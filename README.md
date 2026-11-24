@@ -13,14 +13,21 @@ data files.
 - `index.csv` one row per sheet: part numbers, manufacturer, kind, path, source revision and pages, circuits
 - `render.py` writes a sheet as an HTML page
 
-## Use
+## Pages
 
-    python3 render.py <name>      # writes datasheets/<kind>/<name>.html
-    python3 render.py all
+    python3 render.py all         # every sheet as datasheets/<kind>/<name>.html, and index.html, which lists them
+    python3 render.py <name>      # one
 
-Python 3, standard library. Beside cloud-parts (or at `$CLOUD_SHEETS`),
-`cloud-parts show MPN` names a part's sheet and `cloud-parts sheet MPN`
-writes its page.
+A few seconds; Python 3, standard library. cloud-parts' `install.sh` runs it.
+Open `index.html` to browse.
+
+A page is one HTML file that loads nothing else. Each part of it is a
+`<section>` with an id, and each graph a `<figure>` with one, to link to or
+lift out: `LM317DCYR.html#absolute-maximum-ratings`, `#circuit-adjustable`,
+`#curve-<title>`.
+
+Beside cloud-parts (or at `$CLOUD_SHEETS`), `cloud-parts show MPN` gives a
+part's sheet and its page.
 
 ## Licence
 

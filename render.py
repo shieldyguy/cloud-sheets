@@ -4,13 +4,18 @@
     python3 render.py SHEET.json ... [--pdf] [-o DIR] [-j N]
     python3 render.py NAME ... | all          (a file stem under datasheets/<kind>/)
 
-The page is the HTML file: `all` writes every sheet's in a few seconds. A PDF is
-that page printed, about a second each; -j N prints N at a time.
+The page is the HTML file: `all` writes every sheet's in a few seconds, and
+index.html beside this script, which lists them. A PDF is that page printed,
+about a second each; -j N prints N at a time.
 
-Writes NAME.html (or NAME.pdf) beside the sheet, or into DIR. Graphs are
+Writes NAME.html (or NAME.pdf) beside the sheet, or into DIR. The page is one
+file: its styles and drawings are in it, and it loads nothing. Every part of
+it is a <section> with an id (NAME.html#absolute-maximum-ratings,
+#circuit-<circuit id>), and every graph a <figure> with one. Graphs are
 drawn here from each curve's points; a circuit's drawing is the SVG beside
 the sheet, NAME.<circuit id>.svg. Python 3, standard library only; --pdf
 needs Chrome or Chromium."""
+import csv
 import glob
 import html
 import json
@@ -21,8 +26,9 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT =os.path.dirname(os.path.abspath(__file__))
 COLOURS = ["#1b4f9c", "#c8321f", "#2a7d3f", "#7a45b5", "#c27700", "#141414", "#0e8a8a", "#a8326e"]
 DASHES = ["", "6 3", "2 3", "8 3 2 3", "", "6 3", "2 3", "8 3 2 3"]
 
@@ -74,6 +80,11 @@ dl.where dd{margin:0;color:var(--grey)}
 .circuit-drawing svg,.circuit-drawing img{max-width:100%;height:auto;border:1px solid var(--hair)}
 footer{margin-top:44px;border-top:2px solid var(--ink);padding-top:10px;font-size:12px;color:var(--grey)}
 .scroll{overflow-x:auto}
+nav.toc{display:flex;flex-wrap:wrap;gap:2px 16px;font-size:13px;margin:18px 0 0}
+a{color:#1b4f9c}
+section,figure{scroll-margin-top:12px}
+input.find{font:inherit;width:100%;max-width:420px;padding:7px 9px;border:1px solid var(--ink);margin:14px 0 4px}
+.count{font-size:12px;color:var(--grey)}
 @media (max-width:640px){.two{grid-template-columns:1fr}.curves{grid-template-columns:1fr}}
 @media print{body{padding:0;font-size:12px}.page{max-width:none}h2{break-after:avoid}.curves{grid-template-columns:1fr 1fr;gap:14px 20px}}
 @page{size:A4;margin:16mm 14mm}
@@ -148,6 +159,24 @@ def package_table(p):
 def pg(item):
     p = item.get("page")
     return ' <span class="pg">p. %s</span>' % e(p) if p not in (None, "") else ""
+
+
+# ---- ids: every part of a page can be linked to (NAME.html#id) or lifted out by its id
+IDS = {}
+LOCK = threading.Lock()         # a page is written with this held: ANCHORS and IDS are one page's
+
+
+def ident(text, prefix=""):
+    """An id for a part of the page: its title's words in lower case joined by hyphens, after `prefix`;
+    the second of a name on one page ends -2."""
+    s = re.sub(r"[^a-z0-9]+", "-", str(text).lower()).strip("-")[:64].strip("-")
+    s = "-".join(x for x in (prefix, s) if x) or "section"
+    IDS[s] = IDS.get(s, 0) + 1
+    return s if IDS[s] == 1 else "%s-%d" % (s, IDS[s])
+
+
+def sec(i, *content):
+    return '<section id="%s">%s</section>' % (i, "".join(content))
 
 
 def table(t):
@@ -275,7 +304,7 @@ def plot(c):
         leg = '<div class="legend">%s</div>' % "".join(items)
     cap = "<figcaption><b>%s%s</b>%s%s</figcaption>" % (
         e(c.get("title", "")), pg(c), '<span class="cond">%s</span>' % e(c["conditions"]) if c.get("conditions") else "", leg)
-    return "<figure>%s%s</figure>" % ("".join(o), cap)
+    return '<figure id="%s">%s%s</figure>' % (ident(c.get("title", ""), "curve"), "".join(o), cap)
 
 
 # ---- the page
@@ -309,7 +338,7 @@ def circuit(c, sheet_path):
         o.append(table(parts))
     if c.get("notes"):
         o.append('<ol class="notes">%s</ol>' % "".join("<li>%s</li>" % e(n) for n in c["notes"]))
-    return "".join(o)
+    return sec(ident(c["id"], "circuit"), *o)
 
 
 def page(sheet, sheet_path):
@@ -328,61 +357,98 @@ def page(sheet, sheet_path):
     o.append('<p class="summary">%s</p>' % e(sheet.get("summary", "")))
     if sheet.get("key_figures"):
         o.append('<div class="keys">%s</div>' % "".join("<div><b>%s</b><span>%s</span></div>" % (e(v), e(k)) for k, v in sheet["key_figures"]))
+    IDS.clear()
+    parts = []                  # the page's parts in order: (id, heading, [what is under it])
+
+    def part(i, heading, extra=""):
+        parts.append((ident(i), heading, ["<h2>%s%s</h2>" % (heading, extra)]))
+        return parts[-1][2]
+
     pn = sheet.get("part_numbers")
     if pn:
-        o.append("<h2>Part numbers%s</h2>%s" % (pg(pn), table(pn)))
+        part("part-numbers", "Part numbers", pg(pn)).append(table(pn))
     if sheet.get("pins"):
-        o.append("<h2>Pins</h2>")
+        b = part("pins", "Pins")
         pinout = stem + ".pinout.html"
         if os.path.isfile(pinout):
             with open(pinout, encoding="utf-8") as f:
-                o.append('<div class="land">%s</div>' % f.read())
+                b.append('<div class="land">%s</div>' % f.read())
         for g in sheet["pins"]:
             t = {"columns": ["pin", "name", "type", "function"],
                  "rows": [[p.get("pin", ""), p.get("name", ""), p.get("type", ""), p.get("function", "")] for p in g.get("pins", [])]}
-            o.append("<h3>%s%s</h3>%s" % (e(g.get("package", "")), pg(g), table(t)))
+            b.append(sec(ident(g.get("package", ""), "pins"), "<h3>%s%s</h3>" % (e(g.get("package", "")), pg(g)), table(t)))
     if sheet.get("tables"):
-        o.append("<h2>Ratings and characteristics</h2>")
+        b = part("ratings-and-characteristics", "Ratings and characteristics")
         for t in sheet["tables"]:
-            o.append("<h3>%s%s</h3>" % (e(t.get("title", "")), pg(t)))
-            if t.get("conditions"):
-                o.append('<p class="cond">%s</p>' % e(t["conditions"]))
-            o.append(table(t))
+            b.append(sec(ident(t.get("title", "")), "<h3>%s%s</h3>" % (e(t.get("title", "")), pg(t)),
+                         '<p class="cond">%s</p>' % e(t["conditions"]) if t.get("conditions") else "", table(t)))
     if sheet.get("curves"):
-        o.append('<h2>Typical characteristics</h2><div class="curves">%s</div>' % "".join(plot(c) for c in sheet["curves"]))
+        part("typical-characteristics", "Typical characteristics").append('<div class="curves">%s</div>' % "".join(plot(c) for c in sheet["curves"]))
     drawn = "".join(circuit(c, sheet_path) for c in sheet.get("circuits") or [])
     if drawn:
-        o.append("<h2>Application circuits</h2>" + drawn)
+        part("application-circuits", "Application circuits").append(drawn)
     if sheet.get("equations"):
-        o.append("<h2>Design equations</h2>")
+        b = part("design-equations", "Design equations")
         for q in sheet["equations"]:
-            o.append('<h3>%s%s</h3><div class="eq">%s</div>' % (e(q.get("name", "")), pg(q), e(q.get("expr", ""))))
-            if q.get("where"):
-                o.append('<dl class="where">%s</dl>' % "".join("<dt>%s</dt><dd>%s</dd>" % (e(k), e(v)) for k, v in q["where"].items()))
-            if q.get("note"):
-                o.append('<p class="cond">%s</p>' % e(q["note"]))
+            b.append(sec(ident(q.get("name", ""), "equation"),
+                         '<h3>%s%s</h3><div class="eq">%s</div>' % (e(q.get("name", "")), pg(q), e(q.get("expr", ""))),
+                         '<dl class="where">%s</dl>' % "".join("<dt>%s</dt><dd>%s</dd>" % (e(k), e(v)) for k, v in q["where"].items()) if q.get("where") else "",
+                         '<p class="cond">%s</p>' % e(q["note"]) if q.get("note") else ""))
     if sheet.get("operation"):
-        o.append("<h2>Operation</h2>")
+        b = part("operation", "Operation")
         for s in sheet["operation"]:
-            o.append("<h3>%s%s</h3>%s" % (e(s.get("topic", "")), pg(s), "".join("<p>%s</p>" % e(x) for x in s.get("text", "").split("\n\n"))))
+            b.append(sec(ident(s.get("topic", ""), "operation"), "<h3>%s%s</h3>" % (e(s.get("topic", "")), pg(s)),
+                         "".join("<p>%s</p>" % e(x) for x in s.get("text", "").split("\n\n"))))
     packs = [(p, package_table(p)) for p in sheet.get("packages") or []]
     land = stem + ".land.html"
     if any(t for _, t in packs) or os.path.isfile(land):
-        o.append("<h2>Packages</h2>")
+        b = part("packages", "Packages")
         for p, t in packs:
             if not t:
                 continue
-            o.append("<h3>%s%s</h3>" % (e(p.get("name", "")), pg(p)))
-            if p.get("unit"):
-                o.append('<p class="cond">Dimensions in %s</p>' % e(p["unit"]))
-            o.append(table(t))
+            b.append(sec(ident(p.get("name", ""), "package"), "<h3>%s%s</h3>" % (e(p.get("name", "")), pg(p)),
+                         '<p class="cond">Dimensions in %s</p>' % e(p["unit"]) if p.get("unit") else "", table(t)))
         if os.path.isfile(land):
             with open(land, encoding="utf-8") as f:
-                o.append('<h3>Land pattern</h3><p class="cond">The footprint the parts library gives the part, with its dimensions in mm read from that footprint. It is not the maker\'s drawing.</p><div class="land">%s</div>' % f.read())
+                b.append(sec(ident("land-pattern"), '<h3>Land pattern</h3><p class="cond">The footprint the parts library gives the part, with its dimensions in mm read from that footprint. It is not the maker\'s drawing.</p><div class="land">%s</div>' % f.read()))
+    if len(parts) > 1:
+        o.append('<nav class="toc">%s</nav>' % "".join('<a href="#%s">%s</a>' % (i, h) for i, h, _ in parts))
+    o.extend(sec(i, *b) for i, _, b in parts)
     ref = " ".join(x for x in (src.get("document", ""), src.get("revision", "")) if x)
     o.append("<footer>Source: %s datasheet%s. p. N is a page of it, and a figure called the maker's is a figure of it.</footer>" % (e(sheet.get("manufacturer", "")), e(" " + ref if ref else "")))
     o.append("</div></body></html>")
     return "".join(o)
+
+
+def index(root):
+    """index.html under `root`: every sheet of its index.csv, with its part numbers and a link to its page."""
+    with open(os.path.join(root, "index.csv"), encoding="utf-8", newline="") as f:
+        rows = sorted(csv.DictReader(f), key=lambda r: (r["kind"], os.path.basename(r["sheet"]).lower()))
+    esc = lambda s: html.escape(str(s), quote=True)
+    o = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
+         '<title>cloud-sheets</title><style>%s</style></head><body><div class="page">' % CSS,
+         '<header><h1>Reference sheets<span>%d sheets, by kind</span></h1></header>' % len(rows),
+         '<input class="find" id="q" type="search" placeholder="part number, maker or kind" autofocus><div class="count" id="n"></div>',
+         '<div class="scroll"><table><thead><tr><th>sheet</th><th>part numbers</th><th>maker</th><th>kind</th><th></th></tr></thead><tbody>']
+    for r in rows:
+        name = os.path.basename(r["sheet"])[:-5]
+        mpns = [m for m in r["mpns"].split(";") if m]
+        shown = ", ".join(mpns[:4]) + (" and %d more" % (len(mpns) - 4) if len(mpns) > 4 else "")
+        reg = "registers/%s/%s.html" % (r["kind"], name)
+        o.append('<tr data-k="%s"><td><a href="%s">%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
+            esc(" ".join([name, r["manufacturer"], r["kind"]] + mpns).lower()), esc(r["sheet"][:-5] + ".html"), esc(name),
+            esc(shown), esc(r["manufacturer"]), esc(r["kind"]),
+            '<a href="%s">registers</a>' % esc(reg) if os.path.isfile(os.path.join(root, reg)) else ""))
+    o.append("</tbody></table></div></div><script>"
+             "const q=document.getElementById('q'),n=document.getElementById('n'),rows=[...document.querySelectorAll('tbody tr')];"
+             "function f(){const w=q.value.toLowerCase().split(/\\s+/).filter(Boolean);let c=0;"
+             "for(const r of rows){r.hidden=!w.every(x=>r.dataset.k.includes(x));c+=!r.hidden}"
+             "n.textContent=w.length?c+' of '+rows.length:''}"
+             "q.addEventListener('input',f);f()</script></body></html>")
+    dest = os.path.join(root, "index.html")
+    with open(dest, "w", encoding="utf-8") as f:
+        f.write("".join(o))
+    return dest
 
 
 def main(argv):
@@ -417,8 +483,10 @@ def main(argv):
         out = out_dir or (os.path.join(ROOT, "out", kind) if os.path.basename(os.path.dirname(os.path.dirname(path))) == "sheets" else os.path.dirname(path))
         os.makedirs(out, exist_ok=True)
         dest = os.path.join(out, os.path.basename(path)[:-5] + ".html")
+        with LOCK:
+            text = page(sheet, path)
         with open(dest, "w", encoding="utf-8") as f:
-            f.write(page(sheet, path))
+            f.write(text)
         if "--pdf" in argv:
             pdf = dest[:-5] + ".pdf"
             if os.path.exists(pdf):
@@ -452,6 +520,8 @@ def main(argv):
     else:
         for path in paths:
             one(path)
+    if "all" in names and out_dir is None and "--pdf" not in argv and os.path.isfile(os.path.join(ROOT, "index.csv")):
+        print(index(ROOT))
     return 0
 
 
