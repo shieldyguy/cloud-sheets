@@ -1,0 +1,3931 @@
+{
+ "sheet": 1,
+ "name": "TLE5012BE1000",
+ "kind": "sensor",
+ "manufacturer": "Infineon",
+ "title": "TLE5012B: GMR 360° magnetic angle sensor with SSC, PWM, IIF, HSM and SPC interfaces, PG-DSO-8",
+ "source": {
+  "revision": "Rev. 2.1, 2018-06-20",
+  "pages": 51
+ },
+ "summary": "A magnetic angle sensor built on integrated giant magnetoresistance bridges that measure the sine and cosine of an in-plane field and turn them into a 0° to 360° angle with 15-bit resolution, plus revolution count and angular speed. Over life and temperature the angle error is at most 1.0° with autocalibration on. A three-wire SPI-compatible SSC port up to 8 Mbit/s configures and reads it, and one secondary interface (incremental quadrature, Hall switch emulation, PWM or SAE J2716-based SPC) can run beside SSC or alone. Five preset derivatives (E1000 IIF, E3005 HSM, E5000 and E5020 PWM, E9000 SPC) differ only in start-up configuration. It runs from 3.0 V to 5.5 V, is AEC-Q100 qualified for -40 °C to 150 °C junction, and comes in PG-DSO-8.",
+ "key_figures": [
+  [
+   "Angle range",
+   "0° to 360°, 15-bit (0.01°)"
+  ],
+  [
+   "Angle error",
+   "1.0° max with autocalibration, 0.6° typ; 1.3° / 1.9° max without"
+  ],
+  [
+   "Supply",
+   "3.0 V to 5.5 V, 14 mA typ, 16 mA max"
+  ],
+  [
+   "Magnetic field",
+   "30 mT to 50 mT (to 70 mT with TJ ≤ 85 °C)"
+  ],
+  [
+   "SSC",
+   "8 Mbit/s push-pull, 2 Mbit/s open-drain"
+  ],
+  [
+   "Angle delay",
+   "45 µs typ with prediction (SSC, FIR_MD = 1)"
+  ],
+  [
+   "Power-on time",
+   "5 ms typ, 7 ms max"
+  ],
+  [
+   "ESD",
+   "±4.0 kV HBM"
+  ],
+  [
+   "Junction temperature",
+   "-40 °C to 150 °C"
+  ],
+  [
+   "Package",
+   "PG-DSO-8, RthJA 150 K/W typ"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "ordering code",
+   "marking",
+   "package",
+   "preset interface",
+   "preset settings"
+  ],
+  "rows": [
+   [
+    "TLE5012B E1000",
+    "SP001166960",
+    "012B1000",
+    "PG-DSO-8",
+    "IIF (incremental, A/B mode)",
+    "filter update 42.7 µs; autocalibration mode 1; prediction on; hysteresis 0.703°; 12-bit, 0.088° per count"
+   ],
+   [
+    "TLE5012B E3005",
+    "SP001166964",
+    "012B3005",
+    "PG-DSO-8",
+    "HSM (Hall switch mode)",
+    "filter update 42.7 µs; 5 pole pairs; autocalibration mode 1; prediction on; hysteresis 0.703°"
+   ],
+   [
+    "TLE5012B E5000",
+    "SP001166968",
+    "012B5000",
+    "PG-DSO-8",
+    "PWM, push-pull",
+    "filter update 85.4 µs; PWM 244 Hz; autocalibration, prediction and hysteresis off"
+   ],
+   [
+    "TLE5012B E5020",
+    "SP001166972",
+    "012B5020",
+    "PG-DSO-8",
+    "PWM, open-drain",
+    "filter update 42.7 µs; PWM 1953 Hz; autocalibration mode 2; prediction and hysteresis off"
+   ],
+   [
+    "TLE5012B E9000",
+    "SP001166998",
+    "012B9000",
+    "PG-DSO-8",
+    "SPC, open-drain",
+    "filter update 85.4 µs; autocalibration, prediction and hysteresis off; SPC unit time 3 µs"
+   ]
+  ],
+  "notes": [
+   "All five are one chip with different register defaults loaded at start-up; any of them can be reconfigured over SSC."
+  ]
+ },
+ "pins": [
+  {
+   "package": "PG-DSO-8",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "IFC",
+     "type": "I/O",
+     "function": "Secondary interface pin C (CLK / IIF_IDX / HS3): external clock input, incremental index output or Hall output 3. In SPC mode its level sets slave-number bit S_NR[1]. The external clock cannot be used together with IIF or HSM."
+    },
+    {
+     "pin": "2",
+     "name": "SCK",
+     "type": "input",
+     "function": "SSC clock. Internal pull-down always on. In SPC mode its level sets slave-number bit S_NR[0]."
+    },
+    {
+     "pin": "3",
+     "name": "CSQ",
+     "type": "input",
+     "function": "SSC chip select, active low. Internal pull-up always on."
+    },
+    {
+     "pin": "4",
+     "name": "DATA",
+     "type": "I/O",
+     "function": "SSC data, bidirectional; push-pull (high impedance while receiving) or open-drain. Internal pull-up always on."
+    },
+    {
+     "pin": "5",
+     "name": "IFA",
+     "type": "I/O",
+     "function": "Secondary interface pin A (IIF_A / HS1 / PWM / SPC): incremental phase A, Hall output 1, PWM output or SPC output; it reads the SPC trigger pulse as an input."
+    },
+    {
+     "pin": "6",
+     "name": "VDD",
+     "type": "power",
+     "function": "Supply voltage, 3.0 V to 5.5 V."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "8",
+     "name": "IFB",
+     "type": "output",
+     "function": "Secondary interface pin B (IIF_B / HS2): incremental phase B (direction in step/direction mode) or Hall output 2."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage on VDD pin with respect to ground (VSS)",
+     "VDD",
+     "Max 40 h/Lifetime",
+     "-0.5",
+     "",
+     "6.5",
+     "V"
+    ],
+    [
+     "Voltage on any pin with respect to ground (VSS)",
+     "VIN",
+     "",
+     "-0.5",
+     "",
+     "6.5",
+     "V"
+    ],
+    [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "VDD + 0.5",
+     "V"
+    ],
+    [
+     "Junction temperature",
+     "TJ",
+     "",
+     "-40",
+     "",
+     "150",
+     "°C"
+    ],
+    [
+     "",
+     "",
+     "For 1000 h, not additive",
+     "",
+     "",
+     "150",
+     "°C"
+    ],
+    [
+     "Magnetic field induction",
+     "B",
+     "Max. 5 min @ TA = 25°C",
+     "",
+     "",
+     "200",
+     "mT"
+    ],
+    [
+     "",
+     "",
+     "Max. 5 h @ TA = 25°C",
+     "",
+     "",
+     "150",
+     "mT"
+    ],
+    [
+     "Storage temperature",
+     "TST",
+     "Without magnetic field",
+     "-40",
+     "",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Operating beyond any one of these limits can damage the part for good; long stays at the limits can shorten its life."
+   ]
+  },
+  {
+   "title": "Operating range and parameters",
+   "page": 16,
+   "conditions": "-40°C < TJ < 150°C unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VDD",
+     "[1]",
+     "3.0",
+     "5.0",
+     "5.5",
+     "V"
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "",
+     "",
+     "14",
+     "16",
+     "mA"
+    ],
+    [
+     "Magnetic induction at TJ = 25°C [2][3]",
+     "BXY",
+     "-40°C < TJ < 150°C",
+     "30",
+     "",
+     "50",
+     "mT"
+    ],
+    [
+     "",
+     "",
+     "-40°C < TJ < 100°C",
+     "30",
+     "",
+     "60",
+     "mT"
+    ],
+    [
+     "",
+     "",
+     "-40°C < TJ < 85°C",
+     "30",
+     "",
+     "70",
+     "mT"
+    ],
+    [
+     "Extended magnetic induction range at TJ = 25°C [2][3]",
+     "BXY",
+     "Additional angle error of 0.1°",
+     "25",
+     "",
+     "30",
+     "mT"
+    ],
+    [
+     "Angle range",
+     "Ang",
+     "",
+     "0",
+     "",
+     "360",
+     "°"
+    ],
+    [
+     "POR level",
+     "VPOR",
+     "Power-on reset",
+     "2.0",
+     "",
+     "2.9",
+     "V"
+    ],
+    [
+     "POR hysteresis",
+     "VPORhy",
+     "",
+     "",
+     "30",
+     "",
+     "mV"
+    ],
+    [
+     "Power-on time [4]",
+     "tPon",
+     "VDD > VDDmin",
+     "",
+     "5",
+     "7",
+     "ms"
+    ],
+    [
+     "Fast Reset time [5]",
+     "tRfast",
+     "Fast reset is triggered by disabling startup BIST (S_BIST = 0), then enabling chip reset (AS_RST = 1)",
+     "",
+     "",
+     "0.5",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "[1] VDD decoupled right at the pin by a 100 nF ceramic capacitor.",
+    "[2] For a uniform in-plane field BXY with no vertical component (BZ = 0 mT).",
+    "[3] The allowed field against junction temperature is the curve \"Allowed magnetic field range against junction temperature\".",
+    "[4] No register writes are accepted during the power-on time; the one exception is selecting the external clock, which must then be read back to confirm it.",
+    "[5] Not production tested; guaranteed by design or characterisation."
+   ]
+  },
+  {
+   "title": "Input voltage and output currents",
+   "page": 18,
+   "conditions": "Full operating range; typical values at VDD = 5.0 V and 25°C; other values for -40 °C < TJ < 150°C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage",
+     "VIN",
+     "",
+     "-0.3",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "VDD+ 0.3",
+     "V"
+    ],
+    [
+     "Output current (DATA-Pad)",
+     "IQ",
+     "PAD_DRV ='0x', sink current [1][2]",
+     "",
+     "",
+     "-25",
+     "mA"
+    ],
+    [
+     "",
+     "",
+     "PAD_DRV ='10', sink current [1][2]",
+     "",
+     "",
+     "-5",
+     "mA"
+    ],
+    [
+     "",
+     "",
+     "PAD_DRV ='11', sink current [1][2]",
+     "",
+     "",
+     "-0.4",
+     "mA"
+    ],
+    [
+     "Output current (IFA / IFB / IFC - Pad)",
+     "IQ",
+     "PAD_DRV ='0x', sink current [1][2]",
+     "",
+     "",
+     "-15",
+     "mA"
+    ],
+    [
+     "",
+     "",
+     "PAD_DRV ='1x', sink current [1][2]",
+     "",
+     "",
+     "-5",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "[1] Largest current into the open-drain output to GND.",
+    "[2] VDD = 5 V.",
+    "Drive strength and edge rate of the push-pull outputs are set in register MOD_3."
+   ]
+  },
+  {
+   "title": "Driver strength characteristic",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output rise/fall time",
+     "tfall, trise",
+     "DATA, 50 pF, PAD_DRV='00' [1][2]",
+     "",
+     "",
+     "8",
+     "ns"
+    ],
+    [
+     "",
+     "",
+     "DATA, 50 pF, PAD_DRV='01' [1][2]",
+     "",
+     "",
+     "28",
+     "ns"
+    ],
+    [
+     "",
+     "",
+     "DATA, 50 pF, PAD_DRV='10' [1][2]",
+     "",
+     "",
+     "45",
+     "ns"
+    ],
+    [
+     "",
+     "",
+     "DATA, 50 pF, PAD_DRV='11' [1][2]",
+     "",
+     "",
+     "130",
+     "ns"
+    ],
+    [
+     "",
+     "",
+     "IFA/IFB, 20 pF, PAD_DRV='0x' [1][2]",
+     "",
+     "",
+     "15",
+     "ns"
+    ],
+    [
+     "",
+     "",
+     "IFA/IFB, 20 pF, PAD_DRV='1x' [1][2]",
+     "",
+     "",
+     "30",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "[1] Push-pull output.",
+    "[2] Not production tested; guaranteed by design or characterisation."
+   ]
+  },
+  {
+   "title": "Electrical parameters for 4.5 V < VDD < 5.5 V",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input signal low-level",
+     "VL5",
+     "",
+     "",
+     "",
+     "0.3 VDD",
+     "V"
+    ],
+    [
+     "Input signal high level",
+     "VH5",
+     "",
+     "0.7 VDD",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Output signal low-level",
+     "VOL5",
+     "DATA; IQ = -25 mA (PAD_DRV='0x'), IQ = -5 mA (PAD_DRV='10'), IQ = -0.4 mA (PAD_DRV='11')",
+     "",
+     "",
+     "1",
+     "V"
+    ],
+    [
+     "",
+     "",
+     "IFA,B,C; IQ = -15 mA (PAD_DRV='0x'), IQ = -5 mA (PAD_DRV='1x')",
+     "",
+     "",
+     "1",
+     "V"
+    ],
+    [
+     "Pull-up current [1]",
+     "IPU",
+     "CSQ",
+     "-10",
+     "",
+     "-225",
+     "µA"
+    ],
+    [
+     "",
+     "",
+     "DATA",
+     "-10",
+     "",
+     "-150",
+     "µA"
+    ],
+    [
+     "Pull-down current [2]",
+     "IPD",
+     "SCK",
+     "10",
+     "",
+     "225",
+     "µA"
+    ],
+    [
+     "",
+     "",
+     "IFA, IFB, IFC",
+     "10",
+     "",
+     "150",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "[1] CSQ and DATA always have their internal pull-ups on.",
+    "[2] SCK always has its internal pull-down on; IFA, IFB and IFC have theirs on during start-up and when set to open-drain."
+   ]
+  },
+  {
+   "title": "Electrical parameters for 3.0 V < VDD < 3.6 V",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input signal low-level",
+     "VL3",
+     "",
+     "",
+     "",
+     "0.3 VDD",
+     "V"
+    ],
+    [
+     "Input signal high level",
+     "VH3",
+     "",
+     "0.7 VDD",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Output signal low-level",
+     "VOL3",
+     "DATA; IQ = -15 mA (PAD_DRV='0x'), IQ = -3 mA (PAD_DRV='10'), IQ = -0.24 mA (PAD_DRV='11')",
+     "",
+     "",
+     "0.9",
+     "V"
+    ],
+    [
+     "",
+     "",
+     "IFA,IFB; IQ = - 10 mA (PAD_DRV='0x'), IQ = -3 mA (PAD_DRV='1x')",
+     "",
+     "",
+     "0.9",
+     "V"
+    ],
+    [
+     "Pull-up current [1]",
+     "IPU",
+     "CSQ",
+     "-3",
+     "",
+     "-225",
+     "µA"
+    ],
+    [
+     "",
+     "",
+     "DATA",
+     "-3",
+     "",
+     "-150",
+     "µA"
+    ],
+    [
+     "Pull-down current [2]",
+     "IPD",
+     "SCK",
+     "3",
+     "",
+     "225",
+     "µA"
+    ],
+    [
+     "",
+     "",
+     "IFA, IFB, IFC",
+     "3",
+     "",
+     "150",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "[1] CSQ and DATA always have their internal pull-ups on.",
+    "[2] SCK always has its internal pull-down on; IFA, IFB and IFC have theirs on during start-up and when set to open-drain."
+   ]
+  },
+  {
+   "title": "ESD protection",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "ESD voltage",
+     "VHBM",
+     "Human Body Model [1]",
+     "",
+     "",
+     "±4.0",
+     "kV"
+    ],
+    [
+     "",
+     "VSDM",
+     "Socketed Device Model [2]",
+     "",
+     "",
+     "±0.5",
+     "kV"
+    ]
+   ],
+   "notes": [
+    "[1] HBM to AEC-Q100-002.",
+    "[2] SDM to ESDA/ANSI/ESD SP5.3.2-2008."
+   ]
+  },
+  {
+   "title": "Basic GMR parameters",
+   "page": 20,
+   "conditions": "BXY = 30 mT, TA = 25°C, unless otherwise specified",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "X, Y output range",
+     "RGADC",
+     "Operating range [1]",
+     "",
+     "",
+     "±23230",
+     "digits"
+    ],
+    [
+     "X, Y amplitude [2]",
+     "AX, AY",
+     "At ambient temperature",
+     "6000",
+     "9500",
+     "15781",
+     "digits"
+    ],
+    [
+     "",
+     "",
+     "Operating range",
+     "3922",
+     "",
+     "20620",
+     "digits"
+    ],
+    [
+     "X, Y synchronicity [3]",
+     "k",
+     "",
+     "87.5",
+     "100",
+     "112.49",
+     "%"
+    ],
+    [
+     "X, Y offset [4]",
+     "OX , OY",
+     "",
+     "-2048",
+     "0",
+     "+2047",
+     "digits"
+    ],
+    [
+     "X, Y orthogonality error",
+     "j",
+     "",
+     "-11.25",
+     "0",
+     "+11.24",
+     "°"
+    ],
+    [
+     "X, Y amplitude without magnet",
+     "X0, Y0",
+     "Operating range [1]",
+     "",
+     "",
+     "+4096",
+     "digits"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation.",
+    "[2] Amplitude A is half the peak-to-peak swing of the raw signal about its offset (Figure 15).",
+    "[3] k = 100 * (AX/AY).",
+    "[4] OY = (YMAX + YMIN) / 2; OX = (XMAX + XMIN) / 2."
+   ]
+  },
+  {
+   "title": "Angle performance",
+   "page": 21,
+   "conditions": "BZ = 0 mT, operating conditions of the operating range table; static magnetic field",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Overall angle error (with auto-calibration)",
+     "αErr",
+     "Including lifetime and temperature drift [2][3][4]. For a temperature change above 5 Kelvin within 1.5 revolutions, add the additional angle error curve.",
+     "",
+     "0.6 [1]",
+     "1.0",
+     "°"
+    ],
+    [
+     "Overall angle error (without auto-calibration)",
+     "αErr",
+     "Including temperature drift [2][3][5]",
+     "",
+     "0.6 [1]",
+     "1.3",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "Including lifetime and temperature drift [2][3][4]",
+     "",
+     "",
+     "1.9",
+     "°"
+    ]
+   ],
+   "notes": [
+    "[1] At 25°C, B = 30 mT.",
+    "[2] Hysteresis from a change of rotation direction is included.",
+    "[3] Relative error, measured from a zero angle set first.",
+    "[4] Not production tested; guaranteed by design or characterisation.",
+    "[5] 0 h."
+   ]
+  },
+  {
+   "title": "Signal processing",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Filter update period",
+     "tupd",
+     "FIR_MD = 1 [1]",
+     "",
+     "42.7",
+     "",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 2 [1]",
+     "",
+     "85.3",
+     "",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 3 [1]",
+     "",
+     "170.6",
+     "",
+     "µs"
+    ],
+    [
+     "Angle delay time without prediction [2]",
+     "tadelSSC",
+     "FIR_MD = 1 [1]",
+     "",
+     "85",
+     "95",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 2 [1]",
+     "",
+     "150",
+     "165",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 3 [1]",
+     "",
+     "275",
+     "300",
+     "µs"
+    ],
+    [
+     "",
+     "tadelIIF",
+     "FIR_MD = 1 [1]",
+     "",
+     "120",
+     "135",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 2 [1]",
+     "",
+     "180",
+     "200",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 3 [1]",
+     "",
+     "305",
+     "330",
+     "µs"
+    ],
+    [
+     "Angle delay time with prediction [2]",
+     "tadelSSC",
+     "FIR_MD = 1; PREDICT = 1 [1]",
+     "",
+     "45",
+     "50",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 2; PREDICT = 1 [1]",
+     "",
+     "65",
+     "70",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 3; PREDICT = 1 [1]",
+     "",
+     "105",
+     "115",
+     "µs"
+    ],
+    [
+     "",
+     "tadelIIF",
+     "FIR_MD = 1; PREDICT = 1 [1]",
+     "",
+     "75",
+     "90",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 2; PREDICT = 1 [1]",
+     "",
+     "95",
+     "110",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 3; PREDICT = 1 [1]",
+     "",
+     "135",
+     "150",
+     "µs"
+    ],
+    [
+     "Angle noise (RMS)",
+     "NAngle",
+     "FIR_MD = 1 [1]",
+     "",
+     "0.08",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 2 [1] (default)",
+     "",
+     "0.05",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "FIR_MD = 3 [1]",
+     "",
+     "0.04",
+     "",
+     "°"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation.",
+    "[2] At a constant rotation speed.",
+    "All delays assume the internal oscillator exactly at 24 MHz; the oscillator spread of the clock table scales them."
+   ]
+  },
+  {
+   "title": "Internal clock timing specification",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Digital clock",
+     "fDIG",
+     "",
+     "22.8",
+     "24",
+     "25.8",
+     "MHz"
+    ],
+    [
+     "Internal oscillator frequency",
+     "fCLK",
+     "",
+     "3.8",
+     "4.0",
+     "4.3",
+     "MHz"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "External clock specification",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input frequency",
+     "fCLK",
+     "",
+     "3.8",
+     "4.0",
+     "4.3",
+     "MHz"
+    ],
+    [
+     "CLK duty cycle [1][2]",
+     "CLKDUTY",
+     "",
+     "30",
+     "50",
+     "70",
+     "%"
+    ],
+    [
+     "CLK rise time",
+     "tCLKr",
+     "From VL to VH",
+     "",
+     "",
+     "30",
+     "ns"
+    ],
+    [
+     "CLK fall time",
+     "tCLKf",
+     "From VH to VL",
+     "",
+     "",
+     "30",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "[1] Lowest duty cycle factor: tCLKh(min) / tCLK, where tCLK = 1 / fCLK.",
+    "[2] Highest duty cycle factor: tCLKh(max) / tCLK, where tCLK = 1 / fCLK."
+   ]
+  },
+  {
+   "title": "SSC push-pull timing specification",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SSC baud rate",
+     "fSSC",
+     "[1]",
+     "",
+     "8.0",
+     "",
+     "Mbit/s"
+    ],
+    [
+     "CSQ setup time",
+     "tCSs",
+     "[1]",
+     "105",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CSQ hold time",
+     "tCSh",
+     "[1]",
+     "105",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CSQ off",
+     "tCSoff",
+     "SSC inactive time [1]",
+     "600",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK period",
+     "tSCKp",
+     "[1]",
+     "120",
+     "125",
+     "",
+     "ns"
+    ],
+    [
+     "SCK high",
+     "tSCKh",
+     "[1]",
+     "40",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK low",
+     "tSCKl",
+     "[1]",
+     "30",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "DATA setup time",
+     "tDATAs",
+     "[1]",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "DATA hold time",
+     "tDATAh",
+     "[1]",
+     "40",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Write read delay",
+     "twr_delay",
+     "[1]",
+     "130",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Update time",
+     "tCSupdate",
+     "CSQ low pulse without SCK clock [1]",
+     "1",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "SCK off",
+     "tSCKoff",
+     "[1]",
+     "170",
+     "",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation.",
+    "The SSC inactive time tCSoff is the wait after one transfer before the sensor can be selected again."
+   ]
+  },
+  {
+   "title": "SSC open-drain timing specification",
+   "page": 27,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SSC baud rate",
+     "fSSC",
+     "Pull-up Resistor = 1 kΩ [1]",
+     "",
+     "2.0",
+     "",
+     "Mbit/s"
+    ],
+    [
+     "CSQ setup time",
+     "tCSs",
+     "[1]",
+     "300",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CSQ hold time",
+     "tCSh",
+     "[1]",
+     "400",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CSQ off",
+     "tCSoff",
+     "SSC inactive time [1]",
+     "600",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK period",
+     "tSCKp",
+     "[1]",
+     "500",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK high",
+     "tSCKh",
+     "[1]",
+     "",
+     "190",
+     "",
+     "ns"
+    ],
+    [
+     "SCK low",
+     "tSCKl",
+     "[1]",
+     "",
+     "190",
+     "",
+     "ns"
+    ],
+    [
+     "DATA setup time",
+     "tDATAs",
+     "[1]",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "DATA hold time",
+     "tDATAh",
+     "[1]",
+     "40",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Write read delay",
+     "twr_delay",
+     "[1]",
+     "130",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Update time",
+     "tCSupdate",
+     "CSQ low pulse without SCK clock [1]",
+     "1",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "SCK off",
+     "tSCKoff",
+     "[1]",
+     "170",
+     "",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation."
+   ]
+  },
+  {
+   "title": "Structure of the Command Word",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "name",
+    "bits",
+    "description"
+   ],
+   "rows": [
+    [
+     "RW",
+     "[15]",
+     "Read - Write. 0: Write; 1: Read"
+    ],
+    [
+     "Lock",
+     "[14..11]",
+     "4-bit Lock Value. 0000B: Default operating access for addresses 0x00:0x04; 1010B: Configuration access for addresses 0x05:0x11"
+    ],
+    [
+     "UPD",
+     "[10]",
+     "Update-Register Access. 0: Access to current values; 1: Access to values in update buffer"
+    ],
+    [
+     "ADDR",
+     "[9..4]",
+     "6-bit Address"
+    ],
+    [
+     "ND",
+     "[3..0]",
+     "4-bit Number of Data Words"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Structure of the Safety Word",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "name",
+    "bits",
+    "description"
+   ],
+   "rows": [
+    [
+     "STAT [1]",
+     "[15]",
+     "Chip reset or watchdog overflow, cleared once read over SSC. 0: Reset occurred; 1: No reset"
+    ],
+    [
+     "STAT [1]",
+     "[14]",
+     "System error (overvoltage, undervoltage, VDD-off, GND-off, ROM and others). 0: Error occurred (S_VR; S_DSPU; S_OV; S_XYOL: S_MAGOL; S_FUSE; S_ROM; S_ADCT); 1: No error"
+    ],
+    [
+     "STAT [1]",
+     "[13]",
+     "Interface access error (wrong address or wrong lock). 0: Error occurred; 1: No error"
+    ],
+    [
+     "STAT [1]",
+     "[12]",
+     "Valid angle value (NO_GMR_A = 0; NO_GMR_XY = 0). 0: Angle value invalid; 1: Angle value valid"
+    ],
+    [
+     "RESP",
+     "[11..8]",
+     "Sensor number response indicator: the bit of this sensor's number is low, the others high"
+    ],
+    [
+     "CRC",
+     "[7..0]",
+     "Cyclic Redundancy Check (CRC)"
+    ]
+   ],
+   "notes": [
+    "[1] Once low, a status bit holds until STAT (00H) has been read over SSC."
+   ]
+  },
+  {
+   "title": "Bit Types",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "abbreviation",
+    "function",
+    "description"
+   ],
+   "rows": [
+    [
+     "r",
+     "Read",
+     "Read-only register bit"
+    ],
+    [
+     "w",
+     "Write",
+     "Read and write register bit"
+    ],
+    [
+     "u",
+     "Update",
+     "The bit has an update buffer: when an update is triggered, its present value is copied into the buffer together with all other buffered bits, and a read with UPD = 1 returns the buffered value"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "PWM interface",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "PWM output frequencies (Selectable by IFAB_RES)",
+     "fPWM1",
+     "[1]",
+     "232",
+     "244",
+     "262",
+     "Hz"
+    ],
+    [
+     "",
+     "fPWM2",
+     "[1]",
+     "464",
+     "488",
+     "525",
+     "Hz"
+    ],
+    [
+     "",
+     "fPWM3",
+     "[1]",
+     "929",
+     "977",
+     "1050",
+     "Hz"
+    ],
+    [
+     "",
+     "fPWM4",
+     "[1]",
+     "1855",
+     "1953",
+     "2099",
+     "Hz"
+    ],
+    [
+     "Output duty cycle range",
+     "DYPWM",
+     "Absolute angle [1]",
+     "6.25",
+     "",
+     "93.75",
+     "%"
+    ],
+    [
+     "",
+     "",
+     "Electrical Error (S_RST; S_VR) [1]",
+     "",
+     "2",
+     "",
+     "%"
+    ],
+    [
+     "",
+     "",
+     "System error (S_FUSE; S_OV; S_XYOL; S_MAGOL; S_ADCT) [1]",
+     "",
+     "98",
+     "",
+     "%"
+    ],
+    [
+     "",
+     "",
+     "Short to GND [1]",
+     "0",
+     "",
+     "1",
+     "%"
+    ],
+    [
+     "",
+     "",
+     "Short to VDD, power loss [1]",
+     "99",
+     "",
+     "100",
+     "%"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation.",
+    "The frequency limits include the spread of the internal digital clock."
+   ]
+  },
+  {
+   "title": "SPC frame configuration",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "frame type",
+    "IFAB_RES",
+    "data nibbles"
+   ],
+   "rows": [
+    [
+     "12-bit angle",
+     "00",
+     "3 nibbles"
+    ],
+    [
+     "16-bit angle",
+     "01",
+     "4 nibbles"
+    ],
+    [
+     "12-bit angle, 8-bit temperature",
+     "10",
+     "5 nibbles"
+    ],
+    [
+     "16-bit angle, 8-bit temperature",
+     "11",
+     "6 nibbles"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Structure of status nibble",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "name",
+    "bits",
+    "description"
+   ],
+   "rows": [
+    [
+     "SYS_ERR",
+     "[3]",
+     "System error (S_FUSE, S_OV, S_XYOL, S_MAGOL, S_ADCT). 0: No system error; 1: System error occurred"
+    ],
+    [
+     "ELEC_ERR",
+     "[2]",
+     "Electrical error (S_RST, S_VR). 0: No electrical error; 1: Electrical error occurred"
+    ],
+    [
+     "S_NR",
+     "[1]",
+     "Slave number bit 1 (level on IFC)"
+    ],
+    [
+     "S_NR",
+     "[0]",
+     "Slave number bit 0 (level on SCK)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Predivider setting",
+   "page": 36,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Unit time",
+     "tUnit",
+     "IFAB_HYST = 00 [1]",
+     "",
+     "3.0",
+     "",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "IFAB_HYST = 01 [1]",
+     "",
+     "2.5",
+     "",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "IFAB_HYST = 10 [1]",
+     "",
+     "2.0",
+     "",
+     "µs"
+    ],
+    [
+     "",
+     "",
+     "IFAB_HYST = 11 [1]",
+     "",
+     "1.5",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation."
+   ]
+  },
+  {
+   "title": "Master pulse parameters",
+   "page": 37,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Threshold",
+     "Vth",
+     "[1]",
+     "",
+     "50",
+     "",
+     "% of VDD"
+    ],
+    [
+     "Threshold hysteresis",
+     "Vthhyst",
+     "VDD = 5 V [1]",
+     "",
+     "8",
+     "",
+     "% of VDD"
+    ],
+    [
+     "",
+     "",
+     "VDD = 3 V [1]",
+     "",
+     "3",
+     "",
+     "% of VDD"
+    ],
+    [
+     "Total trigger time",
+     "tmtr",
+     "SPC_Trigger = 0 [1][2]",
+     "",
+     "90",
+     "",
+     "UT"
+    ],
+    [
+     "",
+     "",
+     "SP_Trigger = 1 [1]",
+     "",
+     "tmlow +12",
+     "",
+     "UT"
+    ],
+    [
+     "Master low time",
+     "tmlow",
+     "S_NR =00 [1]",
+     "8",
+     "12",
+     "14",
+     "UT"
+    ],
+    [
+     "",
+     "",
+     "S_NR =01 [1]",
+     "16",
+     "22",
+     "27",
+     "UT"
+    ],
+    [
+     "",
+     "",
+     "S_NR =10 [1]",
+     "29",
+     "39",
+     "48",
+     "UT"
+    ],
+    [
+     "",
+     "",
+     "S_NR =11 [1]",
+     "50",
+     "66",
+     "81",
+     "UT"
+    ],
+    [
+     "Master delay time",
+     "tmd,tot",
+     "[1]",
+     "",
+     "5.8",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation.",
+    "[2] The sensor counts a fixed number of units, the typical figure; the real trigger time moves with the sensor's clock spread.",
+    "SP_Trigger in the second total trigger time row should read SPC_Trigger."
+   ]
+  },
+  {
+   "title": "Hall Switch Mode",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Rotation speed",
+     "n",
+     "Mechanical [2]",
+     "",
+     "",
+     "10000",
+     "rpm"
+    ],
+    [
+     "Electrical angle accuracy",
+     "αelect",
+     "1 pole pair with autocalibration [1][2]",
+     "",
+     "0.6",
+     "1",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "2 pole pairs with autocal. [1][2]",
+     "",
+     "1.2",
+     "2",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "3 pole pairs with autocal. [1][2]",
+     "",
+     "1.8",
+     "3",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "4 pole pairs with autocal. [1][2]",
+     "",
+     "2.4",
+     "4",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "5 pole pairs with autocal. [1][2]",
+     "",
+     "3.0",
+     "5",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "6 pole pairs with autocal. [1][2]",
+     "",
+     "3.6",
+     "6",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "7 pole pairs with autocal. [1][2]",
+     "",
+     "4.2",
+     "7",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "8 pole pairs with autocal. [1][2]",
+     "",
+     "4.8",
+     "8",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "9 pole pairs with autocal. [1][2]",
+     "",
+     "5.4",
+     "9",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "10 pole pairs with autocal. [1][2]",
+     "",
+     "6.0",
+     "10",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "11 pole pairs with autocal. [1][2]",
+     "",
+     "6.6",
+     "11",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "12 pole pairs with autocal. [1][2]",
+     "",
+     "7.2",
+     "12",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "13 pole pairs with autocal. [1][2]",
+     "",
+     "7.8",
+     "13",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "14 pole pairs with autocal. [1][2]",
+     "",
+     "8.4",
+     "14",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "15 pole pairs with autocal. [1][2]",
+     "",
+     "9.0",
+     "15",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "16 pole pairs with autocal. [1][2]",
+     "",
+     "9.6",
+     "16",
+     "°"
+    ],
+    [
+     "Mechanical angle switching hysteresis",
+     "αHShystm",
+     "Selectable by IFAB_HYST [2][3][4]",
+     "0",
+     "",
+     "0.703",
+     "°"
+    ],
+    [
+     "Electrical angle switching hysteresis [5]",
+     "αHShystel",
+     "1 pole pair; IFAB_HYST=11 [1][2]",
+     "",
+     "0.70",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "2 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "1.41",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "3 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "2.11",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "4 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "2.81",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "5 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "3.52",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "6 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "4.22",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "7 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "4.92",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "8 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "5.62",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "9 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "6.33",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "10 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "7.03",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "11 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "7.73",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "12 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "8.44",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "13 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "9.14",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "14 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "9.84",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "15 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "10.55",
+     "",
+     "°"
+    ],
+    [
+     "",
+     "",
+     "16 pole pairs; IFAB_HYST=11 [1][2]",
+     "",
+     "11.25",
+     "",
+     "°"
+    ],
+    [
+     "Fall time",
+     "tHSfall",
+     "RL = 2.2 kΩ; CL < 50 pF [2]",
+     "",
+     "0.02",
+     "1",
+     "µs"
+    ],
+    [
+     "Rise time",
+     "tHSrise",
+     "RL = 2.2 kΩ; CL < 50 pF [2]",
+     "",
+     "0.4",
+     "1",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "[1] Moves with the spread of the internal oscillator frequency.",
+    "[2] Not production tested; guaranteed by design or characterisation.",
+    "[3] Without the hysteresis of the GMR element itself.",
+    "[4] The smallest setting that still does not switch.",
+    "[5] Matters only when the rotation reverses."
+   ]
+  },
+  {
+   "title": "Incremental interface",
+   "page": 41,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Incremental output frequency",
+     "fInc",
+     "Frequency of phase A and phase B [1]",
+     "",
+     "",
+     "1.0",
+     "MHz"
+    ],
+    [
+     "Index pulse width",
+     "t0°",
+     "0° [1]",
+     "",
+     "5",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation."
+   ]
+  },
+  {
+   "title": "ADC test vectors",
+   "page": 42,
+   "conditions": "",
+   "columns": [
+    "register bits",
+    "min",
+    "typ (X/Y value, decimal)",
+    "max"
+   ],
+   "rows": [
+    [
+     "000",
+     "",
+     "0",
+     ""
+    ],
+    [
+     "001",
+     "",
+     "15500",
+     ""
+    ],
+    [
+     "010",
+     "",
+     "21700",
+     ""
+    ],
+    [
+     "011",
+     "",
+     "32767",
+     ""
+    ],
+    [
+     "100 [1]",
+     "",
+     "0",
+     ""
+    ],
+    [
+     "101",
+     "",
+     "-15500",
+     ""
+    ],
+    [
+     "110",
+     "",
+     "-21700",
+     ""
+    ],
+    [
+     "111",
+     "",
+     "-32768",
+     ""
+    ]
+   ],
+   "notes": [
+    "[1] Must not be used.",
+    "A 100 % circle corresponds to about 21700 digits and a 70 % circle to about 15500 digits."
+   ]
+  },
+  {
+   "title": "Test comparator threshold voltages",
+   "page": 43,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Overvoltage detection",
+     "VOVG",
+     "[1]",
+     "",
+     "2.80",
+     "",
+     "V"
+    ],
+    [
+     "",
+     "VOVA",
+     "[1]",
+     "",
+     "2.80",
+     "",
+     "V"
+    ],
+    [
+     "",
+     "VOVD",
+     "[1]",
+     "",
+     "2.80",
+     "",
+     "V"
+    ],
+    [
+     "VDD overvoltage",
+     "VDDOV",
+     "[1]",
+     "",
+     "6.05",
+     "",
+     "V"
+    ],
+    [
+     "VDD undervoltage",
+     "VDDUV",
+     "[1]",
+     "",
+     "2.70",
+     "",
+     "V"
+    ],
+    [
+     "GND - off voltage",
+     "VGNDoff",
+     "[1]",
+     "",
+     "-0.55",
+     "",
+     "V"
+    ],
+    [
+     "VDD - off voltage",
+     "VVDDoff",
+     "[1]",
+     "",
+     "0.55",
+     "",
+     "V"
+    ],
+    [
+     "Spike filter delay",
+     "tDEL",
+     "[1]",
+     "",
+     "10",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "[1] Not production tested; guaranteed by design or characterisation."
+   ]
+  },
+  {
+   "title": "Package parameters",
+   "page": 47,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Thermal resistance",
+     "RthJA",
+     "Junction to air [1]",
+     "",
+     "150",
+     "200",
+     "K/W"
+    ],
+    [
+     "",
+     "RthJC",
+     "Junction to case",
+     "",
+     "",
+     "75",
+     "K/W"
+    ],
+    [
+     "",
+     "RthJL",
+     "Junction to lead",
+     "",
+     "",
+     "85",
+     "K/W"
+    ],
+    [
+     "Soldering moisture level",
+     "",
+     "260°C",
+     "",
+     "MSL 3",
+     "",
+     ""
+    ],
+    [
+     "Lead Frame",
+     "",
+     "",
+     "",
+     "Cu",
+     "",
+     ""
+    ],
+    [
+     "Plating",
+     "",
+     "> 7 µm",
+     "",
+     "Sn 100%",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "[1] To JEDEC JESD51-7."
+   ]
+  },
+  {
+   "title": "Sensor IC placement tolerances in package",
+   "page": 48,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Position eccentricity",
+     "",
+     "In X- and Y-direction",
+     "-200",
+     "",
+     "200",
+     "µm"
+    ],
+    [
+     "Rotation",
+     "",
+     "Affects zero position offset of sensor",
+     "-3",
+     "",
+     "3",
+     "°"
+    ],
+    [
+     "Tilt",
+     "",
+     "",
+     "-3",
+     "",
+     "3",
+     "°"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Marking",
+   "page": 49,
+   "conditions": "",
+   "columns": [
+    "position",
+    "marking",
+    "description"
+   ],
+   "rows": [
+    [
+     "1st Line",
+     "012Bxxxx",
+     "Derivate marking from the ordering code table"
+    ],
+    [
+     "2nd Line",
+     "xxx",
+     "Lot code"
+    ],
+    [
+     "3rd Line",
+     "Gxxxx",
+     "G for green, then a 4-digit date code"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Allowed magnetic field range against junction temperature",
+   "page": 17,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Magnetic field",
+    "unit": "mT",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Upper limit, TJ max 85 °C",
+     "points": [
+      [
+       -40,
+       100
+      ],
+      [
+       25,
+       70
+      ],
+      [
+       85,
+       65
+      ]
+     ]
+    },
+    {
+     "label": "Upper limit, TJ max 100 °C",
+     "points": [
+      [
+       -40,
+       100
+      ],
+      [
+       25,
+       60
+      ],
+      [
+       100,
+       54
+      ]
+     ]
+    },
+    {
+     "label": "Upper limit, TJ max 150 °C",
+     "points": [
+      [
+       -40,
+       100
+      ],
+      [
+       25,
+       50
+      ],
+      [
+       150,
+       42
+      ]
+     ]
+    },
+    {
+     "label": "Lower limit",
+     "points": [
+      [
+       -40,
+       32.7
+      ],
+      [
+       25,
+       30
+      ],
+      [
+       150,
+       26.1
+      ]
+     ]
+    },
+    {
+     "label": "Lower limit with +0.1° angle error at 0 h",
+     "points": [
+      [
+       -40,
+       25
+      ],
+      [
+       150,
+       25
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Additional angle error for temperature changes above 5 Kelvin within 1.5 revolutions",
+   "page": 22,
+   "conditions": "Autocalibration enabled",
+   "x": {
+    "label": "Delta Temperature within 1.5 revolutions",
+    "unit": "K",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Additional angle error",
+    "unit": "°",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tstart -40 °C",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       9.5,
+       0.074
+      ],
+      [
+       19.0,
+       0.161
+      ],
+      [
+       28.5,
+       0.254
+      ],
+      [
+       38.0,
+       0.354
+      ],
+      [
+       47.5,
+       0.455
+      ],
+      [
+       57.1,
+       0.575
+      ],
+      [
+       66.6,
+       0.695
+      ],
+      [
+       76.1,
+       0.822
+      ],
+      [
+       85.6,
+       0.962
+      ],
+      [
+       95.1,
+       1.109
+      ],
+      [
+       104.6,
+       1.23
+      ],
+      [
+       114.1,
+       1.349
+      ],
+      [
+       123.6,
+       1.53
+      ],
+      [
+       133.1,
+       1.67
+      ],
+      [
+       142.7,
+       1.937
+      ],
+      [
+       152.2,
+       2.157
+      ],
+      [
+       161.7,
+       2.417
+      ],
+      [
+       171.2,
+       2.691
+      ],
+      [
+       180.7,
+       2.992
+      ],
+      [
+       190.2,
+       3.248
+      ]
+     ]
+    },
+    {
+     "label": "Tstart 25 °C",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       6.2,
+       0.065
+      ],
+      [
+       12.4,
+       0.134
+      ],
+      [
+       18.7,
+       0.209
+      ],
+      [
+       24.9,
+       0.282
+      ],
+      [
+       31.1,
+       0.356
+      ],
+      [
+       37.3,
+       0.435
+      ],
+      [
+       43.5,
+       0.514
+      ],
+      [
+       49.8,
+       0.613
+      ],
+      [
+       56.0,
+       0.698
+      ],
+      [
+       62.2,
+       0.79
+      ],
+      [
+       68.4,
+       0.894
+      ],
+      [
+       74.6,
+       1.005
+      ],
+      [
+       80.9,
+       1.107
+      ],
+      [
+       87.1,
+       1.247
+      ],
+      [
+       93.3,
+       1.364
+      ],
+      [
+       99.5,
+       1.486
+      ],
+      [
+       105.7,
+       1.64
+      ],
+      [
+       112.0,
+       1.784
+      ],
+      [
+       118.2,
+       1.941
+      ],
+      [
+       124.4,
+       2.082
+      ]
+     ]
+    },
+    {
+     "label": "Tstart 85 °C",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       13.0,
+       0.174
+      ],
+      [
+       26.0,
+       0.369
+      ],
+      [
+       39.0,
+       0.59
+      ],
+      [
+       52.0,
+       0.837
+      ],
+      [
+       65.0,
+       1.111
+      ]
+     ]
+    },
+    {
+     "label": "Tstart 105 °C",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       2.2,
+       0.033
+      ],
+      [
+       4.4,
+       0.072
+      ],
+      [
+       6.6,
+       0.106
+      ],
+      [
+       8.8,
+       0.13
+      ],
+      [
+       11.0,
+       0.159
+      ],
+      [
+       13.2,
+       0.203
+      ],
+      [
+       15.4,
+       0.231
+      ],
+      [
+       17.6,
+       0.271
+      ],
+      [
+       19.8,
+       0.3
+      ],
+      [
+       21.9,
+       0.34
+      ],
+      [
+       24.1,
+       0.37
+      ],
+      [
+       26.3,
+       0.404
+      ],
+      [
+       28.5,
+       0.457
+      ],
+      [
+       30.7,
+       0.49
+      ],
+      [
+       32.9,
+       0.541
+      ],
+      [
+       35.1,
+       0.577
+      ],
+      [
+       37.3,
+       0.613
+      ],
+      [
+       39.5,
+       0.666
+      ],
+      [
+       41.7,
+       0.702
+      ],
+      [
+       43.9,
+       0.742
+      ]
+     ]
+    },
+    {
+     "label": "Tstart 125 °C",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       5.0,
+       0.082
+      ],
+      [
+       10.1,
+       0.165
+      ],
+      [
+       15.1,
+       0.251
+      ],
+      [
+       20.2,
+       0.34
+      ],
+      [
+       25.2,
+       0.433
+      ]
+     ]
+    },
+    {
+     "label": "Tstart 135 °C",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       3.0,
+       0.054
+      ],
+      [
+       6.1,
+       0.106
+      ],
+      [
+       9.1,
+       0.158
+      ],
+      [
+       12.2,
+       0.207
+      ],
+      [
+       15.2,
+       0.256
+      ]
+     ]
+    },
+    {
+     "label": "Tstart >135 °C",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       2.1,
+       0.47
+      ],
+      [
+       4.1,
+       0.94
+      ],
+      [
+       6.3,
+       1.41
+      ],
+      [
+       8.4,
+       1.89
+      ],
+      [
+       10.6,
+       2.36
+      ],
+      [
+       12.9,
+       2.83
+      ],
+      [
+       15.1,
+       3.3
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "iif-ssc",
+   "title": "IIF interface and SSC (IIF in push-pull configuration)",
+   "page": 10,
+   "description": "The E1000 wiring: the three interface pins drive a controller's quadrature-counter inputs directly as push-pull outputs (phase A, phase B, index), while SSC stays connected for configuration and for reading the absolute angle. 100 Ω in series with CSQ and SCK guards against noise, and 470 Ω in DATA limits the current if sensor and controller ever drive the line against each other. A 100 nF capacitor decouples VDD. If IFA, IFB and IFC are set to open-drain instead, each needs a pull-up to VDD, for example 2.2 kΩ.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "470 Ω",
+     "note": "Rs2, recommended"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD, 3.0 V to 5.5 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SSC CSQ"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "SSC SCK"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "SSC DATA"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "IIF IIF_A"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "IIF IIF_B"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "IIF IIF_IDX"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "hsm-ssc-push-pull",
+   "title": "HSM interface and SSC (HSM in push-pull configuration)",
+   "page": 11,
+   "description": "The E3005 wiring: IFA, IFB and IFC stand in for three Hall switches (HS1 to HS3) of a motor commutation input, driven push-pull, with SSC alongside. Series resistors on the SSC lines (100 Ω on CSQ and SCK, 470 Ω on DATA) and a 100 nF VDD capacitor as in the IIF circuit.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "470 Ω",
+     "note": "Rs2, recommended"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD, 3.0 V to 5.5 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SSC CSQ"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "SSC SCK"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "SSC DATA"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "HSM HS1"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "HSM HS2"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "HSM HS3"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "hsm-ssc-open-drain",
+   "title": "HSM interface and SSC (HSM in open-drain configuration)",
+   "page": 11,
+   "description": "Hall switch emulation with the three interface pins set to open-drain over SSC, so each Hall line gets a 2.2 kΩ pull-up to VDD. The SSC side keeps its 100 Ω and 470 Ω series resistors and VDD its 100 nF capacitor.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "470 Ω",
+     "note": "Rs2, recommended"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD, 3.0 V to 5.5 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SSC CSQ"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "SSC SCK"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "SSC DATA"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "HSM HS1"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "HSM HS2"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "HSM HS3"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "Rpu, required"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "Rpu, required"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "Rpu, required"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "pwm-push-pull",
+   "title": "PWM interface (push-pull configuration)",
+   "page": 12,
+   "description": "The E5000 wiring, PWM only: the angle leaves on IFA as a push-pull PWM signal. CSQ is tied to VDD so the SSC interface stays deselected, SCK, IFB and IFC go to ground, and DATA is left open; CSQ and DATA have internal pull-ups. VDD is decoupled with 100 nF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD, 3.0 V to 5.5 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PWM"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "pwm-open-drain",
+   "title": "PWM interface (open-drain configuration)",
+   "page": 12,
+   "description": "The E5020 wiring: PWM on IFA as an open-drain output with a 2.2 kΩ pull-up to VDD. CSQ is tied to VDD to hold SSC inactive, SCK, IFB and IFC are grounded and DATA is open; 100 nF decouples VDD.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD, 3.0 V to 5.5 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PWM"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "Rpu, required"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "spc",
+   "title": "SPC interface",
+   "page": 13,
+   "description": "The E9000 wiring: SPC on IFA, open-drain, with a 2.2 kΩ pull-up to VDD; the same line carries the controller's trigger pulse in. IFC and SCK at ground set slave number 00. To give SCK a high level for another slave number, CSQ must go to ground instead, so SSC is not used alongside SPC. CSQ to VDD, IFB to ground, DATA open, and 100 nF on VDD.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD, 3.0 V to 5.5 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SPC"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "Rpu, required"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ssc-push-pull",
+   "title": "SSC interface with push-pull configuration (high-speed application)",
+   "page": 13,
+   "description": "The SSC link between the sensor and a controller's SPI-type port, DATA in its default push-pull mode. The controller's MTSR and MRST pins are joined and reach DATA through 470 Ω, which limits the current if the sensor drives high while the controller drives low or the other way round. CSQ and SCK come from the controller through 100 Ω each, against noise and disturbances.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "microcontroller (SSC master)",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "470 Ω",
+     "note": "Rs2, recommended"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ssc-open-drain",
+   "title": "SSC interface with open-drain configuration (bus systems)",
+   "page": 14,
+   "description": "DATA set to open-drain (bit SSC_OD) so several SSC slaves, for example two sensors for redundancy, can share one controller line. A 1 kΩ pull-up to VDD holds the shared data node, with 100 Ω in series on each side of it: one to the sensor's DATA, one to the controller's joined MTSR and MRST. CSQ and SCK each pass through 100 Ω. Each sensor is addressed by its own CSQ, so a push-pull bus also works.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "microcontroller (SSC master)",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "Rs1, recommended"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "Rpu, required"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "spc-bus-supply",
+   "title": "Sensors' supply in bus mode",
+   "page": 15,
+   "description": "Two or more sensors share one SPC line into a controller's capture-compare input, with a single pull-up on the line. Every sensor runs from the same VDD as the others: a sensor that loses its supply sinks current from the shared output line and can upset the bus. Each sensor and the controller has its own VDD capacitor.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TLE5012B",
+     "note": "sensor 1"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "TLE5012B",
+     "note": "sensor x"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "Rpu",
+     "note": "no value given"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "no value given"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "no value given"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "no value given"
+    }
+   ],
+   "notes": [
+    "Each sensor's OUT pin is its SPC output, IFA."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Prediction",
+   "expr": "α(t + 1) = α(t) + α(t − 1) − α(t − 2)",
+   "where": {
+    "α(t)": "angle of the latest sample",
+    "α(t − 1), α(t − 2)": "the two samples before it"
+   },
+   "note": "Extrapolates the angle over the delay time; meant for rotation speeds that do not change abruptly.",
+   "page": 23
+  },
+  {
+   "name": "PWM duty cycle",
+   "expr": "Duty cycle = ton / tPWM; tPWM = ton + toff; fPWM = 1 / tPWM",
+   "where": {
+    "ton": "high time",
+    "toff": "low time",
+    "tPWM": "PWM period"
+   },
+   "note": "",
+   "page": 32
+  },
+  {
+   "name": "PWM frequency",
+   "expr": "fPWM = fDIG × 2^IFAB_RES / (24 × 4096)",
+   "where": {
+    "fDIG": "digital clock, 24 MHz typ",
+    "IFAB_RES": "PWM frequency setting, 0 to 3"
+   },
+   "note": "With an external clock, the PWM frequency spread follows from the external clock's spread through this relation.",
+   "page": 33
+  },
+  {
+   "name": "Synchronicity",
+   "expr": "k = 100 × (AX / AY)",
+   "where": {
+    "AX, AY": "X and Y amplitudes in digits"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Offset",
+   "expr": "OX = (XMAX + XMIN) / 2; OY = (YMAX + YMIN) / 2",
+   "where": {
+    "XMAX, XMIN, YMAX, YMIN": "peak values of the raw X and Y signals over a turn"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "SSC CRC",
+   "expr": "g(X) = X^8 + X^4 + X^3 + X^2 + 1",
+   "where": {
+    "seed": "11111111B"
+   },
+   "note": "SAE J1850 CRC over every byte of a transfer, commands included, computed with a fast parallel CRC circuit; it restarts with each transfer and the remainder is sent inverted.",
+   "page": 31
+  },
+  {
+   "name": "SPC CRC nibble",
+   "expr": "g(x) = x^4 + x^3 + x^2 + 1",
+   "where": {
+    "seed": "0101B"
+   },
+   "note": "Computed over the status nibble together with all data nibbles; what remains once the final data nibble is processed is transmitted.",
+   "page": 37
+  },
+  {
+   "name": "External clock duty cycle",
+   "expr": "CLKDUTY = tCLKh / tCLK; tCLK = 1 / fCLK",
+   "where": {
+    "tCLKh": "clock high time",
+    "fCLK": "external clock frequency"
+   },
+   "note": "",
+   "page": 25
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Sensing principle",
+   "page": 7,
+   "text": "Giant magnetoresistive elements sit on top of the CMOS logic. Two full bridges of four elements each respond to the in-plane field: one gives the X (cosine) signal, the other the Y (sine) signal. Each element has a pinned reference direction; resistance is lowest when the outside field is parallel to it and highest when anti-parallel. One bridge alone repeats every 180°, so the two orthogonal bridges together, combined by ARCTAN2, give a true 0° to 360° angle. The full-bridge layout gives the largest signal and lets temperature effects cancel."
+  },
+  {
+   "topic": "Zero position",
+   "page": 7,
+   "text": "Placement of the die in the package can rotate the sensor's 0° direction by up to 3° from the package edge."
+  },
+  {
+   "topic": "Signal chain",
+   "page": 5,
+   "text": "Three regulators fed straight from VDD supply the GMR bridges (VRG), the analogue section (VRA) and the logic (VRD, taken from VRA). Sigma-delta converters turn the X, Y and temperature signals into numbers. The digital processing unit holds a state machine that corrects offset, offset drift, amplitude mismatch and non-orthogonality and runs autocalibration, prediction and speed calculation; a CORDIC that computes the angle; a capture-compare unit that makes the PWM and SPC waveforms; RAM holding the configuration registers; and laser fuses holding the calibration and default configuration, copied into RAM at start-up. The angle is given with 15 bits (0.01°) and sine and cosine with 16 bits; the part also counts revolutions and measures angular speed."
+  },
+  {
+   "topic": "Clock",
+   "page": 5,
+   "text": "A PLL makes the digital clock, normally from the internal oscillator. Set over SSC, the PLL can instead lock to an external clock on IFC to synchronise the sensor with other chips; this works only with the PWM or SPC interface. The PLL triggers on rising edges and needs the pulse widths of the external clock table, with a duty cycle of 30 % to 70 % (50 % typical). If more than two edges go missing, the chip resets itself and restarts on its internal clock, flagged by S_RST, CLK_SEL and the safety word. All timings move with the clock spread."
+  },
+  {
+   "topic": "Start-up",
+   "page": 16,
+   "text": "Once VDD is above its minimum the part is ready after the power-on time of 5 ms typical, 7 ms maximum; built-in self-tests of the state machine, CORDIC, CCU and ADCs run during start-up. Register writes are refused until then, except the switch to the external clock, which is confirmed by reading it back. A fast reset (0.5 ms max) is done by turning off the start-up self-test (S_BIST = 0) and then setting AS_RST = 1."
+  },
+  {
+   "topic": "Interfaces",
+   "page": 6,
+   "text": "SSC is a three-wire, SPI-compatible, bidirectional link up to 8 Mbit/s for configuration and data. One secondary interface on IFA, IFB and IFC runs alongside it: PWM, incremental (IIF), Hall switch mode (HSM) or short PWM code (SPC). With a preset derivative the secondary interface can be used on its own without SSC. Bit IFAB_OD (register IFAB, 0DH) selects push-pull or open-drain for IFA, IFB and IFC; bit SSC_OD (register MOD_3, 09H) does the same for DATA, which is push-pull by default. Pin drive strength and slope are set in MOD_3."
+  },
+  {
+   "topic": "Magnet selection",
+   "page": 17,
+   "text": "The magnet's field, stated at TJ = 25 °C, must fall inside the allowed band, which narrows as the highest junction temperature rises. Every upper limit starts at 100 mT at -40 °C; for TJ up to 85 °C it is 70 mT at 25 °C and 65 mT at 85 °C; for TJ up to 100 °C, 60 mT at 25 °C and 54 mT at 100 °C; for TJ up to 150 °C, 50 mT at 25 °C and 42 mT at 150 °C. The lower limit is 30 mT at 25 °C. Below it, down to 25 mT, the sensor works with 0.1° more angle error at 0 h. A stronger field than the band allows is possible at higher temperatures if extra angle error is accepted."
+  },
+  {
+   "topic": "Angle error",
+   "page": 21,
+   "text": "The overall angle error is relative: the deviation from a straight reference line once a zero angle is defined, for a static field. A rotating field adds a speed-dependent error from the angle delay time; prediction reduces it in fast-turning use. With autocalibration on, a temperature change of more than 5 K within 1.5 revolutions adds the error of the additional angle error curve, which depends on the change and on the starting temperature; the curves are the worst case, a rise, and a fall gives less. Once the temperature settles and 1.5 revolutions pass, the error is back to the table figure."
+  },
+  {
+   "topic": "Autocalibration",
+   "page": 22,
+   "text": "Autocalibration recalculates the compensation parameters while running, lowering the drift error from temperature and ageing. It needs 1.5 revolutions to form new parameters, keeps updating them, and moves them by one LSB at a time so the output never jumps. AUTOCAL in MOD_2 selects: 00 off; 01 mode 1, one LSB per update time tupd (set by FIR_MD) until the new values are reached; 10 mode 2, one LSB per full 1.5-revolution parameter generation, then a new calculation; 11 mode 3, one LSB per 11.25° of angle until the new values are reached. It is on by default only in some derivatives."
+  },
+  {
+   "topic": "Delay and prediction",
+   "page": 23,
+   "text": "The angle reaches the output after the converter, filter and calculation delay, which depends on the filter (FIR_MD) and the interface. Prediction adds the difference between the latest angle and the two before it, estimating where the field will be after the delay."
+  },
+  {
+   "topic": "SSC transfers",
+   "page": 28,
+   "text": "Transfers are word-aligned 16-bit words, MSB first. The master opens with a command word (RW, lock, UPD, address, number of data words), then data words follow, then the sensor appends a safety word with status bits, its sensor-number response and an 8-bit CRC. With ND = 0 one register is read and no safety word is sent, for the fastest readout. With ND > 1 consecutive registers are read, wrapping from 3FH to 00H. Data changes on the rising edge of SCK and is sampled on the falling edge. After changing data direction the master waits twr_delay. Raising CSQ aborts a transfer at once and resets the CRC. A transfer ends after the safety word, and CSQ must then stay high for at least tCSoff. In push-pull mode the DATA driver is on only while the sensor sends; otherwise DATA is high impedance."
+  },
+  {
+   "topic": "Update registers",
+   "page": 28,
+   "text": "Pulsing CSQ low and back high without any SCK clock copies all registers that have an update buffer, at one instant, into those buffers. A read with UPD = 1 then returns that consistent snapshot instead of live values. Such bits are marked u in the register types."
+  },
+  {
+   "topic": "PWM",
+   "page": 32,
+   "text": "Selected with IF_MD = 01. The duty cycle follows the last measured angle (AVAL) with 12-bit resolution at about 0.25, 0.5, 1 or 2 kHz, chosen in IFAB_RES. Duty cycles of 6.25 % to 93.75 % carry the angle; 0 % to 6.25 % and 93.75 % to 100 % are kept for diagnosis. An error sets its status bit and moves the output into the low band (electrical errors, about 2 %) or the high band (system errors, about 98 %). The output shows an error while it lasts and at least once; the status register keeps it until read over SSC or a reset. An S_ADCT error is shown until the next reset. This diagnostic output can be turned off in MOD_4."
+  },
+  {
+   "topic": "SPC",
+   "page": 34,
+   "text": "SPC follows SAE J2716 SENT nibble coding but sends a frame only when the controller triggers it with a low pulse on IFA, so up to four sensors can share one line. The trigger's low time selects the sensor; its slave number comes from the levels on SCK (S_NR[0]) and IFC (S_NR[1]). A frame is: trigger, a 56-unit synchronisation period (during which a new sample is taken), a status nibble, three to six data nibbles, a CRC nibble and an end pulse. Each nibble is a 3-unit low pulse followed by a high time, 12 to 27 units in all for values 0 to 15. The full frame carries a 16-bit angle and an 8-bit temperature. In SPC mode the angle is calculated only on a trigger, and AVAL holds the angle from the last trigger. The sensor accepts the next trigger 90 µs after the end pulse falls. A trigger whose low time is longer than the maximum gets no answer, and the sensor is ready again 30 µs after the pulse crosses Vth. The status nibble flags errors as the PWM bands do, with the same holding rules and the same MOD_4 switch. The unit time is 3 µs, trimmable to 2.5, 2.0 or 1.5 µs in IFAB_HYST."
+  },
+  {
+   "topic": "Hall switch mode",
+   "page": 38,
+   "text": "Selected with IF_MD = 010. IFA, IFB and IFC emulate three Hall switches for motor commutation: each output is high for 180° electrical, the three are 120° electrical apart, and an edge comes every 60° electrical; the pole-pair count is set in HSM_PLP (register 0EH), and mechanical 0° is always the reference. Output is normally push-pull and can be set to open-drain in IFAB_OD. A switching hysteresis keeps rotor vibration from toggling the outputs."
+  },
+  {
+   "topic": "Incremental interface",
+   "page": 40,
+   "text": "IIF behaves like an optical quadrature encoder with 50 % duty: one pulse per angle step, 9 to 12 bits per turn (512 to 4096 steps) set in IFAB_RES. In A/B mode the phase order of IFA and IFB gives the direction (A after B is clockwise); in step/direction mode IFA pulses the steps and IFB's level gives the direction; IIF_MOD in MOD_1 chooses. The controller needs an up/down counter; it can compare the counter with AVAL read over SSC and add any difference. After start-up the sensor sends as many pulses as the absolute angle, so the counter starts at the true position. IFC gives an index pulse at 0°. Fewer bits do not raise the highest rotation speed."
+  },
+  {
+   "topic": "ADC test vectors",
+   "page": 42,
+   "text": "For a self-check, ADCTV_EN in the SIL register switches the converter inputs from the bridges to a resistor divider, and ADCTV_X and ADCTV_Y pick fixed X and Y values that stand for magnet positions; the angle in AVAL then shows whether the converters work. Available sets: 4 points on a 70 % circle (0°, 90°, 180°, 270°); 8 points on a 100 % circle (every 45°); 8 points on a 122.1 % circle (35.3°, 54.7°, 125.3°, 144.7°, 215.3°, 234.7°, 305.3°, 324.7°); 4 points on a 141.4 % circle (45°, 135°, 225°, 315°)."
+  },
+  {
+   "topic": "Supply monitoring",
+   "page": 43,
+   "text": "Comparators watch the internal supplies. A fault must last at least 256 digital clock periods to set its status bit, which filters spikes. Over- and undervoltage set S_VR, shown in the SSC safety word, the SPC status nibble or the PWM low diagnostic band. Each 2.5 V regulator has an overvoltage comparator; a separate one watches VDD itself. The GND-off comparator compares GND with SCK and detects a lost ground connection. The VDD-off comparator detects a lost VDD connection, in which case the chip is fed from SCK and CSQ through their ESD structures."
+  },
+  {
+   "topic": "Safety features",
+   "page": 6,
+   "text": "The part supports SIL-oriented designs with: converter test vectors and inversion or combination of the filter input streams (both set over SSC), an 8-bit CRC on SSC and a 4-bit CRC on SPC, start-up self-tests, two interfaces active at once, and over- and undervoltage detection."
+  },
+  {
+   "topic": "Bus mode supply",
+   "page": 14,
+   "text": "With two or more sensors on one SSC or SPC bus, all of them should share one supply, because an unpowered sensor sinks current through its output and may disturb the bus."
+  },
+  {
+   "topic": "Unused SSC pins",
+   "page": 12,
+   "text": "When SSC is not used, CSQ is tied to VDD for a firm high level so the interface is never selected by accident, and DATA is left open; both have internal pull-ups."
+  },
+  {
+   "topic": "Sensitive area",
+   "page": 48,
+   "text": "The centre of the sensitive area lies on the package centrelines within 0.4 mm, inside a 0.644 mm circle, 1.22 ± 0.18 mm above the seating plane and at least 0.32 mm below the top of the body. The die tilts by 3° at most relative to the seating plane."
+  }
+ ],
+ "packages": [
+  {
+   "name": "PG-DSO-8",
+   "page": 47,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "body length (along the lead rows) [1]",
+     "5 -0.2"
+    ],
+    [
+     "body width [1]",
+     "4 -0.2"
+    ],
+    [
+     "overall width over leads",
+     "6 ±0.2"
+    ],
+    [
+     "overall height",
+     "1.75 MAX."
+    ],
+    [
+     "body height",
+     "(1.45)"
+    ],
+    [
+     "standoff",
+     "0.175 ±0.07"
+    ],
+    [
+     "lead pitch",
+     "1.27"
+    ],
+    [
+     "pitch span, pins 1 to 4",
+     "3.81"
+    ],
+    [
+     "lead width [2]",
+     "0.41 +0.10/-0.06"
+    ],
+    [
+     "lead thickness",
+     "0.19 +0.06"
+    ],
+    [
+     "lead foot length",
+     "0.64 ±0.25"
+    ],
+    [
+     "body top thickness above the lead",
+     "0.12 -0.085"
+    ],
+    [
+     "pin 1 chamfer",
+     "0.35x45°"
+    ],
+    [
+     "lead foot angle",
+     "0° to 8°"
+    ],
+    [
+     "mould draft angle",
+     "8° MAX."
+    ],
+    [
+     "lead position tolerance",
+     "0.2"
+    ],
+    [
+     "seating plane coplanarity",
+     "0.1"
+    ],
+    [
+     "index marking radius",
+     "R0.4"
+    ],
+    [
+     "index marking centre from the body centreline, along the rows",
+     "1.42"
+    ],
+    [
+     "index marking centre from the body centreline, across the rows",
+     "0.95"
+    ],
+    [
+     "lower body draft angle",
+     "12° MAX."
+    ]
+   ],
+   "notes": [
+    "[1] Plastic or metal protrusion of up to 0.15 per side comes on top.",
+    "[2] Up to 0.61 in the dambar area."
+   ]
+  },
+  {
+   "name": "PG-DSO-8 footprint",
+   "page": 48,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "pad length",
+     "1.31"
+    ],
+    [
+     "pad width",
+     "0.65"
+    ],
+    [
+     "pad pitch",
+     "1.27"
+    ],
+    [
+     "outer pad edge to outer pad edge, across the rows",
+     "5.69"
+    ]
+   ]
+  },
+  {
+   "name": "PG-DSO-8 tape",
+   "page": 49,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "tape width",
+     "12 ±0.3"
+    ],
+    [
+     "pocket pitch",
+     "8"
+    ],
+    [
+     "pocket length across the tape",
+     "5.2"
+    ],
+    [
+     "pocket length along the tape",
+     "6.4"
+    ],
+    [
+     "tape thickness",
+     "0.3"
+    ],
+    [
+     "pocket height, inner",
+     "1.75"
+    ],
+    [
+     "pocket height, outer",
+     "2.1"
+    ]
+   ]
+  }
+ ]
+}

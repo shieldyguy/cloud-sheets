@@ -1,0 +1,2135 @@
+{
+ "sheet": 1,
+ "name": "IR1161LTRPBF",
+ "kind": "switching_regulator",
+ "manufacturer": "Infineon",
+ "title": "IR1161: SmartRectifier secondary-side synchronous rectifier controller, 5-pin SOT-23",
+ "source": {
+  "revision": "2016-07-01",
+  "pages": 26
+ },
+ "summary": "A controller that sits on the secondary of an isolated converter and drives one N-channel MOSFET used in place of the output rectifier diode. It watches the MOSFET's drain-to-source voltage directly on a pin rated to 200 V, switches the gate on when the body diode starts to conduct and off as the current falls to zero, and suits DCM or CrCM flyback and LLC resonant half-bridge converters up to 500 kHz. A resistor sets a minimum on time that blanks turn-on ringing and, checked each cycle, stops gate drive at very light load. It runs from 4.75 to 18 V, draws 0.65 mA quiescent, and drives the gate with 1 A source and 2.5 A sink.",
+ "key_figures": [
+  [
+   "Topology",
+   "Flyback, Resonant Half-bridge"
+  ],
+  [
+   "Drain sense voltage",
+   "200V"
+  ],
+  [
+   "VCC operating range",
+   "4.75V ~ 18V"
+  ],
+  [
+   "Gate drive peak current",
+   "+1A & -2.5A"
+  ],
+  [
+   "Turn-off propagation delay",
+   "50ns typ"
+  ],
+  [
+   "Turn-on threshold VTH2",
+   "-230 mV typ"
+  ],
+  [
+   "Turn-off threshold VTH1",
+   "-4 mV typ"
+  ],
+  [
+   "Quiescent current",
+   "0.65 mA typ (RMOT=50k)"
+  ],
+  [
+   "Switching frequency",
+   "500 kHz max"
+  ],
+  [
+   "Package",
+   "5-Pin SOT-23"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "base part number",
+   "package type",
+   "standard pack form",
+   "quantity",
+   "complete part number"
+  ],
+  "rows": [
+   [
+    "IR1161LPBF",
+    "5L-SOT-23",
+    "Tape and Reel",
+    "3000",
+    "IR1161LTRPBF"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "5L-SOT-23",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply. Watched by the undervoltage lockout; held under its off threshold, the chip sleeps at micropower. Clamped inside at 20 V. Wants a ceramic bypass capacitor to GND right at the pins, and may take a small series resistor for more filtering."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Reference of the chip; joins the source of the rectifier MOSFET."
+    },
+    {
+     "pin": "3",
+     "name": "MOT",
+     "type": "analog in",
+     "function": "Minimum on time set point: a resistor from this pin to GND fixes how long the gate is held on after turn-on, during which the drain comparator is ignored. Typical settings run from 500 ns to 2 µs."
+    },
+    {
+     "pin": "4",
+     "name": "VD",
+     "type": "analog in",
+     "function": "High-voltage sense input for the rectifier MOSFET's drain. Route it with care. A small RC filter (around 100 Ω and 100 pF) may be added for noise; larger values delay the control loop."
+    },
+    {
+     "pin": "5",
+     "name": "GATE",
+     "type": "output",
+     "function": "Gate driver output, 1 A source and 2.5 A sink. Can drive the MOSFET gate straight, but a small series resistor is advised, above all with MOSFETs in parallel. Keep the gate loop short and tight."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 4,
+   "conditions": "Voltages are absolute, referenced to GND; currents are positive into a pin. Thermal resistance and power dissipation are for the part mounted on a board in still air.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit",
+    "remarks"
+   ],
+   "rows": [
+    [
+     "Supply Voltage",
+     "VCC",
+     "-0.3",
+     "20",
+     "V",
+     ""
+    ],
+    [
+     "Cont. Drain Sense Voltage",
+     "VD",
+     "-1",
+     "200",
+     "V",
+     ""
+    ],
+    [
+     "Pulse Drain Sense Voltage",
+     "VD",
+     "-3",
+     "200",
+     "V",
+     ""
+    ],
+    [
+     "MOT Voltage",
+     "VMOT",
+     "-0.3",
+     "3.5",
+     "V",
+     ""
+    ],
+    [
+     "Gate Voltage",
+     "VGATE",
+     "-0.3",
+     "VCC+0.3",
+     "V",
+     "VCC=18V, Gate off"
+    ],
+    [
+     "Operating Junction Temperature",
+     "TJ",
+     "-40",
+     "150",
+     "°C",
+     ""
+    ],
+    [
+     "Storage Temperature",
+     "TS",
+     "-55",
+     "150",
+     "°C",
+     ""
+    ],
+    [
+     "Thermal Resistance",
+     "RθJA",
+     "—",
+     "212†",
+     "°C/W",
+     ""
+    ],
+    [
+     "Package Power Dissipation",
+     "PD",
+     "—",
+     "590†",
+     "mW",
+     "TAMB=25°C"
+    ]
+   ],
+   "notes": [
+    "† Measured with the package soldered to a board, in still air."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VCC",
+     "4.75",
+     "18",
+     "V"
+    ],
+    [
+     "Drain Sense Voltage",
+     "VD",
+     "-3 ††",
+     "200",
+     "V"
+    ],
+    [
+     "Junction Temperature",
+     "TJ",
+     "-40",
+     "125",
+     "°C"
+    ],
+    [
+     "Switching Frequency",
+     "Fsw",
+     "—",
+     "500",
+     "kHz"
+    ]
+   ],
+   "notes": [
+    "†† The -3 V excursion on VD is allowed as a spike no wider than 100 ns."
+   ]
+  },
+  {
+   "title": "Recommended component values",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "component",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "MOT pin resistor value",
+     "RMOT",
+     "5",
+     "100",
+     "kΩ"
+    ],
+    [
+     "VCC decoupling capacitor value",
+     "CVCC",
+     "1",
+     "—",
+     "µF"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 5,
+   "conditions": "VCC=12V and TA=25°C unless otherwise specified; VO and IO are referenced to the GND pin.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply section",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Supply Voltage Operating Range",
+     "VCC",
+     "",
+     "4.75",
+     "—",
+     "18",
+     "V"
+    ],
+    [
+     "VCC Turn On Threshold",
+     "VCC ON",
+     "",
+     "4.25",
+     "4.5",
+     "4.75",
+     "V"
+    ],
+    [
+     "VCC Turn Off Threshold (Under Voltage Lock Out)",
+     "VCC UVLO",
+     "",
+     "4.15",
+     "4.4",
+     "4.65",
+     "V"
+    ],
+    [
+     "VCC Turn On/Off Hysteresis",
+     "VCC HYST",
+     "",
+     "—",
+     "0.1",
+     "—",
+     "V"
+    ],
+    [
+     "Operating Current",
+     "ICC",
+     "CLOAD=1nF, fSW=300kHz",
+     "—",
+     "5.0",
+     "8.0",
+     "mA"
+    ],
+    [
+     "Quiescent Current",
+     "IQCC",
+     "RMOT=50k",
+     "—",
+     "0.65",
+     "1.1",
+     "mA"
+    ],
+    [
+     "Start-up Current",
+     "ICC START",
+     "VCC= VCC ON - 0.1V",
+     "—",
+     "10",
+     "50",
+     "µA"
+    ],
+    [
+     "Comparator section",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Turn-off Threshold",
+     "VTH1",
+     "VCC=5V to 15V",
+     "-8",
+     "-4",
+     "0",
+     "mV"
+    ],
+    [
+     "Turn-on Threshold",
+     "VTH2",
+     "VCC=5V to 15V",
+     "-263",
+     "-230",
+     "-197",
+     "mV"
+    ],
+    [
+     "Hysteresis",
+     "VHYST",
+     "",
+     "—",
+     "230",
+     "—",
+     "mV"
+    ],
+    [
+     "Input Bias Current",
+     "IIBIAS1",
+     "VD=-50mV",
+     "-10",
+     "-7.5",
+     "—",
+     "µA"
+    ],
+    [
+     "Input Bias Current",
+     "IIBIAS2",
+     "VD=200V",
+     "—",
+     "7",
+     "30",
+     "µA"
+    ],
+    [
+     "One-shot section",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Blanking Pulse Duration",
+     "tBLANK",
+     "",
+     "8",
+     "13",
+     "24",
+     "µs"
+    ],
+    [
+     "Reset Threshold",
+     "VTH3",
+     "",
+     "1.06",
+     "1.18",
+     "1.31",
+     "V"
+    ],
+    [
+     "Blanking Time of Reset",
+     "tBRST",
+     "",
+     "—",
+     "400",
+     "—",
+     "ns"
+    ],
+    [
+     "Hysteresis",
+     "VHYST3",
+     "GBD",
+     "—",
+     "70",
+     "—",
+     "mV"
+    ],
+    [
+     "Minimum on time section",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Minimum On Time",
+     "TONmin",
+     "RMOT=5k",
+     "80",
+     "100",
+     "120",
+     "ns"
+    ],
+    [
+     "Minimum On Time",
+     "TONmin",
+     "RMOT=24k",
+     "400",
+     "500",
+     "600",
+     "ns"
+    ],
+    [
+     "Minimum On Time",
+     "TONmin",
+     "RMOT=50k",
+     "0.8",
+     "1",
+     "1.2",
+     "µs"
+    ],
+    [
+     "Gate driver section",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Gate Low Voltage",
+     "VGLO",
+     "IGATE=100mA, VCC=12V",
+     "—",
+     "0.2",
+     "0.4",
+     "V"
+    ],
+    [
+     "Gate High Voltage",
+     "VGTH",
+     "VCC=12V, IGATE=5mA",
+     "11.5",
+     "11.9",
+     "VCC",
+     "V"
+    ],
+    [
+     "Gate High Voltage",
+     "VGTH",
+     "VCC=5V, IGATE=5mA",
+     "4.5",
+     "4.9",
+     "VCC",
+     "V"
+    ],
+    [
+     "Rise Time",
+     "tr",
+     "CLOAD=1nF, VCC=12V",
+     "—",
+     "20",
+     "—",
+     "ns"
+    ],
+    [
+     "Fall Time",
+     "tf",
+     "CLOAD=1nF, VCC=12V",
+     "—",
+     "13",
+     "—",
+     "ns"
+    ],
+    [
+     "Turn on Propagation Delay",
+     "tDon",
+     "VDS to VGATE – VDS goes down from 6V to -1V",
+     "—",
+     "60",
+     "90",
+     "ns"
+    ],
+    [
+     "Turn off Propagation Delay",
+     "tDoff",
+     "VDS to VGATE – VDS goes up from -1V to 6V",
+     "—",
+     "50",
+     "60",
+     "ns"
+    ],
+    [
+     "Pull up Resistance",
+     "rup",
+     "IGATE=100mA",
+     "—",
+     "9",
+     "—",
+     "Ω"
+    ],
+    [
+     "Pull down Resistance",
+     "rdown",
+     "IGATE=-100mA",
+     "—",
+     "2",
+     "—",
+     "Ω"
+    ],
+    [
+     "Output Peak Current (source)",
+     "IO source",
+     "GBD",
+     "—",
+     "1",
+     "—",
+     "A"
+    ],
+    [
+     "Output Peak Current (sink)",
+     "IO sink",
+     "GBD",
+     "—",
+     "2.5",
+     "—",
+     "A"
+    ]
+   ],
+   "notes": [
+    "GBD: set by design, not measured in production test."
+   ]
+  },
+  {
+   "title": "Qualification",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "item",
+    "standard",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Qualification level",
+     "",
+     "Industrial"
+    ],
+    [
+     "Moisture sensitivity level, SOT-23 5L",
+     "IPC/JEDEC J-STD-020",
+     "MSL1"
+    ],
+    [
+     "ESD, machine model",
+     "JEDEC JESD22-A115",
+     "Class A"
+    ],
+    [
+     "ESD, human body model",
+     "EIA/JEDEC EIA/JESD22-A114",
+     "Class 1A"
+    ],
+    [
+     "IC latch-up test",
+     "JESD78",
+     "Class I, Level A"
+    ],
+    [
+     "RoHS compliant",
+     "",
+     "Yes"
+    ]
+   ],
+   "notes": [
+    "The family carries JEDEC industrial qualification; consumer qualification is granted from it."
+   ]
+  },
+  {
+   "title": "Carrier tape, 5 lead SOT23",
+   "page": 22,
+   "conditions": "Millimetres.",
+   "columns": [
+    "symbol",
+    "what",
+    "value"
+   ],
+   "rows": [
+    [
+     "Ao",
+     "pocket length",
+     "3.23 +/-0.10"
+    ],
+    [
+     "Bo",
+     "pocket width",
+     "3.17 +/-0.10"
+    ],
+    [
+     "Ko",
+     "pocket depth",
+     "1.37 +/-0.10"
+    ],
+    [
+     "F",
+     "sprocket-hole line to pocket centre",
+     "3.50 +/-0.05"
+    ],
+    [
+     "P1",
+     "pocket pitch",
+     "4.00 +/-0.10"
+    ],
+    [
+     "W",
+     "tape width",
+     "8.00 +0.3/-0.1"
+    ],
+    [
+     "P2",
+     "sprocket hole to pocket centre, along the tape",
+     "2.0±0.05"
+    ],
+    [
+     "Po",
+     "sprocket hole pitch",
+     "4.0±0.1"
+    ],
+    [
+     "Do",
+     "sprocket hole diameter",
+     "ø1.55±0.05"
+    ],
+    [
+     "D1",
+     "pocket hole diameter",
+     "ø1.00+0.25"
+    ],
+    [
+     "E1",
+     "tape edge to sprocket-hole line",
+     "1.75±0.1"
+    ],
+    [
+     "T",
+     "tape thickness",
+     "0.25±0.02"
+    ],
+    [
+     "",
+     "pocket wall draft angle",
+     "9° max"
+    ]
+   ],
+   "notes": [
+    "Ten sprocket pitches accumulate to within ± 0.20."
+   ]
+  },
+  {
+   "title": "Reel, 5 lead SOT23",
+   "page": 23,
+   "conditions": "Millimetres.",
+   "columns": [
+    "item",
+    "value"
+   ],
+   "rows": [
+    [
+     "Reel diameter",
+     "180 +/-.50"
+    ],
+    [
+     "Hub diameter",
+     "60+/-.50"
+    ],
+    [
+     "Arbor hole",
+     "13+0.6 -0.20"
+    ],
+    [
+     "E",
+     "20.2 Min."
+    ],
+    [
+     "D",
+     "1.5 Min"
+    ],
+    [
+     "Material",
+     "POLYSTRENE"
+    ],
+    [
+     "Surface resistivity",
+     "</= 10E11 OHMS/SQ"
+    ],
+    [
+     "Static decay",
+     "< 2SEC. AT 50%RH"
+    ]
+   ]
+  },
+  {
+   "title": "Cover tape",
+   "page": 22,
+   "conditions": "Millimetres unless stated.",
+   "columns": [
+    "item",
+    "value"
+   ],
+   "rows": [
+    [
+     "Cover tape width (W ±0.1) for 8 mm carrier tape",
+     "5.3, 5.5"
+    ],
+    [
+     "Cover tape width for 12 mm carrier tape",
+     "9.2, 9.5"
+    ],
+    [
+     "Cover tape width for 16 mm carrier tape",
+     "13.3, 13.5"
+    ],
+    [
+     "Cover tape width for 24 mm carrier tape",
+     "21.0, 21.3"
+    ],
+    [
+     "Cover tape width for 32 mm carrier tape",
+     "25.5, 26.8"
+    ],
+    [
+     "Cover tape width for 44 mm carrier tape",
+     "37.5"
+    ],
+    [
+     "Cover tape width for 56 mm carrier tape",
+     "49.5"
+    ],
+    [
+     "Thickness",
+     "0.040 - 0.060"
+    ],
+    [
+     "Length",
+     "500 +2/-0 m"
+    ],
+    [
+     "Outer diameter",
+     "215 max"
+    ],
+    [
+     "Tensile strength",
+     "≥6.50 kg/mm²"
+    ],
+    [
+     "Elongation",
+     "≥80%"
+    ],
+    [
+     "Surface resistivity, both sides",
+     "≤10E11 ohms/sq"
+    ],
+    [
+     "Peel strength",
+     "to EIA spec"
+    ],
+    [
+     "Shelf life",
+     "two years from manufacture"
+    ],
+    [
+     "Luminous transmittance",
+     ">80 %"
+    ],
+    [
+     "3 inch core internal diameter",
+     "ø76.5±1.0"
+    ],
+    [
+     "2 inch core internal diameter",
+     "ø50+1.7/-0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Undervoltage lockout against temperature",
+   "page": 18,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCC UVLO thresholds",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC ON",
+     "points": [
+      [
+       -40.0,
+       4.5325
+      ],
+      [
+       -1.9,
+       4.584
+      ],
+      [
+       15.2,
+       4.6011
+      ],
+      [
+       25.0,
+       4.6075
+      ],
+      [
+       35.8,
+       4.6121
+      ],
+      [
+       59.9,
+       4.6168
+      ],
+      [
+       125.0,
+       4.62
+      ]
+     ]
+    },
+    {
+     "label": "VCC UVLO",
+     "points": [
+      [
+       -40.0,
+       4.45
+      ],
+      [
+       -1.9,
+       4.4971
+      ],
+      [
+       15.2,
+       4.5123
+      ],
+      [
+       25.0,
+       4.5175
+      ],
+      [
+       35.8,
+       4.5207
+      ],
+      [
+       59.9,
+       4.5224
+      ],
+      [
+       125.0,
+       4.5175
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent current against temperature",
+   "page": 18,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IQCC quiescent current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IQCC",
+     "points": [
+      [
+       -40.0,
+       0.5945
+      ],
+      [
+       -1.9,
+       0.6221
+      ],
+      [
+       15.2,
+       0.6322
+      ],
+      [
+       25.0,
+       0.6367
+      ],
+      [
+       35.8,
+       0.6408
+      ],
+      [
+       59.9,
+       0.6477
+      ],
+      [
+       125.0,
+       0.6629
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current with 1 nF load against temperature",
+   "page": 18,
+   "conditions": "300 kHz, CLOAD = 1 nF",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICC",
+     "points": [
+      [
+       -39.9,
+       5.137
+      ],
+      [
+       -1.9,
+       5.217
+      ],
+      [
+       25.0,
+       5.255
+      ],
+      [
+       59.9,
+       5.274
+      ],
+      [
+       125.0,
+       5.29
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Start-up current against temperature",
+   "page": 18,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC START start-up current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICC START",
+     "points": [
+      [
+       -40.0,
+       6.445
+      ],
+      [
+       -1.9,
+       7.907
+      ],
+      [
+       25.0,
+       8.795
+      ],
+      [
+       59.9,
+       9.705
+      ],
+      [
+       125.0,
+       11.241
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VTH1 against temperature",
+   "page": 19,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTH1 threshold",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTH1",
+     "points": [
+      [
+       -40.0,
+       -5.0
+      ],
+      [
+       -1.9,
+       -4.548
+      ],
+      [
+       25.0,
+       -4.3
+      ],
+      [
+       59.9,
+       -4.098
+      ],
+      [
+       125.0,
+       -3.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VTH2 against temperature",
+   "page": 19,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTH2 threshold",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTH2",
+     "points": [
+      [
+       -40.0,
+       -221.0
+      ],
+      [
+       -1.9,
+       -215.78
+      ],
+      [
+       6.3,
+       -215.09
+      ],
+      [
+       15.2,
+       -214.79
+      ],
+      [
+       25.0,
+       -215.0
+      ],
+      [
+       35.8,
+       -215.79
+      ],
+      [
+       59.9,
+       -218.78
+      ],
+      [
+       125.0,
+       -229.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VTH3 against temperature",
+   "page": 19,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTH3 threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTH3",
+     "points": [
+      [
+       -40.0,
+       1.14001
+      ],
+      [
+       -1.9,
+       1.14773
+      ],
+      [
+       15.2,
+       1.14972
+      ],
+      [
+       25.0,
+       1.15001
+      ],
+      [
+       35.8,
+       1.14972
+      ],
+      [
+       59.9,
+       1.14773
+      ],
+      [
+       125.0,
+       1.14001
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MOT time against temperature",
+   "page": 19,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Minimum on time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RMOT = 100k",
+     "points": [
+      [
+       -40.0,
+       2.043
+      ],
+      [
+       125.0,
+       2.115
+      ]
+     ]
+    },
+    {
+     "label": "RMOT = 50k",
+     "points": [
+      [
+       -40.0,
+       1.084
+      ],
+      [
+       125.0,
+       1.107
+      ]
+     ]
+    },
+    {
+     "label": "RMOT = 24k",
+     "points": [
+      [
+       -40.0,
+       0.5
+      ],
+      [
+       125.0,
+       0.525
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Blanking time against temperature",
+   "page": 20,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Blanking time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Blanking time",
+     "points": [
+      [
+       -39.9,
+       12.98
+      ],
+      [
+       -1.9,
+       12.814
+      ],
+      [
+       15.2,
+       12.762
+      ],
+      [
+       25.0,
+       12.745
+      ],
+      [
+       35.8,
+       12.735
+      ],
+      [
+       59.9,
+       12.735
+      ],
+      [
+       125.0,
+       12.771
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Tr and Tf against temperature",
+   "page": 20,
+   "conditions": "1 nF load",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Rise and fall time",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tr",
+     "points": [
+      [
+       -40.0,
+       14.7
+      ],
+      [
+       -1.9,
+       16.25
+      ],
+      [
+       25.0,
+       17.08
+      ],
+      [
+       59.9,
+       17.71
+      ],
+      [
+       125.0,
+       18.58
+      ]
+     ]
+    },
+    {
+     "label": "Tf",
+     "points": [
+      [
+       -40.0,
+       12.58
+      ],
+      [
+       125.0,
+       13.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "TDON and TDOFF against temperature",
+   "page": 20,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Propagation delay",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Turn-on propagation delay",
+     "points": [
+      [
+       -40.0,
+       66.91
+      ],
+      [
+       -1.9,
+       64.43
+      ],
+      [
+       15.2,
+       64.0
+      ],
+      [
+       25.0,
+       64.14
+      ],
+      [
+       35.8,
+       64.59
+      ],
+      [
+       59.9,
+       66.2
+      ],
+      [
+       125.0,
+       71.63
+      ]
+     ]
+    },
+    {
+     "label": "Turn-off propagation delay",
+     "points": [
+      [
+       -40.0,
+       48.23
+      ],
+      [
+       -1.9,
+       49.78
+      ],
+      [
+       25.0,
+       51.12
+      ],
+      [
+       125.0,
+       57.56
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RUP and RDOWN against temperature",
+   "page": 20,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rup",
+     "points": [
+      [
+       -40.0,
+       6.47
+      ],
+      [
+       25.0,
+       8.87
+      ],
+      [
+       125.0,
+       13.02
+      ]
+     ]
+    },
+    {
+     "label": "Rdown",
+     "points": [
+      [
+       -40.0,
+       1.35
+      ],
+      [
+       25.0,
+       1.73
+      ],
+      [
+       125.0,
+       2.49
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "flyback",
+   "title": "Flyback synchronous rectifier",
+   "page": 1,
+   "description": "A flyback converter whose secondary rectifier is the MOSFET Q2 in the return leg. IR1161 senses Q2's drain on VD with its GND on Q2's source, and drives Q2's gate through R3. R4 on MOT sets the minimum on time. The chip runs from the output through R5, bypassed by C1 right at VCC and GND. On the primary, controller U2 drives switch Q1 through R1, and R2 senses its source current.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "IR1161"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Primary controller",
+     "external": true
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "flyback transformer",
+     "note": "P2 and S1 are the dotted ends"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "primary switch"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "primary gate resistor"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "primary current sense"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "SR gate resistor"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "RMOT; 5 to 100 kΩ recommended"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "CVCC, ceramic; 1 µF or more recommended"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "",
+     "note": "VCC series resistor"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor"
+    },
+    {
+     "ref": "LOAD",
+     "type": "load",
+     "value": ""
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "VIN",
+     "note": "primary input"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "VOUT",
+     "note": "output +"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "llc",
+   "title": "Resonant half-bridge synchronous rectifier",
+   "page": 13,
+   "description": "An LLC half-bridge (Q1, Q2, resonant inductor L1, resonant capacitor C1) feeding a centre-tapped secondary. Each outer end of the secondary goes to the drain of its own rectifier MOSFET, Q3 or Q4, whose sources form the output return; the centre tap is the output. Each MOSFET has its own IR1161 sensing its drain, driving its gate through a resistor, with an RMOT resistor, a VCC bypass capacitor and a VCC feed resistor from the output.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "IR1161"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "IR1161"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "high-side switch"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "",
+     "note": "low-side switch"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "",
+     "note": "resonant inductor"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "resonant capacitor"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "centre-tapped transformer",
+     "note": "P2, S1 and CT are the dotted ends"
+    },
+    {
+     "ref": "Q3",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET, upper half"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "gate resistor"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "RMOT; 5 to 100 kΩ recommended"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "CVCC, ceramic; 1 µF or more recommended"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "VCC feed from output"
+    },
+    {
+     "ref": "Q4",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET, lower half"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "gate resistor"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "",
+     "note": "RMOT; 5 to 100 kΩ recommended"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "CVCC, ceramic; 1 µF or more recommended"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "",
+     "note": "VCC feed from output"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor"
+    },
+    {
+     "ref": "LOAD",
+     "type": "load",
+     "value": ""
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "VIN",
+     "note": "bus +"
+    },
+    {
+     "ref": "HO",
+     "type": "terminal",
+     "value": "HO",
+     "note": "high-side gate drive"
+    },
+    {
+     "ref": "LO",
+     "type": "terminal",
+     "value": "LO",
+     "note": "low-side gate drive"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "VOUT",
+     "note": "output +"
+    },
+    {
+     "ref": "VINN",
+     "type": "terminal",
+     "value": "VIN-",
+     "note": "bus return"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "logic-gate",
+   "title": "Gate drive for a logic-level SR MOSFET",
+   "page": 15,
+   "description": "Keeps a logic-level rectifier MOSFET off while the chip is unpowered or in UVLO. GATE feeds the MOSFET through schottky D1 and gate resistor R2. PNP Q1 has its emitter at the D1/R2 junction, its base on GATE (pulled to GND by R3) and its collector on GND: whenever GATE is low, Q1 empties the MOSFET gate, holding it under 1 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "IR1161"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "CVcc"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "RMOT"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "",
+     "note": "Dg"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "Rg"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "",
+     "note": "Qsink"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "Rb"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET, logic level"
+    },
+    {
+     "ref": "DRAIN",
+     "type": "terminal",
+     "value": "DRAIN",
+     "note": "to the transformer secondary"
+    },
+    {
+     "ref": "RTN",
+     "type": "terminal",
+     "value": "RTN",
+     "note": "output return"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "vcc-clamp",
+   "title": "VCC clamp",
+   "page": 16,
+   "description": "Feeds VCC from an output higher than the chip's range. NPN Q1 is an emitter follower from VOUT; its base sits one zener voltage (D1) below VOUT, with R1 in series above the zener and R3 from the base to ground, so VCC = VOUT − VZD1 − VBE, decoupled by C1. The chip only starts once VOUT exceeds VCC ON + VZD1 + VBE. R1 and R2 are optional and tighten the clamp voltage.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "IR1161"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "optional"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "",
+     "note": "ZD1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "optional"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Q1",
+     "type": "npn",
+     "value": ""
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "CVcc"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "VOUT",
+     "note": "converter output"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "shutdown",
+   "title": "Enable/disable through the VCC clamp",
+   "page": 16,
+   "description": "The VCC clamp (R1, zener D1, R3, follower Q1, C1) with an NPN Q2 across R3. A high shutdown signal through R4 turns Q2 on, which grounds Q1's base; VCC falls below VCC UVLO and the chip stops.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "IR1161"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "",
+     "note": "ZD1"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Q1",
+     "type": "npn",
+     "value": ""
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "CVcc"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "base resistor"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": ""
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "VOUT",
+     "note": "converter output"
+    },
+    {
+     "ref": "SHUTDOWN",
+     "type": "terminal",
+     "value": "SHUTDOWN",
+     "note": "disable input"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Minimum on time",
+   "expr": "TMOT = 2 × 10^-11 × RMOT",
+   "where": {
+    "TMOT": "minimum on time, s",
+    "RMOT": "resistor from MOT to GND, Ω (5 to 100 kΩ recommended)"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "VCC from the clamp",
+   "expr": "VCC = VOUT − VZD1 − VBE",
+   "where": {
+    "VOUT": "converter output",
+    "VZD1": "voltage of zener ZD1",
+    "VBE": "base-emitter drop of the pass NPN"
+   },
+   "note": "",
+   "page": 16
+  },
+  {
+   "name": "Output at which the clamped chip starts",
+   "expr": "VOUT > VCC ON + VZD1 + VBE",
+   "where": {
+    "VCC ON": "VCC turn-on threshold, 4.5 V typ"
+   },
+   "note": "",
+   "page": 16
+  }
+ ],
+ "operation": [
+  {
+   "topic": "How it rectifies",
+   "page": 11,
+   "text": "The chip judges the direction of current in the rectifier MOSFET from its drain-to-source voltage on VD. With the MOSFET off, the current runs in the body diode; with it on, RDSon acts as the sensing shunt. The gate is driven only while current flows from source to drain, and internal blanking keeps stray edges from toggling it at any load. It is meant for DCM and CrCM flyback and for resonant (LLC) half-bridge converters."
+  },
+  {
+   "topic": "Turn-on",
+   "page": 11,
+   "text": "When the secondary starts to conduct, the body diode drives VDS well below VTH2 (-230 mV typ), and the chip raises the gate. VDS then jumps to a small negative value, usually with ringing. For the minimum on time set on MOT the drain comparator is ignored, so the ringing cannot switch the MOSFET off early."
+  },
+  {
+   "topic": "Turn-off and blanking",
+   "page": 11,
+   "text": "As the current falls to zero VDS rises through VTH1 (-4 mV typ) and the gate goes low; any remaining current returns to the body diode and VDS steps negative again. To keep that step from re-arming turn-on, VTH2 is ignored for tBLANK (13 µs typ) after VTH1 trips. The blanking ends early only when VDS goes above VTH3 (1.18 V typ) and stays there longer than tBRST (400 ns typ); the chip is then armed for the next cycle."
+  },
+  {
+   "topic": "Resonant half-bridge",
+   "page": 13,
+   "text": "In an LLC converter with a centre-tapped secondary each half has its own IR1161 and MOSFET. Switching follows the flyback sequence, with a sinusoidal current shape."
+  },
+  {
+   "topic": "UVLO mode",
+   "page": 10,
+   "text": "Below VCC ON the gate driver stays off and the chip draws only ICC START. It returns to this state from any other whenever VCC drops under VCC UVLO."
+  },
+  {
+   "topic": "Start-up and synchronized enable",
+   "page": 10,
+   "text": "After VCC passes VCC ON the gate is held low for a delay of about 100 µs. Then VDS must rise above VTH3 twice before rectification is enabled, so the gate can never first turn on part-way through a conduction interval (which, with the minimum on time, would hold the MOSFET on past the end of conduction and let current reverse). Rectification then skips its first gate pulse, and per-cycle MOT checking begins; from then on the gate drives every cycle."
+  },
+  {
+   "topic": "MOT protection mode",
+   "page": 10,
+   "text": "If a conduction interval ends before the minimum on time has run out (VD found above VTH1 at the end of MOT), the next gate pulse is withheld. This stops reverse current at very low duty cycle, at light or no load, and cuts standby power. The check runs every cycle, so normal drive resumes by itself once the conduction time grows past MOT again. It works the same in flyback and half-bridge circuits."
+  },
+  {
+   "topic": "Setting the minimum on time",
+   "page": 14,
+   "text": "A resistor from MOT to GND sets the time, 2 × 10^-11 s per ohm: 24 kΩ gives about 500 ns and 50 kΩ about 1 µs. Too long a MOT at light load is what MOT protection guards against."
+  },
+  {
+   "topic": "Logic-level MOSFETs",
+   "page": 15,
+   "text": "While the supply ramps up or down, the drain may already be switching with the chip still in UVLO, and below about 2 V on VCC the chip's gate sink is weak; meanwhile drain-gate capacitance can kick a logic-level MOSFET's gate past its threshold. An external pull-down is advised: a diode from GATE to the MOSFET gate path, a PNP whose emitter sits on the gate side of the diode and whose base is held on GATE with a resistor to GND, discharging the gate whenever GATE is low. It holds the gate under 1 V in all conditions."
+  },
+  {
+   "topic": "Powering VCC",
+   "page": 16,
+   "text": "When the converter output lies inside the VCC range, VCC can be taken from it, perhaps through a low-value resistor for filtering. For higher outputs a clamp is advised, from a zener alone up to a linear regulator; with a clamp the gate swing is smaller too, which saves losses when VOUT is above 15 V. In the zener-and-NPN follower example the chip also starts late, only once the output exceeds VCC ON + VZD1 + VBE; the optional R1 and R2 set the clamp level more precisely."
+  },
+  {
+   "topic": "Shutdown",
+   "page": 16,
+   "text": "Pulling VCC under VCC UVLO turns the chip off. One way: an NPN on the base of the VCC clamp's pass transistor, driven through a resistor from a shutdown signal, pulls that base to ground."
+  },
+  {
+   "topic": "Gate drive layout",
+   "page": 9,
+   "text": "Keep the loop from GATE through the MOSFET gate and back to GND as short and small as possible, to keep inductance low."
+  },
+  {
+   "topic": "Timing definitions",
+   "page": 17,
+   "text": "tDon runs from VDS crossing below VTH2 to the gate rising; tDoff from VDS crossing above VTH1 to the gate falling. Rise and fall times are taken between 10 % and 90 % of the gate swing."
+  },
+  {
+   "topic": "Marking",
+   "page": 24,
+   "text": "Top: a date code (YW) and lot code (LC). Bottom: the IR logo and part number."
+  }
+ ],
+ "packages": [
+  {
+   "name": "5L-SOT-23",
+   "page": 21,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.90",
+     "1.45"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.15"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.90",
+     "1.30"
+    ],
+    [
+     "B",
+     "lead width",
+     "0.25",
+     "0.50"
+    ],
+    [
+     "C",
+     "lead thickness",
+     "0.09",
+     "0.20"
+    ],
+    [
+     "D",
+     "body length",
+     "2.80",
+     "3.00"
+    ],
+    [
+     "E",
+     "overall width across leads",
+     "2.60",
+     "3.00"
+    ],
+    [
+     "E1",
+     "body width",
+     "1.50",
+     "1.75"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "0.95 REF",
+     ""
+    ],
+    [
+     "e1",
+     "outer lead spacing",
+     "1.90 REF",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.35",
+     "0.55"
+    ],
+    [
+     "α",
+     "foot angle",
+     "0°",
+     "10°"
+    ]
+   ]
+  }
+ ]
+}

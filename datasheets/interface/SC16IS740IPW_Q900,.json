@@ -1,0 +1,4466 @@
+{
+ "sheet": 1,
+ "name": "SC16IS740IPW_Q900,",
+ "kind": "interface",
+ "manufacturer": "NXP Semiconductors",
+ "title": "Single UART bridged to an I2C-bus or SPI slave port, 64-byte FIFOs, IrDA SIR",
+ "source": {
+  "document": "SC16IS740_750_760",
+  "revision": "Rev. 7, 9 June 2011",
+  "pages": 63
+ },
+ "summary": "SC16IS740, SC16IS750 and SC16IS760 put one full-duplex UART with 64-byte receive and transmit FIFOs behind a slave I2C-bus (400 kbit/s) or SPI (mode 0) port, chosen by a pin. The register set follows the 16C450 and adds automatic RTS/CTS and Xon/Xoff flow control, RS-485 direction control and address detection, an IrDA SIR encoder and decoder, and a sleep mode under 30 µA. The SC16IS750 and SC16IS760 add eight programmable I/O pins, four of which can serve as modem lines; the SC16IS760 also runs SPI to 15 Mbit/s and IrDA SIR to 1.152 Mbit/s. The SC16IS740 comes in TSSOP16, the other two in TSSOP24 and HVQFN24; SC16IS740IPW/Q900 is the AEC-Q100 version.",
+ "key_figures": [
+  [
+   "UART data rate",
+   "up to 5 Mbit/s (16× clock mode)"
+  ],
+  [
+   "FIFOs",
+   "64 bytes transmit, 64 bytes receive"
+  ],
+  [
+   "Host bus",
+   "I2C-bus slave to 400 kbit/s, or SPI slave mode 0 (4 Mbit/s SC16IS740/750, 15 Mbit/s SC16IS760)"
+  ],
+  [
+   "Supply",
+   "2.3 V to 2.7 V or 3.0 V to 3.6 V"
+  ],
+  [
+   "Supply current",
+   "6.0 mA max operating, no load"
+  ],
+  [
+   "Sleep current",
+   "30 µA max"
+  ],
+  [
+   "Clock",
+   "XTAL1 up to 80 MHz external (3.3 V), 48 MHz (2.5 V); crystal up to 24 MHz"
+  ],
+  [
+   "Inputs",
+   "5.5 V tolerant with supply present"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +95 °C at 3.3 V; -40 °C to +85 °C at 2.5 V"
+  ],
+  [
+   "IrDA SIR",
+   "115.2 kbit/s (SC16IS750), 1.152 Mbit/s (SC16IS760)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 3,
+  "columns": [
+   "part number",
+   "package",
+   "package description",
+   "outline",
+   "programmable I/O pins",
+   "max SPI clock",
+   "max IrDA SIR rate",
+   "qualification"
+  ],
+  "rows": [
+   [
+    "SC16IS740IPW",
+    "TSSOP16",
+    "plastic thin shrink small outline; 16 leads; body width 4.4 mm",
+    "SOT403-1",
+    "none",
+    "4 Mbit/s",
+    "115.2 kbit/s",
+    ""
+   ],
+   [
+    "SC16IS740IPW/Q900",
+    "TSSOP16",
+    "plastic thin shrink small outline; 16 leads; body width 4.4 mm",
+    "SOT403-1",
+    "none",
+    "4 Mbit/s",
+    "115.2 kbit/s",
+    "AEC-Q100"
+   ],
+   [
+    "SC16IS750IBS",
+    "HVQFN24",
+    "plastic thermal enhanced very thin quad flat, no leads; 24 terminals; body 4 × 4 × 0.85 mm",
+    "SOT616-3",
+    "8",
+    "4 Mbit/s",
+    "115.2 kbit/s",
+    ""
+   ],
+   [
+    "SC16IS750IPW",
+    "TSSOP24",
+    "plastic thin shrink small outline; 24 leads; body width 4.4 mm",
+    "SOT355-1",
+    "8",
+    "4 Mbit/s",
+    "115.2 kbit/s",
+    ""
+   ],
+   [
+    "SC16IS760IBS",
+    "HVQFN24",
+    "plastic thermal enhanced very thin quad flat, no leads; 24 terminals; body 4 × 4 × 0.85 mm",
+    "SOT616-3",
+    "8",
+    "15 Mbit/s",
+    "1.152 Mbit/s",
+    ""
+   ],
+   [
+    "SC16IS760IPW",
+    "TSSOP24",
+    "plastic thin shrink small outline; 24 leads; body width 4.4 mm",
+    "SOT355-1",
+    "8",
+    "15 Mbit/s",
+    "1.152 Mbit/s",
+    ""
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "TSSOP16 (SC16IS740IPW, SC16IS740IPW/Q900)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VDD",
+     "type": "power",
+     "function": "Supply."
+    },
+    {
+     "pin": "2",
+     "name": "CS/A0",
+     "type": "input",
+     "function": "SPI: chip select, active LOW, Schmitt-trigger. I2C-bus: address select A0, which with A1 sets the slave address (address map table)."
+    },
+    {
+     "pin": "3",
+     "name": "SI/A1",
+     "type": "input",
+     "function": "SPI: serial data in. I2C-bus: address select A1, which with A0 sets the slave address (address map table)."
+    },
+    {
+     "pin": "4",
+     "name": "SO",
+     "type": "output",
+     "function": "SPI: serial data out, 3-state. In I2C-bus mode its function is undefined; leave it unconnected."
+    },
+    {
+     "pin": "5",
+     "name": "SCL/SCLK",
+     "type": "input",
+     "function": "Host clock: I2C-bus SCL or SPI SCLK."
+    },
+    {
+     "pin": "6",
+     "name": "SDA",
+     "type": "I/O",
+     "function": "I2C-bus data, open-drain. In SPI mode it has no function and must be tied to VSS."
+    },
+    {
+     "pin": "7",
+     "name": "IRQ",
+     "type": "output",
+     "function": "Interrupt request, open-drain, active LOW, driven when an enabled source in IER (or IOIntEna) is pending: input pin change, receive error, receive data, transmit space, modem status. Needs a pull-up to VDD: 1 kΩ at 3.3 V, 1.5 kΩ at 2.5 V."
+    },
+    {
+     "pin": "8",
+     "name": "I2C/SPI",
+     "type": "input",
+     "function": "Host bus select: HIGH picks the I2C-bus, LOW picks SPI."
+    },
+    {
+     "pin": "9",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "10",
+     "name": "RTS",
+     "type": "output",
+     "function": "Request to send, active LOW. MCR[1] = 1 drives it LOW; it is HIGH after reset. It follows the receive FIFO only when auto RTS is on (EFR[6]); in auto RS-485 mode it marks the transmit time."
+    },
+    {
+     "pin": "11",
+     "name": "CTS",
+     "type": "input",
+     "function": "Clear to send, active LOW. LOW means the far end will take data. Its state reads in MSR[4]; it gates transmission only when auto CTS is on (EFR[7])."
+    },
+    {
+     "pin": "12",
+     "name": "TX",
+     "type": "output",
+     "function": "UART serial output. In internal loopback the pin is switched off and the transmit data goes to the receiver inside the chip."
+    },
+    {
+     "pin": "13",
+     "name": "RX",
+     "type": "input",
+     "function": "UART serial input. In internal loopback the pin is ignored and the receiver takes the transmitter's data from inside the chip."
+    },
+    {
+     "pin": "14",
+     "name": "RESET",
+     "type": "input",
+     "function": "Hardware reset, active LOW. Resets the same registers as power-on reset and software reset."
+    },
+    {
+     "pin": "15",
+     "name": "XTAL1",
+     "type": "input",
+     "function": "Oscillator input: one end of a crystal to XTAL2, or an external clock in."
+    },
+    {
+     "pin": "16",
+     "name": "XTAL2",
+     "type": "output",
+     "function": "Oscillator output: the other end of the crystal. Left open when XTAL1 takes an external clock."
+    }
+   ]
+  },
+  {
+   "package": "TSSOP24 (SC16IS750IPW, SC16IS760IPW)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CTS",
+     "type": "input",
+     "function": "Clear to send, active LOW. LOW means the far end will take data. Its state reads in MSR[4]; it gates transmission only when auto CTS is on (EFR[7])."
+    },
+    {
+     "pin": "2",
+     "name": "TX",
+     "type": "output",
+     "function": "UART serial output. In internal loopback the pin is switched off and the transmit data goes to the receiver inside the chip."
+    },
+    {
+     "pin": "3",
+     "name": "RX",
+     "type": "input",
+     "function": "UART serial input. In internal loopback the pin is ignored and the receiver takes the transmitter's data from inside the chip."
+    },
+    {
+     "pin": "4",
+     "name": "RESET",
+     "type": "input",
+     "function": "Hardware reset, active LOW. Resets the same registers as power-on reset and software reset."
+    },
+    {
+     "pin": "5",
+     "name": "XTAL1",
+     "type": "input",
+     "function": "Oscillator input: one end of a crystal to XTAL2, or an external clock in."
+    },
+    {
+     "pin": "6",
+     "name": "XTAL2",
+     "type": "output",
+     "function": "Oscillator output: the other end of the crystal. Left open when XTAL1 takes an external clock."
+    },
+    {
+     "pin": "7",
+     "name": "VDD",
+     "type": "power",
+     "function": "Supply."
+    },
+    {
+     "pin": "8",
+     "name": "I2C/SPI",
+     "type": "input",
+     "function": "Host bus select: HIGH picks the I2C-bus, LOW picks SPI."
+    },
+    {
+     "pin": "9",
+     "name": "CS/A0",
+     "type": "input",
+     "function": "SPI: chip select, active LOW, Schmitt-trigger. I2C-bus: address select A0, which with A1 sets the slave address (address map table)."
+    },
+    {
+     "pin": "10",
+     "name": "SI/A1",
+     "type": "input",
+     "function": "SPI: serial data in. I2C-bus: address select A1, which with A0 sets the slave address (address map table)."
+    },
+    {
+     "pin": "11",
+     "name": "SO",
+     "type": "output",
+     "function": "SPI: serial data out, 3-state. In I2C-bus mode its function is undefined; leave it unconnected."
+    },
+    {
+     "pin": "12",
+     "name": "SCL/SCLK",
+     "type": "input",
+     "function": "Host clock: I2C-bus SCL or SPI SCLK."
+    },
+    {
+     "pin": "13",
+     "name": "SDA",
+     "type": "I/O",
+     "function": "I2C-bus data, open-drain. In SPI mode it has no function and must be tied to VSS."
+    },
+    {
+     "pin": "14",
+     "name": "IRQ",
+     "type": "output",
+     "function": "Interrupt request, open-drain, active LOW, driven when an enabled source in IER (or IOIntEna) is pending: input pin change, receive error, receive data, transmit space, modem status. Needs a pull-up to VDD: 1 kΩ at 3.3 V, 1.5 kΩ at 2.5 V."
+    },
+    {
+     "pin": "15",
+     "name": "GPIO0",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "16",
+     "name": "GPIO1",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "17",
+     "name": "GPIO2",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "18",
+     "name": "GPIO3",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "19",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "20",
+     "name": "GPIO4/DSR",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem DSR line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "21",
+     "name": "GPIO5/DTR",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem DTR line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "22",
+     "name": "GPIO6/CD",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem CD line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "23",
+     "name": "GPIO7/RI",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem RI line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "24",
+     "name": "RTS",
+     "type": "output",
+     "function": "Request to send, active LOW. MCR[1] = 1 drives it LOW; it is HIGH after reset. It follows the receive FIFO only when auto RTS is on (EFR[6]); in auto RS-485 mode it marks the transmit time."
+    }
+   ]
+  },
+  {
+   "package": "HVQFN24 (SC16IS750IBS, SC16IS760IBS)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "RESET",
+     "type": "input",
+     "function": "Hardware reset, active LOW. Resets the same registers as power-on reset and software reset."
+    },
+    {
+     "pin": "2",
+     "name": "XTAL1",
+     "type": "input",
+     "function": "Oscillator input: one end of a crystal to XTAL2, or an external clock in."
+    },
+    {
+     "pin": "3",
+     "name": "XTAL2",
+     "type": "output",
+     "function": "Oscillator output: the other end of the crystal. Left open when XTAL1 takes an external clock."
+    },
+    {
+     "pin": "4",
+     "name": "VDD",
+     "type": "power",
+     "function": "Supply."
+    },
+    {
+     "pin": "5",
+     "name": "I2C/SPI",
+     "type": "input",
+     "function": "Host bus select: HIGH picks the I2C-bus, LOW picks SPI."
+    },
+    {
+     "pin": "6",
+     "name": "CS/A0",
+     "type": "input",
+     "function": "SPI: chip select, active LOW, Schmitt-trigger. I2C-bus: address select A0, which with A1 sets the slave address (address map table)."
+    },
+    {
+     "pin": "7",
+     "name": "SI/A1",
+     "type": "input",
+     "function": "SPI: serial data in. I2C-bus: address select A1, which with A0 sets the slave address (address map table)."
+    },
+    {
+     "pin": "8",
+     "name": "SO",
+     "type": "output",
+     "function": "SPI: serial data out, 3-state. In I2C-bus mode its function is undefined; leave it unconnected."
+    },
+    {
+     "pin": "9",
+     "name": "SCL/SCLK",
+     "type": "input",
+     "function": "Host clock: I2C-bus SCL or SPI SCLK."
+    },
+    {
+     "pin": "10",
+     "name": "SDA",
+     "type": "I/O",
+     "function": "I2C-bus data, open-drain. In SPI mode it has no function and must be tied to VSS."
+    },
+    {
+     "pin": "11",
+     "name": "IRQ",
+     "type": "output",
+     "function": "Interrupt request, open-drain, active LOW, driven when an enabled source in IER (or IOIntEna) is pending: input pin change, receive error, receive data, transmit space, modem status. Needs a pull-up to VDD: 1 kΩ at 3.3 V, 1.5 kΩ at 2.5 V."
+    },
+    {
+     "pin": "12",
+     "name": "GPIO0",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "13",
+     "name": "GPIO1",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "14",
+     "name": "GPIO2",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "15",
+     "name": "GPIO3",
+     "type": "I/O",
+     "function": "Programmable I/O pin with an active pull-up on its input (SC16IS750 and SC16IS760)."
+    },
+    {
+     "pin": "16",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground; the die ground joins this pin and the exposed pad, and both go to supply ground."
+    },
+    {
+     "pin": "17",
+     "name": "GPIO4/DSR",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem DSR line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "18",
+     "name": "GPIO5/DTR",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem DTR line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "19",
+     "name": "GPIO6/CD",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem CD line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "20",
+     "name": "GPIO7/RI",
+     "type": "I/O",
+     "function": "Programmable I/O pin, or the modem RI line when IOControl bit 1 is set; active pull-up on its input."
+    },
+    {
+     "pin": "21",
+     "name": "RTS",
+     "type": "output",
+     "function": "Request to send, active LOW. MCR[1] = 1 drives it LOW; it is HIGH after reset. It follows the receive FIFO only when auto RTS is on (EFR[6]); in auto RS-485 mode it marks the transmit time."
+    },
+    {
+     "pin": "22",
+     "name": "CTS",
+     "type": "input",
+     "function": "Clear to send, active LOW. LOW means the far end will take data. Its state reads in MSR[4]; it gates transmission only when auto CTS is on (EFR[7])."
+    },
+    {
+     "pin": "23",
+     "name": "TX",
+     "type": "output",
+     "function": "UART serial output. In internal loopback the pin is switched off and the transmit data goes to the receiver inside the chip."
+    },
+    {
+     "pin": "24",
+     "name": "RX",
+     "type": "input",
+     "function": "UART serial input. In internal loopback the pin is ignored and the receiver takes the transmitter's data from inside the chip."
+    },
+    {
+     "pin": "EP",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Exposed metal pad under the package, die ground. Solder it to a ground pad on the board with thermal vias in that pad to carry heat through the board."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Limiting values",
+   "page": 44,
+   "conditions": "IEC 60134 absolute maximum rating system",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "supply voltage",
+     "VDD",
+     "",
+     "-0.3",
+     "+4.6",
+     "V"
+    ],
+    [
+     "input voltage",
+     "VI",
+     "any input",
+     "-0.3",
+     "+5.5 (1)",
+     "V"
+    ],
+    [
+     "input current",
+     "II",
+     "any input",
+     "-10",
+     "+10",
+     "mA"
+    ],
+    [
+     "output current",
+     "IO",
+     "any output",
+     "-10",
+     "+10",
+     "mA"
+    ],
+    [
+     "total power dissipation",
+     "Ptot",
+     "",
+     "-",
+     "300",
+     "mW"
+    ],
+    [
+     "power dissipation per output",
+     "P/out",
+     "",
+     "-",
+     "50",
+     "mW"
+    ],
+    [
+     "ambient temperature",
+     "Tamb",
+     "operating; VDD = 2.5 V ± 0.2 V",
+     "-40",
+     "+85",
+     "°C"
+    ],
+    [
+     "ambient temperature",
+     "Tamb",
+     "operating; VDD = 3.3 V ± 0.3 V",
+     "-40",
+     "+95",
+     "°C"
+    ],
+    [
+     "junction temperature",
+     "Tj",
+     "",
+     "-",
+     "+125",
+     "°C"
+    ],
+    [
+     "storage temperature",
+     "Tstg",
+     "",
+     "-65",
+     "+150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) Inputs and outputs stand 5.5 V steady state while the supply is on, and 4.6 V steady state with no supply."
+   ]
+  },
+  {
+   "title": "Static characteristics",
+   "page": 45,
+   "conditions": "VDD = 2.5 V ± 0.2 V, Tamb = -40 °C to +85 °C; or VDD = 3.3 V ± 0.3 V, Tamb = -40 °C to +95 °C; unless otherwise specified",
+   "columns": [
+    "pins",
+    "parameter",
+    "symbol",
+    "conditions",
+    "min (VDD = 2.5 V)",
+    "max (VDD = 2.5 V)",
+    "min (VDD = 3.3 V)",
+    "max (VDD = 3.3 V)",
+    "unit"
+   ],
+   "rows": [
+    [
+     "supplies",
+     "supply voltage",
+     "VDD",
+     "",
+     "2.3",
+     "2.7",
+     "3.0",
+     "3.6",
+     "V"
+    ],
+    [
+     "supplies",
+     "supply current",
+     "IDD",
+     "operating; no load",
+     "-",
+     "6.0",
+     "-",
+     "6.0",
+     "mA"
+    ],
+    [
+     "inputs I2C/SPI, RX, CTS",
+     "HIGH-level input voltage",
+     "VIH",
+     "",
+     "1.6",
+     "5.5 (1)",
+     "2.0",
+     "5.5 (1)",
+     "V"
+    ],
+    [
+     "inputs I2C/SPI, RX, CTS",
+     "LOW-level input voltage",
+     "VIL",
+     "",
+     "-",
+     "0.6",
+     "-",
+     "0.8",
+     "V"
+    ],
+    [
+     "inputs I2C/SPI, RX, CTS",
+     "leakage current",
+     "IL",
+     "input; VI = 0 V or 5.5 V (1)",
+     "-",
+     "1",
+     "-",
+     "1",
+     "µA"
+    ],
+    [
+     "inputs I2C/SPI, RX, CTS",
+     "input capacitance",
+     "Ci",
+     "",
+     "-",
+     "3",
+     "-",
+     "3",
+     "pF"
+    ],
+    [
+     "outputs TX, RTS, SO",
+     "HIGH-level output voltage",
+     "VOH",
+     "IOH = -400 µA",
+     "1.85",
+     "-",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "outputs TX, RTS, SO",
+     "HIGH-level output voltage",
+     "VOH",
+     "IOH = -4 mA",
+     "-",
+     "-",
+     "2.4",
+     "-",
+     "V"
+    ],
+    [
+     "outputs TX, RTS, SO",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 1.6 mA",
+     "-",
+     "0.4",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "outputs TX, RTS, SO",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 4 mA",
+     "-",
+     "-",
+     "-",
+     "0.4",
+     "V"
+    ],
+    [
+     "outputs TX, RTS, SO",
+     "output capacitance",
+     "Co",
+     "",
+     "-",
+     "4",
+     "-",
+     "4",
+     "pF"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "HIGH-level input voltage",
+     "VIH",
+     "",
+     "1.6",
+     "5.5 (1)",
+     "2.0",
+     "5.5 (1)",
+     "V"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "LOW-level input voltage",
+     "VIL",
+     "",
+     "-",
+     "0.6",
+     "-",
+     "0.8",
+     "V"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "HIGH-level output voltage",
+     "VOH",
+     "IOH = -400 µA",
+     "1.85",
+     "-",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "HIGH-level output voltage",
+     "VOH",
+     "IOH = -4 mA",
+     "-",
+     "-",
+     "2.4",
+     "-",
+     "V"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 1.6 mA",
+     "-",
+     "0.4",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 4 mA",
+     "-",
+     "-",
+     "-",
+     "0.4",
+     "V"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "leakage current",
+     "IL",
+     "input; VI = 0 V or 5.5 V (1)",
+     "-",
+     "1",
+     "-",
+     "1",
+     "µA"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "output capacitance",
+     "Co",
+     "",
+     "-",
+     "4",
+     "-",
+     "4",
+     "pF"
+    ],
+    [
+     "GPIO0 to GPIO7 (SC16IS750 and SC16IS760 only)",
+     "pull-up resistance",
+     "RPU",
+     "active pull-up resistor",
+     "3.94",
+     "4.91",
+     "3.02",
+     "3.63",
+     "MΩ"
+    ],
+    [
+     "output IRQ",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 1.6 mA",
+     "-",
+     "0.4",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "output IRQ",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 4 mA",
+     "-",
+     "-",
+     "-",
+     "0.4",
+     "V"
+    ],
+    [
+     "output IRQ",
+     "output capacitance",
+     "Co",
+     "",
+     "-",
+     "4",
+     "-",
+     "4",
+     "pF"
+    ],
+    [
+     "I2C-bus input/output SDA",
+     "HIGH-level input voltage",
+     "VIH",
+     "",
+     "1.6",
+     "5.5 (1)",
+     "2.0",
+     "5.5 (1)",
+     "V"
+    ],
+    [
+     "I2C-bus input/output SDA",
+     "LOW-level input voltage",
+     "VIL",
+     "",
+     "-",
+     "0.6",
+     "-",
+     "0.8",
+     "V"
+    ],
+    [
+     "I2C-bus input/output SDA",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 1.6 mA",
+     "-",
+     "0.4",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "I2C-bus input/output SDA",
+     "LOW-level output voltage",
+     "VOL",
+     "IOL = 4 mA",
+     "-",
+     "-",
+     "-",
+     "0.4",
+     "V"
+    ],
+    [
+     "I2C-bus input/output SDA",
+     "leakage current",
+     "IL",
+     "input; VI = 0 V or 5.5 V (1)",
+     "-",
+     "10",
+     "-",
+     "10",
+     "µA"
+    ],
+    [
+     "I2C-bus input/output SDA",
+     "output capacitance",
+     "Co",
+     "",
+     "-",
+     "7",
+     "-",
+     "7",
+     "pF"
+    ],
+    [
+     "I2C-bus inputs SCL, CS/A0, SI/A1",
+     "HIGH-level input voltage",
+     "VIH",
+     "",
+     "1.6",
+     "5.5 (1)",
+     "2.0",
+     "5.5 (1)",
+     "V"
+    ],
+    [
+     "I2C-bus inputs SCL, CS/A0, SI/A1",
+     "LOW-level input voltage",
+     "VIL",
+     "",
+     "-",
+     "0.6",
+     "-",
+     "0.8",
+     "V"
+    ],
+    [
+     "I2C-bus inputs SCL, CS/A0, SI/A1",
+     "leakage current",
+     "IL",
+     "input; VI = 0 V or 5.5 V (1)",
+     "-",
+     "10",
+     "-",
+     "10",
+     "µA"
+    ],
+    [
+     "I2C-bus inputs SCL, CS/A0, SI/A1",
+     "input capacitance",
+     "Ci",
+     "",
+     "-",
+     "7",
+     "-",
+     "7",
+     "pF"
+    ],
+    [
+     "clock input XTAL1 (2)",
+     "HIGH-level input voltage",
+     "VIH",
+     "",
+     "1.8",
+     "5.5 (1)",
+     "2.4",
+     "5.5 (1)",
+     "V"
+    ],
+    [
+     "clock input XTAL1 (2)",
+     "LOW-level input voltage",
+     "VIL",
+     "",
+     "-",
+     "0.45",
+     "-",
+     "0.6",
+     "V"
+    ],
+    [
+     "clock input XTAL1 (2)",
+     "leakage current",
+     "IL",
+     "input; VI = 0 V or 5.5 V (1)",
+     "-30",
+     "+30",
+     "-30",
+     "+30",
+     "µA"
+    ],
+    [
+     "clock input XTAL1 (2)",
+     "input capacitance",
+     "Ci",
+     "",
+     "-",
+     "3",
+     "-",
+     "3",
+     "pF"
+    ],
+    [
+     "sleep current",
+     "sleep mode supply current",
+     "IDD(sleep)",
+     "inputs are at VDD or ground",
+     "-",
+     "30",
+     "-",
+     "30",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "(1) The 5.5 V steady-state tolerance of inputs and outputs holds with the supply on; with no supply it is 3.8 V.",
+    "(2) With an external clock driving XTAL1, XTAL2 stays open."
+   ]
+  },
+  {
+   "title": "I2C-bus timing",
+   "page": 47,
+   "conditions": "VDD = 2.5 V ± 0.2 V, Tamb = -40 °C to +85 °C; or VDD = 3.3 V ± 0.3 V, Tamb = -40 °C to +95 °C; levels referred to VIL and VIH with inputs swinging VSS to VDD; output load 25 pF, SDA output load 400 pF",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min (standard mode)",
+    "max (standard mode)",
+    "min (fast mode)",
+    "max (fast mode)",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SCL clock frequency",
+     "fSCL",
+     "(2)",
+     "0",
+     "100",
+     "0",
+     "400",
+     "kHz"
+    ],
+    [
+     "bus free time between a STOP and START condition",
+     "tBUF",
+     "",
+     "4.7",
+     "-",
+     "1.3",
+     "-",
+     "µs"
+    ],
+    [
+     "hold time (repeated) START condition",
+     "tHD;STA",
+     "",
+     "4.0",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "set-up time for a repeated START condition",
+     "tSU;STA",
+     "",
+     "4.7",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "set-up time for STOP condition",
+     "tSU;STO",
+     "",
+     "4.7",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "data hold time",
+     "tHD;DAT",
+     "",
+     "0",
+     "-",
+     "0",
+     "-",
+     "ns"
+    ],
+    [
+     "data valid acknowledge time",
+     "tVD;ACK",
+     "",
+     "-",
+     "0.6",
+     "-",
+     "0.6",
+     "µs"
+    ],
+    [
+     "data valid time",
+     "tVD;DAT",
+     "SCL LOW to data out valid",
+     "-",
+     "0.6",
+     "-",
+     "0.6",
+     "ns"
+    ],
+    [
+     "data set-up time",
+     "tSU;DAT",
+     "",
+     "250",
+     "-",
+     "150",
+     "-",
+     "ns"
+    ],
+    [
+     "LOW period of the SCL clock",
+     "tLOW",
+     "",
+     "4.7",
+     "-",
+     "1.3",
+     "-",
+     "µs"
+    ],
+    [
+     "HIGH period of the SCL clock",
+     "tHIGH",
+     "",
+     "4.0",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "fall time of both SDA and SCL signals",
+     "tf",
+     "",
+     "-",
+     "300",
+     "-",
+     "300",
+     "ns"
+    ],
+    [
+     "rise time of both SDA and SCL signals",
+     "tr",
+     "",
+     "-",
+     "1000",
+     "-",
+     "300",
+     "ns"
+    ],
+    [
+     "pulse width of spikes that must be suppressed by the input filter",
+     "tSP",
+     "",
+     "-",
+     "50",
+     "-",
+     "50",
+     "ns"
+    ],
+    [
+     "I2C-bus GPIO output valid time",
+     "td1",
+     "(3)",
+     "0.5",
+     "-",
+     "0.5",
+     "-",
+     "µs"
+    ],
+    [
+     "I2C-bus modem input interrupt valid time",
+     "td2",
+     "",
+     "0.2",
+     "-",
+     "0.2",
+     "-",
+     "µs"
+    ],
+    [
+     "I2C-bus modem input interrupt clear time",
+     "td3",
+     "",
+     "0.2",
+     "-",
+     "0.2",
+     "-",
+     "µs"
+    ],
+    [
+     "I2C input pin interrupt valid time",
+     "td4",
+     "",
+     "0.2",
+     "-",
+     "0.2",
+     "-",
+     "µs"
+    ],
+    [
+     "I2C input pin interrupt clear time",
+     "td5",
+     "",
+     "0.2",
+     "-",
+     "0.2",
+     "-",
+     "µs"
+    ],
+    [
+     "I2C-bus receive interrupt valid time",
+     "td6",
+     "",
+     "0.2",
+     "-",
+     "0.2",
+     "-",
+     "µs"
+    ],
+    [
+     "I2C-bus receive interrupt clear time",
+     "td7",
+     "",
+     "0.2",
+     "-",
+     "0.2",
+     "-",
+     "µs"
+    ],
+    [
+     "I2C-bus transmit interrupt clear time",
+     "td8",
+     "",
+     "1.0",
+     "-",
+     "0.5",
+     "-",
+     "µs"
+    ],
+    [
+     "SCL delay time after reset",
+     "td15",
+     "(4)",
+     "3",
+     "-",
+     "3",
+     "-",
+     "µs"
+    ],
+    [
+     "reset pulse width",
+     "tw(rst)",
+     "",
+     "3",
+     "-",
+     "3",
+     "-",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "The full I2C-bus specification is NXP user manual UM10204.",
+    "(2) The lower limit on SCL frequency comes from the bus time-out: holding SDA LOW for 25 ms or more resets the serial interface.",
+    "(3) SC16IS750 and SC16IS760 only.",
+    "(4) Two XTAL1 clock periods or 3 µs, the shorter of the two."
+   ]
+  },
+  {
+   "title": "fXTAL dynamic characteristics",
+   "page": 50,
+   "conditions": "VDD = 2.5 V ± 0.2 V, Tamb = -40 °C to +85 °C; or VDD = 3.3 V ± 0.3 V, Tamb = -40 °C to +95 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min (VDD = 2.5 V)",
+    "max (VDD = 2.5 V)",
+    "min (VDD = 3.3 V)",
+    "max (VDD = 3.3 V)",
+    "unit"
+   ],
+   "rows": [
+    [
+     "clock pulse duration",
+     "tw1",
+     "",
+     "10",
+     "-",
+     "6",
+     "-",
+     "ns"
+    ],
+    [
+     "clock pulse duration",
+     "tw2",
+     "",
+     "10",
+     "-",
+     "6",
+     "-",
+     "ns"
+    ],
+    [
+     "frequency on pin XTAL",
+     "fXTAL",
+     "(1)(2)",
+     "-",
+     "48 (3)",
+     "-",
+     "80",
+     "MHz"
+    ]
+   ],
+   "notes": [
+    "(1) The figure is for an external clock; with a crystal the oscillator goes to 24 MHz at most.",
+    "(2) fXTAL = 1 / tw3, where tw3 is one full clock period (tw1 HIGH plus tw2 LOW).",
+    "(3) A clock within ±100 ppm is recommended."
+   ]
+  },
+  {
+   "title": "SC16IS740/750 SPI-bus timing",
+   "page": 50,
+   "conditions": "VDD = 2.5 V ± 0.2 V, Tamb = -40 °C to +85 °C; or VDD = 3.3 V ± 0.3 V, Tamb = -40 °C to +95 °C; levels referred to VIL and VIH with inputs swinging VSS to VDD; output load 25 pF unless stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CS HIGH to SO 3-state delay time",
+     "tTR",
+     "CL = 100 pF",
+     "-",
+     "-",
+     "100",
+     "ns"
+    ],
+    [
+     "CS to SCLK setup time",
+     "tCSS",
+     "",
+     "100",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "CS to SCLK hold time",
+     "tCSH",
+     "",
+     "20",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK fall to SO valid delay time",
+     "tDO",
+     "CL = 100 pF",
+     "-",
+     "-",
+     "100",
+     "ns"
+    ],
+    [
+     "SI to SCLK setup time",
+     "tDS",
+     "",
+     "100",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SI to SCLK hold time",
+     "tDH",
+     "",
+     "20",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK period",
+     "tCP",
+     "tCL + tCH",
+     "250",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK HIGH time",
+     "tCH",
+     "",
+     "100",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK LOW time",
+     "tCL",
+     "",
+     "100",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "CS HIGH pulse width",
+     "tCSW",
+     "",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI output data valid time",
+     "td9",
+     "",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI modem output data valid time",
+     "td10",
+     "",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI transmit interrupt clear time",
+     "td11",
+     "",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI modem input interrupt clear time",
+     "td12",
+     "",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI interrupt clear time",
+     "td13",
+     "",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI receive interrupt clear time",
+     "td14",
+     "",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "reset pulse width",
+     "tw(rst)",
+     "",
+     "3",
+     "-",
+     "-",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "SC16IS760 SPI-bus timing",
+   "page": 51,
+   "conditions": "VDD = 2.5 V ± 0.2 V, Tamb = -40 °C to +85 °C; or VDD = 3.3 V ± 0.3 V, Tamb = -40 °C to +95 °C; levels referred to VIL and VIH with inputs swinging VSS to VDD; output load 25 pF unless stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min (VDD = 2.5 V)",
+    "max (VDD = 2.5 V)",
+    "min (VDD = 3.3 V)",
+    "max (VDD = 3.3 V)",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CS HIGH to SO 3-state delay time",
+     "tTR",
+     "CL = 100 pF",
+     "-",
+     "100",
+     "-",
+     "100",
+     "ns"
+    ],
+    [
+     "CS to SCLK setup time",
+     "tCSS",
+     "",
+     "100",
+     "-",
+     "100",
+     "-",
+     "ns"
+    ],
+    [
+     "CS to SCLK hold time",
+     "tCSH",
+     "",
+     "5",
+     "-",
+     "5",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK fall to SO valid delay time",
+     "tDO",
+     "CL = 100 pF",
+     "-",
+     "25",
+     "-",
+     "20",
+     "ns"
+    ],
+    [
+     "SI to SCLK setup time",
+     "tDS",
+     "",
+     "10",
+     "-",
+     "10",
+     "-",
+     "ns"
+    ],
+    [
+     "SI to SCLK hold time",
+     "tDH",
+     "",
+     "10",
+     "-",
+     "10",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK period",
+     "tCP",
+     "tCL + tCH",
+     "83",
+     "-",
+     "67",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK HIGH time",
+     "tCH",
+     "",
+     "30",
+     "-",
+     "25",
+     "-",
+     "ns"
+    ],
+    [
+     "SCLK LOW time",
+     "tCL",
+     "",
+     "30",
+     "-",
+     "25",
+     "-",
+     "ns"
+    ],
+    [
+     "CS HIGH pulse width",
+     "tCSW",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI output data valid time",
+     "td9",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI modem output data valid time",
+     "td10",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI transmit interrupt clear time",
+     "td11",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI modem input interrupt clear time",
+     "td12",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI interrupt clear time",
+     "td13",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "SPI receive interrupt clear time",
+     "td14",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "reset pulse width",
+     "tw(rst)",
+     "",
+     "3",
+     "-",
+     "3",
+     "-",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Baud rates with a 1.8432 MHz crystal",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "desired baud rate",
+    "divisor for the 16× clock",
+    "error between desired and actual (%)"
+   ],
+   "rows": [
+    [
+     "50",
+     "2304",
+     "0"
+    ],
+    [
+     "75",
+     "1536",
+     "0"
+    ],
+    [
+     "110",
+     "1047",
+     "0.026"
+    ],
+    [
+     "134.5",
+     "857",
+     "0.058"
+    ],
+    [
+     "150",
+     "768",
+     "0"
+    ],
+    [
+     "300",
+     "384",
+     "0"
+    ],
+    [
+     "600",
+     "192",
+     "0"
+    ],
+    [
+     "1200",
+     "96",
+     "0"
+    ],
+    [
+     "1800",
+     "64",
+     "0"
+    ],
+    [
+     "2000",
+     "58",
+     "0.69"
+    ],
+    [
+     "2400",
+     "48",
+     "0"
+    ],
+    [
+     "3600",
+     "32",
+     "0"
+    ],
+    [
+     "4800",
+     "24",
+     "0"
+    ],
+    [
+     "7200",
+     "16",
+     "0"
+    ],
+    [
+     "9600",
+     "12",
+     "0"
+    ],
+    [
+     "19200",
+     "6",
+     "0"
+    ],
+    [
+     "38400",
+     "3",
+     "0"
+    ],
+    [
+     "56000",
+     "2",
+     "2.86"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Baud rates with a 3.072 MHz crystal",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "desired baud rate",
+    "divisor for the 16× clock",
+    "error between desired and actual (%)"
+   ],
+   "rows": [
+    [
+     "50",
+     "2304",
+     "0"
+    ],
+    [
+     "75",
+     "2560",
+     "0"
+    ],
+    [
+     "110",
+     "1745",
+     "0.026"
+    ],
+    [
+     "134.5",
+     "1428",
+     "0.034"
+    ],
+    [
+     "150",
+     "1280",
+     "0"
+    ],
+    [
+     "300",
+     "640",
+     "0"
+    ],
+    [
+     "600",
+     "320",
+     "0"
+    ],
+    [
+     "1200",
+     "160",
+     "0"
+    ],
+    [
+     "1800",
+     "107",
+     "0.312"
+    ],
+    [
+     "2000",
+     "96",
+     "0"
+    ],
+    [
+     "2400",
+     "80",
+     "0"
+    ],
+    [
+     "3600",
+     "53",
+     "0.628"
+    ],
+    [
+     "4800",
+     "40",
+     "0"
+    ],
+    [
+     "7200",
+     "27",
+     "1.23"
+    ],
+    [
+     "9600",
+     "20",
+     "0"
+    ],
+    [
+     "19200",
+     "10",
+     "0"
+    ],
+    [
+     "38400",
+     "5",
+     "0"
+    ]
+   ],
+   "notes": [
+    "The divisor for 50 baud reads 2304; at 3.072 MHz it should read 3840."
+   ]
+  },
+  {
+   "title": "Register map: access by direction",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "register",
+    "on read",
+    "on write"
+   ],
+   "rows": [
+    [
+     "RHR/THR",
+     "Receive Holding Register (RHR)",
+     "Transmit Holding Register (THR)"
+    ],
+    [
+     "IER",
+     "Interrupt Enable Register",
+     "Interrupt Enable Register"
+    ],
+    [
+     "IIR/FCR",
+     "Interrupt Identification Register (IIR)",
+     "FIFO Control Register (FCR)"
+    ],
+    [
+     "LCR",
+     "Line Control Register",
+     "Line Control Register"
+    ],
+    [
+     "MCR",
+     "Modem Control Register (1)",
+     "Modem Control Register (1)"
+    ],
+    [
+     "LSR",
+     "Line Status Register",
+     "n/a"
+    ],
+    [
+     "MSR",
+     "Modem Status Register",
+     "n/a"
+    ],
+    [
+     "SPR",
+     "Scratchpad Register",
+     "Scratchpad Register"
+    ],
+    [
+     "TCR",
+     "Transmission Control Register (2)",
+     "Transmission Control Register (2)"
+    ],
+    [
+     "TLR",
+     "Trigger Level Register (2)",
+     "Trigger Level Register (2)"
+    ],
+    [
+     "TXLVL",
+     "Transmit FIFO Level Register",
+     "n/a"
+    ],
+    [
+     "RXLVL",
+     "Receive FIFO Level Register",
+     "n/a"
+    ],
+    [
+     "IODir (3)",
+     "I/O pin Direction Register",
+     "I/O pin Direction Register"
+    ],
+    [
+     "IOState (3)",
+     "I/O pin States Register",
+     "n/a"
+    ],
+    [
+     "IOIntEna (3)",
+     "I/O Interrupt Enable Register",
+     "I/O Interrupt Enable Register"
+    ],
+    [
+     "IOControl (3)",
+     "I/O pins Control Register",
+     "I/O pins Control Register"
+    ],
+    [
+     "EFCR",
+     "Extra Features Register",
+     "Extra Features Register"
+    ],
+    [
+     "DLL",
+     "divisor latch LSB (4)",
+     "divisor latch LSB (4)"
+    ],
+    [
+     "DLH",
+     "divisor latch MSB (4)",
+     "divisor latch MSB (4)"
+    ],
+    [
+     "EFR",
+     "Enhanced Feature Register (5)",
+     "Enhanced Feature Register (5)"
+    ],
+    [
+     "XON1",
+     "Xon1 word (5)",
+     "Xon1 word (5)"
+    ],
+    [
+     "XON2",
+     "Xon2 word (5)",
+     "Xon2 word (5)"
+    ],
+    [
+     "XOFF1",
+     "Xoff1 word (5)",
+     "Xoff1 word (5)"
+    ],
+    [
+     "XOFF2",
+     "Xoff2 word (5)",
+     "Xoff2 word (5)"
+    ]
+   ],
+   "notes": [
+    "(1) MCR[7] changes only while EFR[4] = 1.",
+    "(2) Reachable only with EFR[4] = 1 and MCR[2] = 1.",
+    "(3) SC16IS750 and SC16IS760 only.",
+    "(4) Reachable only with LCR[7] = 1.",
+    "(5) Reachable only with LCR = 1011 1111b (0xBF)."
+   ]
+  },
+  {
+   "title": "Internal registers",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0",
+    "R/W"
+   ],
+   "rows": [
+    [
+     "general register set (1)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x00",
+     "RHR",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R"
+    ],
+    [
+     "0x00",
+     "THR",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "W"
+    ],
+    [
+     "0x01",
+     "IER",
+     "CTS interrupt enable (2)",
+     "RTS interrupt enable (2)",
+     "Xoff (2)",
+     "Sleep mode (2)",
+     "modem status interrupt",
+     "receive line status interrupt",
+     "THR empty interrupt",
+     "RX data available interrupt",
+     "R/W"
+    ],
+    [
+     "0x02",
+     "FCR",
+     "RX trigger level (MSB)",
+     "RX trigger level (LSB)",
+     "TX trigger level (MSB) (2)",
+     "TX trigger level (LSB) (2)",
+     "reserved (3)",
+     "TX FIFO reset (4)",
+     "RX FIFO reset (4)",
+     "FIFO enable",
+     "W"
+    ],
+    [
+     "0x02",
+     "IIR (5)",
+     "FIFO enable",
+     "FIFO enable",
+     "interrupt priority bit 4 (2)",
+     "interrupt priority bit 3 (2)",
+     "interrupt priority bit 2",
+     "interrupt priority bit 1",
+     "interrupt priority bit 0",
+     "interrupt status",
+     "R"
+    ],
+    [
+     "0x03",
+     "LCR",
+     "Divisor Latch Enable",
+     "set break",
+     "set parity",
+     "even parity",
+     "parity enable",
+     "stop bit",
+     "word length bit 1",
+     "word length bit 0",
+     "R/W"
+    ],
+    [
+     "0x04",
+     "MCR",
+     "clock divisor (2)",
+     "IrDA mode enable (2)",
+     "Xon Any (2)",
+     "loopback enable",
+     "reserved (3)",
+     "TCR and TLR enable (2)",
+     "RTS",
+     "DTR/(IO5) (6)",
+     "R/W"
+    ],
+    [
+     "0x05",
+     "LSR",
+     "FIFO data error",
+     "THR and TSR empty",
+     "THR empty",
+     "break interrupt",
+     "framing error",
+     "parity error",
+     "overrun error",
+     "data in receiver",
+     "R"
+    ],
+    [
+     "0x06",
+     "MSR",
+     "CD/(IO6) (6)",
+     "RI/(IO7) (6)",
+     "DSR/(IO4) (6)",
+     "CTS",
+     "ΔCD/(IO6) (6)",
+     "ΔRI/(IO7) (6)",
+     "ΔDSR/(IO4) (6)",
+     "ΔCTS",
+     "R"
+    ],
+    [
+     "0x07",
+     "SPR",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x06",
+     "TCR (7)",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x07",
+     "TLR (7)",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x08",
+     "TXLVL",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R"
+    ],
+    [
+     "0x09",
+     "RXLVL",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R"
+    ],
+    [
+     "0x0A",
+     "IODir (6)",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x0B",
+     "IOState (6)",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x0C",
+     "IOIntEna (6)",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x0D",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     ""
+    ],
+    [
+     "0x0E",
+     "IOControl (6)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "reserved (3)",
+     "UART software reset (8)",
+     "reserved (3)",
+     "I/O[7:4] or RI, CD, DTR, DSR",
+     "latch",
+     "R/W"
+    ],
+    [
+     "0x0F",
+     "EFCR",
+     "IrDA mode (slow/fast) (9)",
+     "reserved (3)",
+     "auto RS-485 RTS output inversion",
+     "auto RS-485 RTS direction control",
+     "reserved (3)",
+     "transmitter disable",
+     "receiver disable",
+     "9-bit mode enable",
+     "R/W"
+    ],
+    [
+     "special register set (10)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x00",
+     "DLL",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x01",
+     "DLH",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "enhanced register set (11)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x02",
+     "EFR",
+     "Auto CTS",
+     "Auto RTS",
+     "special character detect",
+     "enable enhanced functions",
+     "software flow control bit 3",
+     "software flow control bit 2",
+     "software flow control bit 1",
+     "software flow control bit 0",
+     "R/W"
+    ],
+    [
+     "0x04",
+     "XON1",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x05",
+     "XON2",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x06",
+     "XOFF1",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ],
+    [
+     "0x07",
+     "XOFF2",
+     "bit 7",
+     "bit 6",
+     "bit 5",
+     "bit 4",
+     "bit 3",
+     "bit 2",
+     "bit 1",
+     "bit 0",
+     "R/W"
+    ]
+   ],
+   "notes": [
+    "(1) The general set is reached with LCR[7] = 0.",
+    "(2) These bits change only while EFR[4] = 1.",
+    "(3) Reserved bits are written 0.",
+    "(4) After a FIFO reset through FCR[1:0], wait at least 2 × Tclk of XTAL1 before reading RHR or writing THR.",
+    "(5) IIR is not to be read in a burst, meaning several bytes in one I2C-bus transfer with no STOP or repeated START between them, or several bytes in one SPI transfer with CS held LOW.",
+    "(6) SC16IS750 and SC16IS760 only.",
+    "(7) Reached with MCR[2] = 1 and EFR[4] = 1.",
+    "(8) Writing this bit makes the device NACK on the I2C-bus.",
+    "(9) Slow or fast on the SC16IS760; slow only on the SC16IS750.",
+    "(10) The special set is reached with LCR[7] = 1 and LCR not equal to 0xBF.",
+    "(11) The enhanced set is reached only with LCR = 0xBF."
+   ]
+  },
+  {
+   "title": "Register reset states",
+   "page": 13,
+   "conditions": "hardware reset, power-on reset or software reset",
+   "columns": [
+    "register",
+    "reset state"
+   ],
+   "rows": [
+    [
+     "Interrupt Enable Register",
+     "all bits cleared"
+    ],
+    [
+     "Interrupt Identification Register",
+     "bit 0 set; all other bits cleared"
+    ],
+    [
+     "FIFO Control Register",
+     "all bits cleared"
+    ],
+    [
+     "Line Control Register",
+     "0001 1101 (0x1D)"
+    ],
+    [
+     "Modem Control Register",
+     "all bits cleared"
+    ],
+    [
+     "Line Status Register",
+     "bit 5 and bit 6 set; all other bits cleared"
+    ],
+    [
+     "Modem Status Register",
+     "bits 0:3 cleared; bits 4:7 input signals"
+    ],
+    [
+     "Enhanced Feature Register",
+     "all bits cleared"
+    ],
+    [
+     "Receiver Holding Register",
+     "pointer logic cleared"
+    ],
+    [
+     "Transmitter Holding Register",
+     "pointer logic cleared"
+    ],
+    [
+     "Transmission Control Register",
+     "all bits cleared"
+    ],
+    [
+     "Trigger Level Register",
+     "all bits cleared"
+    ],
+    [
+     "Transmit FIFO level",
+     "0100 0000 (0x40)"
+    ],
+    [
+     "Receive FIFO level",
+     "all bits cleared"
+    ],
+    [
+     "I/O direction (2)",
+     "all bits cleared"
+    ],
+    [
+     "I/O interrupt enable (2)",
+     "all bits cleared"
+    ],
+    [
+     "I/O control (3)",
+     "all bits cleared"
+    ],
+    [
+     "Extra Feature Register",
+     "all bits cleared"
+    ]
+   ],
+   "notes": [
+    "(1) DLL, DLH, SPR, XON1, XON2, XOFF1 and XOFF2 keep their contents through RESET, power-on reset and software reset.",
+    "(2) Not on the SC16IS740.",
+    "(3) On the SC16IS740 only the UART software reset bit exists."
+   ]
+  },
+  {
+   "title": "Output states after reset",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "signal",
+    "reset state"
+   ],
+   "rows": [
+    [
+     "TX",
+     "HIGH"
+    ],
+    [
+     "RTS",
+     "HIGH"
+    ],
+    [
+     "I/Os",
+     "inputs"
+    ],
+    [
+     "IRQ",
+     "HIGH by external pull-up"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Interrupt sources and priority",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "IIR[5:0]",
+    "priority level",
+    "interrupt type",
+    "interrupt source"
+   ],
+   "rows": [
+    [
+     "00 0001",
+     "none",
+     "none",
+     "none"
+    ],
+    [
+     "00 0110",
+     "1",
+     "receiver line status",
+     "OE, FE, PE or BI error in a character in the RX FIFO"
+    ],
+    [
+     "00 1100",
+     "2",
+     "RX time-out",
+     "stale data in the RX FIFO"
+    ],
+    [
+     "00 0100",
+     "2",
+     "RHR interrupt",
+     "receive data ready (FIFO off) or RX FIFO above its trigger level (FIFO on)"
+    ],
+    [
+     "00 0010",
+     "3",
+     "THR interrupt",
+     "transmit holding register empty (FIFO off) or TX FIFO past its trigger level (FIFO on)"
+    ],
+    [
+     "00 0000",
+     "4",
+     "modem status (1)",
+     "modem input pin changed state"
+    ],
+    [
+     "11 0000",
+     "5",
+     "I/O pins (1)",
+     "input pin changed state"
+    ],
+    [
+     "01 0000",
+     "6",
+     "Xoff interrupt",
+     "Xoff character(s) or special character received"
+    ],
+    [
+     "10 0000",
+     "7",
+     "CTS, RTS",
+     "RTS or CTS went from active (LOW) to inactive (HIGH)"
+    ]
+   ],
+   "notes": [
+    "(1) SC16IS750 and SC16IS760 only. Modem interrupt status is read in MSR and GPIO interrupt status in IOState."
+   ]
+  },
+  {
+   "title": "Software flow control options (EFR[3:0])",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "EFR[3]",
+    "EFR[2]",
+    "EFR[1]",
+    "EFR[0]",
+    "TX, RX software flow control"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "X",
+     "X",
+     "no transmit flow control"
+    ],
+    [
+     "1",
+     "0",
+     "X",
+     "X",
+     "transmit Xon1, Xoff1"
+    ],
+    [
+     "0",
+     "1",
+     "X",
+     "X",
+     "transmit Xon2, Xoff2"
+    ],
+    [
+     "1",
+     "1",
+     "X",
+     "X",
+     "transmit Xon1 and Xon2, Xoff1 and Xoff2"
+    ],
+    [
+     "X",
+     "X",
+     "0",
+     "0",
+     "no receive flow control"
+    ],
+    [
+     "X",
+     "X",
+     "1",
+     "0",
+     "receiver compares Xon1, Xoff1"
+    ],
+    [
+     "X",
+     "X",
+     "0",
+     "1",
+     "receiver compares Xon2, Xoff2"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "transmit Xon1, Xoff1; receiver compares Xon1 or Xon2, Xoff1 or Xoff2"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "transmit Xon2, Xoff2; receiver compares Xon1 or Xon2, Xoff1 or Xoff2"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "1",
+     "transmit Xon1 and Xon2, Xoff1 and Xoff2; receiver compares Xon1 and Xon2, Xoff1 and Xoff2"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "no transmit flow control; receiver compares Xon1 and Xon2, Xoff1 and Xoff2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "FIFO Control Register (FCR) bits",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:6",
+     "FCR[7] (MSB), FCR[6] (LSB)",
+     "RX FIFO trigger level: 00 = 8, 01 = 16, 10 = 56, 11 = 60 characters"
+    ],
+    [
+     "5:4",
+     "FCR[5] (MSB), FCR[4] (LSB)",
+     "TX FIFO trigger level: 00 = 8, 01 = 16, 10 = 32, 11 = 56 spaces; an enhanced function, writable only with EFR[4] = 1"
+    ],
+    [
+     "3",
+     "FCR[3]",
+     "reserved"
+    ],
+    [
+     "2",
+     "FCR[2] (1)",
+     "1 empties the transmit FIFO and resets its level logic (the transmit shift register is left alone); clears itself afterwards. 0 = no reset (default)"
+    ],
+    [
+     "1",
+     "FCR[1] (1)",
+     "1 empties the receive FIFO and resets its level logic (the receive shift register is left alone); clears itself afterwards. 0 = no reset (default)"
+    ],
+    [
+     "0",
+     "FCR[0]",
+     "1 = transmit and receive FIFOs on; 0 = both off (default)"
+    ]
+   ],
+   "notes": [
+    "Write-only register.",
+    "(1) A FIFO reset takes at least two XTAL1 clocks, so it needs the XTAL1 clock running."
+   ]
+  },
+  {
+   "title": "Line Control Register (LCR) bits",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "LCR[7]",
+     "divisor latch enable: 0 = off (default), 1 = on"
+    ],
+    [
+     "6",
+     "LCR[6]",
+     "break control: 1 holds TX at logic 0 to send a break until the bit is cleared; 0 = no break (default)"
+    ],
+    [
+     "5",
+     "LCR[5]",
+     "forced parity (with LCR[3] = 1): 0 = not forced (default); with LCR[4] = 0 parity is forced to 1, with LCR[4] = 1 it is forced to 0, on both transmit and receive"
+    ],
+    [
+     "4",
+     "LCR[4]",
+     "parity type (with LCR[3] = 1): 0 = odd, 1 = even"
+    ],
+    [
+     "3",
+     "LCR[3]",
+     "parity enable: 0 = none (default); 1 = parity bit sent and checked on receive"
+    ],
+    [
+     "2",
+     "LCR[2]",
+     "stop bits: 0 = 1 stop bit; 1 = 1.5 stop bits with 5-bit words, 2 stop bits with 6, 7 or 8-bit words"
+    ],
+    [
+     "1:0",
+     "LCR[1:0]",
+     "word length (word length table)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "LCR parity selection",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "LCR[5]",
+    "LCR[4]",
+    "LCR[3]",
+    "parity selection"
+   ],
+   "rows": [
+    [
+     "X",
+     "X",
+     "0",
+     "no parity"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "odd parity"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "even parity"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "forced parity '1'"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "forced parity '0'"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "LCR[2] stop bit length",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "LCR[2]",
+    "word length (bits)",
+    "stop bit length (bit times)"
+   ],
+   "rows": [
+    [
+     "0",
+     "5, 6, 7, 8",
+     "1"
+    ],
+    [
+     "1",
+     "5",
+     "1½"
+    ],
+    [
+     "1",
+     "6, 7, 8",
+     "2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "LCR[1:0] word length",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "LCR[1]",
+    "LCR[0]",
+    "word length (bits)"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "5"
+    ],
+    [
+     "0",
+     "1",
+     "6"
+    ],
+    [
+     "1",
+     "0",
+     "7"
+    ],
+    [
+     "1",
+     "1",
+     "8"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Line Status Register (LSR) bits",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "LSR[7]",
+     "FIFO data error: 1 while any parity error, framing error or break is anywhere in the RX FIFO; clears when none remain. 0 = no error (default)"
+    ],
+    [
+     "6",
+     "LSR[6]",
+     "transmitter empty: 1 when both THR and TSR are empty"
+    ],
+    [
+     "5",
+     "LSR[5]",
+     "THR empty: 1 when the transmit holding register is empty; with the FIFO on, up to 64 characters may then be loaded"
+    ],
+    [
+     "4",
+     "LSR[4]",
+     "break interrupt: 1 when RX was LOW for one character frame, received as 0x00. 0 = none (default)"
+    ],
+    [
+     "3",
+     "LSR[3]",
+     "framing error: 1 when the character at the top of the RX FIFO had no valid stop bit. 0 = none (default)"
+    ],
+    [
+     "2",
+     "LSR[2]",
+     "parity error in the character at the top of the RX FIFO. 0 = none (default)"
+    ],
+    [
+     "1",
+     "LSR[1]",
+     "overrun error: 1 when an overrun occurred. 0 = none (default)"
+    ],
+    [
+     "0",
+     "LSR[0]",
+     "data in receiver: 1 when the RX FIFO holds at least one character. 0 = empty (default)"
+    ]
+   ],
+   "notes": [
+    "LSR[4:2] belong to the character waiting at the top of the RX FIFO, so reading LSR first and RHR second pairs each error with its character; an empty RX FIFO gives 0 in all three."
+   ]
+  },
+  {
+   "title": "Modem Control Register (MCR) bits",
+   "page": 27,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "MCR[7] (1)",
+     "clock divisor: 0 = input clock ÷ 1, 1 = input clock ÷ 4"
+    ],
+    [
+     "6",
+     "MCR[6] (1)",
+     "0 = normal UART, 1 = IrDA mode"
+    ],
+    [
+     "5",
+     "MCR[5] (1)",
+     "Xon Any: 0 = off, 1 = on"
+    ],
+    [
+     "4",
+     "MCR[4]",
+     "loopback: 1 = internal loopback, TX fed back to RX inside the chip and MCR[1:0] fed to MSR[4:5]; 0 = normal"
+    ],
+    [
+     "3",
+     "MCR[3]",
+     "reserved"
+    ],
+    [
+     "2",
+     "MCR[2] (1)",
+     "1 makes TCR and TLR reachable; 0 hides them"
+    ],
+    [
+     "1",
+     "MCR[1]",
+     "RTS: 0 forces RTS inactive (HIGH), 1 forces it active (LOW). Drives MSR[4] in loopback. With auto RTS on, flow control drives the pin instead"
+    ],
+    [
+     "0",
+     "MCR[0]",
+     "DTR (2): with GPIO5 set as DTR through IOControl bit 1, 0 forces DTR inactive (HIGH) and 1 forces it active (LOW); IOState bit 5 then has no effect on the pin"
+    ]
+   ],
+   "notes": [
+    "(1) MCR[7:5] and MCR[2] change only while EFR[4] = 1.",
+    "(2) SC16IS750 and SC16IS760 only."
+   ]
+  },
+  {
+   "title": "Modem Status Register (MSR) bits",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "MSR[7]",
+     "CD (1), active HIGH: the inverse of the CD input when GPIO6 is set as CD through IOControl bit 1; IOState bit 6 does not show the pin then"
+    ],
+    [
+     "6",
+     "MSR[6]",
+     "RI (1), active HIGH: the inverse of the RI input when GPIO7 is set as RI through IOControl bit 1"
+    ],
+    [
+     "5",
+     "MSR[5]",
+     "DSR (1), active HIGH: the inverse of the DSR input when GPIO4 is set as DSR through IOControl bit 1; IOState bit 4 does not show the pin then"
+    ],
+    [
+     "4",
+     "MSR[4]",
+     "CTS, active HIGH: the inverse of the CTS input"
+    ],
+    [
+     "3",
+     "MSR[3]",
+     "CD (1) changed state; cleared by reading"
+    ],
+    [
+     "2",
+     "MSR[2]",
+     "RI (1) went from LOW to HIGH; cleared by reading"
+    ],
+    [
+     "1",
+     "MSR[1]",
+     "DSR (1) changed state; cleared by reading"
+    ],
+    [
+     "0",
+     "MSR[0]",
+     "CTS changed state; cleared by reading"
+    ]
+   ],
+   "notes": [
+    "(1) SC16IS750 and SC16IS760 only.",
+    "The RI, CD, CTS and DSR pins are active LOW."
+   ]
+  },
+  {
+   "title": "Interrupt Enable Register (IER) bits",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "IER[7] (1)",
+     "CTS interrupt: 1 = enabled, 0 = disabled (default)"
+    ],
+    [
+     "6",
+     "IER[6] (1)",
+     "RTS interrupt: 1 = enabled, 0 = disabled (default)"
+    ],
+    [
+     "5",
+     "IER[5] (1)",
+     "Xoff interrupt: 1 = enabled, 0 = disabled (default)"
+    ],
+    [
+     "4",
+     "IER[4] (1)",
+     "Sleep mode: 1 = enabled, 0 = disabled (default)"
+    ],
+    [
+     "3",
+     "IER[3]",
+     "modem status interrupt (2): 1 = enabled, 0 = disabled (default); the pins become modem lines through IOControl bit 1"
+    ],
+    [
+     "2",
+     "IER[2]",
+     "receive line status interrupt: 1 = enabled, 0 = disabled (default)"
+    ],
+    [
+     "1",
+     "IER[1]",
+     "THR interrupt: 1 = enabled, 0 = disabled (default)"
+    ],
+    [
+     "0",
+     "IER[0]",
+     "RHR interrupt: 1 = enabled, 0 = disabled (default)"
+    ]
+   ],
+   "notes": [
+    "(1) IER[7:4] change only while EFR[4] = 1. Setting IER[1] again does not raise a new interrupt while the THR is below its threshold.",
+    "(2) SC16IS750 and SC16IS760 only."
+   ]
+  },
+  {
+   "title": "Interrupt Identification Register (IIR) bits",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:6",
+     "IIR[7:6]",
+     "copies of FCR[0]"
+    ],
+    [
+     "5:1",
+     "IIR[5:1]",
+     "5-bit interrupt code (interrupt source table)"
+    ],
+    [
+     "0",
+     "IIR[0]",
+     "interrupt status: 0 = an interrupt is pending, 1 = none pending"
+    ]
+   ],
+   "notes": [
+    "Read-only."
+   ]
+  },
+  {
+   "title": "Interrupt source",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "priority level",
+    "IIR[5]",
+    "IIR[4]",
+    "IIR[3]",
+    "IIR[2]",
+    "IIR[1]",
+    "IIR[0]",
+    "source of the interrupt"
+   ],
+   "rows": [
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "Receiver Line Status error"
+    ],
+    [
+     "2",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "Receiver time-out interrupt"
+    ],
+    [
+     "2",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0",
+     "RHR interrupt"
+    ],
+    [
+     "3",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "THR interrupt"
+    ],
+    [
+     "4",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "modem interrupt (1)(2)"
+    ],
+    [
+     "5",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "input pin change of state (1)(2)"
+    ],
+    [
+     "6",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "received Xoff signal/special character"
+    ],
+    [
+     "7",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "CTS, RTS change of state from active (LOW) to inactive (HIGH)"
+    ]
+   ],
+   "notes": [
+    "(1) Modem interrupt status is read in MSR; GPIO interrupt status in IOState.",
+    "(2) SC16IS750 and SC16IS760 only."
+   ]
+  },
+  {
+   "title": "Enhanced Features Register (EFR) bits",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "EFR[7]",
+     "auto CTS: 1 = on, transmission stops while CTS is HIGH; 0 = off (default)"
+    ],
+    [
+     "6",
+     "EFR[6]",
+     "auto RTS: 1 = on, RTS goes HIGH at the RX FIFO halt level TCR[3:0] and LOW at the resume level TCR[7:4]; 0 = off (default)"
+    ],
+    [
+     "5",
+     "EFR[5]",
+     "special character detect: 1 = received data compared with Xoff2; a match goes into the FIFO and sets IIR[4]; 0 = off (default)"
+    ],
+    [
+     "4",
+     "EFR[4]",
+     "enhanced functions: 1 unlocks IER[7:4], FCR[5:4] and MCR[7:5] for writing; 0 locks them"
+    ],
+    [
+     "3:0",
+     "EFR[3:0]",
+     "software flow control mode (software flow control options table)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Transmission Control Register (TCR) bits",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:4",
+     "TCR[7:4]",
+     "RX FIFO level at which transmission resumes"
+    ],
+    [
+     "3:0",
+     "TCR[3:0]",
+     "RX FIFO level at which transmission halts"
+    ]
+   ],
+   "notes": [
+    "Levels run 0 to 60 characters in steps of 4.",
+    "Writable only with EFR[4] = 1 and MCR[2] = 1. TCR[3:0] must be greater than TCR[7:4]; nothing in hardware checks it. Set TCR before turning on auto RTS or software flow control."
+   ]
+  },
+  {
+   "title": "Trigger Level Register (TLR) bits",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:4",
+     "TLR[7:4]",
+     "RX FIFO interrupt trigger, characters available (4 to 60)"
+    ],
+    [
+     "3:0",
+     "TLR[3:0]",
+     "TX FIFO interrupt trigger, spaces available (4 to 60)"
+    ]
+   ],
+   "notes": [
+    "Writable only with EFR[4] = 1 and MCR[2] = 1. The value written is the trigger level divided by 4.",
+    "A field of 0 hands that FIFO's trigger to FCR; a non-zero field overrides FCR. With TLR setting the RX trigger, FCR[7:6] stays at 00."
+   ]
+  },
+  {
+   "title": "Transmitter FIFO Level (TXLVL) bits",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "-",
+     "unused, reads 0"
+    ],
+    [
+     "6:0",
+     "TXLVL[6:0]",
+     "free spaces in the TX FIFO, 0 (0x00) to 64 (0x40)"
+    ]
+   ],
+   "notes": [
+    "Read-only."
+   ]
+  },
+  {
+   "title": "Receiver FIFO Level (RXLVL) bits",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "-",
+     "unused, reads 0"
+    ],
+    [
+     "6:0",
+     "RXLVL[6:0]",
+     "characters held in the RX FIFO, 0 (0x00) to 64 (0x40)"
+    ]
+   ],
+   "notes": [
+    "Read-only."
+   ]
+  },
+  {
+   "title": "I/O pin Direction (IODir) bits",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:0",
+     "IODir",
+     "direction of GPIO7 to GPIO0, one bit each: 0 = input, 1 = output"
+    ]
+   ],
+   "notes": [
+    "SC16IS750 and SC16IS760 only. Writing IODir clears a pending GPIO interrupt."
+   ]
+  },
+  {
+   "title": "I/O pin State (IOState) bits",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:0",
+     "IOState",
+     "write: level for each pin set as output (0 = low, 1 = high); read: the state of every pin"
+    ]
+   ],
+   "notes": [
+    "SC16IS750 and SC16IS760 only."
+   ]
+  },
+  {
+   "title": "I/O Interrupt Enable (IOIntEna) bits",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:0",
+     "IOIntEna",
+     "per input pin: 1 = a change raises an interrupt, 0 = it does not"
+    ]
+   ],
+   "notes": [
+    "SC16IS750 and SC16IS760 only. With GPIO[7:4] set as modem lines, their interrupts come through IER[3] and IOIntEna bits 7 to 4 do nothing."
+   ]
+  },
+  {
+   "title": "I/O Control (IOControl) bits",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7:4",
+     "-",
+     "reserved"
+    ],
+    [
+     "3",
+     "SRESET",
+     "software reset: writing 1 resets the device; the bit returns to 0"
+    ],
+    [
+     "2",
+     "-",
+     "reserved"
+    ],
+    [
+     "1",
+     "GPIO[7:4] or modem pins",
+     "0 = GPIO[7:4] are I/O pins; 1 = they are RI, CD, DTR, DSR"
+    ],
+    [
+     "0",
+     "IOLATCH",
+     "input latching. 0: not latched; any input change interrupts, reading the input register clears it, and the interrupt also clears if the pin returns before that read. 1: latched; the changed level is held in IOState, only a read of IOState clears the interrupt, and the held value stays even if the pin returns first"
+    ]
+   ],
+   "notes": [
+    "SC16IS750 and SC16IS760 only (the SC16IS740 has the software reset bit alone).",
+    "As I/O pins, GPIO4 to GPIO7 follow IODir, IOState, IOIntEna and IOControl; CD, RI and DSR then do not appear in MSR and raise no modem interrupt, and MCR[0] does not drive DTR.",
+    "As modem lines, CD, RI and DSR read in MSR[7:5] and MSR[3:1], DTR follows MCR[0], a change on RI, CD or DSR raises a modem interrupt when IER[3] is set, and bits 7:4 of IODir, IOState and IOIntEna have no effect."
+   ]
+  },
+  {
+   "title": "Extra Features Control Register (EFCR) bits",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "IRDA MODE",
+     "0 = IrDA SIR, 3/16 pulse width, up to 115.2 kbit/s; 1 = IrDA SIR, 1/4 pulse width, up to 1.152 Mbit/s (1)"
+    ],
+    [
+     "6",
+     "-",
+     "reserved"
+    ],
+    [
+     "5",
+     "RTSINVER",
+     "RS-485 RTS polarity: 0 = RTS 0 while transmitting and 1 while receiving; 1 = the reverse"
+    ],
+    [
+     "4",
+     "RTSCON",
+     "1 = the transmitter drives RTS; 0 = it does not"
+    ],
+    [
+     "3",
+     "-",
+     "reserved"
+    ],
+    [
+     "2",
+     "TXDISABLE",
+     "1 = transmitter off: nothing leaves TX, the TX FIFO keeps filling from the host until full, and a character already in the TSR finishes first; 0 = on"
+    ],
+    [
+     "1",
+     "RXDISABLE",
+     "1 = receiver off at once, the character in the shift register still going to the RX FIFO; 0 = on. Setting it mid-reception is not advised"
+    ],
+    [
+     "0",
+     "9-BIT MODE",
+     "0 = normal RS-232; 1 = RS-485 9-bit (multidrop) mode"
+    ]
+   ],
+   "notes": [
+    "(1) SC16IS760 only."
+   ]
+  },
+  {
+   "title": "I2C-bus address map",
+   "page": 41,
+   "conditions": "",
+   "columns": [
+    "A1",
+    "A0",
+    "I2C address (hex) (1)"
+   ],
+   "rows": [
+    [
+     "VDD",
+     "VDD",
+     "0x90 (1001 000X)"
+    ],
+    [
+     "VDD",
+     "VSS",
+     "0x92 (1001 001X)"
+    ],
+    [
+     "VDD",
+     "SCL",
+     "0x94 (1001 010X)"
+    ],
+    [
+     "VDD",
+     "SDA",
+     "0x96 (1001 011X)"
+    ],
+    [
+     "VSS",
+     "VDD",
+     "0x98 (1001 100X)"
+    ],
+    [
+     "VSS",
+     "VSS",
+     "0x9A (1001 101X)"
+    ],
+    [
+     "VSS",
+     "SCL",
+     "0x9C (1001 110X)"
+    ],
+    [
+     "VSS",
+     "SDA",
+     "0x9E (1001 111X)"
+    ],
+    [
+     "SCL",
+     "VDD",
+     "0xA0 (1010 000X)"
+    ],
+    [
+     "SCL",
+     "VSS",
+     "0xA2 (1010 001X)"
+    ],
+    [
+     "SCL",
+     "SCL",
+     "0xA4 (1010 010X)"
+    ],
+    [
+     "SCL",
+     "SDA",
+     "0xA6 (1010 011X)"
+    ],
+    [
+     "SDA",
+     "VDD",
+     "0xA8 (1010 100X)"
+    ],
+    [
+     "SDA",
+     "VSS",
+     "0xAA (1010 101X)"
+    ],
+    [
+     "SDA",
+     "SCL",
+     "0xAC (1010 110X)"
+    ],
+    [
+     "SDA",
+     "SDA",
+     "0xAE (1010 111X)"
+    ]
+   ],
+   "notes": [
+    "(1) X is 0 for a write and 1 for a read."
+   ]
+  },
+  {
+   "title": "Register address byte (I2C)",
+   "page": 42,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "-",
+     "not used"
+    ],
+    [
+     "6:3",
+     "A[3:0]",
+     "UART internal register select"
+    ],
+    [
+     "2:1",
+     "CH1, CH0",
+     "channel select: CH1 = 0, CH0 = 0; other values reserved"
+    ],
+    [
+     "0",
+     "-",
+     "not used"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register address byte (SPI)",
+   "page": 44,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "R/W",
+     "1 = read from UART, 0 = write to UART"
+    ],
+    [
+     "6:3",
+     "A[3:0]",
+     "UART internal register select"
+    ],
+    [
+     "2:1",
+     "CH1, CH0",
+     "channel select: CH1 = 0, CH0 = 0; other values reserved"
+    ],
+    [
+     "0",
+     "-",
+     "not used"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "SnPb eutectic reflow peak temperature (J-STD-020C)",
+   "page": 58,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "volume < 350 mm³ (°C)",
+    "volume ≥ 350 mm³ (°C)"
+   ],
+   "rows": [
+    [
+     "< 2.5",
+     "235",
+     "220"
+    ],
+    [
+     "≥ 2.5",
+     "220",
+     "220"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Lead-free reflow peak temperature (J-STD-020C)",
+   "page": 58,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "volume < 350 mm³ (°C)",
+    "volume 350 to 2000 mm³ (°C)",
+    "volume > 2000 mm³ (°C)"
+   ],
+   "rows": [
+    [
+     "< 1.6",
+     "260",
+     "260",
+     "260"
+    ],
+    [
+     "1.6 to 2.5",
+     "260",
+     "250",
+     "245"
+    ],
+    [
+     "> 2.5",
+     "250",
+     "245",
+     "245"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "crystal-oscillator",
+   "title": "1.8432 MHz crystal oscillator",
+   "page": 20,
+   "description": "The on-chip oscillator runs a 1.8432 MHz crystal placed between XTAL1 and XTAL2. Each crystal end has a capacitor to ground: 22 pF on the XTAL1 side and 33 pF on the XTAL2 side.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "SC16IS740"
+    },
+    {
+     "ref": "Y1",
+     "type": "crystal",
+     "value": "1.8432 MHz"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22 pF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "33 pF"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Baud rate divisor",
+   "expr": "divisor = (fXTAL1 / prescaler) / (baud rate × 16)",
+   "where": {
+    "fXTAL1": "clock frequency at XTAL1 (crystal or external clock)",
+    "prescaler": "1 with MCR[7] = 0 (the reset state), 4 with MCR[7] = 1",
+    "divisor": "16-bit value written to DLH (high byte) and DLL (low byte), 1 to 2^16 - 1",
+    "baud rate": "wanted UART bit rate"
+   },
+   "note": "The baud rate generator output is 16 times the baud rate. DLL = DLH = 0 stops the baud clock.",
+   "page": 18
+  },
+  {
+   "name": "External clock frequency",
+   "expr": "fXTAL = 1 / tw3",
+   "where": {
+    "tw3": "period of the clock on XTAL1 (tw1 + tw2)"
+   },
+   "note": "",
+   "page": 50
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Family",
+   "page": 1,
+   "text": "The three parts share one UART design. The SC16IS740 is an SC16IS750 without the eight I/O pins. The SC16IS760 is an SC16IS750 with SPI clock to 15 Mbit/s (against 4 Mbit/s) and IrDA SIR to 1.152 Mbit/s (against 115.2 kbit/s); otherwise the two match in function and electrical figures."
+  },
+  {
+   "topic": "Host interface",
+   "page": 7,
+   "text": "I2C/SPI HIGH selects the I2C-bus: SCL and SDA with A0 and A1 setting one of 16 addresses; SO is left open. I2C/SPI LOW selects SPI: SCLK, CS, SI and SO, with SDA tied to VSS. Both ports are slave only."
+  },
+  {
+   "topic": "I2C-bus",
+   "page": 1,
+   "text": "Slave only, up to 400 kbit/s (fast mode), with a noise filter on SCL and SDA. A bus time-out resets the serial interface if SDA stays LOW for 25 ms or more."
+  },
+  {
+   "topic": "I2C-bus register access",
+   "page": 41,
+   "text": "A write is: START, slave address with W, the register address byte, then one or more data bytes, then STOP. A read sends the slave address with W and the register address byte, then a repeated START and the slave address with R; data bytes follow, each ACKed by the host, the last one NACKed, then STOP. In the register address byte bits 6:3 pick the register and bits 2:1 are 00."
+  },
+  {
+   "topic": "SPI",
+   "page": 43,
+   "text": "SPI mode 0, slave only. Each access starts with one byte: bit 7 R/W (1 = read), bits 6:3 the register address, bits 2:1 the channel (00), bit 0 unused, followed by the data byte. Keeping CS LOW and clocking more bytes after a THR (0x00) write or an RHR read streams data into the TX FIFO or out of the RX FIFO."
+  },
+  {
+   "topic": "FIFOs",
+   "page": 9,
+   "text": "Receive and transmit FIFOs each hold 64 characters; the receive FIFO also keeps three error bits per character. Both FIFOs are off after reset, which leaves a trigger level of one character. The FIFO is still used for the transmitted byte when off; a full FIFO loses further characters. TXLVL and RXLVL report the fill state."
+  },
+  {
+   "topic": "Trigger levels",
+   "page": 9,
+   "text": "Interrupt trigger levels come from FCR (fixed choices) or from TLR (4 to 60 in steps of 4). When the TLR field is zero FCR applies; when it is non-zero TLR applies."
+  },
+  {
+   "topic": "Hardware flow control",
+   "page": 9,
+   "text": "Auto CTS and auto RTS are switched separately by EFR[7:6]. With auto CTS the transmitter sends a character only while CTS is LOW; CTS rising before mid-way through the final stop bit lets the present character finish and holds back the next. With auto RTS, RTS goes HIGH when the RX FIFO reaches the halt level in TCR[3:0] and returns LOW at the resume level in TCR[7:4] (FCR levels are used when TCR is zero). The far end may still send one more character after RTS rises. With both on and RTS of each UART wired to CTS of the other, no overrun can happen. CTS changes raise no host interrupt while auto CTS is on."
+  },
+  {
+   "topic": "Software flow control",
+   "page": 11,
+   "text": "EFR[3:0] choose which Xon/Xoff characters are sent and compared (one pair, the other, or both in sequence). An Xoff received stops transmission after the current character, sets IIR[4] if IER[5] allows and pulls IRQ LOW; the matching Xon clears it. Xoff goes out when the RX FIFO passes the halt level (TCR[3:0] or FCR[7:6]); Xon goes out at the resume level. With a 5, 6 or 7-bit word only that many low bits of the Xon/Xoff characters are sent. Xon Any (MCR[5]) resumes on any received character. Special character detect (EFR[5]) compares incoming data with Xoff2, sets the Xoff interrupt without halting, and stores the character in the RX FIFO; reading IIR clears it. Hardware and software flow control are not meant to run together."
+  },
+  {
+   "topic": "Reset",
+   "page": 13,
+   "text": "Power-on reset, the RESET pin and the software reset bit do the same thing. DLL, DLH, SPR and the four Xon/Xoff registers keep their values. After reset TX and RTS are HIGH, the I/O pins are inputs and IRQ is released."
+  },
+  {
+   "topic": "Power-on",
+   "page": 14,
+   "text": "Wait at least 3 µs after power-up (internal power-on reset) before the first bus access; an external RESET pulse may also be applied. Registers can then be read and written, but the UART transmitter and receiver need a stable clock on XTAL1. A crystal can take a few milliseconds to start, depending on the crystal, the supply ramp and the load capacitors."
+  },
+  {
+   "topic": "Interrupts",
+   "page": 15,
+   "text": "Seven priority levels, enabled through IER and IOIntEna and reported in IIR[5:0]. Receive line status interrupts come from LSR[7], set while any error is in the RX FIFO. The receive time-out fires four character times after the last character when the FIFO holds data below the trigger level; the counter restarts at the centre of each received stop bit and on each FIFO read. An Xoff interrupt from flow control clears on the next Xon; one from special character detect clears on reading IIR. Interrupt mode uses IRQ when any of IER[3:0] is set; with IER[3:0] = 0000 the host polls LSR."
+  },
+  {
+   "topic": "Sleep mode",
+   "page": 17,
+   "text": "Enabled when EFR[4] and IER[4] are both 1. The UART sleeps, its clock stopped, once RX is idle, the TX FIFO and shift register are empty, the RX FIFO is empty and no interrupt other than THR is pending. It wakes on activity on RX, a change on a modem input, or a write to the TX FIFO. Revision C and D devices do not wake from RX data in IrDA mode (application note AN10964 gives a workaround); revision E does. GPIO transitions do not wake it, but GPIO inputs can still be read and GPIO interrupts still work. Clear IER[4] before writing DLL or DLH."
+  },
+  {
+   "topic": "Break",
+   "page": 17,
+   "text": "A break is detected when RX stays LOW longer than one full character with its start, parity and stop bits. Setting LCR[6] sends a break by holding TX LOW until the bit is cleared."
+  },
+  {
+   "topic": "Baud rate generator",
+   "page": 18,
+   "text": "XTAL1 divided by 1 or 4 (MCR[7]) and then by the 16-bit DLH:DLL divisor gives the 16× clock for both transmit and receive. Choose the crystal tolerance to keep the baud rate error under 1 %; a 100 ppm crystal is generally recommended."
+  },
+  {
+   "topic": "Clock",
+   "page": 50,
+   "text": "XTAL1 takes a crystal (up to 24 MHz) with XTAL2, or an external clock up to 80 MHz at 3.3 V or 48 MHz at 2.5 V, with XTAL2 open."
+  },
+  {
+   "topic": "Register access",
+   "page": 20,
+   "text": "The four address bits reach the general set while LCR[7] = 0. With LCR[7] = 1 (and LCR not 0xBF), addresses 0x00 and 0x01 give DLL and DLH. With LCR = 0xBF, the enhanced set (EFR, XON1, XON2, XOFF1, XOFF2) appears. TCR and TLR take the place of MSR and SPR when EFR[4] = 1 and MCR[2] = 1."
+  },
+  {
+   "topic": "Auto RS-485 direction",
+   "page": 35,
+   "text": "Setting EFCR[4] gives the transmitter control of RTS, above MCR[1] and hardware flow control: RTS goes to 0 when the host writes to the TX FIFO and back to 1 after the last bit has gone out. EFCR[5] inverts this. Hardware flow control is turned off to use it."
+  },
+  {
+   "topic": "RS-485 multidrop",
+   "page": 36,
+   "text": "EFCR[0] enables 9-bit mode, with flow control off. Address characters carry parity 1. In normal multidrop mode (EFR[5] = 0) the receiver is set to forced parity 0 (LCR[5:3] = 111): an address character shows as a parity error, raises a line status interrupt (IER[2] = 1) and enters the RX FIFO, and the host turns the receiver on or off depending on whether the address is its own. With auto address detection (EFR[5] = 1, address in XOFF2) the receiver drops everything until an address matching XOFF2 arrives, then turns itself on and stores it with its parity bit in the error bit position; a non-matching address later turns the receiver off again."
+  },
+  {
+   "topic": "IrDA",
+   "page": 2,
+   "text": "The built-in IrDA SIR encoder and decoder is selected by MCR[6]. The SC16IS750 runs 3/16 pulses up to 115.2 kbit/s; the SC16IS760 adds 1/4 pulses up to 1.152 Mbit/s (EFCR[7]). SIR at 1.152 Mbit/s does not interoperate with IrDA MIR at that speed."
+  },
+  {
+   "topic": "Programmable I/O",
+   "page": 33,
+   "text": "SC16IS750 and SC16IS760: GPIO0 to GPIO7 are set as inputs or outputs in IODir, driven and read through IOState, and can interrupt on input change (IOIntEna), with optional latching (IOControl bit 0). Each input has an active pull-up of 3.02 MΩ to 4.91 MΩ. IOControl bit 1 turns GPIO4 to GPIO7 into DSR, DTR, CD and RI."
+  },
+  {
+   "topic": "Character format",
+   "page": 2,
+   "text": "5, 6, 7 or 8 data bits; even, odd, forced or no parity; 1, 1.5 or 2 stop bits. Transmitter and receiver can each be disabled (EFCR[2:1]); internal loopback is in MCR[4]."
+  },
+  {
+   "topic": "Interrupt output",
+   "page": 8,
+   "text": "IRQ is open-drain and needs an external pull-up to VDD: 1 kΩ for 3.3 V, 1.5 kΩ for 2.5 V."
+  },
+  {
+   "topic": "Exposed pad",
+   "page": 9,
+   "text": "On HVQFN24 the die ground connects to both VSS pins and the exposed pad. The VSS pins must go to ground; the pad is soldered to a matching board pad with thermal vias for heat and electrical performance."
+  },
+  {
+   "topic": "Handling",
+   "page": 57,
+   "text": "All pins carry ESD protection for normal handling; JESD625-A precautions apply."
+  }
+ ],
+ "packages": [
+  {
+   "name": "TSSOP16 (SOT403-1)",
+   "page": 54,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.1"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.80",
+     "",
+     "0.95"
+    ],
+    [
+     "A3",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "bp",
+     "lead width",
+     "0.19",
+     "",
+     "0.30"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.1",
+     "",
+     "0.2"
+    ],
+    [
+     "D (1)",
+     "body length",
+     "4.9",
+     "",
+     "5.1"
+    ],
+    [
+     "E (2)",
+     "body width",
+     "4.3",
+     "",
+     "4.5"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "HE",
+     "overall width across leads",
+     "6.2",
+     "",
+     "6.6"
+    ],
+    [
+     "L",
+     "lead length",
+     "",
+     "1",
+     ""
+    ],
+    [
+     "Lp",
+     "foot length",
+     "0.50",
+     "",
+     "0.75"
+    ],
+    [
+     "Q",
+     "",
+     "0.3",
+     "",
+     "0.4"
+    ],
+    [
+     "v",
+     "tolerance",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "w",
+     "tolerance",
+     "",
+     "0.13",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "Z (1)",
+     "",
+     "0.06",
+     "",
+     "0.40"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "(1) Excludes plastic or metal protrusions of 0.15 mm max per side.",
+    "(2) Excludes plastic interlead protrusions of 0.25 mm max per side.",
+    "JEDEC MO-153."
+   ]
+  },
+  {
+   "name": "HVQFN24 (SOT616-3)",
+   "page": 55,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A (1)",
+     "overall height",
+     "",
+     "",
+     "1"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.18",
+     "",
+     "0.30"
+    ],
+    [
+     "c",
+     "terminal thickness",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "D (1)",
+     "body length",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "Dh",
+     "exposed pad length",
+     "2.45",
+     "",
+     "2.75"
+    ],
+    [
+     "E (1)",
+     "body width",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "Eh",
+     "exposed pad width",
+     "2.45",
+     "",
+     "2.75"
+    ],
+    [
+     "e",
+     "terminal pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "e1",
+     "terminal row span",
+     "",
+     "2.5",
+     ""
+    ],
+    [
+     "e2",
+     "terminal row span",
+     "",
+     "2.5",
+     ""
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.3",
+     "",
+     "0.5"
+    ],
+    [
+     "v",
+     "tolerance",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "w",
+     "tolerance",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y1",
+     "",
+     "",
+     "0.1",
+     ""
+    ]
+   ],
+   "notes": [
+    "(1) Excludes plastic or metal protrusions of 0.075 mm max per side.",
+    "JEDEC MO-220."
+   ]
+  },
+  {
+   "name": "TSSOP24 (SOT355-1)",
+   "page": 56,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.1"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.80",
+     "",
+     "0.95"
+    ],
+    [
+     "A3",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "bp",
+     "lead width",
+     "0.19",
+     "",
+     "0.30"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.1",
+     "",
+     "0.2"
+    ],
+    [
+     "D (1)",
+     "body length",
+     "7.7",
+     "",
+     "7.9"
+    ],
+    [
+     "E (2)",
+     "body width",
+     "4.3",
+     "",
+     "4.5"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "HE",
+     "overall width across leads",
+     "6.2",
+     "",
+     "6.6"
+    ],
+    [
+     "L",
+     "lead length",
+     "",
+     "1",
+     ""
+    ],
+    [
+     "Lp",
+     "foot length",
+     "0.50",
+     "",
+     "0.75"
+    ],
+    [
+     "Q",
+     "",
+     "0.3",
+     "",
+     "0.4"
+    ],
+    [
+     "v",
+     "tolerance",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "w",
+     "tolerance",
+     "",
+     "0.13",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "Z (1)",
+     "",
+     "0.2",
+     "",
+     "0.5"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "(1) Excludes plastic or metal protrusions of 0.15 mm max per side.",
+    "(2) Excludes plastic interlead protrusions of 0.25 mm max per side.",
+    "JEDEC MO-153."
+   ]
+  }
+ ]
+}

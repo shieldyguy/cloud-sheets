@@ -1,0 +1,5314 @@
+{
+ "sheet": 1,
+ "name": "TPS54340DDAR",
+ "kind": "switching_regulator",
+ "manufacturer": "Texas Instruments",
+ "title": "Buck converter, 4.5 V to 42 V in, 3.5 A, pulse-skipping Eco-mode",
+ "source": {
+  "revision": "SLVSBK0D, October 2012, revised March 2017",
+  "pages": 49
+ },
+ "summary": "TPS54340 is a non-synchronous buck regulator with a 92 mΩ high-side MOSFET, running from 4.5 V to 42 V (45 V absolute) and delivering 3.5 A continuous with an external catch diode. It uses peak current mode control at a fixed 100 kHz to 2.5 MHz, set by a resistor or locked to an external clock. Light loads are handled by pulse skipping (146 µA quiescent), and shutdown draws about 1 µA. It has an adjustable UVLO on EN, internal soft-start, cycle-by-cycle current limit with frequency foldback, overvoltage and thermal protection, in an 8-pin HSOP PowerPAD package.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "4.5 V to 42 V (45 V abs max)"
+  ],
+  [
+   "Output current",
+   "3.5 A continuous"
+  ],
+  [
+   "Current limit",
+   "4.5 A min, 5.5 A typ"
+  ],
+  [
+   "High-side MOSFET",
+   "92 mΩ typ"
+  ],
+  [
+   "Switching frequency",
+   "100 kHz to 2500 kHz; sync 160 kHz to 2300 kHz"
+  ],
+  [
+   "Reference",
+   "0.8 V ±1 %"
+  ],
+  [
+   "Quiescent current",
+   "146 µA typ, nonswitching"
+  ],
+  [
+   "Shutdown current",
+   "1.3 µA typ"
+  ],
+  [
+   "Minimum on time",
+   "135 ns typ"
+  ],
+  [
+   "Junction temperature",
+   "-40 °C to 150 °C"
+  ],
+  [
+   "Package",
+   "HSOP-8 PowerPAD (DDA), 4.89 mm × 3.9 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 39,
+  "columns": [
+   "part number",
+   "status",
+   "material type",
+   "package",
+   "pins",
+   "packing",
+   "RoHS",
+   "lead finish",
+   "MSL / peak reflow",
+   "operating temperature (°C)",
+   "marking"
+  ],
+  "rows": [
+   [
+    "TPS54340DDA",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "75, tube",
+    "Yes",
+    "NIPDAU | NIPDAUAG",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "54340"
+   ],
+   [
+    "TPS54340DDA.B",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "75, tube",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "54340"
+   ],
+   [
+    "TPS54340DDAR",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "2500, large tape and reel",
+    "Yes",
+    "NIPDAU | NIPDAUAG",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "54340"
+   ],
+   [
+    "TPS54340DDAR.B",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "2500, large tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "54340"
+   ],
+   [
+    "TPS54340DDARG4",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "2500, large tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "54340"
+   ],
+   [
+    "TPS54340DDARG4.B",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "2500, large tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "54340"
+   ]
+  ],
+  "notes": [
+   "An automotive-qualified (AEC-Q100) version is sold as TPS54340-Q1.",
+   "TPS54340DDA: HSOP (8), body 4.89 mm × 3.9 mm."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DDA, 8-pin HSOP with PowerPAD",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "BOOT",
+     "type": "output",
+     "function": "Gate-drive supply for the high-side switch. Needs a capacitor to SW; when that capacitor's voltage drops too low to drive the MOSFET, switching stops until it is recharged."
+    },
+    {
+     "pin": "2",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input, 4.5 V to 42 V in operation."
+    },
+    {
+     "pin": "3",
+     "name": "EN",
+     "type": "input",
+     "function": "Enable. An internal current source pulls it up, so an open pin runs the part; below 1.2 V the part is off. A two-resistor divider from VIN sets a higher input undervoltage lockout and its hysteresis."
+    },
+    {
+     "pin": "4",
+     "name": "RT/CLK",
+     "type": "input",
+     "function": "Frequency set. With a resistor to ground, an internal amplifier holds the pin at a fixed voltage and the resistor sets the switching frequency. Driven above the PLL upper threshold, it turns into a high-impedance input that clocks the PLL; if the clock edges stop, resistor mode returns."
+    },
+    {
+     "pin": "5",
+     "name": "FB",
+     "type": "input",
+     "function": "Inverting input of the gm error amplifier; the output divider connects to it."
+    },
+    {
+     "pin": "6",
+     "name": "COMP",
+     "type": "output",
+     "function": "Error amplifier output, which also feeds the PWM current comparator. The frequency compensation network goes from this pin to ground."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "8",
+     "name": "SW",
+     "type": "power out",
+     "function": "Switch node, driven by the source terminal of the integrated high-side MOSFET."
+    },
+    {
+     "pin": "9",
+     "name": "PAD",
+     "type": "ground",
+     "function": "Exposed thermal pad. Solder it to the board and connect it to GND for correct operation."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 5,
+   "conditions": "Over operating free-air temperature range (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "pin",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage",
+     "VIN",
+     "-0.3",
+     "45",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "EN",
+     "-0.3",
+     "8.4",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "BOOT",
+     "",
+     "53",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "FB",
+     "-0.3",
+     "3",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "COMP",
+     "-0.3",
+     "3",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "RT/CLK",
+     "-0.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Output voltage",
+     "BOOT-SW",
+     "",
+     "8",
+     "V"
+    ],
+    [
+     "Output voltage",
+     "SW",
+     "-0.6",
+     "45",
+     "V"
+    ],
+    [
+     "Output voltage",
+     "SW, 10-ns Transient",
+     "-2",
+     "45",
+     "V"
+    ],
+    [
+     "Operating junction temperature",
+     "",
+     "-40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature, TSTG",
+     "",
+     "-65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress past these limits can damage the part permanently; they are stress ratings only, and long exposure at them can reduce reliability. Operation is specified only within the recommended operating conditions."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Electrostatic discharge",
+     "VESD",
+     "Human Body Model (HBM) ESD Stress Voltage",
+     "±2000",
+     "V"
+    ],
+    [
+     "Electrostatic discharge",
+     "VESD",
+     "Charged Device Model (HBM) ESD Stress Voltage",
+     "±500",
+     "V"
+    ]
+   ],
+   "notes": [
+    "The HBM figure is the passing level to ANSI/ESDA/JEDEC JS-001; JEP155 gives 500 V HBM as safe with a standard ESD control process.",
+    "The charged-device figure is the passing level to EIA-JEDEC JESD22-C101; JEP157 gives 250 V CDM as safe with a standard ESD control process.",
+    "The second row's model should read charged device model (CDM)."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 5,
+   "conditions": "Over operating free-air temperature range (unless otherwise noted)",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "Supply input voltage",
+     "VO + VDO",
+     "42",
+     "V"
+    ],
+    [
+     "VO",
+     "Output voltage",
+     "0.8",
+     "41.1",
+     "V"
+    ],
+    [
+     "IO",
+     "Output current",
+     "0",
+     "3.5",
+     "A"
+    ],
+    [
+     "TJ",
+     "Junction Temperature",
+     "-40",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "The minimum supply voltage VO + VDO is given by the minimum input voltage equation."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 5,
+   "conditions": "TPS54340, DDA (8 pins)",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "θJA",
+     "Junction-to-ambient thermal resistance (standard board)",
+     "42.0",
+     "°C/W"
+    ],
+    [
+     "ψJT",
+     "Junction-to-top characterization parameter",
+     "5.9",
+     "°C/W"
+    ],
+    [
+     "ψJB",
+     "Junction-to-board characterization parameter",
+     "23.4",
+     "°C/W"
+    ],
+    [
+     "θJCtop",
+     "Junction-to-case(top) thermal resistance",
+     "45.8",
+     "°C/W"
+    ],
+    [
+     "θJCbot",
+     "Junction-to-case(bottom) thermal resistance",
+     "3.6",
+     "°C/W"
+    ],
+    [
+     "θJB",
+     "Junction-to-board thermal resistance",
+     "23.4",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "Power rating at a given ambient temperature TA is set by a junction temperature of 150 °C."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 6,
+   "conditions": "TJ = -40°C to 150°C, VIN = 4.5 V to 42 V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating input voltage",
+     "",
+     "",
+     "4.5",
+     "",
+     "42",
+     "V"
+    ],
+    [
+     "Internal undervoltage lockout threshold",
+     "",
+     "Rising",
+     "4.1",
+     "4.3",
+     "4.48",
+     "V"
+    ],
+    [
+     "Internal undervoltage lockout threshold hysteresis",
+     "",
+     "",
+     "",
+     "325",
+     "",
+     "mV"
+    ],
+    [
+     "Shutdown supply current",
+     "",
+     "EN = 0 V, 25°C, 4.5 V ≤ VIN ≤ 42 V",
+     "",
+     "1.3",
+     "3.5",
+     "µA"
+    ],
+    [
+     "Operating: nonswitching supply current",
+     "",
+     "FB = 0.9 V, TA = 25°C",
+     "",
+     "146",
+     "175",
+     "µA"
+    ],
+    [
+     "Enable threshold voltage",
+     "",
+     "No voltage hysteresis, rising and falling",
+     "1.1",
+     "1.2",
+     "1.3",
+     "V"
+    ],
+    [
+     "EN input current",
+     "",
+     "Enable threshold +50 mV",
+     "",
+     "-4.6",
+     "",
+     "µA"
+    ],
+    [
+     "EN input current",
+     "",
+     "Enable threshold -50 mV",
+     "-0.58",
+     "-1.2",
+     "-1.8",
+     "µA"
+    ],
+    [
+     "Hysteresis current",
+     "",
+     "",
+     "-2.2",
+     "-3.4",
+     "-4.5",
+     "µA"
+    ],
+    [
+     "Voltage reference",
+     "",
+     "",
+     "0.792",
+     "0.8",
+     "0.808",
+     "V"
+    ],
+    [
+     "High-side MOSFET on-resistance",
+     "",
+     "VIN = 12 V, BOOT-SW = 6 V",
+     "",
+     "92",
+     "190",
+     "mΩ"
+    ],
+    [
+     "Error amplifier input current",
+     "",
+     "",
+     "",
+     "50",
+     "",
+     "nA"
+    ],
+    [
+     "Error amplifier transconductance",
+     "gM",
+     "-2 µA < ICOMP < 2 µA, VCOMP = 1 V",
+     "",
+     "350",
+     "",
+     "µS"
+    ],
+    [
+     "Error amplifier transconductance during soft-start",
+     "gM",
+     "-2 µA < ICOMP < 2 µA, VCOMP = 1 V, VFB = 0.4 V",
+     "",
+     "77",
+     "",
+     "µS"
+    ],
+    [
+     "Error amplifier dc gain",
+     "",
+     "VFB = 0.8 V",
+     "",
+     "10,000",
+     "",
+     "V/V"
+    ],
+    [
+     "Min unity gain bandwidth",
+     "",
+     "",
+     "",
+     "2500",
+     "",
+     "kHz"
+    ],
+    [
+     "Error amplifier source/sink",
+     "",
+     "V(COMP) = 1 V, 100 mV overdrive",
+     "",
+     "±30",
+     "",
+     "µA"
+    ],
+    [
+     "COMP to SW current transconductance",
+     "",
+     "",
+     "",
+     "12",
+     "",
+     "A/V"
+    ],
+    [
+     "Current limit threshold",
+     "",
+     "All VIN and temperatures, Open Loop (1)",
+     "4.5",
+     "5.5",
+     "6.8",
+     "A"
+    ],
+    [
+     "Current limit threshold",
+     "",
+     "All temperatures, VIN = 12 V, Open Loop (1)",
+     "4.5",
+     "5.5",
+     "6.25",
+     "A"
+    ],
+    [
+     "Current limit threshold",
+     "",
+     "VIN = 12 V, TA = 25°C, Open Loop (1)",
+     "5.2",
+     "5.5",
+     "5.85",
+     "A"
+    ],
+    [
+     "Thermal shutdown",
+     "",
+     "",
+     "",
+     "176",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis",
+     "",
+     "",
+     "",
+     "12",
+     "",
+     "°C"
+    ],
+    [
+     "Switching frequency range using RT mode",
+     "",
+     "",
+     "100",
+     "",
+     "2500",
+     "kHz"
+    ],
+    [
+     "Switching frequency",
+     "fSW",
+     "RT = 200 kΩ",
+     "450",
+     "500",
+     "550",
+     "kHz"
+    ],
+    [
+     "Switching frequency range using CLK mode",
+     "",
+     "",
+     "160",
+     "",
+     "2300",
+     "kHz"
+    ],
+    [
+     "RT/CLK high threshold",
+     "",
+     "",
+     "",
+     "1.55",
+     "2",
+     "V"
+    ],
+    [
+     "RT/CLK low threshold",
+     "",
+     "",
+     "0.5",
+     "1.2",
+     "",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) The open-loop current limit is measured right at the SW pin; it does not depend on the inductor value or on slope compensation."
+   ]
+  },
+  {
+   "title": "Timing requirements",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Enable to COMP active",
+     "",
+     "VIN = 12 V, TA = 25°C",
+     "",
+     "540",
+     "",
+     "µs"
+    ],
+    [
+     "Soft-Start Time",
+     "",
+     "fSW = 500 kHz, 10% to 90%",
+     "",
+     "2.1",
+     "",
+     "ms"
+    ],
+    [
+     "Soft-Start Time",
+     "",
+     "fSW = 2.5 MHz, 10% to 90%",
+     "",
+     "0.42",
+     "",
+     "ms"
+    ],
+    [
+     "Minimum controllable on time",
+     "",
+     "VIN = 12 V, TA = 25°C",
+     "",
+     "135",
+     "",
+     "ns"
+    ],
+    [
+     "Current limit threshold delay",
+     "",
+     "",
+     "",
+     "60",
+     "",
+     "ns"
+    ],
+    [
+     "Minimum CLK input pulse width",
+     "",
+     "",
+     "",
+     "15",
+     "",
+     "ns"
+    ],
+    [
+     "RT/CLK falling edge to SW rising edge delay",
+     "",
+     "Measured at 500 kHz with RT resistor in series",
+     "",
+     "55",
+     "",
+     "ns"
+    ],
+    [
+     "PLL lock in time",
+     "",
+     "Measured at 500 kHz",
+     "",
+     "78",
+     "",
+     "µs"
+    ]
+   ]
+  },
+  {
+   "title": "Design parameters, 3.3 V example",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "design parameter",
+    "example value"
+   ],
+   "rows": [
+    [
+     "Output Voltage",
+     "3.3 V"
+    ],
+    [
+     "Transient Response 0.875 A to 2.625 A load step",
+     "ΔVOUT = 4 %"
+    ],
+    [
+     "Maximum Output Current",
+     "3.5 A"
+    ],
+    [
+     "Input Voltage",
+     "12 V nom. 6 V to 42 V"
+    ],
+    [
+     "Output Voltage Ripple",
+     "0.5% of VOUT"
+    ],
+    [
+     "Start Input Voltage (rising VIN)",
+     "5.75 V"
+    ],
+    [
+     "Stop Input Voltage (falling VIN)",
+     "4.5 V"
+    ]
+   ]
+  },
+  {
+   "title": "Capacitor types",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "value (µF)",
+    "EIA size",
+    "voltage",
+    "dielectric",
+    "comments"
+   ],
+   "rows": [
+    [
+     "1 to 2.2",
+     "1210",
+     "100 V",
+     "X7R",
+     "GRM32 series"
+    ],
+    [
+     "1 to 4.7",
+     "1210",
+     "50 V",
+     "X7R",
+     "GRM32 series"
+    ],
+    [
+     "1",
+     "1206",
+     "100 V",
+     "X7R",
+     "GRM31 series"
+    ],
+    [
+     "1 to 2.2",
+     "1206",
+     "50 V",
+     "X7R",
+     "GRM31 series"
+    ],
+    [
+     "1 to 1.8",
+     "2220",
+     "50 V",
+     "X7R",
+     "VJ X7R series"
+    ],
+    [
+     "1 to 1.2",
+     "2220",
+     "100 V",
+     "X7R",
+     "VJ X7R series"
+    ],
+    [
+     "1 to 3.9",
+     "2225",
+     "50 V",
+     "X7R",
+     "VJ X7R series"
+    ],
+    [
+     "1 to 1.8",
+     "2225",
+     "100 V",
+     "X7R",
+     "VJ X7R series"
+    ],
+    [
+     "1 to 2.2",
+     "1812",
+     "100 V",
+     "X7R",
+     "C series C4532"
+    ],
+    [
+     "1.5 to 6.8",
+     "1812",
+     "50 V",
+     "X7R",
+     "C series C4532"
+    ],
+    [
+     "1 to 2.2",
+     "1210",
+     "100 V",
+     "X7R",
+     "C series C3225"
+    ],
+    [
+     "1 to 3.3",
+     "1210",
+     "50 V",
+     "X7R",
+     "C series C3225"
+    ],
+    [
+     "1 to 4.7",
+     "1210",
+     "50 V",
+     "X7R",
+     "X7R dielectric series"
+    ],
+    [
+     "1",
+     "1210",
+     "100 V",
+     "X7R",
+     "X7R dielectric series"
+    ],
+    [
+     "1 to 4.7",
+     "1812",
+     "50 V",
+     "X7R",
+     "X7R dielectric series"
+    ],
+    [
+     "1 to 2.2",
+     "1812",
+     "100 V",
+     "X7R",
+     "X7R dielectric series"
+    ]
+   ]
+  },
+  {
+   "title": "Solder stencil openings for the exposed pad, DDA0008B",
+   "page": 48,
+   "conditions": "Exposed pad, 100% printed solder coverage by area",
+   "columns": [
+    "stencil thickness (mm)",
+    "solder stencil opening (mm)"
+   ],
+   "rows": [
+    [
+     "0.1",
+     "3.03 X 3.80"
+    ],
+    [
+     "0.125",
+     "2.71 X 3.40"
+    ],
+    [
+     "0.150",
+     "2.47 X 3.10"
+    ],
+    [
+     "0.175",
+     "2.29 X 2.87"
+    ]
+   ]
+  },
+  {
+   "title": "Centre power pad solder stencil opening, DDA (R-PDSO-G8)",
+   "page": 45,
+   "conditions": "",
+   "columns": [
+    "stencil thickness",
+    "X",
+    "Y"
+   ],
+   "rows": [
+    [
+     "0.1mm",
+     "3.3",
+     "2.6"
+    ],
+    [
+     "0.127mm",
+     "3.1",
+     "2.4"
+    ],
+    [
+     "0.152mm",
+     "2.9",
+     "2.2"
+    ],
+    [
+     "0.178mm",
+     "2.8",
+     "2.1"
+    ]
+   ],
+   "notes": [
+    "Values in millimetres. The example board layout for this outline uses a 3.10 × 2.40 mm pad within a 4.90 × 2.95 mm solder-mask-defined copper area, six 0.33 mm vias on a 1.30 mm grid, 1.27 mm pin pitch, 5.75 mm across the pad rows, and 0.5 × 2.2 mm signal pads with 0.07 mm mask clearance all around."
+   ]
+  },
+  {
+   "title": "Tube dimensions",
+   "page": 41,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package",
+    "package type",
+    "pins",
+    "SPQ",
+    "L (mm)",
+    "W (mm)",
+    "T (µm)",
+    "B (mm)"
+   ],
+   "rows": [
+    [
+     "TPS54340DDA",
+     "DDA",
+     "HSOIC",
+     "8",
+     "75",
+     "507",
+     "8",
+     "3940",
+     "4.32"
+    ],
+    [
+     "TPS54340DDA",
+     "DDA",
+     "HSOIC",
+     "8",
+     "75",
+     "517",
+     "7.87",
+     "635",
+     "4.25"
+    ],
+    [
+     "TPS54340DDA.B",
+     "DDA",
+     "HSOIC",
+     "8",
+     "75",
+     "517",
+     "7.87",
+     "635",
+     "4.25"
+    ],
+    [
+     "TPS54340DDA.B",
+     "DDA",
+     "HSOIC",
+     "8",
+     "75",
+     "507",
+     "8",
+     "3940",
+     "4.32"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Efficiency against load current, VIN = 12 V",
+   "page": 1,
+   "conditions": "VIN = 12 V, fSW = 600 kHz",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT = 5 V",
+     "points": [
+      [
+       0.003,
+       42.7
+      ],
+      [
+       0.015,
+       43.1
+      ],
+      [
+       0.02,
+       56.7
+      ],
+      [
+       0.068,
+       80.6
+      ],
+      [
+       0.103,
+       83.1
+      ],
+      [
+       0.21,
+       87.5
+      ],
+      [
+       0.342,
+       90.6
+      ],
+      [
+       0.403,
+       91.1
+      ],
+      [
+       0.875,
+       91.8
+      ],
+      [
+       1.643,
+       91.4
+      ],
+      [
+       3.509,
+       89.1
+      ]
+     ]
+    },
+    {
+     "label": "VOUT = 3.3 V",
+     "points": [
+      [
+       0.003,
+       39.4
+      ],
+      [
+       0.015,
+       39.8
+      ],
+      [
+       0.021,
+       61.1
+      ],
+      [
+       0.068,
+       72.1
+      ],
+      [
+       0.168,
+       82.1
+      ],
+      [
+       0.221,
+       85.6
+      ],
+      [
+       0.29,
+       84.4
+      ],
+      [
+       0.4,
+       86.2
+      ],
+      [
+       0.704,
+       87.2
+      ],
+      [
+       1.057,
+       87.7
+      ],
+      [
+       1.86,
+       86.5
+      ],
+      [
+       3.509,
+       83.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "On-resistance against junction temperature",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "On-state resistance RDS(ON)",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "BOOT-SW = 3 V",
+     "points": [
+      [
+       -40.0,
+       0.0885
+      ],
+      [
+       25.0,
+       0.1182
+      ],
+      [
+       85.0,
+       0.1535
+      ],
+      [
+       125.0,
+       0.1808
+      ],
+      [
+       150.0,
+       0.2001
+      ]
+     ]
+    },
+    {
+     "label": "BOOT-SW = 6 V",
+     "points": [
+      [
+       -40.0,
+       0.0666
+      ],
+      [
+       25.0,
+       0.0916
+      ],
+      [
+       85.0,
+       0.1214
+      ],
+      [
+       125.0,
+       0.1445
+      ],
+      [
+       150.0,
+       0.1608
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Voltage reference against junction temperature",
+   "page": 7,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage reference VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VFB",
+     "points": [
+      [
+       -39.9,
+       0.79699
+      ],
+      [
+       -8.9,
+       0.79836
+      ],
+      [
+       6.2,
+       0.79888
+      ],
+      [
+       17.2,
+       0.79905
+      ],
+      [
+       45.9,
+       0.79913
+      ],
+      [
+       78.2,
+       0.79905
+      ],
+      [
+       102.1,
+       0.79872
+      ],
+      [
+       128.8,
+       0.79796
+      ],
+      [
+       150.0,
+       0.79699
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switch current limit against junction temperature",
+   "page": 7,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "High-side switch current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Current limit",
+     "points": [
+      [
+       -39.9,
+       5.74
+      ],
+      [
+       25.1,
+       5.54
+      ],
+      [
+       85.0,
+       5.3
+      ],
+      [
+       150.0,
+       5.02
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switch current limit against input voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Input voltage VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "High-side switch current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = -40 °C",
+     "points": [
+      [
+       4.6,
+       5.619
+      ],
+      [
+       8.96,
+       5.705
+      ],
+      [
+       12.72,
+       5.746
+      ],
+      [
+       32.99,
+       5.762
+      ],
+      [
+       40.45,
+       5.788
+      ],
+      [
+       45.01,
+       5.817
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 25 °C",
+     "points": [
+      [
+       4.54,
+       5.417
+      ],
+      [
+       9.89,
+       5.523
+      ],
+      [
+       13.37,
+       5.552
+      ],
+      [
+       32.99,
+       5.56
+      ],
+      [
+       45.01,
+       5.591
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 150 °C",
+     "points": [
+      [
+       4.54,
+       4.899
+      ],
+      [
+       9.89,
+       5.003
+      ],
+      [
+       13.37,
+       5.031
+      ],
+      [
+       32.99,
+       5.03
+      ],
+      [
+       45.01,
+       5.04
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switching frequency against junction temperature",
+   "page": 8,
+   "conditions": "VIN = 12 V, RT = 200 kΩ",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Switching frequency fSW",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RT = 200 kΩ",
+     "points": [
+      [
+       -39.9,
+       494.44
+      ],
+      [
+       0.1,
+       497.2
+      ],
+      [
+       70.6,
+       500.73
+      ],
+      [
+       107.2,
+       503.69
+      ],
+      [
+       120.9,
+       505.61
+      ],
+      [
+       128.8,
+       507.44
+      ],
+      [
+       135.5,
+       509.77
+      ],
+      [
+       150.0,
+       516.29
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switching frequency against RT/CLK resistance, low frequency range",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "RT/CLK resistance",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Switching frequency fSW",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fSW",
+     "points": [
+      [
+       200.0,
+       498.9
+      ],
+      [
+       241.7,
+       412.2
+      ],
+      [
+       280.2,
+       355.3
+      ],
+      [
+       310.3,
+       319.1
+      ],
+      [
+       346.0,
+       286.1
+      ],
+      [
+       376.8,
+       263.8
+      ],
+      [
+       478.4,
+       207.7
+      ],
+      [
+       529.4,
+       182.6
+      ],
+      [
+       560.2,
+       173.6
+      ],
+      [
+       1000.0,
+       92.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switching frequency against RT/CLK resistance, high frequency range",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "RT/CLK resistance",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Switching frequency fSW",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fSW",
+     "points": [
+      [
+       36.2,
+       2500
+      ],
+      [
+       42.7,
+       2083
+      ],
+      [
+       47.5,
+       1923
+      ],
+      [
+       62.1,
+       1618
+      ],
+      [
+       78.1,
+       1316
+      ],
+      [
+       89.4,
+       1128
+      ],
+      [
+       100.0,
+       980
+      ],
+      [
+       110.6,
+       877
+      ],
+      [
+       122.8,
+       808
+      ],
+      [
+       169.0,
+       598
+      ],
+      [
+       200.0,
+       498
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Error amplifier transconductance against junction temperature",
+   "page": 8,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "gm",
+    "unit": "µA/V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "gm",
+     "points": [
+      [
+       -39.9,
+       416.6
+      ],
+      [
+       3.4,
+       372.5
+      ],
+      [
+       31.0,
+       350.8
+      ],
+      [
+       91.1,
+       309.4
+      ],
+      [
+       150.0,
+       279.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Error amplifier transconductance during soft-start against junction temperature",
+   "page": 8,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "gm",
+    "unit": "µA/V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "gm",
+     "points": [
+      [
+       -39.9,
+       90.09
+      ],
+      [
+       6.2,
+       80.38
+      ],
+      [
+       45.9,
+       73.71
+      ],
+      [
+       96.8,
+       65.68
+      ],
+      [
+       150.0,
+       58.75
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EN threshold voltage against junction temperature",
+   "page": 8,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "EN threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EN threshold",
+     "points": [
+      [
+       -39.9,
+       1.2212
+      ],
+      [
+       3.4,
+       1.221
+      ],
+      [
+       78.2,
+       1.2182
+      ],
+      [
+       150.0,
+       1.213
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EN pin current against junction temperature, VIN = 5 V",
+   "page": 9,
+   "conditions": "VIN = 5 V, EN at threshold +50 mV",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IEN",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IEN",
+     "points": [
+      [
+       -39.9,
+       -1.233
+      ],
+      [
+       17.2,
+       -1.193
+      ],
+      [
+       120.9,
+       -1.166
+      ],
+      [
+       132.3,
+       -1.153
+      ],
+      [
+       150.0,
+       -1.113
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EN pin current against junction temperature, VIN = 12 V",
+   "page": 9,
+   "conditions": "VIN = 12 V, EN at threshold +50 mV",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IEN",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IEN",
+     "points": [
+      [
+       -40.0,
+       -4.7183
+      ],
+      [
+       0,
+       -4.5877
+      ],
+      [
+       25.0,
+       -4.5255
+      ],
+      [
+       85.0,
+       -4.4386
+      ],
+      [
+       125.0,
+       -4.4073
+      ],
+      [
+       150.0,
+       -4.3785
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EN pin hysteresis current against junction temperature",
+   "page": 9,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IEN hysteresis",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IEN hysteresis",
+     "points": [
+      [
+       -39.9,
+       -3.562
+      ],
+      [
+       0.1,
+       -3.432
+      ],
+      [
+       25.0,
+       -3.376
+      ],
+      [
+       91.1,
+       -3.285
+      ],
+      [
+       150.0,
+       -3.25
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switching frequency against FB voltage",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Switching frequency",
+    "unit": "% of nominal",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VFB falling",
+     "points": [
+      [
+       0,
+       12.5
+      ],
+      [
+       0.1717,
+       12.5
+      ],
+      [
+       0.1717,
+       25.0
+      ],
+      [
+       0.3508,
+       25.0
+      ],
+      [
+       0.3508,
+       50.0
+      ],
+      [
+       0.5345,
+       50.0
+      ],
+      [
+       0.5345,
+       100.0
+      ],
+      [
+       0.8,
+       100.0
+      ]
+     ]
+    },
+    {
+     "label": "VFB rising",
+     "points": [
+      [
+       0,
+       12.5
+      ],
+      [
+       0.2024,
+       12.5
+      ],
+      [
+       0.2024,
+       25.0
+      ],
+      [
+       0.4051,
+       25.0
+      ],
+      [
+       0.4051,
+       50.0
+      ],
+      [
+       0.6024,
+       50.0
+      ],
+      [
+       0.6024,
+       100.0
+      ],
+      [
+       0.8,
+       100.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Shutdown supply current against junction temperature",
+   "page": 9,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVIN",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVIN",
+     "points": [
+      [
+       -39.9,
+       1.847
+      ],
+      [
+       -4.2,
+       1.399
+      ],
+      [
+       8.9,
+       1.252
+      ],
+      [
+       17.0,
+       1.183
+      ],
+      [
+       45.9,
+       1.05
+      ],
+      [
+       62.5,
+       0.992
+      ],
+      [
+       78.2,
+       0.969
+      ],
+      [
+       91.1,
+       1.002
+      ],
+      [
+       102.1,
+       1.074
+      ],
+      [
+       112.0,
+       1.186
+      ],
+      [
+       116.5,
+       1.259
+      ],
+      [
+       125.0,
+       1.439
+      ],
+      [
+       128.8,
+       1.551
+      ],
+      [
+       135.5,
+       1.827
+      ],
+      [
+       150.0,
+       2.613
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Shutdown supply current against input voltage",
+   "page": 9,
+   "conditions": "TJ = 25 °C",
+   "x": {
+    "label": "Input voltage VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVIN",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVIN",
+     "points": [
+      [
+       4.48,
+       0.698
+      ],
+      [
+       8.84,
+       0.986
+      ],
+      [
+       11.99,
+       1.141
+      ],
+      [
+       17.71,
+       1.309
+      ],
+      [
+       23.99,
+       1.436
+      ],
+      [
+       30.0,
+       1.512
+      ],
+      [
+       37.5,
+       1.562
+      ],
+      [
+       60.01,
+       1.599
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VIN supply current against junction temperature",
+   "page": 10,
+   "conditions": "VIN = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVIN",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVIN",
+     "points": [
+      [
+       -39.9,
+       151.7
+      ],
+      [
+       14.2,
+       147.3
+      ],
+      [
+       85.0,
+       146.0
+      ],
+      [
+       107.2,
+       146.3
+      ],
+      [
+       125.0,
+       147.4
+      ],
+      [
+       135.5,
+       149.1
+      ],
+      [
+       150.0,
+       152.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VIN supply current against input voltage",
+   "page": 10,
+   "conditions": "TJ = 25 °C",
+   "x": {
+    "label": "Input voltage VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VIN supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVIN",
+     "points": [
+      [
+       4.51,
+       144.3
+      ],
+      [
+       13.3,
+       146.8
+      ],
+      [
+       45.02,
+       149.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "BOOT-SW UVLO against junction temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "BOOT-SW UVLO threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "BOOT-SW UVLO falling",
+     "points": [
+      [
+       -40.0,
+       2.2161
+      ],
+      [
+       25.0,
+       2.1527
+      ],
+      [
+       85.0,
+       2.0789
+      ],
+      [
+       150.0,
+       1.9921
+      ]
+     ]
+    },
+    {
+     "label": "BOOT-SW UVLO rising",
+     "points": [
+      [
+       -40.0,
+       2.3625
+      ],
+      [
+       0,
+       2.3233
+      ],
+      [
+       25.0,
+       2.2944
+      ],
+      [
+       150.0,
+       2.1224
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "The vertical axis unit reads dB; the values are volts."
+   ]
+  },
+  {
+   "title": "Input voltage UVLO against junction temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "UVLO start switching",
+     "points": [
+      [
+       -40.0,
+       4.3107
+      ],
+      [
+       25.0,
+       4.3188
+      ],
+      [
+       150.0,
+       4.3059
+      ]
+     ]
+    },
+    {
+     "label": "UVLO stop switching",
+     "points": [
+      [
+       -40.0,
+       3.9797
+      ],
+      [
+       25.0,
+       3.9938
+      ],
+      [
+       125.0,
+       3.9949
+      ],
+      [
+       150.0,
+       4.0021
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Soft-start time against switching frequency",
+   "page": 10,
+   "conditions": "VIN = 12 V, TJ = 25 °C",
+   "x": {
+    "label": "Switching frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Soft-start time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tSS",
+     "points": [
+      [
+       104,
+       10.0
+      ],
+      [
+       174,
+       6.16
+      ],
+      [
+       222,
+       4.52
+      ],
+      [
+       263,
+       3.86
+      ],
+      [
+       337,
+       3.01
+      ],
+      [
+       425,
+       2.4
+      ],
+      [
+       512,
+       1.99
+      ],
+      [
+       625,
+       1.64
+      ],
+      [
+       762,
+       1.34
+      ],
+      [
+       944,
+       1.08
+      ],
+      [
+       1141,
+       0.9
+      ],
+      [
+       1659,
+       0.62
+      ],
+      [
+       2501,
+       0.41
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency against load current, VOUT = 3.3 V",
+   "page": 33,
+   "conditions": "VOUT = 3.3 V, fSW = 600 kHz",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 6 V",
+     "points": [
+      [
+       0.001,
+       64.96
+      ],
+      [
+       0.028,
+       84.42
+      ],
+      [
+       0.039,
+       84.77
+      ],
+      [
+       0.054,
+       84.45
+      ],
+      [
+       0.071,
+       88.07
+      ],
+      [
+       0.113,
+       90.56
+      ],
+      [
+       0.162,
+       93.01
+      ],
+      [
+       0.21,
+       94.14
+      ],
+      [
+       0.291,
+       91.9
+      ],
+      [
+       0.541,
+       92.6
+      ],
+      [
+       1.068,
+       92.08
+      ],
+      [
+       3.492,
+       85.35
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12 V",
+     "points": [
+      [
+       0.001,
+       61.62
+      ],
+      [
+       0.045,
+       72.4
+      ],
+      [
+       0.161,
+       83.82
+      ],
+      [
+       0.192,
+       85.88
+      ],
+      [
+       0.221,
+       86.44
+      ],
+      [
+       0.283,
+       85.29
+      ],
+      [
+       0.395,
+       87.06
+      ],
+      [
+       0.699,
+       88.11
+      ],
+      [
+       1.085,
+       88.57
+      ],
+      [
+       3.499,
+       83.85
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 24 V",
+     "points": [
+      [
+       0.001,
+       60.72
+      ],
+      [
+       0.018,
+       67.5
+      ],
+      [
+       0.049,
+       70.69
+      ],
+      [
+       0.062,
+       71.01
+      ],
+      [
+       0.074,
+       70.68
+      ],
+      [
+       0.081,
+       67.54
+      ],
+      [
+       0.165,
+       71.85
+      ],
+      [
+       0.193,
+       72.62
+      ],
+      [
+       0.28,
+       78.8
+      ],
+      [
+       0.306,
+       79.41
+      ],
+      [
+       0.37,
+       79.5
+      ],
+      [
+       0.455,
+       81.21
+      ],
+      [
+       0.541,
+       81.38
+      ],
+      [
+       0.697,
+       82.71
+      ],
+      [
+       1.148,
+       84.08
+      ],
+      [
+       1.589,
+       84.21
+      ],
+      [
+       3.499,
+       81.85
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 36 V",
+     "points": [
+      [
+       0.001,
+       57.01
+      ],
+      [
+       0.032,
+       66.51
+      ],
+      [
+       0.072,
+       70.0
+      ],
+      [
+       0.198,
+       70.8
+      ],
+      [
+       0.285,
+       72.21
+      ],
+      [
+       0.36,
+       72.32
+      ],
+      [
+       0.442,
+       76.43
+      ],
+      [
+       0.469,
+       77.0
+      ],
+      [
+       0.543,
+       76.02
+      ],
+      [
+       0.696,
+       77.97
+      ],
+      [
+       0.845,
+       79.09
+      ],
+      [
+       1.503,
+       80.54
+      ],
+      [
+       2.381,
+       80.53
+      ],
+      [
+       3.499,
+       79.19
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 42 V",
+     "points": [
+      [
+       0.001,
+       54.3
+      ],
+      [
+       0.021,
+       63.4
+      ],
+      [
+       0.073,
+       68.88
+      ],
+      [
+       0.194,
+       69.64
+      ],
+      [
+       0.282,
+       72.27
+      ],
+      [
+       0.37,
+       72.78
+      ],
+      [
+       0.456,
+       74.35
+      ],
+      [
+       0.542,
+       73.36
+      ],
+      [
+       0.695,
+       75.54
+      ],
+      [
+       0.845,
+       76.84
+      ],
+      [
+       1.148,
+       77.97
+      ],
+      [
+       1.589,
+       78.75
+      ],
+      [
+       2.404,
+       78.79
+      ],
+      [
+       3.499,
+       77.52
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Light-load efficiency, VOUT = 3.3 V",
+   "page": 33,
+   "conditions": "VOUT = 3.3 V, fSW = 600 kHz",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 6 V",
+     "points": [
+      [
+       0.001107,
+       45.6
+      ],
+      [
+       0.002196,
+       50.9
+      ],
+      [
+       0.003296,
+       52.64
+      ],
+      [
+       0.004392,
+       55.38
+      ],
+      [
+       0.005492,
+       56.02
+      ],
+      [
+       0.006541,
+       57.19
+      ],
+      [
+       0.02121,
+       72.92
+      ],
+      [
+       0.03375,
+       81.71
+      ],
+      [
+       0.04129,
+       84.79
+      ],
+      [
+       0.04408,
+       85.1
+      ],
+      [
+       0.05136,
+       84.66
+      ],
+      [
+       0.0647,
+       85.33
+      ],
+      [
+       0.1118,
+       90.0
+      ],
+      [
+       0.2208,
+       94.14
+      ],
+      [
+       0.2518,
+       94.06
+      ],
+      [
+       0.3208,
+       92.02
+      ],
+      [
+       0.6029,
+       92.71
+      ],
+      [
+       1.139,
+       92.21
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12 V",
+     "points": [
+      [
+       0.001107,
+       40.12
+      ],
+      [
+       0.002479,
+       50.18
+      ],
+      [
+       0.005467,
+       56.78
+      ],
+      [
+       0.01047,
+       61.57
+      ],
+      [
+       0.01991,
+       62.0
+      ],
+      [
+       0.02406,
+       63.0
+      ],
+      [
+       0.03139,
+       66.12
+      ],
+      [
+       0.04368,
+       68.55
+      ],
+      [
+       0.06006,
+       72.62
+      ],
+      [
+       0.08186,
+       74.24
+      ],
+      [
+       0.1599,
+       82.6
+      ],
+      [
+       0.22,
+       85.98
+      ],
+      [
+       0.2493,
+       86.46
+      ],
+      [
+       0.3191,
+       85.31
+      ],
+      [
+       0.4148,
+       86.95
+      ],
+      [
+       1.139,
+       88.54
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 24 V",
+     "points": [
+      [
+       0.001107,
+       30.24
+      ],
+      [
+       0.003547,
+       48.38
+      ],
+      [
+       0.005991,
+       54.8
+      ],
+      [
+       0.009918,
+       59.57
+      ],
+      [
+       0.02406,
+       66.16
+      ],
+      [
+       0.04629,
+       69.67
+      ],
+      [
+       0.06871,
+       71.12
+      ],
+      [
+       0.07845,
+       67.83
+      ],
+      [
+       0.08634,
+       71.1
+      ],
+      [
+       0.1424,
+       71.47
+      ],
+      [
+       0.2118,
+       72.52
+      ],
+      [
+       0.2488,
+       74.05
+      ],
+      [
+       0.3033,
+       78.35
+      ],
+      [
+       0.3293,
+       79.29
+      ],
+      [
+       0.4133,
+       79.59
+      ],
+      [
+       0.5081,
+       81.29
+      ],
+      [
+       0.6018,
+       81.45
+      ],
+      [
+       0.8921,
+       83.35
+      ],
+      [
+       1.139,
+       83.85
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 36 V",
+     "points": [
+      [
+       0.001107,
+       21.97
+      ],
+      [
+       0.005438,
+       47.83
+      ],
+      [
+       0.007601,
+       52.47
+      ],
+      [
+       0.01115,
+       56.78
+      ],
+      [
+       0.02135,
+       61.88
+      ],
+      [
+       0.06476,
+       68.97
+      ],
+      [
+       0.09488,
+       70.31
+      ],
+      [
+       0.2214,
+       70.81
+      ],
+      [
+       0.3185,
+       72.26
+      ],
+      [
+       0.3901,
+       72.23
+      ],
+      [
+       0.4232,
+       72.88
+      ],
+      [
+       0.5066,
+       76.86
+      ],
+      [
+       0.5374,
+       76.98
+      ],
+      [
+       0.604,
+       76.04
+      ],
+      [
+       0.9084,
+       79.0
+      ],
+      [
+       1.139,
+       79.69
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 42 V",
+     "points": [
+      [
+       0.001109,
+       19.01
+      ],
+      [
+       0.008746,
+       50.18
+      ],
+      [
+       0.01122,
+       53.44
+      ],
+      [
+       0.02289,
+       61.0
+      ],
+      [
+       0.0343,
+       63.73
+      ],
+      [
+       0.0897,
+       69.04
+      ],
+      [
+       0.222,
+       69.73
+      ],
+      [
+       0.3178,
+       72.34
+      ],
+      [
+       0.416,
+       72.85
+      ],
+      [
+       0.5095,
+       74.4
+      ],
+      [
+       0.6045,
+       73.42
+      ],
+      [
+       0.8889,
+       76.6
+      ],
+      [
+       1.139,
+       77.47
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency against load current, VOUT = 5 V",
+   "page": 34,
+   "conditions": "VOUT = 5 V, fSW = 600 kHz",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 6 V",
+     "points": [
+      [
+       0.003,
+       83.1
+      ],
+      [
+       0.022,
+       89.9
+      ],
+      [
+       0.066,
+       94.4
+      ],
+      [
+       0.094,
+       94.2
+      ],
+      [
+       0.332,
+       97.0
+      ],
+      [
+       0.78,
+       96.9
+      ],
+      [
+       1.567,
+       95.4
+      ],
+      [
+       1.679,
+       94.6
+      ],
+      [
+       2.116,
+       94.1
+      ],
+      [
+       3.188,
+       91.2
+      ],
+      [
+       3.911,
+       90.2
+      ],
+      [
+       3.992,
+       89.3
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12 V",
+     "points": [
+      [
+       0.003,
+       59.7
+      ],
+      [
+       0.051,
+       81.0
+      ],
+      [
+       0.218,
+       88.8
+      ],
+      [
+       0.398,
+       91.7
+      ],
+      [
+       0.948,
+       92.5
+      ],
+      [
+       1.397,
+       92.3
+      ],
+      [
+       4.005,
+       89.9
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 24 V",
+     "points": [
+      [
+       0.003,
+       66.3
+      ],
+      [
+       0.029,
+       72.4
+      ],
+      [
+       0.052,
+       72.6
+      ],
+      [
+       0.064,
+       71.2
+      ],
+      [
+       0.192,
+       79.6
+      ],
+      [
+       0.367,
+       85.8
+      ],
+      [
+       0.412,
+       86.5
+      ],
+      [
+       0.498,
+       85.7
+      ],
+      [
+       0.625,
+       87.6
+      ],
+      [
+       0.799,
+       87.3
+      ],
+      [
+       1.098,
+       88.2
+      ],
+      [
+       1.697,
+       88.7
+      ],
+      [
+       4.005,
+       87.6
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 36 V",
+     "points": [
+      [
+       0.003,
+       59.0
+      ],
+      [
+       0.03,
+       69.3
+      ],
+      [
+       0.087,
+       73.1
+      ],
+      [
+       0.196,
+       73.7
+      ],
+      [
+       0.278,
+       78.1
+      ],
+      [
+       0.319,
+       79.4
+      ],
+      [
+       0.498,
+       82.1
+      ],
+      [
+       0.598,
+       82.3
+      ],
+      [
+       0.697,
+       84.6
+      ],
+      [
+       0.825,
+       83.6
+      ],
+      [
+       1.397,
+       85.4
+      ],
+      [
+       2.095,
+       86.0
+      ],
+      [
+       4.005,
+       85.4
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 42 V",
+     "points": [
+      [
+       0.003,
+       57.3
+      ],
+      [
+       0.043,
+       69.8
+      ],
+      [
+       0.085,
+       73.5
+      ],
+      [
+       0.196,
+       74.3
+      ],
+      [
+       0.298,
+       76.5
+      ],
+      [
+       0.394,
+       77.2
+      ],
+      [
+       0.497,
+       80.3
+      ],
+      [
+       0.599,
+       80.1
+      ],
+      [
+       0.697,
+       82.5
+      ],
+      [
+       0.898,
+       82.0
+      ],
+      [
+       1.297,
+       83.7
+      ],
+      [
+       1.895,
+       84.5
+      ],
+      [
+       4.005,
+       84.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Light-load efficiency, VOUT = 5 V",
+   "page": 34,
+   "conditions": "VOUT = 5 V, fSW = 600 kHz",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 6 V",
+     "points": [
+      [
+       0.001004,
+       44.4
+      ],
+      [
+       0.001589,
+       50.0
+      ],
+      [
+       0.00186,
+       52.7
+      ],
+      [
+       0.002117,
+       56.4
+      ],
+      [
+       0.002779,
+       71.6
+      ],
+      [
+       0.003073,
+       75.6
+      ],
+      [
+       0.003496,
+       77.2
+      ],
+      [
+       0.00392,
+       77.7
+      ],
+      [
+       0.00446,
+       79.0
+      ],
+      [
+       0.005452,
+       80.3
+      ],
+      [
+       0.009954,
+       82.5
+      ],
+      [
+       0.01953,
+       85.9
+      ],
+      [
+       0.03179,
+       90.5
+      ],
+      [
+       0.07733,
+       94.7
+      ],
+      [
+       0.1001,
+       94.4
+      ],
+      [
+       0.1935,
+       95.5
+      ],
+      [
+       0.3106,
+       97.1
+      ],
+      [
+       0.8596,
+       97.1
+      ],
+      [
+       0.9503,
+       96.8
+      ],
+      [
+       0.9779,
+       96.3
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12 V",
+     "points": [
+      [
+       0.001004,
+       43.6
+      ],
+      [
+       0.002144,
+       51.4
+      ],
+      [
+       0.003747,
+       55.3
+      ],
+      [
+       0.005923,
+       57.7
+      ],
+      [
+       0.009231,
+       58.8
+      ],
+      [
+       0.0166,
+       61.7
+      ],
+      [
+       0.02087,
+       63.3
+      ],
+      [
+       0.02901,
+       68.9
+      ],
+      [
+       0.04089,
+       77.2
+      ],
+      [
+       0.04787,
+       80.1
+      ],
+      [
+       0.05291,
+       81.1
+      ],
+      [
+       0.07676,
+       82.2
+      ],
+      [
+       0.1462,
+       86.7
+      ],
+      [
+       0.3304,
+       91.5
+      ],
+      [
+       0.4037,
+       92.1
+      ],
+      [
+       0.5224,
+       91.8
+      ],
+      [
+       0.7578,
+       92.6
+      ],
+      [
+       0.9666,
+       92.3
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 24 V",
+     "points": [
+      [
+       0.001004,
+       38.3
+      ],
+      [
+       0.001711,
+       47.4
+      ],
+      [
+       0.002523,
+       53.0
+      ],
+      [
+       0.004,
+       58.5
+      ],
+      [
+       0.007983,
+       64.4
+      ],
+      [
+       0.03225,
+       72.1
+      ],
+      [
+       0.0412,
+       72.9
+      ],
+      [
+       0.05262,
+       71.6
+      ],
+      [
+       0.08462,
+       73.4
+      ],
+      [
+       0.222,
+       80.9
+      ],
+      [
+       0.3892,
+       86.7
+      ],
+      [
+       0.5043,
+       85.9
+      ],
+      [
+       0.5824,
+       87.8
+      ],
+      [
+       1.007,
+       87.8
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 36 V",
+     "points": [
+      [
+       0.001004,
+       29.5
+      ],
+      [
+       0.002999,
+       46.6
+      ],
+      [
+       0.004488,
+       51.4
+      ],
+      [
+       0.005986,
+       54.3
+      ],
+      [
+       0.009087,
+       57.5
+      ],
+      [
+       0.01005,
+       57.7
+      ],
+      [
+       0.0184,
+       62.5
+      ],
+      [
+       0.02125,
+       63.1
+      ],
+      [
+       0.02875,
+       63.1
+      ],
+      [
+       0.03089,
+       63.9
+      ],
+      [
+       0.03672,
+       68.4
+      ],
+      [
+       0.0418,
+       70.5
+      ],
+      [
+       0.04968,
+       70.8
+      ],
+      [
+       0.05904,
+       71.8
+      ],
+      [
+       0.08964,
+       72.9
+      ],
+      [
+       0.102,
+       73.7
+      ],
+      [
+       0.1665,
+       73.4
+      ],
+      [
+       0.1978,
+       74.0
+      ],
+      [
+       0.222,
+       74.8
+      ],
+      [
+       0.2918,
+       79.0
+      ],
+      [
+       0.3892,
+       80.3
+      ],
+      [
+       0.5117,
+       82.5
+      ],
+      [
+       0.5994,
+       82.5
+      ],
+      [
+       0.6824,
+       84.9
+      ],
+      [
+       0.788,
+       83.8
+      ],
+      [
+       1.007,
+       84.1
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 42 V",
+     "points": [
+      [
+       0.001004,
+       26.1
+      ],
+      [
+       0.004237,
+       48.2
+      ],
+      [
+       0.006526,
+       52.2
+      ],
+      [
+       0.008957,
+       55.9
+      ],
+      [
+       0.0184,
+       60.1
+      ],
+      [
+       0.03725,
+       66.0
+      ],
+      [
+       0.05187,
+       70.5
+      ],
+      [
+       0.06437,
+       72.1
+      ],
+      [
+       0.09914,
+       74.2
+      ],
+      [
+       0.1978,
+       74.5
+      ],
+      [
+       0.2918,
+       76.6
+      ],
+      [
+       0.3892,
+       77.4
+      ],
+      [
+       0.4761,
+       80.3
+      ],
+      [
+       0.5824,
+       80.3
+      ],
+      [
+       0.663,
+       82.5
+      ],
+      [
+       0.7125,
+       83.0
+      ],
+      [
+       0.8842,
+       82.2
+      ],
+      [
+       0.9921,
+       82.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Overall loop frequency response",
+   "page": 34,
+   "conditions": "VIN = 12 V, VOUT = 3.3 V, IOUT = 3.5 A",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Gain",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Phase",
+    "unit": "degree",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Gain",
+     "points": [
+      [
+       12.64,
+       41.2
+      ],
+      [
+       14.33,
+       41.8
+      ],
+      [
+       16.16,
+       41.1
+      ],
+      [
+       28.5,
+       41.3
+      ],
+      [
+       32.17,
+       40.7
+      ],
+      [
+       50.75,
+       40.7
+      ],
+      [
+       128.1,
+       38.3
+      ],
+      [
+       255.8,
+       34.5
+      ],
+      [
+       1281,
+       22.4
+      ],
+      [
+       2273,
+       18.8
+      ],
+      [
+       9031,
+       12.4
+      ],
+      [
+       16090,
+       8.4
+      ],
+      [
+       40460,
+       -0.1
+      ],
+      [
+       90610,
+       -9.0
+      ],
+      [
+       227300,
+       -21.2
+      ],
+      [
+       319300,
+       -23.8
+      ],
+      [
+       504900,
+       -25.1
+      ],
+      [
+       510100,
+       -25.8
+      ]
+     ]
+    },
+    {
+     "label": "Phase",
+     "points": [
+      [
+       12.84,
+       172.8
+      ],
+      [
+       17.06,
+       169.6
+      ],
+      [
+       20.3,
+       170.0
+      ],
+      [
+       23.45,
+       165.6
+      ],
+      [
+       40.52,
+       163.1
+      ],
+      [
+       54.25,
+       155.8
+      ],
+      [
+       64.14,
+       155.2
+      ],
+      [
+       81.31,
+       150.0
+      ],
+      [
+       113.8,
+       139.6
+      ],
+      [
+       128.8,
+       139.0
+      ],
+      [
+       161.5,
+       131.1
+      ],
+      [
+       204.3,
+       127.2
+      ],
+      [
+       229.0,
+       122.6
+      ],
+      [
+       454.3,
+       112.6
+      ],
+      [
+       899.2,
+       110.1
+      ],
+      [
+       2828,
+       117.7
+      ],
+      [
+       4007,
+       117.9
+      ],
+      [
+       6395,
+       113.1
+      ],
+      [
+       9061,
+       105.7
+      ],
+      [
+       36120,
+       62.8
+      ],
+      [
+       72270,
+       33.0
+      ],
+      [
+       115000,
+       1.2
+      ],
+      [
+       288400,
+       -82.9
+      ],
+      [
+       361200,
+       -94.6
+      ],
+      [
+       505500,
+       -100.8
+      ],
+      [
+       507700,
+       -103.3
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Output regulation against load current",
+   "page": 34,
+   "conditions": "VIN = 12 V, VOUT = 3.3 V, fSW = 600 kHz",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage deviation",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Deviation",
+     "points": [
+      [
+       0.0,
+       0.482
+      ],
+      [
+       0.007,
+       0.388
+      ],
+      [
+       0.006,
+       0.393
+      ],
+      [
+       0.012,
+       0.376
+      ],
+      [
+       0.035,
+       0.384
+      ],
+      [
+       0.062,
+       0.35
+      ],
+      [
+       0.077,
+       0.358
+      ],
+      [
+       0.13,
+       0.357
+      ],
+      [
+       0.198,
+       0.343
+      ],
+      [
+       0.306,
+       0.249
+      ],
+      [
+       0.845,
+       0.102
+      ],
+      [
+       1.417,
+       -0.073
+      ],
+      [
+       1.983,
+       -0.232
+      ],
+      [
+       2.462,
+       -0.35
+      ],
+      [
+       2.925,
+       -0.449
+      ],
+      [
+       3.501,
+       -0.555
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "One tick on the vertical axis reads 0.4 between -0.6 and -0.2; it is -0.4."
+   ]
+  },
+  {
+   "title": "Output regulation against input voltage",
+   "page": 34,
+   "conditions": "VOUT = 3.3 V, IOUT = 3.5 A, fSW = 600 kHz",
+   "x": {
+    "label": "Input voltage VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage deviation",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Deviation",
+     "points": [
+      [
+       6.17,
+       0.2778
+      ],
+      [
+       7.3,
+       0.1071
+      ],
+      [
+       7.81,
+       0.0799
+      ],
+      [
+       9.69,
+       0.0057
+      ],
+      [
+       10.39,
+       -0.0129
+      ],
+      [
+       11.9,
+       -0.0331
+      ],
+      [
+       14.15,
+       -0.0504
+      ],
+      [
+       17.39,
+       -0.0873
+      ],
+      [
+       18.61,
+       -0.0897
+      ],
+      [
+       19.59,
+       -0.0866
+      ],
+      [
+       21.05,
+       -0.075
+      ],
+      [
+       24.08,
+       -0.0418
+      ],
+      [
+       29.08,
+       -0.0016
+      ],
+      [
+       36.13,
+       0.0357
+      ],
+      [
+       41.14,
+       0.0701
+      ],
+      [
+       42.2,
+       0.0735
+      ],
+      [
+       42.3,
+       0.0698
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "One tick on the vertical axis reads 0.2 between -0.3 and -0.1; it is -0.2."
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "buck-3v3-3a5",
+   "title": "3.3 V, 3.5 A buck converter, 6 V to 42 V input",
+   "page": 23,
+   "description": "A 600 kHz step-down converter that turns 6 V to 42 V into 3.3 V at up to 3.5 A. C1 and C2 (2.2 µF, 100 V ceramics) bypass the input. R1 and R2 divide VIN onto EN so that switching starts at about 5.75 V and stops at about 4.5 V. R3 sets the frequency. C4 is the boot capacitor from BOOT to SW. D1, a 5 A Schottky, is the catch diode from ground to SW, and L1 with C6 filters the output. R5 and R6 feed 3.3 V back to FB against the 0.8 V reference. R4 and C5 form the compensation zero on COMP and C8 adds a high-frequency pole.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TPS54340DDA"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN 6 V to 42 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT 3.3 V, 3.5 A"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "2.2 µF",
+     "note": "ceramic, 100 V"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "2.2 µF",
+     "note": "ceramic, 100 V"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "365 kΩ",
+     "note": "RUVLO1, VIN to EN"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "86.6 kΩ",
+     "note": "RUVLO2, EN to ground"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "162 kΩ",
+     "note": "RT, sets 600 kHz"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "boot capacitor"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "B560C",
+     "note": "B560C-13-F, 60 V 5 A Schottky catch diode"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "5.6 µH",
+     "note": "WE 7443552560, 7.5 A saturation, 6.7 A RMS"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100 µF",
+     "note": "ceramic, 5 mΩ ESR"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "31.6 kΩ",
+     "note": "upper feedback resistor (RHS)"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "10.2 kΩ",
+     "note": "lower feedback resistor (RLS)"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "11.5 kΩ",
+     "note": "compensation resistor"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "5600 pF",
+     "note": "compensation zero capacitor"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "47 pF",
+     "note": "compensation pole capacitor"
+    }
+   ],
+   "notes": [
+    "At 12 V in, the converter goes into discontinuous conduction below about 342 mA and into Eco-mode below about 31.4 mA; with no load it draws 237 µA from the input.",
+    "The parts fit in an estimated 1.025 in² (661 mm²) of board, not counting test points or connectors."
+   ]
+  },
+  {
+   "id": "inverting",
+   "title": "Inverting power supply",
+   "page": 35,
+   "description": "The buck converter rearranged to make a negative output from a positive input. The IC's GND pin and the low end of its RT and compensation parts sit on the negative output rail, and the inductor returns to system ground. The catch diode runs from the negative rail up to SW. R1 and R2 divide between system ground and the negative rail onto FB. Cin goes from VIN to system ground and Cd from VIN to the IC ground. EN is left open. No part values are given.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TPS54340"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "Cin",
+     "type": "capacitor",
+     "value": "",
+     "note": "polarised input capacitor, VIN to system ground"
+    },
+    {
+     "ref": "Cd",
+     "type": "capacitor",
+     "value": "",
+     "note": "VIN to IC ground"
+    },
+    {
+     "ref": "Cboot",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "Lo",
+     "type": "inductor",
+     "value": ""
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": ""
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Co",
+     "type": "capacitor",
+     "value": "",
+     "note": "polarised output capacitor"
+    },
+    {
+     "ref": "RT",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Rcomp",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Czero",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "Cpole",
+     "type": "capacitor",
+     "value": ""
+    }
+   ],
+   "notes": [
+    "Application note SLVA317 carries a worked design."
+   ]
+  },
+  {
+   "id": "split-rail",
+   "title": "Split-rail power supply with a coupled inductor",
+   "page": 36,
+   "description": "A positive and a negative output from one positive input, using a coupled inductor. The primary winding runs from SW to system ground and works as in the inverting supply: the IC ground sits on the negative rail, a Schottky from the negative rail to SW catches the current, and Coneg holds the negative output. The second winding, also returned to ground, charges the positive output through its own Schottky into Copos. The feedback divider spans the positive rail (R1) to FB and the negative rail (R2). EN is left open. No part values are given.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TPS54340"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOPOS"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "VONEG"
+    },
+    {
+     "ref": "Cin",
+     "type": "capacitor",
+     "value": "",
+     "note": "polarised, VIN to system ground"
+    },
+    {
+     "ref": "Cd",
+     "type": "capacitor",
+     "value": "",
+     "note": "VIN to IC ground"
+    },
+    {
+     "ref": "Cboot",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "LoA",
+     "type": "inductor",
+     "value": "",
+     "note": "coupled inductor Lo, winding switched by SW"
+    },
+    {
+     "ref": "LoB",
+     "type": "inductor",
+     "value": "",
+     "note": "coupled inductor Lo, winding for the positive output"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "",
+     "note": "negative-rail catch diode"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "",
+     "note": "positive-rail rectifier"
+    },
+    {
+     "ref": "Copos",
+     "type": "capacitor",
+     "value": "",
+     "note": "polarised"
+    },
+    {
+     "ref": "Coneg",
+     "type": "capacitor",
+     "value": "",
+     "note": "polarised"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RT",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Rcomp",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Czero",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "Cpole",
+     "type": "capacitor",
+     "value": ""
+    }
+   ],
+   "notes": [
+    "The winding dots sit at the SW end of LoA and at the ground end of LoB.",
+    "Application note SLVA369 carries a worked design."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Minimum input voltage",
+   "expr": "VIN(min) = (VOUT + VF + Rdc × IOUT) / 0.99 + RDS(on) × IOUT − VF",
+   "where": {
+    "VF": "Schottky diode forward voltage",
+    "Rdc": "DC resistance of the inductor and board copper",
+    "RDS(on)": "high-side MOSFET on-resistance",
+    "IOUT": "output current",
+    "VOUT": "output voltage"
+   },
+   "note": "Use worst-case component values at the highest operating temperature. In the 3.3 V example, with VF = 0.5 V, Rdc = 0.0206 Ω, RDS(on) = 0.12 Ω (BOOT-SW = 3 V curve) and 3.5 A, it gives 3.83 V.",
+   "page": 13
+  },
+  {
+   "name": "Maximum output voltage for a monotonic start at heavy load",
+   "expr": "VOUT(max) = D(max) × (VIN(min) − IOUT(max) × RDS(on) + VF) − VF + IOUT(max) × Rdc",
+   "where": {
+    "D(max)": "maximum duty cycle, ≥ 0.9",
+    "IB2SW": "100 µA",
+    "TSW": "1 / fSW",
+    "VB2SW": "VBOOT + VF",
+    "VBOOT": "(1.41 × VIN − 0.554 − VF / TSW − 1.847 × 10^3 × IB2SW) / (1.41 + 1 / TSW)",
+    "RDS(on)": "1 / (−0.3 × VB2SW² + 3.577 × VB2SW − 4.246)"
+   },
+   "note": "At heavy load the minimum input voltage has to be raised; this relation gives it.",
+   "page": 14
+  },
+  {
+   "name": "Feedback divider",
+   "expr": "RHS = RLS × (VOUT − 0.8 V) / 0.8 V",
+   "where": {
+    "RHS": "resistor from the output to FB",
+    "RLS": "resistor from FB to ground"
+   },
+   "note": "Example: RLS = 10.2 kΩ, VOUT = 3.3 V gives 31.9 kΩ; 31.6 kΩ is used.",
+   "page": 14
+  },
+  {
+   "name": "UVLO upper resistor",
+   "expr": "RUVLO1 = (VSTART − VSTOP) / IHYS",
+   "where": {
+    "VSTART": "input voltage at which switching starts",
+    "VSTOP": "input voltage at which switching stops",
+    "IHYS": "EN hysteresis current, 3.4 µA"
+   },
+   "note": "Example: 5.75 V and 4.5 V give 368 kΩ; 365 kΩ is used.",
+   "page": 15
+  },
+  {
+   "name": "UVLO lower resistor",
+   "expr": "RUVLO2 = VENA / ((VSTART − VENA) / RUVLO1 + I1)",
+   "where": {
+    "VENA": "EN threshold, 1.2 V",
+    "I1": "EN pull-up current, 1.2 µA"
+   },
+   "note": "Example: gives 87.8 kΩ with RUVLO1 = 365 kΩ; 86.6 kΩ is used.",
+   "page": 15
+  },
+  {
+   "name": "Soft-start time",
+   "expr": "tSS (ms) = 1024 / fSW (kHz)",
+   "where": {
+    "tSS": "10 % to 90 % soft-start time"
+   },
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Timing resistor",
+   "expr": "RT (kΩ) = 101756 / fSW (kHz)^1.008",
+   "where": {},
+   "note": "Example: 600 kHz gives 161 kΩ; 162 kΩ is used.",
+   "page": 15
+  },
+  {
+   "name": "Switching frequency from timing resistor",
+   "expr": "fSW (kHz) = 92417 / RT (kΩ)^0.991",
+   "where": {},
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Peak current overshoot from current-limit delay",
+   "expr": "ΔCLPeak = VIN / L × tCLdelay",
+   "where": {
+    "tCLdelay": "current limit delay, 60 ns typ",
+    "L": "inductance"
+   },
+   "note": "",
+   "page": 16
+  },
+  {
+   "name": "Highest frequency without pulse skipping",
+   "expr": "fSW(max skip) = (1 / tON) × (IO × Rdc + VOUT + Vd) / (VIN − IO × RDS(on) + Vd)",
+   "where": {
+    "IO": "output current",
+    "Rdc": "inductor resistance",
+    "VIN": "maximum input voltage",
+    "VOUT": "output voltage",
+    "Vd": "diode voltage drop",
+    "RDS(on)": "switch on-resistance",
+    "tON": "minimum controllable on time"
+   },
+   "note": "Example (3.5 A, 21 mΩ, 3.3 V, 0.7 V, 42 V, 92 mΩ, 135 ns): 712 kHz.",
+   "page": 16
+  },
+  {
+   "name": "Highest frequency for short-circuit protection by foldback",
+   "expr": "fSW(shift) = (fDIV / tON) × (ICL × Rdc + VOUT(sc) + Vd) / (VIN − ICL × RDS(on) + Vd)",
+   "where": {
+    "fDIV": "frequency divide ratio, 1, 2, 4 or 8",
+    "ICL": "current limit",
+    "VOUT(sc)": "output voltage during the short"
+   },
+   "note": "Example (fDIV = 8, 4.7 A, 0.1 V short-circuit output, 42 V): 1260 kHz.",
+   "page": 17
+  },
+  {
+   "name": "Control-to-output transfer function",
+   "expr": "VOUT / VC = Adc × (1 + s / (2π × fZ)) / (1 + s / (2π × fP))",
+   "where": {
+    "VC": "COMP voltage"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Power stage dc gain",
+   "expr": "Adc = gmps × RL",
+   "where": {
+    "gmps": "power stage transconductance, 12 A/V",
+    "RL": "load resistance"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Power stage pole",
+   "expr": "fP = 1 / (COUT × RL × 2π)",
+   "where": {},
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Output capacitor ESR zero",
+   "expr": "fZ = 1 / (COUT × RESR × 2π)",
+   "where": {},
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Error amplifier output resistance",
+   "expr": "Ro = Aol (V/V) / gmea",
+   "where": {
+    "Aol": "amplifier open-loop gain"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Error amplifier output capacitance",
+   "expr": "CO = gmea / (2π × BW (Hz))",
+   "where": {
+    "BW": "amplifier bandwidth"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Error amplifier with compensation",
+   "expr": "EA = A0 × (1 + s / (2π × fZ1)) / ((1 + s / (2π × fP1)) × (1 + s / (2π × fP2)))",
+   "where": {},
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Compensator low-frequency gain",
+   "expr": "A0 = gmea × Ro × R2 / (R1 + R2)",
+   "where": {
+    "R1": "upper feedback resistor",
+    "R2": "lower feedback resistor"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Compensator mid-band gain",
+   "expr": "A1 = gmea × Ro || R3 × R2 / (R1 + R2)",
+   "where": {
+    "R3": "compensation series resistor"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Compensator first pole",
+   "expr": "P1 = 1 / (2π × Ro × C1)",
+   "where": {
+    "C1": "compensation series capacitor"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Compensator zero",
+   "expr": "Z1 = 1 / (2π × R3 × C1)",
+   "where": {},
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Compensator second pole, type 2A",
+   "expr": "P2 = 1 / (2π × R3 || RO × (C2 + CO))",
+   "where": {
+    "C2": "capacitor from COMP to ground in parallel with R3 and C1"
+   },
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Compensator second pole, type 2B",
+   "expr": "P2 = 1 / (2π × R3 || RO × CO)",
+   "where": {},
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Compensator second pole, type 1",
+   "expr": "P2 = 1 / (2π × RO × (C2 + CO))",
+   "where": {},
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Minimum output inductance",
+   "expr": "LO(min) = (VIN(max) − VOUT) / (IOUT × KIND) × VOUT / (VIN(max) × fSW)",
+   "where": {
+    "KIND": "inductor ripple current as a fraction of maximum output current"
+   },
+   "note": "Example with KIND = 0.3: 4.8 µH; 5.6 µH is used.",
+   "page": 25
+  },
+  {
+   "name": "Inductor ripple current",
+   "expr": "IRIPPLE = VOUT × (VIN(max) − VOUT) / (VIN(max) × LO × fSW)",
+   "where": {},
+   "note": "Example: 0.905 A.",
+   "page": 25
+  },
+  {
+   "name": "Inductor RMS current",
+   "expr": "IL(rms) = √(IOUT² + (1/12) × (VOUT × (VIN(max) − VOUT) / (VIN(max) × LO × fSW))²)",
+   "where": {},
+   "note": "Example: 3.5 A.",
+   "page": 25
+  },
+  {
+   "name": "Inductor peak current",
+   "expr": "IL(peak) = IOUT + IRIPPLE / 2",
+   "where": {},
+   "note": "Example: 3.95 A.",
+   "page": 25
+  },
+  {
+   "name": "Output capacitance for a load step",
+   "expr": "COUT > 2 × ΔIOUT / (fSW × ΔVOUT)",
+   "where": {
+    "ΔIOUT": "change in output current",
+    "ΔVOUT": "allowed change in output voltage"
+   },
+   "note": "Example: 1.75 A step, 0.13 V: 44.9 µF.",
+   "page": 26
+  },
+  {
+   "name": "Output capacitance for load-release overshoot",
+   "expr": "COUT > LO × (IOH² − IOL²) / (Vf² − Vi²)",
+   "where": {
+    "IOH": "heavy-load output current",
+    "IOL": "light-load output current",
+    "Vf": "peak output voltage allowed",
+    "Vi": "initial output voltage"
+   },
+   "note": "Example: 2.625 A to 0.875 A, Vf = 3.432 V, Vi = 3.3 V: 38.6 µF.",
+   "page": 26
+  },
+  {
+   "name": "Output capacitance for ripple",
+   "expr": "COUT > 1 / (8 × fSW) × 1 / (VORIPPLE / IRIPPLE)",
+   "where": {
+    "VORIPPLE": "allowed output ripple voltage"
+   },
+   "note": "Example: 16.5 mV ripple: 11.4 µF.",
+   "page": 26
+  },
+  {
+   "name": "Maximum output capacitor ESR",
+   "expr": "RESR < VORIPPLE / IRIPPLE",
+   "where": {},
+   "note": "Example: 18 mΩ.",
+   "page": 26
+  },
+  {
+   "name": "Output capacitor RMS ripple current",
+   "expr": "ICOUT(rms) = VOUT × (VIN(max) − VOUT) / (√12 × VIN(max) × LO × fSW)",
+   "where": {},
+   "note": "Example: 261 mA.",
+   "page": 26
+  },
+  {
+   "name": "Catch diode dissipation",
+   "expr": "PD = (VIN(max) − VOUT) × IOUT × Vfd / VIN(max) + Cj × fSW × (VIN + Vfd)² / 2",
+   "where": {
+    "Vfd": "diode forward voltage",
+    "Cj": "diode junction capacitance"
+   },
+   "note": "Example: B560C-13-F, 0.7 V, 300 pF: 2.42 W.",
+   "page": 27
+  },
+  {
+   "name": "Input capacitor RMS current",
+   "expr": "ICI(rms) = IOUT × √(VOUT / VIN(min) × (VIN(min) − VOUT) / VIN(min))",
+   "where": {},
+   "note": "Example: 6 V minimum input: 1.74 A.",
+   "page": 27
+  },
+  {
+   "name": "Input ripple voltage",
+   "expr": "ΔVIN = IOUT × 0.25 / (CIN × fSW)",
+   "where": {},
+   "note": "Example: 4.4 µF: 331 mV.",
+   "page": 27
+  },
+  {
+   "name": "Modulator pole",
+   "expr": "fP(mod) = IOUT(max) / (2π × VOUT × COUT)",
+   "where": {},
+   "note": "Example with derated COUT = 70 µF: 2411 Hz.",
+   "page": 29
+  },
+  {
+   "name": "Modulator ESR zero",
+   "expr": "fZ(mod) = 1 / (2π × RESR × COUT)",
+   "where": {},
+   "note": "Example with 5 mΩ: 455 kHz.",
+   "page": 29
+  },
+  {
+   "name": "Crossover estimate from pole and zero",
+   "expr": "fco = √(fp(mod) × fz(mod))",
+   "where": {},
+   "note": "Example: 33.1 kHz.",
+   "page": 29
+  },
+  {
+   "name": "Crossover estimate from pole and switching frequency",
+   "expr": "fco = √(fp(mod) × fSW / 2)",
+   "where": {},
+   "note": "Example: 26.9 kHz. The lower of the two estimates is the starting crossover.",
+   "page": 29
+  },
+  {
+   "name": "Compensation resistor",
+   "expr": "R4 = (2π × fco × COUT / gmps) × (VOUT / (VREF × gmea))",
+   "where": {
+    "gmps": "12 A/V",
+    "VREF": "0.8 V",
+    "gmea": "350 µA/V"
+   },
+   "note": "Example: 11.6 kΩ; 11.5 kΩ is used.",
+   "page": 29
+  },
+  {
+   "name": "Compensation zero capacitor",
+   "expr": "C5 = 1 / (2π × R4 × fp(mod))",
+   "where": {},
+   "note": "Example: 5740 pF; 5600 pF is used.",
+   "page": 29
+  },
+  {
+   "name": "Compensation pole capacitor from ESR",
+   "expr": "C8 = COUT × RESR / R4",
+   "where": {},
+   "note": "Example: 30.4 pF.",
+   "page": 30
+  },
+  {
+   "name": "Compensation pole capacitor from switching frequency",
+   "expr": "C8 = 1 / (R4 × fSW × π)",
+   "where": {},
+   "note": "Example: 46.1 pF. The larger of the two values is taken; 47 pF is used.",
+   "page": 30
+  },
+  {
+   "name": "Conduction loss",
+   "expr": "PCOND = IOUT² × RDS(on) × VOUT / VIN",
+   "where": {},
+   "note": "Example at 12 V: 0.31 W.",
+   "page": 30
+  },
+  {
+   "name": "Switching loss",
+   "expr": "PSW = VIN × fSW × IOUT × trise",
+   "where": {
+    "trise": "SW rise time, about VIN × 0.16 ns/V + 3.0 ns"
+   },
+   "note": "Example: 0.123 W with 4.9 ns.",
+   "page": 30
+  },
+  {
+   "name": "Gate drive loss",
+   "expr": "PGD = VIN × QG × fSW",
+   "where": {
+    "QG": "gate charge of the integrated MOSFET, in total"
+   },
+   "note": "Example with 3 nC: 0.022 W.",
+   "page": 30
+  },
+  {
+   "name": "Supply current loss",
+   "expr": "PQ = VIN × IQ",
+   "where": {
+    "IQ": "operating nonswitching supply current"
+   },
+   "note": "Example: 0.0018 W.",
+   "page": 30
+  },
+  {
+   "name": "Total device dissipation",
+   "expr": "PTOT = PCOND + PSW + PGD + PQ",
+   "where": {},
+   "note": "Example: 0.457 W. Valid in continuous conduction only.",
+   "page": 31
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ = TA + RTH × PTOT",
+   "where": {
+    "RTH": "package thermal resistance"
+   },
+   "note": "",
+   "page": 31
+  },
+  {
+   "name": "Maximum ambient temperature",
+   "expr": "TA(max) = TJ(max) − RTH × PTOT",
+   "where": {
+    "TJ(max)": "150 °C"
+   },
+   "note": "",
+   "page": 31
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Control scheme",
+   "page": 12,
+   "text": "Fixed-frequency peak current mode. Each cycle the oscillator turns the high-side switch on, and it turns off when the sensed switch current reaches the level set by COMP. COMP rises and falls with load. Clamping COMP at a maximum gives the current limit; a minimum clamp gives pulse skipping. A compensating ramp added to the sensed current stops sub-harmonic oscillation above 50 % duty without changing the peak current limit."
+  },
+  {
+   "topic": "Eco-mode pulse skipping",
+   "page": 13,
+   "text": "At light load, once the output is regulated and a cycle ends with its peak switch current under the level that corresponds to roughly 600 mV on COMP, switching stops and COMP is held at 600 mV. The output sags, the loop raises COMP, and switching resumes until COMP falls again. The PLL keeps running, so skipped-mode pulses stay aligned to an external clock. Because the part senses peak current, the load at which skipping starts depends on the inductor; the 3.3 V example enters Eco-mode near 31.4 mA. With no load the input draws 146 µA."
+  },
+  {
+   "topic": "Bootstrap and dropout",
+   "page": 13,
+   "text": "A 0.1 µF X5R or X7R ceramic rated 10 V or more goes from BOOT to SW; the recharge diode is built in. With a small input-to-output difference the switch can stay on at 100 % duty while BOOT-SW stays above 2.1 V. Below that, the switch turns off and a small internal low-side MOSFET pulls SW down to recharge the capacitor. That low-side MOSFET is turned off when the output is above 24 V and back on below 21.5 V. Dropout duty is set mostly by the drops across the switch, the inductor resistance, the catch diode and the board copper."
+  },
+  {
+   "topic": "Error amplifier",
+   "page": 14,
+   "text": "A transconductance amplifier compares FB with whichever is lower, the soft-start voltage or the 0.8 V reference. Its gm is 350 µA/V in normal running and drops to 78 µA/V during soft-start. The compensation network goes from COMP to ground."
+  },
+  {
+   "topic": "Output voltage setting",
+   "page": 14,
+   "text": "The reference is 0.8 V ±1 % over temperature and supply. A divider from the output to FB sets VOUT; 1 % resistors or better are advised. Larger values raise light-load efficiency but make the loop more sensitive to noise and to the FB input current. Keep at least 1 µA in the divider; the lower resistor should be under 800 kΩ."
+  },
+  {
+   "topic": "Enable and undervoltage lockout",
+   "page": 14,
+   "text": "The part runs when VIN is above 4.3 V and EN is above 1.2 V, and stops when VIN falls below about 4 V or EN goes below 1.2 V. EN has a 1.2 µA pull-up (I1), so an open pin enables the part. Once EN passes 1.2 V a further 3.4 µA (Ihys) flows out of the pin, and it is removed when EN drops below 1.2 V; with a divider RUVLO1 from VIN to EN and RUVLO2 from EN to ground this sets the start and stop voltages. If the input can rise high enough to push EN over its 8.4 V rating, a zener on EN is advised to clamp it."
+  },
+  {
+   "topic": "Soft-start",
+   "page": 15,
+   "text": "The reference is ramped digitally from zero over 1024 switching cycles. Pulling EN below 1.2 V, or a thermal shutdown, resets the soft-start. An overload also resets the soft-start timer, so recovery to the regulated output is ramped."
+  },
+  {
+   "topic": "Switching frequency",
+   "page": 15,
+   "text": "A resistor from RT/CLK to ground sets 100 kHz to 2500 kHz; the pin sits near 0.5 V and needs that resistor. Higher frequency shrinks the inductor and capacitors, but efficiency, maximum input voltage and the 135 ns minimum on time limit it. The frequency has to stay below both the pulse-skip limit and the foldback limit, and the lower of the two governs."
+  },
+  {
+   "topic": "Current limit and frequency foldback",
+   "page": 16,
+   "text": "The peak switch current limit is set by an internal clamp on COMP, with a typical 60 ns delay; smaller inductors let the peak overshoot further during that delay. As FB falls from 0.8 V to 0 V the oscillator frequency is divided by 1, 2, 4 and then 8, lengthening the off time so the inductor current can ramp down during a short. Foldback is digital, so it works while synchronised to an external clock."
+  },
+  {
+   "topic": "Synchronisation",
+   "page": 17,
+   "text": "A square wave on RT/CLK that goes below 0.5 V and above 1.7 V, with pulses wider than 15 ns, synchronises the part between 160 kHz and 2300 kHz; the SW rising edge follows the clock's falling edge. The clock is AC-coupled through a 10 pF ceramic capacitor. The frequency resistor stays connected from RT/CLK to ground so it takes over when the clock stops; with a low-impedance source, RT goes in series with a termination resistor (for example 50 Ω), the coupling capacitor joining at their junction, and the sum of the two sets the free-running frequency close to the clock. On the first clock edge above the PLL threshold, the 0.5 V source is removed and the PLL locks within 78 µs. When the clock is removed, the frequency drops to 150 kHz before settling at the resistor-set value."
+  },
+  {
+   "topic": "Overvoltage protection",
+   "page": 19,
+   "text": "If FB rises above about 109 % of the reference, the high-side switch turns off at once; it resumes when FB falls below about 106 %. This limits overshoot after a fault clears or after a fast load release with little output capacitance."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 19,
+   "text": "Switching stops above a junction temperature of 176 °C. Below 164 °C the part starts again through soft-start."
+  },
+  {
+   "topic": "Small-signal model",
+   "page": 19,
+   "text": "For loop simulation the power stage is a voltage-controlled current source with gmps = 12 A/V feeding the output capacitor and load, and the error amplifier is a 350 µA/V transconductance with an output resistance Ro and capacitance Co setting its open-loop gain and bandwidth. The model holds in continuous conduction only. The power stage has one dominant pole that moves with load, so crossover stays the same as the load changes, plus the output capacitor ESR zero."
+  },
+  {
+   "topic": "Compensation types",
+   "page": 20,
+   "text": "Three networks from COMP to ground are supported. Type 2A: a series resistor and capacitor with a second capacitor across them. Type 2B: a series resistor and capacitor alone. Type 1: a single capacitor. The type 2 networks suit low-ESR ceramic output capacitors and high bandwidth; type 1 suits high-ESR aluminium electrolytic or tantalum output capacitors."
+  },
+  {
+   "topic": "Operation below 4.5 V input",
+   "page": 22,
+   "text": "Operation is recommended above 4.5 V. The part can run down to its UVLO threshold, typically 4.3 V, and does not switch below it. With EN open or pulled up to VIN, crossing UVLO starts the soft-start sequence."
+  },
+  {
+   "topic": "Inductor selection",
+   "page": 25,
+   "text": "KIND of up to 0.3 suits low-ESR ceramic output capacitors and 0.2 suits higher-ESR types. Ripple current should always exceed 150 mA for stable PWM, and a wide-input design benefits from fairly large ripple. Because the inductor current can reach the switch current limit in transients, the safest choice is a saturation rating at or above the 5.5 A nominal limit."
+  },
+  {
+   "topic": "Output capacitor selection",
+   "page": 25,
+   "text": "Size the output capacitance by the strictest of three limits: holding the output through a load step for about two switching cycles while the loop responds, absorbing the inductor energy on load release (the catch diode cannot sink current), and meeting the ripple specification. In the example the load step governs at 44.9 µF; a 100 µF ceramic with 5 mΩ ESR derates to about 70 µF."
+  },
+  {
+   "topic": "Catch diode",
+   "page": 26,
+   "text": "An external diode from SW to ground is required. Its reverse rating should be at least VIN(max), preferably 42 V or more for transients up to the part's rating, and its peak current rating above the maximum inductor current. A Schottky's low forward voltage raises efficiency; at high frequency the junction capacitance adds AC loss. For long periods at light load a diode with lower leakage may be preferred."
+  },
+  {
+   "topic": "Input capacitor",
+   "page": 27,
+   "text": "At least 3 µF of effective X5R or X7R ceramic capacitance is needed after DC-bias derating, rated above the maximum input voltage and for the input ripple current. Bulk capacitance helps in some designs. If the supply is more than a few inches away, add bulk capacitance, typically a 100 µF electrolytic."
+  },
+  {
+   "topic": "Layout",
+   "page": 37,
+   "text": "Bypass VIN to ground with a low-ESR X5R or X7R ceramic and keep the loop through that capacitor, VIN and the catch diode anode small. Tie GND straight to the PowerPAD and take the pad to inner ground planes through several vias under the IC. Route SW to the diode cathode and the inductor, with both close to the pin and the SW copper kept small to limit capacitive coupling. At full load the top-side ground area also spreads heat. RT/CLK is noise-sensitive: place the RT resistor close to the IC with short traces. In the example layout the boot capacitor trace runs on another layer so the top-side ground stays wide."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DDA0008B, PowerPAD SOIC-8 (HSOP-8)",
+   "page": 46,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "lead tip to lead tip (both rows)",
+     "5.8",
+     "",
+     "6.2"
+    ],
+    [
+     "",
+     "body length",
+     "4.8",
+     "",
+     "5.0"
+    ],
+    [
+     "",
+     "body width",
+     "3.8",
+     "",
+     "4.0"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.7"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "lead width (8X)",
+     "0.31",
+     "",
+     "0.51"
+    ],
+    [
+     "",
+     "lead thickness",
+     "0.10",
+     "",
+     "0.25"
+    ],
+    [
+     "",
+     "pin pitch (6X)",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "",
+     "pin 1 to pin 4 centres (2X)",
+     "",
+     "3.81",
+     ""
+    ],
+    [
+     "",
+     "foot length",
+     "0.40",
+     "",
+     "1.27"
+    ],
+    [
+     "",
+     "gage plane",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "exposed thermal pad length",
+     "2.8",
+     "",
+     "3.4"
+    ],
+    [
+     "",
+     "exposed thermal pad width",
+     "2.11",
+     "",
+     "2.71"
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "body draft angle (4X)",
+     "0°",
+     "",
+     "10°"
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.1"
+    ]
+   ],
+   "notes": [
+    "Body length excludes mold flash, protrusions and gate burrs, which may add up to 0.15 mm per side.",
+    "Body width excludes interlead flash, which may add up to 0.25 mm per side.",
+    "Lead position tolerance 0.25 mm at maximum material condition. Outline to JEDEC MS-012.",
+    "Example land pattern: eight 1.55 × 0.6 mm pads (R0.05 corners) at 1.27 mm pitch, 5.4 mm between pad-row centres; thermal pad metal 2.95 × 4.9 mm with a 2.71 × 3.4 mm solder-mask opening (solder-mask-defined); 0.2 mm vias on a 1.3 mm grid; signal-pad mask clearance 0.07 mm max (non-solder-mask-defined) or 0.07 mm min (solder-mask-defined).",
+    "Example stencil: 0.125 mm thick, thermal pad opening 2.71 × 3.40 mm."
+   ]
+  },
+  {
+   "name": "DDA (R-PDSO-G8), PowerPAD plastic small outline",
+   "page": 43,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "lead tip to lead tip (both rows)",
+     "5.80",
+     "",
+     "6.20"
+    ],
+    [
+     "",
+     "body length",
+     "4.80",
+     "",
+     "5.00"
+    ],
+    [
+     "",
+     "body width",
+     "3.80",
+     "",
+     "4.00"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.70"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "lead width",
+     "0.31",
+     "",
+     "0.51"
+    ],
+    [
+     "",
+     "lead thickness",
+     "",
+     "0.20",
+     ""
+    ],
+    [
+     "",
+     "pin pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "",
+     "foot length",
+     "0.40",
+     "",
+     "1.27"
+    ],
+    [
+     "",
+     "gage plane",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.10"
+    ],
+    [
+     "",
+     "exposed thermal pad, along the pin rows",
+     "2.65",
+     "",
+     "3.10"
+    ],
+    [
+     "",
+     "exposed thermal pad, across the pin rows",
+     "1.65",
+     "",
+     "2.40"
+    ]
+   ],
+   "notes": [
+    "Body dimensions exclude mold flash or protrusion, at most 0.15 mm.",
+    "Lead position tolerance 0.25 mm at maximum material condition. Outline to JEDEC MS-012 variation BA."
+   ]
+  }
+ ]
+}

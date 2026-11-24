@@ -1,0 +1,5900 @@
+{
+ "sheet": 1,
+ "name": "PCAL6416AHF,128",
+ "kind": "interface",
+ "manufacturer": "NXP Semiconductors",
+ "title": "PCAL6416A: 16-bit I2C-bus/SMBus I/O expander with level translation, interrupt, reset and Agile I/O",
+ "source": {
+  "revision": "Rev. 6, 9 October 2014",
+  "pages": 61
+ },
+ "summary": "The PCAL6416A gives a microcontroller sixteen more general-purpose I/O pins, in two 8-bit ports, over a 400 kHz I2C-bus or SMBus. Bus side and port side have separate supplies, each 1.65 V to 5.5 V, so the part also shifts logic levels between the host and the peripherals. Besides direction, output and input inversion registers it has per-pin drive strength, input latching, 100 kΩ pull-up or pull-down resistors and interrupt masking, plus per-port open-drain outputs, an interrupt status register, an open-drain INT output, a RESET input and one address pin.",
+ "key_figures": [
+  [
+   "I/O",
+   "16 (two 8-bit ports), 5 V tolerant"
+  ],
+  [
+   "Supplies",
+   "VDD(I2C-bus) 1.65 V to 5.5 V; VDD(P) 1.65 V to 5.5 V"
+  ],
+  [
+   "Bus",
+   "I2C-bus / SMBus, 0 to 400 kHz; address 0100 00x, ADDR pin"
+  ],
+  [
+   "Output sink",
+   "25 mA per I/O recommended; 100 mA per port, 200 mA device"
+  ],
+  [
+   "Standby current",
+   "1.5 µA typ at VDD(P) 3.6 V to 5.5 V; 1 µA typ at 2.3 V to 3.6 V (fSCL = 0)"
+  ],
+  [
+   "Pull resistors",
+   "100 kΩ typ (50 kΩ to 150 kΩ), pull-up or pull-down per pin"
+  ],
+  [
+   "Interrupt valid time",
+   "1 µs max"
+  ],
+  [
+   "ESD",
+   "2000 V HBM, 1000 V CDM"
+  ],
+  [
+   "Operating temperature",
+   "−40 °C to +85 °C"
+  ],
+  [
+   "Packages",
+   "TSSOP24, HWQFN24, VFBGA24, XFBGA24, UFBGA24"
+  ]
+ ],
+ "part_numbers": {
+  "page": 3,
+  "columns": [
+   "type number",
+   "orderable part number",
+   "package",
+   "outline",
+   "topside mark",
+   "body",
+   "packing",
+   "minimum order quantity",
+   "temperature range"
+  ],
+  "rows": [
+   [
+    "PCAL6416AEV",
+    "PCAL6416AEVJ",
+    "VFBGA24",
+    "SOT1199-1",
+    "L16A",
+    "3 × 3 × 0.85 mm",
+    "Reel 13\" Q1/T1, standard mark SMD",
+    "6000",
+    "Tamb = −40 °C to +85 °C"
+   ],
+   [
+    "PCAL6416AEX",
+    "PCAL6416AEXX",
+    "XFBGA24",
+    "SOT1342-1",
+    "L6X",
+    "2 × 2 × 0.5 mm",
+    "Reel 7\" Q1/T1, standard mark SMD",
+    "5000",
+    "Tamb = −40 °C to +85 °C"
+   ],
+   [
+    "PCAL6416AER",
+    "PCAL6416AERJ",
+    "UFBGA24",
+    "SOT1361-1",
+    "S6X",
+    "2 × 2 × 0.65 mm",
+    "Reel 13\" Q1/T1, standard mark SMD",
+    "10000",
+    "Tamb = −40 °C to +85 °C"
+   ],
+   [
+    "PCAL6416AER",
+    "PCAL6416AERX",
+    "UFBGA24",
+    "SOT1361-1",
+    "S6X",
+    "2 × 2 × 0.65 mm",
+    "Reel 7\" Q1/T1, standard mark SMD",
+    "3000",
+    "Tamb = −40 °C to +85 °C"
+   ],
+   [
+    "PCAL6416AHF",
+    "PCAL6416AHF,128",
+    "HWQFN24",
+    "SOT994-1",
+    "L16A",
+    "4 × 4 × 0.75 mm",
+    "Reel 13\" Q2/T3, standard mark SMD",
+    "6000",
+    "Tamb = −40 °C to +85 °C"
+   ],
+   [
+    "PCAL6416APW",
+    "PCAL6416APW,118",
+    "TSSOP24",
+    "SOT355-1",
+    "PCAL6416A",
+    "4.4 mm body width",
+    "Reel 13\" Q1/T1, standard mark SMD",
+    "2500",
+    "Tamb = −40 °C to +85 °C"
+   ]
+  ],
+  "notes": [
+   "In the marks L6X and S6X the X is a digit from 1 to 5 giving the week within the month of manufacture."
+  ]
+ },
+ "pins": [
+  {
+   "package": "TSSOP24",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "INT",
+     "type": "open-drain output",
+     "function": "Interrupt, active LOW. Needs a pull-up resistor to VDD(I2C-bus) or VDD(P)."
+    },
+    {
+     "pin": "2",
+     "name": "VDD(I2C-bus)",
+     "type": "power in",
+     "function": "Supply of the I2C-bus side. Tie it straight to the supply of the I2C master; its level sets the logic levels of SCL, SDA and RESET, which is how the part translates voltage."
+    },
+    {
+     "pin": "3",
+     "name": "RESET",
+     "type": "input",
+     "function": "Reset, active LOW. With nothing driving it, pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "4",
+     "name": "P0_0",
+     "type": "I/O",
+     "function": "Port 0 bit 0 (P0.0). An input after power-on."
+    },
+    {
+     "pin": "5",
+     "name": "P0_1",
+     "type": "I/O",
+     "function": "Port 0 bit 1 (P0.1). An input after power-on."
+    },
+    {
+     "pin": "6",
+     "name": "P0_2",
+     "type": "I/O",
+     "function": "Port 0 bit 2 (P0.2). An input after power-on."
+    },
+    {
+     "pin": "7",
+     "name": "P0_3",
+     "type": "I/O",
+     "function": "Port 0 bit 3 (P0.3). An input after power-on."
+    },
+    {
+     "pin": "8",
+     "name": "P0_4",
+     "type": "I/O",
+     "function": "Port 0 bit 4 (P0.4). An input after power-on."
+    },
+    {
+     "pin": "9",
+     "name": "P0_5",
+     "type": "I/O",
+     "function": "Port 0 bit 5 (P0.5). An input after power-on."
+    },
+    {
+     "pin": "10",
+     "name": "P0_6",
+     "type": "I/O",
+     "function": "Port 0 bit 6 (P0.6). An input after power-on."
+    },
+    {
+     "pin": "11",
+     "name": "P0_7",
+     "type": "I/O",
+     "function": "Port 0 bit 7 (P0.7). An input after power-on."
+    },
+    {
+     "pin": "12",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "13",
+     "name": "P1_0",
+     "type": "I/O",
+     "function": "Port 1 bit 0 (P1.0). An input after power-on."
+    },
+    {
+     "pin": "14",
+     "name": "P1_1",
+     "type": "I/O",
+     "function": "Port 1 bit 1 (P1.1). An input after power-on."
+    },
+    {
+     "pin": "15",
+     "name": "P1_2",
+     "type": "I/O",
+     "function": "Port 1 bit 2 (P1.2). An input after power-on."
+    },
+    {
+     "pin": "16",
+     "name": "P1_3",
+     "type": "I/O",
+     "function": "Port 1 bit 3 (P1.3). An input after power-on."
+    },
+    {
+     "pin": "17",
+     "name": "P1_4",
+     "type": "I/O",
+     "function": "Port 1 bit 4 (P1.4). An input after power-on."
+    },
+    {
+     "pin": "18",
+     "name": "P1_5",
+     "type": "I/O",
+     "function": "Port 1 bit 5 (P1.5). An input after power-on."
+    },
+    {
+     "pin": "19",
+     "name": "P1_6",
+     "type": "I/O",
+     "function": "Port 1 bit 6 (P1.6). An input after power-on."
+    },
+    {
+     "pin": "20",
+     "name": "P1_7",
+     "type": "I/O",
+     "function": "Port 1 bit 7 (P1.7). An input after power-on."
+    },
+    {
+     "pin": "21",
+     "name": "ADDR",
+     "type": "input",
+     "function": "Address select, the last bit of the slave address. Tie it directly to VDD(P) or to ground."
+    },
+    {
+     "pin": "22",
+     "name": "SCL",
+     "type": "input",
+     "function": "I2C-bus clock. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "23",
+     "name": "SDA",
+     "type": "open-drain I/O",
+     "function": "I2C-bus data. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "24",
+     "name": "VDD(P)",
+     "type": "power in",
+     "function": "Supply of the core and of the 16 port pins; its level sets the port logic levels."
+    }
+   ]
+  },
+  {
+   "package": "HWQFN24",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "22",
+     "name": "INT",
+     "type": "open-drain output",
+     "function": "Interrupt, active LOW. Needs a pull-up resistor to VDD(I2C-bus) or VDD(P)."
+    },
+    {
+     "pin": "23",
+     "name": "VDD(I2C-bus)",
+     "type": "power in",
+     "function": "Supply of the I2C-bus side. Tie it straight to the supply of the I2C master; its level sets the logic levels of SCL, SDA and RESET, which is how the part translates voltage."
+    },
+    {
+     "pin": "24",
+     "name": "RESET",
+     "type": "input",
+     "function": "Reset, active LOW. With nothing driving it, pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "1",
+     "name": "P0_0",
+     "type": "I/O",
+     "function": "Port 0 bit 0 (P0.0). An input after power-on."
+    },
+    {
+     "pin": "2",
+     "name": "P0_1",
+     "type": "I/O",
+     "function": "Port 0 bit 1 (P0.1). An input after power-on."
+    },
+    {
+     "pin": "3",
+     "name": "P0_2",
+     "type": "I/O",
+     "function": "Port 0 bit 2 (P0.2). An input after power-on."
+    },
+    {
+     "pin": "4",
+     "name": "P0_3",
+     "type": "I/O",
+     "function": "Port 0 bit 3 (P0.3). An input after power-on."
+    },
+    {
+     "pin": "5",
+     "name": "P0_4",
+     "type": "I/O",
+     "function": "Port 0 bit 4 (P0.4). An input after power-on."
+    },
+    {
+     "pin": "6",
+     "name": "P0_5",
+     "type": "I/O",
+     "function": "Port 0 bit 5 (P0.5). An input after power-on."
+    },
+    {
+     "pin": "7",
+     "name": "P0_6",
+     "type": "I/O",
+     "function": "Port 0 bit 6 (P0.6). An input after power-on."
+    },
+    {
+     "pin": "8",
+     "name": "P0_7",
+     "type": "I/O",
+     "function": "Port 0 bit 7 (P0.7). An input after power-on."
+    },
+    {
+     "pin": "9",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "10",
+     "name": "P1_0",
+     "type": "I/O",
+     "function": "Port 1 bit 0 (P1.0). An input after power-on."
+    },
+    {
+     "pin": "11",
+     "name": "P1_1",
+     "type": "I/O",
+     "function": "Port 1 bit 1 (P1.1). An input after power-on."
+    },
+    {
+     "pin": "12",
+     "name": "P1_2",
+     "type": "I/O",
+     "function": "Port 1 bit 2 (P1.2). An input after power-on."
+    },
+    {
+     "pin": "13",
+     "name": "P1_3",
+     "type": "I/O",
+     "function": "Port 1 bit 3 (P1.3). An input after power-on."
+    },
+    {
+     "pin": "14",
+     "name": "P1_4",
+     "type": "I/O",
+     "function": "Port 1 bit 4 (P1.4). An input after power-on."
+    },
+    {
+     "pin": "15",
+     "name": "P1_5",
+     "type": "I/O",
+     "function": "Port 1 bit 5 (P1.5). An input after power-on."
+    },
+    {
+     "pin": "16",
+     "name": "P1_6",
+     "type": "I/O",
+     "function": "Port 1 bit 6 (P1.6). An input after power-on."
+    },
+    {
+     "pin": "17",
+     "name": "P1_7",
+     "type": "I/O",
+     "function": "Port 1 bit 7 (P1.7). An input after power-on."
+    },
+    {
+     "pin": "18",
+     "name": "ADDR",
+     "type": "input",
+     "function": "Address select, the last bit of the slave address. Tie it directly to VDD(P) or to ground."
+    },
+    {
+     "pin": "19",
+     "name": "SCL",
+     "type": "input",
+     "function": "I2C-bus clock. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "20",
+     "name": "SDA",
+     "type": "open-drain I/O",
+     "function": "I2C-bus data. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "21",
+     "name": "VDD(P)",
+     "type": "power in",
+     "function": "Supply of the core and of the 16 port pins; its level sets the port logic levels."
+    },
+    {
+     "pin": "EP",
+     "name": "exposed pad",
+     "type": "pad",
+     "function": "Centre pad under the package. Connect it to nothing but ground, as a second ground, or leave it unconnected."
+    }
+   ]
+  },
+  {
+   "package": "VFBGA24",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "A3",
+     "name": "INT",
+     "type": "open-drain output",
+     "function": "Interrupt, active LOW. Needs a pull-up resistor to VDD(I2C-bus) or VDD(P)."
+    },
+    {
+     "pin": "B3",
+     "name": "VDD(I2C-bus)",
+     "type": "power in",
+     "function": "Supply of the I2C-bus side. Tie it straight to the supply of the I2C master; its level sets the logic levels of SCL, SDA and RESET, which is how the part translates voltage."
+    },
+    {
+     "pin": "A2",
+     "name": "RESET",
+     "type": "input",
+     "function": "Reset, active LOW. With nothing driving it, pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "A1",
+     "name": "P0_0",
+     "type": "I/O",
+     "function": "Port 0 bit 0 (P0.0). An input after power-on."
+    },
+    {
+     "pin": "C3",
+     "name": "P0_1",
+     "type": "I/O",
+     "function": "Port 0 bit 1 (P0.1). An input after power-on."
+    },
+    {
+     "pin": "B1",
+     "name": "P0_2",
+     "type": "I/O",
+     "function": "Port 0 bit 2 (P0.2). An input after power-on."
+    },
+    {
+     "pin": "C1",
+     "name": "P0_3",
+     "type": "I/O",
+     "function": "Port 0 bit 3 (P0.3). An input after power-on."
+    },
+    {
+     "pin": "C2",
+     "name": "P0_4",
+     "type": "I/O",
+     "function": "Port 0 bit 4 (P0.4). An input after power-on."
+    },
+    {
+     "pin": "D1",
+     "name": "P0_5",
+     "type": "I/O",
+     "function": "Port 0 bit 5 (P0.5). An input after power-on."
+    },
+    {
+     "pin": "E1",
+     "name": "P0_6",
+     "type": "I/O",
+     "function": "Port 0 bit 6 (P0.6). An input after power-on."
+    },
+    {
+     "pin": "D2",
+     "name": "P0_7",
+     "type": "I/O",
+     "function": "Port 0 bit 7 (P0.7). An input after power-on."
+    },
+    {
+     "pin": "E2",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "E3",
+     "name": "P1_0",
+     "type": "I/O",
+     "function": "Port 1 bit 0 (P1.0). An input after power-on."
+    },
+    {
+     "pin": "E4",
+     "name": "P1_1",
+     "type": "I/O",
+     "function": "Port 1 bit 1 (P1.1). An input after power-on."
+    },
+    {
+     "pin": "D3",
+     "name": "P1_2",
+     "type": "I/O",
+     "function": "Port 1 bit 2 (P1.2). An input after power-on."
+    },
+    {
+     "pin": "E5",
+     "name": "P1_3",
+     "type": "I/O",
+     "function": "Port 1 bit 3 (P1.3). An input after power-on."
+    },
+    {
+     "pin": "D4",
+     "name": "P1_4",
+     "type": "I/O",
+     "function": "Port 1 bit 4 (P1.4). An input after power-on."
+    },
+    {
+     "pin": "D5",
+     "name": "P1_5",
+     "type": "I/O",
+     "function": "Port 1 bit 5 (P1.5). An input after power-on."
+    },
+    {
+     "pin": "C5",
+     "name": "P1_6",
+     "type": "I/O",
+     "function": "Port 1 bit 6 (P1.6). An input after power-on."
+    },
+    {
+     "pin": "C4",
+     "name": "P1_7",
+     "type": "I/O",
+     "function": "Port 1 bit 7 (P1.7). An input after power-on."
+    },
+    {
+     "pin": "B5",
+     "name": "ADDR",
+     "type": "input",
+     "function": "Address select, the last bit of the slave address. Tie it directly to VDD(P) or to ground."
+    },
+    {
+     "pin": "A5",
+     "name": "SCL",
+     "type": "input",
+     "function": "I2C-bus clock. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "A4",
+     "name": "SDA",
+     "type": "open-drain I/O",
+     "function": "I2C-bus data. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "B4",
+     "name": "VDD(P)",
+     "type": "power in",
+     "function": "Supply of the core and of the 16 port pins; its level sets the port logic levels."
+    },
+    {
+     "pin": "B2",
+     "name": "no ball",
+     "type": "none",
+     "function": "Grid position B2 carries no ball."
+    }
+   ]
+  },
+  {
+   "package": "UFBGA24, XFBGA24",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "B3",
+     "name": "INT",
+     "type": "open-drain output",
+     "function": "Interrupt, active LOW. Needs a pull-up resistor to VDD(I2C-bus) or VDD(P)."
+    },
+    {
+     "pin": "A2",
+     "name": "VDD(I2C-bus)",
+     "type": "power in",
+     "function": "Supply of the I2C-bus side. Tie it straight to the supply of the I2C master; its level sets the logic levels of SCL, SDA and RESET, which is how the part translates voltage."
+    },
+    {
+     "pin": "A1",
+     "name": "RESET",
+     "type": "input",
+     "function": "Reset, active LOW. With nothing driving it, pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "B1",
+     "name": "P0_0",
+     "type": "I/O",
+     "function": "Port 0 bit 0 (P0.0). An input after power-on."
+    },
+    {
+     "pin": "C3",
+     "name": "P0_1",
+     "type": "I/O",
+     "function": "Port 0 bit 1 (P0.1). An input after power-on."
+    },
+    {
+     "pin": "C1",
+     "name": "P0_2",
+     "type": "I/O",
+     "function": "Port 0 bit 2 (P0.2). An input after power-on."
+    },
+    {
+     "pin": "C2",
+     "name": "P0_3",
+     "type": "I/O",
+     "function": "Port 0 bit 3 (P0.3). An input after power-on."
+    },
+    {
+     "pin": "D1",
+     "name": "P0_4",
+     "type": "I/O",
+     "function": "Port 0 bit 4 (P0.4). An input after power-on."
+    },
+    {
+     "pin": "E1",
+     "name": "P0_5",
+     "type": "I/O",
+     "function": "Port 0 bit 5 (P0.5). An input after power-on."
+    },
+    {
+     "pin": "E2",
+     "name": "P0_6",
+     "type": "I/O",
+     "function": "Port 0 bit 6 (P0.6). An input after power-on."
+    },
+    {
+     "pin": "D2",
+     "name": "P0_7",
+     "type": "I/O",
+     "function": "Port 0 bit 7 (P0.7). An input after power-on."
+    },
+    {
+     "pin": "E3",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "D3",
+     "name": "P1_0",
+     "type": "I/O",
+     "function": "Port 1 bit 0 (P1.0). An input after power-on."
+    },
+    {
+     "pin": "E4",
+     "name": "P1_1",
+     "type": "I/O",
+     "function": "Port 1 bit 1 (P1.1). An input after power-on."
+    },
+    {
+     "pin": "E5",
+     "name": "P1_2",
+     "type": "I/O",
+     "function": "Port 1 bit 2 (P1.2). An input after power-on."
+    },
+    {
+     "pin": "D5",
+     "name": "P1_3",
+     "type": "I/O",
+     "function": "Port 1 bit 3 (P1.3). An input after power-on."
+    },
+    {
+     "pin": "D4",
+     "name": "P1_4",
+     "type": "I/O",
+     "function": "Port 1 bit 4 (P1.4). An input after power-on."
+    },
+    {
+     "pin": "C5",
+     "name": "P1_5",
+     "type": "I/O",
+     "function": "Port 1 bit 5 (P1.5). An input after power-on."
+    },
+    {
+     "pin": "C4",
+     "name": "P1_6",
+     "type": "I/O",
+     "function": "Port 1 bit 6 (P1.6). An input after power-on."
+    },
+    {
+     "pin": "B5",
+     "name": "P1_7",
+     "type": "I/O",
+     "function": "Port 1 bit 7 (P1.7). An input after power-on."
+    },
+    {
+     "pin": "A5",
+     "name": "ADDR",
+     "type": "input",
+     "function": "Address select, the last bit of the slave address. Tie it directly to VDD(P) or to ground."
+    },
+    {
+     "pin": "A4",
+     "name": "SCL",
+     "type": "input",
+     "function": "I2C-bus clock. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "B4",
+     "name": "SDA",
+     "type": "open-drain I/O",
+     "function": "I2C-bus data. Pull it up to VDD(I2C-bus) through a resistor."
+    },
+    {
+     "pin": "A3",
+     "name": "VDD(P)",
+     "type": "power in",
+     "function": "Supply of the core and of the 16 port pins; its level sets the port logic levels."
+    },
+    {
+     "pin": "B2",
+     "name": "no ball",
+     "type": "none",
+     "function": "Grid position B2 carries no ball."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Voltage translation",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "VDD(I2C-bus) (SDA and SCL of the I2C master)",
+    "VDD(P) (port P)"
+   ],
+   "rows": [
+    [
+     "1.8 V",
+     "1.8 V"
+    ],
+    [
+     "1.8 V",
+     "2.5 V"
+    ],
+    [
+     "1.8 V",
+     "3.3 V"
+    ],
+    [
+     "1.8 V",
+     "5 V"
+    ],
+    [
+     "2.5 V",
+     "1.8 V"
+    ],
+    [
+     "2.5 V",
+     "2.5 V"
+    ],
+    [
+     "2.5 V",
+     "3.3 V"
+    ],
+    [
+     "2.5 V",
+     "5 V"
+    ],
+    [
+     "3.3 V",
+     "1.8 V"
+    ],
+    [
+     "3.3 V",
+     "2.5 V"
+    ],
+    [
+     "3.3 V",
+     "3.3 V"
+    ],
+    [
+     "3.3 V",
+     "5 V"
+    ],
+    [
+     "5 V",
+     "1.8 V"
+    ],
+    [
+     "5 V",
+     "2.5 V"
+    ],
+    [
+     "5 V",
+     "3.3 V"
+    ],
+    [
+     "5 V",
+     "5 V"
+    ]
+   ],
+   "notes": [
+    "Any of the four bus levels works with any of the four port levels."
+   ]
+  },
+  {
+   "title": "Interface definition",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "byte",
+    "bit 7 (MSB)",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0 (LSB)"
+   ],
+   "rows": [
+    [
+     "I2C-bus slave address",
+     "L",
+     "H",
+     "L",
+     "L",
+     "L",
+     "L",
+     "ADDR",
+     "R/W"
+    ],
+    [
+     "I/O data bus, port 0",
+     "P0.7",
+     "P0.6",
+     "P0.5",
+     "P0.4",
+     "P0.3",
+     "P0.2",
+     "P0.1",
+     "P0.0"
+    ],
+    [
+     "I/O data bus, port 1",
+     "P1.7",
+     "P1.6",
+     "P1.5",
+     "P1.4",
+     "P1.3",
+     "P1.2",
+     "P1.1",
+     "P1.0"
+    ]
+   ],
+   "notes": [
+    "R/W HIGH is a read, LOW a write."
+   ]
+  },
+  {
+   "title": "Command byte",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "B7",
+    "B6",
+    "B5",
+    "B4",
+    "B3",
+    "B2",
+    "B1",
+    "B0",
+    "command byte (hexadecimal)",
+    "register",
+    "protocol",
+    "power-up default"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "00h",
+     "Input port 0",
+     "read byte",
+     "xxxx xxxx"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "01h",
+     "Input port 1",
+     "read byte",
+     "xxxx xxxx"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "02h",
+     "Output port 0",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "03h",
+     "Output port 1",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0",
+     "04h",
+     "Polarity Inversion port 0",
+     "read/write byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "05h",
+     "Polarity Inversion port 1",
+     "read/write byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "06h",
+     "Configuration port 0",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "1",
+     "07h",
+     "Configuration port 1",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "40h",
+     "Output drive strength register 0",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "41h",
+     "Output drive strength register 0",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "42h",
+     "Output drive strength register 1",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "43h",
+     "Output drive strength register 1",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0",
+     "44h",
+     "Input latch register 0",
+     "read/write byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "45h",
+     "Input latch register 1",
+     "read/write byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "46h",
+     "Pull-up/pull-down enable register 0",
+     "read/write byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "1",
+     "47h",
+     "Pull-up/pull-down enable register 1",
+     "read/write byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "48h",
+     "Pull-up/pull-down selection register 0",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "49h",
+     "Pull-up/pull-down selection register 1",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "4Ah",
+     "Interrupt mask register 0",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "1",
+     "4Bh",
+     "Interrupt mask register 1",
+     "read/write byte",
+     "1111 1111"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "4Ch",
+     "Interrupt status register 0",
+     "read byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "1",
+     "4Dh",
+     "Interrupt status register 1",
+     "read byte",
+     "0000 0000"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "1",
+     "1",
+     "4Fh",
+     "Output port configuration register",
+     "read/write byte",
+     "0000 0000"
+    ]
+   ],
+   "notes": [
+    "x: undefined."
+   ]
+  },
+  {
+   "title": "Register bits",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0",
+    "default of each bit"
+   ],
+   "rows": [
+    [
+     "00h",
+     "Input port 0",
+     "I0.7",
+     "I0.6",
+     "I0.5",
+     "I0.4",
+     "I0.3",
+     "I0.2",
+     "I0.1",
+     "I0.0",
+     "X"
+    ],
+    [
+     "01h",
+     "Input port 1",
+     "I1.7",
+     "I1.6",
+     "I1.5",
+     "I1.4",
+     "I1.3",
+     "I1.2",
+     "I1.1",
+     "I1.0",
+     "X"
+    ],
+    [
+     "02h",
+     "Output port 0",
+     "O0.7",
+     "O0.6",
+     "O0.5",
+     "O0.4",
+     "O0.3",
+     "O0.2",
+     "O0.1",
+     "O0.0",
+     "1"
+    ],
+    [
+     "03h",
+     "Output port 1",
+     "O1.7",
+     "O1.6",
+     "O1.5",
+     "O1.4",
+     "O1.3",
+     "O1.2",
+     "O1.1",
+     "O1.0",
+     "1"
+    ],
+    [
+     "04h",
+     "Polarity inversion port 0",
+     "N0.7",
+     "N0.6",
+     "N0.5",
+     "N0.4",
+     "N0.3",
+     "N0.2",
+     "N0.1",
+     "N0.0",
+     "0"
+    ],
+    [
+     "05h",
+     "Polarity inversion port 1",
+     "N1.7",
+     "N1.6",
+     "N1.5",
+     "N1.4",
+     "N1.3",
+     "N1.2",
+     "N1.1",
+     "N1.0",
+     "0"
+    ],
+    [
+     "06h",
+     "Configuration port 0",
+     "C0.7",
+     "C0.6",
+     "C0.5",
+     "C0.4",
+     "C0.3",
+     "C0.2",
+     "C0.1",
+     "C0.0",
+     "1"
+    ],
+    [
+     "07h",
+     "Configuration port 1",
+     "C1.7",
+     "C1.6",
+     "C1.5",
+     "C1.4",
+     "C1.3",
+     "C1.2",
+     "C1.1",
+     "C1.0",
+     "1"
+    ],
+    [
+     "40h",
+     "Current control port 0",
+     "CC0.3",
+     "CC0.3",
+     "CC0.2",
+     "CC0.2",
+     "CC0.1",
+     "CC0.1",
+     "CC0.0",
+     "CC0.0",
+     "1"
+    ],
+    [
+     "41h",
+     "Current control port 0",
+     "CC0.7",
+     "CC0.7",
+     "CC0.6",
+     "CC0.6",
+     "CC0.5",
+     "CC0.5",
+     "CC0.4",
+     "CC0.4",
+     "1"
+    ],
+    [
+     "42h",
+     "Current control port 1",
+     "CC1.3",
+     "CC1.3",
+     "CC1.2",
+     "CC1.2",
+     "CC1.1",
+     "CC1.1",
+     "CC1.0",
+     "CC1.0",
+     "1"
+    ],
+    [
+     "43h",
+     "Current control port 1",
+     "CC1.7",
+     "CC1.7",
+     "CC1.6",
+     "CC1.6",
+     "CC1.5",
+     "CC1.5",
+     "CC1.4",
+     "CC1.4",
+     "1"
+    ],
+    [
+     "44h",
+     "Input latch port 0",
+     "L0.7",
+     "L0.6",
+     "L0.5",
+     "L0.4",
+     "L0.3",
+     "L0.2",
+     "L0.1",
+     "L0.0",
+     "0"
+    ],
+    [
+     "45h",
+     "Input latch port 1",
+     "L1.7",
+     "L1.6",
+     "L1.5",
+     "L1.4",
+     "L1.3",
+     "L1.2",
+     "L1.1",
+     "L1.0",
+     "0"
+    ],
+    [
+     "46h",
+     "Pull-up/pull-down enable port 0",
+     "PE0.7",
+     "PE0.6",
+     "PE0.5",
+     "PE0.4",
+     "PE0.3",
+     "PE0.2",
+     "PE0.1",
+     "PE0.0",
+     "0"
+    ],
+    [
+     "47h",
+     "Pull-up/pull-down enable port 1",
+     "PE1.7",
+     "PE1.6",
+     "PE1.5",
+     "PE1.4",
+     "PE1.3",
+     "PE1.2",
+     "PE1.1",
+     "PE1.0",
+     "0"
+    ],
+    [
+     "48h",
+     "Pull-up/pull-down selection port 0",
+     "PUD0.7",
+     "PUD0.6",
+     "PUD0.5",
+     "PUD0.4",
+     "PUD0.3",
+     "PUD0.2",
+     "PUD0.1",
+     "PUD0.0",
+     "1"
+    ],
+    [
+     "49h",
+     "Pull-up/pull-down selection port 1",
+     "PUD1.7",
+     "PUD1.6",
+     "PUD1.5",
+     "PUD1.4",
+     "PUD1.3",
+     "PUD1.2",
+     "PUD1.1",
+     "PUD1.0",
+     "1"
+    ],
+    [
+     "4Ah",
+     "Interrupt mask port 0",
+     "M0.7",
+     "M0.6",
+     "M0.5",
+     "M0.4",
+     "M0.3",
+     "M0.2",
+     "M0.1",
+     "M0.0",
+     "1"
+    ],
+    [
+     "4Bh",
+     "Interrupt mask port 1",
+     "M1.7",
+     "M1.6",
+     "M1.5",
+     "M1.4",
+     "M1.3",
+     "M1.2",
+     "M1.1",
+     "M1.0",
+     "1"
+    ],
+    [
+     "4Ch",
+     "Interrupt status port 0",
+     "S0.7",
+     "S0.6",
+     "S0.5",
+     "S0.4",
+     "S0.3",
+     "S0.2",
+     "S0.1",
+     "S0.0",
+     "0"
+    ],
+    [
+     "4Dh",
+     "Interrupt status port 1",
+     "S1.7",
+     "S1.6",
+     "S1.5",
+     "S1.4",
+     "S1.3",
+     "S1.2",
+     "S1.1",
+     "S1.0",
+     "0"
+    ],
+    [
+     "4Fh",
+     "Output port configuration",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "ODEN1",
+     "ODEN0",
+     "0"
+    ]
+   ],
+   "notes": [
+    "In the current control registers each two-bit field covers one pin: CC0.7 is bits 7:6 of 41h, CC0.6 bits 5:4 of 41h, and so on.",
+    "X: set by the level applied to the pin."
+   ]
+  },
+  {
+   "title": "Output drive strength setting",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "CCx.x",
+    "drive, fraction of full"
+   ],
+   "rows": [
+    [
+     "00b",
+     "0.25"
+    ],
+    [
+     "01b",
+     "0.5"
+    ],
+    [
+     "10b",
+     "0.75"
+    ],
+    [
+     "11b",
+     "1"
+    ]
+   ],
+   "notes": [
+    "11b, full drive, is the power-up value."
+   ]
+  },
+  {
+   "title": "Recommended supply sequencing and ramp rates",
+   "page": 27,
+   "conditions": "Tamb = 25 °C (unless otherwise noted). Not tested; specified by design.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "(dV/dt)f",
+     "fall rate of change of voltage",
+     "Figure 22",
+     "0.1",
+     "-",
+     "2000",
+     "ms"
+    ],
+    [
+     "(dV/dt)r",
+     "rise rate of change of voltage",
+     "Figure 22",
+     "0.1",
+     "-",
+     "2000",
+     "ms"
+    ],
+    [
+     "td(rst)",
+     "reset delay time",
+     "Figure 22; re-ramp time when VDD(P) drops below 0.2 V or to VSS",
+     "1",
+     "-",
+     "-",
+     "µs"
+    ],
+    [
+     "td(rst)",
+     "reset delay time",
+     "Figure 23; re-ramp time when VDD(P) drops to VPOR(min) − 50 mV",
+     "1",
+     "-",
+     "-",
+     "µs"
+    ],
+    [
+     "ΔVDD(gl)",
+     "glitch supply voltage difference",
+     "Figure 24 [1]",
+     "-",
+     "-",
+     "1.0",
+     "V"
+    ],
+    [
+     "tw(gl)VDD",
+     "supply voltage glitch pulse width",
+     "Figure 24 [2]",
+     "-",
+     "-",
+     "10",
+     "µs"
+    ],
+    [
+     "VPOR(trip)",
+     "power-on reset trip voltage",
+     "falling VDD(P)",
+     "0.7",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VPOR(trip)",
+     "power-on reset trip voltage",
+     "rising VDD(P)",
+     "-",
+     "-",
+     "1.4",
+     "V"
+    ]
+   ],
+   "notes": [
+    "[1] How far VDD(P) may dip, falling at 0.4 µs/V, with no loss of function, provided the dip lasts less than 1 µs (tw(gl)VDD < 1 µs).",
+    "[2] The longest dip with no loss of function when the dip depth ΔVDD(gl) is 0.5 × VDD(P).",
+    "Figure 22: VDD(P) falls below 0.2 V or to 0 V and rises again. Figure 23: VDD(P) falls only below the POR threshold and rises again. Figure 24: a dip of depth ΔVDD(gl) and width tw(gl)VDD."
+   ]
+  },
+  {
+   "title": "Limiting values",
+   "page": 29,
+   "conditions": "In accordance with the Absolute Maximum Rating System (IEC 60134).",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VDD(I2C-bus)",
+     "I2C-bus supply voltage",
+     "",
+     "−0.5",
+     "+6.5",
+     "V"
+    ],
+    [
+     "VDD(P)",
+     "supply voltage port P",
+     "",
+     "−0.5",
+     "+6.5",
+     "V"
+    ],
+    [
+     "VI",
+     "input voltage",
+     "[1]",
+     "−0.5",
+     "+6.5",
+     "V"
+    ],
+    [
+     "VO",
+     "output voltage",
+     "[1]",
+     "−0.5",
+     "+6.5",
+     "V"
+    ],
+    [
+     "IIK",
+     "input clamping current",
+     "ADDR, RESET, SCL; VI < 0 V",
+     "-",
+     "±20",
+     "mA"
+    ],
+    [
+     "IOK",
+     "output clamping current",
+     "INT; VO < 0 V",
+     "-",
+     "±20",
+     "mA"
+    ],
+    [
+     "IIOK",
+     "input/output clamping current",
+     "P port; VO < 0 V or VO > VDD(P)",
+     "-",
+     "±20",
+     "mA"
+    ],
+    [
+     "IIOK",
+     "input/output clamping current",
+     "SDA; VO < 0 V or VO > VDD(I2C-bus)",
+     "-",
+     "±20",
+     "mA"
+    ],
+    [
+     "IOL",
+     "LOW-level output current",
+     "continuous; P port; VO = 0 V to VDD(P)",
+     "-",
+     "50",
+     "mA"
+    ],
+    [
+     "IOL",
+     "LOW-level output current",
+     "continuous; SDA, INT; VO = 0 V to VDD(I2C-bus)",
+     "-",
+     "25",
+     "mA"
+    ],
+    [
+     "IOH",
+     "HIGH-level output current",
+     "continuous; P port; VO = 0 V to VDD(P)",
+     "-",
+     "25",
+     "mA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "continuous through VSS",
+     "-",
+     "200",
+     "mA"
+    ],
+    [
+     "IDD(P)",
+     "supply current port P",
+     "continuous through VDD(P)",
+     "-",
+     "160",
+     "mA"
+    ],
+    [
+     "IDD(I2C-bus)",
+     "I2C-bus supply current",
+     "continuous through VDD(I2C-bus)",
+     "-",
+     "10",
+     "mA"
+    ],
+    [
+     "Tstg",
+     "storage temperature",
+     "",
+     "−65",
+     "+150",
+     "°C"
+    ],
+    [
+     "Tj(max)",
+     "maximum junction temperature",
+     "",
+     "-",
+     "125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "[1] Inputs may go below their negative-voltage rating, and outputs past their voltage rating, so long as the input and output current ratings hold."
+   ]
+  },
+  {
+   "title": "Operating conditions",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VDD(I2C-bus)",
+     "I2C-bus supply voltage",
+     "",
+     "1.65",
+     "5.5",
+     "V"
+    ],
+    [
+     "VDD(P)",
+     "supply voltage port P",
+     "",
+     "1.65",
+     "5.5",
+     "V"
+    ],
+    [
+     "VIH",
+     "HIGH-level input voltage",
+     "SCL, SDA, RESET",
+     "0.7 × VDD(I2C-bus)",
+     "5.5",
+     "V"
+    ],
+    [
+     "VIH",
+     "HIGH-level input voltage",
+     "ADDR, P1_7 to P0_0",
+     "0.7 × VDD(P)",
+     "5.5",
+     "V"
+    ],
+    [
+     "VIL",
+     "LOW-level input voltage",
+     "SCL, SDA, RESET",
+     "−0.5",
+     "0.3 × VDD(I2C-bus)",
+     "V"
+    ],
+    [
+     "VIL",
+     "LOW-level input voltage",
+     "ADDR, P1_7 to P0_0",
+     "−0.5",
+     "0.3 × VDD(P)",
+     "V"
+    ],
+    [
+     "IOH",
+     "HIGH-level output current",
+     "P1_7 to P0_0",
+     "-",
+     "10",
+     "mA"
+    ],
+    [
+     "IOL",
+     "LOW-level output current",
+     "P1_7 to P0_0",
+     "-",
+     "25",
+     "mA"
+    ],
+    [
+     "Tamb",
+     "ambient temperature",
+     "operating in free air",
+     "−40",
+     "+85",
+     "°C"
+    ]
+   ]
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Zth(j-a)",
+     "transient thermal impedance from junction to ambient",
+     "TSSOP24 package [1]",
+     "88",
+     "K/W"
+    ],
+    [
+     "Zth(j-a)",
+     "transient thermal impedance from junction to ambient",
+     "HWQFN24 package [1]",
+     "66",
+     "K/W"
+    ],
+    [
+     "Zth(j-a)",
+     "transient thermal impedance from junction to ambient",
+     "VFBGA24 package [1]",
+     "171",
+     "K/W"
+    ]
+   ],
+   "notes": [
+    "[1] Calculated to JESD 51-7."
+   ]
+  },
+  {
+   "title": "Static characteristics",
+   "page": 31,
+   "conditions": "Tamb = −40 °C to +85 °C; VDD(I2C-bus) = 1.65 V to 5.5 V; unless otherwise specified.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ [1]",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIK",
+     "input clamping voltage",
+     "II = −18 mA",
+     "−1.2",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VPOR",
+     "power-on reset voltage",
+     "VI = VDD(P) or VSS; IO = 0 mA",
+     "-",
+     "1.1",
+     "1.4",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −8 mA; CCX.X = 11b; VDD(P) = 1.65 V",
+     "1.2",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −8 mA; CCX.X = 11b; VDD(P) = 2.3 V",
+     "1.8",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −8 mA; CCX.X = 11b; VDD(P) = 3 V",
+     "2.6",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −8 mA; CCX.X = 11b; VDD(P) = 4.5 V",
+     "4.1",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −2.5 mA and CCX.X = 00b; IOH = −5 mA and CCX.X = 01b; IOH = −7.5 mA and CCX.X = 10b; IOH = −10 mA and CCX.X = 11b; VDD(P) = 1.65 V",
+     "1.1",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −2.5 mA and CCX.X = 00b; IOH = −5 mA and CCX.X = 01b; IOH = −7.5 mA and CCX.X = 10b; IOH = −10 mA and CCX.X = 11b; VDD(P) = 2.3 V",
+     "1.7",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −2.5 mA and CCX.X = 00b; IOH = −5 mA and CCX.X = 01b; IOH = −7.5 mA and CCX.X = 10b; IOH = −10 mA and CCX.X = 11b; VDD(P) = 3 V",
+     "2.5",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage [2]",
+     "P port; IOH = −2.5 mA and CCX.X = 00b; IOH = −5 mA and CCX.X = 01b; IOH = −7.5 mA and CCX.X = 10b; IOH = −10 mA and CCX.X = 11b; VDD(P) = 4.5 V",
+     "4.0",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 8 mA; CCX.X = 11b; VDD(P) = 1.65 V",
+     "-",
+     "-",
+     "0.45",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 8 mA; CCX.X = 11b; VDD(P) = 2.3 V",
+     "-",
+     "-",
+     "0.25",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 8 mA; CCX.X = 11b; VDD(P) = 3 V",
+     "-",
+     "-",
+     "0.25",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 8 mA; CCX.X = 11b; VDD(P) = 4.5 V",
+     "-",
+     "-",
+     "0.2",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 2.5 mA and CCX.X = 00b; IOL = 5 mA and CCX.X = 01b; IOL = 7.5 mA and CCX.X = 10b; IOL = 10 mA and CCX.X = 11b; VDD(P) = 1.65 V",
+     "-",
+     "-",
+     "0.5",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 2.5 mA and CCX.X = 00b; IOL = 5 mA and CCX.X = 01b; IOL = 7.5 mA and CCX.X = 10b; IOL = 10 mA and CCX.X = 11b; VDD(P) = 2.3 V",
+     "-",
+     "-",
+     "0.3",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 2.5 mA and CCX.X = 00b; IOL = 5 mA and CCX.X = 01b; IOL = 7.5 mA and CCX.X = 10b; IOL = 10 mA and CCX.X = 11b; VDD(P) = 3 V",
+     "-",
+     "-",
+     "0.25",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage [2]",
+     "P port; IOL = 2.5 mA and CCX.X = 00b; IOL = 5 mA and CCX.X = 01b; IOL = 7.5 mA and CCX.X = 10b; IOL = 10 mA and CCX.X = 11b; VDD(P) = 4.5 V",
+     "-",
+     "-",
+     "0.2",
+     "V"
+    ],
+    [
+     "IOL",
+     "LOW-level output current [3]",
+     "VOL = 0.4 V; VDD(P) = 1.65 V to 5.5 V; SDA",
+     "3",
+     "-",
+     "-",
+     "mA"
+    ],
+    [
+     "IOL",
+     "LOW-level output current [3]",
+     "VOL = 0.4 V; VDD(P) = 1.65 V to 5.5 V; INT",
+     "3",
+     "15 [4]",
+     "-",
+     "mA"
+    ],
+    [
+     "II",
+     "input current",
+     "VDD(P) = 1.65 V to 5.5 V; SCL, SDA, RESET; VI = VDD(I2C-bus) or VSS",
+     "-",
+     "-",
+     "±1",
+     "µA"
+    ],
+    [
+     "II",
+     "input current",
+     "VDD(P) = 1.65 V to 5.5 V; ADDR; VI = VDD(P) or VSS",
+     "-",
+     "-",
+     "±1",
+     "µA"
+    ],
+    [
+     "IIH",
+     "HIGH-level input current",
+     "P port; VI = VDD(P); VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "-",
+     "1",
+     "µA"
+    ],
+    [
+     "IIL",
+     "LOW-level input current",
+     "P port; VI = VSS; VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "-",
+     "1",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "IDD(I2C-bus) + IDD(P); SDA, P port, ADDR, RESET; VI on SDA and RESET = VDD(I2C-bus) or VSS; VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 400 kHz; VDD(P) = 3.6 V to 5.5 V",
+     "-",
+     "10",
+     "25",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "IDD(I2C-bus) + IDD(P); SDA, P port, ADDR, RESET; VI on SDA and RESET = VDD(I2C-bus) or VSS; VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 400 kHz; VDD(P) = 2.3 V to 3.6 V",
+     "-",
+     "6.5",
+     "15",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "IDD(I2C-bus) + IDD(P); SDA, P port, ADDR, RESET; VI on SDA and RESET = VDD(I2C-bus) or VSS; VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 400 kHz; VDD(P) = 1.65 V to 2.3 V",
+     "-",
+     "4",
+     "9",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "IDD(I2C-bus) + IDD(P); SCL, SDA, P port, ADDR, RESET; VI on SCL, SDA and RESET = VDD(I2C-bus) or VSS; VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 0 kHz; VDD(P) = 3.6 V to 5.5 V",
+     "-",
+     "1.5",
+     "7",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "IDD(I2C-bus) + IDD(P); SCL, SDA, P port, ADDR, RESET; VI on SCL, SDA and RESET = VDD(I2C-bus) or VSS; VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 0 kHz; VDD(P) = 2.3 V to 3.6 V",
+     "-",
+     "1",
+     "3.2",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "IDD(I2C-bus) + IDD(P); SCL, SDA, P port, ADDR, RESET; VI on SCL, SDA and RESET = VDD(I2C-bus) or VSS; VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 0 kHz; VDD(P) = 1.65 V to 2.3 V",
+     "-",
+     "0.5",
+     "1.7",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "Active mode; IDD(I2C-bus) + IDD(P); P port, ADDR, RESET; VI on RESET = VDD(I2C-bus); VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 400 kHz, continuous register read; VDD(P) = 3.6 V to 5.5 V",
+     "-",
+     "60",
+     "125",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "Active mode; IDD(I2C-bus) + IDD(P); P port, ADDR, RESET; VI on RESET = VDD(I2C-bus); VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 400 kHz, continuous register read; VDD(P) = 2.3 V to 3.6 V",
+     "-",
+     "40",
+     "75",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "Active mode; IDD(I2C-bus) + IDD(P); P port, ADDR, RESET; VI on RESET = VDD(I2C-bus); VI on P port and ADDR = VDD(P); IO = 0 mA; I/O = inputs; fSCL = 400 kHz, continuous register read; VDD(P) = 1.65 V to 2.3 V",
+     "-",
+     "20",
+     "45",
+     "µA"
+    ],
+    [
+     "IDD",
+     "supply current",
+     "with pull-ups enabled (PCAL6416A only); IDD(I2C-bus) + IDD(P); P port, ADDR, RESET; VI on SCL, SDA and RESET = VDD(I2C-bus) or VSS; VI on P port = VSS; VI on ADDR = VDD(I2C-bus) or VSS; IO = 0 mA; I/O = inputs with pull-up enabled; fSCL = 0 kHz; VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "1.1",
+     "1.5",
+     "mA"
+    ],
+    [
+     "ΔIDD",
+     "additional quiescent supply current [5]",
+     "SCL, SDA, RESET; one input at VDD(I2C-bus) − 0.6 V, other inputs at VDD(I2C-bus) or VSS; VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "-",
+     "25",
+     "µA"
+    ],
+    [
+     "ΔIDD",
+     "additional quiescent supply current [5]",
+     "P port, ADDR; one input at VDD(P) − 0.6 V, other inputs at VDD(P) or VSS; VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "-",
+     "80",
+     "µA"
+    ],
+    [
+     "Ci",
+     "input capacitance",
+     "VI = VDD(I2C-bus) or VSS; VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "6",
+     "7",
+     "pF"
+    ],
+    [
+     "Cio",
+     "input/output capacitance",
+     "VI/O = VDD(I2C-bus) or VSS; VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "7",
+     "8",
+     "pF"
+    ],
+    [
+     "Cio",
+     "input/output capacitance",
+     "VI/O = VDD(P) or VSS; VDD(P) = 1.65 V to 5.5 V",
+     "-",
+     "7.5",
+     "8.5",
+     "pF"
+    ],
+    [
+     "Rpu(int)",
+     "internal pull-up resistance",
+     "input/output",
+     "50",
+     "100",
+     "150",
+     "kΩ"
+    ],
+    [
+     "Rpd(int)",
+     "internal pull-down resistance",
+     "input/output",
+     "50",
+     "100",
+     "150",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "[1] Typical IDD figures are taken at Tamb = 25 °C and a nominal supply (1.8 V, 2.5 V, 3.3 V, 3.6 V or 5 V); every other typical figure at Tamb = 25 °C with VDD(P) = VDD(I2C-bus) = 3.3 V.",
+    "[2] The I/Os together may source no more than 160 mA.",
+    "[3] Limit each I/O externally to 25 mA at most, and each group of eight (P0_0 to P0_7, P1_0 to P1_7) to 100 mA, giving 200 mA for the whole device.",
+    "[4] At Tamb = 25 °C, VOL = 0.4 V, VDD(I2C-bus) = VDD(P) = 3.3 V. With VDD(I2C-bus) = VDD(P) < 2.5 V the typical figure applies at VOL = 0.6 V.",
+    "[5] With the internal pull-up and pull-down resistors switched off."
+   ]
+  },
+  {
+   "title": "I2C-bus interface timing requirements",
+   "page": 37,
+   "conditions": "Over recommended operating free air temperature range, unless otherwise specified.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "Standard-mode min",
+    "Standard-mode max",
+    "Fast-mode min",
+    "Fast-mode max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "fSCL",
+     "SCL clock frequency",
+     "",
+     "0",
+     "100",
+     "0",
+     "400",
+     "kHz"
+    ],
+    [
+     "tHIGH",
+     "HIGH period of the SCL clock",
+     "",
+     "4",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "tLOW",
+     "LOW period of the SCL clock",
+     "",
+     "4.7",
+     "-",
+     "1.3",
+     "-",
+     "µs"
+    ],
+    [
+     "tSP",
+     "pulse width of spikes that must be suppressed by the input filter",
+     "",
+     "0",
+     "50",
+     "0",
+     "50",
+     "ns"
+    ],
+    [
+     "tSU;DAT",
+     "data set-up time",
+     "",
+     "250",
+     "-",
+     "100",
+     "-",
+     "ns"
+    ],
+    [
+     "tHD;DAT",
+     "data hold time",
+     "",
+     "0",
+     "-",
+     "0",
+     "-",
+     "ns"
+    ],
+    [
+     "tr",
+     "rise time of both SDA and SCL signals",
+     "",
+     "-",
+     "1000",
+     "20",
+     "300",
+     "ns"
+    ],
+    [
+     "tf",
+     "fall time of both SDA and SCL signals",
+     "",
+     "-",
+     "300",
+     "20 × (VDD / 5.5 V)",
+     "300",
+     "ns"
+    ],
+    [
+     "tBUF",
+     "bus free time between a STOP and START condition",
+     "",
+     "4.7",
+     "-",
+     "1.3",
+     "-",
+     "µs"
+    ],
+    [
+     "tSU;STA",
+     "set-up time for a repeated START condition",
+     "",
+     "4.7",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "tHD;STA",
+     "hold time (repeated) START condition",
+     "",
+     "4",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "tSU;STO",
+     "set-up time for STOP condition",
+     "",
+     "4",
+     "-",
+     "0.6",
+     "-",
+     "µs"
+    ],
+    [
+     "tVD;DAT",
+     "data valid time",
+     "SCL LOW to SDA output valid",
+     "-",
+     "3.45",
+     "-",
+     "0.9",
+     "µs"
+    ],
+    [
+     "tVD;ACK",
+     "data valid acknowledge time",
+     "ACK signal from SCL LOW to SDA (out) LOW",
+     "-",
+     "3.45",
+     "-",
+     "0.9",
+     "µs"
+    ]
+   ]
+  },
+  {
+   "title": "Reset timing requirements",
+   "page": 37,
+   "conditions": "Over recommended operating free air temperature range, unless otherwise specified.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "Standard-mode min",
+    "Standard-mode max",
+    "Fast-mode min",
+    "Fast-mode max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tw(rst)",
+     "reset pulse width",
+     "",
+     "30",
+     "-",
+     "30",
+     "-",
+     "ns"
+    ],
+    [
+     "trec(rst)",
+     "reset recovery time",
+     "",
+     "200",
+     "-",
+     "200",
+     "-",
+     "ns"
+    ],
+    [
+     "trst",
+     "reset time",
+     "[1]",
+     "600",
+     "-",
+     "600",
+     "-",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "[1] The shortest time for SDA to go HIGH, which is also the shortest wait before a START."
+   ]
+  },
+  {
+   "title": "Switching characteristics",
+   "page": 38,
+   "conditions": "Over recommended operating free air temperature range; CL ≤ 100 pF; unless otherwise specified.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "Standard-mode min",
+    "Standard-mode max",
+    "Fast-mode min",
+    "Fast-mode max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tv(INT)",
+     "valid time on pin INT",
+     "from P port to INT",
+     "-",
+     "1",
+     "-",
+     "1",
+     "µs"
+    ],
+    [
+     "trst(INT)",
+     "reset time on pin INT",
+     "from SCL to INT",
+     "-",
+     "1",
+     "-",
+     "1",
+     "µs"
+    ],
+    [
+     "tv(Q)",
+     "data output valid time",
+     "from SCL to P port",
+     "-",
+     "400",
+     "-",
+     "400",
+     "ns"
+    ],
+    [
+     "tsu(D)",
+     "data input set-up time",
+     "from P port to SCL",
+     "0",
+     "-",
+     "0",
+     "-",
+     "ns"
+    ],
+    [
+     "th(D)",
+     "data input hold time",
+     "from P port to SCL",
+     "300",
+     "-",
+     "300",
+     "-",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "tv(Q) runs from SCL crossing 0.7 × VDD to the port pin crossing 50 %. Timing inputs come from generators with PRR ≤ 10 MHz, Zo = 50 Ω and tr, tf ≤ 30 ns; CL includes probe and jig capacitance.",
+    "Input timing references are 0.3 × and 0.7 × VDD(I2C-bus) on SCL and SDA, 0.5 × VDD(I2C-bus) on INT and RESET, and 0.5 × VDD(P) on the port pins."
+   ]
+  },
+  {
+   "title": "SnPb eutectic process (from J-STD-020D)",
+   "page": 48,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "package reflow temperature (°C), volume < 350 mm³",
+    "package reflow temperature (°C), volume ≥ 350 mm³"
+   ],
+   "rows": [
+    [
+     "< 2.5",
+     "235",
+     "220"
+    ],
+    [
+     "≥ 2.5",
+     "220",
+     "220"
+    ]
+   ]
+  },
+  {
+   "title": "Lead-free process (from J-STD-020D)",
+   "page": 48,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "package reflow temperature (°C), volume < 350 mm³",
+    "package reflow temperature (°C), volume 350 mm³ to 2000 mm³",
+    "package reflow temperature (°C), volume > 2000 mm³"
+   ],
+   "rows": [
+    [
+     "< 1.6",
+     "260",
+     "260",
+     "260"
+    ],
+    [
+     "1.6 to 2.5",
+     "260",
+     "250",
+     "245"
+    ],
+    [
+     "> 2.5",
+     "250",
+     "245",
+     "245"
+    ]
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT1199-1 (VFBGA24)",
+   "page": 50,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P",
+    "SL",
+    "SP",
+    "SR",
+    "Hx",
+    "Hy"
+   ],
+   "rows": [
+    [
+     "0.50",
+     "0.30",
+     "0.30",
+     "0.40",
+     "3.30",
+     "3.30"
+    ]
+   ],
+   "notes": [
+    "Stencil thickness 0.1 mm.",
+    "P: pitch. SL: solder land. SP: solder paste deposit. SR: solder resist opening. Hx, Hy: occupied area."
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT355-1 (TSSOP24)",
+   "page": 51,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P1",
+    "P2",
+    "Ay",
+    "By",
+    "C",
+    "D1",
+    "D2",
+    "Gx",
+    "Gy",
+    "Hx",
+    "Hy"
+   ],
+   "rows": [
+    [
+     "0.650",
+     "0.750",
+     "7.200",
+     "4.500",
+     "1.350",
+     "0.400",
+     "0.600",
+     "8.200",
+     "5.300",
+     "8.600",
+     "7.450"
+    ]
+   ],
+   "notes": [
+    "The occupied area runs (0.125) past the outer edge of the end lands and past the land ends.",
+    "P1: land pitch. P2: pitch of the outer lands. D1: land width. D2: width of the four corner lands. C: land length. Ay: outer span of the land rows. By: inner span. Gx, Gy: gaps. Hx, Hy: occupied area."
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT994-1 (HWQFN24)",
+   "page": 52,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P",
+    "Ax",
+    "Ay",
+    "Bx",
+    "By",
+    "C",
+    "D",
+    "SLx",
+    "SLy",
+    "SPx tot",
+    "SPy tot",
+    "SPx",
+    "SPy",
+    "Gx",
+    "Gy",
+    "Hx",
+    "Hy",
+    "nSPx",
+    "nSPy"
+   ],
+   "rows": [
+    [
+     "0.500",
+     "5.000",
+     "5.000",
+     "3.200",
+     "3.200",
+     "0.900",
+     "0.240",
+     "2.100",
+     "2.100",
+     "1.200",
+     "1.200",
+     "0.450",
+     "0.450",
+     "4.300",
+     "4.300",
+     "5.250",
+     "5.250",
+     "2",
+     "2"
+    ]
+   ],
+   "notes": [
+    "The centre land (SLx × SLy) is pasted as an array of nSPx × nSPy squares SPx × SPy spanning SPx tot × SPy tot.",
+    "Occupied-area margins of 0.025 mm sit beyond the lands.",
+    "P: pitch. Ax, Ay: outer land span. Bx, By: inner land span. C: land length. D: land width. Gx, Gy: gap between land rows. Hx, Hy: occupied area."
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT1342-1 (XFBGA24)",
+   "page": 53,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P",
+    "SR/SL",
+    "SP",
+    "CP",
+    "Hx",
+    "Hy"
+   ],
+   "rows": [
+    [
+     "0.40",
+     "0.18",
+     "0.20",
+     "0.25",
+     "2.20",
+     "2.20"
+    ]
+   ],
+   "notes": [
+    "P: pitch. SL: solder land. SP: solder paste deposit. SR: solder resist opening. CP: copper pad. Hx, Hy: occupied area."
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT1342-1 (XFBGA24), solder mask defined",
+   "page": 54,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P",
+    "SL",
+    "SP",
+    "SR",
+    "Hx",
+    "Hy"
+   ],
+   "rows": [
+    [
+     "0.40",
+     "0.25",
+     "0.18",
+     "0.20",
+     "2.20",
+     "2.20"
+    ]
+   ],
+   "notes": [
+    "P: pitch. SL: solder land. SP: solder paste deposit. SR: solder resist opening. Hx, Hy: occupied area."
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT1342-1 (XFBGA24), non-solder mask defined",
+   "page": 55,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P",
+    "SL",
+    "SP",
+    "SR",
+    "Hx",
+    "Hy"
+   ],
+   "rows": [
+    [
+     "0.40",
+     "0.18",
+     "0.20",
+     "0.25",
+     "2.20",
+     "2.20"
+    ]
+   ],
+   "notes": [
+    "P: pitch. SL: solder land. SP: solder paste deposit. SR: solder resist opening. Hx, Hy: occupied area."
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT1361-1 (UFBGA24), solder mask defined",
+   "page": 56,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P",
+    "SL/SR",
+    "SP",
+    "CP",
+    "Hx",
+    "Hy"
+   ],
+   "rows": [
+    [
+     "0.40",
+     "0.24",
+     "0.25",
+     "0.30",
+     "2.30",
+     "2.30"
+    ]
+   ],
+   "notes": [
+    "Stencil thickness 0.08 mm.",
+    "P: pitch. SL: solder land. SP: solder paste deposit. SR: solder resist opening. CP: copper pad. Hx, Hy: occupied area."
+   ]
+  },
+  {
+   "title": "PCB footprint for reflow soldering, SOT1361-1 (UFBGA24), non-solder mask defined",
+   "page": 57,
+   "conditions": "Dimensions in mm.",
+   "columns": [
+    "P",
+    "SL/CP",
+    "SP",
+    "SR",
+    "Hx",
+    "Hy"
+   ],
+   "rows": [
+    [
+     "0.40",
+     "0.24",
+     "0.25",
+     "0.30",
+     "2.30",
+     "2.30"
+    ]
+   ],
+   "notes": [
+    "Stencil thickness 0.08 mm.",
+    "P: pitch. SL: solder land. SP: solder paste deposit. SR: solder resist opening. CP: copper pad. Hx, Hy: occupied area."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Supply current against ambient temperature",
+   "page": 33,
+   "conditions": "IDD = IDD(I2C-bus) + IDD(P)",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current IDD",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD(P) = 5.5 V",
+     "points": [
+      [
+       -40.0,
+       19.09
+      ],
+      [
+       1.7,
+       18.41
+      ],
+      [
+       24.2,
+       18.25
+      ],
+      [
+       44.6,
+       18.12
+      ],
+      [
+       85.0,
+       18.27
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 5.0 V",
+     "points": [
+      [
+       -39.9,
+       15.85
+      ],
+      [
+       -19.6,
+       15.57
+      ],
+      [
+       22.5,
+       15.52
+      ],
+      [
+       63.5,
+       15.24
+      ],
+      [
+       85.0,
+       15.43
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 3.6 V",
+     "points": [
+      [
+       -40.0,
+       8.46
+      ],
+      [
+       85.0,
+       8.52
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 3.3 V",
+     "points": [
+      [
+       -40.0,
+       7.26
+      ],
+      [
+       -18.8,
+       7.39
+      ],
+      [
+       -0.6,
+       7.26
+      ],
+      [
+       63.6,
+       7.18
+      ],
+      [
+       85.0,
+       7.61
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 2.5 V",
+     "points": [
+      [
+       -40.0,
+       4.54
+      ],
+      [
+       0.5,
+       4.63
+      ],
+      [
+       85.0,
+       4.61
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 2.3 V",
+     "points": [
+      [
+       -40.0,
+       3.95
+      ],
+      [
+       64.1,
+       3.95
+      ],
+      [
+       85.0,
+       4.22
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 1.8 V and 1.65 V",
+     "points": [
+      [
+       -40.0,
+       2.62
+      ],
+      [
+       22.7,
+       2.62
+      ],
+      [
+       43.3,
+       2.77
+      ],
+      [
+       63.8,
+       2.62
+      ],
+      [
+       85.0,
+       3.03
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Standby supply current against ambient temperature",
+   "page": 33,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Standby supply current IDD(stb)",
+    "unit": "nA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD(P) = 5.5 V",
+     "points": [
+      [
+       -40.0,
+       842
+      ],
+      [
+       -18.9,
+       813
+      ],
+      [
+       0.9,
+       802
+      ],
+      [
+       43.5,
+       808
+      ],
+      [
+       64.2,
+       893
+      ],
+      [
+       85.0,
+       1170
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 5.0 V",
+     "points": [
+      [
+       -40.0,
+       746
+      ],
+      [
+       3.4,
+       709
+      ],
+      [
+       43.7,
+       718
+      ],
+      [
+       64.7,
+       779
+      ],
+      [
+       85.0,
+       1008
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 3.6 V",
+     "points": [
+      [
+       -40.0,
+       561
+      ],
+      [
+       1.1,
+       534
+      ],
+      [
+       43.2,
+       548
+      ],
+      [
+       64.3,
+       585
+      ],
+      [
+       85.0,
+       736
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 3.3 V",
+     "points": [
+      [
+       -40.0,
+       530
+      ],
+      [
+       -17.7,
+       524
+      ],
+      [
+       2.8,
+       508
+      ],
+      [
+       43.9,
+       515
+      ],
+      [
+       64.6,
+       553
+      ],
+      [
+       85.0,
+       687
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 2.5 V",
+     "points": [
+      [
+       -40.0,
+       462
+      ],
+      [
+       1.7,
+       448
+      ],
+      [
+       22.8,
+       455
+      ],
+      [
+       43.0,
+       448
+      ],
+      [
+       64.2,
+       474
+      ],
+      [
+       85.0,
+       585
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 2.3 V",
+     "points": [
+      [
+       -40.0,
+       444
+      ],
+      [
+       1.8,
+       434
+      ],
+      [
+       43.0,
+       439
+      ],
+      [
+       64.5,
+       461
+      ],
+      [
+       85.0,
+       559
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 1.8 V",
+     "points": [
+      [
+       -39.9,
+       410
+      ],
+      [
+       -18.8,
+       416
+      ],
+      [
+       1.6,
+       399
+      ],
+      [
+       43.4,
+       407
+      ],
+      [
+       64.3,
+       424
+      ],
+      [
+       85.0,
+       511
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 1.65 V",
+     "points": [
+      [
+       -40.0,
+       409
+      ],
+      [
+       -19.0,
+       424
+      ],
+      [
+       1.6,
+       399
+      ],
+      [
+       22.8,
+       395
+      ],
+      [
+       43.8,
+       399
+      ],
+      [
+       64.4,
+       416
+      ],
+      [
+       85.0,
+       494
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current against supply voltage",
+   "page": 33,
+   "conditions": "Tamb = 25 °C; IDD = IDD(I2C-bus) + IDD(P)",
+   "x": {
+    "label": "VDD(P)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current IDD",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       1.656,
+       2.61
+      ],
+      [
+       1.8,
+       2.62
+      ],
+      [
+       2.3,
+       3.9
+      ],
+      [
+       3.3,
+       7.13
+      ],
+      [
+       3.6,
+       8.41
+      ],
+      [
+       5.0,
+       15.43
+      ],
+      [
+       5.5,
+       18.26
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current against number of I/O held LOW",
+   "page": 33,
+   "conditions": "",
+   "x": {
+    "label": "Number of I/O held LOW",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current IDD(P)",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0,
+       0.001
+      ],
+      [
+       10.0,
+       0.669
+      ],
+      [
+       10.97,
+       0.739
+      ],
+      [
+       15.99,
+       1.065
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0,
+       0.001
+      ],
+      [
+       10.98,
+       0.734
+      ],
+      [
+       14.0,
+       0.927
+      ],
+      [
+       15.99,
+       1.065
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       2.98,
+       0.203
+      ],
+      [
+       14.97,
+       0.996
+      ],
+      [
+       15.99,
+       1.049
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O sink current against LOW-level output voltage, VDD(P) = 1.65 V",
+   "page": 34,
+   "conditions": "CCX.X = 11b; VDD(P) = 1.65 V",
+   "x": {
+    "label": "VOL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sink current Isink",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0.0007,
+       0.06
+      ],
+      [
+       0.0351,
+       4.19
+      ],
+      [
+       0.124,
+       14.27
+      ],
+      [
+       0.222,
+       24.27
+      ],
+      [
+       0.2992,
+       31.24
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0007,
+       0.06
+      ],
+      [
+       0.0606,
+       6.24
+      ],
+      [
+       0.1711,
+       16.87
+      ],
+      [
+       0.2641,
+       24.8
+      ],
+      [
+       0.3,
+       27.55
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0.0004,
+       0
+      ],
+      [
+       0.0961,
+       9.06
+      ],
+      [
+       0.1537,
+       14.1
+      ],
+      [
+       0.1873,
+       16.95
+      ],
+      [
+       0.2344,
+       20.63
+      ],
+      [
+       0.2996,
+       25.47
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O sink current against LOW-level output voltage, VDD(P) = 1.8 V",
+   "page": 34,
+   "conditions": "CCX.X = 11b; VDD(P) = 1.8 V",
+   "x": {
+    "label": "VOL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sink current Isink",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0912,
+       11.43
+      ],
+      [
+       0.1697,
+       20.75
+      ],
+      [
+       0.2355,
+       27.99
+      ],
+      [
+       0.3,
+       34.54
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0004,
+       0
+      ],
+      [
+       0.0786,
+       8.69
+      ],
+      [
+       0.1659,
+       17.84
+      ],
+      [
+       0.2478,
+       25.77
+      ],
+      [
+       0.3,
+       30.37
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0599,
+       6.17
+      ],
+      [
+       0.1394,
+       14.01
+      ],
+      [
+       0.2179,
+       21.24
+      ],
+      [
+       0.3,
+       28.17
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O sink current against LOW-level output voltage, VDD(P) = 2.5 V",
+   "page": 34,
+   "conditions": "CCX.X = 11b; VDD(P) = 2.5 V",
+   "x": {
+    "label": "VOL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sink current Isink",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0,
+       0.05
+      ],
+      [
+       0.1576,
+       25.59
+      ],
+      [
+       0.2141,
+       34.14
+      ],
+      [
+       0.2213,
+       35.49
+      ],
+      [
+       0.3,
+       46.92
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0004,
+       0.05
+      ],
+      [
+       0.1639,
+       23.2
+      ],
+      [
+       0.2383,
+       33.14
+      ],
+      [
+       0.3,
+       40.96
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.1517,
+       20.17
+      ],
+      [
+       0.2275,
+       29.61
+      ],
+      [
+       0.2996,
+       38.24
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O sink current against LOW-level output voltage, VDD(P) = 3.3 V",
+   "page": 34,
+   "conditions": "CCX.X = 11b; VDD(P) = 3.3 V",
+   "x": {
+    "label": "VOL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sink current Isink",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0.0002,
+       0.06
+      ],
+      [
+       0.0171,
+       2.97
+      ],
+      [
+       0.0421,
+       8.06
+      ],
+      [
+       0.1519,
+       28.73
+      ],
+      [
+       0.2999,
+       55.46
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0004,
+       0
+      ],
+      [
+       0.1813,
+       30.02
+      ],
+      [
+       0.3,
+       48.72
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0084,
+       1.07
+      ],
+      [
+       0.0768,
+       12.09
+      ],
+      [
+       0.1864,
+       29.01
+      ],
+      [
+       0.2999,
+       45.71
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O sink current against LOW-level output voltage, VDD(P) = 5.0 V",
+   "page": 34,
+   "conditions": "CCX.X = 11b; VDD(P) = 5.0 V",
+   "x": {
+    "label": "VOL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sink current Isink",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0.0002,
+       0.03
+      ],
+      [
+       0.0188,
+       3.83
+      ],
+      [
+       0.0235,
+       5.26
+      ],
+      [
+       0.1649,
+       36.51
+      ],
+      [
+       0.3,
+       65.6
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0,
+       0.01
+      ],
+      [
+       0.2106,
+       41.39
+      ],
+      [
+       0.3,
+       58.29
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0.01
+      ],
+      [
+       0.0089,
+       1.34
+      ],
+      [
+       0.1577,
+       29.95
+      ],
+      [
+       0.1658,
+       31.12
+      ],
+      [
+       0.2321,
+       43.67
+      ],
+      [
+       0.2996,
+       55.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O sink current against LOW-level output voltage, VDD(P) = 5.5 V",
+   "page": 34,
+   "conditions": "CCX.X = 11b; VDD(P) = 5.5 V",
+   "x": {
+    "label": "VOL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sink current Isink",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0,
+       0.15
+      ],
+      [
+       0.0169,
+       3.27
+      ],
+      [
+       0.0266,
+       5.9
+      ],
+      [
+       0.15,
+       34.07
+      ],
+      [
+       0.1642,
+       36.87
+      ],
+      [
+       0.2082,
+       47.07
+      ],
+      [
+       0.3,
+       67.28
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.173,
+       34.98
+      ],
+      [
+       0.2997,
+       59.99
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0204,
+       3.54
+      ],
+      [
+       0.1065,
+       20.96
+      ],
+      [
+       0.1747,
+       33.84
+      ],
+      [
+       0.1909,
+       37.28
+      ],
+      [
+       0.3,
+       57.83
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O source current against HIGH-level output voltage, VDD(P) = 1.65 V",
+   "page": 35,
+   "conditions": "CCX.X = 11b; VDD(P) = 1.65 V",
+   "x": {
+    "label": "VDD(P) − VOH",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Source current Isource",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0,
+       0.11
+      ],
+      [
+       0.0858,
+       5.67
+      ],
+      [
+       0.1718,
+       10.65
+      ],
+      [
+       0.2338,
+       13.91
+      ],
+      [
+       0.3095,
+       17.45
+      ],
+      [
+       0.3858,
+       20.52
+      ],
+      [
+       0.4575,
+       23.0
+      ],
+      [
+       0.5435,
+       25.4
+      ],
+      [
+       0.6,
+       26.71
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0007,
+       0.06
+      ],
+      [
+       0.0508,
+       2.99
+      ],
+      [
+       0.1497,
+       8.19
+      ],
+      [
+       0.2107,
+       11.09
+      ],
+      [
+       0.2929,
+       14.6
+      ],
+      [
+       0.3895,
+       18.17
+      ],
+      [
+       0.4538,
+       20.19
+      ],
+      [
+       0.5378,
+       22.45
+      ],
+      [
+       0.6,
+       23.79
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0.06
+      ],
+      [
+       0.0548,
+       2.92
+      ],
+      [
+       0.1619,
+       8.02
+      ],
+      [
+       0.2317,
+       10.97
+      ],
+      [
+       0.313,
+       14.11
+      ],
+      [
+       0.3933,
+       16.81
+      ],
+      [
+       0.4542,
+       18.57
+      ],
+      [
+       0.5181,
+       20.22
+      ],
+      [
+       0.6,
+       21.97
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O source current against HIGH-level output voltage, VDD(P) = 1.8 V",
+   "page": 35,
+   "conditions": "CCX.X = 11b; VDD(P) = 1.8 V",
+   "x": {
+    "label": "VDD(P) − VOH",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Source current Isource",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0.0007,
+       0
+      ],
+      [
+       0.0711,
+       5.17
+      ],
+      [
+       0.16,
+       11.13
+      ],
+      [
+       0.2114,
+       14.33
+      ],
+      [
+       0.3125,
+       20.04
+      ],
+      [
+       0.3775,
+       23.24
+      ],
+      [
+       0.4446,
+       26.21
+      ],
+      [
+       0.5173,
+       29.06
+      ],
+      [
+       0.6,
+       31.66
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0651,
+       4.11
+      ],
+      [
+       0.174,
+       10.41
+      ],
+      [
+       0.2251,
+       13.16
+      ],
+      [
+       0.3092,
+       17.25
+      ],
+      [
+       0.3885,
+       20.73
+      ],
+      [
+       0.4486,
+       23.1
+      ],
+      [
+       0.5338,
+       26.06
+      ],
+      [
+       0.6,
+       27.97
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0.0007,
+       0
+      ],
+      [
+       0.0554,
+       3.24
+      ],
+      [
+       0.1477,
+       8.16
+      ],
+      [
+       0.2724,
+       14.15
+      ],
+      [
+       0.3779,
+       18.53
+      ],
+      [
+       0.4403,
+       20.84
+      ],
+      [
+       0.5113,
+       23.22
+      ],
+      [
+       0.6,
+       25.76
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O source current against HIGH-level output voltage, VDD(P) = 2.5 V",
+   "page": 35,
+   "conditions": "CCX.X = 11b; VDD(P) = 2.5 V",
+   "x": {
+    "label": "VDD(P) − VOH",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Source current Isource",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.1747,
+       16.84
+      ],
+      [
+       0.3117,
+       28.91
+      ],
+      [
+       0.4627,
+       40.77
+      ],
+      [
+       0.6,
+       50.25
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0007,
+       0.04
+      ],
+      [
+       0.1404,
+       12.22
+      ],
+      [
+       0.3099,
+       25.68
+      ],
+      [
+       0.4772,
+       37.56
+      ],
+      [
+       0.6,
+       45.26
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.1388,
+       10.76
+      ],
+      [
+       0.3309,
+       24.2
+      ],
+      [
+       0.487,
+       33.85
+      ],
+      [
+       0.6,
+       40.13
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O source current against HIGH-level output voltage, VDD(P) = 3.3 V",
+   "page": 35,
+   "conditions": "CCX.X = 11b; VDD(P) = 3.3 V",
+   "x": {
+    "label": "VDD(P) − VOH",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Source current Isource",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0.0007,
+       0
+      ],
+      [
+       0.011,
+       1.61
+      ],
+      [
+       0.1064,
+       13.02
+      ],
+      [
+       0.2992,
+       34.86
+      ],
+      [
+       0.4553,
+       51.16
+      ],
+      [
+       0.5998,
+       65.14
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0002,
+       0.06
+      ],
+      [
+       0.1111,
+       11.86
+      ],
+      [
+       0.2605,
+       26.8
+      ],
+      [
+       0.4338,
+       43.04
+      ],
+      [
+       0.5994,
+       57.27
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0.0002,
+       0.06
+      ],
+      [
+       0.1654,
+       15.98
+      ],
+      [
+       0.2899,
+       27.23
+      ],
+      [
+       0.4541,
+       41.13
+      ],
+      [
+       0.5998,
+       52.53
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O source current against HIGH-level output voltage, VDD(P) = 5.0 V",
+   "page": 35,
+   "conditions": "CCX.X = 11b; VDD(P) = 5.0 V",
+   "x": {
+    "label": "VDD(P) − VOH",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Source current Isource",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0.0004,
+       0.07
+      ],
+      [
+       0.0178,
+       3.09
+      ],
+      [
+       0.1142,
+       17.24
+      ],
+      [
+       0.3234,
+       47.1
+      ],
+      [
+       0.4207,
+       60.53
+      ],
+      [
+       0.6,
+       84.21
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0756,
+       10.33
+      ],
+      [
+       0.2746,
+       35.96
+      ],
+      [
+       0.4513,
+       57.76
+      ],
+      [
+       0.5993,
+       75.23
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0691,
+       8.8
+      ],
+      [
+       0.2712,
+       33.01
+      ],
+      [
+       0.5095,
+       60.06
+      ],
+      [
+       0.6,
+       69.77
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O source current against HIGH-level output voltage, VDD(P) = 5.5 V",
+   "page": 35,
+   "conditions": "CCX.X = 11b; VDD(P) = 5.5 V",
+   "x": {
+    "label": "VDD(P) − VOH",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Source current Isource",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tamb = -40 °C",
+     "points": [
+      [
+       0,
+       0.08
+      ],
+      [
+       0.1231,
+       19.24
+      ],
+      [
+       0.3094,
+       47.08
+      ],
+      [
+       0.4474,
+       66.9
+      ],
+      [
+       0.6,
+       87.86
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 25 °C",
+     "points": [
+      [
+       0.0007,
+       0
+      ],
+      [
+       0.1198,
+       16.89
+      ],
+      [
+       0.3493,
+       47.36
+      ],
+      [
+       0.6,
+       78.88
+      ]
+     ]
+    },
+    {
+     "label": "Tamb = 85 °C",
+     "points": [
+      [
+       0,
+       0.08
+      ],
+      [
+       0.1564,
+       20.22
+      ],
+      [
+       0.326,
+       41.25
+      ],
+      [
+       0.4292,
+       53.81
+      ],
+      [
+       0.6,
+       73.49
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LOW-level output voltage against temperature",
+   "page": 36,
+   "conditions": "CCX.X = 11b",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOL",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD(P) = 1.8 V; Isink = 10 mA",
+     "points": [
+      [
+       -40.0,
+       80.0
+      ],
+      [
+       -15.1,
+       83.1
+      ],
+      [
+       10.2,
+       88.8
+      ],
+      [
+       34.6,
+       90.1
+      ],
+      [
+       60.0,
+       93.6
+      ],
+      [
+       85.0,
+       98.1
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 5 V; Isink = 10 mA",
+     "points": [
+      [
+       -40.0,
+       45.1
+      ],
+      [
+       -14.8,
+       46.6
+      ],
+      [
+       10.2,
+       49.2
+      ],
+      [
+       35.2,
+       49.2
+      ],
+      [
+       85.0,
+       53.3
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 1.8 V; Isink = 1 mA",
+     "points": [
+      [
+       -40.0,
+       8.8
+      ],
+      [
+       -15.8,
+       9.7
+      ],
+      [
+       85.0,
+       9.7
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 5 V; Isink = 1 mA",
+     "points": [
+      [
+       -40.0,
+       4.8
+      ],
+      [
+       35.4,
+       4.8
+      ],
+      [
+       85.0,
+       6.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "I/O high voltage against temperature",
+   "page": 36,
+   "conditions": "CCX.X = 11b; Isource = −10 mA",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VDD(P) − VOH",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD(P) = 1.8 V",
+     "points": [
+      [
+       -40.0,
+       142.1
+      ],
+      [
+       -15.4,
+       149.9
+      ],
+      [
+       9.7,
+       162.0
+      ],
+      [
+       34.6,
+       167.1
+      ],
+      [
+       85.0,
+       184.6
+      ]
+     ]
+    },
+    {
+     "label": "VDD(P) = 5 V",
+     "points": [
+      [
+       -40.0,
+       64.8
+      ],
+      [
+       59.0,
+       75.2
+      ],
+      [
+       84.9,
+       79.1
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 24,
+   "description": "A master controller on a 1.8 V bus drives the expander, whose port runs from its own VDD(P) rail. SCL, SDA, INT and RESET each have a 10 kΩ pull-up to the 1.8 V bus supply, which also feeds VDD(I2C-bus). ADDR is grounded, so the slave address is 0100 000x. P0_0 reads the output of an alarm subsystem powered from VDD(P); P0_1 is an output driving the enable of a controlled switch. P0_2 to P1_0 are keypad inputs, each with an optional 10 kΩ pull-up to VDD(P), and P1_1 to P1_7 are outputs to the keypad.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCAL6416A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "master controller",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SCL pull-up"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SDA pull-up"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "INT pull-up"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "RESET pull-up"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "pull-up on input P0_2; only needed where the input can float"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "pull-up on input P0_3; only needed where the input can float"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "pull-up on input P0_4; only needed where the input can float"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "pull-up on input P0_5; only needed where the input can float"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "pull-up on input P0_6; only needed where the input can float"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "pull-up on input P0_7; only needed where the input can float"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "pull-up on input P1_0; only needed where the input can float"
+    },
+    {
+     "ref": "U3",
+     "type": "other",
+     "value": "alarm subsystem",
+     "external": true,
+     "note": "for example an alarm system"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "controlled switch",
+     "note": "switched by its enable input"
+    },
+    {
+     "ref": "KP1",
+     "type": "other",
+     "value": "keypad",
+     "external": true
+    },
+    {
+     "ref": "TVI",
+     "type": "terminal",
+     "value": "VDD(I2C-bus) = 1.8 V"
+    },
+    {
+     "ref": "TVP",
+     "type": "terminal",
+     "value": "VDD(P)"
+    },
+    {
+     "ref": "TA",
+     "type": "terminal",
+     "value": "switch A"
+    },
+    {
+     "ref": "TB",
+     "type": "terminal",
+     "value": "switch B"
+    }
+   ],
+   "notes": [
+    "P0_0 and P0_2 to P1_0 are set as inputs; P0_1 and P1_1 to P1_7 as outputs.",
+    "Port inputs that can float take a resistor, fitted outside or the internal pull-up or pull-down; inputs held by their driver at all times take none.",
+    "Outputs in push-pull mode need no outside pull-up resistors; outputs in open-drain mode need them."
+   ]
+  },
+  {
+   "id": "led-parallel-resistor",
+   "title": "LED drive with a 100 kΩ resistor across the LED",
+   "page": 25,
+   "description": "A port pin sinks the current of an LED fed through a series resistor from the VDD(P) supply. A 100 kΩ resistor from the supply to the pin holds the pin near VDD(P) while the LED is dark, so no extra supply current flows.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCAL6416A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "LED current-setting resistor; no value given"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "TVDD",
+     "type": "terminal",
+     "value": "VDD"
+    }
+   ],
+   "notes": [
+    "P0_0 stands for any port pin Pn."
+   ]
+  },
+  {
+   "id": "led-lower-supply",
+   "title": "LED on 5 V with the device on 3.3 V",
+   "page": 25,
+   "description": "The expander runs from 3.3 V while its LED, with a series resistor, is fed from 5 V and sunk by a port pin. With VDD(P) at least 1.2 V under the LED supply, the pin sits at or above VDD(P) when the LED is off, which keeps IDD(P) from rising.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCAL6416A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "LED current-setting resistor; no value given"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "T33",
+     "type": "terminal",
+     "value": "3.3 V"
+    },
+    {
+     "ref": "T5",
+     "type": "terminal",
+     "value": "5 V"
+    }
+   ],
+   "notes": [
+    "P0_0 stands for any port pin Pn."
+   ]
+  },
+  {
+   "id": "sda-load",
+   "title": "SDA load for bus timing",
+   "page": 38,
+   "fixture": true,
+   "description": "SDA carries a 1 kΩ pull-up to VDD(I2C-bus) and 50 pF to ground while the bus and reset timing are measured.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCAL6416A"
+    },
+    {
+     "ref": "RL",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "50 pF",
+     "note": "includes probe and jig capacitance"
+    },
+    {
+     "ref": "TV",
+     "type": "terminal",
+     "value": "VDD(I2C-bus)"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "int-load",
+   "title": "INT load for interrupt timing",
+   "page": 39,
+   "fixture": true,
+   "description": "INT carries a 4.7 kΩ pull-up to VDD(I2C-bus) and 100 pF to ground while tv(INT) and trst(INT) are measured.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCAL6416A"
+    },
+    {
+     "ref": "RL",
+     "type": "resistor",
+     "value": "4.7 kΩ"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "100 pF",
+     "note": "includes probe and jig capacitance"
+    },
+    {
+     "ref": "TV",
+     "type": "terminal",
+     "value": "VDD(I2C-bus)"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "port-load",
+   "title": "Port load for port timing",
+   "page": 40,
+   "fixture": true,
+   "description": "The port pin under test sees 50 pF to ground and a 500 Ω / 500 Ω divider between a 2 × VDD(P) source and ground. The same load serves the reset timing.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCAL6416A"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "50 pF",
+     "note": "includes probe and jig capacitance"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "500 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "500 Ω"
+    },
+    {
+     "ref": "TV",
+     "type": "terminal",
+     "value": "2 × VDD(P)"
+    }
+   ],
+   "notes": [
+    "P0_0 stands for the port pin Pn under test; each output is timed alone, over a single transition."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Slave address",
+   "expr": "address = 0 1 0 0 0 0 ADDR R/W (MSB first)",
+   "where": {
+    "ADDR": "level on the ADDR pin, 0 or 1",
+    "R/W": "1 for a read, 0 for a write"
+   },
+   "note": "Two devices fit on one bus.",
+   "page": 9
+  },
+  {
+   "name": "Output drive",
+   "expr": "drive = k × full drive, k = 0.25, 0.5, 0.75, 1 for CCx.x = 00b, 01b, 10b, 11b",
+   "where": {
+    "CCx.x": "the pin's two-bit field in registers 40h to 43h"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Pull-resistor current",
+   "expr": "I = N × V / Rpu(int)",
+   "where": {
+    "N": "number of pins whose enabled pull resistor has voltage across it",
+    "V": "voltage across each resistor, for a pull-up held LOW about VDD(P)",
+    "Rpu(int)": "internal pull resistance, 100 kΩ typical, 50 kΩ to 150 kΩ"
+   },
+   "note": "Pull-up current is drawn through VDD(P) and appears in IDD; pull-down current from a pin held HIGH returns through VSS, which is rated 200 mA.",
+   "page": 28
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Two supplies",
+   "page": 1,
+   "text": "VDD(I2C-bus) powers the bus side and VDD(P) powers the core and the 16 port pins; each may be anywhere from 1.65 V to 5.5 V, independently. Tie VDD(I2C-bus) to the supply of the master's SCL and SDA lines: it tells the part the bus logic level, while VDD(P) sets the port level."
+  },
+  {
+   "topic": "Relation to the PCA6416A",
+   "page": 1,
+   "text": "The device has the four register pairs of the PCA6416A (input, output, polarity inversion, configuration) and the same pinout, so it drops into a PCA6416A footprint, and its software is backward compatible. On top it adds the Agile I/O registers: drive strength, input latch, pull-up/pull-down enable and select, interrupt mask, interrupt status and push-pull/open-drain output selection. Unlike the PCA6416A it starts with every interrupt masked, so no spurious interrupts appear while a board comes up."
+  },
+  {
+   "topic": "Bus interface",
+   "page": 2,
+   "text": "An I2C-bus and SMBus slave, up to 400 kHz (Fast-mode). SCL and SDA have Schmitt-trigger inputs, so slow edges are tolerated, with typical hysteresis of 0.18 V at 1.8 V, 0.25 V at 2.5 V, 0.33 V at 3.3 V and 0.5 V at 5 V, and a noise filter that rejects spikes up to 50 ns. SCL is an input only."
+  },
+  {
+   "topic": "Addressing",
+   "page": 9,
+   "text": "The seven-bit slave address is 0100 00 followed by the level on ADDR, so two devices can share a bus. The eighth bit is R/W: HIGH reads, LOW writes. ADDR goes straight to VDD(P) or ground."
+  },
+  {
+   "topic": "Command byte",
+   "page": 9,
+   "text": "After the address is acknowledged, the master's next byte goes into the write-only pointer register and picks the register for the data that follows. The low three bits choose among the eight original registers; bit 6 set, with the low bits, reaches the Agile I/O registers at 40h to 4Fh."
+  },
+  {
+   "topic": "Register pairs and writes",
+   "page": 18,
+   "text": "The 22 registers work as 11 pairs, one byte for port 0 and one for port 1 (drive strength takes two pairs). After a data byte the pointer flips to the other register of the same pair, so writing 03h then a second byte puts the second byte in 02h. A write can carry any number of data bytes, the pointer alternating within the pair each time."
+  },
+  {
+   "topic": "Reads",
+   "page": 20,
+   "text": "To read, the master writes the address and the command byte, sends a repeated START, then the address with R/W = 1. The device returns the chosen register, then its partner, alternating for as many bytes as the master acknowledges; the master leaves the last byte unacknowledged. The register takes its data at the rising edge of the acknowledge clock pulse. After a later repeated START, the read resumes at the other register of the pair from where it stopped."
+  },
+  {
+   "topic": "Input port registers (00h, 01h)",
+   "page": 11,
+   "text": "Read-only images of the logic levels on the pins, whether a pin is an input or an output. Writing them does nothing; their power-up value is whatever the pins carry."
+  },
+  {
+   "topic": "Output port registers (02h, 03h)",
+   "page": 11,
+   "text": "The levels driven onto pins set as outputs; they do not affect pins set as inputs. Reading them returns what was written, not the pin level. Default 1."
+  },
+  {
+   "topic": "Polarity inversion registers (04h, 05h)",
+   "page": 12,
+   "text": "A 1 inverts the corresponding input pin's bit in the input register; a 0 leaves it as is. Default 0."
+  },
+  {
+   "topic": "Configuration registers (06h, 07h)",
+   "page": 12,
+   "text": "A 1 makes the pin a high-impedance input, a 0 an output. Default 1: every pin starts as an input."
+  },
+  {
+   "topic": "Output drive strength (40h to 43h)",
+   "page": 25,
+   "text": "Two bits per pin choose one quarter, one half, three quarters or all of the output stage: the setting switches in that many of four parallel transistor pairs (fingers) in both the pull-up and pull-down halves, so 10b runs two fingers and halves the drive. Weaker drive lowers the switching current peak in the VDD and VSS package inductance, which reduces the ground and supply bounce when many outputs switch together, and suits low-capacitance lines. Default 11b, full drive."
+  },
+  {
+   "topic": "Input latch (44h, 45h)",
+   "page": 13,
+   "text": "Applies only to pins set as inputs. With the latch bit 0, a change on the pin raises an interrupt, and if the pin returns to its first level before the input register is read, the interrupt goes away again. With the bit 1, the new level is captured in the input register and held, with the interrupt, until the input register is read, even if the pin has already gone back; the read returns the captured value and the next read returns the present level. Example: a latched P0_4 at 0 pulses to 1 and back; the first read of input port 0 shows bit 4 as 1 and clears the interrupt, the second shows 0. An interrupt stays asserted when a non-latched input changes together with a latched one and then returns; reading reflects only the latched change and clears the interrupt. Changing a bit from latched to non-latched does not clear a pending interrupt; afterwards a read shows the present pin level, and in the other direction a read shows the latched level. Default 0."
+  },
+  {
+   "topic": "Pull-up and pull-down resistors (46h to 49h)",
+   "page": 14,
+   "text": "A 1 in the enable register connects a resistor to the pin; a 0 removes it. The selection register picks a pull-up (1) or a pull-down (0) of 100 kΩ typical, 50 kΩ minimum, 150 kΩ maximum; with the resistor disabled the selection bit has no effect. The resistors are also disconnected from pins whose port is set to open-drain. Enable defaults to 0, selection to 1."
+  },
+  {
+   "topic": "Interrupt mask (4Ah, 4Bh)",
+   "page": 15,
+   "text": "All mask bits are 1 at power-on, so no input can assert INT during start-up. Clearing a bit to 0 lets that input assert INT. Clearing the mask of an input that has already changed asserts INT at once; setting the mask of the input currently causing an interrupt releases INT."
+  },
+  {
+   "topic": "Interrupt status (4Ch, 4Dh)",
+   "page": 16,
+   "text": "Read-only. A 1 marks an input that caused the interrupt, a 0 one that did not. The status bit of a masked input always reads 0. Default 0."
+  },
+  {
+   "topic": "Output port configuration (4Fh)",
+   "page": 16,
+   "text": "Bit 0 (ODEN0) sets the whole of port 0 and bit 1 (ODEN1) the whole of port 1: 0 is push-pull, with both the upper and lower transistors in use, 1 is open-drain, with only the lower transistor. Write this register before the configuration registers turn the pins into outputs. Default 0, push-pull."
+  },
+  {
+   "topic": "Port pin structure",
+   "page": 16,
+   "text": "As an input both output transistors are off and the pin is high impedance; it may be taken above VDD(P), up to 5.5 V, so the ports are 5 V tolerant. As an output one transistor connects the pin to VDD(P) or to VSS, following the output register, and the pin should then be kept within the recommended levels. Each pin has ESD diodes. A pin set as an output never causes an interrupt."
+  },
+  {
+   "topic": "Power-on reset",
+   "page": 17,
+   "text": "Rising from 0 V, VDD(P) holds the part in reset until it passes VPOR (1.1 V typical, 1.4 V maximum); then all registers take their defaults and the bus state machine starts. For another power-on reset VDD(P) must fall below VPOR and rise again: below 0.2 V (or to VSS), or to 50 mV under VPOR(min), and stay there at least 1 µs, with fall and rise rates inside the table limits. The trip point is 0.7 V or more on a falling supply and 1.4 V or less on a rising one. Short dips need not reset the part: a dip of up to 1.0 V lasting under 1 µs, or a dip to half of VDD(P) lasting up to 10 µs, causes no upset. Bypass capacitance, source impedance and device impedance all affect how the part rides through a dip. The outputs do not glitch at power-up."
+  },
+  {
+   "topic": "RESET pin",
+   "page": 17,
+   "text": "Holding RESET LOW for at least tw(rst) (30 ns) puts all registers and the bus state machine back to their defaults without removing power. Once RESET is HIGH the port levels can change again. Without an active driver, RESET needs a pull-up to VDD(I2C-bus)."
+  },
+  {
+   "topic": "Interrupt output",
+   "page": 18,
+   "text": "INT is open-drain and active LOW; pull it up to VDD(P) or VDD(I2C-bus), whichever supplies the device that takes the interrupt. Any rising or falling edge on an unmasked input asserts INT within tv(INT). For a non-latched input INT clears when the pin returns to its old level or when the port that caused it is read; for a latched input only the read clears it. The clearing happens at the ACK or NACK bit of the read, after SCL rises, so an input change during that clock pulse can be lost or give only a very short pulse; later changes are reported normally. Turning an output into an input can raise a false interrupt when the pin level differs from the input register."
+  },
+  {
+   "topic": "LED drive and supply current",
+   "page": 24,
+   "text": "The port outputs sink up to 25 mA each, enough to light an LED directly. An LED from VDD to a pin leaves the pin about 1.2 V under VDD(P) when the LED is off, and IDD(P) climbs as the pin voltage drops below VDD(P). Two ways keep the pin at or above VDD(P): a high-value resistor (100 kΩ) across the LED, or a VDD(P) at least 1.2 V lower than the LED supply."
+  },
+  {
+   "topic": "Current limits",
+   "page": 33,
+   "text": "Keep each I/O to 25 mA, each group of eight to 100 mA and the device to 200 mA of sink current (the VSS rating); the I/Os together may source at most 160 mA."
+  },
+  {
+   "topic": "Bus error recovery",
+   "page": 28,
+   "text": "A power-on reset or RESET returns the part to its default state, at the cost of the port configuration. A STOP from the master puts the slave state machine in a known idle state with SDA released. If the master stops mid-transfer while the device is sending data or an acknowledge, SDA stays LOW and blocks the bus; the master can then send nine clocks on SCL, which always brings the device back to idle, the extra clocks being taken as STOP conditions. Since SCL is input-only on this part, a stuck LOW SCL comes from the master or from another slave stretching the clock."
+  },
+  {
+   "topic": "Exposed pad (HWQFN24)",
+   "page": 5,
+   "text": "The centre pad of the HWQFN24 is not a required connection. If it is soldered, it may connect only to ground, as a second ground; otherwise leave it open."
+  },
+  {
+   "topic": "Protection",
+   "page": 3,
+   "text": "Latch-up above 100 mA to JESD 78 Class II; ESD above 2000 V HBM (JESD22-A114-A) and 1000 V CDM (JESD22-C101)."
+  },
+  {
+   "topic": "Soldering",
+   "page": 47,
+   "text": "All five packages can be reflow soldered. The ball-grid packages and the HWQFN, with lands under the body, cannot be wave soldered. Leaded parts with a pitch under about 0.6 mm are not wave soldered either. Peak reflow temperature follows J-STD-020D by package thickness and volume; follow the moisture sensitivity handling given on the packing."
+  }
+ ],
+ "packages": [
+  {
+   "name": "HWQFN24, SOT994-1, 4 × 4 × 0.75 mm, 24 terminals",
+   "page": 42,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height [1]",
+     "",
+     "",
+     "0.8"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.18",
+     "",
+     "0.30"
+    ],
+    [
+     "c",
+     "terminal thickness",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "D",
+     "body length [1]",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "Dh",
+     "exposed pad length",
+     "1.95",
+     "",
+     "2.25"
+    ],
+    [
+     "E",
+     "body width [1]",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "Eh",
+     "exposed pad width",
+     "1.95",
+     "",
+     "2.25"
+    ],
+    [
+     "e",
+     "terminal pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "e1",
+     "span of terminal centres, sides with terminals 7 to 12 and 19 to 24",
+     "",
+     "2.5",
+     ""
+    ],
+    [
+     "e2",
+     "span of terminal centres, sides with terminals 1 to 6 and 13 to 18",
+     "",
+     "2.5",
+     ""
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.3",
+     "",
+     "0.5"
+    ],
+    [
+     "v",
+     "terminal position tolerance to C, A, B",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "w",
+     "terminal position tolerance to C",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y",
+     "seating plane flatness",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y1",
+     "terminal coplanarity to C",
+     "",
+     "0.1",
+     ""
+    ]
+   ],
+   "notes": [
+    "[1] Excludes plastic or metal protrusions, up to 0.075 mm per side.",
+    "JEDEC MO-220."
+   ]
+  },
+  {
+   "name": "TSSOP24, SOT355-1, 4.4 mm body width, 24 leads",
+   "page": 43,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.1"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.80",
+     "",
+     "0.95"
+    ],
+    [
+     "A3",
+     "lead offset in detail X",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "bp",
+     "lead width",
+     "0.19",
+     "",
+     "0.30"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.1",
+     "",
+     "0.2"
+    ],
+    [
+     "D",
+     "body length [1]",
+     "7.7",
+     "",
+     "7.9"
+    ],
+    [
+     "E",
+     "body width [2]",
+     "4.3",
+     "",
+     "4.5"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "HE",
+     "width across leads",
+     "6.2",
+     "",
+     "6.6"
+    ],
+    [
+     "L",
+     "lead length",
+     "",
+     "1",
+     ""
+    ],
+    [
+     "Lp",
+     "foot length",
+     "0.50",
+     "",
+     "0.75"
+    ],
+    [
+     "Q",
+     "dimension in detail X",
+     "0.3",
+     "",
+     "0.4"
+    ],
+    [
+     "v",
+     "lead tip position tolerance",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "w",
+     "lead position tolerance",
+     "",
+     "0.13",
+     ""
+    ],
+    [
+     "y",
+     "lead coplanarity",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "Z",
+     "body end to first lead centre [1]",
+     "0.2",
+     "",
+     "0.5"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "[1] Excludes plastic or metal protrusions, up to 0.15 mm per side.",
+    "[2] Excludes plastic protrusions between leads, up to 0.25 mm per side.",
+    "JEDEC MO-153."
+   ]
+  },
+  {
+   "name": "VFBGA24, SOT1199-1, 3 × 3 × 0.85 mm, 24 balls",
+   "page": 44,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.75",
+     "0.85",
+     "1.00"
+    ],
+    [
+     "A1",
+     "ball standoff",
+     "0.15",
+     "0.20",
+     "0.25"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.60",
+     "0.65",
+     "0.75"
+    ],
+    [
+     "b",
+     "ball diameter",
+     "0.25",
+     "0.30",
+     "0.35"
+    ],
+    [
+     "D",
+     "body length",
+     "2.9",
+     "3.0",
+     "3.1"
+    ],
+    [
+     "E",
+     "body width",
+     "2.9",
+     "3.0",
+     "3.1"
+    ],
+    [
+     "e",
+     "ball pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "e1",
+     "span of ball centres, columns 1 to 5",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "e2",
+     "span of ball centres, rows A to E",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "v",
+     "ball position tolerance to C, A, B",
+     "",
+     "0.15",
+     ""
+    ],
+    [
+     "w",
+     "ball position tolerance to C",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y",
+     "seating plane flatness",
+     "",
+     "0.08",
+     ""
+    ],
+    [
+     "y1",
+     "ball coplanarity to C",
+     "",
+     "0.1",
+     ""
+    ]
+   ],
+   "notes": [
+    "Ball A1 corner is the index area; position B2 has no ball."
+   ]
+  },
+  {
+   "name": "XFBGA24, SOT1342-1, 2 × 2 × 0.5 mm, 24 balls (EX option)",
+   "page": 45,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "0.5"
+    ],
+    [
+     "A1",
+     "ball standoff",
+     "0.05",
+     "0.10",
+     "0.15"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.33",
+     "0.34",
+     "0.35"
+    ],
+    [
+     "b",
+     "ball diameter",
+     "0.145",
+     "0.175",
+     "0.205"
+    ],
+    [
+     "D",
+     "body length",
+     "1.9",
+     "2.0",
+     "2.1"
+    ],
+    [
+     "E",
+     "body width",
+     "1.9",
+     "2.0",
+     "2.1"
+    ],
+    [
+     "e",
+     "ball pitch",
+     "",
+     "0.4",
+     ""
+    ],
+    [
+     "e1",
+     "span of ball centres, columns 1 to 5",
+     "",
+     "1.6",
+     ""
+    ],
+    [
+     "e2",
+     "span of ball centres, rows A to E",
+     "",
+     "1.6",
+     ""
+    ],
+    [
+     "v",
+     "ball position tolerance to C, A, B",
+     "",
+     "0.15",
+     ""
+    ],
+    [
+     "w",
+     "ball position tolerance to C",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y",
+     "seating plane flatness",
+     "",
+     "0.08",
+     ""
+    ],
+    [
+     "y1",
+     "ball coplanarity to C",
+     "",
+     "0.1",
+     ""
+    ]
+   ],
+   "notes": [
+    "Ball size 0.175 mm. Ball A1 corner is the index area; position B2 has no ball."
+   ]
+  },
+  {
+   "name": "UFBGA24, SOT1361-1, 2 × 2 × 0.65 mm, 24 balls (ER option)",
+   "page": 46,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "0.65"
+    ],
+    [
+     "A1",
+     "ball standoff",
+     "0.17",
+     "0.22",
+     "0.27"
+    ],
+    [
+     "b",
+     "ball diameter",
+     "0.20",
+     "0.24",
+     "0.28"
+    ],
+    [
+     "D",
+     "body length",
+     "1.9",
+     "2.0",
+     "2.1"
+    ],
+    [
+     "E",
+     "body width",
+     "1.9",
+     "2.0",
+     "2.1"
+    ],
+    [
+     "e",
+     "ball pitch",
+     "",
+     "0.4",
+     ""
+    ],
+    [
+     "e1",
+     "span of ball centres, columns 1 to 5",
+     "",
+     "1.6",
+     ""
+    ],
+    [
+     "e2",
+     "span of ball centres, rows A to E",
+     "",
+     "1.6",
+     ""
+    ],
+    [
+     "ZD1",
+     "body edge to first ball column centre",
+     "0.1",
+     "0.2",
+     "0.3"
+    ],
+    [
+     "ZE1",
+     "body edge to first ball row centre",
+     "0.1",
+     "0.2",
+     "0.3"
+    ],
+    [
+     "v",
+     "ball position tolerance to C, A, B",
+     "",
+     "0.15",
+     ""
+    ],
+    [
+     "w",
+     "ball position tolerance to C",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y",
+     "seating plane flatness",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "y1",
+     "ball coplanarity to C",
+     "",
+     "0.1",
+     ""
+    ]
+   ],
+   "notes": [
+    "Ball size 0.24 mm. Ball A1 corner is the index area; position B2 has no ball."
+   ]
+  }
+ ]
+}

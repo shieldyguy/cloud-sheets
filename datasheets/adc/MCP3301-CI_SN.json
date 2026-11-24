@@ -1,0 +1,10188 @@
+{
+ "sheet": 1,
+ "name": "MCP3301-CI_SN",
+ "kind": "adc",
+ "manufacturer": "Microchip",
+ "title": "MCP3301: 13-bit low-power ADC with a differential input and an SPI port",
+ "source": {
+  "document": "DS21700E",
+  "revision": "Revision E, November 2011",
+  "pages": 32
+ },
+ "summary": "A single-channel successive-approximation ADC that converts the difference between two inputs to 12 bits plus sign, in two's complement, at up to 100 ksps from a 4.5 V to 5.5 V supply. An external reference of 400 mV to VDD sets the span of ±VREF. The result is read over a three-wire SPI port in 16 clocks; between conversions the part idles at typically 50 nA. Two linearity grades, B (±1 LSB INL) and C (±2 LSB INL), come in 8-pin MSOP, PDIP and SOIC; MCP3301-CI/SN is the C grade in SOIC.",
+ "key_figures": [
+  [
+   "Resolution",
+   "12 data bits + sign (13-bit), two's complement"
+  ],
+  [
+   "Sampling rate",
+   "100 ksps max at VDD = 5 V (FCLK = 1.7 MHz)"
+  ],
+  [
+   "INL",
+   "±1 LSB max (B grade), ±2 LSB max (C grade)"
+  ],
+  [
+   "DNL",
+   "±1 LSB max, no missing codes over temperature"
+  ],
+  [
+   "Supply",
+   "4.5 V to 5.5 V specified; operates from 2.7 V"
+  ],
+  [
+   "Supply current",
+   "300 µA typ, 450 µA max at 5 V; standby 0.05 µA typ, 1 µA max"
+  ],
+  [
+   "Reference input",
+   "0.4 V to VDD; 100 µA typ, 150 µA max"
+  ],
+  [
+   "Input span",
+   "IN(+) - IN(-) = -VREF to +VREF"
+  ],
+  [
+   "Dynamic",
+   "SINAD 78 dB, THD -91 dB, SFDR 92 dB typ"
+  ],
+  [
+   "Temperature",
+   "-40 °C to +85 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 30,
+  "columns": [
+   "part number",
+   "INL grade",
+   "temperature range",
+   "package"
+  ],
+  "rows": [
+   [
+    "MCP3301-BI/MS",
+    "B: ±1 LSB INL",
+    "I: -40°C to +85°C",
+    "MS: plastic MSOP, 8-lead"
+   ],
+   [
+    "MCP3301-BI/P",
+    "B: ±1 LSB INL",
+    "I: -40°C to +85°C",
+    "P: plastic DIP (300 mil body), 8-lead"
+   ],
+   [
+    "MCP3301-BI/SN",
+    "B: ±1 LSB INL",
+    "I: -40°C to +85°C",
+    "SN: plastic SOIC (150 mil body), 8-lead"
+   ],
+   [
+    "MCP3301-CI/MS",
+    "C: ±2 LSB INL",
+    "I: -40°C to +85°C",
+    "MS: plastic MSOP, 8-lead"
+   ],
+   [
+    "MCP3301-CI/P",
+    "C: ±2 LSB INL",
+    "I: -40°C to +85°C",
+    "P: plastic DIP (300 mil body), 8-lead"
+   ],
+   [
+    "MCP3301-CI/SN",
+    "C: ±2 LSB INL",
+    "I: -40°C to +85°C",
+    "SN: plastic SOIC (150 mil body), 8-lead"
+   ]
+  ],
+  "notes": [
+   "The order code is MCP3301, grade letter, temperature letter, then /package. MCP3301T in place of MCP3301 is the same part on tape and reel.",
+   "MCP3301-CI/SN is the C-grade industrial part in 150 mil SOIC."
+  ]
+ },
+ "pins": [
+  {
+   "package": "MSOP, PDIP, SOIC",
+   "page": 12,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VREF",
+     "type": "analog in",
+     "function": "Reference voltage input. Sets the full-scale input span and the LSB size; any instability of the reference source shows directly in the conversion result."
+    },
+    {
+     "pin": "2",
+     "name": "IN(+)",
+     "type": "analog in",
+     "function": "Positive analog input. Absolute range VSS - 0.3 V to VDD + 0.3 V; full scale is the magnitude of IN(+) - IN(-)."
+    },
+    {
+     "pin": "3",
+     "name": "IN(-)",
+     "type": "analog in",
+     "function": "Negative analog input. Absolute range VSS - 0.3 V to VDD + 0.3 V."
+    },
+    {
+     "pin": "4",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground. Tie to the analog ground plane where the board has one."
+    },
+    {
+     "pin": "5",
+     "name": "CS/SHDN",
+     "type": "digital in",
+     "function": "Chip select, active low; driving it low starts communication. Driving it high ends a conversion and puts the part in low-power standby. It must go high between conversions and cannot be held low across several."
+    },
+    {
+     "pin": "6",
+     "name": "DOUT",
+     "type": "digital out",
+     "function": "SPI serial data output. Shifts out the conversion result; changes on each falling clock edge. High impedance while CS/SHDN is high."
+    },
+    {
+     "pin": "7",
+     "name": "CLK",
+     "type": "digital in",
+     "function": "SPI serial clock. Starts the sample and clocks out each result bit as it is converted; its speed is bounded by the source impedance and by the 85 kHz minimum during conversion."
+    },
+    {
+     "pin": "8",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply, +4.5 V to 5.5 V for specified performance (the part runs from 2.7 V). A 0.1 µF ceramic bypass capacitor goes as close to this pin as possible."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VDD",
+     "7.0V"
+    ],
+    [
+     "All inputs and outputs w.r.t. VSS",
+     "-0.3V to VDD +0.3V"
+    ],
+    [
+     "Storage temperature",
+     "-65°C to +150°C"
+    ],
+    [
+     "Ambient temperature with power applied",
+     "-65°C to +125°C"
+    ],
+    [
+     "Maximum Junction Temperature",
+     "150°C"
+    ],
+    [
+     "ESD protection on all pins (HBM)",
+     "> 4 kV"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these ratings can damage the part permanently; they are not operating conditions, and long exposure at these limits can reduce reliability."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: conversion rate, DC accuracy, dynamic performance",
+   "page": 2,
+   "conditions": "VDD = 5 V, VSS = 0 V, VREF = 5 V unless noted; full differential input (circuit full-diff-test) with the common-mode voltage fixed at 2.5 V; TAMB = -40 °C to +85 °C (Note 7); FSAMPLE = 100 ksps with FCLK = 17 × FSAMPLE.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Maximum Sampling Frequency",
+     "FSAMPLE",
+     "—",
+     "—",
+     "100",
+     "ksps",
+     "See FCLK specifications (Note 8)"
+    ],
+    [
+     "Conversion Time",
+     "tCONV",
+     "",
+     "13",
+     "",
+     "CLK periods",
+     ""
+    ],
+    [
+     "Acquisition Time",
+     "tACQ",
+     "",
+     "1.5",
+     "",
+     "CLK periods",
+     ""
+    ],
+    [
+     "Resolution",
+     "",
+     "",
+     "12 data bits + sign",
+     "",
+     "bits",
+     ""
+    ],
+    [
+     "Integral Nonlinearity",
+     "INL",
+     "—",
+     "±0.5",
+     "±1",
+     "LSB",
+     "MCP3301-B"
+    ],
+    [
+     "Integral Nonlinearity",
+     "INL",
+     "—",
+     "±1",
+     "±2",
+     "LSB",
+     "MCP3301-C"
+    ],
+    [
+     "Differential Nonlinearity",
+     "DNL",
+     "—",
+     "±0.5",
+     "±1",
+     "LSB",
+     "Monotonic with no missing codes over temperature"
+    ],
+    [
+     "Positive Gain Error",
+     "",
+     "-3",
+     "-0.75",
+     "+2",
+     "LSB",
+     ""
+    ],
+    [
+     "Negative Gain Error",
+     "",
+     "-3",
+     "-0.5",
+     "+2",
+     "LSB",
+     ""
+    ],
+    [
+     "Offset Error",
+     "",
+     "-3",
+     "+3",
+     "+6",
+     "LSB",
+     ""
+    ],
+    [
+     "Total Harmonic Distortion",
+     "THD",
+     "—",
+     "-91",
+     "—",
+     "dB",
+     "Note 3"
+    ],
+    [
+     "Signal to Noise and Distortion",
+     "SINAD",
+     "—",
+     "78",
+     "—",
+     "dB",
+     "Note 3"
+    ],
+    [
+     "Spurious Free Dynamic Range",
+     "SFDR",
+     "—",
+     "92",
+     "—",
+     "dB",
+     "Note 3"
+    ],
+    [
+     "Common-Mode Rejection",
+     "CMRR",
+     "—",
+     "79",
+     "—",
+     "dB",
+     "Note 6"
+    ],
+    [
+     "Power Supply Rejection",
+     "PSR",
+     "—",
+     "74",
+     "—",
+     "dB",
+     "Note 4"
+    ]
+   ],
+   "notes": [
+    "Note 1: set by characterization; not tested on every part.",
+    "Note 2: the typical curves give converter performance against the VREF level.",
+    "Note 3: VIN = 0.1 V to 4.9 V at 1 kHz.",
+    "Note 4: VDD = 5 V DC with ±500 mVP-P at 1 kHz superimposed, from the circuit psrr-test.",
+    "Note 5: the maximum clock frequency limit must also be met.",
+    "Note 6: VREF = 400 mV, VIN = 0.1 V to 4.9 V at 1 kHz.",
+    "Note 7: MSOP parts are specified at 25 °C and +85 °C only.",
+    "Note 8: at slow sample rates the clock frequency is limited by the minimum clock speed during conversion (operation: Minimum clock speed).",
+    "Note 9: performance is specified for supplies of 4.5 V to 5.5 V."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: reference input, analog inputs, digital input/output, timing",
+   "page": 3,
+   "conditions": "VDD = 5 V, VSS = 0 V, VREF = 5 V unless noted; full differential input (circuit full-diff-test) with the common-mode voltage fixed at 2.5 V; TAMB = -40 °C to +85 °C (Note 7); FSAMPLE = 100 ksps with FCLK = 17 × FSAMPLE.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Reference Voltage Range",
+     "",
+     "0.4",
+     "—",
+     "VDD",
+     "V",
+     "Note 2"
+    ],
+    [
+     "Reference Current Drain",
+     "",
+     "—",
+     "100",
+     "150",
+     "µA",
+     ""
+    ],
+    [
+     "Reference Current Drain",
+     "",
+     "—",
+     "0.001",
+     "3",
+     "µA",
+     "CS = VDD = 5V"
+    ],
+    [
+     "Full-Scale Input Span",
+     "IN(+)-IN(-)",
+     "-VREF",
+     "—",
+     "VREF",
+     "V",
+     ""
+    ],
+    [
+     "Absolute Input Voltage",
+     "IN(+)",
+     "-0.3",
+     "—",
+     "VDD + 0.3",
+     "V",
+     ""
+    ],
+    [
+     "Absolute Input Voltage",
+     "IN(-)",
+     "-0.3",
+     "—",
+     "VDD + 0.3",
+     "V",
+     ""
+    ],
+    [
+     "Leakage Current",
+     "",
+     "—",
+     "0.001",
+     "±1",
+     "µA",
+     ""
+    ],
+    [
+     "Switch Resistance",
+     "RS",
+     "—",
+     "1",
+     "—",
+     "kΩ",
+     "See table: Analog input model"
+    ],
+    [
+     "Sample Capacitor",
+     "CSAMPLE",
+     "—",
+     "25",
+     "—",
+     "pF",
+     "See table: Analog input model"
+    ],
+    [
+     "Data Coding Format",
+     "",
+     "",
+     "Binary Two's Complement",
+     "",
+     "",
+     ""
+    ],
+    [
+     "High Level Input Voltage",
+     "VIH",
+     "0.7 VDD",
+     "—",
+     "—",
+     "V",
+     ""
+    ],
+    [
+     "Low Level Input Voltage",
+     "VIL",
+     "—",
+     "—",
+     "0.3 VDD",
+     "V",
+     ""
+    ],
+    [
+     "High Level Output Voltage",
+     "VOH",
+     "4.1",
+     "—",
+     "—",
+     "V",
+     "IOH = -1 mA, VDD = 4.5V"
+    ],
+    [
+     "Low Level Output Voltage",
+     "VOL",
+     "—",
+     "—",
+     "0.4",
+     "V",
+     "IOL = 1 mA, VDD = 4.5V"
+    ],
+    [
+     "Input Leakage Current",
+     "ILI",
+     "-10",
+     "—",
+     "10",
+     "µA",
+     "VIN = VSS or VDD"
+    ],
+    [
+     "Output Leakage Current",
+     "ILO",
+     "-10",
+     "—",
+     "10",
+     "µA",
+     "VOUT = VSS or VDD"
+    ],
+    [
+     "Pin Capacitance",
+     "CIN, COUT",
+     "—",
+     "—",
+     "10",
+     "pF",
+     "TAMB = 25°C, f = 1 MHz, Note 1"
+    ],
+    [
+     "Clock Frequency (Note 8)",
+     "FCLK",
+     "0.085",
+     "—",
+     "1.7",
+     "MHz",
+     "VDD = 5V, FSAMPLE = 100 ksps"
+    ],
+    [
+     "Clock High Time",
+     "tHI",
+     "275",
+     "—",
+     "—",
+     "ns",
+     "Note 5"
+    ],
+    [
+     "Clock Low Time",
+     "tLO",
+     "275",
+     "—",
+     "—",
+     "ns",
+     "Note 5"
+    ],
+    [
+     "CS Fall To First Rising CLK Edge",
+     "tSUCS",
+     "100",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "CLK Fall To Output Data Valid",
+     "tDO",
+     "—",
+     "—",
+     "125",
+     "ns",
+     "VDD = 5V, see circuit load-tr-tf-tdo"
+    ],
+    [
+     "CLK Fall To Output Data Valid",
+     "tDO",
+     "—",
+     "—",
+     "200",
+     "ns",
+     "VDD = 2.7V, see circuit load-tr-tf-tdo"
+    ],
+    [
+     "CLK Fall To Output Enable",
+     "tEN",
+     "—",
+     "—",
+     "125",
+     "ns",
+     "VDD = 5V, see circuit load-tr-tf-tdo"
+    ],
+    [
+     "CLK Fall To Output Enable",
+     "tEN",
+     "—",
+     "—",
+     "200",
+     "ns",
+     "VDD = 2.7V, see circuit load-tr-tf-tdo"
+    ],
+    [
+     "CS Rise To Output Disable",
+     "tDIS",
+     "—",
+     "—",
+     "100",
+     "ns",
+     "See test circuit load-tr-tf-tdo; Note 1"
+    ],
+    [
+     "CS Disable Time",
+     "tCSH",
+     "580",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "DOUT Rise Time",
+     "tR",
+     "—",
+     "—",
+     "100",
+     "ns",
+     "See test circuit load-tr-tf-tdo; Note 1"
+    ],
+    [
+     "DOUT Fall Time",
+     "tF",
+     "—",
+     "—",
+     "100",
+     "ns",
+     "See test circuit load-tr-tf-tdo; Note 1"
+    ]
+   ],
+   "notes": [
+    "Note 1: set by characterization; not tested on every part.",
+    "Note 2: the typical curves give converter performance against the VREF level.",
+    "Note 3: VIN = 0.1 V to 4.9 V at 1 kHz.",
+    "Note 4: VDD = 5 V DC with ±500 mVP-P at 1 kHz superimposed, from the circuit psrr-test.",
+    "Note 5: the maximum clock frequency limit must also be met.",
+    "Note 6: VREF = 400 mV, VIN = 0.1 V to 4.9 V at 1 kHz.",
+    "Note 7: MSOP parts are specified at 25 °C and +85 °C only.",
+    "Note 8: at slow sample rates the clock frequency is limited by the minimum clock speed during conversion (operation: Minimum clock speed).",
+    "Note 9: performance is specified for supplies of 4.5 V to 5.5 V.",
+    "CS is the active-low CS/SHDN pin.",
+    "The tEN and tDIS limits refer to the circuit load-tr-tf-tdo; the tEN and tDIS waveforms are measured with the circuit load-tdis-ten."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: power requirements, temperature ranges, thermal package resistance",
+   "page": 4,
+   "conditions": "VDD = 5 V, VSS = 0 V, VREF = 5 V unless noted; full differential input (circuit full-diff-test) with the common-mode voltage fixed at 2.5 V; TAMB = -40 °C to +85 °C (Note 7); FSAMPLE = 100 ksps with FCLK = 17 × FSAMPLE.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Operating Voltage",
+     "VDD",
+     "4.5",
+     "—",
+     "5.5",
+     "V",
+     "Note 9"
+    ],
+    [
+     "Operating Current",
+     "IDD",
+     "—",
+     "300",
+     "450",
+     "µA",
+     "VDD, VREF = 5V, DOUT unloaded"
+    ],
+    [
+     "Operating Current",
+     "IDD",
+     "—",
+     "200",
+     "—",
+     "µA",
+     "VDD, VREF = 2.7V, DOUT unloaded"
+    ],
+    [
+     "Standby Current",
+     "IDDS",
+     "—",
+     "0.05",
+     "1",
+     "µA",
+     "CS = VDD = 5.0V"
+    ],
+    [
+     "Specified Temperature Range",
+     "TA",
+     "-40",
+     "—",
+     "+85",
+     "°C",
+     ""
+    ],
+    [
+     "Operating Temperature Range",
+     "TA",
+     "-40",
+     "—",
+     "+85",
+     "°C",
+     ""
+    ],
+    [
+     "Storage Temperature Range",
+     "TA",
+     "-65",
+     "—",
+     "+150",
+     "°C",
+     ""
+    ],
+    [
+     "Thermal Resistance, 8L-MSOP",
+     "θJA",
+     "—",
+     "206",
+     "—",
+     "°C/W",
+     ""
+    ],
+    [
+     "Thermal Resistance, 8L-PDIP",
+     "θJA",
+     "—",
+     "85",
+     "—",
+     "°C/W",
+     ""
+    ],
+    [
+     "Thermal Resistance, 8L-SOIC",
+     "θJA",
+     "—",
+     "163",
+     "—",
+     "°C/W",
+     ""
+    ]
+   ],
+   "notes": [
+    "Note 1: set by characterization; not tested on every part.",
+    "Note 2: the typical curves give converter performance against the VREF level.",
+    "Note 3: VIN = 0.1 V to 4.9 V at 1 kHz.",
+    "Note 4: VDD = 5 V DC with ±500 mVP-P at 1 kHz superimposed, from the circuit psrr-test.",
+    "Note 5: the maximum clock frequency limit must also be met.",
+    "Note 6: VREF = 400 mV, VIN = 0.1 V to 4.9 V at 1 kHz.",
+    "Note 7: MSOP parts are specified at 25 °C and +85 °C only.",
+    "Note 8: at slow sample rates the clock frequency is limited by the minimum clock speed during conversion (operation: Minimum clock speed).",
+    "Note 9: performance is specified for supplies of 4.5 V to 5.5 V."
+   ]
+  },
+  {
+   "title": "Analog input model",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "element",
+    "symbol",
+    "value"
+   ],
+   "rows": [
+    [
+     "Input pin capacitance",
+     "CPIN",
+     "7 pF"
+    ],
+    [
+     "Protection junction threshold, to VDD and to VSS",
+     "VT",
+     "0.6V"
+    ],
+    [
+     "Leakage current at the pin",
+     "ILEAKAGE",
+     "±1 nA"
+    ],
+    [
+     "Sampling switch resistance",
+     "RSS",
+     "1 kΩ"
+    ],
+    [
+     "Sample/hold capacitance (DAC capacitance)",
+     "CSAMPLE",
+     "25 pF"
+    ]
+   ],
+   "notes": [
+    "The source impedance RS and the source VA sit outside the pin; RS adds to RSS in the charging path of CSAMPLE."
+   ]
+  },
+  {
+   "title": "Binary two's complement output code examples",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "analog input level",
+    "sign bit",
+    "binary data",
+    "decimal data"
+   ],
+   "rows": [
+    [
+     "Full scale positive: (IN+)-(IN-) = VREF-1 LSB",
+     "0",
+     "1111 1111 1111",
+     "+4095"
+    ],
+    [
+     "(IN+)-(IN-) = VREF-2 LSB",
+     "0",
+     "1111 1111 1110",
+     "+4094"
+    ],
+    [
+     "IN+ = (IN-) +2 LSB",
+     "0",
+     "0000 0000 0010",
+     "+2"
+    ],
+    [
+     "IN+ = (IN-) +1 LSB",
+     "0",
+     "0000 0000 0001",
+     "+1"
+    ],
+    [
+     "IN+ = IN-",
+     "0",
+     "0000 0000 0000",
+     "0"
+    ],
+    [
+     "IN+ = (IN-) - 1 LSB",
+     "1",
+     "1111 1111 1111",
+     "-1"
+    ],
+    [
+     "IN+ = (IN-) - 2 LSB",
+     "1",
+     "1111 1111 1110",
+     "-2"
+    ],
+    [
+     "IN+ - IN- = VREF+1 LSB",
+     "1",
+     "0000 0000 0001",
+     "-4095"
+    ],
+    [
+     "Full scale negative: IN+ - IN- = -VREF",
+     "1",
+     "0000 0000 0000",
+     "-4096"
+    ]
+   ],
+   "notes": [
+    "Misprint: the -4095 row should read IN+ - IN- = -VREF + 1 LSB."
+   ]
+  },
+  {
+   "title": "Common-mode range against VREF",
+   "page": 16,
+   "conditions": "VDD = 5V",
+   "columns": [
+    "input",
+    "VREF",
+    "common-mode range, low",
+    "common-mode range, high"
+   ],
+   "rows": [
+    [
+     "Full differential",
+     "2.5 V",
+     "0.95V",
+     "4.05V"
+    ],
+    [
+     "Full differential",
+     "5.0 V",
+     "2.3V",
+     "2.8V"
+    ],
+    [
+     "Pseudo differential",
+     "1.25 V",
+     "0.95V",
+     "4.05V"
+    ],
+    [
+     "Pseudo differential",
+     "2.5 V",
+     "2.3V",
+     "2.8V"
+    ]
+   ],
+   "notes": [
+    "Using the whole conversion range, the allowed common-mode window narrows steadily as VREF rises."
+   ]
+  },
+  {
+   "title": "SPI byte contents, 16 clocks in two 8-bit transfers",
+   "page": 21,
+   "conditions": "SPI mode 0,0 or 1,1",
+   "columns": [
+    "byte",
+    "bits, first to last"
+   ],
+   "rows": [
+    [
+     "First 8 clocks",
+     "?, ?, 0 (null bit), SB, B11, B10, B9, B8"
+    ],
+    [
+     "Second 8 clocks",
+     "B7, B6, B5, B4, B3, B2, B1, B0"
+    ]
+   ],
+   "notes": [
+    "? is an unknown bit: DOUT is high impedance for the first two clocks. LSB-first data already starts to leave the part at the clock-16 falling edge."
+   ]
+  },
+  {
+   "title": "Package marking",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "package",
+    "marking format",
+    "example"
+   ],
+   "rows": [
+    [
+     "8-lead MSOP (3x3 mm)",
+     "XXXXXX / YWWNNN",
+     "3301CI / 130256"
+    ],
+    [
+     "8-lead PDIP (300 mil)",
+     "XXXXXXXX / XXXXXNNN / YYWW",
+     "3301-BI / I/P e3 256 / 1130"
+    ],
+    [
+     "8-lead SOIC (3.90 mm)",
+     "XXXXXXXX / XXXXYYWW / NNN",
+     "3301-BI / SN e3 1130"
+    ]
+   ],
+   "notes": [
+    "XX...X: information specific to the customer; Y: last digit of the year; YY: last two digits of the year; WW: week code, week 01 holding January 1; NNN: traceability code (letters and digits); e3: the JEDEC lead-free mark for a matte tin finish. If the part number does not fit on one line it carries over to the next, leaving fewer characters for customer information.",
+    "*: the package is Pb-free; the e3 mark is on the outer packaging."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Integral nonlinearity (INL) vs. sample rate",
+   "page": 6,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Sample rate",
+    "unit": "ksps",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "INL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive INL",
+     "points": [
+      [
+       3.91,
+       0.3862
+      ],
+      [
+       6.877,
+       0.3778
+      ],
+      [
+       12.41,
+       0.3778
+      ],
+      [
+       38.43,
+       0.4053
+      ],
+      [
+       55.83,
+       0.4095
+      ],
+      [
+       99.93,
+       0.3693
+      ],
+      [
+       175.0,
+       0.3291
+      ]
+     ]
+    },
+    {
+     "label": "Negative INL",
+     "points": [
+      [
+       3.91,
+       -0.5577
+      ],
+      [
+       8.9,
+       -0.5386
+      ],
+      [
+       24.54,
+       -0.5344
+      ],
+      [
+       175.0,
+       -0.5302
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Integral nonlinearity (INL) vs. VREF",
+   "page": 6,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "INL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive INL",
+     "points": [
+      [
+       0.09949,
+       1.033
+      ],
+      [
+       0.1578,
+       0.6526
+      ],
+      [
+       0.1784,
+       0.5808
+      ],
+      [
+       0.2162,
+       0.509
+      ],
+      [
+       0.2471,
+       0.471
+      ],
+      [
+       0.3191,
+       0.4287
+      ],
+      [
+       0.5319,
+       0.378
+      ],
+      [
+       0.9746,
+       0.3442
+      ],
+      [
+       2.982,
+       0.34
+      ],
+      [
+       5.0,
+       0.3696
+      ]
+     ]
+    },
+    {
+     "label": "Negative INL",
+     "points": [
+      [
+       0.09949,
+       -1.924
+      ],
+      [
+       0.1578,
+       -1.214
+      ],
+      [
+       0.1921,
+       -1.024
+      ],
+      [
+       0.2265,
+       -0.9187
+      ],
+      [
+       0.2882,
+       -0.8131
+      ],
+      [
+       0.3706,
+       -0.7328
+      ],
+      [
+       0.4907,
+       -0.6653
+      ],
+      [
+       0.6589,
+       -0.6019
+      ],
+      [
+       0.9334,
+       -0.5343
+      ],
+      [
+       1.211,
+       -0.5554
+      ],
+      [
+       3.099,
+       -0.5259
+      ],
+      [
+       5.0,
+       -0.5343
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Integral nonlinearity (INL) vs. code (representative part)",
+   "page": 6,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Code",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "INL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "INL",
+     "points": [
+      [
+       -4084.0,
+       -0.03842
+      ],
+      [
+       -4055.0,
+       0.05704
+      ],
+      [
+       -4032.0,
+       0.078
+      ],
+      [
+       -4026.0,
+       0.01513
+      ],
+      [
+       -4009.0,
+       0.005821
+      ],
+      [
+       -4003.0,
+       0.1106
+      ],
+      [
+       -3986.0,
+       0.1059
+      ],
+      [
+       -3963.0,
+       -0.078
+      ],
+      [
+       -3957.0,
+       -0.08265
+      ],
+      [
+       -3928.0,
+       -0.005821
+      ],
+      [
+       -3904.0,
+       0.03143
+      ],
+      [
+       -3899.0,
+       -0.03842
+      ],
+      [
+       -3881.0,
+       -0.0454
+      ],
+      [
+       -3875.0,
+       0.04307
+      ],
+      [
+       -3841.0,
+       0.1269
+      ],
+      [
+       -3835.0,
+       -0.005821
+      ],
+      [
+       -3823.0,
+       -0.01979
+      ],
+      [
+       -3800.0,
+       0.06636
+      ],
+      [
+       -3794.0,
+       0.08033
+      ],
+      [
+       -3788.0,
+       0.03143
+      ],
+      [
+       -3765.0,
+       0.02678
+      ],
+      [
+       -3742.0,
+       0.1129
+      ],
+      [
+       -3719.0,
+       0.1222
+      ],
+      [
+       -3707.0,
+       -0.04773
+      ],
+      [
+       -3695.0,
+       -0.05704
+      ],
+      [
+       -3672.0,
+       0.0291
+      ],
+      [
+       -3666.0,
+       0.0454
+      ],
+      [
+       -3649.0,
+       -0.008149
+      ],
+      [
+       -3637.0,
+       -0.01513
+      ],
+      [
+       -3614.0,
+       0.06868
+      ],
+      [
+       -3603.0,
+       0.07567
+      ],
+      [
+       -3579.0,
+       -0.08498
+      ],
+      [
+       -3574.0,
+       -0.1059
+      ],
+      [
+       -3544.0,
+       -0.01281
+      ],
+      [
+       -3521.0,
+       0.003493
+      ],
+      [
+       -3515.0,
+       -0.05239
+      ],
+      [
+       -3504.0,
+       -0.05471
+      ],
+      [
+       -3486.0,
+       0.02678
+      ],
+      [
+       -3475.0,
+       0.03609
+      ],
+      [
+       -3452.0,
+       -0.1315
+      ],
+      [
+       -3446.0,
+       -0.1432
+      ],
+      [
+       -3417.0,
+       -0.0617
+      ],
+      [
+       -3394.0,
+       -0.04074
+      ],
+      [
+       -3388.0,
+       -0.09895
+      ],
+      [
+       -3370.0,
+       -0.1106
+      ],
+      [
+       -3359.0,
+       -0.02445
+      ],
+      [
+       -3330.0,
+       0.05471
+      ],
+      [
+       -3324.0,
+       -0.08265
+      ],
+      [
+       -3318.0,
+       -0.1059
+      ],
+      [
+       -3289.0,
+       -0.01048
+      ],
+      [
+       -3266.0,
+       -0.003493
+      ],
+      [
+       -3260.0,
+       -0.05472
+      ],
+      [
+       -3254.0,
+       -0.05704
+      ],
+      [
+       -3231.0,
+       0.02212
+      ],
+      [
+       -3214.0,
+       0.03143
+      ],
+      [
+       -3196.0,
+       -0.1339
+      ],
+      [
+       -3190.0,
+       -0.1455
+      ],
+      [
+       -3161.0,
+       -0.0617
+      ],
+      [
+       -3138.0,
+       -0.05006
+      ],
+      [
+       -3132.0,
+       -0.09662
+      ],
+      [
+       -3115.0,
+       -0.1129
+      ],
+      [
+       -3103.0,
+       -0.02678
+      ],
+      [
+       -3074.0,
+       0.1432
+      ],
+      [
+       -3074.0,
+       -0.06403
+      ],
+      [
+       -3063.0,
+       -0.03376
+      ],
+      [
+       -3034.0,
+       0.05239
+      ],
+      [
+       -3010.0,
+       0.07567
+      ],
+      [
+       -3005.0,
+       0.0291
+      ],
+      [
+       -2987.0,
+       0.01746
+      ],
+      [
+       -2976.0,
+       0.0943
+      ],
+      [
+       -2964.0,
+       0.1036
+      ],
+      [
+       -2941.0,
+       -0.05471
+      ],
+      [
+       -2935.0,
+       -0.06868
+      ],
+      [
+       -2906.0,
+       0.003493
+      ],
+      [
+       -2883.0,
+       0.02212
+      ],
+      [
+       -2877.0,
+       -0.0291
+      ],
+      [
+       -2859.0,
+       -0.0291
+      ],
+      [
+       -2848.0,
+       0.04773
+      ],
+      [
+       -2819.0,
+       0.2014
+      ],
+      [
+       -2819.0,
+       0.01746
+      ],
+      [
+       -2807.0,
+       0.06636
+      ],
+      [
+       -2778.0,
+       0.1385
+      ],
+      [
+       -2755.0,
+       0.1641
+      ],
+      [
+       -2749.0,
+       0.1176
+      ],
+      [
+       -2743.0,
+       0.1129
+      ],
+      [
+       -2720.0,
+       0.1828
+      ],
+      [
+       -2703.0,
+       0.1921
+      ],
+      [
+       -2685.0,
+       0.04075
+      ],
+      [
+       -2679.0,
+       0.02212
+      ],
+      [
+       -2650.0,
+       0.09895
+      ],
+      [
+       -2633.0,
+       0.08032
+      ],
+      [
+       -2627.0,
+       0.1199
+      ],
+      [
+       -2610.0,
+       0.06403
+      ],
+      [
+       -2592.0,
+       0.1455
+      ],
+      [
+       -2575.0,
+       0.1478
+      ],
+      [
+       -2558.0,
+       -0.005822
+      ],
+      [
+       -2552.0,
+       -0.02445
+      ],
+      [
+       -2523.0,
+       0.05704
+      ],
+      [
+       -2494.0,
+       0.06403
+      ],
+      [
+       -2494.0,
+       0.01979
+      ],
+      [
+       -2476.0,
+       0.001164
+      ],
+      [
+       -2465.0,
+       0.08033
+      ],
+      [
+       -2447.0,
+       0.1059
+      ],
+      [
+       -2430.0,
+       -0.05704
+      ],
+      [
+       -2424.0,
+       -0.07567
+      ],
+      [
+       -2395.0,
+       0.001164
+      ],
+      [
+       -2383.0,
+       0.01048
+      ],
+      [
+       -2366.0,
+       -0.0291
+      ],
+      [
+       -2348.0,
+       -0.03376
+      ],
+      [
+       -2337.0,
+       0.03842
+      ],
+      [
+       -2319.0,
+       0.05937
+      ],
+      [
+       -2302.0,
+       -0.08498
+      ],
+      [
+       -2296.0,
+       -0.1083
+      ],
+      [
+       -2267.0,
+       -0.03609
+      ],
+      [
+       -2256.0,
+       -0.05472
+      ],
+      [
+       -2244.0,
+       -0.01979
+      ],
+      [
+       -2221.0,
+       -0.078
+      ],
+      [
+       -2209.0,
+       -0.001164
+      ],
+      [
+       -2192.0,
+       0.008148
+      ],
+      [
+       -2174.0,
+       -0.1455
+      ],
+      [
+       -2169.0,
+       -0.1641
+      ],
+      [
+       -2139.0,
+       -0.08265
+      ],
+      [
+       -2110.0,
+       -0.06403
+      ],
+      [
+       -2110.0,
+       -0.1059
+      ],
+      [
+       -2093.0,
+       -0.1153
+      ],
+      [
+       -2081.0,
+       -0.05239
+      ],
+      [
+       -2047.0,
+       0.04307
+      ],
+      [
+       -2047.0,
+       -0.1036
+      ],
+      [
+       -2041.0,
+       -0.1246
+      ],
+      [
+       -2012.0,
+       -0.04075
+      ],
+      [
+       -1983.0,
+       -0.02678
+      ],
+      [
+       -1983.0,
+       -0.05937
+      ],
+      [
+       -1965.0,
+       -0.078
+      ],
+      [
+       -1954.0,
+       -0.01281
+      ],
+      [
+       -1936.0,
+       0.01048
+      ],
+      [
+       -1919.0,
+       -0.1432
+      ],
+      [
+       -1913.0,
+       -0.1572
+      ],
+      [
+       -1884.0,
+       -0.09197
+      ],
+      [
+       -1855.0,
+       -0.07567
+      ],
+      [
+       -1855.0,
+       -0.1106
+      ],
+      [
+       -1838.0,
+       -0.1246
+      ],
+      [
+       -1826.0,
+       -0.05937
+      ],
+      [
+       -1814.0,
+       -0.07101
+      ],
+      [
+       -1791.0,
+       0.06403
+      ],
+      [
+       -1785.0,
+       -0.05937
+      ],
+      [
+       -1756.0,
+       0.02212
+      ],
+      [
+       -1751.0,
+       0.03376
+      ],
+      [
+       -1727.0,
+       -0.005821
+      ],
+      [
+       -1710.0,
+       -0.01513
+      ],
+      [
+       -1698.0,
+       0.05006
+      ],
+      [
+       -1681.0,
+       0.06868
+      ],
+      [
+       -1663.0,
+       -0.08498
+      ],
+      [
+       -1652.0,
+       -0.1059
+      ],
+      [
+       -1629.0,
+       -0.0291
+      ],
+      [
+       -1623.0,
+       -0.0291
+      ],
+      [
+       -1600.0,
+       -0.05704
+      ],
+      [
+       -1594.0,
+       -0.0617
+      ],
+      [
+       -1571.0,
+       -0.003493
+      ],
+      [
+       -1553.0,
+       0.01281
+      ],
+      [
+       -1536.0,
+       -0.1292
+      ],
+      [
+       -1530.0,
+       -0.1525
+      ],
+      [
+       -1501.0,
+       -0.09197
+      ],
+      [
+       -1472.0,
+       -0.07101
+      ],
+      [
+       -1472.0,
+       -0.1036
+      ],
+      [
+       -1454.0,
+       -0.1106
+      ],
+      [
+       -1443.0,
+       -0.04307
+      ],
+      [
+       -1425.0,
+       -0.02445
+      ],
+      [
+       -1408.0,
+       -0.1758
+      ],
+      [
+       -1402.0,
+       -0.1967
+      ],
+      [
+       -1373.0,
+       -0.1269
+      ],
+      [
+       -1344.0,
+       -0.1153
+      ],
+      [
+       -1344.0,
+       -0.1409
+      ],
+      [
+       -1327.0,
+       -0.1572
+      ],
+      [
+       -1315.0,
+       -0.08964
+      ],
+      [
+       -1280.0,
+       -0.078
+      ],
+      [
+       -1280.0,
+       -0.1735
+      ],
+      [
+       -1269.0,
+       -0.1991
+      ],
+      [
+       -1245.0,
+       -0.1269
+      ],
+      [
+       -1228.0,
+       -0.1432
+      ],
+      [
+       -1216.0,
+       -0.1176
+      ],
+      [
+       -1199.0,
+       -0.1548
+      ],
+      [
+       -1187.0,
+       -0.08964
+      ],
+      [
+       -1164.0,
+       -0.07101
+      ],
+      [
+       -1153.0,
+       -0.2247
+      ],
+      [
+       -1141.0,
+       -0.248
+      ],
+      [
+       -1118.0,
+       -0.1804
+      ],
+      [
+       -1112.0,
+       -0.1665
+      ],
+      [
+       -1089.0,
+       -0.1944
+      ],
+      [
+       -1071.0,
+       -0.2014
+      ],
+      [
+       -1060.0,
+       -0.1432
+      ],
+      [
+       -1048.0,
+       -0.1478
+      ],
+      [
+       -1025.0,
+       0.005821
+      ],
+      [
+       -1019.0,
+       -0.1106
+      ],
+      [
+       -989.9,
+       -0.04773
+      ],
+      [
+       -978.3,
+       -0.03376
+      ],
+      [
+       -960.9,
+       -0.0617
+      ],
+      [
+       -943.5,
+       -0.06636
+      ],
+      [
+       -926.1,
+       -0.01281
+      ],
+      [
+       -908.7,
+       0.00815
+      ],
+      [
+       -897.0,
+       -0.1385
+      ],
+      [
+       -885.4,
+       -0.1502
+      ],
+      [
+       -862.2,
+       -0.08731
+      ],
+      [
+       -856.4,
+       -0.078
+      ],
+      [
+       -833.2,
+       -0.1106
+      ],
+      [
+       -810.0,
+       -0.1246
+      ],
+      [
+       -804.2,
+       -0.0617
+      ],
+      [
+       -792.5,
+       -0.07567
+      ],
+      [
+       -769.3,
+       0.01746
+      ],
+      [
+       -757.7,
+       -0.08964
+      ],
+      [
+       -734.5,
+       -0.0291
+      ],
+      [
+       -728.7,
+       -0.01281
+      ],
+      [
+       -705.5,
+       -0.04074
+      ],
+      [
+       -682.2,
+       -0.05239
+      ],
+      [
+       -676.4,
+       0.003493
+      ],
+      [
+       -653.2,
+       0.02678
+      ],
+      [
+       -641.6,
+       -0.1152
+      ],
+      [
+       -630.0,
+       -0.1362
+      ],
+      [
+       -606.8,
+       -0.06868
+      ],
+      [
+       -595.1,
+       -0.05471
+      ],
+      [
+       -577.7,
+       -0.08731
+      ],
+      [
+       -560.3,
+       -0.09662
+      ],
+      [
+       -542.9,
+       -0.03842
+      ],
+      [
+       -525.5,
+       -0.02212
+      ],
+      [
+       -513.9,
+       -0.1269
+      ],
+      [
+       -502.3,
+       -0.1548
+      ],
+      [
+       -479.0,
+       -0.08964
+      ],
+      [
+       -467.4,
+       -0.078
+      ],
+      [
+       -450.0,
+       -0.1059
+      ],
+      [
+       -432.6,
+       -0.1152
+      ],
+      [
+       -415.2,
+       -0.05471
+      ],
+      [
+       -403.6,
+       -0.03376
+      ],
+      [
+       -386.1,
+       -0.1851
+      ],
+      [
+       -374.5,
+       -0.2037
+      ],
+      [
+       -351.3,
+       -0.1502
+      ],
+      [
+       -345.5,
+       -0.1525
+      ],
+      [
+       -328.1,
+       -0.1246
+      ],
+      [
+       -299.0,
+       -0.1618
+      ],
+      [
+       -293.2,
+       -0.1106
+      ],
+      [
+       -258.4,
+       -0.078
+      ],
+      [
+       -258.4,
+       -0.1455
+      ],
+      [
+       -246.8,
+       -0.1781
+      ],
+      [
+       -223.6,
+       -0.1199
+      ],
+      [
+       -217.8,
+       -0.1222
+      ],
+      [
+       -212.0,
+       -0.1013
+      ],
+      [
+       -171.3,
+       -0.1339
+      ],
+      [
+       -159.7,
+       -0.08033
+      ],
+      [
+       -136.5,
+       -0.05472
+      ],
+      [
+       -130.7,
+       -0.1991
+      ],
+      [
+       -119.1,
+       -0.22
+      ],
+      [
+       -95.84,
+       -0.1618
+      ],
+      [
+       -90.04,
+       -0.1409
+      ],
+      [
+       -90.04,
+       -0.1735
+      ],
+      [
+       -49.4,
+       -0.1758
+      ],
+      [
+       -31.98,
+       -0.1176
+      ],
+      [
+       -26.17,
+       -0.1246
+      ],
+      [
+       -2.952,
+       0.001164
+      ],
+      [
+       2.855,
+       -0.03143
+      ],
+      [
+       8.66,
+       -0.1129
+      ],
+      [
+       31.88,
+       -0.08964
+      ],
+      [
+       43.5,
+       -0.04307
+      ],
+      [
+       84.14,
+       -0.08265
+      ],
+      [
+       89.94,
+       -0.03609
+      ],
+      [
+       113.2,
+       -0.005821
+      ],
+      [
+       124.8,
+       -0.1432
+      ],
+      [
+       136.4,
+       -0.1688
+      ],
+      [
+       153.8,
+       -0.1385
+      ],
+      [
+       159.6,
+       -0.1455
+      ],
+      [
+       165.4,
+       -0.08731
+      ],
+      [
+       206.1,
+       -0.1269
+      ],
+      [
+       217.7,
+       -0.0943
+      ],
+      [
+       240.9,
+       -0.05239
+      ],
+      [
+       252.5,
+       -0.1595
+      ],
+      [
+       264.1,
+       -0.1921
+      ],
+      [
+       275.7,
+       -0.1595
+      ],
+      [
+       287.3,
+       -0.1688
+      ],
+      [
+       293.1,
+       -0.1129
+      ],
+      [
+       339.6,
+       -0.1548
+      ],
+      [
+       345.4,
+       -0.1176
+      ],
+      [
+       374.4,
+       -0.07567
+      ],
+      [
+       380.2,
+       -0.1898
+      ],
+      [
+       386.0,
+       -0.1967
+      ],
+      [
+       391.8,
+       -0.241
+      ],
+      [
+       415.1,
+       -0.2154
+      ],
+      [
+       426.7,
+       -0.1572
+      ],
+      [
+       449.9,
+       -0.1688
+      ],
+      [
+       473.1,
+       -0.1991
+      ],
+      [
+       478.9,
+       -0.1688
+      ],
+      [
+       508.0,
+       -0.08731
+      ],
+      [
+       513.8,
+       -0.1083
+      ],
+      [
+       519.6,
+       -0.1665
+      ],
+      [
+       542.8,
+       -0.1432
+      ],
+      [
+       548.6,
+       -0.09197
+      ],
+      [
+       595.0,
+       -0.1292
+      ],
+      [
+       600.9,
+       -0.1013
+      ],
+      [
+       629.9,
+       -0.05006
+      ],
+      [
+       635.7,
+       -0.1898
+      ],
+      [
+       647.3,
+       -0.22
+      ],
+      [
+       664.7,
+       -0.1898
+      ],
+      [
+       670.5,
+       -0.1967
+      ],
+      [
+       699.6,
+       -0.1409
+      ],
+      [
+       722.8,
+       -0.1781
+      ],
+      [
+       728.6,
+       -0.1455
+      ],
+      [
+       734.4,
+       -0.1432
+      ],
+      [
+       763.4,
+       -0.08964
+      ],
+      [
+       769.2,
+       -0.02212
+      ],
+      [
+       775.0,
+       -0.09662
+      ],
+      [
+       798.3,
+       -0.08033
+      ],
+      [
+       809.9,
+       -0.01979
+      ],
+      [
+       850.5,
+       -0.05937
+      ],
+      [
+       856.3,
+       -0.03376
+      ],
+      [
+       885.3,
+       0.02445
+      ],
+      [
+       891.1,
+       -0.09662
+      ],
+      [
+       896.9,
+       -0.1036
+      ],
+      [
+       902.8,
+       -0.1502
+      ],
+      [
+       926.0,
+       -0.1292
+      ],
+      [
+       955.0,
+       -0.07101
+      ],
+      [
+       960.8,
+       -0.078
+      ],
+      [
+       978.2,
+       -0.1176
+      ],
+      [
+       989.8,
+       -0.08498
+      ],
+      [
+       1013.0,
+       -0.04074
+      ],
+      [
+       1025.0,
+       -0.08731
+      ],
+      [
+       1030.0,
+       -0.1339
+      ],
+      [
+       1054.0,
+       -0.1083
+      ],
+      [
+       1065.0,
+       -0.05471
+      ],
+      [
+       1106.0,
+       -0.09197
+      ],
+      [
+       1112.0,
+       -0.05239
+      ],
+      [
+       1141.0,
+       0.003493
+      ],
+      [
+       1147.0,
+       -0.0617
+      ],
+      [
+       1152.0,
+       -0.07101
+      ],
+      [
+       1158.0,
+       -0.1758
+      ],
+      [
+       1181.0,
+       -0.1548
+      ],
+      [
+       1205.0,
+       -0.09895
+      ],
+      [
+       1216.0,
+       -0.1106
+      ],
+      [
+       1239.0,
+       -0.1409
+      ],
+      [
+       1245.0,
+       -0.1129
+      ],
+      [
+       1269.0,
+       -0.05471
+      ],
+      [
+       1280.0,
+       -0.09895
+      ],
+      [
+       1298.0,
+       -0.1851
+      ],
+      [
+       1309.0,
+       -0.1735
+      ],
+      [
+       1321.0,
+       -0.1153
+      ],
+      [
+       1367.0,
+       -0.1222
+      ],
+      [
+       1367.0,
+       -0.1548
+      ],
+      [
+       1396.0,
+       -0.0617
+      ],
+      [
+       1402.0,
+       -0.1711
+      ],
+      [
+       1408.0,
+       -0.1781
+      ],
+      [
+       1414.0,
+       -0.2293
+      ],
+      [
+       1437.0,
+       -0.2084
+      ],
+      [
+       1443.0,
+       -0.1502
+      ],
+      [
+       1478.0,
+       -0.1572
+      ],
+      [
+       1489.0,
+       -0.1851
+      ],
+      [
+       1501.0,
+       -0.1665
+      ],
+      [
+       1524.0,
+       -0.09895
+      ],
+      [
+       1536.0,
+       -0.1292
+      ],
+      [
+       1541.0,
+       -0.1851
+      ],
+      [
+       1565.0,
+       -0.1804
+      ],
+      [
+       1588.0,
+       -0.1176
+      ],
+      [
+       1611.0,
+       -0.1292
+      ],
+      [
+       1623.0,
+       -0.1618
+      ],
+      [
+       1628.0,
+       -0.1385
+      ],
+      [
+       1652.0,
+       -0.08033
+      ],
+      [
+       1663.0,
+       -0.1478
+      ],
+      [
+       1669.0,
+       -0.2456
+      ],
+      [
+       1692.0,
+       -0.2293
+      ],
+      [
+       1704.0,
+       -0.1711
+      ],
+      [
+       1750.0,
+       -0.1804
+      ],
+      [
+       1750.0,
+       -0.2107
+      ],
+      [
+       1756.0,
+       -0.1804
+      ],
+      [
+       1779.0,
+       -0.1269
+      ],
+      [
+       1791.0,
+       -0.0454
+      ],
+      [
+       1791.0,
+       -0.1502
+      ],
+      [
+       1820.0,
+       -0.1036
+      ],
+      [
+       1849.0,
+       -0.0291
+      ],
+      [
+       1861.0,
+       -0.05006
+      ],
+      [
+       1872.0,
+       -0.078
+      ],
+      [
+       1884.0,
+       -0.0454
+      ],
+      [
+       1901.0,
+       0.003492
+      ],
+      [
+       1919.0,
+       -0.01979
+      ],
+      [
+       1936.0,
+       -0.1572
+      ],
+      [
+       1948.0,
+       -0.1409
+      ],
+      [
+       1959.0,
+       -0.07567
+      ],
+      [
+       2006.0,
+       -0.078
+      ],
+      [
+       2006.0,
+       -0.1106
+      ],
+      [
+       2012.0,
+       -0.08964
+      ],
+      [
+       2035.0,
+       -0.0291
+      ],
+      [
+       2046.0,
+       -0.0617
+      ],
+      [
+       2058.0,
+       -0.241
+      ],
+      [
+       2076.0,
+       -0.2224
+      ],
+      [
+       2105.0,
+       -0.1548
+      ],
+      [
+       2110.0,
+       -0.1641
+      ],
+      [
+       2134.0,
+       -0.2107
+      ],
+      [
+       2139.0,
+       -0.1874
+      ],
+      [
+       2163.0,
+       -0.1222
+      ],
+      [
+       2174.0,
+       -0.1502
+      ],
+      [
+       2192.0,
+       -0.2969
+      ],
+      [
+       2203.0,
+       -0.2782
+      ],
+      [
+       2232.0,
+       -0.2177
+      ],
+      [
+       2238.0,
+       -0.2247
+      ],
+      [
+       2256.0,
+       -0.2549
+      ],
+      [
+       2267.0,
+       -0.241
+      ],
+      [
+       2290.0,
+       -0.1688
+      ],
+      [
+       2302.0,
+       -0.1944
+      ],
+      [
+       2314.0,
+       -0.3271
+      ],
+      [
+       2331.0,
+       -0.3132
+      ],
+      [
+       2343.0,
+       -0.2456
+      ],
+      [
+       2366.0,
+       -0.2596
+      ],
+      [
+       2389.0,
+       -0.2922
+      ],
+      [
+       2395.0,
+       -0.2736
+      ],
+      [
+       2418.0,
+       -0.2061
+      ],
+      [
+       2430.0,
+       -0.2224
+      ],
+      [
+       2441.0,
+       -0.3597
+      ],
+      [
+       2459.0,
+       -0.3458
+      ],
+      [
+       2488.0,
+       -0.2782
+      ],
+      [
+       2494.0,
+       -0.2829
+      ],
+      [
+       2517.0,
+       -0.3295
+      ],
+      [
+       2523.0,
+       -0.3108
+      ],
+      [
+       2540.0,
+       -0.241
+      ],
+      [
+       2557.0,
+       -0.1665
+      ],
+      [
+       2557.0,
+       -0.2689
+      ],
+      [
+       2586.0,
+       -0.1898
+      ],
+      [
+       2598.0,
+       -0.1222
+      ],
+      [
+       2621.0,
+       -0.1385
+      ],
+      [
+       2644.0,
+       -0.1735
+      ],
+      [
+       2650.0,
+       -0.1548
+      ],
+      [
+       2674.0,
+       -0.08964
+      ],
+      [
+       2685.0,
+       -0.1083
+      ],
+      [
+       2697.0,
+       -0.2549
+      ],
+      [
+       2714.0,
+       -0.241
+      ],
+      [
+       2732.0,
+       -0.1758
+      ],
+      [
+       2749.0,
+       -0.1921
+      ],
+      [
+       2749.0,
+       -0.2247
+      ],
+      [
+       2778.0,
+       -0.2014
+      ],
+      [
+       2795.0,
+       -0.1409
+      ],
+      [
+       2813.0,
+       -0.06403
+      ],
+      [
+       2813.0,
+       -0.1641
+      ],
+      [
+       2848.0,
+       -0.09197
+      ],
+      [
+       2871.0,
+       -0.02445
+      ],
+      [
+       2877.0,
+       -0.02445
+      ],
+      [
+       2900.0,
+       -0.0617
+      ],
+      [
+       2906.0,
+       -0.05704
+      ],
+      [
+       2929.0,
+       0.01513
+      ],
+      [
+       2941.0,
+       0.001165
+      ],
+      [
+       2958.0,
+       -0.1618
+      ],
+      [
+       2970.0,
+       -0.1502
+      ],
+      [
+       2987.0,
+       -0.07334
+      ],
+      [
+       3004.0,
+       -0.08498
+      ],
+      [
+       3028.0,
+       -0.1246
+      ],
+      [
+       3033.0,
+       -0.09662
+      ],
+      [
+       3057.0,
+       -0.0291
+      ],
+      [
+       3068.0,
+       -0.02677
+      ],
+      [
+       3080.0,
+       -0.06636
+      ],
+      [
+       3103.0,
+       -0.05006
+      ],
+      [
+       3109.0,
+       0.02212
+      ],
+      [
+       3132.0,
+       0.01048
+      ],
+      [
+       3132.0,
+       -0.02678
+      ],
+      [
+       3161.0,
+       -0.005821
+      ],
+      [
+       3184.0,
+       0.06403
+      ],
+      [
+       3196.0,
+       0.0454
+      ],
+      [
+       3213.0,
+       -0.1153
+      ],
+      [
+       3225.0,
+       -0.1013
+      ],
+      [
+       3254.0,
+       -0.01979
+      ],
+      [
+       3260.0,
+       -0.02445
+      ],
+      [
+       3283.0,
+       -0.078
+      ],
+      [
+       3289.0,
+       -0.04773
+      ],
+      [
+       3312.0,
+       0.02678
+      ],
+      [
+       3324.0,
+       0.00815
+      ],
+      [
+       3335.0,
+       -0.07567
+      ],
+      [
+       3359.0,
+       -0.05704
+      ],
+      [
+       3370.0,
+       0.01513
+      ],
+      [
+       3388.0,
+       0.003493
+      ],
+      [
+       3411.0,
+       -0.04074
+      ],
+      [
+       3417.0,
+       -0.02212
+      ],
+      [
+       3440.0,
+       0.05704
+      ],
+      [
+       3452.0,
+       0.03842
+      ],
+      [
+       3463.0,
+       -0.1246
+      ],
+      [
+       3486.0,
+       -0.1246
+      ],
+      [
+       3498.0,
+       -0.05471
+      ],
+      [
+       3515.0,
+       -0.05239
+      ],
+      [
+       3539.0,
+       -0.1013
+      ],
+      [
+       3544.0,
+       -0.09197
+      ],
+      [
+       3562.0,
+       -0.01746
+      ],
+      [
+       3579.0,
+       -0.001164
+      ],
+      [
+       3591.0,
+       -0.03609
+      ],
+      [
+       3614.0,
+       -0.02678
+      ],
+      [
+       3637.0,
+       0.04307
+      ],
+      [
+       3643.0,
+       0.03842
+      ],
+      [
+       3643.0,
+       -0.01048
+      ],
+      [
+       3672.0,
+       -0.01048
+      ],
+      [
+       3690.0,
+       0.08498
+      ],
+      [
+       3707.0,
+       0.06403
+      ],
+      [
+       3719.0,
+       -0.08964
+      ],
+      [
+       3736.0,
+       -0.08033
+      ],
+      [
+       3753.0,
+       -0.005821
+      ],
+      [
+       3771.0,
+       -0.01281
+      ],
+      [
+       3771.0,
+       -0.05937
+      ],
+      [
+       3800.0,
+       -0.03376
+      ],
+      [
+       3829.0,
+       0.05239
+      ],
+      [
+       3835.0,
+       0.02445
+      ],
+      [
+       3852.0,
+       -0.06868
+      ],
+      [
+       3870.0,
+       -0.05471
+      ],
+      [
+       3875.0,
+       0.02678
+      ],
+      [
+       3899.0,
+       0.02212
+      ],
+      [
+       3922.0,
+       -0.03143
+      ],
+      [
+       3928.0,
+       -0.005821
+      ],
+      [
+       3951.0,
+       0.0617
+      ],
+      [
+       3962.0,
+       0.04075
+      ],
+      [
+       3980.0,
+       -0.1059
+      ],
+      [
+       3997.0,
+       -0.08964
+      ],
+      [
+       4009.0,
+       -0.01513
+      ],
+      [
+       4032.0,
+       -0.07101
+      ],
+      [
+       4038.0,
+       -0.02445
+      ],
+      [
+       4055.0,
+       -0.06636
+      ],
+      [
+       4073.0,
+       0.02212
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Integral nonlinearity (INL) vs. temperature",
+   "page": 6,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "INL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive INL",
+     "points": [
+      [
+       -39.95,
+       0.3653
+      ],
+      [
+       71.65,
+       0.3257
+      ],
+      [
+       125.0,
+       0.2985
+      ]
+     ]
+    },
+    {
+     "label": "Negative INL",
+     "points": [
+      [
+       -39.95,
+       -0.499
+      ],
+      [
+       125.0,
+       -0.4551
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Differential nonlinearity (DNL) vs. sample rate",
+   "page": 6,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Sample rate",
+    "unit": "ksps",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "DNL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive DNL",
+     "points": [
+      [
+       3.912,
+       0.2351
+      ],
+      [
+       7.826,
+       0.2038
+      ],
+      [
+       15.23,
+       0.1954
+      ],
+      [
+       144.7,
+       0.1954
+      ],
+      [
+       175.0,
+       0.2059
+      ]
+     ]
+    },
+    {
+     "label": "Negative DNL",
+     "points": [
+      [
+       3.912,
+       -0.1912
+      ],
+      [
+       6.847,
+       -0.1661
+      ],
+      [
+       9.363,
+       -0.1578
+      ],
+      [
+       21.94,
+       -0.1578
+      ],
+      [
+       58.98,
+       -0.1724
+      ],
+      [
+       124.1,
+       -0.1787
+      ],
+      [
+       175.0,
+       -0.2059
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Differential nonlinearity (DNL) vs. VREF",
+   "page": 6,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "DNL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive DNL",
+     "points": [
+      [
+       0.0988,
+       1.445
+      ],
+      [
+       0.1523,
+       0.9603
+      ],
+      [
+       0.1812,
+       0.81
+      ],
+      [
+       0.21,
+       0.7182
+      ],
+      [
+       0.2759,
+       0.5971
+      ],
+      [
+       0.4118,
+       0.4676
+      ],
+      [
+       0.5765,
+       0.3633
+      ],
+      [
+       0.9142,
+       0.2129
+      ],
+      [
+       1.021,
+       0.2004
+      ],
+      [
+       1.252,
+       0.2129
+      ],
+      [
+       2.1,
+       0.3215
+      ],
+      [
+       2.57,
+       0.3466
+      ],
+      [
+       2.87,
+       0.309
+      ],
+      [
+       3.352,
+       0.2171
+      ],
+      [
+       3.5,
+       0.2046
+      ],
+      [
+       4.999,
+       0.2004
+      ]
+     ]
+    },
+    {
+     "label": "Negative DNL",
+     "points": [
+      [
+       0.0988,
+       -0.8184
+      ],
+      [
+       0.1812,
+       -0.5678
+      ],
+      [
+       0.2759,
+       -0.4718
+      ],
+      [
+       0.6218,
+       -0.2923
+      ],
+      [
+       0.8483,
+       -0.2088
+      ],
+      [
+       1.021,
+       -0.167
+      ],
+      [
+       1.12,
+       -0.1628
+      ],
+      [
+       1.277,
+       -0.1879
+      ],
+      [
+       2.1,
+       -0.4676
+      ],
+      [
+       2.425,
+       -0.5344
+      ],
+      [
+       2.533,
+       -0.5344
+      ],
+      [
+       2.697,
+       -0.5052
+      ],
+      [
+       2.813,
+       -0.4593
+      ],
+      [
+       3.22,
+       -0.2422
+      ],
+      [
+       3.352,
+       -0.1921
+      ],
+      [
+       3.5,
+       -0.1587
+      ],
+      [
+       3.933,
+       -0.1336
+      ],
+      [
+       4.999,
+       -0.1754
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Differential nonlinearity (DNL) vs. code (representative part)",
+   "page": 7,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Code",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "DNL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "DNL",
+     "points": [
+      [
+       -4067.0,
+       0.02851
+      ],
+      [
+       -4067.0,
+       -0.02851
+      ],
+      [
+       -4038.0,
+       0.03907
+      ],
+      [
+       -4032.0,
+       -0.04118
+      ],
+      [
+       -4003.0,
+       0.06019
+      ],
+      [
+       -4003.0,
+       -0.04329
+      ],
+      [
+       -3986.0,
+       0.02429
+      ],
+      [
+       -3968.0,
+       -0.1003
+      ],
+      [
+       -3939.0,
+       0.02851
+      ],
+      [
+       -3939.0,
+       -0.02851
+      ],
+      [
+       -3910.0,
+       0.04963
+      ],
+      [
+       -3904.0,
+       -0.05808
+      ],
+      [
+       -3875.0,
+       0.05385
+      ],
+      [
+       -3875.0,
+       -0.03696
+      ],
+      [
+       -3840.0,
+       0.1067
+      ],
+      [
+       -3840.0,
+       -0.1214
+      ],
+      [
+       -3823.0,
+       -0.03696
+      ],
+      [
+       -3817.0,
+       0.02851
+      ],
+      [
+       -3777.0,
+       0.03273
+      ],
+      [
+       -3777.0,
+       -0.03696
+      ],
+      [
+       -3765.0,
+       -0.03274
+      ],
+      [
+       -3747.0,
+       0.04541
+      ],
+      [
+       -3730.0,
+       0.02217
+      ],
+      [
+       -3713.0,
+       -0.1193
+      ],
+      [
+       -3701.0,
+       -0.02851
+      ],
+      [
+       -3684.0,
+       0.03273
+      ],
+      [
+       -3649.0,
+       0.04329
+      ],
+      [
+       -3649.0,
+       -0.04963
+      ],
+      [
+       -3637.0,
+       -0.03696
+      ],
+      [
+       -3620.0,
+       0.04752
+      ],
+      [
+       -3585.0,
+       0.03274
+      ],
+      [
+       -3585.0,
+       -0.1383
+      ],
+      [
+       -3567.0,
+       -0.03062
+      ],
+      [
+       -3556.0,
+       0.03062
+      ],
+      [
+       -3521.0,
+       0.03274
+      ],
+      [
+       -3521.0,
+       -0.04963
+      ],
+      [
+       -3492.0,
+       0.04118
+      ],
+      [
+       -3492.0,
+       -0.03273
+      ],
+      [
+       -3474.0,
+       0.01795
+      ],
+      [
+       -3457.0,
+       -0.1067
+      ],
+      [
+       -3445.0,
+       0.03062
+      ],
+      [
+       -3440.0,
+       -0.02851
+      ],
+      [
+       -3393.0,
+       0.03907
+      ],
+      [
+       -3393.0,
+       -0.04963
+      ],
+      [
+       -3364.0,
+       0.04118
+      ],
+      [
+       -3364.0,
+       -0.03485
+      ],
+      [
+       -3329.0,
+       0.1045
+      ],
+      [
+       -3329.0,
+       -0.1172
+      ],
+      [
+       -3312.0,
+       -0.03274
+      ],
+      [
+       -3300.0,
+       0.03062
+      ],
+      [
+       -3265.0,
+       0.03696
+      ],
+      [
+       -3265.0,
+       -0.04118
+      ],
+      [
+       -3236.0,
+       0.03273
+      ],
+      [
+       -3230.0,
+       -0.03062
+      ],
+      [
+       -3219.0,
+       0.02429
+      ],
+      [
+       -3201.0,
+       -0.113
+      ],
+      [
+       -3184.0,
+       -0.02218
+      ],
+      [
+       -3172.0,
+       0.02851
+      ],
+      [
+       -3137.0,
+       0.04329
+      ],
+      [
+       -3137.0,
+       -0.04118
+      ],
+      [
+       -3108.0,
+       0.03907
+      ],
+      [
+       -3108.0,
+       -0.03485
+      ],
+      [
+       -3074.0,
+       0.208
+      ],
+      [
+       -3074.0,
+       -0.1531
+      ],
+      [
+       -3056.0,
+       -0.03273
+      ],
+      [
+       -3044.0,
+       0.02429
+      ],
+      [
+       -3010.0,
+       0.03696
+      ],
+      [
+       -3010.0,
+       -0.03273
+      ],
+      [
+       -2981.0,
+       0.04118
+      ],
+      [
+       -2981.0,
+       -0.02851
+      ],
+      [
+       -2963.0,
+       0.01373
+      ],
+      [
+       -2946.0,
+       -0.0982
+      ],
+      [
+       -2917.0,
+       0.03062
+      ],
+      [
+       -2911.0,
+       -0.02218
+      ],
+      [
+       -2882.0,
+       0.03274
+      ],
+      [
+       -2882.0,
+       -0.03696
+      ],
+      [
+       -2853.0,
+       0.03696
+      ],
+      [
+       -2847.0,
+       -0.02851
+      ],
+      [
+       -2818.0,
+       0.1806
+      ],
+      [
+       -2818.0,
+       -0.113
+      ],
+      [
+       -2800.0,
+       -0.02218
+      ],
+      [
+       -2789.0,
+       0.02217
+      ],
+      [
+       -2754.0,
+       0.03062
+      ],
+      [
+       -2754.0,
+       -0.04118
+      ],
+      [
+       -2725.0,
+       0.03907
+      ],
+      [
+       -2719.0,
+       -0.0264
+      ],
+      [
+       -2702.0,
+       0.01584
+      ],
+      [
+       -2690.0,
+       -0.09821
+      ],
+      [
+       -2673.0,
+       -0.02429
+      ],
+      [
+       -2661.0,
+       0.0264
+      ],
+      [
+       -2626.0,
+       0.03907
+      ],
+      [
+       -2626.0,
+       -0.03273
+      ],
+      [
+       -2591.0,
+       0.03696
+      ],
+      [
+       -2591.0,
+       -0.03273
+      ],
+      [
+       -2580.0,
+       0.01795
+      ],
+      [
+       -2562.0,
+       -0.1172
+      ],
+      [
+       -2551.0,
+       -0.01795
+      ],
+      [
+       -2539.0,
+       0.01795
+      ],
+      [
+       -2498.0,
+       0.0264
+      ],
+      [
+       -2498.0,
+       -0.0264
+      ],
+      [
+       -2481.0,
+       -0.03062
+      ],
+      [
+       -2463.0,
+       0.03273
+      ],
+      [
+       -2452.0,
+       0.01162
+      ],
+      [
+       -2434.0,
+       -0.09609
+      ],
+      [
+       -2417.0,
+       -0.02218
+      ],
+      [
+       -2400.0,
+       0.02429
+      ],
+      [
+       -2370.0,
+       0.03273
+      ],
+      [
+       -2370.0,
+       -0.0264
+      ],
+      [
+       -2353.0,
+       -0.01795
+      ],
+      [
+       -2341.0,
+       0.02851
+      ],
+      [
+       -2324.0,
+       0.01584
+      ],
+      [
+       -2307.0,
+       -0.1003
+      ],
+      [
+       -2289.0,
+       -0.02006
+      ],
+      [
+       -2278.0,
+       0.02218
+      ],
+      [
+       -2243.0,
+       0.03485
+      ],
+      [
+       -2243.0,
+       -0.02429
+      ],
+      [
+       -2208.0,
+       0.03273
+      ],
+      [
+       -2208.0,
+       -0.02006
+      ],
+      [
+       -2196.0,
+       0.01373
+      ],
+      [
+       -2179.0,
+       -0.1067
+      ],
+      [
+       -2161.0,
+       0.01584
+      ],
+      [
+       -2161.0,
+       -0.02006
+      ],
+      [
+       -2115.0,
+       0.03062
+      ],
+      [
+       -2115.0,
+       -0.03907
+      ],
+      [
+       -2080.0,
+       0.02851
+      ],
+      [
+       -2080.0,
+       -0.01795
+      ],
+      [
+       -2051.0,
+       0.113
+      ],
+      [
+       -2051.0,
+       -0.132
+      ],
+      [
+       -2034.0,
+       -0.02218
+      ],
+      [
+       -2028.0,
+       0.02006
+      ],
+      [
+       -1987.0,
+       0.02851
+      ],
+      [
+       -1987.0,
+       -0.02851
+      ],
+      [
+       -1952.0,
+       0.02429
+      ],
+      [
+       -1952.0,
+       -0.02429
+      ],
+      [
+       -1941.0,
+       0.01373
+      ],
+      [
+       -1923.0,
+       -0.08131
+      ],
+      [
+       -1906.0,
+       0.02218
+      ],
+      [
+       -1906.0,
+       -0.02429
+      ],
+      [
+       -1859.0,
+       0.02851
+      ],
+      [
+       -1859.0,
+       -0.02851
+      ],
+      [
+       -1842.0,
+       -0.01373
+      ],
+      [
+       -1824.0,
+       0.0264
+      ],
+      [
+       -1795.0,
+       0.1299
+      ],
+      [
+       -1795.0,
+       -0.08976
+      ],
+      [
+       -1778.0,
+       -0.02218
+      ],
+      [
+       -1760.0,
+       0.01584
+      ],
+      [
+       -1731.0,
+       0.02006
+      ],
+      [
+       -1731.0,
+       -0.02429
+      ],
+      [
+       -1714.0,
+       -0.01584
+      ],
+      [
+       -1697.0,
+       0.03062
+      ],
+      [
+       -1685.0,
+       0.01373
+      ],
+      [
+       -1662.0,
+       -0.08764
+      ],
+      [
+       -1650.0,
+       -0.01584
+      ],
+      [
+       -1633.0,
+       0.02218
+      ],
+      [
+       -1604.0,
+       0.02218
+      ],
+      [
+       -1598.0,
+       -0.02006
+      ],
+      [
+       -1586.0,
+       -0.01795
+      ],
+      [
+       -1569.0,
+       0.02851
+      ],
+      [
+       -1551.0,
+       0.01373
+      ],
+      [
+       -1534.0,
+       -0.09398
+      ],
+      [
+       -1522.0,
+       0.01584
+      ],
+      [
+       -1522.0,
+       -0.01795
+      ],
+      [
+       -1476.0,
+       0.01584
+      ],
+      [
+       -1470.0,
+       -0.02006
+      ],
+      [
+       -1458.0,
+       -0.01795
+      ],
+      [
+       -1441.0,
+       0.02429
+      ],
+      [
+       -1423.0,
+       0.009504
+      ],
+      [
+       -1412.0,
+       -0.07709
+      ],
+      [
+       -1400.0,
+       -0.01584
+      ],
+      [
+       -1377.0,
+       0.01795
+      ],
+      [
+       -1348.0,
+       0.02006
+      ],
+      [
+       -1348.0,
+       -0.02218
+      ],
+      [
+       -1313.0,
+       0.0264
+      ],
+      [
+       -1313.0,
+       -0.01795
+      ],
+      [
+       -1278.0,
+       0.02218
+      ],
+      [
+       -1278.0,
+       -0.08131
+      ],
+      [
+       -1272.0,
+       -0.01584
+      ],
+      [
+       -1255.0,
+       0.01584
+      ],
+      [
+       -1214.0,
+       0.01584
+      ],
+      [
+       -1214.0,
+       -0.01795
+      ],
+      [
+       -1185.0,
+       0.02851
+      ],
+      [
+       -1185.0,
+       -0.01584
+      ],
+      [
+       -1174.0,
+       0.01162
+      ],
+      [
+       -1150.0,
+       -0.0792
+      ],
+      [
+       -1139.0,
+       0.01795
+      ],
+      [
+       -1139.0,
+       -0.01584
+      ],
+      [
+       -1092.0,
+       0.01373
+      ],
+      [
+       -1087.0,
+       -0.01795
+      ],
+      [
+       -1081.0,
+       -0.01162
+      ],
+      [
+       -1057.0,
+       0.02006
+      ],
+      [
+       -1028.0,
+       0.1489
+      ],
+      [
+       -1023.0,
+       -0.09187
+      ],
+      [
+       -999.4,
+       -0.01373
+      ],
+      [
+       -993.5,
+       0.01373
+      ],
+      [
+       -958.7,
+       0.01584
+      ],
+      [
+       -958.7,
+       -0.01373
+      ],
+      [
+       -941.3,
+       -0.01584
+      ],
+      [
+       -929.6,
+       0.02006
+      ],
+      [
+       -918.0,
+       0.007392
+      ],
+      [
+       -894.8,
+       -0.07075
+      ],
+      [
+       -877.3,
+       -0.01162
+      ],
+      [
+       -871.5,
+       0.01373
+      ],
+      [
+       -830.9,
+       0.01162
+      ],
+      [
+       -830.9,
+       -0.01584
+      ],
+      [
+       -819.2,
+       -0.01162
+      ],
+      [
+       -801.8,
+       0.02429
+      ],
+      [
+       -767.0,
+       0.08553
+      ],
+      [
+       -767.0,
+       -0.07286
+      ],
+      [
+       -761.1,
+       -0.01373
+      ],
+      [
+       -737.9,
+       0.01162
+      ],
+      [
+       -726.3,
+       0.009504
+      ],
+      [
+       -714.7,
+       -0.01373
+      ],
+      [
+       -685.6,
+       -0.01373
+      ],
+      [
+       -674.0,
+       0.02006
+      ],
+      [
+       -656.6,
+       0.009504
+      ],
+      [
+       -639.1,
+       -0.07286
+      ],
+      [
+       -633.3,
+       -0.009504
+      ],
+      [
+       -615.9,
+       0.01373
+      ],
+      [
+       -575.2,
+       0.009504
+      ],
+      [
+       -575.2,
+       -0.01373
+      ],
+      [
+       -546.2,
+       0.01795
+      ],
+      [
+       -546.2,
+       -0.01373
+      ],
+      [
+       -528.8,
+       0.009504
+      ],
+      [
+       -511.3,
+       -0.07497
+      ],
+      [
+       -493.9,
+       -0.01373
+      ],
+      [
+       -476.5,
+       0.01584
+      ],
+      [
+       -459.0,
+       0.01584
+      ],
+      [
+       -459.0,
+       -0.01162
+      ],
+      [
+       -435.8,
+       -0.007392
+      ],
+      [
+       -418.4,
+       0.02006
+      ],
+      [
+       -400.9,
+       0.009504
+      ],
+      [
+       -383.5,
+       -0.06864
+      ],
+      [
+       -377.7,
+       -0.007392
+      ],
+      [
+       -354.5,
+       0.01162
+      ],
+      [
+       -342.8,
+       0.01373
+      ],
+      [
+       -331.2,
+       -0.01162
+      ],
+      [
+       -308.0,
+       -0.009504
+      ],
+      [
+       -290.5,
+       0.02006
+      ],
+      [
+       -255.7,
+       0.03696
+      ],
+      [
+       -255.7,
+       -0.06653
+      ],
+      [
+       -244.1,
+       0.009504
+      ],
+      [
+       -238.3,
+       -0.01373
+      ],
+      [
+       -215.0,
+       0.009504
+      ],
+      [
+       -203.4,
+       -0.009504
+      ],
+      [
+       -168.5,
+       0.01584
+      ],
+      [
+       -168.5,
+       -0.01373
+      ],
+      [
+       -151.1,
+       0.01373
+      ],
+      [
+       -127.9,
+       -0.06441
+      ],
+      [
+       -98.82,
+       0.009504
+      ],
+      [
+       -98.82,
+       -0.01795
+      ],
+      [
+       -87.2,
+       0.01373
+      ],
+      [
+       -63.96,
+       -0.01373
+      ],
+      [
+       -52.34,
+       -0.009503
+      ],
+      [
+       -34.91,
+       0.01584
+      ],
+      [
+       -0.04852,
+       0.1172
+      ],
+      [
+       -0.04852,
+       -0.08131
+      ],
+      [
+       23.19,
+       0.01373
+      ],
+      [
+       29.0,
+       -0.01162
+      ],
+      [
+       34.81,
+       0.01162
+      ],
+      [
+       52.24,
+       -0.01162
+      ],
+      [
+       87.1,
+       0.01584
+      ],
+      [
+       92.91,
+       -0.01162
+      ],
+      [
+       98.72,
+       0.007392
+      ],
+      [
+       127.8,
+       -0.05597
+      ],
+      [
+       139.4,
+       -0.01795
+      ],
+      [
+       156.8,
+       0.009504
+      ],
+      [
+       185.9,
+       0.01373
+      ],
+      [
+       191.7,
+       -0.01162
+      ],
+      [
+       203.3,
+       -0.007391
+      ],
+      [
+       220.7,
+       0.01162
+      ],
+      [
+       232.3,
+       0.01162
+      ],
+      [
+       255.6,
+       -0.04963
+      ],
+      [
+       267.2,
+       0.007392
+      ],
+      [
+       267.2,
+       -0.01162
+      ],
+      [
+       290.4,
+       0.01373
+      ],
+      [
+       319.5,
+       -0.01373
+      ],
+      [
+       325.3,
+       0.01373
+      ],
+      [
+       331.1,
+       -0.01162
+      ],
+      [
+       360.2,
+       0.01162
+      ],
+      [
+       383.4,
+       -0.05808
+      ],
+      [
+       395.0,
+       -0.01162
+      ],
+      [
+       400.8,
+       0.007391
+      ],
+      [
+       418.3,
+       0.01162
+      ],
+      [
+       447.3,
+       -0.01373
+      ],
+      [
+       458.9,
+       -0.01584
+      ],
+      [
+       470.6,
+       0.009503
+      ],
+      [
+       511.2,
+       0.05597
+      ],
+      [
+       511.2,
+       -0.04963
+      ],
+      [
+       522.8,
+       -0.01584
+      ],
+      [
+       534.5,
+       0.009503
+      ],
+      [
+       546.1,
+       0.01584
+      ],
+      [
+       575.1,
+       -0.01373
+      ],
+      [
+       580.9,
+       -0.01162
+      ],
+      [
+       604.2,
+       0.009503
+      ],
+      [
+       610.0,
+       0.01584
+      ],
+      [
+       639.0,
+       -0.06019
+      ],
+      [
+       650.7,
+       -0.01162
+      ],
+      [
+       662.3,
+       0.007392
+      ],
+      [
+       673.9,
+       0.01584
+      ],
+      [
+       673.9,
+       -0.01162
+      ],
+      [
+       714.6,
+       -0.01373
+      ],
+      [
+       732.0,
+       0.01584
+      ],
+      [
+       766.9,
+       0.1003
+      ],
+      [
+       766.9,
+       -0.04752
+      ],
+      [
+       778.5,
+       0.007392
+      ],
+      [
+       778.5,
+       -0.01162
+      ],
+      [
+       807.5,
+       -0.009503
+      ],
+      [
+       813.3,
+       0.01373
+      ],
+      [
+       836.6,
+       -0.01373
+      ],
+      [
+       859.8,
+       0.01373
+      ],
+      [
+       871.4,
+       0.01162
+      ],
+      [
+       894.7,
+       -0.06864
+      ],
+      [
+       900.5,
+       -0.02217
+      ],
+      [
+       917.9,
+       0.009504
+      ],
+      [
+       929.5,
+       0.01584
+      ],
+      [
+       941.2,
+       -0.007392
+      ],
+      [
+       964.4,
+       -0.02006
+      ],
+      [
+       970.2,
+       0.009504
+      ],
+      [
+       999.3,
+       0.01584
+      ],
+      [
+       1022.0,
+       -0.0264
+      ],
+      [
+       1028.0,
+       -0.01795
+      ],
+      [
+       1034.0,
+       0.009504
+      ],
+      [
+       1057.0,
+       0.01584
+      ],
+      [
+       1081.0,
+       -0.01162
+      ],
+      [
+       1092.0,
+       -0.02006
+      ],
+      [
+       1115.0,
+       0.02006
+      ],
+      [
+       1127.0,
+       0.01584
+      ],
+      [
+       1150.0,
+       -0.07075
+      ],
+      [
+       1156.0,
+       -0.02429
+      ],
+      [
+       1162.0,
+       0.009504
+      ],
+      [
+       1185.0,
+       0.01373
+      ],
+      [
+       1214.0,
+       -0.01373
+      ],
+      [
+       1226.0,
+       -0.01795
+      ],
+      [
+       1237.0,
+       0.01795
+      ],
+      [
+       1255.0,
+       0.01584
+      ],
+      [
+       1278.0,
+       -0.03907
+      ],
+      [
+       1284.0,
+       0.01373
+      ],
+      [
+       1284.0,
+       -0.04118
+      ],
+      [
+       1313.0,
+       0.02218
+      ],
+      [
+       1342.0,
+       -0.01162
+      ],
+      [
+       1354.0,
+       -0.01373
+      ],
+      [
+       1371.0,
+       0.01584
+      ],
+      [
+       1400.0,
+       0.01584
+      ],
+      [
+       1406.0,
+       -0.05597
+      ],
+      [
+       1412.0,
+       -0.05174
+      ],
+      [
+       1418.0,
+       0.009504
+      ],
+      [
+       1441.0,
+       0.0264
+      ],
+      [
+       1452.0,
+       -0.007392
+      ],
+      [
+       1487.0,
+       -0.01584
+      ],
+      [
+       1499.0,
+       0.01795
+      ],
+      [
+       1505.0,
+       0.01795
+      ],
+      [
+       1534.0,
+       -0.03062
+      ],
+      [
+       1540.0,
+       0.009504
+      ],
+      [
+       1540.0,
+       -0.01373
+      ],
+      [
+       1569.0,
+       0.02218
+      ],
+      [
+       1592.0,
+       -0.01162
+      ],
+      [
+       1603.0,
+       0.01584
+      ],
+      [
+       1603.0,
+       -0.01373
+      ],
+      [
+       1638.0,
+       0.01584
+      ],
+      [
+       1662.0,
+       -0.02851
+      ],
+      [
+       1667.0,
+       -0.07075
+      ],
+      [
+       1685.0,
+       0.01162
+      ],
+      [
+       1696.0,
+       0.01795
+      ],
+      [
+       1726.0,
+       -0.01373
+      ],
+      [
+       1731.0,
+       0.01584
+      ],
+      [
+       1743.0,
+       -0.01584
+      ],
+      [
+       1778.0,
+       -0.01373
+      ],
+      [
+       1789.0,
+       0.1024
+      ],
+      [
+       1795.0,
+       0.02218
+      ],
+      [
+       1795.0,
+       -0.0264
+      ],
+      [
+       1824.0,
+       0.02851
+      ],
+      [
+       1824.0,
+       -0.01584
+      ],
+      [
+       1882.0,
+       0.01584
+      ],
+      [
+       1882.0,
+       -0.01373
+      ],
+      [
+       1888.0,
+       0.01584
+      ],
+      [
+       1917.0,
+       -0.07286
+      ],
+      [
+       1923.0,
+       -0.05174
+      ],
+      [
+       1946.0,
+       0.01373
+      ],
+      [
+       1952.0,
+       0.0264
+      ],
+      [
+       1975.0,
+       -0.01162
+      ],
+      [
+       1987.0,
+       0.01795
+      ],
+      [
+       1999.0,
+       -0.01584
+      ],
+      [
+       2016.0,
+       0.0264
+      ],
+      [
+       2045.0,
+       -0.1067
+      ],
+      [
+       2051.0,
+       0.02851
+      ],
+      [
+       2051.0,
+       -0.1595
+      ],
+      [
+       2080.0,
+       0.02006
+      ],
+      [
+       2109.0,
+       -0.01584
+      ],
+      [
+       2115.0,
+       0.02851
+      ],
+      [
+       2115.0,
+       -0.02006
+      ],
+      [
+       2144.0,
+       0.02006
+      ],
+      [
+       2173.0,
+       -0.04118
+      ],
+      [
+       2179.0,
+       -0.08131
+      ],
+      [
+       2202.0,
+       0.01584
+      ],
+      [
+       2208.0,
+       0.02429
+      ],
+      [
+       2237.0,
+       -0.01373
+      ],
+      [
+       2243.0,
+       0.02218
+      ],
+      [
+       2254.0,
+       -0.02006
+      ],
+      [
+       2272.0,
+       0.02218
+      ],
+      [
+       2289.0,
+       -0.01795
+      ],
+      [
+       2306.0,
+       -0.06864
+      ],
+      [
+       2324.0,
+       0.009504
+      ],
+      [
+       2336.0,
+       0.02851
+      ],
+      [
+       2365.0,
+       -0.01795
+      ],
+      [
+       2370.0,
+       0.02429
+      ],
+      [
+       2370.0,
+       -0.02429
+      ],
+      [
+       2411.0,
+       0.02006
+      ],
+      [
+       2417.0,
+       -0.02006
+      ],
+      [
+       2434.0,
+       -0.08131
+      ],
+      [
+       2458.0,
+       0.01584
+      ],
+      [
+       2463.0,
+       0.02429
+      ],
+      [
+       2492.0,
+       -0.01795
+      ],
+      [
+       2498.0,
+       0.02429
+      ],
+      [
+       2498.0,
+       -0.02218
+      ],
+      [
+       2539.0,
+       0.03062
+      ],
+      [
+       2545.0,
+       -0.02218
+      ],
+      [
+       2562.0,
+       0.1003
+      ],
+      [
+       2562.0,
+       -0.009503
+      ],
+      [
+       2597.0,
+       0.02851
+      ],
+      [
+       2609.0,
+       -0.02006
+      ],
+      [
+       2626.0,
+       0.02851
+      ],
+      [
+       2626.0,
+       -0.02851
+      ],
+      [
+       2655.0,
+       0.02218
+      ],
+      [
+       2661.0,
+       -0.02218
+      ],
+      [
+       2690.0,
+       -0.08342
+      ],
+      [
+       2702.0,
+       0.01584
+      ],
+      [
+       2719.0,
+       0.01795
+      ],
+      [
+       2736.0,
+       -0.02006
+      ],
+      [
+       2754.0,
+       0.03273
+      ],
+      [
+       2754.0,
+       -0.0264
+      ],
+      [
+       2783.0,
+       0.0264
+      ],
+      [
+       2800.0,
+       -0.02006
+      ],
+      [
+       2818.0,
+       0.0982
+      ],
+      [
+       2835.0,
+       -0.01584
+      ],
+      [
+       2847.0,
+       0.03062
+      ],
+      [
+       2847.0,
+       -0.01795
+      ],
+      [
+       2882.0,
+       0.02218
+      ],
+      [
+       2893.0,
+       -0.01795
+      ],
+      [
+       2911.0,
+       0.0264
+      ],
+      [
+       2928.0,
+       -0.02006
+      ],
+      [
+       2946.0,
+       -0.0792
+      ],
+      [
+       2957.0,
+       0.02006
+      ],
+      [
+       2975.0,
+       -0.01795
+      ],
+      [
+       2980.0,
+       0.03696
+      ],
+      [
+       3009.0,
+       0.02851
+      ],
+      [
+       3021.0,
+       -0.02429
+      ],
+      [
+       3056.0,
+       0.0264
+      ],
+      [
+       3056.0,
+       -0.02851
+      ],
+      [
+       3073.0,
+       0.03274
+      ],
+      [
+       3085.0,
+       -0.01584
+      ],
+      [
+       3102.0,
+       -0.01795
+      ],
+      [
+       3108.0,
+       0.03274
+      ],
+      [
+       3137.0,
+       0.03696
+      ],
+      [
+       3137.0,
+       -0.03273
+      ],
+      [
+       3178.0,
+       0.0264
+      ],
+      [
+       3184.0,
+       -0.01795
+      ],
+      [
+       3201.0,
+       -0.08976
+      ],
+      [
+       3224.0,
+       0.02218
+      ],
+      [
+       3236.0,
+       0.03274
+      ],
+      [
+       3248.0,
+       -0.02218
+      ],
+      [
+       3265.0,
+       0.03274
+      ],
+      [
+       3265.0,
+       -0.04118
+      ],
+      [
+       3300.0,
+       0.02429
+      ],
+      [
+       3300.0,
+       -0.02006
+      ],
+      [
+       3329.0,
+       -0.03273
+      ],
+      [
+       3341.0,
+       0.02006
+      ],
+      [
+       3376.0,
+       -0.02851
+      ],
+      [
+       3387.0,
+       0.03062
+      ],
+      [
+       3393.0,
+       0.03274
+      ],
+      [
+       3393.0,
+       -0.02851
+      ],
+      [
+       3428.0,
+       0.0264
+      ],
+      [
+       3439.0,
+       -0.02218
+      ],
+      [
+       3457.0,
+       -0.1003
+      ],
+      [
+       3480.0,
+       0.01584
+      ],
+      [
+       3492.0,
+       0.04118
+      ],
+      [
+       3503.0,
+       -0.02851
+      ],
+      [
+       3521.0,
+       0.03274
+      ],
+      [
+       3521.0,
+       -0.02851
+      ],
+      [
+       3556.0,
+       0.02851
+      ],
+      [
+       3567.0,
+       -0.02429
+      ],
+      [
+       3585.0,
+       -0.01795
+      ],
+      [
+       3608.0,
+       0.01795
+      ],
+      [
+       3620.0,
+       0.03273
+      ],
+      [
+       3643.0,
+       -0.02429
+      ],
+      [
+       3649.0,
+       0.04541
+      ],
+      [
+       3649.0,
+       -0.03907
+      ],
+      [
+       3683.0,
+       0.04118
+      ],
+      [
+       3695.0,
+       -0.02429
+      ],
+      [
+       3712.0,
+       -0.1003
+      ],
+      [
+       3736.0,
+       0.02218
+      ],
+      [
+       3747.0,
+       0.03696
+      ],
+      [
+       3771.0,
+       -0.02218
+      ],
+      [
+       3776.0,
+       0.04118
+      ],
+      [
+       3776.0,
+       -0.04118
+      ],
+      [
+       3811.0,
+       0.03273
+      ],
+      [
+       3823.0,
+       -0.02429
+      ],
+      [
+       3840.0,
+       -0.04752
+      ],
+      [
+       3852.0,
+       0.02218
+      ],
+      [
+       3875.0,
+       0.03907
+      ],
+      [
+       3893.0,
+       -0.02429
+      ],
+      [
+       3904.0,
+       0.03273
+      ],
+      [
+       3904.0,
+       -0.03485
+      ],
+      [
+       3939.0,
+       0.03696
+      ],
+      [
+       3957.0,
+       -0.03274
+      ],
+      [
+       3968.0,
+       -0.1003
+      ],
+      [
+       3974.0,
+       0.01795
+      ],
+      [
+       4003.0,
+       0.03485
+      ],
+      [
+       4020.0,
+       -0.02851
+      ],
+      [
+       4032.0,
+       0.04329
+      ],
+      [
+       4032.0,
+       -0.04118
+      ],
+      [
+       4067.0,
+       0.04541
+      ],
+      [
+       4079.0,
+       -0.03274
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Differential nonlinearity (DNL) vs. temperature",
+   "page": 7,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "DNL",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive DNL",
+     "points": [
+      [
+       -40.08,
+       0.2038
+      ],
+      [
+       75.09,
+       0.1975
+      ],
+      [
+       125.0,
+       0.1869
+      ]
+     ]
+    },
+    {
+     "label": "Negative DNL",
+     "points": [
+      [
+       -40.08,
+       -0.2017
+      ],
+      [
+       17.08,
+       -0.1785
+      ],
+      [
+       89.48,
+       -0.1742
+      ],
+      [
+       125.0,
+       -0.1595
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Positive gain error vs. VREF",
+   "page": 7,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Positive gain error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive gain error",
+     "points": [
+      [
+       0.1342,
+       4.985
+      ],
+      [
+       0.1559,
+       3.909
+      ],
+      [
+       0.1852,
+       3.194
+      ],
+      [
+       0.2347,
+       2.555
+      ],
+      [
+       0.2907,
+       2.137
+      ],
+      [
+       0.3872,
+       1.668
+      ],
+      [
+       0.5337,
+       1.163
+      ],
+      [
+       0.7597,
+       0.5798
+      ],
+      [
+       0.8824,
+       0.3021
+      ],
+      [
+       0.9408,
+       0.2084
+      ],
+      [
+       1.05,
+       0.1379
+      ],
+      [
+       1.7,
+       -0.07234
+      ],
+      [
+       2.583,
+       -0.3096
+      ],
+      [
+       5.015,
+       -0.5813
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Offset error vs. VREF",
+   "page": 7,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Offset error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Offset error",
+     "points": [
+      [
+       0.3577,
+       19.96
+      ],
+      [
+       0.4264,
+       17.65
+      ],
+      [
+       0.5243,
+       14.97
+      ],
+      [
+       0.6417,
+       12.31
+      ],
+      [
+       0.7951,
+       9.301
+      ],
+      [
+       0.855,
+       8.175
+      ],
+      [
+       0.9131,
+       7.462
+      ],
+      [
+       0.9543,
+       7.14
+      ],
+      [
+       1.06,
+       6.604
+      ],
+      [
+       1.381,
+       5.684
+      ],
+      [
+       1.787,
+       4.817
+      ],
+      [
+       2.272,
+       3.959
+      ],
+      [
+       2.696,
+       3.38
+      ],
+      [
+       2.985,
+       3.158
+      ],
+      [
+       3.566,
+       2.906
+      ],
+      [
+       5.014,
+       2.418
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Positive gain error vs. temperature",
+   "page": 7,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Positive gain error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Positive gain error",
+     "points": [
+      [
+       -40.51,
+       -0.53
+      ],
+      [
+       6.892,
+       -0.4706
+      ],
+      [
+       27.01,
+       -0.4524
+      ],
+      [
+       86.64,
+       -0.4402
+      ],
+      [
+       98.35,
+       -0.4257
+      ],
+      [
+       125.5,
+       -0.3762
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Signal to noise ratio (SNR) vs. input frequency",
+   "page": 7,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "SNR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SNR",
+     "points": [
+      [
+       0.9882,
+       78.07
+      ],
+      [
+       4.853,
+       78.27
+      ],
+      [
+       9.763,
+       77.86
+      ],
+      [
+       14.23,
+       76.48
+      ],
+      [
+       22.71,
+       72.95
+      ],
+      [
+       26.09,
+       72.37
+      ],
+      [
+       28.82,
+       72.54
+      ],
+      [
+       35.0,
+       74.05
+      ],
+      [
+       50.64,
+       75.64
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Total harmonic distortion (THD) vs. input frequency",
+   "page": 8,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "THD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "THD",
+     "points": [
+      [
+       0.988,
+       -90.5
+      ],
+      [
+       4.997,
+       -86.47
+      ],
+      [
+       10.49,
+       -83.91
+      ],
+      [
+       15.25,
+       -81.31
+      ],
+      [
+       25.12,
+       -76.11
+      ],
+      [
+       35.86,
+       -73.81
+      ],
+      [
+       50.62,
+       -70.99
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Offset error vs. temperature",
+   "page": 8,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Offset error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Offset error",
+     "points": [
+      [
+       -40.53,
+       2.809
+      ],
+      [
+       22.85,
+       2.788
+      ],
+      [
+       88.12,
+       2.694
+      ],
+      [
+       125.5,
+       2.674
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Signal to noise and distortion (SINAD) vs. input frequency",
+   "page": 8,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "SINAD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SINAD",
+     "points": [
+      [
+       0.9887,
+       77.84
+      ],
+      [
+       4.87,
+       77.69
+      ],
+      [
+       9.425,
+       77.05
+      ],
+      [
+       11.73,
+       76.33
+      ],
+      [
+       14.28,
+       75.17
+      ],
+      [
+       22.99,
+       70.54
+      ],
+      [
+       25.84,
+       69.74
+      ],
+      [
+       29.13,
+       69.64
+      ],
+      [
+       35.54,
+       70.28
+      ],
+      [
+       50.58,
+       69.66
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Signal to noise and distortion (SINAD) vs. input signal level",
+   "page": 8,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input signal level",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SINAD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SINAD",
+     "points": [
+      [
+       -40.1,
+       38.76
+      ],
+      [
+       -30.28,
+       47.77
+      ],
+      [
+       -14.96,
+       64.15
+      ],
+      [
+       -11.74,
+       67.12
+      ],
+      [
+       -9.684,
+       68.46
+      ],
+      [
+       -7.392,
+       69.3
+      ],
+      [
+       0.09905,
+       70.08
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Effective number of bits (ENOB) vs. VREF",
+   "page": 8,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ENOB",
+    "unit": "bits rms",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ENOB",
+     "points": [
+      [
+       0.08439,
+       8.731
+      ],
+      [
+       0.1066,
+       8.794
+      ],
+      [
+       0.1835,
+       9.706
+      ],
+      [
+       0.2269,
+       9.952
+      ],
+      [
+       0.3091,
+       10.29
+      ],
+      [
+       0.5025,
+       10.93
+      ],
+      [
+       0.7357,
+       11.61
+      ],
+      [
+       0.8795,
+       11.95
+      ],
+      [
+       0.998,
+       12.12
+      ],
+      [
+       1.089,
+       12.17
+      ],
+      [
+       1.627,
+       12.36
+      ],
+      [
+       2.172,
+       12.51
+      ],
+      [
+       2.655,
+       12.6
+      ],
+      [
+       3.077,
+       12.63
+      ],
+      [
+       5.016,
+       12.67
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Spurious free dynamic range (SFDR) vs. input frequency",
+   "page": 8,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "SFDR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SFDR",
+     "points": [
+      [
+       0.9877,
+       93.17
+      ],
+      [
+       5.281,
+       90.82
+      ],
+      [
+       9.494,
+       89.15
+      ],
+      [
+       11.59,
+       87.93
+      ],
+      [
+       14.08,
+       85.97
+      ],
+      [
+       16.67,
+       83.6
+      ],
+      [
+       22.67,
+       78.26
+      ],
+      [
+       24.92,
+       77.06
+      ],
+      [
+       28.12,
+       76.7
+      ],
+      [
+       34.95,
+       78.28
+      ],
+      [
+       39.42,
+       77.67
+      ],
+      [
+       50.6,
+       75.61
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Frequency spectrum of 10 kHz input (representative part)",
+   "page": 9,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Amplitude",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Amplitude",
+     "points": [
+      [
+       -0.1499,
+       -51.11
+      ],
+      [
+       107.8,
+       -121.7
+      ],
+      [
+       143.7,
+       -110.5
+      ],
+      [
+       233.7,
+       -122.9
+      ],
+      [
+       251.6,
+       -122.1
+      ],
+      [
+       269.6,
+       -102.9
+      ],
+      [
+       395.5,
+       -107.2
+      ],
+      [
+       467.5,
+       -127.9
+      ],
+      [
+       539.4,
+       -137.4
+      ],
+      [
+       575.4,
+       -108.9
+      ],
+      [
+       683.3,
+       -127.2
+      ],
+      [
+       719.3,
+       -107.6
+      ],
+      [
+       755.2,
+       -108.9
+      ],
+      [
+       791.2,
+       -121.0
+      ],
+      [
+       917.1,
+       -112.1
+      ],
+      [
+       935.1,
+       -122.6
+      ],
+      [
+       1025.0,
+       -120.4
+      ],
+      [
+       1061.0,
+       -109.4
+      ],
+      [
+       1151.0,
+       -109.1
+      ],
+      [
+       1223.0,
+       -128.0
+      ],
+      [
+       1259.0,
+       -118.2
+      ],
+      [
+       1313.0,
+       -106.8
+      ],
+      [
+       1421.0,
+       -131.8
+      ],
+      [
+       1439.0,
+       -107.5
+      ],
+      [
+       1547.0,
+       -109.1
+      ],
+      [
+       1565.0,
+       -116.4
+      ],
+      [
+       1673.0,
+       -122.9
+      ],
+      [
+       1744.0,
+       -110.0
+      ],
+      [
+       1762.0,
+       -109.7
+      ],
+      [
+       1780.0,
+       -124.4
+      ],
+      [
+       1924.0,
+       -121.7
+      ],
+      [
+       1960.0,
+       -113.5
+      ],
+      [
+       2068.0,
+       -123.4
+      ],
+      [
+       2104.0,
+       -110.0
+      ],
+      [
+       2212.0,
+       -108.4
+      ],
+      [
+       2248.0,
+       -121.7
+      ],
+      [
+       2266.0,
+       -120.9
+      ],
+      [
+       2320.0,
+       -105.3
+      ],
+      [
+       2392.0,
+       -112.1
+      ],
+      [
+       2446.0,
+       -120.9
+      ],
+      [
+       2590.0,
+       -110.2
+      ],
+      [
+       2608.0,
+       -133.3
+      ],
+      [
+       2662.0,
+       -106.8
+      ],
+      [
+       2734.0,
+       -123.9
+      ],
+      [
+       2842.0,
+       -128.5
+      ],
+      [
+       2860.0,
+       -108.3
+      ],
+      [
+       2949.0,
+       -108.4
+      ],
+      [
+       2985.0,
+       -127.4
+      ],
+      [
+       3057.0,
+       -119.7
+      ],
+      [
+       3075.0,
+       -113.5
+      ],
+      [
+       3183.0,
+       -116.2
+      ],
+      [
+       3237.0,
+       -108.6
+      ],
+      [
+       3345.0,
+       -118.6
+      ],
+      [
+       3381.0,
+       -108.9
+      ],
+      [
+       3417.0,
+       -122.9
+      ],
+      [
+       3435.0,
+       -109.2
+      ],
+      [
+       3579.0,
+       -123.7
+      ],
+      [
+       3597.0,
+       -109.7
+      ],
+      [
+       3669.0,
+       -130.4
+      ],
+      [
+       3705.0,
+       -111.8
+      ],
+      [
+       3777.0,
+       -108.8
+      ],
+      [
+       3867.0,
+       -128.7
+      ],
+      [
+       3975.0,
+       -125.2
+      ],
+      [
+       4011.0,
+       -116.1
+      ],
+      [
+       4065.0,
+       -109.6
+      ],
+      [
+       4101.0,
+       -127.7
+      ],
+      [
+       4190.0,
+       -120.2
+      ],
+      [
+       4226.0,
+       -113.4
+      ],
+      [
+       4280.0,
+       -106.5
+      ],
+      [
+       4334.0,
+       -131.1
+      ],
+      [
+       4424.0,
+       -111.6
+      ],
+      [
+       4496.0,
+       -118.3
+      ],
+      [
+       4586.0,
+       -133.9
+      ],
+      [
+       4622.0,
+       -110.8
+      ],
+      [
+       4640.0,
+       -110.5
+      ],
+      [
+       4748.0,
+       -121.3
+      ],
+      [
+       4820.0,
+       -108.0
+      ],
+      [
+       4874.0,
+       -123.2
+      ],
+      [
+       4892.0,
+       -121.3
+      ],
+      [
+       4928.0,
+       -107.5
+      ],
+      [
+       5036.0,
+       -110.2
+      ],
+      [
+       5108.0,
+       -122.1
+      ],
+      [
+       5162.0,
+       -111.3
+      ],
+      [
+       5252.0,
+       -121.2
+      ],
+      [
+       5270.0,
+       -106.2
+      ],
+      [
+       5270.0,
+       -117.0
+      ],
+      [
+       5396.0,
+       -109.9
+      ],
+      [
+       5467.0,
+       -122.1
+      ],
+      [
+       5557.0,
+       -114.5
+      ],
+      [
+       5593.0,
+       -107.5
+      ],
+      [
+       5737.0,
+       -107.2
+      ],
+      [
+       5755.0,
+       -121.2
+      ],
+      [
+       5791.0,
+       -123.9
+      ],
+      [
+       5845.0,
+       -108.0
+      ],
+      [
+       5899.0,
+       -122.5
+      ],
+      [
+       5989.0,
+       -114.5
+      ],
+      [
+       6043.0,
+       -110.0
+      ],
+      [
+       6097.0,
+       -123.1
+      ],
+      [
+       6205.0,
+       -117.4
+      ],
+      [
+       6259.0,
+       -110.0
+      ],
+      [
+       6277.0,
+       -111.5
+      ],
+      [
+       6331.0,
+       -120.9
+      ],
+      [
+       6421.0,
+       -125.3
+      ],
+      [
+       6475.0,
+       -111.0
+      ],
+      [
+       6583.0,
+       -130.7
+      ],
+      [
+       6637.0,
+       -110.0
+      ],
+      [
+       6673.0,
+       -106.7
+      ],
+      [
+       6744.0,
+       -122.9
+      ],
+      [
+       6780.0,
+       -110.5
+      ],
+      [
+       6870.0,
+       -121.2
+      ],
+      [
+       6906.0,
+       -124.2
+      ],
+      [
+       6942.0,
+       -108.4
+      ],
+      [
+       7086.0,
+       -126.9
+      ],
+      [
+       7140.0,
+       -107.2
+      ],
+      [
+       7158.0,
+       -105.3
+      ],
+      [
+       7230.0,
+       -118.3
+      ],
+      [
+       7338.0,
+       -107.8
+      ],
+      [
+       7356.0,
+       -128.0
+      ],
+      [
+       7446.0,
+       -115.8
+      ],
+      [
+       7500.0,
+       -108.3
+      ],
+      [
+       7626.0,
+       -121.7
+      ],
+      [
+       7644.0,
+       -109.7
+      ],
+      [
+       7698.0,
+       -108.6
+      ],
+      [
+       7770.0,
+       -126.0
+      ],
+      [
+       7788.0,
+       -122.8
+      ],
+      [
+       7896.0,
+       -110.2
+      ],
+      [
+       7932.0,
+       -107.0
+      ],
+      [
+       8021.0,
+       -127.1
+      ],
+      [
+       8039.0,
+       -129.3
+      ],
+      [
+       8057.0,
+       -114.0
+      ],
+      [
+       8255.0,
+       -110.7
+      ],
+      [
+       8273.0,
+       -119.6
+      ],
+      [
+       8345.0,
+       -111.5
+      ],
+      [
+       8381.0,
+       -122.8
+      ],
+      [
+       8399.0,
+       -122.6
+      ],
+      [
+       8507.0,
+       -104.6
+      ],
+      [
+       8525.0,
+       -104.0
+      ],
+      [
+       8615.0,
+       -126.4
+      ],
+      [
+       8651.0,
+       -118.2
+      ],
+      [
+       8723.0,
+       -105.7
+      ],
+      [
+       8849.0,
+       -126.0
+      ],
+      [
+       8867.0,
+       -111.5
+      ],
+      [
+       8903.0,
+       -125.6
+      ],
+      [
+       9011.0,
+       -109.7
+      ],
+      [
+       9029.0,
+       -133.1
+      ],
+      [
+       9065.0,
+       -107.3
+      ],
+      [
+       9155.0,
+       -123.6
+      ],
+      [
+       9244.0,
+       -104.1
+      ],
+      [
+       9352.0,
+       -109.6
+      ],
+      [
+       9370.0,
+       -132.5
+      ],
+      [
+       9424.0,
+       -127.2
+      ],
+      [
+       9460.0,
+       -106.7
+      ],
+      [
+       9568.0,
+       -107.0
+      ],
+      [
+       9604.0,
+       -118.6
+      ],
+      [
+       9694.0,
+       -108.6
+      ],
+      [
+       9730.0,
+       -133.6
+      ],
+      [
+       9784.0,
+       -113.9
+      ],
+      [
+       9838.0,
+       -101.6
+      ],
+      [
+       9964.0,
+       -124.2
+      ],
+      [
+       9982.0,
+       -0.4777
+      ],
+      [
+       10090.0,
+       -0.4777
+      ],
+      [
+       10090.0,
+       -123.6
+      ],
+      [
+       10250.0,
+       -118.2
+      ],
+      [
+       10270.0,
+       -104.9
+      ],
+      [
+       10290.0,
+       -101.6
+      ],
+      [
+       10310.0,
+       -121.8
+      ],
+      [
+       10450.0,
+       -129.8
+      ],
+      [
+       10490.0,
+       -107.0
+      ],
+      [
+       10580.0,
+       -111.0
+      ],
+      [
+       10590.0,
+       -125.8
+      ],
+      [
+       10700.0,
+       -109.6
+      ],
+      [
+       10720.0,
+       -128.5
+      ],
+      [
+       10860.0,
+       -117.4
+      ],
+      [
+       10900.0,
+       -107.5
+      ],
+      [
+       10920.0,
+       -105.4
+      ],
+      [
+       10970.0,
+       -116.6
+      ],
+      [
+       11040.0,
+       -107.3
+      ],
+      [
+       11130.0,
+       -120.9
+      ],
+      [
+       11190.0,
+       -124.7
+      ],
+      [
+       11200.0,
+       -106.1
+      ],
+      [
+       11330.0,
+       -109.6
+      ],
+      [
+       11370.0,
+       -115.6
+      ],
+      [
+       11460.0,
+       -108.0
+      ],
+      [
+       11470.0,
+       -120.1
+      ],
+      [
+       11550.0,
+       -109.4
+      ],
+      [
+       11650.0,
+       -120.2
+      ],
+      [
+       11710.0,
+       -118.2
+      ],
+      [
+       11780.0,
+       -110.5
+      ],
+      [
+       11800.0,
+       -110.4
+      ],
+      [
+       11820.0,
+       -116.7
+      ],
+      [
+       11940.0,
+       -107.5
+      ],
+      [
+       11960.0,
+       -118.8
+      ],
+      [
+       12050.0,
+       -115.6
+      ],
+      [
+       12140.0,
+       -111.3
+      ],
+      [
+       12180.0,
+       -107.0
+      ],
+      [
+       12190.0,
+       -123.9
+      ],
+      [
+       12340.0,
+       -110.8
+      ],
+      [
+       12370.0,
+       -124.7
+      ],
+      [
+       12430.0,
+       -118.6
+      ],
+      [
+       12520.0,
+       -108.8
+      ],
+      [
+       12540.0,
+       -110.2
+      ],
+      [
+       12640.0,
+       -118.6
+      ],
+      [
+       12660.0,
+       -109.2
+      ],
+      [
+       12770.0,
+       -120.5
+      ],
+      [
+       12810.0,
+       -122.1
+      ],
+      [
+       12900.0,
+       -109.6
+      ],
+      [
+       12910.0,
+       -106.5
+      ],
+      [
+       12990.0,
+       -139.8
+      ],
+      [
+       13060.0,
+       -123.1
+      ],
+      [
+       13090.0,
+       -113.5
+      ],
+      [
+       13180.0,
+       -108.0
+      ],
+      [
+       13270.0,
+       -132.5
+      ],
+      [
+       13290.0,
+       -134.1
+      ],
+      [
+       13400.0,
+       -108.1
+      ],
+      [
+       13420.0,
+       -111.8
+      ],
+      [
+       13440.0,
+       -123.7
+      ],
+      [
+       13600.0,
+       -111.3
+      ],
+      [
+       13630.0,
+       -122.0
+      ],
+      [
+       13690.0,
+       -118.6
+      ],
+      [
+       13740.0,
+       -106.7
+      ],
+      [
+       13810.0,
+       -117.8
+      ],
+      [
+       13880.0,
+       -110.2
+      ],
+      [
+       13970.0,
+       -116.1
+      ],
+      [
+       14010.0,
+       -111.0
+      ],
+      [
+       14060.0,
+       -123.7
+      ],
+      [
+       14140.0,
+       -113.9
+      ],
+      [
+       14170.0,
+       -105.7
+      ],
+      [
+       14280.0,
+       -120.5
+      ],
+      [
+       14300.0,
+       -109.2
+      ],
+      [
+       14300.0,
+       -118.2
+      ],
+      [
+       14460.0,
+       -125.5
+      ],
+      [
+       14480.0,
+       -110.0
+      ],
+      [
+       14590.0,
+       -110.0
+      ],
+      [
+       14600.0,
+       -122.5
+      ],
+      [
+       14710.0,
+       -109.6
+      ],
+      [
+       14780.0,
+       -128.2
+      ],
+      [
+       14800.0,
+       -128.8
+      ],
+      [
+       14910.0,
+       -107.6
+      ],
+      [
+       14980.0,
+       -122.6
+      ],
+      [
+       15020.0,
+       -106.8
+      ],
+      [
+       15050.0,
+       -116.4
+      ],
+      [
+       15160.0,
+       -109.2
+      ],
+      [
+       15230.0,
+       -123.7
+      ],
+      [
+       15270.0,
+       -106.7
+      ],
+      [
+       15340.0,
+       -108.8
+      ],
+      [
+       15380.0,
+       -122.3
+      ],
+      [
+       15430.0,
+       -108.8
+      ],
+      [
+       15470.0,
+       -131.2
+      ],
+      [
+       15610.0,
+       -128.0
+      ],
+      [
+       15670.0,
+       -110.0
+      ],
+      [
+       15700.0,
+       -108.3
+      ],
+      [
+       15770.0,
+       -130.6
+      ],
+      [
+       15900.0,
+       -123.1
+      ],
+      [
+       15920.0,
+       -108.0
+      ],
+      [
+       15990.0,
+       -123.7
+      ],
+      [
+       16040.0,
+       -109.2
+      ],
+      [
+       16100.0,
+       -120.7
+      ],
+      [
+       16130.0,
+       -110.8
+      ],
+      [
+       16260.0,
+       -118.6
+      ],
+      [
+       16280.0,
+       -109.6
+      ],
+      [
+       16310.0,
+       -110.2
+      ],
+      [
+       16400.0,
+       -121.7
+      ],
+      [
+       16470.0,
+       -111.0
+      ],
+      [
+       16490.0,
+       -124.4
+      ],
+      [
+       16600.0,
+       -117.8
+      ],
+      [
+       16650.0,
+       -108.0
+      ],
+      [
+       16690.0,
+       -120.9
+      ],
+      [
+       16780.0,
+       -111.1
+      ],
+      [
+       16820.0,
+       -110.8
+      ],
+      [
+       16830.0,
+       -127.2
+      ],
+      [
+       16940.0,
+       -109.2
+      ],
+      [
+       17030.0,
+       -120.4
+      ],
+      [
+       17140.0,
+       -108.8
+      ],
+      [
+       17160.0,
+       -123.7
+      ],
+      [
+       17210.0,
+       -111.0
+      ],
+      [
+       17270.0,
+       -126.8
+      ],
+      [
+       17390.0,
+       -124.2
+      ],
+      [
+       17410.0,
+       -105.7
+      ],
+      [
+       17460.0,
+       -121.8
+      ],
+      [
+       17500.0,
+       -107.8
+      ],
+      [
+       17570.0,
+       -126.8
+      ],
+      [
+       17610.0,
+       -111.8
+      ],
+      [
+       17680.0,
+       -122.1
+      ],
+      [
+       17790.0,
+       -107.2
+      ],
+      [
+       17840.0,
+       -126.3
+      ],
+      [
+       17900.0,
+       -106.8
+      ],
+      [
+       17970.0,
+       -120.9
+      ],
+      [
+       17990.0,
+       -108.3
+      ],
+      [
+       18090.0,
+       -119.6
+      ],
+      [
+       18110.0,
+       -109.7
+      ],
+      [
+       18240.0,
+       -109.9
+      ],
+      [
+       18290.0,
+       -125.0
+      ],
+      [
+       18330.0,
+       -126.6
+      ],
+      [
+       18420.0,
+       -111.3
+      ],
+      [
+       18450.0,
+       -109.6
+      ],
+      [
+       18540.0,
+       -118.3
+      ],
+      [
+       18580.0,
+       -106.5
+      ],
+      [
+       18610.0,
+       -125.6
+      ],
+      [
+       18720.0,
+       -118.3
+      ],
+      [
+       18780.0,
+       -102.5
+      ],
+      [
+       18900.0,
+       -118.9
+      ],
+      [
+       18920.0,
+       -106.5
+      ],
+      [
+       18940.0,
+       -108.1
+      ],
+      [
+       19010.0,
+       -125.2
+      ],
+      [
+       19080.0,
+       -122.5
+      ],
+      [
+       19140.0,
+       -109.6
+      ],
+      [
+       19240.0,
+       -119.6
+      ],
+      [
+       19280.0,
+       -108.8
+      ],
+      [
+       19330.0,
+       -118.5
+      ],
+      [
+       19350.0,
+       -109.1
+      ],
+      [
+       19500.0,
+       -108.1
+      ],
+      [
+       19530.0,
+       -118.6
+      ],
+      [
+       19570.0,
+       -109.9
+      ],
+      [
+       19600.0,
+       -121.5
+      ],
+      [
+       19750.0,
+       -126.1
+      ],
+      [
+       19770.0,
+       -111.1
+      ],
+      [
+       19820.0,
+       -114.3
+      ],
+      [
+       19840.0,
+       -129.0
+      ],
+      [
+       19960.0,
+       -103.2
+      ],
+      [
+       19980.0,
+       -120.4
+      ],
+      [
+       20070.0,
+       -111.8
+      ],
+      [
+       20110.0,
+       -121.2
+      ],
+      [
+       20200.0,
+       -119.1
+      ],
+      [
+       20270.0,
+       -108.6
+      ],
+      [
+       20410.0,
+       -122.3
+      ],
+      [
+       20430.0,
+       -108.4
+      ],
+      [
+       20450.0,
+       -119.4
+      ],
+      [
+       20540.0,
+       -108.1
+      ],
+      [
+       20630.0,
+       -108.3
+      ],
+      [
+       20650.0,
+       -118.3
+      ],
+      [
+       20760.0,
+       -121.3
+      ],
+      [
+       20810.0,
+       -107.8
+      ],
+      [
+       20830.0,
+       -105.3
+      ],
+      [
+       20920.0,
+       -113.7
+      ],
+      [
+       20940.0,
+       -117.8
+      ],
+      [
+       21030.0,
+       -109.6
+      ],
+      [
+       21130.0,
+       -118.8
+      ],
+      [
+       21170.0,
+       -110.4
+      ],
+      [
+       21200.0,
+       -107.2
+      ],
+      [
+       21240.0,
+       -118.8
+      ],
+      [
+       21310.0,
+       -107.3
+      ],
+      [
+       21330.0,
+       -134.9
+      ],
+      [
+       21460.0,
+       -119.1
+      ],
+      [
+       21510.0,
+       -106.2
+      ],
+      [
+       21600.0,
+       -105.7
+      ],
+      [
+       21620.0,
+       -120.1
+      ],
+      [
+       21740.0,
+       -107.0
+      ],
+      [
+       21800.0,
+       -119.6
+      ],
+      [
+       21820.0,
+       -119.4
+      ],
+      [
+       21870.0,
+       -112.1
+      ],
+      [
+       22010.0,
+       -131.2
+      ],
+      [
+       22050.0,
+       -108.4
+      ],
+      [
+       22070.0,
+       -108.3
+      ],
+      [
+       22180.0,
+       -122.9
+      ],
+      [
+       22190.0,
+       -123.1
+      ],
+      [
+       22230.0,
+       -108.3
+      ],
+      [
+       22340.0,
+       -108.1
+      ],
+      [
+       22390.0,
+       -123.4
+      ],
+      [
+       22460.0,
+       -107.8
+      ],
+      [
+       22540.0,
+       -117.4
+      ],
+      [
+       22610.0,
+       -124.4
+      ],
+      [
+       22630.0,
+       -110.4
+      ],
+      [
+       22730.0,
+       -113.2
+      ],
+      [
+       22790.0,
+       -133.4
+      ],
+      [
+       22820.0,
+       -110.2
+      ],
+      [
+       22880.0,
+       -119.6
+      ],
+      [
+       23000.0,
+       -121.2
+      ],
+      [
+       23060.0,
+       -106.2
+      ],
+      [
+       23110.0,
+       -106.5
+      ],
+      [
+       23180.0,
+       -120.5
+      ],
+      [
+       23200.0,
+       -121.2
+      ],
+      [
+       23220.0,
+       -107.8
+      ],
+      [
+       23330.0,
+       -111.0
+      ],
+      [
+       23440.0,
+       -122.6
+      ],
+      [
+       23450.0,
+       -122.1
+      ],
+      [
+       23560.0,
+       -105.4
+      ],
+      [
+       23650.0,
+       -126.1
+      ],
+      [
+       23690.0,
+       -109.7
+      ],
+      [
+       23700.0,
+       -109.2
+      ],
+      [
+       23780.0,
+       -119.9
+      ],
+      [
+       23830.0,
+       -114.2
+      ],
+      [
+       23880.0,
+       -109.6
+      ],
+      [
+       23970.0,
+       -121.5
+      ],
+      [
+       23990.0,
+       -106.2
+      ],
+      [
+       24080.0,
+       -118.3
+      ],
+      [
+       24120.0,
+       -110.0
+      ],
+      [
+       24260.0,
+       -119.4
+      ],
+      [
+       24280.0,
+       -108.8
+      ],
+      [
+       24370.0,
+       -115.3
+      ],
+      [
+       24440.0,
+       -106.5
+      ],
+      [
+       24460.0,
+       -105.4
+      ],
+      [
+       24510.0,
+       -119.4
+      ],
+      [
+       24590.0,
+       -114.3
+      ],
+      [
+       24600.0,
+       -122.8
+      ],
+      [
+       24730.0,
+       -110.8
+      ],
+      [
+       24750.0,
+       -118.2
+      ],
+      [
+       24860.0,
+       -109.4
+      ],
+      [
+       24890.0,
+       -132.0
+      ],
+      [
+       24960.0,
+       -109.9
+      ],
+      [
+       25040.0,
+       -119.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Effective number of bits (ENOB) vs. input frequency",
+   "page": 9,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "ENOB",
+    "unit": "bits rms",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ENOB",
+     "points": [
+      [
+       0.9875,
+       12.67
+      ],
+      [
+       9.026,
+       12.63
+      ],
+      [
+       22.63,
+       12.61
+      ],
+      [
+       29.27,
+       12.58
+      ],
+      [
+       50.59,
+       12.48
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power supply rejection (PSR) vs. ripple frequency",
+   "page": 9,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise. A 0.1 µF bypass capacitor on the VDD pin.",
+   "x": {
+    "label": "Ripple frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "PSR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PSR",
+     "points": [
+      [
+       0.9745,
+       -73.59
+      ],
+      [
+       23.61,
+       -72.86
+      ],
+      [
+       47.71,
+       -72.42
+      ],
+      [
+       81.59,
+       -71.76
+      ],
+      [
+       123.5,
+       -70.71
+      ],
+      [
+       171.7,
+       -69.17
+      ],
+      [
+       237.5,
+       -66.81
+      ],
+      [
+       376.7,
+       -62.43
+      ],
+      [
+       472.8,
+       -61.24
+      ],
+      [
+       554.0,
+       -60.96
+      ],
+      [
+       804.2,
+       -61.53
+      ],
+      [
+       946.1,
+       -61.56
+      ],
+      [
+       1901.0,
+       -60.69
+      ],
+      [
+       2630.0,
+       -60.56
+      ],
+      [
+       3259.0,
+       -60.81
+      ],
+      [
+       3788.0,
+       -61.31
+      ],
+      [
+       4306.0,
+       -62.12
+      ],
+      [
+       4778.0,
+       -63.15
+      ],
+      [
+       5847.0,
+       -66.3
+      ],
+      [
+       8364.0,
+       -74.23
+      ],
+      [
+       8940.0,
+       -75.45
+      ],
+      [
+       9208.0,
+       -75.56
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IDD vs. VDD",
+   "page": 9,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VDD",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDD",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IDD",
+     "points": [
+      [
+       2.7,
+       178.2
+      ],
+      [
+       3.208,
+       232.4
+      ],
+      [
+       3.5,
+       258.5
+      ],
+      [
+       3.722,
+       270.9
+      ],
+      [
+       4.156,
+       284.2
+      ],
+      [
+       4.614,
+       304.1
+      ],
+      [
+       4.769,
+       311.7
+      ],
+      [
+       4.981,
+       325.0
+      ],
+      [
+       5.078,
+       334.1
+      ],
+      [
+       5.211,
+       350.7
+      ],
+      [
+       5.5,
+       395.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IDD vs. sample rate",
+   "page": 9,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Sample rate",
+    "unit": "ksps",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDD",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IDD",
+     "points": [
+      [
+       3.461,
+       168.1
+      ],
+      [
+       40.49,
+       227.4
+      ],
+      [
+       110.4,
+       343.9
+      ],
+      [
+       175.5,
+       445.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IDD vs. temperature",
+   "page": 9,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDD",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IDD",
+     "points": [
+      [
+       -40.53,
+       299.7
+      ],
+      [
+       -39.18,
+       300.0
+      ],
+      [
+       -32.35,
+       303.0
+      ],
+      [
+       -5.719,
+       315.1
+      ],
+      [
+       7.368,
+       320.6
+      ],
+      [
+       20.66,
+       325.6
+      ],
+      [
+       32.17,
+       329.0
+      ],
+      [
+       38.35,
+       330.4
+      ],
+      [
+       46.63,
+       332.0
+      ],
+      [
+       64.93,
+       334.8
+      ],
+      [
+       95.43,
+       338.6
+      ],
+      [
+       125.5,
+       341.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IREF vs. VDD",
+   "page": 10,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VDD",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IREF",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IREF",
+     "points": [
+      [
+       2.7,
+       35.99
+      ],
+      [
+       3.356,
+       50.18
+      ],
+      [
+       3.681,
+       56.14
+      ],
+      [
+       4.297,
+       64.75
+      ],
+      [
+       4.769,
+       69.44
+      ],
+      [
+       4.958,
+       72.61
+      ],
+      [
+       5.114,
+       77.3
+      ],
+      [
+       5.211,
+       81.61
+      ],
+      [
+       5.5,
+       97.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IREF vs. sample rate",
+   "page": 10,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Sample rate",
+    "unit": "ksps",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IREF",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IREF",
+     "points": [
+      [
+       3.48,
+       55.05
+      ],
+      [
+       11.09,
+       55.9
+      ],
+      [
+       48.88,
+       64.11
+      ],
+      [
+       89.58,
+       71.83
+      ],
+      [
+       135.9,
+       79.16
+      ],
+      [
+       175.5,
+       86.34
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IREF vs. temperature",
+   "page": 10,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IREF",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IREF",
+     "points": [
+      [
+       -40.53,
+       72.33
+      ],
+      [
+       -39.59,
+       72.34
+      ],
+      [
+       -37.81,
+       72.38
+      ],
+      [
+       -31.21,
+       72.54
+      ],
+      [
+       -7.927,
+       73.17
+      ],
+      [
+       2.753,
+       73.43
+      ],
+      [
+       7.471,
+       73.52
+      ],
+      [
+       12.89,
+       73.6
+      ],
+      [
+       18.03,
+       73.65
+      ],
+      [
+       22.45,
+       73.67
+      ],
+      [
+       26.95,
+       73.66
+      ],
+      [
+       30.77,
+       73.62
+      ],
+      [
+       34.85,
+       73.55
+      ],
+      [
+       39.87,
+       73.43
+      ],
+      [
+       48.72,
+       73.16
+      ],
+      [
+       66.75,
+       72.49
+      ],
+      [
+       73.59,
+       72.26
+      ],
+      [
+       80.39,
+       72.07
+      ],
+      [
+       83.4,
+       72.02
+      ],
+      [
+       85.86,
+       71.99
+      ],
+      [
+       90.23,
+       71.97
+      ],
+      [
+       93.26,
+       71.98
+      ],
+      [
+       97.24,
+       72.01
+      ],
+      [
+       100.5,
+       72.06
+      ],
+      [
+       106.6,
+       72.2
+      ],
+      [
+       120.0,
+       72.56
+      ],
+      [
+       123.5,
+       72.64
+      ],
+      [
+       125.5,
+       72.67
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IDDS vs. VDD",
+   "page": 10,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VDD",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDDS",
+    "unit": "pA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IDDS",
+     "points": [
+      [
+       2.502,
+       40.09
+      ],
+      [
+       2.562,
+       38.62
+      ],
+      [
+       2.614,
+       37.75
+      ],
+      [
+       2.925,
+       35.59
+      ],
+      [
+       3.001,
+       35.33
+      ],
+      [
+       3.351,
+       35.85
+      ],
+      [
+       3.626,
+       36.8
+      ],
+      [
+       4.202,
+       40.43
+      ],
+      [
+       4.701,
+       44.84
+      ],
+      [
+       5.05,
+       49.07
+      ],
+      [
+       5.201,
+       51.32
+      ],
+      [
+       5.501,
+       56.85
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IDDS vs. temperature",
+   "page": 10,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDDS",
+    "unit": "nA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "IDDS",
+     "points": [
+      [
+       -39.99,
+       0.004139
+      ],
+      [
+       -32.51,
+       0.00609
+      ],
+      [
+       -28.72,
+       0.006729
+      ],
+      [
+       -26.3,
+       0.006898
+      ],
+      [
+       -19.98,
+       0.006645
+      ],
+      [
+       -13.13,
+       0.005794
+      ],
+      [
+       -9.341,
+       0.005867
+      ],
+      [
+       -6.181,
+       0.006563
+      ],
+      [
+       0.03425,
+       0.009303
+      ],
+      [
+       18.78,
+       0.03039
+      ],
+      [
+       29.95,
+       0.08873
+      ],
+      [
+       39.96,
+       0.2019
+      ],
+      [
+       49.96,
+       0.4427
+      ],
+      [
+       67.56,
+       1.598
+      ],
+      [
+       85.04,
+       6.291
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Negative gain error vs. reference voltage",
+   "page": 10,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Negative gain error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Negative gain error",
+     "points": [
+      [
+       0.08371,
+       6.834
+      ],
+      [
+       0.09845,
+       6.802
+      ],
+      [
+       0.1084,
+       6.554
+      ],
+      [
+       0.1717,
+       3.892
+      ],
+      [
+       0.2101,
+       3.231
+      ],
+      [
+       0.2619,
+       2.747
+      ],
+      [
+       0.3601,
+       2.213
+      ],
+      [
+       0.5154,
+       1.659
+      ],
+      [
+       0.7284,
+       1.107
+      ],
+      [
+       0.8547,
+       0.8177
+      ],
+      [
+       0.9393,
+       0.6706
+      ],
+      [
+       1.04,
+       0.5993
+      ],
+      [
+       1.561,
+       0.4344
+      ],
+      [
+       2.537,
+       0.1798
+      ],
+      [
+       5.015,
+       -0.08803
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Negative gain error vs. temperature",
+   "page": 11,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Negative gain error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Negative gain error",
+     "points": [
+      [
+       -40.55,
+       -0.06584
+      ],
+      [
+       20.26,
+       -0.01565
+      ],
+      [
+       41.21,
+       -0.01112
+      ],
+      [
+       84.8,
+       -0.01782
+      ],
+      [
+       98.2,
+       -0.009686
+      ],
+      [
+       125.5,
+       0.02061
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Common mode rejection vs. frequency",
+   "page": 11,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Common mode rejection ratio",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "CMRR",
+     "points": [
+      [
+       1.0,
+       79.03
+      ],
+      [
+       6.943,
+       79.02
+      ],
+      [
+       12.98,
+       78.97
+      ],
+      [
+       18.96,
+       78.9
+      ],
+      [
+       23.13,
+       78.8
+      ],
+      [
+       26.16,
+       78.7
+      ],
+      [
+       37.68,
+       78.27
+      ],
+      [
+       51.03,
+       77.86
+      ],
+      [
+       61.67,
+       77.53
+      ],
+      [
+       66.53,
+       77.34
+      ],
+      [
+       89.25,
+       76.44
+      ],
+      [
+       98.12,
+       76.09
+      ],
+      [
+       116.4,
+       75.3
+      ],
+      [
+       156.8,
+       73.76
+      ],
+      [
+       200.7,
+       72.31
+      ],
+      [
+       250.7,
+       70.85
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum clock frequency vs. source resistance (RS) to maintain ±1 LSB INL",
+   "page": 14,
+   "conditions": "VDD = VREF = 5V, full differential input, VSS = 0V, FSAMPLE = 100 ksps, FCLK = 17*FSAMPLE, TA = 25°C unless the graph names otherwise.",
+   "x": {
+    "label": "Input resistance",
+    "unit": "Ω",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Maximum clock frequency",
+    "unit": "MHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Maximum clock frequency",
+     "points": [
+      [
+       100.0,
+       1.701
+      ],
+      [
+       2859.0,
+       1.701
+      ],
+      [
+       3877.0,
+       1.691
+      ],
+      [
+       4319.0,
+       1.679
+      ],
+      [
+       4514.0,
+       1.667
+      ],
+      [
+       4765.0,
+       1.638
+      ],
+      [
+       4907.0,
+       1.535
+      ],
+      [
+       6460.0,
+       1.118
+      ],
+      [
+       7823.0,
+       0.8877
+      ],
+      [
+       8758.0,
+       0.7787
+      ],
+      [
+       10920.0,
+       0.6354
+      ],
+      [
+       14380.0,
+       0.5043
+      ],
+      [
+       18020.0,
+       0.4195
+      ],
+      [
+       28040.0,
+       0.2641
+      ],
+      [
+       46040.0,
+       0.1088
+      ],
+      [
+       61510.0,
+       0.04016
+      ],
+      [
+       73760.0,
+       0.01796
+      ],
+      [
+       100000.0,
+       0.0
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "load-tr-tf-tdo",
+   "title": "Load circuit for tR, tF and tDO",
+   "page": 5,
+   "fixture": true,
+   "description": "The DOUT load used for the output timing figures: 3 kΩ pulled to 1.4 V with 100 pF to ground at the measurement point.",
+   "parts": [
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "DOUT",
+     "note": "the converter's DOUT pin"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "3 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 pF",
+     "note": "CL"
+    },
+    {
+     "ref": "V1",
+     "type": "terminal",
+     "value": "1.4 V"
+    },
+    {
+     "ref": "TP1",
+     "type": "terminal",
+     "value": "Test point"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "load-tdis-ten",
+   "title": "Load circuit for tDIS and tEN",
+   "page": 5,
+   "fixture": true,
+   "description": "DOUT carries 100 pF to ground and a 3 kΩ resistor to a selector. Tied to VDD it gives tDIS waveform 2 (output otherwise low), to VDD/2 the tEN waveform, and to VSS tDIS waveform 1 (output otherwise high). tDIS runs from CS/SHDN crossing VIH to DOUT reaching 90 % (waveform 1) or 10 % (waveform 2).",
+   "parts": [
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "DOUT",
+     "note": "the converter's DOUT pin"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "3 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 pF"
+    },
+    {
+     "ref": "TP1",
+     "type": "terminal",
+     "value": "Test point"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "selector",
+     "note": "picks VDD, VDD/2 or VSS"
+    },
+    {
+     "ref": "V1",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "tDIS waveform 2"
+    },
+    {
+     "ref": "V2",
+     "type": "terminal",
+     "value": "VDD/2",
+     "note": "tEN waveform"
+    },
+    {
+     "ref": "V3",
+     "type": "terminal",
+     "value": "VSS",
+     "note": "tDIS waveform 1"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "psrr-test",
+   "title": "Power supply sensitivity test circuit (PSRR)",
+   "page": 5,
+   "fixture": true,
+   "description": "Half of an MCP602 op amp, with 1 kΩ feedback and 1 kΩ to ground, takes a 2.63 V DC level through 1 kΩ and a 5 VP-P sine through 20 kΩ at its non-inverting input and delivers 5 V with ±500 mVP-P ripple to VDD of the converter under test.",
+   "parts": [
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP602",
+     "external": true,
+     "note": "one half of the dual op amp"
+    },
+    {
+     "ref": "B1",
+     "type": "source",
+     "value": "2.63 V",
+     "note": "DC source"
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "5 VP-P",
+     "note": "sine source"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "20 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "feedback"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "to ground"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "5V ±500 mVp-p",
+     "note": "to VDD on the converter under test"
+    }
+   ],
+   "notes": [
+    "The op amp's supply pins are not shown."
+   ]
+  },
+  {
+   "id": "full-diff-test",
+   "title": "Full differential test configuration",
+   "page": 5,
+   "fixture": true,
+   "description": "The configuration the electrical characteristics are measured in: two 5 VP-P sources in series drive IN(+) and IN(-), their junction held at a 2.5 V common-mode source. VREF = 5 V with 1 µF and 0.1 µF to ground; VDD = 5 V with 0.1 µF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP3301"
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "5 VP-P"
+    },
+    {
+     "ref": "V2",
+     "type": "source",
+     "value": "5 VP-P"
+    },
+    {
+     "ref": "B1",
+     "type": "source",
+     "value": "2.5 V",
+     "note": "VCM"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "VREF = 5V"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "VDD = 5V"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "CS/SHDN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "DOUT"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "pseudo-diff-test",
+   "title": "Pseudo differential test configuration",
+   "page": 5,
+   "fixture": true,
+   "description": "One 5 VP-P source drives IN(+) while IN(-) sits on a 2.5 V common-mode source. VREF = 2.5 V with 1 µF and 0.1 µF to ground; VDD = 5 V with 0.1 µF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP3301"
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "5 VP-P"
+    },
+    {
+     "ref": "B1",
+     "type": "source",
+     "value": "2.5 V",
+     "note": "VCM"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "VREF = 2.5V"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "VDD = 5V"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "CS/SHDN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "DOUT"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "bias-bipolar",
+   "title": "Pseudo-differential biasing circuit for bipolar operation",
+   "page": 15,
+   "description": "A single-ended signal is AC coupled through 10 µF into IN(+), and 1 kΩ biases IN(+) at the 2.5 V output of an MCP1525 reference, which also drives IN(-) and VREF. The output spans -4096 to +4095 with a 610 µV LSB. The 10 µF and 1 kΩ set a 100 Hz high-pass corner; a larger C lowers the corner, and R is kept at 1 kΩ or less because more source impedance needs more acquisition time.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP3301"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP1525",
+     "external": true,
+     "note": "2.5 V voltage reference"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "C, input coupling"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "R, input bias"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "reference output"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "reference input"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "VDD = 5V"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "CS/SHDN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "DOUT"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "amp-gain",
+   "title": "Op amp gain stage and input buffer",
+   "page": 16,
+   "description": "An MCP6022 op amp, with 10 kΩ feedback and 1 kΩ to the 2.5 V node, adds gain and buffers the signal into IN(+), so the source may have a high impedance. The input is AC coupled through 1 µF and biased by 1 MΩ to the 2.5 V MCP1525 output, which also sets IN(-), VREF and the gain stage's reference point. The op amp output cannot reach the rails, so some of the input range is lost.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP3301"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP6022",
+     "external": true,
+     "note": "op amp"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "MCP1525",
+     "external": true,
+     "note": "2.5 V voltage reference"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "input coupling"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "gain-setting, to the 2.5 V node"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "feedback"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 MΩ",
+     "note": "input bias"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "reference output"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "reference input"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "VDD = 5V"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "CS/SHDN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "DOUT"
+    }
+   ],
+   "notes": [
+    "The op amp's supply pins are not shown."
+   ]
+  },
+  {
+   "id": "amp-2v048-ref",
+   "title": "Gain stage with a 2.048 V reference below the 2.5 V bias",
+   "page": 16,
+   "description": "The gain stage of amp-gain built with an MCP606, with VREF moved to a 2.048 V shunt reference fed from VDD through 10 kΩ while the signal stays biased at the 2.5 V MCP1525 output. Holding VREF a little under the common-mode voltage keeps the full-scale span inside the op amp's output swing.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP3301"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP606",
+     "external": true,
+     "note": "op amp"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "MCP1525",
+     "external": true,
+     "note": "2.5 V voltage reference"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "2.048 V",
+     "note": "shunt voltage reference"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "shunt reference bias"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "input coupling"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "gain-setting, to the 2.5 V node"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "feedback"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 MΩ",
+     "note": "input bias"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "reference output"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "reference input"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "VDD = 5V"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "CS/SHDN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "DOUT"
+    }
+   ],
+   "notes": [
+    "The op amp's supply pins are not shown."
+   ]
+  },
+  {
+   "id": "antialias-10hz",
+   "title": "Second-order anti-aliasing filter driving the input",
+   "page": 17,
+   "description": "An MCP601 unity-gain follower forms a second-order 10 Hz Butterworth low-pass filter (7.86 kΩ and 14.6 kΩ in series, 2.2 µF fed back from the output, 1 µF to ground) and gives IN(+) a low-impedance drive; IN(-) is grounded. An MCP1541 supplies a 4.096 V reference with 1 µF load capacitance. VDD carries 10 µF and 0.1 µF at the converter, and 0.1 µF at the reference input.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP3301"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP601",
+     "external": true,
+     "note": "op amp"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "MCP1541",
+     "external": true,
+     "note": "4.096 V voltage reference"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "7.86 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "14.6 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "2.2 µF",
+     "note": "filter feedback"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "filter, to ground"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "CL, reference load"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "reference input"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VDD"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "CS/SHDN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "DOUT"
+    }
+   ],
+   "notes": [
+    "The op amp's supply pins are not shown."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "LSB size",
+   "expr": "LSB Size = 2 × VREF / 8192",
+   "where": {
+    "VREF": "voltage on the VREF pin"
+   },
+   "note": "VREF from 400 mV to 5 V gives an input-referred LSB from 98 µV to 1.22 mV; a 2.5 V reference gives 610 µV.",
+   "page": 12
+  },
+  {
+   "name": "Theoretical SNR",
+   "expr": "SNR = 6.02N + 1.76 dB",
+   "where": {
+    "N": "number of bits"
+   },
+   "note": "Quantization noise only; 80.02 dB for N = 13.",
+   "page": 13
+  },
+  {
+   "name": "Total harmonic distortion",
+   "expr": "THD(-dB) = -20 log (√(V2² + V3² + V4² + ... + V8² + V9²) / V1²)",
+   "where": {
+    "V1": "rms amplitude of the fundamental",
+    "V2 ... V9": "rms amplitudes of the second through ninth harmonics"
+   },
+   "note": "Uses the first nine harmonics. Misprint: the denominator should read V1.",
+   "page": 13
+  },
+  {
+   "name": "SINAD",
+   "expr": "SINAD(dB) = 20 log √(10^(SNR/10) + 10^(-(THD/10)))",
+   "where": {
+    "SNR": "signal to noise ratio, dB",
+    "THD": "total harmonic distortion, dB"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Effective number of bits",
+   "expr": "ENOB(N) = (SINAD - 1.76) / 6.02",
+   "where": {
+    "SINAD": "signal to noise and distortion, dB"
+   },
+   "note": "SINAD of 78 dB gives 12.66 bits.",
+   "page": 13
+  },
+  {
+   "name": "Sample clock",
+   "expr": "FCLK = 17 × FSAMPLE",
+   "where": {
+    "FCLK": "serial clock frequency",
+    "FSAMPLE": "sampling frequency"
+   },
+   "note": "The relation under which the electrical characteristics are given; 100 ksps needs 1.7 MHz.",
+   "page": 2
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 14,
+   "text": "A successive-approximation converter with a sample-and-hold on both inputs. The voltage between IN+ and IN- is captured on the internal sample capacitors for 1.5 clock periods (tACQ); then the hold switches open and the stored charge is converted over 13 clock periods, one per bit, into a 13-bit two's complement result. The first bit out is the sign, which says whether IN+ or IN- is the higher input."
+  },
+  {
+   "topic": "Serial communication",
+   "page": 20,
+   "text": "Communication starts when CS/SHDN falls. If the part powered up with CS/SHDN already low, CS/SHDN has to be taken high and low again first. Sampling begins on the first rising CLK edge after CS/SHDN falls and ends on the falling edge of the second clock, when DOUT drives a low null bit. The next 13 clocks shift out the result, sign bit first, then B11 down to B0; DOUT always changes on falling edges. If clocks continue with CS/SHDN low, the result is sent again LSB first (B1 up to B11 and the sign), and after that zeros for as long as clocks arrive. CS/SHDN must return high between conversions (tCSH)."
+  },
+  {
+   "topic": "Power-down during data transfer",
+   "page": 20,
+   "text": "Once the conversion is finished (tDATA), the bias current and the comparator shut down and VREF becomes a high-impedance node, while the clock can carry on reading out the reversed-order data and then zeros. Raising CS/SHDN ends the conversion and puts the part into standby, where it draws typically 50 nA."
+  },
+  {
+   "topic": "Using an 8-bit SPI port",
+   "page": 21,
+   "text": "A conversion takes 16 clocks, which is two 8-bit transfers. Because the part drives DOUT on falling edges, the controller latches on rising edges: SPI mode 0,0 (clock idles low) and mode 1,1 (clock idles high) both work. After the first byte the receive register holds two unknown bits (DOUT is high impedance for the first two clocks), the null bit, the sign bit and B11 to B8; the second byte holds B7 to B0."
+  },
+  {
+   "topic": "Output code",
+   "page": 18,
+   "text": "The result is binary two's complement with a leading sign bit: 0 when IN+ is above IN-, 1 when IN- is above IN+. With IN+ equal to IN- both the sign and the data are zero. The code reaches +4095 when IN+ - IN- = VREF - 1 LSB and -4096 when IN+ - IN- = -VREF."
+  },
+  {
+   "topic": "Input configurations",
+   "page": 13,
+   "text": "Full differential operation drives both IN(+) and IN(-) with signal (circuit full-diff-test). Pseudo-differential operation applies a single-ended signal to one input and biases the other above VSS, giving bipolar codes (circuit pseudo-diff-test). Bipolar operation uses all 8192 codes. Unipolar operation uses one side of the transfer function only, which amounts to a 12-bit converter."
+  },
+  {
+   "topic": "Driving the analog input",
+   "page": 14,
+   "text": "Both inputs see the same model (table: Analog input model): the source impedance adds to the 1 kΩ sampling switch, and together they must charge the 25 pF sample capacitor to 13-bit accuracy within the 1.5-clock acquisition period. A low-impedance source can drive the pin directly. A higher source impedance with no more acquisition time raises the offset, gain and integral nonlinearity errors; a slower clock lengthens acquisition, and the curve of maximum clock frequency against source resistance gives the limit for ±1 LSB INL. Buffering with an op amp removes the impedance problem, and a low-pass filter ahead of the input keeps aliasing signals out of the result."
+  },
+  {
+   "topic": "Minimum clock speed",
+   "page": 15,
+   "text": "During conversion the held charge leaks away if the clock is slow, so the clock should run at 85 kHz or faster through tCONV; slower clocking can add linearity errors beyond the ratings. Apart from that, and provided every timing limit is met, there is no requirement on clock speed or duty cycle during the conversion cycle."
+  },
+  {
+   "topic": "Common-mode range",
+   "page": 16,
+   "text": "The common-mode voltage may be anywhere in the absolute input range, VSS - 0.3 V to VDD + 0.3 V, but using the full conversion range limits its swing for a given VREF; a smaller VREF leaves a wider common-mode window (table: Common-mode range against VREF). VREF down to 400 mV changes INL and DNL by less than 0.1 LSB."
+  },
+  {
+   "topic": "Biasing with a 2.5 V reference",
+   "page": 15,
+   "text": "In circuit bias-bipolar the converter is not production tested at VREF = 2.5 V; its linearity changes by no more than 0.1 LSB from the tested case."
+  },
+  {
+   "topic": "Op amp headroom",
+   "page": 16,
+   "text": "An op amp output that cannot swing to the rails costs input range when the signal swings 0 V to 5 V. A VREF slightly below the common-mode voltage avoids it: a 2.048 V reference with the signal biased at 2.5 V (circuit amp-2v048-ref)."
+  },
+  {
+   "topic": "Reference input",
+   "page": 1,
+   "text": "VREF may be set from 400 mV to 5 V (up to VDD). The reference draws typically 100 µA while converting and 0.001 µA with CS/SHDN high. When an external reference IC drives VREF, follow the layout guidance for that reference; instability of the reference shows up in the result."
+  },
+  {
+   "topic": "Supply",
+   "page": 12,
+   "text": "The part operates from 2.7 V to 5.5 V; the specified performance applies from 4.5 V to 5.5 V. Typical operating current is 300 µA at 5 V; 450 µA is the maximum."
+  },
+  {
+   "topic": "Layout",
+   "page": 17,
+   "text": "Bypass VDD to ground with 0.1 µF placed as near the pin as possible. Keep digital and analog traces well apart, run no traces under the device or its bypass capacitor, and route high-frequency lines such as the clock far from analog traces. An analog ground plane keeps every device at the same ground potential, and feeding VDD to each device from one point in a star cuts errors from shared return currents."
+  },
+  {
+   "topic": "Accuracy definitions",
+   "page": 13,
+   "text": "INL is the largest departure from a straight line through the end points of the bipolar transfer function, the end points lying 1/2 LSB above the first transition (0x1000) and 1/2 LSB below the last (0x0FFF). DNL is the difference between the measured step of two adjacent code transitions and the ideal 1 LSB. Positive gain error is the deviation of the last positive transition (0x0FFF) from VREF - 1/2 LSB, and negative gain error that of the last negative transition (0x1000) from -VREF - 1/2 LSB, each after removing the bipolar offset. Offset error is the deviation of the first positive transition (0x0001) from 1/2 LSB. SFDR is the fundamental's rms value over the next largest spectral component, usually the first harmonic but possibly a noise peak."
+  }
+ ],
+ "packages": [
+  {
+   "name": "8-lead plastic micro small outline (MS) [MSOP]",
+   "page": 23,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "–",
+     "–",
+     "1.10"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "0.75",
+     "0.85",
+     "0.95"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "–",
+     "0.15"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "4.90 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "0.60",
+     "0.80"
+    ],
+    [
+     "L1",
+     "footprint",
+     "",
+     "0.95 REF",
+     ""
+    ],
+    [
+     "φ",
+     "foot angle",
+     "0°",
+     "–",
+     "8°"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.08",
+     "–",
+     "0.23"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.22",
+     "–",
+     "0.40"
+    ]
+   ],
+   "notes": [
+    "D and E1 exclude mold flash and protrusions, which are at most 0.15 mm per side.",
+    "The pin 1 index may take any form within the marked corner area.",
+    "BSC: basic dimension, exact without tolerance. REF: reference dimension, for information.",
+    "Dimensioning and tolerancing to ASME Y14.5M.",
+    "Drawing C04-111B."
+   ]
+  },
+  {
+   "name": "8-lead MSOP recommended land pattern",
+   "page": 24,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "C",
+     "contact pad spacing",
+     "",
+     "4.40",
+     ""
+    ],
+    [
+     "Z",
+     "overall width",
+     "",
+     "",
+     "5.85"
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.45"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "1.45"
+    ],
+    [
+     "G1",
+     "distance between pads",
+     "2.95",
+     "",
+     ""
+    ],
+    [
+     "GX",
+     "distance between pads",
+     "0.20",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Dimensioning and tolerancing to ASME Y14.5M.",
+    "Drawing C04-2111A."
+   ]
+  },
+  {
+   "name": "8-lead plastic dual in-line (P), 300 mil body [PDIP]",
+   "page": 25,
+   "unit": "inch",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     ".100 BSC",
+     ""
+    ],
+    [
+     "A",
+     "top to seating plane",
+     "–",
+     "–",
+     ".210"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     ".115",
+     ".130",
+     ".195"
+    ],
+    [
+     "A1",
+     "base to seating plane",
+     ".015",
+     "–",
+     "–"
+    ],
+    [
+     "E",
+     "shoulder to shoulder width",
+     ".290",
+     ".310",
+     ".325"
+    ],
+    [
+     "E1",
+     "molded package width",
+     ".240",
+     ".250",
+     ".280"
+    ],
+    [
+     "D",
+     "overall length",
+     ".348",
+     ".365",
+     ".400"
+    ],
+    [
+     "L",
+     "tip to seating plane",
+     ".115",
+     ".130",
+     ".150"
+    ],
+    [
+     "c",
+     "lead thickness",
+     ".008",
+     ".010",
+     ".015"
+    ],
+    [
+     "b1",
+     "upper lead width",
+     ".040",
+     ".060",
+     ".070"
+    ],
+    [
+     "b",
+     "lower lead width",
+     ".014",
+     ".018",
+     ".022"
+    ],
+    [
+     "eB",
+     "overall row spacing §",
+     "–",
+     "–",
+     ".430"
+    ]
+   ],
+   "notes": [
+    "D and E1 exclude mold flash and protrusions, which are at most .010\" per side.",
+    "§ marks a significant characteristic.",
+    "Dimensioning and tolerancing to ASME Y14.5M.",
+    "Drawing C04-018B."
+   ]
+  },
+  {
+   "name": "8-lead plastic small outline (SN), narrow, 3.90 mm body [SOIC]",
+   "page": 27,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "-",
+     "-",
+     "1.75"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "1.25",
+     "-",
+     "-"
+    ],
+    [
+     "A1",
+     "standoff §",
+     "0.10",
+     "-",
+     "0.25"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "6.00 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "",
+     "3.90 BSC",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "4.90 BSC",
+     ""
+    ],
+    [
+     "h",
+     "chamfer (optional)",
+     "0.25",
+     "-",
+     "0.50"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "-",
+     "1.27"
+    ],
+    [
+     "L1",
+     "footprint",
+     "",
+     "1.04 REF",
+     ""
+    ],
+    [
+     "φ",
+     "foot angle",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.17",
+     "-",
+     "0.25"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.31",
+     "-",
+     "0.51"
+    ],
+    [
+     "α",
+     "mold draft angle top",
+     "5°",
+     "-",
+     "15°"
+    ],
+    [
+     "β",
+     "mold draft angle bottom",
+     "5°",
+     "-",
+     "15°"
+    ]
+   ],
+   "notes": [
+    "D and E1 exclude mold flash and protrusions, which are at most 0.15 mm per side.",
+    "§ marks a significant characteristic.",
+    "Dimensioning and tolerancing to ASME Y14.5M.",
+    "Geometric tolerances (datums A, B, C seating plane, D): D profile 0.10 C A-B (2X); E1 profile 0.10 C D (2X); lead tips profile 0.20 C (2X N/2 tips); b position 0.25 at MMC to C A-B D (NX); top surface parallelism 0.10 C; lead coplanarity 0.10 C (NX).",
+    "Drawing C04-057C."
+   ]
+  },
+  {
+   "name": "8-lead SOIC recommended land pattern",
+   "page": 28,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "C",
+     "contact pad spacing",
+     "",
+     "5.40",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.60"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "1.55"
+    ]
+   ],
+   "notes": [
+    "Dimensioning and tolerancing to ASME Y14.5M.",
+    "Drawing C04-2057A."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,5305 @@
+{
+ "sheet": 1,
+ "name": "DRV8231ADSGR",
+ "kind": "motor_driver",
+ "manufacturer": "Texas Instruments",
+ "title": "DRV8231A: 3.7 A brushed DC motor H-bridge, 4.5 V to 33 V, with current-mirror sensing (IPROPI) and current regulation",
+ "source": {
+  "document": "SLVSFZ8A",
+  "revision": "Revision A, January 2026",
+  "pages": 44
+ },
+ "summary": "A single full bridge of four N-channel MOSFETs (about 300 mΩ each side) for one brushed DC motor, a relay coil or another inductive load, running from 4.5 V to 33 V on one supply pin with an internal charge pump for the high-side gates. Two logic inputs, IN1 and IN2, select forward, reverse, brake or coast and accept PWM up to 200 kHz; holding both low puts the chip to sleep below 1 µA. A mirror on the low-side FETs sources 1500 µA per amp of load current out of IPROPI, so a resistor there gives a voltage for an ADC, and comparing that voltage with VREF chops the bridge at a set current with a fixed 25 µs off time. Undervoltage lockout, auto-retry overcurrent and thermal shutdown are built in. Packages: 8-pin HSOP PowerPAD (DDA) and 2 mm × 2 mm 8-pin WSON (DSG).",
+ "key_figures": [
+  [
+   "Supply VM",
+   "4.5 V to 33 V (35 V absolute maximum)"
+  ],
+  [
+   "Peak output current",
+   "3.7 A"
+  ],
+  [
+   "RDS(on)",
+   "300 mΩ high side + 300 mΩ low side typ (VVM = 24 V, 1 A)"
+  ],
+  [
+   "Current mirror",
+   "AIPROPI 1500 µA/A typ, ±6 % at 1 A"
+  ],
+  [
+   "Current regulation",
+   "fixed off time 25 µs typ, set by VREF and RIPROPI"
+  ],
+  [
+   "PWM frequency",
+   "0 to 200 kHz"
+  ],
+  [
+   "Sleep current",
+   "1 µA max at VVM = 24 V, 25 °C"
+  ],
+  [
+   "Logic thresholds",
+   "VIL 0.5 V max, VIH 1.5 V min (1.8 V, 3.3 V and 5 V logic)"
+  ],
+  [
+   "Overcurrent trip",
+   "3.7 A min, auto-retry after 3 ms"
+  ],
+  [
+   "Thermal shutdown",
+   "175 °C typ, 40 °C hysteresis"
+  ],
+  [
+   "RθJA",
+   "42.8 °C/W (HSOP), 66.5 °C/W (WSON)"
+  ],
+  [
+   "Packages",
+   "HSOP-8 PowerPAD 4.9 mm × 6.0 mm; WSON-8 2.0 mm × 2.0 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 35,
+  "columns": [
+   "part number",
+   "status",
+   "material type",
+   "package",
+   "pins",
+   "package qty",
+   "carrier",
+   "RoHS",
+   "lead finish",
+   "MSL rating / peak reflow",
+   "op temp (°C)",
+   "part marking"
+  ],
+  "rows": [
+   [
+    "DRV8231ADDAR",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "3000",
+    "LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 150",
+    "DRV8231A"
+   ],
+   [
+    "DRV8231ADDAR.A",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "3000",
+    "LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 150",
+    "DRV8231A"
+   ],
+   [
+    "DRV8231ADSGR",
+    "Active",
+    "Production",
+    "WSON (DSG)",
+    "8",
+    "3000",
+    "LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 150",
+    "31A"
+   ],
+   [
+    "DRV8231ADSGR.A",
+    "Active",
+    "Production",
+    "WSON (DSG)",
+    "8",
+    "3000",
+    "LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 150",
+    "31A"
+   ]
+  ],
+  "notes": [
+   "The DDA package is the 8-pin HSOP, 4.90 mm × 6.00 mm nominal body; the DSG package is the 8-pin WSON, 2.00 mm × 2.00 mm. Both have the same pinout."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DDA (HSOP-8) and DSG (WSON-8)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "IPROPI",
+     "type": "analog output",
+     "function": "Sources a current proportional to the low-side FET current (AIPROPI, 1500 µA/A). A resistor to ground turns it into a voltage that also sets the regulation trip against VREF. Tie to GND to turn off regulation and feedback."
+    },
+    {
+     "pin": "2",
+     "name": "IN2",
+     "type": "logic input",
+     "function": "Bridge control input with internal pulldown (100 kΩ typ). With IN1 it selects the output state in the bridge control table."
+    },
+    {
+     "pin": "3",
+     "name": "IN1",
+     "type": "logic input",
+     "function": "Bridge control input with internal pulldown (100 kΩ typ). With IN2 it selects the output state in the bridge control table."
+    },
+    {
+     "pin": "4",
+     "name": "VREF",
+     "type": "analog input",
+     "function": "Reference for the current regulation threshold, 0 V to 3.6 V recommended (6 V absolute maximum). Also the level the IPROPI clamp follows."
+    },
+    {
+     "pin": "5",
+     "name": "VM",
+     "type": "power",
+     "function": "Supply for the device and the motor, 4.5 V to 33 V recommended. Bypass to ground with 0.1 µF ceramic plus bulk capacitance, all rated for VM."
+    },
+    {
+     "pin": "6",
+     "name": "OUT1",
+     "type": "output",
+     "function": "Bridge output; wire straight to one terminal of the motor or load."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Power ground of the device; tie to system ground."
+    },
+    {
+     "pin": "8",
+     "name": "OUT2",
+     "type": "output",
+     "function": "Bridge output; wire straight to the other terminal of the motor or load."
+    },
+    {
+     "pin": "9",
+     "name": "PAD",
+     "type": "thermal pad",
+     "function": "Exposed thermal pad. Solder to board ground; large ground planes on several layers joined by many vias near the pad carry the heat away."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Device comparison",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "device",
+    "supply voltage (V)",
+    "RDS(on) (mΩ)",
+    "current regulation",
+    "current-sense feedback",
+    "overcurrent protection response",
+    "package",
+    "pin-to-pin devices"
+   ],
+   "rows": [
+    [
+     "DRV8870",
+     "6.5 to 45",
+     "565",
+     "External shunt resistor",
+     "External amplifier",
+     "Automatic retry",
+     "HSOP (4.9x6)",
+     "DRV8870, DRV8251, DRV8231"
+    ],
+    [
+     "DRV8251",
+     "4.5 to 48",
+     "450",
+     "External shunt resistor",
+     "External amplifier",
+     "Latched disable",
+     "HSOP (4.9x6)",
+     "DRV8870, DRV8251, DRV8231"
+    ],
+    [
+     "DRV8231",
+     "4.5 to 33",
+     "600",
+     "External shunt resistor",
+     "External amplifier",
+     "Automatic retry",
+     "HSOP (4.9x6), WSON (2x2)",
+     "DRV8870, DRV8251, DRV8231"
+    ],
+    [
+     "DRV8251A",
+     "4.5 to 48",
+     "450",
+     "Internal current mirror (IPROPI)",
+     "Internal current mirror (IPROPI)",
+     "Automatic retry",
+     "HSOP (4.9x6)",
+     "DRV8251A, DRV8231A"
+    ],
+    [
+     "DRV8231A",
+     "4.5 to 33",
+     "600",
+     "Internal current mirror (IPROPI)",
+     "Internal current mirror (IPROPI)",
+     "Automatic retry",
+     "HSOP (4.9x6), WSON (2x2)",
+     "DRV8251A, DRV8231A"
+    ]
+   ],
+   "notes": [
+    "RDS(on) is the total of a conducting high-side FET plus its low-side partner."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 4,
+   "conditions": "Over operating temperature range unless noted.",
+   "columns": [
+    "parameter",
+    "pin",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Power supply pin voltage",
+     "VM",
+     "-0.3",
+     "35",
+     "V"
+    ],
+    [
+     "Power supply transient voltage ramp",
+     "VM",
+     "0",
+     "2",
+     "V/µs"
+    ],
+    [
+     "Logic pin voltage",
+     "INx",
+     "-0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Reference input pin voltage",
+     "VREF",
+     "-0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Output pin voltage",
+     "OUTx",
+     "-0.7",
+     "VM + 0.7",
+     "V"
+    ],
+    [
+     "Current sense input pin voltage",
+     "IPROPI",
+     "-0.3",
+     "5.75",
+     "V"
+    ],
+    [
+     "Output current",
+     "OUTx",
+     "Internally Limited",
+     "Internally Limited",
+     "A"
+    ],
+    [
+     "Ambient temperature, TA",
+     "",
+     "-40",
+     "125",
+     "°C"
+    ],
+    [
+     "Junction temperature, TJ",
+     "",
+     "-40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "",
+     "-65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these limits can damage the device permanently; operation between the recommended conditions and these limits is not guaranteed and can shorten device life."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Human body model (HBM), per ANSI/ESDA/JEDEC JS-001 (1)",
+     "±2000",
+     "V"
+    ],
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Charged device model (CDM), per JEDEC specification JESD22-C101 (2)",
+     "±500",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) JEDEC JEP155: 500 V HBM is enough for safe handling in a standard ESD-controlled process; pins rated ±2000 V may withstand more.",
+    "(2) JEDEC JEP157: 250 V CDM is enough for safe handling in a standard ESD-controlled process; pins rated ±500 V may withstand more."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 4,
+   "conditions": "Over operating temperature range unless noted.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "pin",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VVM",
+     "Power supply voltage",
+     "VM",
+     "4.5",
+     "",
+     "33",
+     "V"
+    ],
+    [
+     "VVREF",
+     "Reference voltage",
+     "VREF",
+     "0",
+     "",
+     "3.6",
+     "V"
+    ],
+    [
+     "VIN",
+     "Logic input voltage",
+     "INx",
+     "0",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "fPWM",
+     "PWM frequency",
+     "INx",
+     "0",
+     "",
+     "200",
+     "kHz"
+    ],
+    [
+     "IOUT (1)",
+     "Peak output current",
+     "OUTx",
+     "0",
+     "",
+     "3.7",
+     "A"
+    ],
+    [
+     "IIPROPI",
+     "Peak output current",
+     "IPROPI",
+     "0",
+     "",
+     "3",
+     "mA"
+    ],
+    [
+     "TA",
+     "Operating ambient temperature",
+     "Operating ambient temperature",
+     "-40",
+     "",
+     "125",
+     "°C"
+    ],
+    [
+     "TJ",
+     "Operating junction temperature",
+     "",
+     "-40",
+     "",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) Power dissipation and thermal limits still apply."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "DDA (HSOP), 8 pins",
+    "DSG (WSON), 8 pins",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA",
+     "Junction-to-ambient thermal resistance",
+     "42.8",
+     "66.5",
+     "°C/W"
+    ],
+    [
+     "RθJC(top)",
+     "Junction-to-case (top) thermal resistance",
+     "57.6",
+     "77.8",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "16.8",
+     "32.8",
+     "°C/W"
+    ],
+    [
+     "ΨJT",
+     "Junction-to-top characterization parameter",
+     "5.4",
+     "2.2",
+     "°C/W"
+    ],
+    [
+     "ΨJB",
+     "Junction-to-board characterization parameter",
+     "16.8",
+     "32.7",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "6.2",
+     "12.2",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 5,
+   "conditions": "4.5 V ≤ VVM ≤ 33 V, -40 °C ≤ TJ ≤ 150 °C unless noted. Typical values at TJ = 25 °C and VVM = 24 V.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "POWER SUPPLY (VM)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VM sleep mode current",
+     "IVMQ",
+     "VVM = 24 V, IN1 = IN2 = 0, TJ = 25°C",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "VM active mode current",
+     "IVM",
+     "VVM = 24 V, IN1 = IN2 = 1",
+     "",
+     "3",
+     "4",
+     "mA"
+    ],
+    [
+     "Turnon time",
+     "tWAKE",
+     "Control signal to active mode",
+     "",
+     "",
+     "250",
+     "µs"
+    ],
+    [
+     "Turnoff time",
+     "tSLEEP",
+     "Control signal to sleep mode",
+     "0.8",
+     "",
+     "1.5",
+     "ms"
+    ],
+    [
+     "LOGIC-LEVEL INPUTS (INx)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input logic low voltage",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "Input logic high voltage",
+     "VIH",
+     "",
+     "1.5",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input hysteresis",
+     "VHYS",
+     "",
+     "",
+     "200",
+     "",
+     "mV"
+    ],
+    [
+     "Input logic low current",
+     "IIL",
+     "VIN = 0 V",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Input logic high current",
+     "IIH",
+     "VIN = 3.3 V",
+     "",
+     "33",
+     "100",
+     "µA"
+    ],
+    [
+     "Input pulldown resistance",
+     "RPD",
+     "To GND",
+     "",
+     "100",
+     "",
+     "kΩ"
+    ],
+    [
+     "DRIVER OUTPUTS (OUTx)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "High-side MOSFET on resistance",
+     "RDS(on)_HS",
+     "VVM = 24 V, I = 1 A, fPWM = 25 kHz",
+     "",
+     "300",
+     "",
+     "mΩ"
+    ],
+    [
+     "Low-side MOSFET on resistance",
+     "RDS(on)_LS",
+     "VVM = 24 V, I = 1 A, fPWM = 25 kHz",
+     "",
+     "300",
+     "",
+     "mΩ"
+    ],
+    [
+     "Body diode forward voltage",
+     "VSD",
+     "IOUT = 1 A",
+     "",
+     "0.8",
+     "",
+     "V"
+    ],
+    [
+     "Output rise time",
+     "tRISE",
+     "VVM = 24 V, OUTx rising from 10% to 90%",
+     "",
+     "220",
+     "",
+     "ns"
+    ],
+    [
+     "Output fall time",
+     "tFALL",
+     "VVM = 24 V, OUTx falling from 90% to 10%",
+     "",
+     "220",
+     "",
+     "ns"
+    ],
+    [
+     "Input to output propagation delay",
+     "tPD",
+     "INx to OUTx",
+     "",
+     "0.7",
+     "1",
+     "µs"
+    ],
+    [
+     "Output dead time",
+     "tDEAD",
+     "",
+     "",
+     "200",
+     "",
+     "ns"
+    ],
+    [
+     "INTEGRATED CURRENT SENSE AND REGULATION (IPROPI, VREF)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Current mirror scaling factor",
+     "AIPROPI",
+     "",
+     "",
+     "1500",
+     "",
+     "µA/A"
+    ],
+    [
+     "Current mirror total error",
+     "AERR",
+     "IOUT = 1 A, VVM ≥ 6.5 V, VIPROPI ≤ 3.0 V",
+     "-6",
+     "",
+     "6",
+     "%"
+    ],
+    [
+     "Current regulation off time",
+     "tOFF",
+     "",
+     "",
+     "25",
+     "",
+     "µs"
+    ],
+    [
+     "Current regulation blanking time",
+     "tBLK",
+     "",
+     "",
+     "1.4",
+     "",
+     "µs"
+    ],
+    [
+     "Current sense delay time",
+     "tDELAY",
+     "",
+     "",
+     "1.1",
+     "",
+     "µs"
+    ],
+    [
+     "Current regulation deglitch time",
+     "tDEG",
+     "",
+     "",
+     "0.7",
+     "",
+     "µs"
+    ],
+    [
+     "PROTECTION CIRCUITS",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Supply undervoltage lockout (UVLO)",
+     "VUVLO",
+     "Supply rising",
+     "4.15",
+     "4.3",
+     "4.45",
+     "V"
+    ],
+    [
+     "Supply undervoltage lockout (UVLO)",
+     "VUVLO",
+     "Supply falling",
+     "4.05",
+     "4.2",
+     "4.35",
+     "V"
+    ],
+    [
+     "Supply UVLO hysteresis",
+     "VUVLO_HYS",
+     "Rising to falling threshold",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Supply undervoltage deglitch time",
+     "tUVLO",
+     "",
+     "",
+     "10",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection trip point",
+     "IOCP",
+     "",
+     "3.7",
+     "",
+     "",
+     "A"
+    ],
+    [
+     "Overcurrent protection deglitch time",
+     "tOCP",
+     "",
+     "",
+     "1.5",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection retry time",
+     "tRETRY",
+     "",
+     "",
+     "3",
+     "",
+     "ms"
+    ],
+    [
+     "Thermal shutdown temperature",
+     "TTSD",
+     "",
+     "150",
+     "175",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis",
+     "THYS",
+     "",
+     "",
+     "40",
+     "",
+     "°C"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Recommended external components",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "component",
+    "pin 1",
+    "pin 2",
+    "recommended"
+   ],
+   "rows": [
+    [
+     "CVM1",
+     "VM",
+     "GND",
+     "0.1 µF low-ESR ceramic, rated for VM"
+    ],
+    [
+     "CVM2",
+     "VM",
+     "GND",
+     "Bulk capacitor sized per the bulk capacitance section, rated for VM"
+    ]
+   ]
+  },
+  {
+   "title": "H-bridge control",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "IN1",
+    "IN2",
+    "OUT1",
+    "OUT2",
+    "state"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "High-Z",
+     "High-Z",
+     "Coast: bridge off, outputs High-Z; sleep follows after 1 ms"
+    ],
+    [
+     "0",
+     "1",
+     "L",
+     "H",
+     "Reverse: current OUT2 → OUT1"
+    ],
+    [
+     "1",
+     "0",
+     "H",
+     "L",
+     "Forward: current OUT1 → OUT2"
+    ],
+    [
+     "1",
+     "1",
+     "L",
+     "L",
+     "Brake: low-side slow decay"
+    ]
+   ]
+  },
+  {
+   "title": "Modes of operation",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "condition",
+    "H-bridge",
+    "internal circuits"
+   ],
+   "rows": [
+    [
+     "Active mode",
+     "IN1 or IN2 = logic high",
+     "Operating",
+     "Operating"
+    ],
+    [
+     "Low-power sleep mode",
+     "IN1 = IN2 = logic low",
+     "Disabled",
+     "Disabled"
+    ],
+    [
+     "Fault mode",
+     "Any fault condition met",
+     "Disabled",
+     "Per the fault conditions table"
+    ]
+   ]
+  },
+  {
+   "title": "Fault conditions",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "fault",
+    "condition",
+    "H-bridge",
+    "internal circuits",
+    "recovery"
+   ],
+   "rows": [
+    [
+     "VM undervoltage (UVLO)",
+     "VM < VUVLO,falling",
+     "Disabled",
+     "Disabled",
+     "VM > VUVLO,rising"
+    ],
+    [
+     "Overcurrent (OCP)",
+     "IOUT > IOCP",
+     "Disabled",
+     "Operating",
+     "IOUT < IOCP"
+    ],
+    [
+     "Thermal shutdown (TSD)",
+     "TJ > TTSD",
+     "Disabled",
+     "Operating",
+     "TJ < TTSD – THYS"
+    ]
+   ]
+  },
+  {
+   "title": "Design parameters: brushed DC motor",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "design parameter",
+    "reference",
+    "example value"
+   ],
+   "rows": [
+    [
+     "Motor voltage",
+     "VVM",
+     "12V"
+    ],
+    [
+     "Average motor current",
+     "IAVG",
+     "0.8A"
+    ],
+    [
+     "Motor inrush (startup) current",
+     "IINRUSH",
+     "2.1A"
+    ],
+    [
+     "Motor stall current",
+     "ISTALL",
+     "2.1A"
+    ],
+    [
+     "Motor current trip point",
+     "ITRIP",
+     "1.46A"
+    ],
+    [
+     "VREF voltage",
+     "VREF",
+     "3.3V"
+    ],
+    [
+     "IPROPI sense resistance",
+     "RIPROPI",
+     "1.5kΩ"
+    ],
+    [
+     "PWM frequency",
+     "fPWM",
+     "50kHz"
+    ]
+   ]
+  },
+  {
+   "title": "Design parameters: stall detection",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "design parameter",
+    "reference",
+    "example value"
+   ],
+   "rows": [
+    [
+     "Motor voltage",
+     "VM",
+     "14.4 V"
+    ],
+    [
+     "Motor current trip point",
+     "ITRIP",
+     "900 mA"
+    ],
+    [
+     "VREF voltage",
+     "VREF",
+     "2V"
+    ],
+    [
+     "IPROPI resistance",
+     "RIPROPI",
+     "1.5 kΩ"
+    ],
+    [
+     "Stall current trip point",
+     "ISTALL",
+     "500 mA"
+    ],
+    [
+     "Stall IPROPI voltage trip point",
+     "VIPROPI,STALL",
+     "1V"
+    ],
+    [
+     "Inrush current ignore time",
+     "tINRUSH",
+     "65 ms"
+    ],
+    [
+     "Stall detection time",
+     "tSTALL",
+     "65 ms"
+    ]
+   ]
+  },
+  {
+   "title": "Design requirements: relay driving",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "design parameter",
+    "reference",
+    "example value"
+   ],
+   "rows": [
+    [
+     "Motor supply voltage",
+     "VM",
+     "12 V"
+    ],
+    [
+     "Microcontroller supply voltage",
+     "VCC",
+     "3.3 V"
+    ],
+    [
+     "Single coil relay current",
+     "IRelay",
+     "500 mA pulse for 200 ms"
+    ],
+    [
+     "Dual coil relay current",
+     "IOUT1, IOUT2",
+     "100 mA pulse for 200 ms"
+    ]
+   ]
+  },
+  {
+   "title": "Control table for dual-coil relay driving",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "IN1",
+    "IN2",
+    "OUT1",
+    "OUT2",
+    "state"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Hi-Z",
+     "Hi-Z",
+     "Outputs off (bridge Hi-Z)"
+    ],
+    [
+     "0",
+     "1",
+     "L",
+     "H",
+     "Coil1 driven"
+    ],
+    [
+     "1",
+     "0",
+     "H",
+     "L",
+     "Coil2 driven"
+    ],
+    [
+     "1",
+     "1",
+     "L",
+     "L",
+     "Both coils driven; not a valid state for a dual-coil latching relay"
+    ]
+   ]
+  },
+  {
+   "title": "Simulation PCB stack-up, HSOP package",
+   "page": 27,
+   "conditions": "",
+   "columns": [
+    "layer",
+    "2-layer board",
+    "4-layer board"
+   ],
+   "rows": [
+    [
+     "Top layer",
+     "HSOP footprint, 1 oz or 2 oz copper, area varied per the dimension A table; 2 vias (1.2 mm spacing, 0.3 mm diameter, 0.025 mm plating) from the thermal pad to the bottom layer",
+     "Same as 2-layer, the vias also reaching the internal ground plane"
+    ],
+    [
+     "Layer 2, internal ground plane",
+     "N/A",
+     "1 oz copper, 74.2 mm × 74.2 mm, joined to the thermal pad by the vias"
+    ],
+    [
+     "Layer 3, internal supply plane",
+     "N/A",
+     "1 oz copper, 74.2 mm × 74.2 mm, not connected to other layers"
+    ],
+    [
+     "Bottom layer",
+     "Ground plane, 1 oz or 2 oz copper, area varied per the dimension A table, joined to the thermal pad by the vias",
+     "1 oz or 2 oz copper, area fixed at 4.90 mm × 6.00 mm, joined to the thermal pad by the vias"
+    ]
+   ]
+  },
+  {
+   "title": "Dimension A for 8-pin HSOP (DDA) package",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "Cu area (cm2)",
+    "dimension A (mm)"
+   ],
+   "rows": [
+    [
+     "0.069",
+     "Package thermal pad dimensions"
+    ],
+    [
+     "2",
+     "16.40"
+    ],
+    [
+     "4",
+     "22.32"
+    ],
+    [
+     "8",
+     "30.64"
+    ],
+    [
+     "16",
+     "42.38"
+    ]
+   ],
+   "notes": [
+    "Dimension A is the side of the square top-layer copper area in the simulation."
+   ]
+  },
+  {
+   "title": "Simulation PCB stack-up, WSON package",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "layer",
+    "2-layer board",
+    "4-layer board"
+   ],
+   "rows": [
+    [
+     "Top layer",
+     "WSON footprint, 1 oz or 2 oz copper, area varied per the dimension A table; 2 vias (1.2 mm spacing, 0.3 mm diameter, 0.025 mm plating) from the thermal pad to the bottom layer",
+     "Same as 2-layer, the vias also reaching the internal ground plane"
+    ],
+    [
+     "Layer 2, internal ground plane",
+     "N/A",
+     "1 oz copper, 74.2 mm × 74.2 mm, joined to the thermal pad by the vias"
+    ],
+    [
+     "Layer 3, internal supply plane",
+     "N/A",
+     "1 oz copper, 74.2 mm × 74.2 mm, not connected to other layers"
+    ],
+    [
+     "Bottom layer",
+     "Ground plane, 1 oz or 2 oz copper, area varied per the dimension A table, joined to the thermal pad by the vias",
+     "1 oz or 2 oz copper, area fixed at 2.00 mm × 2.00 mm, joined to the thermal pad by the vias"
+    ]
+   ]
+  },
+  {
+   "title": "Dimension A for 8-pin WSON package",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "Cu area (mm2)",
+    "dimension A (mm)"
+   ],
+   "rows": [
+    [
+     "0.015",
+     "Package thermal pad dimensions"
+    ],
+    [
+     "2",
+     "15.11"
+    ],
+    [
+     "4",
+     "20.98"
+    ],
+    [
+     "8",
+     "29.27"
+    ],
+    [
+     "16",
+     "40.99"
+    ]
+   ],
+   "notes": [
+    "Misprint: the area unit should read cm²."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Sleep current (IVMQ) against supply voltage (VVM)",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "VM supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVMQ supply sleep current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = -40°C",
+     "points": [
+      [
+       4.5,
+       0.3941
+      ],
+      [
+       6.5,
+       0.53
+      ],
+      [
+       12.0,
+       0.6
+      ],
+      [
+       24.0,
+       0.659
+      ],
+      [
+       32.92,
+       0.6877
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 27°C",
+     "points": [
+      [
+       4.5,
+       0.413
+      ],
+      [
+       6.5,
+       0.536
+      ],
+      [
+       12.0,
+       0.6031
+      ],
+      [
+       24.0,
+       0.663
+      ],
+      [
+       32.92,
+       0.6848
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 85°C",
+     "points": [
+      [
+       4.5,
+       0.429
+      ],
+      [
+       6.5,
+       0.5381
+      ],
+      [
+       12.0,
+       0.605
+      ],
+      [
+       24.0,
+       0.6661
+      ],
+      [
+       32.92,
+       0.6878
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 125°C",
+     "points": [
+      [
+       4.5,
+       0.4411
+      ],
+      [
+       6.5,
+       0.541
+      ],
+      [
+       12.0,
+       0.609
+      ],
+      [
+       24.0,
+       0.673
+      ],
+      [
+       32.92,
+       0.7016
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 150°C",
+     "points": [
+      [
+       4.5,
+       0.4591
+      ],
+      [
+       6.5,
+       0.554
+      ],
+      [
+       12.0,
+       0.6231
+      ],
+      [
+       24.0,
+       0.696
+      ],
+      [
+       32.92,
+       0.7335
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sleep current (IVMQ) against junction temperature (TJ)",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVMQ supply sleep current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VVM = 4.5 V",
+     "points": [
+      [
+       -39.5,
+       0.3941
+      ],
+      [
+       125.0,
+       0.4411
+      ],
+      [
+       150.0,
+       0.459
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 6.5 V",
+     "points": [
+      [
+       -39.5,
+       0.5302
+      ],
+      [
+       125.0,
+       0.541
+      ],
+      [
+       150.0,
+       0.5539
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 12 V",
+     "points": [
+      [
+       -39.5,
+       0.6001
+      ],
+      [
+       125.0,
+       0.609
+      ],
+      [
+       150.0,
+       0.6228
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 24 V",
+     "points": [
+      [
+       -39.5,
+       0.6591
+      ],
+      [
+       85.0,
+       0.666
+      ],
+      [
+       125.0,
+       0.673
+      ],
+      [
+       150.0,
+       0.696
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 33 V",
+     "points": [
+      [
+       -39.5,
+       0.6877
+      ],
+      [
+       27.0,
+       0.6849
+      ],
+      [
+       85.0,
+       0.6879
+      ],
+      [
+       125.0,
+       0.702
+      ],
+      [
+       150.0,
+       0.7339
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Active current (IVM) against supply voltage (VVM)",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "VM supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVM supply active current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = -40°C",
+     "points": [
+      [
+       4.5,
+       1.8122
+      ],
+      [
+       6.5,
+       1.9325
+      ],
+      [
+       12.0,
+       2.0303
+      ],
+      [
+       24.0,
+       2.0517
+      ],
+      [
+       32.92,
+       2.0872
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 27°C",
+     "points": [
+      [
+       4.5,
+       1.8364
+      ],
+      [
+       6.5,
+       1.9616
+      ],
+      [
+       12.0,
+       2.0752
+      ],
+      [
+       24.0,
+       2.0938
+      ],
+      [
+       32.92,
+       2.1213
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 85°C",
+     "points": [
+      [
+       4.5,
+       1.8507
+      ],
+      [
+       6.5,
+       1.979
+      ],
+      [
+       12.0,
+       2.1056
+      ],
+      [
+       24.0,
+       2.1225
+      ],
+      [
+       32.92,
+       2.1456
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 125°C",
+     "points": [
+      [
+       4.5,
+       1.8582
+      ],
+      [
+       6.5,
+       1.9902
+      ],
+      [
+       12.0,
+       2.1238
+      ],
+      [
+       24.0,
+       2.1405
+      ],
+      [
+       32.92,
+       2.1618
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 150°C",
+     "points": [
+      [
+       4.5,
+       1.8632
+      ],
+      [
+       6.5,
+       1.9977
+      ],
+      [
+       12.0,
+       2.1351
+      ],
+      [
+       24.0,
+       2.1517
+      ],
+      [
+       32.92,
+       2.1723
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Active current (IVM) against junction temperature (TJ)",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVM supply active current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VVM = 4.5 V",
+     "points": [
+      [
+       -39.5,
+       1.8126
+      ],
+      [
+       45.0,
+       1.8414
+      ],
+      [
+       150.0,
+       1.8631
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 6.5 V",
+     "points": [
+      [
+       -39.5,
+       1.9328
+      ],
+      [
+       27.0,
+       1.9616
+      ],
+      [
+       150.0,
+       1.9978
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 12 V",
+     "points": [
+      [
+       -39.5,
+       2.0309
+      ],
+      [
+       0,
+       2.0597
+      ],
+      [
+       45.0,
+       2.0854
+      ],
+      [
+       150.0,
+       2.1353
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 24 V",
+     "points": [
+      [
+       -39.5,
+       2.0521
+      ],
+      [
+       0,
+       2.0789
+      ],
+      [
+       45.0,
+       2.1036
+      ],
+      [
+       150.0,
+       2.1517
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 33 V",
+     "points": [
+      [
+       -39.5,
+       2.0878
+      ],
+      [
+       27.0,
+       2.1217
+      ],
+      [
+       150.0,
+       2.1726
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "High-side RDS(on) against VM supply voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "VM supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RDS(on)_HS",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = -40°C",
+     "points": [
+      [
+       4.5,
+       235.3
+      ],
+      [
+       6.5,
+       229.9
+      ],
+      [
+       12.0,
+       224.5
+      ],
+      [
+       32.92,
+       226.3
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 27°C",
+     "points": [
+      [
+       4.5,
+       295.2
+      ],
+      [
+       6.5,
+       289.5
+      ],
+      [
+       12.0,
+       280.1
+      ],
+      [
+       32.92,
+       282.9
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 85°C",
+     "points": [
+      [
+       4.5,
+       364.9
+      ],
+      [
+       6.5,
+       357.1
+      ],
+      [
+       12.0,
+       343.5
+      ],
+      [
+       32.92,
+       347.2
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 125°C",
+     "points": [
+      [
+       4.5,
+       411.7
+      ],
+      [
+       6.5,
+       403.8
+      ],
+      [
+       12.0,
+       387.6
+      ],
+      [
+       32.92,
+       390.9
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 150°C",
+     "points": [
+      [
+       4.5,
+       433.4
+      ],
+      [
+       6.5,
+       424.0
+      ],
+      [
+       12.0,
+       407.8
+      ],
+      [
+       32.92,
+       410.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "High-side RDS(on) against junction temperature (TJ)",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RDS(on)_HS",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VVM = 4.5 V",
+     "points": [
+      [
+       -39.5,
+       239.3
+      ],
+      [
+       -20.0,
+       255.9
+      ],
+      [
+       27.0,
+       299.3
+      ],
+      [
+       125.0,
+       418.0
+      ],
+      [
+       150.0,
+       440.0
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 6.5 V",
+     "points": [
+      [
+       -39.5,
+       234.4
+      ],
+      [
+       27.0,
+       294.4
+      ],
+      [
+       125.0,
+       410.2
+      ],
+      [
+       150.0,
+       431.1
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 12 V",
+     "points": [
+      [
+       -39.5,
+       228.5
+      ],
+      [
+       27.0,
+       285.6
+      ],
+      [
+       125.0,
+       394.9
+      ],
+      [
+       150.0,
+       415.1
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 24 V",
+     "points": [
+      [
+       -39.5,
+       230.2
+      ],
+      [
+       27.0,
+       287.3
+      ],
+      [
+       125.0,
+       396.9
+      ],
+      [
+       150.0,
+       416.8
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 33 V",
+     "points": [
+      [
+       -39.5,
+       231.1
+      ],
+      [
+       27.0,
+       288.7
+      ],
+      [
+       125.0,
+       398.7
+      ],
+      [
+       150.0,
+       419.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Low-side RDS(on) against VM supply voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "VM supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RDS(on)_LS",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = -40°C",
+     "points": [
+      [
+       4.5,
+       231.4
+      ],
+      [
+       6.5,
+       223.7
+      ],
+      [
+       24.0,
+       225.4
+      ],
+      [
+       32.92,
+       228.5
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 27°C",
+     "points": [
+      [
+       4.5,
+       292.0
+      ],
+      [
+       6.5,
+       280.5
+      ],
+      [
+       32.92,
+       284.4
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 85°C",
+     "points": [
+      [
+       4.5,
+       357.6
+      ],
+      [
+       6.5,
+       343.5
+      ],
+      [
+       32.92,
+       348.9
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 125°C",
+     "points": [
+      [
+       4.5,
+       403.0
+      ],
+      [
+       6.5,
+       385.8
+      ],
+      [
+       32.92,
+       392.5
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 150°C",
+     "points": [
+      [
+       4.5,
+       423.0
+      ],
+      [
+       6.5,
+       405.7
+      ],
+      [
+       32.92,
+       411.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Low-side RDS(on) against junction temperature (TJ)",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RDS(on)_LS",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VVM = 4.5 V",
+     "points": [
+      [
+       -39.5,
+       234.7
+      ],
+      [
+       -20.0,
+       251.0
+      ],
+      [
+       27.0,
+       294.0
+      ],
+      [
+       125.0,
+       406.7
+      ],
+      [
+       150.0,
+       427.5
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 6.5 V",
+     "points": [
+      [
+       -39.5,
+       226.3
+      ],
+      [
+       -20.0,
+       241.6
+      ],
+      [
+       27.0,
+       282.6
+      ],
+      [
+       125.0,
+       389.7
+      ],
+      [
+       150.0,
+       409.5
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 12 V",
+     "points": [
+      [
+       -39.5,
+       227.5
+      ],
+      [
+       -20.0,
+       242.6
+      ],
+      [
+       27.0,
+       283.3
+      ],
+      [
+       45.0,
+       304.0
+      ],
+      [
+       125.0,
+       390.7
+      ],
+      [
+       150.0,
+       410.7
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 24 V",
+     "points": [
+      [
+       -39.5,
+       228.3
+      ],
+      [
+       27.0,
+       285.5
+      ],
+      [
+       125.0,
+       393.5
+      ],
+      [
+       150.0,
+       413.5
+      ]
+     ]
+    },
+    {
+     "label": "VVM = 33 V",
+     "points": [
+      [
+       -39.5,
+       230.5
+      ],
+      [
+       27.0,
+       287.2
+      ],
+      [
+       125.0,
+       395.9
+      ],
+      [
+       150.0,
+       415.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gain error of AIPROPI against motor current",
+   "page": 7,
+   "conditions": "6.5 V ≤ VVM ≤ 33 V, 0 V ≤ VIPROPI ≤ 3 V, -40 °C ≤ TJ ≤ 150 °C",
+   "x": {
+    "label": "IOUT_LS current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "AIPROPI gain error, AERR",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "+6 standard deviation error",
+     "points": [
+      [
+       0.1,
+       34.41
+      ],
+      [
+       0.15,
+       22.48
+      ],
+      [
+       0.2,
+       17.2
+      ],
+      [
+       0.5,
+       7.29
+      ],
+      [
+       0.75,
+       5.48
+      ],
+      [
+       1.0,
+       4.72
+      ],
+      [
+       1.5,
+       4.99
+      ],
+      [
+       1.75,
+       5.61
+      ],
+      [
+       2.25,
+       8.03
+      ],
+      [
+       2.5,
+       10.23
+      ],
+      [
+       2.75,
+       12.89
+      ],
+      [
+       3.0,
+       16.75
+      ],
+      [
+       3.25,
+       22.01
+      ],
+      [
+       3.491,
+       29.61
+      ]
+     ]
+    },
+    {
+     "label": "-6 standard deviation error",
+     "points": [
+      [
+       0.1,
+       -18.92
+      ],
+      [
+       0.15,
+       -12.14
+      ],
+      [
+       0.2,
+       -10.04
+      ],
+      [
+       0.5,
+       -5.91
+      ],
+      [
+       0.75,
+       -4.96
+      ],
+      [
+       1.5,
+       -5.15
+      ],
+      [
+       2.75,
+       -4.66
+      ],
+      [
+       3.0,
+       -4.94
+      ],
+      [
+       3.25,
+       -7.46
+      ],
+      [
+       3.491,
+       -13.49
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "HSOP, PCB junction-to-ambient thermal resistance against copper area",
+   "page": 29,
+   "conditions": "",
+   "x": {
+    "label": "Top layer copper area",
+    "unit": "cm²",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RθJA",
+    "unit": "°C/W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 layer, 2 oz",
+     "points": [
+      [
+       0.07,
+       43.3
+      ],
+      [
+       2.0,
+       35.0
+      ],
+      [
+       4.0,
+       33.6
+      ],
+      [
+       8.0,
+       32.6
+      ],
+      [
+       15.96,
+       31.8
+      ]
+     ]
+    },
+    {
+     "label": "4 layer, 1 oz",
+     "points": [
+      [
+       0.07,
+       45.1
+      ],
+      [
+       2.0,
+       38.6
+      ],
+      [
+       8.0,
+       37.1
+      ],
+      [
+       15.96,
+       36.6
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 2 oz",
+     "points": [
+      [
+       0.07,
+       164.8
+      ],
+      [
+       2.0,
+       76.7
+      ],
+      [
+       4.0,
+       61.9
+      ],
+      [
+       8.0,
+       50.3
+      ],
+      [
+       15.96,
+       41.5
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 1 oz",
+     "points": [
+      [
+       0.07,
+       186.2
+      ],
+      [
+       2.0,
+       86.5
+      ],
+      [
+       4.0,
+       71.1
+      ],
+      [
+       8.0,
+       59.7
+      ],
+      [
+       15.96,
+       51.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "HSOP, junction-to-board characterization parameter against copper area",
+   "page": 29,
+   "conditions": "",
+   "x": {
+    "label": "Top layer copper area",
+    "unit": "cm²",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ΨJB",
+    "unit": "°C/W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 layer, 2 oz",
+     "points": [
+      [
+       0.07,
+       16.9
+      ],
+      [
+       2.0,
+       12.9
+      ],
+      [
+       4.0,
+       12.51
+      ],
+      [
+       8.0,
+       12.31
+      ],
+      [
+       15.96,
+       12.22
+      ]
+     ]
+    },
+    {
+     "label": "4 layer, 1 oz",
+     "points": [
+      [
+       0.07,
+       15.8
+      ],
+      [
+       2.0,
+       13.1
+      ],
+      [
+       15.96,
+       12.9
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 2 oz",
+     "points": [
+      [
+       0.07,
+       49.3
+      ],
+      [
+       2.0,
+       16.71
+      ],
+      [
+       4.0,
+       14.51
+      ],
+      [
+       8.0,
+       13.3
+      ],
+      [
+       15.96,
+       12.81
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 1 oz",
+     "points": [
+      [
+       0.07,
+       47.0
+      ],
+      [
+       2.0,
+       16.71
+      ],
+      [
+       4.0,
+       15.2
+      ],
+      [
+       8.0,
+       14.51
+      ],
+      [
+       15.96,
+       14.32
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "WSON, PCB junction-to-ambient thermal resistance against copper area",
+   "page": 30,
+   "conditions": "",
+   "x": {
+    "label": "Top layer copper area",
+    "unit": "cm²",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RθJA",
+    "unit": "°C/W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 layer, 2 oz",
+     "points": [
+      [
+       0.04,
+       67.5
+      ],
+      [
+       2.0,
+       45.8
+      ],
+      [
+       4.0,
+       43.8
+      ],
+      [
+       8.0,
+       42.5
+      ],
+      [
+       15.96,
+       41.5
+      ]
+     ]
+    },
+    {
+     "label": "4 layer, 1 oz",
+     "points": [
+      [
+       0.04,
+       72.2
+      ],
+      [
+       2.0,
+       53.2
+      ],
+      [
+       8.0,
+       50.9
+      ],
+      [
+       15.96,
+       50.5
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 2 oz",
+     "points": [
+      [
+       0.04,
+       217.8
+      ],
+      [
+       2.0,
+       91.9
+      ],
+      [
+       4.0,
+       74.9
+      ],
+      [
+       8.0,
+       61.9
+      ],
+      [
+       15.96,
+       52.2
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 1 oz",
+     "points": [
+      [
+       0.04,
+       260.6
+      ],
+      [
+       2.0,
+       106.6
+      ],
+      [
+       4.0,
+       89.0
+      ],
+      [
+       8.0,
+       75.8
+      ],
+      [
+       15.96,
+       66.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "WSON, junction-to-board characterization parameter against copper area",
+   "page": 30,
+   "conditions": "",
+   "x": {
+    "label": "Top layer copper area",
+    "unit": "cm²",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ΨJB",
+    "unit": "°C/W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 layer, 2 oz",
+     "points": [
+      [
+       0.04,
+       28.85
+      ],
+      [
+       2.0,
+       18.01
+      ],
+      [
+       4.0,
+       17.41
+      ],
+      [
+       15.96,
+       17.12
+      ]
+     ]
+    },
+    {
+     "label": "4 layer, 1 oz",
+     "points": [
+      [
+       0.04,
+       29.39
+      ],
+      [
+       2.0,
+       20.41
+      ],
+      [
+       4.0,
+       20.11
+      ],
+      [
+       15.96,
+       19.99
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 2 oz",
+     "points": [
+      [
+       0.04,
+       68.28
+      ],
+      [
+       2.0,
+       21.3
+      ],
+      [
+       4.0,
+       18.79
+      ],
+      [
+       8.0,
+       17.6
+      ],
+      [
+       15.96,
+       17.12
+      ]
+     ]
+    },
+    {
+     "label": "2 layer, 1 oz",
+     "points": [
+      [
+       0.04,
+       76.89
+      ],
+      [
+       2.0,
+       23.81
+      ],
+      [
+       4.0,
+       21.9
+      ],
+      [
+       8.0,
+       21.1
+      ],
+      [
+       15.96,
+       20.91
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "HSOP package junction-to-ambient thermal impedance for 1-oz copper layouts",
+   "page": 30,
+   "conditions": "",
+   "x": {
+    "label": "Pulse duration",
+    "unit": "s",
+    "scale": "log"
+   },
+   "y": {
+    "label": "ZθJA",
+    "unit": "°C/W",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "0.069 cm², 2 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.007198,
+       3.042
+      ],
+      [
+       0.1152,
+       9.979
+      ],
+      [
+       0.7837,
+       24.49
+      ],
+      [
+       6.05,
+       67.81
+      ],
+      [
+       16.52,
+       103.4
+      ],
+      [
+       36.84,
+       131.9
+      ],
+      [
+       83.59,
+       152.0
+      ],
+      [
+       215.4,
+       160.4
+      ],
+      [
+       982.3,
+       161.2
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 2 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.00369,
+       2.127
+      ],
+      [
+       0.009679,
+       3.502
+      ],
+      [
+       0.03284,
+       5.738
+      ],
+      [
+       0.1782,
+       10.41
+      ],
+      [
+       0.423,
+       13.27
+      ],
+      [
+       5.077,
+       24.01
+      ],
+      [
+       9.817,
+       29.81
+      ],
+      [
+       42.53,
+       52.72
+      ],
+      [
+       83.59,
+       64.56
+      ],
+      [
+       124.1,
+       69.49
+      ],
+      [
+       205.3,
+       72.97
+      ],
+      [
+       982.3,
+       74.24
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 2 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.00369,
+       2.127
+      ],
+      [
+       0.009679,
+       3.502
+      ],
+      [
+       0.04031,
+       6.192
+      ],
+      [
+       0.2041,
+       10.85
+      ],
+      [
+       0.6449,
+       14.57
+      ],
+      [
+       8.858,
+       24.91
+      ],
+      [
+       61.45,
+       46.42
+      ],
+      [
+       102.4,
+       52.9
+      ],
+      [
+       225.6,
+       58.6
+      ],
+      [
+       982.3,
+       59.64
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 2 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.00369,
+       2.127
+      ],
+      [
+       0.009679,
+       3.502
+      ],
+      [
+       0.07051,
+       7.599
+      ],
+      [
+       0.2643,
+       11.7
+      ],
+      [
+       1.033,
+       16.02
+      ],
+      [
+       15.11,
+       25.44
+      ],
+      [
+       78.78,
+       39.44
+      ],
+      [
+       134.3,
+       44.1
+      ],
+      [
+       276.1,
+       47.44
+      ],
+      [
+       982.3,
+       48.07
+      ]
+     ]
+    },
+    {
+     "label": "0.069 cm², 4 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.005223,
+       2.582
+      ],
+      [
+       0.01275,
+       3.963
+      ],
+      [
+       0.2041,
+       11.7
+      ],
+      [
+       1.128,
+       19.77
+      ],
+      [
+       3.724,
+       26.32
+      ],
+      [
+       11.39,
+       31.13
+      ],
+      [
+       173.4,
+       39.56
+      ],
+      [
+       982.3,
+       40.97
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 4 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.005223,
+       2.582
+      ],
+      [
+       0.01275,
+       3.957
+      ],
+      [
+       0.07051,
+       7.45
+      ],
+      [
+       0.2986,
+       11.39
+      ],
+      [
+       2.849,
+       18.42
+      ],
+      [
+       11.39,
+       23.02
+      ],
+      [
+       182.1,
+       31.34
+      ],
+      [
+       364.0,
+       32.44
+      ],
+      [
+       982.3,
+       32.61
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 4 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.005223,
+       2.582
+      ],
+      [
+       0.01275,
+       3.957
+      ],
+      [
+       0.07051,
+       7.45
+      ],
+      [
+       0.2643,
+       11.04
+      ],
+      [
+       1.575,
+       16.05
+      ],
+      [
+       9.325,
+       21.26
+      ],
+      [
+       191.1,
+       30.07
+      ],
+      [
+       341.9,
+       31.02
+      ],
+      [
+       982.3,
+       31.26
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 4 layer",
+     "points": [
+      [
+       0.001068,
+       1.014
+      ],
+      [
+       0.005223,
+       2.582
+      ],
+      [
+       0.01275,
+       3.957
+      ],
+      [
+       0.07051,
+       7.45
+      ],
+      [
+       0.2643,
+       11.04
+      ],
+      [
+       1.337,
+       15.5
+      ],
+      [
+       5.385,
+       19.24
+      ],
+      [
+       182.1,
+       28.92
+      ],
+      [
+       371.5,
+       30.06
+      ],
+      [
+       982.3,
+       30.24
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "HSOP package junction-to-ambient thermal impedance for 2-oz copper layouts",
+   "page": 31,
+   "conditions": "",
+   "x": {
+    "label": "Pulse duration",
+    "unit": "s",
+    "scale": "log"
+   },
+   "y": {
+    "label": "ZθJA",
+    "unit": "°C/W",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "0.69 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.00369,
+       3.08
+      ],
+      [
+       0.009679,
+       4.968
+      ],
+      [
+       0.08357,
+       10.77
+      ],
+      [
+       0.2643,
+       16.89
+      ],
+      [
+       0.9446,
+       29.29
+      ],
+      [
+       6.767,
+       74.37
+      ],
+      [
+       16.52,
+       106.5
+      ],
+      [
+       38.25,
+       136.4
+      ],
+      [
+       83.6,
+       155.4
+      ],
+      [
+       200.6,
+       163.6
+      ],
+      [
+       982.3,
+       164.5
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.00369,
+       3.08
+      ],
+      [
+       0.009679,
+       4.961
+      ],
+      [
+       0.02104,
+       6.654
+      ],
+      [
+       0.08357,
+       10.19
+      ],
+      [
+       0.2986,
+       14.34
+      ],
+      [
+       2.659,
+       22.55
+      ],
+      [
+       5.385,
+       26.79
+      ],
+      [
+       10.85,
+       33.29
+      ],
+      [
+       44.07,
+       55.82
+      ],
+      [
+       83.6,
+       66.97
+      ],
+      [
+       124.1,
+       71.94
+      ],
+      [
+       205.3,
+       75.44
+      ],
+      [
+       982.3,
+       76.75
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.00369,
+       3.08
+      ],
+      [
+       0.009679,
+       4.961
+      ],
+      [
+       0.02646,
+       7.177
+      ],
+      [
+       0.1549,
+       12.14
+      ],
+      [
+       0.5253,
+       16.19
+      ],
+      [
+       8.404,
+       26.94
+      ],
+      [
+       17.28,
+       32.67
+      ],
+      [
+       61.45,
+       48.79
+      ],
+      [
+       111.4,
+       56.2
+      ],
+      [
+       241.6,
+       61.24
+      ],
+      [
+       982.3,
+       62.11
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.00369,
+       3.08
+      ],
+      [
+       0.009679,
+       4.961
+      ],
+      [
+       0.03284,
+       7.689
+      ],
+      [
+       0.2041,
+       13.05
+      ],
+      [
+       1.033,
+       18.34
+      ],
+      [
+       13.15,
+       27.05
+      ],
+      [
+       131.0,
+       46.31
+      ],
+      [
+       270.2,
+       49.8
+      ],
+      [
+       982.3,
+       50.47
+      ]
+     ]
+    },
+    {
+     "label": "0.69 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.005223,
+       3.713
+      ],
+      [
+       0.01275,
+       5.561
+      ],
+      [
+       0.1782,
+       13.34
+      ],
+      [
+       0.8609,
+       20.69
+      ],
+      [
+       3.486,
+       28.31
+      ],
+      [
+       10.31,
+       33.16
+      ],
+      [
+       186.6,
+       42.14
+      ],
+      [
+       982.3,
+       43.38
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.005223,
+       3.713
+      ],
+      [
+       0.01275,
+       5.555
+      ],
+      [
+       0.04031,
+       8.134
+      ],
+      [
+       0.2041,
+       12.5
+      ],
+      [
+       1.987,
+       19.47
+      ],
+      [
+       10.31,
+       25.06
+      ],
+      [
+       182.1,
+       33.7
+      ],
+      [
+       387.1,
+       34.86
+      ],
+      [
+       982.3,
+       34.98
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.005223,
+       3.713
+      ],
+      [
+       0.01275,
+       5.555
+      ],
+      [
+       0.04899,
+       8.609
+      ],
+      [
+       0.2326,
+       12.89
+      ],
+      [
+       1.704,
+       18.6
+      ],
+      [
+       11.95,
+       24.29
+      ],
+      [
+       191.1,
+       32.44
+      ],
+      [
+       371.5,
+       33.46
+      ],
+      [
+       982.3,
+       33.63
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       1.46
+      ],
+      [
+       0.005223,
+       3.713
+      ],
+      [
+       0.01275,
+       5.555
+      ],
+      [
+       0.04899,
+       8.609
+      ],
+      [
+       0.2326,
+       12.89
+      ],
+      [
+       1.228,
+       17.57
+      ],
+      [
+       6.401,
+       21.99
+      ],
+      [
+       186.6,
+       31.34
+      ],
+      [
+       341.9,
+       32.36
+      ],
+      [
+       982.3,
+       32.59
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "The 0.69 cm² label should read 0.069 cm², the HSOP thermal pad area."
+   ]
+  },
+  {
+   "title": "WSON package junction-to-ambient thermal impedance for 1-oz copper layouts",
+   "page": 31,
+   "conditions": "",
+   "x": {
+    "label": "Pulse duration",
+    "unit": "s",
+    "scale": "log"
+   },
+   "y": {
+    "label": "ZθJA",
+    "unit": "°C/W",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "0.015 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.045
+      ],
+      [
+       0.00252,
+       3.836
+      ],
+      [
+       0.007198,
+       7.112
+      ],
+      [
+       0.05904,
+       19.71
+      ],
+      [
+       0.712,
+       73.49
+      ],
+      [
+       1.337,
+       98.42
+      ],
+      [
+       2.849,
+       131.9
+      ],
+      [
+       10.31,
+       188.9
+      ],
+      [
+       18.83,
+       213.6
+      ],
+      [
+       41.07,
+       239.5
+      ],
+      [
+       141.5,
+       259.0
+      ],
+      [
+       982.3,
+       261.2
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.893
+      ],
+      [
+       0.009679,
+       8.247
+      ],
+      [
+       0.07051,
+       19.2
+      ],
+      [
+       0.2986,
+       31.12
+      ],
+      [
+       0.8609,
+       39.22
+      ],
+      [
+       6.401,
+       52.97
+      ],
+      [
+       45.59,
+       86.49
+      ],
+      [
+       86.11,
+       97.78
+      ],
+      [
+       191.1,
+       104.9
+      ],
+      [
+       982.3,
+       106.2
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.893
+      ],
+      [
+       0.009679,
+       8.247
+      ],
+      [
+       0.07051,
+       19.2
+      ],
+      [
+       0.2986,
+       31.1
+      ],
+      [
+       0.5253,
+       35.66
+      ],
+      [
+       0.9446,
+       39.56
+      ],
+      [
+       10.85,
+       53.22
+      ],
+      [
+       93.96,
+       81.68
+      ],
+      [
+       215.4,
+       87.72
+      ],
+      [
+       982.3,
+       88.76
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.893
+      ],
+      [
+       0.009679,
+       8.247
+      ],
+      [
+       0.07051,
+       19.2
+      ],
+      [
+       0.1549,
+       25.47
+      ],
+      [
+       0.3366,
+       32.11
+      ],
+      [
+       0.5824,
+       36.42
+      ],
+      [
+       1.033,
+       40.03
+      ],
+      [
+       13.15,
+       51.3
+      ],
+      [
+       124.1,
+       71.64
+      ],
+      [
+       264.4,
+       75.12
+      ],
+      [
+       982.3,
+       75.71
+      ]
+     ]
+    },
+    {
+     "label": "0.015 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.045
+      ],
+      [
+       0.00369,
+       4.879
+      ],
+      [
+       0.009679,
+       8.253
+      ],
+      [
+       0.1339,
+       27.11
+      ],
+      [
+       0.2986,
+       36.93
+      ],
+      [
+       0.6449,
+       46.78
+      ],
+      [
+       1.453,
+       54.86
+      ],
+      [
+       3.968,
+       60.06
+      ],
+      [
+       173.4,
+       71.17
+      ],
+      [
+       982.3,
+       72.49
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.89
+      ],
+      [
+       0.01275,
+       9.366
+      ],
+      [
+       0.07051,
+       18.66
+      ],
+      [
+       0.1549,
+       24.05
+      ],
+      [
+       0.2986,
+       28.69
+      ],
+      [
+       0.8609,
+       35.27
+      ],
+      [
+       3.724,
+       40.85
+      ],
+      [
+       169.0,
+       51.74
+      ],
+      [
+       982.3,
+       53.18
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.89
+      ],
+      [
+       0.01275,
+       9.366
+      ],
+      [
+       0.07051,
+       18.66
+      ],
+      [
+       0.1549,
+       24.05
+      ],
+      [
+       0.3366,
+       29.51
+      ],
+      [
+       0.8609,
+       35.1
+      ],
+      [
+       2.477,
+       38.83
+      ],
+      [
+       173.4,
+       50.46
+      ],
+      [
+       982.3,
+       51.83
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.89
+      ],
+      [
+       0.01275,
+       9.366
+      ],
+      [
+       0.07051,
+       18.66
+      ],
+      [
+       0.1549,
+       24.05
+      ],
+      [
+       0.3366,
+       29.51
+      ],
+      [
+       0.712,
+       34.13
+      ],
+      [
+       1.843,
+       37.86
+      ],
+      [
+       205.3,
+       49.98
+      ],
+      [
+       982.3,
+       50.94
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "WSON package junction-to-ambient thermal impedance for 2-oz copper layouts",
+   "page": 31,
+   "conditions": "",
+   "x": {
+    "label": "Pulse duration",
+    "unit": "s",
+    "scale": "log"
+   },
+   "y": {
+    "label": "ZθJA",
+    "unit": "°C/W",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "0.015 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.045
+      ],
+      [
+       0.00252,
+       3.836
+      ],
+      [
+       0.007198,
+       7.084
+      ],
+      [
+       0.05904,
+       19.19
+      ],
+      [
+       0.5824,
+       62.14
+      ],
+      [
+       1.987,
+       103.7
+      ],
+      [
+       3.724,
+       126.0
+      ],
+      [
+       7.552,
+       150.1
+      ],
+      [
+       17.28,
+       176.7
+      ],
+      [
+       35.54,
+       196.6
+      ],
+      [
+       124.1,
+       216.1
+      ],
+      [
+       982.3,
+       219.2
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.885
+      ],
+      [
+       0.009679,
+       8.18
+      ],
+      [
+       0.03284,
+       13.54
+      ],
+      [
+       0.1152,
+       20.45
+      ],
+      [
+       0.423,
+       27.46
+      ],
+      [
+       2.659,
+       35.38
+      ],
+      [
+       5.711,
+       40.47
+      ],
+      [
+       11.39,
+       47.88
+      ],
+      [
+       47.17,
+       72.7
+      ],
+      [
+       83.6,
+       82.46
+      ],
+      [
+       205.3,
+       90.31
+      ],
+      [
+       982.3,
+       91.44
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.885
+      ],
+      [
+       0.009679,
+       8.18
+      ],
+      [
+       0.04031,
+       14.59
+      ],
+      [
+       0.1549,
+       22.13
+      ],
+      [
+       0.2986,
+       25.7
+      ],
+      [
+       0.5824,
+       28.71
+      ],
+      [
+       3.486,
+       34.42
+      ],
+      [
+       7.973,
+       38.47
+      ],
+      [
+       16.52,
+       44.51
+      ],
+      [
+       67.59,
+       63.21
+      ],
+      [
+       114.4,
+       69.54
+      ],
+      [
+       236.1,
+       73.97
+      ],
+      [
+       982.3,
+       74.85
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 2 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.885
+      ],
+      [
+       0.009679,
+       8.18
+      ],
+      [
+       0.04031,
+       14.59
+      ],
+      [
+       0.08357,
+       18.61
+      ],
+      [
+       0.1782,
+       22.92
+      ],
+      [
+       0.3782,
+       26.84
+      ],
+      [
+       0.7837,
+       29.71
+      ],
+      [
+       6.401,
+       35.11
+      ],
+      [
+       12.54,
+       37.87
+      ],
+      [
+       141.5,
+       58.45
+      ],
+      [
+       288.5,
+       61.39
+      ],
+      [
+       982.3,
+       61.9
+      ]
+     ]
+    },
+    {
+     "label": "0.015 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.045
+      ],
+      [
+       0.00369,
+       4.874
+      ],
+      [
+       0.009679,
+       8.201
+      ],
+      [
+       0.1339,
+       26.18
+      ],
+      [
+       0.2986,
+       35.23
+      ],
+      [
+       0.5824,
+       42.89
+      ],
+      [
+       1.337,
+       50.34
+      ],
+      [
+       3.968,
+       55.55
+      ],
+      [
+       182.1,
+       66.6
+      ],
+      [
+       982.3,
+       67.86
+      ]
+     ]
+    },
+    {
+     "label": "2 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.882
+      ],
+      [
+       0.009679,
+       8.175
+      ],
+      [
+       0.04031,
+       14.43
+      ],
+      [
+       0.08357,
+       18.15
+      ],
+      [
+       0.1782,
+       21.98
+      ],
+      [
+       0.712,
+       28.11
+      ],
+      [
+       3.968,
+       33.7
+      ],
+      [
+       173.4,
+       44.46
+      ],
+      [
+       982.3,
+       45.83
+      ]
+     ]
+    },
+    {
+     "label": "4 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.882
+      ],
+      [
+       0.009679,
+       8.175
+      ],
+      [
+       0.04031,
+       14.43
+      ],
+      [
+       0.08357,
+       18.15
+      ],
+      [
+       0.1782,
+       21.98
+      ],
+      [
+       0.5253,
+       26.78
+      ],
+      [
+       1.575,
+       30.03
+      ],
+      [
+       182.1,
+       42.55
+      ],
+      [
+       982.3,
+       43.79
+      ]
+     ]
+    },
+    {
+     "label": "8 cm², 4 layer",
+     "points": [
+      [
+       0.001016,
+       2.051
+      ],
+      [
+       0.00369,
+       4.882
+      ],
+      [
+       0.009679,
+       8.175
+      ],
+      [
+       0.04031,
+       14.43
+      ],
+      [
+       0.08357,
+       18.15
+      ],
+      [
+       0.1782,
+       21.98
+      ],
+      [
+       0.423,
+       25.93
+      ],
+      [
+       1.228,
+       29.25
+      ],
+      [
+       25.18,
+       35.23
+      ],
+      [
+       195.7,
+       41.33
+      ],
+      [
+       982.3,
+       42.45
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical connections: brushed DC motor",
+   "page": 19,
+   "description": "One brushed DC motor between OUT1 and OUT2, run from a 4.5 V to 33 V supply on VM with a 0.1 µF ceramic and a 47 µF bulk capacitor to ground. A controller on 3.3 V drives IN1 and IN2 and reads the IPROPI voltage across RIPROPI with its ADC. VREF sits on 3.3 V, so the bridge chops when the IPROPI voltage reaches 3.3 V; with 1.5 kΩ that is about 1.46 A.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8231A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Controller",
+     "external": true
+    },
+    {
+     "ref": "RIPROPI",
+     "type": "resistor",
+     "value": "1.5 kΩ",
+     "note": "IPROPI sense resistance from the design parameters"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "47 µF"
+    },
+    {
+     "ref": "M1",
+     "type": "load",
+     "value": "Brushed DC motor"
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "4.5 V to 33 V power supply"
+    },
+    {
+     "ref": "VCC",
+     "type": "terminal",
+     "value": "3.3 V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "relay-single-coil",
+   "title": "Single-coil latching relay driving",
+   "page": 22,
+   "description": "The coil of a single-coil latching relay sits across OUT1 and OUT2, so forward and reverse drive set and reset it. Two controller PWM outputs drive IN1 and IN2; VREF is tied to the 3.3 V logic supply VCC and IPROPI has its resistor to ground. VM takes a 0.1 µF bypass and a bulk capacitor. Example coil current is a 500 mA pulse for 200 ms from a 12 V VM.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8231A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Controller",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RIPROPI"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "CBulk",
+     "note": "polarised"
+    },
+    {
+     "ref": "K1",
+     "type": "other",
+     "value": "Single-coil latching relay",
+     "note": "coil pins only"
+    },
+    {
+     "ref": "VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "VM",
+     "type": "terminal",
+     "value": "VM"
+    }
+   ],
+   "notes": [
+    "After the pulse the outputs can go to sleep (IN1 = IN2 = 0) or brake briefly so the coil's stored energy does not flow back into VM."
+   ]
+  },
+  {
+   "id": "relay-dual-coil",
+   "title": "Dual-coil latching relay driving",
+   "page": 23,
+   "description": "A dual-coil latching relay has its centre tap on VM and one coil end on each output. Driving OUT1 low energises Coil1 while OUT2 rises to VM so Coil2 carries nothing; the opposite state drives Coil2. Only the low-side FETs do work, and the high-side body diodes catch the coil current, so no extra freewheeling diodes are fitted. Example coil current is a 100 mA pulse for 200 ms.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8231A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Controller",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RIPROPI"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "CBulk",
+     "note": "polarised"
+    },
+    {
+     "ref": "K1",
+     "type": "other",
+     "value": "Dual-coil latching relay",
+     "note": "COIL1 end, centre tap CT, COIL2 end"
+    },
+    {
+     "ref": "VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "VM",
+     "type": "terminal",
+     "value": "VM"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ipropi-multi-source",
+   "title": "IPROPI sensing on a footprint shared with shunt-sense drivers",
+   "page": 26,
+   "description": "Board option that takes either the DRV8231A or a shunt-sense part on the same pinout. Fitted for the DRV8231A: pin 1 carries IPROPI into a 1.5 kΩ resistor to ground and through 0 Ω to the ADC line, and a 0 Ω link joins pin 7 to ground. The sense amplifier and its output resistor are not fitted; they serve the shunt-sense part, where pin 7 is the sense node.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8231A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "0 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1.5 kΩ",
+     "note": "RIPROPI"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "DNP"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "0 Ω"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Sense amplifier (DNP)",
+     "external": true
+    },
+    {
+     "ref": "ADC",
+     "type": "terminal",
+     "value": "To ADC"
+    },
+    {
+     "ref": "T_IN1",
+     "type": "terminal",
+     "value": "IN1"
+    },
+    {
+     "ref": "T_IN2",
+     "type": "terminal",
+     "value": "IN2"
+    },
+    {
+     "ref": "T_VREF",
+     "type": "terminal",
+     "value": "VREF"
+    },
+    {
+     "ref": "T_VM",
+     "type": "terminal",
+     "value": "VM"
+    },
+    {
+     "ref": "T_OUT1",
+     "type": "terminal",
+     "value": "OUT1"
+    },
+    {
+     "ref": "T_OUT2",
+     "type": "terminal",
+     "value": "OUT2"
+    }
+   ],
+   "notes": [
+    "Misprint in the pin labels: pin 2 is IN2 and pin 3 is IN1.",
+    "For the shunt-sense parts (DRV8870, DRV8231, DRV8251) pin 1 is GND, pin 7 is ISEN with a 0.5 Ω Rsense to ground, the sense amplifier output goes through 0 Ω to the ADC line and the 1.5 kΩ position is 0 Ω to ground with the series position not fitted."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "IPROPI output current",
+   "expr": "IIPROPI (µA) = (ILS1 + ILS2) (A) × AIPROPI (µA/A)",
+   "where": {
+    "ILS1, ILS2": "drain-to-source current in each low-side FET; zero for a FET conducting source to drain or through its body diode",
+    "AIPROPI": "current mirror scaling factor, 1500 µA/A typ"
+   },
+   "note": "In brake (slow decay) only one low-side FET carries current drain to source, so IPROPI reflects that one.",
+   "page": 13
+  },
+  {
+   "name": "IPROPI voltage",
+   "expr": "VIPROPI (V) = IIPROPI (A) × RIPROPI (Ω)",
+   "where": {
+    "RIPROPI": "resistor from IPROPI to ground"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Current regulation trip point",
+   "expr": "ITRIP (A) × AIPROPI (µA/A) = VVREF (V) / RIPROPI (Ω)",
+   "where": {
+    "ITRIP": "load current at which chopping starts",
+    "VVREF": "voltage on VREF"
+   },
+   "note": "Example: VVREF = 3.3 V, RIPROPI = 1375 Ω and AIPROPI = 1500 µA/A give ITRIP of about 1.6 A.",
+   "page": 15
+  },
+  {
+   "name": "Total power dissipation",
+   "expr": "PTOT = PVM + PSW + PRDS",
+   "where": {
+    "PVM": "quiescent supply loss",
+    "PSW": "FET switching loss",
+    "PRDS": "FET conduction loss"
+   },
+   "note": "Other losses are usually small next to these three.",
+   "page": 26
+  },
+  {
+   "name": "Supply current loss",
+   "expr": "PVM = VVM × IVM",
+   "where": {
+    "VVM": "nominal supply voltage",
+    "IVM": "active mode supply current"
+   },
+   "note": "Example: PVM = 96 mW = 24 V × 4 mA.",
+   "page": 26
+  },
+  {
+   "name": "Switching loss",
+   "expr": "PSW = PSW_RISE + PSW_FALL; PSW_RISE = 0.5 × VM × IAVG × tRISE × fPWM; PSW_FALL = 0.5 × VM × IAVG × tFALL × fPWM",
+   "where": {
+    "IAVG": "average output current",
+    "tRISE, tFALL": "output rise and fall times",
+    "fPWM": "switching frequency"
+   },
+   "note": "Example: PSW_RISE = PSW_FALL = 26.4 mW = 0.5 × 24 V × 0.5 A × 220 ns × 20 kHz; PSW = 53 mW.",
+   "page": 26
+  },
+  {
+   "name": "Conduction loss",
+   "expr": "PRDS = IAVG² × (RDS(ON)_HS + RDS(ON)_LS)",
+   "where": {
+    "RDS(ON)_HS, RDS(ON)_LS": "on resistance of the conducting high-side and low-side FETs"
+   },
+   "note": "At an 85 °C junction RDS(on) rises by roughly 1.5 times. Example: PRDS = 225 mW = (0.5 A)² × (300 mΩ × 1.5 + 300 mΩ × 1.5).",
+   "page": 27
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ = (PTOT × RθJA) + TA",
+   "where": {
+    "RθJA": "junction-to-ambient thermal resistance of the board",
+    "TA": "ambient temperature"
+   },
+   "note": "Example: PTOT = 374 mW = 96 mW + 53 mW + 225 mW; TJ = 100 °C = (0.374 W × 40.4 °C/W) + 85 °C.",
+   "page": 27
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 9,
+   "text": "One supply pin, VM, feeds both the logic and the motor. An internal charge pump lifts the high-side gate drive above VM so all four FETs are N-channel and 100 % duty cycle is possible. The bridge totals about 600 mΩ (one high-side plus one low-side FET). PWM from 0 to 200 kHz sets speed."
+  },
+  {
+   "topic": "Bridge control and PWM",
+   "page": 11,
+   "text": "Static levels on IN1 and IN2 give full drive; PWM gives variable speed. Alternating drive with brake (for forward, IN1 held high and IN2 toggled) is the usual PWM pattern; drive alternating with coast (both low) gives fast decay instead. The inputs may be driven before VM comes up."
+  },
+  {
+   "topic": "Dead time and propagation delay",
+   "page": 11,
+   "text": "Each change of an output between high and low inserts dead time (tDEAD, 200 ns typ) with the output High-Z to stop shoot-through. During it the output sits a diode drop below ground if current leaves the pin, or a diode drop above VM if current enters it, through a FET body diode. tPD runs from an input edge to the output change and includes an input deglitch filter; the FET switching adds tRISE and tFALL."
+  },
+  {
+   "topic": "Current sensing",
+   "page": 13,
+   "text": "A current mirror on each low-side FET feeds IPROPI, so no power shunt is needed. Current is seen in drive and in brake (slow decay), so a bidirectional brushed motor can be monitored continuously. In coast the current freewheels source to drain and is not seen; it can be sampled by briefly switching back to drive or brake. AERR combines the mirror's gain error and an offset added to the load current. Size RIPROPI so the expected load current fills the ADC range. An internal clamp limits VIPROPI relative to VREF to protect the ADC during overcurrent."
+  },
+  {
+   "topic": "Sense bandwidth",
+   "page": 14,
+   "text": "IPROPI is ready tDELAY (1.1 µs typ) after the inputs turn a low-side FET on. In drive/brake PWM the sensing FET stays on and this delay does not matter. When the inputs turn the low-side FETs off, IPROPI stops at once, even though the FET keeps conducting while it slews off."
+  },
+  {
+   "topic": "Current regulation",
+   "page": 15,
+   "text": "An internal comparator compares VIPROPI with VVREF. When the load current passes ITRIP, the bridge brakes (both low-side FETs on) for tOFF (25 µs typ), then returns to the input state if the current has fallen below ITRIP, or brakes for another tOFF if not. No new input edge is needed, so regulation works at 100 % duty. A change on IN1 or IN2 during tOFF ends it early and the outputs follow the inputs. Blanking (tBLK) after switching and deglitching (tDEG) keep transients, for example from a capacitor in or across the motor, from tripping it; for longer transients a 10 nF capacitor from IPROPI to ground close to the device filters them, at the cost of slower regulation response. VVREF must stay in its recommended range."
+  },
+  {
+   "topic": "Disabling regulation",
+   "page": 15,
+   "text": "Tie IPROPI to GND with VREF above GND to turn off both regulation and feedback. For feedback without regulation, choose VVREF and RIPROPI so VIPROPI never reaches VVREF."
+  },
+  {
+   "topic": "Overcurrent protection",
+   "page": 16,
+   "text": "Each FET has an analog current limit that clamps its gate drive. If the limit lasts beyond tOCP (1.5 µs typ) the whole bridge turns off and retries after tRETRY (3 ms typ), repeating while the fault stays. High- and low-side FETs are watched separately, so shorts to ground, to supply or across the load all trip it. OCP does not use the IPROPI sense path and works whatever VREF and IPROPI are set to."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 16,
+   "text": "Above TTSD the bridge turns off; it restarts on its own once the die has cooled by THYS."
+  },
+  {
+   "topic": "Undervoltage lockout",
+   "page": 16,
+   "text": "When VM falls below the UVLO falling threshold, the outputs and all circuitry turn off and the logic resets. Operation resumes when VM rises above the rising threshold."
+  },
+  {
+   "topic": "Active and sleep modes",
+   "page": 17,
+   "text": "The device is active once VM is above VUVLO, an input is high and tWAKE (250 µs max) has passed. With IN1 and IN2 both low for tSLEEP the device sleeps with outputs High-Z and draws IVMQ; powered up with both inputs low it sleeps at once. Either input held high longer than tWAKE wakes it."
+  },
+  {
+   "topic": "Logic inputs",
+   "page": 18,
+   "text": "IN1 and IN2 each have a 100 kΩ pulldown to ground."
+  },
+  {
+   "topic": "Motor voltage and current",
+   "page": 19,
+   "text": "Higher VM spins the motor faster at a given duty and raises the rate of current change in the winding. Current peaks at start-up, low speed and stall; the internal regulation can cap the inrush, or the controller can ramp the PWM duty at start."
+  },
+  {
+   "topic": "Stall detection",
+   "page": 20,
+   "text": "Motor current rises at stall, from a jam or an end stop. The controller reads VIPROPI with an ADC (or a comparator) against a firmware threshold placed between the average running current and the stall current. It ignores readings above threshold during the start-up inrush time tINRUSH, found by test, and acts after the current has stayed high for tSTALL: long to let the motor clear a jam, short at an end stop to save power and gears."
+  },
+  {
+   "topic": "Single-coil relay control",
+   "page": 23,
+   "text": "Forward or reverse drive sets or resets a single-coil latching relay. Afterwards the inputs can go low to sleep, or the bridge can brake briefly so back EMF from the coil does not push current into VM. Current regulation can hold the coil current within its rating when VM exceeds the relay voltage."
+  },
+  {
+   "topic": "Bulk capacitance",
+   "page": 32,
+   "text": "The bulk capacitor on VM depends on the peak motor current, the supply's capacitance and current capability, the wiring inductance to the supply, allowed ripple, motor type and braking method. Too little and VM swings with motor current demand and with energy returned by the motor. The final value comes from system testing. Rate the capacitor above the operating voltage to leave room for energy the motor sends back."
+  },
+  {
+   "topic": "Layout",
+   "page": 32,
+   "text": "Use a low-ESR X5R or X7R ceramic from VM to GND and keep it and the bulk capacitor (ceramic or electrolytic) right beside the device so the current loop stays small. VM, OUT1, OUT2 and GND carry the load current and want wide copper. Join the thermal pad to the top ground plane and inner ground planes with thermal vias and give it as much copper as possible."
+  },
+  {
+   "topic": "Thermal performance",
+   "page": 27,
+   "text": "RθJA depends strongly on the board: stack-up, vias, and copper round the pad. Both RθJA and ΨJB fall as the board gains copper area, layer count or copper weight. For short pulses (start-up, a shorted output tripping OCP, brief solenoid or motor drive) die and package dominate and the thermal impedance ZθJA is much lower; for long pulses the board dominates and the result approaches steady state. Measurement in the system is more reliable than the estimates."
+  },
+  {
+   "topic": "Family",
+   "page": 25,
+   "text": "The DRV8231A shares its pinout and footprint with the DRV8251A. The DDA footprint also matches the shunt-sense DRV8870, DRV8251 and DRV8231, whose pin 1 is GND and pin 7 the sense node; one board can carry either kind by fitting or omitting a few resistors and the sense amplifier."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DDA0008B (8-pin HSOP PowerPAD)",
+   "page": 37,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.7"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "body length (1)",
+     "4.8",
+     "",
+     "5.0"
+    ],
+    [
+     "",
+     "body width (2)",
+     "3.8",
+     "",
+     "4.0"
+    ],
+    [
+     "",
+     "width over leads",
+     "5.8",
+     "",
+     "6.2"
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "",
+     "row span pin 1 to pin 4",
+     "",
+     "3.81",
+     ""
+    ],
+    [
+     "",
+     "lead width",
+     "0.31",
+     "",
+     "0.51"
+    ],
+    [
+     "",
+     "lead thickness",
+     "0.10",
+     "",
+     "0.25"
+    ],
+    [
+     "",
+     "foot length",
+     "0.40",
+     "",
+     "1.27"
+    ],
+    [
+     "",
+     "gauge plane",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "body draft angle",
+     "0°",
+     "",
+     "10°"
+    ],
+    [
+     "",
+     "exposed pad length",
+     "2.8",
+     "",
+     "3.4"
+    ],
+    [
+     "",
+     "exposed pad width",
+     "2.11",
+     "",
+     "2.71"
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "land: pad length × width, 8 places",
+     "",
+     "(1.55) × (0.6)",
+     ""
+    ],
+    [
+     "",
+     "land: pad corner radius",
+     "",
+     "(0.05)",
+     ""
+    ],
+    [
+     "",
+     "land: centre-to-centre row span",
+     "",
+     "(5.4)",
+     ""
+    ],
+    [
+     "",
+     "land: solder mask opening on thermal pad",
+     "",
+     "(2.71) × (3.4)",
+     ""
+    ],
+    [
+     "",
+     "land: thermal pad metal",
+     "",
+     "(2.95) × (4.9)",
+     ""
+    ],
+    [
+     "",
+     "land: thermal via diameter, via pitch",
+     "",
+     "(0.2), (1.3)",
+     ""
+    ],
+    [
+     "",
+     "stencil 0.1 thick, thermal opening",
+     "",
+     "3.03 × 3.80",
+     ""
+    ],
+    [
+     "",
+     "stencil 0.125 thick, thermal opening",
+     "",
+     "2.71 × 3.40",
+     ""
+    ],
+    [
+     "",
+     "stencil 0.150 thick, thermal opening",
+     "",
+     "2.47 × 3.10",
+     ""
+    ],
+    [
+     "",
+     "stencil 0.175 thick, thermal opening",
+     "",
+     "2.29 × 2.87",
+     ""
+    ]
+   ],
+   "notes": [
+    "(1) Excludes mold flash, protrusions and gate burrs, at most 0.15 mm per side.",
+    "(2) Excludes interlead flash, at most 0.25 mm per side.",
+    "JEDEC MS-012. Solder mask opening 0.07 mm max all round a non-solder-mask-defined pad, or mask 0.07 mm min over the edge of a solder-mask-defined pad. The metal round the thermal pad may change for creepage. Vias are optional; under paste they are best filled, plugged or tented. Stencil openings give 100 % paste coverage of the pad."
+   ]
+  },
+  {
+   "name": "DSG0008A (8-pin WSON, 2 mm × 2 mm)",
+   "page": 41,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "overall height",
+     "0.7",
+     "",
+     "0.8"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "body length",
+     "1.9",
+     "",
+     "2.1"
+    ],
+    [
+     "",
+     "body width",
+     "1.9",
+     "",
+     "2.1"
+    ],
+    [
+     "",
+     "terminal pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "row span pin 1 to pin 4",
+     "",
+     "1.5",
+     ""
+    ],
+    [
+     "",
+     "terminal width",
+     "0.18",
+     "",
+     "0.32"
+    ],
+    [
+     "",
+     "terminal length",
+     "0.2",
+     "",
+     "0.4"
+    ],
+    [
+     "",
+     "exposed pad length",
+     "",
+     "1.6±0.1",
+     ""
+    ],
+    [
+     "",
+     "exposed pad width",
+     "",
+     "0.9±0.1",
+     ""
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "",
+     "pin 1 chamfer on exposed pad",
+     "",
+     "(45° × 0.25)",
+     ""
+    ],
+    [
+     "",
+     "side wall metal thickness, option 1 / option 2",
+     "",
+     "0.1 / 0.2",
+     ""
+    ],
+    [
+     "",
+     "land: pad length × width, 8 places",
+     "",
+     "(0.5) × (0.25)",
+     ""
+    ],
+    [
+     "",
+     "land: pad corner radius",
+     "",
+     "(0.05)",
+     ""
+    ],
+    [
+     "",
+     "land: centre-to-centre row span",
+     "",
+     "(1.9)",
+     ""
+    ],
+    [
+     "",
+     "land: thermal pad",
+     "",
+     "(0.9) × (1.6)",
+     ""
+    ],
+    [
+     "",
+     "land: two thermal vias, diameter and offset from pad centre",
+     "",
+     "(0.2), (0.55)",
+     ""
+    ],
+    [
+     "",
+     "stencil 0.125 thick: two thermal openings, width × height, centre offset",
+     "",
+     "(0.9) × (0.7), (0.45)",
+     ""
+    ]
+   ],
+   "notes": [
+    "The thermal pad must be soldered to the board for heat and mechanical strength. Solder mask opening 0.07 mm max all round a non-solder-mask-defined pad (preferred), or mask 0.07 mm min over the edge of a solder-mask-defined pad. Vias are optional; under paste they are best filled, plugged or tented. The stencil prints 87 % paste coverage on the thermal pad."
+   ]
+  }
+ ]
+}

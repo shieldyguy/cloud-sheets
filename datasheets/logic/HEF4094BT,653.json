@@ -1,0 +1,2134 @@
+{
+ "sheet": 1,
+ "name": "HEF4094BT,653",
+ "kind": "logic",
+ "manufacturer": "Nexperia",
+ "title": "8-stage shift-and-store register with 3-state outputs",
+ "source": {
+  "revision": "Rev. 14, 8 July 2021",
+  "pages": 15
+ },
+ "summary": "The HEF4094B is a CMOS 8-bit shift register with serial input D, followed by an 8-bit storage register whose contents drive eight 3-state parallel outputs QP0 to QP7. Data shifts on the rising edge of CP; STR HIGH copies the shift register into the storage register, and OE LOW floats the parallel outputs without touching either register. Two serial outputs allow chaining: QS1 changes on the rising clock edge, QS2 on the falling edge that follows. It runs from 3 V to 15 V, with figures at 5 V, 10 V and 15 V.",
+ "key_figures": [
+  [
+   "Supply",
+   "3 V to 15 V (18 V absolute maximum)"
+  ],
+  [
+   "Shift clock",
+   "fmax 10 MHz typ, 5 MHz min at VDD = 5 V; 28 MHz typ at 15 V"
+  ],
+  [
+   "CP to QS1 delay",
+   "135 ns typ tPHL, 105 ns typ tPLH at VDD = 5 V, 25 °C"
+  ],
+  [
+   "Output drive",
+   "IOL 0.64 mA min at 5 V, 4.2 mA min at 15 V (-40 °C)"
+  ],
+  [
+   "Quiescent current",
+   "5 μA max at 5 V, 25 °C; 600 μA max at 15 V, 125 °C"
+  ],
+  [
+   "ESD",
+   "HBM above 2000 V; MM above 200 V"
+  ],
+  [
+   "Temperature",
+   "-40 °C to +125 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "type number",
+   "temperature range",
+   "package",
+   "description",
+   "version"
+  ],
+  "rows": [
+   [
+    "HEF4094BT",
+    "-40 °C to +125 °C",
+    "SO16",
+    "plastic small outline, 16 leads, body width 3.9 mm",
+    "SOT109-1"
+   ],
+   [
+    "HEF4094BTT",
+    "-40 °C to +125 °C",
+    "TSSOP16",
+    "plastic thin shrink small outline, 16 leads, body width 4.4 mm",
+    "SOT403-1"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "SO16 (SOT109-1), TSSOP16 (SOT403-1)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "STR",
+     "type": "input",
+     "function": "Strobe: while HIGH the storage register takes the shift register's contents."
+    },
+    {
+     "pin": "2",
+     "name": "D",
+     "type": "input",
+     "function": "Serial data into shift stage 0."
+    },
+    {
+     "pin": "3",
+     "name": "CP",
+     "type": "input",
+     "function": "Shift clock; the register shifts on its rising edge."
+    },
+    {
+     "pin": "4",
+     "name": "QP0",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 0."
+    },
+    {
+     "pin": "5",
+     "name": "QP1",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 1."
+    },
+    {
+     "pin": "6",
+     "name": "QP2",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 2."
+    },
+    {
+     "pin": "7",
+     "name": "QP3",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 3."
+    },
+    {
+     "pin": "8",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground, 0 V."
+    },
+    {
+     "pin": "9",
+     "name": "QS1",
+     "type": "output",
+     "function": "Serial output from stage 7, updated on the rising CP edge; for chaining with fast clock edges."
+    },
+    {
+     "pin": "10",
+     "name": "QS2",
+     "type": "output",
+     "function": "Serial output carrying the QS1 bit from the next falling CP edge; for chaining with slow clock edges."
+    },
+    {
+     "pin": "11",
+     "name": "QP7",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 7."
+    },
+    {
+     "pin": "12",
+     "name": "QP6",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 6."
+    },
+    {
+     "pin": "13",
+     "name": "QP5",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 5."
+    },
+    {
+     "pin": "14",
+     "name": "QP4",
+     "type": "output",
+     "function": "Parallel 3-state output, bit 4."
+    },
+    {
+     "pin": "15",
+     "name": "OE",
+     "type": "input",
+     "function": "Output enable, active HIGH; LOW puts QP0 to QP7 in the high-impedance state."
+    },
+    {
+     "pin": "16",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply voltage."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Function table",
+   "page": 4,
+   "conditions": "H = HIGH; L = LOW; X = either level; Z = high-impedance OFF-state; NC = unchanged; ↑ = LOW-to-HIGH edge; ↓ = HIGH-to-LOW edge; Q6S = content of shift stage 6 just before a rising clock edge; Q7S = content of shift stage 7 just before a falling clock edge",
+   "columns": [
+    "CP",
+    "OE",
+    "STR",
+    "D",
+    "QP0",
+    "QPn",
+    "QS1",
+    "QS2"
+   ],
+   "rows": [
+    [
+     "↑",
+     "L",
+     "X",
+     "X",
+     "Z",
+     "Z",
+     "Q6S",
+     "NC"
+    ],
+    [
+     "↓",
+     "L",
+     "X",
+     "X",
+     "Z",
+     "Z",
+     "NC",
+     "Q7S"
+    ],
+    [
+     "↑",
+     "H",
+     "L",
+     "X",
+     "NC",
+     "NC",
+     "Q6S",
+     "NC"
+    ],
+    [
+     "↑",
+     "H",
+     "H",
+     "L",
+     "L",
+     "QPn -1",
+     "Q6S",
+     "NC"
+    ],
+    [
+     "↑",
+     "H",
+     "H",
+     "H",
+     "H",
+     "QPn -1",
+     "Q6S",
+     "NC"
+    ],
+    [
+     "↓",
+     "H",
+     "H",
+     "H",
+     "NC",
+     "NC",
+     "NC",
+     "Q7S"
+    ]
+   ],
+   "notes": [
+    "On a rising clock edge stage 7 takes the bit held in stage 6, and that bit appears at the QS outputs."
+   ]
+  },
+  {
+   "title": "Limiting values",
+   "page": 5,
+   "conditions": "Absolute Maximum Rating System (IEC 60134); voltages referred to VSS = 0 V (ground)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "supply voltage",
+     "VDD",
+     "",
+     "-0.5",
+     "+18",
+     "V"
+    ],
+    [
+     "input clamping current",
+     "IIK",
+     "VI < -0.5 V or VI > VDD + 0.5 V",
+     "",
+     "±10",
+     "mA"
+    ],
+    [
+     "input voltage",
+     "VI",
+     "",
+     "-0.5",
+     "VDD + 0.5",
+     "V"
+    ],
+    [
+     "output clamping current",
+     "IOK",
+     "VO < -0.5 V or VO > VDD + 0.5 V",
+     "",
+     "±10",
+     "mA"
+    ],
+    [
+     "input/output current",
+     "II/O",
+     "",
+     "",
+     "±10",
+     "mA"
+    ],
+    [
+     "supply current",
+     "IDD",
+     "",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "storage temperature",
+     "Tstg",
+     "",
+     "-65",
+     "+150",
+     "°C"
+    ],
+    [
+     "ambient temperature",
+     "Tamb",
+     "",
+     "-40",
+     "+125",
+     "°C"
+    ],
+    [
+     "total power dissipation",
+     "Ptot",
+     "[1]",
+     "",
+     "500",
+     "mW"
+    ],
+    [
+     "power dissipation",
+     "P",
+     "per output",
+     "",
+     "100",
+     "mW"
+    ]
+   ],
+   "notes": [
+    "[1] Ptot falls linearly above 110 °C by 12.4 mW/K in SO16 (SOT109-1), and above 91 °C by 8.5 mW/K in TSSOP16 (SOT403-1)."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "supply voltage",
+     "VDD",
+     "",
+     "3",
+     "",
+     "15",
+     "V"
+    ],
+    [
+     "input voltage",
+     "VI",
+     "",
+     "0",
+     "",
+     "VDD",
+     "V"
+    ],
+    [
+     "ambient temperature",
+     "Tamb",
+     "in free air",
+     "-40",
+     "",
+     "+125",
+     "°C"
+    ],
+    [
+     "input transition rise and fall rate",
+     "Δt/ΔV",
+     "VDD = 5 V",
+     "",
+     "",
+     "3.75",
+     "μs/V"
+    ],
+    [
+     "input transition rise and fall rate",
+     "Δt/ΔV",
+     "VDD = 10 V",
+     "",
+     "",
+     "0.5",
+     "μs/V"
+    ],
+    [
+     "input transition rise and fall rate",
+     "Δt/ΔV",
+     "VDD = 15 V",
+     "",
+     "",
+     "0.08",
+     "μs/V"
+    ]
+   ]
+  },
+  {
+   "title": "Static characteristics",
+   "page": 6,
+   "conditions": "VSS = 0 V; VI = VSS or VDD; unless otherwise specified",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "VDD",
+    "-40 °C min",
+    "-40 °C max",
+    "+25 °C min",
+    "+25 °C max",
+    "+85 °C min",
+    "+85 °C max",
+    "+125 °C min",
+    "+125 °C max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "HIGH-level input voltage",
+     "VIH",
+     "|IO| < 1 μA",
+     "5 V",
+     "3.5",
+     "",
+     "3.5",
+     "",
+     "3.5",
+     "",
+     "3.5",
+     "",
+     "V"
+    ],
+    [
+     "HIGH-level input voltage",
+     "VIH",
+     "|IO| < 1 μA",
+     "10 V",
+     "7.0",
+     "",
+     "7.0",
+     "",
+     "7.0",
+     "",
+     "7.0",
+     "",
+     "V"
+    ],
+    [
+     "HIGH-level input voltage",
+     "VIH",
+     "|IO| < 1 μA",
+     "15 V",
+     "11.0",
+     "",
+     "11.0",
+     "",
+     "11.0",
+     "",
+     "11.0",
+     "",
+     "V"
+    ],
+    [
+     "LOW-level input voltage",
+     "VIL",
+     "|IO| < 1 μA",
+     "5 V",
+     "",
+     "1.5",
+     "",
+     "1.5",
+     "",
+     "1.5",
+     "",
+     "1.5",
+     "V"
+    ],
+    [
+     "LOW-level input voltage",
+     "VIL",
+     "|IO| < 1 μA",
+     "10 V",
+     "",
+     "3.0",
+     "",
+     "3.0",
+     "",
+     "3.0",
+     "",
+     "3.0",
+     "V"
+    ],
+    [
+     "LOW-level input voltage",
+     "VIL",
+     "|IO| < 1 μA",
+     "15 V",
+     "",
+     "4.0",
+     "",
+     "4.0",
+     "",
+     "4.0",
+     "",
+     "4.0",
+     "V"
+    ],
+    [
+     "HIGH-level output voltage",
+     "VOH",
+     "|IO| < 1 μA",
+     "5 V",
+     "4.95",
+     "",
+     "4.95",
+     "",
+     "4.95",
+     "",
+     "4.95",
+     "",
+     "V"
+    ],
+    [
+     "HIGH-level output voltage",
+     "VOH",
+     "|IO| < 1 μA",
+     "10 V",
+     "9.95",
+     "",
+     "9.95",
+     "",
+     "9.95",
+     "",
+     "9.95",
+     "",
+     "V"
+    ],
+    [
+     "HIGH-level output voltage",
+     "VOH",
+     "|IO| < 1 μA",
+     "15 V",
+     "14.95",
+     "",
+     "14.95",
+     "",
+     "14.95",
+     "",
+     "14.95",
+     "",
+     "V"
+    ],
+    [
+     "LOW-level output voltage",
+     "VOL",
+     "|IO| < 1 μA",
+     "5 V",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "V"
+    ],
+    [
+     "LOW-level output voltage",
+     "VOL",
+     "|IO| < 1 μA",
+     "10 V",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "V"
+    ],
+    [
+     "LOW-level output voltage",
+     "VOL",
+     "|IO| < 1 μA",
+     "15 V",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "",
+     "0.05",
+     "V"
+    ],
+    [
+     "HIGH-level output current",
+     "IOH",
+     "VO = 2.5 V",
+     "5 V",
+     "",
+     "-1.7",
+     "",
+     "-1.4",
+     "",
+     "-1.1",
+     "",
+     "-1.1",
+     "mA"
+    ],
+    [
+     "HIGH-level output current",
+     "IOH",
+     "VO = 4.6 V",
+     "5 V",
+     "",
+     "-0.64",
+     "",
+     "-0.5",
+     "",
+     "-0.36",
+     "",
+     "-0.36",
+     "mA"
+    ],
+    [
+     "HIGH-level output current",
+     "IOH",
+     "VO = 9.5 V",
+     "10 V",
+     "",
+     "-1.6",
+     "",
+     "-1.3",
+     "",
+     "-0.9",
+     "",
+     "-0.9",
+     "mA"
+    ],
+    [
+     "HIGH-level output current",
+     "IOH",
+     "VO = 13.5 V",
+     "15 V",
+     "",
+     "-4.2",
+     "",
+     "-3.4",
+     "",
+     "-2.4",
+     "",
+     "-2.4",
+     "mA"
+    ],
+    [
+     "LOW-level output current",
+     "IOL",
+     "VO = 0.4 V",
+     "5 V",
+     "0.64",
+     "",
+     "0.5",
+     "",
+     "0.36",
+     "",
+     "0.36",
+     "",
+     "mA"
+    ],
+    [
+     "LOW-level output current",
+     "IOL",
+     "VO = 0.5 V",
+     "10 V",
+     "1.6",
+     "",
+     "1.3",
+     "",
+     "0.9",
+     "",
+     "0.9",
+     "",
+     "mA"
+    ],
+    [
+     "LOW-level output current",
+     "IOL",
+     "VO = 1.5 V",
+     "15 V",
+     "4.2",
+     "",
+     "3.4",
+     "",
+     "2.4",
+     "",
+     "2.4",
+     "",
+     "mA"
+    ],
+    [
+     "OFF-state output current",
+     "IOZ",
+     "QPn output is HIGH; VO = 15 V",
+     "15 V",
+     "",
+     "0.4",
+     "",
+     "0.4",
+     "",
+     "12",
+     "",
+     "12",
+     "μA"
+    ],
+    [
+     "input leakage current",
+     "II",
+     "",
+     "15 V",
+     "",
+     "±0.1",
+     "",
+     "±0.1",
+     "",
+     "±1.0",
+     "",
+     "±1.0",
+     "μA"
+    ],
+    [
+     "supply current",
+     "IDD",
+     "all valid input combinations; IO = 0 A",
+     "5 V",
+     "",
+     "5",
+     "",
+     "5",
+     "",
+     "150",
+     "",
+     "150",
+     "μA"
+    ],
+    [
+     "supply current",
+     "IDD",
+     "all valid input combinations; IO = 0 A",
+     "10 V",
+     "",
+     "10",
+     "",
+     "10",
+     "",
+     "300",
+     "",
+     "300",
+     "μA"
+    ],
+    [
+     "supply current",
+     "IDD",
+     "all valid input combinations; IO = 0 A",
+     "15 V",
+     "",
+     "20",
+     "",
+     "20",
+     "",
+     "600",
+     "",
+     "600",
+     "μA"
+    ],
+    [
+     "input capacitance",
+     "CI",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "7.5",
+     "",
+     "",
+     "",
+     "",
+     "pF"
+    ]
+   ]
+  },
+  {
+   "title": "Dynamic characteristics",
+   "page": 7,
+   "conditions": "VSS = 0 V; Tamb = 25 °C; measured in the switching-time test circuit; unless otherwise specified",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "VDD",
+    "extrapolation formula",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QS1",
+     "5 V",
+     "108 ns + (0.55 ns/pF)CL",
+     "",
+     "135",
+     "270",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QS1",
+     "10 V",
+     "54 ns + (0.23 ns/pF)CL",
+     "",
+     "65",
+     "130",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QS1",
+     "15 V",
+     "42 ns + (0.16 ns/pF)CL",
+     "",
+     "50",
+     "100",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QS2",
+     "5 V",
+     "78 ns + (0.55 ns/pF)CL",
+     "",
+     "105",
+     "210",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QS2",
+     "10 V",
+     "39 ns + (0.23 ns/pF)CL",
+     "",
+     "50",
+     "100",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QS2",
+     "15 V",
+     "32 ns + (0.16 ns/pF)CL",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QPn",
+     "5 V",
+     "138 ns + (0.55 ns/pF)CL",
+     "",
+     "165",
+     "330",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QPn",
+     "10 V",
+     "64 ns + (0.23 ns/pF)CL",
+     "",
+     "75",
+     "150",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "CP to QPn",
+     "15 V",
+     "47 ns + (0.16 ns/pF)CL",
+     "",
+     "55",
+     "110",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "STR to QPn",
+     "5 V",
+     "83 ns + (0.55 ns/pF)CL",
+     "",
+     "110",
+     "220",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "STR to QPn",
+     "10 V",
+     "39 ns + (0.23 ns/pF)CL",
+     "",
+     "50",
+     "100",
+     "ns"
+    ],
+    [
+     "HIGH to LOW propagation delay",
+     "tPHL",
+     "STR to QPn",
+     "15 V",
+     "27 ns + (0.16 ns/pF)CL",
+     "",
+     "35",
+     "70",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QS1",
+     "5 V",
+     "78 ns + (0.55 ns/pF)CL",
+     "",
+     "105",
+     "210",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QS1",
+     "10 V",
+     "39 ns + (0.23 ns/pF)CL",
+     "",
+     "50",
+     "100",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QS1",
+     "15 V",
+     "32 ns + (0.16 ns/pF)CL",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QS2",
+     "5 V",
+     "78 ns + (0.55 ns/pF)CL",
+     "",
+     "105",
+     "210",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QS2",
+     "10 V",
+     "39 ns + (0.23 ns/pF)CL",
+     "",
+     "50",
+     "100",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QS2",
+     "15 V",
+     "32 ns + (0.16 ns/pF)CL",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QPn",
+     "5 V",
+     "123 ns + (0.55 ns/pF)CL",
+     "",
+     "150",
+     "300",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QPn",
+     "10 V",
+     "59 ns + (0.23 ns/pF)CL",
+     "",
+     "70",
+     "140",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "CP to QPn",
+     "15 V",
+     "47 ns + (0.16 ns/pF)CL",
+     "",
+     "55",
+     "110",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "STR to QPn",
+     "5 V",
+     "73 ns + (0.55 ns/pF)CL",
+     "",
+     "100",
+     "200",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "STR to QPn",
+     "10 V",
+     "34 ns + (0.23 ns/pF)CL",
+     "",
+     "45",
+     "90",
+     "ns"
+    ],
+    [
+     "LOW to HIGH propagation delay",
+     "tPLH",
+     "STR to QPn",
+     "15 V",
+     "27 ns + (0.16 ns/pF)CL",
+     "",
+     "35",
+     "70",
+     "ns"
+    ],
+    [
+     "transition time",
+     "tt",
+     "",
+     "5 V",
+     "10 ns + (1.00 ns/pF)CL",
+     "",
+     "60",
+     "120",
+     "ns"
+    ],
+    [
+     "transition time",
+     "tt",
+     "",
+     "10 V",
+     "9 ns + (0.42 ns/pF)CL",
+     "",
+     "30",
+     "60",
+     "ns"
+    ],
+    [
+     "transition time",
+     "tt",
+     "",
+     "15 V",
+     "6 ns + (0.28 ns/pF)CL",
+     "",
+     "20",
+     "40",
+     "ns"
+    ],
+    [
+     "OFF-state to HIGH propagation delay",
+     "tPZH",
+     "OE to QPn",
+     "5 V",
+     "",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "OFF-state to HIGH propagation delay",
+     "tPZH",
+     "OE to QPn",
+     "10 V",
+     "",
+     "",
+     "25",
+     "50",
+     "ns"
+    ],
+    [
+     "OFF-state to HIGH propagation delay",
+     "tPZH",
+     "OE to QPn",
+     "15 V",
+     "",
+     "",
+     "20",
+     "40",
+     "ns"
+    ],
+    [
+     "OFF-state to LOW propagation delay",
+     "tPZL",
+     "OE to QPn",
+     "5 V",
+     "",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "OFF-state to LOW propagation delay",
+     "tPZL",
+     "OE to QPn",
+     "10 V",
+     "",
+     "",
+     "25",
+     "50",
+     "ns"
+    ],
+    [
+     "OFF-state to LOW propagation delay",
+     "tPZL",
+     "OE to QPn",
+     "15 V",
+     "",
+     "",
+     "20",
+     "40",
+     "ns"
+    ],
+    [
+     "HIGH to OFF-state propagation delay",
+     "tPHZ",
+     "OE to QPn",
+     "5 V",
+     "",
+     "",
+     "75",
+     "150",
+     "ns"
+    ],
+    [
+     "HIGH to OFF-state propagation delay",
+     "tPHZ",
+     "OE to QPn",
+     "10 V",
+     "",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "HIGH to OFF-state propagation delay",
+     "tPHZ",
+     "OE to QPn",
+     "15 V",
+     "",
+     "",
+     "30",
+     "60",
+     "ns"
+    ],
+    [
+     "LOW to OFF-state propagation delay",
+     "tPLZ",
+     "OE to QPn",
+     "5 V",
+     "",
+     "",
+     "80",
+     "160",
+     "ns"
+    ],
+    [
+     "LOW to OFF-state propagation delay",
+     "tPLZ",
+     "OE to QPn",
+     "10 V",
+     "",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "LOW to OFF-state propagation delay",
+     "tPLZ",
+     "OE to QPn",
+     "15 V",
+     "",
+     "",
+     "30",
+     "60",
+     "ns"
+    ],
+    [
+     "set-up time",
+     "tsu",
+     "D to CP",
+     "5 V",
+     "",
+     "60",
+     "30",
+     "",
+     "ns"
+    ],
+    [
+     "set-up time",
+     "tsu",
+     "D to CP",
+     "10 V",
+     "",
+     "20",
+     "10",
+     "",
+     "ns"
+    ],
+    [
+     "set-up time",
+     "tsu",
+     "D to CP",
+     "15 V",
+     "",
+     "15",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "hold time",
+     "th",
+     "D to CP",
+     "5 V",
+     "",
+     "+5",
+     "-15",
+     "",
+     "ns"
+    ],
+    [
+     "hold time",
+     "th",
+     "D to CP",
+     "10 V",
+     "",
+     "20",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "hold time",
+     "th",
+     "D to CP",
+     "15 V",
+     "",
+     "20",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "pulse width",
+     "tW",
+     "minimum LOW clock pulse",
+     "5 V",
+     "",
+     "60",
+     "30",
+     "",
+     "ns"
+    ],
+    [
+     "pulse width",
+     "tW",
+     "minimum LOW clock pulse",
+     "10 V",
+     "",
+     "30",
+     "15",
+     "",
+     "ns"
+    ],
+    [
+     "pulse width",
+     "tW",
+     "minimum LOW clock pulse",
+     "15 V",
+     "",
+     "24",
+     "12",
+     "",
+     "ns"
+    ],
+    [
+     "pulse width",
+     "tW",
+     "minimum HIGH strobe pulse",
+     "5 V",
+     "",
+     "40",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "pulse width",
+     "tW",
+     "minimum HIGH strobe pulse",
+     "10 V",
+     "",
+     "30",
+     "15",
+     "",
+     "ns"
+    ],
+    [
+     "pulse width",
+     "tW",
+     "minimum HIGH strobe pulse",
+     "15 V",
+     "",
+     "24",
+     "12",
+     "",
+     "ns"
+    ],
+    [
+     "maximum frequency",
+     "fmax",
+     "",
+     "5 V",
+     "",
+     "5",
+     "10",
+     "",
+     "MHz"
+    ],
+    [
+     "maximum frequency",
+     "fmax",
+     "",
+     "10 V",
+     "",
+     "11",
+     "22",
+     "",
+     "MHz"
+    ],
+    [
+     "maximum frequency",
+     "fmax",
+     "",
+     "15 V",
+     "",
+     "14",
+     "28",
+     "",
+     "MHz"
+    ]
+   ],
+   "notes": [
+    "The typical propagation delays and transition times come from the extrapolation formulas, with CL in pF."
+   ]
+  },
+  {
+   "title": "Dynamic power dissipation",
+   "page": 8,
+   "conditions": "VSS = 0 V; tr = tf ≤ 20 ns; Tamb = 25 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "VDD",
+    "typical formula for PD (μW)"
+   ],
+   "rows": [
+    [
+     "dynamic power dissipation",
+     "PD",
+     "5 V",
+     "PD = 2100 x fi + Σ(fo x CL) x VDD²"
+    ],
+    [
+     "dynamic power dissipation",
+     "PD",
+     "10 V",
+     "PD = 9700 x fi + Σ(fo x CL) x VDD²"
+    ],
+    [
+     "dynamic power dissipation",
+     "PD",
+     "15 V",
+     "PD = 26000 x fi + Σ(fo x CL) x VDD²"
+    ]
+   ],
+   "notes": [
+    "fi is the input frequency and fo an output frequency, both in MHz; CL is the load on an output in pF; VDD is in volts; the Σ term adds up every output."
+   ]
+  },
+  {
+   "title": "Measurement points",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "VDD",
+    "input VM",
+    "output VM",
+    "VX",
+    "VY"
+   ],
+   "rows": [
+    [
+     "5 V to 15 V",
+     "0.5VDD",
+     "0.5VDD",
+     "0.1VDD",
+     "0.9VDD"
+    ]
+   ]
+  },
+  {
+   "title": "Test data",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "VDD",
+    "VI",
+    "tr, tf",
+    "VEXT for tPHL, tPLH",
+    "VEXT for tPHZ, tPZH",
+    "VEXT for tPLZ, tPZL",
+    "CL",
+    "RL"
+   ],
+   "rows": [
+    [
+     "5 V to 15 V",
+     "VSS or VDD",
+     "≤ 20 ns",
+     "open",
+     "VSS",
+     "VDD",
+     "50 pF",
+     "1 kΩ"
+    ]
+   ]
+  },
+  {
+   "title": "ESD protection",
+   "page": 1,
+   "conditions": "",
+   "columns": [
+    "model",
+    "standard",
+    "rating"
+   ],
+   "rows": [
+    [
+     "HBM",
+     "JESD22-A114F",
+     "exceeds 2000 V"
+    ],
+    [
+     "MM",
+     "JESD22-A115-A (C = 200 pF; R = 0 Ω)",
+     "exceeds 200 V"
+    ]
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "remote-holding-register",
+   "title": "Remote control holding register",
+   "page": 10,
+   "description": "Three registers chained into a 24-bit holding register for digitally controlled equipment. Data from the remote control panel passes through control and sync circuitry into D of the first register, and each QS2 feeds D of the next. The panel's clock runs to every CP and the control circuitry's strobe to every STR, so all 24 bits shift together and reach the outputs together; each register's QP0 to QP7 drive one piece of equipment.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "HEF4094B"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "HEF4094B"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "HEF4094B"
+    },
+    {
+     "ref": "TDATA",
+     "type": "terminal",
+     "value": "serial data from control and sync circuitry"
+    },
+    {
+     "ref": "TSTR",
+     "type": "terminal",
+     "value": "strobe from control and sync circuitry"
+    },
+    {
+     "ref": "TCLK",
+     "type": "terminal",
+     "value": "clock from remote control panel"
+    },
+    {
+     "ref": "TOE",
+     "type": "terminal",
+     "value": "output enable, HIGH for QP0 to QP7 to drive"
+    },
+    {
+     "ref": "TQ1_0",
+     "type": "terminal",
+     "value": "equipment 1 control bit 0"
+    },
+    {
+     "ref": "TQ1_1",
+     "type": "terminal",
+     "value": "equipment 1 control bit 1"
+    },
+    {
+     "ref": "TQ1_2",
+     "type": "terminal",
+     "value": "equipment 1 control bit 2"
+    },
+    {
+     "ref": "TQ1_3",
+     "type": "terminal",
+     "value": "equipment 1 control bit 3"
+    },
+    {
+     "ref": "TQ1_4",
+     "type": "terminal",
+     "value": "equipment 1 control bit 4"
+    },
+    {
+     "ref": "TQ1_5",
+     "type": "terminal",
+     "value": "equipment 1 control bit 5"
+    },
+    {
+     "ref": "TQ1_6",
+     "type": "terminal",
+     "value": "equipment 1 control bit 6"
+    },
+    {
+     "ref": "TQ1_7",
+     "type": "terminal",
+     "value": "equipment 1 control bit 7"
+    },
+    {
+     "ref": "TQ2_0",
+     "type": "terminal",
+     "value": "equipment 2 control bit 0"
+    },
+    {
+     "ref": "TQ2_1",
+     "type": "terminal",
+     "value": "equipment 2 control bit 1"
+    },
+    {
+     "ref": "TQ2_2",
+     "type": "terminal",
+     "value": "equipment 2 control bit 2"
+    },
+    {
+     "ref": "TQ2_3",
+     "type": "terminal",
+     "value": "equipment 2 control bit 3"
+    },
+    {
+     "ref": "TQ2_4",
+     "type": "terminal",
+     "value": "equipment 2 control bit 4"
+    },
+    {
+     "ref": "TQ2_5",
+     "type": "terminal",
+     "value": "equipment 2 control bit 5"
+    },
+    {
+     "ref": "TQ2_6",
+     "type": "terminal",
+     "value": "equipment 2 control bit 6"
+    },
+    {
+     "ref": "TQ2_7",
+     "type": "terminal",
+     "value": "equipment 2 control bit 7"
+    },
+    {
+     "ref": "TQ3_0",
+     "type": "terminal",
+     "value": "equipment 3 control bit 0"
+    },
+    {
+     "ref": "TQ3_1",
+     "type": "terminal",
+     "value": "equipment 3 control bit 1"
+    },
+    {
+     "ref": "TQ3_2",
+     "type": "terminal",
+     "value": "equipment 3 control bit 2"
+    },
+    {
+     "ref": "TQ3_3",
+     "type": "terminal",
+     "value": "equipment 3 control bit 3"
+    },
+    {
+     "ref": "TQ3_4",
+     "type": "terminal",
+     "value": "equipment 3 control bit 4"
+    },
+    {
+     "ref": "TQ3_5",
+     "type": "terminal",
+     "value": "equipment 3 control bit 5"
+    },
+    {
+     "ref": "TQ3_6",
+     "type": "terminal",
+     "value": "equipment 3 control bit 6"
+    },
+    {
+     "ref": "TQ3_7",
+     "type": "terminal",
+     "value": "equipment 3 control bit 7"
+    }
+   ],
+   "notes": [
+    "OE of all three registers is one input; QP0 to QP7 drive while it is HIGH and float while it is LOW.",
+    "The equipment on the first register is one that needs its digital control held continuously."
+   ]
+  },
+  {
+   "id": "switching-test",
+   "title": "Test circuit for switching times",
+   "page": 10,
+   "fixture": true,
+   "description": "A pulse generator, terminated to ground by RT, drives an input of the device under test. The output under test is loaded by CL to ground and by RL to VEXT, which is left open or set to VSS or VDD depending on the timing measured.",
+   "parts": [
+    {
+     "ref": "G1",
+     "type": "source",
+     "value": "pulse generator",
+     "note": "VI = VSS or VDD; tr, tf ≤ 20 ns"
+    },
+    {
+     "ref": "RT",
+     "type": "resistor",
+     "value": "Zo of the generator",
+     "note": "termination equal to the generator output impedance"
+    },
+    {
+     "ref": "DUT",
+     "type": "other",
+     "value": "HEF4094B"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "50 pF",
+     "note": "includes jig and probe capacitance"
+    },
+    {
+     "ref": "RL",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "TVDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "TVEXT",
+     "type": "terminal",
+     "value": "VEXT"
+    },
+    {
+     "ref": "TVI",
+     "type": "terminal",
+     "value": "VI"
+    },
+    {
+     "ref": "TVO",
+     "type": "terminal",
+     "value": "VO"
+    }
+   ],
+   "notes": [
+    "VEXT: open for tPHL and tPLH; VSS for tPHZ and tPZH; VDD for tPLZ and tPZL."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Propagation delay and transition time against load",
+   "expr": "t = t0 + k × CL",
+   "where": {
+    "t": "typical tPHL, tPLH or tt, ns",
+    "t0": "intercept from the dynamic characteristics, ns (108 ns for tPHL CP to QS1 at 5 V)",
+    "k": "slope, ns/pF: 0.55 at 5 V, 0.23 at 10 V, 0.16 at 15 V for delays; 1.00, 0.42, 0.28 for tt",
+    "CL": "output load capacitance, pF"
+   },
+   "note": "",
+   "page": 7
+  },
+  {
+   "name": "Dynamic power dissipation",
+   "expr": "PD = K × fi + Σ(fo × CL) × VDD²",
+   "where": {
+    "PD": "dynamic power dissipation, μW",
+    "K": "2100 at VDD = 5 V, 9700 at 10 V, 26000 at 15 V",
+    "fi": "input frequency, MHz",
+    "fo": "output frequency, MHz",
+    "CL": "output load capacitance, pF",
+    "VDD": "supply voltage, V",
+    "Σ(fo × CL)": "summed over the outputs"
+   },
+   "note": "Typical, at Tamb = 25 °C with tr = tf ≤ 20 ns.",
+   "page": 8
+  },
+  {
+   "name": "Power derating",
+   "expr": "Ptot(max) = 500 mW − k × (Tamb − Tk)",
+   "where": {
+    "k": "12.4 mW/K for SO16, 8.5 mW/K for TSSOP16",
+    "Tk": "110 °C for SO16, 91 °C for TSSOP16"
+   },
+   "note": "Applies above Tk only.",
+   "page": 5
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Shifting",
+   "page": 1,
+   "text": "Each rising CP edge moves the level on D into stage 0 and every stage's bit into the next. Operation is fully static."
+  },
+  {
+   "topic": "Serial outputs",
+   "page": 1,
+   "text": "QS1 takes the stage-7 bit on the rising CP edge, which suits chaining with fast clock edges. QS2 presents the same bit after the following falling CP edge for chaining with slow clock edges."
+  },
+  {
+   "topic": "Storage register",
+   "page": 1,
+   "text": "While STR is HIGH the storage register follows the shift register; while STR is LOW it holds, so the outputs stay put during shifting."
+  },
+  {
+   "topic": "Output enable",
+   "page": 1,
+   "text": "OE HIGH lets the storage register drive QP0 to QP7; OE LOW puts them in the high-impedance OFF-state. OE changes neither register, and the serial outputs keep running with OE LOW."
+  },
+  {
+   "topic": "Input clamps",
+   "page": 1,
+   "text": "Every input has clamp diodes, so with a series current-limiting resistor an input can be driven from a voltage above VDD."
+  },
+  {
+   "topic": "Output characteristics",
+   "page": 1,
+   "text": "Outputs have standardized symmetrical drive; the part complies with JEDEC JESD 13-B. Limits are given for -40 °C, +25 °C, +85 °C and +125 °C."
+  },
+  {
+   "topic": "Applications",
+   "page": 10,
+   "text": "Serial-to-parallel conversion; holding register for remote control."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SO16 (SOT109-1), JEDEC MS-012, IEC 076E07",
+   "page": 11,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.75"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "",
+     "0.25"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "1.25",
+     "",
+     "1.45"
+    ],
+    [
+     "A3",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "bp",
+     "lead width",
+     "0.36",
+     "",
+     "0.49"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.19",
+     "",
+     "0.25"
+    ],
+    [
+     "D (1)",
+     "body length",
+     "9.8",
+     "",
+     "10.0"
+    ],
+    [
+     "E (1)",
+     "body width",
+     "3.8",
+     "",
+     "4.0"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "HE",
+     "width across leads",
+     "5.8",
+     "",
+     "6.2"
+    ],
+    [
+     "L",
+     "lead length",
+     "",
+     "1.05",
+     ""
+    ],
+    [
+     "Lp",
+     "foot length",
+     "0.4",
+     "",
+     "1.0"
+    ],
+    [
+     "Q",
+     "",
+     "0.6",
+     "",
+     "0.7"
+    ],
+    [
+     "v",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "w",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "Z (1)",
+     "",
+     "0.3",
+     "",
+     "0.7"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "(1) Plastic or metal protrusions up to 0.15 mm (0.006 inch) per side come on top of these.",
+    "Inch values: A max 0.069; A1 0.004 to 0.010; A2 0.049 to 0.057; A3 0.01; bp 0.014 to 0.019; c 0.0075 to 0.0100; D 0.38 to 0.39; E 0.15 to 0.16; e 0.05; HE 0.228 to 0.244; L 0.041; Lp 0.016 to 0.039; Q 0.020 to 0.028; v 0.01; w 0.01; y 0.004; Z 0.012 to 0.028."
+   ]
+  },
+  {
+   "name": "TSSOP16 (SOT403-1), JEDEC MO-153",
+   "page": 12,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.1"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.80",
+     "",
+     "0.95"
+    ],
+    [
+     "A3",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "bp",
+     "lead width",
+     "0.19",
+     "",
+     "0.30"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.1",
+     "",
+     "0.2"
+    ],
+    [
+     "D (1)",
+     "body length",
+     "4.9",
+     "",
+     "5.1"
+    ],
+    [
+     "E (2)",
+     "body width",
+     "4.3",
+     "",
+     "4.5"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "HE",
+     "width across leads",
+     "6.2",
+     "",
+     "6.6"
+    ],
+    [
+     "L",
+     "lead length",
+     "",
+     "1",
+     ""
+    ],
+    [
+     "Lp",
+     "foot length",
+     "0.50",
+     "",
+     "0.75"
+    ],
+    [
+     "Q",
+     "",
+     "0.3",
+     "",
+     "0.4"
+    ],
+    [
+     "v",
+     "",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "w",
+     "",
+     "",
+     "0.13",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "Z (1)",
+     "",
+     "0.06",
+     "",
+     "0.40"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "(1) Plastic or metal protrusions up to 0.15 mm per side come on top of these.",
+    "(2) Plastic protrusions between leads up to 0.25 mm per side come on top of these."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,4659 @@
+{
+ "sheet": 1,
+ "name": "LTC4242CUHF#PBF",
+ "kind": "power_switch",
+ "manufacturer": "Analog Devices (Linear Technology)",
+ "title": "LTC4242: two-slot PCI Express hot swap controller",
+ "source": {
+  "document": "LTC4242",
+  "revision": "4242f",
+  "pages": 24
+ },
+ "summary": "A hot swap controller that powers two independent PCI Express slots from a backplane. For each slot it drives external N-channel MOSFETs on the 12 V and 3.3 V rails, with adjustable ramp, a 50 mV circuit breaker with 20 µs delay and an active current limit at twice that, and switches the 3.3 V auxiliary rail through an integrated 0.25 Ω switch with its own breaker, current limit and thermal shutdown. Fault and power-good flags, a card-present enable input and a force-on test mode serve the system's hot plug controller. LTC4242CUHF#PBF is the 0 °C to 70 °C, lead-free part in the 38-lead 5 mm × 7 mm QFN.",
+ "key_figures": [
+  [
+   "Slots",
+   "2, each with 12 V, 3.3 V and 3.3 V auxiliary paths"
+  ],
+  [
+   "12VINn operating range",
+   "10.1 V to 14.4 V (20 V absolute maximum)"
+  ],
+  [
+   "3VINn, AUXINn operating range",
+   "3.0 V to 6.0 V"
+  ],
+  [
+   "VCC operating range",
+   "2.7 V to 6.0 V"
+  ],
+  [
+   "Circuit breaker trip sense voltage",
+   "50 mV typ (45 mV to 55 mV), 20 µs typ response"
+  ],
+  [
+   "Active current limit sense voltage",
+   "100 mV typ"
+  ],
+  [
+   "AUX switch resistance",
+   "0.25 Ω typ, 0.4 Ω max at 375 mA"
+  ],
+  [
+   "AUX circuit breaker current",
+   "550 mA typ (385 mA to 715 mA)"
+  ],
+  [
+   "Sense high to gate low",
+   "0.4 µs typ, 1 µs max"
+  ],
+  [
+   "Gate pull-up current",
+   "9 µA typ; gate drive 5.5 V typ above OUT"
+  ],
+  [
+   "Operating temperature",
+   "0 °C to 70 °C (C), -40 °C to 85 °C (I)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "temperature range",
+   "package",
+   "marking"
+  ],
+  "rows": [
+   [
+    "LTC4242CG",
+    "0°C to 70°C",
+    "G, 36-lead plastic SSOP",
+    ""
+   ],
+   [
+    "LTC4242IG",
+    "-40°C to 85°C",
+    "G, 36-lead plastic SSOP",
+    ""
+   ],
+   [
+    "LTC4242CUHF",
+    "0°C to 70°C",
+    "UHF, 38-lead (5mm × 7mm) plastic QFN",
+    "4242"
+   ],
+   [
+    "LTC4242IUHF",
+    "-40°C to 85°C",
+    "UHF, 38-lead (5mm × 7mm) plastic QFN",
+    "4242"
+   ]
+  ],
+  "notes": [
+   "Suffixes: #TR tape and reel, #PBF lead free, #TRPBF lead free on tape and reel; LTC4242CUHF#PBF is the lead-free commercial-grade QFN.",
+   "The QFN marking is the same for both grades; the grade is shown on a label on the shipping container.",
+   "AUXPGOOD1 and AUXPGOOD2 exist only on the QFN."
+  ]
+ },
+ "pins": [
+  {
+   "package": "UHF, 38-lead QFN",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "AUXON1",
+     "type": "input",
+     "function": "Auxiliary-supply control of slot 1. The internal AUX switch follows its edges: on at a rising edge, off at a falling one. Held below 0.6 V for more than 3.5 µs it clears an AUX fault."
+    },
+    {
+     "pin": "2",
+     "name": "3VOUT1",
+     "type": "input",
+     "function": "Connects to the source of slot 1's 3.3 V MOSFET as the gate-drive return. PGOOD1 cannot go low until this pin rises past 2.855 V. A 375 Ω pull-down discharges it to ground while the MOSFET is off."
+    },
+    {
+     "pin": "3",
+     "name": "3VGATE1",
+     "type": "output",
+     "function": "Gate of slot 1's external 3.3 V N-channel MOSFET, driven as 12VGATE is: 9 µA up, 1 mA down at turn-off, 250 mA to 3VOUT1 on an overcurrent fault, clamped about 5.5 V above 3VOUT1. Needs an external series RC to ground for the current-limit loop."
+    },
+    {
+     "pin": "4",
+     "name": "3VSENSE1",
+     "type": "input",
+     "function": "Load side of slot 1's 3.3 V sense resistor, read against 3VIN1 for current limit and circuit breaker. Tied to 3VIN1, the 3.3 V breaker of that slot is off."
+    },
+    {
+     "pin": "5",
+     "name": "3VIN1",
+     "type": "power in",
+     "function": "Slot 1's 3.3 V supply input and the supply-side Kelvin point of its sense resistor. Below about 2.67 V the undervoltage lockout turns off both main supplies of the slot."
+    },
+    {
+     "pin": "6",
+     "name": "AUXIN1",
+     "type": "power in",
+     "function": "Slot 1's 3.3 V auxiliary input, the drain side of the internal AUX switch. Below about 2.67 V its undervoltage lockout turns the AUX switch off."
+    },
+    {
+     "pin": "7",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply for the controller, 2.7 V to 6 V. An internal undervoltage lockout holds the part off until VCC passes 2.45 V."
+    },
+    {
+     "pin": "8",
+     "name": "AUXIN2",
+     "type": "power in",
+     "function": "Slot 2's 3.3 V auxiliary input, the drain side of the internal AUX switch. Below about 2.67 V its undervoltage lockout turns the AUX switch off."
+    },
+    {
+     "pin": "9",
+     "name": "3VIN2",
+     "type": "power in",
+     "function": "Slot 2's 3.3 V supply input and the supply-side Kelvin point of its sense resistor. Below about 2.67 V the undervoltage lockout turns off both main supplies of the slot."
+    },
+    {
+     "pin": "10",
+     "name": "3VSENSE2",
+     "type": "input",
+     "function": "Load side of slot 2's 3.3 V sense resistor, read against 3VIN2 for current limit and circuit breaker. Tied to 3VIN2, the 3.3 V breaker of that slot is off."
+    },
+    {
+     "pin": "11",
+     "name": "3VGATE2",
+     "type": "output",
+     "function": "Gate of slot 2's external 3.3 V N-channel MOSFET, driven as 12VGATE is: 9 µA up, 1 mA down at turn-off, 250 mA to 3VOUT2 on an overcurrent fault, clamped about 5.5 V above 3VOUT2. Needs an external series RC to ground for the current-limit loop."
+    },
+    {
+     "pin": "12",
+     "name": "3VOUT2",
+     "type": "input",
+     "function": "Connects to the source of slot 2's 3.3 V MOSFET as the gate-drive return. PGOOD2 cannot go low until this pin rises past 2.855 V. A 375 Ω pull-down discharges it to ground while the MOSFET is off."
+    },
+    {
+     "pin": "13",
+     "name": "AUXON2",
+     "type": "input",
+     "function": "Auxiliary-supply control of slot 2. The internal AUX switch follows its edges: on at a rising edge, off at a falling one. Held below 0.6 V for more than 3.5 µs it clears an AUX fault."
+    },
+    {
+     "pin": "14",
+     "name": "ON2",
+     "type": "input",
+     "function": "Main-supply control of slot 2. A rising edge turns on the slot's external 12 V and 3.3 V MOSFETs; a falling edge switches both off. Taken below 0.6 V it clears the 12 V and 3.3 V faults."
+    },
+    {
+     "pin": "15",
+     "name": "FON2",
+     "type": "input",
+     "function": "Force-on (diagnostic) input of slot 2, logic level. High, it switches the slot's 12 V, 3.3 V and AUX paths on regardless of undervoltage, overcurrent and the ON/AUXON inputs; undervoltage on VCC still turns the switches off, and there is no current limit in this mode. Grounded, the feature is off."
+    },
+    {
+     "pin": "16",
+     "name": "EN2",
+     "type": "input",
+     "function": "Card-present input of slot 2, active low, with an internal 9 µA pull-up. The slot is enabled only while this pin is below 1.235 V."
+    },
+    {
+     "pin": "17",
+     "name": "FAULT2",
+     "type": "output",
+     "function": "Main-supply fault flag of slot 2, active low, with an internal 9 µA pull-up. An overcurrent on either the 12 V or the 3.3 V supply of the slot latches it low."
+    },
+    {
+     "pin": "18",
+     "name": "AUXFAULT2",
+     "type": "output",
+     "function": "Auxiliary-channel fault flag of slot 2, active low, with an internal 9 µA pull-up. It latches low when the AUX switch shuts off for overcurrent or for die temperature above 150 °C. With FON2 and EN2 both high it shows whether the AUX switch is on."
+    },
+    {
+     "pin": "19",
+     "name": "PGOOD2",
+     "type": "output",
+     "function": "Main power-good of slot 2, open drain with an internal 9 µA pull-up; low means good. It is high while 12VOUT2 or 3VOUT2 is under its power-good threshold, while EN2 is high, while ON2 is low, or while VCC or any main supply is in undervoltage lockout."
+    },
+    {
+     "pin": "20",
+     "name": "AUXPGOOD2",
+     "type": "output",
+     "function": "Auxiliary power-good of slot 2, open drain with an internal 9 µA pull-up; low means good. It is high while AUXOUT2 is under its power-good threshold, while EN2 is high, during thermal shutdown, while AUXON2 is low, or while VCC or AUXIN2 is in undervoltage lockout. QFN only."
+    },
+    {
+     "pin": "21",
+     "name": "12VIN2",
+     "type": "power in",
+     "function": "Slot 2's 12 V supply input, and the supply-side Kelvin point of its sense resistor. Below about 9.78 V the undervoltage lockout turns off both main supplies of the slot (12 V and 3.3 V)."
+    },
+    {
+     "pin": "22",
+     "name": "12VSENSE2",
+     "type": "input",
+     "function": "Load side of slot 2's 12 V sense resistor; 12VIN2 sits on the supply side. The drop across the resistor drives the active current limit and the circuit breaker. Tied to 12VIN2, the 12 V breaker of that slot is off."
+    },
+    {
+     "pin": "23",
+     "name": "12VGATE2",
+     "type": "output",
+     "function": "Gate of slot 2's external 12 V N-channel MOSFET. A 9 µA charge-pump current raises it at turn-on; 1 mA to ground lowers it at turn-off; a 250 mA pull-down from gate to 12VOUT2 is switched on during an overcurrent fault. Held by an internal clamp about 5.5 V above 12VOUT2. Needs an external series RC to ground for a well-behaved current-limit loop."
+    },
+    {
+     "pin": "24",
+     "name": "12VOUT2",
+     "type": "input",
+     "function": "Connects to the source of slot 2's 12 V MOSFET; it is the return for the gate drive. PGOOD2 cannot go low until this pin rises past 10.38 V. When the MOSFET is off a 700 Ω pull-down discharges it to ground."
+    },
+    {
+     "pin": "25",
+     "name": "AUXOUT2",
+     "type": "power out",
+     "function": "Output of slot 2's internal AUX switch. AUXPGOOD2 cannot go low until this pin rises past 2.855 V. A 750 Ω pull-down discharges it to ground while the switch is off."
+    },
+    {
+     "pin": "26",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground of the device; connect to a ground plane."
+    },
+    {
+     "pin": "27",
+     "name": "AUXOUT1",
+     "type": "power out",
+     "function": "Output of slot 1's internal AUX switch. AUXPGOOD1 cannot go low until this pin rises past 2.855 V. A 750 Ω pull-down discharges it to ground while the switch is off."
+    },
+    {
+     "pin": "28",
+     "name": "12VOUT1",
+     "type": "input",
+     "function": "Connects to the source of slot 1's 12 V MOSFET; it is the return for the gate drive. PGOOD1 cannot go low until this pin rises past 10.38 V. When the MOSFET is off a 700 Ω pull-down discharges it to ground."
+    },
+    {
+     "pin": "29",
+     "name": "12VGATE1",
+     "type": "output",
+     "function": "Gate of slot 1's external 12 V N-channel MOSFET. A 9 µA charge-pump current raises it at turn-on; 1 mA to ground lowers it at turn-off; a 250 mA pull-down from gate to 12VOUT1 is switched on during an overcurrent fault. Held by an internal clamp about 5.5 V above 12VOUT1. Needs an external series RC to ground for a well-behaved current-limit loop."
+    },
+    {
+     "pin": "30",
+     "name": "12VSENSE1",
+     "type": "input",
+     "function": "Load side of slot 1's 12 V sense resistor; 12VIN1 sits on the supply side. The drop across the resistor drives the active current limit and the circuit breaker. Tied to 12VIN1, the 12 V breaker of that slot is off."
+    },
+    {
+     "pin": "31",
+     "name": "12VIN1",
+     "type": "power in",
+     "function": "Slot 1's 12 V supply input, and the supply-side Kelvin point of its sense resistor. Below about 9.78 V the undervoltage lockout turns off both main supplies of the slot (12 V and 3.3 V)."
+    },
+    {
+     "pin": "32",
+     "name": "AUXPGOOD1",
+     "type": "output",
+     "function": "Auxiliary power-good of slot 1, open drain with an internal 9 µA pull-up; low means good. It is high while AUXOUT1 is under its power-good threshold, while EN1 is high, during thermal shutdown, while AUXON1 is low, or while VCC or AUXIN1 is in undervoltage lockout. QFN only."
+    },
+    {
+     "pin": "33",
+     "name": "PGOOD1",
+     "type": "output",
+     "function": "Main power-good of slot 1, open drain with an internal 9 µA pull-up; low means good. It is high while 12VOUT1 or 3VOUT1 is under its power-good threshold, while EN1 is high, while ON1 is low, or while VCC or any main supply is in undervoltage lockout."
+    },
+    {
+     "pin": "34",
+     "name": "AUXFAULT1",
+     "type": "output",
+     "function": "Auxiliary-channel fault flag of slot 1, active low, with an internal 9 µA pull-up. It latches low when the AUX switch shuts off for overcurrent or for die temperature above 150 °C. With FON1 and EN1 both high it shows whether the AUX switch is on."
+    },
+    {
+     "pin": "35",
+     "name": "FAULT1",
+     "type": "output",
+     "function": "Main-supply fault flag of slot 1, active low, with an internal 9 µA pull-up. An overcurrent on either the 12 V or the 3.3 V supply of the slot latches it low."
+    },
+    {
+     "pin": "36",
+     "name": "EN1",
+     "type": "input",
+     "function": "Card-present input of slot 1, active low, with an internal 9 µA pull-up. The slot is enabled only while this pin is below 1.235 V."
+    },
+    {
+     "pin": "37",
+     "name": "FON1",
+     "type": "input",
+     "function": "Force-on (diagnostic) input of slot 1, logic level. High, it switches the slot's 12 V, 3.3 V and AUX paths on regardless of undervoltage, overcurrent and the ON/AUXON inputs; undervoltage on VCC still turns the switches off, and there is no current limit in this mode. Grounded, the feature is off."
+    },
+    {
+     "pin": "38",
+     "name": "ON1",
+     "type": "input",
+     "function": "Main-supply control of slot 1. A rising edge turns on the slot's external 12 V and 3.3 V MOSFETs; a falling edge switches both off. Taken below 0.6 V it clears the 12 V and 3.3 V faults."
+    },
+    {
+     "pin": "39",
+     "name": "GND",
+     "type": "ground",
+     "function": "Exposed pad, power ground. Soldering it to the board's ground is optional for electrical connection."
+    }
+   ]
+  },
+  {
+   "package": "G, 36-lead SSOP",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "EN1",
+     "type": "input",
+     "function": "Card-present input of slot 1, active low, with an internal 9 µA pull-up. The slot is enabled only while this pin is below 1.235 V."
+    },
+    {
+     "pin": "2",
+     "name": "FON1",
+     "type": "input",
+     "function": "Force-on (diagnostic) input of slot 1, logic level. High, it switches the slot's 12 V, 3.3 V and AUX paths on regardless of undervoltage, overcurrent and the ON/AUXON inputs; undervoltage on VCC still turns the switches off, and there is no current limit in this mode. Grounded, the feature is off."
+    },
+    {
+     "pin": "3",
+     "name": "ON1",
+     "type": "input",
+     "function": "Main-supply control of slot 1. A rising edge turns on the slot's external 12 V and 3.3 V MOSFETs; a falling edge switches both off. Taken below 0.6 V it clears the 12 V and 3.3 V faults."
+    },
+    {
+     "pin": "4",
+     "name": "AUXON1",
+     "type": "input",
+     "function": "Auxiliary-supply control of slot 1. The internal AUX switch follows its edges: on at a rising edge, off at a falling one. Held below 0.6 V for more than 3.5 µs it clears an AUX fault."
+    },
+    {
+     "pin": "5",
+     "name": "3VOUT1",
+     "type": "input",
+     "function": "Connects to the source of slot 1's 3.3 V MOSFET as the gate-drive return. PGOOD1 cannot go low until this pin rises past 2.855 V. A 375 Ω pull-down discharges it to ground while the MOSFET is off."
+    },
+    {
+     "pin": "6",
+     "name": "3VGATE1",
+     "type": "output",
+     "function": "Gate of slot 1's external 3.3 V N-channel MOSFET, driven as 12VGATE is: 9 µA up, 1 mA down at turn-off, 250 mA to 3VOUT1 on an overcurrent fault, clamped about 5.5 V above 3VOUT1. Needs an external series RC to ground for the current-limit loop."
+    },
+    {
+     "pin": "7",
+     "name": "3VSENSE1",
+     "type": "input",
+     "function": "Load side of slot 1's 3.3 V sense resistor, read against 3VIN1 for current limit and circuit breaker. Tied to 3VIN1, the 3.3 V breaker of that slot is off."
+    },
+    {
+     "pin": "8",
+     "name": "3VIN1",
+     "type": "power in",
+     "function": "Slot 1's 3.3 V supply input and the supply-side Kelvin point of its sense resistor. Below about 2.67 V the undervoltage lockout turns off both main supplies of the slot."
+    },
+    {
+     "pin": "9",
+     "name": "AUXIN1",
+     "type": "power in",
+     "function": "Slot 1's 3.3 V auxiliary input, the drain side of the internal AUX switch. Below about 2.67 V its undervoltage lockout turns the AUX switch off."
+    },
+    {
+     "pin": "10",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply for the controller, 2.7 V to 6 V. An internal undervoltage lockout holds the part off until VCC passes 2.45 V."
+    },
+    {
+     "pin": "11",
+     "name": "AUXIN2",
+     "type": "power in",
+     "function": "Slot 2's 3.3 V auxiliary input, the drain side of the internal AUX switch. Below about 2.67 V its undervoltage lockout turns the AUX switch off."
+    },
+    {
+     "pin": "12",
+     "name": "3VIN2",
+     "type": "power in",
+     "function": "Slot 2's 3.3 V supply input and the supply-side Kelvin point of its sense resistor. Below about 2.67 V the undervoltage lockout turns off both main supplies of the slot."
+    },
+    {
+     "pin": "13",
+     "name": "3VSENSE2",
+     "type": "input",
+     "function": "Load side of slot 2's 3.3 V sense resistor, read against 3VIN2 for current limit and circuit breaker. Tied to 3VIN2, the 3.3 V breaker of that slot is off."
+    },
+    {
+     "pin": "14",
+     "name": "3VGATE2",
+     "type": "output",
+     "function": "Gate of slot 2's external 3.3 V N-channel MOSFET, driven as 12VGATE is: 9 µA up, 1 mA down at turn-off, 250 mA to 3VOUT2 on an overcurrent fault, clamped about 5.5 V above 3VOUT2. Needs an external series RC to ground for the current-limit loop."
+    },
+    {
+     "pin": "15",
+     "name": "3VOUT2",
+     "type": "input",
+     "function": "Connects to the source of slot 2's 3.3 V MOSFET as the gate-drive return. PGOOD2 cannot go low until this pin rises past 2.855 V. A 375 Ω pull-down discharges it to ground while the MOSFET is off."
+    },
+    {
+     "pin": "16",
+     "name": "AUXON2",
+     "type": "input",
+     "function": "Auxiliary-supply control of slot 2. The internal AUX switch follows its edges: on at a rising edge, off at a falling one. Held below 0.6 V for more than 3.5 µs it clears an AUX fault."
+    },
+    {
+     "pin": "17",
+     "name": "ON2",
+     "type": "input",
+     "function": "Main-supply control of slot 2. A rising edge turns on the slot's external 12 V and 3.3 V MOSFETs; a falling edge switches both off. Taken below 0.6 V it clears the 12 V and 3.3 V faults."
+    },
+    {
+     "pin": "18",
+     "name": "FON2",
+     "type": "input",
+     "function": "Force-on (diagnostic) input of slot 2, logic level. High, it switches the slot's 12 V, 3.3 V and AUX paths on regardless of undervoltage, overcurrent and the ON/AUXON inputs; undervoltage on VCC still turns the switches off, and there is no current limit in this mode. Grounded, the feature is off."
+    },
+    {
+     "pin": "19",
+     "name": "EN2",
+     "type": "input",
+     "function": "Card-present input of slot 2, active low, with an internal 9 µA pull-up. The slot is enabled only while this pin is below 1.235 V."
+    },
+    {
+     "pin": "20",
+     "name": "FAULT2",
+     "type": "output",
+     "function": "Main-supply fault flag of slot 2, active low, with an internal 9 µA pull-up. An overcurrent on either the 12 V or the 3.3 V supply of the slot latches it low."
+    },
+    {
+     "pin": "21",
+     "name": "AUXFAULT2",
+     "type": "output",
+     "function": "Auxiliary-channel fault flag of slot 2, active low, with an internal 9 µA pull-up. It latches low when the AUX switch shuts off for overcurrent or for die temperature above 150 °C. With FON2 and EN2 both high it shows whether the AUX switch is on."
+    },
+    {
+     "pin": "22",
+     "name": "PGOOD2",
+     "type": "output",
+     "function": "Main power-good of slot 2, open drain with an internal 9 µA pull-up; low means good. It is high while 12VOUT2 or 3VOUT2 is under its power-good threshold, while EN2 is high, while ON2 is low, or while VCC or any main supply is in undervoltage lockout."
+    },
+    {
+     "pin": "23",
+     "name": "12VIN2",
+     "type": "power in",
+     "function": "Slot 2's 12 V supply input, and the supply-side Kelvin point of its sense resistor. Below about 9.78 V the undervoltage lockout turns off both main supplies of the slot (12 V and 3.3 V)."
+    },
+    {
+     "pin": "24",
+     "name": "12VSENSE2",
+     "type": "input",
+     "function": "Load side of slot 2's 12 V sense resistor; 12VIN2 sits on the supply side. The drop across the resistor drives the active current limit and the circuit breaker. Tied to 12VIN2, the 12 V breaker of that slot is off."
+    },
+    {
+     "pin": "25",
+     "name": "12VGATE2",
+     "type": "output",
+     "function": "Gate of slot 2's external 12 V N-channel MOSFET. A 9 µA charge-pump current raises it at turn-on; 1 mA to ground lowers it at turn-off; a 250 mA pull-down from gate to 12VOUT2 is switched on during an overcurrent fault. Held by an internal clamp about 5.5 V above 12VOUT2. Needs an external series RC to ground for a well-behaved current-limit loop."
+    },
+    {
+     "pin": "26",
+     "name": "12VOUT2",
+     "type": "input",
+     "function": "Connects to the source of slot 2's 12 V MOSFET; it is the return for the gate drive. PGOOD2 cannot go low until this pin rises past 10.38 V. When the MOSFET is off a 700 Ω pull-down discharges it to ground."
+    },
+    {
+     "pin": "27",
+     "name": "AUXOUT2",
+     "type": "power out",
+     "function": "Output of slot 2's internal AUX switch. AUXPGOOD2 cannot go low until this pin rises past 2.855 V. A 750 Ω pull-down discharges it to ground while the switch is off."
+    },
+    {
+     "pin": "28",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground of the device; connect to a ground plane."
+    },
+    {
+     "pin": "29",
+     "name": "AUXOUT1",
+     "type": "power out",
+     "function": "Output of slot 1's internal AUX switch. AUXPGOOD1 cannot go low until this pin rises past 2.855 V. A 750 Ω pull-down discharges it to ground while the switch is off."
+    },
+    {
+     "pin": "30",
+     "name": "12VOUT1",
+     "type": "input",
+     "function": "Connects to the source of slot 1's 12 V MOSFET; it is the return for the gate drive. PGOOD1 cannot go low until this pin rises past 10.38 V. When the MOSFET is off a 700 Ω pull-down discharges it to ground."
+    },
+    {
+     "pin": "31",
+     "name": "12VGATE1",
+     "type": "output",
+     "function": "Gate of slot 1's external 12 V N-channel MOSFET. A 9 µA charge-pump current raises it at turn-on; 1 mA to ground lowers it at turn-off; a 250 mA pull-down from gate to 12VOUT1 is switched on during an overcurrent fault. Held by an internal clamp about 5.5 V above 12VOUT1. Needs an external series RC to ground for a well-behaved current-limit loop."
+    },
+    {
+     "pin": "32",
+     "name": "12VSENSE1",
+     "type": "input",
+     "function": "Load side of slot 1's 12 V sense resistor; 12VIN1 sits on the supply side. The drop across the resistor drives the active current limit and the circuit breaker. Tied to 12VIN1, the 12 V breaker of that slot is off."
+    },
+    {
+     "pin": "33",
+     "name": "12VIN1",
+     "type": "power in",
+     "function": "Slot 1's 12 V supply input, and the supply-side Kelvin point of its sense resistor. Below about 9.78 V the undervoltage lockout turns off both main supplies of the slot (12 V and 3.3 V)."
+    },
+    {
+     "pin": "34",
+     "name": "PGOOD1",
+     "type": "output",
+     "function": "Main power-good of slot 1, open drain with an internal 9 µA pull-up; low means good. It is high while 12VOUT1 or 3VOUT1 is under its power-good threshold, while EN1 is high, while ON1 is low, or while VCC or any main supply is in undervoltage lockout."
+    },
+    {
+     "pin": "35",
+     "name": "AUXFAULT1",
+     "type": "output",
+     "function": "Auxiliary-channel fault flag of slot 1, active low, with an internal 9 µA pull-up. It latches low when the AUX switch shuts off for overcurrent or for die temperature above 150 °C. With FON1 and EN1 both high it shows whether the AUX switch is on."
+    },
+    {
+     "pin": "36",
+     "name": "FAULT1",
+     "type": "output",
+     "function": "Main-supply fault flag of slot 1, active low, with an internal 9 µA pull-up. An overcurrent on either the 12 V or the 3.3 V supply of the slot latches it low."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "pins",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VCC",
+     "-0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Supply voltage",
+     "12VINn",
+     "-0.3",
+     "20",
+     "V"
+    ],
+    [
+     "Supply voltage",
+     "3VINn",
+     "-0.3",
+     "10",
+     "V"
+    ],
+    [
+     "Supply voltage",
+     "AUXINn",
+     "-0.3",
+     "10",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "ONn, AUXONn, FONn",
+     "-0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "ENn",
+     "-0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Output voltage",
+     "FAULTn, PGOODn, AUXFAULTn, AUXPGOODn",
+     "-0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Analog voltage",
+     "12VSENSEn",
+     "-0.3",
+     "20",
+     "V"
+    ],
+    [
+     "Analog voltage",
+     "12VGATEn",
+     "-0.3",
+     "25",
+     "V"
+    ],
+    [
+     "Analog voltage",
+     "12VOUTn (Note 3)",
+     "12VGATEn - 5V",
+     "12VGATEn + 0.3V",
+     "V"
+    ],
+    [
+     "Analog voltage",
+     "AUXOUTn, 3VSENSEn",
+     "-0.3",
+     "10",
+     "V"
+    ],
+    [
+     "Analog voltage",
+     "3VGATEn",
+     "-0.3",
+     "14",
+     "V"
+    ],
+    [
+     "Analog voltage",
+     "3VOUTn (Note 3)",
+     "3VGATEn - 5V",
+     "3VGATEn + 0.3V",
+     "V"
+    ],
+    [
+     "Operating temperature range",
+     "LTC4242C",
+     "0",
+     "70",
+     "°C"
+    ],
+    [
+     "Operating temperature range",
+     "LTC4242I",
+     "-40",
+     "85",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "SSOP",
+     "-65",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "QFN",
+     "-65",
+     "125",
+     "°C"
+    ],
+    [
+     "Lead temperature, soldering 10 s",
+     "SSOP",
+     "",
+     "300",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: operating beyond these limits can damage the part permanently, and long exposure at any of them can reduce its reliability and life.",
+    "Note 3: an internal clamp keeps each GATE pin at least 5 V above its OUT pin; forcing the pin past the clamp can damage the part."
+   ]
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "package",
+    "TJMAX",
+    "θJA",
+    "note"
+   ],
+   "rows": [
+    [
+     "G, 36-lead plastic SSOP",
+     "125°C",
+     "95°C/W",
+     ""
+    ],
+    [
+     "UHF, 38-lead (5mm × 7mm) plastic QFN",
+     "125°C",
+     "34°C/W",
+     "exposed pad (pin 39) is GND; PCB electrical connection optional"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 3,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless otherwise noted; a ● row is guaranteed over the full operating temperature range (Note 2)",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "Operating Voltage",
+     "VCC",
+     "●",
+     "2.7",
+     "",
+     "6.0",
+     "V"
+    ],
+    [
+     "VIN",
+     "Operating Voltage",
+     "12VINn",
+     "●",
+     "10.1",
+     "",
+     "14.4",
+     "V"
+    ],
+    [
+     "VIN",
+     "Operating Voltage",
+     "3VINn",
+     "●",
+     "3.0",
+     "",
+     "6.0",
+     "V"
+    ],
+    [
+     "VIN",
+     "Operating Voltage",
+     "AUXINn",
+     "●",
+     "3.0",
+     "",
+     "6.0",
+     "V"
+    ],
+    [
+     "IDD",
+     "Input Supply Current, VCC",
+     "VAUXONn = 2V, VONn = 2V",
+     "●",
+     "",
+     "1.6",
+     "4",
+     "mA"
+    ],
+    [
+     "IDD",
+     "Input Supply Current, 12VINn",
+     "VAUXONn = 2V, VONn = 2V",
+     "●",
+     "",
+     "0.5",
+     "1",
+     "mA"
+    ],
+    [
+     "IDD",
+     "Input Supply Current, 3VINn",
+     "VAUXONn = 2V, VONn = 2V",
+     "●",
+     "",
+     "0.35",
+     "1",
+     "mA"
+    ],
+    [
+     "VUVL",
+     "Supply Undervoltage Lockout",
+     "VCC Rising",
+     "●",
+     "2.3",
+     "2.45",
+     "2.6",
+     "V"
+    ],
+    [
+     "VUVL",
+     "Supply Undervoltage Lockout",
+     "12VINn Rising",
+     "●",
+     "9.48",
+     "9.78",
+     "10.08",
+     "V"
+    ],
+    [
+     "VUVL",
+     "Supply Undervoltage Lockout",
+     "3VINn Rising",
+     "●",
+     "2.57",
+     "2.67",
+     "2.77",
+     "V"
+    ],
+    [
+     "VUVL",
+     "Supply Undervoltage Lockout",
+     "AUXINn Rising",
+     "●",
+     "2.57",
+     "2.67",
+     "2.77",
+     "V"
+    ],
+    [
+     "ΔVLKO(HYST)",
+     "Supply Undervoltage Lockout Hysteresis",
+     "VCC",
+     "●",
+     "30",
+     "100",
+     "200",
+     "mV"
+    ],
+    [
+     "ΔVLKO(HYST)",
+     "Supply Undervoltage Lockout Hysteresis",
+     "12VINn",
+     "●",
+     "90",
+     "130",
+     "170",
+     "mV"
+    ],
+    [
+     "ΔVLKO(HYST)",
+     "Supply Undervoltage Lockout Hysteresis",
+     "3VINn",
+     "●",
+     "20",
+     "35",
+     "50",
+     "mV"
+    ],
+    [
+     "ΔVLKO(HYST)",
+     "Supply Undervoltage Lockout Hysteresis",
+     "AUXINn",
+     "●",
+     "20",
+     "35",
+     "50",
+     "mV"
+    ],
+    [
+     "ΔVSENSE(CB)",
+     "Circuit Breaker Trip Sense Voltage, 12VINn – 12VSENSEn",
+     "",
+     "●",
+     "45",
+     "50",
+     "55",
+     "mV"
+    ],
+    [
+     "ΔVSENSE(CB)",
+     "Circuit Breaker Trip Sense Voltage, 3VINn – 3VSENSEn",
+     "",
+     "●",
+     "45",
+     "50",
+     "55",
+     "mV"
+    ],
+    [
+     "ΔVSENSE(ACL)",
+     "Active Current Limit Sense Voltage, 12VINn – 12VSENSEn",
+     "",
+     "●",
+     "75",
+     "100",
+     "125",
+     "mV"
+    ],
+    [
+     "ΔVSENSE(ACL)",
+     "Active Current Limit Sense Voltage, 3VINn – 3VSENSEn",
+     "",
+     "●",
+     "75",
+     "100",
+     "125",
+     "mV"
+    ],
+    [
+     "ICBAUX",
+     "Circuit Breaking Current for AUX Supply",
+     "",
+     "●",
+     "385",
+     "550",
+     "715",
+     "mA"
+    ],
+    [
+     "tCB",
+     "Circuit Breaker Response Time",
+     "",
+     "●",
+     "10",
+     "20",
+     "40",
+     "µs"
+    ],
+    [
+     "RAUX",
+     "Internal Switch Resistance, RAUX = (VAUXINn – VAUXOUTn)/I",
+     "I = 375mA (Note 4)",
+     "●",
+     "",
+     "0.25",
+     "0.4",
+     "Ω"
+    ],
+    [
+     "IGATE(UP)",
+     "External N-Channel Gate Pull-Up Current",
+     "Gate Drive On, V12VGATEn = 1V",
+     "●",
+     "-5",
+     "-9",
+     "-13",
+     "µA"
+    ],
+    [
+     "IGATE(UP)",
+     "External N-Channel Gate Pull-Up Current",
+     "Gate Drive On, V3VGATEn = 1V",
+     "●",
+     "-5",
+     "-9",
+     "-13",
+     "µA"
+    ],
+    [
+     "IGATE(DN)",
+     "External N-Channel Gate Pull-Down Current",
+     "Gate Drive Off, V12VGATEn = 17V, V12VOUTn = 12V",
+     "●",
+     "0.5",
+     "1",
+     "2",
+     "mA"
+    ],
+    [
+     "IGATE(DN)",
+     "External N-Channel Gate Pull-Down Current",
+     "Gate Drive Off, V3VGATEn = 8.3V, V3VOUTn = 3.3V",
+     "●",
+     "0.5",
+     "1",
+     "2",
+     "mA"
+    ],
+    [
+     "IGATE(FPD)",
+     "External N-Channel Gate Fast Pull-Down Current",
+     "Fast Turn Off, V12VGATEn = 17V, V12VOUTn = 12V",
+     "●",
+     "150",
+     "250",
+     "400",
+     "mA"
+    ],
+    [
+     "IGATE(FPD)",
+     "External N-Channel Gate Fast Pull-Down Current",
+     "Fast Turn Off, V3VGATEn = 8.3V, V3VOUTn = 3.3V",
+     "●",
+     "150",
+     "250",
+     "400",
+     "mA"
+    ],
+    [
+     "ΔVGATE",
+     "External N-Channel Gate Drive, 12VGATEn – 12VOUTn",
+     "IGATE = 1µA (Note 3)",
+     "●",
+     "4.5",
+     "5.5",
+     "7.9",
+     "V"
+    ],
+    [
+     "ΔVGATE",
+     "External N-Channel Gate Drive, 3VGATEn – 3VOUTn",
+     "IGATE = 1µA (Note 3)",
+     "●",
+     "4.5",
+     "5.5",
+     "7.9",
+     "V"
+    ],
+    [
+     "VPG(TH)",
+     "Power Good Threshold Voltage",
+     "12VOUTn Falling",
+     "●",
+     "10.08",
+     "10.38",
+     "10.68",
+     "V"
+    ],
+    [
+     "VPG(TH)",
+     "Power Good Threshold Voltage",
+     "3VOUTn Falling",
+     "●",
+     "2.772",
+     "2.855",
+     "2.937",
+     "V"
+    ],
+    [
+     "VPG(TH)",
+     "Power Good Threshold Voltage",
+     "AUXOUTn Falling (Note 5)",
+     "●",
+     "2.772",
+     "2.855",
+     "2.937",
+     "V"
+    ],
+    [
+     "VPG(HYST)",
+     "Power Good Hysteresis",
+     "12VOUTn",
+     "●",
+     "20",
+     "70",
+     "110",
+     "mV"
+    ],
+    [
+     "VPG(HYST)",
+     "Power Good Hysteresis",
+     "3VOUTn",
+     "●",
+     "5",
+     "20",
+     "30",
+     "mV"
+    ],
+    [
+     "VPG(HYST)",
+     "Power Good Hysteresis",
+     "AUXOUTn (Note 5)",
+     "●",
+     "5",
+     "20",
+     "30",
+     "mV"
+    ],
+    [
+     "VON(TH)",
+     "ONn, AUXONn Pin Threshold Voltage",
+     "Rising Edge",
+     "●",
+     "1.173",
+     "1.235",
+     "1.297",
+     "V"
+    ],
+    [
+     "ΔVON(TH)",
+     "ONn, AUXONn Pin Hysteresis",
+     "",
+     "●",
+     "30",
+     "70",
+     "120",
+     "mV"
+    ],
+    [
+     "VON(RTH)",
+     "ONn, AUXONn Pin Reset Threshold Voltage",
+     "Falling Edge",
+     "●",
+     "0.5",
+     "0.6",
+     "0.7",
+     "V"
+    ],
+    [
+     "ION(IN)",
+     "ONn, AUXONn Pin Input Current",
+     "VONn = VAUXONn = 1.2V",
+     "●",
+     "",
+     "",
+     "±1",
+     "µA"
+    ],
+    [
+     "VEN(TH)",
+     "ENn Pin Threshold Voltage",
+     "ENn Rising",
+     "●",
+     "1.173",
+     "1.235",
+     "1.297",
+     "V"
+    ],
+    [
+     "ΔVEN(HYST)",
+     "ENn Pin Hysteresis",
+     "",
+     "●",
+     "30",
+     "70",
+     "120",
+     "mV"
+    ],
+    [
+     "IEN(UP)",
+     "ENn Pull-Up Current",
+     "VENn = 1V",
+     "●",
+     "-5",
+     "-9",
+     "-13",
+     "µA"
+    ],
+    [
+     "VFON",
+     "FONn Pin Logic Threshold",
+     "",
+     "●",
+     "0.7",
+     "",
+     "2.6",
+     "V"
+    ],
+    [
+     "ISENSE",
+     "SENSE Pin Input Current, 12VSENSEn",
+     "V12VSENSEn = 12V",
+     "●",
+     "",
+     "40",
+     "100",
+     "µA"
+    ],
+    [
+     "ISENSE",
+     "SENSE Pin Input Current, 3VSENSEn",
+     "V3VSENSEn = 3.3V",
+     "●",
+     "",
+     "40",
+     "100",
+     "µA"
+    ],
+    [
+     "IOUT",
+     "OUT Pin Input Current, 12VOUTn",
+     "Gate Drive On, V12VOUTn = 12V",
+     "●",
+     "",
+     "45",
+     "90",
+     "µA"
+    ],
+    [
+     "IOUT",
+     "OUT Pin Input Current, 3VOUTn",
+     "Gate Drive On, V3VOUTn = 3.3V",
+     "●",
+     "",
+     "27",
+     "60",
+     "µA"
+    ],
+    [
+     "ROUT(DIS)",
+     "OUT Pin Discharge Resistance, 12VOUTn",
+     "Gate Drive Off, V12VOUTn = 6V",
+     "●",
+     "350",
+     "700",
+     "1400",
+     "Ω"
+    ],
+    [
+     "ROUT(DIS)",
+     "OUT Pin Discharge Resistance, 3VOUTn",
+     "Gate Drive Off, V3VOUTn = 2V",
+     "●",
+     "165",
+     "330",
+     "660",
+     "Ω"
+    ],
+    [
+     "ROUT(DIS)",
+     "OUT Pin Discharge Resistance, AUXOUTn",
+     "Gate Drive Off, VAUXOUTn = 2V",
+     "●",
+     "375",
+     "750",
+     "1500",
+     "Ω"
+    ],
+    [
+     "VOL",
+     "Output Low Voltage, FAULTn, AUXFAULTn, PGOODn, AUXPGOODn (Note 5)",
+     "IPIN = 3mA",
+     "●",
+     "",
+     "0.14",
+     "0.4",
+     "V"
+    ],
+    [
+     "IPU",
+     "Pull-Up Current, FAULTn, AUXFAULTn, PGOODn, AUXPGOODn (Note 5)",
+     "VPIN = 1.5V",
+     "●",
+     "-5",
+     "-9",
+     "-13",
+     "µA"
+    ],
+    [
+     "SRAUXOUT",
+     "AUXOUTn Slew Rate",
+     "",
+     "●",
+     "",
+     "1.25",
+     "1.7",
+     "V/ms"
+    ],
+    [
+     "tPLH(GATE)",
+     "Input High (ONn) to GATEs High Prop Delay",
+     "",
+     "●",
+     "",
+     "7",
+     "14",
+     "µs"
+    ],
+    [
+     "tPLH(UVL)",
+     "Input Supply Low (12VINn, 3VINn) to GATEs Low Prop Delay",
+     "",
+     "●",
+     "",
+     "18",
+     "36",
+     "µs"
+    ],
+    [
+     "tPLH(PG)",
+     "Out Low (12VOUTn, 3VOUTn) to PGOOD High Prop Delay",
+     "",
+     "●",
+     "",
+     "20",
+     "40",
+     "µs"
+    ],
+    [
+     "tPHL(SENSE)",
+     "Sense Voltage High to GATE Low",
+     "ΔVSENSE = 200mV, CGATE = 10nF",
+     "●",
+     "",
+     "0.4",
+     "1",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "Note 2: current flowing into a pin is positive and current flowing out is negative; voltages are measured from GND unless a row says otherwise.",
+    "Note 3: an internal clamp keeps each GATE pin at least 5 V above its OUT pin; forcing the pin past the clamp can damage the part.",
+    "Note 4: in the QFN package the AUX switch resistance is guaranteed through correlation with measurements made at wafer level.",
+    "Note 5: AUXPGOODn exists only on the QFN package."
+   ]
+  },
+  {
+   "title": "Table 1. PCI Express power supply requirements",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "supply voltage",
+    "maximum supply current",
+    "maximum load capacitance"
+   ],
+   "rows": [
+    [
+     "12V",
+     "5.5A",
+     "2000µF"
+    ],
+    [
+     "3.3V",
+     "3.0A",
+     "1000µF"
+    ],
+    [
+     "3.3VAUX",
+     "375mA",
+     "150µF"
+    ]
+   ]
+  },
+  {
+   "title": "Table 2. Sense resistance values",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "voltage supply",
+    "RSENSE (1%)",
+    "ITRIP(MIN)",
+    "ITRIP(MAX)"
+   ],
+   "rows": [
+    [
+     "12V",
+     "8mΩ",
+     "5.6A",
+     "6.9A"
+    ],
+    [
+     "3.3V",
+     "13mΩ",
+     "3.4A",
+     "4.3A"
+    ]
+   ]
+  },
+  {
+   "title": "Table 3. Worst-case t1 and inrush current",
+   "page": 19,
+   "conditions": "CGATE = 15nF (12V) and 47nF (3.3V), ±10%",
+   "columns": [
+    "voltage supply",
+    "t1(MIN)",
+    "t1(MAX)",
+    "MAX IINRUSH"
+   ],
+   "rows": [
+    [
+     "12V",
+     "13ms",
+     "40ms",
+     "2.4A"
+    ],
+    [
+     "3.3V",
+     "11ms",
+     "34ms",
+     "0.4A"
+    ]
+   ]
+  },
+  {
+   "title": "Table 4. MOSFET power-up temperature rise calculation",
+   "page": 20,
+   "conditions": "Si7336ADP",
+   "columns": [
+    "voltage supply",
+    "PON",
+    "θJA(MAX)",
+    "ΔT"
+   ],
+   "rows": [
+    [
+     "12V",
+     "11W",
+     "0.75°C/W",
+     "8.3°C"
+    ],
+    [
+     "3.3V",
+     "0.5W",
+     "0.6°C/W",
+     "0.3°C"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "IDD vs VCC",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IDD",
+     "points": [
+      [
+       3.006,
+       1.53
+      ],
+      [
+       3.647,
+       1.712
+      ],
+      [
+       3.998,
+       1.799
+      ],
+      [
+       4.24,
+       1.826
+      ],
+      [
+       5.037,
+       1.879
+      ],
+      [
+       5.831,
+       1.976
+      ],
+      [
+       6.992,
+       2.14
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VCC, 12VINn and 3VINn Supply Current vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC",
+     "points": [
+      [
+       -49.5,
+       1.563
+      ],
+      [
+       28.8,
+       1.587
+      ],
+      [
+       72.4,
+       1.616
+      ],
+      [
+       99.8,
+       1.644
+      ]
+     ]
+    },
+    {
+     "label": "12VINn",
+     "points": [
+      [
+       -49.8,
+       0.616
+      ],
+      [
+       -27.8,
+       0.588
+      ],
+      [
+       0.3,
+       0.571
+      ],
+      [
+       99.5,
+       0.565
+      ]
+     ]
+    },
+    {
+     "label": "3VINn",
+     "points": [
+      [
+       -49.8,
+       0.387
+      ],
+      [
+       45.5,
+       0.381
+      ],
+      [
+       100.1,
+       0.387
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "12VINn UV Rising Threshold vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "12VINn UV rising threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "12VINn",
+     "points": [
+      [
+       -49.8,
+       9.7953
+      ],
+      [
+       -0.3,
+       9.7771
+      ],
+      [
+       100.1,
+       9.7771
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "3VINn, AUXINn Rising Threshold vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "3VINn, AUXINn UV rising threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "3VINn, AUXINn",
+     "points": [
+      [
+       -49.8,
+       2.68408
+      ],
+      [
+       -25.0,
+       2.68332
+      ],
+      [
+       63.8,
+       2.67754
+      ],
+      [
+       99.8,
+       2.67665
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "12VOUTn Power Good Threshold vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "12VOUTn power good threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "12VOUTn",
+     "points": [
+      [
+       -49.8,
+       10.4
+      ],
+      [
+       31.3,
+       10.3787
+      ],
+      [
+       99.8,
+       10.3742
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "3VOUTn, AUXOUTn Power Good Threshold vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "3VOUTn, AUXOUTn power good threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "3VOUTn, AUXOUTn",
+     "points": [
+      [
+       -49.8,
+       2.87589
+      ],
+      [
+       0,
+       2.87453
+      ],
+      [
+       99.8,
+       2.86482
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OUT Discharge Resistance vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OUT discharge resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "AUXOUTn",
+     "points": [
+      [
+       -50.1,
+       548.3
+      ],
+      [
+       99.8,
+       947.1
+      ]
+     ]
+    },
+    {
+     "label": "12VOUTn",
+     "points": [
+      [
+       -49.8,
+       524.0
+      ],
+      [
+       18.6,
+       662.1
+      ],
+      [
+       99.5,
+       842.4
+      ]
+     ]
+    },
+    {
+     "label": "3VOUTn",
+     "points": [
+      [
+       -49.8,
+       232.9
+      ],
+      [
+       67.5,
+       391.7
+      ],
+      [
+       99.8,
+       430.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ONn, AUXONn, ENn Low-to-High Threshold vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ONn, AUXONn, ENn low-high threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ONn, AUXONn, ENn",
+     "points": [
+      [
+       -49.8,
+       1.241051
+      ],
+      [
+       -35.1,
+       1.240382
+      ],
+      [
+       -25.1,
+       1.240007
+      ],
+      [
+       -12.5,
+       1.239626
+      ],
+      [
+       3.2,
+       1.239255
+      ],
+      [
+       22.7,
+       1.23891
+      ],
+      [
+       46.3,
+       1.238606
+      ],
+      [
+       99.8,
+       1.238134
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ONn, AUXONn, ENn Hysteresis vs Temperature",
+   "page": 5,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ONn, AUXONn, ENn hysteresis",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ONn, AUXONn, ENn",
+     "points": [
+      [
+       -50.1,
+       57.81
+      ],
+      [
+       -26.1,
+       60.41
+      ],
+      [
+       -19.6,
+       61.35
+      ],
+      [
+       -1.6,
+       64.75
+      ],
+      [
+       28.2,
+       68.35
+      ],
+      [
+       53.8,
+       72.96
+      ],
+      [
+       99.5,
+       79.95
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FONn Low-to-High Threshold vs VCC",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "FONn low-high threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "FONn",
+     "points": [
+      [
+       2.462,
+       1.779
+      ],
+      [
+       6.529,
+       4.416
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FONn High-to-Low Threshold vs VCC",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "FONn high-low threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "FONn",
+     "points": [
+      [
+       2.482,
+       0.829
+      ],
+      [
+       6.518,
+       2.188
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RON vs Temperature",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RON",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "AUX switch",
+     "points": [
+      [
+       -49.8,
+       0.1848
+      ],
+      [
+       -11.2,
+       0.2144
+      ],
+      [
+       25.2,
+       0.2443
+      ],
+      [
+       48.2,
+       0.2648
+      ],
+      [
+       99.8,
+       0.3133
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RON vs AUXINn",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "AUXINn",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RON",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "AUX switch",
+     "points": [
+      [
+       3.006,
+       0.2424
+      ],
+      [
+       5.997,
+       0.2496
+      ],
+      [
+       6.217,
+       0.2524
+      ],
+      [
+       6.494,
+       0.2587
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current Limit Propagation Delay vs Sense Voltage",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Sense voltage",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current limit propagation delay",
+    "unit": "µs",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "delay",
+     "points": [
+      [
+       49.9,
+       16.61
+      ],
+      [
+       72.1,
+       5.076
+      ],
+      [
+       98.3,
+       1.46
+      ],
+      [
+       114.0,
+       0.7775
+      ],
+      [
+       130.9,
+       0.4364
+      ],
+      [
+       148.9,
+       0.2697
+      ],
+      [
+       157.9,
+       0.231
+      ],
+      [
+       169.0,
+       0.2068
+      ],
+      [
+       195.3,
+       0.1835
+      ],
+      [
+       268.4,
+       0.1717
+      ],
+      [
+       299.6,
+       0.1743
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Circuit Breaker Trip Sense Voltage vs Temperature",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Circuit breaker trip sense voltage",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "trip voltage",
+     "points": [
+      [
+       -49.9,
+       49.944
+      ],
+      [
+       0.2,
+       49.964
+      ],
+      [
+       46.9,
+       50.038
+      ],
+      [
+       74.9,
+       50.04
+      ],
+      [
+       88.6,
+       50.079
+      ],
+      [
+       99.7,
+       50.141
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Aux Circuit Breaker Trip Current vs Temperature",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "AUX circuit breaker trip current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "trip current",
+     "points": [
+      [
+       -50.4,
+       539.7
+      ],
+      [
+       25.0,
+       565.5
+      ],
+      [
+       49.7,
+       570.1
+      ],
+      [
+       99.8,
+       590.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Circuit Breaker Trip Filter Time vs Temperature",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Circuit breaker trip filter time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "filter time",
+     "points": [
+      [
+       -49.8,
+       22.348
+      ],
+      [
+       25.0,
+       21.325
+      ],
+      [
+       99.5,
+       20.074
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gate Drive vs IGATE",
+   "page": 6,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "IGATE",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate drive",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "gate drive",
+     "points": [
+      [
+       2.875,
+       5.423
+      ],
+      [
+       8.067,
+       5.423
+      ],
+      [
+       8.362,
+       5.407
+      ],
+      [
+       8.446,
+       5.374
+      ],
+      [
+       8.508,
+       5.269
+      ],
+      [
+       8.532,
+       5.019
+      ],
+      [
+       8.859,
+       0.012
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gate Drive vs Temperature",
+   "page": 7,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate drive",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "gate drive",
+     "points": [
+      [
+       -49.8,
+       5.3232
+      ],
+      [
+       2.7,
+       5.4158
+      ],
+      [
+       62.7,
+       5.513
+      ],
+      [
+       99.5,
+       5.5843
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IGATE Pull-Up vs Temperature",
+   "page": 7,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IGATE pull-up",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "pull-up",
+     "points": [
+      [
+       -49.8,
+       -9.8
+      ],
+      [
+       99.8,
+       -9.74
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IGATE Off Current vs Temperature",
+   "page": 7,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IGATE off current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "off current",
+     "points": [
+      [
+       -49.8,
+       1.0776
+      ],
+      [
+       28.4,
+       0.9683
+      ],
+      [
+       50.0,
+       0.9349
+      ],
+      [
+       77.2,
+       0.884
+      ],
+      [
+       99.8,
+       0.8531
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gate Fast Pull-Down Current vs Temperature",
+   "page": 7,
+   "conditions": "TA = 25 °C, VCC = VAUXINn = V3VINn = 3.3 V, V12VINn = 12 V unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate fast pull-down current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fast pull-down",
+     "points": [
+      [
+       -49.8,
+       289.02
+      ],
+      [
+       -10.6,
+       264.18
+      ],
+      [
+       13.1,
+       250.17
+      ],
+      [
+       69.1,
+       221.77
+      ],
+      [
+       99.8,
+       207.34
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Normal Power-Up Sequence",
+   "page": 14,
+   "conditions": "ENn pulled low",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ENn",
+     "points": [
+      [
+       0.0,
+       3.23
+      ],
+      [
+       24.832,
+       3.23
+      ],
+      [
+       25.101,
+       0.0
+      ],
+      [
+       100.0,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "AUXOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       25.908,
+       0.0
+      ],
+      [
+       27.793,
+       1.84
+      ],
+      [
+       30.215,
+       3.52
+      ],
+      [
+       100.0,
+       3.52
+      ]
+     ]
+    },
+    {
+     "label": "12VOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       31.427,
+       0.0
+      ],
+      [
+       34.522,
+       1.15
+      ],
+      [
+       38.56,
+       3.07
+      ],
+      [
+       44.616,
+       5.88
+      ],
+      [
+       48.654,
+       7.74
+      ],
+      [
+       52.692,
+       9.31
+      ],
+      [
+       54.711,
+       10.05
+      ],
+      [
+       58.748,
+       11.78
+      ],
+      [
+       60.363,
+       12.22
+      ],
+      [
+       100.0,
+       12.22
+      ]
+     ]
+    },
+    {
+     "label": "3VOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       37.887,
+       0.0
+      ],
+      [
+       42.598,
+       0.58
+      ],
+      [
+       48.654,
+       1.36
+      ],
+      [
+       54.711,
+       2.26
+      ],
+      [
+       58.748,
+       2.62
+      ],
+      [
+       62.786,
+       3.38
+      ],
+      [
+       100.0,
+       3.38
+      ]
+     ]
+    },
+    {
+     "label": "PGOODn",
+     "points": [
+      [
+       0.0,
+       3.31
+      ],
+      [
+       59.287,
+       3.31
+      ],
+      [
+       59.556,
+       0.0
+      ],
+      [
+       100.0,
+       0.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Normal Power-Down Sequence",
+   "page": 15,
+   "conditions": "ENn driven high",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Change from starting level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ENn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       247.7,
+       0.0
+      ],
+      [
+       250.3,
+       3.33
+      ],
+      [
+       1000.0,
+       3.33
+      ]
+     ]
+    },
+    {
+     "label": "AUXOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       250.3,
+       0.0
+      ],
+      [
+       270.5,
+       -0.37
+      ],
+      [
+       297.3,
+       -0.81
+      ],
+      [
+       324.2,
+       -1.23
+      ],
+      [
+       351.0,
+       -1.49
+      ],
+      [
+       377.9,
+       -1.7
+      ],
+      [
+       404.7,
+       -1.86
+      ],
+      [
+       431.5,
+       -2.04
+      ],
+      [
+       458.4,
+       -2.18
+      ],
+      [
+       639.6,
+       -2.2
+      ],
+      [
+       653.0,
+       -2.36
+      ],
+      [
+       1000.0,
+       -2.36
+      ]
+     ]
+    },
+    {
+     "label": "12VOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       250.3,
+       0.0
+      ],
+      [
+       270.5,
+       -0.37
+      ],
+      [
+       297.3,
+       -0.97
+      ],
+      [
+       324.2,
+       -1.52
+      ],
+      [
+       351.0,
+       -1.99
+      ],
+      [
+       377.9,
+       -2.52
+      ],
+      [
+       404.7,
+       -3.07
+      ],
+      [
+       431.5,
+       -3.56
+      ],
+      [
+       458.4,
+       -4.06
+      ],
+      [
+       485.2,
+       -4.59
+      ],
+      [
+       512.1,
+       -5.14
+      ],
+      [
+       538.9,
+       -5.61
+      ],
+      [
+       565.8,
+       -6.24
+      ],
+      [
+       592.6,
+       -6.63
+      ],
+      [
+       646.3,
+       -7.6
+      ],
+      [
+       673.2,
+       -8.07
+      ],
+      [
+       726.8,
+       -9.09
+      ],
+      [
+       753.7,
+       -9.54
+      ],
+      [
+       780.5,
+       -10.01
+      ],
+      [
+       807.4,
+       -10.27
+      ],
+      [
+       834.2,
+       -10.59
+      ],
+      [
+       861.1,
+       -10.74
+      ],
+      [
+       887.9,
+       -10.98
+      ],
+      [
+       941.6,
+       -11.22
+      ],
+      [
+       995.3,
+       -11.48
+      ]
+     ]
+    },
+    {
+     "label": "3VOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       250.3,
+       0.0
+      ],
+      [
+       270.5,
+       -0.1
+      ],
+      [
+       297.3,
+       -0.29
+      ],
+      [
+       324.2,
+       -0.5
+      ],
+      [
+       377.9,
+       -0.79
+      ],
+      [
+       431.5,
+       -1.0
+      ],
+      [
+       485.2,
+       -1.23
+      ],
+      [
+       538.9,
+       -1.39
+      ],
+      [
+       619.5,
+       -1.68
+      ],
+      [
+       673.2,
+       -1.83
+      ],
+      [
+       753.7,
+       -1.99
+      ],
+      [
+       887.9,
+       -2.12
+      ],
+      [
+       995.3,
+       -2.12
+      ]
+     ]
+    },
+    {
+     "label": "PGOODn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       246.3,
+       0.0
+      ],
+      [
+       249.0,
+       3.01
+      ],
+      [
+       1000.0,
+       3.01
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Overcurrent Fault on 3.3V Output",
+   "page": 15,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Change from starting level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Load current change from starting level",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "FAULTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       32.965,
+       0.0
+      ],
+      [
+       33.166,
+       -2.75
+      ],
+      [
+       50.0,
+       -2.75
+      ]
+     ]
+    },
+    {
+     "label": "3VOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.349,
+       0.0
+      ],
+      [
+       12.617,
+       -0.26
+      ],
+      [
+       33.032,
+       -0.26
+      ],
+      [
+       33.3,
+       -3.3
+      ],
+      [
+       50.0,
+       -3.3
+      ]
+     ]
+    },
+    {
+     "label": "3VGATEn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.349,
+       0.0
+      ],
+      [
+       12.617,
+       -0.16
+      ],
+      [
+       32.965,
+       -0.26
+      ],
+      [
+       33.701,
+       -7.12
+      ],
+      [
+       34.371,
+       -7.57
+      ],
+      [
+       35.71,
+       -7.75
+      ],
+      [
+       37.718,
+       -7.91
+      ],
+      [
+       40.395,
+       -7.98
+      ],
+      [
+       43.072,
+       -8.14
+      ],
+      [
+       46.419,
+       -8.22
+      ],
+      [
+       49.766,
+       -8.32
+      ]
+     ]
+    },
+    {
+     "label": "ILOAD",
+     "axis": "y2",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.416,
+       0.0
+      ],
+      [
+       12.617,
+       4.57
+      ],
+      [
+       14.29,
+       4.52
+      ],
+      [
+       33.032,
+       4.48
+      ],
+      [
+       33.233,
+       0.0
+      ],
+      [
+       50.0,
+       0.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Short-Circuit Fault on 3.3V Output",
+   "page": 15,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Change from starting level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Load current change from starting level",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "FAULTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.216,
+       0.0
+      ],
+      [
+       12.416,
+       -0.45
+      ],
+      [
+       12.952,
+       -0.29
+      ],
+      [
+       13.286,
+       0.0
+      ],
+      [
+       31.894,
+       0.0
+      ],
+      [
+       32.095,
+       -2.64
+      ],
+      [
+       50.0,
+       -2.64
+      ]
+     ]
+    },
+    {
+     "label": "3VOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.216,
+       0.0
+      ],
+      [
+       12.349,
+       -1.96
+      ],
+      [
+       12.684,
+       -1.52
+      ],
+      [
+       13.487,
+       -2.38
+      ],
+      [
+       14.29,
+       -2.49
+      ],
+      [
+       16.7,
+       -2.54
+      ],
+      [
+       20.315,
+       -2.59
+      ],
+      [
+       24.331,
+       -2.64
+      ],
+      [
+       28.748,
+       -2.72
+      ],
+      [
+       31.827,
+       -2.75
+      ],
+      [
+       32.095,
+       -3.19
+      ],
+      [
+       50.0,
+       -3.19
+      ]
+     ]
+    },
+    {
+     "label": "3VGATEn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.216,
+       0.0
+      ],
+      [
+       12.617,
+       -2.75
+      ],
+      [
+       13.621,
+       -4.76
+      ],
+      [
+       16.299,
+       -4.71
+      ],
+      [
+       20.047,
+       -4.9
+      ],
+      [
+       24.331,
+       -4.87
+      ],
+      [
+       31.292,
+       -5.03
+      ],
+      [
+       32.363,
+       -5.97
+      ],
+      [
+       33.434,
+       -6.47
+      ],
+      [
+       34.505,
+       -6.68
+      ],
+      [
+       36.647,
+       -7.09
+      ],
+      [
+       39.324,
+       -7.41
+      ],
+      [
+       42.537,
+       -7.57
+      ],
+      [
+       49.498,
+       -7.7
+      ]
+     ]
+    },
+    {
+     "label": "ILOAD",
+     "axis": "y2",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.216,
+       0.0
+      ],
+      [
+       12.684,
+       15.92
+      ],
+      [
+       13.086,
+       14.35
+      ],
+      [
+       13.487,
+       9.95
+      ],
+      [
+       13.889,
+       9.11
+      ],
+      [
+       14.29,
+       8.27
+      ],
+      [
+       16.299,
+       8.22
+      ],
+      [
+       18.307,
+       7.7
+      ],
+      [
+       20.315,
+       7.38
+      ],
+      [
+       24.331,
+       6.75
+      ],
+      [
+       28.347,
+       6.07
+      ],
+      [
+       31.56,
+       5.97
+      ],
+      [
+       31.961,
+       5.45
+      ],
+      [
+       32.363,
+       1.26
+      ],
+      [
+       32.631,
+       0.0
+      ],
+      [
+       50.0,
+       0.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Short-Circuit Fault on 3.3VAUX Output",
+   "page": 16,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Change from starting level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Load current change from starting level",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "AUXFAULTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       39.659,
+       0.0
+      ],
+      [
+       39.859,
+       -2.85
+      ],
+      [
+       50.0,
+       -2.85
+      ]
+     ]
+    },
+    {
+     "label": "AUXOUTn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       17.436,
+       0.0
+      ],
+      [
+       17.637,
+       -3.4
+      ],
+      [
+       19.311,
+       -3.4
+      ],
+      [
+       21.319,
+       -3.14
+      ],
+      [
+       50.0,
+       -3.14
+      ]
+     ]
+    },
+    {
+     "label": "AUXINn",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       17.436,
+       0.0
+      ],
+      [
+       17.637,
+       -0.16
+      ],
+      [
+       29.351,
+       -0.16
+      ],
+      [
+       29.685,
+       -0.39
+      ],
+      [
+       39.726,
+       -0.39
+      ],
+      [
+       40.395,
+       -0.16
+      ],
+      [
+       50.0,
+       -0.16
+      ]
+     ]
+    },
+    {
+     "label": "ILOAD",
+     "axis": "y2",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       17.436,
+       0.0
+      ],
+      [
+       17.503,
+       13.22
+      ],
+      [
+       17.637,
+       -2.49
+      ],
+      [
+       17.771,
+       2.96
+      ],
+      [
+       17.905,
+       1.18
+      ],
+      [
+       18.708,
+       1.1
+      ],
+      [
+       19.511,
+       1.39
+      ],
+      [
+       20.85,
+       1.49
+      ],
+      [
+       21.921,
+       1.81
+      ],
+      [
+       39.659,
+       1.81
+      ],
+      [
+       39.859,
+       -1.44
+      ],
+      [
+       40.06,
+       0.0
+      ],
+      [
+       50.0,
+       0.0
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "pcie-two-slot",
+   "title": "Typical PCI Express application",
+   "page": 12,
+   "description": "One controller powering two PCIe x1 slots on a backplane. In each slot a sense resistor and an Si7336ADP switch the 12 V rail (8 mΩ, 5.5 A) and the 3.3 V rail (13 mΩ, 3 A); the internal switch feeds the 3.3 V auxiliary pin (375 mA). Each gate has a 10 Ω stopper at the MOSFET and an RC to ground (47 Ω with 15 nF on 12 V, 18 Ω with 47 nF on 3.3 V) that sets the ramp and compensates the current loop. VCC runs from 3.3 V through 33 Ω and 1 µF. The hot plug controller sees each card's PRSNT2 line as BD_PRST, reads the fault and power-good flags, and drives ON as the AND of its PWREN output with the slot's MRL signal, which also drives AUXON directly. EN and FON of both slots are grounded.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4242 (SSOP)"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "8mΩ",
+     "note": "slot A 12 V sense"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG1",
+     "type": "resistor",
+     "value": "47Ω"
+    },
+    {
+     "ref": "CG1",
+     "type": "capacitor",
+     "value": "15nF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "13mΩ",
+     "note": "slot A 3.3 V sense"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG2",
+     "type": "resistor",
+     "value": "18Ω"
+    },
+    {
+     "ref": "CG2",
+     "type": "capacitor",
+     "value": "47nF"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "8mΩ",
+     "note": "slot B 12 V sense"
+    },
+    {
+     "ref": "Q3",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG3",
+     "type": "resistor",
+     "value": "47Ω"
+    },
+    {
+     "ref": "CG3",
+     "type": "capacitor",
+     "value": "15nF"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "13mΩ",
+     "note": "slot B 3.3 V sense"
+    },
+    {
+     "ref": "Q4",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG4",
+     "type": "resistor",
+     "value": "18Ω"
+    },
+    {
+     "ref": "CG4",
+     "type": "capacitor",
+     "value": "47nF"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "33Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "PCI Express hot plug controller (HPC)",
+     "external": true
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "2-input AND gate",
+     "external": true,
+     "note": "inside the HPC"
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "2-input AND gate",
+     "external": true,
+     "note": "inside the HPC"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "PCIe x1 connector, slot A"
+    },
+    {
+     "ref": "J2",
+     "type": "connector",
+     "value": "PCIe x1 connector, slot B"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "12V"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "3.3V"
+    },
+    {
+     "ref": "T3",
+     "type": "terminal",
+     "value": "MRL1"
+    },
+    {
+     "ref": "T4",
+     "type": "terminal",
+     "value": "MRL2"
+    },
+    {
+     "ref": "T5",
+     "type": "terminal",
+     "value": "SMBus slot A"
+    },
+    {
+     "ref": "T6",
+     "type": "terminal",
+     "value": "SMBus slot B"
+    }
+   ],
+   "notes": [
+    "The plugged-in card joins its PRSNT1 and PRSNT2 contacts, so a seated card pulls BD_PRST to the grounded PRSNT1 contact.",
+    "Each SMBus link is three lines passing straight through to the slot connector."
+   ]
+  },
+  {
+   "id": "enable-delay",
+   "title": "RC network to generate delay during card plug-in",
+   "page": 13,
+   "description": "A 47 kΩ resistor from the card's BD_PRSNT contact into ENn, with 33 nF from ENn to ground, debounces card insertion. When the seated card grounds BD_PRSNT the capacitor discharges through RD and ENn falls through 1.235 V after the RC delay (sized for a 1 ms debounce); on removal the internal 9 µA pull-up recharges CD and the slot turns off after about 2.8 ms.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4242"
+    },
+    {
+     "ref": "RD",
+     "type": "resistor",
+     "value": "47k"
+    },
+    {
+     "ref": "CD",
+     "type": "capacitor",
+     "value": "33nF"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "OUT"
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "plug-in card",
+     "note": "seated in the connector; its BD_PRSNT contact returns to card ground and its load sits between OUT and ground"
+    }
+   ],
+   "notes": [
+    "OUT is a switched output of the slot (12VOUTn or 3VOUTn), joined to the controller's OUT pin and carried through the connector to the card's load; slot 1's 12VOUT1 stands for it."
+   ]
+  },
+  {
+   "id": "auto-retry",
+   "title": "Auto-retry application",
+   "page": 17,
+   "description": "FAULT and ON of one slot are tied together and pulled up to 3.3 V by 200 kΩ, with 0.1 µF to ground. A circuit breaker trip pulls the node to VOL, which also takes ON below its 0.6 V reset level and clears the latch; the resistor then recharges the capacitor and the slot turns on again once ON passes 1.235 V. With these values the off time is 3.3 ms and, since a short lasts under 40 µs, the retry duty cycle is 1.3%. Shown on the 3.3 V channel with its 13 mΩ sense resistor and Si7336ADP.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4242"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "13mΩ"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "RAUTO",
+     "type": "resistor",
+     "value": "200k"
+    },
+    {
+     "ref": "CAUTO",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "3.3V"
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "plug-in card",
+     "note": "seated in the connector; its BD_PRST contact returns to card ground and the load sits between the supply contact and ground"
+    }
+   ],
+   "notes": [
+    "Pins carry the slot-1 names; slot 2 is wired the same way with its own pins."
+   ]
+  },
+  {
+   "id": "vcc-filter",
+   "title": "RC network for VCC filtering",
+   "page": 17,
+   "description": "33 Ω in series from AUXIN or 3VIN to VCC, with 1 µF from VCC to ground. The low-pass keeps VCC above its undervoltage lockout through a short on the shared input and damps the narrow, tall glitches that lead inductance puts on that input, so VCC (7 V absolute maximum) is protected even though AUXIN and 3VIN tolerate 10 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4242"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "33Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "AUXIN or 3VIN"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "four-supply",
+   "title": "Standalone hot swap application for four supplies: 12V, 5V, 3.3V and 3.3V standby",
+   "page": 21,
+   "description": "A plug-in card that switches four backplane supplies with one controller. Slot 1's 12 V channel takes the 12 V rail (4 mΩ, 10 A, 2000 µF), slot 1's 3.3 V channel the 3.3 V rail (8 mΩ, 5 A, 1000 µF) and slot 2's 3.3 V channel the 5 V rail (8 mΩ, 5 A, 1000 µF); both AUX switches in parallel give the 3.3 V standby output (385 mA, 150 µF). 12VOUT2 joins 12VOUT1, 12VSENSE2 is tied to 12VIN so that breaker is unused, and 12VGATE2 is open. Every input carries an SMAJ suppressor and a 10 Ω plus 100 nF snubber. A two-transistor 2N2222 delay with 4.7 µF holds both EN pins high until the card's grounded contact has been made for a while. ON, AUXON and the fault lines come from the backplane; FON is grounded.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4242"
+    },
+    {
+     "ref": "RS1",
+     "type": "resistor",
+     "value": "4mΩ"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG1",
+     "type": "resistor",
+     "value": "47Ω"
+    },
+    {
+     "ref": "CG1",
+     "type": "capacitor",
+     "value": "15nF"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "2000µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "RS2",
+     "type": "resistor",
+     "value": "8mΩ"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG2",
+     "type": "resistor",
+     "value": "18Ω"
+    },
+    {
+     "ref": "CG2",
+     "type": "capacitor",
+     "value": "47nF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1000µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "RS3",
+     "type": "resistor",
+     "value": "8mΩ"
+    },
+    {
+     "ref": "Q3",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG3",
+     "type": "resistor",
+     "value": "18Ω"
+    },
+    {
+     "ref": "CG3",
+     "type": "capacitor",
+     "value": "47nF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1000µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "150µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "SMAJ15A",
+     "note": "transient voltage suppressor"
+    },
+    {
+     "ref": "D2",
+     "type": "zener",
+     "value": "SMAJ5.0A",
+     "note": "transient voltage suppressor"
+    },
+    {
+     "ref": "D3",
+     "type": "zener",
+     "value": "SMAJ5.0A",
+     "note": "transient voltage suppressor"
+    },
+    {
+     "ref": "D4",
+     "type": "zener",
+     "value": "SMAJ7.0A",
+     "note": "transient voltage suppressor"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "100nF"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100nF"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "100nF"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "100nF"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "33Ω"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "4.7µF"
+    },
+    {
+     "ref": "Q4",
+     "type": "npn",
+     "value": "2N2222"
+    },
+    {
+     "ref": "Q5",
+     "type": "npn",
+     "value": "2N2222"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "12VIN"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "3.3VIN"
+    },
+    {
+     "ref": "T3",
+     "type": "terminal",
+     "value": "VSTANDBY"
+    },
+    {
+     "ref": "T4",
+     "type": "terminal",
+     "value": "AUXON contact"
+    },
+    {
+     "ref": "T5",
+     "type": "terminal",
+     "value": "ON"
+    },
+    {
+     "ref": "T6",
+     "type": "terminal",
+     "value": "grounded contact"
+    },
+    {
+     "ref": "T7",
+     "type": "terminal",
+     "value": "AUXFAULT"
+    },
+    {
+     "ref": "T8",
+     "type": "terminal",
+     "value": "FAULT"
+    },
+    {
+     "ref": "T9",
+     "type": "terminal",
+     "value": "BD_PRST"
+    },
+    {
+     "ref": "T10",
+     "type": "terminal",
+     "value": "5VIN"
+    },
+    {
+     "ref": "T11",
+     "type": "terminal",
+     "value": "12V 10A"
+    },
+    {
+     "ref": "T12",
+     "type": "terminal",
+     "value": "3.3V 5A"
+    },
+    {
+     "ref": "T13",
+     "type": "terminal",
+     "value": "3.3V STANDBY 385mA"
+    },
+    {
+     "ref": "T14",
+     "type": "terminal",
+     "value": "5V 5A"
+    },
+    {
+     "ref": "T15",
+     "type": "terminal",
+     "value": "PGOOD1"
+    },
+    {
+     "ref": "T16",
+     "type": "terminal",
+     "value": "PGOOD2"
+    },
+    {
+     "ref": "T17",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": [
+    "On the backplane the AUXON contact is joined to VSTANDBY and the detect contact is grounded.",
+    "The card's BD_PRST contact is tied to card ground, which tells the backplane the card is present."
+   ]
+  },
+  {
+   "id": "amc-two-module",
+   "title": "Hot swap application for two Advanced Mezzanine Cards (AMC)",
+   "page": 24,
+   "description": "One controller on an AMC carrier switching power to two modules. Each module gets 12 V payload power through 0.008 Ω and an Si7336ADP (5.6 A), with a 10 Ω gate stopper and 22 Ω plus 33 nF to ground, and 3.3 V management power through 0.4 Ω and an Si2306DS (100 mA), with a 10 Ω stopper and 33 nF straight from the gate pin to ground. VCC comes from the management source through 33 Ω and 1 µF. The platform management controller drives ON1 and ON2 and reads PGOOD, FAULT and each module's presence line (PS1, BD_PRSNT). The AUX channels are unused: AUXIN, AUXOUT, AUXON, FON and EN are grounded and the AUXFAULT pins are left unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4242 (SSOP)"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "0.008Ω"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG1",
+     "type": "resistor",
+     "value": "22Ω"
+    },
+    {
+     "ref": "CG1",
+     "type": "capacitor",
+     "value": "33nF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "0.4Ω"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "Si2306DS"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "CG2",
+     "type": "capacitor",
+     "value": "33nF"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "0.008Ω"
+    },
+    {
+     "ref": "Q3",
+     "type": "nmos",
+     "value": "Si7336ADP"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "RG2",
+     "type": "resistor",
+     "value": "22Ω"
+    },
+    {
+     "ref": "CG3",
+     "type": "capacitor",
+     "value": "33nF"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "0.4Ω"
+    },
+    {
+     "ref": "Q4",
+     "type": "nmos",
+     "value": "Si2306DS"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "CG4",
+     "type": "capacitor",
+     "value": "33nF"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "33Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "intelligent platform management controller (IPMC)",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "AMC connector, module 1 (carrier side)"
+    },
+    {
+     "ref": "J2",
+     "type": "connector",
+     "value": "AMC connector, module 2 (carrier side)"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "payload power source (12V)"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "management power source (3.3V)"
+    }
+   ],
+   "notes": [
+    "On the module the PS1 and PS0 contacts are joined, and PS0 is grounded on the carrier."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Card-insertion debounce capacitor",
+   "expr": "CD = tDELAY1 / 43.5 µF",
+   "where": {
+    "tDELAY1": "insertion debounce time in ms",
+    "CD": "ENn capacitor, with RD = 47 kΩ"
+   },
+   "note": "1 ms gives 0.023 µF; 33 nF is used.",
+   "page": 13
+  },
+  {
+   "name": "Card-removal delay",
+   "expr": "tDELAY2 = 0.765 × CD / 9 s",
+   "where": {
+    "CD": "ENn capacitor in µF",
+    "9": "the ENn pull-up current, 9 µA"
+   },
+   "note": "33 nF gives 2.8 ms.",
+   "page": 13
+  },
+  {
+   "name": "Gate ramp rate",
+   "expr": "dVGATE/dt = 9 µA / CG",
+   "where": {
+    "CG": "capacitor from the gate RC to ground"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Inrush current",
+   "expr": "IINRUSH = CL / CG × 9 µA",
+   "where": {
+    "CL": "capacitance on the supply output",
+    "CG": "gate capacitor"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Auto-retry off time",
+   "expr": "tOFF ≈ RAUTO × CAUTO × (1.235 – VOL) / (2.065 + RAUTO × 9 µA)",
+   "where": {
+    "RAUTO": "pull-up from 3VIN to the joined ON and FAULT pins",
+    "CAUTO": "capacitor on that node",
+    "VOL": "FAULT output low voltage"
+   },
+   "note": "200 kΩ and 0.1 µF give 3.3 ms; with a short lasting under 40 µs the duty cycle is 1.3%.",
+   "page": 16
+  },
+  {
+   "name": "Gate capacitance for a given ramp",
+   "expr": "CGATE = IGATE(UP) × t1 / VOUT",
+   "where": {
+    "IGATE(UP)": "gate pull-up current, 13 µA worst case",
+    "t1": "time to charge the load capacitance",
+    "VOUT": "supply output voltage"
+   },
+   "note": "t1 = 10 ms gives 11 nF for 12 V and 39 nF for 3.3 V; 15 nF and 47 nF (±10%) are used.",
+   "page": 19
+  },
+  {
+   "name": "AUX inrush current",
+   "expr": "IINRUSH(MAX) = CLOAD × SRMAX",
+   "where": {
+    "CLOAD": "capacitance on AUXOUTn",
+    "SRMAX": "AUXOUTn slew rate, 1.7 V/ms max"
+   },
+   "note": "The result must stay under ICBAUX(MIN) = 385 mA; allowing 30% capacitor tolerance, CLOAD is at most 170 µF.",
+   "page": 19
+  },
+  {
+   "name": "MOSFET power during inrush",
+   "expr": "PON = CL × VOUT² / (2 × t1)",
+   "where": {
+    "CL": "load capacitance",
+    "VOUT": "output voltage",
+    "t1": "charging time"
+   },
+   "note": "With no load current the MOSFET dissipates the energy finally stored in the load capacitor.",
+   "page": 19
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 11,
+   "text": "Each of the two slots has three supply paths: 12 V and 3.3 V through external N-channel MOSFETs with sense resistors, and a 3.3 V auxiliary path through an integrated 0.25 Ω switch. A charge pump supplies 9 µA to raise the external gates, which are clamped about 5.5 V above their sources; the internal switch gate is slewed so AUXOUT rises at about 1.25 V/ms. Open-drain flags report faults (FAULT, AUXFAULT) and good outputs (PGOOD, and AUXPGOOD on the QFN). With a switch off, its output is discharged to ground by an internal N-channel transistor."
+  },
+  {
+   "topic": "Turn-on conditions",
+   "page": 14,
+   "text": "VCC must be above its undervoltage lockout, and the main or auxiliary inputs above theirs, before the corresponding switches can turn on. EN must be low. The ON and AUXON pins then control the main supplies (12 V and 3.3 V together) and the auxiliary supply independently: a pin already high turns its switches on at once, a low pin turns them on at its next rising edge. The circuit breakers arm after the inputs clear undervoltage lockout. PGOOD and AUXPGOOD go low once the switches are on and the outputs are in tolerance."
+  },
+  {
+   "topic": "Gate ramp and inrush",
+   "page": 14,
+   "text": "The 9 µA source charges the gate capacitor CG, so the gate and the output rise at 9 µA/CG and the inrush current into a load capacitance CL is CL/CG × 9 µA. The same RG/CG network compensates the current loop, and the 10 Ω resistors at the MOSFET gates (R5 to R8 of the PCI Express circuit) stop high-frequency oscillation."
+  },
+  {
+   "topic": "Turn-off",
+   "page": 14,
+   "text": "ON or AUXON going low turns off the main or auxiliary switches; EN going high turns off everything; supply undervoltage, circuit-breaker trips and (for the internal switch) thermal shutdown also turn switches off. On a normal turn-off the main gates are pulled to ground by 1 mA, PGOOD (or AUXPGOOD) rises and the internal pull-downs drain the outputs."
+  },
+  {
+   "topic": "Overcurrent protection",
+   "page": 15,
+   "text": "Each supply has two current levels sensed across its resistor (internal for AUX): a 50 mV comparator, the electronic circuit breaker (ECB), and an amplifier at twice that level, the active current limit (ACL). Above the ECB level a 20 µs timer starts; if the overcurrent lasts that long the MOSFET is turned off and the fault latched. The ACL reduces the MOSFET's gate-to-source voltage to hold current at the ACL level, so a start-up into a short is limited to twice the breaker current and latches off after 20 µs. An overcurrent on either main output latches off both main outputs of the slot but not the auxiliary output, and an auxiliary overcurrent affects only the auxiliary output."
+  },
+  {
+   "topic": "Output short circuit",
+   "page": 15,
+   "text": "On a hard short the ACL enters a high-current mode that pulls the MOSFET's gate-to-source voltage to zero at once; the current drops from tens of amperes to nothing within some hundreds of nanoseconds. The input dips during the surge and then rings upward through lead inductance as the MOSFET opens; RG/CG helps the gate recover and the ACL then regulates at twice the ECB level. If lead inductance collapses the supply pin before the ACL acts, the undervoltage lockout (18 µs filter) turns the pass devices off."
+  },
+  {
+   "topic": "Auxiliary switch protection",
+   "page": 11,
+   "text": "The internal AUX switch has a circuit breaker at 550 mA with the same 20 µs delay, and an active current limit near 1.65 A, about three times the breaker level. Each AUX switch has its own thermal shutdown: at 150 °C it turns off immediately and AUXFAULT latches low, with no effect on the other switches. It may be turned on again by cycling AUXON low then high once the die is below 120 °C."
+  },
+  {
+   "topic": "Undervoltage fault",
+   "page": 16,
+   "text": "An input (12VIN, 3VIN or AUXIN) below its undervoltage threshold for more than 18 µs turns its switches off at once. A main-supply undervoltage turns off both main switches of the slot; auxiliary and main supplies do not affect each other. VCC below its lockout for more than 38 µs turns off all switches. They may turn on again when the supplies and VCC rise past their thresholds."
+  },
+  {
+   "topic": "Power-good fault",
+   "page": 16,
+   "text": "An output that stays below its power-good level longer than 20 µs is a power-good fault and sends PGOOD or AUXPGOOD high. For the flag to be low the output must be above threshold, EN low, the input above its undervoltage threshold, ON (or AUXON) high and thermal shutdown inactive."
+  },
+  {
+   "topic": "Resetting faults",
+   "page": 16,
+   "text": "A main-output overcurrent is cleared by taking ON low or the faulted supply below its undervoltage lockout. An auxiliary overcurrent or thermal fault is cleared by taking AUXON low or AUXIN below its lockout. VCC below its lockout clears every fault. No fault can be reset while FON is high."
+  },
+  {
+   "topic": "Auto-retry",
+   "page": 16,
+   "text": "Joining FAULT and ON with an RC network makes the slot restart by itself after a breaker trip. When the breaker trips, FAULT drops the node to VOL (below the 0.6 V reset level), the gate falls, the resistor recharges the capacitor, and at 1.235 V on ON the gate ramps again; the cycle repeats every tOFF while the short persists."
+  },
+  {
+   "topic": "Force-on (diagnostic) mode",
+   "page": 17,
+   "text": "With FON high and EN low every switch is forced on whatever the input undervoltage, the ON inputs or the latched faults would dictate; the latch keeps its contents and does not change. An output above the ECB level pulls FAULT or AUXFAULT low without latching. VCC undervoltage still turns every switch off, and thermal shutdown still turns off the internal switch while the main switches stay on. There is no current limit in this mode, so a shorted output must be avoided and the external MOSFETs kept within a safe heating limit."
+  },
+  {
+   "topic": "Force-on with current limit",
+   "page": 18,
+   "text": "With both FON and EN high the active current limits work without their 20 µs filter. The AUX fault latch can set if ICBAUX is exceeded, and AUXFAULT shows whether the AUX switch is on. To return to normal operation, take FON and EN low and cycle ON and AUXON."
+  },
+  {
+   "topic": "MOSFET gate drive",
+   "page": 17,
+   "text": "The gate drive is at least 4.5 V, so logic-level N-channel MOSFETs are needed for full enhancement. The gate pins are clamped at typically 5.5 V above their OUT pins."
+  },
+  {
+   "topic": "Current loop compensation",
+   "page": 17,
+   "text": "RG and the ramp capacitor CG compensate the active current limit. CG is chosen for the inrush current allowed; RG is found by experiment, with 10 Ω to 100 Ω as the range to try."
+  },
+  {
+   "topic": "VCC supply",
+   "page": 17,
+   "text": "VCC powers the controller and needs a 1 µF capacitor to ground, mounted right at the VCC and GND pins. When VCC is taken from 3VIN or AUXIN, the RS/C1 low-pass keeps VCC above lockout during a short on that input and holds glitches below the 7 V rating of VCC."
+  },
+  {
+   "topic": "Board presence detect",
+   "page": 11,
+   "text": "A PCI Express slot uses PRSNT1 and PRSNT2 to detect a fully inserted card: the card joins the two, so the last-mating PRSNT2 line goes low only when the card is seated. PRSNT2 goes to the system's hot plug controller, which commands the LTC4242 on after its own debounce delay; the RC network on ENn is another way to make the delay."
+  },
+  {
+   "topic": "Board layout",
+   "page": 18,
+   "text": "The circuit breaker needs Kelvin connections to the sense resistors, with sense traces short, close together, balanced and symmetrical. The sense resistors and power MOSFETs need good thermal design. 1 oz copper is about 0.5 mΩ per square; 0.03 inch of track width per ampere of DC current is suggested on 1 oz copper, and about 1 A per plated via, with the via filled by solder. Input bypass capacitors of 10 µF or more at each system supply limit glitches from inrush and fault currents."
+  },
+  {
+   "topic": "Design example",
+   "page": 19,
+   "text": "For the PCI Express loads (12 V at 5.5 A, 3.3 V at 3 A, 3.3VAUX at 375 mA): a connector pin carries 1.1 A, with five pins for 12 V, three for 3.3 V and one for 3.3VAUX. Sizing each sense resistor from the minimum breaker threshold and the maximum load, with 1% parts, gives 8 mΩ and 13 mΩ. Gate capacitors follow from the gate capacitance equation, and the AUX load capacitance is held to 170 µF by the AUX inrush equation. The Si7336ADP (under 4 mΩ at VGS = 4.5 V, 25 °C, 50 °C/W junction to ambient) dissipates up to 36 mW at 3 A on the 3.3 V rail, about 52 °C junction at 50 °C case, with on-resistance near 4.5 mΩ hot and under 53 mV across sense resistor and MOSFET. Inrush heating is checked against the MOSFET's single-pulse transient thermal impedance; the 12 V MOSFET sees the larger rise. The 20 µs window at twice the breaker level is short enough to add little junction heating when powering into a short or shorting after power-up."
+  },
+  {
+   "topic": "Auto-retry timing",
+   "page": 17,
+   "text": "In the auto-retry cycle ON/FAULT rises slowly from VOL after 3VIN is applied; at 1.235 V the gate starts to rise, and once it passes the MOSFET threshold the sense voltage climbs. When the sense voltage reaches VCB the breaker timer runs for tCB, after which FAULT pulls the node down past 0.6 V to VOL, the gate drops, and the node recharges for tOFF before the next attempt."
+  }
+ ],
+ "packages": [
+  {
+   "name": "G, 36-lead plastic SSOP (5.3 mm)",
+   "page": 22,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length (excluding mold flash)",
+     "12.50",
+     "",
+     "13.10"
+    ],
+    [
+     "",
+     "width across leads",
+     "7.40",
+     "",
+     "8.20"
+    ],
+    [
+     "",
+     "body width (excluding interlead flash)",
+     "5.00",
+     "",
+     "5.60"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "2.0"
+    ],
+    [
+     "",
+     "standoff",
+     "0.05",
+     "",
+     ""
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "",
+     "lead width",
+     "0.22",
+     "",
+     "0.38"
+    ],
+    [
+     "",
+     "lead thickness",
+     "0.09",
+     "",
+     "0.25"
+    ],
+    [
+     "",
+     "foot length",
+     "0.55",
+     "",
+     "0.95"
+    ],
+    [
+     "",
+     "foot angle (°)",
+     "0",
+     "",
+     "8"
+    ],
+    [
+     "",
+     "mold flash per side",
+     "",
+     "",
+     "0.152"
+    ],
+    [
+     "",
+     "interlead flash per side",
+     "",
+     "",
+     "0.254"
+    ],
+    [
+     "",
+     "land pattern: pad length",
+     "",
+     "1.25 ±0.12",
+     ""
+    ],
+    [
+     "",
+     "land pattern: pad width",
+     "",
+     "0.42 ±0.03",
+     ""
+    ],
+    [
+     "",
+     "land pattern: outer span",
+     "7.8",
+     "",
+     "8.2"
+    ],
+    [
+     "",
+     "land pattern: inner span",
+     "5.3",
+     "",
+     "5.7"
+    ],
+    [
+     "",
+     "land pattern: pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "UHF, 38-lead plastic QFN (5 mm × 7 mm)",
+   "page": 23,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body width",
+     "4.90",
+     "5.00",
+     "5.10"
+    ],
+    [
+     "",
+     "body length",
+     "6.90",
+     "7.00",
+     "7.10"
+    ],
+    [
+     "",
+     "overall height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "terminal thickness",
+     "",
+     "(0.200)",
+     ""
+    ],
+    [
+     "",
+     "terminal width",
+     "0.20",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "",
+     "terminal pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "",
+     "terminal length",
+     "0.30",
+     "0.40",
+     "0.50"
+    ],
+    [
+     "",
+     "exposed pad width",
+     "3.05",
+     "3.15",
+     "3.25"
+    ],
+    [
+     "",
+     "exposed pad length",
+     "5.05",
+     "5.15",
+     "5.25"
+    ],
+    [
+     "",
+     "pin 1 notch radius on exposed pad (or 0.35 × 45° chamfer)",
+     "",
+     "0.30",
+     ""
+    ],
+    [
+     "",
+     "exposed pad corner radius",
+     "",
+     "0.115",
+     ""
+    ],
+    [
+     "",
+     "mold flash on exposed pad, any side",
+     "",
+     "",
+     "0.20"
+    ],
+    [
+     "",
+     "land pattern: outline",
+     "",
+     "5.50 × 7.50",
+     ""
+    ],
+    [
+     "",
+     "land pattern: pad row centres",
+     "",
+     "4.10 × 6.10",
+     ""
+    ],
+    [
+     "",
+     "land pattern: exposed pad",
+     "",
+     "3.15 × 5.15",
+     ""
+    ],
+    [
+     "",
+     "land pattern: pad length",
+     "0.65",
+     "0.70",
+     "0.75"
+    ],
+    [
+     "",
+     "land pattern: pad width",
+     "0.20",
+     "0.25",
+     "0.30"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-220, variation WHKD. The exposed pad is solder plated."
+   ]
+  }
+ ]
+}

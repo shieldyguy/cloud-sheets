@@ -1,0 +1,1574 @@
+{
+ "sheet": 1,
+ "name": "SHTC3-TR-10KS",
+ "kind": "sensor",
+ "manufacturer": "Sensirion",
+ "title": "SHTC3: digital relative humidity and temperature sensor, I2C, 2 × 2 mm DFN",
+ "source": {
+  "document": "HT_DS_SHTC3_D1",
+  "revision": "Version 1, July 2018",
+  "pages": 13
+ },
+ "summary": "The SHTC3 measures relative humidity (0 to 100 %RH) and temperature (-40 to 125 °C) on one CMOS chip and reports both, already calibrated, linearised and temperature compensated, as 16-bit words over an I2C bus at up to 1 MHz (Fast-mode Plus) from the fixed address 0x70. It runs from 1.62 to 3.6 V and is built for battery equipment: 0.3 µA asleep, 45 µA idle, and a full humidity-plus-temperature reading averaging 4.9 µA at one reading a second in normal mode, 0.5 µA in low-power mode. Typical accuracy is ±2 %RH and ±0.2 °C. It comes in a four-terminal 2 × 2 × 0.75 mm DFN with a humidity opening on top and an exposed pad tied inside to VSS.",
+ "key_figures": [
+  [
+   "Humidity accuracy",
+   "±2.0 %RH typ"
+  ],
+  [
+   "Temperature accuracy",
+   "±0.2 °C typ"
+  ],
+  [
+   "Supply voltage",
+   "1.62 to 3.6 V"
+  ],
+  [
+   "Sleep current",
+   "0.3 µA typ, 0.6 µA max"
+  ],
+  [
+   "Idle current",
+   "45 µA typ, 70 µA max"
+  ],
+  [
+   "Average current, 1 reading/s",
+   "4.9 µA normal mode, 0.5 µA low-power mode"
+  ],
+  [
+   "Measurement time",
+   "10.8 ms typ normal, 0.7 ms typ low-power"
+  ],
+  [
+   "Interface",
+   "I2C, 0 to 1 MHz, address 0x70"
+  ],
+  [
+   "Ranges",
+   "0 to 100 %RH, -40 to +125 °C"
+  ],
+  [
+   "Package",
+   "DFN-4, 2 × 2 × 0.75 mm, 1 mm pitch"
+  ],
+  [
+   "Energy per measurement",
+   "below 1 µJ"
+  ]
+ ],
+ "part_numbers": {
+  "page": 9,
+  "columns": [
+   "part",
+   "order number",
+   "quantity",
+   "packaging",
+   "reel diameter"
+  ],
+  "rows": [
+   [
+    "SHTC3",
+    "3.000.047",
+    "2500",
+    "Tape & Reel",
+    "180 mm (7 inch)"
+   ],
+   [
+    "SHTC3",
+    "1-101681-01",
+    "10'000",
+    "Tape & Reel",
+    "330 mm (13 inch)"
+   ]
+  ],
+  "notes": [
+   "Both order numbers are the same sensor; they differ only in reel size and count. Reels ship sealed in antistatic ESD bags."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DFN-4 2 × 2 mm",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply, 1.62 to 3.6 V. Needs a 100 nF capacitor to VSS mounted right at the sensor."
+    },
+    {
+     "pin": "2",
+     "name": "SCL",
+     "type": "input / open-drain output",
+     "function": "I2C clock from the bus master, 0 to 1 MHz. The sensor holds it low while measuring when a clock-stretching command was used. Needs an external pull-up."
+    },
+    {
+     "pin": "3",
+     "name": "SDA",
+     "type": "open-drain input/output",
+     "function": "I2C data, both directions. Needs an external pull-up."
+    },
+    {
+     "pin": "4",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "thermal pad",
+     "function": "Exposed centre pad, joined inside to VSS. Solder it for mechanical strength; it may also go to the board's ground net, and it is the sensor's best thermal path to the temperature sensor."
+    }
+   ],
+   "notes": [
+    "Pins 1 and 2 are on one side, 3 and 4 opposite, numbered anticlockwise from pin 1 seen from the top."
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Humidity sensor specifications",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "condition",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Accuracy tolerance",
+     "Typ.",
+     "±2.0",
+     "%RH"
+    ],
+    [
+     "Accuracy tolerance",
+     "Max.",
+     "see curve: RH tolerance against relative humidity",
+     "%RH"
+    ],
+    [
+     "Repeatability",
+     "-",
+     "0.1",
+     "%RH"
+    ],
+    [
+     "Resolution",
+     "-",
+     "0.01",
+     "%RH"
+    ],
+    [
+     "Hysteresis",
+     "-",
+     "±1",
+     "%RH"
+    ],
+    [
+     "Specified range",
+     "extended",
+     "0 to 100",
+     "%RH"
+    ],
+    [
+     "Response time",
+     "τ 63%",
+     "8",
+     "s"
+    ],
+    [
+     "Long-term drift",
+     "Typ.",
+     "<0.25",
+     "%RH/y"
+    ]
+   ],
+   "notes": [
+    "Typical and maximum accuracy tolerance follow Sensirion's Humidity Sensor Specification Statement and hold in normal mode.",
+    "Repeatability is three standard deviations (3σ) of readings repeated under unchanged conditions, so it measures output noise; normal mode.",
+    "Resolution is the A/D converter's; normal mode.",
+    "The specified range is where the specification is guaranteed.",
+    "Extended range: the sensor does best inside 5 to 60 °C and 20 to 80 %RH (recommended operating conditions).",
+    "Response time is the time to 63 % of a step in humidity at 25 °C with 1 m/s of air flowing; in a product it depends on how the sensor is mounted.",
+    "The drift figure is typical in the normal operating range; its maximum is < 0.5 %RH/y. Solvent vapours and outgassing from tapes, adhesives or packaging can raise it."
+   ]
+  },
+  {
+   "title": "Temperature sensor specifications",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "condition",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Accuracy tolerance",
+     "Typ.",
+     "±0.2",
+     "°C"
+    ],
+    [
+     "Accuracy tolerance",
+     "Max.",
+     "see curve: temperature tolerance against temperature",
+     "°C"
+    ],
+    [
+     "Repeatability",
+     "-",
+     "0.1",
+     "°C"
+    ],
+    [
+     "Resolution",
+     "-",
+     "0.01",
+     "°C"
+    ],
+    [
+     "Specified range",
+     "-",
+     "–40 to +125",
+     "°C"
+    ],
+    [
+     "Response time",
+     "τ 63%",
+     "<5 to 30",
+     "s"
+    ],
+    [
+     "Long-term drift",
+     "Typ.",
+     "<0.02",
+     "°C/y"
+    ]
+   ],
+   "notes": [
+    "Accuracy, repeatability and resolution are defined as for humidity and hold in normal mode.",
+    "Response time depends on how well the board under the sensor conducts heat and on how the sensor is mounted.",
+    "Long-term drift maximum is < 0.04 °C/y."
+   ]
+  },
+  {
+   "title": "Typical RH accuracy at various temperatures",
+   "page": 3,
+   "conditions": "Typical accuracy in %RH",
+   "columns": [
+    "RH (%RH)",
+    "0 °C",
+    "10 °C",
+    "20 °C",
+    "30 °C",
+    "40 °C",
+    "50 °C",
+    "60 °C",
+    "70 °C",
+    "80 °C"
+   ],
+   "rows": [
+    [
+     "100",
+     "±3.5",
+     "±3",
+     "±3",
+     "±3",
+     "±3",
+     "±3",
+     "±3.5",
+     "±4",
+     "±4"
+    ],
+    [
+     "90",
+     "±3.5",
+     "±3",
+     "±2.5",
+     "±2.5",
+     "±2.5",
+     "±2.5",
+     "±3",
+     "±3.5",
+     "±4"
+    ],
+    [
+     "80",
+     "±3",
+     "±2.5",
+     "±2",
+     "±2",
+     "±2",
+     "±2.5",
+     "±2.5",
+     "±3",
+     "±3.5"
+    ],
+    [
+     "70",
+     "±3",
+     "±2.5",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2.5",
+     "±2.5",
+     "±3"
+    ],
+    [
+     "60",
+     "±2.5",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2.5",
+     "±2.5"
+    ],
+    [
+     "50",
+     "±2.5",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2.5"
+    ],
+    [
+     "40",
+     "±2.5",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "30",
+     "±2.5",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "20",
+     "±2.5",
+     "±2.5",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "10",
+     "±3",
+     "±3",
+     "±2.5",
+     "±2.5",
+     "±2.5",
+     "±2.5",
+     "±2.5",
+     "±2.5",
+     "±2.5"
+    ],
+    [
+     "0",
+     "±3.5",
+     "±3.5",
+     "±3",
+     "±3",
+     "±3",
+     "±3",
+     "±3",
+     "±3",
+     "±3"
+    ]
+   ],
+   "notes": [
+    "At 25 °C the typical RH tolerance is the one on the RH tolerance curve."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Normal temperature range",
+     "5",
+     "60",
+     "°C"
+    ],
+    [
+     "Normal relative humidity range",
+     "20",
+     "80",
+     "%RH"
+    ],
+    [
+     "Recommended storage temperature",
+     "10",
+     "50",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Sensirion's SHTxx Handling Instructions give more on storage."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 3,
+   "conditions": "TA = 25 °C, VDD = 3.3 V, unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "comments"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VDD",
+     "",
+     "1.62",
+     "3.3",
+     "3.6",
+     "V",
+     "-"
+    ],
+    [
+     "Power-up/down level",
+     "VPOR",
+     "Static power supply",
+     "1.28",
+     "1.4",
+     "1.55",
+     "V",
+     "-"
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Idle state",
+     "-",
+     "45",
+     "70",
+     "µA",
+     "The sensor sits idle after power-up until it gets a sleep command or other bus traffic"
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Sleep Mode",
+     "-",
+     "0.3",
+     "0.6",
+     "µA",
+     "A wake-up command is needed before it answers on I2C again"
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Measurement, Normal Mode",
+     "-",
+     "430",
+     "900",
+     "µA",
+     "Mean current during a measurement"
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Measurement, Low Power M.",
+     "-",
+     "270",
+     "570",
+     "µA",
+     "Mean current during a measurement"
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Average, Normal Mode",
+     "-",
+     "4.9",
+     "-",
+     "µA",
+     "Mean current in continuous operation at one measurement per second"
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Average, Low Power M.",
+     "-",
+     "0.5",
+     "-",
+     "µA",
+     "Mean current in continuous operation at one measurement per second"
+    ],
+    [
+     "Low level input voltage",
+     "VIL",
+     "-",
+     "-",
+     "-",
+     "0.42 VDD",
+     "V",
+     "-"
+    ],
+    [
+     "High level input voltage",
+     "VIH",
+     "-",
+     "0.7 VDD",
+     "-",
+     "-",
+     "V",
+     "-"
+    ],
+    [
+     "Low level output voltage",
+     "VOL",
+     "3 mA sink current",
+     "-",
+     "-",
+     "0.2 VDD",
+     "V",
+     "-"
+    ]
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Supply voltage, VDD",
+     "-0.3 to +4 V"
+    ],
+    [
+     "Operating temperature range",
+     "-40 to +125 °C"
+    ],
+    [
+     "Storage temperature range",
+     "-40 to +125 °C"
+    ],
+    [
+     "ESD HBM (human body model)",
+     "-2 to 2 kV"
+    ],
+    [
+     "ESD CDM (change device model)",
+     "-500 to 500 V"
+    ],
+    [
+     "Latch up, JESD78 Class II, 125°C",
+     "-100 to 100 mA"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these limits can damage the part permanently. The ratings are stress limits only, with no guaranteed function at them; long exposure at the limits can reduce reliability. Each limit is tested on its own.",
+    "\"Change device model\" should read charged device model.",
+    "HBM is rated to ANSI/ESDA/JEDEC JS-001-2014 and AEC-Q100-002; CDM to ANSI/ESD S5.3.1-2009 and AEC-Q100-011.",
+    "Recommended storage is 10 to 50 °C."
+   ]
+  },
+  {
+   "title": "System timing",
+   "page": 4,
+   "conditions": "TA = 25 °C, VDD = 3.3 V, unless otherwise stated; maximum values are measured at -40 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "comments"
+   ],
+   "rows": [
+    [
+     "Power-up time",
+     "tPU",
+     "After hard reset, VDD ≥ VPOR",
+     "-",
+     "180",
+     "240",
+     "µs",
+     "From VDD reaching the power-up level until the sensor is idle"
+    ],
+    [
+     "Soft reset time",
+     "tSR",
+     "After soft reset.",
+     "-",
+     "180",
+     "240",
+     "µs",
+     "From the ACK of the soft-reset command until the sensor is idle"
+    ],
+    [
+     "Measurement duration",
+     "tMEAS",
+     "Average, Normal Mode",
+     "-",
+     "10.8",
+     "12.1",
+     "ms",
+     "One humidity plus temperature measurement"
+    ],
+    [
+     "Measurement duration",
+     "tMEAS",
+     "Average, Low Power M.",
+     "-",
+     "0.7",
+     "0.8",
+     "ms",
+     "One humidity plus temperature measurement"
+    ]
+   ]
+  },
+  {
+   "title": "Communication timing",
+   "page": 5,
+   "conditions": "TA = 25 °C, VDD = 3.3 V, unless otherwise stated; the values are those of the I2C Fast-mode Plus specification",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "comments"
+   ],
+   "rows": [
+    [
+     "SCL clock frequency",
+     "fSCL",
+     "-",
+     "0",
+     "-",
+     "1",
+     "MHz",
+     "-"
+    ],
+    [
+     "Hold time (repeated) START condition",
+     "tHD;STA",
+     "the first clock pulse follows this period",
+     "260",
+     "-",
+     "-",
+     "ns",
+     "-"
+    ],
+    [
+     "LOW period of the SCL clock",
+     "tLOW",
+     "-",
+     "500",
+     "-",
+     "-",
+     "ns",
+     "-"
+    ],
+    [
+     "HIGH period of the SCL clock",
+     "tHIGH",
+     "-",
+     "260",
+     "-",
+     "-",
+     "ns",
+     "-"
+    ],
+    [
+     "Set-up time for a repeated START condition",
+     "tSU;STA",
+     "-",
+     "260",
+     "-",
+     "-",
+     "ns",
+     "-"
+    ],
+    [
+     "SDA hold time",
+     "tHD;DAT",
+     "-",
+     "0",
+     "-",
+     "-",
+     "-",
+     "-"
+    ],
+    [
+     "SDA set-up time",
+     "tSU;DAT",
+     "-",
+     "50",
+     "-",
+     "-",
+     "ns",
+     "-"
+    ],
+    [
+     "SCL/SDA rise time",
+     "tR",
+     "-",
+     "-",
+     "-",
+     "120",
+     "ns",
+     "-"
+    ],
+    [
+     "SCL/SDA fall time",
+     "tF",
+     "-",
+     "-",
+     "-",
+     "120",
+     "ns",
+     "-"
+    ],
+    [
+     "SDA valid time",
+     "tVD;DAT",
+     "-",
+     "-",
+     "-",
+     "400",
+     "ns",
+     "-"
+    ],
+    [
+     "Set-up time for STOP condition",
+     "tSU;STO",
+     "-",
+     "260",
+     "-",
+     "-",
+     "ns",
+     "-"
+    ],
+    [
+     "Capacitive load on bus line",
+     "CB",
+     "-",
+     "-",
+     "-",
+     "550",
+     "pF",
+     "-"
+    ]
+   ],
+   "notes": [
+    "Input and output levels are timed at 30 % and 70 % of the swing. The SDA valid time counts from the falling SCL edge before it."
+   ]
+  },
+  {
+   "title": "I2C address",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "item",
+    "hex",
+    "binary"
+   ],
+   "rows": [
+    [
+     "I2C address",
+     "0x70",
+     "111'0000"
+    ]
+   ]
+  },
+  {
+   "title": "Commands",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "command",
+    "hex",
+    "binary",
+    "page"
+   ],
+   "rows": [
+    [
+     "Sleep",
+     "0xB098",
+     "1011'0000'1001'1000",
+     "6"
+    ],
+    [
+     "Wakeup",
+     "0x3517",
+     "0011'0101'0001'0111",
+     "6"
+    ],
+    [
+     "Software reset",
+     "0x805D",
+     "1000'0000'0101'1101",
+     "8"
+    ],
+    [
+     "Read ID register",
+     "0xEFC8",
+     "1110'1111'1100'1000",
+     "8"
+    ],
+    [
+     "Reset through general call: address byte",
+     "0x00",
+     "",
+     "8"
+    ],
+    [
+     "Reset through general call: second byte",
+     "0x06",
+     "",
+     "8"
+    ],
+    [
+     "Reset through general call: full command",
+     "0x0006",
+     "",
+     "8"
+    ]
+   ],
+   "notes": [
+    "Every command is a 16-bit word sent most significant byte first after an I2C write header; the general-call reset is the two bytes 0x0006 sent to address 0x00."
+   ]
+  },
+  {
+   "title": "Measurement commands",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "clock stretching enabled, read T first",
+    "clock stretching enabled, read RH first",
+    "clock stretching disabled, read T first",
+    "clock stretching disabled, read RH first"
+   ],
+   "rows": [
+    [
+     "Normal Mode",
+     "0x7CA2",
+     "0x5C24",
+     "0x7866",
+     "0x58E0"
+    ],
+    [
+     "Low Power M.",
+     "0x6458",
+     "0x44DE",
+     "0x609C",
+     "0x401A"
+    ]
+   ],
+   "notes": [
+    "Every measurement command measures both quantities; the command picks only which result comes out first and whether SCL is stretched."
+   ]
+  },
+  {
+   "title": "Structure of the 16-bit ID",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "content"
+   ],
+   "rows": [
+    [
+     "15:12",
+     "unspecified, varies from sensor to sensor (x)"
+    ],
+    [
+     "11",
+     "1 (SHTC3 identifier)"
+    ],
+    [
+     "10:6",
+     "unspecified, varies from sensor to sensor (x)"
+    ],
+    [
+     "5:0",
+     "00'0111 (SHTC3 identifier)"
+    ]
+   ],
+   "notes": [
+    "Written out the ID is xxxx'1xxx'xx00'0111."
+   ]
+  },
+  {
+   "title": "CRC properties",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "property",
+    "value"
+   ],
+   "rows": [
+    [
+     "Name",
+     "CRC-8"
+    ],
+    [
+     "Width",
+     "8 bits"
+    ],
+    [
+     "Polynomial",
+     "0x31 (x8 + x5 + x4 + 1)"
+    ],
+    [
+     "Initialization",
+     "0xFF"
+    ],
+    [
+     "Reflect input",
+     "False"
+    ],
+    [
+     "Reflect output",
+     "False"
+    ],
+    [
+     "Final XOR",
+     "0x00"
+    ],
+    [
+     "Examples",
+     "CRC (0x00) = 0xAC"
+    ],
+    [
+     "Examples",
+     "CRC (0xBEEF) = 0x92"
+    ]
+   ],
+   "notes": [
+    "The CRC byte after each 16-bit word covers that word's two bytes."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Typical and maximal tolerance for relative humidity",
+   "page": 2,
+   "conditions": "TA = 25 °C",
+   "x": {
+    "label": "Relative humidity",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ΔRH (±)",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Maximum accuracy",
+     "points": [
+      [
+       0,
+       6.5
+      ],
+      [
+       20,
+       3.5
+      ],
+      [
+       80,
+       3.5
+      ],
+      [
+       100,
+       6.5
+      ]
+     ]
+    },
+    {
+     "label": "Typical accuracy",
+     "points": [
+      [
+       0,
+       3.5
+      ],
+      [
+       20,
+       2.0
+      ],
+      [
+       80,
+       2.0
+      ],
+      [
+       100,
+       3.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Typical and maximal tolerance for temperature sensor",
+   "page": 2,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ΔT (±)",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Maximum accuracy",
+     "points": [
+      [
+       -40,
+       1.5
+      ],
+      [
+       5,
+       0.4
+      ],
+      [
+       60,
+       0.4
+      ],
+      [
+       125,
+       1.5
+      ]
+     ]
+    },
+    {
+     "label": "Typical accuracy",
+     "points": [
+      [
+       -40,
+       0.8
+      ],
+      [
+       5,
+       0.2
+      ],
+      [
+       60,
+       0.2
+      ],
+      [
+       125,
+       0.8
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application circuit",
+   "page": 6,
+   "description": "The sensor sits on a microcontroller's I2C bus. A 100 nF capacitor joins VDD and VSS close to the package. SCL and SDA each carry a pull-up resistor RP to VDD, since the controller and the sensor drive the lines only low; 10 kΩ is the example value, the size follows from the bus capacitance, and pull-ups built into the controller's I/O can take their place. The exposed pad is joined to VSS inside the part.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "SHTC3"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCU (master)",
+     "external": true,
+     "note": "open-drain SCL and SDA, each read back by an input"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RP",
+     "note": "SCL pull-up, e.g. 10 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "RP",
+     "note": "SDA pull-up, e.g. 10 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "decoupling, next to the sensor"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "1.62 to 3.6 V supply"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Relative humidity",
+   "expr": "RH = 100 × SRH / 2^16",
+   "where": {
+    "RH": "relative humidity, %RH",
+    "SRH": "raw 16-bit humidity word, as a decimal number"
+   },
+   "note": "",
+   "page": 9
+  },
+  {
+   "name": "Temperature",
+   "expr": "T = -45 + 175 × ST / 2^16",
+   "where": {
+    "T": "temperature, °C",
+    "ST": "raw 16-bit temperature word, as a decimal number"
+   },
+   "note": "",
+   "page": 9
+  }
+ ],
+ "operation": [
+  {
+   "topic": "What is on the chip",
+   "page": 1,
+   "text": "One die carries a capacitive humidity sensor and a bandgap temperature sensor, each with its own signal conditioning, an A/D converter shared between them, data processing and control logic, calibration memory and the I2C interface."
+  },
+  {
+   "topic": "Bus interface",
+   "page": 6,
+   "text": "The SHTC3 is an I2C slave at 7-bit address 0x70 and runs at any SCL rate from 0 to 1 MHz (Fast-mode Plus), with clock stretching available. Commands and memory sit in a 16-bit address space. Each transfer opens with START and may end with STOP. Both bus lines are open-drain: neither master nor sensor drives them high, so external pull-ups (around 10 kΩ, sized for the bus capacitance) or the controller's built-in ones are needed."
+  },
+  {
+   "topic": "Decoupling and the centre pad",
+   "page": 6,
+   "text": "A 100 nF capacitor goes from VDD to VSS, mounted tight against the sensor. Solder the centre pad, which is joined to VSS inside, for mechanical reasons; connecting it to board ground as well is allowed. Heat reaches the temperature sensor most directly through the centre pad. Sensirion's SHTxx Design Guide covers design-in."
+  },
+  {
+   "topic": "Power-up, sleep and wake-up",
+   "page": 6,
+   "text": "Once VDD passes VPOR the sensor reaches the idle state within tPU (180 µs typ, 240 µs max) and draws about 45 µA there. Sending the sleep command 0xB098 drops it to 0.3 µA. Asleep it ignores everything but the wake-up command 0x3517, which must come before any other command. Skipping sleep gives an immediate reading but leaves the idle current flowing."
+  },
+  {
+   "topic": "Measurement cycle",
+   "page": 7,
+   "text": "A reading takes four separate transfers, each from START to STOP: wake up, send a measurement command, read the results, send the sleep command. Each measurement command measures humidity and temperature both; the eight commands choose normal or low-power mode, which value is returned first, and whether clock stretching is used. A normal-mode measurement takes 10.8 ms typ (12.1 ms max), low-power 0.7 ms (0.8 ms max)."
+  },
+  {
+   "topic": "During a measurement",
+   "page": 8,
+   "text": "With clock stretching off, the sensor answers no I2C header while it measures (it NACKs), so the master polls with read headers until one is acknowledged. With clock stretching on, it acknowledges the read header and holds SCL low until the result is ready, then starts sending. For the best repeatability keep the bus quiet while the sensor measures (Sensirion application note on repeatability)."
+  },
+  {
+   "topic": "Reading the results",
+   "page": 8,
+   "text": "Once the measurement is done, the master sends a read header; the sensor acknowledges it and returns the first 16-bit result as two bytes plus a CRC byte, then the second result the same way. The sensor sends the next byte only after the master ACKs the previous one, so a NACK after any byte ends the transfer early, for example to skip a CRC byte or the second result. Reading both results without CRC checking is fastest as one transfer: the first word, its CRC byte, then the second word, ended with a NACK."
+  },
+  {
+   "topic": "Worked example",
+   "page": 7,
+   "text": "With the RH-first, clock-stretching command 0x5C24, the sensor returned humidity 0xA1 0x33 (CRC 0x1C) and temperature 0x64 0x8B (CRC 0xC7), which convert to 63 %RH and 23.7 °C."
+  },
+  {
+   "topic": "Soft reset",
+   "page": 8,
+   "text": "While idle (no measurement running) the command 0x805D resets every internal state machine and reloads calibration data without a power cycle. The sensor is idle again after tSR (180 µs typ, 240 µs max)."
+  },
+  {
+   "topic": "General-call reset",
+   "page": 8,
+   "text": "Writing 0x06 to the I2C general-call address 0x00 resets the sensor. The reset is not addressed to the SHTC3 alone: every device on the bus that supports general call resets as well. It works only while the sensor is able to accept I2C commands."
+  },
+  {
+   "topic": "ID register",
+   "page": 8,
+   "text": "Command 0xEFC8, sent after a write header, makes the next read return a 16-bit ID and its CRC byte. Bits 11 and 5:0 are fixed for the SHTC3 (1 and 000111); the rest vary between sensors. Reading it confirms the sensor is there and the bus works."
+  },
+  {
+   "topic": "Checksum",
+   "page": 9,
+   "text": "Each 16-bit word the sensor sends is followed by a CRC-8 byte over its two bytes: polynomial 0x31, initial value 0xFF, no reflection, no final XOR."
+  },
+  {
+   "topic": "Conversion",
+   "page": 9,
+   "text": "Results are always 16-bit words, already linearised and temperature compensated inside the sensor; the two conversion equations turn them into %RH and °C."
+  },
+  {
+   "topic": "Operating range and recovery",
+   "page": 3,
+   "text": "The sensor does best at 5 to 60 °C and 20 to 80 %RH. Long stays outside that, high humidity above all, can shift the RH reading for a while (about +3 %RH after 60 h above 80 %RH); back in the normal range it drifts back to calibration on its own. Long exposure to extremes may age it faster. The volatile-organic-compound limits in Sensirion's SHTxx Assembly of SMD Packages (storage and handling) apply in transport, assembly and use."
+  },
+  {
+   "topic": "Construction, marking and quality",
+   "page": 9,
+   "text": "A silicon die on a copper lead frame plated Ni/Pd/Au, overmoulded in epoxy compound. The sawn sidewalls show bare lead-frame metal without plating. The humidity opening is centred on the top face. Marking is laser-cut in two lines, SHTC3 and a five-character tracking code, with a pin-1 dot at top left. MSL1 to IPC/JEDEC J-STD-020; RoHS, REACH and halogen-free (no Pb, Cd, Hg); qualified to JEDEC JESD47. Reels carry traceability labels."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DFN-4 2 × 2 × 0.75 mm",
+   "page": 10,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "",
+     "body width",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "",
+     "body height",
+     "",
+     "0.75",
+     ""
+    ],
+    [
+     "",
+     "terminal pitch along a side",
+     "",
+     "1",
+     ""
+    ],
+    [
+     "",
+     "terminal length (from body edge inward)",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "",
+     "terminal width",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "",
+     "exposed pad length",
+     "",
+     "1.6",
+     ""
+    ],
+    [
+     "",
+     "exposed pad width",
+     "",
+     "0.7",
+     ""
+    ],
+    [
+     "",
+     "exposed pad pin-1 corner chamfer",
+     "",
+     "0.2x45°",
+     ""
+    ],
+    [
+     "",
+     "humidity opening diameter, top face",
+     "",
+     "",
+     "1"
+    ]
+   ],
+   "notes": [
+    "The humidity opening diameter is a reference figure: its edge blends smoothly into the top surface."
+   ]
+  },
+  {
+   "name": "Recommended land pattern",
+   "page": 10,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "signal pad width (copper)",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "",
+     "signal pad length (copper)",
+     "",
+     "0.55",
+     ""
+    ],
+    [
+     "",
+     "signal pad: length inside the package outline",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "",
+     "signal pad: length beyond the package outline",
+     "",
+     "0.20",
+     ""
+    ],
+    [
+     "",
+     "signal pad pitch along a side",
+     "",
+     "1.00",
+     ""
+    ],
+    [
+     "",
+     "centre pad length (copper)",
+     "",
+     "1.60",
+     ""
+    ],
+    [
+     "",
+     "centre pad width (copper)",
+     "",
+     "0.70",
+     ""
+    ],
+    [
+     "",
+     "centre pad paste opening inset from copper, each edge",
+     "",
+     "0.10",
+     ""
+    ],
+    [
+     "",
+     "signal pad paste opening length",
+     "",
+     "0.55",
+     ""
+    ],
+    [
+     "",
+     "signal pad paste opening: inset at inner end, overhang past copper at outer end",
+     "",
+     "0.10",
+     ""
+    ],
+    [
+     "",
+     "stencil thickness",
+     "",
+     "0.100",
+     ""
+    ]
+   ],
+   "notes": [
+    "Board pads are non-solder-mask-defined (NSMD)."
+   ]
+  },
+  {
+   "name": "Carrier tape",
+   "page": 11,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "tape width",
+     "",
+     "8.0 +0.3/-0.1",
+     ""
+    ],
+    [
+     "",
+     "sprocket hole pitch",
+     "",
+     "4.00",
+     ""
+    ],
+    [
+     "",
+     "pocket pitch",
+     "",
+     "4.00",
+     ""
+    ],
+    [
+     "",
+     "sprocket hole to pocket centre, along the tape",
+     "",
+     "2.00 ±.05",
+     ""
+    ],
+    [
+     "",
+     "sprocket hole diameter",
+     "",
+     "Ø1.5 +0.1/-0.0",
+     ""
+    ],
+    [
+     "",
+     "pocket hole diameter",
+     "1.00",
+     "",
+     ""
+    ],
+    [
+     "",
+     "sprocket hole centre to tape edge",
+     "",
+     "1.75 ±.10",
+     ""
+    ],
+    [
+     "",
+     "sprocket hole row to pocket centre, across the tape",
+     "",
+     "3.50 ±.05",
+     ""
+    ],
+    [
+     "",
+     "tape thickness",
+     "",
+     "0.30 ±.05",
+     ""
+    ],
+    [
+     "Ao",
+     "pocket length",
+     "",
+     "2.25",
+     ""
+    ],
+    [
+     "Bo",
+     "pocket width",
+     "",
+     "2.25",
+     ""
+    ],
+    [
+     "Ko",
+     "pocket depth",
+     "",
+     "1.15",
+     ""
+    ],
+    [
+     "",
+     "pocket corner radius",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "tape corner radius at the pocket wall",
+     "",
+     "",
+     "0.20"
+    ]
+   ],
+   "notes": [
+    "Tolerances not given: ±0.2 on one decimal place, ±0.10 on two.",
+    "Ten sprocket-hole pitches accumulate at most ±0.2.",
+    "Camber follows EIA 481.",
+    "Pocket position is measured to the true position of the pocket, not the pocket hole.",
+    "Ao and Bo are taken on a plane at distance R above the pocket floor.",
+    "Leader (header) tape is at the right of the tape seen from the top and trailer tape at the left."
+   ]
+  }
+ ]
+}

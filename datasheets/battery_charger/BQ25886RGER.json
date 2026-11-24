@@ -1,0 +1,4047 @@
+{
+ "sheet": 1,
+ "name": "BQ25886RGER",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "BQ25886: standalone 2-cell, 2 A boost-mode Li-ion charger with power path, BC1.2 detection and OTG buck output",
+ "source": {
+  "document": "SLUSD88A",
+  "revision": "March 2019, revised June 2019",
+  "pages": 43
+ },
+ "summary": "A charger for two-cell (2s) Li-ion and Li-polymer packs fed from a 5 V USB source: a 1.5 MHz synchronous boost converter lifts the 4.3 V to 6.2 V input up to the pack, with the input blocking FET, both switches, the battery FET and the bootstrap diode all inside a 4 mm × 4 mm VQFN-24. The converter feeds a system rail (SYS) held at no less than 6.2 V typ, and an 18 mΩ typ FET joins SYS to the pack, so the system runs at once with a flat or missing pack and the pack tops up the system when the input falls short. With no I2C port, charge voltage (8.2, 8.4, 8.7 or 8.8 V), charge current (up to 2.2 A) and the input current ceiling are set by resistors on VSET, ICHGSET and ILIM; D+/D- detection picks the source's current limit, and the OTG pin runs the converter backwards as a 5.1 V buck from the pack onto VBUS for up to 2 A.",
+ "key_figures": [
+  [
+   "Input voltage (VBUS)",
+   "4.3 V to 6.2 V operating; 20 V absolute maximum"
+  ],
+  [
+   "Charge current",
+   "30 mA to 2200 mA, set by RICHGSET (KICHGSET 3810 Ω/A)"
+  ],
+  [
+   "Charge voltage",
+   "8.2 / 8.4 / 8.7 / 8.8 V by RVSET; ±0.5 %"
+  ],
+  [
+   "Input current limit",
+   "500 mA to 3.3 A; ILIM pin IINMAX = 1110 A·Ω / RILIM"
+  ],
+  [
+   "Minimum system voltage",
+   "6.4 V typ (6.2 V min)"
+  ],
+  [
+   "Switching frequency",
+   "1.5 MHz typ"
+  ],
+  [
+   "Battery FET (SYS to BAT)",
+   "18 mΩ typ"
+  ],
+  [
+   "OTG buck output",
+   "5.1 V typ, up to 2 A"
+  ],
+  [
+   "Charge efficiency",
+   "93.4 % at 5 V in, 7.6 V pack, 1 A charge"
+  ],
+  [
+   "Package",
+   "VQFN-24 (RGE), 4.00 mm × 4.00 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 35,
+  "columns": [
+   "part number",
+   "status",
+   "material type",
+   "package | pins",
+   "package qty | carrier",
+   "RoHS",
+   "lead finish/ball material",
+   "MSL rating/peak reflow",
+   "op temp (°C)",
+   "part marking"
+  ],
+  "rows": [
+   [
+    "BQ25886RGER",
+    "Active",
+    "Production",
+    "VQFN (RGE) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 85",
+    "BQ25886"
+   ],
+   [
+    "BQ25886RGER.A",
+    "Active",
+    "Production",
+    "VQFN (RGE) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 85",
+    "BQ25886"
+   ],
+   [
+    "BQ25886RGERG4",
+    "Active",
+    "Production",
+    "VQFN (RGE) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 85",
+    "BQ25886"
+   ],
+   [
+    "BQ25886RGERG4.A",
+    "Active",
+    "Production",
+    "VQFN (RGE) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 85",
+    "BQ25886"
+   ],
+   [
+    "BQ25886RGET",
+    "Active",
+    "Production",
+    "VQFN (RGE) | 24",
+    "250 | SMALL T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 85",
+    "BQ25886"
+   ],
+   [
+    "BQ25886RGET.A",
+    "Active",
+    "Production",
+    "VQFN (RGE) | 24",
+    "250 | SMALL T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 85",
+    "BQ25886"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "VQFN-24 (RGE)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "D-",
+     "type": "analog in/out",
+     "function": "USB data line, negative side. Used with D+ for BC1.2 source detection, data-contact detection and secondary detection included. Misprint: an NC entry also carries number 1; it should read D- only."
+    },
+    {
+     "pin": "2",
+     "name": "STAT",
+     "type": "digital out, open drain",
+     "function": "Charge status. Pulled up through 10 kΩ. Low while charging; high when charge is done or turned off; toggles at 1 Hz on any fault."
+    },
+    {
+     "pin": "3",
+     "name": "/CE",
+     "type": "digital in",
+     "function": "Charge enable, active low. Low lets the pack charge. A 900 kΩ internal resistor pulls it low."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "OTG",
+     "type": "digital in",
+     "function": "On-The-Go enable. High turns on the buck output from the pack to VBUS; low turns it off."
+    },
+    {
+     "pin": "6",
+     "name": "VSET",
+     "type": "analog in",
+     "function": "Charge voltage select by a resistor to GND: under 18 kΩ (or shorted) gives 8.2 V; 39 kΩ ±10 % gives 8.8 V; 75 kΩ ±10 % gives 8.7 V; over 150 kΩ (or open) gives 8.4 V."
+    },
+    {
+     "pin": "7",
+     "name": "TS",
+     "type": "analog in",
+     "function": "Pack temperature input for an NTC thermistor. Two resistors, REGN to TS and TS to GND, set the temperature window; outside it, charging stops. 103AT-2 thermistor recommended."
+    },
+    {
+     "pin": "8",
+     "name": "ILIM",
+     "type": "analog in",
+     "function": "Input current ceiling. A resistor to ground sets IINMAX = KILIM / RILIM; the loop holds the pin at 0.8 V, and below that the pin voltage tracks input current, IIN = KILIM × VILIM / (RILIM × 0.8 V). Shorted to GND, the ILIM ceiling is at its maximum. Settings under 500 mA are not supported. Must not be left open."
+    },
+    {
+     "pin": "9",
+     "name": "/PG",
+     "type": "digital out, open drain",
+     "function": "Power good, active low. Pulled up through 10 kΩ. Low when the input is inside VVBUS_OP and can supply more than IPOORSRC."
+    },
+    {
+     "pin": "10",
+     "name": "ICHGSET",
+     "type": "analog in",
+     "function": "Charge current set by a resistor to GND, 30 mA (114 Ω) to 2.2 A (8 kΩ). Pre-charge and termination currents are one tenth of it, floored at 30 mA and 10 mA typ. Shorted to GND gives the 30 mA minimum; left open, charging is off."
+    },
+    {
+     "pin": "11",
+     "name": "REGN",
+     "type": "power",
+     "function": "Internal LDO output that biases the chip and the gate drivers. Bypass to GND with 4.7 µF ceramic. Current limit 50 mA."
+    },
+    {
+     "pin": "12",
+     "name": "BTST",
+     "type": "power",
+     "function": "High-side gate-drive supply; the internal bootstrap diode's cathode. A 47 nF capacitor goes from SW to BTST."
+    },
+    {
+     "pin": "13",
+     "name": "BAT",
+     "type": "power",
+     "function": "Battery connection. At least 10 µF, after derating, close between BAT and GND."
+    },
+    {
+     "pin": "14",
+     "name": "BAT",
+     "type": "power",
+     "function": "Battery connection; same node as pin 13."
+    },
+    {
+     "pin": "15",
+     "name": "SYS",
+     "type": "power",
+     "function": "System rail, the boost output. The internal battery FET sits between SYS and BAT; when the pack is below the minimum system voltage the converter holds SYS up. 2 × 22 µF, after derating, close between SYS and power ground."
+    },
+    {
+     "pin": "16",
+     "name": "SYS",
+     "type": "power",
+     "function": "System rail; same node as pin 15."
+    },
+    {
+     "pin": "17",
+     "name": "SW",
+     "type": "power",
+     "function": "Switching node; the switched end of the inductor."
+    },
+    {
+     "pin": "18",
+     "name": "SW",
+     "type": "power",
+     "function": "Switching node; same node as pin 17."
+    },
+    {
+     "pin": "19",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "20",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "21",
+     "name": "PMID",
+     "type": "power",
+     "function": "Drain side of the internal input blocking FET, the converter's input node. VBUS plus PMID need 10 µF or more of low-ESR capacitance after derating, at least 1 µF of it at VBUS and the rest at PMID; 10 µF is the usual PMID value."
+    },
+    {
+     "pin": "22",
+     "name": "PMID",
+     "type": "power",
+     "function": "Converter input node; same node as pin 21."
+    },
+    {
+     "pin": "23",
+     "name": "VBUS",
+     "type": "power",
+     "function": "Supply input from the external DC source. Bypass to GND with 1 µF or more of ceramic capacitance right at the chip."
+    },
+    {
+     "pin": "24",
+     "name": "D+",
+     "type": "analog in/out",
+     "function": "USB data line, positive side. Used with D- for BC1.2 source detection, data-contact detection and secondary detection included."
+    },
+    {
+     "pin": "25",
+     "name": "PAD",
+     "type": "ground",
+     "function": "Exposed thermal pad. Soldered to board ground for heat and strength, with thermal vias under it to the ground plane; the single point where analog and power ground meet."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Device comparison",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "part number",
+    "VBUS operating range",
+    "USB detection",
+    "PowerPath",
+    "cell balancing",
+    "OTG",
+    "16 bit ADC",
+    "control interface",
+    "status pin",
+    "package"
+   ],
+   "rows": [
+    [
+     "BQ25882",
+     "3.9 to 6.2 V",
+     "D+/D-",
+     "Yes",
+     "No",
+     "Up to 2 A",
+     "Yes",
+     "I2C",
+     "/PG",
+     "2.1x2.1 WCSP-25"
+    ],
+    [
+     "BQ25883",
+     "3.9 to 6.2 V",
+     "D+/D-",
+     "Yes",
+     "No",
+     "Up to 2 A",
+     "Yes",
+     "I2C",
+     "STAT, /PG",
+     "4x4 QFN-24"
+    ],
+    [
+     "BQ25886",
+     "4.3 to 6.2 V",
+     "D+/D-",
+     "Yes",
+     "No",
+     "Up to 2 A",
+     "No",
+     "Standalone",
+     "STAT, /PG",
+     "4x4 QFN-24"
+    ],
+    [
+     "BQ25887",
+     "3.9 to 6.2 V",
+     "PSEL",
+     "No",
+     "Yes",
+     "No OTG",
+     "Yes",
+     "I2C",
+     "STAT, /PG",
+     "4x4 QFN-24"
+    ]
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 6,
+   "conditions": "Over operating free-air temperature range, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "pins",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage, with respect to GND unless noted",
+     "VBUS (converter not switching)",
+     "-0.3",
+     "20",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "PMID (converter not switching)",
+     "-0.3",
+     "8.5",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "BAT, SYS (converter not switching)",
+     "-0.3",
+     "12",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "SW",
+     "-0.3 (2)",
+     "13",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "BTST",
+     "-0.3",
+     "19",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "REGN, STAT, /PG, TS",
+     "-0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "ILIM",
+     "-0.3",
+     "5",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "BTST to SW",
+     "-0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Voltage, with respect to GND unless noted",
+     "D+, D-, ICHGSET, VSET, /CE",
+     "-0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Output sink current",
+     "STAT, /PG",
+     "",
+     "6",
+     "mA"
+    ],
+    [
+     "Junction temperature, TJ",
+     "",
+     "-40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "",
+     "-40",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these limits can destroy the part; they are not operating conditions, and long exposure at them can shorten its life.",
+    "(2) SW may go to -2 V for 50 ns."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "V(ESD)",
+     "Electrostatic discharge",
+     "Human body model (HBM), ANSI/ESDA/JEDEC JS-001",
+     "±2000",
+     "V"
+    ],
+    [
+     "V(ESD)",
+     "Electrostatic discharge",
+     "Charged device model (CDM), JEDEC JESD22-C101",
+     "±250",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEP155: 500 V HBM is enough for a standard ESD-controlled assembly line.",
+    "JEP157: 250 V CDM is enough for a standard ESD-controlled assembly line."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 6,
+   "conditions": "Over operating free-air temperature range, unless noted otherwise",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VVBUS",
+     "Input voltage",
+     "4.3",
+     "",
+     "6.2",
+     "V"
+    ],
+    [
+     "IVBUS",
+     "Average input current (VBUS)",
+     "",
+     "",
+     "3.3",
+     "A"
+    ],
+    [
+     "IBAT",
+     "Average charge current (IBAT)",
+     "",
+     "",
+     "2.2",
+     "A"
+    ],
+    [
+     "IBAT_RMS",
+     "RMS discharging current with internal MOSFET",
+     "",
+     "",
+     "5",
+     "A"
+    ],
+    [
+     "IBAT_PK",
+     "Peak discharging current with internal MOSFET",
+     "",
+     "",
+     "9 (up to 1us)",
+     "A"
+    ],
+    [
+     "VBAT",
+     "Battery voltage",
+     "",
+     "",
+     "9.2 (1)",
+     "V"
+    ],
+    [
+     "TA",
+     "Operating free-air temperature range",
+     "-40",
+     "",
+     "85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) Switching spikes on SW must stay inside the SW absolute maximum; a compact layout keeps them down."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "RGE (VQFN) 24 pins",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RΘJA",
+     "Junction-to-ambient thermal resistance (EVM (2))",
+     "18",
+     "°C/W"
+    ],
+    [
+     "RΘJA",
+     "Junction-to-ambient thermal resistance (JEDEC (1))",
+     "32.4",
+     "°C/W"
+    ],
+    [
+     "RΘJC(top)",
+     "Junction-to-case (top) thermal resistance",
+     "26.7",
+     "°C/W"
+    ],
+    [
+     "RΘJB",
+     "Junction-to-board thermal resistance",
+     "10.7",
+     "°C/W"
+    ],
+    [
+     "ΨJT",
+     "Junction-to-top characterization parameter",
+     "0.4",
+     "°C/W"
+    ],
+    [
+     "ΨJB",
+     "Junction-to-board characterization parameter",
+     "10.6",
+     "°C/W"
+    ],
+    [
+     "RΘJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "3.7",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "(1) Metrics as defined in TI application report SPRA953.",
+    "(2) EVM figure: 4-layer board, 35 µm copper."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: quiescent currents",
+   "page": 7,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Battery discharge current (BAT)",
+     "IBAT",
+     "VBAT = 9 V, No VBUS, SCL, SDA = 0 V or 1.8 V, TJ=25C, ADC Disabled",
+     "",
+     "12",
+     "14",
+     "µA"
+    ],
+    [
+     "Battery discharge current (BAT)",
+     "IBAT",
+     "VBAT = 9 V, No VBUS, SCL, SDA = 0 V or 1.8 V, TJ < 85C, ADC Disabled",
+     "",
+     "12",
+     "20",
+     "µA"
+    ],
+    [
+     "Input supply current (VBUS) in HIZ",
+     "IVBUS_HIZ",
+     "VBUS = 5 V, High-Z Mode, no battery, 25℃",
+     "",
+     "30",
+     "48",
+     "µA"
+    ],
+    [
+     "Input supply current (VBUS) in HIZ",
+     "IVBUS_HIZ",
+     "VBUS = 5 V, High-Z Mode, no battery, <85℃",
+     "",
+     "30",
+     "55.2",
+     "µA"
+    ],
+    [
+     "Input supply current (VBUS)",
+     "IVBUS",
+     "VBUS = 5 V, VBAT = 7.6 V, converter not switching",
+     "",
+     "1.5",
+     "3",
+     "mA"
+    ],
+    [
+     "Input supply current (VBUS)",
+     "IVBUS",
+     "VBUS = 5 V, VBAT = 7.6 V, converter switching, ISYS = 0A",
+     "",
+     "3",
+     "",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: VBUS/VBAT power up",
+   "page": 7,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VBUS operating range",
+     "VVBUS_OP",
+     "",
+     "4.3",
+     "",
+     "6.2",
+     "V"
+    ],
+    [
+     "VBUS rising, no battery",
+     "VVBUS_UVLO_RISING",
+     "VBUS rising",
+     "",
+     "3.3",
+     "3.68",
+     "V"
+    ],
+    [
+     "VBUS over-voltage rising threshold",
+     "VVBUS_OV",
+     "VBUS rising",
+     "6.2",
+     "",
+     "6.6",
+     "V"
+    ],
+    [
+     "VBUS over-voltage falling threshold",
+     "VVBUS_OV",
+     "VBUS falling",
+     "5.9",
+     "",
+     "6.4",
+     "V"
+    ],
+    [
+     "Bad adapter detection threshold",
+     "VPOORSRC_FALLING",
+     "VBUS falling below VPOORSRC_FALLING",
+     "",
+     "3.7",
+     "",
+     "V"
+    ],
+    [
+     "Bad adapter detection current source",
+     "IPOORSRC",
+     "",
+     "",
+     "15",
+     "",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: power path",
+   "page": 7,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Typical System Regulation Voltage",
+     "VSYS",
+     "ISYS = 0A, VBAT = 8.80 V > SYS_MIN, Charge Disabled",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Typical System Regulation Voltage",
+     "VSYS",
+     "ISYS = 0A, VBAT < SYS_MIN, Charge Disabled",
+     "",
+     "200",
+     "",
+     "mV"
+    ],
+    [
+     "System Regulation Voltage",
+     "VSYS_MIN",
+     "VBAT < SYS_MIN, Charge Disabled",
+     "6.2",
+     "6.4",
+     "",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: battery charger",
+   "page": 7,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Charge voltage",
+     "VREG_ACC",
+     "RVSET < 18 kΩ, VREG = 8.20 V, TJ = -40℃ - 85℃",
+     "8.159",
+     "8.2",
+     "8.241",
+     "V"
+    ],
+    [
+     "Charge voltage",
+     "VREG_ACC",
+     "RVSET = 39 kΩ (±10%), VREG = 8.80 V, TJ = -40℃ - 85℃",
+     "8.756",
+     "8.8",
+     "8.844",
+     "V"
+    ],
+    [
+     "Charge voltage",
+     "VREG_ACC",
+     "RVSET = 75 kΩ (±10%), VREG = 8.70 V, TJ = -40℃ - 85℃",
+     "8.656",
+     "8.7",
+     "8.744",
+     "V"
+    ],
+    [
+     "Charge voltage",
+     "VREG_ACC",
+     "RSET > 150kΩ, VREG = 8.40 V, TJ = -40℃ to 85℃",
+     "8.358",
+     "8.4",
+     "8.442",
+     "V"
+    ],
+    [
+     "Charge current regulation setting ratio",
+     "KICHGSET",
+     "ICHG = RICHGSET/KICHGSET. ICHG = 1000 mA",
+     "",
+     "3810",
+     "",
+     "Ω/A"
+    ],
+    [
+     "Charge current regulation range",
+     "ICHG_RANGE",
+     "",
+     "30",
+     "",
+     "2200",
+     "mA"
+    ],
+    [
+     "Fast Charge current regulation accuracy",
+     "ICHG_ACC",
+     "ICHG = 1000 mA, VBAT = 6.2 V or 7.6 V, TJ = 0°C to 85°C",
+     "-7.5",
+     "",
+     "7.5",
+     "%"
+    ],
+    [
+     "Fast Charge current regulation accuracy",
+     "ICHG_ACC",
+     "ICHG = 500mA, VBAT = 6.2 V or 7.6 V, TJ = 0°C to 85°C",
+     "-15",
+     "",
+     "15",
+     "%"
+    ],
+    [
+     "Fast Charge current regulation accuracy",
+     "ICHG_ACC",
+     "ICHG = 250 mA, VBAT = 6.2 V or 7.6 V, TJ = 0°C to 85°C",
+     "-25",
+     "",
+     "25",
+     "%"
+    ],
+    [
+     "Precharge current range",
+     "IPRECHG_RANGE",
+     "",
+     "30",
+     "",
+     "800",
+     "mA"
+    ],
+    [
+     "Precharge current accuracy",
+     "IPRECHG_ACC",
+     "VBAT = 5.2 V, IPRECHG = 200 mA, TJ = 25°C",
+     "170",
+     "",
+     "237",
+     "mA"
+    ],
+    [
+     "Precharge current accuracy",
+     "IPRECHG_ACC",
+     "VBAT = 5.2 V, IPRECHG = 200 mA, TJ = 0°C to 85°C",
+     "150",
+     "",
+     "245",
+     "mA"
+    ],
+    [
+     "Termination current range",
+     "ITERM_RANGE",
+     "",
+     "10",
+     "",
+     "800",
+     "mA"
+    ],
+    [
+     "Termination current accuracy",
+     "ITERM_ACC",
+     "ICHG = 1.5A, ITERM = 150 mA, TJ = 25°C",
+     "143",
+     "",
+     "159",
+     "mA"
+    ],
+    [
+     "Termination current accuracy",
+     "ITERM_ACC",
+     "ICHG = 1.5A, ITERM = 150 mA, TJ = 0°C to 85°C",
+     "120",
+     "",
+     "180",
+     "mA"
+    ],
+    [
+     "Termination current accuracy",
+     "ITERM_ACC",
+     "ICHG = 1.5A, ITERM = 50 mA, TJ = 25°C",
+     "42",
+     "",
+     "60",
+     "mA"
+    ],
+    [
+     "Termination current accuracy",
+     "ITERM_ACC",
+     "ICHG = 1.5A, ITERM = 50 mA, TJ = 0°C to 85°C",
+     "18",
+     "",
+     "75",
+     "mA"
+    ],
+    [
+     "Short battery voltage rising threshold to start pre-charging",
+     "VBAT_SHORT_RISING",
+     "VBAT rising",
+     "4.1",
+     "4.4",
+     "4.7",
+     "V"
+    ],
+    [
+     "Short battery voltage falling threshold to stop pre-charging",
+     "VBAT_SHORT_FALLING",
+     "VBAT falling",
+     "3.7",
+     "4",
+     "4.3",
+     "V"
+    ],
+    [
+     "Low battery voltage trickle charging current",
+     "IBAT_SHORT",
+     "VBAT < 4.4 V",
+     "",
+     "100",
+     "",
+     "mA"
+    ],
+    [
+     "VBAT LOWV rising threshold to start fast-charging",
+     "VBAT_LOWV_RISING",
+     "VBAT rising, VBATLOWV = 6.0 V",
+     "5.7",
+     "6",
+     "6.3",
+     "V"
+    ],
+    [
+     "VBAT LOWV falling threshold to stop fast-charging",
+     "VBAT_LOWV_FALLING",
+     "VBAT falling, VBATLOWV = 6.0 V",
+     "5.3",
+     "5.6",
+     "5.9",
+     "V"
+    ],
+    [
+     "Recharge threshold below VREG",
+     "VRECHG",
+     "VBAT falling",
+     "",
+     "200",
+     "",
+     "mV"
+    ],
+    [
+     "High-side switching MOSFET on-resistance between SW and SYS (Q2)",
+     "RON_QHS (Q2)",
+     "TJ = 25°C",
+     "",
+     "32",
+     "35",
+     "mΩ"
+    ],
+    [
+     "High-side switching MOSFET on-resistance between SW and SYS (Q2)",
+     "RON_QHS (Q2)",
+     "TJ = – 40°C to 125°C",
+     "",
+     "32",
+     "47",
+     "mΩ"
+    ],
+    [
+     "Low-side switching MOSFET on-resistance between SW and GND (Q3)",
+     "RON_QLS (Q3)",
+     "TJ = 25°C",
+     "",
+     "42",
+     "46",
+     "mΩ"
+    ],
+    [
+     "Low-side switching MOSFET on-resistance between SW and GND (Q3)",
+     "RON_QLS (Q3)",
+     "TJ = – 40°C to 125°C",
+     "",
+     "42",
+     "63",
+     "mΩ"
+    ],
+    [
+     "MOSFET on-resistance between SYS and BAT (Q4)",
+     "RON_QBAT (Q4)",
+     "TJ = 25°C",
+     "",
+     "18",
+     "19",
+     "mΩ"
+    ],
+    [
+     "MOSFET on-resistance between SYS and BAT (Q4)",
+     "RON_QBAT (Q4)",
+     "TJ = – 40°C - 85°C",
+     "",
+     "18",
+     "23",
+     "mΩ"
+    ],
+    [
+     "BAT discharge current source",
+     "IBAT_DISCHG",
+     "VBAT = 8V, EN_BAT_DISCHG = 1",
+     "8",
+     "11.5",
+     "16",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: input voltage and current regulation",
+   "page": 8,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage regulation range",
+     "VINDPM",
+     "",
+     "4.171",
+     "4.3",
+     "4.429",
+     "V"
+    ],
+    [
+     "IINMAX = KILIM/RILIM",
+     "KILIM",
+     "Input Current regulation by ILIM pin",
+     "",
+     "1110",
+     "",
+     "A x Ω"
+    ],
+    [
+     "Input current regulation limit, IINMAX = KILIM/RILIM",
+     "IINDPM",
+     "Input Current regulation by ILIM pin = 0.5A",
+     "457",
+     "505",
+     "553",
+     "mA"
+    ],
+    [
+     "Input current regulation limit, IINMAX = KILIM/RILIM",
+     "IINDPM",
+     "Input Current regulation by ILIM pin = 0.9A",
+     "839",
+     "909",
+     "980",
+     "mA"
+    ],
+    [
+     "Input current regulation limit, IINMAX = KILIM/RILIM",
+     "IINDPM",
+     "Input Current regulation by ILIM pin = 1.5A",
+     "1413",
+     "1518",
+     "1624",
+     "mA"
+    ],
+    [
+     "Blocking MOSFET on-resistance between VBUS and PMID (QBLK)",
+     "RON_QBLK (Q1)",
+     "TJ = 25°C",
+     "",
+     "33",
+     "37",
+     "mΩ"
+    ],
+    [
+     "Blocking MOSFET on-resistance between VBUS and PMID (QBLK)",
+     "RON_QBLK (Q1)",
+     "TJ = – 40°C to 125°C",
+     "",
+     "33",
+     "51",
+     "mΩ"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: D+/D- detection",
+   "page": 9,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "D+/D- Voltage Source (600 mV)",
+     "VD+D-_600MVSRC",
+     "",
+     "500",
+     "600",
+     "700",
+     "mV"
+    ],
+    [
+     "D+ Current Source (10 µA)",
+     "ID+_10UASRC",
+     "",
+     "7",
+     "10",
+     "14",
+     "µA"
+    ],
+    [
+     "D+/D- Current Sink (100 µA)",
+     "ID+D-_100UASNK",
+     "",
+     "50",
+     "100",
+     "150",
+     "µA"
+    ],
+    [
+     "D+/D- Comparator Threshold for Secondary Detection",
+     "VD+D-_0P325",
+     "",
+     "250",
+     "",
+     "400",
+     "mV"
+    ],
+    [
+     "D- Resistor to Ground (19 kΩ)",
+     "RD-_19K",
+     "",
+     "14.25",
+     "",
+     "24.8",
+     "kΩ"
+    ],
+    [
+     "D+ Comparator Threshold for Data Contact Detection",
+     "VD+_0P8",
+     "",
+     "",
+     "",
+     "800",
+     "mV"
+    ],
+    [
+     "D+/D- Threshold for Non-standard adapter",
+     "VD+D-_1P2",
+     "",
+     "1.05",
+     "",
+     "1.35",
+     "V"
+    ],
+    [
+     "D+/D- Comparator Threshold for Non-standard adapter",
+     "VD+D-_2P0",
+     "",
+     "1.85",
+     "",
+     "2.15",
+     "V"
+    ],
+    [
+     "D+/D- Threshold for Non-standard adapter",
+     "VD+D-_2P8",
+     "",
+     "2.55",
+     "",
+     "2.85",
+     "V"
+    ],
+    [
+     "D+/D- Leakage Current",
+     "ID+D-_LKG",
+     "HiZ",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: battery over-voltage protection",
+   "page": 9,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Battery over-voltage rising threshold",
+     "VBAT_OVP_RISING",
+     "VBAT rising, as percentage of VREG",
+     "102.5",
+     "104",
+     "105",
+     "%"
+    ],
+    [
+     "Battery over-voltage falling threshold",
+     "VBAT_OVP_FALLING",
+     "VBAT falling, as percentage of VREG",
+     "101",
+     "102",
+     "103.3",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: thermal regulation and thermal shutdown",
+   "page": 9,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Junction temperature regulation accuracy",
+     "TREG",
+     "TREG = 120°C",
+     "",
+     "120",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal Shutdown Rising threshold",
+     "TSHUT_RISING",
+     "Temperature Increasing",
+     "",
+     "150",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal Shutdown Falling threshold",
+     "TSHUT_RISING",
+     "Temperature Decreasing",
+     "",
+     "120",
+     "",
+     "°C"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: JEITA thermistor comparator (boost mode)",
+   "page": 9,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "TS pin voltage rising. T1 (0°C) threshold, charge suspended below this temperature",
+     "VT1",
+     "As Percentage to REGN",
+     "72.75",
+     "73.25",
+     "73.75",
+     "%"
+    ],
+    [
+     "TS pin voltage falling. Charge re-enabled to ICHG/2 and VREG above this temperature",
+     "VT1_HYS",
+     "As Percentage to REGN",
+     "",
+     "1.3",
+     "",
+     "%"
+    ],
+    [
+     "TS pin voltage rising. T2 (10°C) threshold, charge set to ICHG/2 and VREG below this temperature",
+     "VT2",
+     "As Percentage to REGN",
+     "67.75",
+     "68.25",
+     "68.75",
+     "%"
+    ],
+    [
+     "TS pin voltage falling. Charge set to ICHG and VREG above this temperature",
+     "VT2_HYS",
+     "As Percentage to REGN",
+     "",
+     "1.2",
+     "",
+     "%"
+    ],
+    [
+     "TS pin voltage falling. T3 (45°C) threshold, charge set to ICHG and 8.1 V above this temperature",
+     "VT3",
+     "As Percentage to REGN",
+     "44.25",
+     "44.75",
+     "45.25",
+     "%"
+    ],
+    [
+     "TS pin voltage rising. Charge set to ICHG and VREG below this temperature",
+     "VT3_HYS",
+     "As Percentage to REGN",
+     "",
+     "1",
+     "",
+     "%"
+    ],
+    [
+     "TS pin voltage falling. T5 (60°C) threshold, charge suspended above this temperature",
+     "VT5",
+     "As Percentage to REGN",
+     "33.875",
+     "34.375",
+     "34.875",
+     "%"
+    ],
+    [
+     "TS pin voltage rising. Charge set to ICHG and 8.1 V below this temperature",
+     "VT5_HYS",
+     "As Percentage to REGN",
+     "",
+     "1.35",
+     "",
+     "%"
+    ]
+   ],
+   "notes": [
+    "Misprint: the cool band gives 20 % of ICHG and the warm band 8.0 V (charging description and TS charging values, pages 20 and 21); ICHG/2 and 8.1 V in the parameter names should read the same."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: cold/hot thermistor comparator (OTG buck mode)",
+   "page": 9,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Cold Temperature Threshold, TS pin Voltage Rising Threshold",
+     "VBCOLD0",
+     "As Percentage to REGN (Approx. – 10°C w/ 103AT)",
+     "76.5",
+     "77",
+     "77.5",
+     "%"
+    ],
+    [
+     "Cold Temperature Threshold, TS pin Voltage Falling Threshold",
+     "VBCOLD0_HYS",
+     "As Percentage to REGN",
+     "",
+     "1",
+     "",
+     "%"
+    ],
+    [
+     "Hot Temperature Threshold, TS pin Voltage falling Threshold",
+     "VBHOT1",
+     "As Percentage to REGN (Approx. 60°C w/ 103AT)",
+     "33.875",
+     "34.375",
+     "34.875",
+     "%"
+    ],
+    [
+     "Hot Temperature Threshold, TS pin Voltage rising Threshold",
+     "VBHOT1_HYS",
+     "As Percentage to REGN",
+     "",
+     "3",
+     "",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: converters, REGN LDO and logic pins",
+   "page": 10,
+   "conditions": "VVBUS_UVLO_RISING < VVBUS < VVBUS_OV, TJ = -40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "PWM switching frequency (boost mode converter)",
+     "FSW",
+     "Oscillator frequency",
+     "1.35",
+     "1.5",
+     "1.65",
+     "MHz"
+    ],
+    [
+     "OTG Buck mode voltage regulation accuracy",
+     "VOTG_ACC",
+     "IVBUS = 0A, OTG_VLIM = 5.1V",
+     "4.947",
+     "5.1",
+     "5.253",
+     "V"
+    ],
+    [
+     "OTG Buck mode voltage regulation accuracy",
+     "VOTG_ACC",
+     "IVBUS = 0A, OTG_VLIM = 5.1 V",
+     "-3",
+     "",
+     "3",
+     "%"
+    ],
+    [
+     "OTG Buck mode current regulation accuracy",
+     "IOTG_ACC",
+     "OTG_ILIM = 2A",
+     "-15",
+     "-7.5",
+     "0",
+     "%"
+    ],
+    [
+     "OTG Buck mode over-voltage threshold",
+     "VOTG_OVP",
+     "",
+     "5.8",
+     "6",
+     "",
+     "V"
+    ],
+    [
+     "REGN LDO output voltage",
+     "VREGN",
+     "VVBUS = 5 V, IREGN = 20 mA",
+     "4.7",
+     "4.8",
+     "5.15",
+     "V"
+    ],
+    [
+     "REGN LDO current limit",
+     "IREGN",
+     "VVBUS = 5 V, VREGN = 3.8 V",
+     "50",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "Input high threshold level, /CE",
+     "VIH_CEZ",
+     "",
+     "1.3",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input low threshold level, /CE",
+     "VIL_CEZ",
+     "",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "High level leakage current, /CE",
+     "IIN_BIAS_CEZ",
+     "Pull-up rail 1.8 V",
+     "",
+     "",
+     "2.5",
+     "uA"
+    ],
+    [
+     "Output low threshold level (/INT, /PG, STAT)",
+     "VOL",
+     "Sink current = 5 mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "High level leakage current (/INT, /PG, STAT)",
+     "IOUT_BIAS",
+     "Pull-up rail 1.8 V",
+     "",
+     "",
+     "1",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Timing requirements",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VBUS OVP reaction time",
+     "tVBUS_OV",
+     "VBUS rising above VBUS_OV threshold to converter turn off",
+     "",
+     "200",
+     "",
+     "ns"
+    ],
+    [
+     "Bad adapter detection duration",
+     "tPOORSRC",
+     "",
+     "",
+     "30",
+     "",
+     "ms"
+    ],
+    [
+     "Deglitch time for charge termination",
+     "tTERM_DGL",
+     "Charge current falling below ITERM",
+     "",
+     "250",
+     "",
+     "ms"
+    ],
+    [
+     "Deglitch time for recharge threshold",
+     "tRECGH_DGL",
+     "BAT voltage falling below VRECHG = 100 mV",
+     "",
+     "250",
+     "",
+     "ms"
+    ],
+    [
+     "Deglitch time for battery over-voltage to disable charge",
+     "tBAT_OVP_DGL",
+     "",
+     "",
+     "1",
+     "",
+     "µs"
+    ],
+    [
+     "Charge Safety Timer Accuracy",
+     "tSAFETY",
+     "CHG_TIMER = 12 hours",
+     "10.8",
+     "12",
+     "13.2",
+     "hr"
+    ],
+    [
+     "Digital low power clock",
+     "fLPDIG",
+     "REGN LDO disabled",
+     "18",
+     "30",
+     "45",
+     "kHZ"
+    ],
+    [
+     "Digital clock",
+     "fDIG",
+     "REGN LDO enabled",
+     "1.35",
+     "1.5",
+     "1.65",
+     "MHz"
+    ]
+   ]
+  },
+  {
+   "title": "Non-standard adapter detection",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "non-standard adapter",
+    "D+ threshold",
+    "D- threshold",
+    "input current limit"
+   ],
+   "rows": [
+    [
+     "Divider 1",
+     "VD+ within V2P8_VTH",
+     "VD– within V2P0_VTH",
+     "2.1 A"
+    ],
+    [
+     "Divider 3",
+     "VD+ within V2P0_VTH",
+     "VD– within V2P8_VTH",
+     "1A"
+    ],
+    [
+     "Divider 4",
+     "VD+ within V2P8_VTH",
+     "VD– within V2P8_VTH",
+     "2.4 A"
+    ]
+   ]
+  },
+  {
+   "title": "Input current limit and ICO start by D+/D- detection result",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "D+/D- detection",
+    "input current limit (IINDPM)",
+    "ICO starts automatically"
+   ],
+   "rows": [
+    [
+     "USB SDP (USB500)",
+     "500 mA",
+     "Disable"
+    ],
+    [
+     "USB CDP",
+     "1.5 A",
+     "Disable"
+    ],
+    [
+     "USB DCP",
+     "3.0 A",
+     "Enable"
+    ],
+    [
+     "Divider 3",
+     "1A",
+     "Disable"
+    ],
+    [
+     "Divider 1",
+     "2.1 A",
+     "Disable"
+    ],
+    [
+     "Divider 4",
+     "2.4 A",
+     "Disable"
+    ],
+    [
+     "Unknown 5V Adapter",
+     "500 mA",
+     "Disable"
+    ]
+   ]
+  },
+  {
+   "title": "Charging parameter defaults",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "BQ25886"
+   ],
+   "rows": [
+    [
+     "Charging voltage",
+     "Set by VSET"
+    ],
+    [
+     "Charging current",
+     "Set by ICHGSET"
+    ],
+    [
+     "Pre-charge current",
+     "1/10 of ICHG"
+    ],
+    [
+     "Termination current",
+     "1/10 of ICHG"
+    ],
+    [
+     "Temperature profile",
+     "JEITA"
+    ],
+    [
+     "Safety timer",
+     "12 hours"
+    ]
+   ]
+  },
+  {
+   "title": "STAT pin state",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "charging state",
+    "STAT"
+   ],
+   "rows": [
+    [
+     "Charging in progress (trickle charge, pre-charge, fast-charge, recharge)",
+     "LOW"
+    ],
+    [
+     "Charging complete",
+     "HIGH"
+    ],
+    [
+     "Sleep mode, charge disable",
+     "HIGH"
+    ],
+    [
+     "Charge suspend (input over-voltage, TS fault, timer fault or battery over-voltage); OTG buck mode suspend (TS fault)",
+     "Blinking at 1Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Design parameters, typical application",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value"
+   ],
+   "rows": [
+    [
+     "VBUS voltage range",
+     "4.3 V to 6.2 V"
+    ],
+    [
+     "Input current limit (ILIM)",
+     "2.4 A"
+    ],
+    [
+     "Fast charge current limit (ICHGSET)",
+     "1.5 A"
+    ],
+    [
+     "Minimum system voltage",
+     "6.2 V"
+    ],
+    [
+     "Battery regulation voltage (VSET)",
+     "8.4 V"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel information",
+   "page": 37,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ25886RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.3",
+     "4.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ25886RGERG4",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ25886RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "180.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel box dimensions",
+   "page": 38,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ25886RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "356.0",
+     "356.0",
+     "36.0"
+    ],
+    [
+     "BQ25886RGERG4",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "367.0",
+     "367.0",
+     "35.0"
+    ],
+    [
+     "BQ25886RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "210.0",
+     "185.0",
+     "35.0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Charge efficiency vs. charge current (L = DFE252012F-1R0)",
+   "page": 11,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5 V",
+   "x": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 7.6 V",
+     "points": [
+      [
+       0.099,
+       89.78
+      ],
+      [
+       0.149,
+       90.27
+      ],
+      [
+       0.201,
+       91.96
+      ],
+      [
+       0.251,
+       92.34
+      ],
+      [
+       0.3,
+       92.89
+      ],
+      [
+       0.396,
+       93.17
+      ],
+      [
+       0.446,
+       93.4
+      ],
+      [
+       0.495,
+       93.51
+      ],
+      [
+       0.593,
+       93.4
+      ],
+      [
+       0.641,
+       93.41
+      ],
+      [
+       0.834,
+       93.0
+      ],
+      [
+       1.077,
+       92.09
+      ],
+      [
+       1.222,
+       91.46
+      ],
+      [
+       1.539,
+       89.82
+      ],
+      [
+       1.711,
+       88.71
+      ],
+      [
+       1.752,
+       88.38
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 8.0 V",
+     "points": [
+      [
+       0.099,
+       89.18
+      ],
+      [
+       0.149,
+       89.88
+      ],
+      [
+       0.201,
+       91.76
+      ],
+      [
+       0.25,
+       91.74
+      ],
+      [
+       0.299,
+       92.61
+      ],
+      [
+       0.396,
+       92.81
+      ],
+      [
+       0.445,
+       93.01
+      ],
+      [
+       0.592,
+       93.1
+      ],
+      [
+       0.64,
+       92.94
+      ],
+      [
+       0.738,
+       92.8
+      ],
+      [
+       0.833,
+       92.54
+      ],
+      [
+       0.931,
+       92.21
+      ],
+      [
+       1.126,
+       91.39
+      ],
+      [
+       1.326,
+       90.35
+      ],
+      [
+       1.435,
+       89.71
+      ],
+      [
+       1.549,
+       89.02
+      ],
+      [
+       1.661,
+       88.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge efficiency vs. charge current (L = IHLP2525CZER1R0K01)",
+   "page": 11,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (IHLP2525CZER1R0K01); VBUS = 5 V",
+   "x": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 7.6 V",
+     "points": [
+      [
+       0.099,
+       87.61
+      ],
+      [
+       0.149,
+       90.41
+      ],
+      [
+       0.199,
+       91.55
+      ],
+      [
+       0.249,
+       92.45
+      ],
+      [
+       0.348,
+       93.44
+      ],
+      [
+       0.395,
+       93.54
+      ],
+      [
+       0.494,
+       93.89
+      ],
+      [
+       0.595,
+       93.91
+      ],
+      [
+       0.793,
+       93.79
+      ],
+      [
+       0.89,
+       93.54
+      ],
+      [
+       1.087,
+       93.15
+      ],
+      [
+       1.48,
+       91.84
+      ],
+      [
+       1.748,
+       90.72
+      ],
+      [
+       1.798,
+       90.45
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 8.0 V",
+     "points": [
+      [
+       0.103,
+       86.8
+      ],
+      [
+       0.153,
+       90.23
+      ],
+      [
+       0.202,
+       91.51
+      ],
+      [
+       0.252,
+       92.32
+      ],
+      [
+       0.301,
+       92.66
+      ],
+      [
+       0.349,
+       93.28
+      ],
+      [
+       0.397,
+       93.28
+      ],
+      [
+       0.447,
+       93.48
+      ],
+      [
+       0.547,
+       93.62
+      ],
+      [
+       0.597,
+       93.57
+      ],
+      [
+       0.695,
+       93.58
+      ],
+      [
+       0.794,
+       93.47
+      ],
+      [
+       0.892,
+       93.3
+      ],
+      [
+       0.941,
+       93.13
+      ],
+      [
+       1.039,
+       92.95
+      ],
+      [
+       1.233,
+       92.32
+      ],
+      [
+       1.484,
+       91.37
+      ],
+      [
+       1.703,
+       90.42
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System efficiency vs. system current (L = DFE252012F-1R0)",
+   "page": 11,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5 V, VBAT = 8.4 V",
+   "x": {
+    "label": "System current",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "System efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PFM En, OOA En",
+     "points": [
+      [
+       0.01012,
+       80.24
+      ],
+      [
+       0.018,
+       84.19
+      ],
+      [
+       0.02401,
+       85.55
+      ],
+      [
+       0.049,
+       87.82
+      ],
+      [
+       0.1,
+       89.11
+      ],
+      [
+       0.1021,
+       91.01
+      ],
+      [
+       0.1581,
+       92.48
+      ],
+      [
+       0.22,
+       92.89
+      ],
+      [
+       0.2801,
+       92.58
+      ],
+      [
+       0.3601,
+       93.19
+      ],
+      [
+       0.5101,
+       93.26
+      ],
+      [
+       0.7504,
+       92.94
+      ],
+      [
+       0.9876,
+       92.22
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System efficiency vs. system current (L = IHLP2525CZER1R0K01)",
+   "page": 11,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (IHLP2525CZER1R0K01); VBUS = 5 V, VBAT = 8.4 V",
+   "x": {
+    "label": "System current",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "System efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PFM En, OOA En",
+     "points": [
+      [
+       0.01012,
+       75.08
+      ],
+      [
+       0.0154,
+       84.65
+      ],
+      [
+       0.01838,
+       86.65
+      ],
+      [
+       0.02243,
+       87.67
+      ],
+      [
+       0.02332,
+       87.61
+      ],
+      [
+       0.02541,
+       88.0
+      ],
+      [
+       0.03143,
+       88.43
+      ],
+      [
+       0.03645,
+       88.95
+      ],
+      [
+       0.03836,
+       88.92
+      ],
+      [
+       0.04138,
+       89.26
+      ],
+      [
+       0.04338,
+       89.12
+      ],
+      [
+       0.05147,
+       89.73
+      ],
+      [
+       0.06448,
+       89.95
+      ],
+      [
+       0.0764,
+       90.41
+      ],
+      [
+       0.1344,
+       90.86
+      ],
+      [
+       0.1804,
+       90.74
+      ],
+      [
+       0.1924,
+       91.05
+      ],
+      [
+       0.2104,
+       91.92
+      ],
+      [
+       0.2204,
+       93.48
+      ],
+      [
+       0.2905,
+       93.26
+      ],
+      [
+       0.3904,
+       93.84
+      ],
+      [
+       0.4705,
+       93.8
+      ],
+      [
+       0.5702,
+       94.09
+      ],
+      [
+       0.5804,
+       93.91
+      ],
+      [
+       0.8206,
+       93.64
+      ],
+      [
+       0.9876,
+       93.22
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OTG efficiency vs. VBUS output current (L = DFE252012F-1R0)",
+   "page": 11,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5 V, VBAT = 7.6 V",
+   "x": {
+    "label": "IBUS",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PFM En, OOA En",
+     "points": [
+      [
+       0.01012,
+       60.25
+      ],
+      [
+       0.01407,
+       68.03
+      ],
+      [
+       0.02007,
+       74.92
+      ],
+      [
+       0.03107,
+       81.89
+      ],
+      [
+       0.03908,
+       84.65
+      ],
+      [
+       0.04508,
+       85.46
+      ],
+      [
+       0.05608,
+       87.19
+      ],
+      [
+       0.0781,
+       88.86
+      ],
+      [
+       0.126,
+       89.78
+      ],
+      [
+       0.1721,
+       90.14
+      ],
+      [
+       0.1741,
+       89.98
+      ],
+      [
+       0.19,
+       90.27
+      ],
+      [
+       0.21,
+       89.98
+      ],
+      [
+       0.22,
+       89.93
+      ],
+      [
+       0.23,
+       90.16
+      ],
+      [
+       0.2401,
+       89.97
+      ],
+      [
+       0.2599,
+       93.76
+      ],
+      [
+       0.2701,
+       93.93
+      ],
+      [
+       0.3101,
+       94.2
+      ],
+      [
+       0.4301,
+       94.39
+      ],
+      [
+       0.7504,
+       94.45
+      ],
+      [
+       0.7597,
+       94.16
+      ],
+      [
+       0.9876,
+       94.22
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OTG efficiency vs. VBUS output current (L = IHLP2525CZER1R0K01)",
+   "page": 11,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (IHLP2525CZER1R0K01); VBUS = 5 V, VBAT = 7.6 V",
+   "x": {
+    "label": "IBUS",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PFM En, OOA En",
+     "points": [
+      [
+       0.01012,
+       59.16
+      ],
+      [
+       0.01405,
+       68.26
+      ],
+      [
+       0.02007,
+       76.28
+      ],
+      [
+       0.02405,
+       79.79
+      ],
+      [
+       0.03405,
+       84.81
+      ],
+      [
+       0.04805,
+       87.87
+      ],
+      [
+       0.06607,
+       89.88
+      ],
+      [
+       0.0801,
+       90.48
+      ],
+      [
+       0.18,
+       91.82
+      ],
+      [
+       0.186,
+       91.69
+      ],
+      [
+       0.1962,
+       91.91
+      ],
+      [
+       0.22,
+       91.49
+      ],
+      [
+       0.2401,
+       91.81
+      ],
+      [
+       0.25,
+       94.28
+      ],
+      [
+       0.4399,
+       95.02
+      ],
+      [
+       0.9876,
+       94.87
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge current accuracy vs. ICHG setting (L = DFE252012F-1R0)",
+   "page": 12,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5 V",
+   "x": {
+    "label": "ICHG setting",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 6.6 V",
+     "points": [
+      [
+       0.246,
+       -1.48
+      ],
+      [
+       0.295,
+       -1.57
+      ],
+      [
+       0.347,
+       -0.95
+      ],
+      [
+       0.395,
+       -1.11
+      ],
+      [
+       0.442,
+       -1.85
+      ],
+      [
+       0.49,
+       -1.95
+      ],
+      [
+       0.641,
+       -1.29
+      ],
+      [
+       0.74,
+       -1.29
+      ],
+      [
+       0.791,
+       -1.11
+      ],
+      [
+       0.938,
+       -1.3
+      ],
+      [
+       1.037,
+       -1.27
+      ],
+      [
+       1.326,
+       -1.78
+      ],
+      [
+       1.376,
+       -1.73
+      ],
+      [
+       1.52,
+       -1.93
+      ],
+      [
+       1.57,
+       -1.88
+      ],
+      [
+       1.762,
+       -2.13
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 7.6 V",
+     "points": [
+      [
+       0.246,
+       -1.5
+      ],
+      [
+       0.392,
+       -1.97
+      ],
+      [
+       0.441,
+       -1.96
+      ],
+      [
+       0.491,
+       -1.9
+      ],
+      [
+       0.591,
+       -1.45
+      ],
+      [
+       0.79,
+       -1.24
+      ],
+      [
+       0.888,
+       -1.35
+      ],
+      [
+       0.987,
+       -1.32
+      ],
+      [
+       1.277,
+       -1.77
+      ],
+      [
+       1.76,
+       -2.23
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge current accuracy vs. ICHG setting (L = IHLP2525CZER1R0K01)",
+   "page": 12,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (IHLP2525CZER1R0K01); VBUS = 5 V",
+   "x": {
+    "label": "ICHG setting",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 6.6 V",
+     "points": [
+      [
+       0.098,
+       -1.68
+      ],
+      [
+       0.149,
+       -0.65
+      ],
+      [
+       0.199,
+       -0.37
+      ],
+      [
+       0.299,
+       -0.48
+      ],
+      [
+       0.349,
+       -0.28
+      ],
+      [
+       0.395,
+       -1.2
+      ],
+      [
+       0.444,
+       -1.29
+      ],
+      [
+       0.493,
+       -1.34
+      ],
+      [
+       0.644,
+       -0.93
+      ],
+      [
+       0.793,
+       -0.89
+      ],
+      [
+       0.94,
+       -1.11
+      ],
+      [
+       1.038,
+       -1.11
+      ],
+      [
+       1.183,
+       -1.42
+      ],
+      [
+       1.28,
+       -1.53
+      ],
+      [
+       1.477,
+       -1.56
+      ],
+      [
+       1.729,
+       -1.2
+      ],
+      [
+       1.889,
+       -0.59
+      ],
+      [
+       1.995,
+       -0.07
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 7.6 V",
+     "points": [
+      [
+       0.099,
+       -1.38
+      ],
+      [
+       0.149,
+       -0.28
+      ],
+      [
+       0.199,
+       -0.59
+      ],
+      [
+       0.249,
+       -0.48
+      ],
+      [
+       0.298,
+       -0.63
+      ],
+      [
+       0.348,
+       -0.57
+      ],
+      [
+       0.395,
+       -1.28
+      ],
+      [
+       0.444,
+       -1.33
+      ],
+      [
+       0.594,
+       -0.92
+      ],
+      [
+       0.644,
+       -0.9
+      ],
+      [
+       0.693,
+       -0.99
+      ],
+      [
+       0.793,
+       -0.86
+      ],
+      [
+       0.939,
+       -1.16
+      ],
+      [
+       1.038,
+       -1.14
+      ],
+      [
+       1.28,
+       -1.51
+      ],
+      [
+       1.48,
+       -1.35
+      ],
+      [
+       1.531,
+       -1.2
+      ],
+      [
+       1.748,
+       -0.09
+      ],
+      [
+       1.798,
+       -0.09
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SYSMIN load regulation",
+   "page": 12,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5 V, VBAT = 6 V, EN_CHG = 0, SYSMIN = 7 V",
+   "x": {
+    "label": "System current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Offset from SYS_MIN",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SYS_MIN offset",
+     "points": [
+      [
+       0.8026,
+       185.7
+      ],
+      [
+       0.9502,
+       181.5
+      ],
+      [
+       1.4003,
+       164.4
+      ],
+      [
+       1.7972,
+       146.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System load regulation after charge done",
+   "page": 12,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5 V, VBAT = 8.4 V, EN_CHG = 0",
+   "x": {
+    "label": "System current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "System voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSYS",
+     "points": [
+      [
+       0.3501,
+       8.5025
+      ],
+      [
+       0.4,
+       8.5009
+      ],
+      [
+       0.4501,
+       8.5002
+      ],
+      [
+       0.5501,
+       8.4975
+      ],
+      [
+       0.9982,
+       8.4944
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OTG voltage regulation vs. VBAT voltage",
+   "page": 12,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5.1 V, IBUS = 1 A",
+   "x": {
+    "label": "VBAT voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       6.185,
+       -0.767
+      ],
+      [
+       6.882,
+       -0.744
+      ],
+      [
+       8.681,
+       -0.754
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       6.174,
+       -0.765
+      ],
+      [
+       8.67,
+       -0.783
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       6.172,
+       -0.783
+      ],
+      [
+       8.668,
+       -0.841
+      ]
+     ]
+    },
+    {
+     "label": "85 °C",
+     "points": [
+      [
+       6.163,
+       -0.791
+      ],
+      [
+       7.564,
+       -0.892
+      ],
+      [
+       8.665,
+       -0.938
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Max current temperature profile",
+   "page": 12,
+   "conditions": "CVBUS = 1 µF, CPMID = 10 µF, CSYS = 44 µF, CBAT = 10 µF, L = 1 µH (DFE252012F-1R0); VBUS = 5 V, VBAT = 7.6 V, ICHG = 0.5 A, 1.0 A, 1.4 A; 4-layer board, 35 µm copper",
+   "x": {
+    "label": "Die temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICHG = 0.5 A",
+     "points": [
+      [
+       90.1,
+       0.472
+      ],
+      [
+       118.0,
+       0.464
+      ],
+      [
+       121.2,
+       0.325
+      ],
+      [
+       124.76,
+       0.008
+      ]
+     ]
+    },
+    {
+     "label": "ICHG = 1.0 A",
+     "points": [
+      [
+       90.1,
+       0.96
+      ],
+      [
+       109.0,
+       0.954
+      ],
+      [
+       111.1,
+       0.907
+      ],
+      [
+       113.9,
+       0.766
+      ],
+      [
+       116.3,
+       0.662
+      ],
+      [
+       118.1,
+       0.548
+      ],
+      [
+       120.3,
+       0.362
+      ],
+      [
+       121.2,
+       0.325
+      ],
+      [
+       124.4,
+       0.018
+      ],
+      [
+       124.84,
+       0.008
+      ]
+     ]
+    },
+    {
+     "label": "ICHG = 1.4 A",
+     "points": [
+      [
+       90.2,
+       1.347
+      ],
+      [
+       99.0,
+       1.339
+      ],
+      [
+       105.1,
+       1.141
+      ],
+      [
+       108.1,
+       1.029
+      ],
+      [
+       114.1,
+       0.763
+      ],
+      [
+       118.2,
+       0.546
+      ],
+      [
+       121.2,
+       0.334
+      ],
+      [
+       124.2,
+       0.063
+      ],
+      [
+       125.0,
+       0.008
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System voltage vs. battery voltage",
+   "page": 17,
+   "conditions": "",
+   "x": {
+    "label": "BAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SYS",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Charge Disabled",
+     "points": [
+      [
+       5.4,
+       7.295
+      ],
+      [
+       7.284,
+       7.295
+      ],
+      [
+       7.289,
+       7.4
+      ],
+      [
+       8.6,
+       8.711
+      ]
+     ]
+    },
+    {
+     "label": "Charge Enabled",
+     "points": [
+      [
+       5.4,
+       7.285
+      ],
+      [
+       7.0,
+       7.285
+      ],
+      [
+       7.198,
+       7.486
+      ],
+      [
+       7.209,
+       7.262
+      ],
+      [
+       8.6,
+       8.652
+      ]
+     ]
+    },
+    {
+     "label": "Minimum System Voltage",
+     "points": [
+      [
+       5.4,
+       7.0
+      ],
+      [
+       8.6,
+       7.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "BATFET I-V curve",
+   "page": 18,
+   "conditions": "",
+   "x": {
+    "label": "IBAT",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VBAT - VSYS",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT - VSYS",
+     "points": [
+      [
+       0.013,
+       25.0
+      ],
+      [
+       1.5,
+       25.0
+      ],
+      [
+       2.0,
+       36.0
+      ],
+      [
+       4.983,
+       89.72
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Standalone typical application, 2s pack, 5 V / 3 A USB input",
+   "page": 25,
+   "description": "A 5 V, 3 A USB source feeds VBUS with 1 µF at the pin; PMID carries 10 µF plus an optional 30 µF, and the 1 µH inductor runs from PMID to SW. 47 nF from SW to BTST supplies the high-side gate drive and 4.7 µF bypasses REGN. SYS feeds the system load with 44 µF and BAT goes to the 2s pack with 10 µF. RILIM 383 Ω, RVSET 150 kΩ and RICHGSET 5.7 kΩ to ground set the input ceiling, an 8.4 V charge voltage and the charge current. The pack's 10 kΩ NTC sits from TS to ground with 5.23 kΩ from REGN and 30.1 kΩ to ground setting the temperature window. STAT and /PG each sink an LED fed through 2.2 kΩ from VREF. A host drives OTG and /CE and shares the D+ and D- lines.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25886"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "5 V @ 3 A",
+     "note": "USB source input"
+    },
+    {
+     "ref": "VREF",
+     "type": "terminal",
+     "value": "VREF",
+     "note": "pull-up rail for the status LEDs"
+    },
+    {
+     "ref": "SYSTEM",
+     "type": "terminal",
+     "value": "system load",
+     "note": "6.4 V system rail out"
+    },
+    {
+     "ref": "HOST_DP",
+     "type": "terminal",
+     "value": "host D+"
+    },
+    {
+     "ref": "HOST_DM",
+     "type": "terminal",
+     "value": "host D-"
+    },
+    {
+     "ref": "HOST_OTG",
+     "type": "terminal",
+     "value": "host OTG"
+    },
+    {
+     "ref": "HOST_CE",
+     "type": "terminal",
+     "value": "host /CE"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "VBUS bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "30 µF",
+     "note": "PMID, optional"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "PMID"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "1 µH"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "47 nF",
+     "note": "bootstrap, SW to BTST"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "REGN bypass"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "44 µF",
+     "note": "SYS"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "BAT"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "STAT LED"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "/PG LED"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "charge status"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "LED",
+     "note": "power good"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "383 Ω",
+     "note": "RILIM"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "150 kΩ",
+     "note": "RVSET, 8.4 V"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "5.7 kΩ",
+     "note": "RICHGSET"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "5.23 kΩ",
+     "note": "RT1, REGN to TS"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "30.1 kΩ",
+     "note": "RT2, TS to GND"
+    },
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "10 kΩ NTC",
+     "note": "pack thermistor"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "2s Li-ion pack"
+    }
+   ],
+   "notes": [
+    "RICHGSET 5.7 kΩ sets 1.5 A (5.7 kΩ / 3810 Ω/A), the design-table charge current; the ICHG = 2A marking on the BAT path should read 1.5 A.",
+    "RILIM 383 Ω sets 2.9 A (1110 A·Ω / 383 Ω); the design table gives 2.4 A for the input current limit."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "TS divider, lower resistor",
+   "page": 21,
+   "expr": "RT2 = RNTC,T1 × RNTC,T5 × (1/VT5 − 1/VT1) / [RNTC,T1 × (1/VT1 − 1) − RNTC,T5 × (1/VT5 − 1)]",
+   "where": {
+    "RT2": "resistor from TS to GND",
+    "RNTC,T1": "thermistor resistance at T1 (0 °C), 27.28 kΩ for a 103AT",
+    "RNTC,T5": "thermistor resistance at T5 (60 °C), 3.02 kΩ for a 103AT",
+    "VT1": "T1 threshold as a fraction of REGN",
+    "VT5": "T5 threshold as a fraction of REGN"
+   },
+   "note": "For a 0 °C to 60 °C window with a 103AT: RT1 = 5.24 kΩ, RT2 = 30.31 kΩ."
+  },
+  {
+   "name": "TS divider, upper resistor",
+   "page": 21,
+   "expr": "RT1 = (1/VT1 − 1) / (1/RT2 + 1/RNTC,T1)",
+   "where": {
+    "RT1": "resistor from REGN to TS"
+   },
+   "note": ""
+  },
+  {
+   "name": "ILIM input current ceiling",
+   "page": 22,
+   "expr": "IINMAX = KILIM / RILIM",
+   "where": {
+    "IINMAX": "input current ceiling set by the ILIM pin",
+    "KILIM": "1110 A·Ω typ",
+    "RILIM": "resistor from ILIM to GND"
+   },
+   "note": "The working limit is the lower of this and the D+/D- detection result."
+  },
+  {
+   "name": "Input current from ILIM voltage",
+   "page": 22,
+   "expr": "IIN = KILIM × VILIM / (RILIM × 0.8 V)",
+   "where": {
+    "VILIM": "voltage on ILIM, below 0.8 V"
+   },
+   "note": "Example: 820 Ω and 0.5 V on ILIM correspond to 0.795 A to 0.973 A."
+  },
+  {
+   "name": "Inductor saturation current",
+   "page": 26,
+   "expr": "ISAT ≥ IIN + IRIPPLE / 2",
+   "where": {
+    "ISAT": "inductor saturation current",
+    "IIN": "input current",
+    "IRIPPLE": "peak-to-peak inductor ripple current"
+   },
+   "note": "Ripple is largest near D = 0.5; 20 % to 40 % of the maximum charge current is the usual design range."
+  },
+  {
+   "name": "Inductor ripple current",
+   "page": 26,
+   "expr": "IRIPPLE = VBUS × (VSYS − VBUS) / (VSYS × fSW × L)",
+   "where": {
+    "VBUS": "input voltage",
+    "VSYS": "system voltage",
+    "fSW": "switching frequency",
+    "L": "inductance"
+   },
+   "note": ""
+  },
+  {
+   "name": "PMID capacitor RMS current",
+   "page": 26,
+   "expr": "IPMID = IRIPPLE / (2 × √3) ≈ 0.29 × IRIPPLE",
+   "where": {
+    "IPMID": "input capacitor RMS ripple current, worst at 50 % duty cycle"
+   },
+   "note": ""
+  },
+  {
+   "name": "SYS capacitor RMS current",
+   "page": 26,
+   "expr": "ICSYS,rms = IOUT × √(D / (1 − D))",
+   "where": {
+    "IOUT": "boost output current",
+    "D": "duty cycle"
+   },
+   "note": ""
+  },
+  {
+   "name": "SYS voltage ripple",
+   "page": 27,
+   "expr": "ΔVSYS = IOUT × D / (fSW × CSYS)",
+   "where": {
+    "CSYS": "SYS capacitance"
+   },
+   "note": ""
+  },
+  {
+   "name": "Charge current setting",
+   "page": 27,
+   "expr": "ICHGSET = RICHGSET / KICHGSET",
+   "where": {
+    "RICHGSET": "resistor from ICHGSET to GND",
+    "KICHGSET": "3810 Ω/A typ"
+   },
+   "note": "Pre-charge and termination currents are ICHG / 10."
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Integrated switches",
+   "page": 13,
+   "text": "Four FETs are inside: Q1 (QBLK) is the input blocking FET between VBUS and PMID, Q2 (QHS) and Q3 (QLS) are the high- and low-side switches of the boost stage, and Q4 (QBAT) links SYS to the pack. The bootstrap diode for the high-side driver is inside as well."
+  },
+  {
+   "topic": "Power-on reset",
+   "page": 14,
+   "text": "Internal bias comes from whichever of VBUS or BAT has passed its UVLO rising threshold, and once either has, the battery FET driver is live."
+  },
+  {
+   "topic": "Running from the pack alone",
+   "page": 14,
+   "text": "With only a pack above VBAT_UVLO_RISING, the battery FET turns on and SYS runs straight from the pack. REGN stays off to keep battery drain low."
+  },
+  {
+   "topic": "Start-up from an input",
+   "page": 14,
+   "text": "On plug-in the chip qualifies the source, runs D+/D- detection to set the input current limit, starts REGN and then starts the converter. Qualification needs VBUS below the OVP threshold and above VPOORSRC while IPOORSRC (15 mA typ) is drawn. An over-voltage source is retried once it clears; a weak source is retried every 2 s, and after seven failures in a row the chip goes to HIZ, leaving the pack to run the system. A fresh plug-in is then needed to restart."
+  },
+  {
+   "topic": "D+/D- source detection",
+   "page": 14,
+   "text": "Detection runs data-contact detection, then primary, then secondary detection, per USB BC1.2, and also recognises non-standard dividers. SDP gives 500 mA, CDP 1.5 A, DCP 3.0 A, divider 3 1 A, divider 1 2.1 A, divider 4 2.4 A and an unknown 5 V adapter 500 mA. /PG goes low when detection completes. The input limit in use is the lower of the detection result (or the ICO result on a DCP) and the ILIM pin setting."
+  },
+  {
+   "topic": "REGN",
+   "page": 15,
+   "text": "REGN biases the chip, drives the gates of QHS and QLS and can supply the TS divider and the STAT and /PG pull-ups. It comes on once VBUS is above UVLO in boost mode (or below it in buck mode), the source has qualified, detection has set the input limit and a 220 ms delay has passed. Otherwise the chip is in HIZ with REGN off, taking less than IVBUS_HIZ from VBUS."
+  },
+  {
+   "topic": "Converter start and PFM",
+   "page": 16,
+   "text": "With the input limit set, /PG goes low and switching starts. Before charging, IBAT_DISCHG is applied to check for a pack; the battery FET stays on to charge it and SYS ramps up with soft-start. The boost runs at a fixed 1.5 MHz. At light load, while the pack is below the minimum system voltage or charging is off, it moves to PFM, with duty cycle set by the SYS to VBUS ratio."
+  },
+  {
+   "topic": "Input current optimizer (ICO)",
+   "page": 16,
+   "text": "ICO finds the most current a source can deliver without pulling it into VINDPM. On this part it runs only when a DCP is detected. It keeps adjusting IINDPM and, once settled, holds that value until a new source is plugged in, VINDPM is entered or VBUS OVP occurs. The ILIM pin limit still caps the result."
+  },
+  {
+   "topic": "OTG buck mode",
+   "page": 16,
+   "text": "The converter can run in reverse as a buck from the pack onto VBUS, meeting the 500 mA USB OTG requirement and delivering up to 2.0 A. It starts when BAT is above VOTG_BAT, VBUS is below VVBUS_PRESENT, OTG is high, TS is between the BHOT and BCOLD thresholds, and 30 ms have passed since enable."
+  },
+  {
+   "topic": "Narrow VDC power path",
+   "page": 17,
+   "text": "The battery FET separates SYS from the pack. With a deeply discharged pack SYS is still held above the fixed 6.2 V typ minimum: the FET runs linearly and SYS sits about 200 mV above the minimum. Once the pack is above the minimum the FET is fully on and SYS is the pack voltage plus the FET drop. With charging off (pack above the minimum) or terminated, SYS is held about 50 mV above the pack."
+  },
+  {
+   "topic": "Dynamic power management",
+   "page": 17,
+   "text": "The chip watches input current and voltage. When system load plus charge current would exceed the input current limit, or would pull VBUS down to VINDPM (4.3 V typ), charge current is cut until the input sits at its limit. On a DCP, entering VINDPM makes ICO lower the limit. If charge current reaches zero and the source is still overloaded, SYS falls below the pack and supplement mode begins."
+  },
+  {
+   "topic": "Supplement mode",
+   "page": 18,
+   "text": "When SYS drops below the pack, the battery FET turns on and the pack shares the load with the input. As discharge current grows the FET gate is driven harder until it is fully on, after which the FET drop rises in proportion to current. The FET turns off again when the pack falls below VBAT_UVLO_RISING."
+  },
+  {
+   "topic": "Charge cycle",
+   "page": 19,
+   "text": "With /CE low the chip charges on its own: voltage from VSET, current from ICHGSET, pre-charge and termination at one tenth of ICHG, JEITA temperature profile, 12 h safety timer. A cycle starts when the converter is running with no TS fault and no timer fault. It ends when current is under the termination level, the pack is above the recharge threshold and the chip is not in DPM or thermal regulation. A pack that sags 200 mV below VREG starts a new cycle; toggling /CE after a finished charge also starts one."
+  },
+  {
+   "topic": "Charge phases",
+   "page": 19,
+   "text": "Five phases: trickle charge below VBAT_SHORT, pre-charge below VBAT_LOWV, constant current, constant voltage, then a top-off timer. In DPM or thermal regulation the actual current is below the setting, termination is held off and the safety timer counts at half speed."
+  },
+  {
+   "topic": "Termination",
+   "page": 20,
+   "text": "At termination the battery FET turns off and STAT goes high; the converter keeps powering SYS, and the battery FET can turn on again for supplement mode. Termination is held off in input current, input voltage or thermal regulation. The termination threshold is ICHG / 10."
+  },
+  {
+   "topic": "JEITA temperature control",
+   "page": 20,
+   "text": "Charging starts only with TS between the VT1 and VT5 thresholds and stops outside them until the pack returns to range. Between T1 and T2 (0 °C to 10 °C) charge current drops to 20 % of ICHG; between T3 and T5 (45 °C to 60 °C) charge voltage drops to 8.0 V. In either band termination is off. The TS divider of RT1 from REGN and RT2 to ground around a 103AT NTC sets the thresholds."
+  },
+  {
+   "topic": "Safety timers",
+   "page": 21,
+   "text": "The fast-charge timer counts at half speed during input voltage, input current or thermal regulation, so a 12 h timer that spends the whole cycle in input current regulation runs out at 24 h. It pauses during charge-disabling faults and supplement mode and resumes afterwards. It resets when a cycle stops and restarts (/CE toggled, or a full pack falls below recharge) and when the pack crosses between pre-charge and fast charge. A fixed 2 h pre-charge timer, running while VBAT < VBAT_LOWV, follows the same rules."
+  },
+  {
+   "topic": "Power good (/PG)",
+   "page": 22,
+   "text": "/PG goes low when VBUS is above UVLO rising, below the OVP threshold, holds above VPOORSRC (3.7 V typ) under IPOORSRC load, and detection has finished."
+  },
+  {
+   "topic": "Charge status (STAT)",
+   "page": 22,
+   "text": "Open-drain status that can drive an LED: low while charging, high when charge is complete or disabled, blinking at 1 Hz on a charge fault or an OTG suspend for a TS fault. With no pack fitted it blinks as the BAT capacitance charges and discharges."
+  },
+  {
+   "topic": "ILIM pin",
+   "page": 22,
+   "text": "The ILIM resistor sets a hardware input current ceiling; the chip regulates ILIM at 0.8 V and enters input current regulation above it. Below 0.8 V the pin voltage is proportional to input current. Left open, ILIM floats above 0.8 V and input current is held at zero."
+  },
+  {
+   "topic": "Boost-mode protection",
+   "page": 23,
+   "text": "VBUS above VVBUS_OV stops switching at once, restarting when it clears. VBUS below VPOORSRC during operation also stops switching, with an automatic retry. SYS over-voltage, 350 mV above the system regulation target, stops the converter at once to clamp load-transient overshoot. If VSYS comes within 250 mV of VBUS a system short is flagged and switching stops, with automatic recovery."
+  },
+  {
+   "topic": "OTG-mode protection",
+   "page": 23,
+   "text": "In buck mode the chip monitors VBUS and the currents in QBLK and QLS. VBUS above VOTG_OVP stops switching and leaves buck mode. Output current is held by a constant-current loop; on a VBUS short the output shuts off and retries seven times, then OTG is disabled."
+  },
+  {
+   "topic": "Thermal regulation and shutdown",
+   "page": 23,
+   "text": "In boost mode the chip trims charge current to hold the junction at 120 °C; termination is then off and the safety timer runs at half speed. Above TSHUT the converter stops, restarting once the die cools below the falling threshold. Thermal shutdown also protects buck mode."
+  },
+  {
+   "topic": "Battery over-voltage",
+   "page": 23,
+   "text": "While charging, if the pack rises 4 % above the regulation voltage, charging stops at once."
+  },
+  {
+   "topic": "Power supply",
+   "page": 31,
+   "text": "SYS can be supplied from a 3.9 V to 6.2 V source rated 500 mA or more on VBUS, or from a 2s pack above VBAT_UVLO on BAT. For full output power to SYS the source needs at least 3 A."
+  },
+  {
+   "topic": "Inductor selection",
+   "page": 26,
+   "text": "1.5 MHz switching allows small inductors and capacitors. Saturation current must exceed input current plus half the ripple; ripple peaks near 50 % duty."
+  },
+  {
+   "topic": "Input capacitors",
+   "page": 26,
+   "text": "Low-ESR X5R or X7R ceramics close to PMID and GND, rated well above the input voltage; 25 V or more for a 5 V input. At least 10 µF for up to 3.3 A of input current, 44 µF on PMID for best performance, and at least 1 µF at VBUS. A long, high-impedance cable drops a lot of voltage under inrush."
+  },
+  {
+   "topic": "SYS capacitors",
+   "page": 27,
+   "text": "Low-ESR X5R or X7R ceramics close to SYS and GND, 16 V rating or more, at least 44 µF for up to 2.2 A of boost output current."
+  },
+  {
+   "topic": "ILIM resistor tolerance",
+   "page": 27,
+   "text": "When the input must never exceed a limit, size RILIM for the low end of the regulation spread: for a 900 mA ceiling with about ±8.9 % accuracy at that setting, design for 819.9 mA, and allow for resistor tolerance too."
+  },
+  {
+   "topic": "Layout",
+   "page": 31,
+   "text": "In order of priority: SYS capacitor tight to SYS and GND; PMID capacitor tight to PMID and power ground; SW trace to the inductor short, with little copper area but wide enough for input current and little capacitance to other nets; decoupling capacitors next to the chip on the same side. Run analog ground apart from power ground and join them only at the thermal pad (or through a 0 Ω resistor). Solder the exposed pad to ground with enough thermal vias under the chip, and size vias for the current they carry."
+  }
+ ],
+ "packages": [
+  {
+   "name": "RGE0024H (24-pin VQFN, 1 mm max height)",
+   "page": 40,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "D",
+     "body length",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "E",
+     "body width",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "e",
+     "terminal pitch (20X)",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "b",
+     "terminal width (24X)",
+     "0.18",
+     "",
+     "0.30"
+    ],
+    [
+     "L",
+     "terminal length (24X)",
+     "0.28",
+     "",
+     "0.48"
+    ],
+    [
+     "",
+     "side-view dimension at the terminals",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "exposed pad (pin 25), square",
+     "2.6",
+     "2.7",
+     "2.8"
+    ],
+    [
+     "",
+     "first to last terminal centre on one side (2X)",
+     "",
+     "2.5",
+     ""
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "",
+     "terminal position tolerance to C A B",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "terminal position tolerance to C",
+     "",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "land pattern: terminal pad length (24X)",
+     "",
+     "(0.58)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: terminal pad width (24X)",
+     "",
+     "(0.24)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: span across terminal pads",
+     "",
+     "(3.825)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: thermal pad, square",
+     "",
+     "(2.7)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: thermal via spacing (2X)",
+     "",
+     "(1.1)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: thermal via diameter",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: terminal pad corner radius",
+     "",
+     "(0.05)",
+     ""
+    ],
+    [
+     "",
+     "solder mask clearance, non-mask-defined",
+     "",
+     "",
+     "0.07"
+    ],
+    [
+     "",
+     "metal under solder mask, mask-defined",
+     "0.07",
+     "",
+     ""
+    ],
+    [
+     "",
+     "stencil: thermal pad apertures (4X), square",
+     "",
+     "(1.188)",
+     ""
+    ],
+    [
+     "",
+     "stencil: thermal pad aperture centre to package centreline (TYP)",
+     "",
+     "(0.694)",
+     ""
+    ],
+    [
+     "",
+     "stencil thickness",
+     "",
+     "0.125",
+     ""
+    ]
+   ],
+   "notes": [
+    "Exposed pad soldered to board ground for heat and strength.",
+    "Stencil prints 78 % of the exposed pad area."
+   ]
+  }
+ ]
+}

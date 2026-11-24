@@ -1,0 +1,1635 @@
+{
+ "sheet": 1,
+ "name": "ADUM4160BRWZ-RL",
+ "kind": "interface",
+ "manufacturer": "Analog Devices",
+ "title": "5 kV USB isolator for full and low speed",
+ "source": {
+  "revision": "Rev. D, 2/12",
+  "pages": 18
+ },
+ "summary": "A galvanic isolator for the D+ and D- lines of an upstream-facing USB port, built on transformer-coupled iCoupler channels. It watches both sides for activity, works out the direction of each packet and turns its output buffers on and off to suit, so the USB stream passes through with a delay close to one hub plus cable. Speed (1.5 Mbps low speed or 12 Mbps full speed) is fixed by two strap pins; the upstream pull-up and the downstream pull-downs are inside. Each side runs from 4.5 V to 5.5 V bus power through an internal 3.3 V regulator, or straight from 3.3 V. The upstream side is short-circuit protected. Wide-body SOIC-16, 5000 V rms for one minute (UL 1577), in a standard and an increased-creepage version.",
+ "key_figures": [
+  [
+   "Data rate",
+   "1.5 Mbps (low speed), 12 Mbps (full speed)"
+  ],
+  [
+   "Isolation",
+   "5000 V rms, 1 minute (UL 1577); VIORM 846 V peak"
+  ],
+  [
+   "Supply",
+   "VBUS1, VBUS2 4.5 V to 5.5 V, or 3.1 V to 3.6 V on VBUS and VDD together"
+  ],
+  [
+   "Upstream supply current",
+   "7 mA max at 1.5 Mbps, 8 mA max at 12 Mbps"
+  ],
+  [
+   "Idle current",
+   "1.7 mA typ, 2.3 mA max (upstream)"
+  ],
+  [
+   "Propagation delay",
+   "70 ns max full speed, 325 ns max low speed"
+  ],
+  [
+   "CMTI",
+   "25 kV/µs min, 35 kV/µs typ"
+  ],
+  [
+   "ESD",
+   "Class 3A contact, ANSI/ESD STM5.1-2007"
+  ],
+  [
+   "Creepage",
+   "7.7 mm (RW-16), 8.3 mm (RI-16-1)"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +105 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 16,
+  "columns": [
+   "part number",
+   "inputs, VDD1 side",
+   "inputs, VDD2 side",
+   "max data rate (Mbps)",
+   "max propagation delay, 5 V (ns)",
+   "max jitter (ns)",
+   "temperature range",
+   "package",
+   "package option"
+  ],
+  "rows": [
+   [
+    "ADuM4160BRWZ",
+    "2",
+    "2",
+    "12",
+    "70",
+    "3",
+    "-40°C to +105°C",
+    "16-Lead SOIC_W",
+    "RW-16"
+   ],
+   [
+    "ADuM4160BRWZ-RL",
+    "2",
+    "2",
+    "12",
+    "70",
+    "3",
+    "-40°C to +105°C",
+    "16-Lead SOIC_W",
+    "RW-16"
+   ],
+   [
+    "ADuM4160BRIZ",
+    "2",
+    "2",
+    "12",
+    "70",
+    "3",
+    "-40°C to +105°C",
+    "16-Lead SOIC_IC",
+    "RI-16-1"
+   ],
+   [
+    "ADuM4160BRIZ-RL",
+    "2",
+    "2",
+    "12",
+    "70",
+    "3",
+    "-40°C to +105°C",
+    "16-Lead SOIC_IC",
+    "RI-16-1"
+   ],
+   [
+    "EVAL-ADUM4160EBZ",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "Evaluation Board",
+    ""
+   ]
+  ],
+  "notes": [
+   "Z marks a RoHS-compliant part.",
+   "The figures in the guide are for the full speed buffer setting.",
+   "SOIC_IC (RI-16-1) is the wide-body package with increased creepage."
+  ]
+ },
+ "pins": [
+  {
+   "package": "16-lead SOIC wide body (RW-16, RI-16-1)",
+   "page": 10,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VBUS1",
+     "type": "power",
+     "function": "Side 1 supply input. Tie to the USB bus (4.5 V to 5.5 V), or, on a 3.3 V supply, tie to VDD1 and the 3.3 V rail. Needs a bypass capacitor to GND1."
+    },
+    {
+     "pin": "2",
+     "name": "GND1",
+     "type": "return",
+     "function": "Side 1 ground. Joined inside to pin 8; connect both to GND1."
+    },
+    {
+     "pin": "3",
+     "name": "VDD1",
+     "type": "power",
+     "function": "Side 1 3.3 V rail. With bus power it is the regulator output: bypass it to GND1 and pull PDEN and SPU up from it. With a 3.3 V supply, tie it to VBUS1 and the supply; bypass to GND1."
+    },
+    {
+     "pin": "4",
+     "name": "PDEN",
+     "type": "input",
+     "function": "Pull-down enable, sampled as the part leaves reset. Tie to VDD1 for normal use. Held at GND1 while leaving reset, it disconnects the downstream pull-down resistors so buffer impedance can be measured."
+    },
+    {
+     "pin": "5",
+     "name": "SPU",
+     "type": "input",
+     "function": "Upstream speed select, active high. High selects the full speed edge rate, timing and J/K convention; low selects the low speed set. Strap to VDD1 or GND1; must equal SPD (pin 13)."
+    },
+    {
+     "pin": "6",
+     "name": "UD-",
+     "type": "I/O",
+     "function": "Upstream D- line."
+    },
+    {
+     "pin": "7",
+     "name": "UD+",
+     "type": "I/O",
+     "function": "Upstream D+ line."
+    },
+    {
+     "pin": "8",
+     "name": "GND1",
+     "type": "return",
+     "function": "Side 1 ground. Joined inside to pin 2; connect both to GND1."
+    },
+    {
+     "pin": "9",
+     "name": "GND2",
+     "type": "return",
+     "function": "Side 2 ground. Joined inside to pin 15; connect both to GND2."
+    },
+    {
+     "pin": "10",
+     "name": "DD+",
+     "type": "I/O",
+     "function": "Downstream D+ line."
+    },
+    {
+     "pin": "11",
+     "name": "DD-",
+     "type": "I/O",
+     "function": "Downstream D- line."
+    },
+    {
+     "pin": "12",
+     "name": "PIN",
+     "type": "input",
+     "function": "Upstream pull-up enable: switches power to the pull-up on the upstream port. Tie to VDD2 to attach at power-up, or drive from a control line to delay enumeration."
+    },
+    {
+     "pin": "13",
+     "name": "SPD",
+     "type": "input",
+     "function": "Downstream speed select, active high. High selects the full speed edge rate, timing and J/K convention; low selects the low speed set. Strap to VDD2 or GND2; must equal SPU (pin 5)."
+    },
+    {
+     "pin": "14",
+     "name": "VDD2",
+     "type": "power",
+     "function": "Side 2 3.3 V rail. With bus power it is the regulator output: bypass it to GND2; pull-ups such as SPD may be taken from it. With a 3.3 V supply, tie it to VBUS2 and the supply; bypass to GND2."
+    },
+    {
+     "pin": "15",
+     "name": "GND2",
+     "type": "return",
+     "function": "Side 2 ground. Joined inside to pin 9; connect both to GND2."
+    },
+    {
+     "pin": "16",
+     "name": "VBUS2",
+     "type": "power",
+     "function": "Side 2 supply input. Tie to a 4.5 V to 5.5 V bus, or, on a 3.3 V supply, tie to VDD2 and the 3.3 V rail. Needs a bypass capacitor to GND2."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Electrical characteristics",
+   "page": 5,
+   "conditions": "4.5 V ≤ VBUS1 ≤ 5.5 V, 4.5 V ≤ VBUS2 ≤ 5.5 V; 3.1 V ≤ VDD1 ≤ 3.6 V, 3.1 V ≤ VDD2 ≤ 3.6 V; min and max over the recommended operating range; typ at TA = 25°C, VDD1 = VDD2 = 3.3 V; each voltage relative to its own ground",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "test conditions"
+   ],
+   "rows": [
+    [
+     "DC specifications",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Total supply current (a), 1.5 Mbps: VDD1 or VBUS1 supply current",
+     "IDD1 (L)",
+     "",
+     "5",
+     "7",
+     "mA",
+     "750 kHz logic signal rate CL = 450 pF"
+    ],
+    [
+     "Total supply current (a), 1.5 Mbps: VDD2 or VBUS2 supply current",
+     "IDD2 (L)",
+     "",
+     "5",
+     "7",
+     "mA",
+     "750 kHz logic signal rate CL = 450 pF"
+    ],
+    [
+     "Total supply current (a), 12 Mbps: VDD1 or VBUS1 supply current",
+     "IDD1 (F)",
+     "",
+     "6",
+     "8",
+     "mA",
+     "6 MHz logic signal rate CL = 50 pF"
+    ],
+    [
+     "Total supply current (a), 12 Mbps: VDD2 or VBUS2 supply current",
+     "IDD2 (F)",
+     "",
+     "6",
+     "8",
+     "mA",
+     "6 MHz logic signal rate CL = 50 pF"
+    ],
+    [
+     "Idle current: VDD1 or VBUS1 idle current",
+     "IDD1 (I)",
+     "",
+     "1.7",
+     "2.3",
+     "mA",
+     ""
+    ],
+    [
+     "Input currents",
+     "IDD-, IDD+, IUD+, IUD-, ISPD, IPIN, ISPU, IPDEN",
+     "-1",
+     "+0.1",
+     "+1",
+     "µA",
+     "0 V ≤ VDD-, VDD+, VUD+, VUD-, VSPD, VPIN, VSPU, VPDEN ≤ 3.0"
+    ],
+    [
+     "Single-ended logic high input threshold",
+     "VIH",
+     "2.0",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "Single-ended logic low input threshold",
+     "VIL",
+     "",
+     "",
+     "0.8",
+     "V",
+     ""
+    ],
+    [
+     "Single-ended input hysteresis",
+     "VHST",
+     "",
+     "0.4",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "Differential input sensitivity",
+     "VDI",
+     "0.2",
+     "",
+     "",
+     "V",
+     "|VXD+ - VXD-|"
+    ],
+    [
+     "Logic high output voltages",
+     "VOH",
+     "2.8",
+     "",
+     "3.6",
+     "V",
+     "RL = 15 kΩ, VL = 0 V"
+    ],
+    [
+     "Logic low output voltages",
+     "VOL",
+     "0",
+     "",
+     "0.3",
+     "V",
+     "RL = 1.5 kΩ, VL = 3.6 V"
+    ],
+    [
+     "VDD1 and VDD2 supply undervoltage lockout",
+     "VUVLO",
+     "2.4",
+     "",
+     "3.1",
+     "V",
+     ""
+    ],
+    [
+     "VBUS1 supply undervoltage lockout",
+     "VUVLOB1",
+     "3.5",
+     "",
+     "4.35",
+     "V",
+     ""
+    ],
+    [
+     "VBUS2 supply undervoltage lockout",
+     "VUVLOB2",
+     "3.5",
+     "",
+     "4.4",
+     "V",
+     ""
+    ],
+    [
+     "Transceiver capacitance",
+     "CIN",
+     "",
+     "10",
+     "",
+     "pF",
+     "UD+, UD-, DD+, DD- to ground"
+    ],
+    [
+     "Capacitance matching",
+     "",
+     "",
+     "10",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Full speed driver impedance",
+     "ZOUTH",
+     "4",
+     "",
+     "20",
+     "Ω",
+     ""
+    ],
+    [
+     "Impedance matching",
+     "",
+     "",
+     "10",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Switching specifications, I/O pins low speed",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Low speed data rate",
+     "",
+     "",
+     "1.5",
+     "",
+     "Mbps",
+     "CL = 50 pF"
+    ],
+    [
+     "Propagation delay (b)",
+     "tPHLL, tPLHL",
+     "",
+     "",
+     "325",
+     "ns",
+     "CL = 50 pF, SPD = SPU = low, VDD1, VDD2 = 3.3 V"
+    ],
+    [
+     "Side 1 output rise/fall time (10% to 90%) low speed",
+     "tRL/tFL",
+     "75",
+     "",
+     "300",
+     "ns",
+     "CL = 450 pF, SPD = SPU = low, VDD1, VDD2 = 3.3 V"
+    ],
+    [
+     "Low speed differential jitter, next transition",
+     "|tLJN|",
+     "",
+     "45",
+     "",
+     "ns",
+     "CL = 50 pF"
+    ],
+    [
+     "Low speed differential jitter, paired transition",
+     "|tLJP|",
+     "",
+     "15",
+     "",
+     "ns",
+     "CL = 50 pF"
+    ],
+    [
+     "Switching specifications, I/O pins full speed",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Full speed data rate",
+     "",
+     "",
+     "12",
+     "",
+     "Mbps",
+     "CL = 50 pF"
+    ],
+    [
+     "Propagation delay (b)",
+     "tPHLF, tPLHF",
+     "20",
+     "60",
+     "70",
+     "ns",
+     "CL = 50 pF, SPD = SPU = high, VDD1, VDD2 = 3.3 V"
+    ],
+    [
+     "Output rise/fall time (10% to 90%) full speed",
+     "tRF/tFF",
+     "4",
+     "",
+     "20",
+     "ns",
+     "CL = 50 pF, SPD = SPU = high, VDD1, VDD2 = 3.3 V"
+    ],
+    [
+     "Full speed differential jitter, next transition",
+     "|tFJN|",
+     "",
+     "3",
+     "",
+     "ns",
+     "CL = 50 pF"
+    ],
+    [
+     "Full speed differential jitter, paired transition",
+     "|tFJP|",
+     "",
+     "1",
+     "",
+     "ns",
+     "CL = 50 pF"
+    ],
+    [
+     "For all operating modes",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Common-mode transient immunity at logic high output (c)",
+     "|CMH|",
+     "25",
+     "35",
+     "",
+     "kV/µs",
+     "VUD+, VUD-, VDD+, VDD- = VDD1 or VDD2, VCM = 1000 V, transient magnitude = 800 V"
+    ],
+    [
+     "Common-mode transient immunity at logic low output (c)",
+     "|CML|",
+     "25",
+     "35",
+     "",
+     "kV/µs",
+     "VUD+, VUD-, VDD+, VDD- = 0 V, VCM = 1000 V, transient magnitude = 800 V"
+    ]
+   ],
+   "notes": [
+    "a. Measured with a USB-compliant load, at a steady data rate with 50% duty, toggling between J and K states.",
+    "b. Low speed delay between a downstream line and its upstream partner (DD+ and UD+, DD- and UD-), either direction, taken between the 50% points of the input edge and the matching output edge.",
+    "c. CMH is the fastest common-mode slew under which the output stays above 0.8 VDDx; CML is the fastest under which it stays below 0.8 V. Both apply to edges of either direction; transient magnitude is how far the common-mode voltage is swept."
+   ]
+  },
+  {
+   "title": "Package characteristics",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "test conditions"
+   ],
+   "rows": [
+    [
+     "Resistance (input to output) (a)",
+     "RI-O",
+     "",
+     "10^12",
+     "",
+     "Ω",
+     ""
+    ],
+    [
+     "Capacitance (input to output) (a)",
+     "CI-O",
+     "",
+     "2.2",
+     "",
+     "pF",
+     "f = 1 MHz"
+    ],
+    [
+     "Input capacitance (b)",
+     "CI",
+     "",
+     "4.0",
+     "",
+     "pF",
+     ""
+    ],
+    [
+     "IC junction-to-ambient thermal resistance",
+     "θJA",
+     "",
+     "45",
+     "",
+     "°C/W",
+     "Thermocouple located at center of package underside"
+    ]
+   ],
+   "notes": [
+    "a. The part is treated as two terminals: pins 1 to 8 shorted together and pins 9 to 16 shorted together.",
+    "b. Measured between a data input pin and ground."
+   ]
+  },
+  {
+   "title": "Regulatory approvals",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "agency",
+    "scheme",
+    "insulation and ratings",
+    "file"
+   ],
+   "rows": [
+    [
+     "UL",
+     "Recognized under 1577 component recognition program (a)",
+     "Single protection, 5000 V rms isolation voltage",
+     "E214100"
+    ],
+    [
+     "CSA",
+     "Component Acceptance Notice #5A",
+     "Basic insulation per CSA 60950-1-07 and IEC 60950-1, 600 V rms (848 V peak) maximum working voltage",
+     "205078"
+    ],
+    [
+     "CSA",
+     "Component Acceptance Notice #5A",
+     "Reinforced insulation per CSA 60950-1-07 and IEC 60950-1, 380 V rms (537 V peak) maximum working voltage, RW-16 package",
+     "205078"
+    ],
+    [
+     "CSA",
+     "Component Acceptance Notice #5A",
+     "Reinforced insulation per CSA 60950-1-07 and IEC 60950-1, 400 V rms (565 V peak) maximum working voltage, RI-16 package",
+     "205078"
+    ],
+    [
+     "CSA",
+     "Component Acceptance Notice #5A",
+     "Reinforced insulation per IEC 60601-1, 125 V rms (176 V peak) maximum working voltage, RW-16 package",
+     "205078"
+    ],
+    [
+     "CSA",
+     "Component Acceptance Notice #5A",
+     "Reinforced insulation per IEC 60601-1, 250 V rms (353 V peak) maximum working voltage, RI-16 package",
+     "205078"
+    ],
+    [
+     "VDE",
+     "DIN V VDE V 0884-10 (VDE V 0884-10):2006-12 (b)",
+     "Reinforced insulation, 846 V peak",
+     "2471900-4880-0001"
+    ]
+   ],
+   "notes": [
+    "a. Every unit is proof tested under UL 1577 at ≥6000 V rms for 1 s, leakage detection limit 10 µA.",
+    "b. Every unit is proof tested under DIN V VDE V 0884-10 at ≥1050 V peak for 1 s, partial discharge limit 5 pC. Parts carrying the * mark are VDE 0884-10 approved."
+   ]
+  },
+  {
+   "title": "Insulation and safety-related specifications",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Rated dielectric insulation voltage",
+     "",
+     "5000",
+     "V rms",
+     "1 minute duration"
+    ],
+    [
+     "Minimum external air gap (clearance)",
+     "L(I01)",
+     "8.0 min",
+     "mm",
+     "Input terminals to output terminals, shortest distance through air"
+    ],
+    [
+     "Minimum external tracking (creepage), RW-16 package",
+     "L(I02)",
+     "7.7 min",
+     "mm",
+     "Input terminals to output terminals, shortest path along the body"
+    ],
+    [
+     "Minimum external tracking (creepage), RI-16 package",
+     "L(I02)",
+     "8.3 min",
+     "mm",
+     "Input terminals to output terminals, shortest path along the body"
+    ],
+    [
+     "Minimum internal gap (internal clearance)",
+     "",
+     "0.017 min",
+     "mm",
+     "Distance through the insulation"
+    ],
+    [
+     "Tracking resistance (comparative tracking index)",
+     "CTI",
+     ">175",
+     "V",
+     "DIN IEC 112/VDE 0303 Part 1"
+    ],
+    [
+     "Isolation group",
+     "",
+     "IIIa",
+     "",
+     "Material Group (DIN VDE 0110, 1/89, Table 1)"
+    ]
+   ]
+  },
+  {
+   "title": "DIN V VDE V 0884-10 (VDE V 0884-10) insulation characteristics",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "description",
+    "conditions",
+    "symbol",
+    "characteristic",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Installation classification per DIN VDE 0110, rated mains voltage ≤ 150 V rms",
+     "",
+     "",
+     "I to IV",
+     ""
+    ],
+    [
+     "Installation classification per DIN VDE 0110, rated mains voltage ≤ 300 V rms",
+     "",
+     "",
+     "I to III",
+     ""
+    ],
+    [
+     "Installation classification per DIN VDE 0110, rated mains voltage ≤ 400 V rms",
+     "",
+     "",
+     "I to II",
+     ""
+    ],
+    [
+     "Climatic classification",
+     "",
+     "",
+     "40/105/21",
+     ""
+    ],
+    [
+     "Pollution degree per DIN VDE 0110, Table 1",
+     "",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "Maximum working insulation voltage",
+     "",
+     "VIORM",
+     "846",
+     "V peak"
+    ],
+    [
+     "Input-to-output test voltage, method b1",
+     "VIORM × 1.875 = VPR, 100% production test, tm = 1 sec, partial discharge < 5 pC",
+     "VPR",
+     "1590",
+     "V peak"
+    ],
+    [
+     "Input-to-output test voltage, method a, after environmental tests subgroup 1",
+     "VIORM × 1.6 = VPR, tm = 60 sec, partial discharge < 5 pC",
+     "VPR",
+     "1375",
+     "V peak"
+    ],
+    [
+     "Input-to-output test voltage, method a, after input and/or safety test subgroup 2 and subgroup 3",
+     "VIORM × 1.2 = VPR, tm = 60 sec, partial discharge < 5 pC",
+     "VPR",
+     "1018",
+     "V peak"
+    ],
+    [
+     "Highest allowable overvoltage",
+     "Transient overvoltage, tTR = 10 seconds",
+     "VTR",
+     "6000",
+     "V peak"
+    ],
+    [
+     "Safety-limiting values: case temperature",
+     "Maximum value allowed in the event of a failure",
+     "TS",
+     "150",
+     "°C"
+    ],
+    [
+     "Safety-limiting values: side 1 + side 2 current",
+     "Maximum value allowed in the event of a failure",
+     "IS1",
+     "550",
+     "mA"
+    ],
+    [
+     "Insulation resistance at TS",
+     "VIO = 500 V",
+     "RS",
+     ">10^9",
+     "Ω"
+    ]
+   ],
+   "notes": [
+    "Reinforced isolation holds only within the safety-limiting values, which protective circuits must keep the part inside. Packages with the * mark carry DIN V VDE V 0884-10 approval."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating temperature",
+     "TA",
+     "-40",
+     "+105",
+     "°C"
+    ],
+    [
+     "Supply voltages (a)",
+     "VBUS1, VBUS2",
+     "3.1",
+     "5.5",
+     "V"
+    ],
+    [
+     "Input signal rise and fall times",
+     "",
+     "",
+     "1.0",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "a. Each voltage is referred to its own side's ground."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 9,
+   "conditions": "Ambient temperature = 25°C, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Storage temperature",
+     "TST",
+     "-65°C to +150°C"
+    ],
+    [
+     "Ambient operating temperature",
+     "TA",
+     "-40°C to +105°C"
+    ],
+    [
+     "Supply voltages (a)",
+     "VBUS1, VBUS2, VDD1, VDD2",
+     "-0.5 V to +6.5 V"
+    ],
+    [
+     "Upstream input voltage (a, b)",
+     "VUD+, VUD-, VSPU",
+     "-0.5 V to VDD1 + 0.5 V"
+    ],
+    [
+     "Downstream input voltage (a, b)",
+     "VDD+, VDD-, VSPD, VPIN",
+     "-0.5 V to VDD2 + 0.5 V"
+    ],
+    [
+     "Average output current per pin (c), side 1",
+     "IO1",
+     "-10 mA to +10 mA"
+    ],
+    [
+     "Average output current per pin (c), side 2",
+     "IO2",
+     "-10 mA to +10 mA"
+    ],
+    [
+     "Common-mode transients (d)",
+     "",
+     "-100 kV/µs to +100 kV/µs"
+    ]
+   ],
+   "notes": [
+    "a. Each voltage is referred to its own side's ground.",
+    "b. VDD1 and VBUS1 are the upstream-side supplies, VDD2 and VBUS2 the downstream-side supplies.",
+    "c. The maximum current at other temperatures follows the thermal derating curve.",
+    "d. Transients across the isolation barrier. Beyond this rating latch-up or permanent damage can result."
+   ]
+  },
+  {
+   "title": "Maximum continuous working voltage",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "max",
+    "unit",
+    "constraint"
+   ],
+   "rows": [
+    [
+     "AC voltage, bipolar waveform",
+     "565",
+     "V peak",
+     "50-year minimum lifetime"
+    ],
+    [
+     "AC voltage, unipolar waveform, basic insulation",
+     "848",
+     "V peak",
+     "Maximum approved working voltage per IEC 60950-1"
+    ],
+    [
+     "AC voltage, unipolar waveform, reinforced insulation",
+     "846",
+     "V peak",
+     "Maximum approved working voltage per VDE 0884-10"
+    ],
+    [
+     "DC voltage, basic insulation",
+     "848",
+     "V peak",
+     "Maximum approved working voltage per IEC 60950-1"
+    ],
+    [
+     "DC voltage, reinforced insulation",
+     "846",
+     "V peak",
+     "Maximum approved working voltage per VDE 0884-10"
+    ]
+   ],
+   "notes": [
+    "The limits apply to the steady voltage magnitude held across the isolation barrier."
+   ]
+  },
+  {
+   "title": "Truth table, control signals and power (positive logic)",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "VSPU input",
+    "VBUS1, VDD1 state",
+    "VUD+, VUD- state",
+    "VSPD input",
+    "VBUS2, VDD2 state",
+    "VDD+, VDD- state",
+    "VPIN input",
+    "notes"
+   ],
+   "rows": [
+    [
+     "H",
+     "Powered",
+     "Active",
+     "H",
+     "Powered",
+     "Active",
+     "H",
+     "Inputs and outputs use the full speed logic convention and timing."
+    ],
+    [
+     "L",
+     "Powered",
+     "Active",
+     "L",
+     "Powered",
+     "Active",
+     "H",
+     "Inputs and outputs use the low speed logic convention and timing."
+    ],
+    [
+     "L",
+     "Powered",
+     "Active",
+     "H",
+     "Powered",
+     "Active",
+     "H",
+     "Not allowed: SPU and SPD must match; the host sees a communication error."
+    ],
+    [
+     "H",
+     "Powered",
+     "Active",
+     "L",
+     "Powered",
+     "Active",
+     "H",
+     "Not allowed: SPU and SPD must match; the host sees a communication error."
+    ],
+    [
+     "X",
+     "Powered",
+     "Z",
+     "X",
+     "Powered",
+     "Z",
+     "L",
+     "Side 1 shows the USB cable a disconnected port."
+    ],
+    [
+     "X",
+     "Unpowered",
+     "X",
+     "X",
+     "Powered",
+     "Z",
+     "X",
+     "With VDD1 lost, the downstream drivers go high-Z within 32 bit times; side 2 starts up high-Z."
+    ],
+    [
+     "X",
+     "Powered",
+     "Z",
+     "X",
+     "Unpowered",
+     "X",
+     "X",
+     "With VDD2 lost, side 1 drops the pull-up and turns off the upstream drivers within 32 bit times."
+    ]
+   ],
+   "notes": [
+    "H is a logic high, L a logic low, X either level, Z a high-impedance output."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Thermal derating curve, safety-limiting values against case temperature per DIN V VDE V 0884-10",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Safe operating VDD1 current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Safe operating current",
+     "points": [
+      [
+       0,
+       555
+      ],
+      [
+       25,
+       555
+      ],
+      [
+       150,
+       0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum allowable external magnetic flux density",
+   "page": 14,
+   "conditions": "",
+   "x": {
+    "label": "Magnetic field frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Maximum allowable magnetic flux density",
+    "unit": "kgauss",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "Maximum flux density",
+     "points": [
+      [
+       1880,
+       99.0
+      ],
+      [
+       10000,
+       18.3
+      ],
+      [
+       100000,
+       1.79
+      ],
+      [
+       1000000,
+       0.176
+      ],
+      [
+       10000000,
+       0.0172
+      ],
+      [
+       98300000,
+       0.00172
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum allowable current for various current-to-ADuM4160 spacings",
+   "page": 14,
+   "conditions": "",
+   "x": {
+    "label": "Magnetic field frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Maximum allowable current",
+    "unit": "kA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "Distance = 1 m",
+     "points": [
+      [
+       102500,
+       930.1
+      ],
+      [
+       1000000,
+       100
+      ],
+      [
+       96330000,
+       0.9982
+      ]
+     ]
+    },
+    {
+     "label": "Distance = 100 mm",
+     "points": [
+      [
+       10130,
+       930.1
+      ],
+      [
+       100000,
+       100
+      ],
+      [
+       96330000,
+       0.1001
+      ]
+     ]
+    },
+    {
+     "label": "Distance = 5 mm",
+     "points": [
+      [
+       1032,
+       452.6
+      ],
+      [
+       1000000,
+       0.467
+      ],
+      [
+       44070000,
+       0.01063
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application: isolated USB peripheral",
+   "page": 12,
+   "description": "The isolator sits between the host cable and a peripheral's microcontroller. Side 1 takes VBUS and ground from the USB host and carries the upstream data lines; side 2 runs from the peripheral's own 3.3 V supply, on VBUS2 and VDD2 together, with its data lines on the microcontroller's USB pins. A microcontroller output drives PIN, so the peripheral decides when the upstream pull-up appears and enumeration starts. The two grounds stay separate.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADuM4160"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "USB host"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "microcontroller",
+     "external": true
+    },
+    {
+     "ref": "U3",
+     "type": "other",
+     "value": "power supply",
+     "external": true
+    },
+    {
+     "ref": "J_MAINS",
+     "type": "terminal",
+     "value": "mains input"
+    }
+   ],
+   "notes": [
+    "Misprint: the side 1 data lines read DD+ and DD-; they are UD+ and UD-.",
+    "Besides the parts shown, the part needs only external series resistors and bypass capacitors to operate."
+   ]
+  },
+  {
+   "id": "layout",
+   "title": "Recommended printed circuit board layout: bus-powered side 1, 3.3 V side 2",
+   "page": 13,
+   "description": "Side 1 is fed 5.0 V from the USB bus on VBUS1, and its regulator puts out 3.3 V on VDD1. Side 2 is fed 3.3 V on both VBUS2 and VDD2, which bypasses its regulator. Each supply pin has a 0.1 µF low-ESR capacitor to its own ground, and each data line has a 24 Ω ±1% series resistor for full speed. PDEN is tied to VDD1 for normal operation. SPU, SPD and PIN are brought out to be strapped: SPU and SPD to the same speed, PIN high to attach. The two ground pins on each side are joined.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADuM4160"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "low ESR, VBUS1 bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "low ESR, VDD1 bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "low ESR, VBUS2 bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "low ESR, VDD2 bypass"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "24 Ω ±1%"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "24 Ω ±1%"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "24 Ω ±1%"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "24 Ω ±1%"
+    },
+    {
+     "ref": "J_VBUS1",
+     "type": "terminal",
+     "value": "VBUS1, 5.0 V input"
+    },
+    {
+     "ref": "J_GND1",
+     "type": "terminal",
+     "value": "GND1"
+    },
+    {
+     "ref": "J_SPU",
+     "type": "terminal",
+     "value": "SPU"
+    },
+    {
+     "ref": "J_UDM",
+     "type": "terminal",
+     "value": "UD-"
+    },
+    {
+     "ref": "J_UDP",
+     "type": "terminal",
+     "value": "UD+"
+    },
+    {
+     "ref": "J_3V3",
+     "type": "terminal",
+     "value": "VBUS2 and VDD2, 3.3 V input"
+    },
+    {
+     "ref": "J_GND2",
+     "type": "terminal",
+     "value": "GND2"
+    },
+    {
+     "ref": "J_SPD",
+     "type": "terminal",
+     "value": "SPD"
+    },
+    {
+     "ref": "J_PIN",
+     "type": "terminal",
+     "value": "PIN"
+    },
+    {
+     "ref": "J_DDM",
+     "type": "terminal",
+     "value": "DD-"
+    },
+    {
+     "ref": "J_DDP",
+     "type": "terminal",
+     "value": "DD+"
+    }
+   ],
+   "notes": [
+    "Side 2 can instead run from a 5 V VBUS2, wired the same way as side 1.",
+    "The 24 Ω resistors are needed only at full speed.",
+    "Lead length from both ends of each bypass capacitor to the supply pin totals 10 mm or less."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Voltage induced in the receiving coil",
+   "expr": "V = (-dβ/dt) × Σ π rn², n = 1, 2, …, N",
+   "where": {
+    "V": "voltage across the receiving coil",
+    "β": "magnetic flux density, gauss",
+    "N": "turn count of the receiving coil",
+    "rn": "radius of turn n of the receiving coil, cm"
+   },
+   "note": "Limiting V to half of the 0.5 V decoder margin gives the maximum allowable flux density curve.",
+   "page": 14
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Data direction",
+   "page": 12,
+   "text": "Each side watches its inputs. A transition out of the idle J state on one side sets that side as the source; the far side turns on its output buffers and stops edge detection on its own inputs, while the source side keeps its outputs off, so data cannot loop back through the barrier. Transfer continues until an end-of-packet or a long enough idle, after which both sides release their buffers and wait for the next activity. Direction is decided packet by packet."
+  },
+  {
+   "topic": "Signal reconstruction",
+   "page": 12,
+   "text": "Only three line states are sent across: J, K and SE0. The output side rebuilds the signal with a fixed delay from the differential input. Invalid SE0 and SE1 transients are not passed, and internal logic hides any glitch caused by the single-ended and differential receivers switching at different levels."
+  },
+  {
+   "topic": "Suspend",
+   "page": 12,
+   "text": "There is no suspend mode. With the bus idle, supply current stays below the 2.5 mA USB suspend limit."
+  },
+  {
+   "topic": "Speed setting",
+   "page": 12,
+   "text": "An upstream-facing port runs at one speed, so the J/K logic levels, slew rate and timing are fixed by strapping SPU on side 1 and SPD on side 2. Both must be set the same and match the peripheral's speed: high for 12 Mbps full speed, low for 1.5 Mbps low speed."
+  },
+  {
+   "topic": "Pull-up and enumeration",
+   "page": 12,
+   "text": "The upstream pull-up and the downstream pull-downs are inside the part. Enumeration starts when the pull-up raises UD+ or UD- at the cable end; PIN on side 2 switches that pull-up, so it can be tied to VDD2, to the peripheral's own pull-up, or to a control line to choose when the device attaches. Beyond this delayed attach, USB traffic passes unchanged and the peripheral design needs no changes."
+  },
+  {
+   "topic": "Pull-down enable",
+   "page": 10,
+   "text": "PDEN is read on leaving reset. Tied to VDD1 the downstream pull-downs are connected as normal; held at GND1 at that moment they are disconnected, which allows the buffer impedance to be measured."
+  },
+  {
+   "topic": "Delay and hub count",
+   "page": 12,
+   "text": "The added propagation delay is similar to that of a hub and cable, so an isolated peripheral counts as having a built-in hub when totting up hub tiers. An ADuM4160 on the upstream port of a hub chip makes an isolated hub, which complies when it is budgeted as two hub delays; the hub chip then lets the isolator run at full speed while still serving low speed devices."
+  },
+  {
+   "topic": "Host and cable use",
+   "page": 13,
+   "text": "Both sides can drive USB cables, so the part can isolate a downstream (host) port or a cable. A compliant downstream port must sense a device's speed from its pull-up and adapt; with speed strapped, such a port works at one speed only. That suits embedded hosts but is not a fully compliant general-purpose port, and an isolated cable likewise runs only at its preset speed."
+  },
+  {
+   "topic": "Power supply options",
+   "page": 13,
+   "text": "Each side has a VBUSx and a VDDx pin and an internal LDO. With 5 V on VBUSx the LDO makes 3.3 V to run the xD+ and xD- drivers, and VDDx gives access to that rail for bypassing and for biasing pull-ups. With only 3.3 V available, feed it to both VBUSx and VDDx; the regulator is then disabled and the side runs straight from the 3.3 V supply."
+  },
+  {
+   "topic": "Loss of power",
+   "page": 11,
+   "text": "If side 1 loses VDD1, the downstream drivers go high impedance within 32 bit times, and side 2 starts up in high impedance. If side 2 loses VDD2, side 1 removes its pull-up and disables its UD+ and UD- drivers inside 32 bit times. PIN low also leaves side 1 looking disconnected."
+  },
+  {
+   "topic": "DC correctness",
+   "page": 13,
+   "text": "Each input edge sends a pulse of about 1 ns across the transformer to a bistable decoder. When the input has not changed for roughly 12 USB bit times, refresh pulses carrying the present state are sent. If the decoder sees no pulses for roughly 36 bit times it takes the input side as unpowered or faulty, and a watchdog forces the output to its default state."
+  },
+  {
+   "topic": "Magnetic field immunity",
+   "page": 14,
+   "text": "Transformer output pulses exceed 1.0 V and the decoder threshold is about 0.5 V, leaving 0.5 V of margin; the 3 V operating condition is the most sensitive. At 1 MHz a 0.2 kgauss field induces 0.25 V, about half the threshold, and causes no false transition; if it coincides with a pulse of the worst polarity the pulse drops from more than 1.0 V to 0.75 V, still above threshold. At 1 MHz it would take 0.5 kA flowing 5 mm from the part to disturb it. Under strong high-frequency fields, loops in PCB traces can themselves induce enough voltage to upset following circuits."
+  },
+  {
+   "topic": "PCB layout",
+   "page": 13,
+   "text": "The logic interfaces need no external circuits. At full speed each D+ and D- line on both sides takes a 24 Ω ±1% series resistor; low speed needs none. Bypass every supply pin with 0.1 µF low-ESR capacitors, keeping the total lead length between the capacitor ends and the supply pin to 10 mm or less. Also consider bypassing between pins 2 and 8 and between pins 9 and 15, unless each side's ground pair is joined close to the package."
+  },
+  {
+   "topic": "Common-mode transients and layout",
+   "page": 13,
+   "text": "Where common-mode transients are large, keep board coupling across the barrier small, and lay out so that whatever coupling remains reaches all pins of one side equally; uneven coupling can push pin-to-pin voltages past the absolute maximum and cause latch-up or permanent damage."
+  },
+  {
+   "topic": "Insulation lifetime",
+   "page": 15,
+   "text": "Insulation wears out under voltage stress at a rate set by the waveform across the barrier. Bipolar ac is the hardest case and sets the 565 V peak working voltage for a 50-year life. Unipolar ac (varying between 0 V and a limit of either sign without crossing 0 V) and dc stress the insulation much less, so the higher approved working voltages hold for 50 years with those waveforms. A waveform that is neither should be treated as bipolar ac and kept to the 50-year bipolar value. The approved working voltage may exceed the 50-year value, and running at it can shorten insulation life."
+  }
+ ],
+ "packages": [
+  {
+   "name": "16-lead SOIC_W wide body (RW-16), JEDEC MS-013-AA",
+   "page": 16,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "min",
+    "max"
+   ],
+   "rows": [
+    [
+     "Body length",
+     "10.10",
+     "10.50"
+    ],
+    [
+     "Body width",
+     "7.40",
+     "7.60"
+    ],
+    [
+     "Overall width across leads",
+     "10.00",
+     "10.65"
+    ],
+    [
+     "Overall height",
+     "2.35",
+     "2.65"
+    ],
+    [
+     "Standoff",
+     "0.10",
+     "0.30"
+    ],
+    [
+     "Lead pitch",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "Lead width",
+     "0.31",
+     "0.51"
+    ],
+    [
+     "Lead thickness",
+     "0.20",
+     "0.33"
+    ],
+    [
+     "Foot length",
+     "0.40",
+     "1.27"
+    ],
+    [
+     "Corner chamfer (× 45°)",
+     "0.25",
+     "0.75"
+    ],
+    [
+     "Foot angle",
+     "0°",
+     "8°"
+    ],
+    [
+     "Coplanarity",
+     "",
+     "0.10"
+    ]
+   ]
+  },
+  {
+   "name": "16-lead SOIC_IC wide body, increased creepage (RI-16-1), JEDEC MS-013-AC",
+   "page": 16,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "min",
+    "max"
+   ],
+   "rows": [
+    [
+     "Body length",
+     "12.60",
+     "13.00"
+    ],
+    [
+     "Body width",
+     "7.40",
+     "7.60"
+    ],
+    [
+     "Overall width across leads",
+     "10.00",
+     "10.65"
+    ],
+    [
+     "Overall height",
+     "2.35",
+     "2.65"
+    ],
+    [
+     "Standoff",
+     "0.10",
+     "0.30"
+    ],
+    [
+     "Lead pitch",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "Lead width",
+     "0.31",
+     "0.51"
+    ],
+    [
+     "Lead thickness",
+     "0.20",
+     "0.33"
+    ],
+    [
+     "Foot length",
+     "0.40",
+     "1.27"
+    ],
+    [
+     "Corner chamfer (× 45°)",
+     "0.25",
+     "0.75"
+    ],
+    [
+     "Foot angle",
+     "0°",
+     "8°"
+    ],
+    [
+     "Coplanarity",
+     "",
+     "0.10"
+    ]
+   ]
+  }
+ ]
+}

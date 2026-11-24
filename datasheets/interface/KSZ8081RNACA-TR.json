@@ -1,0 +1,3621 @@
+{
+ "sheet": 1,
+ "name": "KSZ8081RNACA-TR",
+ "kind": "interface",
+ "manufacturer": "Microchip",
+ "title": "10BASE-T/100BASE-TX Ethernet PHY with RMII",
+ "source": {
+  "document": "DS00002199A",
+  "revision": "DS00002199A (06-14-16)",
+  "pages": 52
+ },
+ "summary": "A one-port Fast Ethernet physical-layer transceiver for CAT-5 twisted pair, 10 and 100 Mb/s in half or full duplex, talking to a MAC over RMII and managed over MDC/MDIO. It runs from one 3.3 V supply, makes its own 1.2 V core rail, accepts 1.8, 2.5 or 3.3 V digital I/O, and carries the line terminations on chip. The RNA version starts up taking a 25 MHz crystal and sending the 50 MHz RMII clock to the MAC; the RND version starts up taking a 50 MHz clock on XI. Both come in a 24-pin 4 mm x 4 mm QFN.",
+ "key_figures": [
+  [
+   "Line rates",
+   "10BASE-T and 100BASE-TX, half and full duplex, IEEE 802.3"
+  ],
+  [
+   "MAC interface",
+   "RMII v1.2, 50 MHz reference clock out (RNA default) or in (RND default)"
+  ],
+  [
+   "Supply",
+   "3.135 V to 3.465 V on VDDA_3.3; VDDIO 3.3, 2.5 or 1.8 V"
+  ],
+  [
+   "Supply current",
+   "47 mA typ at 100BASE-TX full traffic; 41 mA typ at 10BASE-T"
+  ],
+  [
+   "Power, 100BASE-TX link up",
+   "152 mW typ (VDDA_3.3 = VDDIO = 3.3 V)"
+  ],
+  [
+   "Transmit set resistor",
+   "6.49 kΩ 1 % from REXT to ground"
+  ],
+  [
+   "MDC clock",
+   "2.5 MHz typ, 10 MHz max"
+  ],
+  [
+   "ESD",
+   "6 kV HBM"
+  ],
+  [
+   "Ambient",
+   "0 °C to +70 °C (CA), -40 °C to +85 °C (IA)"
+  ],
+  [
+   "Package",
+   "24-pin QFN, 4 mm x 4 mm, exposed ground paddle"
+  ]
+ ],
+ "part_numbers": {
+  "page": 50,
+  "columns": [
+   "part number",
+   "interface",
+   "package",
+   "clock at power-up",
+   "ambient temperature"
+  ],
+  "rows": [
+   [
+    "KSZ8081RNACA",
+    "RMII",
+    "24-pin QFN",
+    "25 MHz input, 50 MHz output",
+    "0°C to +70°C (commercial)"
+   ],
+   [
+    "KSZ8081RNAIA",
+    "RMII",
+    "24-pin QFN",
+    "25 MHz input, 50 MHz output",
+    "-40°C to +85°C (industrial)"
+   ],
+   [
+    "KSZ8081RNDCA",
+    "RMII",
+    "24-pin QFN",
+    "50 MHz input",
+    "0°C to +70°C (commercial)"
+   ],
+   [
+    "KSZ8081RNDIA",
+    "RMII",
+    "24-pin QFN",
+    "50 MHz input",
+    "-40°C to +85°C (industrial)"
+   ]
+  ],
+  "notes": [
+   "Order code fields: KSZ8081, then R for RMII, N for the 24-pin QFN, A (25 MHz in, 50 MHz clocks out) or D (50 MHz clock in), then CA for commercial or IA for industrial temperature."
+  ]
+ },
+ "pins": [
+  {
+   "package": "24-pin QFN 4 mm x 4 mm",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VDD_1.2",
+     "type": "P",
+     "function": "Core supply at 1.2 V, made by the on-chip regulator. Bypass to ground with 2.2 µF and 0.1 µF."
+    },
+    {
+     "pin": "2",
+     "name": "VDDA_3.3",
+     "type": "P",
+     "function": "Analog supply, 3.3 V."
+    },
+    {
+     "pin": "3",
+     "name": "RXM",
+     "type": "I/O",
+     "function": "Line pair, negative side; receives in MDI mode, transmits in MDI-X mode."
+    },
+    {
+     "pin": "4",
+     "name": "RXP",
+     "type": "I/O",
+     "function": "Line pair, positive side; receives in MDI mode, transmits in MDI-X mode."
+    },
+    {
+     "pin": "5",
+     "name": "TXM",
+     "type": "I/O",
+     "function": "Line pair, negative side; transmits in MDI mode, receives in MDI-X mode."
+    },
+    {
+     "pin": "6",
+     "name": "TXP",
+     "type": "I/O",
+     "function": "Line pair, positive side; transmits in MDI mode, receives in MDI-X mode."
+    },
+    {
+     "pin": "7",
+     "name": "XO",
+     "type": "O",
+     "function": "Crystal drive output for a 25 MHz crystal. Left open when XI is fed by an oscillator or other clock."
+    },
+    {
+     "pin": "8",
+     "name": "XI",
+     "type": "I",
+     "function": "Reference clock input: a 25 MHz ±50 ppm crystal, oscillator or clock in 25 MHz mode, a 50 MHz ±50 ppm oscillator or clock in 50 MHz mode. At power-up the RNA expects 25 MHz on XI and the RND 50 MHz; either can be switched afterwards with register 1Fh bit 7."
+    },
+    {
+     "pin": "9",
+     "name": "REXT",
+     "type": "I",
+     "function": "Transmit current set: 6.49 kΩ to ground."
+    },
+    {
+     "pin": "10",
+     "name": "MDIO",
+     "type": "Ipu/Opu",
+     "function": "Management data in and out. Open-drain with a weak internal pull-up; needs an external 1.0 kΩ pull-up."
+    },
+    {
+     "pin": "11",
+     "name": "MDC",
+     "type": "Ipu",
+     "function": "Management clock input; MDIO is timed to it."
+    },
+    {
+     "pin": "12",
+     "name": "RXD1",
+     "type": "Ipd/O",
+     "function": "RMII receive data bit 1, timed to the 50 MHz reference clock."
+    },
+    {
+     "pin": "13",
+     "name": "RXD0",
+     "type": "Ipu/O",
+     "function": "RMII receive data bit 0, timed to the 50 MHz reference clock."
+    },
+    {
+     "pin": "14",
+     "name": "VDDIO",
+     "type": "P",
+     "function": "Digital I/O supply, 3.3 V, 2.5 V or 1.8 V."
+    },
+    {
+     "pin": "15",
+     "name": "CRS_DV/PHYAD[1:0]",
+     "type": "Ipd/O",
+     "function": "RMII carrier sense and receive data valid output. During reset it is the PHY address strap, latched as reset is released."
+    },
+    {
+     "pin": "16",
+     "name": "REF_CLK",
+     "type": "Ipd/O",
+     "function": "In 25 MHz mode, the MAC's 50 MHz RMII clock, sent out. In 50 MHz mode it is unused and left open. The RNA powers up in 25 MHz mode, the RND in 50 MHz mode; register 1Fh bit 7 changes either."
+    },
+    {
+     "pin": "17",
+     "name": "RXER",
+     "type": "Ipd/O",
+     "function": "RMII receive error output. It must read low as reset is released for normal operation; an external pull-down keeps a MAC input from pulling it high. If it latches high, register 16h bit 15 clears the resulting factory test mode."
+    },
+    {
+     "pin": "18",
+     "name": "INTRP",
+     "type": "Ipu/Opu",
+     "function": "Programmable interrupt output. Open-drain with a weak internal pull-up; needs an external 1.0 kΩ pull-up."
+    },
+    {
+     "pin": "19",
+     "name": "TXEN",
+     "type": "I",
+     "function": "RMII transmit enable input."
+    },
+    {
+     "pin": "20",
+     "name": "TXD0",
+     "type": "I",
+     "function": "RMII transmit data bit 0, timed to the 50 MHz reference clock."
+    },
+    {
+     "pin": "21",
+     "name": "TXD1",
+     "type": "I/O",
+     "function": "RMII transmit data bit 1, timed to the 50 MHz reference clock. In NAND tree mode it is the tree's output."
+    },
+    {
+     "pin": "22",
+     "name": "GND",
+     "type": "GND",
+     "function": "Ground."
+    },
+    {
+     "pin": "23",
+     "name": "LED0/ANEN_SPEED",
+     "type": "Ipu/O",
+     "function": "LED output, programmed by register 1Fh bits 5:4; low turns the LED on. During reset it is the strap for auto-negotiation enable and speed, latched into register 0h bits 12 and 13 as reset is released."
+    },
+    {
+     "pin": "24",
+     "name": "RST#",
+     "type": "Ipu",
+     "function": "Chip reset input, active low."
+    },
+    {
+     "pin": "Paddle",
+     "name": "GND",
+     "type": "GND",
+     "function": "Exposed paddle on the underside: ground."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Pin type codes",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "code",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "P",
+     "power supply"
+    ],
+    [
+     "GND",
+     "ground"
+    ],
+    [
+     "I",
+     "input"
+    ],
+    [
+     "O",
+     "output"
+    ],
+    [
+     "I/O",
+     "bidirectional"
+    ],
+    [
+     "Ipu",
+     "input with internal pull-up"
+    ],
+    [
+     "Ipu/O",
+     "input with internal pull-up during power-up and reset; output after"
+    ],
+    [
+     "Ipd/O",
+     "input with internal pull-down during power-up and reset; output after"
+    ],
+    [
+     "Ipu/Opu",
+     "input with internal pull-up and output with internal pull-up"
+    ]
+   ],
+   "notes": [
+    "The pull-up and pull-down values are in the electrical characteristics table."
+   ]
+  },
+  {
+   "title": "LED0 output states",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "LED mode (reg 1Fh bits 5:4)",
+    "line state",
+    "pin",
+    "LED"
+   ],
+   "rows": [
+    [
+     "00",
+     "no link",
+     "high",
+     "off"
+    ],
+    [
+     "00",
+     "link",
+     "low",
+     "on"
+    ],
+    [
+     "00",
+     "activity",
+     "toggle",
+     "blinking"
+    ],
+    [
+     "01",
+     "no link",
+     "high",
+     "off"
+    ],
+    [
+     "01",
+     "link",
+     "low",
+     "on"
+    ],
+    [
+     "10, 11",
+     "reserved",
+     "",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Strap-in options",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "name",
+    "type",
+    "pull-up",
+    "pull-down"
+   ],
+   "rows": [
+    [
+     "15",
+     "PHYAD[1:0]",
+     "Ipd/O",
+     "PHY address 00011b (3h)",
+     "PHY address 00000b (0h), default"
+    ],
+    [
+     "23",
+     "ANEN_SPEED",
+     "Ipu/O",
+     "auto-negotiation on, 100 Mb/s, default",
+     "auto-negotiation off, 10 Mb/s"
+    ]
+   ],
+   "notes": [
+    "Straps are latched as reset is released. PHY address bits 4:2 are always 000.",
+    "ANEN_SPEED loads register 0h bit 12 (auto-negotiation enable), bit 13 (speed) and the speed abilities in register 4h.",
+    "Where MAC inputs on the CRS_DV line drive it during power-up or reset, an external 4.7 kΩ pull-up or 1.0 kΩ pull-down on pin 15 sets the address reliably."
+   ]
+  },
+  {
+   "title": "RMII signals",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "signal",
+    "direction at PHY",
+    "direction at MAC",
+    "function"
+   ],
+   "rows": [
+    [
+     "REF_CLK",
+     "output (25 MHz clock mode) / no connect (50 MHz clock mode)",
+     "input, or input or no connect",
+     "50 MHz reference clock for receive, transmit and control"
+    ],
+    [
+     "TXEN",
+     "input",
+     "output",
+     "transmit enable"
+    ],
+    [
+     "TXD[1:0]",
+     "input",
+     "output",
+     "transmit data"
+    ],
+    [
+     "CRS_DV",
+     "output",
+     "input",
+     "carrier sense / receive data valid"
+    ],
+    [
+     "RXD[1:0]",
+     "output",
+     "input",
+     "receive data"
+    ],
+    [
+     "RXER",
+     "output",
+     "input or not required",
+     "receive error"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "RMII back-to-back connections",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "device 1 pin",
+    "device 1 number",
+    "device 1 type",
+    "device 2 pin",
+    "device 2 number",
+    "device 2 type"
+   ],
+   "rows": [
+    [
+     "CRS_DV",
+     "15",
+     "Output",
+     "TXEN",
+     "19",
+     "Input"
+    ],
+    [
+     "RXD1",
+     "12",
+     "Output",
+     "TXD1",
+     "21",
+     "Input"
+    ],
+    [
+     "RXD0",
+     "13",
+     "Output",
+     "TXD0",
+     "20",
+     "Input"
+    ],
+    [
+     "TXEN",
+     "19",
+     "Input",
+     "CRS_DV",
+     "15",
+     "Output"
+    ],
+    [
+     "TXD1",
+     "21",
+     "Input",
+     "RXD1",
+     "12",
+     "Output"
+    ],
+    [
+     "TXD0",
+     "20",
+     "Input",
+     "RXD0",
+     "13",
+     "Output"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "MII management frame format",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "frame",
+    "preamble",
+    "start of frame",
+    "op code",
+    "PHY address bits [4:0]",
+    "register address bits [4:0]",
+    "TA",
+    "data bits [15:0]",
+    "idle"
+   ],
+   "rows": [
+    [
+     "Read",
+     "32 1's",
+     "01",
+     "10",
+     "000AA",
+     "RRRRR",
+     "Z0",
+     "DDDDDDDD_DDDDDDDD",
+     "Z"
+    ],
+    [
+     "Write",
+     "32 1's",
+     "01",
+     "01",
+     "000AA",
+     "RRRRR",
+     "10",
+     "DDDDDDDD_DDDDDDDD",
+     "Z"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "MDI and MDI-X pin assignment",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "RJ-45 pin",
+    "MDI signal",
+    "MDI-X signal"
+   ],
+   "rows": [
+    [
+     "1",
+     "TX+",
+     "RX+"
+    ],
+    [
+     "2",
+     "TX–",
+     "RX–"
+    ],
+    [
+     "3",
+     "RX+",
+     "TX+"
+    ],
+    [
+     "6",
+     "RX–",
+     "TX–"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "NAND tree test pin order",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "name",
+    "NAND tree role"
+   ],
+   "rows": [
+    [
+     "10",
+     "MDIO",
+     "Input"
+    ],
+    [
+     "11",
+     "MDC",
+     "Input"
+    ],
+    [
+     "12",
+     "RXD1",
+     "Input"
+    ],
+    [
+     "13",
+     "RXD0",
+     "Input"
+    ],
+    [
+     "15",
+     "CRS_DV",
+     "Input"
+    ],
+    [
+     "16",
+     "REF_CLK",
+     "Input"
+    ],
+    [
+     "18",
+     "INTRP",
+     "Input"
+    ],
+    [
+     "19",
+     "TXEN",
+     "Input"
+    ],
+    [
+     "23",
+     "LED0",
+     "Input"
+    ],
+    [
+     "20",
+     "TXD0",
+     "Input"
+    ],
+    [
+     "21",
+     "TXD1",
+     "Output"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Power pin connections",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "number",
+    "connection"
+   ],
+   "rows": [
+    [
+     "VDD_1.2",
+     "1",
+     "2.2 µF and 0.1 µF to ground"
+    ],
+    [
+     "VDDA_3.3",
+     "2",
+     "board 3.3 V through a ferrite bead; 22 µF and 0.1 µF to ground"
+    ],
+    [
+     "VDDIO",
+     "14",
+     "board 3.3 V for 3.3 V I/O; 22 µF and 0.1 µF to ground"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Typical current and power, VDDIO = 3.3 V",
+   "page": 24,
+   "conditions": "VDDA_3.3 = 3.3 V, VDDIO = 3.3 V",
+   "columns": [
+    "condition",
+    "VDDA_3.3 current",
+    "VDDIO current",
+    "total chip power"
+   ],
+   "rows": [
+    [
+     "100BASE-TX link up, no traffic",
+     "34 mA",
+     "12 mA",
+     "152 mW"
+    ],
+    [
+     "100BASE-TX full duplex, 100% utilization",
+     "34 mA",
+     "13 mA",
+     "155 mW"
+    ],
+    [
+     "10BASE-T link up, no traffic",
+     "14 mA",
+     "11 mA",
+     "82.5 mW"
+    ],
+    [
+     "10BASE-T full duplex, 100% utilization",
+     "30 mA",
+     "11 mA",
+     "135 mW"
+    ],
+    [
+     "Power-saving mode (reg 1Fh bit 10 = 1)",
+     "14 mA",
+     "10 mA",
+     "79.2 mW"
+    ],
+    [
+     "EDPD mode (reg 18h bit 11 = 0)",
+     "10 mA",
+     "10 mA",
+     "66 mW"
+    ],
+    [
+     "EDPD mode (reg 18h bit 11 = 0) and PLL off (reg 10h bit 4 = 1)",
+     "3.77 mA",
+     "1.54 mA",
+     "1.75 mW"
+    ],
+    [
+     "Software power-down (reg 0h bit 11 = 1)",
+     "2.59 mA",
+     "1.51 mA",
+     "13.5 mW"
+    ],
+    [
+     "Software power-down (reg 0h bit 11 = 1) and slow-oscillator mode (reg 11h bit 5 = 1)",
+     "1.36 mA",
+     "0.45 mA",
+     "5.97 mW"
+    ]
+   ],
+   "notes": [
+    "The on-chip 1.2 V regulator and the line driver currents are counted in these figures.",
+    "The 1.75 mW total for EDPD with PLL off should read 17.5 mW: 3.3 V × (3.77 + 1.54) mA = 17.5 mW."
+   ]
+  },
+  {
+   "title": "Typical current and power, VDDIO = 2.5 V",
+   "page": 24,
+   "conditions": "VDDA_3.3 = 3.3 V, VDDIO = 2.5 V",
+   "columns": [
+    "condition",
+    "VDDA_3.3 current",
+    "VDDIO current",
+    "total chip power"
+   ],
+   "rows": [
+    [
+     "100BASE-TX link up, no traffic",
+     "34 mA",
+     "12 mA",
+     "142 mW"
+    ],
+    [
+     "100BASE-TX full duplex, 100% utilization",
+     "34 mA",
+     "13 mA",
+     "145 mW"
+    ],
+    [
+     "10BASE-T link up, no traffic",
+     "15 mA",
+     "11 mA",
+     "77 mW"
+    ],
+    [
+     "10BASE-T full duplex, 100% utilization",
+     "27 mA",
+     "11 mA",
+     "117 mW"
+    ],
+    [
+     "Power-saving mode (reg 1Fh bit 10 = 1)",
+     "15 mA",
+     "10 mA",
+     "74.5 mW"
+    ],
+    [
+     "EDPD mode (reg 18h bit 11 = 0)",
+     "11 mA",
+     "10 mA",
+     "61.3 mW"
+    ],
+    [
+     "EDPD mode (reg 18h bit 11 = 0) and PLL off (reg 10h bit 4 = 1)",
+     "3.55 mA",
+     "1.35 mA",
+     "15.1 mW"
+    ],
+    [
+     "Software power-down (reg 0h bit 11 = 1)",
+     "2.29 mA",
+     "1.34 mA",
+     "10.9 mW"
+    ],
+    [
+     "Software power-down (reg 0h bit 11 = 1) and slow-oscillator mode (reg 11h bit 5 = 1)",
+     "1.15 mA",
+     "0.29 mA",
+     "4.52 mW"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Typical current and power, VDDIO = 1.8 V",
+   "page": 25,
+   "conditions": "VDDA_3.3 = 3.3 V, VDDIO = 1.8 V",
+   "columns": [
+    "condition",
+    "VDDA_3.3 current",
+    "VDDIO current",
+    "total chip power"
+   ],
+   "rows": [
+    [
+     "100BASE-TX link up, no traffic",
+     "34 mA",
+     "11 mA",
+     "132 mW"
+    ],
+    [
+     "100BASE-TX full duplex, 100% utilization",
+     "34 mA",
+     "12 mA",
+     "134 mW"
+    ],
+    [
+     "10BASE-T link up, no traffic",
+     "15 mA",
+     "10 mA",
+     "67.5 mW"
+    ],
+    [
+     "10BASE-T full duplex, 100% utilization",
+     "27 mA",
+     "10 mA",
+     "107 mW"
+    ],
+    [
+     "Power-saving mode (reg 1Fh bit 10 = 1)",
+     "15 mA",
+     "9 mA",
+     "65.7 mW"
+    ],
+    [
+     "EDPD mode (reg 18h bit 11 = 0)",
+     "11 mA",
+     "9 mA",
+     "52.5 mW"
+    ],
+    [
+     "EDPD mode (reg 18h bit 11 = 0) and PLL off (reg 10h bit 4 = 1)",
+     "4.05 mA",
+     "1.21 mA",
+     "15.5 mW"
+    ],
+    [
+     "Software power-down (reg 0h bit 11 = 1)",
+     "2.79 mA",
+     "1.21 mA",
+     "11.4 mW"
+    ],
+    [
+     "Software power-down (reg 0h bit 11 = 1) and slow-oscillator mode (reg 11h bit 5 = 1)",
+     "1.65 mA",
+     "0.19 mA",
+     "5.79 mW"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register map",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "register (hex)",
+    "name"
+   ],
+   "rows": [
+    [
+     "0h",
+     "Basic Control"
+    ],
+    [
+     "1h",
+     "Basic Status"
+    ],
+    [
+     "2h",
+     "PHY Identifier 1"
+    ],
+    [
+     "3h",
+     "PHY Identifier 2"
+    ],
+    [
+     "4h",
+     "Auto-Negotiation Advertisement"
+    ],
+    [
+     "5h",
+     "Auto-Negotiation Link Partner Ability"
+    ],
+    [
+     "6h",
+     "Auto-Negotiation Expansion"
+    ],
+    [
+     "7h",
+     "Auto-Negotiation Next Page"
+    ],
+    [
+     "8h",
+     "Link Partner Next Page Ability"
+    ],
+    [
+     "9h",
+     "Reserved"
+    ],
+    [
+     "10h",
+     "Digital Reserved Control"
+    ],
+    [
+     "11h",
+     "AFE Control 1"
+    ],
+    [
+     "12h - 14h",
+     "Reserved"
+    ],
+    [
+     "15h",
+     "RXER Counter"
+    ],
+    [
+     "16h",
+     "Operation Mode Strap Override"
+    ],
+    [
+     "17h",
+     "Operation Mode Strap Status"
+    ],
+    [
+     "18h",
+     "Expanded Control"
+    ],
+    [
+     "19h - 1Ah",
+     "Reserved"
+    ],
+    [
+     "1Bh",
+     "Interrupt Control/Status"
+    ],
+    [
+     "1Ch",
+     "Reserved"
+    ],
+    [
+     "1Dh",
+     "LinkMD Control/Status"
+    ],
+    [
+     "1Eh",
+     "PHY Control 1"
+    ],
+    [
+     "1Fh",
+     "PHY Control 2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register bits",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "address",
+    "name",
+    "function",
+    "mode",
+    "default"
+   ],
+   "rows": [
+    [
+     "0.15",
+     "Reset",
+     "1: software reset; 0: normal. Clears itself.",
+     "RW/SC",
+     "0"
+    ],
+    [
+     "0.14",
+     "Loopback",
+     "1: loopback; 0: normal",
+     "RW",
+     "0"
+    ],
+    [
+     "0.13",
+     "Speed Select",
+     "1: 100 Mb/s; 0: 10 Mb/s. No effect while auto-negotiation is on (0.12 = 1).",
+     "RW",
+     "set by the ANEN_SPEED strap"
+    ],
+    [
+     "0.12",
+     "Auto-Negotiation Enable",
+     "1: auto-negotiation on; 0: off. When on, its result takes precedence over 0.13 and 0.8.",
+     "RW",
+     "set by the ANEN_SPEED strap"
+    ],
+    [
+     "0.11",
+     "Power-Down",
+     "1: power-down; 0: normal. Leaving power-down through software reset takes two writes of 0.15 = 1: the first ends power-down, the second resets and re-reads the straps.",
+     "RW",
+     "0"
+    ],
+    [
+     "0.10",
+     "Isolate",
+     "1: PHY electrically isolated from the MII; 0: normal",
+     "RW",
+     "0"
+    ],
+    [
+     "0.9",
+     "Restart Auto-Negotiation",
+     "1: restart auto-negotiation; 0: normal. Clears itself.",
+     "RW/SC",
+     "0"
+    ],
+    [
+     "0.8",
+     "Duplex Mode",
+     "1: full duplex; 0: half duplex",
+     "RW",
+     "1"
+    ],
+    [
+     "0.7",
+     "Collision Test",
+     "1: COL test on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "0.6:0",
+     "Reserved",
+     "",
+     "RO",
+     "000_0000"
+    ],
+    [
+     "1.15",
+     "100Base-T4",
+     "1: T4 capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "1.14",
+     "100Base-TX Full-Duplex",
+     "1: 100 Mb/s full duplex capable; 0: not",
+     "RO",
+     "1"
+    ],
+    [
+     "1.13",
+     "100Base-TX Half-Duplex",
+     "1: 100 Mb/s half duplex capable; 0: not",
+     "RO",
+     "1"
+    ],
+    [
+     "1.12",
+     "10Base-T Full-Duplex",
+     "1: 10 Mb/s full duplex capable; 0: not",
+     "RO",
+     "1"
+    ],
+    [
+     "1.11",
+     "10Base-T Half-Duplex",
+     "1: 10 Mb/s half duplex capable; 0: not",
+     "RO",
+     "1"
+    ],
+    [
+     "1.10:7",
+     "Reserved",
+     "",
+     "RO",
+     "000_0"
+    ],
+    [
+     "1.6",
+     "No Preamble",
+     "1: preamble suppression; 0: normal preamble",
+     "RO",
+     "1"
+    ],
+    [
+     "1.5",
+     "Auto-Negotiation Complete",
+     "1: auto-negotiation finished; 0: not finished",
+     "RO",
+     "0"
+    ],
+    [
+     "1.4",
+     "Remote Fault",
+     "1: remote fault; 0: none",
+     "RO/LH",
+     "0"
+    ],
+    [
+     "1.3",
+     "Auto-Negotiation Ability",
+     "1: able to auto-negotiate; 0: not",
+     "RO",
+     "1"
+    ],
+    [
+     "1.2",
+     "Link Status",
+     "1: link up; 0: link down",
+     "RO/LL",
+     "0"
+    ],
+    [
+     "1.1",
+     "Jabber Detect",
+     "1: jabber detected; 0: none",
+     "RO/LH",
+     "0"
+    ],
+    [
+     "1.0",
+     "Extended Capability",
+     "1: extended capability registers supported",
+     "RO",
+     "1"
+    ],
+    [
+     "2.15:0",
+     "PHY ID Number",
+     "bits 3 to 18 of the OUI (Kendin OUI 0010A1h)",
+     "RO",
+     "0022h"
+    ],
+    [
+     "3.15:10",
+     "PHY ID Number",
+     "bits 19 to 24 of the OUI (Kendin OUI 0010A1h)",
+     "RO",
+     "0001_01"
+    ],
+    [
+     "3.9:4",
+     "Model Number",
+     "six-bit model number",
+     "RO",
+     "01_0110"
+    ],
+    [
+     "3.3:0",
+     "Revision Number",
+     "four-bit silicon revision",
+     "RO",
+     "silicon Rev. A: A2 = 0x0, A3 = 0x1"
+    ],
+    [
+     "4.15",
+     "Next Page",
+     "1: next page capable; 0: not. Setting it to 0 is recommended.",
+     "RW",
+     "1"
+    ],
+    [
+     "4.14",
+     "Reserved",
+     "",
+     "RO",
+     "0"
+    ],
+    [
+     "4.13",
+     "Remote Fault",
+     "1: remote fault supported; 0: no remote fault",
+     "RW",
+     "0"
+    ],
+    [
+     "4.12",
+     "Reserved",
+     "",
+     "RO",
+     "0"
+    ],
+    [
+     "4.11:10",
+     "Pause",
+     "00: no pause; 10: asymmetric; 01: symmetric; 11: asymmetric and symmetric",
+     "RW",
+     "00"
+    ],
+    [
+     "4.9",
+     "100BASE-T4",
+     "1: T4 capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "4.8",
+     "100BASE-TX Full-Duplex",
+     "1: advertise 100 Mb/s full duplex; 0: do not",
+     "RW",
+     "set by the ANEN_SPEED strap"
+    ],
+    [
+     "4.7",
+     "100BASE-TX Half-Duplex",
+     "1: advertise 100 Mb/s half duplex; 0: do not",
+     "RW",
+     "set by the ANEN_SPEED strap"
+    ],
+    [
+     "4.6",
+     "10BASE-T Full-Duplex",
+     "1: advertise 10 Mb/s full duplex; 0: do not",
+     "RW",
+     "1"
+    ],
+    [
+     "4.5",
+     "10BASE-T Half-Duplex",
+     "1: advertise 10 Mb/s half duplex; 0: do not",
+     "RW",
+     "1"
+    ],
+    [
+     "4.4:0",
+     "Selector Field",
+     "00001: IEEE 802.3",
+     "RW",
+     "0_0001"
+    ],
+    [
+     "5.15",
+     "Next Page",
+     "1: partner next page capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "5.14",
+     "Acknowledge",
+     "1: link code word received from the partner; 0: not yet",
+     "RO",
+     "0"
+    ],
+    [
+     "5.13",
+     "Remote Fault",
+     "1: remote fault detected; 0: none",
+     "RO",
+     "0"
+    ],
+    [
+     "5.12",
+     "Reserved",
+     "",
+     "RO",
+     "0"
+    ],
+    [
+     "5.11:10",
+     "Pause",
+     "00: no pause; 10: asymmetric; 01: symmetric; 11: asymmetric and symmetric",
+     "RO",
+     "00"
+    ],
+    [
+     "5.9",
+     "100Base-T4",
+     "1: partner T4 capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "5.8",
+     "100Base-TX Full-Duplex",
+     "1: partner 100 Mb/s full duplex capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "5.7",
+     "100Base-TX Half-Duplex",
+     "1: partner 100 Mb/s half duplex capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "5.6",
+     "10Base-T Full-Duplex",
+     "1: partner 10 Mb/s full duplex capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "5.5",
+     "10Base-T Half-Duplex",
+     "1: partner 10 Mb/s half duplex capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "5.4:0",
+     "Selector Field",
+     "00001: IEEE 802.3",
+     "RO",
+     "0_0001"
+    ],
+    [
+     "6.15:5",
+     "Reserved",
+     "",
+     "RO",
+     "0000_0000_000"
+    ],
+    [
+     "6.4",
+     "Parallel Detection Fault",
+     "1: parallel detection found a fault; 0: none",
+     "RO/LH",
+     "0"
+    ],
+    [
+     "6.3",
+     "Link Partner Next Page Able",
+     "1: partner has next page ability; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "6.2",
+     "Next Page Able",
+     "1: this device has next page ability; 0: not",
+     "RO",
+     "1"
+    ],
+    [
+     "6.1",
+     "Page Received",
+     "1: new page received; 0: none yet",
+     "RO/LH",
+     "0"
+    ],
+    [
+     "6.0",
+     "Link Partner Auto-Negotiation Able",
+     "1: partner can auto-negotiate; 0: cannot",
+     "RO",
+     "0"
+    ],
+    [
+     "7.15",
+     "Next Page",
+     "1: more next pages follow; 0: last page",
+     "RW",
+     "0"
+    ],
+    [
+     "7.14",
+     "Reserved",
+     "",
+     "RO",
+     "0"
+    ],
+    [
+     "7.13",
+     "Message Page",
+     "1: message page; 0: unformatted page",
+     "RW",
+     "1"
+    ],
+    [
+     "7.12",
+     "Acknowledge2",
+     "1: will comply with the message; 0: cannot comply",
+     "RW",
+     "0"
+    ],
+    [
+     "7.11",
+     "Toggle",
+     "1: the previous transmitted link code word value was logic 1; 0: logic 0",
+     "RO",
+     "0"
+    ],
+    [
+     "7.10:0",
+     "Message Field",
+     "11-bit message code (2048 messages)",
+     "RW",
+     "000_0000_0001"
+    ],
+    [
+     "8.15",
+     "Next Page",
+     "1: more next pages follow; 0: last page",
+     "RO",
+     "0"
+    ],
+    [
+     "8.14",
+     "Acknowledge",
+     "1: link word received successfully; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "8.13",
+     "Message Page",
+     "1: message page; 0: unformatted page",
+     "RO",
+     "0"
+    ],
+    [
+     "8.12",
+     "Acknowledge2",
+     "1: partner can act on the information; 0: cannot",
+     "RO",
+     "0"
+    ],
+    [
+     "8.11",
+     "Toggle",
+     "1: the previous transmitted link code word was logic 0; 0: it was logic 1",
+     "RO",
+     "0"
+    ],
+    [
+     "8.10:0",
+     "Message Field",
+     "11-bit message code (2048 messages)",
+     "RO",
+     "000_0000_0000"
+    ],
+    [
+     "10.15:5",
+     "Reserved",
+     "",
+     "RW",
+     "0000_0000_000"
+    ],
+    [
+     "10.4",
+     "PLL Off",
+     "1: PLL turns off by itself in EDPD mode; 0: PLL stays on in EDPD mode. EDPD itself is register 18h bit 11.",
+     "RW",
+     "0"
+    ],
+    [
+     "10.3:0",
+     "Reserved",
+     "",
+     "RW",
+     "0000"
+    ],
+    [
+     "11.15:6",
+     "Reserved",
+     "",
+     "RW",
+     "0000_0000_00"
+    ],
+    [
+     "11.5",
+     "Slow-Oscillator Mode Enable",
+     "1: XI's crystal or clock is disconnected and the internal slow oscillator runs the chip, for an idle device; 0: off. Enabling it also puts the analog side in software power-down.",
+     "RW",
+     "0"
+    ],
+    [
+     "11.4:0",
+     "Reserved",
+     "",
+     "RW",
+     "0_0000"
+    ],
+    [
+     "15.15:0",
+     "RXER Counter",
+     "count of frames with symbol errors",
+     "RO/SC",
+     "0000h"
+    ],
+    [
+     "16.15",
+     "Reserved Factory Mode",
+     "0: normal; 1: factory test mode. Write 0 to leave it if RXER latched high at reset.",
+     "RW",
+     "0; set by the pull-up or pull-down on RXER (pin 17)"
+    ],
+    [
+     "16.14:11",
+     "Reserved",
+     "",
+     "RW",
+     "000_0"
+    ],
+    [
+     "16.10",
+     "Reserved",
+     "",
+     "RO",
+     "0"
+    ],
+    [
+     "16.9",
+     "B-CAST_OFF Override",
+     "1: override the B-CAST_OFF strap; PHY address 0 is then not a broadcast address",
+     "RW",
+     "0"
+    ],
+    [
+     "16.8:7",
+     "Reserved",
+     "",
+     "RW",
+     "0_0"
+    ],
+    [
+     "16.6",
+     "RMII B-to-B Override",
+     "1: override the strap for RMII back-to-back mode (bit 1 must also be 1)",
+     "RW",
+     "0"
+    ],
+    [
+     "16.5",
+     "NAND Tree Override",
+     "1: override the strap for NAND tree mode",
+     "RW",
+     "0"
+    ],
+    [
+     "16.4:2",
+     "Reserved",
+     "",
+     "RW",
+     "0_00"
+    ],
+    [
+     "16.1",
+     "RMII Override",
+     "1: override the strap for RMII mode",
+     "RW",
+     "1"
+    ],
+    [
+     "16.0",
+     "Reserved",
+     "",
+     "RW",
+     "0"
+    ],
+    [
+     "17.15:13",
+     "PHYAD[2:0] Strap-In Status",
+     "000: strapped to PHY address 0; 011: strapped to PHY address 3. Only addresses 0h and 3h exist.",
+     "RO",
+     ""
+    ],
+    [
+     "17.12:2",
+     "Reserved",
+     "",
+     "RO",
+     ""
+    ],
+    [
+     "17.1",
+     "RMII Strap-In Status",
+     "1: strapped to RMII mode",
+     "RO",
+     ""
+    ],
+    [
+     "17.0",
+     "Reserved",
+     "",
+     "RO",
+     ""
+    ],
+    [
+     "18.15:12",
+     "Reserved",
+     "",
+     "RW",
+     "0000"
+    ],
+    [
+     "18.11",
+     "EDPD Disabled",
+     "energy-detect power-down: 1 disabled; 0 enabled. PLL off is register 10h bit 4.",
+     "RW",
+     "1"
+    ],
+    [
+     "18.10:0",
+     "Reserved",
+     "",
+     "RW",
+     "000_0000_0000"
+    ],
+    [
+     "1B.15",
+     "Jabber Interrupt Enable",
+     "1: jabber interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.14",
+     "Receive Error Interrupt Enable",
+     "1: receive error interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.13",
+     "Page Received Interrupt Enable",
+     "1: page received interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.12",
+     "Parallel Detect Fault Interrupt Enable",
+     "1: parallel detect fault interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.11",
+     "Link Partner Acknowledge Interrupt Enable",
+     "1: link partner acknowledge interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.10",
+     "Link-Down Interrupt Enable",
+     "1: link-down interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.9",
+     "Remote Fault Interrupt Enable",
+     "1: remote fault interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.8",
+     "Link-Up Interrupt Enable",
+     "1: link-up interrupt on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1B.7",
+     "Jabber Interrupt",
+     "1: jabber happened; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1B.6",
+     "Receive Error Interrupt",
+     "1: receive error happened; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1B.5",
+     "Page Receive Interrupt",
+     "1: page received; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1B.4",
+     "Parallel Detect Fault Interrupt",
+     "1: parallel detect fault happened; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1B.3",
+     "Link Partner Acknowledge Interrupt",
+     "1: link partner acknowledge happened; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1B.2",
+     "Link-Down Interrupt",
+     "1: link went down; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1B.1",
+     "Remote Fault Interrupt",
+     "1: remote fault happened; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1B.0",
+     "Link-Up Interrupt",
+     "1: link came up; 0: not",
+     "RO/SC",
+     "0"
+    ],
+    [
+     "1D.15",
+     "Cable Diagnostic Test Enable",
+     "1: start the cable test, clears itself when the test ends; 0: test done and the result valid",
+     "RW/SC",
+     "0"
+    ],
+    [
+     "1D.14:13",
+     "Cable Diagnostic Test Result",
+     "00: normal; 01: open found; 10: short found; 11: test failed",
+     "RO",
+     "00"
+    ],
+    [
+     "1D.12",
+     "Short Cable Indicator",
+     "1: LinkMD found a cable shorter than 10 m",
+     "RO",
+     "0"
+    ],
+    [
+     "1D.11:9",
+     "Reserved",
+     "",
+     "RW",
+     "000"
+    ],
+    [
+     "1D.8:0",
+     "Cable Fault Counter",
+     "distance to the fault",
+     "RO",
+     "0_0000_0000"
+    ],
+    [
+     "1E.15:10",
+     "Reserved",
+     "",
+     "RO",
+     "0000_00"
+    ],
+    [
+     "1E.9",
+     "Enable Pause (Flow Control)",
+     "1: flow control capable; 0: not",
+     "RO",
+     "0"
+    ],
+    [
+     "1E.8",
+     "Link Status",
+     "1: link up; 0: link down",
+     "RO",
+     "0"
+    ],
+    [
+     "1E.7",
+     "Polarity Status",
+     "1: polarity reversed; 0: not reversed",
+     "RO",
+     ""
+    ],
+    [
+     "1E.6",
+     "Reserved",
+     "",
+     "RO",
+     "0"
+    ],
+    [
+     "1E.5",
+     "MDI/MDI-X State",
+     "1: MDI-X; 0: MDI",
+     "RO",
+     ""
+    ],
+    [
+     "1E.4",
+     "Energy Detect",
+     "1: signal present on the receive pair; 0: no signal",
+     "RO",
+     "0"
+    ],
+    [
+     "1E.3",
+     "PHY Isolate",
+     "1: PHY isolated; 0: normal",
+     "RW",
+     "0"
+    ],
+    [
+     "1E.2:0",
+     "Operation Mode Indication",
+     "000: still auto-negotiating; 001: 10Base-T half duplex; 010: 100Base-TX half duplex; 101: 10Base-T full duplex; 110: 100Base-TX full duplex; 011, 100, 111: reserved",
+     "RO",
+     "000"
+    ],
+    [
+     "1F.15",
+     "HP_MDIX",
+     "1: HP Auto MDI/MDI-X; 0: Microchip Auto MDI/MDI-X",
+     "RW",
+     "1"
+    ],
+    [
+     "1F.14",
+     "MDI/MDI-X Select",
+     "with Auto MDI/MDI-X off: 1 = MDI-X, transmit on RXP/RXM (pins 4, 3), receive on TXP/TXM (pins 6, 5); 0 = MDI, transmit on TXP/TXM, receive on RXP/RXM",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.13",
+     "Pair Swap Disable",
+     "1: Auto MDI/MDI-X off; 0: on",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.12",
+     "Reserved",
+     "",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.11",
+     "Force Link",
+     "1: force link pass, the transmitter sends a pattern with no link; 0: normal",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.10",
+     "Power Saving",
+     "1: power saving on; 0: off",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.9",
+     "Interrupt Level",
+     "1: INTRP active high; 0: active low",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.8",
+     "Enable Jabber",
+     "1: jabber counter on; 0: off",
+     "RW",
+     "1"
+    ],
+    [
+     "1F.7",
+     "RMII Reference Clock Select",
+     "1: RNA takes 50 MHz on XI (50 MHz mode), RND takes 25 MHz (25 MHz mode); 0: RNA takes 25 MHz on XI (25 MHz mode), RND takes 50 MHz (50 MHz mode)",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.6",
+     "Reserved",
+     "",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.5:4",
+     "LED Mode",
+     "00: LED0 link/activity; 01: LED0 link; 10, 11: reserved",
+     "RW",
+     "00"
+    ],
+    [
+     "1F.3",
+     "Disable Transmitter",
+     "1: transmitter off; 0: on",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.2",
+     "Remote Loopback",
+     "1: remote (analog) loopback on; 0: normal",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.1",
+     "Reserved",
+     "",
+     "RW",
+     "0"
+    ],
+    [
+     "1F.0",
+     "Disable Data Scrambling",
+     "1: scrambler off; 0: on",
+     "RW",
+     "0"
+    ]
+   ],
+   "notes": [
+    "Mode codes. RW: readable and writable; RO: readable only; SC: clears itself; LH: latches when high; LL: latches when low."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage, VDD_1.2",
+     "VIN",
+     "-0.5",
+     "+1.8",
+     "V"
+    ],
+    [
+     "Supply voltage, VDDIO and VDDA_3.3",
+     "VIN",
+     "-0.5",
+     "+5.0",
+     "V"
+    ],
+    [
+     "Input voltage (all inputs)",
+     "",
+     "-0.5",
+     "+5.0",
+     "V"
+    ],
+    [
+     "Output voltage (all outputs)",
+     "",
+     "-0.5",
+     "+5.0",
+     "V"
+    ],
+    [
+     "Lead temperature (soldering, 10 s)",
+     "",
+     "",
+     "+260",
+     "°C"
+    ],
+    [
+     "Storage temperature",
+     "TS",
+     "-55",
+     "+150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress past these values can damage the part permanently; long exposure at the limits can shorten its life."
+   ]
+  },
+  {
+   "title": "Operating ratings",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage, VDDIO_3.3 and VDDA_3.3",
+     "",
+     "+3.135",
+     "+3.465",
+     "V"
+    ],
+    [
+     "Supply voltage, VDDIO_2.5",
+     "",
+     "+2.375",
+     "+2.625",
+     "V"
+    ],
+    [
+     "Supply voltage, VDDIO_1.8",
+     "",
+     "+1.710",
+     "+1.890",
+     "V"
+    ],
+    [
+     "Ambient temperature, commercial",
+     "TA",
+     "0",
+     "+70",
+     "°C"
+    ],
+    [
+     "Ambient temperature, industrial",
+     "TA",
+     "-40",
+     "+85",
+     "°C"
+    ],
+    [
+     "Maximum junction temperature",
+     "TJ max.",
+     "",
+     "+125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Function is guaranteed only inside these ratings.",
+    "Input signals are not to be driven while the device is unpowered."
+   ]
+  },
+  {
+   "title": "Thermal resistance",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Thermal resistance, junction to ambient",
+     "ΘJA",
+     "+47.84",
+     "°C/W"
+    ],
+    [
+     "Thermal resistance, junction to case",
+     "ΘJC",
+     "+14.71",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 36,
+   "conditions": "TA = 25°C; packaged product",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply current, 10BASE-T",
+     "IDD1_3.3V",
+     "VDDIO, VDDA_3.3 = 3.3V; full-duplex traffic @ 100% utilization",
+     "",
+     "41",
+     "",
+     "mA"
+    ],
+    [
+     "Supply current, 100BASE-TX",
+     "IDD2_3.3V",
+     "VDDIO, VDDA_3.3 = 3.3V; full-duplex traffic @ 100% utilization",
+     "",
+     "47",
+     "",
+     "mA"
+    ],
+    [
+     "Supply current, EDPD mode",
+     "IDD3_3.3V",
+     "VDDIO, VDDA_3.3 = 3.3V; Ethernet cable disconnected (Reg. 18h.11 = 0)",
+     "",
+     "20",
+     "",
+     "mA"
+    ],
+    [
+     "Supply current, power-down mode",
+     "IDD4_3.3V",
+     "VDDIO, VDDA_3.3 = 3.3V; software power-down (Reg. 0h.11 = 1)",
+     "",
+     "4",
+     "",
+     "mA"
+    ],
+    [
+     "Output high voltage",
+     "VOH",
+     "VDDIO = 3.3V",
+     "2.4",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Output high voltage",
+     "VOH",
+     "VDDIO = 2.5V",
+     "2.0",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Output high voltage",
+     "VOH",
+     "VDDIO = 1.8V",
+     "1.5",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Output low voltage",
+     "VOL",
+     "VDDIO = 3.3V",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Output low voltage",
+     "VOL",
+     "VDDIO = 2.5V",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Output low voltage",
+     "VOL",
+     "VDDIO = 1.8V",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "Output tri-state leakage",
+     "|IOZ|",
+     "",
+     "",
+     "",
+     "10",
+     "µA"
+    ],
+    [
+     "LED output drive current",
+     "ILED",
+     "LED0 pin",
+     "",
+     "8",
+     "",
+     "mA"
+    ],
+    [
+     "Internal pull-up resistance",
+     "pu",
+     "VDDIO = 3.3V",
+     "30",
+     "45",
+     "73",
+     "kΩ"
+    ],
+    [
+     "Internal pull-up resistance",
+     "pu",
+     "VDDIO = 2.5V",
+     "39",
+     "61",
+     "102",
+     "kΩ"
+    ],
+    [
+     "Internal pull-up resistance",
+     "pu",
+     "VDDIO = 1.8V",
+     "48",
+     "99",
+     "178",
+     "kΩ"
+    ],
+    [
+     "Internal pull-down resistance",
+     "pd",
+     "VDDIO = 3.3V",
+     "26",
+     "43",
+     "79",
+     "kΩ"
+    ],
+    [
+     "Internal pull-down resistance",
+     "pd",
+     "VDDIO = 2.5V",
+     "34",
+     "59",
+     "113",
+     "kΩ"
+    ],
+    [
+     "Internal pull-down resistance",
+     "pd",
+     "VDDIO = 1.8V",
+     "53",
+     "99",
+     "200",
+     "kΩ"
+    ],
+    [
+     "100BASE-TX peak differential output voltage",
+     "VO",
+     "100Ω termination across differential output",
+     "0.95",
+     "",
+     "1.05",
+     "V"
+    ],
+    [
+     "100BASE-TX output voltage imbalance",
+     "VIMB",
+     "100Ω termination across differential output",
+     "",
+     "",
+     "2",
+     "%"
+    ],
+    [
+     "100BASE-TX rise/fall time",
+     "tr/tf",
+     "",
+     "3",
+     "",
+     "5",
+     "ns"
+    ],
+    [
+     "100BASE-TX rise/fall time imbalance",
+     "",
+     "",
+     "0",
+     "",
+     "0.5",
+     "ns"
+    ],
+    [
+     "100BASE-TX duty cycle distortion",
+     "",
+     "",
+     "",
+     "",
+     "±0.25",
+     "ns"
+    ],
+    [
+     "100BASE-TX overshoot",
+     "",
+     "",
+     "",
+     "",
+     "5",
+     "%"
+    ],
+    [
+     "100BASE-TX output jitter",
+     "",
+     "peak-to-peak",
+     "",
+     "0.7",
+     "",
+     "ns"
+    ],
+    [
+     "10BASE-T peak differential output voltage",
+     "VP",
+     "100Ω termination across differential output",
+     "2.2",
+     "",
+     "2.8",
+     "V"
+    ],
+    [
+     "10BASE-T jitter added",
+     "",
+     "peak-to-peak",
+     "",
+     "",
+     "3.5",
+     "ns"
+    ],
+    [
+     "10BASE-T rise/fall time",
+     "tr/tf",
+     "",
+     "",
+     "25",
+     "",
+     "ns"
+    ],
+    [
+     "10BASE-T receive squelch threshold",
+     "VSQ",
+     "5 MHz square wave",
+     "",
+     "400",
+     "",
+     "mV"
+    ],
+    [
+     "Reference voltage of ISET",
+     "VSET",
+     "R(ISET) = 6.49 kΩ",
+     "",
+     "0.65",
+     "",
+     "V"
+    ],
+    [
+     "50 MHz RMII clock output jitter",
+     "",
+     "peak-to-peak; RMII - 25 MHz clock mode only",
+     "",
+     "300",
+     "",
+     "ps"
+    ],
+    [
+     "Link loss reaction (indication) time, 100 Mbps industrial",
+     "tllr",
+     "link loss at the receive inputs to indication: LED0 in LED mode 01 goes from low (link up) to high (link down), and INTRP asserts for the link-down change",
+     "",
+     "4.4",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "The pull-up and pull-down rows cover every pin with an internal pull, the strap pins included.",
+    "Transmit figures are measured differentially after a 1:1 transformer.",
+    "Supply currents are for the KSZ8081RNA/RND alone and count the line driver and the 1.2 V core rail the chip makes itself."
+   ]
+  },
+  {
+   "title": "RMII timing, 25 MHz on XI, 50 MHz out on REF_CLK",
+   "page": 38,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tCYC",
+     "Clock cycle",
+     "",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "t1",
+     "Setup time",
+     "4",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "t2",
+     "Hold time",
+     "2",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tOD",
+     "Output delay",
+     "7",
+     "10",
+     "13",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "t1 and t2: TXEN and TXD[1:0] against REF_CLK. tOD: CRS_DV, RXD[1:0] and RXER after REF_CLK."
+   ]
+  },
+  {
+   "title": "RMII timing, 50 MHz on XI",
+   "page": 38,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tCYC",
+     "Clock cycle",
+     "",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "t1",
+     "Setup time",
+     "4",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "t2",
+     "Hold time",
+     "2",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tOD",
+     "Output delay",
+     "8",
+     "11",
+     "13",
+     "ns"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Auto-negotiation fast link pulse timing",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tBTB",
+     "FLP burst to FLP burst",
+     "8",
+     "16",
+     "24",
+     "ms"
+    ],
+    [
+     "tFLPW",
+     "FLP burst width",
+     "",
+     "2",
+     "",
+     "ms"
+    ],
+    [
+     "tPW",
+     "Clock/Data pulse width",
+     "",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "tCTD",
+     "Clock pulse to data pulse",
+     "55.5",
+     "64",
+     "69.5",
+     "µs"
+    ],
+    [
+     "tCTC",
+     "Clock pulse to clock pulse",
+     "111",
+     "128",
+     "139",
+     "µs"
+    ],
+    [
+     "",
+     "Number of clock/data pulses per FLP burst",
+     "17",
+     "",
+     "33",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "MDC/MDIO timing",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "fc",
+     "MDC Clock Frequency",
+     "",
+     "2.5",
+     "10",
+     "MHz"
+    ],
+    [
+     "tP",
+     "MDC period",
+     "",
+     "400",
+     "",
+     "ns"
+    ],
+    [
+     "tMD1",
+     "MDIO (PHY input) setup to rising edge of MDC",
+     "10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tMD2",
+     "MDIO (PHY input) hold from rising edge of MDC",
+     "4",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tMD3",
+     "MDIO (PHY output) delay from rising edge of MDC",
+     "5",
+     "222",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Power-up and reset timing",
+   "page": 41,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tVR",
+     "Supply voltage (VDDIO, VDDA_3.3) rise time",
+     "300",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "tSR",
+     "Stable supply voltage (VDDIO, VDDA_3.3) to reset high",
+     "10",
+     "",
+     "",
+     "ms"
+    ],
+    [
+     "tCS",
+     "Configuration setup time",
+     "5",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tCH",
+     "Configuration hold time",
+     "5",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tRC",
+     "Reset to strap-in pin output",
+     "6",
+     "",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "The supply ramp is to be monotonic; tVR is measured 10 % to 90 %.",
+    "A warm reset holds RST# low for at least 500 µs.",
+    "MDC/MDIO access starts no sooner than 100 µs after reset is released."
+   ]
+  },
+  {
+   "title": "25 MHz crystal or reference clock requirements",
+   "page": 44,
+   "conditions": "",
+   "columns": [
+    "characteristic",
+    "value"
+   ],
+   "rows": [
+    [
+     "Frequency",
+     "25 MHz"
+    ],
+    [
+     "Frequency tolerance (max.)",
+     "±50 ppm"
+    ],
+    [
+     "Crystal series resistance (typ.)",
+     "40Ω"
+    ],
+    [
+     "Crystal load capacitance (typ.)",
+     "16 pF"
+    ]
+   ],
+   "notes": [
+    "A crystal specified over temperature may be ±60 ppm."
+   ]
+  },
+  {
+   "title": "50 MHz oscillator or reference clock requirements",
+   "page": 44,
+   "conditions": "",
+   "columns": [
+    "characteristic",
+    "value"
+   ],
+   "rows": [
+    [
+     "Frequency",
+     "50 MHz"
+    ],
+    [
+     "Frequency tolerance (max.)",
+     "±50 ppm"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Magnetics requirements",
+   "page": 45,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value",
+    "test conditions"
+   ],
+   "rows": [
+    [
+     "Turns ratio",
+     "1 CT : 1 CT",
+     ""
+    ],
+    [
+     "Open-circuit inductance (min.)",
+     "350 µH",
+     "100 mV, 100 kHz, 8 mA"
+    ],
+    [
+     "Insertion loss (max.)",
+     "-1.1 dB",
+     "100 kHz to 100 MHz"
+    ],
+    [
+     "HIPOT (min.)",
+     "1500 VRMS",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Compatible single-port 10/100 magnetics",
+   "page": 46,
+   "conditions": "",
+   "columns": [
+    "manufacturer",
+    "part number",
+    "temperature range",
+    "magnetics with RJ-45"
+   ],
+   "rows": [
+    [
+     "Bel Fuse",
+     "S558-5999-U7",
+     "0°C to 70°C",
+     "No"
+    ],
+    [
+     "Bel Fuse",
+     "SI-46001-F",
+     "0°C to 70°C",
+     "Yes"
+    ],
+    [
+     "Bel Fuse",
+     "SI-50170-F",
+     "0°C to 70°C",
+     "Yes"
+    ],
+    [
+     "Delta",
+     "LF8505",
+     "0°C to 70°C",
+     "No"
+    ],
+    [
+     "HALO",
+     "HFJ11-2450E",
+     "0°C to 70°C",
+     "Yes"
+    ],
+    [
+     "HALO",
+     "TG110-E055N5",
+     "-40°C to 85°C",
+     "No"
+    ],
+    [
+     "LANKom",
+     "LF-H41S-1",
+     "0°C to 70°C",
+     "No"
+    ],
+    [
+     "Pulse",
+     "H1102",
+     "0°C to 70°C",
+     "No"
+    ],
+    [
+     "Pulse",
+     "H1260",
+     "0°C to 70°C",
+     "No"
+    ],
+    [
+     "Pulse",
+     "HX1188",
+     "-40°C to 85°C",
+     "No"
+    ],
+    [
+     "Pulse",
+     "J00-0014",
+     "0°C to 70°C",
+     "Yes"
+    ],
+    [
+     "Pulse",
+     "JX0011D21NL",
+     "-40°C to 85°C",
+     "Yes"
+    ],
+    [
+     "TDK",
+     "TLA-6T718A",
+     "0°C to 70°C",
+     "Yes"
+    ],
+    [
+     "Transpower",
+     "HB726",
+     "0°C to 70°C",
+     "No"
+    ],
+    [
+     "Wurth/Midcom",
+     "000-7090-37R-LF1",
+     "-40°C to 85°C",
+     "No"
+    ]
+   ],
+   "notes": [
+    "All have the two PHY-side centre taps brought out separately."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "power",
+   "title": "Power and ground connections",
+   "page": 23,
+   "description": "One 3.3 V rail feeds the chip. VDDIO takes it directly, VDDA_3.3 takes it through a ferrite bead, and each of the two has 22 µF and 0.1 µF to ground at the pin. VDD_1.2 is the chip's own regulated core rail and takes 2.2 µF and 0.1 µF. Pin 22 and the paddle both go to ground. This is the connection for 3.3 V I/O.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "FB1",
+     "type": "other",
+     "value": "ferrite bead"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "22 µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "2.2 µF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "3V3",
+     "type": "terminal",
+     "value": "3.3V"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "reset-rc",
+   "title": "Power-on reset circuit",
+   "page": 42,
+   "description": "For a reset that follows the supply: 10 kΩ from VDDIO charges 10 µF on RST#, holding the chip in reset while the rail comes up. A 1N4148 sits across the resistor, anode at RST# and cathode at VDDIO.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "reset-cpu",
+   "title": "Reset circuit driven by a CPU or FPGA",
+   "page": 42,
+   "description": "The power-on RC network of 10 kΩ, 10 µF and a discharge diode stays on RST#, and a CPU or FPGA reset output pulls the node low through D2 for a warm reset after power-up. D2 is there when the two chips run different VDDIO; then it is to be a low-drop part (VF under 0.3 V, a BAT54 or MSS1P2L for instance), or a level shifter takes its place. With equal VDDIO on both chips, the usual case, D2 is left out and the output wired straight to RST#.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "CPU/FPGA",
+     "note": "reset output RST_OUT_n",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led-strap-pull-up",
+   "title": "LED0 with a pull-up strap",
+   "page": 43,
+   "description": "LED0/ANEN_SPEED wired to strap a 1 (auto-negotiation on, 100 Mb/s) for VDDIO of 3.3 V or 2.5 V. The LED and its 220 Ω resistor run from VDDIO into LED0, which sinks current to light it; a 4.7 kΩ resistor from VDDIO to the pin sets the strap.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "4.7 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "220 Ω"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO = 3.3V, 2.5V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led-strap-float",
+   "title": "LED0 with the strap left floating",
+   "page": 43,
+   "description": "LED0/ANEN_SPEED with only the LED on it for VDDIO of 3.3 V or 2.5 V. The LED and its 220 Ω resistor run from VDDIO into LED0, which sinks current to light it; with no strap resistor the internal pull-up gives a 1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "220 Ω"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO = 3.3V, 2.5V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led-strap-pull-down",
+   "title": "LED0 with a pull-down strap",
+   "page": 43,
+   "description": "LED0/ANEN_SPEED wired to strap a 0 (auto-negotiation off, 10 Mb/s) for VDDIO of 3.3 V or 2.5 V. The LED and its 220 Ω resistor run from VDDIO into LED0, which sinks current to light it; a 1 kΩ resistor from the pin to ground sets the strap.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "220 Ω"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO = 3.3V, 2.5V"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "crystal-25mhz",
+   "title": "25 MHz crystal on XI and XO",
+   "page": 44,
+   "description": "A 25 MHz ±50 ppm crystal between XI and XO with 22 pF from each pin to ground, the reference for RMII 25 MHz clock mode.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "Y1",
+     "type": "crystal",
+     "value": "25 MHz ±50 ppm"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22 pF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 pF"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "osc-25mhz",
+   "title": "25 MHz oscillator on XI",
+   "page": 44,
+   "description": "A 25 MHz ±50 ppm oscillator drives XI for RMII 25 MHz clock mode; XO is left open.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "25 MHz oscillator ±50 ppm"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "osc-50mhz",
+   "title": "50 MHz oscillator on XI",
+   "page": 44,
+   "description": "A 50 MHz ±50 ppm oscillator drives XI for RMII 50 MHz clock mode; XO is left open.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "50 MHz oscillator ±50 ppm"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "magnetics",
+   "title": "Line interface through magnetics to an RJ-45",
+   "page": 45,
+   "description": "TXP/TXM and RXP/RXM each drive one winding of a 1:1 centre-tapped transformer with a common-mode choke on the line side. Because the drivers are voltage-mode and set the pairs' common-mode voltage themselves, the two PHY-side centre taps go to no supply: each has its own 0.1 µF to signal ground, kept apart since the transmit and receive pairs sit at different common-mode voltages. On the cable side, the two line centre taps and the unused pairs 4-5 and 7-8 each go through 75 Ω to one node, returned to chassis ground by 1000 pF rated 2 kV. Terminations for the pairs are inside the chip.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "1:1 CT transformer pair with common-mode chokes",
+     "note": "10/100 magnetics, one channel per pair"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "75 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "75 Ω"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "75 Ω"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "75 Ω"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1000 pF",
+     "note": "2 kV"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "RJ-45"
+    },
+    {
+     "ref": "SGND",
+     "type": "terminal",
+     "value": "signal ground"
+    },
+    {
+     "ref": "CGND",
+     "type": "terminal",
+     "value": "chassis ground"
+    }
+   ],
+   "notes": [
+    "T1 pins: TD+, TCT, TD- are the PHY-side winding of the transmit channel and TX+, TXCT, TX- its line side after the choke; RD+, RCT, RD- and RX+, RXCT, RX- likewise for the receive channel. TD+ and TX+ are the dotted ends."
+   ]
+  },
+  {
+   "id": "rmii-25mhz",
+   "title": "RMII to a MAC in 25 MHz clock mode",
+   "page": 14,
+   "description": "The PHY runs from a 25 MHz crystal on XI/XO with 22 pF load capacitors and sends the 50 MHz reference clock from REF_CLK to the MAC. Receive (CRS_DV, RXD1:0, RXER) goes to the MAC and transmit (TXEN, TXD1:0) comes from it. The RNA starts in this mode; the RND needs register 1Fh bit 7 set to 1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "RMII MAC",
+     "external": true
+    },
+    {
+     "ref": "Y1",
+     "type": "crystal",
+     "value": "25 MHz"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22 pF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 pF"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "rmii-50mhz",
+   "title": "RMII to a MAC in 50 MHz clock mode",
+   "page": 15,
+   "description": "One 50 MHz oscillator clocks both the PHY at XI and the MAC at its REF_CLK input; the PHY's own REF_CLK pin is unused. The data lines run as in 25 MHz mode. The RND starts in this mode; the RNA needs register 1Fh bit 7 set to 1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "RMII MAC",
+     "external": true
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "50 MHz oscillator"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "back-to-back",
+   "title": "Two PHYs back to back as a 100BASE-TX copper repeater",
+   "page": 16,
+   "description": "Two KSZ8081RNA/RND share one 50 MHz oscillator on XI, and each one's receive outputs drive the other's transmit inputs: CRS_DV to TXEN, RXD1 to TXD1, RXD0 to TXD0. Both are set to the 50 MHz clock mode (the RNA by setting register 1Fh bit 7) and register 16h bits 6 and 1 are both set to 1 for back-to-back mode. Each line side goes to its own magnetics and cable.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "KSZ8081RNA/RND"
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "50 MHz oscillator"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "LinkMD distance to cable fault",
+   "expr": "D = 0.38 × N",
+   "where": {
+    "D": "distance to the fault, metres",
+    "N": "register 1Dh bits 8:0 taken as a decimal number"
+   },
+   "note": "0.38 can be recalibrated for cable whose velocity of propagation differs much from the usual.",
+   "page": 21
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Versions",
+   "page": 4,
+   "text": "The RNA and RND differ only in their power-up clock mode. The RNA comes up in RMII 25 MHz mode: a 25 MHz crystal or clock on XI, and the 50 MHz RMII clock sent out of REF_CLK to the MAC. The RND comes up in RMII 50 MHz mode, taking a 50 MHz clock on XI and leaving REF_CLK unused. Register 1Fh bit 7 switches either one to the other mode after power-up."
+  },
+  {
+   "topic": "100BASE-TX transmit",
+   "page": 10,
+   "text": "The transmit path serialises the MAC data into a 125 MHz stream, applies 4B/5B coding and scrambling, converts NRZ to NRZI and drives MLT-3 as a current. A 6.49 kΩ 1 % resistor on REXT sets that current for a 1:1 transformer. Rise and fall are about 4 ns. The 10BASE-T waveshaping lives in the same driver."
+  },
+  {
+   "topic": "100BASE-TX receive",
+   "page": 10,
+   "text": "An adaptive equaliser undoes the cable's length-dependent loss and phase distortion and keeps retuning, for instance with temperature. DC restoration then corrects baseline wander, an adaptive slicer converts MLT-3 to NRZI, a 125 MHz clock is recovered from the edges, and the data is descrambled, 4B/5B decoded and handed to the MAC in parallel."
+  },
+  {
+   "topic": "Scrambler",
+   "page": 10,
+   "text": "In 100BASE-TX the data is scrambled to spread its spectrum, cutting EMI and baseline wander; the receiver undoes it. Register 1Fh bit 0 turns scrambling off."
+  },
+  {
+   "topic": "10BASE-T",
+   "page": 10,
+   "text": "The 10BASE-T driver shares the 100BASE-TX output and magnetics, applies waveshaping and pre-emphasis internally and reaches about 2.5 V peak, with harmonics 27 dB or more under the fundamental for an all-ones Manchester stream. On receive, a squelch rejects signals under 400 mV or with narrow pulses; above it a PLL locks and the Manchester stream is split into clock and NRZ data. The receive clock keeps running between frames."
+  },
+  {
+   "topic": "Clocking",
+   "page": 11,
+   "text": "In 25 MHz mode every internal and external clock comes from the 25 MHz crystal, oscillator or reference on XI. In 50 MHz mode they come from a 50 MHz oscillator or system clock on XI."
+  },
+  {
+   "topic": "Auto-negotiation",
+   "page": 11,
+   "text": "Auto-negotiation follows IEEE 802.3 clause 28 and picks the best mode both ends share, in the order 100BASE-TX full, 100BASE-TX half, 10BASE-T full, 10BASE-T half. If the partner does not negotiate, the PHY parallel-detects by listening for 100BASE-TX idles or 10BASE-T link pulses. It is on after power-up or reset unless the ANEN_SPEED strap is pulled down, and register 0h bit 12 turns it on or off later; when off, register 0h bit 13 sets speed and bit 8 sets duplex."
+  },
+  {
+   "topic": "RMII",
+   "page": 12,
+   "text": "RMII v1.2 uses eight lines: TXEN and TXD1:0 for transmit, CRS_DV, RXD1:0 and RXER for receive, and the 50 MHz REF_CLK, at 10 or 100 Mb/s in half or full duplex. Data moves two bits per clock. TXEN goes high with the first preamble dibit and drops before the clock after the last; with TXEN low the PHY ignores TXD unless it is 00. CRS_DV goes high asynchronously when carrier appears (squelch passed at 10 Mb/s; two non-adjacent zeros in ten bits at 100 Mb/s), so RXD reads 00 until decoding is valid, and it falls before the clock after the frame's last dibit. RXER flags a symbol error for one or more clocks. The MAC derives COL from TXEN and CRS_DV."
+  },
+  {
+   "topic": "Back-to-back repeater",
+   "page": 16,
+   "text": "Two PHYs can be joined RMII to RMII as a managed 100BASE-TX copper repeater. Both run from one 50 MHz reference on XI in 50 MHz mode, register 16h bits 6 and 1 are set to 1, and the receive lines of each go to the transmit lines of the other."
+  },
+  {
+   "topic": "Management interface",
+   "page": 17,
+   "text": "MDC and MDIO give IEEE 802.3 clause 22 access to the 16-bit registers; 0h to 8h are the standard set and the rest are vendor registers. Only PHY addresses 0h and 3h are available, chosen by the PHYAD strap on pin 15. Address 0h starts out as a broadcast address that every PHY answers, so writes to it reach all of them. Where two of these PHYs share MDIO at 0h and 3h, a broadcast write setting register 16h bit 9 in both makes 0h an ordinary address."
+  },
+  {
+   "topic": "Interrupt",
+   "page": 17,
+   "text": "INTRP signals a change of PHY status so the host need not poll. Register 1Bh bits 15:8 choose which events assert it and bits 7:0 report which happened; reading the register clears them. Register 1Fh bit 9 sets its polarity, active low by default."
+  },
+  {
+   "topic": "Auto MDI/MDI-X",
+   "page": 17,
+   "text": "HP Auto MDI/MDI-X detects which pair the partner transmits on and assigns the PHY's pairs to match, so straight and crossover cables both work. It is on by default; register 1Fh bit 13 turns it off, and then bit 14 picks MDI or MDI-X. A transformer with matching transmit and receive paths is recommended for it."
+  },
+  {
+   "topic": "Loopback",
+   "page": 19,
+   "text": "Local (digital) loopback returns the MAC's transmitted frames back over RMII inside the chip, at 10 or 100 Mb/s full duplex: set register 0h bit 14 = 1, bit 12 = 0, bit 8 = 1 and bit 13 for the speed. The frames also leave on the copper port unless the transmitter is turned off with register 1Fh bit 3 for the test. Remote (analog) loopback returns a link partner's frames back down the cable, in 100BASE-TX full duplex only: force 100 Mb/s full duplex with auto-negotiation off (or negotiate to it), then set register 1Fh bit 2."
+  },
+  {
+   "topic": "LinkMD cable diagnostics",
+   "page": 21,
+   "text": "LinkMD sends a pulse down a pair and reads its reflection to find opens, shorts and impedance mismatches and the distance to them. Turn off Auto MDI/MDI-X (register 1Fh bit 13 = 1, bit 14 picking the pair), write 1 to register 1Dh bit 15, wait for it to read 0, then read the result in bits 14:13 (00 normal, 01 open, 10 short, 11 test failed) and the distance count in bits 8:0. A failed test means the link partner could not be silenced, so a reflection cannot be told from the partner's signal."
+  },
+  {
+   "topic": "NAND tree",
+   "page": 21,
+   "text": "For board-level fault finding, the digital I/O pins form a chain of NAND gates ending at TXD1. Set register 16h bit 5, drive every input high, then pull each input low in the listed order and leave it low. TXD1 must change state at every step, alternating high-to-low and low-to-high; a step where it does not marks a faulty pin."
+  },
+  {
+   "topic": "Power-saving mode",
+   "page": 22,
+   "text": "Register 1Fh bit 10 enables power-saving mode, active with auto-negotiation on and no cable. Only the transmitter, the PLL and the energy detector keep running. Off after power-up."
+  },
+  {
+   "topic": "Energy-detect power-down",
+   "page": 22,
+   "text": "Writing 0 to register 18h bit 11 enables EDPD, active with auto-negotiation on and no cable. With register 10h bit 4 set the PLL also stops, leaving only the transmitter and energy detect running. Link pulses still go out at a longer interval, so that two sleeping partners with Auto MDI/MDI-X off still wake when cabled together. Off after power-up."
+  },
+  {
+   "topic": "Power-down and slow oscillator",
+   "page": 23,
+   "text": "Register 0h bit 11 powers the device down, leaving only the management interface; clearing it resumes operation. Register 11h bit 5 additionally swaps the XI clock for an internal slow oscillator, the lowest-power state. To leave that state, clear register 11h bit 5, then clear register 0h bit 11, then software-reset with register 0h bit 15."
+  },
+  {
+   "topic": "Supplies",
+   "page": 23,
+   "text": "One 3.3 V supply runs the chip; the core's 1.2 V comes from the internal regulator on VDD_1.2. VDDA_3.3 is fed through a ferrite bead. VDDIO may be 3.3, 2.5 or 1.8 V."
+  },
+  {
+   "topic": "Power-up and reset",
+   "page": 41,
+   "text": "The VDDIO and VDDA_3.3 ramp is to be monotonic with at least 300 µs from 10 % to 90 %, and RST# released no sooner than 10 ms after they are stable. A warm reset holds RST# low for 500 µs or more. Straps are read as reset is released, and MDC/MDIO access waits 100 µs after that."
+  },
+  {
+   "topic": "RXER at reset",
+   "page": 7,
+   "text": "RXER must latch low at reset. If the MAC pulls it high, the chip enters a factory test mode that writing 0 to register 16h bit 15 clears; an external pull-down on RXER avoids the case."
+  },
+  {
+   "topic": "LED strap at 1.8 V",
+   "page": 43,
+   "text": "With 1.8 V VDDIO an LED on LED0 is not recommended. The ANEN_SPEED strap still works: 4.7 kΩ to VDDIO or open for 1, 1.0 kΩ to ground for 0. An RJ-45 with built-in LEDs at 1.8 V VDDIO needs a level shift from the 3.3 V LED side, for instance with a level-shifter part or a bipolar transistor."
+  },
+  {
+   "topic": "Magnetics",
+   "page": 45,
+   "text": "The line needs a 1:1 isolation transformer, with integrated common-mode chokes where emissions are to beat FCC limits. The drivers are voltage-mode and the terminations are on chip, so the PHY-side centre taps are not tied to a supply; each goes to ground through its own 0.1 µF, separate from the other because the transmit and receive pairs sit at different common-mode voltages."
+  },
+  {
+   "topic": "Exposed pad",
+   "page": 47,
+   "text": "The exposed paddle is ground. The land pattern puts four thermal vias of 0.30 to 0.35 mm diameter in it, connected to ground, and four 1.00 mm x 1.00 mm stencil openings at 1.20 mm pitch."
+  }
+ ],
+ "packages": [
+  {
+   "name": "24-lead QFN 4 mm x 4 mm (QFN44-24LD-PL-1)",
+   "page": 47,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "Body length",
+     "4.00 BSC"
+    ],
+    [
+     "Body width",
+     "4.00 BSC"
+    ],
+    [
+     "Overall height",
+     "0.850±0.050"
+    ],
+    [
+     "Standoff",
+     "0.02 +0.03/-0.00"
+    ],
+    [
+     "Terminal thickness",
+     "0.203±0.025"
+    ],
+    [
+     "Exposed pad, each side",
+     "2.50±0.05"
+    ],
+    [
+     "Terminal width",
+     "0.25±0.05"
+    ],
+    [
+     "Terminal length",
+     "0.400±0.05"
+    ],
+    [
+     "Terminal pitch",
+     "0.500 BSC"
+    ],
+    [
+     "Span of terminal centres along a side",
+     "2.5000 Ref."
+    ],
+    [
+     "Pin 1 notch radius on exposed pad",
+     "R0.20"
+    ],
+    [
+     "Coplanarity",
+     "0.05"
+    ],
+    [
+     "Package warpage (max.)",
+     "0.05"
+    ],
+    [
+     "Burr (max., any direction)",
+     "0.076"
+    ]
+   ],
+   "notes": [
+    "Pin 1 is laser marked with a dot on the top."
+   ]
+  },
+  {
+   "name": "24-lead QFN 4 mm x 4 mm, land pattern",
+   "page": 47,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "Pad width",
+     "0.23±0.02"
+    ],
+    [
+     "Pad length",
+     "0.48±0.02"
+    ],
+    [
+     "Pad pitch",
+     "0.50 BSC"
+    ],
+    [
+     "Thermal pad, each side",
+     "2.6±0.02"
+    ],
+    [
+     "Inner edge to inner edge of opposite pad rows",
+     "3.24±0.02"
+    ],
+    [
+     "Outer edge to outer edge of opposite pad rows",
+     "4.20±0.05"
+    ],
+    [
+     "Thermal via diameter",
+     "0.30-0.35"
+    ],
+    [
+     "Stencil opening on thermal pad",
+     "1.00x1.00"
+    ],
+    [
+     "Stencil opening pitch",
+     "1.20"
+    ]
+   ],
+   "notes": [
+    "Four thermal vias, tied to ground; four stencil openings.",
+    "Misprint: the thermal via diameter 0.30-0.35M should read 0.30-0.35 mm."
+   ]
+  }
+ ]
+}

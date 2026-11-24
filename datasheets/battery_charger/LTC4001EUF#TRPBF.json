@@ -1,0 +1,2908 @@
+{
+ "sheet": 1,
+ "name": "LTC4001EUF#TRPBF",
+ "kind": "battery_charger",
+ "manufacturer": "Analog Devices (Linear Technology)",
+ "title": "2 A synchronous buck charger for one Li-Ion cell, 16-lead 4 mm × 4 mm QFN",
+ "source": {
+  "document": "LTC4001 data sheet 4001f",
+  "revision": "LT 0406 (2006)",
+  "pages": 20
+ },
+ "summary": "A single-cell Li-Ion charger for 5 V adapters that charges at up to 2 A through a 1.5 MHz synchronous buck stage, with both power switches and the current sense resistor inside the package, so no external MOSFET, sense resistor or blocking diode is used. It charges constant current then constant voltage to a fixed 4.2 V, sensed at the battery terminals through separate BATSENS and GNDSENS pins. One resistor sets the charge current, another the near-full (IDET) threshold, and a capacitor the charge time; a deeply discharged cell gets a linear trickle of about 50 mA first. Status comes out on an open-drain CHRG pin and a push-pull FAULT pin, and an NTC input holds charging outside a battery temperature window.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "4 V to 5.5 V (down to UVLO with a current-limited adapter)"
+  ],
+  [
+   "Charge current",
+   "2 A maximum; 1.8 A to 2.2 A at RPROG = 549Ω"
+  ],
+  [
+   "Float voltage",
+   "4.2 V; 4.179 V to 4.221 V at 25 °C, 4.158 V to 4.242 V over temperature"
+  ],
+  [
+   "Switching frequency",
+   "1.5 MHz typ (1.3 MHz to 1.7 MHz)"
+  ],
+  [
+   "Switch on-resistance",
+   "127 mΩ P-channel, 121 mΩ N-channel, typ"
+  ],
+  [
+   "Trickle charge",
+   "50 mA typ below 3.1 V (rising)"
+  ],
+  [
+   "Shutdown supply current",
+   "50 µA max"
+  ],
+  [
+   "Package",
+   "16-lead 4 mm × 4 mm × 0.75 mm QFN (UF), θJA = 37 °C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "package",
+   "marking",
+   "lead finish",
+   "packing",
+   "operating temperature"
+  ],
+  "rows": [
+   [
+    "LTC4001EUF",
+    "UF, 16-lead 4 mm × 4 mm QFN",
+    "4001",
+    "",
+    "",
+    "–40°C to 85°C"
+   ],
+   [
+    "LTC4001EUF#TR",
+    "UF, 16-lead 4 mm × 4 mm QFN",
+    "4001",
+    "",
+    "tape and reel",
+    "–40°C to 85°C"
+   ],
+   [
+    "LTC4001EUF#PBF",
+    "UF, 16-lead 4 mm × 4 mm QFN",
+    "4001",
+    "lead free",
+    "",
+    "–40°C to 85°C"
+   ],
+   [
+    "LTC4001EUF#TRPBF",
+    "UF, 16-lead 4 mm × 4 mm QFN",
+    "4001",
+    "lead free",
+    "tape and reel",
+    "–40°C to 85°C"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "UF (16-lead QFN 4 mm × 4 mm)",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "BAT",
+     "type": "power out",
+     "function": "Charger output to the cell. A 10 µF ceramic from BAT to PGND keeps the output ripple down."
+    },
+    {
+     "pin": "2",
+     "name": "SENSE",
+     "type": "power",
+     "function": "Connection to the internal current sense resistor; the external inductor connects to it."
+    },
+    {
+     "pin": "3",
+     "name": "PGND",
+     "type": "ground",
+     "function": "Ground of the power stage."
+    },
+    {
+     "pin": "4",
+     "name": "GNDSENS",
+     "type": "ground",
+     "function": "Kelvin ground sense, taken to the battery's negative terminal; joined to PGND in the schematic. The programming, timer, soft-start and NTC parts return to it."
+    },
+    {
+     "pin": "5",
+     "name": "SW",
+     "type": "power",
+     "function": "Switch node, the common drain of the internal high-side and synchronous MOSFETs; the inductor's input side connects to it."
+    },
+    {
+     "pin": "6",
+     "name": "EN",
+     "type": "input",
+     "function": "Active-low enable. Low runs the charger. High puts the part in a low-power state: supply current under 50 µA and battery drain under 3 µA."
+    },
+    {
+     "pin": "7",
+     "name": "CHRG",
+     "type": "open-drain output",
+     "function": "Charge status. A strong N-channel pull-down while charging at a high rate; once current stays below the IDET threshold for more than 5 ms it changes to a 30 µA pull-down, latched until the next charge cycle; high impedance after timeout or with the input removed. Blinks on a temperature fault. Can drive an LED."
+    },
+    {
+     "pin": "8",
+     "name": "PVIN",
+     "type": "power in",
+     "function": "Supply to the power switches, 4 V to 5.5 V in normal use (down to the UVLO threshold with a current-limited adapter). Bypass with 10 µF or more of surface-mount ceramic."
+    },
+    {
+     "pin": "9",
+     "name": "VINSENSE",
+     "type": "power in",
+     "function": "Supply sense and supply of the control circuits; feeds the UVLO and VIN-to-VBAT comparators. With BATSENS within 30 mV of it the part sleeps at 50 µA input current. Wire it straight to the PVIN bypass capacitor terminal."
+    },
+    {
+     "pin": "10",
+     "name": "FAULT",
+     "type": "output",
+     "function": "Battery fault output, logic high on a shorted cell or a temperature fault (thermistor below about 0 °C or above about 50 °C with NTC monitoring enabled)."
+    },
+    {
+     "pin": "11",
+     "name": "NTC",
+     "type": "analog input",
+     "function": "Thermistor input. A thermistor runs from NTC to GNDSENS and an equal-value resistor from NTC to VIN. Above 0.74·VIN (cold) or below 0.29·VIN (hot) charging pauses, the timer holds and CHRG blinks; back inside the window, the timer resumes. Each threshold has about 3 °C hysteresis. Tied to GNDSENS, the NTC function is off. Never above VIN."
+    },
+    {
+     "pin": "12",
+     "name": "PROG",
+     "type": "analog",
+     "function": "Charge current setting: RPROG to GNDSENS, RPROG = 1.110 kΩ·A / IBAT. The pin sits at 1.213 V; a current-output DAC can drive it instead."
+    },
+    {
+     "pin": "13",
+     "name": "IDET",
+     "type": "analog",
+     "function": "Near-full current threshold: RIDET to GNDSENS. With RIDET equal to RPROG the threshold is one tenth of the charge current."
+    },
+    {
+     "pin": "14",
+     "name": "SS",
+     "type": "analog",
+     "function": "Soft-start and loop compensation for both the current and the float-voltage loops; a capacitor runs from SS to GNDSENS."
+    },
+    {
+     "pin": "15",
+     "name": "TIMER",
+     "type": "analog",
+     "function": "Charge timer: CTIMER to GNDSENS, 0.0733 µF per hour of charge time. Tied to IDET, the timer is off; tied to GNDSENS, charging ends when current falls below the IDET threshold."
+    },
+    {
+     "pin": "16",
+     "name": "BATSENS",
+     "type": "analog input",
+     "function": "Battery voltage sense to the positive terminal. The float voltage is set by an internal divider on this pin; it is disconnected in sleep or with EN high to cut battery drain."
+    },
+    {
+     "pin": "17",
+     "name": "Exposed Pad",
+     "type": "ground",
+     "function": "Ground pad; solder it to the PCB ground (PGND) for the electrical connection and the rated thermal resistance."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "PVIN, VINSENSE",
+     "t < 1ms, DC < 1%",
+     "–0.3",
+     "7",
+     "V"
+    ],
+    [
+     "PVIN, VINSENSE",
+     "Steady State",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "SW, SENSE, BAT, BATSENS, SS, FAULT, CHRG, EN, NTC, PROG, IDET, TIMER Voltage",
+     "",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Operating Temperature Range",
+     "Note 3",
+     "–40",
+     "85",
+     "°C"
+    ],
+    [
+     "Operating Junction Temperature",
+     "Note 5",
+     "–40",
+     "125",
+     "°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "",
+     "–65",
+     "125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: Operating past these limits can damage the part permanently; long exposure at any of them can reduce its reliability and life.",
+    "Note 3: Performance is guaranteed from 0 °C to 85 °C; over –40 °C to 85 °C it is assured by design, characterization and statistical process control correlation.",
+    "Note 5: On-chip overtemperature protection guards against brief overloads; while it is acting, junction temperature goes above 125 °C. Running continuously above the maximum operating junction temperature can degrade reliability."
+   ]
+  },
+  {
+   "title": "Thermal and package figures",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Maximum junction temperature",
+     "TJMAX",
+     "125",
+     "°C"
+    ],
+    [
+     "Junction-to-ambient thermal resistance",
+     "θJA",
+     "37",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "Note 4: Junction temperature follows from ambient temperature and dissipation as TJ = TA + (PD • 37°C/W).",
+    "The exposed pad (pin 17) is ground and is soldered to the PCB."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 2,
+   "conditions": "TA = 25 °C unless a row is marked ● (full operating temperature range). VIN = 5V, VEN = 0V, RPROG = 549Ω, RIDET = 549Ω, unless otherwise specified.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "Supply Voltage",
+     "(Note 2)",
+     "",
+     "4",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "IIN",
+     "",
+     "PVIN Connected to VINSENSE, PROG and IDET Pins Open, Charger On",
+     "",
+     "",
+     "",
+     "2",
+     "mA"
+    ],
+    [
+     "IIN",
+     "",
+     "Shutdown, EN = VIN",
+     "",
+     "",
+     "",
+     "50",
+     "µA"
+    ],
+    [
+     "VFLOAT",
+     "VBAT Regulated Float Voltage",
+     "Measured from BATSENS to GNDSENS",
+     "●",
+     "4.158",
+     "4.2",
+     "4.242",
+     "V"
+    ],
+    [
+     "VFLOAT",
+     "VBAT Regulated Float Voltage",
+     "Measured from BATSENS to GNDSENS",
+     "",
+     "4.179",
+     "4.2",
+     "4.221",
+     "V"
+    ],
+    [
+     "IBAT",
+     "Current Mode Charge Current",
+     "RPROG = 549Ω, VBAT = 3.5V",
+     "",
+     "1.8",
+     "2",
+     "2.2",
+     "A"
+    ],
+    [
+     "IBAT",
+     "Current Mode Charge Current",
+     "RPROG = 1.10k, VBAT = 3.5V",
+     "",
+     "0.9",
+     "1",
+     "1.1",
+     "A"
+    ],
+    [
+     "IBAT",
+     "Current Mode Charge Current",
+     "Shutdown, EN = VIN",
+     "",
+     "",
+     "",
+     "±5",
+     "µA"
+    ],
+    [
+     "ITRIKL",
+     "Trickle Charge Current",
+     "VBAT = 2V",
+     "",
+     "35",
+     "50",
+     "65",
+     "mA"
+    ],
+    [
+     "VTRIKL",
+     "Trickle Charge Threshold",
+     "VBAT Rising",
+     "",
+     "3.05",
+     "3.1",
+     "3.20",
+     "V"
+    ],
+    [
+     "VTRIKL",
+     "Trickle Charge Threshold",
+     "VBAT Falling",
+     "",
+     "2.85",
+     "3.0",
+     "3.05",
+     "V"
+    ],
+    [
+     "VUVL",
+     "VIN Undervoltage Lockout Voltage",
+     "VIN Rising, Measured from VINSENSE to GNDSENS",
+     "",
+     "2.7",
+     "",
+     "2.82",
+     "V"
+    ],
+    [
+     "∆VUVL",
+     "VIN Undervoltage Lockout Hysteresis",
+     "Measured from VINSENSE to GNDSENS",
+     "",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "VASD",
+     "Automatic Shutdown Threshold Voltage",
+     "VINSENSE – VBATSENS Rising (Turn-On), VBATSENSE = 4V",
+     "",
+     "200",
+     "250",
+     "300",
+     "mV"
+    ],
+    [
+     "VASD",
+     "Automatic Shutdown Threshold Voltage",
+     "VINSENSE – VBATSENS Falling (Turn-Off), VBATSENSE = 4V",
+     "",
+     "15",
+     "30",
+     "60",
+     "mV"
+    ],
+    [
+     "fOSC",
+     "Oscillator Frequency",
+     "",
+     "",
+     "1.3",
+     "1.5",
+     "1.7",
+     "MHz"
+    ],
+    [
+     "D",
+     "Maximum Duty Factor",
+     "",
+     "",
+     "",
+     "",
+     "100",
+     "%"
+    ],
+    [
+     "RPFET",
+     "RDS(ON) of P-Channel MOSFET",
+     "Measured from PVIN to SW",
+     "",
+     "",
+     "127",
+     "",
+     "mΩ"
+    ],
+    [
+     "RNFET",
+     "RDS(ON) of N-Channel MOSFET",
+     "Measured from SW to PGND",
+     "",
+     "",
+     "121",
+     "",
+     "mΩ"
+    ],
+    [
+     "tTIMER",
+     "Timer Accuracy",
+     "CTIMER = 0.22µF",
+     "",
+     "",
+     "±10",
+     "",
+     "%"
+    ],
+    [
+     "VEN",
+     "Enable Input Threshold Voltage",
+     "VEN Rising",
+     "",
+     "0.6",
+     "0.8",
+     "1",
+     "V"
+    ],
+    [
+     "∆VEN",
+     "Enable Input Hysteresis",
+     "",
+     "",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "VPROG",
+     "PROG Pin Voltage",
+     "RPROG = 549Ω",
+     "",
+     "",
+     "1.213",
+     "",
+     "V"
+    ],
+    [
+     "VIDET",
+     "IDET Pin Voltage",
+     "RIDET = 549Ω",
+     "",
+     "",
+     "1.213",
+     "",
+     "V"
+    ],
+    [
+     "IIDET",
+     "IDET Threshold",
+     "RIDET = 549Ω",
+     "",
+     "150",
+     "200",
+     "250",
+     "mA"
+    ],
+    [
+     "ICHRG",
+     "CHRG Pin Weak Pull-Down Current",
+     "VCHRG = 1V",
+     "",
+     "15",
+     "30",
+     "50",
+     "µA"
+    ],
+    [
+     "VCHRG",
+     "CHRG Pin Output Low Voltage",
+     "ICHRG = 5mA",
+     "",
+     "",
+     "0.2",
+     "0.4",
+     "V"
+    ],
+    [
+     "VOL",
+     "FAULT Pin Output Low Voltage",
+     "1mA Load",
+     "",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "VOH",
+     "FAULT Pin Output High Voltage",
+     "1mA Load",
+     "",
+     "4.6",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "VRECHRG",
+     "Recharge Battery Threshold Voltage",
+     "VFLOAT – VRECHRG VBAT Falling",
+     "",
+     "50",
+     "100",
+     "135",
+     "mV"
+    ],
+    [
+     "tRB",
+     "Recharge Filter Time Constant",
+     "",
+     "",
+     "4",
+     "",
+     "",
+     "ms"
+    ],
+    [
+     "tRECHRG",
+     "Recharge Time",
+     "Percent of Total Charge Time",
+     "",
+     "",
+     "50",
+     "",
+     "%"
+    ],
+    [
+     "tTRIKL",
+     "Low-Battery Trickle Charge Time",
+     "Percent of Total Charge Time, VBAT < 2.8V, Measured Using BATSENS and GNDSENS Pins",
+     "",
+     "",
+     "25",
+     "",
+     "%"
+    ],
+    [
+     "ISS",
+     "Soft-Start Ramp Current",
+     "VBAT < VFLOAT – 100mV, VBAT Across BATSENS and GNDSENS Pins",
+     "",
+     "6",
+     "12.8",
+     "16",
+     "µA"
+    ],
+    [
+     "VCOLD",
+     "NTC Pin Cold Temperature Fault Threshold",
+     "From NTC to GNDSENS Pin, Rising Threshold",
+     "",
+     "",
+     "0.74 VINSENSE",
+     "",
+     "V"
+    ],
+    [
+     "VCOLD",
+     "NTC Pin Cold Temperature Fault Threshold",
+     "From NTC to GNDSENS Pin, Falling Threshold",
+     "",
+     "",
+     "0.72 VINSENSE",
+     "",
+     "V"
+    ],
+    [
+     "VHOT",
+     "NTC Pin Hot Temperature Fault Threshold",
+     "From NTC to GNDSENS Pin, Falling Threshold",
+     "",
+     "",
+     "0.29 VINSENSE",
+     "",
+     "V"
+    ],
+    [
+     "VHOT",
+     "NTC Pin Hot Temperature Fault Threshold",
+     "From NTC to GNDSENS Pin, Rising Threshold",
+     "",
+     "",
+     "0.30 VINSENSE",
+     "",
+     "V"
+    ],
+    [
+     "VDIS",
+     "NTC Disable Threshold (Falling)",
+     "From NTC to GNDSENS Pin",
+     "",
+     "0.015 • VINSENSE",
+     "0.02 • VINSENSE",
+     "0.025 • VINSENSE",
+     "V"
+    ],
+    [
+     "∆VDIS",
+     "NTC Disable Hysteresis",
+     "From NTC to GNDSENS Pin",
+     "",
+     "",
+     "0.01 • VINSENSE",
+     "",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Note 2: With a current-limited wall adapter the part may run with VIN down to the undervoltage lockout threshold."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Power loss against VBAT, charging in PWM mode",
+   "page": 1,
+   "conditions": "VIN = 5V, 2A charger",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Total application circuit power dissipation",
+    "unit": "W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 5V",
+     "points": [
+      [
+       3.038,
+       1.224
+      ],
+      [
+       3.48,
+       1.222
+      ],
+      [
+       4.08,
+       1.202
+      ],
+      [
+       4.121,
+       1.199
+      ],
+      [
+       4.134,
+       1.192
+      ],
+      [
+       4.168,
+       1.021
+      ],
+      [
+       4.188,
+       0.827
+      ],
+      [
+       4.198,
+       0.081
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Oscillator frequency against VIN",
+   "page": 4,
+   "conditions": "VBAT = 3.2V, VSS = 1V, TA = 25 °C",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency variation",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 3.2V, VSS = 1V",
+     "points": [
+      [
+       3.303,
+       -0.999
+      ],
+      [
+       3.518,
+       -0.476
+      ],
+      [
+       3.619,
+       -0.274
+      ],
+      [
+       3.753,
+       -0.056
+      ],
+      [
+       3.872,
+       0.104
+      ],
+      [
+       3.951,
+       0.196
+      ],
+      [
+       4.002,
+       0.233
+      ],
+      [
+       4.189,
+       0.303
+      ],
+      [
+       4.415,
+       0.374
+      ],
+      [
+       4.499,
+       0.417
+      ],
+      [
+       4.559,
+       0.422
+      ],
+      [
+       4.62,
+       0.411
+      ],
+      [
+       4.671,
+       0.384
+      ],
+      [
+       4.707,
+       0.35
+      ],
+      [
+       4.998,
+       -0.003
+      ],
+      [
+       5.102,
+       -0.089
+      ],
+      [
+       5.192,
+       -0.134
+      ],
+      [
+       5.287,
+       -0.163
+      ],
+      [
+       5.399,
+       -0.179
+      ],
+      [
+       5.49,
+       -0.205
+      ],
+      [
+       5.623,
+       -0.211
+      ],
+      [
+       5.712,
+       -0.188
+      ],
+      [
+       5.776,
+       -0.132
+      ],
+      [
+       5.909,
+       0.133
+      ],
+      [
+       5.996,
+       0.267
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Oscillator frequency against temperature",
+   "page": 4,
+   "conditions": "VIN = 5V, VBAT = 3.2V, VSS = 1V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency variation from 25 °C",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 5V",
+     "points": [
+      [
+       -49.8,
+       0.2168
+      ],
+      [
+       -31.0,
+       0.1943
+      ],
+      [
+       -22.2,
+       0.179
+      ],
+      [
+       21.9,
+       0.0126
+      ],
+      [
+       37.1,
+       -0.0329
+      ],
+      [
+       50.2,
+       -0.0457
+      ],
+      [
+       63.8,
+       -0.0469
+      ],
+      [
+       71.0,
+       -0.0399
+      ],
+      [
+       77.6,
+       -0.0179
+      ],
+      [
+       84.2,
+       0.0251
+      ],
+      [
+       113.1,
+       0.2834
+      ],
+      [
+       127.8,
+       0.4292
+      ],
+      [
+       149.4,
+       0.6957
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dissipation of the fig8 circuit against IBAT",
+   "page": 4,
+   "conditions": "VIN = 5V, VBAT = 4V, TA = 25 °C",
+   "x": {
+    "label": "IBAT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Total application circuit power dissipation",
+    "unit": "W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 4V",
+     "points": [
+      [
+       501,
+       0.184
+      ],
+      [
+       693,
+       0.239
+      ],
+      [
+       889,
+       0.315
+      ],
+      [
+       1086,
+       0.412
+      ],
+      [
+       1283,
+       0.529
+      ],
+      [
+       1475,
+       0.668
+      ],
+      [
+       1660,
+       0.828
+      ],
+      [
+       1835,
+       1.009
+      ],
+      [
+       1998,
+       1.211
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dissipation of the fig8 circuit against VIN",
+   "page": 4,
+   "conditions": "VBAT = 4V, TA = 25 °C",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Total application circuit power dissipation",
+    "unit": "W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IBAT = 2A",
+     "points": [
+      [
+       4.5,
+       1.052
+      ],
+      [
+       4.706,
+       1.177
+      ],
+      [
+       4.785,
+       1.203
+      ],
+      [
+       4.837,
+       1.21
+      ],
+      [
+       4.972,
+       1.208
+      ],
+      [
+       5.044,
+       1.214
+      ],
+      [
+       5.311,
+       1.248
+      ],
+      [
+       5.5,
+       1.284
+      ]
+     ]
+    },
+    {
+     "label": "IBAT = 1.5A",
+     "points": [
+      [
+       4.502,
+       0.666
+      ],
+      [
+       4.747,
+       0.701
+      ],
+      [
+       5.141,
+       0.727
+      ],
+      [
+       5.499,
+       0.769
+      ]
+     ]
+    },
+    {
+     "label": "IBAT = 1A",
+     "points": [
+      [
+       4.25,
+       0.287
+      ],
+      [
+       4.418,
+       0.327
+      ],
+      [
+       4.539,
+       0.348
+      ],
+      [
+       4.928,
+       0.371
+      ],
+      [
+       5.5,
+       0.43
+      ]
+     ]
+    },
+    {
+     "label": "IBAT = 500mA",
+     "points": [
+      [
+       4.25,
+       0.126
+      ],
+      [
+       4.835,
+       0.164
+      ],
+      [
+       5.499,
+       0.223
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PROG pin characteristic (VPROG against IPROG)",
+   "page": 4,
+   "conditions": "VIN = 5V, TA = 25 °C",
+   "x": {
+    "label": "IPROG",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VPROG",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 3.2V",
+     "points": [
+      [
+       0.04,
+       1.226
+      ],
+      [
+       7.9,
+       1.225
+      ],
+      [
+       8.96,
+       1.185
+      ],
+      [
+       14.42,
+       0.004
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 3.5V",
+     "points": [
+      [
+       0.04,
+       1.226
+      ],
+      [
+       10.02,
+       1.221
+      ],
+      [
+       11.05,
+       1.042
+      ],
+      [
+       15.82,
+       0.004
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 3.7V",
+     "points": [
+      [
+       0.04,
+       1.226
+      ],
+      [
+       10.97,
+       1.222
+      ],
+      [
+       12.11,
+       0.999
+      ],
+      [
+       16.75,
+       0.003
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 4V",
+     "points": [
+      [
+       0.04,
+       1.228
+      ],
+      [
+       11.99,
+       1.222
+      ],
+      [
+       12.99,
+       1.1
+      ],
+      [
+       18.13,
+       0.002
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output charging characteristic, constant current then constant voltage",
+   "page": 4,
+   "conditions": "VIN = 5V, TA = 25 °C",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBAT",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 5V",
+     "points": [
+      [
+       0,
+       0.056
+      ],
+      [
+       2.997,
+       0.057
+      ],
+      [
+       2.997,
+       1.995
+      ],
+      [
+       4.098,
+       1.998
+      ],
+      [
+       4.154,
+       1.989
+      ],
+      [
+       4.192,
+       1.808
+      ],
+      [
+       4.17,
+       0.005
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Trickle charge current against VBAT",
+   "page": 4,
+   "conditions": "TA = 25 °C",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBAT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 5.5V",
+     "points": [
+      [
+       0,
+       52.22
+      ],
+      [
+       0.51,
+       51.5
+      ],
+      [
+       1.422,
+       50.01
+      ],
+      [
+       2.457,
+       48.15
+      ],
+      [
+       2.997,
+       47.1
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 5V",
+     "points": [
+      [
+       0,
+       51.29
+      ],
+      [
+       0.51,
+       50.57
+      ],
+      [
+       1.422,
+       49.09
+      ],
+      [
+       2.454,
+       47.1
+      ],
+      [
+       2.997,
+       45.93
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 4.5V",
+     "points": [
+      [
+       0,
+       50.47
+      ],
+      [
+       0.515,
+       49.72
+      ],
+      [
+       1.529,
+       47.97
+      ],
+      [
+       2.43,
+       46.02
+      ],
+      [
+       2.997,
+       44.58
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 4V",
+     "points": [
+      [
+       0.003,
+       49.63
+      ],
+      [
+       0.52,
+       48.86
+      ],
+      [
+       1.413,
+       47.2
+      ],
+      [
+       2.383,
+       44.87
+      ],
+      [
+       2.663,
+       44.05
+      ],
+      [
+       3.0,
+       42.93
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VFLOAT and recharge battery threshold voltage against temperature",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Float and recharge voltages",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VFLOAT",
+     "points": [
+      [
+       -49.9,
+       4.1925
+      ],
+      [
+       23.8,
+       4.201
+      ],
+      [
+       83.3,
+       4.1984
+      ],
+      [
+       95.0,
+       4.1991
+      ],
+      [
+       130.0,
+       4.1888
+      ],
+      [
+       149.6,
+       4.1817
+      ]
+     ]
+    },
+    {
+     "label": "VRECHARGE (VBAT falling)",
+     "points": [
+      [
+       -50.1,
+       4.0916
+      ],
+      [
+       26.4,
+       4.0981
+      ],
+      [
+       85.4,
+       4.0911
+      ],
+      [
+       132.4,
+       4.0793
+      ],
+      [
+       149.6,
+       4.0729
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IDET threshold against RIDET for RPROG = 549Ω",
+   "page": 5,
+   "conditions": "TA = 25 °C",
+   "x": {
+    "label": "RIDET",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDET",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RPROG = 549Ω",
+     "points": [
+      [
+       302.1,
+       368.3
+      ],
+      [
+       370.5,
+       301.0
+      ],
+      [
+       434.0,
+       257.2
+      ],
+      [
+       477.8,
+       234.6
+      ],
+      [
+       532.6,
+       211.0
+      ],
+      [
+       600.6,
+       186.2
+      ],
+      [
+       646.3,
+       173.0
+      ],
+      [
+       706.1,
+       159.3
+      ],
+      [
+       856.2,
+       132.6
+      ],
+      [
+       1027.8,
+       110.1
+      ],
+      [
+       1197.6,
+       95.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Battery-less start-up: VBAT against time",
+   "page": 17,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT",
+     "points": [
+      [
+       0.181,
+       0.364
+      ],
+      [
+       0.453,
+       0.955
+      ],
+      [
+       0.725,
+       1.427
+      ],
+      [
+       0.997,
+       1.818
+      ],
+      [
+       1.269,
+       2.109
+      ],
+      [
+       1.54,
+       2.355
+      ],
+      [
+       1.812,
+       2.55
+      ],
+      [
+       2.084,
+       2.677
+      ],
+      [
+       2.356,
+       2.795
+      ],
+      [
+       2.628,
+       2.886
+      ],
+      [
+       2.899,
+       2.968
+      ],
+      [
+       3.171,
+       3.036
+      ],
+      [
+       3.443,
+       3.077
+      ],
+      [
+       3.715,
+       3.123
+      ],
+      [
+       4.123,
+       3.145
+      ],
+      [
+       4.395,
+       3.055
+      ],
+      [
+       4.666,
+       3.1
+      ],
+      [
+       4.938,
+       3.118
+      ],
+      [
+       5.21,
+       3.145
+      ],
+      [
+       5.482,
+       3.055
+      ],
+      [
+       5.754,
+       3.1
+      ],
+      [
+       6.161,
+       3.145
+      ],
+      [
+       6.433,
+       3.055
+      ],
+      [
+       6.705,
+       3.1
+      ],
+      [
+       6.977,
+       3.123
+      ],
+      [
+       7.249,
+       3.136
+      ],
+      [
+       7.521,
+       3.077
+      ],
+      [
+       7.792,
+       3.1
+      ],
+      [
+       8.064,
+       3.136
+      ],
+      [
+       8.336,
+       3.055
+      ],
+      [
+       8.608,
+       3.1
+      ],
+      [
+       8.88,
+       3.145
+      ],
+      [
+       9.151,
+       3.1
+      ],
+      [
+       9.423,
+       3.077
+      ],
+      [
+       9.695,
+       3.118
+      ],
+      [
+       10.103,
+       3.055
+      ],
+      [
+       10.375,
+       3.077
+      ],
+      [
+       10.647,
+       3.123
+      ],
+      [
+       10.918,
+       3.145
+      ],
+      [
+       11.19,
+       3.077
+      ],
+      [
+       11.462,
+       3.1
+      ],
+      [
+       11.734,
+       3.145
+      ],
+      [
+       12.142,
+       3.077
+      ],
+      [
+       12.413,
+       3.123
+      ],
+      [
+       12.685,
+       3.145
+      ],
+      [
+       12.957,
+       3.077
+      ],
+      [
+       13.229,
+       3.105
+      ],
+      [
+       13.501,
+       3.145
+      ],
+      [
+       13.773,
+       3.055
+      ],
+      [
+       14.044,
+       3.1
+      ],
+      [
+       14.316,
+       3.145
+      ],
+      [
+       14.588,
+       3.055
+      ],
+      [
+       14.86,
+       3.1
+      ],
+      [
+       15.132,
+       3.127
+      ],
+      [
+       15.403,
+       3.055
+      ],
+      [
+       15.675,
+       3.091
+      ],
+      [
+       15.947,
+       3.141
+      ],
+      [
+       16.219,
+       3.105
+      ],
+      [
+       16.491,
+       3.077
+      ],
+      [
+       16.763,
+       3.123
+      ],
+      [
+       17.034,
+       3.15
+      ],
+      [
+       17.306,
+       3.077
+      ],
+      [
+       17.578,
+       3.1
+      ],
+      [
+       17.85,
+       3.145
+      ],
+      [
+       18.258,
+       4.268
+      ],
+      [
+       18.529,
+       4.268
+      ],
+      [
+       18.801,
+       4.268
+      ],
+      [
+       19.073,
+       4.268
+      ],
+      [
+       19.345,
+       4.268
+      ],
+      [
+       19.617,
+       4.268
+      ],
+      [
+       19.889,
+       4.268
+      ],
+      [
+       20.296,
+       4.268
+      ],
+      [
+       20.568,
+       4.268
+      ],
+      [
+       20.84,
+       4.268
+      ],
+      [
+       21.112,
+       4.268
+      ],
+      [
+       21.384,
+       4.268
+      ],
+      [
+       21.655,
+       4.268
+      ],
+      [
+       21.927,
+       4.268
+      ],
+      [
+       22.199,
+       4.268
+      ],
+      [
+       22.471,
+       4.268
+      ],
+      [
+       22.743,
+       4.268
+      ],
+      [
+       23.015,
+       4.268
+      ],
+      [
+       23.286,
+       4.268
+      ],
+      [
+       23.558,
+       4.268
+      ],
+      [
+       23.83,
+       4.268
+      ],
+      [
+       24.238,
+       4.268
+      ],
+      [
+       24.51,
+       4.268
+      ],
+      [
+       24.782,
+       4.268
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Battery-less start-up: VSS against time",
+   "page": 17,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSS",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSS",
+     "points": [
+      [
+       0.181,
+       4.095
+      ],
+      [
+       0.453,
+       4.095
+      ],
+      [
+       0.725,
+       4.095
+      ],
+      [
+       0.997,
+       4.095
+      ],
+      [
+       1.269,
+       4.095
+      ],
+      [
+       1.54,
+       4.095
+      ],
+      [
+       1.812,
+       4.095
+      ],
+      [
+       2.084,
+       4.095
+      ],
+      [
+       2.356,
+       4.095
+      ],
+      [
+       2.628,
+       4.095
+      ],
+      [
+       2.899,
+       4.095
+      ],
+      [
+       3.171,
+       4.095
+      ],
+      [
+       3.443,
+       4.095
+      ],
+      [
+       3.715,
+       4.095
+      ],
+      [
+       4.123,
+       4.095
+      ],
+      [
+       4.395,
+       50.955
+      ],
+      [
+       4.666,
+       42.311
+      ],
+      [
+       4.938,
+       35.032
+      ],
+      [
+       5.21,
+       30.482
+      ],
+      [
+       5.482,
+       75.978
+      ],
+      [
+       5.754,
+       65.059
+      ],
+      [
+       6.161,
+       50.955
+      ],
+      [
+       6.433,
+       94.631
+      ],
+      [
+       6.705,
+       81.893
+      ],
+      [
+       6.977,
+       70.974
+      ],
+      [
+       7.249,
+       80.528
+      ],
+      [
+       7.521,
+       101.456
+      ],
+      [
+       7.792,
+       88.717
+      ],
+      [
+       8.064,
+       76.888
+      ],
+      [
+       8.336,
+       118.744
+      ],
+      [
+       8.608,
+       105.551
+      ],
+      [
+       8.88,
+       91.902
+      ],
+      [
+       9.151,
+       168.79
+      ],
+      [
+       9.423,
+       118.744
+      ],
+      [
+       9.695,
+       105.551
+      ],
+      [
+       10.103,
+       176.069
+      ],
+      [
+       10.375,
+       125.114
+      ],
+      [
+       10.647,
+       111.465
+      ],
+      [
+       10.918,
+       98.726
+      ],
+      [
+       11.19,
+       138.308
+      ],
+      [
+       11.462,
+       123.749
+      ],
+      [
+       11.734,
+       109.645
+      ],
+      [
+       12.142,
+       142.857
+      ],
+      [
+       12.413,
+       126.479
+      ],
+      [
+       12.685,
+       113.285
+      ],
+      [
+       12.957,
+       152.866
+      ],
+      [
+       13.229,
+       138.308
+      ],
+      [
+       13.501,
+       121.474
+      ],
+      [
+       13.773,
+       160.601
+      ],
+      [
+       14.044,
+       146.952
+      ],
+      [
+       14.316,
+       131.938
+      ],
+      [
+       14.588,
+       169.7
+      ],
+      [
+       14.86,
+       155.596
+      ],
+      [
+       15.132,
+       136.943
+      ],
+      [
+       15.403,
+       212.011
+      ],
+      [
+       15.675,
+       162.875
+      ],
+      [
+       15.947,
+       146.952
+      ],
+      [
+       16.219,
+       181.529
+      ],
+      [
+       16.491,
+       172.429
+      ],
+      [
+       16.763,
+       157.871
+      ],
+      [
+       17.034,
+       166.06
+      ],
+      [
+       17.306,
+       181.984
+      ],
+      [
+       17.578,
+       165.15
+      ],
+      [
+       17.85,
+       149.682
+      ],
+      [
+       18.258,
+       211.556
+      ],
+      [
+       18.529,
+       211.556
+      ],
+      [
+       18.801,
+       211.556
+      ],
+      [
+       19.073,
+       211.556
+      ],
+      [
+       19.345,
+       211.556
+      ],
+      [
+       19.617,
+       211.556
+      ],
+      [
+       19.889,
+       211.556
+      ],
+      [
+       20.296,
+       211.556
+      ],
+      [
+       20.568,
+       211.556
+      ],
+      [
+       20.84,
+       211.556
+      ],
+      [
+       21.112,
+       211.556
+      ],
+      [
+       21.384,
+       211.556
+      ],
+      [
+       21.655,
+       211.556
+      ],
+      [
+       21.927,
+       211.556
+      ],
+      [
+       22.199,
+       211.556
+      ],
+      [
+       22.471,
+       211.556
+      ],
+      [
+       22.743,
+       211.556
+      ],
+      [
+       23.015,
+       211.556
+      ],
+      [
+       23.286,
+       211.556
+      ],
+      [
+       23.558,
+       211.556
+      ],
+      [
+       23.83,
+       211.556
+      ],
+      [
+       24.238,
+       211.556
+      ],
+      [
+       24.51,
+       211.556
+      ],
+      [
+       24.782,
+       211.556
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "2 A single-cell Li-Ion charger",
+   "page": 1,
+   "description": "A 4.5 V to 5.5 V supply into PVIN and VINSENSE with a 10 µF bypass, a 1.5 µH inductor from SW to SENSE, and a 10 µF across the cell. One 274 Ω resistor from the joined PROG and IDET pins sets 2 A charge with a C/10 near-full threshold. 0.22 µF on TIMER gives a three-hour cycle, 0.1 µF on SS sets soft-start and compensation. NTC and EN go to the GNDSENS return, so temperature monitoring is off and the charger always runs. CHRG and FAULT are left open. BATSENS and GNDSENS run separately to the cell terminals.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4001"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "1.5 µH"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "input bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "across the cell"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.22 µF",
+     "note": "timer"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "soft-start and compensation"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "274 Ω",
+     "note": "PROG and IDET together"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "4.2 V Li-Ion cell"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "4.5 V to 5.5 V"
+    }
+   ],
+   "notes": [
+    "GNDSENS and PGND meet at the cell's negative terminal; the input capacitor returns to PGND."
+   ]
+  },
+  {
+   "id": "fig8",
+   "title": "2 A Li-Ion charger with 3 h timer, temperature qualification, soft-start, remote sensing and C/10 indication",
+   "page": 18,
+   "description": "A complete 2 A charger for a 2 Ah cell. Separate 549 Ω resistors on PROG and IDET give 2 A charge and a 200 mA (C/10) near-full threshold. 0.22 µF on TIMER sets a three-hour charge and 0.1 µF on SS sets soft-start. A 10 kΩ resistor from VIN and a 10 kΩ NTC thermistor to GNDSENS form the temperature divider on NTC. An LED with a 1 kΩ resistor from VIN into CHRG shows charge status. FAULT goes to a microcontroller input and EN comes from a microcontroller output. BAT and BATSENS meet at the cell's positive terminal, PGND and GNDSENS at its negative one.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4001"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "1.5 µH",
+     "note": "Vishay Dale IHLP-2525AH-01"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "input bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "across the cell"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.22 µF",
+     "note": "timer, 3 h"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "soft-start and compensation"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10k",
+     "note": "NTC bias"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1k",
+     "note": "LED current"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10k at 25 °C",
+     "note": "NTC thermistor, Vishay Dale NTHS0603N02N1002J"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "549 Ω",
+     "note": "RPROG"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "549 Ω",
+     "note": "RIDET"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "2 Ah 4.2 V Li-Ion cell"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "4.5 V to 5.5 V"
+    },
+    {
+     "ref": "FAULT",
+     "type": "terminal",
+     "value": "to µP"
+    },
+    {
+     "ref": "EN",
+     "type": "terminal",
+     "value": "from µP"
+    }
+   ],
+   "notes": [
+    "GNDSENS and PGND meet at the cell's negative terminal; C1 and C4 return to PGND, every other ground return to GNDSENS."
+   ]
+  },
+  {
+   "id": "single-resistor",
+   "title": "Charge current and IDET threshold set by one resistor",
+   "page": 10,
+   "description": "PROG and IDET tied together share one resistor to GNDSENS, which sets the charge current and puts the near-full threshold at one tenth of it, at some cost in accuracy of both. 274 Ω gives 2 A.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4001"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "274 Ω",
+     "note": "for 2 A"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "mcu-interface",
+   "title": "Microprocessor reading three CHRG states",
+   "page": 11,
+   "description": "CHRG feeds a microprocessor input, with 390 kΩ to the processor's VDD and 2 kΩ to one of its outputs. With the output driven high, the input reads low while the strong pull-down is on (charging) and high once only the 30 µA source remains (near full). With the output then made high impedance, the input reads low if the 30 µA source is still on and is pulled high by the 390 kΩ once CHRG has gone high impedance (charging stopped).",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4001"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "390k"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2k"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "microprocessor",
+     "external": true
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "VDD"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ntc-wide-window",
+   "title": "Thermistor network with a wider temperature window",
+   "page": 13,
+   "description": "A 13.3 kΩ resistor in series with a 100 kΩ (at 25 °C) thermistor, biased by 121 kΩ from VINSENSE, stretches the hold window of an R-T Curve 1 thermistor to about 0 °C cold and 50 °C hot.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC4001"
+    },
+    {
+     "ref": "RNOM",
+     "type": "resistor",
+     "value": "121k"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "13.3k"
+    },
+    {
+     "ref": "RNTC",
+     "type": "resistor",
+     "value": "100k at 25 °C",
+     "note": "NTC thermistor"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Charge current resistor",
+   "expr": "RPROG = 1.110 k / IBAT(AMPS)",
+   "where": {
+    "RPROG": "resistor from PROG to GNDSENS, kΩ",
+    "IBAT": "high-rate charge current, A"
+   },
+   "note": "",
+   "page": 6
+  },
+  {
+   "name": "Charge current resistor from the PROG gain",
+   "expr": "RPROG = 915 • 1.213V / IBAT",
+   "where": {
+    "915": "ratio of charge current to PROG pin current",
+    "1.213V": "PROG pin voltage"
+   },
+   "note": "For 2 A: RPROG ≅ 554.9Ω.",
+   "page": 10
+  },
+  {
+   "name": "IDET threshold resistor",
+   "expr": "RIDET = 91.5 • 1.213V / IDET",
+   "where": {
+    "91.5": "ratio of IDET threshold to IDET pin current",
+    "IDET": "near-full current threshold, A"
+   },
+   "note": "For 200 mA (C/10 of a 2 Ah cell): RIDET ≅ 554.9Ω. 1.10 kΩ gives about 100 mA and 274 Ω about 400 mA.",
+   "page": 10
+  },
+  {
+   "name": "Single programming resistor",
+   "expr": "R1 = 457.5 • 1.213 / ICHARGE;  IDET = ICHARGE / 10",
+   "where": {
+    "R1": "one resistor from the joined PROG and IDET pins to GNDSENS",
+    "ICHARGE": "charge current, A"
+   },
+   "note": "274 Ω for 2 A.",
+   "page": 10
+  },
+  {
+   "name": "Timer capacitor",
+   "expr": "CTIMER = Time(Hrs) • 0.0733 (µF)",
+   "where": {
+    "Time": "charge time, hours"
+   },
+   "note": "0.22 µF gives about 3 h.",
+   "page": 6
+  },
+  {
+   "name": "NTC bias resistor, window moved colder",
+   "expr": "RNOM = (RCOLD / 2.815) • RNTC at 25°C",
+   "where": {
+    "RCOLD": "thermistor resistance ratio at the wanted cold trip point",
+    "RNTC at 25°C": "thermistor value at 25 °C"
+   },
+   "note": "Example: a 100k R-T Curve 1 thermistor with ratio 3.266 at 0 °C gives 116k; nearest 1 % is 115k, for trips near 0 °C and 44 °C.",
+   "page": 12
+  },
+  {
+   "name": "NTC bias resistor, window moved hotter",
+   "expr": "RNOM = (RHOT / 0.4086) • RNTC at 25°C",
+   "where": {
+    "RHOT": "thermistor resistance ratio at the wanted hot trip point"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "NTC bias and series resistor for a wider window",
+   "expr": "RNOM = (RCOLD – RHOT) / (2.815 – 0.4086);  R1 = (0.4086 / (2.815 – 0.4086)) • (RCOLD – RHOT) – RHOT",
+   "where": {
+    "RCOLD": "thermistor resistance at the cold trip point",
+    "RHOT": "thermistor resistance at the hot trip point",
+    "R1": "resistor in series with the thermistor"
+   },
+   "note": "For a 100k thermistor, 0 °C and 50 °C: RNOM = 120.8k (121k), R1 = 13.3k.",
+   "page": 13
+  },
+  {
+   "name": "Inductor ripple current",
+   "expr": "∆IL = (VBAT – VBAT² / VIN) / (L • f)",
+   "where": {
+    "VBAT": "battery voltage",
+    "VIN": "input voltage",
+    "L": "inductance",
+    "f": "PWM frequency, 1.5 MHz typ"
+   },
+   "note": "Largest at maximum VIN with VBAT = VIN/2. With 1.5 µH, 2 A, VIN = 5.5 V and VBAT = 2.85 V: 0.61 A p-p. Keep ∆IL at or below 0.4 • IBAT.",
+   "page": 14
+  },
+  {
+   "name": "Peak inductor current",
+   "expr": "IPK = IBAT + 0.5 • ∆IL",
+   "where": {
+    "IBAT": "maximum charge current"
+   },
+   "note": "2.31 A in the 1.5 µH, 2 A example; stay below the inductor's saturation current.",
+   "page": 14
+  },
+  {
+   "name": "Dissipation in trickle (linear) mode",
+   "expr": "PD = (VIN – VBAT) • ITRIKL + VIN • IIN",
+   "where": {
+    "IIN": "IC supply current"
+   },
+   "note": "Worst case VBAT = 0: 5.5 V, 65 mA, 2 mA gives 368.5 mW.",
+   "page": 15
+  },
+  {
+   "name": "Drop across the charger in adapter current limit",
+   "expr": "VDROP = ILIMIT • RPFET",
+   "where": {
+    "ILIMIT": "adapter current limit",
+    "RPFET": "on-resistance of the high-side PMOS"
+   },
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Dissipation in adapter current limit",
+   "expr": "PD = (VBAT + VDROP) • (IIN + IP) + VDROP • ILIMIT",
+   "where": {
+    "IIN": "chip quiescent current",
+    "IP": "total current out of the PROG and IDET pins"
+   },
+   "note": "2 A and 200 mA programmed, 1.5 A adapter, RPFET = 127 mΩ, IIN = 2 mA, IP = 4 mA, VBAT ≈ 4.242 V: VDROP = 190.5 mV, PD = 312 mW.",
+   "page": 15
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ = TA + (PD • 37°C/W)",
+   "where": {
+    "TA": "ambient temperature",
+    "PD": "highest dissipation of the operating modes"
+   },
+   "note": "",
+   "page": 16
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Charge cycle",
+   "page": 8,
+   "text": "Charging starts once VIN is above the UVLO level, at least 250 mV above the battery, and EN is low. Below the trickle threshold (about 3 V) a linear charger supplies about 50 mA. If the cell is still low after a quarter of the charge time it is judged faulty: the cycle stops and FAULT goes high. Above the threshold the linear charger turns off and the 1.5 MHz buck takes over, ramping up under soft-start to the constant current set at PROG. Near 4.2 V the current tapers. When it stays below the IDET threshold for more than 5 ms, CHRG swaps its strong pull-down for a 30 µA source. The timer capacitor sets the total time; at timeout the cycle ends and CHRG goes high impedance."
+  },
+  {
+   "topic": "Restart and recharge",
+   "page": 8,
+   "text": "A finished cycle restarts when the input is removed and reapplied or EN is pulsed high. With adapter and cell both still present, a new cycle begins on its own when the battery falls to the recharge threshold, 100 mV under the float voltage (about 4.1 V); a recharge cycle runs for half the normal charge time. The recharge comparator must see the battery below threshold for at least 4 ms, so short load dips (GPRS phone bursts) do not trigger it; this filter works with the timer disabled too."
+  },
+  {
+   "topic": "Termination options",
+   "page": 11,
+   "text": "TIMER chooses how a cycle ends: a capacitor to GNDSENS ends it on time; TIMER tied to GNDSENS ends it when current drops below the IDET threshold; TIMER tied to IDET disables termination, leaving an external controller to stop charging by pulling EN high."
+  },
+  {
+   "topic": "IDET blanking",
+   "page": 8,
+   "text": "The IDET comparator is ignored until the battery nears the float voltage, so the low current during soft-start does not flag end of charge."
+  },
+  {
+   "topic": "CHRG status pin",
+   "page": 11,
+   "text": "CHRG has three states: strong N-channel pull-down (charging at high rate, able to sink LED current), a weak 30 µA pull-down (current below the IDET threshold for at least 4 ms with the battery near float), and high impedance (cycle over). With two resistors a processor can tell all three apart (circuit mcu-interface). On a temperature fault while still charging above the IDET current, the pull-down switches at about 50 kHz with a duty factor that alternates high and low at about 1.5 Hz: an LED shows a slow blink while an interrupt input sees edges within about 20 µs; spikes inside each pulse are about 500 ns wide."
+  },
+  {
+   "topic": "Battery temperature",
+   "page": 12,
+   "text": "An NTC thermistor near the pack goes from NTC to GNDSENS and a 1 % resistor of the thermistor's 25 °C value (RNOM) from NTC to VINSENSE. Hold starts when the thermistor falls to 0.41 × RNOM (hot; 4.1k, about 50 °C, for a 10k Vishay NTHS0603N02N1002J) or rises to 2.82 × RNOM (cold; 28.2k, about 0 °C). In hold the timer freezes and charging stops; FAULT goes high. Each comparator has about 3 °C hysteresis. The trip points suit thermistors following Vishay Dale R-T Curve 2 (RCOLD/RHOT = 2.815/0.4086 = 6.89), or any with a ratio near 7. Higher-value R-T Curve 1 thermistors (10k to 100k) give about 3 °C and 47 °C, a 44 °C span that RNOM shifts; a resistor in series with the thermistor widens it. Grounding NTC turns the function off."
+  },
+  {
+   "topic": "Undervoltage lockout and automatic shutdown",
+   "page": 8,
+   "text": "The charger stays off until VIN passes the UVLO threshold, which has 100 mV of hysteresis. To block reverse current it also shuts down when VIN falls to within 30 mV typ of VBAT, and restarts only when VIN is more than 250 mV above VBAT. In that sleep state input current falls to 50 µA and the BATSENS divider is disconnected."
+  },
+  {
+   "topic": "Protection",
+   "page": 9,
+   "text": "Both chargers stop if the battery rises about 5 % above the float voltage, as when the cell is pulled out during charge. Charging stops when the die passes about 160 °C and resumes below about 150 °C. A hard short across the battery keeps the part in trickle mode at about 50 mA; PWM charging is refused if PROG programs a current far above 2 A; an overcurrent comparator watches peak inductor current. The input needs no blocking diode."
+  },
+  {
+   "topic": "Soft-start and compensation",
+   "page": 10,
+   "text": "Each time the high-rate charger starts, the SS capacitor charges from an internal 12.8 µA source; the useful SS range is about 0.3 V to 1.6 V, and 0.1 µF reaches full duty cycle in about 10 ms. The same capacitor compensates the current and float-voltage loops; it must be at least 10 nF."
+  },
+  {
+   "topic": "Inductor",
+   "page": 14,
+   "text": "The 1.5 MHz switching frequency allows a small inductor, which needs low core loss at that frequency; The Vishay Dale IHLP-2525AH-01 suits it. 1.5 µH gives reasonable ripple in a typical design. Peak current must stay below saturation, and ripple above 0.4 × IBAT can upset the output short-circuit comparator."
+  },
+  {
+   "topic": "Input and output capacitors",
+   "page": 13,
+   "text": "A 10 µF ceramic chip capacitor is used at input and output for its low ESR and ESL and ripple current rating. Some high-Q ceramics can ring at start-up, for example when plugged into a live supply (Application Note 88). Beads or inductors in the battery leads raise the battery's impedance at 1.5 MHz and push ripple into the output capacitor: with 0.1 Ω capacitor ESR and 2 Ω battery impedance, only 5 % of the ripple reaches the battery. The same applies to the input leads."
+  },
+  {
+   "topic": "Current-limited wall adapter",
+   "page": 14,
+   "text": "Any adapter works, but dissipation is lowest when the adapter's current limit is below the programmed charge current. Then, after trickle and soft-start, the adapter goes into limit, its voltage collapses toward the battery voltage and the buck runs at 100 % duty with the top PMOS fully on; drop across the part is ILIMIT × RPFET. Near the float voltage the current demand falls below the limit and VIN returns to the adapter's rated voltage."
+  },
+  {
+   "topic": "Thermal",
+   "page": 15,
+   "text": "Dissipation is found for both modes: linear trickle (worst at VBAT = 0, maximum VIN, maximum trickle and quiescent current) and buck charging, estimated from the total circuit dissipation curves, which slightly overstate chip loss because they include the external parts. The highest figure goes into TJ = TA + PD × 37 °C/W."
+  },
+  {
+   "topic": "Running without a battery",
+   "page": 16,
+   "text": "With a battery fitted, the load just needs an average current below the charge current and must not pull VBAT under the trickle threshold. Without a battery, VBAT starts at 0 V and trickle charge raises it; at the threshold the PWM charger starts with SS near zero, the load drags VBAT back into trickle, and each pass starts with SS a little higher until the charger outruns the load and VBAT rises to float. Load current should stay under the worst-case trickle current (preferably under 30 mA) while VBAT is below 3.15 V; above 3.15 V, up to the charge current is allowed. Extra low-ESR output capacitance and a 10k resistor in series with the SS capacitor improve battery-less start-up."
+  },
+  {
+   "topic": "Remote sensing",
+   "page": 14,
+   "text": "For the best float accuracy BATSENS and GNDSENS go straight to the battery terminals, and so do BAT and PGND, so that no charge current flows in the sense lines."
+  },
+  {
+   "topic": "Layout",
+   "page": 18,
+   "text": "Edges at SW are under 5 ns. Keep the SW trace and the PVIN-to-PGND bypass loop as short as possible, put a ground plane under the switching parts, and solder the exposed pad to that plane for heat. Other paths carry only DC or 1.5 MHz triangular ripple. The input and output capacitors return to PGND; every other ground return goes to GNDSENS."
+  }
+ ],
+ "packages": [
+  {
+   "name": "UF16, 16-lead plastic QFN 4 mm × 4 mm (LTC DWG 05-08-1692, JEDEC MO-220 WGGC)",
+   "page": 19,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length and width (4 sides)",
+     "3.90",
+     "4.00",
+     "4.10"
+    ],
+    [
+     "",
+     "overall height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "terminal thickness",
+     "",
+     "0.200 REF",
+     ""
+    ],
+    [
+     "",
+     "exposed pad length and width (4 sides)",
+     "2.05",
+     "2.15",
+     "2.25"
+    ],
+    [
+     "",
+     "terminal width",
+     "0.25",
+     "0.30",
+     "0.35"
+    ],
+    [
+     "",
+     "terminal pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "",
+     "terminal length",
+     "0.35",
+     "0.55",
+     "0.75"
+    ],
+    [
+     "",
+     "terminal corner radius",
+     "",
+     "0.115",
+     ""
+    ],
+    [
+     "",
+     "pin 1 notch radius on exposed pad (or 0.35 × 45° chamfer)",
+     "",
+     "0.20",
+     ""
+    ],
+    [
+     "",
+     "land pattern: overall across pads",
+     "4.30",
+     "4.35",
+     "4.40"
+    ],
+    [
+     "",
+     "land pattern: across inner pad ends",
+     "2.85",
+     "2.90",
+     "2.95"
+    ],
+    [
+     "",
+     "land pattern: thermal pad",
+     "2.10",
+     "2.15",
+     "2.20"
+    ],
+    [
+     "",
+     "land pattern: pad length",
+     "0.67",
+     "0.72",
+     "0.77"
+    ],
+    [
+     "",
+     "land pattern: pad width",
+     "0.25",
+     "0.30",
+     "0.35"
+    ],
+    [
+     "",
+     "land pattern: pad pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ]
+   ],
+   "notes": [
+    "Exposed pad dimensions exclude mold flash, which is at most 0.15 mm per side.",
+    "The exposed pad is solder plated.",
+    "A shaded corner on top and bottom marks the pin 1 location."
+   ]
+  }
+ ]
+}

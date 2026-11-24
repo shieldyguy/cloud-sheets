@@ -1,0 +1,2176 @@
+{
+ "sheet": 1,
+ "name": "DS3231MZ+TRL",
+ "kind": "rtc",
+ "manufacturer": "Analog Devices (Maxim Integrated)",
+ "title": "DS3231M: ±5 ppm I2C real-time clock with integrated MEMS resonator",
+ "source": {
+  "document": "19-5312",
+  "revision": "Rev 7; 3/15",
+  "pages": 20
+ },
+ "summary": "A real-time clock with a built-in, temperature-compensated MEMS resonator, holding ±5 ppm (±0.432 s per day) from -45°C to +85°C. It counts seconds to years with leap-year correction up to 2100, has two time-of-day alarms, 1Hz and 32.768kHz outputs, a ±3°C temperature sensor, a reset output with debounced pushbutton input, and a battery input that it switches to when VCC fails. It talks 400kHz I2C at address D0h and runs from 2.3V to 5.5V. It fits the footprint of the DS3231 and works like it.",
+ "key_figures": [
+  [
+   "Timekeeping accuracy",
+   "±5 ppm (±0.432 s/day), -45°C to +85°C"
+  ],
+  [
+   "Supply VCC / VBAT",
+   "2.3 V to 5.5 V"
+  ],
+  [
+   "Timekeeping battery current IBATT",
+   "2 µA typ, 3.0 µA max at VBAT = 3.63 V, EN32KHZ = 0"
+  ],
+  [
+   "Standby supply current ICCS",
+   "130 µA max at VCC = 3.63 V"
+  ],
+  [
+   "Power-fail voltage VPF",
+   "2.45 V to 2.70 V, 2.575 V typ"
+  ],
+  [
+   "Temperature sensor accuracy",
+   "±3°C typ, 0.25°C resolution"
+  ],
+  [
+   "Interface",
+   "I2C up to 400 kHz, address D0h"
+  ],
+  [
+   "Outputs",
+   "32.768 kHz, 1 Hz / interrupt, reset (all open drain)"
+  ],
+  [
+   "Operating temperature",
+   "-45°C to +85°C"
+  ],
+  [
+   "Packages",
+   "8 SO, 16 SO"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "temperature range",
+   "package",
+   "qualification"
+  ],
+  "rows": [
+   [
+    "DS3231MZ+",
+    "-45°C to +85°C",
+    "8 SO",
+    ""
+   ],
+   [
+    "DS3231MZ/V+",
+    "-45°C to +85°C",
+    "8 SO",
+    "automotive qualified"
+   ],
+   [
+    "DS3231M+",
+    "-45°C to +85°C",
+    "16 SO",
+    ""
+   ]
+  ],
+  "notes": [
+   "+ marks a lead-free, RoHS-compliant package. /V marks the automotive-qualified part."
+  ]
+ },
+ "pins": [
+  {
+   "package": "8 SO",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "32KHZ",
+     "type": "open-drain output",
+     "function": "32.768kHz square wave at 50% duty. Needs an external pull-up. Turned on and off by EN32KHZ (status register 0Fh) and runs from either supply. May be left open."
+    },
+    {
+     "pin": "2",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Main supply. Decouple with 0.1µF to 1.0µF. Tie to ground when unused."
+    },
+    {
+     "pin": "3",
+     "name": "INT/SQW",
+     "type": "open-drain output",
+     "function": "Active-low alarm interrupt, or 1Hz square wave, picked by INTCN (control register 0Eh): INTCN = 0 gives the square wave, INTCN = 1 lets an enabled alarm match pull it low. INTCN is 1 after power-up, so the pin starts as an interrupt output with the alarms off. Needs a pull-up to a supply no higher than 5.5V. May be left open."
+    },
+    {
+     "pin": "4",
+     "name": "RST",
+     "type": "open-drain input/output",
+     "function": "Active-low reset. Goes low while VCC is under VPF and is released tRST after VCC rises above VPF, pulled up by an internal resistor RPU of about 50kΩ to VCC; add no external pull-up. Also takes a pushbutton, which it debounces. If the oscillator is off, tREC is skipped and the pin goes high at once."
+    },
+    {
+     "pin": "5",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "6",
+     "name": "VBAT",
+     "type": "power in",
+     "function": "Backup supply. When VBAT is the main supply, decouple it with a 0.1µF to 1.0µF low-leakage capacitor; as a backup it needs none. Tie to ground when unused. UL recognized for protection against reverse charging a primary lithium cell."
+    },
+    {
+     "pin": "7",
+     "name": "SDA",
+     "type": "open-drain input/output",
+     "function": "I2C data. Needs an external pull-up, which may go up to 5.5V whatever VCC is."
+    },
+    {
+     "pin": "8",
+     "name": "SCL",
+     "type": "input",
+     "function": "I2C clock, which times data in and out. Its pull-up may go up to 5.5V whatever VCC is."
+    }
+   ]
+  },
+  {
+   "package": "16 SO",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "32KHZ",
+     "type": "open-drain output",
+     "function": "32.768kHz square wave at 50% duty. Needs an external pull-up. Turned on and off by EN32KHZ (status register 0Fh) and runs from either supply. May be left open."
+    },
+    {
+     "pin": "2",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Main supply. Decouple with 0.1µF to 1.0µF. Tie to ground when unused."
+    },
+    {
+     "pin": "3",
+     "name": "INT/SQW",
+     "type": "open-drain output",
+     "function": "Active-low alarm interrupt, or 1Hz square wave, picked by INTCN (control register 0Eh): INTCN = 0 gives the square wave, INTCN = 1 lets an enabled alarm match pull it low. INTCN is 1 after power-up, so the pin starts as an interrupt output with the alarms off. Needs a pull-up to a supply no higher than 5.5V. May be left open."
+    },
+    {
+     "pin": "4",
+     "name": "RST",
+     "type": "open-drain input/output",
+     "function": "Active-low reset. Goes low while VCC is under VPF and is released tRST after VCC rises above VPF, pulled up by an internal resistor RPU of about 50kΩ to VCC; add no external pull-up. Also takes a pushbutton, which it debounces. If the oscillator is off, tREC is skipped and the pin goes high at once."
+    },
+    {
+     "pin": "5–12",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "No connection. Connect these pins to ground."
+    },
+    {
+     "pin": "13",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "14",
+     "name": "VBAT",
+     "type": "power in",
+     "function": "Backup supply. When VBAT is the main supply, decouple it with a 0.1µF to 1.0µF low-leakage capacitor; as a backup it needs none. Tie to ground when unused. UL recognized for protection against reverse charging a primary lithium cell."
+    },
+    {
+     "pin": "15",
+     "name": "SDA",
+     "type": "open-drain input/output",
+     "function": "I2C data. Needs an external pull-up, which may go up to 5.5V whatever VCC is."
+    },
+    {
+     "pin": "16",
+     "name": "SCL",
+     "type": "input",
+     "function": "I2C clock, which times data in and out. Its pull-up may go up to 5.5V whatever VCC is."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Voltage range on any pin relative to GND",
+     "-0.3V to +6.0V"
+    ],
+    [
+     "Operating temperature range",
+     "-45°C to +85°C"
+    ],
+    [
+     "Storage temperature range",
+     "-55°C to +125°C"
+    ],
+    [
+     "Junction temperature",
+     "+150°C"
+    ],
+    [
+     "Lead temperature (soldering, 10s)",
+     "+300°C"
+    ],
+    [
+     "Soldering temperature (reflow)",
+     "+260°C"
+    ]
+   ],
+   "notes": [
+    "Operation at or past these limits can damage the part permanently; long exposure to them can reduce reliability. They are stress limits, not operating conditions."
+   ]
+  },
+  {
+   "title": "Package thermal characteristics",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "package",
+    "parameter",
+    "symbol",
+    "value"
+   ],
+   "rows": [
+    [
+     "8 SO",
+     "Junction-to-ambient thermal resistance",
+     "θJA",
+     "120°C/W"
+    ],
+    [
+     "16 SO",
+     "Junction-to-ambient thermal resistance",
+     "θJA",
+     "90°C/W"
+    ]
+   ],
+   "notes": [
+    "Figures are for a four-layer board, measured to JEDEC JESD51-7."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 2,
+   "conditions": "TA = -45°C to +85°C, unless otherwise noted. All voltages referred to ground.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VCC",
+     "",
+     "2.3",
+     "3.3",
+     "5.5",
+     "V"
+    ],
+    [
+     "Supply voltage",
+     "VBAT",
+     "",
+     "2.3",
+     "3.0",
+     "5.5",
+     "V"
+    ],
+    [
+     "Logic 1",
+     "VIH",
+     "",
+     "0.7 x VCC",
+     "",
+     "VCC + 0.3",
+     "V"
+    ],
+    [
+     "Logic 0",
+     "VIL",
+     "",
+     "-0.3",
+     "",
+     "0.3 x VCC",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: frequency and timekeeping",
+   "page": 2,
+   "conditions": "VCC or VBAT = +3.3V, TA = -45°C to +85°C, unless otherwise noted. Typical values at VCC = +3.3V, VBAT = +3.0V, TA = +25°C.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "1Hz frequency tolerance",
+     "Δf/fOUT",
+     "Measured over ≥ 10s interval",
+     "",
+     "",
+     "±5",
+     "ppm"
+    ],
+    [
+     "1Hz frequency stability vs. VCC voltage",
+     "Δf/V",
+     "",
+     "",
+     "±1",
+     "",
+     "ppm/V"
+    ],
+    [
+     "Timekeeping accuracy",
+     "tKA",
+     "",
+     "",
+     "",
+     "±0.432",
+     "Seconds/Day"
+    ],
+    [
+     "32kHz frequency tolerance",
+     "Δf/fOUT",
+     "",
+     "",
+     "",
+     "±2.5",
+     "%"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "DC electrical characteristics: general",
+   "page": 2,
+   "conditions": "VCC = +2.3V to +5.5V, TA = -45°C to +85°C, unless otherwise noted. Typical values at VCC = +3.3V, VBAT = +3.0V, TA = +25°C.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Active supply current (I2C active; includes temperature conversion current)",
+     "ICCA",
+     "VCC = +3.63V",
+     "",
+     "",
+     "200",
+     "µA"
+    ],
+    [
+     "Active supply current (I2C active; includes temperature conversion current)",
+     "ICCA",
+     "VCC = VCCMAX",
+     "",
+     "",
+     "300",
+     "µA"
+    ],
+    [
+     "Standby supply current (I2C inactive; includes temperature conversion current)",
+     "ICCS",
+     "VCC = +3.63V",
+     "",
+     "",
+     "130",
+     "µA"
+    ],
+    [
+     "Standby supply current (I2C inactive; includes temperature conversion current)",
+     "ICCS",
+     "VCC = VCCMAX",
+     "",
+     "",
+     "200",
+     "µA"
+    ],
+    [
+     "Temperature conversion current (I2C inactive)",
+     "ICCSCONV",
+     "VCC = +3.63V",
+     "",
+     "",
+     "575",
+     "µA"
+    ],
+    [
+     "Temperature conversion current (I2C inactive)",
+     "ICCSCONV",
+     "VCC = VCCMAX",
+     "",
+     "",
+     "650",
+     "µA"
+    ],
+    [
+     "Power-fail voltage",
+     "VPF",
+     "",
+     "2.45",
+     "2.575",
+     "2.70",
+     "V"
+    ],
+    [
+     "Logic 0 output (32KHZ, INT/SQW, SDA)",
+     "VOL",
+     "IOL = 3mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Logic 0 output (RST)",
+     "VOL",
+     "IOL = 1mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Output leakage (32KHZ, INT/SQW, SDA)",
+     "ILO",
+     "",
+     "-0.1",
+     "",
+     "+0.1",
+     "µA"
+    ],
+    [
+     "Input leakage (SCL)",
+     "ILI",
+     "",
+     "-0.1",
+     "",
+     "+0.1",
+     "µA"
+    ],
+    [
+     "RST I/O leakage",
+     "IOL",
+     "",
+     "-200",
+     "",
+     "+10",
+     "µA"
+    ],
+    [
+     "VBAT leakage",
+     "IBATLKG",
+     "",
+     "",
+     "25",
+     "100",
+     "nA"
+    ],
+    [
+     "Temperature accuracy",
+     "TEMPACC",
+     "VCC or VBAT = +3.3V",
+     "",
+     "±3",
+     "",
+     "°C"
+    ],
+    [
+     "Temperature conversion time",
+     "tCONV",
+     "",
+     "",
+     "10",
+     "",
+     "ms"
+    ],
+    [
+     "Pushbutton debounce",
+     "PBDB",
+     "",
+     "",
+     "250",
+     "",
+     "ms"
+    ],
+    [
+     "Reset active time",
+     "tRST",
+     "",
+     "",
+     "250",
+     "",
+     "ms"
+    ],
+    [
+     "Oscillator stop flag (OSF) delay",
+     "tOSF",
+     "(Note 3)",
+     "",
+     "125",
+     "200",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "Note 3: tOSF is how long the oscillator has to be stopped before the OSF flag sets."
+   ]
+  },
+  {
+   "title": "DC electrical characteristics: VBAT current consumption",
+   "page": 3,
+   "conditions": "VCC = 0V, VBAT = +2.3V to +5.5V, TA = -45°C to +85°C, unless otherwise noted. Typical values at VCC = 0V, VBAT = +3.0V, TA = +25°C.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Active battery current (I2C active) (Note 4)",
+     "IBATA",
+     "VBAT = +3.63V",
+     "",
+     "",
+     "70",
+     "µA"
+    ],
+    [
+     "Active battery current (I2C active) (Note 4)",
+     "IBATA",
+     "VBAT = VBATMAX",
+     "",
+     "",
+     "150",
+     "µA"
+    ],
+    [
+     "Timekeeping battery current (I2C inactive) (Note 4)",
+     "IBATT",
+     "VBAT = +3.63V, EN32KHZ = 0",
+     "",
+     "2",
+     "3.0",
+     "µA"
+    ],
+    [
+     "Timekeeping battery current (I2C inactive) (Note 4)",
+     "IBATT",
+     "VBAT = VBATMAX, EN32KHZ = 0",
+     "",
+     "2",
+     "3.5",
+     "µA"
+    ],
+    [
+     "Temperature conversion current (I2C inactive)",
+     "IBATTC",
+     "VBAT = +3.63V",
+     "",
+     "",
+     "575",
+     "µA"
+    ],
+    [
+     "Temperature conversion current (I2C inactive)",
+     "IBATTC",
+     "VBAT = VBATMAX",
+     "",
+     "",
+     "650",
+     "µA"
+    ],
+    [
+     "Data retention current (oscillator stopped and I2C inactive)",
+     "IBATDR",
+     "TA = +25°C",
+     "",
+     "",
+     "100",
+     "nA"
+    ]
+   ],
+   "notes": [
+    "Note 4: the figure takes in the temperature conversion current, averaged."
+   ]
+  },
+  {
+   "title": "AC electrical characteristics: power switch",
+   "page": 3,
+   "conditions": "TA = -45°C to +85°C, unless otherwise noted. Timing in Figure 2.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC fall time, VPFMAX to VPFMIN",
+     "tVCCF",
+     "",
+     "300",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "VCC rise time, VPFMIN to VPFMAX",
+     "tVCCR",
+     "",
+     "0",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Recovery at power-up",
+     "tREC",
+     "(Note 5)",
+     "",
+     "250",
+     "300",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "Note 5: tREC applies only while the oscillator runs. With EOSC = 1, tREC is skipped and RST goes high at once. RST has no effect on the I2C interface or on the clock."
+   ]
+  },
+  {
+   "title": "AC electrical characteristics: I2C interface",
+   "page": 4,
+   "conditions": "VCC or VBAT = +2.3V to +5.5V, TA = -45°C to +85°C, unless otherwise noted. Typical values at VCC = +3.3V, VBAT = +3.0V, TA = +25°C. Timing in Figure 1, referred to VIL max and VIH min.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SCL clock frequency",
+     "fSCL",
+     "",
+     "0",
+     "",
+     "400",
+     "kHz"
+    ],
+    [
+     "Bus free time between STOP and START conditions",
+     "tBUF",
+     "",
+     "1.3",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Hold time (repeated) START condition",
+     "tHD:STA",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Low period of SCL",
+     "tLOW",
+     "",
+     "1.3",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "High period of SCL",
+     "tHIGH",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Data hold time",
+     "tHD:DAT",
+     "",
+     "0",
+     "",
+     "0.9",
+     "µs"
+    ],
+    [
+     "Data set-up time",
+     "tSU:DAT",
+     "",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "START set-up time",
+     "tSU:STA",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "SDA and SCL rise time",
+     "tR",
+     "(Note 7)",
+     "20 + 0.1CB",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "SDA and SCL fall time",
+     "tF",
+     "(Note 7)",
+     "20 + 0.1CB",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "STOP set-up time",
+     "tSU:STO",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "SDA, SCL input capacitance",
+     "CBIN",
+     "(Note 8)",
+     "",
+     "10",
+     "",
+     "pF"
+    ]
+   ],
+   "notes": [
+    "Note 6: the limits are for fast mode (400kHz); standard-mode I2C timing also works.",
+    "Note 7: CB is the summed capacitance of a single bus line, in pF.",
+    "Note 8: set by design and not tested on every part."
+   ]
+  },
+  {
+   "title": "Table 1. Power control",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "configuration",
+    "condition",
+    "I/O active",
+    "I/O inactive",
+    "RST"
+   ],
+   "rows": [
+    [
+     "VCC only (Figure 4)",
+     "VCC > VPF",
+     "ICCA",
+     "ICCS",
+     "Inactive (High)"
+    ],
+    [
+     "VCC only (Figure 4)",
+     "VCC < VPF",
+     "ICCA",
+     "ICCS",
+     "Active (Low)"
+    ],
+    [
+     "VBAT only (Figure 5)",
+     "EOSC = 0",
+     "IBATA",
+     "IBATT",
+     "Disabled (Low)"
+    ],
+    [
+     "VBAT only (Figure 5)",
+     "EOSC = 1",
+     "IBATA",
+     "IBATDR",
+     "Disabled (Low)"
+    ],
+    [
+     "Dual supply (Figure 6)",
+     "VCC > VPF",
+     "ICCA",
+     "ICCS",
+     "Inactive (High)"
+    ],
+    [
+     "Dual supply (Figure 6)",
+     "VCC < VPF, VCC > VBAT",
+     "ICCA",
+     "ICCS",
+     "Active (Low)"
+    ],
+    [
+     "Dual supply (Figure 6)",
+     "VCC < VPF, VCC < VBAT",
+     "IBATA",
+     "IBATT",
+     "Active (Low)"
+    ]
+   ],
+   "notes": [
+    "EOSC is the active-low enable-oscillator bit of the control register."
+   ]
+  },
+  {
+   "title": "Table 2. Timekeeping registers",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "address",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0",
+    "function",
+    "range"
+   ],
+   "rows": [
+    [
+     "00h",
+     "0",
+     "10 Seconds",
+     "10 Seconds",
+     "10 Seconds",
+     "Seconds",
+     "Seconds",
+     "Seconds",
+     "Seconds",
+     "Seconds",
+     "00–59"
+    ],
+    [
+     "01h",
+     "0",
+     "10 Minutes",
+     "10 Minutes",
+     "10 Minutes",
+     "Minutes",
+     "Minutes",
+     "Minutes",
+     "Minutes",
+     "Minutes",
+     "00–59"
+    ],
+    [
+     "02h",
+     "0",
+     "12/24",
+     "AM/PM or 20 Hours",
+     "10 Hours",
+     "Hour",
+     "Hour",
+     "Hour",
+     "Hour",
+     "Hours",
+     "1–12 + AM/PM, 00–23"
+    ],
+    [
+     "03h",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "Day",
+     "Day",
+     "Day",
+     "Day",
+     "1–7"
+    ],
+    [
+     "04h",
+     "0",
+     "0",
+     "10 Date",
+     "10 Date",
+     "Date",
+     "Date",
+     "Date",
+     "Date",
+     "Date",
+     "01–31"
+    ],
+    [
+     "05h",
+     "Century",
+     "0",
+     "0",
+     "10 Month",
+     "Month",
+     "Month",
+     "Month",
+     "Month",
+     "Month/Century",
+     "01–12 + Century"
+    ],
+    [
+     "06h",
+     "10 Year",
+     "10 Year",
+     "10 Year",
+     "10 Year",
+     "Year",
+     "Year",
+     "Year",
+     "Year",
+     "Year",
+     "00–99"
+    ],
+    [
+     "07h",
+     "A1M1",
+     "10 Seconds",
+     "10 Seconds",
+     "10 Seconds",
+     "Seconds",
+     "Seconds",
+     "Seconds",
+     "Seconds",
+     "Alarm 1 Seconds",
+     "00–59"
+    ],
+    [
+     "08h",
+     "A1M2",
+     "10 Minutes",
+     "10 Minutes",
+     "10 Minutes",
+     "Minutes",
+     "Minutes",
+     "Minutes",
+     "Minutes",
+     "Alarm 1 Minutes",
+     "00–59"
+    ],
+    [
+     "09h",
+     "A1M3",
+     "12/24",
+     "AM/PM or 20 Hours",
+     "10 Hours",
+     "Hour",
+     "Hour",
+     "Hour",
+     "Hour",
+     "Alarm 1 Hours",
+     "1–12 + AM/PM, 00–23"
+    ],
+    [
+     "0Ah",
+     "A1M4",
+     "DY/DT",
+     "10 Date",
+     "10 Date",
+     "Day or Date",
+     "Day or Date",
+     "Day or Date",
+     "Day or Date",
+     "Alarm 1 Day / Alarm 1 Date",
+     "1–7 / 1–31"
+    ],
+    [
+     "0Bh",
+     "A2M2",
+     "10 Minutes",
+     "10 Minutes",
+     "10 Minutes",
+     "Minutes",
+     "Minutes",
+     "Minutes",
+     "Minutes",
+     "Alarm 2 Minutes",
+     "00–59"
+    ],
+    [
+     "0Ch",
+     "A2M3",
+     "12/24",
+     "AM/PM or 20 Hours",
+     "10 Hours",
+     "Hour",
+     "Hour",
+     "Hour",
+     "Hour",
+     "Alarm 2 Hours",
+     "1–12 + AM/PM, 00–23"
+    ],
+    [
+     "0Dh",
+     "A2M4",
+     "DY/DT",
+     "10 Date",
+     "10 Date",
+     "Day or Date",
+     "Day or Date",
+     "Day or Date",
+     "Day or Date",
+     "Alarm 2 Day / Alarm 2 Date",
+     "1–7 / 1–31"
+    ],
+    [
+     "0Eh",
+     "EOSC",
+     "BBSQW",
+     "CONV",
+     "NA",
+     "NA",
+     "INTCN",
+     "A2IE",
+     "A1IE",
+     "Control",
+     "—"
+    ],
+    [
+     "0Fh",
+     "OSF",
+     "0",
+     "0",
+     "0",
+     "EN32KHZ",
+     "BSY",
+     "A2F",
+     "A1F",
+     "Status",
+     "—"
+    ],
+    [
+     "10h",
+     "SIGN",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "Aging Offset",
+     "81h–7Fh"
+    ],
+    [
+     "11h",
+     "SIGN",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "Temperature MSB",
+     "—"
+    ],
+    [
+     "12h",
+     "DATA",
+     "DATA",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "Temperature LSB",
+     "—"
+    ]
+   ],
+   "notes": [
+    "EOSC is active low; in the hours registers the 24 of 12/24 and the AM of AM/PM are the low states, and in DY/DT the DT (date) is the low state.",
+    "Register contents are undefined at first power-up except where a default is given."
+   ]
+  },
+  {
+   "title": "Table 3. Alarm 1 mask bits",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "DY/DT",
+    "A1M4",
+    "A1M3",
+    "A1M2",
+    "A1M1",
+    "alarm rate"
+   ],
+   "rows": [
+    [
+     "X",
+     "1",
+     "1",
+     "1",
+     "1",
+     "Alarm once a second"
+    ],
+    [
+     "X",
+     "1",
+     "1",
+     "1",
+     "0",
+     "Alarm when seconds match"
+    ],
+    [
+     "X",
+     "1",
+     "1",
+     "0",
+     "0",
+     "Alarm when minutes and seconds match"
+    ],
+    [
+     "X",
+     "1",
+     "0",
+     "0",
+     "0",
+     "Alarm when hours, minutes, and seconds match"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "Alarm when date, hours, minutes, and seconds match"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "Alarm when day, hours, minutes, and seconds match"
+    ]
+   ],
+   "notes": [
+    "Combinations missing from the list give illogical operation."
+   ]
+  },
+  {
+   "title": "Table 3. Alarm 2 mask bits",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "DY/DT",
+    "A2M4",
+    "A2M3",
+    "A2M2",
+    "alarm rate"
+   ],
+   "rows": [
+    [
+     "X",
+     "1",
+     "1",
+     "1",
+     "Alarm once per minute (00 seconds of every minute)"
+    ],
+    [
+     "X",
+     "1",
+     "1",
+     "0",
+     "Alarm when minutes match"
+    ],
+    [
+     "X",
+     "1",
+     "0",
+     "0",
+     "Alarm when hours and minutes match"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "Alarm when date, hours, and minutes match"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "Alarm when day, hours, and minutes match"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Control register (0Eh)",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "power-up value",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "EOSC",
+     "0",
+     "Enable oscillator, active low. 0 runs the oscillator; 1 stops it once the part is running from VBAT. On VCC the oscillator always runs, whatever this bit holds. With the oscillator off, every register holds still."
+    ],
+    [
+     "6",
+     "BBSQW",
+     "0",
+     "Battery-backed square wave. With BBSQW = 1, INTCN = 0 and VCC < VPF, the 1Hz square wave keeps running; with BBSQW = 0 the INT/SQW pin goes high-impedance when VCC drops under VPF."
+    ],
+    [
+     "5",
+     "CONV",
+     "0",
+     "Convert temperature. Writing 1 starts a temperature measurement and a run of the compensation algorithm. The bit reads 1 until the conversion ends, then CONV and BSY both clear. Compensation cannot run more than once per second, and a requested conversion leaves the internal schedule unchanged. Poll CONV to follow a requested conversion (Figure 7)."
+    ],
+    [
+     "4:3",
+     "NA",
+     "1 1",
+     "No effect; either value may be written."
+    ],
+    [
+     "2",
+     "INTCN",
+     "1",
+     "Interrupt control. 0 puts the 1Hz square wave on INT/SQW. 1 lets an enabled alarm match drive INT/SQW. The alarm flags set on a match either way."
+    ],
+    [
+     "1",
+     "A2IE",
+     "0",
+     "Alarm 2 interrupt enable. With 1 (and INTCN = 1), a set A2F drives INT/SQW low; with 0, or with INTCN = 0, A2F raises no interrupt."
+    ],
+    [
+     "0",
+     "A1IE",
+     "0",
+     "Alarm 1 interrupt enable. With 1 (and INTCN = 1), a set A1F drives INT/SQW low; with 0, or with INTCN = 0, A1F raises no interrupt."
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Status register (0Fh)",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "power-up value",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "OSF",
+     "1",
+     "Oscillator stop flag. Reads 1 when the oscillator is stopped or has stopped at some point, so the time held may be wrong. It stays 1 until written 0. Causes: first power-up; VCC and VBAT both too low to keep the oscillator going; EOSC set while battery-backed; noise, leakage or similar disturbing the oscillator."
+    ],
+    [
+     "6:4",
+     "—",
+     "0 0 0",
+     "Unused; always read 0."
+    ],
+    [
+     "3",
+     "EN32KHZ",
+     "1",
+     "Enable for the 32KHZ output. 0 makes the pin high-impedance. After power-up it is 1, and the pin gives 32.768kHz while the oscillator runs."
+    ],
+    [
+     "2",
+     "BSY",
+     "X",
+     "Busy: 1 while a temperature conversion is in progress, cleared when it ends."
+    ],
+    [
+     "1",
+     "A2F",
+     "X",
+     "Alarm 2 flag: 1 once the time has matched the alarm 2 registers. INT/SQW also asserts if A2IE = 1 and INTCN = 1. Only 0 can be written; writing 1 leaves it as it is."
+    ],
+    [
+     "0",
+     "A1F",
+     "X",
+     "Alarm 1 flag: 1 once the time has matched the alarm 1 registers. INT/SQW also asserts if A1IE = 1 and INTCN = 1. Only 0 can be written; writing 1 leaves it as it is."
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Aging offset register (10h)",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "power-up value",
+    "function"
+   ],
+   "rows": [
+    [
+     "7",
+     "SIGN",
+     "0",
+     "Sign of the two's-complement offset."
+    ],
+    [
+     "6:0",
+     "DATA",
+     "0000000",
+     "Offset magnitude; the valid range is ±127 codes."
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Temperature registers (11h–12h)",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0",
+    "power-up value"
+   ],
+   "rows": [
+    [
+     "11h (upper byte)",
+     "SIGN",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "DATA",
+     "00000000"
+    ],
+    [
+     "12h (lower byte)",
+     "DATA",
+     "DATA",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "00000000"
+    ]
+   ],
+   "notes": [
+    "Read only. 11h holds the integer part and 12h bits 7:6 the quarter-degree part of a 10-bit two's-complement reading."
+   ]
+  },
+  {
+   "title": "Package information",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "package type",
+    "package code",
+    "outline no.",
+    "land pattern no."
+   ],
+   "rows": [
+    [
+     "16 SO",
+     "W16MK+1",
+     "21-0042",
+     "90-0107"
+    ],
+    [
+     "8 SO",
+     "S8MK+1",
+     "21-0041",
+     "90-0096"
+    ]
+   ],
+   "notes": [
+    "The +, # or - in a package code marks RoHS status only; the outline is the same whatever that character is."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Power-supply current vs. power-supply voltage",
+   "page": 6,
+   "conditions": "VBAT = 2.3V, EN32KHZ = 1, IOUT = 0mA",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       2.3,
+       119.5
+      ],
+      [
+       2.68,
+       89.0
+      ],
+      [
+       2.801,
+       83.4
+      ],
+      [
+       2.849,
+       82.4
+      ],
+      [
+       2.92,
+       82.3
+      ],
+      [
+       3.038,
+       84.4
+      ],
+      [
+       3.282,
+       91.3
+      ],
+      [
+       4.983,
+       124.2
+      ],
+      [
+       5.498,
+       134.9
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       2.3,
+       116.1
+      ],
+      [
+       2.691,
+       87.8
+      ],
+      [
+       2.815,
+       82.6
+      ],
+      [
+       2.872,
+       81.6
+      ],
+      [
+       2.932,
+       81.4
+      ],
+      [
+       3.053,
+       82.4
+      ],
+      [
+       3.436,
+       89.2
+      ],
+      [
+       5.498,
+       131.5
+      ]
+     ]
+    },
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       2.3,
+       107.7
+      ],
+      [
+       2.582,
+       80.7
+      ],
+      [
+       2.699,
+       71.0
+      ],
+      [
+       2.801,
+       66.0
+      ],
+      [
+       2.853,
+       64.8
+      ],
+      [
+       2.915,
+       64.7
+      ],
+      [
+       3.019,
+       66.7
+      ],
+      [
+       3.282,
+       75.6
+      ],
+      [
+       4.818,
+       107.8
+      ],
+      [
+       5.498,
+       123.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Battery-supply current vs. battery-supply voltage",
+   "page": 6,
+   "conditions": "VCC = 0V, EN32KHZ = 1, BBSQW = 0",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       2.3,
+       2.52
+      ],
+      [
+       3.049,
+       2.579
+      ],
+      [
+       3.799,
+       2.681
+      ],
+      [
+       4.299,
+       2.771
+      ],
+      [
+       4.799,
+       2.811
+      ],
+      [
+       5.022,
+       2.863
+      ],
+      [
+       5.498,
+       2.881
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       2.3,
+       2.051
+      ],
+      [
+       2.8,
+       2.06
+      ],
+      [
+       4.726,
+       2.164
+      ],
+      [
+       5.022,
+       2.213
+      ],
+      [
+       5.498,
+       2.251
+      ]
+     ]
+    },
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       2.3,
+       1.621
+      ],
+      [
+       2.8,
+       1.641
+      ],
+      [
+       3.799,
+       1.751
+      ],
+      [
+       5.498,
+       1.871
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "INT/SQW output voltage vs. output current",
+   "page": 6,
+   "conditions": "VCC = 2.3V, VBAT = 0V, TA = +25°C",
+   "x": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "INT/SQW",
+     "points": [
+      [
+       0,
+       0.0002
+      ],
+      [
+       3.2,
+       0.1347
+      ],
+      [
+       5.8,
+       0.2509
+      ],
+      [
+       8.3,
+       0.3707
+      ],
+      [
+       9.99,
+       0.4582
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RST output voltage vs. output current",
+   "page": 6,
+   "conditions": "VCC = 2.45V, VBAT = 3.0V, TA = +25°C",
+   "x": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RST",
+     "points": [
+      [
+       0,
+       0.0002
+      ],
+      [
+       4.998,
+       0.4305
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RST output voltage vs. power supply voltage",
+   "page": 6,
+   "conditions": "VBAT = 3.0V, TA = +25°C",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RST",
+     "points": [
+      [
+       0.698,
+       0.003
+      ],
+      [
+       2.497,
+       0.003
+      ],
+      [
+       2.603,
+       2.627
+      ],
+      [
+       5.997,
+       6.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Frequency error vs. temperature",
+   "page": 6,
+   "conditions": "VCC = 3.3V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency error",
+    "unit": "ppm",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Upper limit",
+     "points": [
+      [
+       -40.0,
+       5.0
+      ],
+      [
+       89.9,
+       5.0
+      ]
+     ]
+    },
+    {
+     "label": "Lower limit",
+     "points": [
+      [
+       -40.0,
+       -5.0
+      ],
+      [
+       89.9,
+       -5.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power-supply current vs. SCL frequency",
+   "page": 6,
+   "conditions": "TA = +25°C",
+   "x": {
+    "label": "SCL frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = +2.7 V",
+     "points": [
+      [
+       0,
+       87.1
+      ],
+      [
+       99.9,
+       102.0
+      ],
+      [
+       399.8,
+       152.0
+      ]
+     ]
+    },
+    {
+     "label": "VCC = +3.5 V",
+     "points": [
+      [
+       0,
+       99.0
+      ],
+      [
+       60.9,
+       106.3
+      ],
+      [
+       99.9,
+       112.0
+      ],
+      [
+       399.8,
+       164.0
+      ]
+     ]
+    },
+    {
+     "label": "VCC = +5.5 V",
+     "points": [
+      [
+       0,
+       105.0
+      ],
+      [
+       61.0,
+       117.4
+      ],
+      [
+       106.5,
+       127.5
+      ],
+      [
+       399.8,
+       198.0
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical operating circuit",
+   "page": 1,
+   "description": "The RTC sits on a 3.3V rail shared with the host CPU. SCL and SDA run to the CPU's I/O port; INT/SQW and RST run to its interrupt inputs, and 32KHZ to a further CPU input. SCL, SDA, 32KHZ and INT/SQW each have a pull-up to 3.3V; RST has none, since the part pulls it up inside. C1 decouples VCC, and a battery on VBAT keeps the clock running when the rail is down.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DS3231M"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "CPU",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "Pull-up on INT/SQW; 1 kΩ to 10 MΩ is the typical range for the open-drain outputs."
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "Pull-up on 32KHZ; 1 kΩ to 10 MΩ is the typical range for the open-drain outputs."
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "Pull-up on SDA."
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "Pull-up on SCL."
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "VCC decoupling, 0.1 µF to 1.0 µF."
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "battery",
+     "note": "Backup cell."
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "+3.3V"
+    }
+   ],
+   "notes": [
+    "U2's pins SCL and SDA are I/O port pins, INT and RST are interrupt inputs, and 32KHZ is a further input."
+   ]
+  },
+  {
+   "id": "vcc-only",
+   "title": "Figure 4. Single supply (VCC only)",
+   "page": 9,
+   "description": "The part runs from 3.3V on VCC alone, with VBAT tied to ground. RST goes low when VCC drops under VPF, and temperature conversions happen every second.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DS3231M"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "+3.3V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "vbat-only",
+   "title": "Figure 5. Single supply (VBAT only)",
+   "page": 9,
+   "description": "The part runs from a battery on VBAT alone, with VCC tied to ground. RST is disabled and sits at ground through the internal pull-up, and temperature conversions happen every 10s.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DS3231M"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "battery"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "dual-supply",
+   "title": "Figure 6. Dual power supply",
+   "page": 9,
+   "description": "3.3V on VCC runs the part in normal use and a battery on VBAT backs it up. An internal comparator against a temperature-compensated reference picks the source: VCC while it is above VPF, and below VPF whichever of VCC and VBAT is higher.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DS3231M"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "+3.3V"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "battery"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Temperature reading",
+   "expr": "T = N × 0.25 °C",
+   "where": {
+    "N": "10-bit two's-complement code, 11h as the upper 8 bits and 12h bits 7:6 as the lower 2",
+    "T": "die temperature"
+   },
+   "note": "Example: 00011001 01b reads +25.25 °C.",
+   "page": 16
+  },
+  {
+   "name": "Aging offset",
+   "expr": "Δf ≈ −0.12 ppm × CODE",
+   "where": {
+    "CODE": "aging offset register 10h, two's complement, −127 to +127",
+    "Δf": "change in time-base frequency"
+   },
+   "note": "0.12 ppm per LSB is typical and holds across the operating temperature range. A positive code slows the time base, a negative one speeds it up.",
+   "page": 15
+  },
+  {
+   "name": "Bus rise and fall time, minimum",
+   "expr": "tR, tF (min) = 20 ns + 0.1 × CB",
+   "where": {
+    "CB": "summed capacitance of a single bus line, pF"
+   },
+   "note": "",
+   "page": 4
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Time base",
+   "page": 9,
+   "text": "A MEMS resonator, an on-chip temperature sensor and a digital adjustment block make the time base. The controller reads the temperature and corrects the 1Hz output; the trim is set at the factory over the operating range. On VCC the correction is made every second, on VBAT every 10s to save current, without loss of long-term accuracy. The aging offset register adds a user offset, either sign, to the factory value; it is not needed to meet the specified accuracy."
+  },
+  {
+   "topic": "Power-supply configurations",
+   "page": 9,
+   "text": "The part runs from VCC alone (VBAT grounded), VBAT alone (VCC grounded), or VCC with VBAT as backup. Above VPF the part runs from VCC. Below VPF it runs from VCC if VCC is above VBAT and from VBAT otherwise. RST is held low whenever VCC is below VPF. Temperature conversions run every second on VCC and every 10s on VBAT."
+  },
+  {
+   "topic": "First power-up",
+   "page": 10,
+   "text": "When a battery is first connected, the oscillator stays off until VCC passes VPF or a valid I2C address is written, which saves the battery. It typically starts within 1s. About 2s after VCC comes up or the address is written, the part measures temperature and applies the correction; from then on it runs and corrects as long as VCC or VBAT is valid. At that first VCC (or first address on VBAT) the time and date reset to 01/01/00 01 00:00:00 (DD/MM/YY DOW HH:MM:SS)."
+  },
+  {
+   "topic": "Battery attachment",
+   "page": 10,
+   "text": "Contact bounce while the cell is first fitted can briefly cut power and corrupt memory recall. Two remedies: apply VCC before fitting the battery (preferred), or put a 0.1nF to 1nF capacitor from VBAT to ground."
+  },
+  {
+   "topic": "VBAT current",
+   "page": 10,
+   "text": "On VBAT with the interface busy the part draws IBATA. With the interface idle it draws IBATT, which takes in the averaged conversion current IBATTC; IBATTC is given so the battery can be sized for the periodic current pulse while holding a valid voltage. With the oscillator stopped (EOSC = 1) it draws only IBATDR, useful where time need not be kept, such as storage before shipment."
+  },
+  {
+   "topic": "Pushbutton reset",
+   "page": 10,
+   "text": "Outside a reset cycle the part watches RST for a falling edge, as from a pushbutton to ground. On one it pulls RST low for the debounce time PBDB, then waits for the line to rise; on release it holds RST low for tRST. A VCC drop below VPF also forces RST low; when VCC comes back above VPF, RST stays low for about 250ms (tREC) while the supply settles, unless the oscillator is not running, in which case RST goes high at once. Asserting RST does not disturb the part's own operation. Reset output and pushbutton sensing need VCC."
+  },
+  {
+   "topic": "Clock and calendar",
+   "page": 12,
+   "text": "Year, month, date, day of week, hours, minutes and seconds are kept in BCD, with month lengths and leap years handled. Hours bit 6 picks the mode: 1 for 12-hour, with bit 5 as AM/PM (1 = PM); 0 for 24-hour, with bit 5 the 20-hour bit. The century bit (month bit 7) toggles as the year rolls from 99 to 00. Day of week advances at midnight; its numbering is the user's choice but must run in sequence. Illogical entries give undefined operation."
+  },
+  {
+   "topic": "Reading and setting the time",
+   "page": 11,
+   "text": "On each I2C START, and when the register pointer wraps to 00h, the current time is copied to a second set of registers, and reads come from that copy while the clock runs on, so a read never sees a mid-update value. During a multibyte access the pointer wraps from 12h to 00h. Writing the seconds register resets the countdown chain; the write takes effect on the part's acknowledge, and the rest of the time and date must then be written within 1s."
+  },
+  {
+   "topic": "Alarms",
+   "page": 12,
+   "text": "Alarm 1 lives in 07h–0Ah and alarm 2 in 0Bh–0Dh. Bit 7 of each alarm register is a mask bit; with all masks 0 the alarm fires only on a full match, and other mask settings (Table 3) repeat it every second, minute, hour, day or date. DY/DT (bit 6 of the day/date register) picks a match on date of month (0) or day of week (1). The match is checked at each once-per-second update. A match sets A1F or A2F; if the matching enable bit and INTCN are both 1, INT/SQW is driven low."
+  },
+  {
+   "topic": "I2C interface",
+   "page": 16,
+   "text": "The interface works while either VCC or VBAT is valid. The slave address byte is D0h for a write and D1h for a read (address 1101000), fixed. Data is clocked in on the rising edge of SCL and shifted out after the falling edge. After a write, the second byte sets the register pointer; a read starts at the pointer, so a dummy write followed by a repeated START sets where a read begins. The master acknowledges each byte it wants more after and NACKs the last. The part does not stretch the clock. Fast mode (400kHz) and standard mode both work."
+  },
+  {
+   "topic": "Bus recovery",
+   "page": 11,
+   "text": "If the host resets in mid-transfer, for example on loss of VCC, the bus can be left out of step. To recover, clock SCL until SDA reads high, then pull SDA low with SCL high to make a START."
+  },
+  {
+   "topic": "Temperature conversion",
+   "page": 16,
+   "text": "The temperature registers read 0°C after a power reset, and a conversion starts. The reading is refreshed at first VCC or first I2C access on VBAT, then every second on VCC or every 10s on VBAT, and after each conversion asked for through CONV. BSY is 1 during every conversion (Figure 7)."
+  },
+  {
+   "topic": "Decoupling",
+   "page": 18,
+   "text": "Decouple VCC and VBAT with 0.1µF or 1.0µF, ideally surface-mount ceramic parts for their low lead inductance and good high-frequency behaviour. Without a need to communicate on battery, the VBAT capacitor can go."
+  },
+  {
+   "topic": "Pull-ups",
+   "page": 18,
+   "text": "32KHZ and INT/SQW are open drain and need external pull-ups, typically 1kΩ to 10MΩ. RST is open drain with its own 50kΩ pull-up to VCC; do not add another. SDA needs an external pull-up. Since the part never stretches the clock, SCL may be driven by an open-drain output with a pull-up or by a push-pull output."
+  },
+  {
+   "topic": "Battery charge protection",
+   "page": 18,
+   "text": "Redundant internal circuitry keeps the part from charging the backup battery."
+  }
+ ]
+}

@@ -1,0 +1,6761 @@
+{
+ "sheet": 1,
+ "name": "L6563ATR",
+ "kind": "switching_regulator",
+ "manufacturer": "STMicroelectronics",
+ "title": "L6563, L6563A: advanced transition-mode PFC controller",
+ "source": {
+  "revision": "Rev 4, March 2007",
+  "pages": 39
+ },
+ "summary": "Transition-mode, current-mode boost PFC controller in SO-14 for PFC pre-regulators, with application circuits from 80 W to 350 W. Beyond a standard TM core it adds 1/V² line feedforward, a THD optimizer, optional tracking boost, a two-step output OVP set by one resistor, a separate PFC_OK input that latches off on feedback-loop failure, remote on/off and brownout through RUN, and two flags (PWM_LATCH, PWM_STOP) for the downstream converter's controller. The L6563 also latches off on boost-inductor saturation; the L6563A omits that. L6563ATR is the L6563A on tape and reel.",
+ "key_figures": [
+  [
+   "Supply operating range",
+   "10.3 to 22 V after turn-on"
+  ],
+  [
+   "Turn-on / turn-off threshold",
+   "12 V / 9.5 V typ"
+  ],
+  [
+   "Start-up current",
+   "50 µA typ, 90 µA max"
+  ],
+  [
+   "Quiescent current",
+   "3 mA typ, 5 mA max"
+  ],
+  [
+   "Feedback reference",
+   "2.5 V, 1.5 % at TJ = 25 °C (2.465 to 2.535 V)"
+  ],
+  [
+   "Gate driver",
+   "-600 / +800 mA peak, clamp 12 V typ"
+  ],
+  [
+   "Dynamic OVP trip current",
+   "20 µA typ"
+  ],
+  [
+   "PFC_OK latch-off threshold",
+   "2.5 V typ"
+  ],
+  [
+   "Junction temperature",
+   "-25 to 150 °C"
+  ],
+  [
+   "Package",
+   "SO-14"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "inductor saturation detection",
+   "package",
+   "packing"
+  ],
+  "rows": [
+   [
+    "L6563",
+    "yes",
+    "SO-14",
+    "Tube"
+   ],
+   [
+    "L6563TR",
+    "yes",
+    "SO-14",
+    "Tape & Reel"
+   ],
+   [
+    "L6563A",
+    "no",
+    "SO-14",
+    "Tube"
+   ],
+   [
+    "L6563ATR",
+    "no",
+    "SO-14",
+    "Tape & Reel"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "SO-14",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "INV",
+     "type": "analog input",
+     "function": "Error amplifier inverting input. The PFC output is brought in through a resistor divider. High impedance, except when TBO is used: an internal current set by TBO is then drawn out of this pin so that the regulated output follows the mains."
+    },
+    {
+     "pin": "2",
+     "name": "COMP",
+     "type": "analog output",
+     "function": "Error amplifier output. The voltage-loop compensation network joins this pin to INV; it sets loop stability, power factor and THD."
+    },
+    {
+     "pin": "3",
+     "name": "MULT",
+     "type": "analog input",
+     "function": "Main multiplier input, fed from the rectified mains by a resistor divider. It gives the current loop its sinusoidal reference, and its peak also tells the chip the RMS line voltage."
+    },
+    {
+     "pin": "4",
+     "name": "CS",
+     "type": "analog input",
+     "function": "PWM comparator input: the MOSFET current, read as a voltage across a sense resistor, is compared with the internal reference to end each on-time. On the L6563 a second threshold at 1.7 V catches abnormal current such as a saturating inductor, shuts the IC down to near start-up consumption and drives PWM_LATCH high. The L6563A lacks that second threshold."
+    },
+    {
+     "pin": "5",
+     "name": "VFF",
+     "type": "analog",
+     "function": "Second multiplier input, for the 1/V² feedforward. A capacitor and a resistor in parallel to GND complete the internal peak detector; the pin then holds a DC level equal to the MULT peak, which cancels the loop gain's dependence on line voltage. Must not be tied straight to GND."
+    },
+    {
+     "pin": "6",
+     "name": "TBO",
+     "type": "analog output",
+     "function": "Tracking boost. Carries a buffered copy of the VFF voltage; a resistor from this pin to GND sets a current that is drawn from INV, so the output voltage rises in proportion to the mains. Left open when tracking boost is not used."
+    },
+    {
+     "pin": "7",
+     "name": "PFC_OK",
+     "type": "analog input",
+     "function": "Output monitoring and disable. A second divider from the PFC output feeds it. Above 2.5 V the IC shuts down to near start-up consumption, latches, and drives PWM_LATCH high; only cycling Vcc clears it (protection against a failed feedback loop). Below 0.2 V the IC shuts down with much reduced consumption and restarts once the pin passes 0.26 V. Held between 0.26 V and 2.5 V when neither function is wanted."
+    },
+    {
+     "pin": "8",
+     "name": "PWM_LATCH",
+     "type": "output",
+     "function": "Fault flag, high impedance in normal running. Goes high when PFC_OK exceeds 2.5 V or, on the L6563, when CS exceeds 1.7 V; meant to latch off the PWM controller of the downstream DC-DC converter. Left floating when unused."
+    },
+    {
+     "pin": "9",
+     "name": "PWM_STOP",
+     "type": "output",
+     "function": "Fault flag, high impedance in normal running. Pulled to ground while RUN holds the IC disabled (below 0.5 V); meant to stop the downstream converter's PWM controller for as long as that lasts. Left floating when unused."
+    },
+    {
+     "pin": "10",
+     "name": "RUN",
+     "type": "analog input",
+     "function": "Remote on/off. Below 0.52 V the IC shuts down (not latched) with much lower consumption and PWM_STOP goes low; it restarts above 0.6 V. Wired to VFF, directly or through a divider, it gives brownout protection; tied to INV when unused."
+    },
+    {
+     "pin": "11",
+     "name": "ZCD",
+     "type": "analog input",
+     "function": "Boost inductor demagnetization sense for transition-mode operation; a falling edge turns the MOSFET on."
+    },
+    {
+     "pin": "12",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, the return of both the signal circuitry and the gate driver."
+    },
+    {
+     "pin": "13",
+     "name": "GD",
+     "type": "output",
+     "function": "Gate driver output, a totem pole with 600 mA peak source and 800 mA peak sink for power MOSFETs or IGBTs. Its high level is clamped near 12 V."
+    },
+    {
+     "pin": "14",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply for the signal circuitry and the gate driver."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "pin",
+    "parameter",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "14",
+     "IC supply voltage (Icc = 20mA)",
+     "self-limited",
+     "V"
+    ],
+    [
+     "---",
+     "2, 4 to 6, 8 to 10",
+     "Analog inputs & outputs",
+     "-0.3 to 8",
+     "V"
+    ],
+    [
+     "---",
+     "1, 3, 7",
+     "Max. pin voltage (Ipin = 1 mA)",
+     "Self-limited",
+     "V"
+    ],
+    [
+     "IPWM_STOP",
+     "10",
+     "Max. sink current",
+     "3",
+     "mA"
+    ],
+    [
+     "IZCD",
+     "9",
+     "Zero current detector max. current",
+     "-10 (source), 10 (sink)",
+     "mA"
+    ],
+    [
+     "PTOT",
+     "",
+     "Power dissipation @TA = 50°C",
+     "0.75",
+     "W"
+    ],
+    [
+     "TJ",
+     "",
+     "Junction temperature operating range",
+     "-25 to 150",
+     "°C"
+    ],
+    [
+     "TSTG",
+     "",
+     "Storage temperature",
+     "-55 to 150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "IPWM_STOP: PWM_STOP is pin 9 (misprinted 10).",
+    "IZCD: ZCD is pin 11 (misprinted 9)."
+   ]
+  },
+  {
+   "title": "Thermal data",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RthJA",
+     "Maximum thermal resistance junction-ambient",
+     "120",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply voltage",
+   "page": 7,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating range",
+     "Vcc",
+     "After turn-on",
+     "10.3",
+     "",
+     "22",
+     "V"
+    ],
+    [
+     "Turn-on threshold",
+     "VccOn",
+     "(1)",
+     "11",
+     "12",
+     "13",
+     "V"
+    ],
+    [
+     "Turn-off threshold",
+     "VccOff",
+     "(1)",
+     "8.7",
+     "9.5",
+     "10.3",
+     "V"
+    ],
+    [
+     "Hysteresis",
+     "Hys",
+     "",
+     "2.3",
+     "",
+     "2.7",
+     "V"
+    ],
+    [
+     "Zener Voltage",
+     "VZ",
+     "Icc = 20 mA",
+     "22",
+     "25",
+     "28",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply current",
+   "page": 7,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Start-up current",
+     "Istart-up",
+     "Before turn-on, Vcc = 10V",
+     "",
+     "50",
+     "90",
+     "µA"
+    ],
+    [
+     "Quiescent current",
+     "Iq",
+     "After turn-on",
+     "",
+     "3",
+     "5",
+     "mA"
+    ],
+    [
+     "Operating supply current",
+     "ICC",
+     "@ 70kHz",
+     "",
+     "3.8",
+     "5.5",
+     "mA"
+    ],
+    [
+     "Idle state quiescent Current",
+     "Iqdis",
+     "Latched by PFC_OK > Vthl or Vcs > VCSdis",
+     "",
+     "180",
+     "250",
+     "µA"
+    ],
+    [
+     "Idle state quiescent Current",
+     "Iqdis",
+     "Disabled by PFC_OK < Vth or RUN < VDIS",
+     "",
+     "1.5",
+     "2.2",
+     "mA"
+    ],
+    [
+     "Quiescent current",
+     "Iq",
+     "During static/dynamic OVP",
+     "",
+     "2",
+     "3",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: multiplier input",
+   "page": 7,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input bias current",
+     "IMULT",
+     "VMULT = 0 to 3 V",
+     "",
+     "-0.2",
+     "-1",
+     "µA"
+    ],
+    [
+     "Linear operation range",
+     "VMULT",
+     "",
+     "0 to 3",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Internal clamp level",
+     "VCLAMP",
+     "IMULT = 1 mA",
+     "9",
+     "9.5",
+     "",
+     "V"
+    ],
+    [
+     "Output max. slope",
+     "ΔVcs/ΔVMULT",
+     "VMULT = 0 to 0.5V, VFF = 0.8V, VCOMP = Upper clamp",
+     "2.2",
+     "2.34",
+     "",
+     "V/V"
+    ],
+    [
+     "Gain (3)",
+     "KM",
+     "VMULT = 1 V, VCOMP = 4 V, VVFF = VMULT",
+     "0.375",
+     "0.45",
+     "0.525",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production.",
+    "(3): the multiplier output follows VCS = KM · VMULT · (VCOMP - 2.5) / VVFF²."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: error amplifier",
+   "page": 7,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage feedback input threshold",
+     "VINV",
+     "TJ = 25 °C",
+     "2.465",
+     "2.5",
+     "2.535",
+     "V"
+    ],
+    [
+     "Voltage feedback input threshold",
+     "VINV",
+     "10.3 V < Vcc < 22 V (2)",
+     "2.44",
+     "",
+     "2.56",
+     "V"
+    ],
+    [
+     "Line regulation",
+     "",
+     "Vcc = 10.3 V to 22V",
+     "",
+     "2",
+     "5",
+     "mV"
+    ],
+    [
+     "Input bias current",
+     "IINV",
+     "TBO open, VINV = 0 to 4 V",
+     "",
+     "-0.2",
+     "-1",
+     "µA"
+    ],
+    [
+     "Internal clamp level",
+     "VINVCLAMP",
+     "IINV = 1 mA",
+     "9",
+     "9.5",
+     "",
+     "V"
+    ],
+    [
+     "Voltage gain",
+     "Gv",
+     "Open loop",
+     "60",
+     "80",
+     "",
+     "dB"
+    ],
+    [
+     "Gain-bandwidth product",
+     "GB",
+     "",
+     "",
+     "1",
+     "",
+     "MHz"
+    ],
+    [
+     "Source current",
+     "ICOMP",
+     "VCOMP = 4V, VINV = 2.4 V",
+     "-2",
+     "-3.5",
+     "-5",
+     "mA"
+    ],
+    [
+     "Sink current",
+     "ICOMP",
+     "VCOMP = 4V, VINV = 2.6 V",
+     "2.5",
+     "4.5",
+     "",
+     "mA"
+    ],
+    [
+     "Upper clamp voltage",
+     "VCOMP",
+     "ISOURCE = 0.5 mA",
+     "5.7",
+     "6.2",
+     "6.7",
+     "V"
+    ],
+    [
+     "Lower clamp voltage",
+     "VCOMP",
+     "ISINK = 0.5 mA (2)",
+     "2.1",
+     "2.25",
+     "2.4",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: current sense comparator",
+   "page": 8,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input bias current",
+     "ICS",
+     "VCS = 0",
+     "",
+     "",
+     "-1",
+     "µA"
+    ],
+    [
+     "Leading edge blanking",
+     "tLEB",
+     "",
+     "100",
+     "200",
+     "300",
+     "ns"
+    ],
+    [
+     "Delay to output",
+     "td(H-L)",
+     "",
+     "",
+     "120",
+     "",
+     "ns"
+    ],
+    [
+     "Current sense reference clamp",
+     "VCSclamp",
+     "VCOMP = Upper clamp, VVFF = VMULT = 0.5V",
+     "1.0",
+     "1.08",
+     "1.16",
+     "V"
+    ],
+    [
+     "Current sense offset",
+     "Vcsoffset",
+     "VMULT = 0, VVFF = 3V",
+     "",
+     "25",
+     "",
+     "mV"
+    ],
+    [
+     "Current sense offset",
+     "Vcsoffset",
+     "VMULT = 3V, VVFF = 3V",
+     "",
+     "5",
+     "",
+     "mV"
+    ],
+    [
+     "Ic latch-off level (L6563 only)",
+     "VCSdis",
+     "(2)",
+     "1.6",
+     "1.7",
+     "1.8",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: output overvoltage",
+   "page": 8,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Dynamic OVP triggering current",
+     "IOVP",
+     "",
+     "17",
+     "20",
+     "23",
+     "µA"
+    ],
+    [
+     "Hysteresis",
+     "Hys",
+     "(4)",
+     "",
+     "15",
+     "",
+     "µA"
+    ],
+    [
+     "Static OVP threshold",
+     "",
+     "(2)",
+     "2",
+     "2.15",
+     "2.3",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: voltage feedforward",
+   "page": 8,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Linear operation range",
+     "VVFF",
+     "RFF = 47 kΩ to GND",
+     "0.5",
+     "",
+     "3",
+     "V"
+    ],
+    [
+     "Dropout VMULTpk - VVFF",
+     "ΔV",
+     "",
+     "",
+     "",
+     "20",
+     "mV"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: zero current detector",
+   "page": 9,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Upper clamp voltage",
+     "VZCDH",
+     "IZCD = 2.5 mA",
+     "5.0",
+     "5.7",
+     "",
+     "V"
+    ],
+    [
+     "Lower clamp voltage",
+     "VZCDL",
+     "IZCD = - 2.5 mA",
+     "-0.3",
+     "0",
+     "0.3",
+     "V"
+    ],
+    [
+     "Arming voltage (positive-going edge)",
+     "VZCDA",
+     "(4)",
+     "",
+     "1.4",
+     "",
+     "V"
+    ],
+    [
+     "Triggering voltage (negative-going edge)",
+     "VZCDT",
+     "(4)",
+     "",
+     "0.7",
+     "",
+     "V"
+    ],
+    [
+     "Input bias current",
+     "IZCDb",
+     "VZCD = 1 to 4.5 V",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Source current capability",
+     "IZCDsrc",
+     "",
+     "-2.5",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "Sink current capability",
+     "IZCDsnk",
+     "",
+     "2.5",
+     "",
+     "",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: tracking boost function",
+   "page": 9,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Dropout voltage VVFF - VTBO",
+     "ΔV",
+     "ITBO = 0.25 mA",
+     "",
+     "",
+     "20",
+     "mV"
+    ],
+    [
+     "Linear operation",
+     "ITBO",
+     "",
+     "0",
+     "",
+     "0.25",
+     "mA"
+    ],
+    [
+     "IINV - ITBO current mismatch",
+     "",
+     "ITBO = 25 µA to 0.25 mA",
+     "-3.5",
+     "",
+     "3.5",
+     "%"
+    ],
+    [
+     "Clamp voltage",
+     "VTBOclamp",
+     "VVFF = 4V (2)",
+     "2.9",
+     "3",
+     "3.1",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PFC_OK",
+   "page": 9,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Latch-off threshold",
+     "Vthl",
+     "Voltage rising (2)",
+     "2.4",
+     "2.5",
+     "2.6",
+     "V"
+    ],
+    [
+     "Disable threshold",
+     "Vth",
+     "Voltage falling (2)",
+     "",
+     "0.2",
+     "",
+     "V"
+    ],
+    [
+     "Enable threshold",
+     "VEN",
+     "Voltage rising (2)",
+     "",
+     "0.26",
+     "",
+     "V"
+    ],
+    [
+     "Input bias current",
+     "IPFC_OK",
+     "VPFC_OK = 0 to 2.5V",
+     "",
+     "-0.1",
+     "-1",
+     "µA"
+    ],
+    [
+     "Clamp voltage",
+     "Vclamp",
+     "IPFC_OK = 1 mA",
+     "9",
+     "9.5",
+     "",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PWM_LATCH",
+   "page": 9,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Low level leakage current",
+     "Ileak",
+     "VPWM_LATCH = 0",
+     "",
+     "",
+     "-1",
+     "µA"
+    ],
+    [
+     "High level",
+     "VH",
+     "IPWM_LATCH = -0.5 mA",
+     "3.7",
+     "",
+     "",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PWM_STOP",
+   "page": 9,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "High level leakage current",
+     "Ileak",
+     "VPWM_STOP = 6V",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Low level",
+     "VL",
+     "IPWM_STOP = 0.5 mA",
+     "",
+     "",
+     "1",
+     "V"
+    ],
+    [
+     "Clamp voltage",
+     "Vclamp",
+     "IPFC_OK = 2 mA",
+     "9",
+     "9.5",
+     "",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: run function",
+   "page": 10,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input bias current",
+     "IRUN",
+     "VRUN = 0 to 3 V",
+     "",
+     "",
+     "-1",
+     "µA"
+    ],
+    [
+     "Disable threshold",
+     "VDIS",
+     "Voltage falling (2)",
+     "0.5",
+     "0.52",
+     "0.54",
+     "V"
+    ],
+    [
+     "Enable threshold",
+     "VEN",
+     "Voltage rising (2)",
+     "0.56",
+     "0.6",
+     "0.64",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: start timer",
+   "page": 10,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Start timer period",
+     "tSTART",
+     "",
+     "75",
+     "150",
+     "300",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: gate driver",
+   "page": 10,
+   "conditions": "-25 °C < TJ < +125 °C, VCC = 12 V, Co = 1 nF from GD to GND, CFF = 1 µF from VFF to GND, unless stated otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Dropout voltage",
+     "VOHdrop",
+     "IGDsource = 20 mA",
+     "",
+     "2",
+     "2.6",
+     "V"
+    ],
+    [
+     "Dropout voltage",
+     "VOHdrop",
+     "IGDsource = 200 mA",
+     "",
+     "2.5",
+     "3",
+     "V"
+    ],
+    [
+     "",
+     "VOLdrop",
+     "IGDsink = 200 mA",
+     "",
+     "1",
+     "2",
+     "V"
+    ],
+    [
+     "Current fall time",
+     "tf",
+     "",
+     "",
+     "30",
+     "70",
+     "ns"
+    ],
+    [
+     "Current rise time",
+     "tr",
+     "",
+     "",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "Output clamp voltage",
+     "VOclamp",
+     "IGDsource = 5mA; Vcc = 20V",
+     "10",
+     "12",
+     "15",
+     "V"
+    ],
+    [
+     "UVLO saturation",
+     "",
+     "Vcc = 0 to VccOn, Isink = 10mA",
+     "",
+     "",
+     "1.1",
+     "V"
+    ]
+   ],
+   "notes": [
+    "(1) and (2): parameters marked with the same number track each other.",
+    "(4): set by design; the function is checked in production."
+   ]
+  },
+  {
+   "title": "Idle states",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "condition",
+    "caused or revealed by",
+    "PWM_LATCH (pin 8)",
+    "PWM_STOP (pin 9)",
+    "typical IC consumption",
+    "IC behavior"
+   ],
+   "rows": [
+    [
+     "UVLO",
+     "Vcc < 8.7 V",
+     "Open",
+     "Open",
+     "50 µA",
+     "Auto-restart"
+    ],
+    [
+     "Feedback disconnected",
+     "PFC_OK > 2.5 V",
+     "Active (high)",
+     "Open",
+     "180 µA",
+     "Latched"
+    ],
+    [
+     "Saturated Boost Inductor (L6563 only)",
+     "Vcs > 1.7 V",
+     "Active (high)",
+     "Open",
+     "180 µA",
+     "Latched"
+    ],
+    [
+     "AC Brownout",
+     "RUN < 0.52 V",
+     "Open",
+     "Active (low)",
+     "1.5 mA",
+     "Auto-restart"
+    ],
+    [
+     "Standby",
+     "PFC_OK < 0.2 V",
+     "Open",
+     "Open",
+     "1.5 mA",
+     "Auto-restart"
+    ]
+   ]
+  },
+  {
+   "title": "EVAL6563-80W evaluation results at full load",
+   "page": 33,
+   "conditions": "Measured with the line filter of circuit line-filter",
+   "columns": [
+    "Vin (VAC)",
+    "Pin (W)",
+    "Vo (VDC)",
+    "ΔVo (Vpk-pk)",
+    "Po (W)",
+    "η (%)",
+    "PF",
+    "THD (%)"
+   ],
+   "rows": [
+    [
+     "90",
+     "85.3",
+     "219.4",
+     "16.6",
+     "79.64",
+     "93.4",
+     "0.999",
+     "3.7"
+    ],
+    [
+     "115",
+     "84.9",
+     "244.1",
+     "15.0",
+     "80.80",
+     "95.2",
+     "0.998",
+     "4.3"
+    ],
+    [
+     "135",
+     "83.7",
+     "263.7",
+     "13.9",
+     "80.16",
+     "95.8",
+     "0.997",
+     "4.8"
+    ],
+    [
+     "180",
+     "83.5",
+     "307.6",
+     "14.5",
+     "80.28",
+     "96.1",
+     "0.993",
+     "6.0"
+    ],
+    [
+     "230",
+     "85.2",
+     "356.7",
+     "13.0",
+     "81.33",
+     "95.5",
+     "0.984",
+     "7.7"
+    ],
+    [
+     "265",
+     "85.0",
+     "390.6",
+     "12.1",
+     "80.85",
+     "95.1",
+     "0.974",
+     "9.5"
+    ]
+   ]
+  },
+  {
+   "title": "EVAL6563-80W evaluation results at half load",
+   "page": 33,
+   "conditions": "Measured with the line filter of circuit line-filter",
+   "columns": [
+    "Vin (VAC)",
+    "Pin (W)",
+    "Vo (VDC)",
+    "ΔVo (Vpk-pk)",
+    "Po (W)",
+    "η (%)",
+    "PF",
+    "THD (%)"
+   ],
+   "rows": [
+    [
+     "90",
+     "43.4",
+     "219.9",
+     "8.6",
+     "40.90",
+     "94.2",
+     "0.997",
+     "4.8"
+    ],
+    [
+     "115",
+     "42.6",
+     "244.5",
+     "7.7",
+     "40.10",
+     "94.1",
+     "0.994",
+     "5.7"
+    ],
+    [
+     "135",
+     "43.1",
+     "264.0",
+     "7.3",
+     "40.39",
+     "93.7",
+     "0.989",
+     "6.5"
+    ],
+    [
+     "180",
+     "43.8",
+     "307.7",
+     "7.7",
+     "40.31",
+     "92.0",
+     "0.978",
+     "8.4"
+    ],
+    [
+     "230",
+     "45.6",
+     "356.8",
+     "6.8",
+     "41.03",
+     "90.0",
+     "0.951",
+     "9.6"
+    ],
+    [
+     "265",
+     "46.0",
+     "390.7",
+     "6.7",
+     "40.63",
+     "88.3",
+     "0.920",
+     "14.2"
+    ]
+   ]
+  },
+  {
+   "title": "Interface pin of the cascaded PWM or resonant controller",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "controller",
+    "pin X driven by PWM_STOP (not latched)",
+    "pin X driven by PWM_LATCH (latched)"
+   ],
+   "rows": [
+    [
+     "L5991/A",
+     "3 or 7",
+     "14"
+    ],
+    [
+     "UC284x",
+     "1",
+     ""
+    ],
+    [
+     "UC384x",
+     "1",
+     ""
+    ],
+    [
+     "L6565",
+     "2 or 5",
+     ""
+    ],
+    [
+     "L6668",
+     "9 or 11",
+     "7"
+    ],
+    [
+     "L6599",
+     "5 or 7",
+     "8"
+    ]
+   ]
+  },
+  {
+   "title": "Supply pins of the PWM controller in the power-up sequencing circuit",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "controller",
+    "pin X"
+   ],
+   "rows": [
+    [
+     "L5991/A",
+     "8+9"
+    ],
+    [
+     "UC284x",
+     "7"
+    ],
+    [
+     "UC384x",
+     "7"
+    ],
+    [
+     "L6565",
+     "8"
+    ],
+    [
+     "L6598",
+     "12"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Figure 4. Supply current against supply voltage",
+   "page": 11,
+   "conditions": "Co = 1 nF, f = 70 kHz, Tj = 25 °C",
+   "x": {
+    "label": "Supply voltage Vcc",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current Icc",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "Vcc rising",
+     "points": [
+      [
+       2.259,
+       0.007123
+      ],
+      [
+       3.063,
+       0.009985
+      ],
+      [
+       3.968,
+       0.01667
+      ],
+      [
+       5.708,
+       0.02535
+      ],
+      [
+       7.601,
+       0.03249
+      ],
+      [
+       12.22,
+       0.04855
+      ],
+      [
+       12.23,
+       0.04797
+      ],
+      [
+       12.23,
+       2.662
+      ],
+      [
+       12.78,
+       2.847
+      ],
+      [
+       13.75,
+       3.435
+      ],
+      [
+       23.94,
+       5.103
+      ],
+      [
+       24.59,
+       5.439
+      ],
+      [
+       24.69,
+       5.797
+      ]
+     ]
+    },
+    {
+     "label": "Vcc falling",
+     "points": [
+      [
+       9.74,
+       0.03925
+      ],
+      [
+       9.727,
+       2.328
+      ],
+      [
+       12.78,
+       2.847
+      ],
+      [
+       13.75,
+       3.435
+      ],
+      [
+       23.94,
+       5.103
+      ],
+      [
+       24.59,
+       5.439
+      ],
+      [
+       24.69,
+       5.797
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 5. VCC Zener voltage against TJ",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vcc Zener voltage Vccz (pin 14)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vccz",
+     "points": [
+      [
+       -25.09,
+       24.21
+      ],
+      [
+       -0.02993,
+       24.24
+      ],
+      [
+       24.88,
+       24.26
+      ],
+      [
+       49.94,
+       24.3
+      ],
+      [
+       74.85,
+       24.33
+      ],
+      [
+       99.83,
+       24.35
+      ],
+      [
+       124.9,
+       24.37
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6. IC consumption against TJ",
+   "page": 11,
+   "conditions": "Vcc = 12 V, Co = 1 nF, f = 70 kHz",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IC consumption Icc",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "Operating",
+     "points": [
+      [
+       -25.02,
+       4.645
+      ],
+      [
+       0.05223,
+       4.5
+      ],
+      [
+       24.95,
+       4.371
+      ],
+      [
+       50.02,
+       4.201
+      ],
+      [
+       74.84,
+       4.049
+      ],
+      [
+       99.82,
+       3.964
+      ],
+      [
+       124.8,
+       3.912
+      ]
+     ]
+    },
+    {
+     "label": "Quiescent",
+     "points": [
+      [
+       -25.02,
+       3.373
+      ],
+      [
+       0.05223,
+       3.174
+      ],
+      [
+       24.95,
+       2.987
+      ],
+      [
+       50.02,
+       2.796
+      ],
+      [
+       74.84,
+       2.631
+      ],
+      [
+       99.82,
+       2.469
+      ],
+      [
+       124.8,
+       2.33
+      ]
+     ]
+    },
+    {
+     "label": "Disabled or during OVP",
+     "points": [
+      [
+       -25.02,
+       1.881
+      ],
+      [
+       0.05223,
+       1.751
+      ],
+      [
+       24.95,
+       1.626
+      ],
+      [
+       50.02,
+       1.51
+      ],
+      [
+       74.84,
+       1.399
+      ],
+      [
+       99.82,
+       1.316
+      ],
+      [
+       124.8,
+       1.232
+      ]
+     ]
+    },
+    {
+     "label": "Latched off",
+     "points": [
+      [
+       -25.02,
+       0.1905
+      ],
+      [
+       0.05223,
+       0.1802
+      ],
+      [
+       50.02,
+       0.1802
+      ],
+      [
+       74.84,
+       0.1705
+      ],
+      [
+       99.82,
+       0.1604
+      ],
+      [
+       124.8,
+       0.1604
+      ]
+     ]
+    },
+    {
+     "label": "Before start-up",
+     "points": [
+      [
+       -25.02,
+       0.06512
+      ],
+      [
+       0.05223,
+       0.05528
+      ],
+      [
+       24.95,
+       0.04818
+      ],
+      [
+       50.02,
+       0.04415
+      ],
+      [
+       74.84,
+       0.04111
+      ],
+      [
+       99.82,
+       0.03708
+      ],
+      [
+       124.8,
+       0.03517
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 7. Feedback reference against TJ",
+   "page": 11,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Feedback reference VREF (pin 1)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VREF",
+     "points": [
+      [
+       -40.14,
+       2.49
+      ],
+      [
+       -25.18,
+       2.5
+      ],
+      [
+       -0.09729,
+       2.507
+      ],
+      [
+       24.9,
+       2.51
+      ],
+      [
+       49.89,
+       2.51
+      ],
+      [
+       74.89,
+       2.507
+      ],
+      [
+       99.88,
+       2.5
+      ],
+      [
+       124.9,
+       2.49
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8. Start-up and UVLO thresholds against TJ",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC-ON",
+     "points": [
+      [
+       -40.02,
+       12.14
+      ],
+      [
+       -25.1,
+       12.12
+      ],
+      [
+       -0.1991,
+       12.07
+      ],
+      [
+       24.87,
+       12.03
+      ],
+      [
+       49.85,
+       11.97
+      ],
+      [
+       74.84,
+       11.91
+      ],
+      [
+       99.91,
+       11.84
+      ],
+      [
+       124.9,
+       11.77
+      ]
+     ]
+    },
+    {
+     "label": "VCC-OFF",
+     "points": [
+      [
+       -40.02,
+       9.721
+      ],
+      [
+       -25.1,
+       9.694
+      ],
+      [
+       -0.1991,
+       9.644
+      ],
+      [
+       24.87,
+       9.602
+      ],
+      [
+       49.85,
+       9.543
+      ],
+      [
+       74.84,
+       9.481
+      ],
+      [
+       99.91,
+       9.414
+      ],
+      [
+       124.9,
+       9.352
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 9. E/A output clamp levels against TJ",
+   "page": 11,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCOMP (pin 2)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Upper clamp",
+     "points": [
+      [
+       -39.99,
+       6.212
+      ],
+      [
+       -24.94,
+       6.212
+      ],
+      [
+       -0.02911,
+       6.201
+      ],
+      [
+       24.96,
+       6.201
+      ],
+      [
+       50.02,
+       6.191
+      ],
+      [
+       75.0,
+       6.183
+      ],
+      [
+       99.99,
+       6.172
+      ],
+      [
+       125.0,
+       6.159
+      ]
+     ]
+    },
+    {
+     "label": "Lower clamp",
+     "points": [
+      [
+       -39.99,
+       2.182
+      ],
+      [
+       -24.94,
+       2.182
+      ],
+      [
+       -0.02911,
+       2.193
+      ],
+      [
+       24.96,
+       2.203
+      ],
+      [
+       99.99,
+       2.203
+      ],
+      [
+       125.0,
+       2.193
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 10. Static OVP level against TJ",
+   "page": 12,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCOMP (pin 2)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Static OVP level",
+     "points": [
+      [
+       -40.04,
+       2.18
+      ],
+      [
+       -25.0,
+       2.18
+      ],
+      [
+       -0.04201,
+       2.19
+      ],
+      [
+       25.08,
+       2.2
+      ],
+      [
+       99.96,
+       2.2
+      ],
+      [
+       125.0,
+       2.19
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 11. Vcs clamp against TJ",
+   "page": 12,
+   "conditions": "Vcc = 12 V, VCOMP = upper clamp",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCSx (pin 4)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vcs clamp",
+     "points": [
+      [
+       -24.99,
+       1.09
+      ],
+      [
+       -0.07624,
+       1.09
+      ],
+      [
+       25.02,
+       1.08
+      ],
+      [
+       50.02,
+       1.08
+      ],
+      [
+       74.94,
+       1.07
+      ],
+      [
+       99.95,
+       1.06
+      ],
+      [
+       125.0,
+       1.05
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 12. Dynamic OVP current against TJ (normalized value)",
+   "page": 12,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IOVP, normalized",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IOVP",
+     "points": [
+      [
+       -24.97,
+       92.51
+      ],
+      [
+       -0.07834,
+       97.51
+      ],
+      [
+       24.99,
+       99.99
+      ],
+      [
+       49.89,
+       101.1
+      ],
+      [
+       74.96,
+       101.4
+      ],
+      [
+       100.0,
+       101.6
+      ],
+      [
+       124.9,
+       101.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 13. Current-sense offset against mains voltage phase angle",
+   "page": 12,
+   "conditions": "Vcc = 12 V, Tj = 25 °C",
+   "x": {
+    "label": "Phase angle θ",
+    "unit": "rad",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCSoffset (pin 4)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VMULT = 0 to 3 V, VFF = 3 V",
+     "points": [
+      [
+       2.2e-07,
+       24.97
+      ],
+      [
+       0.1609,
+       21.85
+      ],
+      [
+       0.561,
+       14.97
+      ],
+      [
+       0.8097,
+       11.35
+      ],
+      [
+       1.073,
+       8.118
+      ],
+      [
+       1.331,
+       5.858
+      ],
+      [
+       1.454,
+       5.232
+      ],
+      [
+       1.573,
+       4.991
+      ],
+      [
+       1.69,
+       5.204
+      ],
+      [
+       1.814,
+       5.844
+      ],
+      [
+       2.069,
+       8.104
+      ],
+      [
+       2.333,
+       11.3
+      ],
+      [
+       2.58,
+       14.97
+      ],
+      [
+       2.975,
+       21.84
+      ],
+      [
+       3.136,
+       24.97
+      ]
+     ]
+    },
+    {
+     "label": "VMULT = 0 to 0.7 V, VFF = 0.7 V",
+     "points": [
+      [
+       0.002704,
+       12.41
+      ],
+      [
+       0.002704,
+       10.45
+      ],
+      [
+       0.006758,
+       9.213
+      ],
+      [
+       0.03244,
+       6.739
+      ],
+      [
+       0.09867,
+       4.991
+      ],
+      [
+       0.2176,
+       4.081
+      ],
+      [
+       0.3839,
+       3.341
+      ],
+      [
+       0.7921,
+       2.445
+      ],
+      [
+       1.222,
+       2.104
+      ],
+      [
+       1.573,
+       2.019
+      ],
+      [
+       1.921,
+       2.104
+      ],
+      [
+       2.345,
+       2.474
+      ],
+      [
+       2.751,
+       3.355
+      ],
+      [
+       2.914,
+       4.052
+      ],
+      [
+       3.037,
+       4.991
+      ],
+      [
+       3.104,
+       6.739
+      ],
+      [
+       3.133,
+       9.27
+      ],
+      [
+       3.136,
+       12.57
+      ],
+      [
+       3.137,
+       11.55
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 14. Delay-to-output against TJ",
+   "page": 12,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tD(H-L)",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tD(H-L)",
+     "points": [
+      [
+       -25.05,
+       94.94
+      ],
+      [
+       0.07476,
+       103.0
+      ],
+      [
+       24.94,
+       106.9
+      ],
+      [
+       49.98,
+       116.0
+      ],
+      [
+       74.85,
+       129.0
+      ],
+      [
+       100.1,
+       146.1
+      ],
+      [
+       125.0,
+       157.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 15. Ic latch-off level on current sense against TJ (L6563 only)",
+   "page": 12,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vpin4",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Latch-off level",
+     "points": [
+      [
+       -24.9,
+       1.7
+      ],
+      [
+       50.04,
+       1.7
+      ],
+      [
+       74.97,
+       1.69
+      ],
+      [
+       125.0,
+       1.69
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 16. Multiplier characteristics at VFF = 1 V",
+   "page": 13,
+   "conditions": "Vcc = 12 V, Tj = 25 °C",
+   "x": {
+    "label": "VMULT (pin 3)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCS (pin 4)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCOMP = 2.6 V",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.01354
+      ],
+      [
+       0.1998,
+       0.01685
+      ],
+      [
+       0.3001,
+       0.02072
+      ],
+      [
+       0.3999,
+       0.02403
+      ],
+      [
+       0.4997,
+       0.0279
+      ],
+      [
+       0.6992,
+       0.03453
+      ],
+      [
+       0.799,
+       0.0384
+      ],
+      [
+       0.8999,
+       0.04337
+      ],
+      [
+       0.9996,
+       0.04668
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 3.0 V",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.03066
+      ],
+      [
+       0.1998,
+       0.05166
+      ],
+      [
+       0.3001,
+       0.07376
+      ],
+      [
+       0.3999,
+       0.09475
+      ],
+      [
+       0.4997,
+       0.1141
+      ],
+      [
+       0.6992,
+       0.1572
+      ],
+      [
+       0.799,
+       0.1787
+      ],
+      [
+       0.8999,
+       0.2003
+      ],
+      [
+       0.9996,
+       0.2213
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 3.5 V",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.05166
+      ],
+      [
+       0.1998,
+       0.09475
+      ],
+      [
+       0.3001,
+       0.1373
+      ],
+      [
+       0.3999,
+       0.1804
+      ],
+      [
+       0.4997,
+       0.2262
+      ],
+      [
+       0.5995,
+       0.2688
+      ],
+      [
+       0.6992,
+       0.3119
+      ],
+      [
+       0.799,
+       0.3555
+      ],
+      [
+       0.8999,
+       0.3975
+      ],
+      [
+       0.9996,
+       0.4412
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 4.0 V",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.07376
+      ],
+      [
+       0.1998,
+       0.1373
+      ],
+      [
+       0.3001,
+       0.2036
+      ],
+      [
+       0.3999,
+       0.2688
+      ],
+      [
+       0.4997,
+       0.3356
+      ],
+      [
+       0.5995,
+       0.4003
+      ],
+      [
+       0.6992,
+       0.4671
+      ],
+      [
+       0.799,
+       0.5312
+      ],
+      [
+       0.8999,
+       0.5959
+      ],
+      [
+       0.9996,
+       0.661
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 4.5 V",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.09475
+      ],
+      [
+       0.1998,
+       0.1831
+      ],
+      [
+       0.3001,
+       0.271
+      ],
+      [
+       0.3999,
+       0.3594
+      ],
+      [
+       0.4997,
+       0.445
+      ],
+      [
+       0.5995,
+       0.5334
+      ],
+      [
+       0.6992,
+       0.6224
+      ],
+      [
+       0.799,
+       0.708
+      ],
+      [
+       0.8999,
+       0.7936
+      ],
+      [
+       0.9996,
+       0.8798
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 5.0 V",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.1163
+      ],
+      [
+       0.1998,
+       0.2262
+      ],
+      [
+       0.3001,
+       0.3384
+      ],
+      [
+       0.3999,
+       0.4472
+      ],
+      [
+       0.4997,
+       0.5572
+      ],
+      [
+       0.5995,
+       0.6666
+      ],
+      [
+       0.6992,
+       0.7771
+      ],
+      [
+       0.799,
+       0.8815
+      ],
+      [
+       0.8502,
+       0.9202
+      ],
+      [
+       0.8999,
+       0.9445
+      ],
+      [
+       0.9996,
+       0.9732
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 5.5 V",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.1373
+      ],
+      [
+       0.1998,
+       0.271
+      ],
+      [
+       0.3001,
+       0.4047
+      ],
+      [
+       0.3999,
+       0.5356
+      ],
+      [
+       0.4997,
+       0.6688
+      ],
+      [
+       0.5995,
+       0.8003
+      ],
+      [
+       0.6992,
+       0.9163
+      ],
+      [
+       0.7489,
+       0.9456
+      ],
+      [
+       0.799,
+       0.9633
+      ],
+      [
+       0.8999,
+       0.9826
+      ],
+      [
+       0.9996,
+       0.9903
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = upper voltage clamp",
+     "points": [
+      [
+       -0.0002697,
+       0.01298
+      ],
+      [
+       0.1,
+       0.1616
+      ],
+      [
+       0.1998,
+       0.3157
+      ],
+      [
+       0.3001,
+       0.471
+      ],
+      [
+       0.3999,
+       0.6262
+      ],
+      [
+       0.4997,
+       0.7809
+      ],
+      [
+       0.5995,
+       0.9191
+      ],
+      [
+       0.6491,
+       0.95
+      ],
+      [
+       0.6992,
+       0.9688
+      ],
+      [
+       0.799,
+       0.9892
+      ],
+      [
+       0.8999,
+       1.002
+      ],
+      [
+       0.9996,
+       1.009
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 17. ZCD clamp levels against TJ",
+   "page": 13,
+   "conditions": "Vcc = 12 V, IZCD = ±2.5 mA",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VZCD (pin 11)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Upper clamp",
+     "points": [
+      [
+       -24.97,
+       5.529
+      ],
+      [
+       0.05212,
+       5.581
+      ],
+      [
+       24.99,
+       5.622
+      ],
+      [
+       50.02,
+       5.674
+      ],
+      [
+       74.88,
+       5.722
+      ],
+      [
+       99.91,
+       5.763
+      ],
+      [
+       125.0,
+       5.804
+      ]
+     ]
+    },
+    {
+     "label": "Lower clamp",
+     "points": [
+      [
+       -24.97,
+       -0.05239
+      ],
+      [
+       0.05212,
+       -0.05239
+      ],
+      [
+       24.99,
+       -0.04126
+      ],
+      [
+       74.88,
+       -0.04126
+      ],
+      [
+       99.91,
+       -0.05239
+      ],
+      [
+       125.0,
+       -0.05239
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 18. Multiplier characteristics at VFF = 3 V",
+   "page": 13,
+   "conditions": "Vcc = 12 V, Tj = 25 °C",
+   "x": {
+    "label": "VMULT (pin 3)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCS (pin 4)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCOMP = 2.6 V",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.02334
+      ],
+      [
+       0.9983,
+       0.02307
+      ],
+      [
+       1.499,
+       0.02224
+      ],
+      [
+       2.499,
+       0.02169
+      ],
+      [
+       3.0,
+       0.02086
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 3.0 V",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.03301
+      ],
+      [
+       0.9983,
+       0.04213
+      ],
+      [
+       1.499,
+       0.05207
+      ],
+      [
+       1.999,
+       0.06285
+      ],
+      [
+       2.499,
+       0.07169
+      ],
+      [
+       3.0,
+       0.08163
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 3.5 V",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.04517
+      ],
+      [
+       0.9983,
+       0.06782
+      ],
+      [
+       1.499,
+       0.09075
+      ],
+      [
+       1.999,
+       0.1131
+      ],
+      [
+       2.499,
+       0.1363
+      ],
+      [
+       3.0,
+       0.1579
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 4.0 V",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.0587
+      ],
+      [
+       0.9983,
+       0.09296
+      ],
+      [
+       1.499,
+       0.1291
+      ],
+      [
+       1.999,
+       0.1642
+      ],
+      [
+       2.499,
+       0.201
+      ],
+      [
+       3.0,
+       0.2363
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 4.5 V",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.07141
+      ],
+      [
+       0.9983,
+       0.1195
+      ],
+      [
+       1.499,
+       0.1678
+      ],
+      [
+       1.999,
+       0.2159
+      ],
+      [
+       2.499,
+       0.2651
+      ],
+      [
+       3.0,
+       0.3131
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 5.0 V",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.08412
+      ],
+      [
+       0.9983,
+       0.1443
+      ],
+      [
+       1.499,
+       0.2059
+      ],
+      [
+       1.999,
+       0.2695
+      ],
+      [
+       2.499,
+       0.3311
+      ],
+      [
+       3.0,
+       0.391
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = 5.5 V",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.09793
+      ],
+      [
+       0.9983,
+       0.1711
+      ],
+      [
+       1.499,
+       0.2452
+      ],
+      [
+       1.999,
+       0.3211
+      ],
+      [
+       2.499,
+       0.396
+      ],
+      [
+       3.0,
+       0.4689
+      ]
+     ]
+    },
+    {
+     "label": "VCOMP = upper voltage clamp",
+     "points": [
+      [
+       -0.000788,
+       0.02528
+      ],
+      [
+       0.5003,
+       0.1098
+      ],
+      [
+       0.9983,
+       0.196
+      ],
+      [
+       1.499,
+       0.2838
+      ],
+      [
+       1.999,
+       0.3739
+      ],
+      [
+       2.499,
+       0.462
+      ],
+      [
+       3.0,
+       0.5479
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 19. ZCD source capability against TJ",
+   "page": 13,
+   "conditions": "Vcc = 12 V, VZCD = lower clamp",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IZCDsrc",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IZCDsrc",
+     "points": [
+      [
+       -25.04,
+       -4.077
+      ],
+      [
+       -0.04165,
+       -4.667
+      ],
+      [
+       24.96,
+       -4.956
+      ],
+      [
+       49.79,
+       -5.112
+      ],
+      [
+       74.88,
+       -5.008
+      ],
+      [
+       99.96,
+       -4.83
+      ],
+      [
+       124.9,
+       -4.619
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 20. Multiplier gain against TJ",
+   "page": 13,
+   "conditions": "Vcc = 12 V, VCOMP = 4 V, VMULT = VFF = 1 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "KM",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "KM",
+     "points": [
+      [
+       -24.96,
+       0.4699
+      ],
+      [
+       50.04,
+       0.4699
+      ],
+      [
+       74.96,
+       0.4603
+      ],
+      [
+       99.96,
+       0.4603
+      ],
+      [
+       125.0,
+       0.4498
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 21. VFF and TBO dropouts against TJ",
+   "page": 13,
+   "conditions": "Vcc = 12 V, Vpin3 = 2.9 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Dropout",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vpin6 - Vpin5",
+     "points": [
+      [
+       -25.03,
+       3.88
+      ],
+      [
+       -0.1081,
+       3.978
+      ],
+      [
+       24.9,
+       4.547
+      ],
+      [
+       49.98,
+       4.252
+      ],
+      [
+       74.91,
+       3.83
+      ],
+      [
+       99.99,
+       3.672
+      ],
+      [
+       125.1,
+       4.003
+      ]
+     ]
+    },
+    {
+     "label": "Vpin5 - Vpin3",
+     "points": [
+      [
+       -25.03,
+       -1.401
+      ],
+      [
+       -0.1081,
+       0.1801
+      ],
+      [
+       24.9,
+       0.5209
+      ],
+      [
+       49.98,
+       0.2995
+      ],
+      [
+       74.91,
+       0.1555
+      ],
+      [
+       99.99,
+       -0.1326
+      ],
+      [
+       125.1,
+       -0.5718
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 22. TBO current mismatch against TJ",
+   "page": 14,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "100 · (I(INV) - I(TBO)) / I(INV)",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ITBO = 250 µA",
+     "points": [
+      [
+       -24.98,
+       -1.62
+      ],
+      [
+       0.03387,
+       -1.67
+      ],
+      [
+       24.96,
+       -1.67
+      ],
+      [
+       49.98,
+       -1.559
+      ],
+      [
+       75.08,
+       -1.46
+      ],
+      [
+       100.0,
+       -1.35
+      ],
+      [
+       124.9,
+       -1.229
+      ]
+     ]
+    },
+    {
+     "label": "ITBO = 25 µA",
+     "points": [
+      [
+       -24.98,
+       -2.24
+      ],
+      [
+       0.03387,
+       -2.279
+      ],
+      [
+       24.96,
+       -2.229
+      ],
+      [
+       49.98,
+       -2.069
+      ],
+      [
+       75.08,
+       -1.829
+      ],
+      [
+       100.0,
+       -1.579
+      ],
+      [
+       124.9,
+       -1.061
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 23. RUN thresholds against TJ",
+   "page": 14,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vpin10",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ON",
+     "points": [
+      [
+       -40.06,
+       0.5697
+      ],
+      [
+       -24.9,
+       0.5697
+      ],
+      [
+       0.03267,
+       0.5796
+      ],
+      [
+       24.96,
+       0.5796
+      ],
+      [
+       49.98,
+       0.59
+      ],
+      [
+       74.99,
+       0.6
+      ],
+      [
+       125.0,
+       0.6
+      ]
+     ]
+    },
+    {
+     "label": "OFF",
+     "points": [
+      [
+       -40.06,
+       0.5201
+      ],
+      [
+       125.0,
+       0.5201
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 24. TBO-INV current mismatch against TBO current",
+   "page": 14,
+   "conditions": "Vcc = 12 V, Tj = 25 °C",
+   "x": {
+    "label": "I(TBO)",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "100 · (I(INV) - I(TBO)) / I(INV)",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Mismatch",
+     "points": [
+      [
+       23.45,
+       -2.229
+      ],
+      [
+       56.8,
+       -2.109
+      ],
+      [
+       108.0,
+       -1.936
+      ],
+      [
+       160.1,
+       -1.81
+      ],
+      [
+       203.8,
+       -1.712
+      ],
+      [
+       234.4,
+       -1.676
+      ],
+      [
+       246.0,
+       -1.667
+      ],
+      [
+       254.5,
+       -1.667
+      ],
+      [
+       263.4,
+       -1.667
+      ],
+      [
+       280.8,
+       -1.676
+      ],
+      [
+       308.1,
+       -1.71
+      ],
+      [
+       333.6,
+       -1.748
+      ],
+      [
+       387.8,
+       -1.834
+      ],
+      [
+       442.1,
+       -1.94
+      ],
+      [
+       500.6,
+       -2.07
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 25. PWM_LATCH high saturation against TJ",
+   "page": 14,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vpin8",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Isource = 50 µA",
+     "points": [
+      [
+       -25.03,
+       5.241
+      ],
+      [
+       0.06534,
+       5.211
+      ],
+      [
+       24.99,
+       5.19
+      ],
+      [
+       49.91,
+       5.17
+      ],
+      [
+       74.92,
+       5.14
+      ],
+      [
+       99.85,
+       5.121
+      ],
+      [
+       125.0,
+       5.101
+      ]
+     ]
+    },
+    {
+     "label": "Isource = 500 µA",
+     "points": [
+      [
+       -25.03,
+       4.92
+      ],
+      [
+       0.06534,
+       4.87
+      ],
+      [
+       24.99,
+       4.83
+      ],
+      [
+       49.91,
+       4.78
+      ],
+      [
+       74.92,
+       4.73
+      ],
+      [
+       99.85,
+       4.681
+      ],
+      [
+       125.0,
+       4.63
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 26. TBO clamp against TJ",
+   "page": 14,
+   "conditions": "Vcc = 12 V, Vpin3 = 4 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vpin6",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TBO clamp",
+     "points": [
+      [
+       -25.04,
+       2.97
+      ],
+      [
+       -0.04497,
+       2.97
+      ],
+      [
+       24.96,
+       2.98
+      ],
+      [
+       74.96,
+       2.98
+      ],
+      [
+       100.0,
+       2.99
+      ],
+      [
+       125.0,
+       2.98
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 27. PWM_STOP low saturation against TJ",
+   "page": 14,
+   "conditions": "Vcc = 12 V, Isink = 0.5 mA",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vpin9",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PWM_STOP low level",
+     "points": [
+      [
+       -24.93,
+       0.1298
+      ],
+      [
+       0.02137,
+       0.1298
+      ],
+      [
+       25.05,
+       0.14
+      ],
+      [
+       50.0,
+       0.1502
+      ],
+      [
+       74.86,
+       0.1502
+      ],
+      [
+       99.89,
+       0.1599
+      ],
+      [
+       124.9,
+       0.1703
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 28. PFC_OK thresholds against TJ",
+   "page": 15,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vpin7",
+    "unit": "V",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "Latch-off",
+     "points": [
+      [
+       -24.96,
+       2.506
+      ],
+      [
+       25.03,
+       2.514
+      ],
+      [
+       50.02,
+       2.514
+      ],
+      [
+       100.0,
+       2.506
+      ],
+      [
+       125.0,
+       2.49
+      ]
+     ]
+    },
+    {
+     "label": "ON",
+     "points": [
+      [
+       -24.96,
+       0.2204
+      ],
+      [
+       0.0321,
+       0.2404
+      ],
+      [
+       25.03,
+       0.2605
+      ],
+      [
+       50.02,
+       0.2801
+      ],
+      [
+       75.02,
+       0.3104
+      ],
+      [
+       100.0,
+       0.3301
+      ],
+      [
+       125.0,
+       0.3504
+      ]
+     ]
+    },
+    {
+     "label": "OFF",
+     "points": [
+      [
+       -24.96,
+       0.19
+      ],
+      [
+       0.0321,
+       0.2102
+      ],
+      [
+       25.03,
+       0.2204
+      ],
+      [
+       50.02,
+       0.2404
+      ],
+      [
+       75.02,
+       0.2504
+      ],
+      [
+       100.0,
+       0.2697
+      ],
+      [
+       125.0,
+       0.2905
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 29. UVLO saturation against TJ",
+   "page": 15,
+   "conditions": "Vcc = 0 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate driver output voltage VGD",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "UVLO saturation",
+     "points": [
+      [
+       -40.05,
+       1.0
+      ],
+      [
+       -25.12,
+       0.9803
+      ],
+      [
+       0.06293,
+       0.9401
+      ],
+      [
+       24.99,
+       0.9152
+      ],
+      [
+       49.92,
+       0.8805
+      ],
+      [
+       75.01,
+       0.8499
+      ],
+      [
+       99.94,
+       0.8204
+      ],
+      [
+       124.9,
+       0.79
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 30. Start-up timer against TJ",
+   "page": 15,
+   "conditions": "Vcc = 12 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Tstart",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Tstart",
+     "points": [
+      [
+       -25.13,
+       127.0
+      ],
+      [
+       0.07477,
+       125.0
+      ],
+      [
+       24.94,
+       122.0
+      ],
+      [
+       49.98,
+       123.0
+      ],
+      [
+       99.88,
+       127.0
+      ],
+      [
+       125.0,
+       129.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 31. Gate-drive output low saturation",
+   "page": 15,
+   "conditions": "Tj = 25 °C, Vcc = 11 V, sink",
+   "x": {
+    "label": "IGD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate driver output voltage VGD",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Sink",
+     "points": [
+      [
+       -0.3726,
+       0.0009724
+      ],
+      [
+       799.8,
+       3.501
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 32. Gate-drive clamp against TJ",
+   "page": 15,
+   "conditions": "Vcc = 20 V",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate driver clamp voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Clamp",
+     "points": [
+      [
+       -25.09,
+       10.47
+      ],
+      [
+       -0.0973,
+       10.63
+      ],
+      [
+       24.81,
+       10.78
+      ],
+      [
+       49.89,
+       10.96
+      ],
+      [
+       74.89,
+       11.14
+      ],
+      [
+       100.1,
+       11.3
+      ],
+      [
+       125.0,
+       11.47
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 33. Gate-drive output high saturation",
+   "page": 15,
+   "conditions": "Tj = 25 °C, Vcc = 11 V, source",
+   "x": {
+    "label": "IGD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VGD - Vcc",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Source",
+     "points": [
+      [
+       19.5,
+       -2.001
+      ],
+      [
+       619.6,
+       -4.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 35. Squarer-divider transfer characteristic",
+   "page": 19,
+   "conditions": "VCOMP = 4 V",
+   "x": {
+    "label": "VFF = VMULT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Vcsx",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Actual",
+     "points": [
+      [
+       0.001719,
+       1.096
+      ],
+      [
+       0.5026,
+       1.096
+      ],
+      [
+       0.5097,
+       1.096
+      ],
+      [
+       0.6156,
+       0.9688
+      ],
+      [
+       0.7358,
+       0.8565
+      ],
+      [
+       0.8875,
+       0.7528
+      ],
+      [
+       1.139,
+       0.6353
+      ],
+      [
+       1.386,
+       0.5495
+      ],
+      [
+       1.821,
+       0.4468
+      ],
+      [
+       2.424,
+       0.3589
+      ],
+      [
+       2.968,
+       0.3081
+      ],
+      [
+       3.513,
+       0.2774
+      ]
+     ]
+    },
+    {
+     "label": "Ideal",
+     "points": [
+      [
+       0.5162,
+       1.159
+      ],
+      [
+       0.5469,
+       1.1
+      ],
+      [
+       0.5877,
+       1.04
+      ],
+      [
+       0.6333,
+       0.9839
+      ],
+      [
+       0.6819,
+       0.9222
+      ],
+      [
+       0.7339,
+       0.8647
+      ],
+      [
+       0.8031,
+       0.7994
+      ],
+      [
+       0.8766,
+       0.7464
+      ],
+      [
+       0.9684,
+       0.6866
+      ],
+      [
+       1.033,
+       0.6536
+      ],
+      [
+       1.119,
+       0.6158
+      ],
+      [
+       1.195,
+       0.5883
+      ],
+      [
+       1.282,
+       0.5566
+      ],
+      [
+       1.373,
+       0.532
+      ],
+      [
+       1.45,
+       0.5103
+      ],
+      [
+       1.525,
+       0.4927
+      ],
+      [
+       1.617,
+       0.4738
+      ],
+      [
+       1.695,
+       0.459
+      ],
+      [
+       1.78,
+       0.4463
+      ],
+      [
+       1.858,
+       0.433
+      ],
+      [
+       1.932,
+       0.4228
+      ],
+      [
+       2.023,
+       0.4092
+      ],
+      [
+       2.112,
+       0.3992
+      ],
+      [
+       2.176,
+       0.3917
+      ],
+      [
+       2.266,
+       0.3833
+      ],
+      [
+       2.338,
+       0.3762
+      ],
+      [
+       2.429,
+       0.3669
+      ],
+      [
+       2.518,
+       0.3616
+      ],
+      [
+       2.582,
+       0.3547
+      ],
+      [
+       2.668,
+       0.3497
+      ],
+      [
+       2.761,
+       0.3452
+      ],
+      [
+       2.826,
+       0.3377
+      ],
+      [
+       2.923,
+       0.3346
+      ],
+      [
+       2.988,
+       0.3293
+      ],
+      [
+       3.077,
+       0.324
+      ],
+      [
+       3.167,
+       0.3187
+      ],
+      [
+       3.243,
+       0.3155
+      ],
+      [
+       3.319,
+       0.313
+      ],
+      [
+       3.41,
+       0.3092
+      ],
+      [
+       3.481,
+       0.3077
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 36. RFF·CFF against 3rd harmonic distortion introduced in the input current",
+   "page": 20,
+   "conditions": "",
+   "x": {
+    "label": "D3",
+    "unit": "%",
+    "scale": "log"
+   },
+   "y": {
+    "label": "RFF·CFF",
+    "unit": "s",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "fL = 50 Hz",
+     "points": [
+      [
+       0.1008,
+       3.269
+      ],
+      [
+       0.22,
+       1.47
+      ],
+      [
+       0.3382,
+       0.9708
+      ],
+      [
+       0.4588,
+       0.7035
+      ],
+      [
+       0.5763,
+       0.5613
+      ],
+      [
+       0.7052,
+       0.463
+      ],
+      [
+       0.8952,
+       0.3586
+      ],
+      [
+       1.086,
+       0.2969
+      ],
+      [
+       1.315,
+       0.2449
+      ],
+      [
+       1.576,
+       0.2081
+      ],
+      [
+       1.911,
+       0.1723
+      ],
+      [
+       2.318,
+       0.1421
+      ],
+      [
+       2.807,
+       0.1173
+      ],
+      [
+       3.399,
+       0.0939
+      ],
+      [
+       4.123,
+       0.07746
+      ],
+      [
+       4.999,
+       0.06366
+      ],
+      [
+       6.055,
+       0.05271
+      ],
+      [
+       7.343,
+       0.04348
+      ],
+      [
+       8.905,
+       0.03586
+      ],
+      [
+       9.961,
+       0.03269
+      ]
+     ]
+    },
+    {
+     "label": "fL = 60 Hz",
+     "points": [
+      [
+       0.1008,
+       2.697
+      ],
+      [
+       0.22,
+       1.253
+      ],
+      [
+       0.3382,
+       0.7979
+      ],
+      [
+       0.4588,
+       0.5978
+      ],
+      [
+       0.5763,
+       0.463
+      ],
+      [
+       0.697,
+       0.3834
+      ],
+      [
+       0.8453,
+       0.3162
+      ],
+      [
+       1.025,
+       0.2609
+      ],
+      [
+       1.243,
+       0.2152
+      ],
+      [
+       1.506,
+       0.1782
+      ],
+      [
+       1.826,
+       0.1464
+      ],
+      [
+       2.188,
+       0.1249
+      ],
+      [
+       2.654,
+       0.1
+      ],
+      [
+       3.107,
+       0.08785
+      ],
+      [
+       3.768,
+       0.07035
+      ],
+      [
+       4.564,
+       0.05803
+      ],
+      [
+       5.534,
+       0.04787
+      ],
+      [
+       6.711,
+       0.03949
+      ],
+      [
+       8.139,
+       0.03269
+      ],
+      [
+       9.857,
+       0.02687
+      ],
+      [
+       9.961,
+       0.02687
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 39. Output voltage against input voltage with TBO",
+   "page": 26,
+   "conditions": "Vin1 = 88 V, Vin2 = 264 V, Vo1 = 200 V, Vo2 = 385 V, Vox = 400 V, Vinx = 270 V",
+   "x": {
+    "label": "Input RMS voltage Vin",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage Vo",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vo",
+     "points": [
+      [
+       88.9,
+       200.0
+      ],
+      [
+       89.5,
+       201.7
+      ],
+      [
+       93.7,
+       205.1
+      ],
+      [
+       96.9,
+       209.5
+      ],
+      [
+       97.9,
+       209.5
+      ],
+      [
+       98.4,
+       211.2
+      ],
+      [
+       99.5,
+       211.2
+      ],
+      [
+       105.8,
+       218.9
+      ],
+      [
+       106.9,
+       218.9
+      ],
+      [
+       109.0,
+       222.4
+      ],
+      [
+       110.0,
+       222.4
+      ],
+      [
+       114.8,
+       228.4
+      ],
+      [
+       115.9,
+       228.4
+      ],
+      [
+       116.4,
+       230.2
+      ],
+      [
+       117.5,
+       230.2
+      ],
+      [
+       123.8,
+       237.9
+      ],
+      [
+       124.9,
+       237.9
+      ],
+      [
+       125.4,
+       239.7
+      ],
+      [
+       128.0,
+       241.3
+      ],
+      [
+       137.0,
+       251.7
+      ],
+      [
+       138.1,
+       251.7
+      ],
+      [
+       140.1,
+       255.2
+      ],
+      [
+       141.2,
+       255.2
+      ],
+      [
+       147.5,
+       262.9
+      ],
+      [
+       148.6,
+       262.9
+      ],
+      [
+       154.9,
+       270.6
+      ],
+      [
+       156.0,
+       270.6
+      ],
+      [
+       158.1,
+       274.1
+      ],
+      [
+       159.1,
+       274.1
+      ],
+      [
+       160.7,
+       276.8
+      ],
+      [
+       163.4,
+       278.4
+      ],
+      [
+       165.5,
+       281.9
+      ],
+      [
+       166.6,
+       281.9
+      ],
+      [
+       178.7,
+       295.7
+      ],
+      [
+       179.7,
+       295.7
+      ],
+      [
+       186.1,
+       303.5
+      ],
+      [
+       187.2,
+       303.5
+      ],
+      [
+       193.5,
+       311.2
+      ],
+      [
+       194.5,
+       311.2
+      ],
+      [
+       195.1,
+       313.0
+      ],
+      [
+       197.7,
+       314.6
+      ],
+      [
+       204.0,
+       322.4
+      ],
+      [
+       206.7,
+       324.1
+      ],
+      [
+       211.4,
+       330.2
+      ],
+      [
+       212.5,
+       330.2
+      ],
+      [
+       214.6,
+       333.6
+      ],
+      [
+       215.7,
+       333.6
+      ],
+      [
+       215.7,
+       334.4
+      ],
+      [
+       218.3,
+       336.2
+      ],
+      [
+       227.8,
+       347.4
+      ],
+      [
+       228.8,
+       347.4
+      ],
+      [
+       242.5,
+       362.9
+      ],
+      [
+       243.6,
+       362.9
+      ],
+      [
+       245.7,
+       366.4
+      ],
+      [
+       246.8,
+       366.4
+      ],
+      [
+       251.5,
+       372.4
+      ],
+      [
+       252.6,
+       372.4
+      ],
+      [
+       266.3,
+       387.9
+      ],
+      [
+       267.4,
+       387.9
+      ],
+      [
+       269.5,
+       391.4
+      ],
+      [
+       300.1,
+       391.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 50. EVAL6563-80W: Vout against Vin (tracking boost)",
+   "page": 34,
+   "conditions": "",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "Vout",
+     "points": [
+      [
+       90,
+       219.2
+      ],
+      [
+       115,
+       243.9
+      ],
+      [
+       135,
+       263.6
+      ],
+      [
+       180,
+       307.5
+      ],
+      [
+       230,
+       356.6
+      ],
+      [
+       265,
+       391.5
+      ],
+      [
+       270,
+       394.0
+      ],
+      [
+       275,
+       395.5
+      ],
+      [
+       281,
+       396.7
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "tracking-boost-80w",
+   "title": "80 W wide-range PFC pre-regulator with tracking boost",
+   "page": 27,
+   "description": "A transition-mode boost PFC for 88 to 264 Vac whose 80 W output moves from 200 V at low line to 385 V at high line. R1a, R1b and R2 feed the rectified line to MULT; C4 and R10 on VFF, with RUN tied there for brownout; R4 on TBO sets how far the output tracks. The output divider R8a, R8b, R9 closes the loop at INV, compensated by C6 and R5-C5 to COMP; a second divider R10a, R10b, R11 watches the output at PFC_OK. The auxiliary winding drives ZCD through R3. The IC takes 10.3 to 22 V from an outside supply.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563"
+    },
+    {
+     "ref": "F1",
+     "type": "other",
+     "value": "4 A / 250 V",
+     "note": "fuse"
+    },
+    {
+     "ref": "BR1",
+     "type": "other",
+     "value": "4 x 1N4007",
+     "note": "bridge rectifier"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.22 µF",
+     "note": "400 V"
+    },
+    {
+     "ref": "R1A",
+     "type": "resistor",
+     "value": "3.3 MΩ"
+    },
+    {
+     "ref": "R1B",
+     "type": "resistor",
+     "value": "3.3 MΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "51.1 kΩ"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "2.2 nF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "22 µF",
+     "note": "25 V"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "boost inductor",
+     "note": "boost inductor with an auxiliary winding; P1-P2 main winding, S1-S2 auxiliary, P2 and S2 the dotted ends"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "68 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "62 kΩ"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "10 Ω"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "STP8NM50"
+    },
+    {
+     "ref": "R7A",
+     "type": "resistor",
+     "value": "0.68 Ω",
+     "note": "1/4 W"
+    },
+    {
+     "ref": "R7B",
+     "type": "resistor",
+     "value": "0.68 Ω",
+     "note": "1/4 W"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "470 nF"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "390 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "21 kΩ"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10 nF"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "STTH1L06"
+    },
+    {
+     "ref": "NTC1",
+     "type": "other",
+     "value": "NTC",
+     "note": "inrush limiter"
+    },
+    {
+     "ref": "R8A",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R8B",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R10A",
+     "type": "resistor",
+     "value": "3.3 MΩ"
+    },
+    {
+     "ref": "R10B",
+     "type": "resistor",
+     "value": "3.3 MΩ"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "47.5 kΩ"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "34.8 kΩ"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "56 µF",
+     "note": "400 V, output bulk capacitor"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Vac (88 V to 264 V)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "Vac return"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "Supply voltage 10.3 to 22 V"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "Vo = 200 to 385 V, Po = 80 W"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "Vo return"
+    }
+   ],
+   "notes": [
+    "C3 is 22 µF (misprinted 22 mF).",
+    "The 56 µF, 400 V output capacitor is C8 (misprinted C6, the label of the 100 nF compensation capacitor).",
+    "Design values: Vin1 = 88 V, Vin2 = 264 V, Vo1 = 200 V, Vo2 = 385 V, Vox = 400 V, ΔVo = 40 V, Vinx = 270 V."
+   ]
+  },
+  {
+   "id": "eval6563-80w",
+   "title": "EVAL6563-80W demonstration board: 80 W wide-range PFC with tracking boost",
+   "page": 32,
+   "description": "The demonstration board, 64 x 94 mm, delivering 80 W at 220 to 390 V from 88 to 264 Vac. VCC is fed from the rectified line through R3A and R3B, and from the auxiliary winding through C6, R2, the 20 V zener D2 and D3, with C2 and C4 as its capacitors. Daux joins the rectified line to the cathode of D1. MULT is fed by R11A, R11B, R10 with C7; C9 and R17 sit on VFF with RUN tied there; R14 on TBO sets tracking. The output divider R9A, R9B, R8 feeds INV with C12 and C8-R4 to COMP; R12A, R12B, R13 with C11 watch the output at PFC_OK. R15 (0 Ω) joins CS to the sense resistors R7A and R7B; C10 is not fitted. TP1 and TP2 bring out PWM_STOP and PWM_LATCH.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563"
+    },
+    {
+     "ref": "F1",
+     "type": "other",
+     "value": "4 A / 250 V",
+     "note": "fuse"
+    },
+    {
+     "ref": "BR1",
+     "type": "other",
+     "value": "1W08G",
+     "note": "bridge rectifier, P1"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.47 µF",
+     "note": "400 V"
+    },
+    {
+     "ref": "R11A",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R11B",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "15.8 kΩ"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "4.7 nF"
+    },
+    {
+     "ref": "R3A",
+     "type": "resistor",
+     "value": "120 kΩ"
+    },
+    {
+     "ref": "R3B",
+     "type": "resistor",
+     "value": "120 kΩ"
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "D2",
+     "type": "zener",
+     "value": "20 V"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "15 nF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "33 Ω"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "47 kΩ"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "0.43 mH boost inductor",
+     "note": "E25x13x7 core, 3C85 ferrite or equivalent, 1.6 mm gap; primary 80 turns of 20 x 0.1 mm, secondary 9 turns of 0.1 mm; P1-P2 primary, S1-S2 secondary, P2 and S2 the dotted ends"
+    },
+    {
+     "ref": "DAUX",
+     "type": "diode",
+     "value": "1N4007"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "33 µF",
+     "note": "25 V electrolytic"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "R18",
+     "type": "resistor",
+     "value": "47 kΩ"
+    },
+    {
+     "ref": "TP1",
+     "type": "terminal",
+     "value": "TP1"
+    },
+    {
+     "ref": "TP2",
+     "type": "terminal",
+     "value": "TP2"
+    },
+    {
+     "ref": "R20",
+     "type": "resistor",
+     "value": "47 kΩ"
+    },
+    {
+     "ref": "R14",
+     "type": "resistor",
+     "value": "22.1 kΩ"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "470 nF"
+    },
+    {
+     "ref": "R17",
+     "type": "resistor",
+     "value": "390 kΩ"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "N.A.",
+     "note": "not assembled"
+    },
+    {
+     "ref": "R15",
+     "type": "resistor",
+     "value": "0 Ω"
+    },
+    {
+     "ref": "R7A",
+     "type": "resistor",
+     "value": "0.68 Ω",
+     "note": "1/2 W"
+    },
+    {
+     "ref": "R7B",
+     "type": "resistor",
+     "value": "0.68 Ω",
+     "note": "1/2 W"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "39 kΩ"
+    },
+    {
+     "ref": "C12",
+     "type": "capacitor",
+     "value": "220 nF"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "22 Ω"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "STP8NM50"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "STTH2L06"
+    },
+    {
+     "ref": "NTC1",
+     "type": "other",
+     "value": "2.5 Ω",
+     "note": "NTC inrush limiter"
+    },
+    {
+     "ref": "R9A",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R9B",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "37.4 kΩ"
+    },
+    {
+     "ref": "R12A",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R12B",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R13",
+     "type": "resistor",
+     "value": "10.5 kΩ"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "4.7 nF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "56 µF",
+     "note": "400 V electrolytic"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Vac (88 V to 264 V)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "Vac return"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "Vo = 220 to 390 V, Po = 80 W"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "Vo return"
+    }
+   ],
+   "notes": [
+    "The lower PFC_OK divider resistor is R12B (misprinted R12A).",
+    "Full-load and half-load results are in the EVAL6563-80W evaluation tables, measured with the line filter of circuit line-filter."
+   ]
+  },
+  {
+   "id": "line-filter",
+   "title": "Line filter for the EVAL6563-80W measurements",
+   "page": 34,
+   "description": "The mains filter the demonstration board was measured with: an X2 capacitor on each side of a 25 mH, 1.2 A common-mode choke. It was not tested for EMI compliance.",
+   "parts": [
+    {
+     "ref": "CX1",
+     "type": "capacitor",
+     "value": "220 nF",
+     "note": "X2"
+    },
+    {
+     "ref": "L1",
+     "type": "other",
+     "value": "253Y1R2",
+     "note": "TDK common-mode choke, 25 mH, 1.2 A; windings 1-2 and 3-4, 1 and 3 the dotted ends"
+    },
+    {
+     "ref": "CX2",
+     "type": "capacitor",
+     "value": "220 nF",
+     "note": "X2"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "to the AC source"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "to the AC source"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "to EVAL6563-80W"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "to EVAL6563-80W"
+    }
+   ],
+   "notes": [],
+   "fixture": true
+  },
+  {
+   "id": "fixed-400v-250w",
+   "title": "250 W wide-range PFC pre-regulator, fixed 400 V output",
+   "page": 35,
+   "description": "A 250 W boost PFC regulating a fixed 400 V from 88 to 264 Vac; TBO, PWM_LATCH and PWM_STOP are unused. R1A, R1B, R2 and C3 feed MULT; C5 and R7 sit on VFF with RUN joined to it. The loop closes at INV through R9A, R9B and R10, with R4 in parallel with R5-C4 to COMP. R11A, R11B and R12 with C7 watch the output at PFC_OK. GD drives M1 through R6 with D3 across it. D1 joins the rectified line to the cathode of D2, where 630 V capacitor C6 also sits. The IC runs from an outside 10.3 to 22 V supply.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563"
+    },
+    {
+     "ref": "F1",
+     "type": "other",
+     "value": "8 A / 250 V",
+     "note": "fuse"
+    },
+    {
+     "ref": "BR1",
+     "type": "other",
+     "value": "KBU8M",
+     "note": "bridge rectifier, B1"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "400 V"
+    },
+    {
+     "ref": "R1A",
+     "type": "resistor",
+     "value": "820 kΩ"
+    },
+    {
+     "ref": "R1B",
+     "type": "resistor",
+     "value": "820 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 nF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "390 kΩ"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "470 nF"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "47 kΩ"
+    },
+    {
+     "ref": "L1",
+     "type": "other",
+     "value": "150 µH boost inductor",
+     "note": "ETD29x16x10 core, 3C85 ferrite or equivalent, 1.5 mm gap; primary 74 turns of 20 x AWG30 (0.3 mm), secondary 8 turns of 0.1 mm; P1-P2 primary, S1-S2 secondary, P2 and S2 the dotted ends"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "6.8 kΩ"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "33 Ω"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "STP12NM50"
+    },
+    {
+     "ref": "R8A",
+     "type": "resistor",
+     "value": "0.22 Ω",
+     "note": "1 W"
+    },
+    {
+     "ref": "R8B",
+     "type": "resistor",
+     "value": "0.22 Ω",
+     "note": "1 W"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "1N5406"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "STTH5L06"
+    },
+    {
+     "ref": "NTC1",
+     "type": "other",
+     "value": "2.5 Ω",
+     "note": "NTC inrush limiter"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "470 nF",
+     "note": "630 V"
+    },
+    {
+     "ref": "R9A",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R9B",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "12.7 kΩ"
+    },
+    {
+     "ref": "R11A",
+     "type": "resistor",
+     "value": "1.87 MΩ"
+    },
+    {
+     "ref": "R11B",
+     "type": "resistor",
+     "value": "1.87 MΩ"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10 nF"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "20 kΩ"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "150 µF",
+     "note": "450 V electrolytic"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Vac 88 V to 264 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "Vac return"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "Vcc 10.3 to 22 V"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "Vout = 400 V, Pout = 250 W"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "Vout return"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "fot-350w",
+   "title": "350 W wide-range PFC pre-regulator, fixed 400 V output, fixed-off-time control",
+   "page": 35,
+   "description": "A 350 W, 400 V boost PFC run with fixed-off-time (FOT) control; the 0.55 mH inductor has no auxiliary winding. ZCD instead sits on an RC network: C7 and R7 to ground, C6 and R8 to the cathode of D5 whose anode is on GD, and R6 to the emitter of PNP TR1, whose base is on MULT and collector on ground. GD drives the paralleled M1A and M1B through R9 and R10, each with a 1N4148 across it. R11 and C8 bring the voltage across R12A to R12C into CS. Feedback, PFC_OK monitoring and VFF are arranged as in the 250 W circuit.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563"
+    },
+    {
+     "ref": "F1",
+     "type": "other",
+     "value": "8 A / 250 V",
+     "note": "fuse"
+    },
+    {
+     "ref": "BR1",
+     "type": "other",
+     "value": "KBU8M",
+     "note": "bridge rectifier, B1"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "400 V"
+    },
+    {
+     "ref": "R1A",
+     "type": "resistor",
+     "value": "620 kΩ"
+    },
+    {
+     "ref": "R1B",
+     "type": "resistor",
+     "value": "620 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 nF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "390 kΩ"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "470 nF"
+    },
+    {
+     "ref": "TR1",
+     "type": "pnp",
+     "value": "BC557"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "1.5 kΩ"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "12 kΩ"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "1.5 kΩ"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "330 pF"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "560 pF"
+    },
+    {
+     "ref": "D5",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "6.8 kΩ"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "6.8 Ω"
+    },
+    {
+     "ref": "D4",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "6.8 Ω"
+    },
+    {
+     "ref": "M1A",
+     "type": "nmos",
+     "value": "STP12NM50"
+    },
+    {
+     "ref": "M1B",
+     "type": "nmos",
+     "value": "STP12NM50"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "330 pF"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "330 Ω"
+    },
+    {
+     "ref": "R12A",
+     "type": "resistor",
+     "value": "0.33 Ω",
+     "note": "1 W"
+    },
+    {
+     "ref": "R12B",
+     "type": "resistor",
+     "value": "0.33 Ω",
+     "note": "1 W"
+    },
+    {
+     "ref": "R12C",
+     "type": "resistor",
+     "value": "0.33 Ω",
+     "note": "1 W"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "0.55 mH",
+     "note": "E42*21*15 core, B2 material, 1.9 mm air gap on the centre leg, 58 turns of 20 x AWG32 (0.2 mm)"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "1N5406"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "STTH806DTI"
+    },
+    {
+     "ref": "NTC1",
+     "type": "other",
+     "value": "2.5 Ω",
+     "note": "NTC inrush limiter"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "470 nF",
+     "note": "630 V"
+    },
+    {
+     "ref": "R13A",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R13B",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "R14",
+     "type": "resistor",
+     "value": "12.7 kΩ"
+    },
+    {
+     "ref": "R15A",
+     "type": "resistor",
+     "value": "1.87 MΩ"
+    },
+    {
+     "ref": "R15B",
+     "type": "resistor",
+     "value": "1.87 MΩ"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "10 nF"
+    },
+    {
+     "ref": "R16",
+     "type": "resistor",
+     "value": "20 kΩ"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "220 µF",
+     "note": "450 V electrolytic"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Vac 88 V to 264 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "Vac return"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "Vcc 10.3 to 22 V"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "Vout = 400 V, Pout = 350 W"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "Vout return"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "l5991-standby-pfc-ok",
+   "title": "L5991 standby disables the L6563 through PFC_OK",
+   "page": 29,
+   "description": "Lets the L5991 (the DC-DC stage, working as master) turn the PFC off at light load. PNP Q1 has its emitter on ST-BY and its base on the R1-R2 divider from Vref; its collector feeds the R3-R4 divider into NPN Q2. Q2 pulls down the base of NPN Q3, which R5 pulls up to Vref; Q3's collector is on PFC_OK.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "L5991/A",
+     "note": "PWM controller with standby function",
+     "external": true
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "27 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "BC557"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "150 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "150 kΩ"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "BC547"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "47 kΩ"
+    },
+    {
+     "ref": "Q3",
+     "type": "npn",
+     "value": "BC547"
+    }
+   ],
+   "notes": [
+    "ST-BY is L5991 pin 16; Vref is pin 4."
+   ]
+  },
+  {
+   "id": "l5991-standby-vcc-cut",
+   "title": "L5991 standby cuts the L6563 supply",
+   "page": 29,
+   "description": "The same ST-BY sensing as in l5991-standby-pfc-ok, but Q2 now drives the base of PNP Q3 through R5, and Q3 passes the auxiliary Supply_Bus to the L6563's VCC. In standby Q3 opens and the PFC controller loses its supply altogether, for when its residual consumption matters.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "L5991/A",
+     "note": "PWM controller with standby function",
+     "external": true
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "27 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "BC557"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "150 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "150 kΩ"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "BC547"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "15 kΩ"
+    },
+    {
+     "ref": "Q3",
+     "type": "pnp",
+     "value": "BC557"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "electrolytic, value not given"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Supply_Bus"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "l6668-vcc-switch",
+   "title": "L6668 PFC_STOP switches the L6563 supply",
+   "page": 29,
+   "description": "PNP Q1 passes the L6668's Vcc to the L6563's VCC, so the L6668 can disable the PFC at light load. Q1's base has R1 to its emitter and runs through the 8.2 V zener D1 and R2 to an RC node fed from PFC_STOP through a series resistor.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "L6668",
+     "note": "PWM controller",
+     "external": true
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "BC557"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "8.2 V"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2.2 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "value not given"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "value not given"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "value not given"
+    }
+   ],
+   "notes": [
+    "L6668 pins: Vcc 16, PFC_STOP 14."
+   ]
+  },
+  {
+   "id": "l6668-pfc-ok",
+   "title": "L6668 PFC_STOP disables the L6563 through PFC_OK",
+   "page": 29,
+   "description": "Lets the L6668 disable the PFC at light load. R1 ties PFC_STOP to the L6668's VREF; R2 takes PFC_STOP to the base of NPN Q1, whose collector is on PFC_OK (or RUN) of the L6563 and emitter on ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "L6668",
+     "note": "PWM controller; VREF pin 8, PFC_STOP pin 14",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2.2 kΩ"
+    },
+    {
+     "ref": "Q1",
+     "type": "npn",
+     "value": "BC547"
+    }
+   ],
+   "notes": [
+    "Q1's collector may go to RUN (pin 10) instead of PFC_OK (pin 7). With an L6599 the PFC_STOP pin (14) connects straight to PFC_OK or RUN with no parts."
+   ]
+  },
+  {
+   "id": "pwm-stop-link",
+   "title": "PWM_STOP stops a cascaded PWM or resonant controller (not latched)",
+   "page": 30,
+   "description": "An ON/OFF signal drives RUN; PWM_STOP connects straight to pin X of the downstream PWM or resonant controller, so pulling RUN below 0.52 V also stops that controller until RUN is released. Pin X for each controller is in the table of interface pins.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "PWM or resonant controller",
+     "note": "pin X: L5991/A 3 or 7, UC284x 1, UC384x 1, L6565 2 or 5, L6668 9 or 11, L6599 5 or 7",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "ON/OFF"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "pwm-latch-link",
+   "title": "PWM_LATCH latches off a cascaded PWM or resonant controller",
+   "page": 30,
+   "description": "PWM_LATCH connects straight to pin X of the downstream controller, so a PFC_OK latch-off (or, on the L6563, an inductor-saturation latch-off) also latches that controller off. Pin X for each controller is in the table of interface pins.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "PWM or resonant controller",
+     "note": "pin X: L5991/A 14, L6668 7, L6599 8",
+     "external": true
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "power-up-sequencing",
+   "title": "Power-up sequencing of the PWM controller (master PFC)",
+   "page": 30,
+   "description": "Starts the downstream PWM controller only once the PFC output (HV bus) has reached a set level. NPN Q1 (BC337) passes the supply rail to the PWM controller's supply pin X; its base is held at the VZ1 + VZ2 clamp, fed from the supply rail through R1. PNP Q2 (BC558C), with its base on the HV-bus divider, shorts that base node to ground while the bus is low. The same divider feeds PFC_OK. PWM_STOP pulls the VZ1-VZ2 junction low, removing the PWM controller's supply while RUN holds the L6563 off.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "PWM controller",
+     "note": "supply pin X: L5991/A 8+9, UC284x 7, UC384x 7, L6565 8, L6598 12",
+     "external": true
+    },
+    {
+     "ref": "Q1",
+     "type": "npn",
+     "value": "BC337"
+    },
+    {
+     "ref": "Q2",
+     "type": "pnp",
+     "value": "BC558C"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "HV bus divider, upper; value not given"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "HV bus divider, middle; value not given"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "HV bus divider, lower; value not given"
+    },
+    {
+     "ref": "DZ1",
+     "type": "zener",
+     "value": "VZ1",
+     "note": "VZ1 < UVLO of the PWM controller"
+    },
+    {
+     "ref": "DZ2",
+     "type": "zener",
+     "value": "VZ2",
+     "note": "VZ2 < 9 V; VZ1 + VZ2 < Vccmax of the PWM controller"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Supply rail"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "HV bus"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "ON/OFF"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "brownout-divider",
+   "title": "Brownout protection from a mains divider",
+   "page": 31,
+   "description": "A resistor divider from the AC mains, filtered by a capacitor, feeds RUN; the IC stops below 0.52 V and restarts above 0.6 V. This arrangement suits any design.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "value not given"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "value not given"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "electrolytic, value not given"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "AC mains"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "brownout-vff",
+   "title": "Brownout protection from VFF",
+   "page": 31,
+   "description": "RUN tied straight to VFF, so the feedforward peak detector (RFF, CFF) sets the brownout level. Usable when the multiplier bias and the RFF·CFF time constant fit the required brownout level and hold-up time.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "RFF",
+     "type": "resistor",
+     "value": "",
+     "note": "value set by the feedforward design"
+    },
+    {
+     "ref": "CFF",
+     "type": "capacitor",
+     "value": "",
+     "note": "value set by the feedforward design"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "zcd-no-aux",
+   "title": "Demagnetization sensing without an auxiliary winding",
+   "page": 36,
+   "description": "A boost stage whose inductor has no auxiliary winding: ZCD takes the drain voltage through RZCD in series with CZCD.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "input capacitor"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "",
+     "note": "boost inductor"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "",
+     "note": "boost diode"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "power MOSFET"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor"
+    },
+    {
+     "ref": "RL",
+     "type": "load",
+     "value": "Rload"
+    },
+    {
+     "ref": "RZCD",
+     "type": "resistor",
+     "value": "RZCD"
+    },
+    {
+     "ref": "CZCD",
+     "type": "capacitor",
+     "value": "CZCD"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Vinac"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "Vinac return"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "Vout"
+    }
+   ],
+   "notes": [
+    "ZCD is pin 11 (misprinted 9)."
+   ]
+  },
+  {
+   "id": "fast-turn-off",
+   "title": "Faster turn-off for a large MOSFET",
+   "page": 36,
+   "description": "An enhanced turn-off for driving a big MOSFET. GD drives the gate through a series resistor; a PNP (BC327) has its base on GD, emitter on the gate and collector at the source. Rs is the current-sense resistor.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "L6563 or L6563A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "gate resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "BC327"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "",
+     "note": "power MOSFET Q"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "Rs",
+     "note": "current sense"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "drain, to the boost inductor"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "Vcc"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Multiplier output",
+   "expr": "VCS = KM · VMULT · (VCOMP - 2.5) / VVFF²",
+   "where": {
+    "KM": "multiplier gain, 0.45 typ",
+    "VMULT": "MULT pin voltage",
+    "VCOMP": "error amplifier output",
+    "VVFF": "VFF pin voltage"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Output divider currents",
+   "expr": "IR2 = IR1 = 2.5 / R2 = (VO - 2.5) / R1",
+   "where": {
+    "R1": "upper output divider resistor",
+    "R2": "lower output divider resistor",
+    "VO": "regulated output voltage"
+   },
+   "note": "INV sits at the 2.5 V reference in steady state.",
+   "page": 16
+  },
+  {
+   "name": "Upper resistor current during an output step",
+   "expr": "I'R1 = (VO - 2.5 + ΔVO) / R1",
+   "where": {
+    "ΔVO": "sudden change of the output voltage"
+   },
+   "note": "The excess ΔIR1 = ΔVO / R1 flows into COMP through the compensation network.",
+   "page": 16
+  },
+  {
+   "name": "Dynamic OVP threshold",
+   "expr": "ΔVO = R1 · 20 · 10^-6",
+   "where": {
+    "ΔVO": "output overvoltage that trips the dynamic OVP",
+    "R1": "upper output divider resistor, Ω"
+   },
+   "note": "Example: VO = 400 V, ΔVO = 40 V gives R1 = 2 MΩ and R2 = 12.58 kΩ; the 15 % tolerance of IOVP puts ±6 V (±1.36 %) on the trip level.",
+   "page": 16
+  },
+  {
+   "name": "PFC_OK divider",
+   "expr": "R4 = R3 · 2.5 / (Vox - 2.5)",
+   "where": {
+    "R3": "upper PFC_OK divider resistor",
+    "R4": "lower PFC_OK divider resistor",
+    "Vox": "output voltage at which PFC_OK reaches 2.5 V and latches off"
+   },
+   "note": "Example: VO = 400 V, Vox = 475 V, R3 = 3 MΩ gives R4 = 15.87 kΩ.",
+   "page": 18
+  },
+  {
+   "name": "Feedforward ripple",
+   "expr": "ΔVFF = 2 · VMULTpk / (1 + 4 · fL · RFF · CFF)",
+   "where": {
+    "ΔVFF": "peak-to-peak triangular ripple at twice line frequency on CFF",
+    "VMULTpk": "peak MULT voltage",
+    "fL": "line frequency"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Third harmonic from feedforward ripple",
+   "expr": "D3% = 100 / (2π · fL · RFF · CFF)",
+   "where": {
+    "D3%": "third harmonic distortion of the input current, percent"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Tracking boost: input voltage at the output limit",
+   "expr": "Vinclamp = (Vox - Vo1) / (Vo2 - Vo1) · Vin2 - (Vox - Vo2) / (Vo2 - Vo1) · Vin1",
+   "where": {
+    "Vin1": "minimum specified RMS input",
+    "Vin2": "maximum specified RMS input",
+    "Vo1": "output at Vin1",
+    "Vo2": "output at Vin2",
+    "Vox": "absolute upper limit of the regulated output"
+   },
+   "note": "Choose Vinx with Vin2 ≤ Vinx < Vinclamp; Vinx = Vinclamp lets the output reach Vox.",
+   "page": 24
+  },
+  {
+   "name": "Tracking boost: MULT divider ratio",
+   "expr": "k = 3 / (√2 · Vinx)",
+   "where": {
+    "k": "MULT divider ratio",
+    "Vinx": "RMS input above which the output stops tracking"
+   },
+   "note": "The MULT peak at Vin1 must exceed 0.65 V. Worked example: k = 7.857 x 10^-3 for Vinx = 270 V.",
+   "page": 24
+  },
+  {
+   "name": "Tracking boost: upper output resistor",
+   "expr": "R1 = ΔVo / 20 · 10^6",
+   "where": {
+    "ΔVo": "OVP threshold, V"
+   },
+   "note": "",
+   "page": 24
+  },
+  {
+   "name": "Tracking boost: lower output resistor",
+   "expr": "R2 = 2.5 · R1 · (Vin2 - Vin1) / ((Vo1 - 2.5) · Vin2 - (Vo2 - 2.5) · Vin1)",
+   "where": {},
+   "note": "",
+   "page": 24
+  },
+  {
+   "name": "Tracking boost: TBO resistor",
+   "expr": "RT = √2 · k · R1 · (Vin2 - Vin1) / (Vo2 - Vo1)",
+   "where": {
+    "RT": "resistor from TBO to GND"
+   },
+   "note": "",
+   "page": 24
+  },
+  {
+   "name": "Tracking boost: maximum TBO current",
+   "expr": "ITBOmax = 3 / RT ≤ 0.25 · 10^-3",
+   "where": {
+    "ITBOmax": "TBO source current at the 3 V clamp, A"
+   },
+   "note": "",
+   "page": 25
+  },
+  {
+   "name": "Tracking boost: output against input",
+   "expr": "Vo = 2.5 · (1 + R1 / R2) + VTBO · R1 / RT, with VTBO = min(√2 · k · Vin, 3 V)",
+   "where": {
+    "Vin": "RMS input voltage",
+    "VTBO": "TBO voltage, equal to the MULT peak up to the 3 V clamp"
+   },
+   "note": "Worked example (Vin1 = 88 V, Vin2 = 264 V, Vo1 = 200 V, Vo2 = 385 V, Vox = 400 V, ΔVo = 40 V): Vinclamp = 278.27 V, Vinx chosen 270 V, R1 = 2 MΩ, R2 = 47.62 kΩ, RT = 21.14 kΩ, ITBOmax = 0.142 mA; Vo(Vin1) = 200 V, Vo(Vin2) = 385 V, Vo(Vinx) = 391.307 V.",
+   "page": 26
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Control method",
+   "page": 3,
+   "text": "Current-mode PFC controller for transition mode (TM), built on a standard TM core with additions. A linear multiplier plus a circuit that reduces crossover distortion keeps THD low across wide mains and load ranges. The output is regulated by a voltage-mode error amplifier against a 1.5 % reference (TJ = 25 °C); 1/V² line feedforward improves loop stability and response to line steps. The output stage can also be run with ST's fixed-off-time (FOT) control. It is aimed at EN61000-3-2 compliant supplies above 350 W."
+  },
+  {
+   "topic": "L6563 against L6563A",
+   "page": 3,
+   "text": "The only difference: the L6563 has the inductor saturation protection on CS (the 1.7 V latch-off level), the L6563A does not, which suits designs that must tolerate some saturation."
+  },
+  {
+   "topic": "Supply and start-up",
+   "page": 7,
+   "text": "Turn-on at 12 V typ, turn-off at 9.5 V typ, operating range after turn-on 10.3 to 22 V; an internal zener limits VCC near 25 V at 20 mA. Before start-up the IC draws at most 90 µA, running at most 5 mA quiescent. During UVLO the gate driver is actively pulled down. The start timer period is 150 µs typ."
+  },
+  {
+   "topic": "Two-step overvoltage protection",
+   "page": 16,
+   "text": "An output step forces extra current ΔVO/R1 through the compensation network into COMP. At about 18 µA the multiplier output is pulled down to reduce input power; above 20 µA (dynamic OVP) the switch stays off until the current falls to roughly 5 µA. If the overvoltage lasts, for example with no load, the error amplifier saturates low and the static OVP comparator (2.15 V on COMP) holds the switch off until the output returns near regulation. The trip level depends only on R1, the regulated level on the R1/R2 ratio. Either OVP lowers quiescent consumption to spare the Vcc capacitor."
+  },
+  {
+   "topic": "Feedback failure protection",
+   "page": 18,
+   "text": "The normal OVP cannot act if R1 opens, since the loop then loses the output reading and runs at maximum on-time. PFC_OK, fed by a separate divider (R3 upper, R4 lower), set to reach 2.5 V above the worst-case transient output, stops gate drive at once, shuts the IC down below 250 µA and latches while Vcc stays above UVLO; PWM_LATCH goes high (open source, 3.7 V minimum at 0.5 mA) to latch off the downstream PWM controller. Restart needs the input power removed so both controllers drop below UVLO. A shorted or open divider resistor or a floating PFC_OK pin also shuts the IC down. Below 0.2 V PFC_OK disables the IC without latching (below 1 mA, PWM_STOP and PWM_LATCH stay open); it restarts above 0.26 V."
+  },
+  {
+   "topic": "Voltage feedforward",
+   "page": 18,
+   "text": "PFC power-stage gain, and so crossover frequency, scales with the square of the RMS line, for example 20 Hz at 264 Vac becomes about 4 Hz at 88 Vac. A squarer-divider (1/V²) fed with a voltage proportional to the line RMS makes the multiplier output inversely proportional to line, keeping loop gain constant. CFF and RFF on VFF complete an internal peak detector holding the MULT peak: a line rise charges CFF quickly through the internal diode, a line fall discharges it with time constant RFF·CFF, typically in the hundreds of ms. Too short a time constant adds 2·fL ripple and THD; too long gives output overshoot and undershoot on line changes. Below 0.5 V on VFF the multiplier output no longer rises, which limits power in brownout. VFF must never be left floating or grounded directly."
+  },
+  {
+   "topic": "THD optimizer",
+   "page": 21,
+   "text": "Near the line zero crossings the chip adds a positive offset to the multiplier output, lengthening the on-time where energy transfer is poor and fully discharging the filter capacitor after the bridge. The offset fades as the instantaneous line rises and is scaled by VFF: small at low line, larger at high line. Keeping the high-frequency capacitor after the bridge as small as EMI allows lets the optimizer work best."
+  },
+  {
+   "topic": "Tracking boost",
+   "page": 23,
+   "text": "A resistor RT from TBO to GND makes the output follow the RMS input instead of staying fixed. TBO carries the MULT peak; the current V(TBO)/RT is mirrored 1:1 and drawn from INV, so a higher line raises the output. TBO clamps at 3 V, which ends tracking above a chosen input (set by the MULT divider). Left open, TBO gives a fixed output. The design steps are the tracking boost equations; the TBO current must stay at or below 0.25 mA."
+  },
+  {
+   "topic": "Inductor saturation detection (L6563 only)",
+   "page": 27,
+   "text": "Hard saturation makes the current slope 50 to 100 times steeper, so within the sense delay the current can soar, drop the gate drive through the sense resistor and destroy the MOSFET in a few cycles. Even a sound inductor can saturate slightly when a PFC that was off at light load restarts at an unfavourable line phase. CS normally stays within 1.1 V; above 1.7 V a second comparator stops and latches the IC and drives PWM_LATCH high. Restart needs the input power cycled."
+  },
+  {
+   "topic": "Housekeeping interfaces",
+   "page": 28,
+   "text": "Three lines link the PFC to the downstream converter's controller. PWM_LATCH, open in normal running, goes high on a feedback failure or inductor saturation to latch the other controller off. PFC_OK's disable lets a DC-DC master switch the PFC off at light load, or the PFC supply can be cut; both need the DC-DC stage to start first and power both controllers. PWM_STOP, an open collector paired with RUN, goes low when RUN falls below 0.52 V, for systems where the PFC is master: tied to the other controller's error amplifier output or soft-start pin it holds that converter off. Using soft-start also delays the DC-DC start, which assumes that controller's UVLO thresholds are above the L6563's. Otherwise the power-up sequencing circuit (two zeners, BC337 and BC558C) starts the DC-DC controller when the PFC output reaches a set level, with VZ1 below that controller's UVLO, VZ2 below 9 V and VZ1 + VZ2 below its Vcc maximum."
+  },
+  {
+   "topic": "Brownout",
+   "page": 30,
+   "text": "RUN and PWM_STOP with their hysteresis give brownout protection in master-PFC systems: a non-latched shutdown on mains undervoltage, which avoids RMS-current overheating, open-loop operation followed by an abrupt return of the line, and spurious restarts during power-down."
+  },
+  {
+   "topic": "Gate driver",
+   "page": 3,
+   "text": "Totem-pole output rated 600 mA source and 800 mA sink, for MOSFETs or IGBTs, with its high level clamped at about 12 V. For a large MOSFET a PNP across gate and source can speed turn-off."
+  },
+  {
+   "topic": "EVAL6563-80W layout",
+   "page": 32,
+   "text": "The demonstration board measures 64 x 94 mm."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SO-14",
+   "page": 37,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "1.35",
+     "",
+     "1.75"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "",
+     "0.30"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "1.10",
+     "",
+     "1.65"
+    ],
+    [
+     "B",
+     "lead width",
+     "0.33",
+     "",
+     "0.51"
+    ],
+    [
+     "C",
+     "lead thickness",
+     "0.19",
+     "",
+     "0.25"
+    ],
+    [
+     "D (1)",
+     "body length",
+     "8.55",
+     "",
+     "8.75"
+    ],
+    [
+     "E",
+     "body width",
+     "3.80",
+     "",
+     "4.0"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "H",
+     "width over leads",
+     "5.8",
+     "",
+     "6.20"
+    ],
+    [
+     "h",
+     "corner chamfer (h x 45°)",
+     "0.25",
+     "",
+     "0.50"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "",
+     "1.27"
+    ],
+    [
+     "k",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "ddd",
+     "lead coplanarity",
+     "",
+     "",
+     "0.10"
+    ],
+    [
+     "",
+     "gauge plane height",
+     "",
+     "0.25",
+     ""
+    ]
+   ]
+  }
+ ]
+}

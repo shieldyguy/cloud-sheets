@@ -1,0 +1,2455 @@
+{
+ "sheet": 1,
+ "name": "ATM90E26-YU-R",
+ "kind": "current_monitor",
+ "manufacturer": "Microchip (Atmel)",
+ "title": "Single-phase wide-span energy metering IC (M90E26)",
+ "source": {
+  "revision": "Atmel-46002B, 11/2014",
+  "pages": 60
+ },
+ "summary": "The M90E26 meters active and reactive energy for single-phase two-wire, three-wire and anti-tamper meters, and also measures rms voltage and current, power, power factor, phase angle and line frequency. It samples one voltage and two currents (L line by shunt or CT with gain up to 24, N line by CT) on three ADCs, outputs energy as CF1/CF2 pulses or in clear-on-read registers, and talks to a host over SPI or UART. It runs from one 3.3 V supply with an 8.192 MHz crystal, in a 28-pin SSOP.",
+ "key_figures": [
+  [
+   "Active energy accuracy",
+   "0.1 % over 5000:1"
+  ],
+  [
+   "Reactive energy accuracy",
+   "0.2 % over 5000:1"
+  ],
+  [
+   "Supply",
+   "2.8 V to 3.6 V (accuracy 3.0 V to 3.6 V)"
+  ],
+  [
+   "Supply current",
+   "3.4 mA analog + 2.4 mA digital typ"
+  ],
+  [
+   "L line input",
+   "5 µVrms to 25 mVrms at gain 24"
+  ],
+  [
+   "Reference",
+   "1.26 V, ±15 ppm/°C typ"
+  ],
+  [
+   "Interface",
+   "SPI (3- or 4-wire) or UART 2400/9600"
+  ],
+  [
+   "Temperature",
+   "-40 °C to +85 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 57,
+  "columns": [
+   "part number",
+   "package",
+   "carrier",
+   "temperature range"
+  ],
+  "rows": [
+   [
+    "ATM90E26-YU-R",
+    "SSOP28",
+    "Tape&Reel",
+    "Industry (-40°C to +85°C)"
+   ],
+   [
+    "ATM90E26-YU-B",
+    "SSOP28",
+    "Tube",
+    "Industry (-40°C to +85°C)"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "SSOP28",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "MMD1",
+     "type": "digital in (LVTTL)",
+     "function": "Metering-mode select, high bit; with MMD0 picks anti-tampering (00), fixed L line (01), L+N sum (10) or register-chosen line (11)."
+    },
+    {
+     "pin": "2",
+     "name": "DGND",
+     "type": "ground",
+     "function": "Ground for the digital circuitry."
+    },
+    {
+     "pin": "3",
+     "name": "DVDD",
+     "type": "power in",
+     "function": "Supply for the digital circuitry; decouple with 10 µF electrolytic plus 0.1 µF."
+    },
+    {
+     "pin": "4",
+     "name": "Reset",
+     "type": "digital in (LVTTL)",
+     "function": "Active-low hardware reset. Give it a 0.1 µF capacitor to ground, or drive it from a microcontroller output."
+    },
+    {
+     "pin": "5",
+     "name": "AVDD",
+     "type": "power in",
+     "function": "Supply for the analog circuitry; decouple with 0.1 µF."
+    },
+    {
+     "pin": "6",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground (also pin 14)."
+    },
+    {
+     "pin": "7",
+     "name": "I2P",
+     "type": "analog in",
+     "function": "N line current input, positive side of the differential pair; 120 µVrms to 600 mVrms at gain 1."
+    },
+    {
+     "pin": "8",
+     "name": "I2N",
+     "type": "analog in",
+     "function": "N line current input, negative side of the differential pair."
+    },
+    {
+     "pin": "9",
+     "name": "Resv_low",
+     "type": "digital in (LVTTL)",
+     "function": "Reserved; tie to ground in normal use."
+    },
+    {
+     "pin": "10",
+     "name": "I1P",
+     "type": "analog in",
+     "function": "L line current input, positive side of the differential pair; 5 µVrms to 25 mVrms at gain 24."
+    },
+    {
+     "pin": "11",
+     "name": "I1N",
+     "type": "analog in",
+     "function": "L line current input, negative side of the differential pair."
+    },
+    {
+     "pin": "12",
+     "name": "USEL",
+     "type": "digital in (LVTTL)",
+     "function": "Host interface select: high gives UART, low gives SPI. Hold it fixed once out of reset."
+    },
+    {
+     "pin": "13",
+     "name": "Vref",
+     "type": "analog out",
+     "function": "On-chip reference output; decouple with 1 µF in parallel with 1 nF."
+    },
+    {
+     "pin": "14",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground (also pin 6)."
+    },
+    {
+     "pin": "15",
+     "name": "VN",
+     "type": "analog in",
+     "function": "Voltage input, negative side of the differential pair."
+    },
+    {
+     "pin": "16",
+     "name": "VP",
+     "type": "analog in",
+     "function": "Voltage input, positive side of the differential pair; 120 µVrms to 600 mVrms."
+    },
+    {
+     "pin": "17",
+     "name": "WarnOut",
+     "type": "digital out (LVTTL)",
+     "function": "Fatal-error flag: goes active on a calibration checksum fault or, when enabled, a voltage sag."
+    },
+    {
+     "pin": "18",
+     "name": "CF1",
+     "type": "digital out (LVTTL)",
+     "function": "Active-energy pulse output."
+    },
+    {
+     "pin": "19",
+     "name": "CF2",
+     "type": "digital out (LVTTL)",
+     "function": "Reactive-energy pulse output."
+    },
+    {
+     "pin": "20",
+     "name": "IRQ",
+     "type": "digital out (LVTTL)",
+     "function": "Interrupt line; active while any event bit in SysStatus (01H) is set, released when none is."
+    },
+    {
+     "pin": "21",
+     "name": "ZX",
+     "type": "digital out (LVTTL)",
+     "function": "Voltage zero-crossing output; positive, negative or both crossings chosen by Zxcon[1:0] in MMode (2BH)."
+    },
+    {
+     "pin": "22",
+     "name": "OSCI",
+     "type": "digital in (LVTTL)",
+     "function": "Crystal input. An 8.192 MHz crystal goes from OSCI to OSCO, with 12 pF from this pin to ground."
+    },
+    {
+     "pin": "23",
+     "name": "OSCO",
+     "type": "digital out (LVTTL)",
+     "function": "Crystal output, the other end of the 8.192 MHz crystal, with 12 pF from this pin to ground."
+    },
+    {
+     "pin": "24",
+     "name": "CS",
+     "type": "digital in (LVTTL)",
+     "function": "SPI chip select, active low. Four-wire SPI: take it low at the start of each access and hold it low throughout. Three-wire SPI: keep it low always. UART: tie it to VDD."
+    },
+    {
+     "pin": "25",
+     "name": "SCLK",
+     "type": "digital in (LVTTL)",
+     "function": "SPI clock: SDI is sampled on the rising edge, SDO changes on the falling edge. Tie to ground when the UART is used."
+    },
+    {
+     "pin": "26",
+     "name": "SDO/UTX",
+     "type": "digital out, tri-state (LVTTL)",
+     "function": "SPI data out, clocked out on the SCLK falling edge; in UART mode the transmit line, which wants a 10 kΩ pull-up to VDD."
+    },
+    {
+     "pin": "27",
+     "name": "SDI/URX",
+     "type": "digital in (LVTTL)",
+     "function": "SPI data and address in, sampled on the SCLK rising edge; in UART mode the receive line."
+    },
+    {
+     "pin": "28",
+     "name": "MMD0",
+     "type": "digital in (LVTTL)",
+     "function": "Metering-mode select, low bit; see MMD1."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Active energy metering error",
+   "page": 10,
+   "conditions": "Shunt 250 µΩ, or CT 1000:1 with 6 Ω burden",
+   "columns": [
+    "current",
+    "power factor",
+    "error (%)"
+   ],
+   "rows": [
+    [
+     "20mA ≤ I < 50mA",
+     "1.0",
+     "±0.2"
+    ],
+    [
+     "50mA ≤ I ≤ 100A",
+     "1.0",
+     "±0.1"
+    ],
+    [
+     "50mA ≤ I < 100mA",
+     "0.5 (Inductive) / 0.8 (Capacitive)",
+     "±0.2"
+    ],
+    [
+     "100mA ≤ I ≤ 100A",
+     "0.5 (Inductive) / 0.8 (Capacitive)",
+     "±0.1"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Reactive energy metering error",
+   "page": 10,
+   "conditions": "Shunt 250 µΩ, or CT 1000:1 with 6 Ω burden",
+   "columns": [
+    "current",
+    "sinφ (inductive or capacitive)",
+    "error (%)"
+   ],
+   "rows": [
+    [
+     "20mA ≤ I < 50mA",
+     "1.0",
+     "±0.4"
+    ],
+    [
+     "50mA ≤ I ≤ 100A",
+     "1.0",
+     "±0.2"
+    ],
+    [
+     "50mA ≤ I < 100mA",
+     "0.5",
+     "±0.4"
+    ],
+    [
+     "100mA ≤ I ≤ 100A",
+     "0.5",
+     "±0.2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Startup and no-load threshold registers",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "threshold",
+    "register"
+   ],
+   "rows": [
+    [
+     "Active startup power",
+     "PStartTh, 27H"
+    ],
+    [
+     "Active no-load power",
+     "PNolTh, 28H"
+    ],
+    [
+     "Reactive startup power",
+     "QStartTh, 29H"
+    ],
+    [
+     "Reactive no-load power",
+     "QNolTh, 2AH"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Energy registers",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "energy",
+    "register"
+   ],
+   "rows": [
+    [
+     "Forward active",
+     "APenergy, 40H"
+    ],
+    [
+     "Reverse active",
+     "ANenergy, 41H"
+    ],
+    [
+     "Absolute active",
+     "ATenergy, 42H"
+    ],
+    [
+     "Forward (inductive) reactive",
+     "RPenergy, 43H"
+    ],
+    [
+     "Reverse (capacitive) reactive",
+     "RNenergy, 44H"
+    ],
+    [
+     "Absolute reactive",
+     "RTenergy, 45H"
+    ]
+   ],
+   "notes": [
+    "Reading an energy register clears it. One LSB is 0.1 of a CF pulse."
+   ]
+  },
+  {
+   "title": "Metering mode",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "MMD1",
+    "MMD0",
+    "metering mode",
+    "CF1/CF2 output"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Anti-tampering (larger power)",
+     "energy of whichever line is larger"
+    ],
+    [
+     "0",
+     "1",
+     "L line (fixed L line)",
+     "L line energy always"
+    ],
+    [
+     "1",
+     "0",
+     "L+N (single-phase three-wire)",
+     "arithmetic sum of L and N line energy"
+    ],
+    [
+     "1",
+     "1",
+     "Flexible (line set by LNSel, MMode 2BH)",
+     "energy of the selected line"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Measurement format",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "measurement",
+    "fiducial value (FV)",
+    "format",
+    "range",
+    "comment"
+   ],
+   "rows": [
+    [
+     "Voltage rms",
+     "Un",
+     "XXX.XX",
+     "0~655.35V",
+     ""
+    ],
+    [
+     "Current rms (notes 1, 2)",
+     "Imax as 4Ib",
+     "XX.XXX",
+     "0~65.535A",
+     ""
+    ],
+    [
+     "Active/reactive power (note 1)",
+     "maximum power as Un*4Ib",
+     "XX.XXX",
+     "-32.768~+32.767 kW/kvar",
+     "two's complement, MSB is sign"
+    ],
+    [
+     "Apparent power (note 1)",
+     "Un*4Ib",
+     "XX.XXX",
+     "0~+32.767 kVA",
+     "two's complement, MSB always 0"
+    ],
+    [
+     "Frequency",
+     "fn",
+     "XX.XX",
+     "45.00~65.00 Hz",
+     ""
+    ],
+    [
+     "Power factor (note 3)",
+     "1.000",
+     "X.XXX",
+     "-1.000~+1.000",
+     "signed, MSB is sign"
+    ],
+    [
+     "Phase angle (note 4)",
+     "180°",
+     "XXX.X",
+     "-180°~+180°",
+     "signed, MSB is sign"
+    ]
+   ],
+   "notes": [
+    "1: Every register is 16 bits. Currents or powers above these ranges are scaled in the MCU, for instance by calibrating the register to half the real value and doubling the reading; power scales by the same factor as current.",
+    "2: Accuracy is not guaranteed below 15 mA; at a 5 A fiducial current and 0.5 % fiducial accuracy the tolerance is 25 mA.",
+    "3: Power factor is active power over apparent power.",
+    "4: Phase angle is taken from the voltage and current zero crossings, timed at 256 kHz; small currents give no assured precision."
+   ]
+  },
+  {
+   "title": "Read/write result, four-wire SPI",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "operation",
+    "timeout",
+    "SCLK cycles (note 1)",
+    "read/write status",
+    "LastData update"
+   ],
+   "rows": [
+    [
+     "Read",
+     "-",
+     ">=24",
+     "Normal Read",
+     "Yes"
+    ],
+    [
+     "Read",
+     "-",
+     "<24",
+     "Partial Read",
+     "No"
+    ],
+    [
+     "Write",
+     "No",
+     "=24",
+     "Normal Write",
+     "Yes"
+    ],
+    [
+     "Write",
+     "No",
+     "!=24",
+     "No Write",
+     "No"
+    ],
+    [
+     "Write",
+     "Yes",
+     "-",
+     "No Write",
+     "No"
+    ]
+   ],
+   "notes": [
+    "1: Cycles counted while CS is low, or up to the timeout if one occurs.",
+    "'-' is don't care."
+   ]
+  },
+  {
+   "title": "Read/write result, three-wire SPI",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "operation",
+    "timeout",
+    "SCLK cycles (note 1)",
+    "read/write status",
+    "LastData update"
+   ],
+   "rows": [
+    [
+     "Read",
+     "No",
+     ">=24 (note 2)",
+     "Normal Read",
+     "Yes"
+    ],
+    [
+     "Read",
+     "Timeout after 24 cycles",
+     ">24",
+     "Normal Read",
+     "Yes"
+    ],
+    [
+     "Read",
+     "Timeout before 24 cycles",
+     "- (note 3)",
+     "Partial Read",
+     "No"
+    ],
+    [
+     "Read",
+     "Timeout at 24 cycles",
+     "=24",
+     "Normal Read",
+     "Yes"
+    ],
+    [
+     "Write",
+     "No",
+     "=24",
+     "Normal Write",
+     "Yes"
+    ],
+    [
+     "Write",
+     "No",
+     "!=24",
+     "No Write",
+     "No"
+    ],
+    [
+     "Write",
+     "Yes",
+     "-",
+     "No Write",
+     "No"
+    ]
+   ],
+   "notes": [
+    "1: Cycles counted between two starts, or up to the timeout if one occurs.",
+    "2: Without a timeout fewer than 24 cycles cannot happen: the opening clocks of the following access are counted into this one, and the data is corrupted.",
+    "3: '-' is don't care."
+   ]
+  },
+  {
+   "title": "Register map",
+   "page": 21,
+   "conditions": "All registers 16 bits",
+   "columns": [
+    "address",
+    "name",
+    "group",
+    "access",
+    "default",
+    "function"
+   ],
+   "rows": [
+    [
+     "00H",
+     "SoftReset",
+     "Status and special",
+     "W",
+     "0000H",
+     "Software reset"
+    ],
+    [
+     "01H",
+     "SysStatus",
+     "Status and special",
+     "R/C",
+     "0000H",
+     "System status"
+    ],
+    [
+     "02H",
+     "FuncEn",
+     "Status and special",
+     "R/W",
+     "000CH",
+     "Function enable"
+    ],
+    [
+     "03H",
+     "SagTh",
+     "Status and special",
+     "R/W",
+     "1D6AH",
+     "Voltage sag threshold"
+    ],
+    [
+     "04H",
+     "SmallPMod",
+     "Status and special",
+     "R/W",
+     "0000H",
+     "Small-power mode"
+    ],
+    [
+     "06H",
+     "LastData",
+     "Status and special",
+     "R",
+     "0000H",
+     "Last SPI/UART read or write value"
+    ],
+    [
+     "08H",
+     "LSB",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "Low 16 bits of RMS/power readings"
+    ],
+    [
+     "20H",
+     "CalStart",
+     "Metering calibration and configuration",
+     "R/W",
+     "6886H",
+     "Metering calibration start command"
+    ],
+    [
+     "21H",
+     "PLconstH",
+     "Metering calibration and configuration",
+     "R/W",
+     "0015H",
+     "PL_Constant high word"
+    ],
+    [
+     "22H",
+     "PLconstL",
+     "Metering calibration and configuration",
+     "R/W",
+     "D174H",
+     "PL_Constant low word"
+    ],
+    [
+     "23H",
+     "Lgain",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "L line calibration gain"
+    ],
+    [
+     "24H",
+     "Lphi",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "L line calibration angle"
+    ],
+    [
+     "25H",
+     "Ngain",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "N line calibration gain"
+    ],
+    [
+     "26H",
+     "Nphi",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "N line calibration angle"
+    ],
+    [
+     "27H",
+     "PStartTh",
+     "Metering calibration and configuration",
+     "R/W",
+     "08BDH",
+     "Active startup power threshold"
+    ],
+    [
+     "28H",
+     "PNolTh",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "Active no-load power threshold"
+    ],
+    [
+     "29H",
+     "QStartTh",
+     "Metering calibration and configuration",
+     "R/W",
+     "0AECH",
+     "Reactive startup power threshold"
+    ],
+    [
+     "2AH",
+     "QNolTh",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "Reactive no-load power threshold"
+    ],
+    [
+     "2BH",
+     "MMode",
+     "Metering calibration and configuration",
+     "R/W",
+     "9422H",
+     "Metering mode configuration"
+    ],
+    [
+     "2CH",
+     "CS1",
+     "Metering calibration and configuration",
+     "R/W",
+     "0000H",
+     "Checksum 1 (over 21H-2BH)"
+    ],
+    [
+     "30H",
+     "AdjStart",
+     "Measurement calibration",
+     "R/W",
+     "6886H",
+     "Measurement calibration start command"
+    ],
+    [
+     "31H",
+     "Ugain",
+     "Measurement calibration",
+     "R/W",
+     "6720H",
+     "Voltage rms gain"
+    ],
+    [
+     "32H",
+     "IgainL",
+     "Measurement calibration",
+     "R/W",
+     "7A13H",
+     "L line current rms gain"
+    ],
+    [
+     "33H",
+     "IgainN",
+     "Measurement calibration",
+     "R/W",
+     "7530H",
+     "N line current rms gain"
+    ],
+    [
+     "34H",
+     "Uoffset",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "Voltage offset"
+    ],
+    [
+     "35H",
+     "IoffsetL",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "L line current offset"
+    ],
+    [
+     "36H",
+     "IoffsetN",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "N line current offset"
+    ],
+    [
+     "37H",
+     "PoffsetL",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "L line active power offset"
+    ],
+    [
+     "38H",
+     "QoffsetL",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "L line reactive power offset"
+    ],
+    [
+     "39H",
+     "PoffsetN",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "N line active power offset"
+    ],
+    [
+     "3AH",
+     "QoffsetN",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "N line reactive power offset"
+    ],
+    [
+     "3BH",
+     "CS2",
+     "Measurement calibration",
+     "R/W",
+     "0000H",
+     "Checksum 2 (over 31H-3AH)"
+    ],
+    [
+     "40H",
+     "APenergy",
+     "Energy",
+     "R/C",
+     "0000H",
+     "Forward active energy"
+    ],
+    [
+     "41H",
+     "ANenergy",
+     "Energy",
+     "R/C",
+     "0000H",
+     "Reverse active energy"
+    ],
+    [
+     "42H",
+     "ATenergy",
+     "Energy",
+     "R/C",
+     "0000H",
+     "Absolute active energy"
+    ],
+    [
+     "43H",
+     "RPenergy",
+     "Energy",
+     "R/C",
+     "0000H",
+     "Forward (inductive) reactive energy"
+    ],
+    [
+     "44H",
+     "RNenergy",
+     "Energy",
+     "R/C",
+     "0000H",
+     "Reverse (capacitive) reactive energy"
+    ],
+    [
+     "45H",
+     "RTenergy",
+     "Energy",
+     "R/C",
+     "0000H",
+     "Absolute reactive energy"
+    ],
+    [
+     "46H",
+     "EnStatus",
+     "Energy",
+     "R",
+     "C800H",
+     "Metering status"
+    ],
+    [
+     "48H",
+     "Irms",
+     "Measurement",
+     "R",
+     "0000H",
+     "L line current rms, XX.XXX A"
+    ],
+    [
+     "49H",
+     "Urms",
+     "Measurement",
+     "R",
+     "0000H",
+     "Voltage rms, XXX.XX V"
+    ],
+    [
+     "4AH",
+     "Pmean",
+     "Measurement",
+     "R",
+     "0000H",
+     "L line mean active power, XX.XXX kW, signed"
+    ],
+    [
+     "4BH",
+     "Qmean",
+     "Measurement",
+     "R",
+     "0000H",
+     "L line mean reactive power, XX.XXX kvar, signed"
+    ],
+    [
+     "4CH",
+     "Freq",
+     "Measurement",
+     "R",
+     "0000H",
+     "Voltage frequency, XX.XX Hz (1388H = 50.00 Hz)"
+    ],
+    [
+     "4DH",
+     "PowerF",
+     "Measurement",
+     "R",
+     "0000H",
+     "L line power factor, X.XXX, sign-magnitude (03E8H = 1.000, 83E8H = -1.000)"
+    ],
+    [
+     "4EH",
+     "Pangle",
+     "Measurement",
+     "R",
+     "0000H",
+     "Voltage to L line current angle, XXX.X degrees, sign-magnitude"
+    ],
+    [
+     "4FH",
+     "Smean",
+     "Measurement",
+     "R",
+     "0000H",
+     "L line mean apparent power, XX.XXX kVA"
+    ],
+    [
+     "68H",
+     "Irms2",
+     "Measurement",
+     "R",
+     "0000H",
+     "N line current rms, XX.XXX A"
+    ],
+    [
+     "6AH",
+     "Pmean2",
+     "Measurement",
+     "R",
+     "0000H",
+     "N line mean active power, XX.XXX kW, signed"
+    ],
+    [
+     "6BH",
+     "Qmean2",
+     "Measurement",
+     "R",
+     "0000H",
+     "N line mean reactive power, XX.XXX kvar, signed"
+    ],
+    [
+     "6DH",
+     "PowerF2",
+     "Measurement",
+     "R",
+     "0000H",
+     "N line power factor, X.XXX, sign-magnitude"
+    ],
+    [
+     "6EH",
+     "Pangle2",
+     "Measurement",
+     "R",
+     "0000H",
+     "Voltage to N line current angle, XXX.X degrees, sign-magnitude"
+    ],
+    [
+     "6FH",
+     "Smean2",
+     "Measurement",
+     "R",
+     "0000H",
+     "N line mean apparent power, XX.XXX kVA"
+    ]
+   ],
+   "notes": [
+    "Access: W write only, R read only, R/W read and write, R/C read and cleared by the read.",
+    "LSB (08H) carries R/W in the address list and Read in its own register entry. Its bits 7:0 always read 0.",
+    "Reading an unused address returns 0; writing one has no effect.",
+    "Ugain (31H) bit 15 must be 0.",
+    "PoffsetL, QoffsetL, PoffsetN and QoffsetN (37H-3AH) are two's complement, MSB is the sign."
+   ]
+  },
+  {
+   "title": "Command codes",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "register",
+    "value",
+    "effect"
+   ],
+   "rows": [
+    [
+     "SoftReset (00H)",
+     "789AH",
+     "software reset; any other value does nothing"
+    ],
+    [
+     "SmallPMod (04H)",
+     "A987H",
+     "small-power mode (used for power offset calibration); any other value is normal mode"
+    ],
+    [
+     "CalStart (20H)",
+     "6886H",
+     "power-on value; metering off"
+    ],
+    [
+     "CalStart (20H)",
+     "5678H",
+     "21H-2BH return to power-on values; metering and pulses run without checking CS1; no CalErr, WarnOut or IRQ"
+    ],
+    [
+     "CalStart (20H)",
+     "8765H",
+     "CS1 checked against 21H-2BH: if it matches, metering runs; if not, metering stops, CalErr is set and WarnOut and IRQ go active"
+    ],
+    [
+     "CalStart (20H)",
+     "other",
+     "metering off; CalErr set; WarnOut and IRQ active"
+    ],
+    [
+     "AdjStart (30H)",
+     "6886H",
+     "power-on value; no measurement"
+    ],
+    [
+     "AdjStart (30H)",
+     "5678H",
+     "31H-3AH return to power-on values; measurement runs without checking CS2; no AdjErr or IRQ"
+    ],
+    [
+     "AdjStart (30H)",
+     "8765H",
+     "CS2 checked against 31H-3AH: if it matches, measurement runs; if not, measurement stops, AdjErr is set and IRQ goes active"
+    ],
+    [
+     "AdjStart (30H)",
+     "other",
+     "no measurement; AdjErr set; IRQ active"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "SysStatus (01H) bits",
+   "page": 23,
+   "conditions": "Read/clear, default 0000H",
+   "columns": [
+    "bit",
+    "name",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "15-14",
+     "CalErr[1:0]",
+     "00: CS1 checksum good (default); 11: CS1 checksum error, WarnOut also active"
+    ],
+    [
+     "13-12",
+     "AdjErr[1:0]",
+     "00: CS2 checksum good (default); 11: CS2 checksum error"
+    ],
+    [
+     "11-8",
+     "-",
+     "reserved"
+    ],
+    [
+     "7",
+     "LNchange",
+     "1: the metering line (L or N) has changed; 0 default"
+    ],
+    [
+     "6",
+     "RevQchg",
+     "1: reactive energy direction has changed; 0 default; enabled by RevQEn"
+    ],
+    [
+     "5",
+     "RevPchg",
+     "1: active energy direction has changed; 0 default; enabled by RevPEn"
+    ],
+    [
+     "4-2",
+     "-",
+     "reserved"
+    ],
+    [
+     "1",
+     "SagWarn",
+     "1: voltage sag; 0 default; enabled by SagEn, and routed to WarnOut by SagWo"
+    ],
+    [
+     "0",
+     "-",
+     "reserved"
+    ]
+   ],
+   "notes": [
+    "Any of these events drives IRQ active.",
+    "RevQchq in the bit 6 description should read RevQchg."
+   ]
+  },
+  {
+   "title": "FuncEn (02H) bits",
+   "page": 24,
+   "conditions": "Read/write, default 000CH",
+   "columns": [
+    "bit",
+    "name",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "15-6",
+     "-",
+     "reserved"
+    ],
+    [
+     "5",
+     "SagEn",
+     "voltage sag interrupt: 0 off (default), 1 on"
+    ],
+    [
+     "4",
+     "SagWo",
+     "voltage sag on WarnOut: 0 off (default), 1 on"
+    ],
+    [
+     "3",
+     "RevQEn",
+     "reactive direction-change interrupt: 0 off, 1 on (default)"
+    ],
+    [
+     "2",
+     "RevPEn",
+     "active direction-change interrupt: 0 off, 1 on (default)"
+    ],
+    [
+     "1-0",
+     "-",
+     "reserved"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "MMode (2BH) bits",
+   "page": 31,
+   "conditions": "Read/write, default 9422H",
+   "columns": [
+    "bit",
+    "name",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "15-13",
+     "Lgain[2:0]",
+     "L line current gain: 1XX = 1, 000 = 4, 001 = 8, 010 = 16, 011 = 24; default 100"
+    ],
+    [
+     "12-11",
+     "Ngain[1:0]",
+     "N line current gain: 00 = 2, 01 = 4, 10 = 1 (default), 11 = 1"
+    ],
+    [
+     "10",
+     "LNSel",
+     "line metered in flexible mode: 0 N line, 1 L line (default)"
+    ],
+    [
+     "9-8",
+     "DisHPF[1:0]",
+     "high-pass filters after the ADCs, all channels: 00 HPF1 and HPF0 on (default), 01 HPF1 on and HPF0 off, 10 HPF1 off and HPF0 on, 11 both off"
+    ],
+    [
+     "7",
+     "Amod",
+     "CF1: 0 forward or reverse active pulses (default), 1 absolute active pulses"
+    ],
+    [
+     "6",
+     "Rmod",
+     "CF2: 0 forward (inductive) or reverse (capacitive) reactive pulses (default), 1 absolute reactive pulses"
+    ],
+    [
+     "5-4",
+     "Zxcon[1:0]",
+     "ZX output: 00 positive crossings, 01 negative crossings, 10 both (default), 11 off; ZX is high for 5 ms at each crossing"
+    ],
+    [
+     "3-0",
+     "Pthresh[3:0]",
+     "anti-tampering L/N power difference threshold; see the threshold table"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Anti-tampering threshold, Pthresh[3:0]",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "Pthresh[3:0]",
+    "threshold"
+   ],
+   "rows": [
+    [
+     "0000",
+     "12.5%"
+    ],
+    [
+     "0001",
+     "6.25%"
+    ],
+    [
+     "0010",
+     "3.125% (default)"
+    ],
+    [
+     "0011",
+     "1.5625%"
+    ],
+    [
+     "0100",
+     "1%"
+    ],
+    [
+     "0101",
+     "2%"
+    ],
+    [
+     "0110",
+     "3%"
+    ],
+    [
+     "0111",
+     "4%"
+    ],
+    [
+     "1000",
+     "5%"
+    ],
+    [
+     "1001",
+     "6%"
+    ],
+    [
+     "1010",
+     "7%"
+    ],
+    [
+     "1011",
+     "8%"
+    ],
+    [
+     "1100",
+     "9%"
+    ],
+    [
+     "1101",
+     "10%"
+    ],
+    [
+     "1110",
+     "11%"
+    ],
+    [
+     "1111",
+     "12%"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "EnStatus (46H) bits",
+   "page": 43,
+   "conditions": "Read, C800H after power-on",
+   "columns": [
+    "bit",
+    "name",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "15",
+     "Qnoload",
+     "1: reactive no-load state"
+    ],
+    [
+     "14",
+     "Pnoload",
+     "1: active no-load state"
+    ],
+    [
+     "13",
+     "RevQ",
+     "direction of the last CF2 pulse: 0 forward, 1 reverse; always 0 when CF2 is set to absolute"
+    ],
+    [
+     "12",
+     "RevP",
+     "direction of the last CF1 pulse: 0 forward, 1 reverse; always 0 when CF1 is set to absolute"
+    ],
+    [
+     "11",
+     "Lline",
+     "line in use in anti-tampering mode: 0 N line, 1 L line"
+    ],
+    [
+     "10-2",
+     "-",
+     "reserved"
+    ],
+    [
+     "1-0",
+     "LNMode[1:0]",
+     "copy of the MMD1/MMD0 pins: 00 anti-tampering, 01 L line, 10 L+N, 11 flexible"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Energy register example",
+   "page": 39,
+   "conditions": "Active energy; forward 12.34 and reverse 1.23 pulses at T0, then +0.005 forward (T0-T1), +0.004 reverse (T1-T2), +0.003 reverse (T2-T3)",
+   "columns": [
+    "pulse count",
+    "T0",
+    "T1",
+    "T2",
+    "T3"
+   ],
+   "rows": [
+    [
+     "Forward active",
+     "12.34",
+     "12.345",
+     "12.341",
+     "12.34"
+    ],
+    [
+     "Reverse active",
+     "1.23",
+     "1.23",
+     "1.23",
+     "1.232"
+    ],
+    [
+     "Absolute active",
+     "13.57",
+     "13.575",
+     "13.579",
+     "13.582"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 51,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "DC power supply rejection ratio (PSRR)",
+     "",
+     "VDD=3.3V±0.3V, 100Hz, I=5A, V=220V, L line shunt resistor 150μΩ, N line CT 1000:1, sampling resistor 4.8Ω",
+     "",
+     "",
+     "±0.1",
+     "%"
+    ],
+    [
+     "AC power supply rejection ratio (PSRR)",
+     "",
+     "VDD=3.3V superimposes 400mVrms, 100Hz sinusoidal signal, I=5A, V=220V, L line shunt resistor 150μΩ, N line CT 1000:1, sampling resistor 4.8Ω",
+     "",
+     "",
+     "±0.1",
+     "%"
+    ],
+    [
+     "Active energy error (dynamic range 5000:1)",
+     "",
+     "L line current gain is '24'; N line current gain is '1'",
+     "",
+     "",
+     "±0.1",
+     "%"
+    ],
+    [
+     "Measurement error",
+     "",
+     "",
+     "",
+     "",
+     "±0.5",
+     "%"
+    ],
+    [
+     "Sampling frequency",
+     "",
+     "",
+     "",
+     "8",
+     "",
+     "kHz"
+    ],
+    [
+     "Harmonic metering (active and reactive) bandwidth",
+     "",
+     "1% total energy metering error limit; V-harmonic <= 10% of fundamental; I-harmonic<=40% of fundamental",
+     "",
+     "1.1",
+     "",
+     "kHz"
+    ],
+    [
+     "Line frequency",
+     "",
+     "Active energy metering",
+     "",
+     "47.5-62.5",
+     "",
+     "Hz"
+    ],
+    [
+     "Line frequency",
+     "",
+     "Reactive energy metering",
+     "",
+     "47.5-52.5",
+     "",
+     "Hz"
+    ],
+    [
+     "L line current channel differential input",
+     "",
+     "PGA gain is '24'",
+     "5μ",
+     "",
+     "25m",
+     "Vrms"
+    ],
+    [
+     "L line current channel differential input",
+     "",
+     "PGA gain is '16'",
+     "7.5μ",
+     "",
+     "37.5m",
+     "Vrms"
+    ],
+    [
+     "L line current channel differential input",
+     "",
+     "PGA gain is '8'",
+     "15μ",
+     "",
+     "75m",
+     "Vrms"
+    ],
+    [
+     "L line current channel differential input",
+     "",
+     "PGA gain is '4'",
+     "30μ",
+     "",
+     "150m",
+     "Vrms"
+    ],
+    [
+     "L line current channel differential input",
+     "",
+     "PGA gain is '1'",
+     "120μ",
+     "",
+     "600m",
+     "Vrms"
+    ],
+    [
+     "N line current channel differential input",
+     "",
+     "DPGA gain is '1'",
+     "120μ",
+     "",
+     "600m",
+     "Vrms"
+    ],
+    [
+     "Voltage channel differential input",
+     "",
+     "DPGA gain is '1'",
+     "120μ",
+     "",
+     "600m",
+     "Vrms"
+    ],
+    [
+     "L line current channel input impedance",
+     "",
+     "single-ended impedance",
+     "",
+     "1",
+     "",
+     "kΩ"
+    ],
+    [
+     "N line current channel input impedance",
+     "",
+     "single-ended impedance",
+     "",
+     "400",
+     "",
+     "kΩ"
+    ],
+    [
+     "Voltage channel input impedance",
+     "",
+     "single-ended impedance",
+     "",
+     "400",
+     "",
+     "kΩ"
+    ],
+    [
+     "L line current channel DC offset",
+     "",
+     "PGA gain is '24'",
+     "",
+     "",
+     "10",
+     "mV"
+    ],
+    [
+     "N line current channel DC offset",
+     "",
+     "",
+     "",
+     "",
+     "10",
+     "mV"
+    ],
+    [
+     "Voltage channel DC offset",
+     "",
+     "",
+     "",
+     "",
+     "10",
+     "mV"
+    ],
+    [
+     "On-chip reference",
+     "",
+     "",
+     "",
+     "1.26",
+     "",
+     "V"
+    ],
+    [
+     "Reference voltage temperature coefficient",
+     "",
+     "",
+     "",
+     "±15",
+     "±40",
+     "ppm/°C"
+    ],
+    [
+     "Crystal or external clock",
+     "",
+     "The accuracy of crystal or external clock is ±100 ppm",
+     "",
+     "8.192",
+     "",
+     "MHz"
+    ],
+    [
+     "SPI interface bit rate",
+     "",
+     "",
+     "200",
+     "",
+     "160k",
+     "bps"
+    ],
+    [
+     "UART interface baud rate",
+     "",
+     "Baud rate of 2400 and 9600 is automatically detected",
+     "",
+     "2400 or 9600",
+     "",
+     "bps"
+    ],
+    [
+     "UART interface tolerance",
+     "",
+     "",
+     "",
+     "±2",
+     "",
+     "%"
+    ],
+    [
+     "CFx pulse width",
+     "",
+     "If T ≥ 160 ms, width=80ms; if T<160 ms, width = 0.5T",
+     "",
+     "80",
+     "",
+     "ms"
+    ],
+    [
+     "Charged device model (CDM)",
+     "",
+     "JESD22-C101",
+     "500",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Human body model (HBM)",
+     "",
+     "JESD22-A114",
+     "2000",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Latch up",
+     "",
+     "JESD78A",
+     "",
+     "",
+     "±100",
+     "mA"
+    ],
+    [
+     "Latch up",
+     "",
+     "JESD78A",
+     "",
+     "",
+     "4.95",
+     "V"
+    ],
+    [
+     "AVDD, analog power supply",
+     "AVDD",
+     "Metering precision guaranteed within 3.0V~3.6V",
+     "2.8",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "DVDD, digital power supply",
+     "DVDD",
+     "Metering precision guaranteed within 3.0V~3.6V",
+     "2.8",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Analog current",
+     "IAVDD",
+     "VDD=3.3V, T=25°C, Vref decoupling capacitor is 1μF",
+     "",
+     "3.4",
+     "",
+     "mA"
+    ],
+    [
+     "Digital current",
+     "IDVDD",
+     "VDD=3.3V, T=25°C, Vref decoupling capacitor is 1μF",
+     "",
+     "2.4",
+     "",
+     "mA"
+    ],
+    [
+     "Digital input high level (pin 1, 4, 24, 25, 27 and 28)",
+     "",
+     "VDD=3.3V±10%",
+     "2.0",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Digital input high level (pin 9, 12 and 22)",
+     "",
+     "VDD=3.3V±10%",
+     "2.0",
+     "",
+     "VDD+0.3",
+     "V"
+    ],
+    [
+     "Digital input low level",
+     "",
+     "VDD=3.3V±10%",
+     "",
+     "",
+     "0.8",
+     "V"
+    ],
+    [
+     "Digital input leakage current",
+     "",
+     "VDD=3.6V, VI=VDD or GND",
+     "",
+     "",
+     "±1",
+     "μA"
+    ],
+    [
+     "Digital output low level",
+     "",
+     "VDD=3.3V, IOL=10mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Digital output high level",
+     "",
+     "VDD=3.3V, IOH=-10mA",
+     "2.4",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Digital output low level (OSCO)",
+     "",
+     "VDD=3.3V, IOL=1mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Digital output high level (OSCO)",
+     "",
+     "VDD=3.3V, IOH=-1mA",
+     "2.4",
+     "",
+     "",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "SPI timing",
+   "page": 53,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tCSH (note 1)",
+     "Minimum CS high level time",
+     "30T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tCSS (note 1)",
+     "CS setup time",
+     "3T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tCSD (note 1)",
+     "CS hold time",
+     "30T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tCLD (note 1)",
+     "Clock disable time",
+     "1T",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tCLH",
+     "Clock high level time",
+     "30T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tCLL",
+     "Clock low level time",
+     "16T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tDIS",
+     "Data setup time",
+     "3T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tDIH",
+     "Data hold time",
+     "22T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tDW",
+     "Minimum data width",
+     "30T+10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tPD",
+     "Output delay",
+     "14T",
+     "",
+     "15T+20",
+     "ns"
+    ],
+    [
+     "tDF (note 1)",
+     "Output disable time",
+     "",
+     "",
+     "16T+20",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "1: Does not apply to three-wire SPI.",
+    "T is one SCLK period; 122 ns is the typical figure for four-wire SPI."
+   ]
+  },
+  {
+   "title": "Power-on reset",
+   "page": 54,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VH",
+     "Power on trigger voltage",
+     "2.375",
+     "2.5",
+     "2.625",
+     "V"
+    ],
+    [
+     "VL",
+     "Power off trigger voltage",
+     "2.185",
+     "2.3",
+     "2.415",
+     "V"
+    ],
+    [
+     "VH-VL",
+     "Hysteretic voltage difference",
+     "",
+     "0.2",
+     "",
+     "V"
+    ],
+    [
+     "T1",
+     "Delay time after power on",
+     "5",
+     "",
+     "",
+     "ms"
+    ],
+    [
+     "T2",
+     "Delay time after power off",
+     "10",
+     "",
+     "",
+     "μs"
+    ]
+   ],
+   "notes": [
+    "T1 runs from DVDD rising through VH to reset release; T2 from DVDD falling through VL to reset assertion."
+   ]
+  },
+  {
+   "title": "Zero-crossing timing",
+   "page": 55,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "TZX",
+     "High level width",
+     "",
+     "5",
+     "",
+     "ms"
+    ],
+    [
+     "TD",
+     "Delay time",
+     "",
+     "",
+     "0.5",
+     "ms"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Voltage sag timing",
+   "page": 56,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "TD",
+     "Delay time",
+     "",
+     "",
+     "0.5",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "TD runs from the sag being detected to WarnOut and IRQ going active."
+   ]
+  },
+  {
+   "title": "CFx pulse width",
+   "page": 56,
+   "conditions": "",
+   "columns": [
+    "pulse period T",
+    "pulse width Tp"
+   ],
+   "rows": [
+    [
+     "T ≥ 160ms",
+     "80ms"
+    ],
+    [
+     "10ms ≤ T < 160ms",
+     "0.5T"
+    ],
+    [
+     "T < 10ms",
+     "5ms (T held at 10ms)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 56,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "maximum limit"
+   ],
+   "rows": [
+    [
+     "Relative voltage between AVDD and AGND",
+     "-0.3V~3.7V"
+    ],
+    [
+     "Relative voltage between DVDD and DGND",
+     "-0.3V~3.7V"
+    ],
+    [
+     "Analog input voltage (I1P, I1N, I2P, I2N, VP, VN)",
+     "-1V~VDD"
+    ],
+    [
+     "Digital input voltage",
+     "-0.3V~VDD+2.6V"
+    ],
+    [
+     "Operating temperature range",
+     "-40~85 °C"
+    ],
+    [
+     "Maximum junction temperature",
+     "150 °C"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Thermal resistance",
+   "page": 56,
+   "conditions": "",
+   "columns": [
+    "package",
+    "θJA",
+    "unit",
+    "condition"
+   ],
+   "rows": [
+    [
+     "Green SSOP28",
+     "49",
+     "°C/W",
+     "No airflow"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [],
+ "circuits": [],
+ "equations": [
+  {
+   "name": "Anti-tampering switch, L to N",
+   "expr": "(PN - PL) / PL × 100 % > Threshold",
+   "page": 12,
+   "where": {
+    "PN": "N line active power",
+    "PL": "L line active power",
+    "Threshold": "Pthresh setting"
+   },
+   "note": "While metering L, the chip moves to N when this holds."
+  },
+  {
+   "name": "Anti-tampering switch, N to L",
+   "expr": "(PL - PN) / PN × 100 % > Threshold",
+   "page": 12,
+   "where": {
+    "PN": "N line active power",
+    "PL": "L line active power",
+    "Threshold": "Pthresh setting"
+   },
+   "note": "While metering N, the chip moves back to L when this holds."
+  },
+  {
+   "name": "Fiducial error",
+   "expr": "Fiducial_Error = (Umea - Ureal) / UFV × 100 %",
+   "page": 13,
+   "where": {
+    "Umea": "measured value",
+    "Ureal": "true value",
+    "UFV": "fiducial value of the quantity"
+   },
+   "note": ""
+  },
+  {
+   "name": "UART checksum",
+   "expr": "CHKSUM = (sum of bytes) mod 256",
+   "page": 19,
+   "where": {
+    "write, host and chip": "RW_Address + DATA_MSB + DATA_LSB",
+    "read, host": "RW_Address",
+    "read, chip": "DATA_MSB + DATA_LSB"
+   },
+   "note": "Unsigned addition with the carry dropped."
+  },
+  {
+   "name": "SagTh power-on value",
+   "expr": "SagTh = 22000 × sqrt(2) × 0.78 / (4 × Ugain / 32768) = 1D6AH",
+   "page": 24,
+   "where": {
+    "Ugain": "voltage rms gain register (31H)"
+   },
+   "note": "SagTh format XXX.XX, in volts."
+  },
+  {
+   "name": "Small-power mode scaling",
+   "expr": "P_normal = P_small × Igain × Ugain / (100000 × 2^42)",
+   "page": 25,
+   "where": {
+    "P_small": "power register reading in small-power mode",
+    "P_normal": "the same power in normal mode",
+    "Igain": "current rms gain",
+    "Ugain": "voltage rms gain"
+   },
+   "note": ""
+  },
+  {
+   "name": "CS1 checksum",
+   "expr": "L2C = MOD(H21 + ... + H2B + L21 + ... + L2B, 2^8); H2C = H21 XOR ... XOR H2B XOR L21 XOR ... XOR L2B",
+   "page": 33,
+   "where": {
+    "Hxx, Lxx": "high and low byte of register xx",
+    "L2C, H2C": "low and high byte of CS1 (2CH)"
+   },
+   "note": "Reading CS1 returns the chip's own computed value, not the written one."
+  },
+  {
+   "name": "CS2 checksum",
+   "expr": "L3B = MOD(H31 + ... + H3A + L31 + ... + L3A, 2^8); H3B = H31 XOR ... XOR H3A XOR L31 XOR ... XOR L3A",
+   "page": 38,
+   "where": {
+    "Hxx, Lxx": "high and low byte of register xx",
+    "L3B, H3B": "low and high byte of CS2 (3BH)"
+   },
+   "note": "Reading CS2 returns the chip's own computed value, not the written one."
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Accuracy and range",
+   "page": 10,
+   "text": "Active energy is within 0.1 % and reactive within 0.2 % over a 5000:1 current span (typical). Active energy needs calibrating at one current only (Ib); reactive energy needs none once active is done. The reference drifts 15 ppm/°C typical. Rms, power, power factor and phase angle readings stay within 0.5 % fiducial error; frequency is accurate to 0.01 Hz."
+  },
+  {
+   "topic": "Standards",
+   "page": 1,
+   "text": "Meets IEC 62052-11, IEC 62053-21 and IEC 62053-23 for class 1 or class 2 single-phase watt-hour meters and class 2 var-hour meters."
+  },
+  {
+   "topic": "Sensors",
+   "page": 12,
+   "text": "The L line current can come from a shunt or a CT; the N line is usually a CT, for isolation. Voltage comes from a resistor divider or a PT. Rogowski coils are not supported. The L channel has gains 1, 4, 8, 16, 24 and the N channel 1, 2, 4, set in MMode (2BH)."
+  },
+  {
+   "topic": "Startup and no-load",
+   "page": 10,
+   "text": "Startup and no-load thresholds are programmable for active and reactive power (27H-2AH). When the startup power is below the power of 20 mA at unity power factor, the meter starts within 1.2 times the theoretical startup time. In the active no-load state CF1 gives no pulses, and in the reactive no-load state CF2 gives none; Pnoload and Qnoload in EnStatus (46H) report these states."
+  },
+  {
+   "topic": "Energy accumulation",
+   "page": 39,
+   "text": "CF1 pulses track active energy and CF2 reactive energy; energy can be counted from the pulses or taken from the energy registers (40H-45H), which hold forward, reverse and absolute values, clear on read, count 0.1 pulse per LSB up to 6553.5 pulses and wrap from FFFFH to 0000H. Inside, energy resolves to 0.01 pulse: forward and reverse amounts below 0.01 pulse cancel each other, while the absolute count adds both. A register updates at each 0.1 pulse; at each whole pulse the CF pin fires and REVP/REVQ update. The absolute count can therefore exceed forward plus reverse; where they must agree, compute absolute from the forward and reverse readings."
+  },
+  {
+   "topic": "Meter constant doubling",
+   "page": 27,
+   "text": "PL_Constant (21H/22H) scales with the voltage and current sampling ratios and inversely with the meter constant; energy beyond it is added to the registers and sent out on CFx. Setting it to a multiple of 4 lets the meter constant double or quadruple at low current, shortening verification. PLconstH takes effect only after PLconstL is written."
+  },
+  {
+   "topic": "Anti-tampering",
+   "page": 12,
+   "text": "In anti-tampering mode the chip meters whichever line carries more power, comparing their active powers against one of 16 thresholds (default 3.125 %); reactive energy follows the line chosen for active. The two-way comparison gives hysteresis. L line is used after reset. When both lines are above startup power but below 8 times it, the line with more power is chosen, so quantization and calibration mismatch at low power do not stop either line from starting."
+  },
+  {
+   "topic": "Zero crossing",
+   "page": 13,
+   "text": "ZX goes high for 5 ms at positive, negative or all voltage zero crossings, chosen by Zxcon[1:0], within 0.5 ms of the crossing. It suits relay switching and power-line carrier timing."
+  },
+  {
+   "topic": "Calibration",
+   "page": 14,
+   "text": "Metering calibration: gain at unity power factor, then phase at 0.5 inductive, L line and N line one after the other. A power offset compensation corrects a steady interference floor, such as from the meter's own power transformer coupling into a shunt, which matters most at low current. Measurement calibration sets voltage and current rms gains, with offsets for voltage, current, active and reactive power to correct nonlinearity near zero. Frequency, angle and power factor need no calibration."
+  },
+  {
+   "topic": "Configuration checksums",
+   "page": 33,
+   "text": "After writing 21H-2BH, write CS1 (2CH); after writing 31H-3AH, write CS2 (3BH). The chip recomputes both regularly. With CalStart = 8765H a CS1 mismatch stops metering, sets CalErr and drives WarnOut and IRQ, so a corrupted setup cannot produce a burst of pulses at power-up; with AdjStart = 8765H a CS2 mismatch sets AdjErr and stops measurement."
+  },
+  {
+   "topic": "Reset",
+   "page": 14,
+   "text": "An on-chip supply monitor with hysteresis holds the part in reset outside its supply window (on above 2.5 V typ, off below 2.3 V typ). Reset can come from power-up, from the Reset pin held low for more than 200 µs, or from writing 789AH to SoftReset (00H). Every register returns to its default."
+  },
+  {
+   "topic": "Interface choice",
+   "page": 15,
+   "text": "USEL low selects SPI, high selects UART; it must not change after reset. The last 16-bit word read or written is kept in LastData (06H)."
+  },
+  {
+   "topic": "SPI, four-wire",
+   "page": 15,
+   "text": "Each access is 24 SCLK cycles with CS low throughout. The first bit on SDI is 1 for a read or 0 for a write, then 7 address bits, then 16 data bits: in on SDI for a write, out on SDO for a read, MSB first. SDO is high impedance otherwise."
+  },
+  {
+   "topic": "SPI, three-wire",
+   "page": 16,
+   "text": "CS stays low. SCLK idles high; holding it low for at least 400 µs marks the start of an access, after which the 24-cycle frame is as in four-wire mode."
+  },
+  {
+   "topic": "SPI timeout and errors",
+   "page": 17,
+   "text": "If SCLK stops for 6 ms the access is abandoned. More than 24 cycles in one access blocks a write; a read still completes from the first 24 cycles, though the result may be wrong. Unused addresses read as zero and ignore writes."
+  },
+  {
+   "topic": "UART",
+   "page": 18,
+   "text": "8 data bits, LSB first, no parity. The host sets the rate, 2400 or 9600 baud, which the chip detects from the FEH start byte; keep the rate fixed within a transaction. A write is FEH, RW_ADDRESS (bit 7 = 0), DATA_MSB, DATA_LSB, checksum from the host, answered by one checksum byte. A read is FEH, RW_ADDRESS (bit 7 = 1), checksum, answered by DATA_MSB, DATA_LSB and checksum. The chip answers within 5 ms when the checksum is right, with at most 5 bit times between its bytes. A gap over 20 ms between host bytes, or a bad checksum, aborts the transaction and the chip waits for the next FEH; the host should time out and wait at least 20 ms before retrying. UTX is high impedance when not sending."
+  },
+  {
+   "topic": "WarnOut",
+   "page": 20,
+   "text": "WarnOut flags two faults: a CS1 checksum error (with CalErr and IRQ) and, if SagWo is set, a voltage sag. A sag is declared when the voltage stays under SagTh (03H) for one cycle counted from a zero crossing; sensing on the AC side is free of the delay a large rectifier capacitor adds, so a sag is seen earlier, and less power-down detection circuitry is needed."
+  },
+  {
+   "topic": "Isolated host",
+   "page": 20,
+   "text": "Behind slow optocouplers (PS2501 named as an example) the host can run SPI (three- or four-wire) or UART, read energy from the registers instead of counting CF pulses, read CalErr and SysStatus instead of wiring WarnOut and IRQ, and reset the chip by writing 789AH to SoftReset. CFx can drive an optocoupler and the pulse LED."
+  },
+  {
+   "topic": "Supply and clock",
+   "page": 52,
+   "text": "3.3 V single supply, working from 2.8 V to 3.6 V with metering accuracy held from 3.0 V to 3.6 V. Digital inputs on pins 1, 4, 24, 25, 27 and 28 accept 5 V. The clock is an 8.192 MHz crystal or external clock within ±100 ppm."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SSOP28 (28Y), 5.3 mm body, 0.65 mm pitch",
+   "page": 58,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "1.73",
+     "1.86",
+     "1.99"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "0.13",
+     "0.21"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "1.68",
+     "1.73",
+     "1.78"
+    ],
+    [
+     "b",
+     "lead width (note 3)",
+     "0.25",
+     "-",
+     "0.38"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.13",
+     "-",
+     "0.20"
+    ],
+    [
+     "D",
+     "body length (note 2)",
+     "10.07",
+     "10.20",
+     "10.33"
+    ],
+    [
+     "E",
+     "width across leads",
+     "7.65",
+     "7.80",
+     "7.90"
+    ],
+    [
+     "E1",
+     "body width (note 2)",
+     "5.20",
+     "5.30",
+     "5.38"
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.55",
+     "0.75",
+     "0.95"
+    ],
+    [
+     "R",
+     "lead bend radius",
+     "0.09",
+     "-",
+     "-"
+    ],
+    [
+     "R1",
+     "lead bend radius",
+     "0.09",
+     "-",
+     "-"
+    ],
+    [
+     "",
+     "lead length",
+     "",
+     "(1.25 REF)",
+     ""
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-150, variation AH.",
+    "2: D and E1 exclude mold flash and protrusions, up to 0.20 mm per side, but include mold mismatch; measured at datum H.",
+    "3: b excludes dambar protrusion (at most 0.13 mm over b at maximum material) and intrusion (b reduced by at most 0.07 mm at least material).",
+    "Gauge plane 0.25 mm. Lead coplanarity 0.10; lead position 0.15 at maximum material."
+   ]
+  }
+ ]
+}

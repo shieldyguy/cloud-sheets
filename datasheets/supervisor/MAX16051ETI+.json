@@ -1,0 +1,4054 @@
+{
+ "sheet": 1,
+ "name": "MAX16051ETI+",
+ "kind": "supervisor",
+ "manufacturer": "Analog Devices (Maxim Integrated)",
+ "title": "MAX16050/MAX16051: voltage monitor and power sequencer with reverse sequencing, 2.7 V to 16 V, 28-pin TQFN",
+ "source": {
+  "document": "19-1013",
+  "revision": "Rev 2, 5/17",
+  "pages": 24
+ },
+ "summary": "A power sequencer and supervisor that turns a board's supplies on one after another through open-drain enable outputs, checks each rail against an adjustable 0.5 V threshold, and releases a reset once all are good. On SHDN it switches them off in reverse order, draining each rail with an 85 mA pull-down until it is under 250 mV before the next goes; on a fault all go off at once. An overvoltage flag, a bus-removal flag, a charge pump for n-channel pass switches and a chaining scheme for more rails are included. The MAX16051ETI+ watches six voltages and sequences five in a fixed order; the MAX16050ETI+ watches five and sequences four in an order picked by three pins.",
+ "key_figures": [
+  [
+   "Operating VCC",
+   "2.7 V to 16 V"
+  ],
+  [
+   "SET_ and EN threshold",
+   "0.5 V typ, 0.492 V to 0.508 V"
+  ],
+  [
+   "Overvoltage threshold",
+   "0.55 V typ, 0.541 V to 0.558 V"
+  ],
+  [
+   "Supply current",
+   "0.7 mA typ, 1.4 mA max at VCC = 3.3 V"
+  ],
+  [
+   "Discharge pull-down",
+   "85 mA typ per DISC_ pin"
+  ],
+  [
+   "Reset timeout",
+   "128 ms typ (50 to 300 ms) with TIMEOUT on ABP, or set by a capacitor"
+  ],
+  [
+   "Charge-pump output",
+   "VCC + 5 V typ, 25 µA typ source"
+  ],
+  [
+   "Channels",
+   "MAX16051: 6 monitored, 5 sequenced; MAX16050: 5 monitored, 4 sequenced"
+  ],
+  [
+   "Temperature range",
+   "-40 °C to +85 °C"
+  ],
+  [
+   "Package",
+   "28-pin TQFN-EP, 4 mm x 4 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 23,
+  "columns": [
+   "part number",
+   "temperature range",
+   "package",
+   "monitored voltages",
+   "voltages sequenced",
+   "sequence order"
+  ],
+  "rows": [
+   [
+    "MAX16050ETI+",
+    "-40°C to +85°C",
+    "28 TQFN-EP",
+    "5",
+    "4",
+    "set by SEQ1–SEQ3"
+   ],
+   [
+    "MAX16051ETI+",
+    "-40°C to +85°C",
+    "28 TQFN-EP",
+    "6",
+    "5",
+    "fixed, OUT1 to OUT5"
+   ]
+  ],
+  "notes": [
+   "+ marks a lead-free, RoHS-compliant package; EP is the exposed pad."
+  ]
+ },
+ "pins": [
+  {
+   "package": "28 TQFN-EP, 4 mm x 4 mm (MAX16051)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply input, 2.7 V to 16 V. A 0.1 µF capacitor to GND decouples it."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "3",
+     "name": "ABP",
+     "type": "power out",
+     "function": "Output of the internal regulator that runs the chip; takes a 1 µF capacitor to GND and can supply more than 1 mA to outside circuits."
+    },
+    {
+     "pin": "4",
+     "name": "EN",
+     "type": "analog in",
+     "function": "Analog enable. A resistor divider on it sets the voltage it watches; it trips at 0.5 V."
+    },
+    {
+     "pin": "5",
+     "name": "SET4",
+     "type": "analog in",
+     "function": "Monitor input 4. An external divider sets the supply level that brings it to its 0.5 V threshold."
+    },
+    {
+     "pin": "6",
+     "name": "OUT4",
+     "type": "open-drain out",
+     "function": "Enable output 4, needing a pull-up, which may go to VCC. On the MAX16051 it releases when SET3 is above 0.5 V."
+    },
+    {
+     "pin": "7",
+     "name": "DISC4",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 4. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "8",
+     "name": "SET3",
+     "type": "analog in",
+     "function": "Monitor input 3; 0.5 V threshold set by an external divider."
+    },
+    {
+     "pin": "9",
+     "name": "OUT3",
+     "type": "open-drain out",
+     "function": "Enable output 3, needing a pull-up. On the MAX16051 it releases when SET2 is above 0.5 V."
+    },
+    {
+     "pin": "10",
+     "name": "DISC3",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 3. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "11",
+     "name": "SET2",
+     "type": "analog in",
+     "function": "Monitor input 2; 0.5 V threshold set by an external divider."
+    },
+    {
+     "pin": "12",
+     "name": "OUT2",
+     "type": "open-drain out",
+     "function": "Enable output 2, needing a pull-up. On the MAX16051 it releases when SET1 is above 0.5 V."
+    },
+    {
+     "pin": "13",
+     "name": "DISC2",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 2. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "14",
+     "name": "EN_HOLD",
+     "type": "digital in",
+     "function": "Hold input. While low, a falling SHDN or EN does not start a power-down; high lets it proceed. Tie to ABP when not used."
+    },
+    {
+     "pin": "15",
+     "name": "REM",
+     "type": "open-drain out",
+     "function": "Bus-removal flag, needing a pull-up. Low while any DISC_ pin is above VTH_PL; released once every DISC_ pin is below it."
+    },
+    {
+     "pin": "16",
+     "name": "DISC1",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 1. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "17",
+     "name": "OUT1",
+     "type": "open-drain out",
+     "function": "Enable output 1, needing a pull-up. Released once ABP is above VUVLO, EN is above VTH_EN, SHDN is high and every DISC_ pin is below 250 mV (MAX16051; MAX16050 order by SEQ1 to SEQ3)."
+    },
+    {
+     "pin": "18",
+     "name": "SET1",
+     "type": "analog in",
+     "function": "Monitor input 1; 0.5 V threshold set by an external divider."
+    },
+    {
+     "pin": "19",
+     "name": "OV_OUT",
+     "type": "open-drain out",
+     "function": "Overvoltage flag, needing a pull-up. Pulls low when any SET_ pin goes above 0.55 V; releases shortly after all are back below."
+    },
+    {
+     "pin": "20",
+     "name": "RESET",
+     "type": "open-drain out",
+     "function": "Active-low reset, needing a pull-up. Asserted when any monitored input (EN included) is under threshold, SHDN is low or FAULT is low, and held for the reset timeout after all clear: 128 ms typ with TIMEOUT on ABP, or set by a capacitor on TIMEOUT."
+    },
+    {
+     "pin": "21",
+     "name": "FAULT",
+     "type": "digital in/out",
+     "function": "Fault line, pulled up to ABP inside by 100 kΩ. With EN and SHDN high the chip drives it low when any SET_ input drops under threshold; driving it low from outside forces all outputs off at once."
+    },
+    {
+     "pin": "22",
+     "name": "SHDN",
+     "type": "digital in",
+     "function": "Active-low shutdown, pulled up to ABP inside by 100 kΩ. Taking it low powers the supplies down in reverse order."
+    },
+    {
+     "pin": "23",
+     "name": "DELAY",
+     "type": "analog",
+     "function": "Sequence delay. A capacitor to GND sets the wait between one OUT_ and the next on power-up; left open the wait is 10 µs typ. Power-down uses no capacitor delay."
+    },
+    {
+     "pin": "24",
+     "name": "TIMEOUT",
+     "type": "analog",
+     "function": "Reset timeout. A capacitor to GND sets it; tied to ABP it is 128 ms typ; left open it is 10 µs typ."
+    },
+    {
+     "pin": "25",
+     "name": "DISC5",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 5. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "26",
+     "name": "OUT5",
+     "type": "open-drain out",
+     "function": "Enable output 5, needing a pull-up. Released when SET4 is above 0.5 V."
+    },
+    {
+     "pin": "27",
+     "name": "SET5",
+     "type": "analog in",
+     "function": "Monitor input 5; 0.5 V threshold set by an external divider."
+    },
+    {
+     "pin": "28",
+     "name": "CP_OUT",
+     "type": "power out",
+     "function": "Charge-pump output at about VCC + 5 V, sourcing up to 25 µA, for pulling up gates of external n-channel MOSFETs."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "ground",
+     "function": "Exposed pad, tied to GND inside. Solder it to the ground plane to carry heat; GND pin 2 must still be connected."
+    }
+   ]
+  },
+  {
+   "package": "28 TQFN-EP, 4 mm x 4 mm (MAX16050)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply input, 2.7 V to 16 V. A 0.1 µF capacitor to GND decouples it."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "3",
+     "name": "ABP",
+     "type": "power out",
+     "function": "Output of the internal regulator that runs the chip; takes a 1 µF capacitor to GND and can supply more than 1 mA to outside circuits."
+    },
+    {
+     "pin": "4",
+     "name": "EN",
+     "type": "analog in",
+     "function": "Analog enable. A resistor divider on it sets the voltage it watches; it trips at 0.5 V."
+    },
+    {
+     "pin": "5",
+     "name": "SET4",
+     "type": "analog in",
+     "function": "Monitor input 4. An external divider sets the supply level that brings it to its 0.5 V threshold."
+    },
+    {
+     "pin": "6",
+     "name": "OUT4",
+     "type": "open-drain out",
+     "function": "Enable output 4, needing a pull-up, which may go to VCC. On the MAX16051 it releases when SET3 is above 0.5 V."
+    },
+    {
+     "pin": "7",
+     "name": "DISC4",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 4. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "8",
+     "name": "SET3",
+     "type": "analog in",
+     "function": "Monitor input 3; 0.5 V threshold set by an external divider."
+    },
+    {
+     "pin": "9",
+     "name": "OUT3",
+     "type": "open-drain out",
+     "function": "Enable output 3, needing a pull-up. On the MAX16051 it releases when SET2 is above 0.5 V."
+    },
+    {
+     "pin": "10",
+     "name": "DISC3",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 3. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "11",
+     "name": "SET2",
+     "type": "analog in",
+     "function": "Monitor input 2; 0.5 V threshold set by an external divider."
+    },
+    {
+     "pin": "12",
+     "name": "OUT2",
+     "type": "open-drain out",
+     "function": "Enable output 2, needing a pull-up. On the MAX16051 it releases when SET1 is above 0.5 V."
+    },
+    {
+     "pin": "13",
+     "name": "DISC2",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 2. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "14",
+     "name": "EN_HOLD",
+     "type": "digital in",
+     "function": "Hold input. While low, a falling SHDN or EN does not start a power-down; high lets it proceed. Tie to ABP when not used."
+    },
+    {
+     "pin": "15",
+     "name": "REM",
+     "type": "open-drain out",
+     "function": "Bus-removal flag, needing a pull-up. Low while any DISC_ pin is above VTH_PL; released once every DISC_ pin is below it."
+    },
+    {
+     "pin": "16",
+     "name": "DISC1",
+     "type": "analog in/out",
+     "function": "Discharge and sense pin 1. Open in normal running; sinks 85 mA during a fault or power-down."
+    },
+    {
+     "pin": "17",
+     "name": "OUT1",
+     "type": "open-drain out",
+     "function": "Enable output 1, needing a pull-up. Released once ABP is above VUVLO, EN is above VTH_EN, SHDN is high and every DISC_ pin is below 250 mV (MAX16051; MAX16050 order by SEQ1 to SEQ3)."
+    },
+    {
+     "pin": "18",
+     "name": "SET1",
+     "type": "analog in",
+     "function": "Monitor input 1; 0.5 V threshold set by an external divider."
+    },
+    {
+     "pin": "19",
+     "name": "OV_OUT",
+     "type": "open-drain out",
+     "function": "Overvoltage flag, needing a pull-up. Pulls low when any SET_ pin goes above 0.55 V; releases shortly after all are back below."
+    },
+    {
+     "pin": "20",
+     "name": "RESET",
+     "type": "open-drain out",
+     "function": "Active-low reset, needing a pull-up. Asserted when any monitored input (EN included) is under threshold, SHDN is low or FAULT is low, and held for the reset timeout after all clear: 128 ms typ with TIMEOUT on ABP, or set by a capacitor on TIMEOUT."
+    },
+    {
+     "pin": "21",
+     "name": "FAULT",
+     "type": "digital in/out",
+     "function": "Fault line, pulled up to ABP inside by 100 kΩ. With EN and SHDN high the chip drives it low when any SET_ input drops under threshold; driving it low from outside forces all outputs off at once."
+    },
+    {
+     "pin": "22",
+     "name": "SHDN",
+     "type": "digital in",
+     "function": "Active-low shutdown, pulled up to ABP inside by 100 kΩ. Taking it low powers the supplies down in reverse order."
+    },
+    {
+     "pin": "23",
+     "name": "DELAY",
+     "type": "analog",
+     "function": "Sequence delay. A capacitor to GND sets the wait between one OUT_ and the next on power-up; left open the wait is 10 µs typ. Power-down uses no capacitor delay."
+    },
+    {
+     "pin": "24",
+     "name": "TIMEOUT",
+     "type": "analog",
+     "function": "Reset timeout. A capacitor to GND sets it; tied to ABP it is 128 ms typ; left open it is 10 µs typ."
+    },
+    {
+     "pin": "25",
+     "name": "SEQ1",
+     "type": "digital in",
+     "function": "Sequence order select, three levels; with SEQ2 and SEQ3 it picks one of 24 power-up orders."
+    },
+    {
+     "pin": "26",
+     "name": "SEQ2",
+     "type": "digital in",
+     "function": "Sequence order select, three levels."
+    },
+    {
+     "pin": "27",
+     "name": "SEQ3",
+     "type": "digital in",
+     "function": "Sequence order select, three levels."
+    },
+    {
+     "pin": "28",
+     "name": "CP_OUT",
+     "type": "power out",
+     "function": "Charge-pump output at about VCC + 5 V, sourcing up to 25 µA, for pulling up gates of external n-channel MOSFETs."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "ground",
+     "function": "Exposed pad, tied to GND inside. Solder it to the ground plane to carry heat; GND pin 2 must still be connected."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "All voltages with respect to GND",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "",
+     "-0.3",
+     "+30",
+     "V"
+    ],
+    [
+     "REM, OUT_, DISC_",
+     "",
+     "-0.3",
+     "+30",
+     "V"
+    ],
+    [
+     "RESET, SHDN, SET_, FAULT, EN_HOLD, EN, DELAY, OV_OUT, ABP, TIMEOUT, SEQ_",
+     "",
+     "-0.3",
+     "+6",
+     "V"
+    ],
+    [
+     "CP_OUT",
+     "",
+     "-0.3",
+     "(VCC + 6V)",
+     "V"
+    ],
+    [
+     "RESET current",
+     "",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "DISC_ current",
+     "",
+     "",
+     "180",
+     "mA"
+    ],
+    [
+     "Input/output current",
+     "all other pins",
+     "",
+     "20",
+     "mA"
+    ],
+    [
+     "Continuous power dissipation",
+     "28-pin 4 mm x 4 mm thin QFN, TA = +70 °C, derate 28.6 mW/°C above +70 °C",
+     "",
+     "2285*",
+     "mW"
+    ],
+    [
+     "Operating temperature range",
+     "",
+     "-40",
+     "+85",
+     "°C"
+    ],
+    [
+     "Junction temperature",
+     "",
+     "",
+     "+150",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "",
+     "-65",
+     "+150",
+     "°C"
+    ],
+    [
+     "Lead temperature",
+     "soldering, 10 s",
+     "",
+     "+300",
+     "°C"
+    ],
+    [
+     "Soldering temperature",
+     "reflow",
+     "",
+     "+260",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "* Figure for a multilayer board to JEDEC51."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply",
+   "page": 2,
+   "conditions": "VCC = 2.7 V to 16 V, VEN = VABP, TA = TJ = -40 °C to +85 °C unless noted; typ at TA = +25 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating Voltage Range",
+     "VCC",
+     "Voltage on VCC to ensure the device is fully operational",
+     "2.7",
+     "",
+     "16",
+     "V"
+    ],
+    [
+     "Reset Voltage (Note 2)",
+     "VCCR",
+     "VDISC_ = VOUT_ = VRESET = low, voltage on VCC falling",
+     "",
+     "",
+     "1.1",
+     "V"
+    ],
+    [
+     "Regulated Supply Voltage",
+     "VABP",
+     "IABP = 1mA (external sourcing current from ABP)",
+     "2.45",
+     "",
+     "2.90",
+     "V"
+    ],
+    [
+     "Undervoltage Lockout",
+     "VUVLO",
+     "Minimum voltage on ABP, ABP rising",
+     "2.1",
+     "2.3",
+     "",
+     "V"
+    ],
+    [
+     "Undervoltage Lockout Hysteresis",
+     "VUVLO_HYS",
+     "ABP falling",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Supply Current",
+     "ICC",
+     "VCC = 3.3V, all OUT_ = high, no load",
+     "",
+     "0.7",
+     "1.4",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "Limits hold over the stated conditions; every part is tested at +25 °C and +85 °C, and the -40 °C limits rest on design.",
+    "Note 2: VCCR is the least VCC at which DISC_, OUT_ and RESET are still guaranteed low."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: monitored analog inputs",
+   "page": 2,
+   "conditions": "VCC = 2.7 V to 16 V, VEN = VABP, TA = TJ = -40 °C to +85 °C unless noted; typ at TA = +25 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SET_ Threshold",
+     "VTH",
+     "SET_ falling",
+     "0.492",
+     "0.5",
+     "0.508",
+     "V"
+    ],
+    [
+     "SET_ Threshold Hysteresis",
+     "VTH_HYS",
+     "SET_ rising",
+     "",
+     "0.5",
+     "",
+     "%VTH"
+    ],
+    [
+     "SET1–SET4 Input Current",
+     "ISET",
+     "VSET_ = 0.5V",
+     "-100",
+     "",
+     "+100",
+     "nA"
+    ],
+    [
+     "SET5 Input Current",
+     "ISET5",
+     "VSET5 = 0.5V (MAX16051 only)",
+     "-100",
+     "",
+     "+100",
+     "nA"
+    ],
+    [
+     "SET_ Threshold Tempco",
+     "ΔVTH/_TC",
+     "",
+     "",
+     "30",
+     "",
+     "ppm/°C"
+    ],
+    [
+     "Overvoltage Threshold",
+     "VTH_OV",
+     "SET_ rising",
+     "0.541",
+     "0.55",
+     "0.558",
+     "V"
+    ],
+    [
+     "Overvoltage Threshold Hysteresis",
+     "",
+     "SET_ falling",
+     "",
+     "0.5",
+     "",
+     "%VTH_OV"
+    ],
+    [
+     "EN Threshold",
+     "VTH_EN",
+     "EN_ falling",
+     "0.492",
+     "0.5",
+     "0.508",
+     "V"
+    ],
+    [
+     "EN Threshold Hysteresis",
+     "VEN_HYS",
+     "EN_ rising",
+     "",
+     "0.5",
+     "",
+     "%VTH_EN"
+    ],
+    [
+     "EN Pulse Width",
+     "tENLO_PW",
+     "EN falling",
+     "25",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "EN to OUT_ Delay",
+     "tENLO_OUT",
+     "EN falling",
+     "",
+     "30",
+     "",
+     "µs"
+    ],
+    [
+     "EN Input Current",
+     "IEN",
+     "VEN = 0.5V",
+     "-100",
+     "",
+     "+100",
+     "nA"
+    ]
+   ],
+   "notes": [
+    "Limits hold over the stated conditions; every part is tested at +25 °C and +85 °C, and the -40 °C limits rest on design."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: sequencing, capacitor discharge and sequence timing outputs",
+   "page": 3,
+   "conditions": "VCC = 2.7 V to 16 V, VEN = VABP, TA = TJ = -40 °C to +85 °C unless noted; typ at TA = +25 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "OUT_ Output Low Voltage",
+     "VOL_OUT",
+     "VCC = 3.3V, ISINK = 3.2mA",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "OUT_ Output Low Voltage",
+     "VOL_OUT",
+     "VCC = 1.8V, ISINK = 100µA",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "OUT_ Leakage Current",
+     "ILKG_OUT",
+     "VOUT_ = 12V, OUT_ asserted",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "DISC_ Output Pulldown Current",
+     "IOL_DISC",
+     "Pulldown current during fault condition or power-down mode, VDISC_ = 1V",
+     "",
+     "85",
+     "",
+     "mA"
+    ],
+    [
+     "DISC_ Output Leakage Current",
+     "ILKG_DISC",
+     "VDISC_ = 3.3V, not in power-down mode",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "DISC_ Power Low Threshold",
+     "VTH_PL",
+     "DISC_ falling",
+     "200",
+     "250",
+     "300",
+     "mV"
+    ],
+    [
+     "DELAY, TIMEOUT Output Source Current",
+     "IDT",
+     "VDELAY = VTIMEOUT = 0V",
+     "1.6",
+     "2.5",
+     "3.0",
+     "µA"
+    ],
+    [
+     "DELAY, TIMEOUT Threshold Voltage",
+     "VTH_DT",
+     "",
+     "1.218",
+     "1.250",
+     "1.281",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Limits hold over the stated conditions; every part is tested at +25 °C and +85 °C, and the -40 °C limits rest on design."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: digital inputs/outputs",
+   "page": 3,
+   "conditions": "VCC = 2.7 V to 16 V, VEN = VABP, TA = TJ = -40 °C to +85 °C unless noted; typ at TA = +25 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SHDN, FAULT, EN_HOLD Input-Logic Low Voltage",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "SHDN, FAULT, EN_HOLD Input-Logic High Voltage",
+     "VIH",
+     "",
+     "2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "EN_HOLD Input Current",
+     "II",
+     "",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "EN_HOLD to OUT_ Delay",
+     "tEN_OUT",
+     "",
+     "",
+     "3",
+     "",
+     "µs"
+    ],
+    [
+     "FAULT, SHDN to ABP Pullup Resistance",
+     "RP",
+     "",
+     "60",
+     "100",
+     "160",
+     "kΩ"
+    ],
+    [
+     "SHDN to OUT_ Delay",
+     "tOUT",
+     "",
+     "",
+     "12",
+     "",
+     "µs"
+    ],
+    [
+     "SHDN to Pulse Width",
+     "tSHDN_PW",
+     "SHDN falling",
+     "1.9",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "RESET Output Low Voltage",
+     "VOL",
+     "VCC = 3.3V, ISINK = 3.2mA",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "RESET Output Low Voltage",
+     "VOL",
+     "VCC = 1.8V, ISINK = 100µA",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "REM, FAULT Output Low Voltage",
+     "VOL_RF",
+     "VCC = 3.3V, ISINK = 3.2mA",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "FAULT Pulse Width",
+     "tFAULT_PW",
+     "FAULT falling",
+     "1.9",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "SET_ to FAULT Delay Time",
+     "tSET_FAULT",
+     "SET_ falling below respective threshold",
+     "",
+     "2.5",
+     "",
+     "µs"
+    ],
+    [
+     "SEQ1–SEQ3 Logic-High Level",
+     "VIH_SEQ",
+     "MAX16050 only",
+     "VABP - 0.35",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "SEQ1–SEQ3 Logic High-Impedance (No Connect) Level",
+     "VIX_SEQ",
+     "MAX16050 only",
+     "0.92",
+     "",
+     "1.45",
+     "V"
+    ],
+    [
+     "SEQ1–SEQ3 Logic-Low Level",
+     "VIL_SEQ",
+     "MAX16050 only",
+     "",
+     "",
+     "0.33",
+     "V"
+    ],
+    [
+     "SEQ1–SEQ3 High-Impedance State Tolerance Current",
+     "IIX",
+     "MAX16050 (Note 3)",
+     "-6",
+     "",
+     "+6",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "Limits hold over the stated conditions; every part is tested at +25 °C and +85 °C, and the -40 °C limits rest on design.",
+    "Note 3: each of SEQ1 to SEQ3 reads three levels: high, low and open (high impedance)."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: reset circuit",
+   "page": 4,
+   "conditions": "VCC = 2.7 V to 16 V, VEN = VABP, TA = TJ = -40 °C to +85 °C unless noted; typ at TA = +25 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RESET, REM, OV_OUT Output Leakage",
+     "ILKG",
+     "VRESET = VREM = VOV_OUT = 5V",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "RESET Timeout Period",
+     "tRP",
+     "TIMEOUT = ABP",
+     "50",
+     "128",
+     "300",
+     "ms"
+    ],
+    [
+     "OUT_, FAULT, SHDN to RESET Delay",
+     "tRST",
+     "TIMEOUT = unconnected",
+     "",
+     "3",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "Limits hold over the stated conditions; every part is tested at +25 °C and +85 °C, and the -40 °C limits rest on design."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: charge-pump output",
+   "page": 4,
+   "conditions": "VCC = 2.7 V to 16 V, VEN = VABP, TA = TJ = -40 °C to +85 °C unless noted; typ at TA = +25 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CP_OUT Voltage",
+     "VCP_OUT",
+     "ICP_OUT = 0.5µA",
+     "VCC + 4.6",
+     "VCC + 5",
+     "VCC + 5.8",
+     "V"
+    ],
+    [
+     "CP_OUT Source Current",
+     "ICP_OUT",
+     "VCP_OUT = VCC + 2V",
+     "17",
+     "25",
+     "30",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "Limits hold over the stated conditions; every part is tested at +25 °C and +85 °C, and the -40 °C limits rest on design."
+   ]
+  },
+  {
+   "title": "MAX16050 sequence order select",
+   "page": 16,
+   "conditions": "MAX16050 only",
+   "columns": [
+    "SEQ1",
+    "SEQ2",
+    "SEQ3",
+    "first supply",
+    "second supply",
+    "third supply",
+    "fourth supply"
+   ],
+   "rows": [
+    [
+     "High-Z",
+     "High-Z",
+     "High-Z",
+     "OUT1",
+     "OUT2",
+     "OUT3",
+     "OUT4"
+    ],
+    [
+     "High-Z",
+     "High-Z",
+     "Low",
+     "OUT1",
+     "OUT2",
+     "OUT4",
+     "OUT3"
+    ],
+    [
+     "High-Z",
+     "High-Z",
+     "High",
+     "OUT1",
+     "OUT3",
+     "OUT2",
+     "OUT4"
+    ],
+    [
+     "High-Z",
+     "Low",
+     "High-Z",
+     "OUT1",
+     "OUT3",
+     "OUT4",
+     "OUT2"
+    ],
+    [
+     "High-Z",
+     "Low",
+     "Low",
+     "OUT1",
+     "OUT4",
+     "OUT2",
+     "OUT3"
+    ],
+    [
+     "High-Z",
+     "Low",
+     "High",
+     "OUT1",
+     "OUT4",
+     "OUT3",
+     "OUT2"
+    ],
+    [
+     "High-Z",
+     "High",
+     "High-Z",
+     "OUT2",
+     "OUT1",
+     "OUT3",
+     "OUT4"
+    ],
+    [
+     "High-Z",
+     "High",
+     "Low",
+     "OUT2",
+     "OUT1",
+     "OUT4",
+     "OUT3"
+    ],
+    [
+     "High-Z",
+     "High",
+     "High",
+     "OUT2",
+     "OUT3",
+     "OUT1",
+     "OUT4"
+    ],
+    [
+     "Low",
+     "High-Z",
+     "High-Z",
+     "OUT2",
+     "OUT3",
+     "OUT4",
+     "OUT1"
+    ],
+    [
+     "Low",
+     "High-Z",
+     "Low",
+     "OUT2",
+     "OUT4",
+     "OUT1",
+     "OUT3"
+    ],
+    [
+     "Low",
+     "High-Z",
+     "High",
+     "OUT2",
+     "OUT4",
+     "OUT3",
+     "OUT1"
+    ],
+    [
+     "Low",
+     "Low",
+     "High-Z",
+     "OUT3",
+     "OUT1",
+     "OUT2",
+     "OUT4"
+    ],
+    [
+     "Low",
+     "Low",
+     "Low",
+     "OUT3",
+     "OUT1",
+     "OUT4",
+     "OUT2"
+    ],
+    [
+     "Low",
+     "Low",
+     "High",
+     "OUT3",
+     "OUT2",
+     "OUT1",
+     "OUT4"
+    ],
+    [
+     "Low",
+     "High",
+     "High-Z",
+     "OUT3",
+     "OUT2",
+     "OUT4",
+     "OUT1"
+    ],
+    [
+     "Low",
+     "High",
+     "Low",
+     "OUT3",
+     "OUT4",
+     "OUT1",
+     "OUT2"
+    ],
+    [
+     "Low",
+     "High",
+     "High",
+     "OUT3",
+     "OUT4",
+     "OUT2",
+     "OUT1"
+    ],
+    [
+     "High",
+     "High-Z",
+     "High-Z",
+     "OUT4",
+     "OUT1",
+     "OUT2",
+     "OUT3"
+    ],
+    [
+     "High",
+     "High-Z",
+     "Low",
+     "OUT4",
+     "OUT1",
+     "OUT3",
+     "OUT2"
+    ],
+    [
+     "High",
+     "High-Z",
+     "High",
+     "OUT4",
+     "OUT2",
+     "OUT1",
+     "OUT3"
+    ],
+    [
+     "High",
+     "Low",
+     "High-Z",
+     "OUT4",
+     "OUT2",
+     "OUT3",
+     "OUT1"
+    ],
+    [
+     "High",
+     "Low",
+     "Low",
+     "OUT4",
+     "OUT3",
+     "OUT1",
+     "OUT2"
+    ],
+    [
+     "High",
+     "Low",
+     "High",
+     "OUT4",
+     "OUT3",
+     "OUT2",
+     "OUT1"
+    ]
+   ],
+   "notes": [
+    "SEQ1 = SEQ2 = SEQ3 = High-Z is the default order, OUT1 to OUT4."
+   ]
+  },
+  {
+   "title": "Recommended MOSFETs",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "manufacturer",
+    "part",
+    "VDS (V)",
+    "VGSth (V)",
+    "RDSON at VGS = 4.5V (mΩ)",
+    "IMAX at 50mV voltage drop (A)",
+    "Qg (nC) (typ)",
+    "footprint"
+   ],
+   "rows": [
+    [
+     "Fairchild",
+     "FDC633N",
+     "30",
+     "0.67",
+     "42",
+     "1.19",
+     "11",
+     "SuperSOT-6"
+    ],
+    [
+     "Fairchild",
+     "FDP8030L, FDB8030L",
+     "30",
+     "1.5",
+     "4.5",
+     "11.11",
+     "120",
+     "TO-220, TO-263AB"
+    ],
+    [
+     "Fairchild",
+     "FDD6672A",
+     "30",
+     "1.2",
+     "9.5",
+     "5.26",
+     "33",
+     "TO-252"
+    ],
+    [
+     "Fairchild",
+     "FDS8876",
+     "30",
+     "2.5 (max)",
+     "17",
+     "2.94",
+     "15",
+     "SO-8"
+    ],
+    [
+     "Vishay",
+     "Si7136DP",
+     "20",
+     "3",
+     "4.5",
+     "11.11",
+     "24.5",
+     "SO-8"
+    ],
+    [
+     "Vishay",
+     "Si4872DY",
+     "30",
+     "1",
+     "10",
+     "5",
+     "27",
+     "SO-8"
+    ],
+    [
+     "Vishay",
+     "SUD50N02-09P",
+     "20",
+     "3",
+     "17",
+     "2.94",
+     "10.5",
+     "TO-252"
+    ],
+    [
+     "Vishay",
+     "Si1488DH",
+     "20",
+     "0.95",
+     "49",
+     "1.02",
+     "6",
+     "SOT-363, SC70-6"
+    ],
+    [
+     "International Rectifier",
+     "IRL3716",
+     "20",
+     "3",
+     "4.8",
+     "10.4",
+     "53",
+     "TO220AB, D2PAK, TO-262"
+    ],
+    [
+     "International Rectifier",
+     "IRL3402",
+     "20",
+     "0.7",
+     "10",
+     "5",
+     "78 (max)",
+     "TO-220AB"
+    ],
+    [
+     "International Rectifier",
+     "IRL3715Z",
+     "20",
+     "2.1",
+     "15.5",
+     "3.22",
+     "7",
+     "TO220AB, D2PAK, TO-262"
+    ],
+    [
+     "International Rectifier",
+     "IRLML2502",
+     "20",
+     "1.2",
+     "45",
+     "1.11",
+     "8",
+     "SOT23-3, Micro3"
+    ]
+   ]
+  },
+  {
+   "title": "Package information",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "package type",
+    "package code",
+    "outline no.",
+    "land pattern no."
+   ],
+   "rows": [
+    [
+     "28 TQFN",
+     "T2844-1",
+     "21-0139",
+     "90-0035"
+    ]
+   ],
+   "notes": [
+    "Body 4 mm x 4 mm, with an exposed pad on the underside."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Supply current vs. supply voltage",
+   "page": 4,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted; MAX16051",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = +85°C",
+     "points": [
+      [
+       2.74,
+       652.4
+      ],
+      [
+       2.99,
+       649.3
+      ],
+      [
+       3.28,
+       652.2
+      ],
+      [
+       3.97,
+       663.2
+      ],
+      [
+       4.7,
+       678.2
+      ],
+      [
+       15.98,
+       856.5
+      ]
+     ]
+    },
+    {
+     "label": "TA = +25°C",
+     "points": [
+      [
+       2.74,
+       623.0
+      ],
+      [
+       2.99,
+       615.4
+      ],
+      [
+       3.21,
+       616.5
+      ],
+      [
+       4.64,
+       643.9
+      ],
+      [
+       15.98,
+       822.7
+      ]
+     ]
+    },
+    {
+     "label": "TA = -40°C",
+     "points": [
+      [
+       2.74,
+       589.9
+      ],
+      [
+       2.99,
+       577.6
+      ],
+      [
+       3.21,
+       577.9
+      ],
+      [
+       4.1,
+       597.1
+      ],
+      [
+       6.02,
+       628.9
+      ],
+      [
+       15.98,
+       787.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current vs. temperature",
+   "page": 4,
+   "conditions": "VCC = 5V, all OUT_ = high, no load; MAX16051",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 5V",
+     "points": [
+      [
+       -39.8,
+       611.6
+      ],
+      [
+       0.1,
+       635.7
+      ],
+      [
+       84.8,
+       683.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Normalized SET_ threshold voltage vs. temperature",
+   "page": 4,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted; normalized at TA = +25°C",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Normalized SET_ threshold voltage",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSET_ falling",
+     "points": [
+      [
+       -39.1,
+       0.998392
+      ],
+      [
+       8.6,
+       0.999876
+      ],
+      [
+       17.6,
+       0.999982
+      ],
+      [
+       56.6,
+       1.000194
+      ],
+      [
+       79.7,
+       1.000194
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Normalized sequence delay vs. temperature",
+   "page": 5,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted; normalized at TA = +25°C",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Normalized sequence delay",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "CDELAY = OPEN",
+     "points": [
+      [
+       -40.0,
+       0.9743
+      ],
+      [
+       -20.1,
+       0.9742
+      ],
+      [
+       -16.0,
+       0.9757
+      ],
+      [
+       24.9,
+       1.0005
+      ],
+      [
+       40.5,
+       1.0049
+      ],
+      [
+       46.7,
+       1.0107
+      ],
+      [
+       49.6,
+       1.018
+      ],
+      [
+       52.1,
+       1.0282
+      ],
+      [
+       54.1,
+       1.0414
+      ],
+      [
+       59.1,
+       1.0881
+      ],
+      [
+       62.8,
+       1.1158
+      ],
+      [
+       64.9,
+       1.126
+      ],
+      [
+       66.9,
+       1.1319
+      ],
+      [
+       71.9,
+       1.1392
+      ],
+      [
+       79.7,
+       1.1406
+      ],
+      [
+       84.7,
+       1.1436
+      ]
+     ]
+    },
+    {
+     "label": "CDELAY = 0.1µF",
+     "points": [
+      [
+       -39.9,
+       0.8633
+      ],
+      [
+       -24.7,
+       0.9012
+      ],
+      [
+       -12.3,
+       0.929
+      ],
+      [
+       16.6,
+       0.9888
+      ],
+      [
+       20.3,
+       0.9961
+      ],
+      [
+       30.6,
+       1.0034
+      ],
+      [
+       43.8,
+       1.002
+      ],
+      [
+       49.6,
+       0.999
+      ],
+      [
+       54.1,
+       0.9932
+      ],
+      [
+       84.7,
+       0.9188
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sequence delay vs. CDELAY",
+   "page": 5,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted",
+   "x": {
+    "label": "CDELAY",
+    "unit": "nF",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sequence delay",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Sequence delay",
+     "points": [
+      [
+       3.2,
+       -0.3
+      ],
+      [
+       20.8,
+       6.6
+      ],
+      [
+       103.2,
+       46.5
+      ],
+      [
+       222.5,
+       95.6
+      ],
+      [
+       306.7,
+       132.4
+      ],
+      [
+       469.9,
+       206.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Normalized reset timeout period vs. temperature",
+   "page": 5,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted; normalized at TA = +25°C",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Normalized reset timeout period",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TIMEOUT = OPEN",
+     "points": [
+      [
+       -39.9,
+       0.9733
+      ],
+      [
+       -19.9,
+       0.9821
+      ],
+      [
+       5.9,
+       0.9982
+      ],
+      [
+       13.5,
+       1.0004
+      ],
+      [
+       20.6,
+       0.9989
+      ],
+      [
+       25.0,
+       0.9997
+      ],
+      [
+       30.8,
+       1.0011
+      ],
+      [
+       52.2,
+       1.0099
+      ],
+      [
+       64.6,
+       1.018
+      ],
+      [
+       84.6,
+       1.0356
+      ]
+     ]
+    },
+    {
+     "label": "TIMEOUT = ABP",
+     "points": [
+      [
+       -39.9,
+       0.9572
+      ],
+      [
+       -19.9,
+       0.9718
+      ],
+      [
+       -5.2,
+       0.9784
+      ],
+      [
+       -1.7,
+       0.9813
+      ],
+      [
+       5.9,
+       0.9901
+      ],
+      [
+       9.9,
+       0.9931
+      ],
+      [
+       30.8,
+       1.0026
+      ],
+      [
+       52.2,
+       1.0158
+      ],
+      [
+       64.6,
+       1.0216
+      ],
+      [
+       84.6,
+       1.0356
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VABP vs. VCC",
+   "page": 5,
+   "conditions": "VEN = VABP; MAX16050",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VABP",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = +85°C",
+     "points": [
+      [
+       0.008,
+       0.007
+      ],
+      [
+       1.104,
+       0.007
+      ],
+      [
+       1.208,
+       0.023
+      ],
+      [
+       1.255,
+       0.198
+      ],
+      [
+       1.314,
+       0.856
+      ],
+      [
+       1.501,
+       1.362
+      ],
+      [
+       1.715,
+       1.675
+      ],
+      [
+       2.089,
+       2.069
+      ],
+      [
+       2.699,
+       2.657
+      ],
+      [
+       2.849,
+       2.675
+      ],
+      [
+       4.992,
+       2.675
+      ]
+     ]
+    },
+    {
+     "label": "TA = +25°C",
+     "points": [
+      [
+       0.008,
+       0.006
+      ],
+      [
+       1.46,
+       0.014
+      ],
+      [
+       1.603,
+       1.249
+      ],
+      [
+       1.713,
+       1.661
+      ],
+      [
+       2.002,
+       1.98
+      ],
+      [
+       2.687,
+       2.644
+      ],
+      [
+       2.737,
+       2.659
+      ],
+      [
+       2.962,
+       2.662
+      ],
+      [
+       4.992,
+       2.663
+      ]
+     ]
+    },
+    {
+     "label": "TA = -40°C",
+     "points": [
+      [
+       0.008,
+       0.007
+      ],
+      [
+       1.697,
+       -0.003
+      ],
+      [
+       1.802,
+       1.519
+      ],
+      [
+       1.867,
+       1.786
+      ],
+      [
+       1.938,
+       1.921
+      ],
+      [
+       2.575,
+       2.553
+      ],
+      [
+       2.674,
+       2.631
+      ],
+      [
+       2.737,
+       2.647
+      ],
+      [
+       4.992,
+       2.649
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reset timeout period vs. CTIMEOUT",
+   "page": 5,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted",
+   "x": {
+    "label": "CTIMEOUT",
+    "unit": "nF",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Reset timeout period",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Reset timeout period",
+     "points": [
+      [
+       2.1,
+       1.5
+      ],
+      [
+       19.6,
+       8.5
+      ],
+      [
+       151.2,
+       74.7
+      ],
+      [
+       468.7,
+       226.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CP_OUT voltage vs. CP_OUT current",
+   "page": 5,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted",
+   "x": {
+    "label": "CP_OUT current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "CP_OUT voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "CP_OUT voltage",
+     "points": [
+      [
+       0.08,
+       10.03
+      ],
+      [
+       1.73,
+       9.91
+      ],
+      [
+       20.48,
+       8.03
+      ],
+      [
+       22.94,
+       7.71
+      ],
+      [
+       23.44,
+       7.58
+      ],
+      [
+       23.68,
+       7.22
+      ],
+      [
+       23.77,
+       6.69
+      ],
+      [
+       24.1,
+       2.61
+      ],
+      [
+       24.51,
+       0.01
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OV_OUT low voltage vs. sink current",
+   "page": 5,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted",
+   "x": {
+    "label": "Sink current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OV_OUT low voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OV_OUT low voltage",
+     "points": [
+      [
+       0.06,
+       0.0012
+      ],
+      [
+       2.5,
+       0.051
+      ],
+      [
+       4.42,
+       0.0803
+      ],
+      [
+       10.06,
+       0.1799
+      ],
+      [
+       20.0,
+       0.3763
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OUT_ low voltage vs. sink current",
+   "page": 6,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted",
+   "x": {
+    "label": "Sink current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OUT_ low voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OUT_ low voltage",
+     "points": [
+      [
+       0.01,
+       -0.0008
+      ],
+      [
+       1.36,
+       0.0543
+      ],
+      [
+       5.33,
+       0.1716
+      ],
+      [
+       10.52,
+       0.3369
+      ],
+      [
+       15.7,
+       0.5213
+      ],
+      [
+       19.88,
+       0.6866
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RESET low voltage vs. sink current",
+   "page": 6,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C, unless otherwise noted",
+   "x": {
+    "label": "Sink current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RESET low voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RESET low voltage",
+     "points": [
+      [
+       0.14,
+       0.0019
+      ],
+      [
+       2.75,
+       0.0541
+      ],
+      [
+       3.45,
+       0.0628
+      ],
+      [
+       5.62,
+       0.1005
+      ],
+      [
+       12.56,
+       0.228
+      ],
+      [
+       20.01,
+       0.3816
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reverse sequence power-down using SHDN",
+   "page": 6,
+   "conditions": "VCC = 5V; VEN = VABP, TA = +25°C; CDELAY = CTIMEOUT = open; every channel 5V/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage above the channel's low level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SHDN",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       41.2,
+       0.0
+      ],
+      [
+       42.0,
+       4.87
+      ],
+      [
+       339.7,
+       4.87
+      ],
+      [
+       340.5,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V1",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       51.9,
+       0.0
+      ],
+      [
+       52.7,
+       3.0
+      ],
+      [
+       377.9,
+       3.0
+      ],
+      [
+       378.6,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V2",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       61.8,
+       0.0
+      ],
+      [
+       62.6,
+       3.04
+      ],
+      [
+       370.2,
+       3.04
+      ],
+      [
+       371.0,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V3",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       72.5,
+       0.0
+      ],
+      [
+       73.3,
+       3.08
+      ],
+      [
+       359.5,
+       3.08
+      ],
+      [
+       360.3,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V4",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       82.4,
+       0.0
+      ],
+      [
+       83.2,
+       2.81
+      ],
+      [
+       351.1,
+       2.81
+      ],
+      [
+       351.9,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Simultaneous power-down using EN",
+   "page": 6,
+   "conditions": "VCC = 5V; TA = +25°C; CDELAY = CTIMEOUT = open; every channel 5V/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage above the channel's low level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EN",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       39.7,
+       0.0
+      ],
+      [
+       40.5,
+       4.71
+      ],
+      [
+       336.6,
+       4.71
+      ],
+      [
+       337.4,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V1",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       51.1,
+       0.0
+      ],
+      [
+       51.9,
+       3.08
+      ],
+      [
+       341.2,
+       3.08
+      ],
+      [
+       342.0,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V2",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       61.1,
+       0.0
+      ],
+      [
+       61.8,
+       3.04
+      ],
+      [
+       341.2,
+       3.04
+      ],
+      [
+       342.0,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V3",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       71.0,
+       0.0
+      ],
+      [
+       71.8,
+       3.04
+      ],
+      [
+       340.5,
+       3.04
+      ],
+      [
+       341.2,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V4",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       80.9,
+       0.0
+      ],
+      [
+       81.7,
+       3.08
+      ],
+      [
+       341.2,
+       3.08
+      ],
+      [
+       342.0,
+       0.0
+      ],
+      [
+       400,
+       0.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Daisy-chaining two devices with SHDN rising",
+   "page": 6,
+   "conditions": "Two devices as in the daisy-chain circuit; CDELAY (U1) = CDELAY (U2) = 100pF; SHDN and V1–V7 5V/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage above the channel's low level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SHDN",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       103.1,
+       0.0
+      ],
+      [
+       105.0,
+       3.16
+      ],
+      [
+       1000,
+       3.16
+      ]
+     ]
+    },
+    {
+     "label": "V1",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       169.8,
+       0.0
+      ],
+      [
+       171.8,
+       3.04
+      ],
+      [
+       1000,
+       3.04
+      ]
+     ]
+    },
+    {
+     "label": "V2",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       230.9,
+       0.0
+      ],
+      [
+       232.8,
+       3.0
+      ],
+      [
+       1000,
+       3.0
+      ]
+     ]
+    },
+    {
+     "label": "V3",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       293.9,
+       0.0
+      ],
+      [
+       295.8,
+       3.06
+      ],
+      [
+       1000,
+       3.06
+      ]
+     ]
+    },
+    {
+     "label": "V4",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       358.8,
+       0.0
+      ],
+      [
+       360.7,
+       3.06
+      ],
+      [
+       1000,
+       3.06
+      ]
+     ]
+    },
+    {
+     "label": "V5",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       431.3,
+       0.0
+      ],
+      [
+       433.2,
+       2.97
+      ],
+      [
+       1000,
+       2.97
+      ]
+     ]
+    },
+    {
+     "label": "V6",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       492.4,
+       0.0
+      ],
+      [
+       494.3,
+       3.0
+      ],
+      [
+       1000,
+       3.0
+      ]
+     ]
+    },
+    {
+     "label": "V7",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       551.5,
+       0.0
+      ],
+      [
+       553.4,
+       3.0
+      ],
+      [
+       1000,
+       3.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Daisy-chaining two devices with SHDN falling",
+   "page": 6,
+   "conditions": "Two devices as in the daisy-chain circuit; CDELAY (U1) = CDELAY (U2) = 100pF; SHDN and V1–V7 5V/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage above the channel's low level",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SHDN",
+     "points": [
+      [
+       0.0,
+       3.16
+      ],
+      [
+       18.9,
+       3.16
+      ],
+      [
+       19.1,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V1",
+     "points": [
+      [
+       0.0,
+       3.0
+      ],
+      [
+       87.6,
+       3.0
+      ],
+      [
+       87.8,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V2",
+     "points": [
+      [
+       0.0,
+       3.0
+      ],
+      [
+       81.3,
+       3.0
+      ],
+      [
+       81.5,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V3",
+     "points": [
+      [
+       0.0,
+       3.08
+      ],
+      [
+       78.8,
+       3.08
+      ],
+      [
+       79.0,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V4",
+     "points": [
+      [
+       0.0,
+       3.0
+      ],
+      [
+       70.6,
+       3.0
+      ],
+      [
+       70.8,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V5",
+     "points": [
+      [
+       0.0,
+       3.04
+      ],
+      [
+       64.9,
+       3.04
+      ],
+      [
+       65.1,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V6",
+     "points": [
+      [
+       0.0,
+       3.08
+      ],
+      [
+       55.5,
+       3.08
+      ],
+      [
+       55.7,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "V7",
+     "points": [
+      [
+       0.0,
+       2.97
+      ],
+      [
+       46.2,
+       2.97
+      ],
+      [
+       46.4,
+       0.0
+      ],
+      [
+       100,
+       0.0
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "four-converters",
+   "title": "Sequencing four DC-DC converters",
+   "page": 9,
+   "description": "Four DC-DC converters run from VBUS, each enabled by one OUT_ pin that a resistor pulls up to VBUS. Each converter output is watched by a SET_ divider and tied to its DISC_ pin, so the chip can both confirm it has come up and drain it on the way down. VBUS also feeds VCC and, through a divider, EN, so the whole sequence waits for the input rail. SEQ1 to SEQ3 are left open for the default order OUT1, OUT2, OUT3, OUT4; EN_HOLD is tied to ABP; capacitors on TIMEOUT and DELAY set the reset timeout and the step delay. RESET, OV_OUT, FAULT and REM are pulled up to VPU, and an LED on REM shows when the board must not be unplugged.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX16050"
+    },
+    {
+     "ref": "TVBUS",
+     "type": "terminal",
+     "value": "VBUS"
+    },
+    {
+     "ref": "DC1",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RP1",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT1 pull-up"
+    },
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, upper"
+    },
+    {
+     "ref": "RB1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, lower"
+    },
+    {
+     "ref": "TV1",
+     "type": "terminal",
+     "value": "V1"
+    },
+    {
+     "ref": "DC2",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RP2",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT2 pull-up"
+    },
+    {
+     "ref": "RT2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, upper"
+    },
+    {
+     "ref": "RB2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, lower"
+    },
+    {
+     "ref": "TV2",
+     "type": "terminal",
+     "value": "V2"
+    },
+    {
+     "ref": "DC3",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RP3",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT3 pull-up"
+    },
+    {
+     "ref": "RT3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, upper"
+    },
+    {
+     "ref": "RB3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, lower"
+    },
+    {
+     "ref": "TV3",
+     "type": "terminal",
+     "value": "V3"
+    },
+    {
+     "ref": "DC4",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RP4",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT4 pull-up"
+    },
+    {
+     "ref": "RT4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, upper"
+    },
+    {
+     "ref": "RB4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, lower"
+    },
+    {
+     "ref": "TV4",
+     "type": "terminal",
+     "value": "V4"
+    },
+    {
+     "ref": "CV",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VCC bypass"
+    },
+    {
+     "ref": "REA",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, upper"
+    },
+    {
+     "ref": "REB",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, lower"
+    },
+    {
+     "ref": "CA",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "ABP bypass"
+    },
+    {
+     "ref": "CT",
+     "type": "capacitor",
+     "value": "",
+     "note": "CTIMEOUT"
+    },
+    {
+     "ref": "CD",
+     "type": "capacitor",
+     "value": "",
+     "note": "CDELAY"
+    },
+    {
+     "ref": "TSHDN",
+     "type": "terminal",
+     "value": "SHDN (on/off control)"
+    },
+    {
+     "ref": "TVPU",
+     "type": "terminal",
+     "value": "VPU"
+    },
+    {
+     "ref": "RL",
+     "type": "resistor",
+     "value": "",
+     "note": "LED current"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "",
+     "note": "lit while REM is low"
+    },
+    {
+     "ref": "RF",
+     "type": "resistor",
+     "value": "",
+     "note": "FAULT pull-up"
+    },
+    {
+     "ref": "RO",
+     "type": "resistor",
+     "value": "",
+     "note": "OV_OUT pull-up"
+    },
+    {
+     "ref": "RR",
+     "type": "resistor",
+     "value": "",
+     "note": "RESET pull-up"
+    },
+    {
+     "ref": "TRESET",
+     "type": "terminal",
+     "value": "RESET"
+    },
+    {
+     "ref": "TOV_OUT",
+     "type": "terminal",
+     "value": "OV_OUT"
+    },
+    {
+     "ref": "TFAULT",
+     "type": "terminal",
+     "value": "FAULT"
+    },
+    {
+     "ref": "TREM",
+     "type": "terminal",
+     "value": "REM"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "set-divider",
+   "title": "Setting a SET_ input threshold",
+   "page": 18,
+   "description": "A two-resistor divider from the supply being watched to ground feeds one SET_ input; R1 and R2 fix the supply voltage at which the input crosses 0.5 V. VCC runs from VBUS and RESET reports the result.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX16050"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "TV1TH",
+     "type": "terminal",
+     "value": "V1TH (supply monitored)"
+    },
+    {
+     "ref": "TVBUS",
+     "type": "terminal",
+     "value": "VBUS"
+    },
+    {
+     "ref": "TRESET",
+     "type": "terminal",
+     "value": "RESET"
+    }
+   ],
+   "notes": [
+    "SET1 stands for any of SET1 to SET4 (SET5 on the MAX16051); the circuit is the same for each."
+   ]
+  },
+  {
+   "id": "daisy-chain",
+   "title": "Two devices daisy-chained for eight supplies",
+   "page": 21,
+   "description": "Two MAX16050s each sequence four DC-DC converters wired as in the four-converter circuit. U1 starts first; its RESET drives U2's EN node, so U2 begins only when all four of U1's rails are good. Pulling the shared SHDN line low starts the power-down: U2 turns its rails off in reverse order, and its REM, tied to U1's EN_HOLD (pulled up to U1's ABP), keeps U1 on until every U2 rail has fallen below VTH_PL; then U1 powers its own rails down. All FAULT and OV_OUT pins share one line, so a fault or overvoltage on any rail shuts all eight off together. U2's RESET is the system reset.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX16050"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MAX16050"
+    },
+    {
+     "ref": "TVBUS",
+     "type": "terminal",
+     "value": "VBUS"
+    },
+    {
+     "ref": "DCA1",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPA1",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT1 pull-up"
+    },
+    {
+     "ref": "RTA1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, upper"
+    },
+    {
+     "ref": "RBA1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, lower"
+    },
+    {
+     "ref": "TV1",
+     "type": "terminal",
+     "value": "V1"
+    },
+    {
+     "ref": "DCA2",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPA2",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT2 pull-up"
+    },
+    {
+     "ref": "RTA2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, upper"
+    },
+    {
+     "ref": "RBA2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, lower"
+    },
+    {
+     "ref": "TV2",
+     "type": "terminal",
+     "value": "V2"
+    },
+    {
+     "ref": "DCA3",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPA3",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT3 pull-up"
+    },
+    {
+     "ref": "RTA3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, upper"
+    },
+    {
+     "ref": "RBA3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, lower"
+    },
+    {
+     "ref": "TV3",
+     "type": "terminal",
+     "value": "V3"
+    },
+    {
+     "ref": "DCA4",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPA4",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT4 pull-up"
+    },
+    {
+     "ref": "RTA4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, upper"
+    },
+    {
+     "ref": "RBA4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, lower"
+    },
+    {
+     "ref": "TV4",
+     "type": "terminal",
+     "value": "V4"
+    },
+    {
+     "ref": "DCB1",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPB1",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT1 pull-up"
+    },
+    {
+     "ref": "RTB1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, upper"
+    },
+    {
+     "ref": "RBB1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, lower"
+    },
+    {
+     "ref": "TV5",
+     "type": "terminal",
+     "value": "V5"
+    },
+    {
+     "ref": "DCB2",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPB2",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT2 pull-up"
+    },
+    {
+     "ref": "RTB2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, upper"
+    },
+    {
+     "ref": "RBB2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, lower"
+    },
+    {
+     "ref": "TV6",
+     "type": "terminal",
+     "value": "V6"
+    },
+    {
+     "ref": "DCB3",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPB3",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT3 pull-up"
+    },
+    {
+     "ref": "RTB3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, upper"
+    },
+    {
+     "ref": "RBB3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, lower"
+    },
+    {
+     "ref": "TV7",
+     "type": "terminal",
+     "value": "V7"
+    },
+    {
+     "ref": "DCB4",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RPB4",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT4 pull-up"
+    },
+    {
+     "ref": "RTB4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, upper"
+    },
+    {
+     "ref": "RBB4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, lower"
+    },
+    {
+     "ref": "TV8",
+     "type": "terminal",
+     "value": "V8"
+    },
+    {
+     "ref": "CVA",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VCC bypass"
+    },
+    {
+     "ref": "REAA",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, upper"
+    },
+    {
+     "ref": "REBA",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, lower"
+    },
+    {
+     "ref": "CAA",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "ABP bypass"
+    },
+    {
+     "ref": "CTA",
+     "type": "capacitor",
+     "value": "",
+     "note": "CTIMEOUT"
+    },
+    {
+     "ref": "CDA",
+     "type": "capacitor",
+     "value": "",
+     "note": "CDELAY"
+    },
+    {
+     "ref": "CVB",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VCC bypass"
+    },
+    {
+     "ref": "REAB",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, upper"
+    },
+    {
+     "ref": "REBB",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, lower"
+    },
+    {
+     "ref": "CAB",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "ABP bypass"
+    },
+    {
+     "ref": "CTB",
+     "type": "capacitor",
+     "value": "",
+     "note": "CTIMEOUT"
+    },
+    {
+     "ref": "CDB",
+     "type": "capacitor",
+     "value": "",
+     "note": "CDELAY"
+    },
+    {
+     "ref": "RH",
+     "type": "resistor",
+     "value": "",
+     "note": "U1 EN_HOLD pull-up to U1 ABP"
+    },
+    {
+     "ref": "TSHDN",
+     "type": "terminal",
+     "value": "SHDN (low starts reverse shutdown of all 8 supplies)"
+    },
+    {
+     "ref": "TVPU",
+     "type": "terminal",
+     "value": "VPU"
+    },
+    {
+     "ref": "RF",
+     "type": "resistor",
+     "value": "",
+     "note": "FAULT / OV_OUT pull-up"
+    },
+    {
+     "ref": "RR",
+     "type": "resistor",
+     "value": "",
+     "note": "RESET pull-up"
+    },
+    {
+     "ref": "TFAULT",
+     "type": "terminal",
+     "value": "OV_OUT / FAULT"
+    },
+    {
+     "ref": "TRESET",
+     "type": "terminal",
+     "value": "RESET"
+    }
+   ],
+   "notes": [
+    "Nets prefixed A belong to U1, B to U2."
+   ]
+  },
+  {
+   "id": "three-converters-mosfet",
+   "title": "Three DC-DC converters and a MOSFET switch in sequence",
+   "page": 22,
+   "description": "As the four-converter circuit, but the fourth rail is VBUS switched through an n-channel MOSFET. Its gate is OUT4, pulled up to CP_OUT, which sits about 5 V above VCC, so the MOSFET is fully on once OUT4 releases. V4 is watched by SET4 and drained through DISC4 like the converter rails.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX16050"
+    },
+    {
+     "ref": "TVBUS",
+     "type": "terminal",
+     "value": "VBUS"
+    },
+    {
+     "ref": "DC1",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RP1",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT1 pull-up"
+    },
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, upper"
+    },
+    {
+     "ref": "RB1",
+     "type": "resistor",
+     "value": "",
+     "note": "SET1 divider, lower"
+    },
+    {
+     "ref": "TV1",
+     "type": "terminal",
+     "value": "V1"
+    },
+    {
+     "ref": "DC2",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RP2",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT2 pull-up"
+    },
+    {
+     "ref": "RT2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, upper"
+    },
+    {
+     "ref": "RB2",
+     "type": "resistor",
+     "value": "",
+     "note": "SET2 divider, lower"
+    },
+    {
+     "ref": "TV2",
+     "type": "terminal",
+     "value": "V2"
+    },
+    {
+     "ref": "DC3",
+     "type": "other",
+     "value": "DC-DC converter with enable",
+     "note": "pins IN, EN, OUT"
+    },
+    {
+     "ref": "RP3",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT3 pull-up"
+    },
+    {
+     "ref": "RT3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, upper"
+    },
+    {
+     "ref": "RB3",
+     "type": "resistor",
+     "value": "",
+     "note": "SET3 divider, lower"
+    },
+    {
+     "ref": "TV3",
+     "type": "terminal",
+     "value": "V3"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "pass switch for V4; suitable parts are in Recommended MOSFETs"
+    },
+    {
+     "ref": "TV4",
+     "type": "terminal",
+     "value": "V4"
+    },
+    {
+     "ref": "RP4",
+     "type": "resistor",
+     "value": "",
+     "note": "OUT4 pull-up to CP_OUT, gate drive"
+    },
+    {
+     "ref": "RT4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, upper"
+    },
+    {
+     "ref": "RB4",
+     "type": "resistor",
+     "value": "",
+     "note": "SET4 divider, lower"
+    },
+    {
+     "ref": "CV",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VCC bypass"
+    },
+    {
+     "ref": "REA",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, upper"
+    },
+    {
+     "ref": "REB",
+     "type": "resistor",
+     "value": "",
+     "note": "EN divider, lower"
+    },
+    {
+     "ref": "CA",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "ABP bypass"
+    },
+    {
+     "ref": "CT",
+     "type": "capacitor",
+     "value": "",
+     "note": "CTIMEOUT"
+    },
+    {
+     "ref": "CD",
+     "type": "capacitor",
+     "value": "",
+     "note": "CDELAY"
+    },
+    {
+     "ref": "TSHDN",
+     "type": "terminal",
+     "value": "SHDN (on/off control)"
+    },
+    {
+     "ref": "TVPU",
+     "type": "terminal",
+     "value": "VPU"
+    },
+    {
+     "ref": "RL",
+     "type": "resistor",
+     "value": "",
+     "note": "LED current"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "",
+     "note": "lit while REM is low"
+    },
+    {
+     "ref": "RF",
+     "type": "resistor",
+     "value": "",
+     "note": "FAULT pull-up"
+    },
+    {
+     "ref": "RO",
+     "type": "resistor",
+     "value": "",
+     "note": "OV_OUT pull-up"
+    },
+    {
+     "ref": "RR",
+     "type": "resistor",
+     "value": "",
+     "note": "RESET pull-up"
+    },
+    {
+     "ref": "TRESET",
+     "type": "terminal",
+     "value": "RESET"
+    },
+    {
+     "ref": "TOV_OUT",
+     "type": "terminal",
+     "value": "OV_OUT"
+    },
+    {
+     "ref": "TFAULT",
+     "type": "terminal",
+     "value": "FAULT"
+    },
+    {
+     "ref": "TREM",
+     "type": "terminal",
+     "value": "REM"
+    }
+   ],
+   "notes": [
+    "Q1 drain is on VBUS and source on V4."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Sequence delay",
+   "expr": "tDELAY = 10 µs + 500 kΩ × CDELAY",
+   "where": {
+    "tDELAY": "delay between one OUT_ and the next on power-up, s",
+    "CDELAY": "capacitor from DELAY to GND, F"
+   },
+   "note": "An estimate; with DELAY open the delay is 10 µs typ.",
+   "page": 18
+  },
+  {
+   "name": "Reset timeout",
+   "expr": "tRP = 10 µs + 500 kΩ × CTIMEOUT",
+   "where": {
+    "tRP": "time RESET stays low after all SET_ inputs pass VTH, s",
+    "CTIMEOUT": "capacitor from TIMEOUT to GND, F"
+   },
+   "note": "An estimate; TIMEOUT open gives 10 µs typ, TIMEOUT on ABP gives 128 ms typ.",
+   "page": 18
+  },
+  {
+   "name": "Monitored threshold",
+   "expr": "V1TH = VTH × (1 + R1 / R2)",
+   "where": {
+    "V1TH": "supply level at which the SET_ input trips",
+    "VTH": "SET_ threshold, 0.5 V typ",
+    "R1": "divider resistor from the supply to SET_",
+    "R2": "divider resistor from SET_ to GND"
+   },
+   "note": "",
+   "page": 18
+  },
+  {
+   "name": "Upper divider resistor from leakage error",
+   "expr": "R1 = eA × V1TH / ISET",
+   "where": {
+    "eA": "share of the allowed absolute divider error due to SET_ leakage (0.01 for ±1 %)",
+    "V1TH": "power-good level of the watched supply",
+    "ISET": "worst-case SET_ input current"
+   },
+   "note": "This error adds to the divider's own tolerance error.",
+   "page": 19
+  },
+  {
+   "name": "Lower divider resistor",
+   "expr": "R2 = VTH × R1 / (V1TH − VTH)",
+   "where": {
+    "VTH": "SET_ threshold, 0.5 V typ",
+    "R1": "upper divider resistor",
+    "V1TH": "power-good level of the watched supply"
+   },
+   "note": "",
+   "page": 19
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Channels and order",
+   "page": 15,
+   "text": "The MAX16051 watches six voltages (five SET_ inputs plus EN) and sequences five, always in the order OUT1 to OUT5. The MAX16050 watches five and sequences four; its three-level SEQ1 to SEQ3 inputs pick one of 24 orders, and all three open gives OUT1 to OUT4."
+  },
+  {
+   "topic": "Start-up",
+   "page": 15,
+   "text": "All OUT_ pins stay low until four things hold together: ABP is above the undervoltage lockout, EN is above its threshold, SHDN is high, and every DISC_ pin is below 250 mV. Then the first OUT_ releases. Each next OUT_ releases once the previous rail's SET_ input passes its threshold plus the DELAY time (10 µs with DELAY open). A rail may take as long as it needs to come up; the chip simply waits. When the last rail is good RESET releases after the reset timeout."
+  },
+  {
+   "topic": "Fault",
+   "page": 15,
+   "text": "Once sequencing is done, any SET_ input falling under its threshold is a fault: every OUT_ goes low at once, RESET goes low, all DISC_ pull-downs turn on, and FAULT is driven low for at least 1.9 µs. The chip then starts again as soon as the four start-up conditions hold."
+  },
+  {
+   "topic": "Reverse-order shutdown (SHDN)",
+   "page": 17,
+   "text": "SHDN low turns the rails off one at a time in the reverse of the power-up order. Each OUT_ goes low, its DISC_ pin sinks 85 mA, and once that DISC_ pin reads under 250 mV the following OUT_ is switched off straight away, with no capacitor delay. SHDN is pulled up to ABP inside and must be low for the minimum pulse width before the chip acts."
+  },
+  {
+   "topic": "Simultaneous shutdown (EN)",
+   "page": 17,
+   "text": "EN falling under its threshold turns all rails off together without reverse sequencing. RESET goes low at once on either SHDN or EN, and REM releases when every DISC_ pin is below 250 mV. If SHDN has already gone low, a later fall of EN is ignored; for an EN shutdown, SHDN has to stay high for tENLO_OUT after EN falls, otherwise a reverse-order shutdown may start instead."
+  },
+  {
+   "topic": "Reset voltage VCCR",
+   "page": 17,
+   "text": "As VCC falls below about 2.2 V typ, ABP drops under VUVLO; from then on DISC_, OUT_ and RESET are held low as long as VCC is above VCCR (1.1 V max), and below VCCR their state is undefined. FAULT becomes undefined as soon as ABP is under VUVLO."
+  },
+  {
+   "topic": "Charge pump",
+   "page": 17,
+   "text": "CP_OUT behaves like a 25 µA current source that climbs to VCC + 5 V. It can pull up the gates of one or more n-channel pass MOSFETs; a capacitor from gate to ground sets the turn-on slew. Pull-up resistors from CP_OUT to OUT_ pins that are still low draw current from it, which can pull CP_OUT down far enough that other MOSFETs are not fully enhanced."
+  },
+  {
+   "topic": "Unused channels",
+   "page": 17,
+   "text": "Tie an unused SET_ input to ABP and that channel's DISC_ to GND; neither may float. Disabling one channel leaves the others working."
+  },
+  {
+   "topic": "FAULT line",
+   "page": 17,
+   "text": "FAULT has a 100 kΩ pull-up to ABP. With EN and SHDN high it goes low when any SET_ input drops under threshold. Pulled low from outside for at least tFAULT_PW it shuts every OUT_ off at once. FAULT pins of several chips can be joined so a fault anywhere shuts every chip down together, pull-downs included."
+  },
+  {
+   "topic": "Overvoltage output",
+   "page": 18,
+   "text": "OV_OUT, open-drain, goes low when any SET_ input exceeds 0.55 V and releases after a short delay once all are back below. It does not turn the outputs off by itself; to make an overvoltage force OUT_ low, OV_OUT is wired to FAULT."
+  },
+  {
+   "topic": "Discharge inputs",
+   "page": 18,
+   "text": "Each DISC_ pin goes on its sequenced rail. It is high impedance in normal running; when its OUT_ goes low it sinks 85 mA to drain the rail's capacitors below 250 mV so the next rail can be switched off, and it senses the rail during reverse sequencing."
+  },
+  {
+   "topic": "Bus removal output",
+   "page": 18,
+   "text": "REM is low while any DISC_ pin is above VTH_PL and released once all are below it, marking when the input power may be removed after a controlled power-down. An LED on REM can show when it is not yet safe to pull a board."
+  },
+  {
+   "topic": "EN_HOLD",
+   "page": 18,
+   "text": "While EN_HOLD is low a falling SHDN or EN is ignored; it must be high for either to turn the chip off. It is used to chain chips; tie it to ABP when not needed."
+  },
+  {
+   "topic": "Daisy chain",
+   "page": 19,
+   "text": "Several chips can be chained. Joining all FAULT pins turns every supply off on any fault. In the two-chip circuit, U1's RESET drives U2's EN so U2 sequences after U1; for power-down SHDN is pulled low, U2 shuts its rails off first, and U2's REM, held low while any U2 rail is up and tied to U1's EN_HOLD, keeps U1 on until U2 is done."
+  },
+  {
+   "topic": "SET_ resistor choice",
+   "page": 18,
+   "text": "The SET_ input leaks up to 100 nA, and the error this adds to the trip point grows with the divider resistance. Smaller resistors cut the error and raise the divider's power draw."
+  },
+  {
+   "topic": "Pull-up resistors",
+   "page": 19,
+   "text": "The open-drain outputs are rated for 0.3 V low at 3.2 mA with VCC = 3.3 V, so the pull-up must keep the sink current under that: more than 1.6 kΩ to a 5 V pull-up rail, more than 3.74 kΩ to 12 V."
+  },
+  {
+   "topic": "MOSFET selection",
+   "page": 19,
+   "text": "A pass MOSFET sits in series with its supply, so its on-resistance times the load current sets the voltage lost. Choose its RDS(on) for a gate-source drive of 4.5 V to 6.0 V (see Recommended MOSFETs)."
+  },
+  {
+   "topic": "Layout and bypassing",
+   "page": 19,
+   "text": "Decouple VCC with 0.1 µF and ABP with 1 µF, each to GND and each right beside the chip. Solder the exposed pad to the ground plane for heat, and connect GND as well; the pad is not to be the only ground."
+  },
+  {
+   "topic": "Process",
+   "page": 23,
+   "text": "BiCMOS."
+  }
+ ]
+}

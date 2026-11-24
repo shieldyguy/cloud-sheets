@@ -1,0 +1,4772 @@
+{
+ "sheet": 1,
+ "name": "NCP4308DDR2G",
+ "kind": "switching_regulator",
+ "manufacturer": "onsemi",
+ "title": "NCP4308: synchronous rectifier controller for flyback and LLC supplies",
+ "source": {
+  "document": "NCP4308/D",
+  "revision": "Rev. 2, January 2026",
+  "pages": 32
+ },
+ "summary": "A secondary-side controller that drives a synchronous rectifier MOSFET in CCM, DCM or QR flyback and LLC converters, sensing the MOSFET's drain directly on a 150 V CS pin. It turns on at −75 mV and off at 0 mV, with 8 A sink and 4 A source drive clamped at 9.5 V (B, D, Q) or 4.7 V (A, C, suited to GaN). Resistors set the minimum on and off blanking times, and the Q version adds an adjustable maximum on-time that lets a QR primary run in CCM. NCP4308DDR2G is version D (4.45 V UVLO, 9.5 V clamp) in SOIC-8, the only order code still offered.",
+ "key_figures": [
+  [
+   "Supply VCC",
+   "up to 35 V; 37 V absolute maximum"
+  ],
+  [
+   "UVLO VCCON / VCCOFF",
+   "4.45 V / 3.95 V typ (A, D, Q); 8.8 V / 7.8 V typ (B, C)"
+  ],
+  [
+   "CS input",
+   "−4 V to 150 V (−10 V dynamic, 200 ns)"
+  ],
+  [
+   "Turn-on / turn-off CS threshold",
+   "−75 mV typ / −1 mV to 0 mV"
+  ],
+  [
+   "Driver peak current",
+   "8 A sink, 4 A source typ"
+  ],
+  [
+   "Driver clamp VDRVMAX",
+   "9.5 V typ (B, D, Q); 4.7 V typ (A, C)"
+  ],
+  [
+   "Propagation delay CS to DRV",
+   "35 ns on, 12 ns off typ"
+  ],
+  [
+   "Minimum on / off time",
+   "1.00 µs typ at 10 kΩ; 55 ns / 245 ns at 0 Ω"
+  ],
+  [
+   "Maximum operating frequency",
+   "1 MHz"
+  ],
+  [
+   "Supply current, not switching",
+   "2.0 mA typ"
+  ],
+  [
+   "Junction temperature",
+   "−40 °C to 125 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 26,
+  "columns": [
+   "part number",
+   "version",
+   "package",
+   "UVLO [V]",
+   "DRV clamp [V]",
+   "pin 5 function",
+   "usage",
+   "package marking",
+   "shipping",
+   "status"
+  ],
+  "rows": [
+   [
+    "NCP4308DDR2G",
+    "D",
+    "SOIC8",
+    "4.5",
+    "9.5",
+    "NC",
+    "LLC, CCM flyback, DCM flyback, QR, QR with primary side CCM control",
+    "NCP4308D",
+    "2500 / tape and reel",
+    "active"
+   ],
+   [
+    "NCP4308ADR2G",
+    "A",
+    "SOIC8",
+    "4.5",
+    "4.7",
+    "NC",
+    "LLC, CCM flyback, DCM flyback, QR, QR with primary side CCM control",
+    "NCP4308A",
+    "2500 / tape and reel",
+    "discontinued"
+   ],
+   [
+    "NCP4308AMTTWG",
+    "A",
+    "WDFN8",
+    "4.5",
+    "4.7",
+    "NC",
+    "LLC, CCM flyback, DCM flyback, QR, QR with primary side CCM control",
+    "EA",
+    "3000 / tape and reel",
+    "discontinued"
+   ],
+   [
+    "NCP4308DMNTWG",
+    "D",
+    "DFN8",
+    "4.5",
+    "9.5",
+    "NC",
+    "LLC, CCM flyback, DCM flyback, QR, QR with primary side CCM control",
+    "4308D",
+    "4000 / tape and reel",
+    "discontinued"
+   ],
+   [
+    "NCP4308DMTTWG",
+    "D",
+    "WDFN8",
+    "4.5",
+    "9.5",
+    "NC",
+    "LLC, CCM flyback, DCM flyback, QR, QR with primary side CCM control",
+    "ED",
+    "3000 / tape and reel",
+    "discontinued"
+   ],
+   [
+    "NCP4308QDR2G",
+    "Q",
+    "SOIC8",
+    "4.5",
+    "9.5",
+    "MAX_TON",
+    "QR with forced CCM from secondary side",
+    "NCP4308Q",
+    "2500 / tape and reel",
+    "discontinued"
+   ]
+  ],
+  "notes": [
+   "All are Pb-free. Discontinued devices are not available.",
+   "Top marking: SOIC-8 carries NCP4308x (x = A, B, C, D or Q) over ALYW G; DFN8 carries 4308x over ALYWG; WDFN8 carries Ex (x = A or D) with date code M. A = assembly location, L = wafer lot, Y = year, W = work week, M = date code, G = Pb-free package; the microdot may sit in either place."
+  ]
+ },
+ "pins": [
+  {
+   "package": "SOIC8, DFN8, WDFN8 (ver. A, B, C, D)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply input, 4 V (ver. A, D) or 8 V (ver. B, C) up to 35 V."
+    },
+    {
+     "pin": "2",
+     "name": "MIN_TOFF",
+     "type": "analog in",
+     "function": "A resistor from this pin to GND sets the minimum off time (blanking after turn-off)."
+    },
+    {
+     "pin": "3",
+     "name": "MIN_TON",
+     "type": "analog in",
+     "function": "A resistor from this pin to GND sets the minimum on time (blanking after turn-on)."
+    },
+    {
+     "pin": "4",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected inside; leave it open or ground it."
+    },
+    {
+     "pin": "5",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected inside; leave it open or ground it."
+    },
+    {
+     "pin": "6",
+     "name": "CS",
+     "type": "analog in",
+     "function": "Current sense, rated to 150 V, wired to the SR MOSFET drain. Sees whether current flows in the MOSFET channel or its body diode; the basic turn-off threshold is 0 mV, and a series resistor lowers it."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Return for the driver, the VCC decoupling capacitor and the MIN_TON and MIN_TOFF resistors. Runs by a Kelvin connection straight to the SR MOSFET source terminal."
+    },
+    {
+     "pin": "8",
+     "name": "DRV",
+     "type": "output",
+     "function": "Gate driver output to the SR MOSFET."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "ground",
+     "function": "DFN8 exposed flag; connect it to GND."
+    }
+   ]
+  },
+  {
+   "package": "SOIC8 (ver. Q)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply input, 4 V up to 35 V."
+    },
+    {
+     "pin": "2",
+     "name": "MIN_TOFF",
+     "type": "analog in",
+     "function": "A resistor from this pin to GND sets the minimum off time."
+    },
+    {
+     "pin": "3",
+     "name": "MIN_TON",
+     "type": "analog in",
+     "function": "A resistor from this pin to GND sets the minimum on time."
+    },
+    {
+     "pin": "4",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected inside; leave it open or ground it."
+    },
+    {
+     "pin": "5",
+     "name": "MAX_TON",
+     "type": "analog in",
+     "function": "A resistor from this pin to GND sets the maximum on time; the pin sources 100 µA typ."
+    },
+    {
+     "pin": "6",
+     "name": "CS",
+     "type": "analog in",
+     "function": "Current sense, rated to 150 V, wired to the SR MOSFET drain; turn-off threshold 0 mV, lowered by a series resistor."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Return for the driver, VCC decoupling and the timing resistors; Kelvin connection to the SR MOSFET source."
+    },
+    {
+     "pin": "8",
+     "name": "DRV",
+     "type": "output",
+     "function": "Gate driver output to the SR MOSFET."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply Voltage",
+     "VCC",
+     "−0.3 to 37.0",
+     "V"
+    ],
+    [
+     "MIN_TON, MIN_TOFF, MAX_TON Input Voltage",
+     "VMIN_TON, VMIN_TOFF, VMAX_TON",
+     "−0.3 to VCC",
+     "V"
+    ],
+    [
+     "Driver Output Voltage",
+     "VDRV",
+     "−0.3 to 17.0",
+     "V"
+    ],
+    [
+     "Current Sense Input Voltage",
+     "VCS",
+     "−4 to 150",
+     "V"
+    ],
+    [
+     "Current Sense Dynamic Input Voltage (tPW = 200 ns)",
+     "VCS_DYN",
+     "−10 to 150",
+     "V"
+    ],
+    [
+     "MIN_TON, MIN_TOFF, MAX_TON, Input Current",
+     "IMIN_TON, IMIN_TOFF, IMAX_TON",
+     "−10 to 10",
+     "mA"
+    ],
+    [
+     "Junction to Air Thermal Resistance, 1 oz 1 in² Copper Area, SOIC8",
+     "RθJ-A_SOIC8",
+     "160",
+     "°C/W"
+    ],
+    [
+     "Junction to Air Thermal Resistance, 1 oz 1 in² Copper Area, DFN8",
+     "RθJ-A_DFN8",
+     "80",
+     "°C/W"
+    ],
+    [
+     "Junction to Air Thermal Resistance, 1 oz 1 in² Copper Area, WDFN8",
+     "RθJ-A_WDFN8",
+     "160",
+     "°C/W"
+    ],
+    [
+     "Maximum Junction Temperature",
+     "TJMAX",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage Temperature",
+     "TSTG",
+     "−60 to 150",
+     "°C"
+    ],
+    [
+     "ESD Capability, Human Body Model, Except Pin 6, per JESD22-A114E",
+     "ESDHBM",
+     "2000",
+     "V"
+    ],
+    [
+     "ESD Capability, Human Body Model, Pin 6, per JESD22-A114E",
+     "ESDHBM",
+     "1000",
+     "V"
+    ],
+    [
+     "ESD Capability, Machine Model, per JESD22-A115-A",
+     "ESDMM",
+     "200",
+     "V"
+    ],
+    [
+     "ESD Capability, Charged Device Model, Except Pin 6, per JESD22-C101F",
+     "ESDCDM",
+     "750",
+     "V"
+    ],
+    [
+     "ESD Capability, Charged Device Model, Pin 6, per JESD22-C101F",
+     "ESDCDM",
+     "250",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Going past any of these limits can damage the part and leaves its function and reliability unsure.",
+    "Latch-up: passes JEDEC JESD78D, Class I."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Maximum Operating Input Voltage",
+     "VCC",
+     "",
+     "35",
+     "V"
+    ],
+    [
+     "Operating Junction Temperature",
+     "TJ",
+     "−40",
+     "125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Function outside these ranges is not implied; long exposure beyond them can reduce reliability."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply section",
+   "page": 7,
+   "conditions": "−40 °C ≤ TJ ≤ 125 °C; VCC = 12 V; CDRV = 0 nF; RMIN_TON = RMIN_TOFF = 10 kΩ; VCS = −1 to +4 V; fCS = 100 kHz, DCCS = 50%, unless otherwise noted. Typical values are at TJ = +25 °C.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC UVLO (ver. B & C)",
+     "VCC rising, VCS = 0 V",
+     "VCCON",
+     "8.3",
+     "8.8",
+     "9.4",
+     "V"
+    ],
+    [
+     "VCC UVLO (ver. B & C)",
+     "VCC falling, VCS = 0 V",
+     "VCCOFF",
+     "7.3",
+     "7.8",
+     "8.3",
+     "V"
+    ],
+    [
+     "VCC UVLO Hysteresis (ver. B & C)",
+     "",
+     "VCCHYS",
+     "",
+     "1.0",
+     "",
+     "V"
+    ],
+    [
+     "VCC UVLO (ver. A, D & Q)",
+     "VCC rising, VCS = 0 V",
+     "VCCON",
+     "4.20",
+     "4.45",
+     "4.80",
+     "V"
+    ],
+    [
+     "VCC UVLO (ver. A, D & Q)",
+     "VCC falling, VCS = 0 V",
+     "VCCOFF",
+     "3.70",
+     "3.95",
+     "4.20",
+     "V"
+    ],
+    [
+     "VCC UVLO Hysteresis (ver. A, D & Q)",
+     "",
+     "VCCHYS",
+     "",
+     "0.5",
+     "",
+     "V"
+    ],
+    [
+     "Start-up Delay",
+     "VCC rising from 0 to VCCON + 1 V @ tr = 10 µs, VCS = 0 V",
+     "tSTART_DEL",
+     "",
+     "75",
+     "125",
+     "µs"
+    ],
+    [
+     "Current Consumption, RMIN_TON = RMIN_TOFF = 0 kΩ",
+     "CDRV = 0 nF, fCS = 500 kHz; A, C",
+     "ICC",
+     "3.0",
+     "4.0",
+     "5.6",
+     "mA"
+    ],
+    [
+     "Current Consumption, RMIN_TON = RMIN_TOFF = 0 kΩ",
+     "CDRV = 0 nF, fCS = 500 kHz; B, D, Q",
+     "ICC",
+     "3.5",
+     "4.5",
+     "6.0",
+     "mA"
+    ],
+    [
+     "Current Consumption, RMIN_TON = RMIN_TOFF = 0 kΩ",
+     "CDRV = 1 nF, fCS = 500 kHz; A, C",
+     "ICC",
+     "4.5",
+     "6.0",
+     "7.5",
+     "mA"
+    ],
+    [
+     "Current Consumption, RMIN_TON = RMIN_TOFF = 0 kΩ",
+     "CDRV = 1 nF, fCS = 500 kHz; B, D, Q",
+     "ICC",
+     "7.7",
+     "9.0",
+     "10.7",
+     "mA"
+    ],
+    [
+     "Current Consumption, RMIN_TON = RMIN_TOFF = 0 kΩ",
+     "CDRV = 10 nF, fCS = 500 kHz; A, C",
+     "ICC",
+     "20",
+     "25",
+     "30",
+     "mA"
+    ],
+    [
+     "Current Consumption, RMIN_TON = RMIN_TOFF = 0 kΩ",
+     "CDRV = 10 nF, fCS = 500 kHz; B, D, Q",
+     "ICC",
+     "40",
+     "50",
+     "60",
+     "mA"
+    ],
+    [
+     "Current Consumption",
+     "No switching, VCS = 0 V, RMIN_TON = RMIN_TOFF = 0 kΩ",
+     "ICC",
+     "1.5",
+     "2.0",
+     "2.5",
+     "mA"
+    ],
+    [
+     "Current Consumption",
+     "No switching, VCS = 0 V, RMIN_TON = RMIN_TOFF = 0 kΩ, DFN8, WDFN8",
+     "ICC",
+     "1.0",
+     "2.0",
+     "2.5",
+     "mA"
+    ],
+    [
+     "Current Consumption below UVLO",
+     "No switching, VCC = VCCOFF – 0.1 V, VCS = 0 V",
+     "ICC_UVLO",
+     "",
+     "75",
+     "125",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: driver output",
+   "page": 7,
+   "conditions": "−40 °C ≤ TJ ≤ 125 °C; VCC = 12 V; CDRV = 0 nF; RMIN_TON = RMIN_TOFF = 10 kΩ; VCS = −1 to +4 V; fCS = 100 kHz, DCCS = 50%, unless otherwise noted. Typical values are at TJ = +25 °C.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output Voltage Rise-Time",
+     "CDRV = 10 nF, 10% to 90% VDRVMAX",
+     "tr",
+     "",
+     "40",
+     "55",
+     "ns"
+    ],
+    [
+     "Output Voltage Fall-Time",
+     "CDRV = 10 nF, 90% to 10% VDRVMAX",
+     "tf",
+     "",
+     "20",
+     "35",
+     "ns"
+    ],
+    [
+     "Driver Source Resistance",
+     "",
+     "RDRV_SOURCE",
+     "",
+     "1.2",
+     "",
+     "Ω"
+    ],
+    [
+     "Driver Sink Resistance",
+     "",
+     "RDRV_SINK",
+     "",
+     "0.5",
+     "",
+     "Ω"
+    ],
+    [
+     "Output Peak Source Current",
+     "",
+     "IDRV_SOURCE",
+     "",
+     "4",
+     "",
+     "A"
+    ],
+    [
+     "Output Peak Sink Current",
+     "",
+     "IDRV_SINK",
+     "",
+     "8",
+     "",
+     "A"
+    ],
+    [
+     "Maximum Driver Output Voltage",
+     "VCC = 35 V, CDRV > 1 nF (ver. B, D and Q)",
+     "VDRVMAX",
+     "9.0",
+     "9.5",
+     "10.5",
+     "V"
+    ],
+    [
+     "Maximum Driver Output Voltage",
+     "VCC = 35 V, CDRV > 1 nF (ver. A, C)",
+     "VDRVMAX",
+     "4.3",
+     "4.7",
+     "5.5",
+     "V"
+    ],
+    [
+     "Minimum Driver Output Voltage",
+     "VCC = VCCOFF + 200 mV (ver. B)",
+     "VDRVMIN",
+     "7.2",
+     "7.8",
+     "8.5",
+     "V"
+    ],
+    [
+     "Minimum Driver Output Voltage",
+     "VCC = VCCOFF + 200 mV (ver. C)",
+     "VDRVMIN",
+     "4.2",
+     "4.7",
+     "5.3",
+     "V"
+    ],
+    [
+     "Minimum Driver Output Voltage",
+     "VCC = VCCOFF + 200 mV (ver. A, D and Q)",
+     "VDRVMIN",
+     "3.6",
+     "4.0",
+     "4.4",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: CS input",
+   "page": 7,
+   "conditions": "−40 °C ≤ TJ ≤ 125 °C; VCC = 12 V; CDRV = 0 nF; RMIN_TON = RMIN_TOFF = 10 kΩ; VCS = −1 to +4 V; fCS = 100 kHz, DCCS = 50%, unless otherwise noted. Typical values are at TJ = +25 °C.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Total Propagation Delay From CS to DRV Output On",
+     "VCS goes down from 4 to −1 V, tf_CS = 5 ns",
+     "tPD_ON",
+     "",
+     "35",
+     "60",
+     "ns"
+    ],
+    [
+     "Total Propagation Delay From CS to DRV Output Off",
+     "VCS goes up from −1 to 4 V, tr_CS = 5 ns",
+     "tPD_OFF",
+     "",
+     "12",
+     "23",
+     "ns"
+    ],
+    [
+     "CS Bias Current",
+     "VCS = −20 mV",
+     "ICS",
+     "−105",
+     "−100",
+     "−95",
+     "µA"
+    ],
+    [
+     "Turn On CS Threshold Voltage",
+     "",
+     "VTH_CS_ON",
+     "−120",
+     "−75",
+     "−40",
+     "mV"
+    ],
+    [
+     "Turn Off CS Threshold Voltage",
+     "Guaranteed by Design",
+     "VTH_CS_OFF",
+     "−1",
+     "",
+     "0",
+     "mV"
+    ],
+    [
+     "Turn Off Timer Reset Threshold Voltage",
+     "",
+     "VTH_CS_RESET",
+     "0.4",
+     "0.5",
+     "0.6",
+     "V"
+    ],
+    [
+     "CS Leakage Current",
+     "VCS = 150 V",
+     "ICS_LEAKAGE",
+     "",
+     "",
+     "0.4",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: minimum tON and tOFF adjust",
+   "page": 8,
+   "conditions": "−40 °C ≤ TJ ≤ 125 °C; VCC = 12 V; CDRV = 0 nF; RMIN_TON = RMIN_TOFF = 10 kΩ; VCS = −1 to +4 V; fCS = 100 kHz, DCCS = 50%, unless otherwise noted. Typical values are at TJ = +25 °C.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Minimum tON time",
+     "RMIN_TON = 0 Ω",
+     "tON_MIN",
+     "35",
+     "55",
+     "75",
+     "ns"
+    ],
+    [
+     "Minimum tON time",
+     "RMIN_TON = 0 Ω, DFN8, WDFN8",
+     "tON_MIN",
+     "25",
+     "50",
+     "75",
+     "ns"
+    ],
+    [
+     "Minimum tOFF time",
+     "RMIN_TOFF = 0 Ω",
+     "tOFF_MIN",
+     "190",
+     "245",
+     "290",
+     "ns"
+    ],
+    [
+     "Minimum tOFF time",
+     "RMIN_TOFF = 0 Ω, DFN8, WDFN8",
+     "tOFF_MIN",
+     "160",
+     "245",
+     "290",
+     "ns"
+    ],
+    [
+     "Minimum tON time",
+     "RMIN_TON = 10 kΩ",
+     "tON_MIN",
+     "0.92",
+     "1.00",
+     "1.08",
+     "µs"
+    ],
+    [
+     "Minimum tOFF time",
+     "RMIN_TOFF = 10 kΩ",
+     "tOFF_MIN",
+     "0.92",
+     "1.00",
+     "1.08",
+     "µs"
+    ],
+    [
+     "Minimum tON time",
+     "RMIN_TON = 50 kΩ",
+     "tON_MIN",
+     "4.62",
+     "5.00",
+     "5.38",
+     "µs"
+    ],
+    [
+     "Minimum tOFF time",
+     "RMIN_TOFF = 50 kΩ",
+     "tOFF_MIN",
+     "4.62",
+     "5.00",
+     "5.38",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: maximum tON adjust",
+   "page": 8,
+   "conditions": "−40 °C ≤ TJ ≤ 125 °C; VCC = 12 V; CDRV = 0 nF; RMIN_TON = RMIN_TOFF = 10 kΩ; VCS = −1 to +4 V; fCS = 100 kHz, DCCS = 50%, unless otherwise noted. Typical values are at TJ = +25 °C.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Maximum tON Time",
+     "VMAX_TON = 3 V",
+     "tON_MAX",
+     "4.3",
+     "4.8",
+     "5.3",
+     "µs"
+    ],
+    [
+     "Maximum tON Time",
+     "VMAX_TON = 0.3 V",
+     "tON_MAX",
+     "41",
+     "48",
+     "55",
+     "µs"
+    ],
+    [
+     "Maximum tON Output Current",
+     "VMAX_TON = 0.3 V",
+     "IMAX_TON",
+     "−105",
+     "−100",
+     "−95",
+     "µA"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "VCCON and VCCOFF levels, ver. A, D, Q",
+   "page": 9,
+   "conditions": "VCS = 0 V",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply voltage VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCCON",
+     "points": [
+      [
+       -40.0,
+       4.423
+      ],
+      [
+       25.0,
+       4.455
+      ],
+      [
+       125.0,
+       4.489
+      ]
+     ]
+    },
+    {
+     "label": "VCCOFF",
+     "points": [
+      [
+       -40.0,
+       3.924
+      ],
+      [
+       18.6,
+       3.947
+      ],
+      [
+       125.0,
+       3.975
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VCCON and VCCOFF levels, ver. B, C",
+   "page": 9,
+   "conditions": "VCS = 0 V",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply voltage VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCCON",
+     "points": [
+      [
+       -40.0,
+       8.737
+      ],
+      [
+       25.0,
+       8.802
+      ],
+      [
+       125.0,
+       8.871
+      ]
+     ]
+    },
+    {
+     "label": "VCCOFF",
+     "points": [
+      [
+       -40.0,
+       7.743
+      ],
+      [
+       25.0,
+       7.798
+      ],
+      [
+       125.0,
+       7.854
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current consumption against supply voltage, ver. D",
+   "page": 9,
+   "conditions": "CDRV = 0 nF, fCS = 500 kHz",
+   "x": {
+    "label": "Supply voltage VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = 125 °C",
+     "points": [
+      [
+       5.0,
+       3.476
+      ],
+      [
+       5.56,
+       3.844
+      ],
+      [
+       6.53,
+       4.797
+      ],
+      [
+       6.81,
+       4.883
+      ],
+      [
+       7.41,
+       4.93
+      ],
+      [
+       8.03,
+       4.849
+      ],
+      [
+       21.75,
+       4.814
+      ],
+      [
+       28.75,
+       4.894
+      ],
+      [
+       34.75,
+       5.05
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 85 °C",
+     "points": [
+      [
+       5.0,
+       3.445
+      ],
+      [
+       5.59,
+       3.69
+      ],
+      [
+       6.53,
+       4.47
+      ],
+      [
+       6.81,
+       4.552
+      ],
+      [
+       7.41,
+       4.608
+      ],
+      [
+       7.84,
+       4.534
+      ],
+      [
+       21.5,
+       4.564
+      ],
+      [
+       28.5,
+       4.675
+      ],
+      [
+       34.75,
+       4.861
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 55 °C",
+     "points": [
+      [
+       5.0,
+       3.45
+      ],
+      [
+       5.34,
+       3.499
+      ],
+      [
+       5.59,
+       3.589
+      ],
+      [
+       6.56,
+       4.243
+      ],
+      [
+       6.81,
+       4.302
+      ],
+      [
+       7.44,
+       4.366
+      ],
+      [
+       7.81,
+       4.294
+      ],
+      [
+       9.75,
+       4.33
+      ],
+      [
+       21.66,
+       4.385
+      ],
+      [
+       29.75,
+       4.547
+      ],
+      [
+       34.75,
+       4.696
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 25 °C",
+     "points": [
+      [
+       5.0,
+       3.462
+      ],
+      [
+       5.34,
+       3.484
+      ],
+      [
+       5.63,
+       3.564
+      ],
+      [
+       6.56,
+       4.098
+      ],
+      [
+       7.44,
+       4.216
+      ],
+      [
+       7.81,
+       4.152
+      ],
+      [
+       10.0,
+       4.208
+      ],
+      [
+       21.5,
+       4.319
+      ],
+      [
+       29.0,
+       4.439
+      ],
+      [
+       34.75,
+       4.604
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 0 °C",
+     "points": [
+      [
+       5.0,
+       3.474
+      ],
+      [
+       5.34,
+       3.488
+      ],
+      [
+       5.63,
+       3.549
+      ],
+      [
+       6.56,
+       3.983
+      ],
+      [
+       7.44,
+       4.095
+      ],
+      [
+       7.81,
+       4.032
+      ],
+      [
+       10.28,
+       4.123
+      ],
+      [
+       18.0,
+       4.269
+      ],
+      [
+       23.37,
+       4.295
+      ],
+      [
+       27.5,
+       4.349
+      ],
+      [
+       31.19,
+       4.435
+      ],
+      [
+       34.75,
+       4.559
+      ]
+     ]
+    },
+    {
+     "label": "TJ = −20 °C",
+     "points": [
+      [
+       5.0,
+       3.492
+      ],
+      [
+       5.59,
+       3.546
+      ],
+      [
+       6.56,
+       3.914
+      ],
+      [
+       7.44,
+       4.02
+      ],
+      [
+       7.81,
+       3.963
+      ],
+      [
+       10.75,
+       4.106
+      ],
+      [
+       16.75,
+       4.281
+      ],
+      [
+       22.5,
+       4.271
+      ],
+      [
+       28.25,
+       4.356
+      ],
+      [
+       34.75,
+       4.569
+      ]
+     ]
+    },
+    {
+     "label": "TJ = −40 °C",
+     "points": [
+      [
+       5.0,
+       3.518
+      ],
+      [
+       5.59,
+       3.57
+      ],
+      [
+       6.53,
+       3.87
+      ],
+      [
+       7.41,
+       3.971
+      ],
+      [
+       7.81,
+       3.917
+      ],
+      [
+       11.38,
+       4.177
+      ],
+      [
+       13.5,
+       4.276
+      ],
+      [
+       15.72,
+       4.318
+      ],
+      [
+       20.75,
+       4.29
+      ],
+      [
+       24.25,
+       4.314
+      ],
+      [
+       30.25,
+       4.448
+      ],
+      [
+       34.75,
+       4.628
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current consumption below UVLO, ver. D",
+   "page": 9,
+   "conditions": "VCC = VCCOFF − 0.1 V, VCS = 0 V",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC_UVLO",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICC_UVLO",
+     "points": [
+      [
+       -40.0,
+       72.0
+      ],
+      [
+       15.4,
+       76.4
+      ],
+      [
+       75.7,
+       79.1
+      ],
+      [
+       95.4,
+       78.0
+      ],
+      [
+       125.4,
+       73.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current consumption, ver. A",
+   "page": 9,
+   "conditions": "VCC = 12 V, VCS = −1 to 4 V, fCS = 500 kHz",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "CDRV = 10 nF",
+     "points": [
+      [
+       -40.0,
+       25.83
+      ],
+      [
+       -15.1,
+       26.03
+      ],
+      [
+       125.0,
+       26.4
+      ]
+     ]
+    },
+    {
+     "label": "CDRV = 1 nF",
+     "points": [
+      [
+       -40.0,
+       6.25
+      ],
+      [
+       39.9,
+       6.26
+      ],
+      [
+       125.0,
+       6.57
+      ]
+     ]
+    },
+    {
+     "label": "CDRV = 0 nF",
+     "points": [
+      [
+       -40.0,
+       4.17
+      ],
+      [
+       31.0,
+       4.23
+      ],
+      [
+       125.0,
+       4.82
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current consumption, ver. D",
+   "page": 9,
+   "conditions": "VCC = 12 V, VCS = −1 to 4 V, fCS = 500 kHz",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "CDRV = 10 nF",
+     "points": [
+      [
+       -40.0,
+       50.86
+      ],
+      [
+       -17.5,
+       50.84
+      ],
+      [
+       31.0,
+       51.58
+      ],
+      [
+       125.0,
+       51.45
+      ]
+     ]
+    },
+    {
+     "label": "CDRV = 1 nF",
+     "points": [
+      [
+       -40.0,
+       9.43
+      ],
+      [
+       125.0,
+       9.97
+      ]
+     ]
+    },
+    {
+     "label": "CDRV = 0 nF",
+     "points": [
+      [
+       -40.0,
+       4.54
+      ],
+      [
+       46.4,
+       4.71
+      ],
+      [
+       125.0,
+       5.27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CS current against junction temperature",
+   "page": 10,
+   "conditions": "VCS = −20 mV",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICS",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICS",
+     "points": [
+      [
+       -40.0,
+       -99.38
+      ],
+      [
+       -2.7,
+       -99.87
+      ],
+      [
+       39.9,
+       -100.16
+      ],
+      [
+       80.3,
+       -100.17
+      ],
+      [
+       125.0,
+       -99.93
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CS current against CS voltage",
+   "page": 10,
+   "conditions": "VCC = 12 V",
+   "x": {
+    "label": "CS voltage VCS",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICS",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = 125 °C",
+     "points": [
+      [
+       -1.0,
+       -1.125
+      ],
+      [
+       -0.782,
+       -0.73
+      ],
+      [
+       -0.625,
+       -0.47
+      ],
+      [
+       -0.531,
+       -0.333
+      ],
+      [
+       -0.433,
+       -0.23
+      ],
+      [
+       -0.25,
+       -0.108
+      ],
+      [
+       -0.22,
+       -0.1
+      ],
+      [
+       -0.05,
+       -0.1
+      ],
+      [
+       -0.014,
+       -0.107
+      ],
+      [
+       -0.003,
+       -0.092
+      ],
+      [
+       -0.003,
+       -0.009
+      ],
+      [
+       0.006,
+       0.003
+      ],
+      [
+       1.003,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 85 °C",
+     "points": [
+      [
+       -1.0,
+       -0.988
+      ],
+      [
+       -0.813,
+       -0.649
+      ],
+      [
+       -0.625,
+       -0.349
+      ],
+      [
+       -0.531,
+       -0.226
+      ],
+      [
+       -0.5,
+       -0.195
+      ],
+      [
+       -0.433,
+       -0.151
+      ],
+      [
+       -0.363,
+       -0.126
+      ],
+      [
+       -0.233,
+       -0.098
+      ],
+      [
+       -0.05,
+       -0.101
+      ],
+      [
+       -0.014,
+       -0.107
+      ],
+      [
+       -0.003,
+       -0.092
+      ],
+      [
+       -0.003,
+       -0.009
+      ],
+      [
+       0.006,
+       0.003
+      ],
+      [
+       1.003,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 55 °C",
+     "points": [
+      [
+       -1.0,
+       -0.867
+      ],
+      [
+       -0.844,
+       -0.583
+      ],
+      [
+       -0.75,
+       -0.432
+      ],
+      [
+       -0.625,
+       -0.259
+      ],
+      [
+       -0.531,
+       -0.159
+      ],
+      [
+       -0.468,
+       -0.119
+      ],
+      [
+       -0.398,
+       -0.102
+      ],
+      [
+       -0.15,
+       -0.1
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 25 °C",
+     "points": [
+      [
+       -1.0,
+       -0.779
+      ],
+      [
+       -0.844,
+       -0.496
+      ],
+      [
+       -0.75,
+       -0.353
+      ],
+      [
+       -0.625,
+       -0.209
+      ],
+      [
+       -0.563,
+       -0.155
+      ],
+      [
+       -0.5,
+       -0.115
+      ],
+      [
+       -0.468,
+       -0.103
+      ],
+      [
+       -0.398,
+       -0.093
+      ],
+      [
+       -0.25,
+       -0.1
+      ],
+      [
+       -0.05,
+       -0.1
+      ],
+      [
+       -0.014,
+       -0.107
+      ],
+      [
+       -0.003,
+       -0.092
+      ],
+      [
+       -0.003,
+       -0.009
+      ],
+      [
+       0.006,
+       0.003
+      ],
+      [
+       1.003,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 0 °C",
+     "points": [
+      [
+       -1.0,
+       -0.69
+      ],
+      [
+       -0.844,
+       -0.414
+      ],
+      [
+       -0.75,
+       -0.28
+      ],
+      [
+       -0.656,
+       -0.19
+      ],
+      [
+       -0.594,
+       -0.149
+      ],
+      [
+       -0.531,
+       -0.119
+      ],
+      [
+       -0.468,
+       -0.098
+      ],
+      [
+       -0.398,
+       -0.092
+      ],
+      [
+       -0.25,
+       -0.1
+      ],
+      [
+       -0.05,
+       -0.1
+      ],
+      [
+       -0.014,
+       -0.107
+      ],
+      [
+       -0.003,
+       -0.092
+      ],
+      [
+       -0.003,
+       -0.009
+      ],
+      [
+       0.006,
+       0.003
+      ],
+      [
+       0.55,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "TJ = −20 °C",
+     "points": [
+      [
+       -1.0,
+       -0.62
+      ],
+      [
+       -0.844,
+       -0.353
+      ],
+      [
+       -0.75,
+       -0.229
+      ],
+      [
+       -0.656,
+       -0.158
+      ],
+      [
+       -0.563,
+       -0.12
+      ],
+      [
+       -0.468,
+       -0.097
+      ],
+      [
+       -0.398,
+       -0.093
+      ],
+      [
+       -0.05,
+       -0.1
+      ],
+      [
+       -0.014,
+       -0.107
+      ],
+      [
+       -0.003,
+       -0.092
+      ],
+      [
+       -0.003,
+       -0.009
+      ],
+      [
+       0.006,
+       0.003
+      ],
+      [
+       1.003,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "TJ = −40 °C",
+     "points": [
+      [
+       -1.0,
+       -0.55
+      ],
+      [
+       -0.813,
+       -0.262
+      ],
+      [
+       -0.75,
+       -0.194
+      ],
+      [
+       -0.688,
+       -0.15
+      ],
+      [
+       -0.594,
+       -0.118
+      ],
+      [
+       -0.468,
+       -0.097
+      ],
+      [
+       -0.05,
+       -0.099
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current against CS voltage",
+   "page": 10,
+   "conditions": "VCC = 12 V",
+   "x": {
+    "label": "CS voltage VCS",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = 125 °C",
+     "points": [
+      [
+       -4.0,
+       2.486
+      ],
+      [
+       -3.438,
+       2.297
+      ],
+      [
+       -1.625,
+       1.842
+      ],
+      [
+       -1.125,
+       1.745
+      ],
+      [
+       -0.531,
+       1.668
+      ],
+      [
+       -0.099,
+       1.661
+      ],
+      [
+       -0.054,
+       1.645
+      ],
+      [
+       0.013,
+       1.881
+      ],
+      [
+       3.799,
+       1.87
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 85 °C",
+     "points": [
+      [
+       -4.0,
+       2.518
+      ],
+      [
+       -3.687,
+       2.435
+      ],
+      [
+       -2.251,
+       2.137
+      ],
+      [
+       -1.344,
+       1.982
+      ],
+      [
+       -0.594,
+       1.886
+      ],
+      [
+       -0.106,
+       1.885
+      ],
+      [
+       -0.057,
+       1.869
+      ],
+      [
+       0.013,
+       1.951
+      ],
+      [
+       3.799,
+       1.926
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 55 °C",
+     "points": [
+      [
+       -4.0,
+       2.535
+      ],
+      [
+       -3.719,
+       2.429
+      ],
+      [
+       -2.75,
+       2.254
+      ],
+      [
+       -1.594,
+       2.061
+      ],
+      [
+       -0.688,
+       1.947
+      ],
+      [
+       -0.467,
+       1.937
+      ],
+      [
+       -0.106,
+       1.952
+      ],
+      [
+       -0.057,
+       1.94
+      ],
+      [
+       0.004,
+       1.981
+      ],
+      [
+       0.519,
+       1.986
+      ],
+      [
+       0.956,
+       1.971
+      ],
+      [
+       3.799,
+       1.968
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 25 °C",
+     "points": [
+      [
+       -4.0,
+       2.538
+      ],
+      [
+       -3.75,
+       2.431
+      ],
+      [
+       -3.469,
+       2.373
+      ],
+      [
+       -1.749,
+       2.093
+      ],
+      [
+       -0.751,
+       1.968
+      ],
+      [
+       -0.467,
+       1.96
+      ],
+      [
+       -0.106,
+       1.975
+      ],
+      [
+       -0.057,
+       1.965
+      ],
+      [
+       0.008,
+       2.003
+      ],
+      [
+       0.519,
+       2.007
+      ],
+      [
+       0.894,
+       1.993
+      ],
+      [
+       3.799,
+       1.992
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 0 °C",
+     "points": [
+      [
+       -4.0,
+       2.537
+      ],
+      [
+       -3.75,
+       2.434
+      ],
+      [
+       -3.438,
+       2.352
+      ],
+      [
+       -2.001,
+       2.129
+      ],
+      [
+       -0.813,
+       1.98
+      ],
+      [
+       -0.467,
+       1.972
+      ],
+      [
+       -0.106,
+       1.988
+      ],
+      [
+       -0.057,
+       1.979
+      ],
+      [
+       0.008,
+       2.018
+      ],
+      [
+       0.487,
+       2.022
+      ],
+      [
+       0.894,
+       2.007
+      ],
+      [
+       3.799,
+       2.007
+      ]
+     ]
+    },
+    {
+     "label": "TJ = −20 °C",
+     "points": [
+      [
+       -4.0,
+       2.535
+      ],
+      [
+       -3.562,
+       2.379
+      ],
+      [
+       -3.22,
+       2.305
+      ],
+      [
+       -1.656,
+       2.077
+      ],
+      [
+       -0.813,
+       1.982
+      ],
+      [
+       -0.499,
+       1.978
+      ],
+      [
+       -0.112,
+       1.994
+      ],
+      [
+       -0.057,
+       1.986
+      ],
+      [
+       0.013,
+       2.03
+      ],
+      [
+       0.55,
+       2.033
+      ],
+      [
+       0.862,
+       2.018
+      ],
+      [
+       3.799,
+       2.019
+      ]
+     ]
+    },
+    {
+     "label": "TJ = −40 °C",
+     "points": [
+      [
+       -4.0,
+       2.528
+      ],
+      [
+       -3.501,
+       2.367
+      ],
+      [
+       -3.094,
+       2.276
+      ],
+      [
+       -1.812,
+       2.09
+      ],
+      [
+       -0.906,
+       1.988
+      ],
+      [
+       -0.562,
+       1.979
+      ],
+      [
+       -0.099,
+       1.998
+      ],
+      [
+       -0.063,
+       1.988
+      ],
+      [
+       0.013,
+       2.042
+      ],
+      [
+       0.55,
+       2.044
+      ],
+      [
+       0.862,
+       2.028
+      ],
+      [
+       3.799,
+       2.029
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CS turn-on threshold",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTH_CS_ON",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTH_CS_ON",
+     "points": [
+      [
+       -40.0,
+       -71.2
+      ],
+      [
+       12.2,
+       -72.0
+      ],
+      [
+       125.0,
+       -72.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CS turn-off threshold",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTH_CS_OFF",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTH_CS_OFF",
+     "points": [
+      [
+       -40.0,
+       -0.496
+      ],
+      [
+       -20.0,
+       -0.476
+      ],
+      [
+       2.9,
+       -0.525
+      ],
+      [
+       28.1,
+       -0.504
+      ],
+      [
+       80.3,
+       -0.506
+      ],
+      [
+       101.0,
+       -0.581
+      ],
+      [
+       125.4,
+       -0.725
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CS reset threshold against junction temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTH_CS_RESET",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTH_CS_RESET",
+     "points": [
+      [
+       -39.9,
+       0.4804
+      ],
+      [
+       124.5,
+       0.4884
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CS reset threshold against supply voltage",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTH_CS_RESET",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTH_CS_RESET",
+     "points": [
+      [
+       3.94,
+       0.4784
+      ],
+      [
+       34.66,
+       0.4794
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CS leakage current",
+   "page": 11,
+   "conditions": "VCS = 150 V",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICS_LEAKAGE",
+    "unit": "nA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICS_LEAKAGE",
+     "points": [
+      [
+       -40.0,
+       -0.5
+      ],
+      [
+       50.0,
+       1.0
+      ],
+      [
+       71.1,
+       -0.2
+      ],
+      [
+       80.3,
+       0.8
+      ],
+      [
+       90.0,
+       4.3
+      ],
+      [
+       106.6,
+       13.7
+      ],
+      [
+       117.0,
+       21.5
+      ],
+      [
+       125.0,
+       30.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Propagation delay from CS to DRV output on",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tPD_ON",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tPD_ON",
+     "points": [
+      [
+       -40.0,
+       31.66
+      ],
+      [
+       2.9,
+       33.74
+      ],
+      [
+       80.3,
+       38.74
+      ],
+      [
+       125.0,
+       42.03
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Propagation delay from CS to DRV output off",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tPD_OFF",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tPD_OFF",
+     "points": [
+      [
+       -40.1,
+       11.32
+      ],
+      [
+       125.0,
+       14.37
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum on-time, RMIN_TON = 0 Ω",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TON",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TON",
+     "points": [
+      [
+       -40.0,
+       57.1
+      ],
+      [
+       -2.8,
+       55.8
+      ],
+      [
+       39.9,
+       53.93
+      ],
+      [
+       66.6,
+       53.01
+      ],
+      [
+       95.4,
+       52.39
+      ],
+      [
+       125.4,
+       52.17
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum on-time, RMIN_TON = 10 kΩ, against junction temperature",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TON",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TON",
+     "points": [
+      [
+       -40.0,
+       1.0016
+      ],
+      [
+       -5.4,
+       1.0014
+      ],
+      [
+       36.9,
+       0.9999
+      ],
+      [
+       85.0,
+       0.9973
+      ],
+      [
+       125.4,
+       0.9942
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum on-time, RMIN_TON = 50 kΩ",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TON",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TON",
+     "points": [
+      [
+       -40.0,
+       5.0001
+      ],
+      [
+       50.0,
+       5.0004
+      ],
+      [
+       125.0,
+       4.991
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum off-time, RMIN_TOFF = 0 Ω",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TOFF",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TOFF",
+     "points": [
+      [
+       -40.0,
+       257.8
+      ],
+      [
+       5.9,
+       248.0
+      ],
+      [
+       33.9,
+       243.3
+      ],
+      [
+       66.5,
+       238.7
+      ],
+      [
+       89.9,
+       236.4
+      ],
+      [
+       125.0,
+       235.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum off-time, RMIN_TOFF = 10 kΩ, against junction temperature",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TOFF",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TOFF",
+     "points": [
+      [
+       -40.0,
+       0.9974
+      ],
+      [
+       25.0,
+       0.999
+      ],
+      [
+       85.0,
+       0.9957
+      ],
+      [
+       125.0,
+       0.9961
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum off-time, RMIN_TOFF = 50 kΩ",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TOFF",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TOFF",
+     "points": [
+      [
+       -40.0,
+       4.9979
+      ],
+      [
+       125.0,
+       4.9859
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum on-time, RMIN_TON = 10 kΩ, against supply voltage",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TON",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TON",
+     "points": [
+      [
+       4.0,
+       1.00047
+      ],
+      [
+       5.75,
+       1.00141
+      ],
+      [
+       7.0,
+       1.00157
+      ],
+      [
+       14.35,
+       1.00051
+      ],
+      [
+       25.0,
+       1.00027
+      ],
+      [
+       35.0,
+       0.99949
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Minimum off-time, RMIN_TOFF = 10 kΩ, against supply voltage",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TOFF",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TOFF",
+     "points": [
+      [
+       4.0,
+       1.006
+      ],
+      [
+       6.0,
+       1.003
+      ],
+      [
+       7.75,
+       1.002
+      ],
+      [
+       10.01,
+       1.003
+      ],
+      [
+       17.19,
+       1.0019
+      ],
+      [
+       35.0,
+       1.003
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Driver output voltage, ver. B, D and Q",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VDRV",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 12 V, CDRV = 0 nF",
+     "points": [
+      [
+       -40.1,
+       9.389
+      ],
+      [
+       -17.5,
+       9.452
+      ],
+      [
+       25.0,
+       9.528
+      ],
+      [
+       85.0,
+       9.547
+      ],
+      [
+       125.4,
+       9.569
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 12 V, CDRV = 1 nF",
+     "points": [
+      [
+       -40.1,
+       9.366
+      ],
+      [
+       12.2,
+       9.494
+      ],
+      [
+       36.9,
+       9.539
+      ],
+      [
+       66.6,
+       9.561
+      ],
+      [
+       125.4,
+       9.575
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 12 V, CDRV = 10 nF",
+     "points": [
+      [
+       -40.1,
+       9.397
+      ],
+      [
+       12.2,
+       9.489
+      ],
+      [
+       39.9,
+       9.524
+      ],
+      [
+       66.6,
+       9.538
+      ],
+      [
+       125.4,
+       9.55
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 35 V, CDRV = 0 nF",
+     "points": [
+      [
+       -40.1,
+       9.383
+      ],
+      [
+       -15.1,
+       9.47
+      ],
+      [
+       36.9,
+       9.571
+      ],
+      [
+       66.6,
+       9.602
+      ],
+      [
+       125.4,
+       9.63
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 35 V, CDRV = 1 nF",
+     "points": [
+      [
+       -40.1,
+       9.34
+      ],
+      [
+       -5.3,
+       9.431
+      ],
+      [
+       39.9,
+       9.516
+      ],
+      [
+       71.1,
+       9.553
+      ],
+      [
+       125.4,
+       9.597
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 35 V, CDRV = 10 nF",
+     "points": [
+      [
+       -40.1,
+       9.389
+      ],
+      [
+       -17.5,
+       9.452
+      ],
+      [
+       25.0,
+       9.528
+      ],
+      [
+       85.0,
+       9.547
+      ],
+      [
+       125.4,
+       9.569
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Driver output voltage, ver. A and C",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VDRV",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 12 V, CDRV = 0 nF",
+     "points": [
+      [
+       -40.1,
+       4.717
+      ],
+      [
+       -5.3,
+       4.749
+      ],
+      [
+       36.9,
+       4.77
+      ],
+      [
+       75.7,
+       4.768
+      ],
+      [
+       125.0,
+       4.751
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 12 V, CDRV = 1 nF",
+     "points": [
+      [
+       -40.1,
+       4.665
+      ],
+      [
+       -7.9,
+       4.692
+      ],
+      [
+       33.9,
+       4.71
+      ],
+      [
+       125.4,
+       4.712
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 12 V, CDRV = 10 nF",
+     "points": [
+      [
+       -40.1,
+       4.629
+      ],
+      [
+       -7.9,
+       4.656
+      ],
+      [
+       36.9,
+       4.675
+      ],
+      [
+       125.4,
+       4.676
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 35 V, CDRV = 0 nF",
+     "points": [
+      [
+       -40.1,
+       4.69
+      ],
+      [
+       -12.7,
+       4.712
+      ],
+      [
+       46.4,
+       4.746
+      ],
+      [
+       125.0,
+       4.765
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 35 V, CDRV = 1 nF",
+     "points": [
+      [
+       -40.1,
+       4.627
+      ],
+      [
+       53.9,
+       4.694
+      ],
+      [
+       125.0,
+       4.731
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 35 V, CDRV = 10 nF",
+     "points": [
+      [
+       -40.1,
+       4.586
+      ],
+      [
+       53.9,
+       4.653
+      ],
+      [
+       125.0,
+       4.69
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum on-time against MAX_TON voltage, ver. Q",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "VMAX_TON",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMAX_TON",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = 85 °C",
+     "points": [
+      [
+       0.29,
+       50.03
+      ],
+      [
+       0.375,
+       38.53
+      ],
+      [
+       0.438,
+       32.98
+      ],
+      [
+       0.525,
+       27.52
+      ],
+      [
+       0.612,
+       23.61
+      ],
+      [
+       0.7,
+       20.69
+      ],
+      [
+       0.812,
+       17.83
+      ],
+      [
+       0.937,
+       15.44
+      ],
+      [
+       1.088,
+       13.32
+      ],
+      [
+       1.263,
+       11.48
+      ],
+      [
+       1.462,
+       9.92
+      ],
+      [
+       1.7,
+       8.53
+      ],
+      [
+       2.238,
+       6.48
+      ],
+      [
+       3.005,
+       4.77
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum on-time, VMAX_TON = 3 V, ver. Q",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMAX_TON",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMAX_TON",
+     "points": [
+      [
+       -40.0,
+       4.8112
+      ],
+      [
+       9.0,
+       4.8061
+      ],
+      [
+       39.9,
+       4.8103
+      ],
+      [
+       125.0,
+       4.8592
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum on-time, VMAX_TON = 0.3 V, ver. Q",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMAX_TON",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMAX_TON",
+     "points": [
+      [
+       -40.0,
+       48.09
+      ],
+      [
+       12.2,
+       48.02
+      ],
+      [
+       46.4,
+       48.07
+      ],
+      [
+       85.0,
+       48.28
+      ],
+      [
+       125.0,
+       48.67
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MIN_TON adjust characteristic",
+   "page": 21,
+   "conditions": "",
+   "x": {
+    "label": "RMIN_TON",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TON",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TON",
+     "points": [
+      [
+       0.03,
+       0.099
+      ],
+      [
+       10.0,
+       1.006
+      ],
+      [
+       29.99,
+       3.046
+      ],
+      [
+       100.0,
+       9.999
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MIN_TOFF adjust characteristic",
+   "page": 21,
+   "conditions": "",
+   "x": {
+    "label": "RMIN_TOFF",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tMIN_TOFF",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tMIN_TOFF",
+     "points": [
+      [
+       0.04,
+       0.184
+      ],
+      [
+       2.0,
+       0.192
+      ],
+      [
+       100.03,
+       9.994
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "llc",
+   "title": "LLC converter with two synchronous rectifiers",
+   "page": 2,
+   "description": "A half-bridge LLC stage: M1 and M2, run by the LLC controller, drive the primary N1 of TR1 through the series capacitor C1. The secondary is two windings N2 and N3 joined at a centre tap that is the output. Each outer end goes through its own SR MOSFET (M3, M4) to the return, and each MOSFET has its own NCP4308: CS on the drain, GND on the source, DRV on the gate, VCC from the output with C3 or C4 from VCC to GND, and the two timing resistors from MIN_TON and MIN_TOFF to GND. C2 holds the output. Regulation goes back to the primary through the zener D1 and the optocoupler OK1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP4308"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "NCP4308"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "LLC stage control",
+     "external": true
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "",
+     "note": "high-side primary switch"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "",
+     "note": "low-side primary switch"
+    },
+    {
+     "ref": "TR1",
+     "type": "other",
+     "value": "",
+     "note": "transformer; N1 primary (N1_1 dotted), N2 and N3 secondaries (N2_1, N3_1 dotted)"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "in series with N1"
+    },
+    {
+     "ref": "M3",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET, N2 side"
+    },
+    {
+     "ref": "M4",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET, N3 side"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor, polarised"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "U1 VCC decoupling"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "U2 VCC decoupling"
+    },
+    {
+     "ref": "RMIN_TOFF1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RMIN_TON1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RMIN_TOFF2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RMIN_TON2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": ""
+    },
+    {
+     "ref": "OK1",
+     "type": "other",
+     "value": "",
+     "note": "optocoupler; A/K LED, C/E phototransistor"
+    },
+    {
+     "ref": "VBULK",
+     "type": "terminal",
+     "value": "+Vbulk"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "+Vout"
+    },
+    {
+     "ref": "RTN",
+     "type": "terminal",
+     "value": "RTN"
+    }
+   ],
+   "notes": [
+    "M1 and M2 each have a diode from source to drain.",
+    "U1 GND and U2 GND each run to their own MOSFET's source."
+   ]
+  },
+  {
+   "id": "flyback",
+   "title": "DCM, CCM or QR flyback with secondary synchronous rectifier",
+   "page": 2,
+   "description": "A single-switch flyback. On the primary, M1 switches TR1 from the bulk rail, R2 senses its current for the flyback controller, R1, C2 and D3 clamp the drain, and the auxiliary winding feeds the controller's VCC through D4 into C3. On the secondary, the SR MOSFET M2 sits in the return leg. The NCP4308 takes VCC from the output with C4 to GND, senses M2's drain through R5 (the threshold-shift resistor), returns GND to M2's source, drives M2's gate, and has R3 and R4 as its MIN_TOFF and MIN_TON resistors. C5 holds the output; D5 and OK1 carry the feedback.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP4308"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "flyback control circuitry",
+     "external": true
+    },
+    {
+     "ref": "TR1",
+     "type": "other",
+     "value": "",
+     "note": "transformer; P1/P2 primary (P2 dotted), S1/S2 secondary (S1 dotted), A1/A2 auxiliary (A1 dotted)"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "bulk input, polarised"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "D4",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "controller VCC, polarised"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "",
+     "note": "primary switch"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "primary current sense"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "NCP4308 VCC decoupling"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor, polarised"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "RMIN_TOFF"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "RMIN_TON"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "",
+     "note": "RSHIFT_CS"
+    },
+    {
+     "ref": "D5",
+     "type": "zener",
+     "value": ""
+    },
+    {
+     "ref": "OK1",
+     "type": "other",
+     "value": "",
+     "note": "optocoupler; A/K LED, C/E phototransistor"
+    },
+    {
+     "ref": "VBULK",
+     "type": "terminal",
+     "value": "Vbulk"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "+Vout"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": [
+    "U1 GND and C4 return to M2's source by their own trace."
+   ]
+  },
+  {
+   "id": "primary-side-flyback",
+   "title": "Primary-side regulated flyback with secondary synchronous rectifier",
+   "page": 3,
+   "description": "A flyback regulated from the primary: the controller reads the auxiliary winding through the divider R3, R4 (filtered by C4) on its ZCD pin, and its COMP pin carries C5 and the series R5, C6 to ground. M1 switches TR1, R2 senses current, R1, C2 and D3 clamp the drain, and D4 with C3 feeds the controller's VCC from the auxiliary winding. There is no optocoupler. The secondary is the same SR stage as the plain flyback: M2 in the return leg, the NCP4308 on the output with C7 across VCC and GND, R8 in series with CS, R7 and R6 on MIN_TOFF and MIN_TON. C10 holds the output.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP4308"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "primary side flyback controller",
+     "external": true
+    },
+    {
+     "ref": "TR1",
+     "type": "other",
+     "value": "",
+     "note": "transformer; P1/P2 primary (P2 dotted), S1/S2 secondary (S1 dotted), A1/A2 auxiliary (A1 dotted)"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "bulk input, polarised"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "D4",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "controller VCC, polarised"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "",
+     "note": "primary switch"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "primary current sense"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "",
+     "note": "NCP4308 VCC decoupling"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor, polarised"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "",
+     "note": "RMIN_TOFF"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "",
+     "note": "RMIN_TON"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "",
+     "note": "RSHIFT_CS"
+    },
+    {
+     "ref": "VBULK",
+     "type": "terminal",
+     "value": "Vbulk"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "+Vout"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "qr-max-ton",
+   "title": "QR flyback forced into CCM at heavy load by MAX_TON (NCP4308Q)",
+   "page": 3,
+   "description": "A quasi-resonant flyback with the Q version on the secondary. The SR stage is as in the plain flyback (M3 in the return leg, R8 in series with CS, R9 and R10 on MIN_TOFF and MIN_TON, C5 across VCC and GND), and the divider R11, R12 from the output sets the MAX_TON pin. DRV also drives the small pulse transformer TR2 through C6. On the primary, TR2's winding drives the gate of M2 through R7, clamped by the zener D5; M2 pulls the controller's ZCD node to ground, so the end of SR conduction at tMAX_TON acts as a ZCD event for the controller and lets the primary turn on in CCM. The ZCD node also takes the auxiliary winding through R3 and R4 (D4 across R4), with R6 and C3 to ground. M1 is driven through R1 with D1 across it, R2 senses current, R5, C2 and D2 clamp the drain, and D3 with C4 feeds VCC. Feedback goes through the zener D6 and OK1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP4308Q"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "QR control circuitry",
+     "external": true
+    },
+    {
+     "ref": "TR1",
+     "type": "other",
+     "value": "",
+     "note": "transformer; P1/P2 primary (P2 dotted), S1/S2 secondary (S1 dotted), A1/A2 auxiliary (A1 dotted)"
+    },
+    {
+     "ref": "TR2",
+     "type": "other",
+     "value": "",
+     "note": "pulse transformer; P1/P2 primary side (P1 dotted), S1/S2 secondary side (S1 dotted)"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "bulk input, polarised"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "controller VCC, polarised"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "gate resistor"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "",
+     "note": "across R1"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "",
+     "note": "primary switch"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "primary current sense"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "D4",
+     "type": "diode",
+     "value": "",
+     "note": "across R4"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "",
+     "note": "pulls ZCD low on the MAX_TON signal"
+    },
+    {
+     "ref": "D5",
+     "type": "zener",
+     "value": ""
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "",
+     "note": "couples DRV to TR2"
+    },
+    {
+     "ref": "M3",
+     "type": "nmos",
+     "value": "",
+     "note": "SR MOSFET"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "",
+     "note": "NCP4308 VCC decoupling"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor, polarised"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "",
+     "note": "RMIN_TOFF"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "",
+     "note": "RMIN_TON"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "",
+     "note": "RSHIFT_CS"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "",
+     "note": "MAX_TON divider, upper"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "",
+     "note": "MAX_TON divider, lower"
+    },
+    {
+     "ref": "D6",
+     "type": "zener",
+     "value": ""
+    },
+    {
+     "ref": "OK1",
+     "type": "other",
+     "value": "",
+     "note": "optocoupler; A/K LED, C/E phototransistor"
+    },
+    {
+     "ref": "VBULK",
+     "type": "terminal",
+     "value": "Vbulk"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "+Vout"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "min-ton-modulation",
+   "title": "Modulating the minimum on-time with an NPN transistor",
+   "page": 22,
+   "description": "RMIN_TON sets the base blanking time from MIN_TON to GND. A second resistor RMIN_TON_2 from the same pin goes to ground through the NPN Q1; the voltage on Q1's base switches or throttles that path, drawing extra current from the pin and so changing the blanking time. The control signal can come from load current, the feedback voltage or another quantity. MIN_TOFF can be modulated the same way.",
+   "parts": [
+    {
+     "ref": "MIN_TON",
+     "type": "terminal",
+     "value": "NCP4308 MIN_TON pin"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "NCP4308 GND pin"
+    },
+    {
+     "ref": "RMIN_TON",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RMIN_TON_2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Q1",
+     "type": "npn",
+     "value": ""
+    },
+    {
+     "ref": "MOD",
+     "type": "terminal",
+     "value": "MIN_TON modulation voltage input"
+    },
+    {
+     "ref": "RET",
+     "type": "terminal",
+     "value": "modulation input return"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "max-ton-setting",
+   "title": "Setting and modulating the maximum on-time (NCP4308Q)",
+   "page": 23,
+   "description": "RMAX_TON from MAX_TON to GND carries the pin's 100 µA source current and so sets the MAX_TON voltage and the maximum on-time. The optional RA from VOUT makes the maximum on-time depend on VOUT, so it can be longer when VOUT is low during hard overload or start-up.",
+   "parts": [
+    {
+     "ref": "MAX_TON",
+     "type": "terminal",
+     "value": "NCP4308Q MAX_TON pin"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "NCP4308Q GND pin"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "RMAX_TON",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RA",
+     "type": "resistor",
+     "value": "",
+     "note": "optional"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "CS offset voltage",
+   "expr": "VRSHIFT_CS = RSHIFT_CS × ICS",
+   "where": {
+    "RSHIFT_CS": "optional resistor in series with CS",
+    "ICS": "CS bias current, −100 µA typ"
+   },
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "Turn-on threshold seen at the drain",
+   "expr": "VCS_TURN_ON = VTH_CS_ON − RSHIFT_CS × ICS",
+   "where": {
+    "VTH_CS_ON": "turn-on CS threshold, −75 mV typ"
+   },
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "Turn-off threshold seen at the drain",
+   "expr": "VCS_TURN_OFF = VTH_CS_OFF − RSHIFT_CS × ICS",
+   "where": {
+    "VTH_CS_OFF": "turn-off CS threshold, −1 mV to 0 mV"
+   },
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "Reset threshold seen at the drain",
+   "expr": "VCS_RESET = VTH_CS_RESET − RSHIFT_CS × ICS",
+   "where": {
+    "VTH_CS_RESET": "turn-off timer reset threshold, 0.5 V typ"
+   },
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "MIN_TON resistor current",
+   "expr": "IR_MIN_TON = Vref / RMIN_TON",
+   "where": {
+    "Vref": "internal reference held on the pin",
+    "RMIN_TON": "resistor from MIN_TON to GND"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Minimum on-time from the timing capacitor",
+   "expr": "tMIN_TON = Ct × Vref / IR_MIN_TON = Ct × RMIN_TON",
+   "where": {
+    "Ct": "internal timing capacitor"
+   },
+   "note": "Holds when the timing capacitor is charged with the resistor current itself; the part charges it with a scaled copy set by its current mirror ratio.",
+   "page": 21
+  },
+  {
+   "name": "Minimum on-time",
+   "expr": "tMIN_TON = 1.00 × 10^−4 × RMIN_TON [µs]",
+   "where": {
+    "RMIN_TON": "in Ω"
+   },
+   "note": "Loses accuracy near the shortest times because of the timing comparator's delay.",
+   "page": 21
+  },
+  {
+   "name": "Minimum off-time",
+   "expr": "tMIN_TOFF = 1.00 × 10^−4 × RMIN_TOFF [µs]",
+   "where": {
+    "RMIN_TOFF": "in Ω"
+   },
+   "note": "Loses accuracy near the shortest times because of the timing comparator's delay.",
+   "page": 21
+  },
+  {
+   "name": "Total gate drive loss",
+   "expr": "PDRV_total = VCC × VCLAMP × Cg_ZVS × fSW",
+   "where": {
+    "VCC": "NCP4308 supply voltage",
+    "VCLAMP": "driver clamp voltage",
+    "Cg_ZVS": "MOSFET gate-source capacitance under zero-voltage switching",
+    "fSW": "switching frequency"
+   },
+   "note": "Shared between the IC, any external gate resistor and the MOSFET's internal gate resistance.",
+   "page": 24
+  },
+  {
+   "name": "Driver loss inside the IC",
+   "expr": "PDRV_IC = ½ × Cg_ZVS × VCLAMP² × fSW × RDRV_SINK_EQ / (RDRV_SINK_EQ + RG_EXT + Rg_int) + Cg_ZVS × VCLAMP × fSW × (VCC − VCLAMP) + ½ × Cg_ZVS × VCLAMP² × fSW × RDRV_SOURCE_EQ / (RDRV_SOURCE_EQ + RG_EXT + Rg_int)",
+   "where": {
+    "RDRV_SINK_EQ": "equivalent low-side driver resistance, 0.5 Ω",
+    "RDRV_SOURCE_EQ": "equivalent high-side driver resistance, 1.2 Ω",
+    "RG_EXT": "external gate resistor, if any",
+    "Rg_int": "MOSFET internal gate resistance"
+   },
+   "note": "Models the clamped high side as a switch resistance with a series voltage source.",
+   "page": 25
+  },
+  {
+   "name": "IC consumption loss",
+   "expr": "PCC = VCC × ICC",
+   "where": {
+    "ICC": "supply current measured with CDRV = 0 nF, switching at the target frequency with the chosen MIN_TON and MIN_TOFF resistors"
+   },
+   "note": "",
+   "page": 25
+  },
+  {
+   "name": "Die temperature",
+   "expr": "TDIE = (PDRV_IC + PCC) × RθJA + TA",
+   "where": {
+    "RθJA": "junction-to-ambient thermal resistance",
+    "TA": "ambient temperature"
+   },
+   "note": "",
+   "page": 25
+  },
+  {
+   "name": "MOSFET capacitances",
+   "expr": "Ciss = Cgs + Cgd; Crss = Cgd; Coss = Cds + Cgd",
+   "where": {
+    "Cgs": "gate-source capacitance",
+    "Cgd": "gate-drain capacitance",
+    "Cds": "drain-source capacitance"
+   },
+   "note": "",
+   "page": 24
+  }
+ ],
+ "operation": [
+  {
+   "topic": "What it does",
+   "page": 14,
+   "text": "The NCP4308 runs a synchronous rectifier MOSFET on the secondary of a switch-mode supply, either on its own or alongside a primary controller. It decides from the MOSFET's drain-source voltage alone when to switch on and off, so it works in CCM, DCM and QR flyback and in LLC converters. A 0 mV turn-off threshold and an 8 A sink driver let the MOSFET conduct for nearly the whole of the secondary current pulse. The 5 V clamp versions (A, C) are offered for driving GaN transistors."
+  },
+  {
+   "topic": "Applications",
+   "page": 1,
+   "text": "Notebook adapters, compact AC/DC chargers for phones, LCD TV supplies and any switch-mode supply that needs high efficiency."
+  },
+  {
+   "topic": "Supply",
+   "page": 14,
+   "text": "VCC runs from about 4 V (A, D, Q) or 8 V (B, C) to 35 V, so the chip can sit straight on the output of most adapters. Below VCCOFF the chip draws 75 µA typ. After VCC first rises past VCCON there is a start-up delay of 75 µs typ."
+  },
+  {
+   "topic": "Driver with no supply",
+   "page": 14,
+   "text": "When VCC is missing, drain swings coupled through the MOSFET's gate-drain capacitance would lift the gate. The chip uses that pulse on DRV to power its sink transistor, holding the gate low (not to zero) until VCC is present."
+  },
+  {
+   "topic": "Turn-on",
+   "page": 14,
+   "text": "When the secondary voltage reverses, the MOSFET's body diode conducts and the drain falls to about −1 V. CS sources 100 µA; once the CS voltage is below VTH_CS_ON (−75 mV typ) the driver turns the MOSFET on. A minimum on-time, set by RMIN_TON, then blanks the turn-off comparator so ringing cannot switch the MOSFET off early."
+  },
+  {
+   "topic": "Turn-off and threshold shift",
+   "page": 15,
+   "text": "The MOSFET turns off when CS rises above VTH_CS_OFF (−0.5 mV typ), less any drop across the optional RSHIFT_CS. The turn-off current therefore depends on the MOSFET's RDS(on). The 100 µA bias through RSHIFT_CS raises the turn-on, turn-off and reset thresholds referred to the drain; its effect on turn-off matters most. Shorting RSHIFT_CS is recommended. With a 1 mΩ MOSFET, a −10 mV threshold would leave 10 A flowing at turn-off, while 0 mV turns off at 0 A."
+  },
+  {
+   "topic": "Minimum off-time and ringing",
+   "page": 15,
+   "text": "A minimum off-time starts when CS rises above VTH_CS_RESET (0.5 V typ) and must run out before another drive pulse. If the drain rings back below VTH_CS_RESET while it runs, the timer resets, and it restarts once the voltage rises again, so ringing after turn-off cannot retrigger the driver. The total blanking stretches with the ringing."
+  },
+  {
+   "topic": "Self synchronisation at start-up",
+   "page": 20,
+   "text": "After start-up the driver stays off until one full minimum off-time has passed with CS above VTH_CS_RESET. Each dip of CS below VTH_CS_RESET during that wait restarts the timer; only after a complete period is the output enabled."
+  },
+  {
+   "topic": "Setting the blanking times",
+   "page": 20,
+   "text": "MIN_TON and MIN_TOFF are each set by a resistor to GND, independent of VCC: the pin holds a reference, and a scaled copy of the resistor current charges an internal capacitor. Roughly 1 µs per 10 kΩ. The shortest times are clamped inside to 55 ns on and 245 ns off, so a pin shorted to GND is safe. The times can be modulated with extra parts, such as an NPN that adds a second resistor in parallel."
+  },
+  {
+   "topic": "Maximum on-time (ver. Q)",
+   "page": 22,
+   "text": "The Q version adds MAX_TON: a resistor to GND sets a maximum conduction time, 4.8 µs typ at 3 V on the pin and 48 µs typ at 0.3 V. When it runs out the MOSFET turns off before the secondary current reaches zero, and the rest flows in the body diode. DRV, coupled to the primary side by a little pulse transformer, acts as an early ZCD event, so a QR controller can turn on in CCM at heavy load without cross conduction, keeping the minimum switching frequency up and allowing a smaller core. A resistor RA from VOUT lengthens the maximum on-time when the output is low, during overload or start-up."
+  },
+  {
+   "topic": "Layout",
+   "page": 19,
+   "text": "The turn-off comparator measures CS against the GND pin, and with a 1 mΩ MOSFET each 1 mV of error shifts the turn-off current by 1 A, so milliohms or nanohenries in the sense path matter. Use a Kelvin connection: GND to the MOSFET source solder point, CS to the drain solder point. Lead inductance in a leaded package (TO220) adds a voltage proportional to di/dt that pulls CS towards zero while current still flows, turning the MOSFET off early; the loss grows with lower RDS(on) and higher frequency. Keep leads as short as possible; a leadless SMT MOSFET makes the shift negligible. Two MOSFETs in parallel need a symmetric Kelvin connection. VCC is decoupled by 100 nF and 1 µF capacitors in parallel, returned to the GND pin."
+  },
+  {
+   "topic": "Power dissipation",
+   "page": 24,
+   "text": "The SR MOSFET always switches at zero voltage: its body diode conducts before turn-on, and turn-off begins before the drain voltage rises. So the gate-drain capacitance adds no Miller charge and the gate load is Ciss at the clamp voltage (Qg_ZVS), which differs from the total gate charge most MOSFET data sheets give for hard switching and may need measuring, since it is non-linear. The steps: find Cg_ZVS, compute the gate drive loss for the chosen 5 V or 10 V clamp, add the IC's own consumption, then the die temperature. With no external gate resistor and a small internal gate resistance, nearly all the gate drive loss lands in the driver. PCB layout changes the real thermal resistance."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SOIC-8 NB (case 751-07)",
+   "page": 30,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min (mm)",
+    "max (mm)",
+    "min (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "A",
+     "body length",
+     "4.80",
+     "5.00",
+     "0.189",
+     "0.197"
+    ],
+    [
+     "B",
+     "body width",
+     "3.80",
+     "4.00",
+     "0.150",
+     "0.157"
+    ],
+    [
+     "C",
+     "overall height",
+     "1.35",
+     "1.75",
+     "0.053",
+     "0.069"
+    ],
+    [
+     "D",
+     "lead width",
+     "0.33",
+     "0.51",
+     "0.013",
+     "0.020"
+    ],
+    [
+     "G",
+     "lead pitch",
+     "1.27 BSC",
+     "",
+     "0.050 BSC",
+     ""
+    ],
+    [
+     "H",
+     "standoff",
+     "0.10",
+     "0.25",
+     "0.004",
+     "0.010"
+    ],
+    [
+     "J",
+     "lead thickness",
+     "0.19",
+     "0.25",
+     "0.007",
+     "0.010"
+    ],
+    [
+     "K",
+     "foot length",
+     "0.40",
+     "1.27",
+     "0.016",
+     "0.050"
+    ],
+    [
+     "M",
+     "foot angle",
+     "0°",
+     "8°",
+     "0°",
+     "8°"
+    ],
+    [
+     "N",
+     "chamfer (× 45°)",
+     "0.25",
+     "0.50",
+     "0.010",
+     "0.020"
+    ],
+    [
+     "S",
+     "width across leads",
+     "5.80",
+     "6.20",
+     "0.228",
+     "0.244"
+    ],
+    [
+     "footprint",
+     "pad length",
+     "1.52",
+     "",
+     "0.060",
+     ""
+    ],
+    [
+     "footprint",
+     "pad width",
+     "0.6",
+     "",
+     "0.024",
+     ""
+    ],
+    [
+     "footprint",
+     "pad pitch",
+     "1.270",
+     "",
+     "0.050",
+     ""
+    ],
+    [
+     "footprint",
+     "outer span of pad rows",
+     "7.0",
+     "",
+     "0.275",
+     ""
+    ],
+    [
+     "footprint",
+     "inner span of pad rows",
+     "4.0",
+     "",
+     "0.155",
+     ""
+    ]
+   ],
+   "notes": [
+    "A and B exclude mold protrusion, at most 0.15 mm (0.006 in) per side.",
+    "D excludes dambar protrusion; up to 0.127 mm (0.005 in) total beyond D at maximum material condition is allowed.",
+    "Millimetres control; dimensioning and tolerancing to ANSI Y14.5M-1982."
+   ]
+  },
+  {
+   "name": "DFN8 4 × 4, 0.8 mm pitch (case 488AF)",
+   "page": 28,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.80",
+     "",
+     "1.00"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "A3",
+     "terminal thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.25",
+     "",
+     "0.35"
+    ],
+    [
+     "D",
+     "body length",
+     "",
+     "4.00 BSC",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "1.91",
+     "",
+     "2.21"
+    ],
+    [
+     "E",
+     "body width",
+     "",
+     "4.00 BSC",
+     ""
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "2.09",
+     "",
+     "2.39"
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.80 BSC",
+     ""
+    ],
+    [
+     "K",
+     "terminal to exposed pad",
+     "0.20",
+     "",
+     ""
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.30",
+     "",
+     "0.50"
+    ],
+    [
+     "L1",
+     "terminal pull-back",
+     "",
+     "",
+     "0.15"
+    ],
+    [
+     "footprint",
+     "exposed pad land length",
+     "",
+     "2.21",
+     ""
+    ],
+    [
+     "footprint",
+     "exposed pad land width",
+     "",
+     "2.39",
+     ""
+    ],
+    [
+     "footprint",
+     "terminal land length (8×)",
+     "",
+     "0.63",
+     ""
+    ],
+    [
+     "footprint",
+     "terminal land width (8×)",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "footprint",
+     "outer span of land rows",
+     "",
+     "4.30",
+     ""
+    ],
+    [
+     "footprint",
+     "land pitch",
+     "",
+     "0.80",
+     ""
+    ]
+   ],
+   "notes": [
+    "b is the plated terminal width, measured 0.15 mm to 0.30 mm from the tip.",
+    "Coplanarity covers the exposed pad as well as the terminals.",
+    "Millimetres control; ASME Y14.5M-1994."
+   ]
+  },
+  {
+   "name": "WDFN8 2 × 2, 0.5 mm pitch (case 511AT)",
+   "page": 29,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.70",
+     "",
+     "0.80"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "A3",
+     "terminal thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.20",
+     "",
+     "0.30"
+    ],
+    [
+     "D",
+     "body length",
+     "",
+     "2.00 BSC",
+     ""
+    ],
+    [
+     "E",
+     "body width",
+     "",
+     "2.00 BSC",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "L",
+     "terminal length (7×)",
+     "0.40",
+     "",
+     "0.60"
+    ],
+    [
+     "L1",
+     "terminal pull-back",
+     "",
+     "",
+     "0.15"
+    ],
+    [
+     "L2",
+     "pin 1 terminal length",
+     "0.50",
+     "",
+     "0.70"
+    ],
+    [
+     "footprint",
+     "land length (7×)",
+     "",
+     "0.78",
+     ""
+    ],
+    [
+     "footprint",
+     "pin 1 land length",
+     "",
+     "0.88",
+     ""
+    ],
+    [
+     "footprint",
+     "land width (8×)",
+     "",
+     "0.30",
+     ""
+    ],
+    [
+     "footprint",
+     "outer span of land rows",
+     "",
+     "2.30",
+     ""
+    ],
+    [
+     "footprint",
+     "land pitch",
+     "",
+     "0.50",
+     ""
+    ]
+   ],
+   "notes": [
+    "b is the plated terminal width, measured 0.15 mm to 0.30 mm from the tip.",
+    "Millimetres control; ASME Y14.5M-1994."
+   ]
+  }
+ ]
+}

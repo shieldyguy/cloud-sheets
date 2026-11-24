@@ -1,0 +1,2827 @@
+{
+ "sheet": 1,
+ "name": "LIS2DHTR",
+ "kind": "sensor",
+ "manufacturer": "STMicroelectronics",
+ "title": "LIS2DH: 3-axis MEMS accelerometer, ±2/±4/±8/±16 g, I2C/SPI, 32-level FIFO, LGA-14 2 x 2 x 1 mm",
+ "source": {
+  "document": "Doc ID 022516",
+  "revision": "Rev 1, November 2011",
+  "pages": 49
+ },
+ "summary": "A three-axis linear accelerometer with a digital I2C or SPI port, built as a capacitive MEMS element read by a charge amplifier and an A/D converter. Full scale is set by register to ±2, ±4, ±8 or ±16 g, and the output data rate runs from 1 Hz to 5.376 kHz. Three resolutions trade current for noise: 8-bit low-power, 10-bit normal and 12-bit high-resolution, with 2 µA at 1 Hz. Two programmable interrupt generators handle free-fall, wake-up, 6D/4D orientation and single or double click; a 32-level FIFO, a self-test and an 8-bit temperature output are on chip. The core runs from 1.71 V to 3.6 V with a separate I/O supply, over -40 °C to +85 °C.",
+ "key_figures": [
+  [
+   "Full scale",
+   "±2, ±4, ±8, ±16 g"
+  ],
+  [
+   "Sensitivity",
+   "1 mg/digit (±2 g, high resolution) to 192 mg/digit (±16 g, low power)"
+  ],
+  [
+   "Zero-g offset",
+   "±40 mg typ (±2 g)"
+  ],
+  [
+   "Output data rate",
+   "1 Hz to 1.344 kHz (HR/normal); up to 5.376 kHz (low power)"
+  ],
+  [
+   "Supply",
+   "Vdd 1.71 V to 3.6 V; Vdd_IO 1.71 V to Vdd+0.1"
+  ],
+  [
+   "Current",
+   "11 µA typ normal mode 50 Hz; 2 µA at 1 Hz; 6 µA low power 50 Hz; 0.5 µA power-down"
+  ],
+  [
+   "Interfaces",
+   "I2C to 400 kHz; SPI to 10 MHz, 3- or 4-wire"
+  ],
+  [
+   "FIFO",
+   "32 levels per axis"
+  ],
+  [
+   "Shock survival",
+   "10000 g for 0.1 ms"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +85 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "order code",
+   "temperature range [°C]",
+   "package",
+   "packing"
+  ],
+  "rows": [
+   [
+    "LIS2DH",
+    "-40 to +85",
+    "LGA-14",
+    "Tray"
+   ],
+   [
+    "LIS2DHTR",
+    "-40 to +85",
+    "LGA-14",
+    "Tape and reel"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "LGA-14",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SCL/SPC",
+     "type": "digital input",
+     "function": "Serial clock: SCL in I2C mode, SPC in SPI mode."
+    },
+    {
+     "pin": "2",
+     "name": "SDA/SDI/SDO",
+     "type": "digital I/O",
+     "function": "Serial data: SDA in I2C mode; SDI (data in) in SPI mode; SDO (data out) in 3-wire SPI."
+    },
+    {
+     "pin": "3",
+     "name": "SDO/SA0",
+     "type": "digital I/O",
+     "function": "SPI data out in 4-wire SPI; in I2C mode, sets the least significant bit of the slave address."
+    },
+    {
+     "pin": "4",
+     "name": "CS",
+     "type": "digital input",
+     "function": "Chip select and interface choice: high selects I2C (SPI idle), low selects SPI and turns I2C off. Tie high for I2C."
+    },
+    {
+     "pin": "5",
+     "name": "INT2",
+     "type": "digital output",
+     "function": "Interrupt output 2."
+    },
+    {
+     "pin": "6",
+     "name": "INT1",
+     "type": "digital output",
+     "function": "Interrupt output 1."
+    },
+    {
+     "pin": "7",
+     "name": "Vdd_IO",
+     "type": "power in",
+     "function": "Supply for the I/O pads; sets the logic levels of the interface."
+    },
+    {
+     "pin": "8",
+     "name": "Vdd",
+     "type": "power in",
+     "function": "Core supply."
+    },
+    {
+     "pin": "9",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, 0 V."
+    },
+    {
+     "pin": "10",
+     "name": "Res",
+     "type": "ground",
+     "function": "Reserved; connect to GND."
+    },
+    {
+     "pin": "11",
+     "name": "Res",
+     "type": "ground",
+     "function": "Reserved; connect to GND."
+    },
+    {
+     "pin": "12",
+     "name": "Res",
+     "type": "ground",
+     "function": "Reserved; connect to GND."
+    },
+    {
+     "pin": "13",
+     "name": "Res",
+     "type": "ground",
+     "function": "Reserved; connect to GND."
+    },
+    {
+     "pin": "14",
+     "name": "Res",
+     "type": "ground",
+     "function": "Reserved; connect to GND."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Mechanical characteristics",
+   "page": 10,
+   "conditions": "Vdd = 2.5 V, T = 25 °C unless otherwise noted. Factory calibration is done at 2.5 V; the supply may be 1.71 V to 3.6 V.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Measurement range (2)",
+     "FS",
+     "FS bit set to 00",
+     "",
+     "±2.0",
+     "",
+     "g"
+    ],
+    [
+     "Measurement range (2)",
+     "FS",
+     "FS bit set to 01",
+     "",
+     "±4.0",
+     "",
+     "g"
+    ],
+    [
+     "Measurement range (2)",
+     "FS",
+     "FS bit set to 10",
+     "",
+     "±8.0",
+     "",
+     "g"
+    ],
+    [
+     "Measurement range (2)",
+     "FS",
+     "FS bit set to 11",
+     "",
+     "±16.0",
+     "",
+     "g"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 00; Normal mode",
+     "",
+     "4",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 00; High Resolution mode",
+     "",
+     "1",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 00; Low power mode",
+     "",
+     "16",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 01; Normal mode",
+     "",
+     "8",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 01; High Resolution mode",
+     "",
+     "2",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 01; Low power mode",
+     "",
+     "32",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 10; Normal mode",
+     "",
+     "16",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 10; High Resolution mode",
+     "",
+     "4",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 10; Low power mode",
+     "",
+     "64",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 11; Normal mode",
+     "",
+     "48",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 11; High Resolution mode",
+     "",
+     "12",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity",
+     "So",
+     "FS bit set to 11; Low power mode",
+     "",
+     "192",
+     "",
+     "mg/digit"
+    ],
+    [
+     "Sensitivity change vs temperature",
+     "TCSo",
+     "FS bit set to 00",
+     "",
+     "0.01",
+     "",
+     "%/°C"
+    ],
+    [
+     "Typical zero-g level offset accuracy (3), (4)",
+     "TyOff",
+     "FS bit set to 00",
+     "",
+     "±40",
+     "",
+     "mg"
+    ],
+    [
+     "Zero-g level change vs temperature",
+     "TCOff",
+     "Max delta from 25 °C",
+     "",
+     "±0.5",
+     "",
+     "mg/°C"
+    ],
+    [
+     "Self-test output change (5), (6), (7)",
+     "Vst",
+     "FS bit set to 00; X axis; Normal mode",
+     "17",
+     "",
+     "360",
+     "LSb"
+    ],
+    [
+     "Self-test output change (5), (6), (7)",
+     "Vst",
+     "FS bit set to 00; Y axis; Normal mode",
+     "17",
+     "",
+     "360",
+     "LSb"
+    ],
+    [
+     "Self-test output change (5), (6), (7)",
+     "Vst",
+     "FS bit set to 00; Z axis; Normal mode",
+     "17",
+     "",
+     "360",
+     "LSb"
+    ],
+    [
+     "Operating temperature range",
+     "Top",
+     "",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Typical figures carry no guarantee.",
+    "(2) Checked at wafer level by measuring the initial offset and sensitivity.",
+    "(3) The offset figure is taken after MSL3 preconditioning.",
+    "(4) The built-in high-pass filter removes the offset.",
+    "(5) The CTRL_REG4 ST bits set the sign of the self-test change, the same for all three axes.",
+    "(6) The self-test change is |OUTPUT[LSb] with self-test on - OUTPUT[LSb] with self-test off|; at ±2 g full scale and 10-bit data 1 LSb is 4 mg.",
+    "(7) Once self-test is switched on, output data are valid after two samples in low-power or normal mode and after eight samples in high-resolution mode."
+   ]
+  },
+  {
+   "title": "Temperature sensor characteristics",
+   "page": 11,
+   "conditions": "Vdd = 2.5 V, T = 25 °C unless otherwise noted. Factory calibration is done at 2.5 V; the temperature sensor is guaranteed to work from 2 V to 3.6 V.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Temperature sensor output change vs temperature",
+     "TSDr",
+     "",
+     "1",
+     "",
+     "digit/°C (2)"
+    ],
+    [
+     "Temperature refresh rate",
+     "TODR",
+     "",
+     "ODR (3)",
+     "",
+     "Hz"
+    ],
+    [
+     "Operating temperature range",
+     "Top",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Typical figures carry no guarantee.",
+    "(2) With 8-bit resolution.",
+    "(3) The refresh rate equals the output data rate chosen in CTRL_REG1 (data rate configuration table)."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 12,
+   "conditions": "Vdd = 2.5 V, T = 25 °C unless otherwise noted. Factory calibration is done at 2.5 V; the supply may be 1.71 V to 3.6 V.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "Vdd",
+     "",
+     "1.71",
+     "2.5",
+     "3.6",
+     "V"
+    ],
+    [
+     "I/O pins supply voltage (2)",
+     "Vdd_IO",
+     "",
+     "1.71",
+     "",
+     "Vdd+0.1",
+     "V"
+    ],
+    [
+     "Current consumption in Normal mode",
+     "Idd",
+     "50 Hz ODR",
+     "",
+     "11",
+     "",
+     "µA"
+    ],
+    [
+     "Current consumption in Normal mode",
+     "Idd",
+     "1 Hz ODR",
+     "",
+     "2",
+     "",
+     "µA"
+    ],
+    [
+     "Current consumption in low-power mode",
+     "IddLP",
+     "50 Hz ODR",
+     "",
+     "6",
+     "",
+     "µA"
+    ],
+    [
+     "Current consumption in power-down mode",
+     "IddPdn",
+     "",
+     "",
+     "0.5",
+     "",
+     "µA"
+    ],
+    [
+     "Digital high level input voltage",
+     "VIH",
+     "",
+     "0.8*Vdd_IO",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Digital low level input voltage",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.2*Vdd_IO",
+     "V"
+    ],
+    [
+     "High level output voltage",
+     "VOH",
+     "",
+     "0.9*Vdd_IO",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Low level output voltage",
+     "VOL",
+     "",
+     "",
+     "",
+     "0.1*Vdd_IO",
+     "V"
+    ],
+    [
+     "Operating temperature range",
+     "Top",
+     "",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Typical figures carry no guarantee.",
+    "(2) Vdd may be switched off while Vdd_IO stays up: the buses keep working and the measurement chain is unpowered."
+   ]
+  },
+  {
+   "title": "SPI slave timing values",
+   "page": 13,
+   "conditions": "Over the general operating conditions for Vdd and Top. Timing is referred to 0.2·Vdd_IO and 0.8·Vdd_IO on inputs and outputs.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SPI clock cycle",
+     "tc(SPC)",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "SPI clock frequency",
+     "fc(SPC)",
+     "",
+     "10",
+     "MHz"
+    ],
+    [
+     "CS setup time",
+     "tsu(CS)",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "CS hold time",
+     "th(CS)",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "SDI input setup time",
+     "tsu(SI)",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "SDI input hold time",
+     "th(SI)",
+     "15",
+     "",
+     "ns"
+    ],
+    [
+     "SDO valid output time",
+     "tv(SO)",
+     "",
+     "50",
+     "ns"
+    ],
+    [
+     "SDO output hold time",
+     "th(SO)",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "SDO output disable time",
+     "tdis(SO)",
+     "",
+     "50",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "(1) The values hold at a 10 MHz clock in both 3-wire and 4-wire SPI; they come from characterization and are not production tested.",
+    "With no transfer in progress, internal pull-ups drive SDO."
+   ]
+  },
+  {
+   "title": "I2C slave timing values",
+   "page": 14,
+   "conditions": "Over the general operating conditions for Vdd and Top. Timing is referred to 0.2·Vdd_IO and 0.8·Vdd_IO.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "standard mode min",
+    "standard mode max",
+    "fast mode min",
+    "fast mode max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SCL clock frequency",
+     "f(SCL)",
+     "0",
+     "100",
+     "0",
+     "400",
+     "kHz"
+    ],
+    [
+     "SCL clock low time",
+     "tw(SCLL)",
+     "4.7",
+     "",
+     "1.3",
+     "",
+     "µs"
+    ],
+    [
+     "SCL clock high time",
+     "tw(SCLH)",
+     "4.0",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "SDA setup time",
+     "tsu(SDA)",
+     "250",
+     "",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "SDA data hold time",
+     "th(SDA)",
+     "0",
+     "3.45",
+     "0.01",
+     "0.9",
+     "µs"
+    ],
+    [
+     "SDA and SCL rise time",
+     "tr(SDA) tr(SCL)",
+     "",
+     "1000",
+     "20 + 0.1Cb (2)",
+     "300",
+     "ns"
+    ],
+    [
+     "SDA and SCL fall time",
+     "tf(SDA) tf(SCL)",
+     "",
+     "300",
+     "20 + 0.1Cb (2)",
+     "300",
+     "ns"
+    ],
+    [
+     "START condition hold time",
+     "th(ST)",
+     "4",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Repeated START condition setup time",
+     "tsu(SR)",
+     "4.7",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "STOP condition setup time",
+     "tsu(SP)",
+     "4",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Bus free time between STOP and START condition",
+     "tw(SP:SR)",
+     "4.7",
+     "",
+     "1.3",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "(1) Figures follow the I2C standard's requirements and are not production tested.",
+    "(2) Cb: the capacitance, in pF, that a single bus wire presents in total."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "maximum value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "Vdd",
+     "-0.3 to 4.8",
+     "V"
+    ],
+    [
+     "I/O pins Supply voltage",
+     "Vdd_IO",
+     "-0.3 to 4.8",
+     "V"
+    ],
+    [
+     "Input voltage on any control pin (CS, SCL/SPC, SDA/SDI/SDO, SDO/SA0)",
+     "Vin",
+     "-0.3 to Vdd_IO +0.3",
+     "V"
+    ],
+    [
+     "Acceleration (any axis, powered, Vdd = 2.5 V)",
+     "APOW",
+     "3000 g for 0.5 ms",
+     ""
+    ],
+    [
+     "Acceleration (any axis, powered, Vdd = 2.5 V)",
+     "APOW",
+     "10000 g for 0.1 ms",
+     ""
+    ],
+    [
+     "Acceleration (any axis, unpowered)",
+     "AUNP",
+     "3000 g for 0.5 ms",
+     ""
+    ],
+    [
+     "Acceleration (any axis, unpowered)",
+     "AUNP",
+     "10000 g for 0.1 ms",
+     ""
+    ],
+    [
+     "Operating temperature range",
+     "TOP",
+     "-40 to +85",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "TSTG",
+     "-40 to +125",
+     "°C"
+    ],
+    [
+     "Electrostatic discharge protection",
+     "ESD",
+     "2 (HBM)",
+     "kV"
+    ]
+   ],
+   "notes": [
+    "No pin may see more than 4.8 V of supply voltage.",
+    "Mechanical shock and ESD from careless handling can both destroy the part.",
+    "Operation at these limits is not implied, and long exposure to them can reduce reliability."
+   ]
+  },
+  {
+   "title": "Operating mode selection",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "operating mode",
+    "CTRL_REG1[3] (LPen bit)",
+    "CTRL_REG4[3] (HR bit)",
+    "BW [Hz]",
+    "turn-on time [ms]",
+    "So @ ±2g [mg/digit]"
+   ],
+   "rows": [
+    [
+     "Low power mode (8 bit data output)",
+     "1",
+     "0",
+     "ODR/2",
+     "1",
+     "16"
+    ],
+    [
+     "Normal mode (10 bit data output)",
+     "0",
+     "0",
+     "ODR/2",
+     "1.6",
+     "4"
+    ],
+    [
+     "High resolution (12 bit data output)",
+     "0",
+     "1",
+     "ODR/9",
+     "7/ODR",
+     "1"
+    ],
+    [
+     "Not allowed",
+     "1",
+     "1",
+     "--",
+     "--",
+     "--"
+    ]
+   ]
+  },
+  {
+   "title": "Turn-on time for operating mode change",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "operating mode change",
+    "turn-on time [ms]"
+   ],
+   "rows": [
+    [
+     "12-bit mode to 8 bit mode",
+     "1/ODR"
+    ],
+    [
+     "12-bit mode to 10 bit mode",
+     "1/ODR"
+    ],
+    [
+     "10-bit mode to 8 bit mode",
+     "1/ODR"
+    ],
+    [
+     "10-bit mode to 12 bit mode",
+     "7/ODR"
+    ],
+    [
+     "8-bit mode to 10 bit mode",
+     "1/ODR"
+    ],
+    [
+     "8-bit mode to 12 bit mode",
+     "7/ODR"
+    ]
+   ]
+  },
+  {
+   "title": "Operating modes current consumption",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "operating mode [Hz]",
+    "low power mode (8 bit data output) [µA]",
+    "normal mode (10 bit data output) [µA]",
+    "high resolution (12 bit data output) [µA]"
+   ],
+   "rows": [
+    [
+     "1",
+     "2",
+     "2",
+     "2"
+    ],
+    [
+     "10",
+     "3",
+     "4",
+     "4"
+    ],
+    [
+     "25",
+     "4",
+     "6",
+     "6"
+    ],
+    [
+     "50",
+     "6",
+     "11",
+     "11"
+    ],
+    [
+     "100",
+     "10",
+     "20",
+     "20"
+    ],
+    [
+     "200",
+     "18",
+     "38",
+     "38"
+    ],
+    [
+     "400",
+     "36",
+     "73",
+     "73"
+    ],
+    [
+     "1344",
+     "--",
+     "185",
+     "185"
+    ],
+    [
+     "1620",
+     "100",
+     "--",
+     "--"
+    ],
+    [
+     "5376",
+     "185",
+     "--",
+     "--"
+    ]
+   ]
+  },
+  {
+   "title": "I2C slave address with read/write bit",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "command",
+    "SAD[6:1]",
+    "SAD[0] = SA0",
+    "R/W",
+    "SAD+R/W"
+   ],
+   "rows": [
+    [
+     "Read",
+     "001100",
+     "0",
+     "1",
+     "00110001 (31h)"
+    ],
+    [
+     "Write",
+     "001100",
+     "0",
+     "0",
+     "00110000 (30h)"
+    ],
+    [
+     "Read",
+     "001100",
+     "1",
+     "1",
+     "00110011 (33h)"
+    ],
+    [
+     "Write",
+     "001100",
+     "1",
+     "0",
+     "00110010 (32h)"
+    ]
+   ]
+  },
+  {
+   "title": "I2C transfer sequences",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "transfer",
+    "master sends",
+    "slave sends"
+   ],
+   "rows": [
+    [
+     "Write one byte",
+     "ST, SAD+W, SUB, DATA, SP",
+     "SAK after SAD+W, after SUB and after DATA"
+    ],
+    [
+     "Write several bytes",
+     "ST, SAD+W, SUB, DATA, DATA, SP",
+     "SAK after SAD+W, after SUB and after each DATA"
+    ],
+    [
+     "Read one byte",
+     "ST, SAD+W, SUB, SR, SAD+R, NMAK, SP",
+     "SAK after SAD+W, after SUB and after SAD+R; then DATA"
+    ],
+    [
+     "Read several bytes",
+     "ST, SAD+W, SUB, SR, SAD+R, MAK after each DATA but the last, NMAK, SP",
+     "SAK after SAD+W, after SUB and after SAD+R; then DATA, DATA, DATA"
+    ]
+   ],
+   "notes": [
+    "ST start, SR repeated start, SP stop, SAK slave acknowledge, MAK master acknowledge, NMAK no master acknowledge, SUB register sub-address."
+   ]
+  },
+  {
+   "title": "Register address map",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "name",
+    "type",
+    "address hex",
+    "address binary",
+    "default",
+    "comment"
+   ],
+   "rows": [
+    [
+     "Reserved",
+     "",
+     "00 - 06",
+     "",
+     "",
+     "Reserved"
+    ],
+    [
+     "STATUS_REG_AUX",
+     "r",
+     "07",
+     "000 0111",
+     "",
+     ""
+    ],
+    [
+     "Reserved",
+     "r",
+     "08-0B",
+     "",
+     "",
+     "Reserved"
+    ],
+    [
+     "OUT_TEMP_L",
+     "r",
+     "0C",
+     "000 1100",
+     "Output",
+     ""
+    ],
+    [
+     "OUT_TEMP_H",
+     "r",
+     "0D",
+     "000 1101",
+     "Output",
+     ""
+    ],
+    [
+     "INT_COUNTER_REG",
+     "r",
+     "0E",
+     "000 1110",
+     "",
+     ""
+    ],
+    [
+     "WHO_AM_I",
+     "r",
+     "0F",
+     "000 1111",
+     "00110011",
+     "Dummy register"
+    ],
+    [
+     "Reserved",
+     "",
+     "10 - 1E",
+     "",
+     "",
+     "Reserved"
+    ],
+    [
+     "TEMP_CFG_REG",
+     "rw",
+     "1F",
+     "001 1111",
+     "",
+     ""
+    ],
+    [
+     "CTRL_REG1",
+     "rw",
+     "20",
+     "010 0000",
+     "00000111",
+     ""
+    ],
+    [
+     "CTRL_REG2",
+     "rw",
+     "21",
+     "010 0001",
+     "00000000",
+     ""
+    ],
+    [
+     "CTRL_REG3",
+     "rw",
+     "22",
+     "010 0010",
+     "00000000",
+     ""
+    ],
+    [
+     "CTRL_REG4",
+     "rw",
+     "23",
+     "010 0011",
+     "00000000",
+     ""
+    ],
+    [
+     "CTRL_REG5",
+     "rw",
+     "24",
+     "010 0100",
+     "00000000",
+     ""
+    ],
+    [
+     "CTRL_REG6",
+     "rw",
+     "25",
+     "010 0101",
+     "00000000",
+     ""
+    ],
+    [
+     "REFERENCE",
+     "rw",
+     "26",
+     "010 0110",
+     "00000000",
+     ""
+    ],
+    [
+     "STATUS_REG2",
+     "r",
+     "27",
+     "010 0111",
+     "00000000",
+     ""
+    ],
+    [
+     "OUT_X_L",
+     "r",
+     "28",
+     "010 1000",
+     "Output",
+     ""
+    ],
+    [
+     "OUT_X_H",
+     "r",
+     "29",
+     "010 1001",
+     "Output",
+     ""
+    ],
+    [
+     "OUT_Y_L",
+     "r",
+     "2A",
+     "010 1010",
+     "Output",
+     ""
+    ],
+    [
+     "OUT_Y_H",
+     "r",
+     "2B",
+     "010 1011",
+     "Output",
+     ""
+    ],
+    [
+     "OUT_Z_L",
+     "r",
+     "2C",
+     "010 1100",
+     "Output",
+     ""
+    ],
+    [
+     "OUT_Z_H",
+     "r",
+     "2D",
+     "010 1101",
+     "Output",
+     ""
+    ],
+    [
+     "FIFO_CTRL_REG",
+     "rw",
+     "2E",
+     "010 1110",
+     "00000000",
+     ""
+    ],
+    [
+     "FIFO_SRC_REG",
+     "r",
+     "2F",
+     "010 1111",
+     "0010000",
+     ""
+    ],
+    [
+     "INT1_CFG",
+     "rw",
+     "30",
+     "011 0000",
+     "00000000",
+     ""
+    ],
+    [
+     "INT1_SOURCE",
+     "r",
+     "31",
+     "011 0001",
+     "00000000",
+     ""
+    ],
+    [
+     "INT1_THS",
+     "rw",
+     "32",
+     "011 0010",
+     "00000000",
+     ""
+    ],
+    [
+     "INT1_DURATION",
+     "rw",
+     "33",
+     "011 0011",
+     "00000000",
+     ""
+    ],
+    [
+     "INT2_CFG",
+     "rw",
+     "34",
+     "011 0100",
+     "00000000",
+     ""
+    ],
+    [
+     "INT2_SOURCE",
+     "r",
+     "35",
+     "011 0101",
+     "00000000",
+     ""
+    ],
+    [
+     "INT2_THS",
+     "rw",
+     "36",
+     "011 0110",
+     "00000000",
+     ""
+    ],
+    [
+     "INT2_DURATION",
+     "rw",
+     "37",
+     "011 0111",
+     "00000000",
+     ""
+    ],
+    [
+     "CLICK_CFG",
+     "rw",
+     "38",
+     "011 1000",
+     "00000000",
+     ""
+    ],
+    [
+     "CLICK_SRC",
+     "r",
+     "39",
+     "011 1001",
+     "00000000",
+     ""
+    ],
+    [
+     "CLICK_THS",
+     "rw",
+     "3A",
+     "011 1010",
+     "00000000",
+     ""
+    ],
+    [
+     "TIME_LIMIT",
+     "rw",
+     "3B",
+     "011 1011",
+     "00000000",
+     ""
+    ],
+    [
+     "TIME_LATENCY",
+     "rw",
+     "3C",
+     "011 1100",
+     "00000000",
+     ""
+    ],
+    [
+     "TIME_WINDOW",
+     "rw",
+     "3D",
+     "011 1101",
+     "00000000",
+     ""
+    ],
+    [
+     "Act_THS",
+     "rw",
+     "3E",
+     "011 1110",
+     "00000000",
+     ""
+    ],
+    [
+     "Act_DUR",
+     "rw",
+     "3F",
+     "011 1111",
+     "00000000",
+     ""
+    ]
+   ],
+   "notes": [
+    "Reserved addresses, and any address missing from the map, must not be written: a write there can permanently damage the device.",
+    "Registers filled at boot hold the factory trim; they are reloaded at every power-up and should be left unchanged."
+   ]
+  },
+  {
+   "title": "Register bit layout",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "register",
+    "address",
+    "b7",
+    "b6",
+    "b5",
+    "b4",
+    "b3",
+    "b2",
+    "b1",
+    "b0",
+    "page"
+   ],
+   "rows": [
+    [
+     "STATUS_REG_AUX",
+     "07h",
+     "--",
+     "TOR",
+     "--",
+     "--",
+     "--",
+     "TDA",
+     "--",
+     "--",
+     "32"
+    ],
+    [
+     "INT_COUNTER",
+     "0Eh",
+     "IC7",
+     "IC6",
+     "IC5",
+     "IC4",
+     "IC3",
+     "IC2",
+     "IC1",
+     "IC0",
+     "32"
+    ],
+    [
+     "WHO_AM_I",
+     "0Fh",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "32"
+    ],
+    [
+     "TEMP_CFG_REG",
+     "1Fh",
+     "TEMP_EN1",
+     "TEMP_EN0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "32"
+    ],
+    [
+     "CTRL_REG1",
+     "20h",
+     "ODR3",
+     "ODR2",
+     "ODR1",
+     "ODR0",
+     "LPen",
+     "Zen",
+     "Yen",
+     "Xen",
+     "33"
+    ],
+    [
+     "CTRL_REG2",
+     "21h",
+     "HPM1",
+     "HPM0",
+     "HPCF2",
+     "HPCF1",
+     "FDS",
+     "HPCLICK",
+     "HPIS2",
+     "HPIS1",
+     "34"
+    ],
+    [
+     "CTRL_REG3",
+     "22h",
+     "I1_CLICK",
+     "I1_AOI1",
+     "I1_AOI2",
+     "I1_DRDY1",
+     "I1_DRDY2",
+     "I1_WTM",
+     "I1_OVERRUN",
+     "--",
+     "34"
+    ],
+    [
+     "CTRL_REG4",
+     "23h",
+     "BDU",
+     "BLE",
+     "FS1",
+     "FS0",
+     "HR",
+     "ST1",
+     "ST0",
+     "SIM",
+     "35"
+    ],
+    [
+     "CTRL_REG5",
+     "24h",
+     "BOOT",
+     "FIFO_EN",
+     "--",
+     "--",
+     "LIR_INT1",
+     "D4D_INT1",
+     "LIR_INT2",
+     "D4D_INT2",
+     "36"
+    ],
+    [
+     "CTRL_REG6",
+     "25h",
+     "I2_CLICKen",
+     "I2_INT1",
+     "I2_INT2",
+     "BOOT_I2",
+     "P2_ACT",
+     "--",
+     "H_LACTIVE",
+     "-",
+     "36"
+    ],
+    [
+     "REFERENCE/DATACAPTURE",
+     "26h",
+     "Ref7",
+     "Ref6",
+     "Ref5",
+     "Ref4",
+     "Ref3",
+     "Ref2",
+     "Ref1",
+     "Ref0",
+     "37"
+    ],
+    [
+     "STATUS_REG",
+     "27h",
+     "ZYXOR",
+     "ZOR",
+     "YOR",
+     "XOR",
+     "ZYXDA",
+     "ZDA",
+     "YDA",
+     "XDA",
+     "37"
+    ],
+    [
+     "FIFO_CTRL_REG",
+     "2Eh",
+     "FM1",
+     "FM0",
+     "TR",
+     "FTH4",
+     "FTH3",
+     "FTH2",
+     "FTH1",
+     "FTH0",
+     "38"
+    ],
+    [
+     "FIFO_SRC_REG",
+     "2Fh",
+     "WTM",
+     "OVRN_FIFO",
+     "EMPTY",
+     "FSS4",
+     "FSS3",
+     "FSS2",
+     "FSS1",
+     "FSS0",
+     "38"
+    ],
+    [
+     "INT1_CFG",
+     "30h",
+     "AOI",
+     "6D",
+     "ZHIE/ZUPE",
+     "ZLIE/ZDOWNE",
+     "YHIE/YUPE",
+     "YLIE/YDOWNE",
+     "XHIE/XUPE",
+     "XLIE/XDOWNE",
+     "39"
+    ],
+    [
+     "INT1_SRC",
+     "31h",
+     "0",
+     "IA",
+     "ZH",
+     "ZL",
+     "YH",
+     "YL",
+     "XH",
+     "XL",
+     "40"
+    ],
+    [
+     "INT1_THS",
+     "32h",
+     "0",
+     "THS6",
+     "THS5",
+     "THS4",
+     "THS3",
+     "THS2",
+     "THS1",
+     "THS0",
+     "40"
+    ],
+    [
+     "INT1_DURATION",
+     "33h",
+     "0",
+     "D6",
+     "D5",
+     "D4",
+     "D3",
+     "D2",
+     "D1",
+     "D0",
+     "41"
+    ],
+    [
+     "INT2_CFG",
+     "34h",
+     "AOI",
+     "6D",
+     "ZHIE",
+     "ZLIE",
+     "YHIE",
+     "YLIE",
+     "XHIE",
+     "XLIE",
+     "41"
+    ],
+    [
+     "INT2_SRC",
+     "35h",
+     "0",
+     "IA",
+     "ZH",
+     "ZL",
+     "YH",
+     "YL",
+     "XH",
+     "XL",
+     "42"
+    ],
+    [
+     "INT2_THS",
+     "36h",
+     "0",
+     "THS6",
+     "THS5",
+     "THS4",
+     "THS3",
+     "THS2",
+     "THS1",
+     "THS0",
+     "43"
+    ],
+    [
+     "INT2_DURATION",
+     "37h",
+     "0",
+     "D6",
+     "D5",
+     "D4",
+     "D3",
+     "D2",
+     "D1",
+     "D0",
+     "43"
+    ],
+    [
+     "CLICK_CFG",
+     "38h",
+     "--",
+     "--",
+     "ZD",
+     "ZS",
+     "YD",
+     "YS",
+     "XD",
+     "XS",
+     "44"
+    ],
+    [
+     "CLICK_SRC",
+     "39h",
+     "",
+     "IA",
+     "DClick",
+     "SClick",
+     "Sign",
+     "Z",
+     "Y",
+     "X",
+     "44"
+    ],
+    [
+     "CLICK_THS",
+     "3Ah",
+     "-",
+     "Ths6",
+     "Ths5",
+     "Ths4",
+     "Ths3",
+     "Ths2",
+     "Ths1",
+     "Ths0",
+     "45"
+    ],
+    [
+     "TIME_LIMIT",
+     "3Bh",
+     "-",
+     "TLI6",
+     "TLI5",
+     "TLI4",
+     "TLI3",
+     "TLI2",
+     "TLI1",
+     "TLI0",
+     "45"
+    ],
+    [
+     "TIME_LATENCY",
+     "3Ch",
+     "TLA7",
+     "TLA6",
+     "TLA5",
+     "TLA4",
+     "TLA3",
+     "TLA2",
+     "TLA1",
+     "TLA0",
+     "45"
+    ],
+    [
+     "TIME_WINDOW",
+     "3Dh",
+     "TW7",
+     "TW6",
+     "TW5",
+     "TW4",
+     "TW3",
+     "TW2",
+     "TW1",
+     "TW0",
+     "45"
+    ],
+    [
+     "Act_THS",
+     "3Eh",
+     "--",
+     "Acth6",
+     "Acth5",
+     "Acth4",
+     "Acth3",
+     "Acth2",
+     "Acth1",
+     "Acth0",
+     "46"
+    ],
+    [
+     "Act_DUR",
+     "3Fh",
+     "ActD7",
+     "ActD6",
+     "ActD5",
+     "ActD4",
+     "ActD3",
+     "ActD2",
+     "ActD1",
+     "ActD0",
+     "46"
+    ]
+   ],
+   "notes": [
+    "WHO_AM_I reads 00110011 (33h).",
+    "BLE in CTRL_REG4 works only in high-resolution mode.",
+    "INT1_CFG and INT2_CFG are loaded at boot and can be written only once boot is finished."
+   ]
+  },
+  {
+   "title": "Register fields",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "register",
+    "field",
+    "default",
+    "function"
+   ],
+   "rows": [
+    [
+     "STATUS_REG_AUX",
+     "TOR",
+     "0",
+     "1: a new temperature sample overwrote one that had not been read"
+    ],
+    [
+     "STATUS_REG_AUX",
+     "TDA",
+     "0",
+     "1: a new temperature sample is ready"
+    ],
+    [
+     "OUT_TEMP_L/H",
+     "",
+     "",
+     "Temperature output, two's complement, 8-bit, left justified in OUT_TEMP_H"
+    ],
+    [
+     "TEMP_CFG_REG",
+     "TEMP_EN[1-0]",
+     "00",
+     "Temperature sensor: 00 off, 11 on"
+    ],
+    [
+     "CTRL_REG1",
+     "ODR3-0",
+     "00",
+     "Output data rate; 0000 is power-down (data rate configuration table)"
+    ],
+    [
+     "CTRL_REG1",
+     "LPen",
+     "0",
+     "0: normal mode; 1: low-power mode"
+    ],
+    [
+     "CTRL_REG1",
+     "Zen",
+     "1",
+     "1: Z axis on"
+    ],
+    [
+     "CTRL_REG1",
+     "Yen",
+     "1",
+     "1: Y axis on"
+    ],
+    [
+     "CTRL_REG1",
+     "Xen",
+     "1",
+     "1: X axis on"
+    ],
+    [
+     "CTRL_REG2",
+     "HPM1-HPM0",
+     "00",
+     "High-pass filter mode (high-pass filter mode table)"
+    ],
+    [
+     "CTRL_REG2",
+     "HPCF2-HPCF1",
+     "",
+     "High-pass cut-off frequency select"
+    ],
+    [
+     "CTRL_REG2",
+     "FDS",
+     "0",
+     "0: filter bypassed; 1: filtered data go to the output registers and FIFO"
+    ],
+    [
+     "CTRL_REG2",
+     "HPCLICK",
+     "",
+     "1: high-pass filter applied to the click function"
+    ],
+    [
+     "CTRL_REG2",
+     "HPIS2",
+     "",
+     "1: high-pass filter applied to the AOI function of interrupt 2"
+    ],
+    [
+     "CTRL_REG2",
+     "HPIS1",
+     "",
+     "1: high-pass filter applied to the AOI function of interrupt 1"
+    ],
+    [
+     "CTRL_REG3",
+     "I1_CLICK",
+     "0",
+     "1: click interrupt routed to INT1"
+    ],
+    [
+     "CTRL_REG3",
+     "I1_AOI1",
+     "0",
+     "1: AOI1 interrupt routed to INT1"
+    ],
+    [
+     "CTRL_REG3",
+     "I1_AOI2",
+     "0",
+     "1: AOI2 interrupt routed to INT1"
+    ],
+    [
+     "CTRL_REG3",
+     "I1_DRDY1",
+     "0",
+     "1: DRDY1 interrupt routed to INT1"
+    ],
+    [
+     "CTRL_REG3",
+     "I1_DRDY2",
+     "0",
+     "1: DRDY2 interrupt routed to INT1"
+    ],
+    [
+     "CTRL_REG3",
+     "I1_WTM",
+     "0",
+     "1: FIFO watermark interrupt routed to INT1"
+    ],
+    [
+     "CTRL_REG3",
+     "I1_OVERRUN",
+     "0",
+     "1: FIFO overrun interrupt routed to INT1"
+    ],
+    [
+     "CTRL_REG4",
+     "BDU",
+     "0",
+     "0: output registers update continuously; 1: no update until both MSB and LSB are read"
+    ],
+    [
+     "CTRL_REG4",
+     "BLE",
+     "0",
+     "0: LSb at the lower address; 1: MSb at the lower address (high-resolution mode only)"
+    ],
+    [
+     "CTRL_REG4",
+     "FS1-FS0",
+     "00",
+     "Full scale: 00 ±2 g, 01 ±4 g, 10 ±8 g, 11 ±16 g"
+    ],
+    [
+     "CTRL_REG4",
+     "HR",
+     "",
+     "Operating mode select, with LPen (operating mode selection table)"
+    ],
+    [
+     "CTRL_REG4",
+     "ST1-ST0",
+     "00",
+     "Self-test: 00 off, others in the self-test mode table"
+    ],
+    [
+     "CTRL_REG4",
+     "SIM",
+     "0",
+     "SPI mode: 0 four-wire, 1 three-wire"
+    ],
+    [
+     "CTRL_REG5",
+     "BOOT",
+     "0",
+     "1: reload the trim memory content"
+    ],
+    [
+     "CTRL_REG5",
+     "FIFO_EN",
+     "0",
+     "1: FIFO on"
+    ],
+    [
+     "CTRL_REG5",
+     "LIR_INT1",
+     "0",
+     "1: interrupt 1 request latched until INT1_SRC is read"
+    ],
+    [
+     "CTRL_REG5",
+     "D4D_INT1",
+     "",
+     "1: 4D detection on INT1 when the 6D bit of INT1_CFG is set"
+    ],
+    [
+     "CTRL_REG5",
+     "LIR_INT2",
+     "0",
+     "1: interrupt 2 request latched until INT2_SRC is read"
+    ],
+    [
+     "CTRL_REG5",
+     "D4D_INT2",
+     "",
+     "1: 4D detection on INT2 when the 6D bit of INT2_CFG is set"
+    ],
+    [
+     "CTRL_REG6",
+     "I2_CLICKen",
+     "0",
+     "1: click interrupt on INT2"
+    ],
+    [
+     "CTRL_REG6",
+     "I2_INT1",
+     "0",
+     "1: interrupt 1 function on INT2"
+    ],
+    [
+     "CTRL_REG6",
+     "I2_INT2",
+     "0",
+     "1: interrupt 2 function on INT2"
+    ],
+    [
+     "CTRL_REG6",
+     "BOOT_I2",
+     "0",
+     "1: boot status on INT2"
+    ],
+    [
+     "CTRL_REG6",
+     "P2_ACT",
+     "0",
+     "1: activity interrupt on INT2"
+    ],
+    [
+     "CTRL_REG6",
+     "H_LACTIVE",
+     "0",
+     "Interrupt polarity: 0 active high, 1 active low"
+    ],
+    [
+     "REFERENCE",
+     "Ref7-Ref0",
+     "0",
+     "Reference value used by the interrupt generators"
+    ],
+    [
+     "STATUS_REG",
+     "ZYXOR",
+     "0",
+     "1: a new X, Y, Z set overwrote an unread one"
+    ],
+    [
+     "STATUS_REG",
+     "ZOR / YOR / XOR",
+     "0",
+     "1: new data on that axis overwrote unread data"
+    ],
+    [
+     "STATUS_REG",
+     "ZYXDA",
+     "0",
+     "1: a new X, Y, Z set is ready"
+    ],
+    [
+     "STATUS_REG",
+     "ZDA / YDA / XDA",
+     "0",
+     "1: new data on that axis is ready"
+    ],
+    [
+     "OUT_X/Y/Z_L/H",
+     "",
+     "",
+     "Acceleration on each axis, two's complement, left justified"
+    ],
+    [
+     "FIFO_CTRL_REG",
+     "FM1-FM0",
+     "00",
+     "FIFO mode (FIFO mode table)"
+    ],
+    [
+     "FIFO_CTRL_REG",
+     "TR",
+     "0",
+     "Trigger source: 0 interrupt 1, 1 interrupt 2"
+    ],
+    [
+     "FIFO_CTRL_REG",
+     "FTH4:0",
+     "0",
+     "FIFO threshold"
+    ],
+    [
+     "INT1_CFG / INT2_CFG",
+     "AOI",
+     "0",
+     "AND/OR combination of events (interrupt mode table)"
+    ],
+    [
+     "INT1_CFG / INT2_CFG",
+     "6D",
+     "0",
+     "Six-direction detection on (interrupt mode table)"
+    ],
+    [
+     "INT1_CFG / INT2_CFG",
+     "ZHIE, ZLIE, YHIE, YLIE, XHIE, XLIE",
+     "0",
+     "1: interrupt when that axis goes above (H) or below (L) the threshold, or on direction recognition in 6D mode"
+    ],
+    [
+     "INT1_SRC / INT2_SRC",
+     "IA",
+     "0",
+     "1: one or more interrupt events happened"
+    ],
+    [
+     "INT1_SRC / INT2_SRC",
+     "ZH, ZL, YH, YL, XH, XL",
+     "0",
+     "1: that high or low event happened"
+    ],
+    [
+     "INT1_THS / INT2_THS",
+     "THS6-THS0",
+     "000 0000",
+     "Interrupt threshold; 1 LSb = 16 mg @FS=2g, 32 mg @FS=4g, 62 mg @FS=8g, 186 mg @FS=16g"
+    ],
+    [
+     "INT1_DURATION / INT2_DURATION",
+     "D6-D0",
+     "000 0000",
+     "Minimum event duration; 1 LSb = 1/ODR"
+    ],
+    [
+     "CLICK_CFG",
+     "ZD / YD / XD",
+     "0",
+     "1: double-click interrupt on that axis"
+    ],
+    [
+     "CLICK_CFG",
+     "ZS / YS / XS",
+     "0",
+     "1: single-click interrupt on that axis"
+    ],
+    [
+     "CLICK_SRC",
+     "IA",
+     "0",
+     "1: one or more click interrupts happened"
+    ],
+    [
+     "CLICK_SRC",
+     "DClick",
+     "0",
+     "Double-click detection"
+    ],
+    [
+     "CLICK_SRC",
+     "SClick",
+     "0",
+     "Single-click detection"
+    ],
+    [
+     "CLICK_SRC",
+     "Sign",
+     "",
+     "Click sign: 0 positive, 1 negative"
+    ],
+    [
+     "CLICK_SRC",
+     "Z / Y / X",
+     "0",
+     "1: click detected on that axis"
+    ],
+    [
+     "CLICK_THS",
+     "Ths6-Ths0",
+     "000 0000",
+     "Click threshold"
+    ],
+    [
+     "TIME_LIMIT",
+     "TLI6-TLI0",
+     "000 0000",
+     "Click time limit"
+    ],
+    [
+     "TIME_LATENCY",
+     "TLA7-TLA0",
+     "000 0000",
+     "Click time latency"
+    ],
+    [
+     "TIME_WINDOW",
+     "TW7-TW0",
+     "",
+     "Click time window"
+    ],
+    [
+     "Act_THS",
+     "Acth[6-0]",
+     "",
+     "Sleep-to-wake / return-to-sleep threshold in low-power mode; 1 LSb = 16 mg @FS=2g, 32 mg @FS=4g, 62 mg @FS=8g, 186 mg @FS=16g"
+    ],
+    [
+     "Act_DUR",
+     "ActD[7-0]",
+     "",
+     "Sleep-to-wake / return-to-sleep duration; 1 LSb = (8*1[LSb]+1)/ODR"
+    ]
+   ]
+  },
+  {
+   "title": "Data rate configuration",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "ODR3",
+    "ODR2",
+    "ODR1",
+    "ODR0",
+    "power mode selection"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "Power down mode"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "HR / normal / Low power mode (1 Hz)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "HR / normal / Low power mode (10 Hz)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "HR / normal / Low power mode (25 Hz)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "HR / normal / Low power mode (50 Hz)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "HR / normal / Low power mode (100 Hz)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "HR / normal / Low power mode (200 Hz)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "HR / normal / Low power mode (400 Hz)"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "Low power mode (1.620 kHz)"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "HR / normal (1.344 kHz); Low power mode (5.376 kHz)"
+    ]
+   ]
+  },
+  {
+   "title": "High pass filter mode configuration",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "HPM1",
+    "HPM0",
+    "high pass filter mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Normal mode (reset reading REFERENCE/DATACAPTURE (26h) register)"
+    ],
+    [
+     "0",
+     "1",
+     "Reference signal for filtering"
+    ],
+    [
+     "1",
+     "0",
+     "Normal mode"
+    ],
+    [
+     "1",
+     "1",
+     "Autoreset on interrupt event"
+    ]
+   ]
+  },
+  {
+   "title": "Self test mode configuration",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "ST1",
+    "ST0",
+    "self test mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Normal mode"
+    ],
+    [
+     "0",
+     "1",
+     "Self test 0"
+    ],
+    [
+     "1",
+     "0",
+     "Self test 1"
+    ],
+    [
+     "1",
+     "1",
+     "--"
+    ]
+   ]
+  },
+  {
+   "title": "FIFO mode configuration",
+   "page": 38,
+   "conditions": "",
+   "columns": [
+    "FM1",
+    "FM0",
+    "FIFO mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Bypass mode"
+    ],
+    [
+     "0",
+     "1",
+     "FIFO mode"
+    ],
+    [
+     "1",
+     "0",
+     "Stream mode"
+    ],
+    [
+     "1",
+     "1",
+     "Trigger mode"
+    ]
+   ]
+  },
+  {
+   "title": "Interrupt mode",
+   "page": 39,
+   "conditions": "INT1_CFG and INT2_CFG",
+   "columns": [
+    "AOI",
+    "6D",
+    "interrupt mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "OR combination of interrupt events"
+    ],
+    [
+     "0",
+     "1",
+     "6 direction movement recognition"
+    ],
+    [
+     "1",
+     "0",
+     "AND combination of interrupt events"
+    ],
+    [
+     "1",
+     "1",
+     "6 direction position recognition"
+    ]
+   ],
+   "notes": [
+    "Movement recognition (01) fires once when the orientation enters a known zone from an unknown one, and the output lasts one ODR period. Position recognition (11) holds the output for as long as the orientation stays in a known zone."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Electrical connection",
+   "page": 20,
+   "description": "The accelerometer wired to a host controller. Vdd feeds the core at pin 8 with a 100 nF ceramic and a 10 µF aluminium capacitor to ground next to that pin; Vdd_IO feeds the I/O pads at pin 7 and sets the signal levels of every line to the host. GND and the five reserved pins all go to ground. The four serial lines and both interrupt outputs run to the controller; for I2C, CS is held high.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LIS2DH"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "aluminium"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "ceramic"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Vdd"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "Vdd_IO"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SCL/SPC"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "SDA/SDI/SDO"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "SDO/SA0"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "CS"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "INT1"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "INT2"
+    },
+    {
+     "ref": "J9",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": [
+    "The pin 1 indicator pad stays unconnected during soldering.",
+    "All supplies and grounds are to be applied together."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Self-test output change",
+   "expr": "Vst = |OUT(self-test on) - OUT(self-test off)|",
+   "where": {
+    "OUT": "axis output in LSb"
+   },
+   "note": "At ±2 g and 10-bit data, 1 LSb = 4 mg. Pass range 17 to 360 LSb.",
+   "page": 11
+  },
+  {
+   "name": "Sensitivity from a ±1 g flip",
+   "expr": "So = |OUT(+1 g) - OUT(-1 g)| / 2",
+   "where": {
+    "OUT(+1 g)": "axis output pointing down, toward the earth's centre",
+    "OUT(-1 g)": "axis output after turning the part over by 180°"
+   },
+   "note": "",
+   "page": 16
+  },
+  {
+   "name": "Interrupt duration",
+   "expr": "t = N / ODR",
+   "where": {
+    "N": "content of INT1_DURATION or INT2_DURATION (D6-D0)",
+    "ODR": "output data rate"
+   },
+   "note": "",
+   "page": 41
+  },
+  {
+   "name": "Sleep-to-wake duration step",
+   "expr": "1 LSb = (8*1[LSb]+1)/ODR",
+   "where": {
+    "ODR": "output data rate"
+   },
+   "note": "Act_DUR register.",
+   "page": 46
+  },
+  {
+   "name": "Interrupt and activity threshold step",
+   "expr": "1 LSb = 16 mg (±2 g), 32 mg (±4 g), 62 mg (±8 g), 186 mg (±16 g)",
+   "where": {},
+   "note": "INT1_THS, INT2_THS and Act_THS.",
+   "page": 40
+  },
+  {
+   "name": "I2C fast-mode rise and fall time minimum",
+   "expr": "t = 20 + 0.1·Cb ns",
+   "where": {
+    "Cb": "capacitance of one bus line, pF"
+   },
+   "note": "",
+   "page": 14
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Sensing element",
+   "page": 18,
+   "text": "A surface-micromachined silicon proof mass hangs from a few anchor points and moves along the measured axis. Its displacement unbalances a capacitive half-bridge; the rest capacitances are a few pF and full-scale motion changes them by femtofarads. A cap over the element keeps the mould compound off the moving structure."
+  },
+  {
+   "topic": "Measurement chain",
+   "page": 18,
+   "text": "A low-noise charge amplifier turns the capacitance imbalance into a voltage, and an A/D converter turns that into a number. Data are read over I2C or SPI, and a data-ready signal flags each new X, Y, Z set."
+  },
+  {
+   "topic": "Factory calibration",
+   "page": 19,
+   "text": "Sensitivity and zero-g level are trimmed at the factory at 2.5 V. The trim lives in non-volatile memory and is copied into registers at every power-up, so no user calibration is needed. Boot takes about 5 ms after power-up."
+  },
+  {
+   "topic": "Supplies",
+   "page": 20,
+   "text": "Vdd powers the core and Vdd_IO the I/O pads. Decoupling of 100 nF ceramic plus 10 µF aluminium belongs as close to pin 8 as possible. All supplies and grounds should come up together. Vdd may be removed with Vdd_IO kept: the bus stays usable and the measurement chain is off."
+  },
+  {
+   "topic": "Operating modes",
+   "page": 16,
+   "text": "Low-power mode gives 8-bit data, normal mode 10-bit and high-resolution mode 12-bit, chosen by LPen in CTRL_REG1 and HR in CTRL_REG4; both set at once is not allowed. Bandwidth is ODR/2 in the first two and ODR/9 in high resolution. Changing into 12-bit mode takes 7/ODR; other changes take 1/ODR."
+  },
+  {
+   "topic": "Self-test",
+   "page": 17,
+   "text": "Self-test applies an electrostatic force to the proof mass that stands in for a known acceleration, so the output shifts by an amount set by full scale and sensitivity. The output is the sum of real acceleration and the test force; a shift inside the Vst limits shows the sensor and its interface are working."
+  },
+  {
+   "topic": "Zero-g level",
+   "page": 16,
+   "text": "With no acceleration the output should be mid-scale, 00h in two's complement; a part lying flat reads 0 g on X and Y and 1 g on Z. Mounting stress on the board can move the offset slightly; it moves little with temperature."
+  },
+  {
+   "topic": "6D / 4D orientation",
+   "page": 18,
+   "text": "The interrupt generators can flag when the part rests in a known orientation. In 4D mode the Z axis is left out of the position detection."
+  },
+  {
+   "topic": "Sleep to wake and return to sleep",
+   "page": 18,
+   "text": "With a threshold in Act_THS (3Eh) and a duration in Act_DUR (3Fh), the part drops to low-power mode at 10 Hz ODR while acceleration stays under the threshold, ignoring the ODR, LPen and HR settings. When acceleration rises above the threshold, the programmed mode and data rate return."
+  },
+  {
+   "topic": "Interrupts",
+   "page": 19,
+   "text": "Two independent generators produce wake-up and free-fall events on the enabled axes, and both can be active at once on the two pins. Thresholds, timing and routing of INT1 and INT2 are all set over the serial interface. Reading INT1_SRC or INT2_SRC clears its IA bit and the pin, and refreshes the register when latching is on."
+  },
+  {
+   "topic": "FIFO",
+   "page": 21,
+   "text": "Each axis has a 32-slot, 10-bit buffer, set by FM bits in FIFO_CTRL_REG (2Eh). Bypass: the buffer is unused and only the first slot carries data. FIFO mode: data fill the buffer, then collection stops when it is full. Stream: once full, the oldest sample is dropped for each new one. Stream-to-FIFO: runs as stream until a trigger event, then as FIFO. A watermark level can raise an interrupt; watermark, empty and full events can go to INT1 or INT2."
+  },
+  {
+   "topic": "Reading the FIFO",
+   "page": 21,
+   "text": "Reads of OUT_X, OUT_Y and OUT_Z (29h, 2Bh, 2Dh) return the oldest stored samples in stream, trigger or FIFO mode; single and burst reads both work. A burst read wraps from 2Dh back to 28h, so emptying all 32 levels takes 192 bytes (six registers times 32)."
+  },
+  {
+   "topic": "Temperature sensor",
+   "page": 19,
+   "text": "Set TEMP_EN in TEMP_CFG_REG to turn it on, and BDU in CTRL_REG4 to 1 to read it. Read both OUT_TEMP_L and OUT_TEMP_H; the result sits in OUT_TEMP_H as 8-bit two's complement, left justified, at 1 digit/°C."
+  },
+  {
+   "topic": "Output data format",
+   "page": 37,
+   "text": "Each axis output is a 16-bit two's complement word across an _L and _H register pair, left justified; the number of valid bits follows the operating mode."
+  },
+  {
+   "topic": "Interface selection",
+   "page": 23,
+   "text": "I2C and SPI share the same pads. CS high selects I2C (connect it to Vdd_IO); CS low selects SPI. SPI runs in 4-wire mode by default and in 3-wire mode when SIM in CTRL_REG4 is set."
+  },
+  {
+   "topic": "I2C",
+   "page": 24,
+   "text": "The device is a slave with 7-bit address 001100x; SDO/SA0 sets the last bit, 0011000b when tied to ground and 0011001b when tied to supply, so two parts can share one bus. SCL and SDA each need a pull-up to Vdd_IO. Standard and fast (400 kHz) modes are supported. After the address comes an 8-bit sub-address: the lower seven bits pick the register and the top bit turns on auto-increment for multi-byte transfers. A read uses a repeated start after the sub-address. Data go MSb first. A receiver that cannot yet take another byte may hold SCL low to make the transmitter wait."
+  },
+  {
+   "topic": "SPI",
+   "page": 26,
+   "text": "CS low frames a transfer; SPC idles high while CS is high. Data change on the falling edge of SPC and are sampled on the rising edge. A single-register access is 16 clocks: bit 0 is RW (1 read, 0 write), bit 1 is MS (1 auto-increments the address on multi-byte access), bits 2-7 are the address AD5-AD0, and bits 8-15 the data, MSb first. In a read the part drives SDO from bit 8. Further bytes add 8 clocks each. In 3-wire mode the data come back on SDA/SDI/SDO, and multi-byte reads work there too."
+  },
+  {
+   "topic": "Soldering",
+   "page": 20,
+   "text": "The LGA package meets ECOPACK, RoHS and Green requirements and is qualified for soldering heat to JEDEC J-STD-020. The pin 1 indicator pad is left unconnected."
+  }
+ ],
+ "packages": [
+  {
+   "name": "LGA-14 2x2x1",
+   "page": 47,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A1",
+     "overall height",
+     "",
+     "",
+     "1"
+    ],
+    [
+     "A2",
+     "",
+     "",
+     "0.785",
+     ""
+    ],
+    [
+     "A3",
+     "",
+     "",
+     "0.200",
+     ""
+    ],
+    [
+     "D1",
+     "body size",
+     "1.850",
+     "2.000",
+     "2.150"
+    ],
+    [
+     "E1",
+     "body size",
+     "1.850",
+     "2.000",
+     "2.150"
+    ],
+    [
+     "L1",
+     "",
+     "",
+     "0.900",
+     ""
+    ],
+    [
+     "L2",
+     "",
+     "",
+     "1.250",
+     ""
+    ],
+    [
+     "N1",
+     "",
+     "",
+     "0.350",
+     ""
+    ],
+    [
+     "T1",
+     "",
+     "",
+     "0.275",
+     ""
+    ],
+    [
+     "T2",
+     "",
+     "",
+     "0.200",
+     ""
+    ],
+    [
+     "P1",
+     "",
+     "",
+     "0.850",
+     ""
+    ],
+    [
+     "P2",
+     "",
+     "",
+     "0.850",
+     ""
+    ],
+    [
+     "d",
+     "pin 1 indicator diameter",
+     "",
+     "0.150",
+     ""
+    ],
+    [
+     "M",
+     "",
+     "",
+     "0.100",
+     ""
+    ],
+    [
+     "K",
+     "",
+     "",
+     "0.050",
+     ""
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,4567 @@
+{
+ "sheet": 1,
+ "name": "LTC1624CS8#TRPBF",
+ "kind": "switching_regulator",
+ "manufacturer": "Linear Technology (Analog Devices)",
+ "title": "LTC1624: SO-8 current mode controller for an external N-channel MOSFET",
+ "source": {
+  "document": "LTC1624",
+  "revision": "1624f, LT/TP 0198",
+  "pages": 28
+ },
+ "summary": "A fixed 200 kHz, current mode switching regulator controller in an 8-lead SO that drives one external N-channel MOSFET through a bootstrapped floating driver. It builds step-down, boost, SEPIC and positive-to-negative converters from 3.5 V to 36 V inputs, with a 1.19 V ±1% reference, 95% maximum duty cycle and an external sense resistor that sets the current limit. Burst Mode operation keeps light-load efficiency high, and the ITH/RUN pin carries compensation, soft start and a micropower shutdown (16 µA typical).",
+ "key_figures": [
+  [
+   "Input voltage",
+   "3.5V to 36V"
+  ],
+  [
+   "Output voltage (step-down)",
+   "1.19V to 30V"
+  ],
+  [
+   "Reference",
+   "1.19V ±1% (1.1781V to 1.2019V)"
+  ],
+  [
+   "Switching frequency",
+   "200kHz (175kHz to 225kHz)"
+  ],
+  [
+   "Maximum duty cycle",
+   "95%"
+  ],
+  [
+   "Current sense threshold",
+   "160mV typ"
+  ],
+  [
+   "Supply current",
+   "550µA typ normal, 16µA typ shutdown"
+  ],
+  [
+   "Gate drive",
+   "TG rise and fall 50ns typ into 3000pF"
+  ],
+  [
+   "Package",
+   "S8, θJA = 110°C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "package",
+   "operating temperature",
+   "top marking"
+  ],
+  "rows": [
+   [
+    "LTC1624CS8",
+    "S8, 8-lead plastic SO",
+    "0°C to 70°C",
+    "1624"
+   ],
+   [
+    "LTC1624IS8",
+    "S8, 8-lead plastic SO",
+    "–40°C to 85°C",
+    "1624I"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "S8 (8-lead plastic SO)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SENSE-",
+     "type": "analog input",
+     "function": "Negative input of the current comparator, taken to the far end of RSENSE from VIN. The fixed offsets between this pin and VIN, divided by RSENSE, set the current thresholds. Keep it within 15 V below VIN and no more than 0.3 V below ground."
+    },
+    {
+     "pin": "2",
+     "name": "ITH/RUN",
+     "type": "analog input/output",
+     "function": "Error amplifier output, where the loop compensation network connects, and the run control. A higher voltage raises the current comparator's trip point; the working range is 1.19 V to 2.4 V. Below 0.8 V the part shuts down, every function stops and TG is held low."
+    },
+    {
+     "pin": "3",
+     "name": "VFB",
+     "type": "analog input",
+     "function": "Feedback input, fed from a resistor divider on the output; regulates to 1.19 V."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground. Return it to the negative terminals of COUT and CIN and to the Schottky diode's anode."
+    },
+    {
+     "pin": "5",
+     "name": "SW",
+     "type": "power",
+     "function": "Switch node, to the inductor. In a step-down converter it swings from one Schottky drop below ground up to VIN."
+    },
+    {
+     "pin": "6",
+     "name": "TG",
+     "type": "output",
+     "function": "Gate drive for the external N-channel MOSFET, from a floating driver whose swing is INTVCC riding on the SW voltage."
+    },
+    {
+     "pin": "7",
+     "name": "BOOST",
+     "type": "power in",
+     "function": "Supply of the floating topside driver; the bootstrap capacitor CB returns to this pin. In step-down use it swings from INTVCC to VIN + INTVCC; in other topologies, with SW at 0 V, it sits at INTVCC."
+    },
+    {
+     "pin": "8",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Main supply and positive input of the current comparator. Decouple it to ground close to the pin."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Supply Voltage (VIN)",
+     "",
+     "–0.3",
+     "36",
+     "V"
+    ],
+    [
+     "Topside Driver Supply Voltage (BOOST)",
+     "",
+     "–0.3",
+     "42",
+     "V"
+    ],
+    [
+     "Switch Voltage (SW)",
+     "",
+     "–0.6",
+     "36",
+     "V"
+    ],
+    [
+     "Differential Boost Voltage (BOOST to SW)",
+     "",
+     "–0.3",
+     "7.8",
+     "V"
+    ],
+    [
+     "SENSE– Voltage",
+     "VIN < 15V",
+     "–0.3",
+     "VIN + 0.3V",
+     "V"
+    ],
+    [
+     "SENSE– Voltage",
+     "VIN ≥ 15V",
+     "VIN – 15V",
+     "VIN + 0.3V",
+     "V"
+    ],
+    [
+     "ITH/RUN, VFB Voltages",
+     "",
+     "–0.3",
+     "2.7",
+     "V"
+    ],
+    [
+     "Peak Driver Output Current (TG)",
+     "< 10µs",
+     "",
+     "2",
+     "A"
+    ],
+    [
+     "Operating Temperature Range",
+     "LTC1624CS",
+     "0",
+     "70",
+     "°C"
+    ],
+    [
+     "Operating Temperature Range",
+     "LTC1624IS",
+     "–40",
+     "85",
+     "°C"
+    ],
+    [
+     "Junction Temperature (Note 1)",
+     "",
+     "",
+     "125",
+     "°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "",
+     "–65",
+     "150",
+     "°C"
+    ],
+    [
+     "Lead Temperature (Soldering, 10 sec)",
+     "",
+     "",
+     "300",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: the junction temperature follows from ambient and dissipation as TJ = TA + (PD • 110°C/W)."
+   ]
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 2,
+   "conditions": "S8 package",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Maximum junction temperature",
+     "TJMAX",
+     "125",
+     "°C"
+    ],
+    [
+     "Thermal resistance, junction to ambient",
+     "θJA",
+     "110",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: main control loop",
+   "page": 2,
+   "conditions": "TA = 25°C, VIN = 15V, unless otherwise noted",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "IIN VFB",
+     "Feedback Current",
+     "(Note 2)",
+     "",
+     "",
+     "10",
+     "50",
+     "nA"
+    ],
+    [
+     "VFB",
+     "Feedback Voltage",
+     "(Note 2)",
+     "●",
+     "1.1781",
+     "1.19",
+     "1.2019",
+     "V"
+    ],
+    [
+     "∆VLINE REG",
+     "Reference Voltage Line Regulation",
+     "VIN = 3.6V to 20V (Note 2)",
+     "",
+     "",
+     "0.002",
+     "0.01",
+     "%/V"
+    ],
+    [
+     "∆VLOAD REG",
+     "Output Voltage Load Regulation",
+     "(Note 2) ITH Sinking 5µA",
+     "●",
+     "",
+     "0.5",
+     "0.8",
+     "%"
+    ],
+    [
+     "∆VLOAD REG",
+     "Output Voltage Load Regulation",
+     "(Note 2) ITH Sourcing 5µA",
+     "●",
+     "",
+     "–0.5",
+     "–0.8",
+     "%"
+    ],
+    [
+     "VOVL",
+     "Output Overvoltage Lockout",
+     "",
+     "",
+     "1.24",
+     "1.28",
+     "1.32",
+     "V"
+    ],
+    [
+     "IQ",
+     "Input DC Supply Current, Normal Mode",
+     "(Note 3)",
+     "",
+     "",
+     "550",
+     "900",
+     "µA"
+    ],
+    [
+     "IQ",
+     "Input DC Supply Current, Shutdown",
+     "(Note 3) VITH/RUN = 0V",
+     "",
+     "",
+     "16",
+     "30",
+     "µA"
+    ],
+    [
+     "VITH/RUN",
+     "Run Threshold",
+     "",
+     "",
+     "0.6",
+     "0.8",
+     "",
+     "V"
+    ],
+    [
+     "IITH/RUN",
+     "Run Current Source",
+     "VITH/RUN = 0.3V",
+     "",
+     "–0.8",
+     "–2.5",
+     "–5.0",
+     "µA"
+    ],
+    [
+     "IITH/RUN",
+     "Run Pullup Current",
+     "VITH/RUN = 1V",
+     "",
+     "–50",
+     "–160",
+     "–350",
+     "µA"
+    ],
+    [
+     "∆VSENSE(MAX)",
+     "Maximum Current Sense Threshold",
+     "VFB = 1.0V",
+     "",
+     "145",
+     "160",
+     "185",
+     "mV"
+    ],
+    [
+     "TG tr",
+     "TG Transition Time, Rise Time",
+     "CLOAD = 3000pF",
+     "",
+     "",
+     "50",
+     "150",
+     "ns"
+    ],
+    [
+     "TG tf",
+     "TG Transition Time, Fall Time",
+     "CLOAD = 3000pF",
+     "",
+     "",
+     "50",
+     "150",
+     "ns"
+    ],
+    [
+     "fOSC",
+     "Oscillator Frequency",
+     "",
+     "●",
+     "175",
+     "200",
+     "225",
+     "kHz"
+    ],
+    [
+     "VBOOST",
+     "Boost Voltage",
+     "SW = 0V, IBOOST = 5mA, VIN = 8V",
+     "",
+     "4.8",
+     "5.15",
+     "5.5",
+     "V"
+    ],
+    [
+     "∆VBOOST",
+     "Boost Load Regulation",
+     "SW = 0V, IBOOST = 2mA to 20mA",
+     "",
+     "",
+     "3",
+     "5",
+     "%"
+    ]
+   ],
+   "notes": [
+    "● marks limits that hold over the whole operating temperature range: 0°C ≤ TA ≤ 70°C for the LTC1624CS and –40°C ≤ TA ≤ 85°C for the LTC1624IS.",
+    "Note 2: measured with the part inside a servo loop that holds VFB at the error amplifier's midpoint, VITH = 1.8V.",
+    "Note 3: the figures exclude the gate charge current drawn at the switching frequency, which raises the operating supply current."
+   ]
+  },
+  {
+   "title": "Step-down design example",
+   "page": 13,
+   "conditions": "VIN = 12V nominal, 22V maximum; VOUT = 3.3V; IMAX = 2A; Si4412DY; L = 10µH",
+   "columns": [
+    "quantity",
+    "value"
+   ],
+   "rows": [
+    [
+     "RSENSE",
+     "100mV/2A = 0.05Ω"
+    ],
+    [
+     "∆IL at VIN = 22V",
+     "1.58AP-P"
+    ],
+    [
+     "Si4412DY RDS(ON)",
+     "0.042Ω"
+    ],
+    [
+     "Si4412DY CRSS",
+     "100pF"
+    ],
+    [
+     "PMAIN at 22V, T(estimated) = 50°C",
+     "62mW"
+    ],
+    [
+     "ISC(AVG) with 0.05Ω sense",
+     "2A"
+    ],
+    [
+     "Schottky dissipation at short circuit (0.5V drop)",
+     "0.98W"
+    ],
+    [
+     "CIN RMS current rating",
+     "at least 1.0A at temperature"
+    ],
+    [
+     "COUT ESR",
+     "0.03Ω"
+    ],
+    [
+     "Output ripple from ESR",
+     "0.03Ω (1.58AP-P) = 47mVP-P"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Related parts",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "part number",
+    "description",
+    "comments"
+   ],
+   "rows": [
+    [
+     "LTC1147",
+     "High Efficiency Step-Down Controller",
+     "100% DC, Burst Mode Operation, 8-Pin SO and PDIP"
+    ],
+    [
+     "LTC1148HV/LTC1148",
+     "High Efficiency Synchronous Step-Down Controllers",
+     "100% DC, Burst Mode Operation, VIN < 20V"
+    ],
+    [
+     "LTC1149",
+     "High Efficiency Synchronous Step-Down Controller",
+     "100% DC, Std Threshold MOSFETs, VIN < 48V"
+    ],
+    [
+     "LTC1159",
+     "High Efficiency Synchronous Step-Down Controller",
+     "100% DC, Logic Level MOSFETs, VIN < 40V"
+    ],
+    [
+     "LTC1174",
+     "Monolithic 0.6A Step-Down Switching Regulator",
+     "100% DC, Burst Mode Operation, 8-Pin SO"
+    ],
+    [
+     "LTC1265",
+     "1.2A Monolithic High Efficiency Step-Down Switching Regulator",
+     "100% DC, Burst Mode Operation, 14-Pin SO"
+    ],
+    [
+     "LTC1266",
+     "High Efficiency Synchronous Step-Down Controller, N-Channel Drive",
+     "100% DC, Burst Mode Operation, VIN < 20V"
+    ],
+    [
+     "LT1375/LT1376",
+     "1.5A, 500kHz Step-Down Switching Regulators",
+     "High Frequency"
+    ],
+    [
+     "LTC1433/LTC1434",
+     "Monolithic 0.45A Low Noise Current Mode Step-Down Switching Regulators",
+     "16- and 20-Pin Narrow SSOP"
+    ],
+    [
+     "LTC1435",
+     "High Efficiency Low Noise Synchronous Step-Down Controller, N-Channel Drive",
+     "Burst Mode Operation, 16-Pin Narrow SO"
+    ],
+    [
+     "LTC1436/LTC1436-PLL",
+     "High Efficiency Low Noise Synchronous Step-Down Controllers, N-Channel Drive",
+     "Adaptive Power Mode, 20- and 24-Pin SSOP"
+    ],
+    [
+     "LTC1474/LTC1475",
+     "Ultralow Quiescent Current Step-Down Monolithic Switching Regulators",
+     "100% DC, 8-Pin MSOP, VIN < 20V"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Efficiency vs Load Current, VOUT = 3.3V",
+   "page": 3,
+   "conditions": "VOUT = 3.3V, RSENSE = 0.033Ω",
+   "x": {
+    "label": "Load current",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 5V",
+     "points": [
+      [
+       0.002454,
+       70.05
+      ],
+      [
+       0.003518,
+       76.85
+      ],
+      [
+       0.004738,
+       80.21
+      ],
+      [
+       0.007417,
+       83.66
+      ],
+      [
+       0.01401,
+       86.94
+      ],
+      [
+       0.03313,
+       89.78
+      ],
+      [
+       0.1018,
+       91.9
+      ],
+      [
+       0.1767,
+       92.58
+      ],
+      [
+       0.4032,
+       93.26
+      ],
+      [
+       1.021,
+       93.42
+      ],
+      [
+       1.234,
+       93.28
+      ],
+      [
+       1.768,
+       92.44
+      ],
+      [
+       2.442,
+       91.07
+      ],
+      [
+       3.59,
+       88.64
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 10V",
+     "points": [
+      [
+       0.006583,
+       70.05
+      ],
+      [
+       0.008361,
+       73.58
+      ],
+      [
+       0.01012,
+       75.55
+      ],
+      [
+       0.01311,
+       77.58
+      ],
+      [
+       0.01849,
+       79.62
+      ],
+      [
+       0.02884,
+       81.6
+      ],
+      [
+       0.05056,
+       83.47
+      ],
+      [
+       0.1012,
+       85.17
+      ],
+      [
+       0.2662,
+       87.09
+      ],
+      [
+       0.4487,
+       87.84
+      ],
+      [
+       0.8377,
+       88.41
+      ],
+      [
+       1.239,
+       88.45
+      ],
+      [
+       1.839,
+       88.04
+      ],
+      [
+       2.636,
+       87.17
+      ],
+      [
+       3.508,
+       85.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs Input Voltage, VOUT = 3.3V",
+   "page": 3,
+   "conditions": "VOUT = 3.3V, RSENSE = 0.033Ω",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILOAD = 1A",
+     "points": [
+      [
+       3.81,
+       94.05
+      ],
+      [
+       8.53,
+       89.73
+      ],
+      [
+       10.99,
+       88.23
+      ],
+      [
+       17.26,
+       85.45
+      ],
+      [
+       20.62,
+       84.33
+      ],
+      [
+       25.08,
+       83.29
+      ],
+      [
+       27.79,
+       82.06
+      ]
+     ]
+    },
+    {
+     "label": "ILOAD = 0.1A",
+     "points": [
+      [
+       3.81,
+       93.14
+      ],
+      [
+       6.91,
+       87.82
+      ],
+      [
+       9.39,
+       84.07
+      ],
+      [
+       11.79,
+       81.41
+      ],
+      [
+       14.25,
+       79.26
+      ],
+      [
+       17.1,
+       77.45
+      ],
+      [
+       18.56,
+       76.86
+      ],
+      [
+       22.54,
+       76.3
+      ],
+      [
+       25.12,
+       75.78
+      ],
+      [
+       26.63,
+       74.96
+      ],
+      [
+       27.96,
+       73.79
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs Load Current, VOUT = 5V",
+   "page": 3,
+   "conditions": "VOUT = 5V, VIN = 10V, RSENSE = 0.033Ω",
+   "x": {
+    "label": "Load current",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 10V",
+     "points": [
+      [
+       0.003604,
+       70.09
+      ],
+      [
+       0.005185,
+       74.98
+      ],
+      [
+       0.00694,
+       78.17
+      ],
+      [
+       0.01003,
+       81.47
+      ],
+      [
+       0.0157,
+       84.6
+      ],
+      [
+       0.02667,
+       87.28
+      ],
+      [
+       0.04931,
+       89.21
+      ],
+      [
+       0.09949,
+       90.12
+      ],
+      [
+       0.2697,
+       90.85
+      ],
+      [
+       0.3803,
+       91.31
+      ],
+      [
+       0.7363,
+       92.62
+      ],
+      [
+       1.033,
+       92.97
+      ],
+      [
+       1.511,
+       92.83
+      ],
+      [
+       2.161,
+       92.45
+      ],
+      [
+       2.912,
+       91.84
+      ],
+      [
+       3.569,
+       91.03
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs Input Voltage, VOUT = 5V",
+   "page": 3,
+   "conditions": "VOUT = 5V, RSENSE = 0.033Ω",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILOAD = 1A",
+     "points": [
+      [
+       5.4,
+       97.41
+      ],
+      [
+       10.57,
+       92.85
+      ],
+      [
+       13.01,
+       91.03
+      ],
+      [
+       14.99,
+       89.81
+      ],
+      [
+       18.65,
+       88.33
+      ],
+      [
+       22.91,
+       86.99
+      ],
+      [
+       25.28,
+       86.39
+      ],
+      [
+       27.74,
+       86.1
+      ]
+     ]
+    },
+    {
+     "label": "ILOAD = 0.1A",
+     "points": [
+      [
+       5.52,
+       95.99
+      ],
+      [
+       6.89,
+       93.18
+      ],
+      [
+       7.91,
+       91.68
+      ],
+      [
+       9.98,
+       89.41
+      ],
+      [
+       13.24,
+       86.36
+      ],
+      [
+       15.05,
+       85.13
+      ],
+      [
+       25.1,
+       80.0
+      ],
+      [
+       27.96,
+       77.84
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VIN – VOUT Dropout Voltage vs Load Current",
+   "page": 3,
+   "conditions": "RSENSE = 0.033Ω, VOUT drop of 5%",
+   "x": {
+    "label": "Load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VIN – VOUT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RSENSE = 0.033Ω",
+     "points": [
+      [
+       0.0,
+       0.2617
+      ],
+      [
+       0.209,
+       0.3055
+      ],
+      [
+       0.402,
+       0.328
+      ],
+      [
+       0.917,
+       0.4009
+      ],
+      [
+       2.998,
+       0.6161
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Input Supply Current vs Input Voltage",
+   "page": 3,
+   "conditions": "VFB = 1.21V",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Sleep mode",
+     "points": [
+      [
+       3.28,
+       399.4
+      ],
+      [
+       4.16,
+       432.9
+      ],
+      [
+       4.89,
+       460.3
+      ],
+      [
+       5.53,
+       481.4
+      ],
+      [
+       6.18,
+       495.8
+      ],
+      [
+       9.18,
+       509.5
+      ],
+      [
+       14.9,
+       520.7
+      ],
+      [
+       20.97,
+       532.0
+      ],
+      [
+       24.94,
+       546.2
+      ],
+      [
+       27.49,
+       568.7
+      ],
+      [
+       30.04,
+       599.7
+      ],
+      [
+       32.58,
+       638.5
+      ],
+      [
+       35.03,
+       684.1
+      ]
+     ]
+    },
+    {
+     "label": "Shutdown",
+     "points": [
+      [
+       3.57,
+       13.2
+      ],
+      [
+       5.54,
+       13.1
+      ],
+      [
+       10.08,
+       13.7
+      ],
+      [
+       15.58,
+       17.1
+      ],
+      [
+       19.93,
+       25.2
+      ],
+      [
+       25.2,
+       49.9
+      ],
+      [
+       29.04,
+       80.7
+      ],
+      [
+       32.09,
+       121.1
+      ],
+      [
+       34.95,
+       174.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Boost Line Regulation",
+   "page": 3,
+   "conditions": "IBOOST = 1mA, VSW = 0V",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Boost voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IBOOST = 1mA",
+     "points": [
+      [
+       3.43,
+       2.74
+      ],
+      [
+       6.97,
+       5.784
+      ],
+      [
+       6.97,
+       5.273
+      ],
+      [
+       6.99,
+       5.265
+      ],
+      [
+       7.04,
+       5.247
+      ],
+      [
+       7.14,
+       5.225
+      ],
+      [
+       7.3,
+       5.205
+      ],
+      [
+       11.79,
+       5.2
+      ],
+      [
+       21.56,
+       5.213
+      ],
+      [
+       30.84,
+       5.23
+      ],
+      [
+       34.99,
+       5.239
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Boost Load Regulation",
+   "page": 3,
+   "conditions": "VSW = 0V",
+   "x": {
+    "label": "Boost load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Boost voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 15V",
+     "points": [
+      [
+       0.08,
+       5.333
+      ],
+      [
+       0.92,
+       5.241
+      ],
+      [
+       2.38,
+       5.208
+      ],
+      [
+       29.97,
+       4.953
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 5V",
+     "points": [
+      [
+       0.08,
+       4.431
+      ],
+      [
+       0.92,
+       4.34
+      ],
+      [
+       6.05,
+       4.213
+      ],
+      [
+       30.01,
+       3.813
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Boost Voltage vs Temperature",
+   "page": 3,
+   "conditions": "ILOAD = 1mA",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Boost voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILOAD = 1mA",
+     "points": [
+      [
+       -39.79,
+       4.942
+      ],
+      [
+       125.4,
+       5.635
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ITH/RUN Pin Source Current vs Temperature",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ITH/RUN pin source current with VITH = 1V",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "ITH/RUN pin source current with VITH = 0V",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ITH/RUN = 1V",
+     "points": [
+      [
+       -39.4,
+       109.4
+      ],
+      [
+       121.5,
+       228.8
+      ]
+     ]
+    },
+    {
+     "label": "ITH/RUN = 0V",
+     "axis": "y2",
+     "points": [
+      [
+       -39.4,
+       2.074
+      ],
+      [
+       124.5,
+       3.343
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Frequency vs Feedback Voltage",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Feedback voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Oscillator frequency",
+     "points": [
+      [
+       0.002,
+       34.6
+      ],
+      [
+       0.179,
+       34.6
+      ],
+      [
+       0.264,
+       83.0
+      ],
+      [
+       0.328,
+       113.2
+      ],
+      [
+       0.393,
+       139.0
+      ],
+      [
+       0.461,
+       160.3
+      ],
+      [
+       0.533,
+       177.0
+      ],
+      [
+       0.611,
+       189.0
+      ],
+      [
+       0.697,
+       196.2
+      ],
+      [
+       0.791,
+       198.7
+      ],
+      [
+       1.173,
+       198.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Operating Frequency vs Temperature",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT in regulation",
+     "points": [
+      [
+       -39.71,
+       204.0
+      ],
+      [
+       -30.3,
+       203.8
+      ],
+      [
+       -11.06,
+       202.9
+      ],
+      [
+       9.76,
+       201.7
+      ],
+      [
+       24.09,
+       200.7
+      ],
+      [
+       28.45,
+       200.7
+      ],
+      [
+       33.92,
+       201.4
+      ],
+      [
+       40.65,
+       202.5
+      ],
+      [
+       48.68,
+       204.0
+      ],
+      [
+       66.76,
+       205.5
+      ],
+      [
+       90.25,
+       206.0
+      ],
+      [
+       111.34,
+       206.0
+      ],
+      [
+       121.9,
+       205.9
+      ]
+     ]
+    },
+    {
+     "label": "VFB = 0V",
+     "points": [
+      [
+       -39.71,
+       32.2
+      ],
+      [
+       -31.63,
+       32.5
+      ],
+      [
+       -15.1,
+       32.5
+      ],
+      [
+       3.64,
+       32.2
+      ],
+      [
+       18.31,
+       31.6
+      ],
+      [
+       27.11,
+       31.6
+      ],
+      [
+       44.2,
+       31.8
+      ],
+      [
+       62.6,
+       32.0
+      ],
+      [
+       74.94,
+       32.1
+      ],
+      [
+       86.24,
+       32.4
+      ],
+      [
+       101.11,
+       33.1
+      ],
+      [
+       114.68,
+       33.8
+      ],
+      [
+       121.9,
+       34.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum Current Sense Threshold vs Temperature",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current sense threshold",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Maximum current sense threshold",
+     "points": [
+      [
+       -40.04,
+       157.03
+      ],
+      [
+       -6.42,
+       158.37
+      ],
+      [
+       42.53,
+       160.28
+      ],
+      [
+       90.88,
+       162.18
+      ],
+      [
+       125.0,
+       163.52
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "step-down-3v3-2a",
+   "title": "Figure 1. High Efficiency Step-Down Converter",
+   "page": 1,
+   "description": "A 4.8 V to 28 V input is stepped down to 3.3 V at 2 A. The 0.05 Ω sense resistor in the drain of the Si4412DY sets the peak current; the switch node feeds a 10 µH inductor with an MBRS340T3 catch diode. 35.7k over 20k sets the output from the 1.19 V reference, 470 pF and 6.8k compensate the loop at ITH/RUN, and 1000 pF filters the sense input. CB, 0.1 µF from BOOST to SW, supplies the floating gate drive.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "4.8V to 28V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "3.3V, 2A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.05Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF",
+     "note": "between VIN and SENSE–"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si4412DY"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340T3"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 10V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "20k"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "470pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "6.8k"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "output-divider",
+   "title": "Figure 2. Setting the LTC1624 Output Voltage",
+   "page": 10,
+   "description": "The feedback divider is taken from the output node after the inductor: R2 from VOUT to VFB, R1 from VFB to the chip's ground, with 100 pF across R1 at the pins. Because the divider taps the output itself, it can sense the voltage at a remote load.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_SW",
+     "type": "terminal",
+     "value": "inductor drive (SW side)"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "L1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100pF"
+    }
+   ],
+   "notes": [
+    "VOUT = 1.19V × (1 + R2/R1). With remote sensing, a local 100 Ω from L1 to R2 keeps the output from running high if the sense lead opens."
+   ]
+  },
+  {
+   "id": "ith-run-logic-diode",
+   "title": "Figure 3(a). ITH/RUN Pin Interfacing: logic gate through a diode",
+   "page": 10,
+   "description": "An inverting logic gate on a 3.3 V or 5 V supply pulls ITH/RUN low through D1 to shut the converter down; with the gate output high the diode is off and CC, RC compensate as usual.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "inverter",
+     "external": true
+    },
+    {
+     "ref": "J_LOGIC",
+     "type": "terminal",
+     "value": "logic input"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "3.3V or 5V"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "D1"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "CC"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "RC"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ith-run-nmos",
+   "title": "Figure 3(b). ITH/RUN Pin Interfacing: open-drain N-channel MOSFET",
+   "page": 10,
+   "description": "A small N-channel MOSFET from ITH/RUN to ground shuts the converter down when its gate is driven high.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "shutdown control"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "N-channel MOSFET"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "CC"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "RC"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ith-run-soft-start",
+   "title": "Figure 3(c). ITH/RUN Pin Interfacing: soft start",
+   "page": 10,
+   "description": "Soft start: R1 charges C1 from a supply, and D1 (anode at ITH/RUN, cathode at C1) lets the ITH/RUN voltage climb only as C1 charges, so the internal current limit ramps up with it. An N-channel MOSFET is connected across C1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_SUP",
+     "type": "terminal",
+     "value": "supply for R1"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "shutdown control"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "C1"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "N-channel MOSFET"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "D1"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "CC"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "RC"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "automotive-input",
+   "title": "Figure 4. Plugging into the Cigarette Lighter",
+   "page": 12,
+   "description": "Input protection for a car's 12 V line: a series diode rated for 50 A peak blocks reverse battery, and a 1.5KA24A transient suppressor from VIN to ground clamps load dump.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_12V",
+     "type": "terminal",
+     "value": "12V (cigarette lighter)"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "series diode, 50A IPK rating"
+    },
+    {
+     "ref": "D2",
+     "type": "zener",
+     "value": "1.5KA24A",
+     "note": "transient voltage suppressor (General Instrument)"
+    }
+   ],
+   "notes": [
+    "The suppressor must stay off at double-battery (24 V) and still clamp below the converter's breakdown."
+   ]
+  },
+  {
+   "id": "burst-mode-modify",
+   "title": "Figure 5. Modifying Burst Mode Operation",
+   "page": 12,
+   "description": "A step-down converter with Q1 (2N2222) added: its base on VOUT and emitter resistor R* to ground make it a current source of about 180 µA, which pulls through a 100 Ω resistor in series with SENSE– and puts 18 mV across it. That offset cancels the burst comparator's own offset, so the top MOSFET is driven every cycle and the converter keeps a constant frequency down to IOUT(MIN).",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "CIN"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "RSENSE"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100Ω",
+     "note": "18mV across it"
+    },
+    {
+     "ref": "Q1",
+     "type": "npn",
+     "value": "2N2222"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R*",
+     "note": "R* = (VOUT – 0.7V)/180µA"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "N-channel MOSFET"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340T3"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "L1"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "COUT"
+    }
+   ],
+   "notes": [
+    "The LTC1624's ITH/RUN, VFB, BOOST and GND connections are those of a step-down converter such as Figure 1."
+   ]
+  },
+  {
+   "id": "boost-basic",
+   "title": "Figure 6. Boost Converter",
+   "page": 13,
+   "description": "The basic step-up arrangement. RSENSE sits between VIN and the inductor, with SENSE– at the inductor end; the MOSFET's source and the SW pin go to ground, the drain node feeds the output through D1, and R2 over R1 set the output.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "CIN"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "L1"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "M1"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "CB"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "D1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "COUT"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "sepic-basic",
+   "title": "Figure 7. SEPIC Converter",
+   "page": 15,
+   "description": "The basic SEPIC: L1 and the grounded-source MOSFET form the boost half, the coupling capacitor C1 carries the drain swing to L2 and D1, and the output may be above or below the input. L1 and L2 may share one core.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "CIN"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "L1",
+     "note": "may share a core with L2; dot at pin 1 (RSENSE end)"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "M1"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "CB"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "C1",
+     "note": "coupling capacitor"
+    },
+    {
+     "ref": "L2",
+     "type": "inductor",
+     "value": "L2",
+     "note": "may share a core with L1; dot at pin 2 (ground end)"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "D1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "COUT"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "inverting-basic",
+   "title": "Figure 8. Positive-to-Negative Converter",
+   "page": 18,
+   "description": "A negative output from a positive input with a grounded inductor. The chip's GND pin is tied to –VOUT so that the feedback is positive with respect to it; R1 from system ground to VFB and R2 from VFB to –VOUT set the output, and D1 returns the inductor current from –VOUT to the switch node.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "–VOUT"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "CIN"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "RSENSE"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "M1"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "CB"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "L1"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "D1"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "COUT"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "CC"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "RC"
+    }
+   ],
+   "notes": [
+    "VIN + |VOUT| must not exceed 36 V."
+   ]
+  },
+  {
+   "id": "step-down-5v-3a",
+   "title": "Figure 10. 5V/3A Converter with Output Derived Boost Voltage",
+   "page": 21,
+   "description": "A 5.3 V to 28 V input to 5 V at 3 A. The topside driver is fed from the output: a CMDSH-3 Schottky from VOUT to BOOST charges CB, so the driver current is drawn from the 5 V side and scaled down at the input. RSENSE is 0.033 Ω, L1 a 10 µH Coiltronics CTX10-4, and 35.7k over 11k set 5 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "5.3V to 28V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "5V, 3A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.033Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF",
+     "note": "between VIN and SENSE–"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si4412DY"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340T3"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH",
+     "note": "Coiltronics CTX10-4"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 10V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "11k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "560pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "4.7k"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "CMDSH-3"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "step-down-1v8-1a5",
+   "title": "Figure 11. Wide Input Range 1.8V/1.5A Converter",
+   "page": 22,
+   "description": "A 4.8 V to 22 V input to 1.8 V at 1.5 A, using an Si6436DY switch, a 0.068 Ω sense resistor and a 10 µH Sumida CDR105B-100; 35.7k over 69.8k set 1.8 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "4.8V to 22V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "1.8V, 1.5A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.068Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF",
+     "note": "between VIN and SENSE–"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si6436DY"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340T3"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH",
+     "note": "Sumida CDR105B-100"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 10V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "69.8k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "470pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "6.8k"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "step-down-12v-1a",
+   "title": "Figure 12. 12V/1A Low Dropout Converter",
+   "page": 22,
+   "description": "A 12.3 V to 28 V input to 12 V at 1 A; the 95% maximum duty cycle lets the input fall close to the output. Si4412DY switch, 0.068 Ω sense, 47 µH Sumida CDRH125-470, MBRS140T3 diode; 35.7k over 3.92k set 12 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "12.3V to 28V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "12V, 1A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.068Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF",
+     "note": "between VIN and SENSE–"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si4412DY"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS140T3"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "47µH",
+     "note": "Sumida CDRH125-470"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 16V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "3.92k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "470pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "6.8k"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "boost-12v-0a75",
+   "title": "Figure 13. 12V/0.75A Boost Converter",
+   "page": 22,
+   "description": "A 5.2 V to 11 V input stepped up to 12 V at 0.75 A. A 0.04 Ω sense resistor feeds a 22 µH Sumida CDRH125-220; the Si4412DY's source and the SW pin are grounded, and an MBRS130LT3 passes the drain current to the output. 35.7k over 3.92k set 12 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "5.2V to 11V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "12V, 0.75A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.04Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "22µH",
+     "note": "Sumida CDRH125-220"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si4412DY"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS130LT3"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 16V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "3.92k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "330pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "3.3k"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "sepic-12v",
+   "title": "Figure 14. 12V/0.4A SEPIC Converter",
+   "page": 23,
+   "description": "A 5 V to 15 V input to a 12 V output, so the input may sit above or below the output. L1a and L1b are the two windings of one Coiltronics CTX20-4; a 22 µF 35 V capacitor couples the drain node to L1b and the MBRS130LT3 output diode. Sense resistor 0.068 Ω, switch Si4412DY, divider 35.7k over 3.92k.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "5V to 15V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "12V, 0.5A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.068Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    },
+    {
+     "ref": "L1a",
+     "type": "inductor",
+     "value": "CTX20-4 winding a",
+     "note": "Coiltronics CTX20-4, coupled with L1b; dot at pin 1 (RSENSE end)"
+    },
+    {
+     "ref": "L1b",
+     "type": "inductor",
+     "value": "CTX20-4 winding b",
+     "note": "Coiltronics CTX20-4, coupled with L1a; dot at pin 2 (ground end)"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si4412DY"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "22µF 35V",
+     "note": "coupling capacitor"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS130LT3"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 16V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "3.92k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "330pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "4.7k"
+    }
+   ],
+   "notes": [
+    "The output rating is given as both 0.5 A (at the output) and 0.4 A (in the title)."
+   ]
+  },
+  {
+   "id": "inverting-5v-2a",
+   "title": "Figure 15. Inverting –5V/2A Converter",
+   "page": 23,
+   "description": "A 5 V to 22 V input to –5 V at 2 A. The chip's GND pin rides on –VOUT. R2 (78.7k) from ground to VFB and R1 (24.9k) from VFB to –VOUT set the output. D2 (CMDSH-3) from system ground charges CB. For shutdown, a TTL-level SHUTDOWN signal drives an inverter on VCC; its output switches M3 (TP0610L), which drives the gate of M2 (VN2222) against R3 (100k) to –VOUT, and M2 pulls ITH/RUN down to –VOUT.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "5V to 22V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "–5V, 2A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "SHUTDOWN"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "inverter",
+     "external": true
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.025Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN to –VOUT"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si4410DY"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "CMDSH-3"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "33µH",
+     "note": "Coilcraft DO5022P-333"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340T3"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "78.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "24.9k 1%"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 10V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "1000pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "3.3k"
+    },
+    {
+     "ref": "M3",
+     "type": "pmos",
+     "value": "TP0610L"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "VN2222"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "step-down-3v3-1a5",
+   "title": "Figure 16. Low Dropout 3.3V/1.5A Converter",
+   "page": 23,
+   "description": "A 3.5 V to 18 V input to 3.3 V at 1.5 A, with the input allowed down near the output. Si6426DQ switch, 0.068 Ω sense, 20 µH from a Coiltronics CTX20-4; 35.7k over 20k set 3.3 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "3.5V to 18V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "3.3V, 1.5A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.068Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF",
+     "note": "between VIN and SENSE–"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si6426DQ"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340T3"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "20µH",
+     "note": "Coiltronics CTX20-4"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 10V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "20k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "470pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "6.8k"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "sepic-5v-1a",
+   "title": "Figure 17. 5V/1A SEPIC Converter with Output Derived Boost Voltage",
+   "page": 24,
+   "description": "A 3.6 V to 18 V input to 5 V at 1 A in the SEPIC arrangement, with the gate drive supply taken from the 5 V output through a CMDSH-3 into BOOST. L1a and L1b are the two windings of a Coiltronics CTX20-4; 22 µF 35 V couples the drain node to L1b and the MBRS130LT3. Sense 0.05 Ω, switch Si6426DQ, divider 35.7k over 11k.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "3.6V to 18V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "5V, 1A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.05Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    },
+    {
+     "ref": "L1a",
+     "type": "inductor",
+     "value": "CTX20-4 winding a",
+     "note": "Coiltronics CTX20-4, coupled with L1b; dot at pin 1 (RSENSE end)"
+    },
+    {
+     "ref": "L1b",
+     "type": "inductor",
+     "value": "CTX20-4 winding b",
+     "note": "Coiltronics CTX20-4, coupled with L1a; dot at pin 2 (ground end)"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si6426DQ"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "CMDSH-3"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "22µF 35V",
+     "note": "coupling capacitor"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS130LT3"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 16V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "11k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "330pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "6.8k"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "step-down-12v-10a",
+   "title": "Figure 18. 24V to 12V/10A Buck Converter with Output-Derived Boost Voltage",
+   "page": 24,
+   "description": "A 13 V to 28 V input to 12 V at 10 A. Two 0.015 Ω sense resistors in parallel feed an IRL3803 switch; the catch diode is an MBR2535CT, the inductor a Pulse Engineering PO472, and the output capacitor a 2700 µF 16 V Sanyo OS-CON. The topside driver is supplied from the output: R5 (220 Ω) from the output, a 1N755 7.5 V zener to ground and C9 form a node that charges CB at BOOST through an MBR0540. Feedback is 100k (with 220 pF across it) over 11k; compensation is 100 pF with 20k.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "13V to 28V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "12V, 10A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "1000µF 35V ×2",
+     "note": "CIN1, CIN2: Sanyo 35MV1000GX"
+    },
+    {
+     "ref": "RSENSE1",
+     "type": "resistor",
+     "value": "0.015Ω",
+     "note": "IRC LR2010-01-R015-F"
+    },
+    {
+     "ref": "RSENSE2",
+     "type": "resistor",
+     "value": "0.015Ω",
+     "note": "IRC LR2010-01-R015-F"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "3.3µF 50V",
+     "note": "Wima MKS2"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "3.3µF 50V",
+     "note": "Wima MKS2"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "IRL3803",
+     "note": "International Rectifier; shares a Thermalloy #6399B heat sink with D1"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBR2535CT",
+     "note": "Motorola; on the same heat sink as M1"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "PO472",
+     "note": "Pulse Engineering"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "2700µF 16V",
+     "note": "Sanyo 16MV2700GX"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "220Ω"
+    },
+    {
+     "ref": "Z1",
+     "type": "zener",
+     "value": "1N755"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "MBR0540"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100k 1%"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "220pF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "11k 1%"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "20k"
+    }
+   ],
+   "notes": [
+    "Z1 is marked IN 755, the 1N755 7.5 V zener."
+   ]
+  },
+  {
+   "id": "boost-90v",
+   "title": "Figure 19. 24V to 90V at 0.5A Boost Converter",
+   "page": 25,
+   "description": "A 20 V to 32 V input stepped up to 90 V at 0.5 A. A 0.025 Ω sense resistor feeds a 47 µH Coilcraft inductor, an IRL540NS switches its far end to ground, and an MBRS1100 delivers to a 100 µF 100 V output capacitor. 1M over 13.3k set 90 V; 820 pF with 6.8k compensate.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "20V to 32V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "90V, 0.5A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V",
+     "note": "Kemet T495X226M035AS"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.025Ω",
+     "note": "IRC LR2010-01-R025-F"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "47µH",
+     "note": "Coilcraft D05022P-473"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "IRL540NS",
+     "note": "International Rectifier"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS1100",
+     "note": "Motorola"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 100V",
+     "note": "Sanyo 100MV100GX"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1M 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "13.3k"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "820pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "6.8k"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "boost-24v-5a",
+   "title": "Figure 20. 12V to 24V/5A Boost Converter",
+   "page": 25,
+   "description": "A 9 V to 15 V input stepped up to 24 V at 5 A. A 0.005 Ω sense resistor feeds a 10 µH inductor (8 turns of #14 bifilar on a Magnetics 55930AZ core); an IRL3803 switches it and an MBR2535CT delivers to two 1000 µF 35 V capacitors. BOOST is held by R5 (750 Ω, 0.5 W) from the output and a 1N755 7.5 V zener to ground. 1M over 52.3k set 24 V; compensation is 4700 pF with 27k, plus 1500 pF from ITH/RUN to ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "9V to 15V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "24V, 5A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "100µF 16V",
+     "note": "Kemet T495X107M016AS"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.005Ω 5%",
+     "note": "IRC OAR-3"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH",
+     "note": "Magnetics core #55930AZ, winding 8T #14 bifilar"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "IRL3803",
+     "note": "International Rectifier; shares a Thermalloy 6399 heat sink with D1"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBR2535CT",
+     "note": "Motorola"
+    },
+    {
+     "ref": "COUT1",
+     "type": "capacitor",
+     "value": "1000µF 35V",
+     "note": "Sanyo 35MV1000GX"
+    },
+    {
+     "ref": "COUT2",
+     "type": "capacitor",
+     "value": "1000µF 35V",
+     "note": "Sanyo 35MV1000GX"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "750Ω 0.5W"
+    },
+    {
+     "ref": "Z1",
+     "type": "zener",
+     "value": "1N755 7.5V"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1M 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "52.3k"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1500pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "4700pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "27k"
+    }
+   ],
+   "notes": [
+    "Z1 is marked IN755, the 1N755 7.5 V zener."
+   ]
+  },
+  {
+   "id": "current-limited-12v-3a",
+   "title": "Figure 21. 12V/3A Adjustable Current Power Supply for Battery Charger or Current Source Applications",
+   "page": 26,
+   "description": "A 13 V to 28 V input to 12 V at up to 3 A with an adjustable output current limit. The step-down stage uses an Si4412DY, 0.033 Ω sense, a 27 µH Sumida CDRH127-270 and an MBRS340; 35.7k (with 100 pF) over 3.92k set 12 V. A second 0.025 Ω resistor, R4, carries the output current, with the LTC1620's +IN and –IN across it. The LTC1620's IOUT pin connects to ITH/RUN through Q2, an MMBTA14 Darlington with base and collector joined; its PROG pin sits on the divider of R6, R7 and the 1M CURRENT ADJ potentiometer. An LT1121-5 regulator from +VIN supplies 5 V to the LTC1620.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "13V to 28V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "12V, 3A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "LTC1620",
+     "external": true
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "LT1121-5",
+     "external": true
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×2",
+     "note": "CIN1, CIN2: Kemet T495X226M035AS"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.033Ω",
+     "note": "IRC LR2010-01-R033-F"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Si4412DY",
+     "note": "Siliconix"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "27µH",
+     "note": "Sumida CDRH127-270"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "0.025Ω",
+     "note": "IRC LR2010-01-R025-F"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 16V ×2",
+     "note": "two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "3.92k"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "330pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "MMBTA14",
+     "note": "Motorola Darlington; base and collector joined"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "56k"
+    },
+    {
+     "ref": "R8",
+     "type": "other",
+     "value": "1M potentiometer",
+     "note": "CURRENT ADJ; wiper tied to its grounded end"
+    },
+    {
+     "ref": "C14",
+     "type": "capacitor",
+     "value": "0.01µF"
+    },
+    {
+     "ref": "C12",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "C13",
+     "type": "capacitor",
+     "value": "0.1µF"
+    }
+   ],
+   "notes": [
+    "LT1121-5 pins 4, 6 and 7 are NC and pin 2 is NC/ADJ; all are tied to ground. Its SHDN pin and the LTC1620's SENSE pin are left open."
+   ]
+  },
+  {
+   "id": "step-down-3v3-6a5",
+   "title": "Figure 22. High Current 3.3V/6.5A Converter",
+   "page": 27,
+   "description": "A 4.8 V to 28 V input to 3.3 V at 6.5 A, with a Siliconix SUD50N03-10 switch, 0.015 Ω sense, an 8 µH Panasonic 12TS-7ROLB and an MBRD835L; input and output capacitors are three in parallel each.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "4.8V to 28V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "3.3V, 6.5A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "22µF 35V ×3",
+     "note": "three in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.015Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1000pF",
+     "note": "between VIN and SENSE–"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "SUD50N03-10"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRD835L"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "8µH",
+     "note": "Panasonic 12TS-7ROLB"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "100µF 10V ×3",
+     "note": "three in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k 1%"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "20k 1%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "680pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "3.3k"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "VIN bypass"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "step-down-3v3-10a",
+   "title": "Figure 23. 5V to 3.3V/10A Converter (Surface Mount)",
+   "page": 28,
+   "description": "A 4.5 V to 5.5 V input to 3.3 V at 10 A, all surface mount. A 0.0082 Ω sense resistor feeds an IRL3803S; SENSE– reaches the drain side of the sense resistor through R3 (10 Ω) and is filtered to VIN by 0.033 µF. D2 (MBR0520) from VIN charges CB to raise the gate drive at this low input. L1 is 1.68 µH, D1 an MBRB2515L, the output two 470 µF 6.3 V tantalums. Q2, an MMBTA14LT1 Darlington wired as a diode, runs from ITH/RUN through 10k to the output. 35.7k (with 100 pF) over 20k set 3.3 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1624"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "+VIN 4.5V to 5.5V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "+VOUT 3.3V, 10A"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "VOUT RTN"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "100µF 10V ×4",
+     "note": "Kemet T495D107M010AS, four in parallel"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.0082Ω",
+     "note": "IRC OAR3-R0082"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10Ω"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.033µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "MBR0520",
+     "note": "Motorola"
+    },
+    {
+     "ref": "CB",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "IRL3803S",
+     "note": "International Rectifier"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "1.68µH",
+     "note": "Pulse Engineering PE53691"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRB2515L",
+     "note": "Motorola"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "470µF 6.3V ×2",
+     "note": "AVX TPSV477M006R0055, two in parallel"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "35.7k"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "20k"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100pF"
+    },
+    {
+     "ref": "CC",
+     "type": "capacitor",
+     "value": "820pF"
+    },
+    {
+     "ref": "RC",
+     "type": "resistor",
+     "value": "6.8k"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "MMBTA14LT1",
+     "note": "Motorola Darlington; base and collector joined"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10k"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Step-down sense resistor",
+   "expr": "RSENSE = 100mV / IMAX",
+   "where": {
+    "IMAX": "maximum average output current"
+   },
+   "note": "The 100 mV leaves margin under the 160 mV maximum threshold. RSENSE from 0.005 Ω to 0.5 Ω suits the part.",
+   "page": 7
+  },
+  {
+   "name": "Step-down inductor ripple current",
+   "expr": "∆IL = [(VIN – VOUT) / (f × L)] × [(VOUT + VD) / (VIN + VD)]",
+   "where": {
+    "∆IL": "peak-to-peak inductor ripple current",
+    "f": "operating frequency, 200 kHz",
+    "L": "inductance",
+    "VD": "forward drop of the output Schottky diode"
+   },
+   "note": "∆IL = 0.4(IMAX) is a reasonable starting point; ∆IL is largest at maximum VIN.",
+   "page": 7
+  },
+  {
+   "name": "Step-down main switch duty cycle",
+   "expr": "Main Switch Duty Cycle = (VOUT + VD) / (VIN + VD)",
+   "where": {
+    "VD": "Schottky forward drop"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Step-down MOSFET dissipation",
+   "expr": "PMAIN = [(VOUT + VD) / (VIN + VD)] × (IMAX)² × (1 + δ) × RDS(ON) + k × (VIN)^1.85 × (IMAX) × (CRSS) × (f)",
+   "where": {
+    "δ": "temperature dependency of RDS(ON); about 0.005/°C for low voltage MOSFETs",
+    "k": "constant inversely related to gate drive current; k = 2.5 can be used",
+    "CRSS": "reverse transfer capacitance of the MOSFET",
+    "f": "operating frequency"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Step-down average diode current",
+   "expr": "IDIODE(AVG) = ILOAD(AVG) × (VIN – VOUT) / (VIN + VD)",
+   "where": {},
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Allowable diode forward drop",
+   "expr": "VD ≈ [PD / ISC(AVG)] × [(VIN + VD) / VIN]",
+   "where": {
+    "PD": "allowable diode power dissipation",
+    "ISC(AVG)": "average short-circuit current"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Step-down input capacitor RMS current",
+   "expr": "CIN Required IRMS ≈ IMAX × [VOUT(VIN – VOUT)]^(1/2) / VIN",
+   "where": {},
+   "note": "Largest at VIN = 2VOUT, where IRMS = IOUT/2.",
+   "page": 8
+  },
+  {
+   "name": "Step-down output ripple",
+   "expr": "∆VOUT ≈ ∆IL × [ESR + 1 / (4 × f × COUT)]",
+   "where": {
+    "f": "operating frequency",
+    "COUT": "output capacitance",
+    "∆IL": "inductor ripple current"
+   },
+   "note": "With ∆IL = 0.4IOUT(MAX) and COUT ESR < 2RSENSE, the ripple stays under 100 mV at maximum VIN.",
+   "page": 9
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ = TA + (PD • 110°C/W)",
+   "where": {
+    "PD": "power dissipated in the LTC1624"
+   },
+   "note": "Worked case: 17 mA from 30 V at 70°C gives TJ = 70°C + (17mA)(30V)(110°C/W) = 126°C.",
+   "page": 2
+  },
+  {
+   "name": "Output voltage",
+   "expr": "VOUT = 1.19V × (1 + R2 / R1)",
+   "where": {
+    "R2": "divider resistor from VOUT to VFB",
+    "R1": "divider resistor from VFB to GND"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Peak inductor current set by ITH/RUN",
+   "expr": "IL(PEAK) = (VITH/RUN – 1.3V) / (6.8RSENSE)",
+   "where": {},
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Maximum output current during soft start",
+   "expr": "IOUT(MAX) = ILPEAK – ∆IL / 2",
+   "where": {
+    "∆IL": "inductor ripple current"
+   },
+   "note": "The peak current limit starts near 10mV/RSENSE at VITH/RUN = 1.4V and ends at 160mV/RSENSE at VITH/RUN = 2.4V.",
+   "page": 10
+  },
+  {
+   "name": "Efficiency",
+   "expr": "%Efficiency = 100% – (L1 + L2 + L3 + ...)",
+   "where": {
+    "L1, L2, ...": "individual losses as a percentage of input power"
+   },
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Gate charge current",
+   "expr": "IGATECHG = f (QT + QB)",
+   "where": {
+    "QT": "gate charge of the topside MOSFET",
+    "QB": "gate charge of the internal bottom-side MOSFET"
+   },
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Transition loss",
+   "expr": "Transition Loss = 2.5(VIN)^1.85 (IMAX)(CRSS)(f)",
+   "where": {},
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Load switch rise time",
+   "expr": "trise ≈ 25 • CLOAD",
+   "where": {
+    "CLOAD": "bypass capacitance of the load being switched in"
+   },
+   "note": "Example: 10µF needs a 250µs rise time, limiting charging current to about 200mA.",
+   "page": 12
+  },
+  {
+   "name": "Minimum current for constant frequency (Figure 5)",
+   "expr": "IOUT(MIN) = [tON(MIN)² × f / (2L)] × (VIN – VOUT) × [(VIN + VD) / (VOUT + VD)]",
+   "where": {
+    "tON(MIN)": "450ns",
+    "f": "200kHz"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Figure 5 emitter resistor",
+   "expr": "R* = (VOUT – 0.7V) / 180µA",
+   "where": {},
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Step-down Schottky dissipation at short circuit",
+   "expr": "PD = ISC(AVG) × (VD) × [VIN / (VIN + VD)]",
+   "where": {},
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Step-down maximum input voltage",
+   "expr": "VIN(MAX) = 11.1VOUT + 5V",
+   "where": {},
+   "note": "For DC > 9%.",
+   "page": 13
+  },
+  {
+   "name": "Boost main switch duty cycle",
+   "expr": "Main Switch Duty Cycle = 1 – VIN / (VOUT + VD)",
+   "where": {},
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Boost MOSFET dissipation",
+   "expr": "PMAIN = (IIN(MAX))² × [1 – VIN(MIN) / (VOUT + VD)] × (1 + δ) × RDS(ON) + k × (VOUT)^1.85 × (IIN(MAX)) × (CRSS) × (200kHz)",
+   "where": {
+    "IIN(MAX)": "IOUT(MAX) × (VOUT + VD) / VIN(MIN)",
+    "δ": "temperature dependency of RDS(ON)",
+    "k": "constant inversely related to gate drive current"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Boost peak inductor current",
+   "expr": "IL(PEAK) = IOUT(MAX) × [VOUT / VIN(MIN)] + ∆IL(MAX) / 2",
+   "where": {
+    "∆IL(MAX)": "∆IL(P-P) at VIN = VIN(MIN)"
+   },
+   "note": "At VIN(MIN) and IOUT(MAX), ∆IL usually runs 20% to 30% of the inductor's peak current.",
+   "page": 14
+  },
+  {
+   "name": "Boost inductor ripple current",
+   "expr": "∆IL(P-P) = VIN × (VOUT + VD – VIN) / [(200kHz)(L)(VOUT + VD)]",
+   "where": {},
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Boost sense resistor",
+   "expr": "RSENSE = [100mV / IOUT(MAX)] × [VIN(MIN) / (VOUT + VD)]",
+   "where": {},
+   "note": "Assumes 30% inductor ripple current and leaves margin for the LTC1624.",
+   "page": 15
+  },
+  {
+   "name": "Boost output capacitor ripple current",
+   "expr": "COUT IRIPPLE(RMS) ≈ IOUT × √[(VOUT – VIN) / VIN]",
+   "where": {},
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Boost output ripple",
+   "expr": "VOUT = RESR (∆IL(RMS))",
+   "where": {},
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Boost input capacitor ripple current",
+   "expr": "CIN IRIPPLE ≈ 0.3(VIN)(VOUT – VIN) / [(200kHz)(L)(VOUT)]",
+   "where": {},
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Boost maximum input voltage",
+   "expr": "VIN(MAX) = 0.91VOUT + 0.5V",
+   "where": {},
+   "note": "For DC = 9%.",
+   "page": 15
+  },
+  {
+   "name": "SEPIC main switch duty cycle",
+   "expr": "Main Switch Duty Cycle = (VOUT + VD) / (VIN + VOUT + VD)",
+   "where": {},
+   "note": "",
+   "page": 16
+  },
+  {
+   "name": "SEPIC MOSFET dissipation",
+   "expr": "PMAIN = (ISW(MAX))² × [(VOUT + VD) / (VIN(MIN) + VOUT + VD)] × (1 + δ) × RDS(ON) + k × (VIN(MIN) + VOUT)^1.85 × (ISW(MAX)) × (CRSS) × (200kHz)",
+   "where": {
+    "ISW(MAX)": "IOUT(MAX) × [(VOUT + VD) / VIN(MIN) + 1]"
+   },
+   "note": "The peak switch current is ISW(MAX) + ∆IL.",
+   "page": 16
+  },
+  {
+   "name": "SEPIC peak current in L1",
+   "expr": "IL1(PEAK) = IOUT(MAX) × [VOUT / VIN(MIN)] + ∆IL1 / 2",
+   "where": {},
+   "note": "",
+   "page": 16
+  },
+  {
+   "name": "SEPIC peak current in L2",
+   "expr": "IL2(PEAK) = IOUT(MAX) × [(VIN(MIN) + VD) / VIN(MIN)] + ∆IL2 / 2",
+   "where": {},
+   "note": "At VIN(MIN) and IOUT(MAX), ∆IL usually runs 20% to 30% of the peak; ∆IL1 = ∆IL2, and ∆IL is largest at maximum VIN.",
+   "page": 16
+  },
+  {
+   "name": "SEPIC inductor ripple current",
+   "expr": "∆IL(P-P) = (VIN)(VOUT + VD) / [(200kHz)(L)(VIN + VOUT + VD)]",
+   "where": {},
+   "note": "With L1 = L2 wound on one core, replace L by 2L in the SEPIC equations.",
+   "page": 16
+  },
+  {
+   "name": "SEPIC sense resistor",
+   "expr": "RSENSE = [100mV / IOUT(MAX)] × [VIN(MIN) / (VOUT + VD)]",
+   "where": {},
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "SEPIC peak diode current",
+   "expr": "ID1(PEAK) = IOUT(MAX) × [(VOUT + VD) / VIN(MIN) + 1] + ∆IL",
+   "where": {},
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "SEPIC input capacitor ripple current",
+   "expr": "IRIPPLE(RMS) = ∆IL / √12",
+   "where": {},
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "SEPIC output capacitor ripple current",
+   "expr": "IRIPPLE(RMS) = IOUT × √(VOUT / VIN)",
+   "where": {},
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "SEPIC output ripple voltage",
+   "expr": "VOUT(RIPPLE) = 2(∆IL)(ESR)",
+   "where": {},
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "SEPIC coupling capacitor ripple voltage",
+   "expr": "∆VC1 = [IOUT / ((200kHz)(C1))] × [VOUT / (VIN + VOUT + VD)]",
+   "where": {},
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "SEPIC coupling capacitor maximum voltage",
+   "expr": "VC1(MAX) = VIN + ∆VC1 / 2",
+   "where": {},
+   "note": "Typically close to VIN(MAX).",
+   "page": 17
+  },
+  {
+   "name": "SEPIC coupling capacitor ripple current",
+   "expr": "IRIPPLE(C1) = IOUT × √(VOUT / VIN)",
+   "where": {},
+   "note": "Largest at IOUT(MAX) and VIN(MIN).",
+   "page": 17
+  },
+  {
+   "name": "SEPIC minimum coupling capacitance",
+   "expr": "C1(MIN) = L1 (IOUT)² (VOUT)² / (VIN(MIN))⁴",
+   "where": {},
+   "note": "",
+   "page": 18
+  },
+  {
+   "name": "SEPIC maximum input voltage",
+   "expr": "VIN(MAX) = 10.1VOUT + 5V",
+   "where": {},
+   "note": "For DC > 9%; never above 36V.",
+   "page": 18
+  },
+  {
+   "name": "Positive-to-negative output voltage",
+   "expr": "VOUT = 1.19V × (1 + R1 / R2) ≈ –VIN × [DC / (1 – DC)]",
+   "where": {
+    "R1": "resistor from ground to VFB (Figure 8)",
+    "R2": "resistor from VFB to –VOUT",
+    "DC": "duty cycle"
+   },
+   "note": "",
+   "page": 18
+  },
+  {
+   "name": "Positive-to-negative main switch duty cycle",
+   "expr": "Main Switch Duty Cycle = (|VOUT| + VD) / (VIN + |VOUT| + VD)",
+   "where": {
+    "|VOUT|": "absolute value of VOUT"
+   },
+   "note": "",
+   "page": 18
+  },
+  {
+   "name": "Positive-to-negative MOSFET dissipation",
+   "expr": "PMAIN = ISW(MAX) × {IOUT(MAX) (I + δ) RDS(ON) + k (VIN(MAX) + |VOUT|)^1.85 (CRSS)(200kHz)}",
+   "where": {
+    "ISW(MAX)": "IOUT(MAX) × (VIN + |VOUT| + VD) / VIN"
+   },
+   "note": "(I + δ) should read (1 + δ). Switch current is largest at VIN(MIN); peak switch current is ISW(MAX) + ∆IL/2 and the switch sees up to VIN(MAX) + |VOUT|.",
+   "page": 18
+  },
+  {
+   "name": "Positive-to-negative peak inductor current",
+   "expr": "IL(PEAK) = IOUT(MAX) × [(VIN + |VOUT| + VD) / VIN] + ∆IL / 2",
+   "where": {},
+   "note": "At VIN(MIN) and IOUT(MAX), ∆IL usually runs 20% to 50% of the inductor's peak current; it is largest at minimum VIN.",
+   "page": 19
+  },
+  {
+   "name": "Positive-to-negative inductor ripple current",
+   "expr": "∆IL(P-P) = (VIN)(|VOUT| + VD) / [(200kHz)(L)(VIN + |VOUT| + VD)]",
+   "where": {},
+   "note": "",
+   "page": 19
+  },
+  {
+   "name": "Positive-to-negative sense resistor",
+   "expr": "RSENSE = [100mV / IOUT(MAX)] × [VIN(MIN) / (VIN(MIN) + |VOUT| + VD)]",
+   "where": {},
+   "note": "",
+   "page": 19
+  },
+  {
+   "name": "Positive-to-negative peak diode current",
+   "expr": "ID(PEAK) = IOUT(MAX) × [(|VOUT| + VD) / VIN + 1] + ∆IL / 2",
+   "where": {},
+   "note": "Average forward current is ID(PEAK) – ∆IL/2; peak reverse voltage is |VOUT| + VIN.",
+   "page": 19
+  },
+  {
+   "name": "Positive-to-negative capacitor ripple current",
+   "expr": "Capacitor IRMS = (ff)(IOUT) √(|VOUT| / VIN)",
+   "where": {
+    "ff": "fudge factor, 1.2 to 2.0"
+   },
+   "note": "Applies to both input and output capacitors, at VIN(MIN).",
+   "page": 20
+  },
+  {
+   "name": "Positive-to-negative output ripple",
+   "expr": "VOUT(P-P) = RESR (ID(MAX))",
+   "where": {},
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Positive-to-negative maximum input voltage",
+   "expr": "VIN(MAX) < 10.1VOUT + 5V; VIN(MAX) < 36V – |VOUT|",
+   "where": {},
+   "note": "The first limit is for DC > 9%, the second the absolute maximum rating.",
+   "page": 20
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Control loop",
+   "page": 5,
+   "text": "Fixed 200 kHz, peak current mode. The oscillator sets an RS latch each cycle to turn the external MOSFET on, and current comparator I1 resets it when the inductor current reaches a level set by the ITH/RUN voltage, driven by error amplifier EA. EA compares VFB with the 1.19 V reference; more load pulls VFB down slightly, ITH/RUN rises, and the average inductor current follows the load. While the top MOSFET is off an internal bottom MOSFET turns on for roughly 300 ns to 400 ns to recharge the bootstrap capacitor CB."
+  },
+  {
+   "topic": "Dropout",
+   "page": 5,
+   "text": "Duty cycle can reach 95%. A dropout detector counts how many cycles the MOSFET stays on and now and then forces a short off time so CB can recharge."
+  },
+  {
+   "topic": "Shutdown and soft start",
+   "page": 10,
+   "text": "Pulling ITH/RUN below 0.8 V shuts the part down with IQ under 30 µA; logic can drive the pin directly (Figure 3a, 3b). Released, an internal 2.5 µA source charges CC; at 0.8 V the loop starts and EA pulls ITH/RUN up toward 2.4 V while the output is low. In normal running ITH/RUN moves between 1.19 V and 2.4 V with load. Ramping ITH/RUN slowly from 1.19 V to 2.4 V (Figure 3c) ramps the peak current limit in proportion, from about 10mV/RSENSE at 1.4 V to 160mV/RSENSE at 2.4 V, which limits inrush and can sequence supplies."
+  },
+  {
+   "topic": "Overvoltage",
+   "page": 5,
+   "text": "Comparator OV turns the top MOSFET off and holds it off while the output overshoots by more than 7.5% (VFB above the 1.28 V lockout)."
+  },
+  {
+   "topic": "Burst Mode operation",
+   "page": 5,
+   "text": "At light load the MOSFET switches in bursts. When comparator B sees ITH/RUN below 1.5 V and the RSENSE voltage stays under comparator I2's offset (about 20 mV) for a full cycle, the top and internal bottom drives stop on the following cycles until ITH/RUN climbs back over 1.5 V. Burst Mode begins at roughly 8mV/RSENSE, about 8% of maximum output current. Smaller inductors make it start at higher load and lower the burst frequency. Figure 5 adds an 18 mV offset in series with SENSE– to keep constant-frequency operation to lower currents; cycle skipping still starts near 1% of maximum current, set by the 450 ns minimum on-time."
+  },
+  {
+   "topic": "INTVCC and bootstrap supply",
+   "page": 9,
+   "text": "An internal regulator makes the 5 V INTVCC that powers the drivers and internal circuits. An internal high voltage diode DB charges CB from INTVCC each off cycle while SW is low, and a small internal N-channel MOSFET pulls SW to ground after each on time to keep CB fully charged. When TG turns on, CB's voltage is placed across the MOSFET gate and source, SW rises to VIN and BOOST to VIN + INTVCC. CB should be at least 50 times the MOSFET's input capacitance; 0.1 µF usually suffices."
+  },
+  {
+   "topic": "Output-derived boost supply",
+   "page": 9,
+   "text": "Feeding BOOST from the output saves input current because the driver current is then scaled by (duty cycle)/(efficiency): for 5 V outputs a small Schottky such as a CMDSH-3 from VOUT to BOOST (Figure 10); for 3.3 V and lower outputs extra circuitry is needed. In a 20 V to 5 V converter, 5 mA of INTVCC current becomes about 1.5 mA at the input. For VIN below 7 V a Schottky from VIN to BOOST raises the gate drive. BOOST to SW must stay at or below 7.8 V."
+  },
+  {
+   "topic": "MOSFET choice",
+   "page": 8,
+   "text": "The gate swing is INTVCC, typically 5 V, so logic level MOSFETs are needed; below 5 V input, sublogic level parts. In boost, SEPIC and inverting circuits gate drive is about 5 V for VIN above 5.6 V and VIN – 0.6 V below 5 V. Check BVDSS: many logic level MOSFETs stop at 30 V. Choose by RDS(ON), CRSS, input voltage and current. Below about 20 V a larger MOSFET improves efficiency at high current; above about 20 V transition losses dominate and a part with higher RDS(ON) and lower CRSS does better. For a boost converter that 20 V boundary applies to VOUT, and for SEPIC and inverting converters to VIN + VOUT."
+  },
+  {
+   "topic": "Inductor",
+   "page": 7,
+   "text": "At the fixed 200 kHz small inductances are favoured; for step-down circuits 5 µH to 68 µH is typical, for boost, SEPIC and inverting circuits 10 µH to 100 µH. Larger inductance lowers ripple and core loss but needs more turns and copper. Ferrite has very low core loss but saturates abruptly, so the peak current must stay below saturation; molypermalloy and Kool Mµ toroids are low-loss alternatives. The inductor's saturation current must exceed the maximum set by RSENSE."
+  },
+  {
+   "topic": "Output diode",
+   "page": 8,
+   "text": "The step-down Schottky conducts in the off time and is most stressed in a short circuit (VOUT = 0 V), carrying ISC(PK) at nearly 100% duty. In a boost converter the diode sees VOUT in reverse and carries the output current; in SEPIC and inverting converters it sees VOUT + VIN. Boost converters have no short-circuit protection: the inductor current is then limited only by the source. MBR130LT3 is a suggested Schottky for boost and SEPIC circuits."
+  },
+  {
+   "topic": "Input and output capacitors",
+   "page": 8,
+   "text": "The step-down input current is a square wave of duty about VOUT/VIN, so CIN must be a low ESR part rated for the RMS current; ripple ratings are often for 2000 hours, so derate or choose a higher temperature part. COUT is chosen by ESR. Tantalums must be surge tested, since a battery connected suddenly can destroy untested ones. A boost converter's input capacitor is less critical, typically 10 µF to 100 µF with ESR around 0.3 Ω; its output capacitor carries large RMS ripple. Inverting converters have high ripple current in both capacitors."
+  },
+  {
+   "topic": "Duty cycle limits",
+   "page": 13,
+   "text": "The minimum recommended on-time is 450 ns. Below 9% duty cycle the part may skip cycles: ripple current rises but regulation holds. For a step-down converter this restricts input voltage only for VOUT below 2.2 V with 30 V MOSFETs. In a boost converter the minimum on-time limits how close VIN may come to VOUT before the output overshoots and trips the overvoltage comparator. SEPIC and inverting designs are affected only below about 2.5 V output."
+  },
+  {
+   "topic": "Losses",
+   "page": 11,
+   "text": "Four losses dominate: the LTC1624's VIN current (IQ plus gate drive current), I²R losses in the MOSFET, RSENSE and inductor, topside MOSFET transition losses (significant at about 20 V input and above), and the Schottky drop. Example: at 50% duty with RDS(ON) = 0.05 Ω, RL = 0.15 Ω and RSENSE = 0.05 Ω the effective resistance is 0.2 Ω, costing 2% to 8% at VOUT = 5 V from 0.5 A to 2 A; a 0.5 V diode at 50% duty costs about 5%. Capacitor ESR and core losses usually add under 2%."
+  },
+  {
+   "topic": "Transient response",
+   "page": 11,
+   "text": "A load step first moves VOUT by ∆ILOAD • ESR, then the loop restores it over several cycles; watching for overshoot or ringing checks stability. The ITH components of Figure 1 compensate most designs. Switching in a load with large (>1 µF) bypass capacitance drops VOUT sharply; the remedy is to slow the load switch's rise time."
+  },
+  {
+   "topic": "Automotive input",
+   "page": 12,
+   "text": "A car battery line can carry load dump (spikes to about 60 V lasting hundreds of milliseconds), reverse battery and double battery (24 V jump starts). Figure 4's series diode blocks reverse polarity and its transient suppressor clamps load dump. Though the part is rated to 36 V, most designs are limited to 30 V by the MOSFET BVDSS."
+  },
+  {
+   "topic": "SEPIC inductors",
+   "page": 16,
+   "text": "L1 and L2 see the same voltage throughout the cycle, so they may be wound on one core; with L1 = L2 on one core, use 2L for L in the equations. A Coiltronics CTX10-4 (10 µH, two windings) gives 10 µH at 4 A with the windings paralleled, or two 10 µH, 2 A inductors split, so L = 20 µH."
+  },
+  {
+   "topic": "Positive-to-negative shutdown",
+   "page": 20,
+   "text": "With GND on –VOUT, shutdown needs ITH/RUN pulled below 0.8 V relative to –VOUT; its normal range is –VOUT (shutdown) to –VOUT + 2.4 V (maximum output current). In Figure 15, M2, M3 and R3 shift TTL levels down: M3 drives M2's gate in shutdown and M2 pulls ITH/RUN to –VOUT."
+  },
+  {
+   "topic": "Board layout (step-down)",
+   "page": 20,
+   "text": "Keep signal and power grounds apart, returning GND (pin 4) to COUT's negative plate. Run VFB (pin 3) straight to R1, R2, which connect between COUT's positive plate and signal ground, with the 100 pF capacitor close to the part. Join VIN to the input at the same point as RSENSE and run SENSE– and VIN side by side at minimum spacing, with their filter capacitor close to the part. Put CIN's positive plate as close to RSENSE as possible and CIN close to the VIN and GND pins, since it supplies the MOSFET's AC current and recharges the bootstrap capacitor. Keep SW away from small-signal nodes and join M1, L1 and D1 tightly at the switch node."
+  }
+ ],
+ "packages": [
+  {
+   "name": "S8 (8-lead plastic small outline, narrow 0.150, LTC DWG # 05-08-1610)",
+   "page": 27,
+   "unit": "mm",
+   "columns": [
+    "what",
+    "min",
+    "max",
+    "inches min",
+    "inches max"
+   ],
+   "rows": [
+    [
+     "body length (excludes mold flash)",
+     "4.801",
+     "5.004",
+     "0.189",
+     "0.197"
+    ],
+    [
+     "overall width across leads",
+     "5.791",
+     "6.197",
+     "0.228",
+     "0.244"
+    ],
+    [
+     "body width (excludes interlead flash)",
+     "3.810",
+     "3.988",
+     "0.150",
+     "0.157"
+    ],
+    [
+     "overall height",
+     "1.346",
+     "1.752",
+     "0.053",
+     "0.069"
+    ],
+    [
+     "standoff",
+     "0.101",
+     "0.254",
+     "0.004",
+     "0.010"
+    ],
+    [
+     "lead width",
+     "0.355",
+     "0.483",
+     "0.014",
+     "0.019"
+    ],
+    [
+     "lead pitch",
+     "1.270",
+     "1.270",
+     "0.050",
+     "0.050"
+    ],
+    [
+     "lead thickness",
+     "0.203",
+     "0.254",
+     "0.008",
+     "0.010"
+    ],
+    [
+     "foot length",
+     "0.406",
+     "1.270",
+     "0.016",
+     "0.050"
+    ],
+    [
+     "corner chamfer × 45°",
+     "0.254",
+     "0.508",
+     "0.010",
+     "0.020"
+    ],
+    [
+     "foot angle",
+     "0°",
+     "8°",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Mold flash adds at most 0.152 mm (0.006\") per side to the body length; interlead flash at most 0.254 mm (0.010\") per side to the body width. Lead pitch is typical."
+   ]
+  }
+ ]
+}

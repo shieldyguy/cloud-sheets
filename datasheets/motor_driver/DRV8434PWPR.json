@@ -1,0 +1,7456 @@
+{
+ "sheet": 1,
+ "name": "DRV8434PWPR",
+ "kind": "motor_driver",
+ "manufacturer": "Texas Instruments",
+ "title": "DRV8434: 48 V, 2.5 A full-scale stepper driver with on-chip current sensing, STEP/DIR indexer to 1/256 microstep and smart tune decay",
+ "source": {
+  "document": "SLOSE47A",
+  "revision": "Revision A, May 2022 (first issued November 2020)",
+  "pages": 54
+ },
+ "summary": "A bipolar stepper motor driver with two N-channel H-bridges (330 mΩ high side plus low side at 24 V, 25 °C), an indexer driven by STEP and DIR from full step to 1/256 microstep, and current sensing done inside the chip so no sense resistors are fitted. It runs from 4.5 V to 48 V and drives up to 2.5 A full-scale or 1.8 A rms, set by the VREF voltage; decay is selectable among smart tune, slow and mixed modes. Protection covers VM and charge-pump undervoltage, overcurrent, open load and overtemperature, reported on nFAULT. DRV8434PWPR is the 28-pin HTSSOP PowerPAD part; DRV8434RGER is the 24-pin 4 mm VQFN.",
+ "key_figures": [
+  [
+   "Supply voltage VM",
+   "4.5 V to 48 V (50 V abs max)"
+  ],
+  [
+   "Full-scale current",
+   "2.5 A; 1.8 A rms; 4 A min overcurrent trip"
+  ],
+  [
+   "RDS(ON) per FET",
+   "165 mΩ typ, 200 mΩ max at 25 °C"
+  ],
+  [
+   "Microstepping",
+   "full step to 1/256, STEP up to 500 kHz"
+  ],
+  [
+   "Full-scale current accuracy",
+   "±4% for 1 A < IO < 2.5 A"
+  ],
+  [
+   "Transimpedance gain KV",
+   "1.32 V/A typ (IFS = VREF / KV)"
+  ],
+  [
+   "PWM off-time",
+   "7, 16, 24 or 32 µs"
+  ],
+  [
+   "Sleep current",
+   "2 µA typ, 4 µA max"
+  ],
+  [
+   "Logic inputs",
+   "1.8 V, 3.3 V and 5 V levels"
+  ],
+  [
+   "Thermal resistance RθJA",
+   "29.7 °C/W HTSSOP, 39.0 °C/W VQFN"
+  ],
+  [
+   "Operating ambient",
+   "-40 °C to 125 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "package",
+   "pins",
+   "body size (nom)",
+   "packing",
+   "marking"
+  ],
+  "rows": [
+   [
+    "DRV8434PWPR",
+    "HTSSOP (PWP), PowerPAD",
+    "28",
+    "9.7 mm x 4.4 mm",
+    "tape and reel, 2500",
+    "DRV8434"
+   ],
+   [
+    "DRV8434RGER",
+    "VQFN (RGE), exposed pad",
+    "24",
+    "4 mm x 4 mm",
+    "tape and reel, 3000",
+    "DRV 8434"
+   ]
+  ],
+  "notes": [
+   "The .A orderable variants (DRV8434PWPR.A, DRV8434RGER.A) carry the same package, packing and marking."
+  ]
+ },
+ "pins": [
+  {
+   "package": "HTSSOP-28 (PWP)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCP",
+     "type": "power",
+     "function": "Charge pump output, the high-side gate drive supply. A 0.22 µF, 16 V X7R ceramic goes from VCP to VM."
+    },
+    {
+     "pin": "2, 13",
+     "name": "VM",
+     "type": "power",
+     "function": "Motor supply. Each VM pin gets its own 0.01 µF ceramic to PGND, plus VM-rated bulk capacitance."
+    },
+    {
+     "pin": "3, 12",
+     "name": "PGND",
+     "type": "power",
+     "function": "Power ground of the bridges; to system ground."
+    },
+    {
+     "pin": "4, 5",
+     "name": "AOUT1",
+     "type": "output",
+     "function": "Bridge A output, to one end of motor winding A."
+    },
+    {
+     "pin": "6, 7",
+     "name": "AOUT2",
+     "type": "output",
+     "function": "Bridge A output, to the other end of motor winding A."
+    },
+    {
+     "pin": "8, 9",
+     "name": "BOUT2",
+     "type": "output",
+     "function": "Bridge B output, to one end of motor winding B."
+    },
+    {
+     "pin": "10, 11",
+     "name": "BOUT1",
+     "type": "output",
+     "function": "Bridge B output, to the other end of motor winding B."
+    },
+    {
+     "pin": "14",
+     "name": "GND",
+     "type": "power",
+     "function": "Device (logic) ground; to system ground."
+    },
+    {
+     "pin": "15",
+     "name": "DVDD",
+     "type": "power",
+     "function": "Output of the internal 5 V logic regulator. Decouple to GND with a 0.47 µF to 1 µF X7R ceramic rated 6.3 V or 10 V."
+    },
+    {
+     "pin": "16",
+     "name": "nFAULT",
+     "type": "open drain",
+     "function": "Fault flag, open drain, low while a fault is present. Needs an external pull-up."
+    },
+    {
+     "pin": "17",
+     "name": "VREF",
+     "type": "input",
+     "function": "Analog reference that sets the full-scale chopping current; 3.3 V at most. Can be fed from DVDD through a resistor divider."
+    },
+    {
+     "pin": "18",
+     "name": "M0",
+     "type": "input",
+     "function": "Step-mode select, tri-level (low, Hi-Z, high); with M1 sets the microstep resolution. Internal pulldown."
+    },
+    {
+     "pin": "19",
+     "name": "TOFF",
+     "type": "input",
+     "function": "Quad-level input: sets the PWM off-time, or in smart tune Ripple Control the current ripple."
+    },
+    {
+     "pin": "20",
+     "name": "DECAY1",
+     "type": "input",
+     "function": "Decay-mode select, with DECAY0."
+    },
+    {
+     "pin": "21",
+     "name": "DECAY0",
+     "type": "input",
+     "function": "Decay-mode select, tri-level, with DECAY1."
+    },
+    {
+     "pin": "22",
+     "name": "M1",
+     "type": "input",
+     "function": "Step-mode select, quad-level (low, 330 kΩ to GND, Hi-Z, high); with M0 sets the microstep resolution. Internal pulldown."
+    },
+    {
+     "pin": "23",
+     "name": "STEP",
+     "type": "input",
+     "function": "Step clock: each rising edge moves the indexer on by one step. Internal pulldown."
+    },
+    {
+     "pin": "24",
+     "name": "DIR",
+     "type": "input",
+     "function": "Sets which way the indexer steps. Internal pulldown."
+    },
+    {
+     "pin": "25",
+     "name": "ENABLE",
+     "type": "input",
+     "function": "Tri-level. Low turns the outputs off; high or Hi-Z drives them. High picks auto-retry and Hi-Z picks latched response to overcurrent and overtemperature. Internal pull-up to DVDD."
+    },
+    {
+     "pin": "26",
+     "name": "nSLEEP",
+     "type": "input",
+     "function": "High runs the device, low puts it in low-power sleep. A short low pulse clears latched faults. Internal pulldown."
+    },
+    {
+     "pin": "27",
+     "name": "CPL",
+     "type": "power",
+     "function": "Charge pump flying capacitor, low side: a 0.022 µF X7R ceramic rated for VM goes from CPH to CPL."
+    },
+    {
+     "pin": "28",
+     "name": "CPH",
+     "type": "power",
+     "function": "Charge pump flying capacitor, high side (switching node)."
+    },
+    {
+     "pin": "PAD",
+     "name": "PAD",
+     "type": "thermal",
+     "function": "Exposed thermal pad; to system ground."
+    }
+   ]
+  },
+  {
+   "package": "VQFN-24 (RGE)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1, 8",
+     "name": "VM",
+     "type": "power",
+     "function": "Motor supply. Each VM pin gets its own 0.01 µF ceramic to PGND, plus VM-rated bulk capacitance."
+    },
+    {
+     "pin": "2, 7",
+     "name": "PGND",
+     "type": "power",
+     "function": "Power ground of the bridges; to system ground."
+    },
+    {
+     "pin": "3",
+     "name": "AOUT1",
+     "type": "output",
+     "function": "Bridge A output, to one end of motor winding A."
+    },
+    {
+     "pin": "4",
+     "name": "AOUT2",
+     "type": "output",
+     "function": "Bridge A output, to the other end of motor winding A."
+    },
+    {
+     "pin": "5",
+     "name": "BOUT2",
+     "type": "output",
+     "function": "Bridge B output, to one end of motor winding B."
+    },
+    {
+     "pin": "6",
+     "name": "BOUT1",
+     "type": "output",
+     "function": "Bridge B output, to the other end of motor winding B."
+    },
+    {
+     "pin": "9",
+     "name": "GND",
+     "type": "power",
+     "function": "Device (logic) ground; to system ground."
+    },
+    {
+     "pin": "10",
+     "name": "DVDD",
+     "type": "power",
+     "function": "Output of the internal 5 V logic regulator. Decouple to GND with a 0.47 µF to 1 µF X7R ceramic rated 6.3 V or 10 V."
+    },
+    {
+     "pin": "11",
+     "name": "nFAULT",
+     "type": "open drain",
+     "function": "Fault flag, open drain, low while a fault is present. Needs an external pull-up."
+    },
+    {
+     "pin": "12",
+     "name": "VREF",
+     "type": "input",
+     "function": "Analog reference that sets the full-scale chopping current; 3.3 V at most. Can be fed from DVDD through a resistor divider."
+    },
+    {
+     "pin": "13",
+     "name": "M0",
+     "type": "input",
+     "function": "Step-mode select, tri-level (low, Hi-Z, high); with M1 sets the microstep resolution. Internal pulldown."
+    },
+    {
+     "pin": "14",
+     "name": "TOFF",
+     "type": "input",
+     "function": "Quad-level input: sets the PWM off-time, or in smart tune Ripple Control the current ripple."
+    },
+    {
+     "pin": "15",
+     "name": "DECAY1",
+     "type": "input",
+     "function": "Decay-mode select, with DECAY0."
+    },
+    {
+     "pin": "16",
+     "name": "DECAY0",
+     "type": "input",
+     "function": "Decay-mode select, tri-level, with DECAY1."
+    },
+    {
+     "pin": "17",
+     "name": "M1",
+     "type": "input",
+     "function": "Step-mode select, quad-level (low, 330 kΩ to GND, Hi-Z, high); with M0 sets the microstep resolution. Internal pulldown."
+    },
+    {
+     "pin": "18",
+     "name": "STEP",
+     "type": "input",
+     "function": "Step clock: each rising edge moves the indexer on by one step. Internal pulldown."
+    },
+    {
+     "pin": "19",
+     "name": "DIR",
+     "type": "input",
+     "function": "Sets which way the indexer steps. Internal pulldown."
+    },
+    {
+     "pin": "20",
+     "name": "ENABLE",
+     "type": "input",
+     "function": "Tri-level. Low turns the outputs off; high or Hi-Z drives them. High picks auto-retry and Hi-Z picks latched response to overcurrent and overtemperature. Internal pull-up to DVDD."
+    },
+    {
+     "pin": "21",
+     "name": "nSLEEP",
+     "type": "input",
+     "function": "High runs the device, low puts it in low-power sleep. A short low pulse clears latched faults. Internal pulldown."
+    },
+    {
+     "pin": "22",
+     "name": "CPL",
+     "type": "power",
+     "function": "Charge pump flying capacitor, low side: a 0.022 µF X7R ceramic rated for VM goes from CPH to CPL."
+    },
+    {
+     "pin": "23",
+     "name": "CPH",
+     "type": "power",
+     "function": "Charge pump flying capacitor, high side (switching node)."
+    },
+    {
+     "pin": "24",
+     "name": "VCP",
+     "type": "power",
+     "function": "Charge pump output, the high-side gate drive supply. A 0.22 µF, 16 V X7R ceramic goes from VCP to VM."
+    },
+    {
+     "pin": "PAD",
+     "name": "PAD",
+     "type": "thermal",
+     "function": "Exposed thermal pad; to system ground."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 5,
+   "conditions": "Over operating free-air temperature range unless noted otherwise",
+   "columns": [
+    "parameter",
+    "pins",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Power supply voltage",
+     "VM",
+     "-0.3",
+     "50",
+     "V"
+    ],
+    [
+     "Charge pump voltage",
+     "VCP, CPH",
+     "-0.3",
+     "VVM + 7",
+     "V"
+    ],
+    [
+     "Charge pump negative switching pin",
+     "CPL",
+     "-0.3",
+     "VVM",
+     "V"
+    ],
+    [
+     "nSLEEP pin voltage",
+     "nSLEEP",
+     "-0.3",
+     "VVM",
+     "V"
+    ],
+    [
+     "Internal regulator voltage",
+     "DVDD",
+     "-0.3",
+     "5.75",
+     "V"
+    ],
+    [
+     "Control pin voltage",
+     "STEP, DIR, ENABLE, nFAULT, DECAY0, DECAY1, TOFF, M0, M1",
+     "-0.3",
+     "5.75",
+     "V"
+    ],
+    [
+     "Open drain output current",
+     "nFAULT",
+     "0",
+     "10",
+     "mA"
+    ],
+    [
+     "Reference input pin voltage",
+     "VREF",
+     "-0.3",
+     "5.75",
+     "V"
+    ],
+    [
+     "Continuous phase node pin voltage",
+     "AOUT1, AOUT2, BOUT1, BOUT2",
+     "-1",
+     "VVM + 1",
+     "V"
+    ],
+    [
+     "Transient 100 ns phase node pin voltage",
+     "AOUT1, AOUT2, BOUT1, BOUT2",
+     "-3",
+     "VVM + 3",
+     "V"
+    ],
+    [
+     "Peak drive current",
+     "AOUT1, AOUT2, BOUT1, BOUT2",
+     "Internally Limited",
+     "Internally Limited",
+     "A"
+    ],
+    [
+     "Operating ambient temperature, TA",
+     "",
+     "-40",
+     "125",
+     "°C"
+    ],
+    [
+     "Operating junction temperature, TJ",
+     "",
+     "-40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "",
+     "-65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Ratings above these values can damage the part permanently. They are stress limits only; operation at them is not implied, and long exposure to them can reduce reliability.",
+    "Peak drive current is limited inside the device; no figure is given."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "model",
+    "pins",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "V(ESD)",
+     "Human-body model (HBM), ANSI/ESDA/JEDEC JS-001",
+     "all",
+     "±2000",
+     "V"
+    ],
+    [
+     "V(ESD)",
+     "Charged-device model (CDM), JEDEC JESD22-C101",
+     "Corner pins for PWP (1, 14, 15 and 28)",
+     "±750",
+     "V"
+    ],
+    [
+     "V(ESD)",
+     "Charged-device model (CDM), JEDEC JESD22-C101",
+     "Other pins",
+     "±500",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 6,
+   "conditions": "Over operating free-air temperature range unless noted otherwise",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VVM",
+     "Supply voltage range for normal (DC) operation",
+     "4.5",
+     "48",
+     "V"
+    ],
+    [
+     "VI",
+     "Logic level input voltage",
+     "0",
+     "5.5",
+     "V"
+    ],
+    [
+     "VVREF",
+     "VREF voltage",
+     "0.05",
+     "3.3",
+     "V"
+    ],
+    [
+     "fSTEP",
+     "Applied STEP signal (STEP)",
+     "0",
+     "500(1)",
+     "kHz"
+    ],
+    [
+     "IFS",
+     "Motor full-scale current (xOUTx)",
+     "0",
+     "2.5(2)",
+     "A"
+    ],
+    [
+     "Irms",
+     "Motor RMS current (xOUTx)",
+     "0",
+     "1.8(2)",
+     "A"
+    ],
+    [
+     "TA",
+     "Operating ambient temperature",
+     "-40",
+     "125",
+     "°C"
+    ],
+    [
+     "TJ",
+     "Operating junction temperature",
+     "-40",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) The STEP input accepts up to 500 kHz; the motor load limits the usable step rate of the system.",
+    "(2) Power dissipation and thermal limits apply."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "PWP (HTSSOP), 28 pins",
+    "RGE (VQFN), 24 pins",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA",
+     "Junction-to-ambient thermal resistance",
+     "29.7",
+     "39.0",
+     "°C/W"
+    ],
+    [
+     "RθJC(top)",
+     "Junction-to-case (top) thermal resistance",
+     "23.0",
+     "28.9",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "9.3",
+     "16.0",
+     "°C/W"
+    ],
+    [
+     "ψJT",
+     "Junction-to-top characterization parameter",
+     "0.3",
+     "0.4",
+     "°C/W"
+    ],
+    [
+     "ψJB",
+     "Junction-to-board characterization parameter",
+     "9.2",
+     "15.9",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "2.4",
+     "3.4",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 7,
+   "conditions": "Typical values at TA = 25°C and VVM = 24 V; limits over recommended operating conditions unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "POWER SUPPLIES (VM, DVDD)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VM operating supply current",
+     "IVM",
+     "ENABLE = 1, nSLEEP = 1, No motor load",
+     "",
+     "5",
+     "6.5",
+     "mA"
+    ],
+    [
+     "VM sleep mode supply current",
+     "IVMQ",
+     "nSLEEP = 0",
+     "",
+     "2",
+     "4",
+     "µA"
+    ],
+    [
+     "Sleep time",
+     "tSLEEP",
+     "nSLEEP = 0 to sleep-mode",
+     "120",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "nSLEEP reset pulse",
+     "tRESET",
+     "nSLEEP low to clear fault",
+     "20",
+     "",
+     "40",
+     "µs"
+    ],
+    [
+     "Wake-up time",
+     "tWAKE",
+     "nSLEEP = 1 to output transition",
+     "",
+     "0.8",
+     "1.2",
+     "ms"
+    ],
+    [
+     "Turn-on time",
+     "tON",
+     "VM > UVLO to output transition",
+     "",
+     "0.8",
+     "1.2",
+     "ms"
+    ],
+    [
+     "Enable time",
+     "tEN",
+     "ENABLE = 0/1 to output transition",
+     "",
+     "",
+     "5",
+     "µs"
+    ],
+    [
+     "Internal regulator voltage",
+     "VDVDD",
+     "No external load, 6 V < VVM < 48V",
+     "4.75",
+     "5",
+     "5.25",
+     "V"
+    ],
+    [
+     "Internal regulator voltage",
+     "VDVDD",
+     "No external load, VVM = 4.5V",
+     "4.2",
+     "4.35",
+     "",
+     "V"
+    ],
+    [
+     "CHARGE PUMP (VCP, CPH, CPL)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VCP operating voltage",
+     "VVCP",
+     "6 V < VVM < 48 V",
+     "",
+     "VVM + 5",
+     "",
+     "V"
+    ],
+    [
+     "Charge pump switching frequency",
+     "f(VCP)",
+     "VVM > UVLO; nSLEEP = 1",
+     "",
+     "360",
+     "",
+     "kHz"
+    ],
+    [
+     "LOGIC-LEVEL INPUTS (STEP, DIR, nSLEEP)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input logic-low voltage",
+     "VIL",
+     "",
+     "0",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "Input logic-high voltage",
+     "VIH",
+     "",
+     "1.5",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Input logic hysteresis",
+     "VHYS",
+     "",
+     "",
+     "150",
+     "",
+     "mV"
+    ],
+    [
+     "Input logic-low current",
+     "IIL",
+     "VIN = 0 V",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Input logic-high current",
+     "IIH",
+     "VIN = 5 V",
+     "",
+     "",
+     "100",
+     "µA"
+    ],
+    [
+     "TRI-LEVEL INPUTS (M0, DECAY0, DECAY1, ENABLE)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input logic-low voltage",
+     "VI1",
+     "Tied to GND",
+     "0",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "Input Hi-Z voltage",
+     "VI2",
+     "Hi-Z",
+     "1.8",
+     "2",
+     "2.2",
+     "V"
+    ],
+    [
+     "Input logic-high voltage",
+     "VI3",
+     "Tied to DVDD",
+     "2.7",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Output pull-up current",
+     "IO",
+     "",
+     "",
+     "10",
+     "",
+     "µA"
+    ],
+    [
+     "QUAD-LEVEL INPUTS (M1, TOFF)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input logic-low voltage",
+     "VI1",
+     "Tied to GND",
+     "0",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "",
+     "VI2",
+     "330kΩ ± 5% to GND",
+     "1",
+     "1.25",
+     "1.4",
+     "V"
+    ],
+    [
+     "Input Hi-Z voltage",
+     "VI3",
+     "Hi-Z",
+     "1.8",
+     "2",
+     "2.2",
+     "V"
+    ],
+    [
+     "Input logic-high voltage",
+     "VI4",
+     "Tied to DVDD",
+     "2.7",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Output pull-up current",
+     "IIL",
+     "",
+     "",
+     "10",
+     "",
+     "µA"
+    ],
+    [
+     "CONTROL OUTPUTS (nFAULT)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Output logic-low voltage",
+     "VOL",
+     "IO = 5 mA",
+     "",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "Output logic-high leakage",
+     "IOH",
+     "",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "MOTOR DRIVER OUTPUTS (AOUT1, AOUT2, BOUT1, BOUT2)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "High-side FET on resistance",
+     "RDS(ON)",
+     "TJ = 25 °C, IO = -1 A",
+     "",
+     "165",
+     "200",
+     "mΩ"
+    ],
+    [
+     "High-side FET on resistance",
+     "RDS(ON)",
+     "TJ = 125 °C, IO = -1 A",
+     "",
+     "250",
+     "300",
+     "mΩ"
+    ],
+    [
+     "High-side FET on resistance",
+     "RDS(ON)",
+     "TJ = 150 °C, IO = -1 A",
+     "",
+     "280",
+     "350",
+     "mΩ"
+    ],
+    [
+     "Low-side FET on resistance",
+     "RDS(ON)",
+     "TJ = 25 °C, IO = 1 A",
+     "",
+     "165",
+     "200",
+     "mΩ"
+    ],
+    [
+     "Low-side FET on resistance",
+     "RDS(ON)",
+     "TJ = 125 °C, IO = 1 A",
+     "",
+     "250",
+     "300",
+     "mΩ"
+    ],
+    [
+     "Low-side FET on resistance",
+     "RDS(ON)",
+     "TJ = 150 °C, IO = 1 A",
+     "",
+     "280",
+     "350",
+     "mΩ"
+    ],
+    [
+     "Output slew rate",
+     "tSR",
+     "VVM = 24 V, IO = 1 A, Between 10% and 90%",
+     "",
+     "240",
+     "",
+     "V/µs"
+    ],
+    [
+     "PWM CURRENT CONTROL (VREF)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Transimpedance gain",
+     "KV",
+     "VREF = 3.3 V",
+     "1.254",
+     "1.32",
+     "1.386",
+     "V/A"
+    ],
+    [
+     "VREF Leakage Current",
+     "IVREF",
+     "VREF = 3.3 V",
+     "",
+     "",
+     "8.25",
+     "µA"
+    ],
+    [
+     "PWM off-time",
+     "tOFF",
+     "TOFF = 0",
+     "",
+     "7",
+     "",
+     "µs"
+    ],
+    [
+     "PWM off-time",
+     "tOFF",
+     "TOFF = 1",
+     "",
+     "16",
+     "",
+     "µs"
+    ],
+    [
+     "PWM off-time",
+     "tOFF",
+     "TOFF = Hi-Z",
+     "",
+     "24",
+     "",
+     "µs"
+    ],
+    [
+     "PWM off-time",
+     "tOFF",
+     "TOFF = 330 kΩ to GND",
+     "",
+     "32",
+     "",
+     "µs"
+    ],
+    [
+     "Current trip accuracy",
+     "ΔITRIP",
+     "0.25 A < IO < 0.5 A",
+     "-12",
+     "",
+     "12",
+     "%"
+    ],
+    [
+     "Current trip accuracy",
+     "ΔITRIP",
+     "0.5 A < IO < 1 A",
+     "-6",
+     "",
+     "6",
+     "%"
+    ],
+    [
+     "Current trip accuracy",
+     "ΔITRIP",
+     "1 A < IO < 2.5 A",
+     "-4",
+     "",
+     "4",
+     "%"
+    ],
+    [
+     "AOUT and BOUT current matching",
+     "IO,CH",
+     "IO = 2.5 A",
+     "-2.5",
+     "",
+     "2.5",
+     "%"
+    ],
+    [
+     "PROTECTION CIRCUITS",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VM UVLO lockout",
+     "VUVLO",
+     "VM falling, UVLO falling",
+     "4.1",
+     "4.25",
+     "4.35",
+     "V"
+    ],
+    [
+     "VM UVLO lockout",
+     "VUVLO",
+     "VM rising, UVLO rising",
+     "4.2",
+     "4.35",
+     "4.45",
+     "V"
+    ],
+    [
+     "Undervoltage hysteresis",
+     "VUVLO,HYS",
+     "Rising to falling threshold",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Charge pump undervoltage",
+     "VCPUV",
+     "VCP falling; CPUV report",
+     "",
+     "VVM + 2",
+     "",
+     "V"
+    ],
+    [
+     "Overcurrent protection",
+     "IOCP",
+     "Current through any FET",
+     "4",
+     "",
+     "",
+     "A"
+    ],
+    [
+     "Overcurrent deglitch time",
+     "tOCP",
+     "",
+     "",
+     "2",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent retry time",
+     "tRETRY",
+     "",
+     "",
+     "4",
+     "",
+     "ms"
+    ],
+    [
+     "Open load detection time",
+     "tOL",
+     "",
+     "",
+     "",
+     "50",
+     "ms"
+    ],
+    [
+     "Open load current threshold",
+     "IOL",
+     "",
+     "",
+     "75",
+     "",
+     "mA"
+    ],
+    [
+     "Thermal shutdown",
+     "TOTSD",
+     "Die temperature TJ",
+     "150",
+     "165",
+     "180",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis",
+     "THYS_OTSD",
+     "Die temperature TJ",
+     "",
+     "20",
+     "",
+     "°C"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Indexer timing requirements",
+   "page": 8,
+   "conditions": "Typical limits at TJ = 25°C and VVM = 24 V; over recommended operating conditions unless noted otherwise",
+   "columns": [
+    "no.",
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "1",
+     "ƒSTEP",
+     "Step frequency",
+     "",
+     "500(1)",
+     "kHz"
+    ],
+    [
+     "2",
+     "tWH(STEP)",
+     "Pulse duration, STEP high",
+     "970",
+     "",
+     "ns"
+    ],
+    [
+     "3",
+     "tWL(STEP)",
+     "Pulse duration, STEP low",
+     "970",
+     "",
+     "ns"
+    ],
+    [
+     "4",
+     "tSU(DIR, Mx)",
+     "Setup time, DIR or MODEx to STEP rising",
+     "200",
+     "",
+     "ns"
+    ],
+    [
+     "5",
+     "tH(DIR, Mx)",
+     "Hold time, DIR or MODEx to STEP rising",
+     "200",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "(1) The STEP input accepts up to 500 kHz; the motor load limits the usable step rate of the system."
+   ]
+  },
+  {
+   "title": "External components",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "component",
+    "pin 1",
+    "pin 2",
+    "recommended"
+   ],
+   "rows": [
+    [
+     "CVM1",
+     "VM",
+     "PGND",
+     "Two X7R, 0.01-µF, VM-rated ceramic capacitors"
+    ],
+    [
+     "CVM2",
+     "VM",
+     "PGND",
+     "Bulk, VM-rated capacitor"
+    ],
+    [
+     "CVCP",
+     "VCP",
+     "VM",
+     "X7R, 0.22-µF, 16-V ceramic capacitor"
+    ],
+    [
+     "CSW",
+     "CPH",
+     "CPL",
+     "X7R, 0.022-µF, VM-rated ceramic capacitor"
+    ],
+    [
+     "CDVDD",
+     "DVDD",
+     "GND",
+     "X7R, 0.47-µF to 1-µF, 6.3-V ceramic capacitor"
+    ],
+    [
+     "RnFAULT",
+     "VCC (1)",
+     "nFAULT",
+     ">4.7-kΩ resistor"
+    ],
+    [
+     "RREF1",
+     "VREF",
+     "VCC",
+     "Resistor to limit the chopping current; RREF1 in parallel with RREF2 below 50 kΩ"
+    ],
+    [
+     "RREF2 (Optional)",
+     "VREF",
+     "GND",
+     "Resistor to limit the chopping current; RREF1 in parallel with RREF2 below 50 kΩ"
+    ]
+   ],
+   "notes": [
+    "(1) VCC is a supply on the board, not a device pin; the open-drain nFAULT output needs a pull-up to some supply, which may be DVDD."
+   ]
+  },
+  {
+   "title": "Microstepping indexer settings",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "M0",
+    "M1",
+    "step mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Full step (2-phase excitation) with 100% current"
+    ],
+    [
+     "0",
+     "330 kΩ to GND",
+     "Full step (2-phase excitation) with 71% current"
+    ],
+    [
+     "1",
+     "0",
+     "Non-circular 1/2 step"
+    ],
+    [
+     "Hi-Z",
+     "0",
+     "1/2 step"
+    ],
+    [
+     "0",
+     "1",
+     "1/4 step"
+    ],
+    [
+     "1",
+     "1",
+     "1/8 step"
+    ],
+    [
+     "Hi-Z",
+     "1",
+     "1/16 step"
+    ],
+    [
+     "0",
+     "Hi-Z",
+     "1/32 step"
+    ],
+    [
+     "Hi-Z",
+     "330 kΩ to GND",
+     "1/64 step"
+    ],
+    [
+     "Hi-Z",
+     "Hi-Z",
+     "1/128 step"
+    ],
+    [
+     "1",
+     "Hi-Z",
+     "1/256 step"
+    ]
+   ],
+   "notes": [
+    "The application section names the same pins MODE0 and MODE1."
+   ]
+  },
+  {
+   "title": "Relative current and step directions",
+   "page": 15,
+   "conditions": "DIR high",
+   "columns": [
+    "1/8 step",
+    "1/4 step",
+    "1/2 step",
+    "full step 71%",
+    "AOUT current (% full-scale)",
+    "BOUT current (% full-scale)",
+    "electrical angle (degrees)"
+   ],
+   "rows": [
+    [
+     "1",
+     "1",
+     "1",
+     "",
+     "0%",
+     "100%",
+     "0.00"
+    ],
+    [
+     "2",
+     "",
+     "",
+     "",
+     "20%",
+     "98%",
+     "11.25"
+    ],
+    [
+     "3",
+     "2",
+     "",
+     "",
+     "38%",
+     "92%",
+     "22.50"
+    ],
+    [
+     "4",
+     "",
+     "",
+     "",
+     "56%",
+     "83%",
+     "33.75"
+    ],
+    [
+     "5",
+     "3",
+     "2",
+     "1",
+     "71%",
+     "71%",
+     "45.00"
+    ],
+    [
+     "6",
+     "",
+     "",
+     "",
+     "83%",
+     "56%",
+     "56.25"
+    ],
+    [
+     "7",
+     "4",
+     "",
+     "",
+     "92%",
+     "38%",
+     "67.50"
+    ],
+    [
+     "8",
+     "",
+     "",
+     "",
+     "98%",
+     "20%",
+     "78.75"
+    ],
+    [
+     "9",
+     "5",
+     "3",
+     "",
+     "100%",
+     "0%",
+     "90.00"
+    ],
+    [
+     "10",
+     "",
+     "",
+     "",
+     "98%",
+     "-20%",
+     "101.25"
+    ],
+    [
+     "11",
+     "6",
+     "",
+     "",
+     "92%",
+     "-38%",
+     "112.50"
+    ],
+    [
+     "12",
+     "",
+     "",
+     "",
+     "83%",
+     "-56%",
+     "123.75"
+    ],
+    [
+     "13",
+     "7",
+     "4",
+     "2",
+     "71%",
+     "-71%",
+     "135.00"
+    ],
+    [
+     "14",
+     "",
+     "",
+     "",
+     "56%",
+     "-83%",
+     "146.25"
+    ],
+    [
+     "15",
+     "8",
+     "",
+     "",
+     "38%",
+     "-92%",
+     "157.50"
+    ],
+    [
+     "16",
+     "",
+     "",
+     "",
+     "20%",
+     "-98%",
+     "168.75"
+    ],
+    [
+     "17",
+     "9",
+     "5",
+     "",
+     "0%",
+     "-100%",
+     "180.00"
+    ],
+    [
+     "18",
+     "",
+     "",
+     "",
+     "-20%",
+     "-98%",
+     "191.25"
+    ],
+    [
+     "19",
+     "10",
+     "",
+     "",
+     "-38%",
+     "-92%",
+     "202.50"
+    ],
+    [
+     "20",
+     "",
+     "",
+     "",
+     "-56%",
+     "-83%",
+     "213.75"
+    ],
+    [
+     "21",
+     "11",
+     "6",
+     "3",
+     "-71%",
+     "-71%",
+     "225.00"
+    ],
+    [
+     "22",
+     "",
+     "",
+     "",
+     "-83%",
+     "-56%",
+     "236.25"
+    ],
+    [
+     "23",
+     "12",
+     "",
+     "",
+     "-92%",
+     "-38%",
+     "247.50"
+    ],
+    [
+     "24",
+     "",
+     "",
+     "",
+     "-98%",
+     "-20%",
+     "258.75"
+    ],
+    [
+     "25",
+     "13",
+     "7",
+     "",
+     "-100%",
+     "0%",
+     "270.00"
+    ],
+    [
+     "26",
+     "",
+     "",
+     "",
+     "-98%",
+     "20%",
+     "281.25"
+    ],
+    [
+     "27",
+     "14",
+     "",
+     "",
+     "-92%",
+     "38%",
+     "292.50"
+    ],
+    [
+     "28",
+     "",
+     "",
+     "",
+     "-83%",
+     "56%",
+     "303.75"
+    ],
+    [
+     "29",
+     "15",
+     "8",
+     "4",
+     "-71%",
+     "71%",
+     "315.00"
+    ],
+    [
+     "30",
+     "",
+     "",
+     "",
+     "-56%",
+     "83%",
+     "326.25"
+    ],
+    [
+     "31",
+     "16",
+     "",
+     "",
+     "-38%",
+     "92%",
+     "337.50"
+    ],
+    [
+     "32",
+     "",
+     "",
+     "",
+     "-20%",
+     "98%",
+     "348.75"
+    ]
+   ],
+   "notes": [
+    "AOUT current is sin(angle) and BOUT current cos(angle); finer resolutions continue the same pattern. Positive current flows out of xOUT1 into xOUT2.",
+    "Each STEP rising edge moves one row on; with DIR low the order runs backwards."
+   ]
+  },
+  {
+   "title": "Full step with 100% current",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "full step 100%",
+    "AOUT current (% full-scale)",
+    "BOUT current (% full-scale)",
+    "electrical angle (degrees)"
+   ],
+   "rows": [
+    [
+     "1",
+     "100",
+     "100",
+     "45"
+    ],
+    [
+     "2",
+     "100",
+     "-100",
+     "135"
+    ],
+    [
+     "3",
+     "-100",
+     "-100",
+     "225"
+    ],
+    [
+     "4",
+     "-100",
+     "100",
+     "315"
+    ]
+   ]
+  },
+  {
+   "title": "Non-circular 1/2-stepping current",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "non-circular 1/2-step",
+    "AOUT current (% full-scale)",
+    "BOUT current (% full-scale)",
+    "electrical angle (degrees)"
+   ],
+   "rows": [
+    [
+     "1",
+     "0",
+     "100",
+     "0"
+    ],
+    [
+     "2",
+     "100",
+     "100",
+     "45"
+    ],
+    [
+     "3",
+     "100",
+     "0",
+     "90"
+    ],
+    [
+     "4",
+     "100",
+     "-100",
+     "135"
+    ],
+    [
+     "5",
+     "0",
+     "-100",
+     "180"
+    ],
+    [
+     "6",
+     "-100",
+     "-100",
+     "225"
+    ],
+    [
+     "7",
+     "-100",
+     "0",
+     "270"
+    ],
+    [
+     "8",
+     "-100",
+     "100",
+     "315"
+    ]
+   ]
+  },
+  {
+   "title": "Decay mode settings",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "DECAY0",
+    "DECAY1",
+    "increasing steps",
+    "decreasing steps"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Smart tune Dynamic Decay",
+     "Smart tune Dynamic Decay"
+    ],
+    [
+     "0",
+     "1",
+     "Smart tune Ripple Control",
+     "Smart tune Ripple Control"
+    ],
+    [
+     "1",
+     "0",
+     "Mixed decay: 30% fast",
+     "Mixed decay: 30% fast"
+    ],
+    [
+     "1",
+     "1",
+     "Slow decay",
+     "Mixed decay: 30% fast"
+    ],
+    [
+     "Hi-Z",
+     "0",
+     "Mixed decay: 60% fast",
+     "Mixed decay: 60% fast"
+    ],
+    [
+     "Hi-Z",
+     "1",
+     "Slow decay",
+     "Slow decay"
+    ]
+   ],
+   "notes": [
+    "With DECAY1 at Hi-Z the mode is smart tune Dynamic Decay whatever DECAY0 is."
+   ]
+  },
+  {
+   "title": "Current ripple settings",
+   "page": 25,
+   "conditions": "smart tune Ripple Control",
+   "columns": [
+    "TOFF",
+    "current ripple at a given microstep level"
+   ],
+   "rows": [
+    [
+     "0",
+     "19mA + 1% of ITRIP"
+    ],
+    [
+     "1",
+     "19mA + 2% of ITRIP"
+    ],
+    [
+     "Hi-Z",
+     "19mA + 4% of ITRIP"
+    ],
+    [
+     "330kΩ to GND",
+     "19mA + 6% of ITRIP"
+    ]
+   ]
+  },
+  {
+   "title": "OFF time settings",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "TOFF",
+    "OFF time"
+   ],
+   "rows": [
+    [
+     "0",
+     "7 µs"
+    ],
+    [
+     "1",
+     "16 µs"
+    ],
+    [
+     "Hi-Z",
+     "24 µs"
+    ],
+    [
+     "330kΩ to GND",
+     "32 µs"
+    ]
+   ]
+  },
+  {
+   "title": "Fault condition summary",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "fault",
+    "condition",
+    "configuration",
+    "error report",
+    "H-bridge",
+    "charge pump",
+    "indexer",
+    "logic",
+    "recovery"
+   ],
+   "rows": [
+    [
+     "VM undervoltage (UVLO)",
+     "VM < VUVLO",
+     "—",
+     "nFAULT",
+     "Disabled",
+     "Disabled",
+     "Disabled",
+     "Reset (VDVDD < 3.9 V)",
+     "Automatic: VM > VUVLO"
+    ],
+    [
+     "VCP undervoltage (CPUV)",
+     "VCP < VCPUV",
+     "—",
+     "nFAULT",
+     "Disabled",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Automatic: VCP > VCPUV"
+    ],
+    [
+     "Overcurrent (OCP)",
+     "IOUT > IOCP",
+     "ENABLE = Hi-Z",
+     "nFAULT",
+     "Disabled",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Latched"
+    ],
+    [
+     "Overcurrent (OCP)",
+     "IOUT > IOCP",
+     "ENABLE = 1",
+     "nFAULT",
+     "Disabled",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Automatic retry: tRETRY"
+    ],
+    [
+     "Open Load (OL)",
+     "No load detected",
+     "—",
+     "nFAULT",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Report only"
+    ],
+    [
+     "Thermal Shutdown (OTSD)",
+     "TJ > TTSD",
+     "ENABLE = Hi-Z",
+     "nFAULT",
+     "Disabled",
+     "Disabled",
+     "Operating",
+     "Operating",
+     "Latched"
+    ],
+    [
+     "Thermal Shutdown (OTSD)",
+     "TJ > TTSD",
+     "ENABLE = 1",
+     "nFAULT",
+     "Disabled",
+     "Disabled",
+     "Operating",
+     "Operating",
+     "Automatic: TJ < TOTSD - THYS_OTSD"
+    ]
+   ]
+  },
+  {
+   "title": "Functional modes summary",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "condition",
+    "configuration",
+    "H-bridge",
+    "DVDD regulator",
+    "charge pump",
+    "indexer",
+    "logic"
+   ],
+   "rows": [
+    [
+     "Sleep mode",
+     "4.5 V < VM < 48 V",
+     "nSLEEP pin = 0",
+     "Disabled",
+     "Disbaled",
+     "Disabled",
+     "Disabled",
+     "Disabled"
+    ],
+    [
+     "Operating",
+     "4.5 V < VM < 48 V",
+     "nSLEEP pin = 1, ENABLE pin = 1 or Hi-Z",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Operating"
+    ],
+    [
+     "Disabled",
+     "4.5 V < VM < 48 V",
+     "nSLEEP pin = 1, ENABLE pin = 0",
+     "Disabled",
+     "Operating",
+     "Operating",
+     "Operating",
+     "Operating"
+    ]
+   ],
+   "notes": [
+    "Disbaled in the sleep-mode DVDD regulator cell should read Disabled."
+   ]
+  },
+  {
+   "title": "Design parameters",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "design parameter",
+    "reference",
+    "example value"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VM",
+     "24 V"
+    ],
+    [
+     "Motor winding resistance",
+     "RL",
+     "0.9 Ω/phase"
+    ],
+    [
+     "Motor winding inductance",
+     "LL",
+     "1.4 mH/phase"
+    ],
+    [
+     "Motor full step angle",
+     "θstep",
+     "1.8°/step"
+    ],
+    [
+     "Target microstepping level",
+     "nm",
+     "1/8 step"
+    ],
+    [
+     "Target motor speed",
+     "v",
+     "18.75 rpm"
+    ],
+    [
+     "Target full-scale current",
+     "IFS",
+     "2A"
+    ]
+   ]
+  },
+  {
+   "title": "Packaging information",
+   "page": 46,
+   "conditions": "",
+   "columns": [
+    "orderable part number",
+    "status",
+    "material type",
+    "package | pins",
+    "package qty | carrier",
+    "RoHS",
+    "lead finish",
+    "MSL rating / peak reflow",
+    "op temp (°C)",
+    "part marking"
+   ],
+   "rows": [
+    [
+     "DRV8434PWPR",
+     "Active",
+     "Production",
+     "HTSSOP (PWP) | 28",
+     "2500 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-3-260C-168 HR",
+     "-40 to 125",
+     "DRV8434"
+    ],
+    [
+     "DRV8434PWPR.A",
+     "Active",
+     "Production",
+     "HTSSOP (PWP) | 28",
+     "2500 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-3-260C-168 HR",
+     "-40 to 125",
+     "DRV8434"
+    ],
+    [
+     "DRV8434RGER",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 125",
+     "DRV 8434"
+    ],
+    [
+     "DRV8434RGER.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 125",
+     "DRV 8434"
+    ]
+   ],
+   "notes": [
+    "The VQFN marking runs over two lines, DRV above 8434."
+   ]
+  },
+  {
+   "title": "Tape and reel information",
+   "page": 47,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "DRV8434PWPR",
+     "HTSSOP",
+     "PWP",
+     "28",
+     "2500",
+     "330.0",
+     "16.4",
+     "6.75",
+     "10.1",
+     "1.8",
+     "12.0",
+     "16.0",
+     "Q1"
+    ],
+    [
+     "DRV8434RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ]
+   ],
+   "notes": [
+    "A0, B0 and K0 are the pocket width, length and depth; W is the carrier tape width and P1 the pitch from one pocket to the next."
+   ]
+  },
+  {
+   "title": "Tape and reel box dimensions",
+   "page": 48,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "DRV8434PWPR",
+     "HTSSOP",
+     "PWP",
+     "28",
+     "2500",
+     "353.0",
+     "353.0",
+     "32.0"
+    ],
+    [
+     "DRV8434RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "360.0",
+     "360.0",
+     "36.0"
+    ]
+   ]
+  },
+  {
+   "title": "HTSSOP stencil openings for the thermal pad",
+   "page": 45,
+   "conditions": "",
+   "columns": [
+    "stencil thickness (mm)",
+    "solder stencil opening (mm)"
+   ],
+   "rows": [
+    [
+     "0.1",
+     "3.47 X 4.53"
+    ],
+    [
+     "0.125",
+     "3.10 X 4.05"
+    ],
+    [
+     "0.15",
+     "2.83 X 3.70"
+    ],
+    [
+     "0.175",
+     "2.62 X 3.42"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Figure 6-2. Sleep current over supply voltage",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sleep current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = -40 °C",
+     "points": [
+      [
+       5.0,
+       0.8359
+      ],
+      [
+       24.0,
+       1.6214
+      ],
+      [
+       33.0,
+       1.7564
+      ],
+      [
+       48.0,
+       1.9818
+      ]
+     ]
+    },
+    {
+     "label": "TA = 0 °C",
+     "points": [
+      [
+       5.0,
+       0.8479
+      ],
+      [
+       24.0,
+       1.5114
+      ],
+      [
+       33.0,
+       1.5638
+      ],
+      [
+       48.0,
+       1.625
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25 °C",
+     "points": [
+      [
+       5.0,
+       0.8614
+      ],
+      [
+       24.0,
+       1.5118
+      ],
+      [
+       33.0,
+       1.5667
+      ],
+      [
+       48.0,
+       1.6259
+      ]
+     ]
+    },
+    {
+     "label": "TA = 85 °C",
+     "points": [
+      [
+       5.0,
+       0.8982
+      ],
+      [
+       24.0,
+       1.5171
+      ],
+      [
+       33.0,
+       1.5632
+      ],
+      [
+       48.0,
+       1.6197
+      ]
+     ]
+    },
+    {
+     "label": "TA = 125 °C",
+     "points": [
+      [
+       5.0,
+       0.94
+      ],
+      [
+       24.0,
+       1.5408
+      ],
+      [
+       33.0,
+       1.5911
+      ],
+      [
+       48.0,
+       1.6578
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6-3. Sleep current over temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sleep current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM = 4.5 V",
+     "points": [
+      [
+       -40.0,
+       0.8148
+      ],
+      [
+       0.0,
+       0.8293
+      ],
+      [
+       25.0,
+       0.8435
+      ],
+      [
+       85.0,
+       0.8812
+      ],
+      [
+       125.0,
+       0.9237
+      ]
+     ]
+    },
+    {
+     "label": "VM = 24 V",
+     "points": [
+      [
+       -40.0,
+       1.6197
+      ],
+      [
+       0.0,
+       1.512
+      ],
+      [
+       25.0,
+       1.5109
+      ],
+      [
+       85.0,
+       1.5169
+      ],
+      [
+       125.0,
+       1.5401
+      ]
+     ]
+    },
+    {
+     "label": "VM = 33 V",
+     "points": [
+      [
+       -40.0,
+       1.7563
+      ],
+      [
+       0.0,
+       1.5638
+      ],
+      [
+       25.0,
+       1.5688
+      ],
+      [
+       85.0,
+       1.5627
+      ],
+      [
+       125.0,
+       1.5924
+      ]
+     ]
+    },
+    {
+     "label": "VM = 48 V",
+     "points": [
+      [
+       -40.0,
+       1.9822
+      ],
+      [
+       0.0,
+       1.625
+      ],
+      [
+       25.0,
+       1.6251
+      ],
+      [
+       85.0,
+       1.6194
+      ],
+      [
+       125.0,
+       1.658
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6-4. Operating current over supply voltage",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Operating current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = -40 °C",
+     "points": [
+      [
+       5,
+       5.2674
+      ],
+      [
+       24,
+       5.6267
+      ],
+      [
+       33,
+       5.6024
+      ],
+      [
+       48,
+       5.6192
+      ]
+     ]
+    },
+    {
+     "label": "TA = 0 °C",
+     "points": [
+      [
+       5,
+       5.2744
+      ],
+      [
+       24,
+       5.6361
+      ],
+      [
+       33,
+       5.6236
+      ],
+      [
+       48,
+       5.6451
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25 °C",
+     "points": [
+      [
+       5,
+       5.2864
+      ],
+      [
+       24,
+       5.655
+      ],
+      [
+       33,
+       5.6494
+      ],
+      [
+       48,
+       5.6664
+      ]
+     ]
+    },
+    {
+     "label": "TA = 85 °C",
+     "points": [
+      [
+       5,
+       5.2961
+      ],
+      [
+       24,
+       5.6762
+      ],
+      [
+       33,
+       5.6872
+      ],
+      [
+       48,
+       5.7061
+      ]
+     ]
+    },
+    {
+     "label": "TA = 125 °C",
+     "points": [
+      [
+       5,
+       5.3173
+      ],
+      [
+       24,
+       5.7019
+      ],
+      [
+       33,
+       5.7154
+      ],
+      [
+       48,
+       5.7322
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6-5. Operating current over temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Operating current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM = 4.5 V",
+     "points": [
+      [
+       -40.0,
+       5.2568
+      ],
+      [
+       0.0,
+       5.2641
+      ],
+      [
+       25.0,
+       5.2757
+      ],
+      [
+       85.0,
+       5.2854
+      ],
+      [
+       125.0,
+       5.306
+      ]
+     ]
+    },
+    {
+     "label": "VM = 24 V",
+     "points": [
+      [
+       -40.0,
+       5.6264
+      ],
+      [
+       0.0,
+       5.6358
+      ],
+      [
+       25.0,
+       5.6545
+      ],
+      [
+       85.0,
+       5.6762
+      ],
+      [
+       125.0,
+       5.7017
+      ]
+     ]
+    },
+    {
+     "label": "VM = 33 V",
+     "points": [
+      [
+       -40.0,
+       5.6027
+      ],
+      [
+       0.0,
+       5.624
+      ],
+      [
+       25.0,
+       5.6498
+      ],
+      [
+       85.0,
+       5.6877
+      ],
+      [
+       125.0,
+       5.7159
+      ]
+     ]
+    },
+    {
+     "label": "VM = 48 V",
+     "points": [
+      [
+       -40.0,
+       5.6194
+      ],
+      [
+       0.0,
+       5.6451
+      ],
+      [
+       25.0,
+       5.6666
+      ],
+      [
+       85.0,
+       5.7066
+      ],
+      [
+       125.0,
+       5.7323
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6-6. Low-side RDS(ON) over supply voltage",
+   "page": 10,
+   "conditions": "MODE = 0 or 330k to GND",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Low-side RDS(ON)",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = -40 °C",
+     "points": [
+      [
+       5.0,
+       143.1521
+      ],
+      [
+       24.0,
+       139.5522
+      ],
+      [
+       33.0,
+       139.4403
+      ],
+      [
+       48.0,
+       139.8251
+      ]
+     ]
+    },
+    {
+     "label": "TA = 0 °C",
+     "points": [
+      [
+       5.0,
+       165.059
+      ],
+      [
+       24.0,
+       160.2791
+      ],
+      [
+       33.0,
+       160.1562
+      ],
+      [
+       48.0,
+       161.1185
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25 °C",
+     "points": [
+      [
+       5.0,
+       174.2143
+      ],
+      [
+       24.0,
+       169.4809
+      ],
+      [
+       33.0,
+       168.6304
+      ],
+      [
+       48.0,
+       170.2292
+      ]
+     ]
+    },
+    {
+     "label": "TA = 85 °C",
+     "points": [
+      [
+       5.0,
+       208.0556
+      ],
+      [
+       24.0,
+       200.5187
+      ],
+      [
+       33.0,
+       200.3691
+      ],
+      [
+       48.0,
+       201.3387
+      ]
+     ]
+    },
+    {
+     "label": "TA = 125 °C",
+     "points": [
+      [
+       5.0,
+       243.3159
+      ],
+      [
+       24.0,
+       236.4674
+      ],
+      [
+       33.0,
+       236.3612
+      ],
+      [
+       48.0,
+       237.3189
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6-7. Low-side RDS(ON) over temperature",
+   "page": 10,
+   "conditions": "MODE = 0 or 330k to GND",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Low-side RDS(ON)",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM = 4.5 V",
+     "points": [
+      [
+       -40.0,
+       143.711
+      ],
+      [
+       -20.0,
+       154.312
+      ],
+      [
+       0.0,
+       164.9315
+      ],
+      [
+       25.0,
+       174.4379
+      ],
+      [
+       40.0,
+       182.9749
+      ],
+      [
+       60.0,
+       194.3169
+      ],
+      [
+       85.0,
+       208.5962
+      ],
+      [
+       100.0,
+       221.9313
+      ],
+      [
+       125.0,
+       244.0356
+      ]
+     ]
+    },
+    {
+     "label": "VM = 24 V, 33 V and 48 V",
+     "points": [
+      [
+       -40.0,
+       139.6646
+      ],
+      [
+       -20.0,
+       150.0491
+      ],
+      [
+       0.0,
+       160.5045
+      ],
+      [
+       25.0,
+       169.4891
+      ],
+      [
+       40.0,
+       177.3395
+      ],
+      [
+       60.0,
+       187.7938
+      ],
+      [
+       85.0,
+       200.7148
+      ],
+      [
+       100.0,
+       214.2687
+      ],
+      [
+       125.0,
+       236.986
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6-8. High-side RDS(ON) over supply voltage",
+   "page": 10,
+   "conditions": "MODE = 0 or 330k to GND",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "High-side RDS(ON)",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = -40 °C",
+     "points": [
+      [
+       5.0,
+       131.8887
+      ],
+      [
+       24.0,
+       125.6751
+      ],
+      [
+       33.0,
+       137.0093
+      ],
+      [
+       48.0,
+       134.771
+      ]
+     ]
+    },
+    {
+     "label": "TA = 0 °C",
+     "points": [
+      [
+       5.0,
+       155.0776
+      ],
+      [
+       24.0,
+       146.1579
+      ],
+      [
+       33.0,
+       158.8304
+      ],
+      [
+       48.0,
+       160.2981
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25 °C",
+     "points": [
+      [
+       5.0,
+       164.217
+      ],
+      [
+       24.0,
+       154.6154
+      ],
+      [
+       33.0,
+       168.0235
+      ],
+      [
+       48.0,
+       170.1998
+      ]
+     ]
+    },
+    {
+     "label": "TA = 85 °C",
+     "points": [
+      [
+       5.0,
+       198.7786
+      ],
+      [
+       24.0,
+       189.211
+      ],
+      [
+       33.0,
+       201.1539
+      ],
+      [
+       48.0,
+       204.0349
+      ]
+     ]
+    },
+    {
+     "label": "TA = 125 °C",
+     "points": [
+      [
+       5.0,
+       229.825
+      ],
+      [
+       24.0,
+       220.254
+      ],
+      [
+       33.0,
+       232.9342
+      ],
+      [
+       48.0,
+       235.1137
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6-9. High-side RDS(ON) over temperature",
+   "page": 10,
+   "conditions": "MODE = 0 or 330k to GND",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "High-side RDS(ON)",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM = 4.5 V",
+     "points": [
+      [
+       -40.0,
+       132.371
+      ],
+      [
+       -20.0,
+       143.8134
+      ],
+      [
+       0.0,
+       155.2957
+      ],
+      [
+       25.0,
+       164.8431
+      ],
+      [
+       40.0,
+       173.3548
+      ],
+      [
+       60.0,
+       184.6978
+      ],
+      [
+       85.0,
+       198.8795
+      ],
+      [
+       100.0,
+       210.6806
+      ],
+      [
+       125.0,
+       230.3092
+      ]
+     ]
+    },
+    {
+     "label": "VM = 24 V",
+     "points": [
+      [
+       -40.0,
+       125.7351
+      ],
+      [
+       -20.0,
+       135.8314
+      ],
+      [
+       0.0,
+       145.8654
+      ],
+      [
+       25.0,
+       154.5173
+      ],
+      [
+       40.0,
+       163.2612
+      ],
+      [
+       60.0,
+       174.8948
+      ],
+      [
+       85.0,
+       189.5161
+      ],
+      [
+       100.0,
+       201.1214
+      ],
+      [
+       125.0,
+       220.2265
+      ]
+     ]
+    },
+    {
+     "label": "VM = 33 V",
+     "points": [
+      [
+       -40.0,
+       136.6802
+      ],
+      [
+       -20.0,
+       147.7298
+      ],
+      [
+       0.0,
+       159.1112
+      ],
+      [
+       25.0,
+       168.2489
+      ],
+      [
+       40.0,
+       176.4847
+      ],
+      [
+       60.0,
+       187.7339
+      ],
+      [
+       85.0,
+       201.6978
+      ],
+      [
+       100.0,
+       213.4941
+      ],
+      [
+       125.0,
+       233.1187
+      ]
+     ]
+    },
+    {
+     "label": "VM = 48 V",
+     "points": [
+      [
+       -40.0,
+       134.7392
+      ],
+      [
+       -20.0,
+       147.5697
+      ],
+      [
+       0.0,
+       160.457
+      ],
+      [
+       25.0,
+       170.4958
+      ],
+      [
+       40.0,
+       178.9971
+      ],
+      [
+       60.0,
+       190.3493
+      ],
+      [
+       85.0,
+       204.5121
+      ],
+      [
+       100.0,
+       216.1292
+      ],
+      [
+       125.0,
+       235.4428
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8-3. 1/8 microstepping with smart tune Ripple Control decay",
+   "page": 35,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Winding current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Winding current, trace C7 (green)",
+     "points": [
+      [
+       -49.9,
+       -0.744
+      ],
+      [
+       -49.0,
+       -0.744
+      ],
+      [
+       -48.8,
+       -0.366
+      ],
+      [
+       -47.0,
+       -0.366
+      ],
+      [
+       -46.8,
+       0.012
+      ],
+      [
+       -45.0,
+       0.012
+      ],
+      [
+       -44.8,
+       0.38
+      ],
+      [
+       -43.0,
+       0.38
+      ],
+      [
+       -42.8,
+       0.741
+      ],
+      [
+       -41.0,
+       0.741
+      ],
+      [
+       -40.8,
+       1.061
+      ],
+      [
+       -39.0,
+       1.061
+      ],
+      [
+       -38.8,
+       1.354
+      ],
+      [
+       -37.0,
+       1.354
+      ],
+      [
+       -36.8,
+       1.585
+      ],
+      [
+       -35.0,
+       1.585
+      ],
+      [
+       -34.8,
+       1.762
+      ],
+      [
+       -33.0,
+       1.762
+      ],
+      [
+       -32.8,
+       1.866
+      ],
+      [
+       -31.0,
+       1.866
+      ],
+      [
+       -30.8,
+       1.902
+      ],
+      [
+       -27.0,
+       1.866
+      ],
+      [
+       -26.8,
+       1.762
+      ],
+      [
+       -25.0,
+       1.756
+      ],
+      [
+       -24.8,
+       1.585
+      ],
+      [
+       -23.0,
+       1.585
+      ],
+      [
+       -22.8,
+       1.293
+      ],
+      [
+       -21.1,
+       1.293
+      ],
+      [
+       -20.8,
+       1.055
+      ],
+      [
+       -19.0,
+       1.061
+      ],
+      [
+       -18.8,
+       0.735
+      ],
+      [
+       -17.0,
+       0.735
+      ],
+      [
+       -16.8,
+       0.361
+      ],
+      [
+       -15.0,
+       0.368
+      ],
+      [
+       -14.8,
+       -0.006
+      ],
+      [
+       -13.0,
+       -0.006
+      ],
+      [
+       -12.8,
+       -0.378
+      ],
+      [
+       -11.0,
+       -0.378
+      ],
+      [
+       -10.8,
+       -0.756
+      ],
+      [
+       -9.0,
+       -0.75
+      ],
+      [
+       -8.8,
+       -1.091
+      ],
+      [
+       -7.0,
+       -1.091
+      ],
+      [
+       -6.8,
+       -1.39
+      ],
+      [
+       -5.0,
+       -1.384
+      ],
+      [
+       -4.8,
+       -1.622
+      ],
+      [
+       -3.2,
+       -1.616
+      ],
+      [
+       -2.8,
+       -1.793
+      ],
+      [
+       -1.0,
+       -1.793
+      ],
+      [
+       -0.7,
+       -1.896
+      ],
+      [
+       2.9,
+       -1.933
+      ],
+      [
+       3.1,
+       -1.89
+      ],
+      [
+       5.0,
+       -1.89
+      ],
+      [
+       5.2,
+       -1.774
+      ],
+      [
+       7.0,
+       -1.774
+      ],
+      [
+       7.2,
+       -1.604
+      ],
+      [
+       9.0,
+       -1.61
+      ],
+      [
+       9.2,
+       -1.317
+      ],
+      [
+       11.0,
+       -1.311
+      ],
+      [
+       11.2,
+       -1.079
+      ],
+      [
+       13.0,
+       -1.079
+      ],
+      [
+       13.2,
+       -0.75
+      ],
+      [
+       15.0,
+       -0.744
+      ],
+      [
+       15.3,
+       -0.372
+      ],
+      [
+       17.0,
+       -0.366
+      ],
+      [
+       17.2,
+       0.012
+      ],
+      [
+       19.0,
+       0.012
+      ],
+      [
+       19.2,
+       0.38
+      ],
+      [
+       21.0,
+       0.38
+      ],
+      [
+       21.2,
+       0.735
+      ],
+      [
+       23.0,
+       0.735
+      ],
+      [
+       23.2,
+       1.061
+      ],
+      [
+       25.0,
+       1.067
+      ],
+      [
+       25.2,
+       1.354
+      ],
+      [
+       27.0,
+       1.354
+      ],
+      [
+       27.2,
+       1.579
+      ],
+      [
+       28.9,
+       1.579
+      ],
+      [
+       29.2,
+       1.762
+      ],
+      [
+       31.0,
+       1.762
+      ],
+      [
+       31.2,
+       1.866
+      ],
+      [
+       33.0,
+       1.866
+      ],
+      [
+       33.2,
+       1.902
+      ],
+      [
+       37.0,
+       1.866
+      ],
+      [
+       37.2,
+       1.756
+      ],
+      [
+       39.0,
+       1.756
+      ],
+      [
+       39.2,
+       1.579
+      ],
+      [
+       41.0,
+       1.579
+      ],
+      [
+       41.2,
+       1.293
+      ],
+      [
+       43.0,
+       1.293
+      ],
+      [
+       43.2,
+       1.055
+      ],
+      [
+       45.0,
+       1.055
+      ],
+      [
+       45.2,
+       0.735
+      ],
+      [
+       47.1,
+       0.735
+      ],
+      [
+       47.2,
+       0.368
+      ],
+      [
+       49.0,
+       0.38
+      ],
+      [
+       49.2,
+       -0.006
+      ],
+      [
+       49.9,
+       -0.006
+      ]
+     ]
+    },
+    {
+     "label": "Winding current, trace C8 (orange)",
+     "points": [
+      [
+       -49.9,
+       -1.805
+      ],
+      [
+       -49.0,
+       -1.805
+      ],
+      [
+       -48.8,
+       -1.915
+      ],
+      [
+       -45.2,
+       -1.951
+      ],
+      [
+       -44.9,
+       -1.915
+      ],
+      [
+       -43.0,
+       -1.915
+      ],
+      [
+       -42.8,
+       -1.799
+      ],
+      [
+       -41.0,
+       -1.799
+      ],
+      [
+       -40.8,
+       -1.622
+      ],
+      [
+       -39.0,
+       -1.622
+      ],
+      [
+       -38.8,
+       -1.384
+      ],
+      [
+       -37.0,
+       -1.39
+      ],
+      [
+       -36.8,
+       -1.098
+      ],
+      [
+       -35.0,
+       -1.091
+      ],
+      [
+       -34.8,
+       -0.756
+      ],
+      [
+       -33.0,
+       -0.756
+      ],
+      [
+       -32.8,
+       -0.396
+      ],
+      [
+       -31.0,
+       -0.384
+      ],
+      [
+       -30.8,
+       0
+      ],
+      [
+       -29.0,
+       0
+      ],
+      [
+       -28.8,
+       0.386
+      ],
+      [
+       -27.0,
+       0.386
+      ],
+      [
+       -26.8,
+       0.741
+      ],
+      [
+       -25.0,
+       0.753
+      ],
+      [
+       -24.8,
+       1.073
+      ],
+      [
+       -23.0,
+       1.079
+      ],
+      [
+       -22.8,
+       1.366
+      ],
+      [
+       -21.0,
+       1.372
+      ],
+      [
+       -20.8,
+       1.604
+      ],
+      [
+       -19.0,
+       1.604
+      ],
+      [
+       -18.8,
+       1.78
+      ],
+      [
+       -17.0,
+       1.787
+      ],
+      [
+       -16.7,
+       1.89
+      ],
+      [
+       -13.0,
+       1.927
+      ],
+      [
+       -12.9,
+       1.89
+      ],
+      [
+       -11.0,
+       1.89
+      ],
+      [
+       -10.7,
+       1.78
+      ],
+      [
+       -9.0,
+       1.787
+      ],
+      [
+       -8.8,
+       1.61
+      ],
+      [
+       -7.0,
+       1.604
+      ],
+      [
+       -6.8,
+       1.372
+      ],
+      [
+       -5.0,
+       1.366
+      ],
+      [
+       -4.8,
+       1.079
+      ],
+      [
+       -3.0,
+       1.079
+      ],
+      [
+       -2.8,
+       0.747
+      ],
+      [
+       -1.0,
+       0.747
+      ],
+      [
+       -0.8,
+       0.386
+      ],
+      [
+       1.0,
+       0.38
+      ],
+      [
+       1.2,
+       0
+      ],
+      [
+       3.0,
+       0
+      ],
+      [
+       3.2,
+       -0.384
+      ],
+      [
+       5.0,
+       -0.39
+      ],
+      [
+       5.2,
+       -0.762
+      ],
+      [
+       7.0,
+       -0.768
+      ],
+      [
+       7.2,
+       -1.098
+      ],
+      [
+       9.0,
+       -1.104
+      ],
+      [
+       9.2,
+       -1.39
+      ],
+      [
+       11.0,
+       -1.396
+      ],
+      [
+       11.2,
+       -1.634
+      ],
+      [
+       13.0,
+       -1.634
+      ],
+      [
+       13.2,
+       -1.799
+      ],
+      [
+       14.9,
+       -1.799
+      ],
+      [
+       15.3,
+       -1.927
+      ],
+      [
+       17.0,
+       -1.915
+      ],
+      [
+       17.4,
+       -1.957
+      ],
+      [
+       21.0,
+       -1.915
+      ],
+      [
+       21.2,
+       -1.799
+      ],
+      [
+       23.0,
+       -1.799
+      ],
+      [
+       23.2,
+       -1.622
+      ],
+      [
+       25.0,
+       -1.622
+      ],
+      [
+       25.2,
+       -1.39
+      ],
+      [
+       27.0,
+       -1.39
+      ],
+      [
+       27.2,
+       -1.098
+      ],
+      [
+       29.0,
+       -1.091
+      ],
+      [
+       29.2,
+       -0.756
+      ],
+      [
+       31.0,
+       -0.756
+      ],
+      [
+       31.2,
+       -0.396
+      ],
+      [
+       33.0,
+       -0.378
+      ],
+      [
+       33.2,
+       0
+      ],
+      [
+       35.0,
+       0
+      ],
+      [
+       35.2,
+       0.386
+      ],
+      [
+       37.0,
+       0.386
+      ],
+      [
+       37.2,
+       0.747
+      ],
+      [
+       39.0,
+       0.753
+      ],
+      [
+       39.2,
+       1.079
+      ],
+      [
+       41.0,
+       1.079
+      ],
+      [
+       41.2,
+       1.366
+      ],
+      [
+       43.0,
+       1.366
+      ],
+      [
+       43.2,
+       1.604
+      ],
+      [
+       45.0,
+       1.604
+      ],
+      [
+       45.2,
+       1.78
+      ],
+      [
+       47.0,
+       1.78
+      ],
+      [
+       47.2,
+       1.89
+      ],
+      [
+       49.1,
+       1.89
+      ],
+      [
+       49.2,
+       1.927
+      ],
+      [
+       49.9,
+       1.927
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8-4. 1/8 microstepping with smart tune Dynamic Decay",
+   "page": 35,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Winding current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Winding current, trace C7 (green)",
+     "points": [
+      [
+       -49.9,
+       0.741
+      ],
+      [
+       -48.6,
+       0.741
+      ],
+      [
+       -48.3,
+       0.331
+      ],
+      [
+       -46.7,
+       0.313
+      ],
+      [
+       -46.4,
+       -0.006
+      ],
+      [
+       -44.7,
+       -0.006
+      ],
+      [
+       -44.4,
+       -0.384
+      ],
+      [
+       -42.6,
+       -0.384
+      ],
+      [
+       -42.4,
+       -0.75
+      ],
+      [
+       -40.6,
+       -0.768
+      ],
+      [
+       -40.4,
+       -1.085
+      ],
+      [
+       -38.6,
+       -1.092
+      ],
+      [
+       -38.4,
+       -1.384
+      ],
+      [
+       -36.6,
+       -1.39
+      ],
+      [
+       -36.4,
+       -1.622
+      ],
+      [
+       -34.6,
+       -1.622
+      ],
+      [
+       -34.3,
+       -1.799
+      ],
+      [
+       -32.6,
+       -1.799
+      ],
+      [
+       -32.3,
+       -1.909
+      ],
+      [
+       -30.8,
+       -1.896
+      ],
+      [
+       -30.4,
+       -1.939
+      ],
+      [
+       -26.6,
+       -1.89
+      ],
+      [
+       -26.3,
+       -1.78
+      ],
+      [
+       -24.6,
+       -1.78
+      ],
+      [
+       -24.3,
+       -1.61
+      ],
+      [
+       -22.6,
+       -1.61
+      ],
+      [
+       -22.3,
+       -1.323
+      ],
+      [
+       -20.6,
+       -1.323
+      ],
+      [
+       -20.4,
+       -1.085
+      ],
+      [
+       -18.6,
+       -1.092
+      ],
+      [
+       -18.4,
+       -0.756
+      ],
+      [
+       -16.6,
+       -0.756
+      ],
+      [
+       -16.3,
+       -0.317
+      ],
+      [
+       -14.7,
+       -0.317
+      ],
+      [
+       -14.4,
+       0.012
+      ],
+      [
+       -12.7,
+       0.012
+      ],
+      [
+       -12.4,
+       0.38
+      ],
+      [
+       -10.7,
+       0.386
+      ],
+      [
+       -10.4,
+       0.729
+      ],
+      [
+       -8.6,
+       0.747
+      ],
+      [
+       -8.4,
+       1.049
+      ],
+      [
+       -6.7,
+       1.061
+      ],
+      [
+       -6.4,
+       1.354
+      ],
+      [
+       -4.6,
+       1.36
+      ],
+      [
+       -4.4,
+       1.585
+      ],
+      [
+       -2.6,
+       1.585
+      ],
+      [
+       -2.4,
+       1.756
+      ],
+      [
+       -0.6,
+       1.762
+      ],
+      [
+       -0.2,
+       1.878
+      ],
+      [
+       3.3,
+       1.908
+      ],
+      [
+       3.5,
+       1.872
+      ],
+      [
+       5.4,
+       1.872
+      ],
+      [
+       5.6,
+       1.762
+      ],
+      [
+       7.4,
+       1.762
+      ],
+      [
+       7.7,
+       1.585
+      ],
+      [
+       9.4,
+       1.585
+      ],
+      [
+       9.7,
+       1.305
+      ],
+      [
+       11.4,
+       1.299
+      ],
+      [
+       11.6,
+       1.073
+      ],
+      [
+       13.4,
+       1.061
+      ],
+      [
+       13.6,
+       0.747
+      ],
+      [
+       15.4,
+       0.741
+      ],
+      [
+       15.7,
+       0.313
+      ],
+      [
+       17.3,
+       0.313
+      ],
+      [
+       17.6,
+       -0.006
+      ],
+      [
+       19.3,
+       -0.006
+      ],
+      [
+       19.6,
+       -0.378
+      ],
+      [
+       21.4,
+       -0.384
+      ],
+      [
+       21.6,
+       -0.756
+      ],
+      [
+       23.4,
+       -0.762
+      ],
+      [
+       23.6,
+       -1.085
+      ],
+      [
+       25.4,
+       -1.092
+      ],
+      [
+       25.6,
+       -1.384
+      ],
+      [
+       27.4,
+       -1.384
+      ],
+      [
+       27.6,
+       -1.622
+      ],
+      [
+       29.4,
+       -1.622
+      ],
+      [
+       29.6,
+       -1.793
+      ],
+      [
+       31.4,
+       -1.799
+      ],
+      [
+       31.6,
+       -1.902
+      ],
+      [
+       35.3,
+       -1.939
+      ],
+      [
+       35.6,
+       -1.896
+      ],
+      [
+       37.3,
+       -1.896
+      ],
+      [
+       37.6,
+       -1.78
+      ],
+      [
+       39.4,
+       -1.78
+      ],
+      [
+       39.6,
+       -1.61
+      ],
+      [
+       41.4,
+       -1.61
+      ],
+      [
+       41.7,
+       -1.323
+      ],
+      [
+       43.4,
+       -1.323
+      ],
+      [
+       43.6,
+       -1.085
+      ],
+      [
+       45.5,
+       -1.092
+      ],
+      [
+       45.6,
+       -0.713
+      ],
+      [
+       47.4,
+       -0.713
+      ],
+      [
+       47.6,
+       -0.329
+      ],
+      [
+       49.4,
+       -0.323
+      ],
+      [
+       49.9,
+       0.012
+      ]
+     ]
+    },
+    {
+     "label": "Winding current, trace C8 (orange)",
+     "points": [
+      [
+       -49.9,
+       1.787
+      ],
+      [
+       -48.6,
+       1.787
+      ],
+      [
+       -48.3,
+       1.89
+      ],
+      [
+       -46.6,
+       1.89
+      ],
+      [
+       -46.4,
+       1.927
+      ],
+      [
+       -42.6,
+       1.896
+      ],
+      [
+       -42.4,
+       1.787
+      ],
+      [
+       -40.6,
+       1.787
+      ],
+      [
+       -40.4,
+       1.61
+      ],
+      [
+       -38.6,
+       1.61
+      ],
+      [
+       -38.4,
+       1.384
+      ],
+      [
+       -36.6,
+       1.372
+      ],
+      [
+       -36.4,
+       1.091
+      ],
+      [
+       -34.6,
+       1.085
+      ],
+      [
+       -34.3,
+       0.705
+      ],
+      [
+       -32.6,
+       0.711
+      ],
+      [
+       -32.4,
+       0.343
+      ],
+      [
+       -30.7,
+       0.325
+      ],
+      [
+       -30.4,
+       0
+      ],
+      [
+       -28.7,
+       0
+      ],
+      [
+       -28.3,
+       -0.396
+      ],
+      [
+       -26.6,
+       -0.402
+      ],
+      [
+       -26.4,
+       -0.75
+      ],
+      [
+       -24.6,
+       -0.774
+      ],
+      [
+       -24.4,
+       -1.098
+      ],
+      [
+       -22.6,
+       -1.104
+      ],
+      [
+       -22.4,
+       -1.39
+      ],
+      [
+       -20.7,
+       -1.396
+      ],
+      [
+       -20.4,
+       -1.634
+      ],
+      [
+       -18.6,
+       -1.634
+      ],
+      [
+       -18.4,
+       -1.811
+      ],
+      [
+       -16.7,
+       -1.805
+      ],
+      [
+       -16.4,
+       -1.921
+      ],
+      [
+       -12.6,
+       -1.951
+      ],
+      [
+       -12.4,
+       -1.915
+      ],
+      [
+       -10.6,
+       -1.915
+      ],
+      [
+       -10.4,
+       -1.799
+      ],
+      [
+       -8.6,
+       -1.799
+      ],
+      [
+       -8.4,
+       -1.628
+      ],
+      [
+       -6.6,
+       -1.628
+      ],
+      [
+       -6.4,
+       -1.402
+      ],
+      [
+       -4.6,
+       -1.39
+      ],
+      [
+       -4.4,
+       -1.104
+      ],
+      [
+       -2.6,
+       -1.098
+      ],
+      [
+       -2.4,
+       -0.781
+      ],
+      [
+       -0.6,
+       -0.768
+      ],
+      [
+       -0.3,
+       -0.335
+      ],
+      [
+       1.3,
+       -0.335
+      ],
+      [
+       1.6,
+       0
+      ],
+      [
+       3.3,
+       0
+      ],
+      [
+       3.6,
+       0.38
+      ],
+      [
+       5.4,
+       0.386
+      ],
+      [
+       5.6,
+       0.741
+      ],
+      [
+       7.4,
+       0.753
+      ],
+      [
+       7.6,
+       1.073
+      ],
+      [
+       9.4,
+       1.079
+      ],
+      [
+       9.6,
+       1.36
+      ],
+      [
+       11.3,
+       1.372
+      ],
+      [
+       11.6,
+       1.604
+      ],
+      [
+       13.4,
+       1.604
+      ],
+      [
+       13.6,
+       1.787
+      ],
+      [
+       15.4,
+       1.787
+      ],
+      [
+       15.6,
+       1.89
+      ],
+      [
+       17.2,
+       1.89
+      ],
+      [
+       17.6,
+       1.927
+      ],
+      [
+       21.4,
+       1.896
+      ],
+      [
+       21.6,
+       1.787
+      ],
+      [
+       23.4,
+       1.787
+      ],
+      [
+       23.6,
+       1.61
+      ],
+      [
+       25.4,
+       1.61
+      ],
+      [
+       25.6,
+       1.39
+      ],
+      [
+       27.4,
+       1.378
+      ],
+      [
+       27.6,
+       1.091
+      ],
+      [
+       29.4,
+       1.085
+      ],
+      [
+       29.7,
+       0.717
+      ],
+      [
+       31.4,
+       0.717
+      ],
+      [
+       31.7,
+       0.325
+      ],
+      [
+       33.3,
+       0.325
+      ],
+      [
+       33.6,
+       0
+      ],
+      [
+       35.3,
+       0
+      ],
+      [
+       35.6,
+       -0.39
+      ],
+      [
+       37.4,
+       -0.409
+      ],
+      [
+       37.6,
+       -0.756
+      ],
+      [
+       39.4,
+       -0.774
+      ],
+      [
+       39.6,
+       -1.098
+      ],
+      [
+       41.4,
+       -1.104
+      ],
+      [
+       41.6,
+       -1.39
+      ],
+      [
+       43.4,
+       -1.396
+      ],
+      [
+       43.6,
+       -1.634
+      ],
+      [
+       45.5,
+       -1.64
+      ],
+      [
+       45.7,
+       -1.811
+      ],
+      [
+       47.3,
+       -1.805
+      ],
+      [
+       47.6,
+       -1.915
+      ],
+      [
+       49.5,
+       -1.915
+      ],
+      [
+       49.9,
+       -1.957
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8-5. 1/32 microstepping with smart tune Ripple Control decay",
+   "page": 35,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Winding current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Winding current, trace C7 (green)",
+     "points": [
+      [
+       -49.9,
+       1.006
+      ],
+      [
+       -47.4,
+       0.645
+      ],
+      [
+       -45.8,
+       0.283
+      ],
+      [
+       -45.3,
+       0.229
+      ],
+      [
+       -44.9,
+       0.241
+      ],
+      [
+       -44.3,
+       -0.006
+      ],
+      [
+       -42.9,
+       -0.195
+      ],
+      [
+       -42.8,
+       -0.293
+      ],
+      [
+       -42.4,
+       -0.293
+      ],
+      [
+       -39.8,
+       -0.841
+      ],
+      [
+       -36.3,
+       -1.378
+      ],
+      [
+       -32.8,
+       -1.75
+      ],
+      [
+       -29.2,
+       -1.915
+      ],
+      [
+       -25.9,
+       -1.89
+      ],
+      [
+       -25.8,
+       -1.854
+      ],
+      [
+       -22.9,
+       -1.695
+      ],
+      [
+       -22.8,
+       -1.646
+      ],
+      [
+       -21.9,
+       -1.604
+      ],
+      [
+       -21.8,
+       -1.543
+      ],
+      [
+       -21.4,
+       -1.549
+      ],
+      [
+       -21.3,
+       -1.494
+      ],
+      [
+       -20.4,
+       -1.439
+      ],
+      [
+       -20.3,
+       -1.311
+      ],
+      [
+       -19.4,
+       -1.293
+      ],
+      [
+       -17.9,
+       -1.079
+      ],
+      [
+       -14.8,
+       -0.476
+      ],
+      [
+       -14.4,
+       -0.463
+      ],
+      [
+       -14.3,
+       -0.372
+      ],
+      [
+       -13.9,
+       -0.36
+      ],
+      [
+       -12.8,
+       -0.116
+      ],
+      [
+       -12.4,
+       -0.11
+      ],
+      [
+       -12.2,
+       0.012
+      ],
+      [
+       -9.4,
+       0.464
+      ],
+      [
+       -9.2,
+       0.56
+      ],
+      [
+       -4.2,
+       1.348
+      ],
+      [
+       -0.2,
+       1.756
+      ],
+      [
+       1.8,
+       1.86
+      ],
+      [
+       3.8,
+       1.902
+      ],
+      [
+       6.1,
+       1.86
+      ],
+      [
+       8.1,
+       1.756
+      ],
+      [
+       8.2,
+       1.713
+      ],
+      [
+       10.1,
+       1.585
+      ],
+      [
+       10.7,
+       1.463
+      ],
+      [
+       11.7,
+       1.409
+      ],
+      [
+       11.8,
+       1.293
+      ],
+      [
+       12.5,
+       1.274
+      ],
+      [
+       13.1,
+       1.201
+      ],
+      [
+       17.1,
+       0.554
+      ],
+      [
+       17.7,
+       0.374
+      ],
+      [
+       18.6,
+       0.301
+      ],
+      [
+       19.7,
+       -0.006
+      ],
+      [
+       20.1,
+       -0.006
+      ],
+      [
+       21.2,
+       -0.293
+      ],
+      [
+       22.1,
+       -0.378
+      ],
+      [
+       25.8,
+       -1.085
+      ],
+      [
+       29.8,
+       -1.616
+      ],
+      [
+       33.8,
+       -1.89
+      ],
+      [
+       35.8,
+       -1.927
+      ],
+      [
+       38.1,
+       -1.89
+      ],
+      [
+       42.1,
+       -1.604
+      ],
+      [
+       42.7,
+       -1.488
+      ],
+      [
+       43.7,
+       -1.439
+      ],
+      [
+       43.8,
+       -1.317
+      ],
+      [
+       44.6,
+       -1.293
+      ],
+      [
+       44.7,
+       -1.226
+      ],
+      [
+       45.1,
+       -1.226
+      ],
+      [
+       45.2,
+       -1.159
+      ],
+      [
+       46.1,
+       -1.079
+      ],
+      [
+       46.2,
+       -1.0
+      ],
+      [
+       46.6,
+       -0.994
+      ],
+      [
+       47.8,
+       -0.744
+      ],
+      [
+       48.2,
+       -0.744
+      ],
+      [
+       49.9,
+       -0.384
+      ]
+     ]
+    },
+    {
+     "label": "Winding current, trace C8 (orange)",
+     "points": [
+      [
+       -49.9,
+       1.622
+      ],
+      [
+       -47.8,
+       1.805
+      ],
+      [
+       -43.9,
+       1.927
+      ],
+      [
+       -42.1,
+       1.89
+      ],
+      [
+       -39.9,
+       1.78
+      ],
+      [
+       -38.3,
+       1.604
+      ],
+      [
+       -37.9,
+       1.604
+      ],
+      [
+       -33.9,
+       1.079
+      ],
+      [
+       -32.8,
+       0.837
+      ],
+      [
+       -32.4,
+       0.831
+      ],
+      [
+       -31.8,
+       0.669
+      ],
+      [
+       -30.9,
+       0.566
+      ],
+      [
+       -30.8,
+       0.47
+      ],
+      [
+       -30.4,
+       0.47
+      ],
+      [
+       -29.3,
+       0.229
+      ],
+      [
+       -28.9,
+       0.235
+      ],
+      [
+       -28.2,
+       0
+      ],
+      [
+       -27.9,
+       0
+      ],
+      [
+       -27.8,
+       -0.104
+      ],
+      [
+       -25.9,
+       -0.384
+      ],
+      [
+       -24.2,
+       -0.762
+      ],
+      [
+       -20.2,
+       -1.39
+      ],
+      [
+       -16.2,
+       -1.799
+      ],
+      [
+       -14.2,
+       -1.921
+      ],
+      [
+       -11.8,
+       -1.945
+      ],
+      [
+       -9.9,
+       -1.909
+      ],
+      [
+       -7.9,
+       -1.799
+      ],
+      [
+       -3.9,
+       -1.384
+      ],
+      [
+       -3.8,
+       -1.317
+      ],
+      [
+       -3.4,
+       -1.311
+      ],
+      [
+       -0.4,
+       -0.841
+      ],
+      [
+       3.2,
+       -0.128
+      ],
+      [
+       3.6,
+       -0.146
+      ],
+      [
+       3.8,
+       0
+      ],
+      [
+       4.1,
+       0
+      ],
+      [
+       7.8,
+       0.747
+      ],
+      [
+       13.2,
+       1.543
+      ],
+      [
+       15.8,
+       1.78
+      ],
+      [
+       17.7,
+       1.878
+      ],
+      [
+       19.7,
+       1.927
+      ],
+      [
+       22.1,
+       1.878
+      ],
+      [
+       24.1,
+       1.78
+      ],
+      [
+       26.6,
+       1.549
+      ],
+      [
+       27.7,
+       1.372
+      ],
+      [
+       28.1,
+       1.372
+      ],
+      [
+       28.7,
+       1.226
+      ],
+      [
+       29.6,
+       1.146
+      ],
+      [
+       32.6,
+       0.657
+      ],
+      [
+       33.2,
+       0.476
+      ],
+      [
+       33.6,
+       0.47
+      ],
+      [
+       34.7,
+       0.205
+      ],
+      [
+       35.6,
+       0.12
+      ],
+      [
+       35.8,
+       0
+      ],
+      [
+       36.1,
+       0
+      ],
+      [
+       38.2,
+       -0.476
+      ],
+      [
+       38.6,
+       -0.476
+      ],
+      [
+       39.2,
+       -0.671
+      ],
+      [
+       42.8,
+       -1.25
+      ],
+      [
+       45.8,
+       -1.628
+      ],
+      [
+       49.9,
+       -1.921
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8-6. 1/32 microstepping with smart tune Dynamic Decay",
+   "page": 35,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Winding current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Winding current, trace C7 (green)",
+     "points": [
+      [
+       -49.9,
+       -1.226
+      ],
+      [
+       -47.7,
+       -1.561
+      ],
+      [
+       -45.1,
+       -1.793
+      ],
+      [
+       -43.1,
+       -1.896
+      ],
+      [
+       -40.8,
+       -1.933
+      ],
+      [
+       -38.8,
+       -1.89
+      ],
+      [
+       -36.8,
+       -1.78
+      ],
+      [
+       -36.2,
+       -1.695
+      ],
+      [
+       -34.8,
+       -1.61
+      ],
+      [
+       -34.7,
+       -1.555
+      ],
+      [
+       -34.3,
+       -1.555
+      ],
+      [
+       -34.2,
+       -1.5
+      ],
+      [
+       -33.3,
+       -1.439
+      ],
+      [
+       -33.1,
+       -1.329
+      ],
+      [
+       -32.3,
+       -1.299
+      ],
+      [
+       -31.3,
+       -1.104
+      ],
+      [
+       -30.8,
+       -1.098
+      ],
+      [
+       -29.2,
+       -0.756
+      ],
+      [
+       -28.7,
+       -0.756
+      ],
+      [
+       -28.7,
+       -0.665
+      ],
+      [
+       -28.2,
+       -0.665
+      ],
+      [
+       -26.1,
+       -0.122
+      ],
+      [
+       -24.7,
+       0.054
+      ],
+      [
+       -24.3,
+       0.042
+      ],
+      [
+       -23.1,
+       0.386
+      ],
+      [
+       -17.2,
+       1.348
+      ],
+      [
+       -13.1,
+       1.762
+      ],
+      [
+       -11.1,
+       1.866
+      ],
+      [
+       -8.8,
+       1.902
+      ],
+      [
+       -6.8,
+       1.866
+      ],
+      [
+       -4.8,
+       1.762
+      ],
+      [
+       -1.2,
+       1.415
+      ],
+      [
+       -1.0,
+       1.305
+      ],
+      [
+       0.2,
+       1.201
+      ],
+      [
+       0.8,
+       1.073
+      ],
+      [
+       1.2,
+       1.061
+      ],
+      [
+       1.8,
+       0.916
+      ],
+      [
+       2.2,
+       0.91
+      ],
+      [
+       2.8,
+       0.747
+      ],
+      [
+       3.2,
+       0.741
+      ],
+      [
+       3.3,
+       0.663
+      ],
+      [
+       3.8,
+       0.657
+      ],
+      [
+       6.4,
+       0.036
+      ],
+      [
+       7.2,
+       -0.049
+      ],
+      [
+       7.7,
+       -0.037
+      ],
+      [
+       8.9,
+       -0.384
+      ],
+      [
+       11.3,
+       -0.841
+      ],
+      [
+       16.8,
+       -1.616
+      ],
+      [
+       19.3,
+       -1.823
+      ],
+      [
+       20.8,
+       -1.896
+      ],
+      [
+       23.2,
+       -1.933
+      ],
+      [
+       25.2,
+       -1.89
+      ],
+      [
+       27.8,
+       -1.738
+      ],
+      [
+       30.7,
+       -1.439
+      ],
+      [
+       30.9,
+       -1.329
+      ],
+      [
+       31.7,
+       -1.293
+      ],
+      [
+       32.2,
+       -1.165
+      ],
+      [
+       34.2,
+       -0.927
+      ],
+      [
+       35.3,
+       -0.665
+      ],
+      [
+       35.7,
+       -0.665
+      ],
+      [
+       37.4,
+       -0.22
+      ],
+      [
+       38.4,
+       -0.03
+      ],
+      [
+       39.2,
+       0.054
+      ],
+      [
+       39.7,
+       0.042
+      ],
+      [
+       40.3,
+       0.229
+      ],
+      [
+       40.7,
+       0.229
+      ],
+      [
+       40.9,
+       0.386
+      ],
+      [
+       43.9,
+       0.904
+      ],
+      [
+       46.9,
+       1.354
+      ],
+      [
+       49.9,
+       1.646
+      ]
+     ]
+    },
+    {
+     "label": "Winding current, trace C8 (orange)",
+     "points": [
+      [
+       -49.9,
+       1.494
+      ],
+      [
+       -46.8,
+       1.085
+      ],
+      [
+       -46.7,
+       1.0
+      ],
+      [
+       -45.8,
+       0.928
+      ],
+      [
+       -45.7,
+       0.843
+      ],
+      [
+       -45.3,
+       0.843
+      ],
+      [
+       -44.2,
+       0.578
+      ],
+      [
+       -43.8,
+       0.572
+      ],
+      [
+       -42.6,
+       0.229
+      ],
+      [
+       -41.6,
+       0.042
+      ],
+      [
+       -40.8,
+       -0.049
+      ],
+      [
+       -40.3,
+       -0.043
+      ],
+      [
+       -39.1,
+       -0.39
+      ],
+      [
+       -35.2,
+       -1.091
+      ],
+      [
+       -31.2,
+       -1.634
+      ],
+      [
+       -27.2,
+       -1.915
+      ],
+      [
+       -25.2,
+       -1.945
+      ],
+      [
+       -22.7,
+       -1.915
+      ],
+      [
+       -18.2,
+       -1.573
+      ],
+      [
+       -13.2,
+       -0.86
+      ],
+      [
+       -13.2,
+       -0.768
+      ],
+      [
+       -12.7,
+       -0.768
+      ],
+      [
+       -12.2,
+       -0.591
+      ],
+      [
+       -11.7,
+       -0.591
+      ],
+      [
+       -11.1,
+       -0.335
+      ],
+      [
+       -9.6,
+       -0.037
+      ],
+      [
+       -8.8,
+       0
+      ],
+      [
+       -8.8,
+       0.048
+      ],
+      [
+       -8.3,
+       0.036
+      ],
+      [
+       -7.1,
+       0.386
+      ],
+      [
+       -1.2,
+       1.36
+      ],
+      [
+       2.9,
+       1.78
+      ],
+      [
+       4.9,
+       1.884
+      ],
+      [
+       6.8,
+       1.927
+      ],
+      [
+       9.2,
+       1.89
+      ],
+      [
+       11.2,
+       1.787
+      ],
+      [
+       15.2,
+       1.372
+      ],
+      [
+       17.3,
+       1.0
+      ],
+      [
+       18.2,
+       0.934
+      ],
+      [
+       18.3,
+       0.843
+      ],
+      [
+       18.8,
+       0.843
+      ],
+      [
+       19.8,
+       0.578
+      ],
+      [
+       20.2,
+       0.572
+      ],
+      [
+       22.4,
+       0.036
+      ],
+      [
+       23.2,
+       0
+      ],
+      [
+       23.2,
+       -0.055
+      ],
+      [
+       23.7,
+       -0.043
+      ],
+      [
+       24.8,
+       -0.378
+      ],
+      [
+       27.8,
+       -0.933
+      ],
+      [
+       31.8,
+       -1.518
+      ],
+      [
+       34.9,
+       -1.805
+      ],
+      [
+       37.8,
+       -1.939
+      ],
+      [
+       41.3,
+       -1.915
+      ],
+      [
+       45.8,
+       -1.573
+      ],
+      [
+       48.8,
+       -1.11
+      ],
+      [
+       49.3,
+       -1.098
+      ],
+      [
+       49.4,
+       -1.018
+      ],
+      [
+       49.9,
+       -1.018
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8-7. 1/256 microstepping with smart tune Ripple Control decay",
+   "page": 35,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Winding current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Winding current, trace C7 (green)",
+     "points": [
+      [
+       -49.9,
+       1.116
+      ],
+      [
+       -47.6,
+       0.789
+      ],
+      [
+       -39.3,
+       -0.738
+      ],
+      [
+       -35.3,
+       -1.366
+      ],
+      [
+       -31.7,
+       -1.744
+      ],
+      [
+       -29.1,
+       -1.89
+      ],
+      [
+       -27.9,
+       -1.915
+      ],
+      [
+       -25.2,
+       -1.854
+      ],
+      [
+       -23.0,
+       -1.732
+      ],
+      [
+       -20.0,
+       -1.427
+      ],
+      [
+       -19.4,
+       -1.433
+      ],
+      [
+       -19.3,
+       -1.287
+      ],
+      [
+       -18.7,
+       -1.268
+      ],
+      [
+       -16.7,
+       -0.982
+      ],
+      [
+       -4.6,
+       1.146
+      ],
+      [
+       -1.3,
+       1.579
+      ],
+      [
+       0.9,
+       1.756
+      ],
+      [
+       3.7,
+       1.878
+      ],
+      [
+       4.8,
+       1.89
+      ],
+      [
+       5.2,
+       1.848
+      ],
+      [
+       7.3,
+       1.799
+      ],
+      [
+       10.6,
+       1.579
+      ],
+      [
+       11.9,
+       1.415
+      ],
+      [
+       12.7,
+       1.415
+      ],
+      [
+       12.8,
+       1.274
+      ],
+      [
+       13.4,
+       1.238
+      ],
+      [
+       16.8,
+       0.717
+      ],
+      [
+       27.9,
+       -1.25
+      ],
+      [
+       30.8,
+       -1.604
+      ],
+      [
+       34.8,
+       -1.89
+      ],
+      [
+       36.8,
+       -1.915
+      ],
+      [
+       37.5,
+       -1.866
+      ],
+      [
+       38.7,
+       -1.86
+      ],
+      [
+       41.1,
+       -1.726
+      ],
+      [
+       44.0,
+       -1.433
+      ],
+      [
+       44.7,
+       -1.433
+      ],
+      [
+       44.8,
+       -1.293
+      ],
+      [
+       45.4,
+       -1.268
+      ],
+      [
+       47.1,
+       -1.024
+      ],
+      [
+       49.9,
+       -0.543
+      ]
+     ]
+    },
+    {
+     "label": "Winding current, trace C8 (orange)",
+     "points": [
+      [
+       -49.9,
+       1.512
+      ],
+      [
+       -47.3,
+       1.774
+      ],
+      [
+       -45.7,
+       1.86
+      ],
+      [
+       -43.4,
+       1.915
+      ],
+      [
+       -41.0,
+       1.848
+      ],
+      [
+       -37.3,
+       1.592
+      ],
+      [
+       -32.7,
+       0.982
+      ],
+      [
+       -23.0,
+       -0.793
+      ],
+      [
+       -19.2,
+       -1.39
+      ],
+      [
+       -15.2,
+       -1.799
+      ],
+      [
+       -13.0,
+       -1.915
+      ],
+      [
+       -11.2,
+       -1.945
+      ],
+      [
+       -10.8,
+       -1.902
+      ],
+      [
+       -9.2,
+       -1.896
+      ],
+      [
+       -7.0,
+       -1.768
+      ],
+      [
+       -3.1,
+       -1.354
+      ],
+      [
+       0.8,
+       -0.756
+      ],
+      [
+       8.8,
+       0.735
+      ],
+      [
+       14.4,
+       1.555
+      ],
+      [
+       16.8,
+       1.768
+      ],
+      [
+       18.8,
+       1.878
+      ],
+      [
+       20.5,
+       1.915
+      ],
+      [
+       21.8,
+       1.884
+      ],
+      [
+       25.2,
+       1.72
+      ],
+      [
+       28.9,
+       1.335
+      ],
+      [
+       32.8,
+       0.741
+      ],
+      [
+       43.9,
+       -1.25
+      ],
+      [
+       46.8,
+       -1.622
+      ],
+      [
+       49.9,
+       -1.848
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8-8. 1/256 microstepping with smart tune Dynamic Decay",
+   "page": 35,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Winding current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Winding current, trace C7 (green)",
+     "points": [
+      [
+       -49.9,
+       -1.805
+      ],
+      [
+       -46.7,
+       -1.927
+      ],
+      [
+       -44.3,
+       -1.89
+      ],
+      [
+       -42.2,
+       -1.774
+      ],
+      [
+       -39.0,
+       -1.445
+      ],
+      [
+       -38.5,
+       -1.445
+      ],
+      [
+       -38.3,
+       -1.323
+      ],
+      [
+       -37.7,
+       -1.28
+      ],
+      [
+       -34.8,
+       -0.848
+      ],
+      [
+       -27.0,
+       0.627
+      ],
+      [
+       -22.3,
+       1.354
+      ],
+      [
+       -18.2,
+       1.762
+      ],
+      [
+       -16.2,
+       1.866
+      ],
+      [
+       -14.2,
+       1.902
+      ],
+      [
+       -12.3,
+       1.86
+      ],
+      [
+       -10.4,
+       1.762
+      ],
+      [
+       -7.0,
+       1.427
+      ],
+      [
+       -6.5,
+       1.421
+      ],
+      [
+       -6.3,
+       1.293
+      ],
+      [
+       -5.8,
+       1.28
+      ],
+      [
+       -2.3,
+       0.735
+      ],
+      [
+       5.7,
+       -0.762
+      ],
+      [
+       9.7,
+       -1.39
+      ],
+      [
+       11.5,
+       -1.604
+      ],
+      [
+       13.8,
+       -1.799
+      ],
+      [
+       15.7,
+       -1.89
+      ],
+      [
+       17.3,
+       -1.927
+      ],
+      [
+       19.7,
+       -1.89
+      ],
+      [
+       21.8,
+       -1.774
+      ],
+      [
+       24.9,
+       -1.457
+      ],
+      [
+       25.5,
+       -1.445
+      ],
+      [
+       25.7,
+       -1.323
+      ],
+      [
+       26.2,
+       -1.305
+      ],
+      [
+       28.7,
+       -0.933
+      ],
+      [
+       37.3,
+       0.687
+      ],
+      [
+       41.7,
+       1.354
+      ],
+      [
+       45.7,
+       1.762
+      ],
+      [
+       47.7,
+       1.86
+      ],
+      [
+       49.9,
+       1.902
+      ]
+     ]
+    },
+    {
+     "label": "Winding current, trace C8 (orange)",
+     "points": [
+      [
+       -49.9,
+       0.657
+      ],
+      [
+       -42.1,
+       -0.817
+      ],
+      [
+       -38.3,
+       -1.402
+      ],
+      [
+       -34.4,
+       -1.799
+      ],
+      [
+       -32.3,
+       -1.915
+      ],
+      [
+       -30.9,
+       -1.939
+      ],
+      [
+       -28.6,
+       -1.915
+      ],
+      [
+       -26.3,
+       -1.799
+      ],
+      [
+       -22.3,
+       -1.396
+      ],
+      [
+       -18.3,
+       -0.78
+      ],
+      [
+       -14.7,
+       -0.024
+      ],
+      [
+       -7.1,
+       1.262
+      ],
+      [
+       -4.6,
+       1.579
+      ],
+      [
+       -2.5,
+       1.768
+      ],
+      [
+       0.5,
+       1.902
+      ],
+      [
+       1.7,
+       1.927
+      ],
+      [
+       3.4,
+       1.89
+      ],
+      [
+       5.7,
+       1.787
+      ],
+      [
+       9.6,
+       1.384
+      ],
+      [
+       13.7,
+       0.771
+      ],
+      [
+       21.0,
+       -0.652
+      ],
+      [
+       24.9,
+       -1.293
+      ],
+      [
+       27.6,
+       -1.628
+      ],
+      [
+       29.4,
+       -1.793
+      ],
+      [
+       31.7,
+       -1.915
+      ],
+      [
+       34.2,
+       -1.939
+      ],
+      [
+       35.7,
+       -1.909
+      ],
+      [
+       37.7,
+       -1.799
+      ],
+      [
+       39.7,
+       -1.622
+      ],
+      [
+       45.1,
+       -0.878
+      ],
+      [
+       49.6,
+       0.012
+      ],
+      [
+       49.9,
+       0.006
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical-htssop",
+   "title": "Figure 8-1. Typical application, HTSSOP-28 (PWP) (1/8 microstepping, smart tune Ripple Control decay)",
+   "page": 32,
+   "description": "One bipolar stepper motor on the two bridges, run from a 24 V VM rail by STEP and DIR from a controller, which also drives nSLEEP and ENABLE. M0 and M1 are both tied to DVDD (1/8 step); DECAY1 to DVDD with DECAY0 grounded selects smart tune Ripple Control, and TOFF grounded gives the smallest ripple setting (19 mA + 1% of ITRIP). RREF1 and RREF2 divide VCC down to VREF, which sets the full-scale current. The charge pump uses 0.022 µF between CPH and CPL and 0.22 µF from VCP to VM. Each VM pin has 0.01 µF, with 100 µF bulk; DVDD has 0.47 µF and also pulls nFAULT up through 10 kΩ. The thermal pad connects to system ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8434",
+     "note": "HTSSOP-28 (PWP)"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.022 µF",
+     "note": "charge pump flying capacitor, CPH to CPL"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.22 µF",
+     "note": "charge pump storage capacitor, VCP to VM"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "ceramic, at the first VM pin"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100 µF",
+     "note": "polarised bulk capacitor on VM"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "ceramic, at the second VM pin"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.47 µF",
+     "note": "DVDD decoupling"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "nFAULT pull-up to DVDD"
+    },
+    {
+     "ref": "RREF1",
+     "type": "resistor",
+     "value": "",
+     "note": "upper VREF divider resistor, from VCC"
+    },
+    {
+     "ref": "RREF2",
+     "type": "resistor",
+     "value": "",
+     "note": "lower VREF divider resistor, to ground"
+    },
+    {
+     "ref": "MOT1",
+     "type": "other",
+     "value": "bipolar stepper motor",
+     "note": "winding A on A1-A2, winding B on B1-B2"
+    },
+    {
+     "ref": "J_VM",
+     "type": "terminal",
+     "value": "VM, motor supply"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC, reference supply for the VREF divider"
+    },
+    {
+     "ref": "J_NSLEEP",
+     "type": "terminal",
+     "value": "nSLEEP, from controller"
+    },
+    {
+     "ref": "J_ENABLE",
+     "type": "terminal",
+     "value": "ENABLE, from controller"
+    },
+    {
+     "ref": "J_DIR",
+     "type": "terminal",
+     "value": "DIR, from controller"
+    },
+    {
+     "ref": "J_STEP",
+     "type": "terminal",
+     "value": "STEP, from controller"
+    }
+   ],
+   "notes": [
+    "RREF1 and RREF2 have no values; their parallel combination is below 50 kΩ.",
+    "Design example values: VM = 24 V, IFS = 2 A, motor 0.9 Ω and 1.4 mH per phase, 1.8° per step, 18.75 rpm at 1/8 step, which is a 500 Hz STEP rate."
+   ]
+  },
+  {
+   "id": "typical-vqfn",
+   "title": "Figure 8-2. Typical application, VQFN-24 (RGE) (1/8 microstepping, smart tune Ripple Control decay)",
+   "page": 33,
+   "description": "One bipolar stepper motor on the two bridges, run from a 24 V VM rail by STEP and DIR from a controller, which also drives nSLEEP and ENABLE. M0 and M1 are both tied to DVDD (1/8 step); DECAY1 to DVDD with DECAY0 grounded selects smart tune Ripple Control, and TOFF grounded gives the smallest ripple setting (19 mA + 1% of ITRIP). RREF1 and RREF2 divide VCC down to VREF, which sets the full-scale current. The charge pump uses 0.022 µF between CPH and CPL and 0.22 µF from VCP to VM. Each VM pin has 0.01 µF, with 100 µF bulk; DVDD has 0.47 µF and also pulls nFAULT up through 10 kΩ. The thermal pad connects to system ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8434",
+     "note": "VQFN-24 (RGE)"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.022 µF",
+     "note": "charge pump flying capacitor, CPH to CPL"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.22 µF",
+     "note": "charge pump storage capacitor, VCP to VM"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "ceramic, at the first VM pin"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100 µF",
+     "note": "polarised bulk capacitor on VM"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "ceramic, at the second VM pin"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.47 µF",
+     "note": "DVDD decoupling"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "nFAULT pull-up to DVDD"
+    },
+    {
+     "ref": "RREF1",
+     "type": "resistor",
+     "value": "",
+     "note": "upper VREF divider resistor, from VCC"
+    },
+    {
+     "ref": "RREF2",
+     "type": "resistor",
+     "value": "",
+     "note": "lower VREF divider resistor, to ground"
+    },
+    {
+     "ref": "MOT1",
+     "type": "other",
+     "value": "bipolar stepper motor",
+     "note": "winding A on A1-A2, winding B on B1-B2"
+    },
+    {
+     "ref": "J_VM",
+     "type": "terminal",
+     "value": "VM, motor supply"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC, reference supply for the VREF divider"
+    },
+    {
+     "ref": "J_NSLEEP",
+     "type": "terminal",
+     "value": "nSLEEP, from controller"
+    },
+    {
+     "ref": "J_ENABLE",
+     "type": "terminal",
+     "value": "ENABLE, from controller"
+    },
+    {
+     "ref": "J_DIR",
+     "type": "terminal",
+     "value": "DIR, from controller"
+    },
+    {
+     "ref": "J_STEP",
+     "type": "terminal",
+     "value": "STEP, from controller"
+    }
+   ],
+   "notes": [
+    "RREF1 and RREF2 have no values; their parallel combination is below 50 kΩ.",
+    "Design example values: VM = 24 V, IFS = 2 A, motor 0.9 Ω and 1.4 mH per phase, 1.8° per step, 18.75 rpm at 1/8 step, which is a 500 Hz STEP rate."
+   ]
+  },
+  {
+   "id": "vref-pwm",
+   "title": "Figure 7-4. Setting VREF from a PWM output",
+   "page": 17,
+   "description": "A controller PWM output is filtered to a DC level for VREF: R1 in series from the PWM pin, then R2 and C1 from the VREF node to ground. VREF must stay at or below 3.3 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8434"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "J_PWM",
+     "type": "terminal",
+     "value": "PWM output of the controller"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "vref-dac",
+   "title": "Figure 7-3. Setting VREF from a DAC output",
+   "page": 17,
+   "description": "A controller DAC output drives VREF directly, so the full-scale current follows the DAC voltage, which must not go above 3.3 V.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8434"
+    },
+    {
+     "ref": "J_DAC",
+     "type": "terminal",
+     "value": "DAC output of the controller"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Full-scale current from VREF",
+   "expr": "IFS (A) = VREF (V) / KV (V/A) = VREF (V) / 1.32 (V/A)",
+   "where": {
+    "IFS": "full-scale regulation current, the trip level of the largest microstep",
+    "VREF": "voltage on the VREF pin, 3.3 V at most",
+    "KV": "transimpedance gain, 1.32 V/A typ"
+   },
+   "note": "",
+   "page": 18
+  },
+  {
+   "name": "Full-scale current with torque scaling",
+   "expr": "IFS (A) = VREF (V) / KV (V/A) × TRQ_DAC (%) = VREF (V) × TRQ_DAC (%) / 1.32 (V/A)",
+   "where": {
+    "IFS": "full-scale current, the largest current in either winding",
+    "VREF": "voltage on the VREF pin",
+    "KV": "transimpedance gain",
+    "TRQ_DAC": "torque DAC setting, in percent"
+   },
+   "note": "",
+   "page": 34
+  },
+  {
+   "name": "Step rate for a motor speed",
+   "expr": "ƒstep (steps/s) = v (rpm) × 360 (°/rot) / (θstep (°/step) × nm (steps/microstep) × 60 (s/min))",
+   "where": {
+    "ƒstep": "STEP input frequency",
+    "v": "motor speed",
+    "θstep": "full-step angle of the motor",
+    "nm": "microstepping level"
+   },
+   "note": "1.8°/step, 18.75 rpm and 1/8 step give 500 Hz.",
+   "page": 34
+  },
+  {
+   "name": "Conduction loss",
+   "expr": "PCOND = 2 × (IRMS)² × (RDS(ONH) + RDS(ONL))",
+   "where": {
+    "IRMS": "rms motor current",
+    "RDS(ONH)": "high-side on-resistance",
+    "RDS(ONL)": "low-side on-resistance"
+   },
+   "note": "Design example: 2 × (2 A / √2)² × (0.165 Ω + 0.165 Ω) = 1.32 W. On-resistance rises with temperature, which this figure depends on strongly.",
+   "page": 36
+  },
+  {
+   "name": "Switching loss per H-bridge",
+   "expr": "PSW_RISE = 0.5 × VVM × IRMS × tRISE_PWM × fPWM; PSW_FALL = 0.5 × VVM × IRMS × tFALL_PWM × fPWM",
+   "where": {
+    "VVM": "supply voltage",
+    "IRMS": "rms motor current",
+    "tRISE_PWM, tFALL_PWM": "output rise and fall times, each about VVM / tSR",
+    "tSR": "output slew rate, 240 V/µs typ",
+    "fPWM": "PWM switching frequency"
+   },
+   "note": "Design example at 30 kHz: 0.5 × 24 V × (2 A / √2) × (24 V / 240 V/µs) × 30 kHz = 0.05 W for each of rise and fall. Misprint: the fall-time example prints 1 A / √2; it should read 2 A / √2.",
+   "page": 36
+  },
+  {
+   "name": "Total switching loss",
+   "expr": "PSW = 2 × (PSW_RISE + PSW_FALL)",
+   "where": {
+    "PSW": "switching loss of both bridges"
+   },
+   "note": "Design example: 2 × (0.05 W + 0.05 W) = 0.2 W.",
+   "page": 36
+  },
+  {
+   "name": "Quiescent loss",
+   "expr": "PQ = VVM × IVM",
+   "where": {
+    "IVM": "VM operating supply current"
+   },
+   "note": "Design example: 24 V × 5 mA = 0.12 W.",
+   "page": 36
+  },
+  {
+   "name": "Total dissipation",
+   "expr": "PTOT = PCOND + PSW + PQ",
+   "where": {},
+   "note": "Design example: 1.32 W + 0.2 W + 0.12 W = 1.64 W.",
+   "page": 37
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ = TA + (PTOT × RθJA)",
+   "where": {
+    "TA": "ambient temperature",
+    "RθJA": "junction-to-ambient thermal resistance on a JEDEC 4-layer board: 29.7 °C/W HTSSOP, 39 °C/W VQFN"
+   },
+   "note": "Design example at 25 °C ambient: 73.71 °C for HTSSOP, 88.96 °C for VQFN.",
+   "page": 37
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 11,
+   "text": "Two N-channel MOSFET H-bridges, a microstepping indexer and current sensing by a current mirror on the power MOSFETs (no sense resistors) in one chip for a bipolar stepper. Supply range 4.5 V to 48 V; output current ratings are 4 A peak, 2.5 A full-scale and 1.8 A rms, the usable full-scale and rms values depending on ambient temperature, supply voltage and the board's thermal design. Pin-compatible with DRV8426, DRV8436 and DRV8424/25. Both the digital oscillator and the charge pump use spread-spectrum clocking to reduce radiated emissions."
+  },
+  {
+   "topic": "Current ratings",
+   "page": 13,
+   "text": "Peak current is set by the overcurrent trip IOCP, whose minimum gives a peak rating of 4 A per bridge, applying to short pulses at low duty. The rms rating, 1.8 A per bridge, comes from thermal limits (RDS(ON), edge times, PWM frequency, quiescent current, package) for a typical board at 25 °C and moves up or down with heatsinking and ambient. Full-scale current is the top of the sine the indexer produces."
+  },
+  {
+   "topic": "Indexer and step modes",
+   "page": 14,
+   "text": "M0 and M1 select full step (100% or 71% current), non-circular half step, half step, or 1/4 to 1/256 microstepping, and can be changed while running; the indexer then moves to the next valid state of the new mode at the next STEP rising edge. After power-up, leaving UVLO or leaving sleep, the indexer starts at 45° electrical, 71% of full scale in both windings. Full step at 100% and non-circular half step draw more power than their circular counterparts and give more torque at high speed."
+  },
+  {
+   "topic": "Setting VREF",
+   "page": 16,
+   "text": "VREF can come from a divider (from DVDD or another supply), a DAC, or a filtered PWM signal; a higher VREF gives a higher full-scale current. VREF must not exceed 3.3 V. For a divider the parallel value of the two resistors stays under 50 kΩ."
+  },
+  {
+   "topic": "Current regulation",
+   "page": 18,
+   "text": "Fixed off-time PWM: with the bridge driving, winding current rises at a rate set by supply voltage, inductance and back-EMF until it reaches the trip level, then the bridge decays for the off-time set by TOFF and drives again. A comparator watches the voltage on sense MOSFETs paralleled with the low-side FETs, biased by a sine-shaped current DAC; VREF scales that DAC's full-scale value. After each turn-on the comparator is blanked for about 1 µs (tBLANK), which is also the minimum drive time."
+  },
+  {
+   "topic": "Decay modes",
+   "page": 19,
+   "text": "DECAY0 and DECAY1 select smart tune Dynamic Decay, smart tune Ripple Control, mixed decay (30% or 60% fast), slow decay, or slow on rising steps with 30% mixed on falling steps. Changes take effect after a 10 µs deglitch. Fast decay reverses the bridge; slow decay turns on both low-side FETs. In full step and non-circular half step the falling-step decay mode is always used. Slow decay gives the least ripple but follows falling steps slowly and can lose regulation when back-EMF is small (motor held or stepping very slowly); mixed decay, fast for the first part of tOFF and slow for the rest, keeps regulation in that case at the cost of more ripple."
+  },
+  {
+   "topic": "Smart tune Dynamic Decay",
+   "page": 24,
+   "text": "Picks slow, mixed or fast decay on every PWM cycle and adjusts the fast share of mixed decay: overshoot of the trip level makes the next cycle more aggressive, a long drive time makes it less so. On falling steps it switches to fast decay. It keeps a fixed off-time, so PWM frequency stays fixed, and adapts to winding resistance and inductance, ageing, speed and load, supply changes and back-EMF."
+  },
+  {
+   "topic": "Smart tune Ripple Control",
+   "page": 25,
+   "text": "Adds a valley level IVALLEY under ITRIP: on reaching ITRIP the bridge goes into slow decay until the current falls to IVALLEY, so the off-time varies with conditions. The ripple, set by TOFF, is 19 mA plus 1%, 2%, 4% or 6% of the present ITRIP. Small ripple settings keep the PWM frequency out of the audible range; larger ripple lowers PWM frequency and switching loss."
+  },
+  {
+   "topic": "Charge pump",
+   "page": 26,
+   "text": "Generates the high-side gate-drive supply, about VM + 5 V, at 360 kHz. It needs a storage capacitor from VCP to VM and a ceramic flying capacitor between CPH and CPL."
+  },
+  {
+   "topic": "DVDD regulator",
+   "page": 27,
+   "text": "Internal linear regulator, nominally 5 V, for logic; it can source up to 2 mA and its voltage drops sharply above that. It may supply VREF through a divider and the nFAULT pull-up. Inputs that must be permanently high (Mx, DECAYx, TOFF) are best tied to DVDD: when VM is off or the part sleeps, DVDD shuts down and no current flows in the input pulldowns (typically 200 kΩ). Tying nSLEEP to DVDD would keep the device asleep for good."
+  },
+  {
+   "topic": "Input structures",
+   "page": 27,
+   "text": "STEP, DIR and nSLEEP are two-level logic inputs. M0, DECAY0 and ENABLE are tri-level (low, Hi-Z, high); DECAY1 has its own input structure. M1 and TOFF are quad-level: low, 330 kΩ to GND, Hi-Z, high. Logic inputs accept 1.8 V, 3.3 V and 5 V levels."
+  },
+  {
+   "topic": "nFAULT",
+   "page": 29,
+   "text": "Open-drain output, pulled up to 5 V, 3.3 V or 1.8 V; low during a fault and high after power-up. A 5 V pull-up may go to DVDD through a resistor; 3.3 V or 1.8 V needs an external supply."
+  },
+  {
+   "topic": "Undervoltage lockout",
+   "page": 29,
+   "text": "If VM falls below VUVLO, all outputs and the charge pump turn off and nFAULT goes low; operation resumes when VM recovers. If VCP falls below VCPUV, outputs turn off and nFAULT goes low while the charge pump keeps running; operation resumes when VCP recovers."
+  },
+  {
+   "topic": "Overcurrent protection",
+   "page": 29,
+   "text": "Each MOSFET has an analog current limit that removes its gate drive. If the limit lasts longer than tOCP, both bridges turn off and nFAULT goes low; the charge pump keeps running. ENABLE at Hi-Z gives latched shutdown, which an nSLEEP reset pulse or power cycling clears once the fault is gone; ENABLE high (above 2.7 V) gives automatic retry after tRETRY. The mode can be changed while running."
+  },
+  {
+   "topic": "Open-load detection",
+   "page": 29,
+   "text": "An open load is flagged when the current in a winding stays below both IOL and the indexer's ITRIP for longer than tOL; it is report only. With ENABLE tied to DVDD, nFAULT releases as soon as the condition clears; with ENABLE at Hi-Z it releases after the condition clears and an nSLEEP reset pulse. A power cycle or leaving sleep also clears it."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 30,
+   "text": "Above TOTSD all bridge MOSFETs and the charge pump turn off and nFAULT goes low. ENABLE at Hi-Z latches: recovery needs the die below TOTSD - THYS_OTSD and then an nSLEEP reset pulse or power cycle. ENABLE high retries automatically once the die is below TOTSD - THYS_OTSD."
+  },
+  {
+   "topic": "Sleep, disable and operating modes",
+   "page": 30,
+   "text": "nSLEEP low puts the device to sleep after tSLEEP: bridges, charge pump, DVDD regulator and logic off. Bringing nSLEEP high wakes it; inputs are accepted after tWAKE. With nSLEEP high, ENABLE low holds the outputs at Hi-Z while the rest keeps running; ENABLE high or Hi-Z with VM above UVLO is the operating mode."
+  },
+  {
+   "topic": "nSLEEP reset pulse",
+   "page": 31,
+   "text": "A low pulse on nSLEEP longer than 20 µs and shorter than 40 µs clears latched faults without disturbing the charge pump or other blocks. A low between 40 µs and 120 µs clears faults and may or may not put the device to sleep."
+  },
+  {
+   "topic": "STEP and DIR timing",
+   "page": 8,
+   "text": "STEP high and low times are at least 970 ns each; DIR and the mode pins need 200 ns setup and hold around the STEP rising edge. STEP may run up to 500 kHz."
+  },
+  {
+   "topic": "Power supply and bulk capacitance",
+   "page": 38,
+   "text": "VM runs from 4.5 V to 48 V. Each VM pin needs a 0.01 µF ceramic rated for VM placed as close as possible, plus bulk capacitance on VM. How much bulk is needed depends on peak motor current, the supply's own capacitance and current capability, wiring inductance between supply and driver, allowed ripple, motor type and braking method; it is settled by system testing. The bulk capacitor's voltage rating sits above the operating voltage to absorb energy the motor returns to the supply."
+  },
+  {
+   "topic": "Layout",
+   "page": 39,
+   "text": "Bypass VM to PGND with a low-ESR 0.01 µF ceramic rated for VM, right at the VM pin, joined to PGND by a wide trace or ground plane; add VM-rated bulk capacitance, which may be electrolytic. Put a low-ESR 0.022 µF ceramic rated for VM between CPL and CPH and a low-ESR 0.22 µF 16 V ceramic between VM and VCP, both as close to their pins as possible. DVDD gets a low-ESR 0.47 µF 6.3 V ceramic to ground near its pin. The thermal pad connects to system ground."
+  }
+ ],
+ "packages": [
+  {
+   "name": "HTSSOP-28 PowerPAD (PWP0028M)",
+   "page": 43,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "overall width across leads",
+     "6.2",
+     "",
+     "6.6"
+    ],
+    [
+     "",
+     "body length",
+     "9.6",
+     "",
+     "9.8"
+    ],
+    [
+     "",
+     "body width",
+     "4.3",
+     "",
+     "4.5"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.2"
+    ],
+    [
+     "",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "lead pitch (26X)",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "",
+     "first to last lead centre on one side (2X)",
+     "",
+     "8.45",
+     ""
+    ],
+    [
+     "",
+     "lead width (28X)",
+     "0.19",
+     "",
+     "0.30"
+    ],
+    [
+     "",
+     "lead thickness",
+     "",
+     "(0.15)",
+     ""
+    ],
+    [
+     "",
+     "foot length",
+     "0.50",
+     "",
+     "0.75"
+    ],
+    [
+     "",
+     "gauge plane",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "foot angle (°)",
+     "0",
+     "",
+     "8"
+    ],
+    [
+     "",
+     "exposed thermal pad, along body length",
+     "3.53",
+     "",
+     "4.05"
+    ],
+    [
+     "",
+     "exposed thermal pad, across body",
+     "2.58",
+     "",
+     "3.10"
+    ],
+    [
+     "",
+     "thermal pad tab width (2X)",
+     "",
+     "",
+     "0.82"
+    ],
+    [
+     "",
+     "thermal pad tab length (2X)",
+     "",
+     "",
+     "0.825"
+    ],
+    [
+     "",
+     "board pad length (28X)",
+     "",
+     "(1.5)",
+     ""
+    ],
+    [
+     "",
+     "board pad width (28X)",
+     "",
+     "(0.45)",
+     ""
+    ],
+    [
+     "",
+     "land pattern span across rows",
+     "",
+     "(5.8)",
+     ""
+    ],
+    [
+     "",
+     "board pad corner radius",
+     "",
+     "(R0.05)",
+     ""
+    ],
+    [
+     "",
+     "board thermal pad (land)",
+     "",
+     "(3.1) x (4.05)",
+     ""
+    ],
+    [
+     "",
+     "board thermal pad, max metal (creepage-dependent)",
+     "",
+     "(3.4) x (9.7)",
+     ""
+    ],
+    [
+     "",
+     "thermal via diameter",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "thermal via pitch",
+     "",
+     "(1.2)",
+     ""
+    ]
+   ],
+   "notes": [
+    "Body length excludes mold flash, protrusions and gate burrs, which may add up to 0.15 mm per side.",
+    "Seating-plane coplanarity 0.1 mm. JEDEC MO-153.",
+    "Solder mask clearance around a non-solder-mask-defined pad 0.05 mm max; solder-mask-defined pads overlap the metal by 0.05 mm min."
+   ]
+  },
+  {
+   "name": "VQFN-24 (RGE0024B)",
+   "page": 50,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "",
+     "body width",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "terminal pitch (20X)",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "first to last terminal centre on one side (2X)",
+     "",
+     "2.5",
+     ""
+    ],
+    [
+     "",
+     "terminal width (24X)",
+     "0.2",
+     "",
+     "0.3"
+    ],
+    [
+     "",
+     "terminal length (24X)",
+     "0.3",
+     "",
+     "0.5"
+    ],
+    [
+     "",
+     "terminal thickness",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "exposed thermal pad (pin 25), square",
+     "2.35",
+     "2.45",
+     "2.55"
+    ],
+    [
+     "",
+     "board pad length (24X)",
+     "",
+     "(0.6)",
+     ""
+    ],
+    [
+     "",
+     "board pad width (24X)",
+     "",
+     "(0.25)",
+     ""
+    ],
+    [
+     "",
+     "land pattern span",
+     "",
+     "(3.8)",
+     ""
+    ],
+    [
+     "",
+     "board pad corner radius",
+     "",
+     "(R0.05)",
+     ""
+    ],
+    [
+     "",
+     "board thermal pad",
+     "",
+     "(2.45)",
+     ""
+    ],
+    [
+     "",
+     "thermal via diameter",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "thermal via pitch",
+     "",
+     "(0.975)",
+     ""
+    ],
+    [
+     "",
+     "stencil, thermal pad openings (4X square)",
+     "",
+     "(1.08)",
+     ""
+    ],
+    [
+     "",
+     "stencil, opening centre from pad centreline",
+     "",
+     "(0.64)",
+     ""
+    ]
+   ],
+   "notes": [
+    "The exposed pad is 2.45 ± 0.1 mm square. Seating-plane coplanarity 0.08 mm. The thermal pad must be soldered to the board.",
+    "A 0.125 mm stencil with four openings prints 78% solder coverage over the exposed pad.",
+    "Solder mask clearance around a non-solder-mask-defined pad 0.07 mm max; solder-mask-defined pads overlap the metal by 0.07 mm min."
+   ]
+  }
+ ]
+}

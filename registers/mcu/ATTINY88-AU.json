@@ -1,0 +1,4700 @@
+{
+ "registers": 1,
+ "name": "ATTINY88-AU",
+ "manufacturer": "Microchip",
+ "source": {
+  "document": "ATTINY88-AU.pdf",
+  "revision": "8008H-AVR-04/11",
+  "pages": 302
+ },
+ "peripherals": [
+  {
+   "name": "CPU",
+   "title": "AVR CPU Core",
+   "page": 8,
+   "instances": [],
+   "registers": [
+    {
+     "name": "SPH",
+     "title": "Stack Pointer Registers",
+     "offset": "0x5E",
+     "io": "0x3E",
+     "bits": 8,
+     "reset": "0b000000xx",
+     "access": "R/W",
+     "page": 15,
+     "property": [],
+     "notes": [
+      "Initial value of bits 1:0 printed as RAMEND."
+     ],
+     "fields": [
+      {
+       "name": "SP[9:8]",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Stack Pointer bits 9:8: address of the stack top. The stack grows from higher toward lower addresses, so a PUSH decrements it. The program must set up the stack space in data SRAM before calling a subroutine or enabling interrupts.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SPL",
+     "title": "Stack Pointer Registers",
+     "offset": "0x5D",
+     "io": "0x3D",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R/W",
+     "page": 15,
+     "property": [],
+     "notes": [
+      "Initial value of bits 7:0 printed as RAMEND."
+     ],
+     "fields": [
+      {
+       "name": "SP",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Stack Pointer bits 7:0: address of the stack top. The stack grows from higher toward lower addresses, so a PUSH decrements it. The program must set up the stack space in data SRAM before calling a subroutine or enabling interrupts.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SREG",
+     "title": "Status Register",
+     "offset": "0x5F",
+     "io": "0x3F",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 15,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "I",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Global interrupt enable: no interrupt runs while it is 0, whatever the individual enables say; with it 1, each interrupt follows its own enable bit. Hardware clears it when an interrupt is taken and RETI sets it again; SEI and CLI set and clear it.",
+       "values": []
+      },
+      {
+       "name": "T",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit copy storage: BST copies a register bit into T, and BLD copies T into a register bit.",
+       "values": []
+      },
+      {
+       "name": "H",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Half carry flag: set by a half carry in some arithmetic operations; used for BCD arithmetic.",
+       "values": []
+      },
+      {
+       "name": "S",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Sign bit: always N exclusive-or V.",
+       "values": []
+      },
+      {
+       "name": "V",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Two’s complement overflow flag, for two’s complement arithmetic.",
+       "values": []
+      },
+      {
+       "name": "N",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Negative flag: set when an arithmetic or logic result is negative.",
+       "values": []
+      },
+      {
+       "name": "Z",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Zero flag: set when an arithmetic or logic result is zero.",
+       "values": []
+      },
+      {
+       "name": "C",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Carry flag: set when an arithmetic or logic operation carries.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MEMORY",
+   "title": "Memories",
+   "page": 17,
+   "instances": [],
+   "registers": [
+    {
+     "name": "EEARH",
+     "title": "EEPROM Address Register",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "",
+     "page": 25,
+     "property": [],
+     "notes": [
+      "The maker prints no address for it: its diagram, drawn with EEARL, leaves it out, and the register summary does not list it."
+     ],
+     "fields": []
+    },
+    {
+     "name": "EEARL",
+     "title": "EEPROM Address Register",
+     "offset": "0x41",
+     "io": "0x21",
+     "bits": 8,
+     "reset": "0b00xxxxxx",
+     "access": "R/W",
+     "page": 25,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "EEAR",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "EEPROM byte address, linear over the 64-byte EEPROM (0 to 63). Undefined at reset, so write it before any EEPROM access.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "EEDR",
+     "title": "EEPROM Data Register",
+     "offset": "0x40",
+     "io": "0x20",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 25,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "EEDR",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "EEPROM data: the byte to write to the address in EEAR, or, after a read, the byte read from that address.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "EECR",
+     "title": "EEPROM Control Register",
+     "offset": "0x3F",
+     "io": "0x1F",
+     "bits": 8,
+     "reset": "0b00xx00x0",
+     "access": "R/W",
+     "page": 25,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "EEPM",
+       "bits": "5:4",
+       "access": "R/W",
+       "reset": "x",
+       "text": "EEPROM programming mode: picks what a write to EEPE does, either an atomic erase-then-write or an erase or a write alone. Writes to EEPM are ignored while EEPE is set. Reset returns it to 0b00 unless the EEPROM is busy programming.",
+       "table": {
+        "columns": [
+         "EEPM1",
+         "EEPM0",
+         "Programming Time",
+         "Operation"
+        ],
+        "rows": [
+         [
+          "0",
+          "0",
+          "3.4 ms",
+          "Erase then write, as one atomic operation"
+         ],
+         [
+          "0",
+          "1",
+          "1.8 ms",
+          "Erase, only"
+         ],
+         [
+          "1",
+          "0",
+          "1.8 ms",
+          "Write, only"
+         ],
+         [
+          "1",
+          "1",
+          "-",
+          "Reserved"
+         ]
+        ]
+       }
+      },
+      {
+       "name": "EERIE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "EEPROM ready interrupt enable: 1 enables the interrupt, which fires while non-volatile memory can accept programming, as long as the SREG I-bit is 1; 0 disables it.",
+       "values": []
+      },
+      {
+       "name": "EEMPE",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "EEPROM master write enable: while it is 1, writing EEPE to 1 within four clock cycles programs the EEPROM at the selected address; with it 0, EEPE has no effect. Hardware clears it four clock cycles after it is set.",
+       "values": []
+      },
+      {
+       "name": "EEPE",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "x",
+       "text": "EEPROM write strobe: writing 1, with address and data set up and EEMPE written to 1 in the four cycles before, writes EEDR into the EEPROM; without EEMPE nothing is written. Write sequence: wait for EEPE to read 0, wait for SPMCSR.SELFPRGEN to read 0 (not needed if software never writes Flash), set EEAR and EEDR if needed, write EEMPE to 1 with EEPE 0, then write EEPE to 1 within four cycles. An interrupt between those last two steps makes the write fail, and an interrupt routine that touches EEAR or EEDR during another access spoils that access. No EEPROM write can happen while the CPU is writing Flash. Hardware clears EEPE when the write time has passed; the CPU halts for two cycles after EEPE is set.",
+       "values": []
+      },
+      {
+       "name": "EERE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "EEPROM read strobe: with the address in EEAR, writing 1 reads the byte, which is ready at once; the CPU halts four cycles. A read, or a change of EEAR, cannot happen while a write is in progress, so check EEPE first.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "GPIOR2",
+     "title": "General Purpose I/O Register 2",
+     "offset": "0x4B",
+     "io": "0x2B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 27,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "GPIOR2",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "General purpose I/O register 2.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "GPIOR1",
+     "title": "General Purpose I/O Register 1",
+     "offset": "0x4A",
+     "io": "0x2A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 27,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "GPIOR1",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "General purpose I/O register 1.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "GPIOR0",
+     "title": "General Purpose I/O Register 0",
+     "offset": "0x3E",
+     "io": "0x1E",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 27,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "GPIOR0",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "General purpose I/O register 0.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CLOCK",
+   "title": "Clock System",
+   "page": 28,
+   "instances": [],
+   "registers": [
+    {
+     "name": "OSCCAL",
+     "title": "Oscillator Calibration Register",
+     "offset": "0x66",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R/W",
+     "page": 34,
+     "property": [],
+     "notes": [
+      "Initial value of bits 7:0 printed as Device Specific Calibration Value."
+     ],
+     "fields": [
+      {
+       "name": "CAL7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 7.",
+       "values": []
+      },
+      {
+       "name": "CAL6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 6.",
+       "values": []
+      },
+      {
+       "name": "CAL5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 5.",
+       "values": []
+      },
+      {
+       "name": "CAL4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 4.",
+       "values": []
+      },
+      {
+       "name": "CAL3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 3.",
+       "values": []
+      },
+      {
+       "name": "CAL2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 2.",
+       "values": []
+      },
+      {
+       "name": "CAL1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 1.",
+       "values": []
+      },
+      {
+       "name": "CAL0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Oscillator calibration value bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "CLKPR",
+     "title": "Clock Prescale Register",
+     "offset": "0x61",
+     "bits": 8,
+     "reset": "0b0000xxxx",
+     "access": "R/W",
+     "page": 34,
+     "property": [],
+     "notes": [
+      "Initial value of bits 3:0 printed as See Bit Description."
+     ],
+     "fields": [
+      {
+       "name": "CLKPCE",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Clock prescaler change enable: must be written to 1, with every other CLKPR bit written to 0 at the same time, before CLKPS can change. Hardware clears it four cycles later or when CLKPS is written; writing it again inside that window neither extends nor clears it.",
+       "values": []
+      },
+      {
+       "name": "CLKPS",
+       "bits": "3:0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Clock prescaler select: the factor dividing the selected clock source down to the system clock, which slows every synchronous peripheral; may be changed at run time. To change it, write CLKPCE 1 with the other bits 0, then within four cycles write the new CLKPS with CLKPCE 0. The CKDIV8 fuse sets the reset value: 0b0000 when unprogrammed, 0b0011 (divide by 8) when programmed, as shipped. Any value can be written whatever the fuse.",
+       "values": [
+        {
+         "value": "0b0000",
+         "name": "1",
+         "text": "1."
+        },
+        {
+         "value": "0b0001",
+         "name": "2",
+         "text": "2."
+        },
+        {
+         "value": "0b0010",
+         "name": "4",
+         "text": "4."
+        },
+        {
+         "value": "0b0011",
+         "name": "8",
+         "text": "8."
+        },
+        {
+         "value": "0b0100",
+         "name": "16",
+         "text": "16."
+        },
+        {
+         "value": "0b0101",
+         "name": "32",
+         "text": "32."
+        },
+        {
+         "value": "0b0110",
+         "name": "64",
+         "text": "64."
+        },
+        {
+         "value": "0b0111",
+         "name": "128",
+         "text": "128."
+        },
+        {
+         "value": "0b1000",
+         "name": "256",
+         "text": "256."
+        },
+        {
+         "value": "0b1001",
+         "name": "Reserved",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1010",
+         "name": "Reserved",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1011",
+         "name": "Reserved",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1100",
+         "name": "Reserved",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1101",
+         "name": "Reserved",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1110",
+         "name": "Reserved",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1111",
+         "name": "Reserved",
+         "text": "Reserved."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "POWER",
+   "title": "Power Management and Sleep Modes",
+   "page": 36,
+   "instances": [],
+   "registers": [
+    {
+     "name": "SMCR",
+     "title": "Sleep Mode Control Register",
+     "offset": "0x53",
+     "io": "0x33",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 39,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "SM",
+       "bits": "2:1",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Sleep mode select.",
+       "values": [
+        {
+         "value": "0b00",
+         "name": "Idle",
+         "text": "Idle."
+        },
+        {
+         "value": "0b01",
+         "name": "ADC Noise Reduction",
+         "text": "ADC Noise Reduction."
+        },
+        {
+         "value": "0b10",
+         "name": "Power-down",
+         "text": "Power-down."
+        },
+        {
+         "value": "0b11",
+         "name": "Reserved",
+         "text": "Reserved."
+        }
+       ]
+      },
+      {
+       "name": "SE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Sleep enable: must be 1 for the SLEEP instruction to put the MCU into sleep.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "MCUCR",
+     "title": "MCU Control Register",
+     "offset": "0x55",
+     "io": "0x35",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 40,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "BODS",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "BOD sleep: when it is active, a SLEEP instruction turns the BOD off for that sleep mode. Set by a timed sequence: write BODS and BODSE both to 1, then within four clock cycles write BODS 1 and BODSE 0. It takes effect three clock cycles after being set, and clears itself three clock cycles after that.",
+       "values": []
+      },
+      {
+       "name": "BODSE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "BOD sleep enable: allows BODS to be set, as part of the timed sequence.",
+       "values": []
+      },
+      {
+       "name": "PUD",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pull-up disable.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PRR",
+     "title": "Power Reduction Register",
+     "offset": "0x64",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 40,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PRTWI",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Power reduction TWI: 1 stops the clock to the TWI; re-initialize the TWI after waking it.",
+       "values": []
+      },
+      {
+       "name": "PRTIM0",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Power reduction Timer/Counter0: 1 shuts the module down; when it is enabled again it carries on as before.",
+       "values": []
+      },
+      {
+       "name": "PRTIM1",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Power reduction Timer/Counter1: 1 shuts the module down; when it is enabled again it carries on as before.",
+       "values": []
+      },
+      {
+       "name": "PRSPI",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Power reduction SPI: 1 stops the clock to the SPI; re-initialize the SPI after waking it. Not to be written to 1 when the debugWIRE on-chip debug system is used.",
+       "values": []
+      },
+      {
+       "name": "PRADC",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Power reduction ADC: 1 shuts the ADC down; disable the ADC first. The analog comparator cannot be used while the ADC is shut down.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "RESET",
+   "title": "System Control and Reset",
+   "page": 42,
+   "instances": [],
+   "registers": [
+    {
+     "name": "MCUSR",
+     "title": "MCU Status Register",
+     "offset": "0x54",
+     "io": "0x34",
+     "bits": 8,
+     "reset": "0b0000xxxx",
+     "access": "R/W",
+     "page": 49,
+     "property": [],
+     "notes": [
+      "Initial value of bits 3:0 printed as See Bit Description."
+     ],
+     "fields": [
+      {
+       "name": "WDRF",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Watchdog system reset flag: set by a watchdog reset; a power-on reset or a write of 0 clears it.",
+       "values": []
+      },
+      {
+       "name": "BORF",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Brown-out reset flag: set by a brown-out reset; a power-on reset or a write of 0 clears it.",
+       "values": []
+      },
+      {
+       "name": "EXTRF",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "x",
+       "text": "External reset flag: set by an external reset; a power-on reset or a write of 0 clears it.",
+       "values": []
+      },
+      {
+       "name": "PORF",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Power-on reset flag: set by a power-on reset; cleared only by writing 0. Reading MCUSR and clearing it early lets the flags show the cause of the next reset.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "WDTCSR",
+     "title": "Watchdog Timer Control Register",
+     "offset": "0x60",
+     "bits": 8,
+     "reset": "0b0000x000",
+     "access": "R/W",
+     "page": 49,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "WDIF",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Watchdog interrupt flag: set on a watchdog time-out when the watchdog is set for interrupt. Cleared by hardware when the interrupt vector runs, or by writing 1. The interrupt runs when this flag, WDIE and the SREG I-bit are all 1.",
+       "values": []
+      },
+      {
+       "name": "WDIE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Watchdog interrupt enable: with the I-bit in SREG set, 1 enables the watchdog interrupt. With WDE 0 the watchdog is in interrupt mode and a time-out runs the interrupt. With WDE 1 it works in interrupt-plus-reset mode: a first time-out sets WDIF, running the vector clears WDIE and WDIF and leaves the watchdog in system reset mode, and a second time-out before the interrupt has run resets the system. Keeping that combined mode needs WDIE set again after each interrupt, outside the interrupt routine.",
+       "table": {
+        "columns": [
+         "WDTON",
+         "WDE",
+         "WDIE",
+         "Mode",
+         "Action on Time-out"
+        ],
+        "rows": [
+         [
+          "0",
+          "0",
+          "0",
+          "Stopped",
+          "None"
+         ],
+         [
+          "0",
+          "0",
+          "1",
+          "Interrupt Mode",
+          "Interrupt"
+         ],
+         [
+          "0",
+          "1",
+          "0",
+          "System Reset Mode",
+          "Reset"
+         ],
+         [
+          "0",
+          "1",
+          "1",
+          "Interrupt and system reset mode",
+          "Interrupt first, then system reset mode"
+         ],
+         [
+          "1",
+          "X",
+          "X",
+          "System Reset Mode",
+          "Reset"
+         ]
+        ]
+       }
+      },
+      {
+       "name": "WDP3",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Watchdog timer prescaler bit 3: with WDP2:0, sets the watchdog time-out while the watchdog runs. A reserved setting (0b1010 and above) acts as one of the valid settings below 0b1010.",
+       "table": {
+        "columns": [
+         "WDP3",
+         "WDP2",
+         "WDP1",
+         "WDP0",
+         "Number of WDT Oscillator Cycles",
+         "Typical Time-out at VCC = 5.0V"
+        ],
+        "rows": [
+         [
+          "0",
+          "0",
+          "0",
+          "0",
+          "2K (2048) cycles",
+          "16 ms"
+         ],
+         [
+          "0",
+          "0",
+          "0",
+          "1",
+          "4K (4096) cycles",
+          "32 ms"
+         ],
+         [
+          "0",
+          "0",
+          "1",
+          "0",
+          "8K (8192) cycles",
+          "64 ms"
+         ],
+         [
+          "0",
+          "0",
+          "1",
+          "1",
+          "16K (16384) cycles",
+          "0.125 s"
+         ],
+         [
+          "0",
+          "1",
+          "0",
+          "0",
+          "32K (32768) cycles",
+          "0.25 s"
+         ],
+         [
+          "0",
+          "1",
+          "0",
+          "1",
+          "64K (65536) cycles",
+          "0.5 s"
+         ],
+         [
+          "0",
+          "1",
+          "1",
+          "0",
+          "128K (131072) cycles",
+          "1.0 s"
+         ],
+         [
+          "0",
+          "1",
+          "1",
+          "1",
+          "256K (262144) cycles",
+          "2.0 s"
+         ],
+         [
+          "1",
+          "0",
+          "0",
+          "0",
+          "512K (524288) cycles",
+          "4.0 s"
+         ],
+         [
+          "1",
+          "0",
+          "0",
+          "1",
+          "1024K (1048576) cycles",
+          "8.0 s"
+         ],
+         [
+          "1",
+          "0",
+          "1",
+          "0",
+          "Reserved",
+          ""
+         ],
+         [
+          "1",
+          "0",
+          "1",
+          "1",
+          "Reserved",
+          ""
+         ],
+         [
+          "1",
+          "1",
+          "0",
+          "0",
+          "Reserved",
+          ""
+         ],
+         [
+          "1",
+          "1",
+          "0",
+          "1",
+          "Reserved",
+          ""
+         ],
+         [
+          "1",
+          "1",
+          "1",
+          "0",
+          "Reserved",
+          ""
+         ],
+         [
+          "1",
+          "1",
+          "1",
+          "1",
+          "Reserved",
+          ""
+         ]
+        ]
+       }
+      },
+      {
+       "name": "WDCE",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Watchdog change enable: must be set to clear WDE or change the prescaler bits, as part of the timed sequence. Hardware clears it four clock cycles after it is written to 1.",
+       "values": []
+      },
+      {
+       "name": "WDE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "x",
+       "text": "Watchdog system reset enable. WDRF in MCUSR overrides it: WDE is always set while WDRF is set, so clear WDRF before clearing WDE.",
+       "values": []
+      },
+      {
+       "name": "WDP2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Watchdog timer prescaler bit 2: with the other WDP bits, sets the watchdog time-out while the watchdog runs. A reserved setting (0b1010 and above) acts as one of the valid settings below 0b1010.",
+       "values": []
+      },
+      {
+       "name": "WDP1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Watchdog timer prescaler bit 1: with the other WDP bits, sets the watchdog time-out while the watchdog runs. A reserved setting (0b1010 and above) acts as one of the valid settings below 0b1010.",
+       "values": []
+      },
+      {
+       "name": "WDP0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Watchdog timer prescaler bit 0: with the other WDP bits, sets the watchdog time-out while the watchdog runs. A reserved setting (0b1010 and above) acts as one of the valid settings below 0b1010.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INT",
+   "title": "Interrupts",
+   "page": 52,
+   "instances": [],
+   "registers": [
+    {
+     "name": "EICRA",
+     "title": "External Interrupt Control Register A",
+     "offset": "0x69",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 55,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ISC1",
+       "bits": "3:2",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Interrupt sense control 1: picks the level or edge on pin INT1 that raises external interrupt 1, which runs when the SREG I-flag and its mask bit are set. INT1 is sampled before edges are detected. For an edge or toggle, pulses longer than one clock period raise the interrupt and shorter ones may not; a low level must last until the current instruction completes.",
+       "values": [
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Low level on INT1."
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "Any logic change on INT1."
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Falling edge on INT1."
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Rising edge on INT1."
+        }
+       ]
+      },
+      {
+       "name": "ISC0",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Interrupt sense control 0: picks the level or edge on pin INT0 that raises external interrupt 0, which runs when the SREG I-flag and its mask bit are set. INT0 is sampled before edges are detected. For an edge or toggle, pulses longer than one clock period raise the interrupt and shorter ones may not; a low level must last until the current instruction completes.",
+       "values": [
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Low level on INT0."
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "Any logic change on INT0."
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Falling edge on INT0."
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Rising edge on INT0."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "EIMSK",
+     "title": "External Interrupt Mask Register",
+     "offset": "0x3D",
+     "io": "0x1D",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 56,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "INT1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "External interrupt request 1 enable: with this bit and the I-bit in SREG set, pin INT1 raises an interrupt, on the edge or level set by ISC11:ISC10 in EICRA, even when INT1 is an output. It runs from the INT1 vector.",
+       "values": []
+      },
+      {
+       "name": "INT0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "External interrupt request 0 enable: with this bit and the I-bit in SREG set, pin INT0 raises an interrupt, on the edge or level set by ISC01:ISC00 in EICRA, even when INT0 is an output. It runs from the INT0 vector.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "EIFR",
+     "title": "External Interrupt Flag Register",
+     "offset": "0x3C",
+     "io": "0x1C",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 56,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "INTF1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "External interrupt flag 1: set when an edge or logic change on INT1 raises a request; with the I-bit in SREG and EIMSK.INT1 set, the MCU jumps to the vector. Cleared when the interrupt routine runs, or by writing 1. Held at 0 while INT1 is configured as a level interrupt.",
+       "values": []
+      },
+      {
+       "name": "INTF0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "External interrupt flag 0: set when an edge or logic change on INT0 raises a request; with the I-bit in SREG and EIMSK.INT0 set, the MCU jumps to the vector. Cleared when the interrupt routine runs, or by writing 1. Held at 0 while INT0 is configured as a level interrupt.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PCICR",
+     "title": "Pin Change Interrupt Control Register",
+     "offset": "0x68",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 57,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PCIE3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt enable 3: with this bit and the I-bit in SREG set, a change on any PCINT[27:24] pin enabled in PCMSK3 raises an interrupt, run from the PCI3 vector.",
+       "values": []
+      },
+      {
+       "name": "PCIE2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt enable 2: with this bit and the I-bit in SREG set, a change on any PCINT[23:16] pin enabled in PCMSK2 raises an interrupt, run from the PCI2 vector.",
+       "values": []
+      },
+      {
+       "name": "PCIE1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt enable 1: with this bit and the I-bit in SREG set, a change on any PCINT[15:8] pin enabled in PCMSK1 raises an interrupt, run from the PCI1 vector.",
+       "values": []
+      },
+      {
+       "name": "PCIE0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt enable 0: with this bit and the I-bit in SREG set, a change on any PCINT[7:0] pin enabled in PCMSK0 raises an interrupt, run from the PCI0 vector.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PCIFR",
+     "title": "Pin Change Interrupt Flag Register",
+     "offset": "0x3B",
+     "io": "0x1B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 58,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PCIF3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt flag 3: set when any PCINT[27:24] pin changes and raises a request; with the I-bit in SREG and PCICR.PCIE3 set, the MCU jumps to the vector. Cleared when the interrupt routine runs, or by writing 1.",
+       "values": []
+      },
+      {
+       "name": "PCIF2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt flag 2: set when any PCINT[23:16] pin changes and raises a request; with the I-bit in SREG and PCICR.PCIE2 set, the MCU jumps to the vector. Cleared when the interrupt routine runs, or by writing 1.",
+       "values": []
+      },
+      {
+       "name": "PCIF1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt flag 1: set when any PCINT[15:8] pin changes and raises a request; with the I-bit in SREG and PCICR.PCIE1 set, the MCU jumps to the vector. Cleared when the interrupt routine runs, or by writing 1.",
+       "values": []
+      },
+      {
+       "name": "PCIF0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pin change interrupt flag 0: set when any PCINT[7:0] pin changes and raises a request; with the I-bit in SREG and PCICR.PCIE0 set, the MCU jumps to the vector. Cleared when the interrupt routine runs, or by writing 1.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PCMSK3",
+     "title": "Pin Change Mask Register 3",
+     "offset": "0x6A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 58,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PCINT[27:24]",
+       "bits": "3:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Pin change enable mask: a 1 enables the pin change interrupt on the matching PCINT[27:24] pin, provided PCICR.PCIE3 is set; a 0 disables it.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PCMSK2",
+     "title": "Pin Change Mask Register 2",
+     "offset": "0x6D",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 59,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PCINT[23:16]",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Pin change enable mask: a 1 enables the pin change interrupt on the matching PCINT[23:16] pin, provided PCICR.PCIE2 is set; a 0 disables it.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PCMSK1",
+     "title": "Pin Change Mask Register 1",
+     "offset": "0x6C",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 59,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PCINT[15:8]",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Pin change enable mask: a 1 enables the pin change interrupt on the matching PCINT[15:8] pin, provided PCICR.PCIE1 is set; a 0 disables it.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PCMSK0",
+     "title": "Pin Change Mask Register 0",
+     "offset": "0x6B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 59,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PCINT",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Pin change enable mask: a 1 enables the pin change interrupt on the matching PCINT[7:0] pin, provided PCICR.PCIE0 is set; a 0 disables it.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "PORT",
+   "title": "I/O-Ports",
+   "page": 60,
+   "instances": [],
+   "registers": [
+    {
+     "name": "MCUCR",
+     "title": "MCU Control Register",
+     "offset": "0x55",
+     "io": "0x35",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 77,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "BPDS",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "BPDS.",
+       "values": []
+      },
+      {
+       "name": "BPDSE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "BPDSE.",
+       "values": []
+      },
+      {
+       "name": "PUD",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Pull-up disable: 1 turns off the I/O port pull-ups even on pins whose DDxn and PORTxn select a pull-up ({DDxn, PORTxn} = 0b01).",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PORTCR",
+     "title": "Port Control Register",
+     "offset": "0x32",
+     "io": "0x12",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 77,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "BBMD",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Break-before-make mode enable for port D: 1 puts a tri-state cycle in between when DDRxn is written to make a pin an output.",
+       "values": []
+      },
+      {
+       "name": "BBMC",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Break-before-make mode enable for port C: 1 puts a tri-state cycle in between when DDRxn is written to make a pin an output.",
+       "values": []
+      },
+      {
+       "name": "BBMB",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Break-before-make mode enable for port B: 1 puts a tri-state cycle in between when DDRxn is written to make a pin an output.",
+       "values": []
+      },
+      {
+       "name": "BBMA",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Break-before-make mode enable for port A: 1 puts a tri-state cycle in between when DDRxn is written to make a pin an output.",
+       "values": []
+      },
+      {
+       "name": "PUDD",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port-wise pull-up disable for port D: 1 turns off the port’s pull-ups even on pins whose DDxn and PORTxn select a pull-up ({DDxn, PORTxn} = 0b01). ORed with MCUCR.PUD.",
+       "values": []
+      },
+      {
+       "name": "PUDC",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port-wise pull-up disable for port C: 1 turns off the port’s pull-ups even on pins whose DDxn and PORTxn select a pull-up ({DDxn, PORTxn} = 0b01). ORed with MCUCR.PUD.",
+       "values": []
+      },
+      {
+       "name": "PUDB",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port-wise pull-up disable for port B: 1 turns off the port’s pull-ups even on pins whose DDxn and PORTxn select a pull-up ({DDxn, PORTxn} = 0b01). ORed with MCUCR.PUD.",
+       "values": []
+      },
+      {
+       "name": "PUDA",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port-wise pull-up disable for port A: 1 turns off the port’s pull-ups even on pins whose DDxn and PORTxn select a pull-up ({DDxn, PORTxn} = 0b01). ORed with MCUCR.PUD.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PORTA",
+     "title": "The Port A Data Register",
+     "offset": "0x2E",
+     "io": "0x0E",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 78,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PORTA3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data bit 3.",
+       "values": []
+      },
+      {
+       "name": "PORTA2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data bit 2.",
+       "values": []
+      },
+      {
+       "name": "PORTA1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data bit 1.",
+       "values": []
+      },
+      {
+       "name": "PORTA0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "DDRA",
+     "title": "The Port A Data Direction Register",
+     "offset": "0x2D",
+     "io": "0x0D",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 78,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "DDA3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data direction bit 3.",
+       "values": []
+      },
+      {
+       "name": "DDA2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data direction bit 2.",
+       "values": []
+      },
+      {
+       "name": "DDA1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data direction bit 1.",
+       "values": []
+      },
+      {
+       "name": "DDA0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port A data direction bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PINA",
+     "title": "The Port A Input Pins",
+     "offset": "0x2C",
+     "io": "0x0C",
+     "bits": 8,
+     "reset": "0b0000xxxx",
+     "access": "R",
+     "page": 78,
+     "property": [],
+     "notes": [
+      "Initial value of bits 3:0 printed as N/A."
+     ],
+     "fields": [
+      {
+       "name": "PINA3",
+       "bits": "3",
+       "access": "R",
+       "reset": "x",
+       "text": "Port A input pin bit 3.",
+       "values": []
+      },
+      {
+       "name": "PINA2",
+       "bits": "2",
+       "access": "R",
+       "reset": "x",
+       "text": "Port A input pin bit 2.",
+       "values": []
+      },
+      {
+       "name": "PINA1",
+       "bits": "1",
+       "access": "R",
+       "reset": "x",
+       "text": "Port A input pin bit 1.",
+       "values": []
+      },
+      {
+       "name": "PINA0",
+       "bits": "0",
+       "access": "R",
+       "reset": "x",
+       "text": "Port A input pin bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PORTB",
+     "title": "The Port B Data Register",
+     "offset": "0x25",
+     "io": "0x05",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 78,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PORTB7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 7.",
+       "values": []
+      },
+      {
+       "name": "PORTB6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 6.",
+       "values": []
+      },
+      {
+       "name": "PORTB5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 5.",
+       "values": []
+      },
+      {
+       "name": "PORTB4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 4.",
+       "values": []
+      },
+      {
+       "name": "PORTB3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 3.",
+       "values": []
+      },
+      {
+       "name": "PORTB2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 2.",
+       "values": []
+      },
+      {
+       "name": "PORTB1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 1.",
+       "values": []
+      },
+      {
+       "name": "PORTB0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "DDRB",
+     "title": "The Port B Data Direction Register",
+     "offset": "0x24",
+     "io": "0x04",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 78,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "DDB7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 7.",
+       "values": []
+      },
+      {
+       "name": "DDB6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 6.",
+       "values": []
+      },
+      {
+       "name": "DDB5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 5.",
+       "values": []
+      },
+      {
+       "name": "DDB4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 4.",
+       "values": []
+      },
+      {
+       "name": "DDB3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 3.",
+       "values": []
+      },
+      {
+       "name": "DDB2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 2.",
+       "values": []
+      },
+      {
+       "name": "DDB1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 1.",
+       "values": []
+      },
+      {
+       "name": "DDB0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port B data direction bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PINB",
+     "title": "The Port B Input Pins",
+     "offset": "0x23",
+     "io": "0x03",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R",
+     "page": 78,
+     "property": [],
+     "notes": [
+      "Initial value of bits 7:0 printed as N/A."
+     ],
+     "fields": [
+      {
+       "name": "PINB7",
+       "bits": "7",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 7.",
+       "values": []
+      },
+      {
+       "name": "PINB6",
+       "bits": "6",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 6.",
+       "values": []
+      },
+      {
+       "name": "PINB5",
+       "bits": "5",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 5.",
+       "values": []
+      },
+      {
+       "name": "PINB4",
+       "bits": "4",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 4.",
+       "values": []
+      },
+      {
+       "name": "PINB3",
+       "bits": "3",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 3.",
+       "values": []
+      },
+      {
+       "name": "PINB2",
+       "bits": "2",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 2.",
+       "values": []
+      },
+      {
+       "name": "PINB1",
+       "bits": "1",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 1.",
+       "values": []
+      },
+      {
+       "name": "PINB0",
+       "bits": "0",
+       "access": "R",
+       "reset": "x",
+       "text": "Port B input pin bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PORTC",
+     "title": "The Port C Data Register",
+     "offset": "0x28",
+     "io": "0x08",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 78,
+     "property": [],
+     "notes": [
+      "The bit diagram prints bit 7 as PORTC6; the register summary's PORTC7 is carried."
+     ],
+     "fields": [
+      {
+       "name": "PORTC7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 7.",
+       "values": []
+      },
+      {
+       "name": "PORTC6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 6.",
+       "values": []
+      },
+      {
+       "name": "PORTC5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 5.",
+       "values": []
+      },
+      {
+       "name": "PORTC4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 4.",
+       "values": []
+      },
+      {
+       "name": "PORTC3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 3.",
+       "values": []
+      },
+      {
+       "name": "PORTC2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 2.",
+       "values": []
+      },
+      {
+       "name": "PORTC1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 1.",
+       "values": []
+      },
+      {
+       "name": "PORTC0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "DDRC",
+     "title": "The Port C Data Direction Register",
+     "offset": "0x27",
+     "io": "0x07",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 78,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "DDC7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 7.",
+       "values": []
+      },
+      {
+       "name": "DDC6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 6.",
+       "values": []
+      },
+      {
+       "name": "DDC5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 5.",
+       "values": []
+      },
+      {
+       "name": "DDC4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 4.",
+       "values": []
+      },
+      {
+       "name": "DDC3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 3.",
+       "values": []
+      },
+      {
+       "name": "DDC2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 2.",
+       "values": []
+      },
+      {
+       "name": "DDC1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 1.",
+       "values": []
+      },
+      {
+       "name": "DDC0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port C data direction bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PINC",
+     "title": "The Port C Input Pins",
+     "offset": "0x26",
+     "io": "0x06",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R",
+     "page": 79,
+     "property": [],
+     "notes": [
+      "Initial value of bits 7:0 printed as N/A."
+     ],
+     "fields": [
+      {
+       "name": "PINC7",
+       "bits": "7",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 7.",
+       "values": []
+      },
+      {
+       "name": "PINC6",
+       "bits": "6",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 6.",
+       "values": []
+      },
+      {
+       "name": "PINC5",
+       "bits": "5",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 5.",
+       "values": []
+      },
+      {
+       "name": "PINC4",
+       "bits": "4",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 4.",
+       "values": []
+      },
+      {
+       "name": "PINC3",
+       "bits": "3",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 3.",
+       "values": []
+      },
+      {
+       "name": "PINC2",
+       "bits": "2",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 2.",
+       "values": []
+      },
+      {
+       "name": "PINC1",
+       "bits": "1",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 1.",
+       "values": []
+      },
+      {
+       "name": "PINC0",
+       "bits": "0",
+       "access": "R",
+       "reset": "x",
+       "text": "Port C input pin bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PORTD",
+     "title": "The Port D Data Register",
+     "offset": "0x2B",
+     "io": "0x0B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 79,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PORTD7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 7.",
+       "values": []
+      },
+      {
+       "name": "PORTD6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 6.",
+       "values": []
+      },
+      {
+       "name": "PORTD5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 5.",
+       "values": []
+      },
+      {
+       "name": "PORTD4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 4.",
+       "values": []
+      },
+      {
+       "name": "PORTD3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 3.",
+       "values": []
+      },
+      {
+       "name": "PORTD2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 2.",
+       "values": []
+      },
+      {
+       "name": "PORTD1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 1.",
+       "values": []
+      },
+      {
+       "name": "PORTD0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "DDRD",
+     "title": "The Port D Data Direction Register",
+     "offset": "0x2A",
+     "io": "0x0A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 79,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "DDD7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 7.",
+       "values": []
+      },
+      {
+       "name": "DDD6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 6.",
+       "values": []
+      },
+      {
+       "name": "DDD5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 5.",
+       "values": []
+      },
+      {
+       "name": "DDD4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 4.",
+       "values": []
+      },
+      {
+       "name": "DDD3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 3.",
+       "values": []
+      },
+      {
+       "name": "DDD2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 2.",
+       "values": []
+      },
+      {
+       "name": "DDD1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 1.",
+       "values": []
+      },
+      {
+       "name": "DDD0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Port D data direction bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PIND",
+     "title": "The Port D Input Pins",
+     "offset": "0x29",
+     "io": "0x09",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R",
+     "page": 79,
+     "property": [],
+     "notes": [
+      "Initial value of bits 7:0 printed as N/A."
+     ],
+     "fields": [
+      {
+       "name": "PIND7",
+       "bits": "7",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 7.",
+       "values": []
+      },
+      {
+       "name": "PIND6",
+       "bits": "6",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 6.",
+       "values": []
+      },
+      {
+       "name": "PIND5",
+       "bits": "5",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 5.",
+       "values": []
+      },
+      {
+       "name": "PIND4",
+       "bits": "4",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 4.",
+       "values": []
+      },
+      {
+       "name": "PIND3",
+       "bits": "3",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 3.",
+       "values": []
+      },
+      {
+       "name": "PIND2",
+       "bits": "2",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 2.",
+       "values": []
+      },
+      {
+       "name": "PIND1",
+       "bits": "1",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 1.",
+       "values": []
+      },
+      {
+       "name": "PIND0",
+       "bits": "0",
+       "access": "R",
+       "reset": "x",
+       "text": "Port D input pin bit 0.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TC0",
+   "title": "8-bit Timer/Counter0",
+   "page": 80,
+   "instances": [],
+   "registers": [
+    {
+     "name": "TCCR0A",
+     "title": "Timer/Counter Control Register A",
+     "offset": "0x45",
+     "io": "0x25",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 85,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "CTC0",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Clear timer on compare match mode: picks the counting sequence and the source of TOP, between normal mode and CTC mode.",
+       "table": {
+        "columns": [
+         "Mode",
+         "CTC0",
+         "Timer/Counter Mode of Operation",
+         "TOP",
+         "Update of OCRx at",
+         "TOV Flag Set on(1)"
+        ],
+        "rows": [
+         [
+          "0",
+          "0",
+          "Normal",
+          "0xFF",
+          "Immediate",
+          "MAX"
+         ],
+         [
+          "1",
+          "1",
+          "CTC",
+          "OCRA",
+          "Immediate",
+          "MAX"
+         ]
+        ]
+       }
+      },
+      {
+       "name": "CS0",
+       "bits": "2:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Clock select: the Timer/Counter0 clock source. With an external pin source, edges on T0 clock the counter even when the pin is an output.",
+       "values": [
+        {
+         "value": "0b000",
+         "name": "",
+         "text": "No clock; Timer/Counter stopped."
+        },
+        {
+         "value": "0b001",
+         "name": "clkI/O (No prescaling)",
+         "text": "clkI/O, no prescaling."
+        },
+        {
+         "value": "0b010",
+         "name": "clkI/O/8 (From prescaler)",
+         "text": "clkI/O/8."
+        },
+        {
+         "value": "0b011",
+         "name": "clkI/O/64 (From prescaler)",
+         "text": "clkI/O/64."
+        },
+        {
+         "value": "0b100",
+         "name": "clkI/O/256 (From prescaler)",
+         "text": "clkI/O/256."
+        },
+        {
+         "value": "0b101",
+         "name": "clkI/O/1024 (From prescaler)",
+         "text": "clkI/O/1024."
+        },
+        {
+         "value": "0b110",
+         "name": "",
+         "text": "External clock on T0, falling edge."
+        },
+        {
+         "value": "0b111",
+         "name": "",
+         "text": "External clock on T0, rising edge."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "TCNT0",
+     "title": "Timer/Counter Register",
+     "offset": "0x46",
+     "io": "0x26",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 86,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TCNT0",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Timer/Counter0 count value.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "OCR0A",
+     "title": "Output Compare Register A",
+     "offset": "0x47",
+     "io": "0x27",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 86,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCR0A",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Output compare register A value.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "OCR0B",
+     "title": "Output Compare Register B",
+     "offset": "0x48",
+     "io": "0x28",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 87,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCR0B",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Output compare register B value.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TIMSK0",
+     "title": "Timer/Counter Interrupt Mask Register",
+     "offset": "0x6E",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 87,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCIE0B",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter0 compare match B interrupt enable: with the I-bit in SREG set, 1 enables the interrupt, which runs when TIFR0.OCF0B is set.",
+       "values": []
+      },
+      {
+       "name": "OCIE0A",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter0 compare match A interrupt enable: with the I-bit in SREG set, 1 enables the interrupt, which runs when TIFR0.OCF0A is set.",
+       "values": []
+      },
+      {
+       "name": "TOIE0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter0 overflow interrupt enable: with the I-bit in SREG set, 1 enables the interrupt, which runs when TIFR0.TOV0 is set.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TIFR0",
+     "title": "Timer/Counter 0 Interrupt Flag Register",
+     "offset": "0x35",
+     "io": "0x15",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 87,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCF0B",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter0 output compare B match flag: set when the counter matches OCR0B. Cleared by hardware when the interrupt vector runs, or by writing 1. The interrupt runs when this flag, OCIE0B and the SREG I-bit are all 1.",
+       "values": []
+      },
+      {
+       "name": "OCF0A",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter0 output compare A match flag: set when the counter matches OCR0A. Cleared by hardware when the interrupt vector runs, or by writing 1. The interrupt runs when this flag, OCIE0A and the SREG I-bit are all 1.",
+       "values": []
+      },
+      {
+       "name": "TOV0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter0 overflow flag: set when Timer/Counter0 overflows. Cleared by hardware when the interrupt vector runs, or by writing 1. The interrupt runs when this flag, TOIE0 and the SREG I-bit are all 1.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TC1",
+   "title": "16-bit Timer/Counter1 with PWM",
+   "page": 89,
+   "instances": [],
+   "registers": [
+    {
+     "name": "TCCR1A",
+     "title": "Timer/Counter1 Control Register A",
+     "offset": "0x80",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 110,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "COM1A",
+       "bits": "7:6",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Compare output mode for channel A: any nonzero value hands pin OC1A to the compare output in place of normal port function; the pin’s DDR bit must be set for the output driver to work. What each setting does depends on the WGM1[3:0] mode. In fast PWM and in both phase correct PWM modes, OCR1A equal to TOP with COM1A1 set is a special case; in fast PWM the compare match is then ignored and the set or clear happens at TOP.",
+       "values": [
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Normal port operation; OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "Toggle OC1A/OC1B on compare match.",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Clear OC1A/OC1B on compare match (output low).",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Set OC1A/OC1B on compare match (output high).",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Normal port operation; OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "WGM1[3:0] = 14 or 15: toggle OC1A on compare match, OC1B disconnected. Any other WGM1 mode: OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Clear OC1A/OC1B on compare match, set at TOP.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Set OC1A/OC1B on compare match, clear at TOP.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Normal port operation; OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "WGM1[3:0] = 8, 9, 10 or 11: toggle OC1A on compare match, OC1B disconnected. Any other WGM1 mode: OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Clear OC1A/OC1B on compare match counting up, set it on compare match counting down.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Set OC1A/OC1B on compare match counting up, clear it on compare match counting down.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        }
+       ]
+      },
+      {
+       "name": "COM1B",
+       "bits": "5:4",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Compare output mode for channel B: any nonzero value hands pin OC1B to the compare output in place of normal port function; the pin’s DDR bit must be set for the output driver to work. What each setting does depends on the WGM1[3:0] mode. In fast PWM and in both phase correct PWM modes, OCR1B equal to TOP with COM1B1 set is a special case; in fast PWM the compare match is then ignored and the set or clear happens at TOP.",
+       "values": [
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Normal port operation; OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "Toggle OC1A/OC1B on compare match.",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Clear OC1A/OC1B on compare match (output low).",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Set OC1A/OC1B on compare match (output high).",
+         "when": "Compare Output Mode, non-PWM"
+        },
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Normal port operation; OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "WGM1[3:0] = 14 or 15: toggle OC1A on compare match, OC1B disconnected. Any other WGM1 mode: OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Clear OC1A/OC1B on compare match, set at TOP.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Set OC1A/OC1B on compare match, clear at TOP.",
+         "when": "Compare Output Mode, Fast PWM(1)"
+        },
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Normal port operation; OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        },
+        {
+         "value": "0b01",
+         "name": "",
+         "text": "WGM1[3:0] = 8, 9, 10 or 11: toggle OC1A on compare match, OC1B disconnected. Any other WGM1 mode: OC1A/OC1B disconnected.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Clear OC1A/OC1B on compare match counting up, set it on compare match counting down.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Set OC1A/OC1B on compare match counting up, clear it on compare match counting down.",
+         "when": "Compare Output Mode, Phase Correct and Phase & Frequency Correct PWM(1)"
+        }
+       ]
+      },
+      {
+       "name": "WGM1",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Waveform generation mode, low bits: with WGM1[3:2] in TCCR1B, picks the counting sequence, the source of TOP and the waveform: normal, CTC, or one of three PWM modes.",
+       "table": {
+        "columns": [
+         "Mode",
+         "WGM13",
+         "WGM12",
+         "WGM11",
+         "WGM10",
+         "Timer/Counter Mode of Operation",
+         "TOP",
+         "Update of OCR1x at",
+         "TOV1 Flag Set on"
+        ],
+        "rows": [
+         [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "Normal",
+          "0xFFFF",
+          "Immediate",
+          "MAX"
+         ],
+         [
+          "1",
+          "0",
+          "0",
+          "0",
+          "1",
+          "PWM, Phase Correct, 8-bit",
+          "0x00FF",
+          "TOP",
+          "BOTTOM"
+         ],
+         [
+          "2",
+          "0",
+          "0",
+          "1",
+          "0",
+          "PWM, Phase Correct, 9-bit",
+          "0x01FF",
+          "TOP",
+          "BOTTOM"
+         ],
+         [
+          "3",
+          "0",
+          "0",
+          "1",
+          "1",
+          "PWM, Phase Correct, 10-bit",
+          "0x03FF",
+          "TOP",
+          "BOTTOM"
+         ],
+         [
+          "4",
+          "0",
+          "1",
+          "0",
+          "0",
+          "CTC",
+          "OCR1A",
+          "Immediate",
+          "MAX"
+         ],
+         [
+          "5",
+          "0",
+          "1",
+          "0",
+          "1",
+          "Fast PWM, 8-bit",
+          "0x00FF",
+          "TOP",
+          "TOP"
+         ],
+         [
+          "6",
+          "0",
+          "1",
+          "1",
+          "0",
+          "Fast PWM, 9-bit",
+          "0x01FF",
+          "TOP",
+          "TOP"
+         ],
+         [
+          "7",
+          "0",
+          "1",
+          "1",
+          "1",
+          "Fast PWM, 10-bit",
+          "0x03FF",
+          "TOP",
+          "TOP"
+         ],
+         [
+          "8",
+          "1",
+          "0",
+          "0",
+          "0",
+          "PWM, phase and frequency correct",
+          "ICR1",
+          "BOTTOM",
+          "BOTTOM"
+         ],
+         [
+          "9",
+          "1",
+          "0",
+          "0",
+          "1",
+          "PWM, phase and frequency correct",
+          "OCR1A",
+          "BOTTOM",
+          "BOTTOM"
+         ],
+         [
+          "10",
+          "1",
+          "0",
+          "1",
+          "0",
+          "PWM, Phase Correct",
+          "ICR1",
+          "TOP",
+          "BOTTOM"
+         ],
+         [
+          "11",
+          "1",
+          "0",
+          "1",
+          "1",
+          "PWM, Phase Correct",
+          "OCR1A",
+          "TOP",
+          "BOTTOM"
+         ],
+         [
+          "12",
+          "1",
+          "1",
+          "0",
+          "0",
+          "CTC",
+          "ICR1",
+          "Immediate",
+          "MAX"
+         ],
+         [
+          "13",
+          "1",
+          "1",
+          "0",
+          "1",
+          "(Reserved)",
+          "-",
+          "-",
+          "-"
+         ],
+         [
+          "14",
+          "1",
+          "1",
+          "1",
+          "0",
+          "Fast PWM",
+          "ICR1",
+          "TOP",
+          "TOP"
+         ],
+         [
+          "15",
+          "1",
+          "1",
+          "1",
+          "1",
+          "Fast PWM",
+          "OCR1A",
+          "TOP",
+          "TOP"
+         ]
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "TCCR1B",
+     "title": "Timer/Counter1 Control Register B",
+     "offset": "0x81",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 112,
+     "property": [],
+     "notes": [
+      "The settings of WGM1[3:2] are carried on TCCR1A.WGM1, which holds the low bits."
+     ],
+     "fields": [
+      {
+       "name": "ICNC1",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Input capture noise canceler: 1 filters the ICP1 input, which then changes only after four equal samples in a row, delaying the capture by four oscillator cycles.",
+       "values": []
+      },
+      {
+       "name": "ICES1",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Input capture edge select: 0 captures on a falling edge of ICP1, 1 on a rising edge. A capture copies the counter into ICR1 and sets ICF1, which can raise the input capture interrupt. While ICR1 is used as TOP, ICP1 is disconnected and input capture is off.",
+       "values": []
+      },
+      {
+       "name": "WGM1[3:2]",
+       "bits": "4:3",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Waveform generation mode, high bits; with WGM1[1:0] in TCCR1A.",
+       "values": []
+      },
+      {
+       "name": "CS1",
+       "bits": "2:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Clock select: the Timer/Counter1 clock source. With an external pin source, edges on T1 clock the counter even when the pin is an output.",
+       "values": [
+        {
+         "value": "0b000",
+         "name": "",
+         "text": "No clock; Timer/Counter stopped."
+        },
+        {
+         "value": "0b001",
+         "name": "clkI/O/1 (No prescaling)",
+         "text": "clkI/O/1, no prescaling."
+        },
+        {
+         "value": "0b010",
+         "name": "clkI/O/8 (From prescaler)",
+         "text": "clkI/O/8."
+        },
+        {
+         "value": "0b011",
+         "name": "clkI/O/64 (From prescaler)",
+         "text": "clkI/O/64."
+        },
+        {
+         "value": "0b100",
+         "name": "clkI/O/256 (From prescaler)",
+         "text": "clkI/O/256."
+        },
+        {
+         "value": "0b101",
+         "name": "clkI/O/1024 (From prescaler)",
+         "text": "clkI/O/1024."
+        },
+        {
+         "value": "0b110",
+         "name": "",
+         "text": "External clock on T1, falling edge."
+        },
+        {
+         "value": "0b111",
+         "name": "",
+         "text": "External clock on T1, rising edge."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "TCCR1C",
+     "title": "Timer/Counter1 Control Register C",
+     "offset": "0x82",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 113,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "FOC1A",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Force output compare for channel A: writing 1 forces an immediate compare match on the waveform generator, and OC1A changes as COM1A[1:0] sets; no interrupt, and no timer clear in CTC mode with OCR1A as TOP. Active only when WGM1[3:0] selects a non-PWM mode; must be written 0 whenever TCCR1A is written in a PWM mode. Reads as 0.",
+       "values": []
+      },
+      {
+       "name": "FOC1B",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Force output compare for channel B: writing 1 forces an immediate compare match on the waveform generator, and OC1B changes as COM1B[1:0] sets; no interrupt, and no timer clear in CTC mode with OCR1A as TOP. Active only when WGM1[3:0] selects a non-PWM mode; must be written 0 whenever TCCR1A is written in a PWM mode. Reads as 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TCNT1H",
+     "title": "Timer/Counter1",
+     "offset": "0x85",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 113,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TCNT1[15:8]",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Timer/Counter1 count, high byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TCNT1L",
+     "title": "Timer/Counter1",
+     "offset": "0x84",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 113,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TCNT1",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Timer/Counter1 count, low byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "OCR1AH",
+     "title": "Output Compare Register 1 A",
+     "offset": "0x89",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 114,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCR1A[15:8]",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Output compare register 1 A, high byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "OCR1AL",
+     "title": "Output Compare Register 1 A",
+     "offset": "0x88",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 114,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCR1A",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Output compare register 1 A, low byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "OCR1BH",
+     "title": "Output Compare Register 1 B",
+     "offset": "0x8B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 114,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCR1B[15:8]",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Output compare register 1 B, high byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "OCR1BL",
+     "title": "Output Compare Register 1 B",
+     "offset": "0x8A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 114,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "OCR1B",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Output compare register 1 B, low byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ICR1H",
+     "title": "Input Capture Register 1",
+     "offset": "0x87",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 114,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ICR1[15:8]",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Input capture register 1, high byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ICR1L",
+     "title": "Input Capture Register 1",
+     "offset": "0x86",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 114,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ICR1",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Input capture register 1, low byte.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TIMSK1",
+     "title": "Timer/Counter1 Interrupt Mask Register",
+     "offset": "0x6F",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 114,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ICIE1",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 input capture interrupt enable: with the I-flag in SREG set, 1 enables the interrupt, which runs when TIFR1.ICF1 is set.",
+       "values": []
+      },
+      {
+       "name": "OCIE1B",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 output compare B match interrupt enable: with the I-flag in SREG set, 1 enables the interrupt, which runs when TIFR1.OCF1B is set.",
+       "values": []
+      },
+      {
+       "name": "OCIE1A",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 output compare A match interrupt enable: with the I-flag in SREG set, 1 enables the interrupt, which runs when TIFR1.OCF1A is set.",
+       "values": []
+      },
+      {
+       "name": "TOIE1",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 overflow interrupt enable: with the I-flag in SREG set, 1 enables the interrupt, which runs when TIFR1.TOV1 is set.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TIFR1",
+     "title": "Timer/Counter1 Interrupt Flag Register",
+     "offset": "0x36",
+     "io": "0x16",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 115,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ICF1",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 input capture flag: set by a capture event on ICP1, or, when WGM1[3:0] uses ICR1 as TOP, when the counter reaches TOP. Cleared when the input capture vector runs, or by writing 1.",
+       "values": []
+      },
+      {
+       "name": "OCF1B",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 output compare B match flag: set in the timer clock cycle after TCNT1 matches OCR1B; a FOC1B strobe does not set it. Cleared when the vector runs, or by writing 1.",
+       "values": []
+      },
+      {
+       "name": "OCF1A",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 output compare A match flag: set in the timer clock cycle after TCNT1 matches OCR1A; a FOC1A strobe does not set it. Cleared when the vector runs, or by writing 1.",
+       "values": []
+      },
+      {
+       "name": "TOV1",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter1 overflow flag: when it sets depends on WGM1[3:0]; in normal and CTC modes, on a timer overflow. Cleared when the overflow vector runs, or by writing 1.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "PRESCALER",
+   "title": "Timer/Counter0 and Timer/Counter1 Prescalers",
+   "page": 117,
+   "instances": [],
+   "registers": [
+    {
+     "name": "GTCCR",
+     "title": "General Timer/Counter Control Register",
+     "offset": "0x43",
+     "io": "0x23",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 118,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TSM",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Timer/Counter synchronization mode: while 1, the value written to PSRSYNC is held, keeping the prescaler in reset so the timers stay halted and can be set up together. Writing 0 makes hardware clear PSRSYNC, and the timers start counting together.",
+       "values": []
+      },
+      {
+       "name": "PSRSYNC",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Prescaler reset: 1 resets the prescaler shared by Timer/Counter1 and Timer/Counter0, affecting both. Hardware clears it at once unless TSM is set.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "SPI",
+   "title": "SPI – Serial Peripheral Interface",
+   "page": 120,
+   "instances": [],
+   "registers": [
+    {
+     "name": "SPCR",
+     "title": "SPI Control Register",
+     "offset": "0x4C",
+     "io": "0x2C",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 126,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "SPIE",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "SPI interrupt enable: the SPI interrupt runs when SPSR.SPIF is set and the global interrupt enable in SREG is set.",
+       "values": []
+      },
+      {
+       "name": "SPE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "SPI enable: must be 1 for any SPI operation.",
+       "values": []
+      },
+      {
+       "name": "DORD",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Data order: 1 sends the LSB first, 0 the MSB first.",
+       "values": []
+      },
+      {
+       "name": "MSTR",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Master/slave select: 1 for master, 0 for slave. In master mode, SS set as an input and driven low clears MSTR and sets SPSR.SPIF; MSTR must then be set again for master mode.",
+       "values": []
+      },
+      {
+       "name": "CPOL",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Clock polarity: 1 makes SCK high when idle, 0 low when idle.",
+       "table": {
+        "columns": [
+         "CPOL",
+         "Leading Edge",
+         "Trailing Edge"
+        ],
+        "rows": [
+         [
+          "0",
+          "Rising",
+          "Falling"
+         ],
+         [
+          "1",
+          "Falling",
+          "Rising"
+         ]
+        ]
+       }
+      },
+      {
+       "name": "CPHA",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Clock phase: chooses whether data is sampled on the first (leading) or the last (trailing) SCK edge.",
+       "table": {
+        "columns": [
+         "CPHA",
+         "Leading Edge",
+         "Trailing Edge"
+        ],
+        "rows": [
+         [
+          "0",
+          "Sample",
+          "Setup"
+         ],
+         [
+          "1",
+          "Setup",
+          "Sample"
+         ]
+        ]
+       }
+      },
+      {
+       "name": "SPR",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "SPI clock rate select: with SPSR.SPI2X, sets the SCK rate as a fraction of fosc in master mode; no effect in slave mode.",
+       "table": {
+        "columns": [
+         "SPI2X",
+         "SPR1",
+         "SPR0",
+         "SCK Frequency"
+        ],
+        "rows": [
+         [
+          "0",
+          "0",
+          "0",
+          "fosc/4"
+         ],
+         [
+          "0",
+          "0",
+          "1",
+          "fosc/16"
+         ],
+         [
+          "0",
+          "1",
+          "0",
+          "fosc/64"
+         ],
+         [
+          "0",
+          "1",
+          "1",
+          "fosc/128"
+         ],
+         [
+          "1",
+          "0",
+          "0",
+          "fosc/2"
+         ],
+         [
+          "1",
+          "0",
+          "1",
+          "fosc/8"
+         ],
+         [
+          "1",
+          "1",
+          "0",
+          "fosc/32"
+         ],
+         [
+          "1",
+          "1",
+          "1",
+          "fosc/64"
+         ]
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "SPSR",
+     "title": "SPI Status Register",
+     "offset": "0x4D",
+     "io": "0x2D",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 127,
+     "property": [],
+     "notes": [
+      "The settings of SPI2X are carried on SPCR.SPR, which holds the low bits."
+     ],
+     "fields": [
+      {
+       "name": "SPIF",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "SPI interrupt flag: set when a transfer completes, and also in master mode when SS is an input driven low; raises an interrupt if SPCR.SPIE and global interrupts are enabled. Cleared by hardware when the vector runs, or by reading SPSR with SPIF set and then accessing SPDR.",
+       "values": []
+      },
+      {
+       "name": "WCOL",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "Write collision flag: set when SPDR is written during a transfer. Cleared, with SPIF, by reading SPSR with WCOL set and then accessing SPDR.",
+       "values": []
+      },
+      {
+       "name": "SPI2X",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Double SPI speed: 1 doubles the SCK frequency in master mode, so the shortest SCK period is two CPU clock periods. As a slave, the SPI is guaranteed only at fosc/4 or lower.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SPDR",
+     "title": "SPI Data Register",
+     "offset": "0x4E",
+     "io": "0x2E",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R/W",
+     "page": 128,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "SPDR",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "SPI data register.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TWI",
+   "title": "TWI – Two Wire Interface",
+   "page": 129,
+   "instances": [],
+   "registers": [
+    {
+     "name": "TWBR",
+     "title": "TWI Bit Rate Register",
+     "offset": "0xB8",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 156,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TWBR",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Bit rate register: the division factor of the bit rate generator that makes SCL in master modes. Must be 10 or more in master mode.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TWCR",
+     "title": "TWI Control Register",
+     "offset": "0xBC",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W, R",
+     "page": 156,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TWINT",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI interrupt flag: set by hardware when the TWI finishes a job and waits for software; with the I-bit in SREG and TWIE set, the MCU jumps to the TWI vector. SCL low is stretched while it is set. Cleared only by software writing 1, not by running the vector; clearing it starts the TWI, so finish with TWAR, TWSR and TWDR first.",
+       "values": []
+      },
+      {
+       "name": "TWEA",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI enable acknowledge: when 1, an ACK is sent on receiving the device’s own slave address, a general call with TWAR.TWGCE set, or a data byte in master receiver or slave receiver mode. Writing 0 takes the device off the bus for a while; writing 1 resumes address recognition.",
+       "values": []
+      },
+      {
+       "name": "TWSTA",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI START condition: write 1 to become bus master. The TWI sends a START when the bus is free, or waits for a STOP and then sends one. Software must clear it after the START has gone out.",
+       "values": []
+      },
+      {
+       "name": "TWSTO",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI STOP condition: in master mode, 1 sends a STOP and clears itself when done. In slave mode, 1 sends no STOP but returns the TWI to unaddressed slave mode and releases SCL and SDA to high impedance, to recover from an error.",
+       "values": []
+      },
+      {
+       "name": "TWWC",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "TWI write collision flag: set by a write to TWDR while TWINT is low; cleared by writing TWDR while TWINT is high.",
+       "values": []
+      },
+      {
+       "name": "TWEN",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI enable: 1 starts the TWI, which takes over the SCL and SDA pins and turns on their slew-rate limiters and spike filters. 0 switches the TWI off and ends any transfer at once.",
+       "values": []
+      },
+      {
+       "name": "TWIE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI interrupt enable: with the I-bit in SREG set, 1 requests the TWI interrupt for as long as TWINT is high.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TWSR",
+     "title": "TWI Status Register",
+     "offset": "0xB9",
+     "bits": 8,
+     "reset": "0xF8",
+     "access": "R, R/W",
+     "page": 158,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TWS",
+       "bits": "7:3",
+       "access": "R",
+       "reset": "0x1F",
+       "text": "TWI status: the 5-bit state of the TWI logic and the bus. A read of TWSR also returns the prescaler bits, so mask those to 0 when testing the status.",
+       "values": []
+      },
+      {
+       "name": "TWPS",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "TWI prescaler: readable and writable; sets the bit rate prescaler used in the bit rate calculation.",
+       "values": [
+        {
+         "value": "0b00",
+         "name": "1",
+         "text": "1."
+        },
+        {
+         "value": "0b01",
+         "name": "4",
+         "text": "4."
+        },
+        {
+         "value": "0b10",
+         "name": "16",
+         "text": "16."
+        },
+        {
+         "value": "0b11",
+         "name": "64",
+         "text": "64."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "TWDR",
+     "title": "TWI Data Register",
+     "offset": "0xBB",
+     "bits": 8,
+     "reset": "0xFF",
+     "access": "R/W",
+     "page": 159,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TWD",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0xFF",
+       "text": "TWI data: the next byte to send, or the last byte received.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TWAR",
+     "title": "TWI (Slave) Address Register",
+     "offset": "0xBA",
+     "bits": 8,
+     "reset": "0xFE",
+     "access": "R/W",
+     "page": 159,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TWA",
+       "bits": "7:1",
+       "access": "R/W",
+       "reset": "0x7F",
+       "text": "TWI slave address: the 7-bit address of the TWI unit.",
+       "values": []
+      },
+      {
+       "name": "TWGCE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI general call recognition enable: 1 makes the TWI recognize a general call on the bus.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TWAMR",
+     "title": "TWI (Slave) Address Mask Register",
+     "offset": "0xBD",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 160,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TWAM",
+       "bits": "7:1",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "TWI address mask: a 7-bit mask over the slave address in TWAR. A bit set to 1 makes the address match skip the comparison of that incoming address bit with its TWAR bit.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TWHSR",
+     "title": "TWI High Speed Register",
+     "offset": "0xBE",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 160,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TWHS",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "TWI high speed enable: 1 clocks the TWI from the undivided system clock. This mode needs clkTWIHS at exactly twice clkI/O, so the I/O clock must be scaled down by 2 (for example, the 8 MHz internal oscillator prescaled to 4 MHz).",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "AC",
+   "title": "Analog Comparator",
+   "page": 161,
+   "instances": [],
+   "registers": [
+    {
+     "name": "ADCSRB",
+     "title": "ADC Control and Status Register B",
+     "offset": "0x7B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 162,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ACME",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Analog comparator multiplexer enable: 1 while the ADC is off (ADCSRA.ADEN = 0) lets the ADC multiplexer pick the comparator’s negative input; 0 puts AIN1 on the negative input.",
+       "values": []
+      },
+      {
+       "name": "ADTS2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC auto trigger source bit 2.",
+       "values": []
+      },
+      {
+       "name": "ADTS1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC auto trigger source bit 1.",
+       "values": []
+      },
+      {
+       "name": "ADTS0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC auto trigger source bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ACSR",
+     "title": "Analog Comparator Control and Status Register",
+     "offset": "0x50",
+     "io": "0x30",
+     "bits": 8,
+     "reset": "0b00x00000",
+     "access": "R/W, R",
+     "page": 162,
+     "property": [],
+     "notes": [
+      "Initial value of bit 5 printed as N/A."
+     ],
+     "fields": [
+      {
+       "name": "ACD",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Analog comparator disable: 1 switches the comparator’s power off, lowering consumption in active and idle mode; may be set at any time. Clear ACIE before changing it, or an interrupt can occur.",
+       "values": []
+      },
+      {
+       "name": "ACBG",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Analog comparator bandgap select: 1 puts the fixed internal bandgap reference on the positive input in place of AIN0; 0 puts AIN0 there.",
+       "values": []
+      },
+      {
+       "name": "ACO",
+       "bits": "5",
+       "access": "R",
+       "reset": "x",
+       "text": "Analog comparator output, synchronized, with a delay of 1 to 2 clock cycles.",
+       "values": []
+      },
+      {
+       "name": "ACI",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Analog comparator interrupt flag: hardware sets it when the comparator output does what ACIS1:ACIS0 select. The interrupt runs when ACIE and the SREG I-bit are both 1. Cleared by hardware when the vector runs, or by writing 1.",
+       "values": []
+      },
+      {
+       "name": "ACIE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Analog comparator interrupt enable: with the I-bit in SREG set, 1 enables the comparator interrupt; 0 disables it.",
+       "values": []
+      },
+      {
+       "name": "ACIC",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Analog comparator input capture enable: 1 connects the comparator output straight to the Timer/Counter1 input capture front end, using its noise canceler and edge select; 0 leaves them unconnected. TIMSK1.ICIE1 must be set for the comparator to raise the input capture interrupt.",
+       "values": []
+      },
+      {
+       "name": "ACIS",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Analog comparator interrupt mode select: which comparator events raise the interrupt. Clear ACIE before changing it, or an interrupt can occur.",
+       "values": [
+        {
+         "value": "0b00",
+         "name": "",
+         "text": "Interrupt on output toggle."
+        },
+        {
+         "value": "0b01",
+         "name": "Reserved",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b10",
+         "name": "",
+         "text": "Interrupt on falling output edge."
+        },
+        {
+         "value": "0b11",
+         "name": "",
+         "text": "Interrupt on rising output edge."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "DIDR1",
+     "title": "Digital Input Disable Register 1",
+     "offset": "0x7F",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 163,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "AIN1D",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "AIN1 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "AIN0D",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "AIN0 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ADC",
+   "title": "ADC – Analog to Digital Converter",
+   "page": 164,
+   "instances": [],
+   "registers": [
+    {
+     "name": "ADMUX",
+     "title": "ADC Multiplexer Selection Register",
+     "offset": "0x7C",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 176,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "REFS0",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Reference selection: the ADC voltage reference. A change during a conversion takes effect when that conversion completes (ADCSRA.ADIF set).",
+       "values": [
+        {
+         "value": "0",
+         "name": "Internal 1.1V Voltage Reference",
+         "text": "Internal 1.1V reference."
+        },
+        {
+         "value": "1",
+         "name": "AVCC Reference",
+         "text": "AVCC."
+        }
+       ]
+      },
+      {
+       "name": "ADLAR",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC left adjust result: 1 left-adjusts the result in the ADC data register, 0 right-adjusts it. Takes effect at once, even during a conversion.",
+       "values": []
+      },
+      {
+       "name": "MUX",
+       "bits": "3:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Analog channel selection: which analog input feeds the ADC; channel ADC8 is the temperature measurement. A change during a conversion takes effect when that conversion completes (ADCSRA.ADIF set). After switching to the internal voltage reference, the ADC needs 1 ms to settle, enabled, before measurements are stable.",
+       "values": [
+        {
+         "value": "0b0000",
+         "name": "ADC0",
+         "text": "ADC0."
+        },
+        {
+         "value": "0b0001",
+         "name": "ADC1",
+         "text": "ADC1."
+        },
+        {
+         "value": "0b0010",
+         "name": "ADC2",
+         "text": "ADC2."
+        },
+        {
+         "value": "0b0011",
+         "name": "ADC3",
+         "text": "ADC3."
+        },
+        {
+         "value": "0b0100",
+         "name": "ADC4",
+         "text": "ADC4."
+        },
+        {
+         "value": "0b0101",
+         "name": "ADC5",
+         "text": "ADC5."
+        },
+        {
+         "value": "0b0110",
+         "name": "ADC6",
+         "text": "ADC6."
+        },
+        {
+         "value": "0b0111",
+         "name": "ADC7",
+         "text": "ADC7."
+        },
+        {
+         "value": "0b1000",
+         "name": "ADC8",
+         "text": "ADC8."
+        },
+        {
+         "value": "0b1001",
+         "name": "(reserved)",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1010",
+         "name": "(reserved)",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1011",
+         "name": "(reserved)",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1100",
+         "name": "(reserved)",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1101",
+         "name": "(reserved)",
+         "text": "Reserved."
+        },
+        {
+         "value": "0b1110",
+         "name": "1.1V (VBG)",
+         "text": "1.1V bandgap (VBG)."
+        },
+        {
+         "value": "0b1111",
+         "name": "0V (GND)",
+         "text": "0V (GND)."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ADCSRA",
+     "title": "ADC Control and Status Register A",
+     "offset": "0x7A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 178,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADEN",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC enable: 1 turns the ADC on, 0 turns it off; turning it off during a conversion ends that conversion.",
+       "values": []
+      },
+      {
+       "name": "ADSC",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC start conversion: write 1 to start each conversion in single conversion mode, or the first in free running mode. The first conversion after the ADC is enabled takes 25 ADC clock cycles instead of 13, and initializes the ADC. Reads 1 while a conversion runs and 0 when done; writing 0 does nothing.",
+       "values": []
+      },
+      {
+       "name": "ADATE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC auto trigger enable: 1 makes the ADC start a conversion on each rising edge of the trigger signal chosen by ADCSRB.ADTS.",
+       "values": []
+      },
+      {
+       "name": "ADIF",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC interrupt flag: set once a conversion is done and the result registers hold it. The conversion complete interrupt runs when ADIE and the SREG I-bit are both 1. Cleared by hardware when the vector runs, or by writing 1. A read-modify-write of ADCSRA, SBI and CBI included, can lose a pending interrupt.",
+       "values": []
+      },
+      {
+       "name": "ADIE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC interrupt enable: with the I-bit in SREG set, 1 enables the conversion complete interrupt.",
+       "values": []
+      },
+      {
+       "name": "ADPS",
+       "bits": "2:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "ADC prescaler select: the division factor from the system clock to the ADC clock.",
+       "values": [
+        {
+         "value": "0b000",
+         "name": "2",
+         "text": "2."
+        },
+        {
+         "value": "0b001",
+         "name": "2",
+         "text": "2."
+        },
+        {
+         "value": "0b010",
+         "name": "4",
+         "text": "4."
+        },
+        {
+         "value": "0b011",
+         "name": "8",
+         "text": "8."
+        },
+        {
+         "value": "0b100",
+         "name": "16",
+         "text": "16."
+        },
+        {
+         "value": "0b101",
+         "name": "32",
+         "text": "32."
+        },
+        {
+         "value": "0b110",
+         "name": "64",
+         "text": "64."
+        },
+        {
+         "value": "0b111",
+         "name": "128",
+         "text": "128."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ADCH",
+     "title": "",
+     "offset": "0x79",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R",
+     "page": 179,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADC9",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 9.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC8",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 8.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC9",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 9. With the result left-adjusted, reading ADCH alone gives the result to 8 bits.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC8",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 8.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC7",
+       "bits": "5",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 7.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC6",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 6.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC5",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 5.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC4",
+       "bits": "2",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 4.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC3",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 3.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC2",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 2.",
+       "mode": "ADLAR = 1",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ADCL",
+     "title": "",
+     "offset": "0x78",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R",
+     "page": 179,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADC7",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 7.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC6",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 6.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC5",
+       "bits": "5",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 5.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC4",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 4.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC3",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 3.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC2",
+       "bits": "2",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 2.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC1",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 1.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC0",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 0. Once ADCL is read, the data registers do not update until ADCH is read, so the full result is read ADCL first, then ADCH.",
+       "values": [],
+       "mode": "ADLAR = 0"
+      },
+      {
+       "name": "ADC1",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 1.",
+       "mode": "ADLAR = 1",
+       "values": []
+      },
+      {
+       "name": "ADC0",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "ADC conversion result bit 0. Once ADCL is read, the data registers do not update until ADCH is read, so the full result is read ADCL first, then ADCH.",
+       "mode": "ADLAR = 1",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ADCSRB",
+     "title": "ADC Control and Status Register B",
+     "offset": "0x7B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 179,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ACME",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Analog comparator multiplexer enable.",
+       "values": []
+      },
+      {
+       "name": "ADTS",
+       "bits": "2:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "ADC auto trigger source: with ADCSRA.ADATE set, picks the source whose interrupt flag rising edge starts a conversion; with ADATE clear it has no effect. Switching from a cleared source to a set one makes a rising edge, which starts a conversion if ADCSRA.ADEN is set. Switching to free running mode (0) makes no trigger even when ADIF is set.",
+       "values": [
+        {
+         "value": "0b000",
+         "name": "Free Running mode",
+         "text": "Free running mode."
+        },
+        {
+         "value": "0b001",
+         "name": "Analog Comparator",
+         "text": "Analog comparator."
+        },
+        {
+         "value": "0b010",
+         "name": "External Interrupt Request 0",
+         "text": "External interrupt request 0."
+        },
+        {
+         "value": "0b011",
+         "name": "Timer/Counter0 Compare Match A",
+         "text": "Timer/Counter0 compare match A."
+        },
+        {
+         "value": "0b100",
+         "name": "Timer/Counter0 Overflow",
+         "text": "Timer/Counter0 overflow."
+        },
+        {
+         "value": "0b101",
+         "name": "Timer/Counter1 Compare Match B",
+         "text": "Timer/Counter1 compare match B."
+        },
+        {
+         "value": "0b110",
+         "name": "Timer/Counter1 Overflow",
+         "text": "Timer/Counter1 overflow."
+        },
+        {
+         "value": "0b111",
+         "name": "Timer/Counter1 Capture Event",
+         "text": "Timer/Counter1 capture event."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "DIDR0",
+     "title": "Digital Input Disable Register 0",
+     "offset": "0x7E",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 180,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADC7D",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC7 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "ADC6D",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC6 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "ADC5D",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC5 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "ADC4D",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC4 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "ADC3D",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC3 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "ADC2D",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC2 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "ADC1D",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC1 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      },
+      {
+       "name": "ADC0D",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "ADC0 digital input disable: 1 turns off the pin’s digital input buffer, and its PIN register bit then reads 0. Setting it on a pin used only as an analog input saves power in the buffer.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DEBUG",
+   "title": "debugWIRE On-Chip Debug System",
+   "page": 181,
+   "instances": [],
+   "registers": [
+    {
+     "name": "DWDR",
+     "title": "debugWire Data Register",
+     "offset": "0x51",
+     "io": "0x31",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 182,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "DWDR",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "debugWIRE data register.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "BOOT",
+   "title": "Self-Programming the Flash",
+   "page": 183,
+   "instances": [],
+   "registers": [
+    {
+     "name": "SPMCSR",
+     "title": "Store Program Memory Control and Status Register",
+     "offset": "0x57",
+     "io": "0x37",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 186,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "RWWSB",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-while-write section busy: present for compatibility with parts that have read-while-write; always reads 0 here.",
+       "values": []
+      },
+      {
+       "name": "CTPB",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Clear temporary page buffer: writing it while the buffer is being filled empties the buffer, losing its data.",
+       "values": []
+      },
+      {
+       "name": "RFLB",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Read fuse and lock bits: an LPM issued no more than three cycles after setting RFLB and SELFPRGEN loads the lock bits or the fuse bits, chosen by Z0 of the Z-pointer, into the destination register.",
+       "values": []
+      },
+      {
+       "name": "PGWRT",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Page write: written to 1 together with SELFPRGEN, makes the next SPM within four clock cycles write the temporary buffer to the page addressed by the high part of the Z-pointer; R1 and R0 are ignored. Clears itself when the write completes or if no SPM follows within four cycles. The CPU halts for the whole page write.",
+       "values": []
+      },
+      {
+       "name": "PGERS",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Page erase: written to 1 together with SELFPRGEN, makes the next SPM within four clock cycles erase the page addressed by the high part of the Z-pointer; R1 and R0 are ignored. Clears itself when the erase completes or if no SPM follows within four cycles. The CPU halts during the operation.",
+       "values": []
+      },
+      {
+       "name": "SELFPRGEN",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Self programming enable: enables SPM for the next four clock cycles. Written with CTPB, RFLB, PGWRT or PGERS, the next SPM does that operation; written alone, the next SPM stores R1:R0 in the temporary page buffer at the Z-pointer address, ignoring the Z LSB. Clears itself when the SPM completes or if none comes within four cycles; stays 1 until a page erase or page write finishes. Any value of the low five bits other than 10001, 01001, 00101, 00011 or 00001 has no effect.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,3725 @@
+{
+ "sheet": 1,
+ "name": "NCP361SNT1G",
+ "kind": "power_switch",
+ "manufacturer": "onsemi",
+ "title": "NCP361 / NCV361: USB positive overvoltage protection controller with internal PMOS FET and overcurrent protection",
+ "source": {
+  "document": "NCP361/D",
+  "revision": "Rev. 6, April 2025",
+  "pages": 13
+ },
+ "summary": "A single-channel input protector for a USB VBUS line: a P-channel MOSFET between IN and OUT that is closed only while the input sits between an undervoltage lockout of 3.0 V and an overvoltage lockout of 5.675 V (typical), and that withstands up to 20 V on the input. The switch also opens on overcurrent (750 mA typical), turning on again after the ton delay of about 4 ms while the fault lasts, and on overtemperature. An active-low open-drain FLAG output reports faults and an active-low EN input turns the output off. It comes in a 2 x 2 mm UDFN6 and a TSOP-5; the NCV361 is the automotive version.",
+ "key_figures": [
+  [
+   "Input voltage range",
+   "1.2 to 20 V"
+  ],
+  [
+   "Overvoltage lockout",
+   "5.675 V typ (5.43 to 5.9 V)"
+  ],
+  [
+   "Undervoltage lockout",
+   "3.0 V typ (2.85 to 3.15 V)"
+  ],
+  [
+   "Overcurrent limit",
+   "750 mA typ (550 to 950 mA)"
+  ],
+  [
+   "Dropout",
+   "150 mV typ, 200 mV max at 500 mA"
+  ],
+  [
+   "Output turn-off on overvoltage",
+   "0.7 µs typ"
+  ],
+  [
+   "Quiescent current",
+   "20 µA typ at 5.25 V, no load"
+  ],
+  [
+   "Absolute maximum, IN to GND",
+   "21 V"
+  ],
+  [
+   "Operating ambient",
+   "-40 to +85 °C"
+  ],
+  [
+   "Packages",
+   "UDFN6 2 x 2 mm, TSOP-5"
+  ]
+ ],
+ "part_numbers": {
+  "page": 10,
+  "columns": [
+   "part number",
+   "marking",
+   "package",
+   "packing",
+   "grade"
+  ],
+  "rows": [
+   [
+    "NCP361MUTBG",
+    "AD",
+    "UDFN6 (Pb-Free)",
+    "3000 / Tape & Reel",
+    "standard"
+   ],
+   [
+    "NCP361SNT1G",
+    "ACD",
+    "TSOP-5 (Pb-Free)",
+    "3000 / Tape & Reel",
+    "standard"
+   ],
+   [
+    "NCV361SNT1G",
+    "VET",
+    "TSOP-5 (Pb-Free)",
+    "3000 / Tape & Reel",
+    "automotive (NCV prefix)"
+   ]
+  ],
+  "notes": [
+   "The NCV prefix marks the version for automotive and other uses that need unique site and change-control requirements; it is AEC-Q100 qualified and PPAP capable.",
+   "All three devices share the same thresholds: 750 mA overcurrent, 3.00 V UVLO and 5.675 V OVLO (typical)."
+  ]
+ },
+ "pins": [
+  {
+   "package": "UDFN6",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "EN",
+     "type": "digital in",
+     "function": "Enable, active low. A high level puts the part in shutdown with OUT cut off from IN; for normal operation hold it at GND or drive it from an I/O. Fault detection keeps running whatever its level."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "3",
+     "name": "IN",
+     "type": "power in",
+     "function": "Input, tied to VBUS. Needs a low-ESR ceramic capacitor of 1 µF or more to GND."
+    },
+    {
+     "pin": "4, 5",
+     "name": "OUT",
+     "type": "power out",
+     "function": "Switched output, cut off from VBUS while the input is above the OVLO or below the UVLO threshold. Needs a 1 µF capacitor; both OUT pins are wired together on the board."
+    },
+    {
+     "pin": "6",
+     "name": "FLAG",
+     "type": "open-drain output",
+     "function": "Fault output, active low; pulled low when the input exceeds the OVLO threshold. Open drain, so a resistor to VCC must pull it up."
+    },
+    {
+     "pin": "PAD1",
+     "name": "PAD1",
+     "type": "thermal pad",
+     "function": "Exposed pad, joined to the package tie bars. It may be tied to the ground plane to carry heat away and is never tied to any other potential."
+    }
+   ]
+  },
+  {
+   "package": "TSOP-5",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "IN",
+     "type": "power in",
+     "function": "Input, tied to VBUS. Needs a low-ESR ceramic capacitor of 1 µF or more to GND."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "3",
+     "name": "EN",
+     "type": "digital in",
+     "function": "Enable, active low. A high level puts the part in shutdown with OUT cut off from IN; for normal operation hold it at GND or drive it from an I/O. Fault detection keeps running whatever its level."
+    },
+    {
+     "pin": "4",
+     "name": "FLAG",
+     "type": "open-drain output",
+     "function": "Fault output, active low; pulled low when the input exceeds the OVLO threshold. Open drain, so a resistor to VCC must pull it up."
+    },
+    {
+     "pin": "5",
+     "name": "OUT",
+     "type": "power out",
+     "function": "Switched output, cut off from VBUS while the input is above the OVLO or below the UVLO threshold. Needs a 1 µF capacitor."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Maximum ratings",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "rating",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Minimum Voltage (IN to GND)",
+     "Vminin",
+     "-0.3",
+     "V"
+    ],
+    [
+     "Minimum Voltage (All others to GND)",
+     "Vmin",
+     "-0.3",
+     "V"
+    ],
+    [
+     "Maximum Voltage (IN to GND)",
+     "Vmaxin",
+     "21",
+     "V"
+    ],
+    [
+     "Maximum Voltage (All others to GND)",
+     "Vmax",
+     "7.0",
+     "V"
+    ],
+    [
+     "Maximum DC Current from Vin to Vout (PMOS) (Note 1)",
+     "Imax",
+     "600",
+     "mA"
+    ],
+    [
+     "Thermal Resistance, Junction-to-Air, TSOP-5",
+     "RθJA",
+     "305",
+     "°C/W"
+    ],
+    [
+     "Thermal Resistance, Junction-to-Air, UDFN",
+     "RθJA",
+     "240",
+     "°C/W"
+    ],
+    [
+     "Operating Ambient Temperature Range",
+     "TA",
+     "-40 to +85",
+     "°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "Tstg",
+     "-65 to +150",
+     "°C"
+    ],
+    [
+     "Junction Operating Temperature",
+     "TJ",
+     "150",
+     "°C"
+    ],
+    [
+     "ESD Withstand Voltage (IEC 61000-4-2)",
+     "Vesd",
+     "15 Air, 8.0 Contact",
+     "kV"
+    ],
+    [
+     "Human Body Model (HBM), Model = 2 (Note 2)",
+     "",
+     "2000",
+     "V"
+    ],
+    [
+     "Machine Model (MM) Model = B (Note 3)",
+     "",
+     "200",
+     "V"
+    ],
+    [
+     "Moisture Sensitivity",
+     "MSL",
+     "Level 1",
+     "-"
+    ]
+   ],
+   "notes": [
+    "Going past any of these limits can damage the part; correct operation and reliability are then not assured.",
+    "Note 1: rated on a minimum PCB area. A lower RθJA raises the current the part can carry.",
+    "Note 2: HBM per JESD22/A114, a 100 pF capacitor discharged through 1.5 kΩ.",
+    "Note 3: MM per JESD22/A115, a 200 pF capacitor discharged through all pins."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 4,
+   "conditions": "Min/max limits over -40 °C < TA < +85 °C and Vin = +5.0 V; typical values at TA = +25 °C, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Voltage Range",
+     "Vin",
+     "",
+     "1.2",
+     "",
+     "20",
+     "V"
+    ],
+    [
+     "Undervoltage Lockout Threshold",
+     "UVLO",
+     "Vin falls down UVLO threshold",
+     "2.85",
+     "3.0",
+     "3.15",
+     "V"
+    ],
+    [
+     "Uvervoltage Lockout Hysteresis",
+     "UVLOhyst",
+     "",
+     "50",
+     "70",
+     "90",
+     "mV"
+    ],
+    [
+     "Overvoltage Lockout Threshold",
+     "OVLO",
+     "Vin rises up OVLO threshold",
+     "5.43",
+     "5.675",
+     "5.9",
+     "V"
+    ],
+    [
+     "Overvoltage Lockout Hysteresis",
+     "OVLOhyst",
+     "",
+     "50",
+     "100",
+     "125",
+     "mV"
+    ],
+    [
+     "Vin versus Vout Dopout",
+     "Vdrop",
+     "Vin = 5 V, I charge = 500 mA",
+     "",
+     "150",
+     "200",
+     "mV"
+    ],
+    [
+     "Overcurrent Limit",
+     "Ilim",
+     "Vin = 5 V",
+     "550",
+     "750",
+     "950",
+     "mA"
+    ],
+    [
+     "Supply Quiescent Current",
+     "Idd",
+     "No Load, Vin = 5.25 V",
+     "",
+     "20",
+     "35",
+     "µA"
+    ],
+    [
+     "Standby Current",
+     "Istd",
+     "Vin = 5 V, EN = 1.2 V",
+     "",
+     "26",
+     "37",
+     "µA"
+    ],
+    [
+     "Zero Gate Voltage Drain Current",
+     "IDSS",
+     "VDS = 20 V, VGS = 0 V",
+     "",
+     "0.08",
+     "",
+     "µA"
+    ],
+    [
+     "FLAG Output Low Voltage",
+     "Volflag",
+     "Vin > OVLO, Sink 1 mA on FLAG pin",
+     "",
+     "",
+     "400",
+     "mV"
+    ],
+    [
+     "FLAG Leakage Current",
+     "FLAGleak",
+     "FLAG level = 5 V",
+     "",
+     "5.0",
+     "",
+     "nA"
+    ],
+    [
+     "EN Voltage High",
+     "Vih",
+     "Vin from 3.3 V to 5.5 V",
+     "1.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "EN Voltage Low",
+     "Vil",
+     "Vin from 3.3 V to 5.5 V",
+     "",
+     "",
+     "0.55",
+     "V"
+    ],
+    [
+     "EN Leakage Current",
+     "ENleak",
+     "EN = 5.5 V or GND",
+     "",
+     "170",
+     "",
+     "nA"
+    ]
+   ],
+   "notes": [
+    "Uvervoltage reads Undervoltage, and Dopout reads Dropout.",
+    "FLAG and EN are active-low signals."
+   ]
+  },
+  {
+   "title": "Timings",
+   "page": 4,
+   "conditions": "Min/max limits over -40 °C < TA < +85 °C and Vin = +5.0 V; typical values at TA = +25 °C, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Start Up Delay",
+     "ton",
+     "From Vin > UVLO to Vout = 0.8xVin, See Fig 3 & 9",
+     "",
+     "4.0",
+     "15",
+     "ms"
+    ],
+    [
+     "FLAG going up Delay",
+     "tstart",
+     "From Vin > UVLO to FLAG = 1.2 V, See Fig 3 & 10",
+     "",
+     "3.0",
+     "",
+     "µs"
+    ],
+    [
+     "Output Turn Off Time",
+     "toff",
+     "From Vin > OVLO to Vout ≤ 0.3 V, See Fig 4 & 11; Vin increasing from 5 V to 8 V at 3 V/µs. No output capacitor.",
+     "",
+     "0.7",
+     "1.5",
+     "µs"
+    ],
+    [
+     "Alert Delay",
+     "tstop",
+     "From Vin > OVLO to FLAG ≤ 0.4 V, See Fig 4 & 12; Vin increasing from 5 V to 8 V at 3 V/µs",
+     "",
+     "1.0",
+     "",
+     "µs"
+    ],
+    [
+     "Disable Time",
+     "tdis",
+     "From EN 0.4 to 1.2V to Vout ≤ 0.3 V, See Fig 5 & 13; Vin = 4.75 V. No output capacitor.",
+     "",
+     "3.0",
+     "",
+     "µs"
+    ],
+    [
+     "Thermal Shutdown Temperature",
+     "Tsd",
+     "",
+     "",
+     "150",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal Shutdown Hysteresis",
+     "Tsdhyst",
+     "",
+     "",
+     "30",
+     "",
+     "°C"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Part-number code",
+   "page": 10,
+   "conditions": "NCP361xxxxxTxG; positions a, b, c, d, e",
+   "columns": [
+    "code",
+    "contents",
+    "options"
+   ],
+   "rows": [
+    [
+     "a",
+     "Overcurrent Threshold",
+     "-: 750 mA"
+    ],
+    [
+     "b",
+     "Package",
+     "MU: UDFN; SN: TSOP-5"
+    ],
+    [
+     "c",
+     "UVLO Typical Threshold",
+     "-: 3.00 V"
+    ],
+    [
+     "d",
+     "OVLO Typical Threshold",
+     "-: 5.675 V"
+    ],
+    [
+     "e",
+     "Tape & Reel Type",
+     "B: = 3000; 1: = 3000"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Current capability against PCB area",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "RθJA",
+    "PCB copper area",
+    "ambient",
+    "allowed DC current"
+   ],
+   "rows": [
+    [
+     "305 °C/W",
+     "none",
+     "",
+     "500 mA"
+    ],
+    [
+     "260 °C/W",
+     "200 mm²",
+     "85 °C",
+     "625 mA"
+    ]
+   ],
+   "notes": [
+    "Internal bond wires carry up to 1 A, more than the thermal limit."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Figure 9. Start-up",
+   "page": 6,
+   "conditions": "Vin on Ch1, Vout on Ch2; 1.0 V/div each; 1.0 ms/div",
+   "x": {
+    "label": "Time from left edge of capture",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vin",
+     "points": [
+      [
+       0.0,
+       0.08
+      ],
+      [
+       2.348,
+       0.08
+      ],
+      [
+       2.368,
+       5.09
+      ],
+      [
+       7.832,
+       5.09
+      ],
+      [
+       10.0,
+       5.1
+      ]
+     ]
+    },
+    {
+     "label": "Vout",
+     "points": [
+      [
+       0.0,
+       0.08
+      ],
+      [
+       3.544,
+       0.08
+      ],
+      [
+       3.794,
+       0.63
+      ],
+      [
+       4.043,
+       1.37
+      ],
+      [
+       4.292,
+       1.97
+      ],
+      [
+       4.541,
+       2.64
+      ],
+      [
+       4.791,
+       3.19
+      ],
+      [
+       5.04,
+       3.57
+      ],
+      [
+       5.289,
+       3.87
+      ],
+      [
+       5.538,
+       4.09
+      ],
+      [
+       5.788,
+       4.22
+      ],
+      [
+       6.037,
+       4.41
+      ],
+      [
+       6.286,
+       4.55
+      ],
+      [
+       6.535,
+       4.74
+      ],
+      [
+       6.785,
+       4.9
+      ],
+      [
+       7.034,
+       4.98
+      ],
+      [
+       7.283,
+       5.07
+      ],
+      [
+       7.832,
+       5.09
+      ],
+      [
+       10.0,
+       5.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 10. FLAG going-up delay",
+   "page": 6,
+   "conditions": "Vin on Ch1, FLAG on Ch3; 1.0 V/div each; 5.0 µs/div",
+   "x": {
+    "label": "Time from left edge of capture",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vin",
+     "points": [
+      [
+       0.0,
+       0.14
+      ],
+      [
+       22.358,
+       0.14
+      ],
+      [
+       22.557,
+       5.13
+      ],
+      [
+       50.0,
+       5.12
+      ]
+     ]
+    },
+    {
+     "label": "FLAG",
+     "points": [
+      [
+       0.0,
+       3.52
+      ],
+      [
+       22.507,
+       3.51
+      ],
+      [
+       22.707,
+       3.02
+      ],
+      [
+       22.807,
+       2.09
+      ],
+      [
+       22.906,
+       1.37
+      ],
+      [
+       23.006,
+       1.01
+      ],
+      [
+       23.205,
+       0.81
+      ],
+      [
+       23.455,
+       0.65
+      ],
+      [
+       40.653,
+       0.62
+      ],
+      [
+       40.852,
+       1.77
+      ],
+      [
+       40.952,
+       3.0
+      ],
+      [
+       41.65,
+       3.22
+      ],
+      [
+       44.143,
+       3.35
+      ],
+      [
+       46.635,
+       3.51
+      ],
+      [
+       50.0,
+       3.51
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 11. Output turn-off time",
+   "page": 6,
+   "conditions": "Vin on Ch1, Vout on Ch2; 1.0 V/div each; 500 ns/div",
+   "x": {
+    "label": "Time from left edge of capture",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vin",
+     "points": [
+      [
+       0.0,
+       5.1
+      ],
+      [
+       1.722,
+       5.1
+      ],
+      [
+       1.822,
+       5.26
+      ],
+      [
+       1.922,
+       5.5
+      ],
+      [
+       2.021,
+       5.69
+      ],
+      [
+       2.121,
+       5.92
+      ],
+      [
+       2.221,
+       6.19
+      ],
+      [
+       2.321,
+       6.4
+      ],
+      [
+       2.42,
+       6.65
+      ],
+      [
+       2.62,
+       7.14
+      ],
+      [
+       2.719,
+       7.31
+      ],
+      [
+       2.819,
+       7.55
+      ],
+      [
+       2.919,
+       7.74
+      ],
+      [
+       2.944,
+       8.09
+      ],
+      [
+       2.959,
+       8.86
+      ],
+      [
+       3.018,
+       8.67
+      ],
+      [
+       3.033,
+       8.34
+      ],
+      [
+       3.048,
+       8.12
+      ],
+      [
+       3.078,
+       8.01
+      ],
+      [
+       3.118,
+       8.07
+      ],
+      [
+       5.0,
+       8.07
+      ]
+     ]
+    },
+    {
+     "label": "Vout",
+     "points": [
+      [
+       0.0,
+       5.1
+      ],
+      [
+       1.722,
+       5.1
+      ],
+      [
+       1.822,
+       5.26
+      ],
+      [
+       1.922,
+       5.5
+      ],
+      [
+       2.021,
+       5.69
+      ],
+      [
+       2.121,
+       5.92
+      ],
+      [
+       2.221,
+       6.19
+      ],
+      [
+       2.321,
+       6.4
+      ],
+      [
+       2.42,
+       6.65
+      ],
+      [
+       2.62,
+       7.14
+      ],
+      [
+       2.719,
+       7.31
+      ],
+      [
+       2.819,
+       7.55
+      ],
+      [
+       2.919,
+       7.74
+      ],
+      [
+       2.944,
+       7.28
+      ],
+      [
+       2.959,
+       6.35
+      ],
+      [
+       2.974,
+       4.85
+      ],
+      [
+       2.989,
+       3.03
+      ],
+      [
+       3.003,
+       1.61
+      ],
+      [
+       3.018,
+       0.82
+      ],
+      [
+       3.033,
+       0.35
+      ],
+      [
+       3.048,
+       0.14
+      ],
+      [
+       3.118,
+       0.16
+      ],
+      [
+       5.0,
+       0.16
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 12. Alert delay",
+   "page": 6,
+   "conditions": "Ch1 and FLAG on Ch3; 1.0 V/div each; 200 ns/div",
+   "x": {
+    "label": "Time from left edge of capture",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Ch1",
+     "points": [
+      [
+       0.0,
+       5.1
+      ],
+      [
+       0.819,
+       5.1
+      ],
+      [
+       0.848,
+       5.29
+      ],
+      [
+       0.878,
+       5.83
+      ],
+      [
+       0.908,
+       6.43
+      ],
+      [
+       0.938,
+       7.06
+      ],
+      [
+       0.968,
+       7.68
+      ],
+      [
+       1.028,
+       7.99
+      ],
+      [
+       1.088,
+       8.04
+      ],
+      [
+       1.207,
+       8.07
+      ],
+      [
+       1.267,
+       8.4
+      ],
+      [
+       1.387,
+       8.06
+      ],
+      [
+       2.0,
+       8.07
+      ]
+     ]
+    },
+    {
+     "label": "FLAG",
+     "points": [
+      [
+       0.0,
+       3.52
+      ],
+      [
+       1.177,
+       3.52
+      ],
+      [
+       1.207,
+       3.4
+      ],
+      [
+       1.237,
+       3.06
+      ],
+      [
+       1.267,
+       2.35
+      ],
+      [
+       1.297,
+       1.91
+      ],
+      [
+       1.327,
+       1.85
+      ],
+      [
+       1.387,
+       1.03
+      ],
+      [
+       1.447,
+       0.88
+      ],
+      [
+       1.506,
+       0.7
+      ],
+      [
+       1.626,
+       0.65
+      ],
+      [
+       2.0,
+       0.65
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 13. Disable time",
+   "page": 6,
+   "conditions": "EN on Ch4 at 5.0 V/div; Vin on Ch1 and Vout on Ch2 at 1.0 V/div; 1.0 µs/div",
+   "x": {
+    "label": "Time from left edge of capture",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EN",
+     "points": [
+      [
+       0.0,
+       0.12
+      ],
+      [
+       3.644,
+       0.12
+      ],
+      [
+       4.043,
+       0.63
+      ],
+      [
+       4.242,
+       1.42
+      ],
+      [
+       4.442,
+       2.13
+      ],
+      [
+       4.641,
+       3.08
+      ],
+      [
+       4.84,
+       3.87
+      ],
+      [
+       5.04,
+       4.58
+      ],
+      [
+       5.239,
+       4.98
+      ],
+      [
+       10.0,
+       5.02
+      ]
+     ]
+    },
+    {
+     "label": "Vin",
+     "points": [
+      [
+       0.0,
+       4.99
+      ],
+      [
+       10.0,
+       4.99
+      ]
+     ]
+    },
+    {
+     "label": "Vout",
+     "points": [
+      [
+       0.0,
+       4.99
+      ],
+      [
+       5.957,
+       4.99
+      ],
+      [
+       6.017,
+       4.88
+      ],
+      [
+       6.047,
+       4.6
+      ],
+      [
+       6.077,
+       4.3
+      ],
+      [
+       6.107,
+       3.82
+      ],
+      [
+       6.137,
+       3.05
+      ],
+      [
+       6.167,
+       1.86
+      ],
+      [
+       6.226,
+       0.52
+      ],
+      [
+       6.286,
+       0.21
+      ],
+      [
+       6.436,
+       0.11
+      ],
+      [
+       10.0,
+       0.17
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 14. Thermal shutdown",
+   "page": 6,
+   "conditions": "Vin on Ch1, Vout on Ch2, FLAG on Ch3; 1.0 V/div each; 50.0 ms/div",
+   "x": {
+    "label": "Time from left edge of capture",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vin",
+     "points": [
+      [
+       0.0,
+       5.29
+      ],
+      [
+       114.407,
+       5.29
+      ],
+      [
+       116.401,
+       5.5
+      ],
+      [
+       150.299,
+       5.5
+      ],
+      [
+       156.281,
+       5.29
+      ],
+      [
+       266.949,
+       5.29
+      ],
+      [
+       268.943,
+       5.55
+      ],
+      [
+       302.841,
+       5.47
+      ],
+      [
+       307.827,
+       5.29
+      ],
+      [
+       421.486,
+       5.34
+      ],
+      [
+       423.48,
+       5.55
+      ],
+      [
+       459.372,
+       5.43
+      ],
+      [
+       464.357,
+       5.29
+      ],
+      [
+       500.0,
+       5.29
+      ]
+     ]
+    },
+    {
+     "label": "Vout",
+     "points": [
+      [
+       0.748,
+       0.14
+      ],
+      [
+       1.246,
+       3.98
+      ],
+      [
+       5.234,
+       4.34
+      ],
+      [
+       6.73,
+       4.45
+      ],
+      [
+       8.225,
+       4.5
+      ],
+      [
+       11.216,
+       4.57
+      ],
+      [
+       114.407,
+       4.57
+      ],
+      [
+       115.404,
+       2.24
+      ],
+      [
+       116.401,
+       0.02
+      ],
+      [
+       150.299,
+       0.16
+      ],
+      [
+       151.296,
+       0.82
+      ],
+      [
+       152.293,
+       1.88
+      ],
+      [
+       153.29,
+       2.81
+      ],
+      [
+       154.287,
+       3.63
+      ],
+      [
+       155.284,
+       4.06
+      ],
+      [
+       156.281,
+       4.31
+      ],
+      [
+       157.278,
+       4.41
+      ],
+      [
+       159.272,
+       4.53
+      ],
+      [
+       266.949,
+       4.57
+      ],
+      [
+       267.946,
+       2.24
+      ],
+      [
+       268.943,
+       0.05
+      ],
+      [
+       302.841,
+       0.03
+      ],
+      [
+       303.838,
+       0.66
+      ],
+      [
+       304.835,
+       1.36
+      ],
+      [
+       305.833,
+       2.69
+      ],
+      [
+       306.83,
+       3.49
+      ],
+      [
+       307.827,
+       3.98
+      ],
+      [
+       308.824,
+       4.25
+      ],
+      [
+       309.821,
+       4.41
+      ],
+      [
+       311.815,
+       4.53
+      ],
+      [
+       421.486,
+       4.53
+      ],
+      [
+       422.483,
+       2.24
+      ],
+      [
+       423.48,
+       0.06
+      ],
+      [
+       457.378,
+       0.08
+      ],
+      [
+       458.375,
+       0.74
+      ],
+      [
+       459.372,
+       1.77
+      ],
+      [
+       460.369,
+       2.88
+      ],
+      [
+       461.366,
+       3.6
+      ],
+      [
+       462.363,
+       4.06
+      ],
+      [
+       463.36,
+       4.28
+      ],
+      [
+       464.357,
+       4.41
+      ],
+      [
+       466.351,
+       4.5
+      ],
+      [
+       500.0,
+       4.57
+      ]
+     ]
+    },
+    {
+     "label": "FLAG",
+     "points": [
+      [
+       5.234,
+       3.51
+      ],
+      [
+       114.407,
+       3.51
+      ],
+      [
+       116.401,
+       0.81
+      ],
+      [
+       148.305,
+       0.76
+      ],
+      [
+       149.302,
+       2.24
+      ],
+      [
+       150.299,
+       3.57
+      ],
+      [
+       266.949,
+       3.51
+      ],
+      [
+       268.943,
+       0.81
+      ],
+      [
+       301.844,
+       0.76
+      ],
+      [
+       302.841,
+       2.88
+      ],
+      [
+       303.838,
+       3.62
+      ],
+      [
+       421.486,
+       3.52
+      ],
+      [
+       422.483,
+       1.61
+      ],
+      [
+       423.48,
+       0.85
+      ],
+      [
+       456.381,
+       0.74
+      ],
+      [
+       457.378,
+       2.94
+      ],
+      [
+       458.375,
+       3.63
+      ],
+      [
+       500.0,
+       3.51
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 15. RDS(on) against temperature",
+   "page": 7,
+   "conditions": "Load = 500 mA",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RDS(on)",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vin = 3.6 V",
+     "points": [
+      [
+       -40.8,
+       204.9
+      ],
+      [
+       -26.7,
+       237.5
+      ],
+      [
+       -17.6,
+       254.6
+      ],
+      [
+       -1.0,
+       265.2
+      ],
+      [
+       131.1,
+       405.3
+      ]
+     ]
+    },
+    {
+     "label": "Vin = 5 V",
+     "points": [
+      [
+       -40.8,
+       177.4
+      ],
+      [
+       64.7,
+       275.0
+      ],
+      [
+       131.1,
+       341.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 16. Output short circuit",
+   "page": 7,
+   "conditions": "VIN on Ch1, VOUT on Ch2 at 1.0 V/div; input current on Ch4 at 500 mA/div; 10.0 ms/div",
+   "x": {
+    "label": "Time from left edge of capture",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Input current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       0.0,
+       5.4
+      ],
+      [
+       24.2,
+       5.39
+      ],
+      [
+       24.45,
+       5.47
+      ],
+      [
+       25.7,
+       5.48
+      ],
+      [
+       26.4,
+       5.42
+      ],
+      [
+       27.25,
+       5.31
+      ],
+      [
+       27.35,
+       5.47
+      ],
+      [
+       28.6,
+       5.48
+      ],
+      [
+       29.3,
+       5.42
+      ],
+      [
+       29.95,
+       5.31
+      ],
+      [
+       30.05,
+       5.47
+      ],
+      [
+       31.3,
+       5.48
+      ],
+      [
+       32.0,
+       5.42
+      ],
+      [
+       32.65,
+       5.31
+      ],
+      [
+       32.75,
+       5.47
+      ],
+      [
+       34.0,
+       5.48
+      ],
+      [
+       34.7,
+       5.42
+      ],
+      [
+       35.35,
+       5.31
+      ],
+      [
+       35.45,
+       5.47
+      ],
+      [
+       36.7,
+       5.48
+      ],
+      [
+       37.4,
+       5.42
+      ],
+      [
+       37.95,
+       5.31
+      ],
+      [
+       38.05,
+       5.47
+      ],
+      [
+       39.3,
+       5.48
+      ],
+      [
+       40.0,
+       5.42
+      ],
+      [
+       40.65,
+       5.31
+      ],
+      [
+       40.75,
+       5.47
+      ],
+      [
+       42.0,
+       5.48
+      ],
+      [
+       42.7,
+       5.42
+      ],
+      [
+       43.25,
+       5.31
+      ],
+      [
+       43.35,
+       5.47
+      ],
+      [
+       44.6,
+       5.48
+      ],
+      [
+       45.3,
+       5.42
+      ],
+      [
+       45.95,
+       5.31
+      ],
+      [
+       46.05,
+       5.47
+      ],
+      [
+       47.3,
+       5.48
+      ],
+      [
+       48.0,
+       5.42
+      ],
+      [
+       48.55,
+       5.31
+      ],
+      [
+       48.65,
+       5.47
+      ],
+      [
+       49.9,
+       5.48
+      ],
+      [
+       50.6,
+       5.42
+      ],
+      [
+       51.15,
+       5.31
+      ],
+      [
+       51.25,
+       5.47
+      ],
+      [
+       52.5,
+       5.48
+      ],
+      [
+       53.2,
+       5.42
+      ],
+      [
+       53.85,
+       5.31
+      ],
+      [
+       53.95,
+       5.47
+      ],
+      [
+       55.2,
+       5.48
+      ],
+      [
+       55.9,
+       5.42
+      ],
+      [
+       56.45,
+       5.31
+      ],
+      [
+       56.55,
+       5.47
+      ],
+      [
+       57.8,
+       5.48
+      ],
+      [
+       58.5,
+       5.42
+      ],
+      [
+       59.05,
+       5.31
+      ],
+      [
+       59.15,
+       5.47
+      ],
+      [
+       60.4,
+       5.48
+      ],
+      [
+       61.1,
+       5.42
+      ],
+      [
+       61.75,
+       5.31
+      ],
+      [
+       61.85,
+       5.47
+      ],
+      [
+       63.1,
+       5.48
+      ],
+      [
+       63.8,
+       5.42
+      ],
+      [
+       64.35,
+       5.31
+      ],
+      [
+       64.45,
+       5.47
+      ],
+      [
+       65.7,
+       5.48
+      ],
+      [
+       66.4,
+       5.42
+      ],
+      [
+       66.95,
+       5.31
+      ],
+      [
+       67.05,
+       5.47
+      ],
+      [
+       68.3,
+       5.48
+      ],
+      [
+       69.0,
+       5.42
+      ],
+      [
+       69.55,
+       5.31
+      ],
+      [
+       69.65,
+       5.47
+      ],
+      [
+       70.9,
+       5.48
+      ],
+      [
+       71.6,
+       5.42
+      ],
+      [
+       72.25,
+       5.31
+      ],
+      [
+       72.35,
+       5.47
+      ],
+      [
+       73.6,
+       5.48
+      ],
+      [
+       74.6,
+       5.4
+      ],
+      [
+       100.0,
+       5.4
+      ]
+     ]
+    },
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       0.0,
+       5.24
+      ],
+      [
+       24.3,
+       5.24
+      ],
+      [
+       24.5,
+       0.0
+      ],
+      [
+       73.8,
+       0.0
+      ],
+      [
+       74.0,
+       0.39
+      ],
+      [
+       74.4,
+       1.04
+      ],
+      [
+       74.8,
+       2.1
+      ],
+      [
+       75.2,
+       3.1
+      ],
+      [
+       75.6,
+       3.63
+      ],
+      [
+       76.0,
+       3.98
+      ],
+      [
+       76.4,
+       4.19
+      ],
+      [
+       76.8,
+       4.41
+      ],
+      [
+       77.2,
+       4.61
+      ],
+      [
+       77.6,
+       4.79
+      ],
+      [
+       78.0,
+       4.94
+      ],
+      [
+       78.4,
+       5.04
+      ],
+      [
+       78.8,
+       5.1
+      ],
+      [
+       79.2,
+       5.13
+      ],
+      [
+       79.6,
+       5.17
+      ],
+      [
+       80.4,
+       5.2
+      ],
+      [
+       82.4,
+       5.23
+      ],
+      [
+       100.0,
+       5.24
+      ]
+     ]
+    },
+    {
+     "label": "Iin",
+     "axis": "y2",
+     "points": [
+      [
+       0.0,
+       496
+      ],
+      [
+       22.6,
+       496
+      ],
+      [
+       23.6,
+       536
+      ],
+      [
+       24.1,
+       575
+      ],
+      [
+       24.3,
+       671
+      ],
+      [
+       24.4,
+       -12
+      ],
+      [
+       24.45,
+       -12
+      ],
+      [
+       25.9,
+       -12
+      ],
+      [
+       26.6,
+       417
+      ],
+      [
+       27.25,
+       988
+      ],
+      [
+       27.3,
+       -12
+      ],
+      [
+       27.35,
+       -12
+      ],
+      [
+       28.8,
+       -12
+      ],
+      [
+       29.5,
+       417
+      ],
+      [
+       29.95,
+       988
+      ],
+      [
+       30.0,
+       -12
+      ],
+      [
+       30.05,
+       -12
+      ],
+      [
+       31.5,
+       -12
+      ],
+      [
+       32.2,
+       417
+      ],
+      [
+       32.65,
+       988
+      ],
+      [
+       32.7,
+       -12
+      ],
+      [
+       32.75,
+       -12
+      ],
+      [
+       34.2,
+       -12
+      ],
+      [
+       34.9,
+       417
+      ],
+      [
+       35.35,
+       988
+      ],
+      [
+       35.4,
+       -12
+      ],
+      [
+       35.45,
+       -12
+      ],
+      [
+       36.9,
+       -12
+      ],
+      [
+       37.6,
+       417
+      ],
+      [
+       37.95,
+       988
+      ],
+      [
+       38.0,
+       -12
+      ],
+      [
+       38.05,
+       -12
+      ],
+      [
+       39.5,
+       -12
+      ],
+      [
+       40.2,
+       417
+      ],
+      [
+       40.65,
+       988
+      ],
+      [
+       40.7,
+       -12
+      ],
+      [
+       40.75,
+       -12
+      ],
+      [
+       42.2,
+       -12
+      ],
+      [
+       42.9,
+       417
+      ],
+      [
+       43.25,
+       988
+      ],
+      [
+       43.3,
+       -12
+      ],
+      [
+       43.35,
+       -12
+      ],
+      [
+       44.8,
+       -12
+      ],
+      [
+       45.5,
+       417
+      ],
+      [
+       45.95,
+       988
+      ],
+      [
+       46.0,
+       -12
+      ],
+      [
+       46.05,
+       -12
+      ],
+      [
+       47.5,
+       -12
+      ],
+      [
+       48.2,
+       417
+      ],
+      [
+       48.55,
+       988
+      ],
+      [
+       48.6,
+       -12
+      ],
+      [
+       48.65,
+       -12
+      ],
+      [
+       50.1,
+       -12
+      ],
+      [
+       50.8,
+       417
+      ],
+      [
+       51.15,
+       988
+      ],
+      [
+       51.2,
+       -12
+      ],
+      [
+       51.25,
+       -12
+      ],
+      [
+       52.7,
+       -12
+      ],
+      [
+       53.4,
+       417
+      ],
+      [
+       53.85,
+       988
+      ],
+      [
+       53.9,
+       -12
+      ],
+      [
+       53.95,
+       -12
+      ],
+      [
+       55.4,
+       -12
+      ],
+      [
+       56.1,
+       417
+      ],
+      [
+       56.45,
+       988
+      ],
+      [
+       56.5,
+       -12
+      ],
+      [
+       56.55,
+       -12
+      ],
+      [
+       58.0,
+       -12
+      ],
+      [
+       58.7,
+       417
+      ],
+      [
+       59.05,
+       988
+      ],
+      [
+       59.1,
+       -12
+      ],
+      [
+       59.15,
+       -12
+      ],
+      [
+       60.6,
+       -12
+      ],
+      [
+       61.3,
+       417
+      ],
+      [
+       61.75,
+       988
+      ],
+      [
+       61.8,
+       -12
+      ],
+      [
+       61.85,
+       -12
+      ],
+      [
+       63.3,
+       -12
+      ],
+      [
+       64.0,
+       417
+      ],
+      [
+       64.35,
+       988
+      ],
+      [
+       64.4,
+       -12
+      ],
+      [
+       64.45,
+       -12
+      ],
+      [
+       65.9,
+       -12
+      ],
+      [
+       66.6,
+       417
+      ],
+      [
+       66.95,
+       988
+      ],
+      [
+       67.0,
+       -12
+      ],
+      [
+       67.05,
+       -12
+      ],
+      [
+       68.5,
+       -12
+      ],
+      [
+       69.2,
+       417
+      ],
+      [
+       69.55,
+       988
+      ],
+      [
+       69.6,
+       -12
+      ],
+      [
+       69.65,
+       -12
+      ],
+      [
+       71.1,
+       -12
+      ],
+      [
+       71.8,
+       417
+      ],
+      [
+       72.25,
+       988
+      ],
+      [
+       72.3,
+       -12
+      ],
+      [
+       72.35,
+       -12
+      ],
+      [
+       73.8,
+       -12
+      ],
+      [
+       74.4,
+       536
+      ],
+      [
+       74.8,
+       424
+      ],
+      [
+       75.2,
+       321
+      ],
+      [
+       76.4,
+       385
+      ],
+      [
+       77.6,
+       440
+      ],
+      [
+       78.8,
+       472
+      ],
+      [
+       80.6,
+       488
+      ],
+      [
+       100.0,
+       496
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 17. Quiescent current against input voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Input voltage, Vin",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply quiescent current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "125 °C",
+     "points": [
+      [
+       1.23,
+       16.2
+      ],
+      [
+       1.65,
+       61.4
+      ],
+      [
+       1.68,
+       39.3
+      ],
+      [
+       1.78,
+       38.2
+      ],
+      [
+       1.92,
+       38.2
+      ],
+      [
+       2.5,
+       40.5
+      ],
+      [
+       2.84,
+       40.5
+      ],
+      [
+       2.94,
+       39.3
+      ],
+      [
+       3.08,
+       33.5
+      ],
+      [
+       3.11,
+       18.5
+      ],
+      [
+       5.3,
+       23.8
+      ],
+      [
+       5.68,
+       23.8
+      ],
+      [
+       5.88,
+       45.7
+      ],
+      [
+       6.12,
+       53.2
+      ],
+      [
+       6.33,
+       55.6
+      ],
+      [
+       6.53,
+       56.7
+      ],
+      [
+       8.03,
+       60.2
+      ],
+      [
+       8.14,
+       61.4
+      ],
+      [
+       8.92,
+       64.3
+      ],
+      [
+       9.54,
+       68.9
+      ],
+      [
+       14.11,
+       110.5
+      ],
+      [
+       20.03,
+       169.6
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       1.23,
+       5.8
+      ],
+      [
+       1.54,
+       30.1
+      ],
+      [
+       1.88,
+       33.5
+      ],
+      [
+       2.36,
+       34.7
+      ],
+      [
+       2.63,
+       36.4
+      ],
+      [
+       2.94,
+       35.9
+      ],
+      [
+       3.05,
+       32.4
+      ],
+      [
+       3.11,
+       17.9
+      ],
+      [
+       3.59,
+       19.6
+      ],
+      [
+       3.93,
+       19.6
+      ],
+      [
+       3.93,
+       20.3
+      ],
+      [
+       5.09,
+       22.6
+      ],
+      [
+       5.43,
+       22.6
+      ],
+      [
+       5.43,
+       23.1
+      ],
+      [
+       5.68,
+       22.6
+      ],
+      [
+       5.82,
+       39.9
+      ],
+      [
+       5.91,
+       44.6
+      ],
+      [
+       6.12,
+       48.1
+      ],
+      [
+       6.53,
+       49.8
+      ],
+      [
+       6.84,
+       49.8
+      ],
+      [
+       7.83,
+       52.7
+      ],
+      [
+       8.89,
+       57.9
+      ],
+      [
+       13.64,
+       103.6
+      ],
+      [
+       20.03,
+       170.2
+      ]
+     ]
+    },
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       1.23,
+       1.7
+      ],
+      [
+       1.34,
+       2.9
+      ],
+      [
+       1.71,
+       24.3
+      ],
+      [
+       2.05,
+       27.8
+      ],
+      [
+       2.36,
+       28.4
+      ],
+      [
+       2.6,
+       30.1
+      ],
+      [
+       2.94,
+       29.5
+      ],
+      [
+       3.05,
+       26.0
+      ],
+      [
+       3.08,
+       17.4
+      ],
+      [
+       3.83,
+       18.5
+      ],
+      [
+       3.83,
+       19.1
+      ],
+      [
+       4.24,
+       19.1
+      ],
+      [
+       4.55,
+       20.3
+      ],
+      [
+       4.89,
+       20.3
+      ],
+      [
+       4.89,
+       20.9
+      ],
+      [
+       5.23,
+       20.9
+      ],
+      [
+       5.23,
+       21.4
+      ],
+      [
+       5.64,
+       21.4
+      ],
+      [
+       5.74,
+       33.0
+      ],
+      [
+       6.02,
+       39.3
+      ],
+      [
+       7.22,
+       41.1
+      ],
+      [
+       8.24,
+       45.1
+      ],
+      [
+       8.41,
+       45.1
+      ],
+      [
+       8.79,
+       47.5
+      ],
+      [
+       13.54,
+       93.7
+      ],
+      [
+       15.75,
+       117.5
+      ],
+      [
+       20.03,
+       160.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 18. Overcurrent protection threshold against temperature",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Overcurrent threshold",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vin = 3.25 V",
+     "points": [
+      [
+       -40.2,
+       840.2
+      ],
+      [
+       -25.4,
+       850.2
+      ],
+      [
+       -0.1,
+       870.1
+      ],
+      [
+       24.8,
+       880.1
+      ],
+      [
+       84.6,
+       870.1
+      ],
+      [
+       124.9,
+       870.1
+      ]
+     ]
+    },
+    {
+     "label": "Vin = 3.6 V",
+     "points": [
+      [
+       -40.2,
+       830.3
+      ],
+      [
+       -25.4,
+       840.2
+      ],
+      [
+       -0.1,
+       850.2
+      ],
+      [
+       24.8,
+       850.2
+      ],
+      [
+       84.6,
+       830.3
+      ],
+      [
+       124.9,
+       830.3
+      ]
+     ]
+    },
+    {
+     "label": "Vin = 4.2 V",
+     "points": [
+      [
+       -40.2,
+       799.7
+      ],
+      [
+       -25.4,
+       789.8
+      ],
+      [
+       -0.1,
+       809.7
+      ],
+      [
+       24.8,
+       809.7
+      ],
+      [
+       84.6,
+       799.7
+      ],
+      [
+       124.9,
+       789.8
+      ]
+     ]
+    },
+    {
+     "label": "Vin = 5 V",
+     "points": [
+      [
+       -40.2,
+       749.9
+      ],
+      [
+       -25.4,
+       759.9
+      ],
+      [
+       24.8,
+       779.8
+      ],
+      [
+       124.9,
+       779.8
+      ]
+     ]
+    },
+    {
+     "label": "Vin = 5.25 V",
+     "points": [
+      [
+       -40.2,
+       739.9
+      ],
+      [
+       -25.4,
+       739.9
+      ],
+      [
+       -0.1,
+       749.9
+      ],
+      [
+       24.8,
+       769.8
+      ],
+      [
+       124.9,
+       769.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 19. Overcurrent protection threshold against input voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Overcurrent threshold",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       3.248,
+       880.0
+      ],
+      [
+       3.594,
+       850.2
+      ],
+      [
+       4.193,
+       809.6
+      ],
+      [
+       5.249,
+       769.8
+      ]
+     ]
+    },
+    {
+     "label": "85 °C",
+     "points": [
+      [
+       3.248,
+       870.1
+      ],
+      [
+       3.594,
+       830.3
+      ],
+      [
+       4.193,
+       799.7
+      ],
+      [
+       4.996,
+       779.8
+      ],
+      [
+       5.249,
+       769.8
+      ]
+     ]
+    },
+    {
+     "label": "125 °C",
+     "points": [
+      [
+       3.248,
+       870.1
+      ],
+      [
+       3.594,
+       830.3
+      ],
+      [
+       4.193,
+       789.7
+      ],
+      [
+       4.996,
+       779.8
+      ],
+      [
+       5.249,
+       769.8
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       3.248,
+       870.1
+      ],
+      [
+       3.594,
+       850.2
+      ],
+      [
+       4.193,
+       809.6
+      ],
+      [
+       4.996,
+       769.8
+      ],
+      [
+       5.249,
+       749.9
+      ]
+     ]
+    },
+    {
+     "label": "-25 °C",
+     "points": [
+      [
+       3.248,
+       850.2
+      ],
+      [
+       3.594,
+       840.2
+      ],
+      [
+       4.193,
+       789.7
+      ],
+      [
+       4.996,
+       759.9
+      ],
+      [
+       5.249,
+       740.0
+      ]
+     ]
+    },
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       3.248,
+       840.2
+      ],
+      [
+       3.594,
+       830.3
+      ],
+      [
+       4.193,
+       799.7
+      ],
+      [
+       4.996,
+       749.9
+      ],
+      [
+       5.249,
+       740.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 23. Thermal resistance of the UDFN 2x2 and TSOP packages against PCB copper area and thickness",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Copper heat-spreader area",
+    "unit": "mm²",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Theta JA",
+    "unit": "°C/W",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Delta DFN against TSOP-5",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TSOP-5 1.0 oz",
+     "points": [
+      [
+       24.4,
+       350.9
+      ],
+      [
+       49.3,
+       317.7
+      ],
+      [
+       99.2,
+       288.9
+      ],
+      [
+       149.1,
+       272.7
+      ],
+      [
+       298.7,
+       247.5
+      ],
+      [
+       399.8,
+       238.5
+      ],
+      [
+       599.4,
+       225.1
+      ]
+     ]
+    },
+    {
+     "label": "TSOP-5 2.0 oz",
+     "points": [
+      [
+       24.4,
+       308.7
+      ],
+      [
+       49.3,
+       280.8
+      ],
+      [
+       99.2,
+       254.7
+      ],
+      [
+       149.1,
+       241.3
+      ],
+      [
+       298.7,
+       218.8
+      ],
+      [
+       399.8,
+       210.7
+      ],
+      [
+       599.4,
+       199.9
+      ]
+     ]
+    },
+    {
+     "label": "DFN 2x2.2 1.0 oz",
+     "points": [
+      [
+       25.1,
+       263.3
+      ],
+      [
+       50.1,
+       222.8
+      ],
+      [
+       100.0,
+       188.7
+      ],
+      [
+       149.8,
+       170.7
+      ],
+      [
+       299.5,
+       144.7
+      ],
+      [
+       400.5,
+       134.7
+      ],
+      [
+       600.0,
+       122.2
+      ]
+     ]
+    },
+    {
+     "label": "DFN 2x2.2 2.0 oz",
+     "points": [
+      [
+       25.1,
+       234.5
+      ],
+      [
+       50.1,
+       198.5
+      ],
+      [
+       100.0,
+       168.0
+      ],
+      [
+       149.8,
+       152.7
+      ],
+      [
+       299.5,
+       129.3
+      ],
+      [
+       400.5,
+       120.4
+      ],
+      [
+       600.0,
+       108.7
+      ]
+     ]
+    },
+    {
+     "label": "% Delta DFN vs TSOP-5",
+     "axis": "y2",
+     "points": [
+      [
+       25.1,
+       24.84
+      ],
+      [
+       50.0,
+       29.94
+      ],
+      [
+       100.0,
+       34.73
+      ],
+      [
+       149.9,
+       37.27
+      ],
+      [
+       299.5,
+       41.62
+      ],
+      [
+       400.5,
+       43.41
+      ],
+      [
+       600.0,
+       45.66
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application circuit (UDFN pinout)",
+   "page": 2,
+   "description": "The NCP361 sits between a VBUS input and the protected rail. A 1 µF 25 V X5R 0603 ceramic (C1) decouples IN and a second one (C2) sits on the joined OUT pins. EN is wired straight to GND, so the switch is on whenever the input is inside the UVLO-OVLO window. The open-drain FLAG pin leaves as the FLAG signal and is pulled up through R1, 1 MΩ, from a separate FLAG supply by way of the two-pin part J2 (FLAG_State).",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP361",
+     "note": "UDFN6 pinout"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "25 V X5R 0603, input"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "25 V X5R 0603, output"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 MΩ",
+     "note": "FLAG pull-up"
+    },
+    {
+     "ref": "J2",
+     "type": "connector",
+     "value": "FLAG_State",
+     "note": "two pins"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "INPUT"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "OUTPUT"
+    },
+    {
+     "ref": "FLAG",
+     "type": "terminal",
+     "value": "FLAG"
+    },
+    {
+     "ref": "FLAGPWR",
+     "type": "terminal",
+     "value": "FLAG Power"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "DC current allowed by the thermal limit",
+   "expr": "I = √((TJ - TA) / (RθJA × RDSON))",
+   "where": {
+    "I": "continuous current through the switch",
+    "TJ": "junction temperature",
+    "TA": "ambient temperature",
+    "RθJA": "junction-to-ambient thermal resistance of the mounted package",
+    "RDSON": "on-resistance of the internal PMOS FET"
+   },
+   "note": "With 260 °C/W (200 mm² of copper) and TA = 85 °C the result is 625 mA.",
+   "page": 9
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Function",
+   "page": 8,
+   "text": "An internal PMOS FET joins IN to OUT. While VBUS stays inside the window between UVLO and OVLO the output tracks the input, less the drop across the FET's RDS(on); outside the window the FET is off and the load is cut off. The input withstands positive overvoltage up to 20 V. No external switch is used."
+  },
+  {
+   "topic": "Fault detection and the switch",
+   "page": 5,
+   "text": "A detection block watches input voltage, load current and die temperature and drives the switch. With VIN above OVLO or below UVLO the switch is open; with UVLO < VIN < OVLO it is closed."
+  },
+  {
+   "topic": "Undervoltage lockout",
+   "page": 8,
+   "text": "On a rising input the output stays off until VIN passes 3.0 V nominal. FLAG is held low until the input reaches the UVLO threshold. The threshold has 70 mV of hysteresis against noise and transients."
+  },
+  {
+   "topic": "Start-up",
+   "page": 5,
+   "text": "Once VIN passes UVLO, the output ramps up and reaches 0.8 × Vin after ton (4.0 ms typical, 15 ms maximum), then settles at Vin - RDS(on) × I. FLAG rises past 1.2 V a time tstart after VIN crosses UVLO."
+  },
+  {
+   "topic": "Overvoltage lockout",
+   "page": 8,
+   "text": "When VIN rises above OVLO the output turns off (toff, 0.7 µs typical, to Vout ≤ 0.3 V) and FLAG goes low (tstop, 1.0 µs typical, to FLAG ≤ 0.4 V). Both stay that way until VIN drops below OVLO less its 100 mV hysteresis. Between UVLO and OVLO the output follows the input; outside, it is at 0 V."
+  },
+  {
+   "topic": "Overcurrent protection",
+   "page": 8,
+   "text": "The current limit is set inside the part at 750 mA. Versions from 150 mA to 750 mA are possible by a metal option, available through onsemi. When the load current passes Ilim the FET turns off within 5 µs and FLAG goes low. The part then turns on again after the ton delay (4 ms typical) and keeps cycling on and off while the fault lasts, which limits dissipation; a system controller can count the FLAG events and turn the FET off with EN. Once the overload is removed, normal operation resumes on the next turn-on."
+  },
+  {
+   "topic": "FLAG output",
+   "page": 8,
+   "text": "FLAG is pulled low when 1.2 V < Vin < UVLO, when Vin > OVLO, when the load current exceeds the limit, or when TJ > 150 °C, and is released in normal operation. It is an open-drain output and needs a pull-up resistor to VCC, typically 1 MΩ and at least 10 kΩ."
+  },
+  {
+   "topic": "EN input",
+   "page": 8,
+   "text": "EN low or grounded allows normal operation; EN high cuts OUT off from IN, with Vout falling below 0.3 V within tdis (3.0 µs typical) of EN passing 1.2 V, while FLAG stays high. EN does not override an OVLO or UVLO fault: with EN high, FLAG still goes low when Vin leaves the window and returns high tstart after Vin is back inside it."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 4,
+   "text": "The FET turns off at a junction temperature of 150 °C (typical) and turns back on after the die cools by the 30 °C hysteresis; FLAG is low while the output is off."
+  },
+  {
+   "topic": "ESD",
+   "page": 8,
+   "text": "With 1 µF mounted at the input on the board, the input meets IEC 61000-4-2 level 4: ±15 kV air discharge and ±8 kV contact discharge. HBM class 2, MM class B."
+  },
+  {
+   "topic": "PCB and thermal",
+   "page": 9,
+   "text": "The internal PMOS FET is rated 500 mA. On the UDFN, PAD1 may be joined to the ground plane to improve heat transfer and must not be joined to any other potential. More copper area lowers RθJA and raises the current the part can carry: without added copper (305 °C/W) the DC current is 500 mA; with 200 mm² (260 °C/W) at 85 °C ambient it is 625 mA. The final thermal resistance is to be confirmed by measurement on the application board."
+  }
+ ],
+ "packages": [
+  {
+   "name": "TSOP-5 (case 483)",
+   "page": 11,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.900",
+     "1.000",
+     "1.100"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.010",
+     "0.055",
+     "0.100"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "",
+     "0.950 REF.",
+     ""
+    ],
+    [
+     "b",
+     "lead width",
+     "0.250",
+     "0.375",
+     "0.500"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.100",
+     "0.180",
+     "0.260"
+    ],
+    [
+     "D",
+     "body length",
+     "2.850",
+     "3.000",
+     "3.150"
+    ],
+    [
+     "E",
+     "overall width across leads",
+     "2.500",
+     "2.750",
+     "3.000"
+    ],
+    [
+     "E1",
+     "body width",
+     "1.350",
+     "1.500",
+     "1.650"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.950 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.200",
+     "0.400",
+     "0.600"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "5°",
+     "10°"
+    ]
+   ],
+   "notes": [
+    "Body 3.00 x 1.50 x 0.95 mm, 0.95 mm pitch, five leads (1, 2, 3 on one side; 4, 5 on the other).",
+    "D and E1 exclude mold flash, protrusions and gate burrs, each at most 0.15 per side.",
+    "The maximum lead thickness includes the finish; the minimum is the base metal alone.",
+    "An optional trimmed lead may sit between pins 4 and 5, extending no more than 0.2 from the body.",
+    "Gauge plane 0.250 above the seating plane; lead position tolerance 0.20; coplanarity 0.05."
+   ]
+  },
+  {
+   "name": "TSOP-5 recommended footprint",
+   "page": 11,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "pad pitch",
+     "0.950"
+    ],
+    [
+     "pad 1 to pad 3 centres",
+     "1.900"
+    ],
+    [
+     "row pitch, pad centre to pad centre",
+     "2.400"
+    ],
+    [
+     "pad length",
+     "1.000"
+    ],
+    [
+     "pad width",
+     "0.700"
+    ]
+   ]
+  },
+  {
+   "name": "UDFN6 2x2 (case 517AB)",
+   "page": 12,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.45",
+     "0.55"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.05"
+    ],
+    [
+     "A3",
+     "terminal thickness",
+     "0.127 REF",
+     ""
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.25",
+     "0.35"
+    ],
+    [
+     "D",
+     "body length",
+     "2.00 BSC",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "1.50",
+     "1.70"
+    ],
+    [
+     "E",
+     "body width",
+     "2.00 BSC",
+     ""
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "0.80",
+     "1.00"
+    ],
+    [
+     "e",
+     "terminal pitch",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.25",
+     "0.35"
+    ],
+    [
+     "L1",
+     "terminal dimension, alternate construction",
+     "---",
+     "0.15"
+    ]
+   ],
+   "notes": [
+    "b is taken on the plated terminal between 0.15 and 0.25 mm from its tip.",
+    "Coplanarity covers the exposed pad as well as the terminals.",
+    "Tie bars may show on the top and are joined to the thermal pad."
+   ]
+  },
+  {
+   "name": "UDFN6 recommended footprint",
+   "page": 12,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "exposed pad land length",
+     "1.70"
+    ],
+    [
+     "exposed pad land width",
+     "0.95"
+    ],
+    [
+     "outer edge to outer edge across the two pad rows",
+     "2.30"
+    ],
+    [
+     "terminal pad length (6x)",
+     "0.47"
+    ],
+    [
+     "terminal pad width (6x)",
+     "0.40"
+    ],
+    [
+     "pad pitch",
+     "0.65"
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,765 @@
+{
+ "sheet": 1,
+ "name": "MIC2779L-2YM5-TR",
+ "kind": "supervisor",
+ "manufacturer": "Microchip",
+ "title": "MIC2779: battery voltage monitor with separately set low and high thresholds, push-pull reset, SOT23-5",
+ "source": {
+  "document": "DS20006116A",
+  "revision": "Revision A, November 2018",
+  "pages": 16
+ },
+ "summary": "A low-power voltage monitor with two comparator inputs against a 1.240 V bandgap: LTH sets the level at which the reset output trips and latches, HTH the higher level at which it lets go, so the hysteresis is set by an external three-resistor divider. Once HTH has risen past the reference, the output stays asserted for 140 ms minimum before releasing. The supply pin is separate from the sensing inputs, the output is push-pull, and supply current is 1 µA typical. MIC2779L has an active-low /RST and MIC2779H an active-high RST; both are 2 % parts in a 5-lead SOT23 for -40 °C to +85 °C.",
+ "key_figures": [
+  [
+   "Reference voltage",
+   "1.240 V typ; 1.215 to 1.265 V, -40 to +85 °C"
+  ],
+  [
+   "Threshold accuracy",
+   "±2 %"
+  ],
+  [
+   "Reset pulse width",
+   "140 ms min, 420 ms max"
+  ],
+  [
+   "Supply current",
+   "1 µA typ, 2 µA max (output not asserted)"
+  ],
+  [
+   "Supply range",
+   "1.5 V to 5.5 V; output held low down to VDD = 1.2 V"
+  ],
+  [
+   "Input leakage",
+   "5 pA typ, 10 nA max"
+  ],
+  [
+   "Output",
+   "push-pull; L: active-low /RST, H: active-high RST"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +85 °C"
+  ],
+  [
+   "Package",
+   "SOT23-5 (M5), 2.90 x 1.60 mm body"
+  ]
+ ],
+ "part_numbers": {
+  "page": 13,
+  "columns": [
+   "part number",
+   "output polarity",
+   "accuracy",
+   "junction temperature range",
+   "package",
+   "packing"
+  ],
+  "rows": [
+   [
+    "MIC2779H-2YM5-TR",
+    "active-high RST",
+    "2 %",
+    "-40 °C to +85 °C, RoHS compliant",
+    "5-lead SOT23 (M5)",
+    "3,000/reel"
+   ],
+   [
+    "MIC2779L-2YM5-TR",
+    "active-low /RST",
+    "2 %",
+    "-40 °C to +85 °C, RoHS compliant",
+    "5-lead SOT23 (M5)",
+    "3,000/reel"
+   ]
+  ],
+  "notes": [
+   "Code fields in order: H or L for polarity, -2 for 2 % accuracy, Y for the temperature range, M5 for the package, -TR for tape and reel.",
+   "The -TR suffix is an ordering code only and does not appear in the marking on the part.",
+   "Top mark: a product code on the first line and a three-character traceability code on the second (for instance UPB1 over 288). The package is Pb-free; its JEDEC e3 (matte tin) mark is on the outer packing."
+  ]
+ },
+ "pins": [
+  {
+   "package": "SOT23-5 (M5), MIC2779L",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "HTH",
+     "type": "analog input",
+     "function": "Comparator input for the upper threshold. When it first climbs past VREF, the delay runs and /RST is held low for at least 140 ms before it goes high."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "3",
+     "name": "LTH",
+     "type": "analog input",
+     "function": "Comparator input for the lower threshold. Dropping under VREF asserts /RST, which then stays asserted until VHTH > VREF."
+    },
+    {
+     "pin": "4",
+     "name": "/RST",
+     "type": "output",
+     "function": "Push-pull reset output, active low. Goes low and latches once VLTH < VREF; it is released only after VHTH > VREF."
+    },
+    {
+     "pin": "5",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply for the internal circuits, independent of the sensed inputs."
+    }
+   ]
+  },
+  {
+   "package": "SOT23-5 (M5), MIC2779H",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "HTH",
+     "type": "analog input",
+     "function": "Comparator input for the upper threshold. When it first climbs past VREF, the delay runs and RST is held high for at least 140 ms before it goes low."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "3",
+     "name": "LTH",
+     "type": "analog input",
+     "function": "Comparator input for the lower threshold. Dropping under VREF asserts RST, which then stays asserted until VHTH > VREF."
+    },
+    {
+     "pin": "4",
+     "name": "RST",
+     "type": "output",
+     "function": "Push-pull reset output, active high. Goes high and latches once VLTH < VREF; it is released only after VHTH > VREF."
+    },
+    {
+     "pin": "5",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply for the internal circuits, independent of the sensed inputs."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VDD",
+     "–0.3V to +7V"
+    ],
+    [
+     "Input voltages",
+     "VLTH, VHTH, V/RST, VRST",
+     "–0.3V to +7V"
+    ],
+    [
+     "/RST, RST output current",
+     "I/RST, IRST",
+     "20 mA"
+    ],
+    [
+     "Storage temperature",
+     "TS",
+     "–65°C to +150°C"
+    ],
+    [
+     "ESD rating (Note 1)",
+     "",
+     "2 kV"
+    ]
+   ],
+   "notes": [
+    "Stress past these limits can damage the part permanently; running it at them is not implied, and long exposure can reduce reliability.",
+    "Note 1: the part is ESD sensitive and should be handled with care. The rating is human body model, 100 pF discharged through 1.5 kΩ."
+   ]
+  },
+  {
+   "title": "Operating ratings",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Supply voltage (Note 2)",
+     "VDD",
+     "+1.5V to +5.5V"
+    ],
+    [
+     "Input voltages",
+     "VLTH, VHTH, V/RST, VRST",
+     "–0.3V to +6.0V"
+    ],
+    [
+     "Ambient temperature range",
+     "TA",
+     "–40°C to +85°C"
+    ],
+    [
+     "Package thermal resistance, 5-Ld SOT23",
+     "",
+     "256°C/W"
+    ]
+   ],
+   "notes": [
+    "Function is not guaranteed outside these ratings.",
+    "Note 2: VDD runs from 1.5 V to 5.5 V; the output is guaranteed to stay low with VDD as low as 1.2 V."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 4,
+   "conditions": "1.5V ≤ VDD ≤ 5.5V; TA = +25°C, unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply Current",
+     "IDD",
+     "/RST, RST not asserted",
+     "—",
+     "1",
+     "2",
+     "µA"
+    ],
+    [
+     "Input Leakage Current",
+     "ILTH, IHTH",
+     "—",
+     "—",
+     "5",
+     "—",
+     "pA"
+    ],
+    [
+     "Input Leakage Current",
+     "ILTH, IHTH",
+     "—",
+     "—",
+     "—",
+     "10",
+     "nA"
+    ],
+    [
+     "Reference Voltage",
+     "VREF",
+     "—",
+     "—",
+     "1.240",
+     "—",
+     "V"
+    ],
+    [
+     "Reference Voltage",
+     "VREF",
+     "MIC2779H/L-2",
+     "1.215",
+     "—",
+     "1.265",
+     "V"
+    ],
+    [
+     "Propagation Delay",
+     "tD",
+     "VLTH = VREF(MAX) +100 mV to VREF(MIN) – 100 mV",
+     "—",
+     "5",
+     "—",
+     "µs"
+    ],
+    [
+     "Reset Pulse Width",
+     "tRESET",
+     "—",
+     "140",
+     "—",
+     "420",
+     "ms"
+    ],
+    [
+     "Reset Output Low Voltage",
+     "VOL",
+     "/RST asserted or RST not asserted, ISINK = 1.6 mA, VDD ≥ 1.6V",
+     "—",
+     "—",
+     "0.3",
+     "V"
+    ],
+    [
+     "Reset Output Low Voltage",
+     "VOL",
+     "/RST asserted or RST not asserted, ISINK = 100 µA, VDD ≥ 1.2V",
+     "—",
+     "—",
+     "0.4",
+     "V"
+    ],
+    [
+     "Reset Output High Voltage",
+     "VOH",
+     "/RST not asserted or RST asserted, ISOURCE = 500 µA, VDD ≥ 1.6V",
+     "0.8VDD",
+     "—",
+     "—",
+     "V"
+    ],
+    [
+     "Reset Output High Voltage",
+     "VOH",
+     "/RST not asserted or RST asserted, ISOURCE = 50 µA, VDD ≥ 1.2V",
+     "0.8VDD",
+     "—",
+     "—",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Every min and max figure in this table holds over –40°C ≤ TA ≤ +85°C; the typical figures are at 25 °C."
+   ]
+  },
+  {
+   "title": "Temperature specifications",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Ambient Temperature Range",
+     "TA",
+     "—",
+     "–40",
+     "—",
+     "+85",
+     "°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "TS",
+     "—",
+     "–65",
+     "—",
+     "+150",
+     "°C"
+    ],
+    [
+     "Thermal Resistance, SOT23-5",
+     "θJA",
+     "—",
+     "—",
+     "256",
+     "—",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "Allowed dissipation depends on ambient temperature, the maximum junction temperature and θJA. Dissipating more pushes the junction past its +85 °C maximum, and holding it above +85 °C can affect reliability."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Input Transient Response",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Reset comparator overdrive, VREF – VLTH",
+    "unit": "mV",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Maximum transient duration",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       3.581,
+       115.1
+      ],
+      [
+       7.177,
+       100.0
+      ],
+      [
+       10.76,
+       72.0
+      ],
+      [
+       14.32,
+       59.1
+      ],
+      [
+       21.48,
+       48.1
+      ],
+      [
+       28.7,
+       38.1
+      ],
+      [
+       32.35,
+       36.0
+      ],
+      [
+       35.81,
+       33.0
+      ],
+      [
+       71.77,
+       20.1
+      ],
+      [
+       107.6,
+       15.0
+      ],
+      [
+       179.5,
+       12.0
+      ],
+      [
+       358.1,
+       11.8
+      ],
+      [
+       717.7,
+       1.5
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "cell-phone-battery-monitor",
+   "title": "Cellular telephone battery monitor",
+   "page": 2,
+   "description": "A single Li-ion cell feeds a 3.0 V LDO and also powers the MIC2779L directly. A divider of 604 kΩ, 56 kΩ and 340 kΩ from the cell to ground drives LTH from its upper tap and HTH from its lower tap, giving VBAT(hi) = 3.6 V and VBAT(lo) = 3.1 V. /RST drives the LDO's enable, so the 3.0 V rail is switched off once the cell falls to 3.1 V and comes back after the cell has passed 3.6 V and the reset delay has run.",
+   "parts": [
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "Li-ion cell"
+    },
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MIC2779L"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MIC5207-3.0YM5",
+     "external": true,
+     "note": "3.0 V LDO regulator"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "604 kΩ",
+     "note": "1 %"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "56 kΩ",
+     "note": "1 %"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "340 kΩ",
+     "note": "1 %"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "on the LDO bypass pin"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "polarised, LDO output"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "VOUT 3.0 V"
+    }
+   ],
+   "notes": [
+    "VBAT(hi) = 3.6V, VBAT(lo) = 3.1V."
+   ]
+  },
+  {
+   "id": "example-divider",
+   "title": "Example circuit",
+   "page": 8,
+   "description": "The three-resistor divider on its own: R1 from VBATT to the LTH tap, R2 from the LTH tap to the HTH tap, R3 from the HTH tap to ground. VBATT also supplies VDD, and the reset pin is the circuit's output (/RST on the L part, RST on the H part).",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MIC2779L"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "604 kΩ",
+     "note": "1 %"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "56 kΩ",
+     "note": "1 %"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "340 kΩ",
+     "note": "1 %"
+    },
+    {
+     "ref": "VBATT",
+     "type": "terminal",
+     "value": "VBATT"
+    },
+    {
+     "ref": "RESET",
+     "type": "terminal",
+     "value": "/RST"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Low-voltage threshold",
+   "expr": "VBAT(LO) = VREF × (R1 + R2 + R3) / (R2 + R3)",
+   "where": {
+    "VREF": "1.240 V",
+    "R1": "divider resistor from VBAT to the LTH tap",
+    "R2": "divider resistor between the LTH and HTH taps",
+    "R3": "divider resistor from the HTH tap to ground"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "High-voltage threshold",
+   "expr": "VBAT(HI) = VREF × (R1 + R2 + R3) / R3",
+   "where": {
+    "VREF": "1.240 V"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Worked example, R3",
+   "expr": "VBAT(HI) = 3.6 V = 1.24 × (1 MΩ / R3); R3 = 344 kΩ",
+   "where": {
+    "1 MΩ": "chosen total R1 + R2 + R3"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Worked example, R2 and R1",
+   "expr": "VBAT(LO) = 3.1 V = 1.24 × (1 MΩ / (R2 + 344 kΩ)); R2 = 56 kΩ; R1 = 1 MΩ – R2 – R3 = 600 kΩ",
+   "where": {},
+   "note": "The circuits use 604 kΩ, 56 kΩ and 340 kΩ, 1 %.",
+   "page": 8
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 7,
+   "text": "The part watches a battery through a divider. When the cell runs down past the lower set point the output asserts. After the cell is swapped or recharged above the upper set point, the output stays asserted (low on the L part, high on the H part) for at least 140 ms and then releases."
+  },
+  {
+   "topic": "Output",
+   "page": 7,
+   "text": "The reset output drives both ways (push-pull) at logic levels. MIC2779L drives /RST, active low; MIC2779H drives RST, active high. For an open-drain output the MIC2778 or MIC833 is the alternative."
+  },
+  {
+   "topic": "Trip points and latching",
+   "page": 7,
+   "text": "Each input goes to a comparator against the internal reference. VLTH falling under VREF asserts the output, and at that moment VHTH is taken to be under VREF as well. The asserted state is latched, so recovery of the cell or removal of the load cannot make the output toggle; only VHTH rising above VREF ends it."
+  },
+  {
+   "topic": "Delay",
+   "page": 7,
+   "text": "At power-up, or after the cell is replaced or recharged, VHTH crossing above VREF starts a delay; the output is released after 140 ms minimum (420 ms maximum)."
+  },
+  {
+   "topic": "Supply",
+   "page": 1,
+   "text": "VDD is separate from the sensing inputs, so the part may run from a rail downstream of the battery such as a boost converter output. Supply current is 1 µA typical."
+  },
+  {
+   "topic": "Choosing the divider",
+   "page": 8,
+   "text": "Fix the divider total R1 + R2 + R3 first; 1 MΩ keeps battery drain low with no measurable loss of accuracy. Leakage into a high-value divider shifts the trip points, and the total from VBAT to ground should stay at 3 MΩ or less. Set VBAT(HI) first to get R3, then use VBAT(LO) to get R2, and R1 is what remains. For one Li-ion cell, 3.6 V is a sensible upper point (moderately charged); the cell must not go below 2.5 V and many designs stop at 3.1 V. Resistor tolerance follows the accuracy the system needs."
+  },
+  {
+   "topic": "Input transients",
+   "page": 8,
+   "text": "Brief negative-going dips below VBAT(LO) are ignored: the narrower the dip, the larger the overdrive below VREF it can have without causing a reset. Typical longest ignored dip is about 115 µs at 3.6 mV overdrive, 36 µs at 32 mV and 12 µs at 180 to 360 mV."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SOT23-5 (M5), outline SOT23-5LD-PL-1",
+   "page": 10,
+   "unit": "mm",
+   "columns": [
+    "what",
+    "value"
+   ],
+   "rows": [
+    [
+     "body length",
+     "2.90±0.10"
+    ],
+    [
+     "body width",
+     "1.60±0.10"
+    ],
+    [
+     "overall width across leads",
+     "2.80±0.20"
+    ],
+    [
+     "lead pitch",
+     "0.95 TYP"
+    ],
+    [
+     "lead width",
+     "0.250 (MIN), 0.500 (MAX)"
+    ],
+    [
+     "overall height",
+     "0.90 (MIN), 1.45 (MAX)"
+    ],
+    [
+     "body thickness",
+     "1.10±0.20"
+    ],
+    [
+     "standoff",
+     "0.00 (MIN), 0.15 (MAX)"
+    ],
+    [
+     "lead thickness",
+     "0.09 (MIN), 0.20 (MAX)"
+    ],
+    [
+     "foot length",
+     "0.45±0.1"
+    ],
+    [
+     "gauge plane",
+     "0.20 bsc"
+    ],
+    [
+     "foot angle",
+     "0°~3°"
+    ],
+    [
+     "body side angles",
+     "10° TYP (2 PLCS)"
+    ]
+   ],
+   "notes": [
+    "Body dimensions exclude mold flash and burr and include plating. Dimensioning and tolerancing to ANSI Y14.5M-1982; foot length is measured by the gauge plane method.",
+    "The die faces up for moulding and down for trim and form."
+   ]
+  },
+  {
+   "name": "SOT23-5 recommended land pattern",
+   "page": 10,
+   "unit": "mm",
+   "columns": [
+    "what",
+    "value"
+   ],
+   "rows": [
+    [
+     "pad width",
+     "0.66±0.02"
+    ],
+    [
+     "pad length",
+     "1.00±0.02"
+    ],
+    [
+     "pad pitch",
+     "0.95 BSC"
+    ],
+    [
+     "outer pad spacing, pin 1 to pin 3",
+     "1.90 BSC"
+    ],
+    [
+     "row pitch, pad centre to pad centre",
+     "2.60±0.05"
+    ],
+    [
+     "overall length over both rows",
+     "3.63±0.05"
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2566 @@
+{
+ "sheet": 1,
+ "name": "BQ76200PWR",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "bq76200: high-side N-channel charge/discharge FET driver for 8 V to 75 V battery packs",
+ "source": {
+  "document": "SLUSC16B",
+  "revision": "November 2015, revised March 2019",
+  "pages": 30
+ },
+ "summary": "The bq76200 drives back-to-back N-channel protection FETs in the positive line of a battery pack, so the pack's ground stays continuous with the host. An internal charge pump on an external capacitor (470 nF and up) lifts the gates 9 V to 14 V above the stack; separate enables switch the charge and discharge FETs, another enables a P-channel precharge or predischarge driver, and PMON_EN switches PACK onto a PACKDIV pin so an MCU can read PACK+ through a divider. It runs from 8 V to 75 V with pins rated to 100 V and pairs with the bq76920/30/40 AFEs or an MCU. It comes in a 16-pin TSSOP; BQ76200PWR is the 2000-piece reel.",
+ "key_figures": [
+  [
+   "Supply (BAT) range",
+   "8 V to 75 V; 100 V absolute maximum on BAT, PACK and the outputs"
+  ],
+  [
+   "Gate drive, CHG and DSG",
+   "12 V typ (9 V to 14 V) above source, CL = 10 nF"
+  ],
+  [
+   "PCHG gate drive",
+   "12 V typ (5 V to 14 V) below PACK"
+  ],
+  [
+   "Charge pump voltage",
+   "9 V to 14 V above BAT; start-up 100 ms typ with 470 nF"
+  ],
+  [
+   "Normal mode current",
+   "40 µA typ, 60 µA max at 8 V"
+  ],
+  [
+   "Shutdown current",
+   "6 µA typ, 9.5 µA max"
+  ],
+  [
+   "Turn-on, CHG / DSG",
+   "27 µs / 24 µs typ into 10 nF, pump already on"
+  ],
+  [
+   "Turn-off, CHG / DSG",
+   "7 µs typ into 10 nF"
+  ],
+  [
+   "Enable thresholds",
+   "0.6 V max low, 1.2 V min high; inputs to 15 V"
+  ],
+  [
+   "PACK to PACKDIV switch",
+   "2.5 kΩ typ"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to 85 °C"
+  ],
+  [
+   "Package",
+   "TSSOP-16 (PW), 5.0 × 4.4 × 1.0 mm nominal body"
+  ]
+ ],
+ "part_numbers": {
+  "page": 22,
+  "columns": [
+   "part number",
+   "package",
+   "packing",
+   "marking",
+   "operating temperature"
+  ],
+  "rows": [
+   [
+    "BQ76200PW",
+    "TSSOP-16 (PW)",
+    "tube, 90",
+    "BQ7620B",
+    "-40 to 85 °C"
+   ],
+   [
+    "BQ76200PW.A",
+    "TSSOP-16 (PW)",
+    "tube, 90",
+    "BQ7620B",
+    "-40 to 85 °C"
+   ],
+   [
+    "BQ76200PWR",
+    "TSSOP-16 (PW)",
+    "large tape and reel, 2000",
+    "BQ7620B",
+    "-40 to 85 °C"
+   ],
+   [
+    "BQ76200PWR.A",
+    "TSSOP-16 (PW)",
+    "large tape and reel, 2000",
+    "BQ7620B",
+    "-40 to 85 °C"
+   ],
+   [
+    "BQ76200PWRG4",
+    "TSSOP-16 (PW)",
+    "large tape and reel, 2000",
+    "BQ7620B",
+    "-40 to 85 °C"
+   ],
+   [
+    "BQ76200PWRG4.A",
+    "TSSOP-16 (PW)",
+    "large tape and reel, 2000",
+    "BQ7620B",
+    "-40 to 85 °C"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "TSSOP-16 (PW)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VDDCP",
+     "type": "output",
+     "function": "Charge pump output. A capacitor goes from this pin to BAT (470 nF nominal); nothing else may draw current from it."
+    },
+    {
+     "pin": "2",
+     "name": "BAT",
+     "type": "power",
+     "function": "Supply input from the top of the cell stack."
+    },
+    {
+     "pin": "3",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; leave open."
+    },
+    {
+     "pin": "4",
+     "name": "CHG_EN",
+     "type": "digital input",
+     "function": "Turns the charge FET gate drive on when high. Internal pull-down; ground it when unused."
+    },
+    {
+     "pin": "5",
+     "name": "CP_EN",
+     "type": "digital input",
+     "function": "Turns the charge pump on when high. Inside the chip it is ORed with CHG_EN and DSG_EN. Internal pull-down; ground it when unused."
+    },
+    {
+     "pin": "6",
+     "name": "DSG_EN",
+     "type": "digital input",
+     "function": "Turns the discharge FET gate drive on when high. Internal pull-down; ground it when unused."
+    },
+    {
+     "pin": "7",
+     "name": "PMON_EN",
+     "type": "digital input",
+     "function": "Closes the internal switch from PACK to PACKDIV when high. Internal pull-down; ground it when unused."
+    },
+    {
+     "pin": "8",
+     "name": "PCHG_EN",
+     "type": "digital input",
+     "function": "Turns the precharge P-channel gate drive on when high. Internal pull-down; ground it when unused."
+    },
+    {
+     "pin": "9",
+     "name": "VSS",
+     "type": "power",
+     "function": "Ground reference."
+    },
+    {
+     "pin": "10",
+     "name": "PACKDIV",
+     "type": "output",
+     "function": "PACK voltage passed through the internal switch, for a resistor divider into an MCU ADC. Leave open when unused."
+    },
+    {
+     "pin": "11",
+     "name": "PACK",
+     "type": "power",
+     "function": "Sense input from the PACK+ terminal."
+    },
+    {
+     "pin": "12",
+     "name": "DSG",
+     "type": "output",
+     "function": "Gate drive for the discharge N-channel FET. Leave open when unused."
+    },
+    {
+     "pin": "13",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; leave open."
+    },
+    {
+     "pin": "14",
+     "name": "PCHG",
+     "type": "output",
+     "function": "Gate drive for the precharge P-channel FET. Leave open when unused."
+    },
+    {
+     "pin": "15",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; leave open."
+    },
+    {
+     "pin": "16",
+     "name": "CHG",
+     "type": "output",
+     "function": "Gate drive for the charge N-channel FET. Leave open when unused."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 4,
+   "conditions": "Over operating free-air temperature range unless otherwise noted",
+   "columns": [
+    "parameter",
+    "pins or conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage range, VIN",
+     "BAT, PACK (both under charge pump disabled condition)",
+     "–0.3",
+     "100",
+     "V"
+    ],
+    [
+     "Input voltage range, VIN",
+     "CHG_EN, DSG_EN, PCHG_EN, PMON_EN, CP_EN",
+     "–0.3",
+     "15",
+     "V"
+    ],
+    [
+     "Output voltage range, VO",
+     "CHG, DSG, PCHG, PACKDIV, VDDCP",
+     "–0.3",
+     "100",
+     "V"
+    ],
+    [
+     "TFUNC",
+     "Functional Temperature",
+     "–40",
+     "110",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "",
+     "–65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Ratings beyond these can damage the device permanently; they are stress limits only, and running at them for long periods can reduce reliability.",
+    "Current into any enable input must be limited to 5 mA at most."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "V(ESD)",
+     "Electrostatic discharge",
+     "Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001",
+     "±2000",
+     "V"
+    ],
+    [
+     "V(ESD)",
+     "Electrostatic discharge",
+     "Charged-device model (CDM), per JEDEC specification JESD22-C101",
+     "±500",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEP155 gives 500 V HBM as the level a standard ESD control process handles safely in manufacturing.",
+    "JEP157 gives 250 V CDM as the level a standard ESD control process handles safely in manufacturing."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 4,
+   "conditions": "Typical values stated where TA = 25°C and VBAT = 48.8 V, Min/Max values stated where TA = –40°C to 85°C and BAT = 8 V to 75 V (unless otherwise noted)",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VBAT",
+     "Battery cell input supply voltage range",
+     "8",
+     "",
+     "75",
+     "V"
+    ],
+    [
+     "VPACK",
+     "Charger/Load voltage range",
+     "0",
+     "",
+     "75",
+     "V"
+    ],
+    [
+     "VIN",
+     "Input voltage range, CHG_EN, DSG_EN, PCHG_EN, PMON_EN, CP_EN",
+     "0",
+     "",
+     "14",
+     "V"
+    ],
+    [
+     "CVDDCP",
+     "Capacitor Between VDDCP and BAT",
+     "",
+     "470",
+     "",
+     "nF"
+    ],
+    [
+     "TOPR",
+     "Operating free-range temperature",
+     "–40",
+     "",
+     "85",
+     "°C"
+    ]
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 4,
+   "conditions": "TSSOP (PW), 16 pins",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA, High K",
+     "Junction-to-ambient thermal resistance",
+     "106.8",
+     "°C/W"
+    ],
+    [
+     "RθJC(top)",
+     "Junction-to-case(top) thermal resistance",
+     "41.5",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "51.8",
+     "°C/W"
+    ],
+    [
+     "ψJT",
+     "Junction-to-top characterization parameter",
+     "3.8",
+     "°C/W"
+    ],
+    [
+     "ψJB",
+     "Junction-to-board characterization parameter",
+     "51.3",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case(bottom) thermal resistance",
+     "n/a",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "The metrics are defined in the application report SPRA953 on semiconductor and IC package thermal metrics."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 5,
+   "conditions": "Typical values stated at TA = 25°C and V(BAT) = 48 V. MIN/MAX values stated with TA = –40°C to 85°C and V(BAT) = 8 to 75 V unless otherwise noted.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "I(BAT)",
+     "NORMAL mode current",
+     "C(VDDCP) = 470 nF, V(BAT) = 8V, CL = 10 nF",
+     "",
+     "40",
+     "60",
+     "µA"
+    ],
+    [
+     "I(BAT)",
+     "NORMAL mode current",
+     "C(VDDCP) = 470 nF, V(BAT) ≥ 48V, CL = 10 nF",
+     "",
+     "40",
+     "52",
+     "uA"
+    ],
+    [
+     "Ishut",
+     "Sum of current into BAT and PACK pin",
+     "Shutdown Mode, PACK = 0 V, BAT = 8 V",
+     "",
+     "6",
+     "9.5",
+     "µA"
+    ],
+    [
+     "V(VDDCP)",
+     "Charge pump voltage",
+     "No Load, CP_EN = hi, V(VDDCP) – V(BAT)",
+     "9",
+     "",
+     "14",
+     "V"
+    ],
+    [
+     "tCPON",
+     "Charge pump start up time from zero volt",
+     "C(VDDCP) = 470 nF, 10% to 90% of V(VDDCP)",
+     "",
+     "100",
+     "",
+     "ms"
+    ],
+    [
+     "VIL",
+     "Digital low input level for CHG_EN, DSG_EN, PCHG_EN, CP_EN, PMON_EN",
+     "",
+     "",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "VIH",
+     "Digital high input level for CHG_EN, DSG_EN, PCHG_EN, CP_EN, PMON_EN",
+     "",
+     "1.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "RPD",
+     "Internal Pull down",
+     "VIN = 5 V",
+     "0.6",
+     "1",
+     "4",
+     "MΩ"
+    ],
+    [
+     "V(CHGFETON)",
+     "CHG gate drive voltage (on)",
+     "CL = 10 nF, CHG_EN = Hi, V(BAT) = V(PACK), V(CHG) – V(BAT)",
+     "9",
+     "12",
+     "14",
+     "V"
+    ],
+    [
+     "R(CHGFETON)",
+     "CHG FET driver on resistance",
+     "V(VDDCP) – V(BAT) = 12 V, CHG_EN = Hi, V(BAT) = V(PACK)",
+     "",
+     "1.1",
+     "",
+     "kΩ"
+    ],
+    [
+     "R(CHGFETOFF)",
+     "CHG FET driver off resistance",
+     "V(VDDCP) – V(BAT) = 12 V, CHG_EN = Lo, V(BAT) = V(PACK)",
+     "",
+     "0.3",
+     "",
+     "kΩ"
+    ],
+    [
+     "V(DSGFETON)",
+     "DSG gate drive voltage (on)",
+     "CL = 10 nF, DSG_EN = Hi, V(BAT) = V(PACK), V(DSG) – V(PACK)",
+     "9",
+     "12",
+     "14",
+     "V"
+    ],
+    [
+     "R(DSGFETON)",
+     "DSG FET driver on resistance",
+     "V(VDDCP) – V(BAT) = 12 V, DSG_EN = Hi, V(BAT) = V(PACK)",
+     "",
+     "3.5",
+     "",
+     "kΩ"
+    ],
+    [
+     "R(DSGFETOFF)",
+     "DSG FET driver off resistance",
+     "V(VDDCP) – V(BAT) = 12 V, DSG_EN = Lo, V(BAT) = V(PACK)",
+     "",
+     "1",
+     "",
+     "kΩ"
+    ],
+    [
+     "V(PCHGFETON)",
+     "PCHG gate drive voltage (on)",
+     "V(PACK) > 17 V, V(BAT) < V(PACK), V(PACK) – V(PCHG)",
+     "5",
+     "12",
+     "14",
+     "V"
+    ],
+    [
+     "R(PMONFET)",
+     "On resistance of internal FET (R between PACK and PACKDIV)",
+     "PMON_EN = hi",
+     "1.5",
+     "2.5",
+     "3.5",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "For I(BAT), NORMAL mode means CHG_EN, DSG_EN and CP_EN high with PCHG_EN and PMON_EN low; the figure is a time average."
+   ]
+  },
+  {
+   "title": "Timing requirements",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tCHGFETON",
+     "CHG on rise time + propagation delay",
+     "CL = 10 nF, (20% of CHG_EN from Lo to Hi) to (80% of V(CHGFETON)), CP_EN = Hi, (CP is already on)",
+     "",
+     "27",
+     "45",
+     "µs"
+    ],
+    [
+     "tCHGFETOFF",
+     "CHG off fall time + propagation delay",
+     "CL= 10 nF, (80% of CHG_EN from Hi to Lo) to (20% of V(CHGFETON)), CHG_EN = Hi to Lo",
+     "",
+     "7",
+     "20",
+     "µs"
+    ],
+    [
+     "tPROP _CHG",
+     "CHG EN to CHG output",
+     "CL= 10 nF, CP_EN = Hi, (CP is already on), see timing diagram",
+     "",
+     "0.5",
+     "",
+     "µs"
+    ],
+    [
+     "tDSGFETON",
+     "DSG on rise time + propagation delay",
+     "CL = 10 nF, (20% of DSG_EN from Lo to Hi) to (80% of V(DSGFETON)), CP_EN = Hi, (CP is already on)",
+     "",
+     "24",
+     "50",
+     "µs"
+    ],
+    [
+     "tDSGFETOFF",
+     "DSG off fall time + propagation delay",
+     "CL = 10 nF, (80% of DSG_EN from Hi to Lo) to (20% of V(DSGFETON))",
+     "",
+     "7",
+     "20",
+     "µs"
+    ],
+    [
+     "tPROP_DSG",
+     "DSG EN to DSG output propagation delay",
+     "CL= 10 nF, CP_EN = Hi, (CP already on), see timing Diagram",
+     "",
+     "0.5",
+     "",
+     "µs"
+    ],
+    [
+     "tPCHGOFF",
+     "PCHG turn off time + propagation delay",
+     "CL = 1 nF, (20% of PCHG_EN from Hi to Lo) to (80% of VPCHGFETON)",
+     "",
+     "30",
+     "60",
+     "µs"
+    ],
+    [
+     "tPCHGON",
+     "PCHG turn on time + propagation delay",
+     "CL = 1 nF, (80% of PCHG_EN from Lo to Hi) to (20% of V(PCHGFETON))",
+     "",
+     "34",
+     "55",
+     "µs"
+    ],
+    [
+     "tPROP_PCHG",
+     "PCH_EN to PCHG propagation delay",
+     "CL = 1 nF",
+     "",
+     "0.5",
+     "",
+     "µs"
+    ],
+    [
+     "tPROP_PMON",
+     "PMON_EN and PACKDIV = PACK propagation delay",
+     "",
+     "",
+     "0.5",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "Measured with the charge pump already running: each on time runs from the enable's 20 % point to the output's 80 % point, and each off time from the enable's 80 % point to the output's 20 % point; tprop is the delay before the output starts to move."
+   ]
+  },
+  {
+   "title": "Enable inputs and the outputs they control",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "input pin",
+    "associated output pin",
+    "description"
+   ],
+   "rows": [
+    [
+     "CHG_EN",
+     "CHG",
+     "Charge FET control"
+    ],
+    [
+     "DSG_EN",
+     "DSG",
+     "Discharge FET control"
+    ],
+    [
+     "PCHG_EN",
+     "PCHG",
+     "Precharge FET control"
+    ],
+    [
+     "PMON_EN",
+     "PACKDIV",
+     "Pack monitor control"
+    ]
+   ]
+  },
+  {
+   "title": "CHG and DSG with respect to CP_EN, CHG_EN and DSG_EN",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "CP_EN",
+    "CHG_EN",
+    "DSG_EN",
+    "charge pump",
+    "CHG",
+    "DSG"
+   ],
+   "rows": [
+    [
+     "Lo (default)",
+     "Lo (default)",
+     "Lo (default)",
+     "OFF (default)",
+     "OFF (default)",
+     "OFF (default)"
+    ],
+    [
+     "Lo",
+     "Lo",
+     "Hi",
+     "ON",
+     "OFF",
+     "ON"
+    ],
+    [
+     "Lo",
+     "Hi",
+     "Lo",
+     "ON",
+     "ON",
+     "OFF"
+    ],
+    [
+     "Lo",
+     "Hi",
+     "Hi",
+     "ON",
+     "ON",
+     "ON"
+    ],
+    [
+     "Hi",
+     "Lo",
+     "Lo",
+     "ON",
+     "OFF",
+     "OFF"
+    ],
+    [
+     "Hi",
+     "Lo",
+     "Hi",
+     "ON",
+     "OFF",
+     "ON"
+    ],
+    [
+     "Hi",
+     "Hi",
+     "Lo",
+     "ON",
+     "ON",
+     "OFF"
+    ],
+    [
+     "Hi",
+     "Hi",
+     "Hi",
+     "ON",
+     "ON",
+     "ON"
+    ]
+   ]
+  },
+  {
+   "title": "PCHG output against PCHG_EN",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "PCHG_EN",
+    "PCHG"
+   ],
+   "rows": [
+    [
+     "Lo (default)",
+     "OFF (default)"
+    ],
+    [
+     "Hi",
+     "ON"
+    ]
+   ]
+  },
+  {
+   "title": "PACKDIV switch against PMON_EN",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "PMON_EN",
+    "PACKDIV"
+   ],
+   "rows": [
+    [
+     "Lo (default)",
+     "DISABLED (default)"
+    ],
+    [
+     "Hi",
+     "ENABLED"
+    ]
+   ]
+  },
+  {
+   "title": "Device modes",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "condition"
+   ],
+   "rows": [
+    [
+     "NORMAL",
+     "CHG_EN = Hi, DSG_EN = Hi, CP_EN = Hi, PCHG_EN = don't care, PMON_EN = don't care"
+    ],
+    [
+     "SHUTDOWN",
+     "CHG_EN = Lo, DSG_EN = Lo, CP_EN = Lo, PCHG_EN = Lo, PMON_EN = Lo"
+    ]
+   ]
+  },
+  {
+   "title": "Design parameters",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "external component",
+    "note"
+   ],
+   "rows": [
+    [
+     "BAT and PACK Filters",
+     "Rfilter and Cfilter",
+     "100 Ω and 0.01 µF recommended."
+    ],
+    [
+     "VDDCP capacitor",
+     "CVDDCP",
+     "470 µF minimum; a larger value supports a larger gate load (application note SLVA729)."
+    ],
+    [
+     "PACKDIV resistor divider",
+     "Ra and Rb",
+     "Choose Ra + Rb from the highest PACK voltage of the application so that the PACKDIV current stays under 500 µA."
+    ],
+    [
+     "CHG, DSG, PCHG gate-source resistor",
+     "Rgs",
+     "10 MΩ recommended; another value changes how heavily the charge pump is loaded and calls for full system testing."
+    ]
+   ],
+   "notes": [
+    "470 µF is a misprint for 470 nF."
+   ]
+  },
+  {
+   "title": "Orderable part numbers: packaging information",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "orderable part number",
+    "status",
+    "material type",
+    "package | pins",
+    "package qty | carrier",
+    "RoHS",
+    "lead finish/ball material",
+    "MSL rating/peak reflow",
+    "op temp (°C)",
+    "part marking"
+   ],
+   "rows": [
+    [
+     "BQ76200PW",
+     "Active",
+     "Production",
+     "TSSOP (PW) | 16",
+     "90 | TUBE",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ7620B"
+    ],
+    [
+     "BQ76200PW.A",
+     "Active",
+     "Production",
+     "TSSOP (PW) | 16",
+     "90 | TUBE",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ7620B"
+    ],
+    [
+     "BQ76200PWR",
+     "Active",
+     "Production",
+     "TSSOP (PW) | 16",
+     "2000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ7620B"
+    ],
+    [
+     "BQ76200PWR.A",
+     "Active",
+     "Production",
+     "TSSOP (PW) | 16",
+     "2000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ7620B"
+    ],
+    [
+     "BQ76200PWRG4",
+     "Active",
+     "Production",
+     "TSSOP (PW) | 16",
+     "2000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ7620B"
+    ],
+    [
+     "BQ76200PWRG4.A",
+     "Active",
+     "Production",
+     "TSSOP (PW) | 16",
+     "2000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ7620B"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel dimensions",
+   "page": 24,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ76200PWR",
+     "TSSOP",
+     "PW",
+     "16",
+     "2000",
+     "330.0",
+     "12.4",
+     "6.9",
+     "5.6",
+     "1.6",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ76200PWRG4",
+     "TSSOP",
+     "PW",
+     "16",
+     "2000",
+     "330.0",
+     "12.4",
+     "6.9",
+     "5.6",
+     "1.6",
+     "8.0",
+     "12.0",
+     "Q1"
+    ]
+   ],
+   "notes": [
+    "A0, B0 and K0 are the pocket width, length and depth; W is the carrier tape width and P1 the pitch from one pocket centre to the next."
+   ]
+  },
+  {
+   "title": "Tape and reel box dimensions",
+   "page": 25,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ76200PWR",
+     "TSSOP",
+     "PW",
+     "16",
+     "2000",
+     "350.0",
+     "350.0",
+     "43.0"
+    ],
+    [
+     "BQ76200PWRG4",
+     "TSSOP",
+     "PW",
+     "16",
+     "2000",
+     "350.0",
+     "350.0",
+     "43.0"
+    ]
+   ]
+  },
+  {
+   "title": "Tube dimensions",
+   "page": 26,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package name",
+    "package type",
+    "pins",
+    "SPQ",
+    "L (mm)",
+    "W (mm)",
+    "T (µm)",
+    "B (mm)"
+   ],
+   "rows": [
+    [
+     "BQ76200PW",
+     "PW",
+     "TSSOP",
+     "16",
+     "90",
+     "530",
+     "10.2",
+     "3600",
+     "3.5"
+    ],
+    [
+     "BQ76200PW.A",
+     "PW",
+     "TSSOP",
+     "16",
+     "90",
+     "530",
+     "10.2",
+     "3600",
+     "3.5"
+    ]
+   ],
+   "notes": [
+    "L is tube length, W tube width, T tube height and B the width of the alignment groove."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Normal mode current",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Normal mode current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Min",
+     "points": [
+      [
+       -40.0,
+       30.36
+      ],
+      [
+       25.0,
+       26.59
+      ],
+      [
+       105.0,
+       22.77
+      ]
+     ]
+    },
+    {
+     "label": "Average",
+     "points": [
+      [
+       -40.0,
+       32.61
+      ],
+      [
+       25.0,
+       28.31
+      ],
+      [
+       105.0,
+       24.06
+      ]
+     ]
+    },
+    {
+     "label": "Max",
+     "points": [
+      [
+       -40.0,
+       34.26
+      ],
+      [
+       25.0,
+       29.41
+      ],
+      [
+       105.0,
+       26.17
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Shutdown mode current",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Shutdown current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Min",
+     "points": [
+      [
+       -40.0,
+       5.349
+      ],
+      [
+       25.0,
+       4.901
+      ],
+      [
+       105.0,
+       4.7
+      ]
+     ]
+    },
+    {
+     "label": "Average",
+     "points": [
+      [
+       -40.0,
+       6.194
+      ],
+      [
+       25.0,
+       5.582
+      ],
+      [
+       105.0,
+       5.371
+      ]
+     ]
+    },
+    {
+     "label": "Max",
+     "points": [
+      [
+       -40.0,
+       6.733
+      ],
+      [
+       25.0,
+       6.207
+      ],
+      [
+       105.0,
+       5.864
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Input pin voltage for internal pull-down resistance (Rpd)",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Internal Rpd",
+    "unit": "MΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       1.0,
+       0.55
+      ],
+      [
+       2.0,
+       0.579
+      ],
+      [
+       3.0,
+       0.606
+      ],
+      [
+       4.0,
+       0.631
+      ],
+      [
+       5.0,
+       0.656
+      ],
+      [
+       6.0,
+       0.682
+      ],
+      [
+       7.0,
+       0.709
+      ],
+      [
+       8.0,
+       0.735
+      ],
+      [
+       9.0,
+       0.763
+      ],
+      [
+       10.0,
+       0.792
+      ],
+      [
+       11.0,
+       0.822
+      ],
+      [
+       12.0,
+       0.854
+      ],
+      [
+       13.0,
+       0.886
+      ],
+      [
+       14.0,
+       0.921
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       1.0,
+       0.724
+      ],
+      [
+       2.0,
+       0.757
+      ],
+      [
+       3.0,
+       0.789
+      ],
+      [
+       4.0,
+       0.821
+      ],
+      [
+       5.0,
+       0.853
+      ],
+      [
+       6.0,
+       0.885
+      ],
+      [
+       7.0,
+       0.918
+      ],
+      [
+       8.0,
+       0.951
+      ],
+      [
+       9.0,
+       0.986
+      ],
+      [
+       10.0,
+       1.022
+      ],
+      [
+       11.0,
+       1.059
+      ],
+      [
+       12.0,
+       1.098
+      ],
+      [
+       13.0,
+       1.139
+      ],
+      [
+       14.0,
+       1.182
+      ]
+     ]
+    },
+    {
+     "label": "105 °C",
+     "points": [
+      [
+       1.0,
+       1.036
+      ],
+      [
+       2.0,
+       1.09
+      ],
+      [
+       3.0,
+       1.136
+      ],
+      [
+       4.0,
+       1.182
+      ],
+      [
+       5.0,
+       1.227
+      ],
+      [
+       6.0,
+       1.273
+      ],
+      [
+       7.0,
+       1.32
+      ],
+      [
+       8.0,
+       1.367
+      ],
+      [
+       9.0,
+       1.416
+      ],
+      [
+       10.0,
+       1.467
+      ],
+      [
+       11.0,
+       1.52
+      ],
+      [
+       12.0,
+       1.575
+      ],
+      [
+       13.0,
+       1.632
+      ],
+      [
+       14.0,
+       1.693
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CHG/DSG FET on voltage against temperature",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "FET on voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Min",
+     "points": [
+      [
+       -40.0,
+       10.19
+      ],
+      [
+       25.0,
+       10.118
+      ],
+      [
+       85.0,
+       9.944
+      ],
+      [
+       105.0,
+       9.883
+      ]
+     ]
+    },
+    {
+     "label": "Average",
+     "points": [
+      [
+       -40.0,
+       10.57
+      ],
+      [
+       25.0,
+       10.451
+      ],
+      [
+       85.0,
+       10.294
+      ],
+      [
+       105.0,
+       10.224
+      ]
+     ]
+    },
+    {
+     "label": "Max",
+     "points": [
+      [
+       -40.0,
+       11.211
+      ],
+      [
+       25.0,
+       11.02
+      ],
+      [
+       85.0,
+       10.807
+      ],
+      [
+       105.0,
+       10.728
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PCHG on voltage against temperature",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VPCHG on",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Min",
+     "points": [
+      [
+       -40.0,
+       7.07
+      ],
+      [
+       25.0,
+       7.89
+      ],
+      [
+       85.0,
+       8.7
+      ],
+      [
+       105.0,
+       9.09
+      ]
+     ]
+    },
+    {
+     "label": "Average",
+     "points": [
+      [
+       -40.0,
+       10.07
+      ],
+      [
+       25.0,
+       10.98
+      ],
+      [
+       85.0,
+       11.67
+      ],
+      [
+       105.0,
+       11.99
+      ]
+     ]
+    },
+    {
+     "label": "Max",
+     "points": [
+      [
+       -40.0,
+       12.74
+      ],
+      [
+       25.0,
+       12.95
+      ],
+      [
+       85.0,
+       13.16
+      ],
+      [
+       105.0,
+       13.25
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "simplified",
+   "title": "Simplified schematic",
+   "page": 1,
+   "description": "High-side protection for a battery pack. Two N-channel FETs sit back to back in the positive line, drains joined: Q1 (charge) with its source on the cell side and Q2 (discharge) with its source on PACK+. A P-channel FET Q3 with a 1 MΩ series resistor bridges from the cell stack to the joined drains for current-limited precharge. Each N-channel gate has a 10 MΩ resistor to its own source. BAT and PACK each take a 100 Ω / 0.01 µF filter, the 470 nF charge pump capacitor sits between VDDCP and BAT, and the five enables come from an AFE or MCU. PACKDIV feeds a divider Ra/Rb whose midpoint goes to an ADC.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq76200"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "charge FET"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "discharge FET"
+    },
+    {
+     "ref": "Q3",
+     "type": "pmos",
+     "value": "precharge FET"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 MΩ",
+     "note": "precharge current limit"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 MΩ",
+     "note": "Q1 gate-source"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10 MΩ",
+     "note": "Q2 gate-source"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 nF",
+     "note": "charge pump"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "PACK filter"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "PACK filter"
+    },
+    {
+     "ref": "Ra",
+     "type": "resistor",
+     "value": "Ra",
+     "note": "PACKDIV divider, upper"
+    },
+    {
+     "ref": "Rb",
+     "type": "resistor",
+     "value": "Rb",
+     "note": "PACKDIV divider, lower"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "BAT+ (top of cell stack)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "BAT- (bottom of cell stack)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PACK+"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "PACK-"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "CHG_EN from AFE or MCU"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "CP_EN from AFE or MCU"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "DSG_EN from AFE or MCU"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "PMON_EN from AFE or MCU"
+    },
+    {
+     "ref": "J9",
+     "type": "terminal",
+     "value": "PCHG_EN from AFE or MCU"
+    },
+    {
+     "ref": "J10",
+     "type": "terminal",
+     "value": "to ADC"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "parallel-fets",
+   "title": "Charge pump capacitor scaled for FETs in parallel",
+   "page": 13,
+   "description": "Partial circuit showing several N-channel FETs in parallel in each direction: Q1A and Q1B (charge, sources on the cell side) driven together from CHG, Q2A and Q2B (discharge, sources on PACK+) driven together from DSG, their drains joined in the middle. The larger total gate capacitance is served by raising CVDDCP between VDDCP and BAT. BAT has the 100 Ω / 0.01 µF filter. Only the charge pump, BAT filter and gate drives are wired; the enable inputs, PACK and PACKDIV are left unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq76200"
+    },
+    {
+     "ref": "Q1A",
+     "type": "nmos",
+     "value": "charge FET"
+    },
+    {
+     "ref": "Q1B",
+     "type": "nmos",
+     "value": "charge FET, in parallel"
+    },
+    {
+     "ref": "Q2A",
+     "type": "nmos",
+     "value": "discharge FET"
+    },
+    {
+     "ref": "Q2B",
+     "type": "nmos",
+     "value": "discharge FET, in parallel"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "CVDDCP",
+     "type": "capacitor",
+     "value": "CVDDCP",
+     "note": "scaled to the gate load: 470 nF supports about 30 nF, 2.1 µF about 90 nF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "BAT+ (top of cell stack)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "BAT- (bottom of cell stack)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PACK+"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "PACK-"
+    }
+   ],
+   "notes": [
+    "Two FETs per direction stand for any number in parallel."
+   ]
+  },
+  {
+   "id": "precharge",
+   "title": "P-channel FET across the charge FET for precharge",
+   "page": 14,
+   "description": "Partial circuit for precharging a deeply discharged stack. P-channel Q3, in series with the current-limiting resistor Rpchg, runs from the cell stack to the joined drains of the charge and discharge FETs, so it bypasses the charge FET Q1. PCHG drives its gate and an MCU drives PCHG_EN. BAT has the 100 Ω / 0.01 µF filter and 470 nF sits between VDDCP and BAT. The other enables, PACK and PACKDIV are left unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq76200"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "charge FET"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "discharge FET"
+    },
+    {
+     "ref": "Q3",
+     "type": "pmos",
+     "value": "precharge FET"
+    },
+    {
+     "ref": "Rpchg",
+     "type": "resistor",
+     "value": "Rpchg",
+     "note": "precharge current limit, power resistor"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 nF",
+     "note": "charge pump"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "BAT+ (top of cell stack)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "BAT- (bottom of cell stack)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PACK+"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "PACK-"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "PCHG_EN from MCU"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "predischarge",
+   "title": "P-channel FET across the discharge FET for predischarge",
+   "page": 15,
+   "description": "Partial circuit for bringing up a load with large capacitance. P-channel Q3 and resistor Rpdsg in series run from the joined drains to PACK+, bypassing the discharge FET Q2, so the load side can be charged through a limited current before Q2 turns on. PCHG drives Q3's gate and an MCU drives PCHG_EN. The charge FET Q1 and discharge FET Q2 each have a 10 MΩ gate-source resistor. BAT has the 100 Ω / 0.01 µF filter and 470 nF sits between VDDCP and BAT.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq76200"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "charge FET"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "discharge FET"
+    },
+    {
+     "ref": "Q3",
+     "type": "pmos",
+     "value": "predischarge FET"
+    },
+    {
+     "ref": "Rpdsg",
+     "type": "resistor",
+     "value": "Rpdsg",
+     "note": "predischarge current limit"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 MΩ",
+     "note": "Q1 gate-source"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10 MΩ",
+     "note": "Q2 gate-source"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 nF",
+     "note": "charge pump"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "BAT+ (top of cell stack)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "BAT- (bottom of cell stack)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PACK+"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "PACK-"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "PCHG_EN from MCU"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "separate-paths",
+   "title": "Separate charge and discharge paths",
+   "page": 16,
+   "description": "Partial circuit with two positive terminals. A single N-channel FET Q1 (source on the cell side) switches the charge terminal from CHG, and two or more N-channel FETs in parallel, Q2A and Q2B (sources on the discharge terminal), switch the discharge terminal from DSG. This suits packs whose charge current is far below their discharge current. BAT has the 100 Ω / 0.01 µF filter and 470 nF sits between VDDCP and BAT. The enables, PCHG, PACK and PACKDIV are left unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq76200"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "charge FET"
+    },
+    {
+     "ref": "Q2A",
+     "type": "nmos",
+     "value": "discharge FET"
+    },
+    {
+     "ref": "Q2B",
+     "type": "nmos",
+     "value": "discharge FET, in parallel"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 nF",
+     "note": "charge pump"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "BAT+ (top of cell stack)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "BAT- (bottom of cell stack)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "Charge"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "Discharge"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "PACK-"
+    }
+   ],
+   "notes": [
+    "Two discharge FETs stand for any number in parallel."
+   ]
+  },
+  {
+   "id": "typical",
+   "title": "Typical application with a bq76940 AFE and an MCU",
+   "page": 17,
+   "description": "A 15-series pack monitored by a bq76940 AFE, with the bq76200 moving the protection FETs to the high side. The AFE's CHG and DSG outputs drive CHG_EN and DSG_EN directly; an MCU, powered from the AFE's REGOUT and talking to it over I2C with ALERT on a GPIO, drives CP_EN, PCHG_EN and PMON_EN from GPIOs and reads PACK+ through Ra/Rb on an ADC input. Q1 (charge) and Q2 (discharge) are back-to-back N-channel FETs with 10 MΩ gate-source resistors; P-channel Q3 with a 1 MΩ series resistor and its own 10 MΩ gate-source resistor precharges through the joined drains. BAT and PACK have 100 Ω / 0.01 µF filters, 470 nF sits between VDDCP and BAT, and the current-sense resistor Rsns lies between the cell stack's negative end and PACK-.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq76200"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "charge FET"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "discharge FET"
+    },
+    {
+     "ref": "Q3",
+     "type": "pmos",
+     "value": "precharge FET"
+    },
+    {
+     "ref": "Rpchg",
+     "type": "resistor",
+     "value": "1 MΩ",
+     "note": "precharge current limit"
+    },
+    {
+     "ref": "Rgs1",
+     "type": "resistor",
+     "value": "10 MΩ",
+     "note": "Q3 gate-source"
+    },
+    {
+     "ref": "Rgs2",
+     "type": "resistor",
+     "value": "10 MΩ",
+     "note": "Q1 gate-source"
+    },
+    {
+     "ref": "Rgs3",
+     "type": "resistor",
+     "value": "10 MΩ",
+     "note": "Q2 gate-source"
+    },
+    {
+     "ref": "Rfilter1",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "Cfilter1",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "BAT filter"
+    },
+    {
+     "ref": "Rfilter2",
+     "type": "resistor",
+     "value": "100 Ω",
+     "note": "PACK filter"
+    },
+    {
+     "ref": "Cfilter2",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "PACK filter"
+    },
+    {
+     "ref": "CVDDCP",
+     "type": "capacitor",
+     "value": "470 nF",
+     "note": "charge pump"
+    },
+    {
+     "ref": "Ra",
+     "type": "resistor",
+     "value": "Ra",
+     "note": "PACKDIV divider, upper"
+    },
+    {
+     "ref": "Rb",
+     "type": "resistor",
+     "value": "Rb",
+     "note": "PACKDIV divider, lower"
+    },
+    {
+     "ref": "Rsns",
+     "type": "resistor",
+     "value": "Rsns",
+     "note": "pack current sense"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "BAT+ (top of cell stack)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "BAT- (bottom of cell stack)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PACK+"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "PACK-"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "bq76940 CHG"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "bq76940 DSG"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "bq76940 REGOUT"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "bq76940 SCL"
+    },
+    {
+     "ref": "J9",
+     "type": "terminal",
+     "value": "bq76940 SDA"
+    },
+    {
+     "ref": "J10",
+     "type": "terminal",
+     "value": "bq76940 ALERT"
+    }
+   ],
+   "notes": [
+    "The bq76940's own circuit (cell taps through Rc/Cc filters to VC0 to VC15, the Rf/Cf supply filters, thermistors on TS1 to TS3, the SRP/SRN sense filter of two 100 Ω and three 0.1 µF, REGOUT and CAP decoupling and a boot push-button) completes the pack around these terminals."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "PACKDIV divider current limit",
+   "expr": "VPACK(max) / (Ra + Rb) < 500 µA",
+   "where": {
+    "VPACK(max)": "highest PACK+ voltage in the application (for a 48 V pack, the charger's 50.4 V)",
+    "Ra": "divider resistor from PACKDIV to the ADC node",
+    "Rb": "divider resistor from the ADC node to ground"
+   },
+   "note": "(Ra + Rb) < 500 µA is a misprint for VPACK(max) / (Ra + Rb) < 500 µA.",
+   "page": 18
+  },
+  {
+   "name": "PACKDIV divider ratio",
+   "expr": "Rb / (Ra + Rb) < VADC(max) / VPACK(max)",
+   "where": {
+    "VADC(max)": "full-scale input of the MCU ADC",
+    "VPACK(max)": "highest PACK+ voltage"
+   },
+   "note": "With 50.4 V and a 3 V ADC, Ra of 100 kΩ or less and Rb of 6 kΩ or less meet both conditions.",
+   "page": 18
+  },
+  {
+   "name": "VDDCP capacitor for a given gate load",
+   "expr": "CVDDCP ≥ CLOAD × (470 nF / 20 nF)",
+   "where": {
+    "CVDDCP": "capacitor from VDDCP to BAT",
+    "CLOAD": "total gate capacitance switched"
+   },
+   "note": "Tested, 470 nF carries about 30 nF of load; derating to 20 nF per 470 nF gives 2.1 µF for about 90 nF.",
+   "page": 13
+  },
+  {
+   "name": "Enable-to-on delay, charge pump already running",
+   "expr": "tdelay = tprop + tFET,rise",
+   "where": {
+    "tprop": "enable to output propagation delay, 0.5 µs typical",
+    "tFET,rise": "rise time of the FET gate"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Enable-to-on delay, charge pump started by the enable",
+   "expr": "tdelay = tCPON + tprop + tFET,rise",
+   "where": {
+    "tCPON": "charge pump start-up time, 100 ms typical with 470 nF"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Highest voltage on the device",
+   "expr": "Vmax ≈ VBAT(max) + V(VDDCP)(max) = 75 V + 14 V ≈ 89 V",
+   "where": {
+    "VBAT(max)": "highest recommended BAT or PACK voltage, 75 V",
+    "V(VDDCP)(max)": "charge pump voltage above BAT, 14 V maximum"
+   },
+   "note": "Worst-case transients come on top of this and must stay within the 100 V pin rating.",
+   "page": 19
+  }
+ ],
+ "operation": [
+  {
+   "topic": "What the part does",
+   "page": 8,
+   "text": "The bq76200 drives N-channel protection FETs placed in the positive line of a battery pack rather than the negative line. With the switches on the high side the pack's ground stays connected to the host whether the FETs are open or closed, so the host can keep talking to the pack's monitor or MCU and read its state after a fault before deciding to reconnect. It adds a P-channel gate driver for a current-limited precharge path and a switch that puts PACK+ onto a pin for measurement."
+  },
+  {
+   "topic": "Charge pump",
+   "page": 9,
+   "text": "An internal charge pump builds the gate drive on a capacitor of at least 470 nF from VDDCP to BAT. CP_EN, CHG_EN and DSG_EN are ORed: any one high starts it, and it stops only when all three are low; it is off by default. Once its voltage passes an internal UVLO, about 9 V above VBAT, it counts as on; CHG and DSG then rise with it to the full V(VDDCP) level. If the load is too heavy for the capacitor and the pump never clears UVLO, CHG and DSG stay off. PCHG drives a P-channel FET and needs no charge pump. When switched off, the pump is not pulled down: the capacitor discharges slowly, and a restart before it has emptied takes less than tCPON."
+  },
+  {
+   "topic": "Recommended charge pump control",
+   "page": 10,
+   "text": "Drive CP_EN from the host and raise it at system start-up, keeping it high in operation. The pump's start-up time then falls inside the system start-up and a FET turns on in tprop plus its rise time. If CP_EN is not used it should be grounded; each turn-on then also waits tCPON for the pump."
+  },
+  {
+   "topic": "Losing the VDDCP capacitor",
+   "page": 9,
+   "text": "If the VDDCP capacitor is open or damaged while CHG_EN or DSG_EN is high, a residual voltage can remain on CHG or DSG that holds the FETs partly on at high RDS(on), which can destroy them."
+  },
+  {
+   "topic": "Measuring VDDCP",
+   "page": 10,
+   "text": "A probe on VDDCP loads the pump and reads lower than V(VDDCP); a higher-impedance probe disturbs it less."
+  },
+  {
+   "topic": "Enable inputs",
+   "page": 10,
+   "text": "CHG_EN, DSG_EN, PCHG_EN and PMON_EN each control one output (CHG, DSG, PCHG and the PACKDIV switch), and CP_EN controls the pump. Their thresholds (0.6 V low, 1.2 V high) suit MCU outputs, and they tolerate up to 15 V so an AFE's FET driver outputs can drive them directly; input current must be limited to 5 mA. Each input has an internal pull-down of about 1 MΩ, so an unpowered controller or an open trace leaves CHG, DSG and PCHG off and PACKDIV disconnected."
+  },
+  {
+   "topic": "No interlock",
+   "page": 12,
+   "text": "The device switches its outputs exactly as the inputs command and does not check combinations: CHG_EN and PCHG_EN high together turn on both charge paths at once. Unwanted combinations have to be prevented by the schematic, the AFE or the host firmware."
+  },
+  {
+   "topic": "Mixed AFE and MCU control",
+   "page": 12,
+   "text": "A suggested split is CP_EN from the MCU, so the pump runs from start-up, and CHG_EN and DSG_EN from the AFE's FET driver outputs, so an AFE with hardware protection (bq76920/30/40) acts on the FETs with the shortest delay."
+  },
+  {
+   "topic": "Precharge",
+   "page": 13,
+   "text": "A deeply discharged pack is first charged at a much lower current, for example C/10, so the cells' passivation layer can recover. PCHG drives a P-channel FET connected across the charge FET, with a series power resistor to set the precharge current; the MCU drives PCHG_EN to enter and leave precharge. Precharge current is commonly 1/20 of normal charge current or less when the charger cannot lower its own current; the limit set by the cell manufacturer governs. Where the charger itself limits current and the stack is above the bq76200's minimum supply, the CHG FET alone can do the precharge, and PCHG is left open."
+  },
+  {
+   "topic": "Predischarge",
+   "page": 14,
+   "text": "PCHG can instead drive a P-channel FET in parallel with the discharge FET, through a resistor, to charge a heavily capacitive load before the discharge FET closes. Recovery after a discharge fault often requires the load to be removed, and residual voltage on a large load capacitance would otherwise take a long time to bleed away, delaying recovery."
+  },
+  {
+   "topic": "Pack voltage monitor",
+   "page": 11,
+   "text": "PMON_EN closes an internal switch of R(PMONFET), about 2.5 kΩ, from PACK to PACKDIV. An external divider on PACKDIV scales PACK+ into an MCU ADC's range, for charger detection or charge control. The divider must keep PACKDIV within its absolute maximum and its current below 500 µA. To save power, enable it only while measuring. Leave PACKDIV open if unused."
+  },
+  {
+   "topic": "Modes",
+   "page": 11,
+   "text": "NORMAL: the charge pump is running because CP_EN, CHG_EN or DSG_EN is high, and an enabled CHG or DSG output sits at about V(BAT) + V(VDDCP). SHUTDOWN: all three of CP_EN, DSG_EN, CHG_EN low; the device is fully off, its outputs are low and the current into BAT and PACK is 6 µA typical, 9.5 µA maximum (PACK = 0 V, BAT = 8 V)."
+  },
+  {
+   "topic": "VDDCP capacitor and parallel FETs",
+   "page": 12,
+   "text": "The electrical figures assume a 10 nF gate load on a 470 nF VDDCP capacitor. More FETs in parallel, larger FETs, and switching CHG and DSG together rather than one after the other all raise the load on the pump. Beyond about 30 nF a larger capacitor is needed. A larger capacitor lengthens pump start-up and a larger gate load lengthens FET switching, so the design should be tested across its full operating range."
+  },
+  {
+   "topic": "Gate resistors",
+   "page": 15,
+   "text": "CHG and DSG have internal on and off resistances (about 1.1 kΩ and 0.3 kΩ for CHG, 3.5 kΩ and 1 kΩ for DSG). A series gate resistor can be added to slow FET switching. A 10 MΩ gate-source resistor on each FET is recommended; another value changes the pump's load."
+  },
+  {
+   "topic": "Separate charge and discharge paths",
+   "page": 15,
+   "text": "When charge current is much smaller than discharge current, the charge and discharge FETs can be put in separate paths to separate terminals, with fewer FETs in parallel on the charge side to save cost."
+  },
+  {
+   "topic": "Supply voltage headroom",
+   "page": 19,
+   "text": "BAT and PACK are recommended up to 75 V. With the pump on, up to 14 V more sits above BAT or PACK, about 89 V in total. The pins are rated to 100 V, so the worst transient plus the pump voltage sets the highest stack and pack voltage a design can use."
+  },
+  {
+   "topic": "Layout",
+   "page": 19,
+   "text": "Put CVDDCP and the BAT and PACK RC filters next to the device. Where the board has separate high-current and low-current grounds, connect VSS to the low-current ground to keep noise off the enable inputs; the two grounds join at the cell stack's negative terminal, on the cell side of the sense resistor."
+  },
+  {
+   "topic": "Design steps",
+   "page": 18,
+   "text": "Decide whether the MCU drives CP_EN (strongly recommended, though CHG and DSG work without it if the slower turn-on is acceptable). Size CVDDCP for the number of FETs in parallel and verify it over temperature. If PMON_EN is used, size Ra and Rb for current and ADC range. Wire the rest as in the typical application."
+  }
+ ],
+ "packages": [
+  {
+   "name": "TSSOP-16 (PW0016A)",
+   "page": 27,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "overall width across lead tips",
+     "6.2",
+     "",
+     "6.6"
+    ],
+    [
+     "",
+     "body length (pin 1 to pin 8 side), excluding mold flash",
+     "4.9",
+     "",
+     "5.1"
+    ],
+    [
+     "",
+     "body width, excluding interlead flash",
+     "4.3",
+     "",
+     "4.5"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.2"
+    ],
+    [
+     "",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "lead pitch (14X)",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "",
+     "pin 1 to pin 8 lead centres (2X)",
+     "",
+     "4.55",
+     ""
+    ],
+    [
+     "",
+     "lead width (16X)",
+     "0.17",
+     "",
+     "0.30"
+    ],
+    [
+     "",
+     "lead thickness",
+     "",
+     "(0.15)",
+     ""
+    ],
+    [
+     "",
+     "foot length",
+     "0.50",
+     "",
+     "0.75"
+    ],
+    [
+     "",
+     "gage plane height",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "body draft angle (4X)",
+     "(0°)",
+     "",
+     "(12°)"
+    ],
+    [
+     "",
+     "lead position tolerance",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "land pattern: pad length (16X)",
+     "",
+     "(1.5)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: pad width (16X)",
+     "",
+     "(0.45)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: pad pitch (14X)",
+     "",
+     "(0.65)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: span to pad outer ends",
+     "",
+     "(5.8)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: pad corner radius",
+     "",
+     "(R0.05)",
+     ""
+    ],
+    [
+     "",
+     "solder mask opening around pad, non-solder-mask-defined (preferred)",
+     "",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "solder mask overlap on pad, solder-mask-defined",
+     "0.05",
+     "",
+     ""
+    ],
+    [
+     "",
+     "stencil thickness for the paste example",
+     "",
+     "0.125",
+     ""
+    ]
+   ],
+   "notes": [
+    "Mold flash, protrusions and gate burrs are excluded from the body length and may add up to 0.15 mm per side; interlead flash is excluded from the body width and may add up to 0.25 mm per side.",
+    "JEDEC MO-153. Dimensions in parentheses are reference values.",
+    "The stencil apertures match the land pattern (16X 1.5 × 0.45 mm on 0.65 mm pitch, 5.8 mm span)."
+   ]
+  }
+ ]
+}

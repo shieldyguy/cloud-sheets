@@ -1,0 +1,6806 @@
+{
+ "sheet": 1,
+ "name": "LT8391EFE#PBF",
+ "kind": "led_driver",
+ "manufacturer": "Analog Devices",
+ "title": "60V four-switch synchronous buck-boost LED controller, spread spectrum",
+ "source": {
+  "revision": "Rev A (8391fa), 12/17",
+  "pages": 34
+ },
+ "summary": "The LT8391 controls four external N-channel MOSFETs around a single inductor to regulate LED current with the input above, below or equal to the output, from 4V to 60V in and 0V to 60V out. Peak-buck/peak-boost current mode gives smooth region changes, at a fixed 150kHz to 650kHz, an external clock, or ±15% triangle spread spectrum. LED current is set by a sense resistor and two CTRL inputs (20:1 analog dimming, ±3% at 100mV full scale) and dimmed by external (up to 2000:1) or internal (up to 128:1) PWM through a high-side PMOS driver. Open and short LED faults are flagged on FAULT, with hiccup, latch-off or keep-running response.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "4V to 60V"
+  ],
+  [
+   "Output voltage",
+   "0V to 60V (51V LED string with open-LED protection)"
+  ],
+  [
+   "LED current accuracy",
+   "±3% (97 mV to 103 mV at 100 mV full scale)"
+  ],
+  [
+   "Switching frequency",
+   "150kHz to 650kHz"
+  ],
+  [
+   "PWM dimming",
+   "2000:1 external, 128:1 internal"
+  ],
+  [
+   "Analog dimming",
+   "20:1"
+  ],
+  [
+   "Efficiency",
+   "up to 98%"
+  ],
+  [
+   "Shutdown current",
+   "1µA typ, 2µA max"
+  ],
+  [
+   "Packages",
+   "28-lead TSSOP (FE) and 28-lead 4mm × 5mm QFN (UFD), exposed pad"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "tape and reel",
+   "part marking",
+   "package",
+   "temperature range"
+  ],
+  "rows": [
+   [
+    "LT8391EFE#PBF",
+    "LT8391EFE#TRPBF",
+    "LT8391FE",
+    "28-Lead Plastic TSSOP",
+    "–40°C to 125°C"
+   ],
+   [
+    "LT8391IFE#PBF",
+    "LT8391IFE#TRPBF",
+    "LT8391FE",
+    "28-Lead Plastic TSSOP",
+    "–40°C to 125°C"
+   ],
+   [
+    "LT8391HFE#PBF",
+    "LT8391HFE#TRPBF",
+    "LT8391FE",
+    "28-Lead Plastic TSSOP",
+    "–40°C to 150°C"
+   ],
+   [
+    "LT8391EUFD#PBF",
+    "LT8391EUFD#TRPBF",
+    "8391",
+    "28-Lead (4mm × 5mm) Plastic QFN",
+    "–40°C to 125°C"
+   ],
+   [
+    "LT8391IUFD#PBF",
+    "LT8391IUFD#TRPBF",
+    "8391",
+    "28-Lead (4mm × 5mm) Plastic QFN",
+    "–40°C to 125°C"
+   ],
+   [
+    "LT8391HUFD#PBF",
+    "LT8391HUFD#TRPBF",
+    "8391",
+    "28-Lead (4mm × 5mm) Plastic QFN",
+    "–40°C to 150°C"
+   ]
+  ],
+  "notes": [
+   "E, I and H are the temperature grades (Note 2); the grade is shown on a label on the shipping container. Some packages come in 500-unit reels with the #TRMPBF suffix."
+  ]
+ },
+ "pins": [
+  {
+   "package": "FE (28-lead TSSOP, exposed pad)",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "BG1",
+     "type": "output",
+     "function": "Gate drive for the buck-side bottom N-channel MOSFET (switch B); swings from ground to INTVCC."
+    },
+    {
+     "pin": "2",
+     "name": "BST1",
+     "type": "power",
+     "function": "Floating supply for the buck-side top gate driver. An internal Schottky diode from INTVCC charges it; a bootstrap capacitor goes from BST1 to SW1. Swings from one diode drop below INTVCC up to VIN + INTVCC."
+    },
+    {
+     "pin": "3",
+     "name": "SW1",
+     "type": "power",
+     "function": "Buck-side switch node; moves between a Schottky drop below ground and VIN."
+    },
+    {
+     "pin": "4",
+     "name": "TG1",
+     "type": "output",
+     "function": "Gate drive for the buck-side top N-channel MOSFET (switch A); swings from SW1 to BST1."
+    },
+    {
+     "pin": "5",
+     "name": "LSP",
+     "type": "input",
+     "function": "Positive side of the inductor current sense resistor RSENSE. Use a Kelvin connection."
+    },
+    {
+     "pin": "6",
+     "name": "LSN",
+     "type": "input",
+     "function": "Negative side of the inductor current sense resistor RSENSE. Use a Kelvin connection."
+    },
+    {
+     "pin": "7",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input. Also tells the controller the input voltage for picking the buck, buck-boost or boost region. Bypass to ground close by with at least 1µF ceramic."
+    },
+    {
+     "pin": "8",
+     "name": "INTVCC",
+     "type": "power out",
+     "function": "Output of the internal 5V linear regulator fed from VIN; it runs the control circuits and gate drivers. Bypass to ground close by with at least 4.7µF ceramic."
+    },
+    {
+     "pin": "9",
+     "name": "EN/UVLO",
+     "type": "input",
+     "function": "Enable and undervoltage lockout. Below 0.3V the part is shut down and VIN draws under 2µA; above 1.227V it runs. A divider from VIN uses the 1.214V falling threshold to set an input UVLO, and the 2.5µA pull-down current sets its hysteresis. Tie to VIN when neither is wanted."
+    },
+    {
+     "pin": "10",
+     "name": "RP",
+     "type": "input",
+     "function": "Sets the internal PWM dimming frequency with a resistor to ground. Do not leave open and do not use more than 1MΩ. Ground it when an external PWM signal drives the PWM pin."
+    },
+    {
+     "pin": "11",
+     "name": "PWM",
+     "type": "input",
+     "function": "PWM dimming input. External dimming: a digital pulse from 0V to above 1.5V, with RP grounded. Internal dimming: an analog level between 1V and 2V compared with an internal ramp. Tie to INTVCC when dimming is not used. Holding it low turns TG1 and TG2 off, BG1 and BG2 on, cuts VC off from its internal loads and turns PWMTG off."
+    },
+    {
+     "pin": "12",
+     "name": "VREF",
+     "type": "output",
+     "function": "Accurate 2V reference able to source 1mA. Bypass to ground close by with a 0.47µF ceramic capacitor."
+    },
+    {
+     "pin": "13",
+     "name": "CTRL1",
+     "type": "input",
+     "function": "Sets the LED current sense threshold: 0mV to 90mV linearly for 0.25V to 1.15V, a smooth bend between 1.15V and 1.35V, and the 100mV full scale above 1.35V. Driven by a reference or a divider from VREF; tie to VREF for full scale. Below 0.2V switching stops."
+    },
+    {
+     "pin": "14",
+     "name": "ISP",
+     "type": "input",
+     "function": "Positive side of the LED current sense resistor RLED. Use a Kelvin connection."
+    },
+    {
+     "pin": "15",
+     "name": "ISN",
+     "type": "input",
+     "function": "Negative side of the LED current sense resistor RLED. Use a Kelvin connection."
+    },
+    {
+     "pin": "16",
+     "name": "CTRL2",
+     "type": "input",
+     "function": "Second current sense threshold input, meant for derating LED current with temperature through a divider from VREF that has a negative temperature coefficient. Same transfer as CTRL1 (0mV to 90mV over 0.25V to 1.15V, 100mV above 1.35V). Tie to VREF for full scale; below 0.2V switching stops."
+    },
+    {
+     "pin": "17",
+     "name": "FAULT",
+     "type": "open-drain output",
+     "function": "LED fault flag, active low; needs an external pull-up. Pulled low for an open LED (VFB > 0.95V and V(ISP-ISN) < 10mV) or a short LED (VFB < 0.25V). The flag is updated only while PWM is high and held while PWM is low."
+    },
+    {
+     "pin": "18",
+     "name": "SS",
+     "type": "input",
+     "function": "Soft-start timer: a capacitor to ground, charged by an internal 12.5µA current, ramps the FB regulation level; 0.1µF is the suggested value. UVLO or thermal shutdown pulls SS to ground at once and stops switching. One resistor from SS to VREF picks the LED fault mode: none for hiccup, 499k for latch-off, 100k for keep-running."
+    },
+    {
+     "pin": "19",
+     "name": "FB",
+     "type": "input",
+     "function": "Voltage feedback for constant-voltage regulation (regulated to 1.00V) and LED fault detection. Open or short LED pulls FAULT low and enters the selected fault mode; overvoltage (VFB > 1.05V) turns off TG1, BG1, TG2, BG2 and PWMTG."
+    },
+    {
+     "pin": "20",
+     "name": "VC",
+     "type": "output",
+     "function": "Error amplifier output that sets the inductor current comparator threshold; an RC network to ground compensates the loop. While PWM is low the pin is disconnected from internal loads so it holds its voltage."
+    },
+    {
+     "pin": "21",
+     "name": "RT",
+     "type": "input",
+     "function": "Resistor to ground sets the internal oscillator between 150kHz and 650kHz."
+    },
+    {
+     "pin": "22",
+     "name": "SYNC/SPRD",
+     "type": "input",
+     "function": "Ground for the internal oscillator frequency; drive with a clock to synchronize; tie to INTVCC for ±15% triangle spread spectrum around the internal frequency."
+    },
+    {
+     "pin": "23",
+     "name": "PWMTG",
+     "type": "output",
+     "function": "Drive for an external high-side PMOS PWM switch: a buffered, inverted copy of PWM swinging from VOUT down to the higher of (VOUT – 5V) and 1.2V. Leave open if unused."
+    },
+    {
+     "pin": "24",
+     "name": "VOUT",
+     "type": "power",
+     "function": "Output voltage sense, used for region selection, and the positive rail of the PWMTG driver. Bypass to ground close by with at least 1µF ceramic."
+    },
+    {
+     "pin": "25",
+     "name": "TG2",
+     "type": "output",
+     "function": "Gate drive for the boost-side top N-channel MOSFET (switch D); swings from SW2 to BST2."
+    },
+    {
+     "pin": "26",
+     "name": "SW2",
+     "type": "power",
+     "function": "Boost-side switch node; moves between a Schottky drop below ground and VOUT."
+    },
+    {
+     "pin": "27",
+     "name": "BST2",
+     "type": "power",
+     "function": "Floating supply for the boost-side top gate driver, charged from INTVCC through an internal Schottky diode; a bootstrap capacitor goes from BST2 to SW2. Swings from one diode drop below INTVCC up to VOUT + INTVCC."
+    },
+    {
+     "pin": "28",
+     "name": "BG2",
+     "type": "output",
+     "function": "Gate drive for the boost-side bottom N-channel MOSFET (switch C); swings from ground to INTVCC."
+    },
+    {
+     "pin": "29",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, the exposed pad. Solder it straight to the ground plane."
+    }
+   ]
+  },
+  {
+   "package": "UFD (28-lead 4mm × 5mm QFN, exposed pad)",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "TG1",
+     "type": "output",
+     "function": "Gate drive for the buck-side top N-channel MOSFET (switch A); swings from SW1 to BST1."
+    },
+    {
+     "pin": "2",
+     "name": "LSP",
+     "type": "input",
+     "function": "Positive side of the inductor current sense resistor RSENSE. Use a Kelvin connection."
+    },
+    {
+     "pin": "3",
+     "name": "LSN",
+     "type": "input",
+     "function": "Negative side of the inductor current sense resistor RSENSE. Use a Kelvin connection."
+    },
+    {
+     "pin": "4",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input. Also tells the controller the input voltage for picking the buck, buck-boost or boost region. Bypass to ground close by with at least 1µF ceramic."
+    },
+    {
+     "pin": "5",
+     "name": "INTVCC",
+     "type": "power out",
+     "function": "Output of the internal 5V linear regulator fed from VIN; it runs the control circuits and gate drivers. Bypass to ground close by with at least 4.7µF ceramic."
+    },
+    {
+     "pin": "6",
+     "name": "EN/UVLO",
+     "type": "input",
+     "function": "Enable and undervoltage lockout. Below 0.3V the part is shut down and VIN draws under 2µA; above 1.227V it runs. A divider from VIN uses the 1.214V falling threshold to set an input UVLO, and the 2.5µA pull-down current sets its hysteresis. Tie to VIN when neither is wanted."
+    },
+    {
+     "pin": "7",
+     "name": "RP",
+     "type": "input",
+     "function": "Sets the internal PWM dimming frequency with a resistor to ground. Do not leave open and do not use more than 1MΩ. Ground it when an external PWM signal drives the PWM pin."
+    },
+    {
+     "pin": "8",
+     "name": "PWM",
+     "type": "input",
+     "function": "PWM dimming input. External dimming: a digital pulse from 0V to above 1.5V, with RP grounded. Internal dimming: an analog level between 1V and 2V compared with an internal ramp. Tie to INTVCC when dimming is not used. Holding it low turns TG1 and TG2 off, BG1 and BG2 on, cuts VC off from its internal loads and turns PWMTG off."
+    },
+    {
+     "pin": "9",
+     "name": "VREF",
+     "type": "output",
+     "function": "Accurate 2V reference able to source 1mA. Bypass to ground close by with a 0.47µF ceramic capacitor."
+    },
+    {
+     "pin": "10",
+     "name": "CTRL1",
+     "type": "input",
+     "function": "Sets the LED current sense threshold: 0mV to 90mV linearly for 0.25V to 1.15V, a smooth bend between 1.15V and 1.35V, and the 100mV full scale above 1.35V. Driven by a reference or a divider from VREF; tie to VREF for full scale. Below 0.2V switching stops."
+    },
+    {
+     "pin": "11",
+     "name": "ISP",
+     "type": "input",
+     "function": "Positive side of the LED current sense resistor RLED. Use a Kelvin connection."
+    },
+    {
+     "pin": "12",
+     "name": "ISN",
+     "type": "input",
+     "function": "Negative side of the LED current sense resistor RLED. Use a Kelvin connection."
+    },
+    {
+     "pin": "13",
+     "name": "CTRL2",
+     "type": "input",
+     "function": "Second current sense threshold input, meant for derating LED current with temperature through a divider from VREF that has a negative temperature coefficient. Same transfer as CTRL1 (0mV to 90mV over 0.25V to 1.15V, 100mV above 1.35V). Tie to VREF for full scale; below 0.2V switching stops."
+    },
+    {
+     "pin": "14",
+     "name": "FAULT",
+     "type": "open-drain output",
+     "function": "LED fault flag, active low; needs an external pull-up. Pulled low for an open LED (VFB > 0.95V and V(ISP-ISN) < 10mV) or a short LED (VFB < 0.25V). The flag is updated only while PWM is high and held while PWM is low."
+    },
+    {
+     "pin": "15",
+     "name": "SS",
+     "type": "input",
+     "function": "Soft-start timer: a capacitor to ground, charged by an internal 12.5µA current, ramps the FB regulation level; 0.1µF is the suggested value. UVLO or thermal shutdown pulls SS to ground at once and stops switching. One resistor from SS to VREF picks the LED fault mode: none for hiccup, 499k for latch-off, 100k for keep-running."
+    },
+    {
+     "pin": "16",
+     "name": "FB",
+     "type": "input",
+     "function": "Voltage feedback for constant-voltage regulation (regulated to 1.00V) and LED fault detection. Open or short LED pulls FAULT low and enters the selected fault mode; overvoltage (VFB > 1.05V) turns off TG1, BG1, TG2, BG2 and PWMTG."
+    },
+    {
+     "pin": "17",
+     "name": "VC",
+     "type": "output",
+     "function": "Error amplifier output that sets the inductor current comparator threshold; an RC network to ground compensates the loop. While PWM is low the pin is disconnected from internal loads so it holds its voltage."
+    },
+    {
+     "pin": "18",
+     "name": "RT",
+     "type": "input",
+     "function": "Resistor to ground sets the internal oscillator between 150kHz and 650kHz."
+    },
+    {
+     "pin": "19",
+     "name": "SYNC/SPRD",
+     "type": "input",
+     "function": "Ground for the internal oscillator frequency; drive with a clock to synchronize; tie to INTVCC for ±15% triangle spread spectrum around the internal frequency."
+    },
+    {
+     "pin": "20",
+     "name": "PWMTG",
+     "type": "output",
+     "function": "Drive for an external high-side PMOS PWM switch: a buffered, inverted copy of PWM swinging from VOUT down to the higher of (VOUT – 5V) and 1.2V. Leave open if unused."
+    },
+    {
+     "pin": "21",
+     "name": "VOUT",
+     "type": "power",
+     "function": "Output voltage sense, used for region selection, and the positive rail of the PWMTG driver. Bypass to ground close by with at least 1µF ceramic."
+    },
+    {
+     "pin": "22",
+     "name": "TG2",
+     "type": "output",
+     "function": "Gate drive for the boost-side top N-channel MOSFET (switch D); swings from SW2 to BST2."
+    },
+    {
+     "pin": "23",
+     "name": "SW2",
+     "type": "power",
+     "function": "Boost-side switch node; moves between a Schottky drop below ground and VOUT."
+    },
+    {
+     "pin": "24",
+     "name": "BST2",
+     "type": "power",
+     "function": "Floating supply for the boost-side top gate driver, charged from INTVCC through an internal Schottky diode; a bootstrap capacitor goes from BST2 to SW2. Swings from one diode drop below INTVCC up to VOUT + INTVCC."
+    },
+    {
+     "pin": "25",
+     "name": "BG2",
+     "type": "output",
+     "function": "Gate drive for the boost-side bottom N-channel MOSFET (switch C); swings from ground to INTVCC."
+    },
+    {
+     "pin": "26",
+     "name": "BG1",
+     "type": "output",
+     "function": "Gate drive for the buck-side bottom N-channel MOSFET (switch B); swings from ground to INTVCC."
+    },
+    {
+     "pin": "27",
+     "name": "BST1",
+     "type": "power",
+     "function": "Floating supply for the buck-side top gate driver. An internal Schottky diode from INTVCC charges it; a bootstrap capacitor goes from BST1 to SW1. Swings from one diode drop below INTVCC up to VIN + INTVCC."
+    },
+    {
+     "pin": "28",
+     "name": "SW1",
+     "type": "power",
+     "function": "Buck-side switch node; moves between a Schottky drop below ground and VIN."
+    },
+    {
+     "pin": "29",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, the exposed pad. Solder it straight to the ground plane."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "Note 1",
+   "columns": [
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN, EN/UVLO, VOUT, ISP, ISN",
+     "",
+     "60",
+     "V"
+    ],
+    [
+     "(ISP-ISN)",
+     "–1",
+     "1",
+     "V"
+    ],
+    [
+     "BST1, BST2",
+     "",
+     "66",
+     "V"
+    ],
+    [
+     "SW1, SW2, LSP, LSN",
+     "–6",
+     "60",
+     "V"
+    ],
+    [
+     "INTVCC, (BST1-SW1), (BST2-SW2)",
+     "",
+     "6",
+     "V"
+    ],
+    [
+     "(BST1-LSP), (BST1-LSN)",
+     "",
+     "6",
+     "V"
+    ],
+    [
+     "FB, PWM, SYNC/SPRD, CTRL1, CTRL2, FAULT",
+     "",
+     "6",
+     "V"
+    ],
+    [
+     "Operating junction temperature, LT8391E (Notes 2, 3)",
+     "–40",
+     "125",
+     "°C"
+    ],
+    [
+     "Operating junction temperature, LT8391I (Notes 2, 3)",
+     "–40",
+     "125",
+     "°C"
+    ],
+    [
+     "Operating junction temperature, LT8391H (Notes 2, 3)",
+     "–40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature",
+     "–65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: Going past these limits can damage the part for good; sitting at any one of them for long stretches can shorten its life and lower its reliability.",
+    "Note 2: The E grade is tested to its specifications from 0°C to 125°C junction; over –40°C to 125°C it is held to them by design, characterization and statistical process control. The I grade is guaranteed over –40°C to 125°C and the H grade over –40°C to 150°C junction. Lifetime falls at high junction temperature and is derated above 125°C.",
+    "Note 3: An overtemperature shutdown guards against brief overloads; while it is active the junction is above 150°C. Running continuously above the maximum operating junction temperature can harm reliability."
+   ]
+  },
+  {
+   "title": "Thermal resistance",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "package",
+    "θJA",
+    "θJC",
+    "unit"
+   ],
+   "rows": [
+    [
+     "FE (28-lead TSSOP)",
+     "30",
+     "5",
+     "°C/W"
+    ],
+    [
+     "UFD (28-lead 4mm × 5mm QFN)",
+     "34",
+     "3.4",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "On both packages the exposed pad (pin 29) is GND and has to be soldered to the board."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply",
+   "page": 3,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN Operating Voltage Range",
+     "",
+     "●",
+     "4",
+     "",
+     "60",
+     "V"
+    ],
+    [
+     "VIN Quiescent Current",
+     "VEN/UVLO = 0.3V",
+     "",
+     "",
+     "1",
+     "2",
+     "µA"
+    ],
+    [
+     "VIN Quiescent Current",
+     "VEN/UVLO = 1.1V",
+     "",
+     "",
+     "270",
+     "",
+     "µA"
+    ],
+    [
+     "VIN Quiescent Current",
+     "Not Switching",
+     "",
+     "",
+     "2.1",
+     "2.8",
+     "mA"
+    ],
+    [
+     "VOUT Voltage Range",
+     "",
+     "●",
+     "0",
+     "",
+     "60",
+     "V"
+    ],
+    [
+     "VOUT Quiescent Current",
+     "VEN/UVLO = 0.3V, VOUT = 12V",
+     "",
+     "",
+     "0.1",
+     "0.5",
+     "µA"
+    ],
+    [
+     "VOUT Quiescent Current",
+     "VEN/UVLO = 1.1V, VOUT = 12V",
+     "",
+     "",
+     "0.1",
+     "0.5",
+     "µA"
+    ],
+    [
+     "VOUT Quiescent Current",
+     "Not Switching, VOUT = 12V",
+     "",
+     "20",
+     "40",
+     "60",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: linear regulators",
+   "page": 3,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "INTVCC Regulation Voltage",
+     "IINTVCC = 20mA",
+     "",
+     "4.85",
+     "5.0",
+     "5.15",
+     "V"
+    ],
+    [
+     "INTVCC Load Regulation",
+     "IINTVCC = 0mA to 80mA",
+     "",
+     "",
+     "1",
+     "4",
+     "%"
+    ],
+    [
+     "INTVCC Line Regulation",
+     "IINTVCC = 20mA, VIN = 6V to 60V",
+     "",
+     "",
+     "1",
+     "4",
+     "%"
+    ],
+    [
+     "INTVCC Current Limit",
+     "VINTVCC = 4.5V",
+     "",
+     "80",
+     "110",
+     "160",
+     "mA"
+    ],
+    [
+     "INTVCC Dropout Voltage (VIN – INTVCC)",
+     "IINTVCC = 20mA, VIN = 4V",
+     "",
+     "",
+     "160",
+     "",
+     "mV"
+    ],
+    [
+     "INTVCC Undervoltage Lockout Threshold",
+     "Falling",
+     "",
+     "3.44",
+     "3.54",
+     "3.64",
+     "V"
+    ],
+    [
+     "INTVCC Undervoltage Lockout Hysteresis",
+     "",
+     "",
+     "",
+     "0.24",
+     "",
+     "V"
+    ],
+    [
+     "VREF Regulation Voltage",
+     "IVREF = 100µA",
+     "●",
+     "1.97",
+     "2.00",
+     "2.03",
+     "V"
+    ],
+    [
+     "VREF Load Regulation",
+     "IVREF = 0mA to 1mA",
+     "",
+     "",
+     "0.4",
+     "1",
+     "%"
+    ],
+    [
+     "VREF Line Regulation",
+     "IVREF = 100µA, VIN = 4V to 60V",
+     "",
+     "",
+     "0.1",
+     "0.2",
+     "%"
+    ],
+    [
+     "VREF Current Limit",
+     "VREF = 1.8V",
+     "",
+     "2",
+     "2.5",
+     "3.2",
+     "mA"
+    ],
+    [
+     "VREF Undervoltage Lockout Threshold",
+     "Falling",
+     "",
+     "1.78",
+     "1.84",
+     "1.90",
+     "V"
+    ],
+    [
+     "VREF Undervoltage Lockout Hysteresis",
+     "",
+     "",
+     "",
+     "50",
+     "",
+     "mV"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: control inputs and outputs",
+   "page": 3,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "EN/UVLO Shutdown Threshold",
+     "",
+     "●",
+     "0.3",
+     "0.6",
+     "1.0",
+     "V"
+    ],
+    [
+     "EN/UVLO Enable Threshold",
+     "Falling",
+     "●",
+     "1.190",
+     "1.214",
+     "1.238",
+     "V"
+    ],
+    [
+     "EN/UVLO Enable Hysteresis",
+     "",
+     "",
+     "",
+     "13",
+     "",
+     "mV"
+    ],
+    [
+     "EN/UVLO Hysteresis Current",
+     "VEN/UVLO = 0.3V",
+     "",
+     "–0.1",
+     "0",
+     "0.1",
+     "µA"
+    ],
+    [
+     "EN/UVLO Hysteresis Current",
+     "VEN/UVLO = 1.1V",
+     "",
+     "2.2",
+     "2.5",
+     "2.8",
+     "µA"
+    ],
+    [
+     "EN/UVLO Hysteresis Current",
+     "VEN/UVLO = 1.3V",
+     "",
+     "–0.1",
+     "0",
+     "0.1",
+     "µA"
+    ],
+    [
+     "CTRL1, CTRL2 Input Bias Current",
+     "VCTRL1/2 = 0.75V (Note 4), Current out of Pin",
+     "",
+     "0",
+     "20",
+     "50",
+     "nA"
+    ],
+    [
+     "CTRL1, CTRL2 Dim-Off Threshold",
+     "Falling",
+     "●",
+     "190",
+     "200",
+     "210",
+     "mV"
+    ],
+    [
+     "CTRL1, CTRL2 Dim-Off Hysteresis",
+     "",
+     "",
+     "",
+     "28",
+     "",
+     "mV"
+    ]
+   ],
+   "notes": [
+    "Note 4: VCTRL1/2 stands for the CTRL1 voltage with CTRL2 held at 2V, or the CTRL2 voltage with CTRL1 held at 2V."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PWM dimming",
+   "page": 3,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "External PWM Dimming Threshold",
+     "Rising, RP = 30k",
+     "●",
+     "1.3",
+     "1.4",
+     "1.5",
+     "V"
+    ],
+    [
+     "External PWM Dimming Hysteresis",
+     "RP = 30k",
+     "",
+     "",
+     "220",
+     "",
+     "mV"
+    ],
+    [
+     "Internal PWM Dimming Duty Cycle",
+     "VPWM = 1V, RP ≥ 51k",
+     "",
+     "",
+     "",
+     "3",
+     "%"
+    ],
+    [
+     "Internal PWM Dimming Duty Cycle",
+     "VPWM = 1.5V, RP ≥ 51k",
+     "",
+     "47",
+     "",
+     "53",
+     "%"
+    ],
+    [
+     "Internal PWM Dimming Duty Cycle",
+     "VPWM = 2V, RP ≥ 51k",
+     "",
+     "97",
+     "",
+     "",
+     "%"
+    ],
+    [
+     "Switching Frequency to Internal PWM Dimming Frequency Ratio",
+     "RP = 51k",
+     "",
+     "",
+     "256",
+     "",
+     ""
+    ],
+    [
+     "Switching Frequency to Internal PWM Dimming Frequency Ratio",
+     "RP = 82k",
+     "",
+     "",
+     "512",
+     "",
+     ""
+    ],
+    [
+     "Switching Frequency to Internal PWM Dimming Frequency Ratio",
+     "RP = 130k",
+     "",
+     "",
+     "1024",
+     "",
+     ""
+    ],
+    [
+     "Switching Frequency to Internal PWM Dimming Frequency Ratio",
+     "RP = 200k",
+     "",
+     "",
+     "2048",
+     "",
+     ""
+    ],
+    [
+     "Switching Frequency to Internal PWM Dimming Frequency Ratio",
+     "RP = 300k",
+     "",
+     "",
+     "4096",
+     "",
+     ""
+    ],
+    [
+     "RP Pin Current Limit",
+     "VRP = 0V, Current out of Pin",
+     "",
+     "",
+     "40",
+     "",
+     "µA"
+    ],
+    [
+     "Minimum VOUT for PWMTG to be On",
+     "PWM dimming on",
+     "",
+     "",
+     "2.4",
+     "3",
+     "V"
+    ],
+    [
+     "PWMTG On Voltage V(VOUT-PWMTG)",
+     "VOUT = 12V",
+     "",
+     "4.6",
+     "5",
+     "5.4",
+     "V"
+    ],
+    [
+     "PWMTG Off Voltage V(VOUT-PWMTG)",
+     "VOUT = 12V",
+     "",
+     "–0.1",
+     "0",
+     "0.1",
+     "V"
+    ],
+    [
+     "PWM to PWMTG Turn On Propagation Delay",
+     "CPWMTG = 3.3nF to VOUT, 50% to 50%",
+     "",
+     "",
+     "90",
+     "",
+     "ns"
+    ],
+    [
+     "PWM to PWMTG Turn Off Propagation Delay",
+     "CPWMTG = 3.3nF to VOUT, 50% to 50%",
+     "",
+     "",
+     "40",
+     "",
+     "ns"
+    ],
+    [
+     "PWMTG Turn On Fall Time",
+     "CPWMTG = 3.3nF to VOUT, 10% to 90%",
+     "",
+     "",
+     "300",
+     "",
+     "ns"
+    ],
+    [
+     "PWMTG Turn Off Rise Time",
+     "CPWMTG = 3.3nF to VOUT, 90% to 10%",
+     "",
+     "",
+     "10",
+     "",
+     "ns"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: error amplifier",
+   "page": 4,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Full Scale LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 ≥ 1.35V (Note 4), VISP = 12V",
+     "●",
+     "97",
+     "100",
+     "103",
+     "mV"
+    ],
+    [
+     "Full Scale LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 ≥ 1.35V (Note 4), VISP = 0V",
+     "●",
+     "97",
+     "100",
+     "103",
+     "mV"
+    ],
+    [
+     "9/10th LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 1.15V (Note 4), VISP = 12V",
+     "●",
+     "87",
+     "90",
+     "93",
+     "mV"
+    ],
+    [
+     "9/10th LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 1.15V (Note 4), VISP = 0V",
+     "●",
+     "87",
+     "90",
+     "93",
+     "mV"
+    ],
+    [
+     "1/2 LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 0.75V (Note 4), VISP = 12V",
+     "●",
+     "47.5",
+     "50",
+     "52.5",
+     "mV"
+    ],
+    [
+     "1/2 LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 0.75V (Note 4), VISP = 0V",
+     "●",
+     "47.5",
+     "50",
+     "52.5",
+     "mV"
+    ],
+    [
+     "1/20th LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 0.30V (Note 4), VISP = 12V",
+     "●",
+     "3",
+     "5",
+     "7",
+     "mV"
+    ],
+    [
+     "1/20th LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 0.30V (Note 4), VISP = 0V",
+     "●",
+     "3",
+     "5",
+     "7",
+     "mV"
+    ],
+    [
+     "Zero Scale LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 0.25V (Note 4), VISP = 12V",
+     "●",
+     "–2",
+     "0",
+     "2",
+     "mV"
+    ],
+    [
+     "Zero Scale LED Current Regulation V(ISP-ISN)",
+     "VCTRL1/2 = 0.25V (Note 4), VISP = 0V",
+     "●",
+     "–2",
+     "0",
+     "2",
+     "mV"
+    ],
+    [
+     "ISP/ISN Input Common Mode Range",
+     "",
+     "●",
+     "0",
+     "",
+     "60",
+     "V"
+    ],
+    [
+     "ISP/ISN Low Side to High Side Switchover Voltage",
+     "VISP = VISN",
+     "",
+     "",
+     "1.8",
+     "",
+     "V"
+    ],
+    [
+     "ISP/ISN High Side to Low Side Switchover Voltage",
+     "VISP = VISN",
+     "",
+     "",
+     "1.7",
+     "",
+     "V"
+    ],
+    [
+     "ISP Input Bias Current",
+     "VPWM = 5V, VISP = VISN = 12V",
+     "",
+     "",
+     "23",
+     "",
+     "µA"
+    ],
+    [
+     "ISP Input Bias Current",
+     "VPWM = 5V, VISP = VISN = 0V",
+     "",
+     "",
+     "–10",
+     "",
+     "µA"
+    ],
+    [
+     "ISP Input Bias Current",
+     "VEN/UVLO = 0V, VISP = VISN = 12V or 0V",
+     "",
+     "",
+     "0",
+     "",
+     "µA"
+    ],
+    [
+     "ISN Input Bias Current",
+     "VPWM = 5V, VISP = VISN = 12V",
+     "",
+     "",
+     "23",
+     "",
+     "µA"
+    ],
+    [
+     "ISN Input Bias Current",
+     "VPWM = 5V, VISP = VISN = 0V",
+     "",
+     "",
+     "–10",
+     "",
+     "µA"
+    ],
+    [
+     "ISN Input Bias Current",
+     "VEN/UVLO = 0V, VISP = VISN = 12V or 0V",
+     "",
+     "",
+     "0",
+     "",
+     "µA"
+    ],
+    [
+     "LED Current Regulation Amplifier gm",
+     "",
+     "",
+     "",
+     "2000",
+     "",
+     "µS"
+    ],
+    [
+     "FB Regulation Voltage",
+     "VC = 1.2V",
+     "●",
+     "0.98",
+     "1.00",
+     "1.02",
+     "V"
+    ],
+    [
+     "FB Line Regulation",
+     "VIN = 4V to 60V",
+     "",
+     "",
+     "0.2",
+     "0.5",
+     "%"
+    ],
+    [
+     "FB Load Regulation",
+     "",
+     "",
+     "",
+     "0.2",
+     "0.8",
+     "%"
+    ],
+    [
+     "FB Voltage Regulation Amplifier gm",
+     "",
+     "",
+     "",
+     "660",
+     "",
+     "µS"
+    ],
+    [
+     "FB Input Bias Current",
+     "FB in Regulation, Current Out of Pin",
+     "",
+     "",
+     "10",
+     "40",
+     "nA"
+    ],
+    [
+     "VC Output Impedance",
+     "",
+     "",
+     "",
+     "10",
+     "",
+     "MΩ"
+    ],
+    [
+     "VC Standby Leakage Current",
+     "VC = 1.2V, PWM Dimming Off",
+     "",
+     "–10",
+     "0",
+     "10",
+     "nA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: current comparator",
+   "page": 5,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Maximum Current Sense Threshold V(LSP-LSN)",
+     "Buck, VFB = 0.8V",
+     "●",
+     "35",
+     "50",
+     "65",
+     "mV"
+    ],
+    [
+     "Maximum Current Sense Threshold V(LSP-LSN)",
+     "Boost, VFB = 0.8V",
+     "●",
+     "40",
+     "50",
+     "60",
+     "mV"
+    ],
+    [
+     "Reverse Current Sense Threshold V(LSP-LSN)",
+     "Buck, VFB = 0.8V",
+     "",
+     "",
+     "–4",
+     "",
+     "mV"
+    ],
+    [
+     "Reverse Current Sense Threshold V(LSP-LSN)",
+     "Boost, VFB = 0.8V",
+     "",
+     "",
+     "–4",
+     "",
+     "mV"
+    ],
+    [
+     "LSP Pin Bias Current",
+     "VLSP = VLSN = 12V",
+     "",
+     "",
+     "60",
+     "",
+     "µA"
+    ],
+    [
+     "LSN Pin Bias Current",
+     "VLSP = VLSN = 12V",
+     "",
+     "",
+     "60",
+     "",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: fault",
+   "page": 5,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "FB Overvoltage Threshold (VFB)",
+     "Rising",
+     "●",
+     "1.03",
+     "1.05",
+     "1.07",
+     "V"
+    ],
+    [
+     "FB Overvoltage Hysteresis",
+     "",
+     "●",
+     "15",
+     "25",
+     "35",
+     "mV"
+    ],
+    [
+     "FB Open LED Threshold (VFB)",
+     "Rising, V(ISP-ISN) = 0V",
+     "●",
+     "0.93",
+     "0.95",
+     "0.97",
+     "V"
+    ],
+    [
+     "FB Open LED Hysteresis",
+     "V(ISP-ISN) = 0V",
+     "●",
+     "35",
+     "50",
+     "65",
+     "mV"
+    ],
+    [
+     "FB Short LED Threshold (VFB)",
+     "Falling",
+     "●",
+     "0.24",
+     "0.25",
+     "0.26",
+     "V"
+    ],
+    [
+     "FB Short LED Hysteresis",
+     "Hysteresis",
+     "●",
+     "35",
+     "50",
+     "65",
+     "mV"
+    ],
+    [
+     "ISP/ISN Over Current Threshold V(ISP-ISN)",
+     "VISP = 12V",
+     "",
+     "",
+     "750",
+     "",
+     "mV"
+    ],
+    [
+     "ISP/ISN Open LED Threshold V(ISP-ISN)",
+     "Falling, VFB = 1.0V",
+     "●",
+     "8",
+     "10",
+     "12",
+     "mV"
+    ],
+    [
+     "ISP/ISN Open LED Hysteresis",
+     "VFB = 1.0V",
+     "●",
+     "3",
+     "5",
+     "7",
+     "mV"
+    ],
+    [
+     "FAULT Pull-Down Resistance",
+     "",
+     "",
+     "",
+     "100",
+     "200",
+     "Ω"
+    ],
+    [
+     "SS Hard Pull-Down Resistance",
+     "VEN/UVLO = 1.1V",
+     "",
+     "",
+     "100",
+     "200",
+     "Ω"
+    ],
+    [
+     "SS Pull-Up Current",
+     "VFB = 0.8V, VSS = 0V",
+     "",
+     "10.5",
+     "12.5",
+     "14.5",
+     "µA"
+    ],
+    [
+     "SS Pull-Down Current",
+     "VFB = 1.0V, VSS = 2V",
+     "",
+     "1.05",
+     "1.25",
+     "1.45",
+     "µA"
+    ],
+    [
+     "SS Fault Latch-Off Threshold",
+     "Falling",
+     "",
+     "",
+     "1.7",
+     "",
+     "V"
+    ],
+    [
+     "SS Fault Latch-Off Hysteresis",
+     "",
+     "",
+     "",
+     "50",
+     "",
+     "mV"
+    ],
+    [
+     "SS Fault Reset Threshold",
+     "",
+     "",
+     "",
+     "0.2",
+     "",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: oscillator",
+   "page": 5,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RT Pin Voltage",
+     "RT = 100kΩ",
+     "",
+     "",
+     "1.00",
+     "",
+     "V"
+    ],
+    [
+     "Switching Frequency",
+     "VSYNC/SPRD = 0V, RT = 226k",
+     "●",
+     "190",
+     "200",
+     "210",
+     "kHz"
+    ],
+    [
+     "Switching Frequency",
+     "VSYNC/SPRD = 0V, RT = 100k",
+     "●",
+     "380",
+     "400",
+     "420",
+     "kHz"
+    ],
+    [
+     "Switching Frequency",
+     "VSYNC/SPRD = 0V, RT = 59.0k",
+     "●",
+     "570",
+     "600",
+     "630",
+     "kHz"
+    ],
+    [
+     "SYNC Frequency",
+     "",
+     "",
+     "150",
+     "",
+     "650",
+     "kHz"
+    ],
+    [
+     "SYNC/SPRD Input Bias Current",
+     "VSYNC/SPRD = 5V",
+     "",
+     "–0.1",
+     "0",
+     "0.1",
+     "µA"
+    ],
+    [
+     "SYNC/SPRD Threshold Voltage",
+     "",
+     "",
+     "0.4",
+     "",
+     "1.5",
+     "V"
+    ],
+    [
+     "Highest Spread Spectrum Above Oscillator Frequency",
+     "VSYNC/SPRD = 5V",
+     "",
+     "12.5",
+     "14.5",
+     "16.5",
+     "%"
+    ],
+    [
+     "Lowest Spread Spectrum Below Oscillator Frequency",
+     "VSYNC/SPRD = 5V",
+     "",
+     "–17.7",
+     "–15.7",
+     "–13.7",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: region transition",
+   "page": 6,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Buck-Boost to Boost (VIN/VOUT)",
+     "",
+     "",
+     "0.73",
+     "0.75",
+     "0.77",
+     ""
+    ],
+    [
+     "Boost to Buck-Boost (VIN/VOUT)",
+     "",
+     "",
+     "0.83",
+     "0.85",
+     "0.87",
+     ""
+    ],
+    [
+     "Buck to Buck-Boost (VIN/VOUT)",
+     "",
+     "",
+     "1.16",
+     "1.18",
+     "1.20",
+     ""
+    ],
+    [
+     "Buck-Boost to Buck (VIN/VOUT)",
+     "",
+     "",
+     "1.31",
+     "1.33",
+     "1.35",
+     ""
+    ],
+    [
+     "Peak-Buck to Peak-Boost (VIN/VOUT)",
+     "",
+     "",
+     "0.96",
+     "0.98",
+     "1.00",
+     ""
+    ],
+    [
+     "Peak-Boost to Peak-Buck (VIN/VOUT)",
+     "",
+     "",
+     "1.00",
+     "1.02",
+     "1.04",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: NMOS drivers",
+   "page": 6,
+   "conditions": "VIN = 12V, VEN/UVLO = 1.5V unless noted; TA = 25°C; rows marked ● apply over the full operating temperature range (Note 2).",
+   "columns": [
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "TG1, TG2 Gate Driver On-Resistance, Gate Pull-Up",
+     "V(BST-SW) = 5V",
+     "",
+     "",
+     "2.6",
+     "",
+     "Ω"
+    ],
+    [
+     "TG1, TG2 Gate Driver On-Resistance, Gate Pull-Down",
+     "V(BST-SW) = 5V",
+     "",
+     "",
+     "1.4",
+     "",
+     "Ω"
+    ],
+    [
+     "BG1, BG2 Gate Driver On-Resistance, Gate Pull-Up",
+     "VINTVCC = 5V",
+     "",
+     "",
+     "3.2",
+     "",
+     "Ω"
+    ],
+    [
+     "BG1, BG2 Gate Driver On-Resistance, Gate Pull-Down",
+     "VINTVCC = 5V",
+     "",
+     "",
+     "1.2",
+     "",
+     "Ω"
+    ],
+    [
+     "TG1, TG2 Rise Time",
+     "CL = 3.3nF, 10% to 90%",
+     "",
+     "",
+     "25",
+     "",
+     "ns"
+    ],
+    [
+     "TG1, TG2 Fall Time",
+     "CL = 3.3nF, 90% to 10%",
+     "",
+     "",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "BG1, BG2 Rise Time",
+     "CL = 3.3nF, 10% to 90%",
+     "",
+     "",
+     "25",
+     "",
+     "ns"
+    ],
+    [
+     "BG1, BG2 Fall Time",
+     "CL = 3.3nF, 90% to 10%",
+     "",
+     "",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "TG Off to BG On Delay",
+     "CL = 3.3nF",
+     "",
+     "",
+     "60",
+     "",
+     "ns"
+    ],
+    [
+     "BG Off to TG On Delay",
+     "CL = 3.3nF",
+     "",
+     "",
+     "60",
+     "",
+     "ns"
+    ],
+    [
+     "TG1 Minimum Duty Cycle in Buck Region",
+     "Peak-Buck Current Mode",
+     "",
+     "",
+     "10",
+     "",
+     "%"
+    ],
+    [
+     "TG1 Maximum Duty Cycle in Buck Region",
+     "Peak-Buck Current Mode",
+     "",
+     "",
+     "95",
+     "",
+     "%"
+    ],
+    [
+     "TG1 Fixed Duty Cycle in Buck-Boost Region",
+     "Peak-Boost Current Mode",
+     "",
+     "",
+     "85",
+     "",
+     "%"
+    ],
+    [
+     "BG2 Fixed Duty Cycle in Buck-Boost Region",
+     "Peak-Buck Current Mode",
+     "",
+     "",
+     "15",
+     "",
+     "%"
+    ],
+    [
+     "BG2 Minimum Duty Cycle in Boost Region",
+     "Peak-Boost Current Mode",
+     "",
+     "",
+     "10",
+     "",
+     "%"
+    ],
+    [
+     "BG2 Maximum Duty Cycle in Boost Region",
+     "Peak-Boost Current Mode",
+     "",
+     "",
+     "95",
+     "",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "Table 1. Switching frequency against RT value (1% resistor)",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "fOSC (kHz)",
+    "RT (k)"
+   ],
+   "rows": [
+    [
+     "150",
+     "309"
+    ],
+    [
+     "200",
+     "226"
+    ],
+    [
+     "300",
+     "140"
+    ],
+    [
+     "400",
+     "100"
+    ],
+    [
+     "500",
+     "75"
+    ],
+    [
+     "600",
+     "59"
+    ],
+    [
+     "650",
+     "51.1"
+    ]
+   ]
+  },
+  {
+   "title": "Table 2. V(ISP-ISN) threshold against Min(VCTRL1, VCTRL2)",
+   "page": 23,
+   "conditions": "typical",
+   "columns": [
+    "Min(VCTRL1, VCTRL2) (V)",
+    "V(ISP-ISN) (mV)"
+   ],
+   "rows": [
+    [
+     "1.15",
+     "90"
+    ],
+    [
+     "1.20",
+     "94.5"
+    ],
+    [
+     "1.25",
+     "98"
+    ],
+    [
+     "1.30",
+     "99.5"
+    ],
+    [
+     "1.35",
+     "100"
+    ]
+   ]
+  },
+  {
+   "title": "Table 3. Internal PWM dimming frequency against RP value (5% resistor)",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "RP (k)",
+    "fSW",
+    "fSW = 200kHz",
+    "fSW = 400kHz",
+    "fSW = 600kHz"
+   ],
+   "rows": [
+    [
+     "≤ 30",
+     "External",
+     "External",
+     "External",
+     "External"
+    ],
+    [
+     "51",
+     "fSW/256",
+     "781Hz",
+     "1563Hz",
+     "2344Hz"
+    ],
+    [
+     "82",
+     "fSW/512",
+     "391Hz",
+     "781Hz",
+     "1172Hz"
+    ],
+    [
+     "130",
+     "fSW/1024",
+     "195Hz",
+     "391Hz",
+     "586Hz"
+    ],
+    [
+     "200",
+     "fSW/2048",
+     "98Hz",
+     "195Hz",
+     "293Hz"
+    ],
+    [
+     "300",
+     "fSW/4096",
+     "49Hz",
+     "98Hz",
+     "146Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Fault protection mode against SS resistor",
+   "page": 25,
+   "conditions": "resistor from SS to VREF",
+   "columns": [
+    "resistor SS to VREF",
+    "mode"
+   ],
+   "rows": [
+    [
+     "none",
+     "hiccup"
+    ],
+    [
+     "499k",
+     "latch-off"
+    ],
+    [
+     "100k",
+     "keep-running"
+    ]
+   ]
+  },
+  {
+   "title": "Highest PWM dimming ratio by operating region",
+   "page": 24,
+   "conditions": "same application",
+   "columns": [
+    "region",
+    "PWM dimming ratio"
+   ],
+   "rows": [
+    [
+     "buck",
+     "up to 2000:1"
+    ],
+    [
+     "buck-boost",
+     "up to 1000:1"
+    ],
+    [
+     "boost",
+     "up to 400:1"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Efficiency vs VIN (98% efficient 50W buck-boost LED driver)",
+   "page": 1,
+   "conditions": "25V, 2A LED string",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency",
+     "points": [
+      [
+       5.96,
+       89.19
+      ],
+      [
+       8.06,
+       93.23
+      ],
+      [
+       8.91,
+       94.33
+      ],
+      [
+       9.73,
+       94.9
+      ],
+      [
+       11.75,
+       95.73
+      ],
+      [
+       15.04,
+       96.63
+      ],
+      [
+       17.11,
+       97.0
+      ],
+      [
+       21.27,
+       97.55
+      ],
+      [
+       21.5,
+       95.42
+      ],
+      [
+       22.05,
+       95.54
+      ],
+      [
+       25.43,
+       95.77
+      ],
+      [
+       30.06,
+       95.0
+      ],
+      [
+       33.4,
+       94.31
+      ],
+      [
+       33.66,
+       95.94
+      ],
+      [
+       41.54,
+       94.44
+      ],
+      [
+       55.0,
+       92.18
+      ],
+      [
+       41.54,
+       94.44
+      ],
+      [
+       34.05,
+       95.85
+      ],
+      [
+       29.78,
+       96.51
+      ],
+      [
+       29.78,
+       96.61
+      ],
+      [
+       29.53,
+       94.98
+      ],
+      [
+       25.35,
+       95.8
+      ],
+      [
+       18.93,
+       95.25
+      ],
+      [
+       18.95,
+       97.23
+      ],
+      [
+       15.04,
+       96.63
+      ],
+      [
+       10.09,
+       95.07
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs LED current (buck region)",
+   "page": 7,
+   "conditions": "TA = 25°C, VIN = 36V",
+   "x": {
+    "label": "LED current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 36V",
+     "points": [
+      [
+       0.047,
+       48.0
+      ],
+      [
+       0.09,
+       63.8
+      ],
+      [
+       0.144,
+       77.13
+      ],
+      [
+       0.199,
+       82.59
+      ],
+      [
+       0.288,
+       86.12
+      ],
+      [
+       0.363,
+       87.73
+      ],
+      [
+       0.499,
+       89.68
+      ],
+      [
+       0.705,
+       91.51
+      ],
+      [
+       1.1,
+       93.17
+      ],
+      [
+       1.999,
+       95.61
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs LED current (buck-boost region)",
+   "page": 7,
+   "conditions": "TA = 25°C, VIN = 24V",
+   "x": {
+    "label": "LED current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 24V",
+     "points": [
+      [
+       0.047,
+       74.05
+      ],
+      [
+       0.18,
+       79.85
+      ],
+      [
+       0.363,
+       86.9
+      ],
+      [
+       0.451,
+       89.4
+      ],
+      [
+       0.598,
+       91.85
+      ],
+      [
+       0.766,
+       93.33
+      ],
+      [
+       1.1,
+       94.66
+      ],
+      [
+       1.999,
+       95.67
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs LED current (boost region)",
+   "page": 7,
+   "conditions": "TA = 25°C, VIN = 12V",
+   "x": {
+    "label": "LED current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 12V",
+     "points": [
+      [
+       0.046,
+       80.36
+      ],
+      [
+       0.144,
+       89.09
+      ],
+      [
+       0.176,
+       90.86
+      ],
+      [
+       0.255,
+       92.68
+      ],
+      [
+       0.363,
+       93.84
+      ],
+      [
+       0.649,
+       95.44
+      ],
+      [
+       0.911,
+       96.03
+      ],
+      [
+       1.999,
+       95.93
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LED current vs VIN",
+   "page": 7,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "LED current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "LED current",
+     "points": [
+      [
+       6.05,
+       1.9985
+      ],
+      [
+       21.25,
+       2.0006
+      ],
+      [
+       21.68,
+       2.0051
+      ],
+      [
+       33.32,
+       2.0111
+      ],
+      [
+       33.78,
+       2.0063
+      ],
+      [
+       50.03,
+       2.0124
+      ],
+      [
+       30.05,
+       2.0044
+      ],
+      [
+       29.78,
+       2.0048
+      ],
+      [
+       29.58,
+       2.009
+      ],
+      [
+       20.02,
+       2.0044
+      ],
+      [
+       19.05,
+       2.0034
+      ],
+      [
+       18.96,
+       2.0006
+      ],
+      [
+       10.07,
+       1.9984
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VIN shutdown current",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IQ",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 60V",
+     "points": [
+      [
+       -49.7,
+       1.648
+      ],
+      [
+       25.1,
+       1.653
+      ],
+      [
+       100.1,
+       1.683
+      ],
+      [
+       125.1,
+       1.733
+      ],
+      [
+       150.2,
+       1.863
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12V",
+     "points": [
+      [
+       -49.7,
+       1.003
+      ],
+      [
+       112.6,
+       1.073
+      ],
+      [
+       128.3,
+       1.103
+      ],
+      [
+       150.2,
+       1.193
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 4V",
+     "points": [
+      [
+       -49.7,
+       0.332
+      ],
+      [
+       78.2,
+       0.356
+      ],
+      [
+       122.0,
+       0.406
+      ],
+      [
+       131.4,
+       0.436
+      ],
+      [
+       150.2,
+       0.524
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VIN quiescent current",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IQ",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 60V",
+     "points": [
+      [
+       -49.7,
+       2.333
+      ],
+      [
+       3.2,
+       2.353
+      ],
+      [
+       150.2,
+       2.471
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12V",
+     "points": [
+      [
+       -49.7,
+       2.222
+      ],
+      [
+       -24.9,
+       2.241
+      ],
+      [
+       22.0,
+       2.259
+      ],
+      [
+       50.1,
+       2.281
+      ],
+      [
+       78.2,
+       2.293
+      ],
+      [
+       150.2,
+       2.351
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 4V",
+     "points": [
+      [
+       -49.7,
+       2.122
+      ],
+      [
+       -21.8,
+       2.143
+      ],
+      [
+       28.2,
+       2.163
+      ],
+      [
+       150.2,
+       2.261
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "INTVCC voltage vs temperature",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VINTVCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IINTVCC = 0mA",
+     "points": [
+      [
+       -49.9,
+       4.9998
+      ],
+      [
+       -21.8,
+       5.0035
+      ],
+      [
+       40.7,
+       5.0049
+      ],
+      [
+       100.0,
+       5.0003
+      ],
+      [
+       149.9,
+       4.9893
+      ]
+     ]
+    },
+    {
+     "label": "IINTVCC = 80mA",
+     "points": [
+      [
+       -49.9,
+       4.9598
+      ],
+      [
+       21.9,
+       4.9566
+      ],
+      [
+       50.0,
+       4.9533
+      ],
+      [
+       106.2,
+       4.9418
+      ],
+      [
+       149.9,
+       4.9274
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "INTVCC voltage vs VIN",
+   "page": 8,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VINTVCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IINTVCC = 20mA",
+     "points": [
+      [
+       5.98,
+       4.9933
+      ],
+      [
+       12.05,
+       5.0003
+      ],
+      [
+       60.04,
+       5.0423
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "INTVCC UVLO threshold",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VINTVCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.9,
+       3.7498
+      ],
+      [
+       46.9,
+       3.7542
+      ],
+      [
+       75.0,
+       3.749
+      ],
+      [
+       103.1,
+       3.7486
+      ],
+      [
+       149.9,
+       3.739
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.9,
+       3.5098
+      ],
+      [
+       -24.9,
+       3.514
+      ],
+      [
+       43.8,
+       3.5162
+      ],
+      [
+       106.2,
+       3.5135
+      ],
+      [
+       149.9,
+       3.506
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VREF voltage vs temperature",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVREF = 0mA",
+     "points": [
+      [
+       -49.9,
+       1.99987
+      ],
+      [
+       -24.9,
+       2.002
+      ],
+      [
+       0.1,
+       2.002
+      ],
+      [
+       28.2,
+       2.00297
+      ],
+      [
+       121.8,
+       1.99922
+      ],
+      [
+       149.9,
+       1.996
+      ]
+     ]
+    },
+    {
+     "label": "IVREF = 1mA",
+     "points": [
+      [
+       -49.9,
+       1.9932
+      ],
+      [
+       -24.9,
+       1.995
+      ],
+      [
+       0.1,
+       1.994
+      ],
+      [
+       21.9,
+       1.99496
+      ],
+      [
+       37.5,
+       1.99469
+      ],
+      [
+       56.3,
+       1.99357
+      ],
+      [
+       118.7,
+       1.98857
+      ],
+      [
+       149.9,
+       1.985
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VREF voltage vs VIN",
+   "page": 8,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVREF = 100µA",
+     "points": [
+      [
+       3.98,
+       2.00099
+      ],
+      [
+       11.97,
+       2.00199
+      ],
+      [
+       59.93,
+       2.00299
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VREF UVLO threshold",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VREF",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.9,
+       1.8865
+      ],
+      [
+       18.8,
+       1.8874
+      ],
+      [
+       65.6,
+       1.8858
+      ],
+      [
+       149.9,
+       1.8783
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.9,
+       1.8365
+      ],
+      [
+       -24.9,
+       1.8373
+      ],
+      [
+       65.6,
+       1.8359
+      ],
+      [
+       100.0,
+       1.8323
+      ],
+      [
+       124.9,
+       1.8313
+      ],
+      [
+       149.9,
+       1.8273
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EN/UVLO enable threshold",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VEN/UVLO",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.9,
+       1.22304
+      ],
+      [
+       21.9,
+       1.22592
+      ],
+      [
+       65.6,
+       1.22607
+      ],
+      [
+       81.2,
+       1.22582
+      ],
+      [
+       149.9,
+       1.223
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.9,
+       1.21105
+      ],
+      [
+       21.9,
+       1.21392
+      ],
+      [
+       65.6,
+       1.21407
+      ],
+      [
+       81.2,
+       1.21382
+      ],
+      [
+       149.9,
+       1.211
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EN/UVLO hysteresis current",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IHYS",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Hysteresis current",
+     "points": [
+      [
+       -50.2,
+       2.5
+      ],
+      [
+       21.8,
+       2.504
+      ],
+      [
+       121.9,
+       2.502
+      ],
+      [
+       150.0,
+       2.506
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CTRL1/CTRL2 dim-off threshold",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCTRL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.9,
+       0.2276
+      ],
+      [
+       149.9,
+       0.2272
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.9,
+       0.1982
+      ],
+      [
+       -18.7,
+       0.1992
+      ],
+      [
+       149.9,
+       0.1992
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "V(ISP-ISN) regulation vs VCTRL",
+   "page": 9,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "VCTRL",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "V(ISP-ISN)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "V(ISP-ISN)",
+     "points": [
+      [
+       0.256,
+       0.5
+      ],
+      [
+       1.151,
+       89.6
+      ],
+      [
+       1.242,
+       97.7
+      ],
+      [
+       1.278,
+       99.3
+      ],
+      [
+       1.332,
+       99.9
+      ],
+      [
+       1.994,
+       99.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "V(ISP-ISN) regulation vs VISP",
+   "page": 9,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "VISP",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "V(ISP-ISN)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "V(ISP-ISN)",
+     "points": [
+      [
+       0.01,
+       99.86
+      ],
+      [
+       59.98,
+       99.81
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "V(ISP-ISN) regulation vs temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "V(ISP-ISN)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VISP = 0V",
+     "points": [
+      [
+       -49.8,
+       99.53
+      ],
+      [
+       -18.7,
+       99.71
+      ],
+      [
+       21.9,
+       99.82
+      ],
+      [
+       46.9,
+       99.83
+      ],
+      [
+       106.2,
+       99.66
+      ],
+      [
+       150.0,
+       99.35
+      ]
+     ]
+    },
+    {
+     "label": "VISP = 12V",
+     "points": [
+      [
+       -49.8,
+       99.66
+      ],
+      [
+       21.9,
+       99.46
+      ],
+      [
+       65.6,
+       99.25
+      ],
+      [
+       96.9,
+       99.03
+      ],
+      [
+       150.0,
+       98.46
+      ]
+     ]
+    },
+    {
+     "label": "VISP = 60V",
+     "points": [
+      [
+       -49.8,
+       99.59
+      ],
+      [
+       21.9,
+       99.43
+      ],
+      [
+       65.6,
+       99.23
+      ],
+      [
+       96.9,
+       99.01
+      ],
+      [
+       150.0,
+       98.44
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "V(ISP-ISN) regulation vs VFB",
+   "page": 9,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "V(ISP-ISN)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "V(ISP-ISN)",
+     "points": [
+      [
+       0.9603,
+       100.0
+      ],
+      [
+       0.98109,
+       99.8
+      ],
+      [
+       0.98896,
+       95.6
+      ],
+      [
+       0.99384,
+       92.3
+      ],
+      [
+       0.99671,
+       89.6
+      ],
+      [
+       0.99851,
+       86.5
+      ],
+      [
+       0.99947,
+       81.9
+      ],
+      [
+       0.99977,
+       75.9
+      ],
+      [
+       0.99977,
+       0.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FB regulation vs temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 4V",
+     "points": [
+      [
+       -50.3,
+       0.99597
+      ],
+      [
+       -22.0,
+       0.99711
+      ],
+      [
+       71.9,
+       0.99711
+      ],
+      [
+       150.1,
+       0.99407
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12V",
+     "points": [
+      [
+       -50.3,
+       0.99697
+      ],
+      [
+       -22.0,
+       0.99811
+      ],
+      [
+       71.9,
+       0.99811
+      ],
+      [
+       150.1,
+       0.99507
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 60V",
+     "points": [
+      [
+       -50.3,
+       1.00297
+      ],
+      [
+       -25.2,
+       1.00407
+      ],
+      [
+       -0.1,
+       1.00407
+      ],
+      [
+       21.8,
+       1.00498
+      ],
+      [
+       40.6,
+       1.00518
+      ],
+      [
+       53.1,
+       1.00498
+      ],
+      [
+       75.0,
+       1.00407
+      ],
+      [
+       103.2,
+       1.00399
+      ],
+      [
+       150.1,
+       1.00207
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum current sense vs temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current limit",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Buck",
+     "points": [
+      [
+       -49.8,
+       48.16
+      ],
+      [
+       0,
+       47.76
+      ],
+      [
+       46.9,
+       47.03
+      ],
+      [
+       100.0,
+       47.03
+      ],
+      [
+       150.0,
+       46.67
+      ]
+     ]
+    },
+    {
+     "label": "Boost",
+     "points": [
+      [
+       -49.8,
+       48.82
+      ],
+      [
+       -25.0,
+       48.35
+      ],
+      [
+       25.0,
+       47.96
+      ],
+      [
+       50.0,
+       47.93
+      ],
+      [
+       100.0,
+       47.45
+      ],
+      [
+       150.0,
+       47.43
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FB overvoltage threshold",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.9,
+       1.0498
+      ],
+      [
+       46.9,
+       1.0504
+      ],
+      [
+       149.9,
+       1.0473
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.9,
+       1.0232
+      ],
+      [
+       46.9,
+       1.0244
+      ],
+      [
+       149.9,
+       1.0203
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FB open LED threshold",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.9,
+       0.9482
+      ],
+      [
+       40.7,
+       0.9505
+      ],
+      [
+       78.1,
+       0.9482
+      ],
+      [
+       149.9,
+       0.9473
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.9,
+       0.8965
+      ],
+      [
+       -24.9,
+       0.8983
+      ],
+      [
+       43.8,
+       0.8984
+      ],
+      [
+       149.9,
+       0.8953
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FB short LED threshold",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.9,
+       0.3032
+      ],
+      [
+       118.7,
+       0.3034
+      ],
+      [
+       149.9,
+       0.3023
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.9,
+       0.2498
+      ],
+      [
+       149.9,
+       0.2493
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ISP/ISN open LED threshold",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "V(ISP-ISN)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Rising",
+     "points": [
+      [
+       -49.7,
+       15.15
+      ],
+      [
+       125.1,
+       14.09
+      ],
+      [
+       150.1,
+       14.06
+      ]
+     ]
+    },
+    {
+     "label": "Falling",
+     "points": [
+      [
+       -49.7,
+       9.99
+      ],
+      [
+       -3.1,
+       9.82
+      ],
+      [
+       25.1,
+       9.54
+      ],
+      [
+       50.1,
+       9.58
+      ],
+      [
+       75.1,
+       9.34
+      ],
+      [
+       100.1,
+       9.39
+      ],
+      [
+       125.1,
+       9.09
+      ],
+      [
+       150.1,
+       9.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SS current vs temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ISS",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Pull-up",
+     "points": [
+      [
+       -49.6,
+       12.52
+      ],
+      [
+       150.1,
+       12.68
+      ]
+     ]
+    },
+    {
+     "label": "Pull-down",
+     "points": [
+      [
+       -49.6,
+       1.27
+      ],
+      [
+       150.1,
+       1.27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Oscillator frequency vs temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Switching frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RT = 59.0k",
+     "points": [
+      [
+       -49.9,
+       596.3
+      ],
+      [
+       150.1,
+       591.9
+      ]
+     ]
+    },
+    {
+     "label": "RT = 100k",
+     "points": [
+      [
+       -49.9,
+       399.7
+      ],
+      [
+       150.1,
+       397.2
+      ]
+     ]
+    },
+    {
+     "label": "RT = 226k",
+     "points": [
+      [
+       -49.9,
+       199.7
+      ],
+      [
+       150.1,
+       195.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 11. Normalized RDS(ON) vs temperature",
+   "page": 21,
+   "conditions": "power MOSFET",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ρT normalized on-resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Normalized on-resistance",
+     "points": [
+      [
+       -49.7,
+       0.682
+      ],
+      [
+       115.4,
+       1.411
+      ],
+      [
+       129.6,
+       1.499
+      ],
+      [
+       136.9,
+       1.56
+      ],
+      [
+       143.7,
+       1.635
+      ],
+      [
+       149.6,
+       1.724
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 13. Internal PWM dimming duty ratio vs PWM voltage",
+   "page": 24,
+   "conditions": "",
+   "x": {
+    "label": "PWM",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "PWMTG duty ratio",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PWMTG duty ratio",
+     "points": [
+      [
+       -0.002,
+       1.5
+      ],
+      [
+       1.002,
+       1.5
+      ],
+      [
+       1.989,
+       98.5
+      ],
+      [
+       2.998,
+       98.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs VIN (95% efficient 12W buck-boost LED driver with dual package MOSFETs)",
+   "page": 29,
+   "conditions": "12V, 1A LED string",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency",
+     "points": [
+      [
+       5.07,
+       87.52
+      ],
+      [
+       7.05,
+       92.44
+      ],
+      [
+       8.94,
+       94.45
+      ],
+      [
+       9.45,
+       94.78
+      ],
+      [
+       9.57,
+       92.58
+      ],
+      [
+       10.64,
+       93.2
+      ],
+      [
+       12.99,
+       94.1
+      ],
+      [
+       14.7,
+       93.54
+      ],
+      [
+       14.68,
+       95.17
+      ],
+      [
+       17.58,
+       94.11
+      ],
+      [
+       25.03,
+       91.78
+      ],
+      [
+       31.29,
+       90.21
+      ],
+      [
+       36.94,
+       88.99
+      ],
+      [
+       40.73,
+       88.31
+      ],
+      [
+       44.44,
+       87.83
+      ],
+      [
+       56.0,
+       86.86
+      ],
+      [
+       44.44,
+       87.83
+      ],
+      [
+       40.73,
+       88.31
+      ],
+      [
+       37.58,
+       88.87
+      ],
+      [
+       31.91,
+       90.07
+      ],
+      [
+       26.28,
+       91.44
+      ],
+      [
+       17.02,
+       94.24
+      ],
+      [
+       16.66,
+       94.46
+      ],
+      [
+       16.6,
+       92.89
+      ],
+      [
+       12.98,
+       94.14
+      ],
+      [
+       10.66,
+       93.23
+      ],
+      [
+       10.52,
+       95.28
+      ],
+      [
+       9.19,
+       94.59
+      ],
+      [
+       7.3,
+       92.82
+      ],
+      [
+       5.11,
+       87.51
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "84W 120Hz AC LED output",
+   "page": 30,
+   "conditions": "24VAC 60Hz input",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ILED",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILED",
+     "points": [
+      [
+       0,
+       -0.22
+      ],
+      [
+       0.37,
+       -0.22
+      ],
+      [
+       0.74,
+       0.04
+      ],
+      [
+       1.29,
+       2.22
+      ],
+      [
+       2.03,
+       4.03
+      ],
+      [
+       2.95,
+       5.31
+      ],
+      [
+       3.51,
+       5.82
+      ],
+      [
+       3.88,
+       5.92
+      ],
+      [
+       4.25,
+       5.92
+      ],
+      [
+       4.98,
+       5.49
+      ],
+      [
+       5.7,
+       4.67
+      ],
+      [
+       6.42,
+       2.73
+      ],
+      [
+       7.14,
+       1.49
+      ],
+      [
+       7.32,
+       0.62
+      ],
+      [
+       8.04,
+       -0.18
+      ],
+      [
+       8.76,
+       -0.18
+      ],
+      [
+       9.12,
+       0.11
+      ],
+      [
+       9.48,
+       1.78
+      ],
+      [
+       10.38,
+       4.17
+      ],
+      [
+       11.49,
+       5.53
+      ],
+      [
+       12.04,
+       5.85
+      ],
+      [
+       12.59,
+       5.85
+      ],
+      [
+       13.15,
+       5.64
+      ],
+      [
+       13.88,
+       4.78
+      ],
+      [
+       14.62,
+       3.42
+      ],
+      [
+       15.71,
+       0.51
+      ],
+      [
+       16.24,
+       -0.15
+      ],
+      [
+       17.14,
+       -0.18
+      ],
+      [
+       17.5,
+       0.15
+      ],
+      [
+       18.57,
+       3.96
+      ],
+      [
+       19.11,
+       4.35
+      ],
+      [
+       19.29,
+       4.99
+      ],
+      [
+       19.82,
+       5.56
+      ],
+      [
+       20.37,
+       5.85
+      ],
+      [
+       20.91,
+       5.85
+      ],
+      [
+       21.46,
+       5.6
+      ],
+      [
+       22.19,
+       4.71
+      ],
+      [
+       24.01,
+       0.44
+      ],
+      [
+       24.55,
+       -0.15
+      ],
+      [
+       25.46,
+       -0.18
+      ],
+      [
+       25.83,
+       0.15
+      ],
+      [
+       26.92,
+       3.89
+      ],
+      [
+       28.01,
+       5.46
+      ],
+      [
+       28.73,
+       5.89
+      ],
+      [
+       29.28,
+       5.89
+      ],
+      [
+       29.64,
+       5.67
+      ],
+      [
+       30.56,
+       4.67
+      ],
+      [
+       31.3,
+       3.31
+      ],
+      [
+       32.41,
+       0.33
+      ],
+      [
+       32.78,
+       -0.04
+      ],
+      [
+       33.34,
+       -0.18
+      ],
+      [
+       33.71,
+       -0.18
+      ],
+      [
+       34.27,
+       0.22
+      ],
+      [
+       34.64,
+       2.15
+      ],
+      [
+       35.37,
+       3.96
+      ],
+      [
+       36.44,
+       5.49
+      ],
+      [
+       36.79,
+       5.78
+      ],
+      [
+       37.15,
+       5.85
+      ],
+      [
+       37.69,
+       5.85
+      ],
+      [
+       38.04,
+       5.64
+      ],
+      [
+       38.76,
+       4.81
+      ],
+      [
+       39.47,
+       3.53
+      ],
+      [
+       39.65,
+       2.76
+      ],
+      [
+       40.38,
+       1.6
+      ],
+      [
+       40.75,
+       0.29
+      ],
+      [
+       41.12,
+       -0.15
+      ],
+      [
+       42.04,
+       -0.22
+      ],
+      [
+       42.6,
+       0.04
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs VIN (97% efficient 8A buck-boost SLA battery charger)",
+   "page": 31,
+   "conditions": "",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency",
+     "points": [
+      [
+       9.68,
+       95.54
+      ],
+      [
+       10.11,
+       95.66
+      ],
+      [
+       10.54,
+       95.99
+      ],
+      [
+       11.97,
+       96.66
+      ],
+      [
+       12.12,
+       95.11
+      ],
+      [
+       12.54,
+       95.32
+      ],
+      [
+       14.26,
+       96.1
+      ],
+      [
+       16.62,
+       95.88
+      ],
+      [
+       17.12,
+       95.99
+      ],
+      [
+       17.62,
+       95.88
+      ],
+      [
+       18.7,
+       95.88
+      ],
+      [
+       18.7,
+       96.99
+      ],
+      [
+       19.05,
+       96.88
+      ],
+      [
+       22.2,
+       96.54
+      ],
+      [
+       23.06,
+       96.54
+      ],
+      [
+       23.99,
+       96.32
+      ],
+      [
+       27.14,
+       96.1
+      ],
+      [
+       23.99,
+       96.32
+      ],
+      [
+       23.06,
+       96.54
+      ],
+      [
+       22.2,
+       96.54
+      ],
+      [
+       19.05,
+       96.88
+      ],
+      [
+       18.12,
+       96.88
+      ],
+      [
+       16.98,
+       96.99
+      ],
+      [
+       16.91,
+       97.1
+      ],
+      [
+       16.77,
+       97.1
+      ],
+      [
+       16.62,
+       95.99
+      ],
+      [
+       14.26,
+       96.1
+      ],
+      [
+       12.54,
+       95.32
+      ],
+      [
+       12.04,
+       94.88
+      ],
+      [
+       11.11,
+       94.23
+      ],
+      [
+       10.97,
+       94.23
+      ],
+      [
+       10.68,
+       95.77
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge profile (97% efficient 8A buck-boost SLA battery charger)",
+   "page": 31,
+   "conditions": "VCHRG = 14.6V, VFLOAT = 13.6V",
+   "x": {
+    "label": "Time",
+    "unit": "minutes",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Battery voltage",
+     "points": [
+      [
+       0,
+       13.2
+      ],
+      [
+       29.9,
+       13.464
+      ],
+      [
+       65.0,
+       13.731
+      ],
+      [
+       74.7,
+       13.856
+      ],
+      [
+       80.0,
+       13.891
+      ],
+      [
+       89.6,
+       14.087
+      ],
+      [
+       95.8,
+       14.318
+      ],
+      [
+       98.4,
+       14.478
+      ],
+      [
+       101.1,
+       14.531
+      ],
+      [
+       107.2,
+       14.567
+      ],
+      [
+       110.7,
+       14.567
+      ],
+      [
+       111.6,
+       14.584
+      ],
+      [
+       118.6,
+       14.584
+      ],
+      [
+       119.5,
+       14.602
+      ],
+      [
+       131.8,
+       14.602
+      ],
+      [
+       132.7,
+       14.62
+      ],
+      [
+       160.8,
+       14.62
+      ],
+      [
+       161.7,
+       14.638
+      ],
+      [
+       167.9,
+       14.638
+      ],
+      [
+       168.7,
+       13.66
+      ],
+      [
+       169.6,
+       13.642
+      ],
+      [
+       248.7,
+       13.642
+      ]
+     ]
+    },
+    {
+     "label": "Battery current",
+     "points": [
+      [
+       0,
+       7.9
+      ],
+      [
+       20.2,
+       7.9
+      ],
+      [
+       29.9,
+       7.856
+      ],
+      [
+       85.3,
+       7.856
+      ],
+      [
+       86.1,
+       7.811
+      ],
+      [
+       93.2,
+       7.811
+      ],
+      [
+       96.7,
+       7.633
+      ],
+      [
+       98.4,
+       7.365
+      ],
+      [
+       101.1,
+       6.43
+      ],
+      [
+       108.1,
+       4.737
+      ],
+      [
+       116.0,
+       3.489
+      ],
+      [
+       116.0,
+       3.355
+      ],
+      [
+       122.2,
+       2.598
+      ],
+      [
+       130.9,
+       1.885
+      ],
+      [
+       144.1,
+       1.261
+      ],
+      [
+       154.7,
+       0.994
+      ],
+      [
+       165.2,
+       0.816
+      ],
+      [
+       168.7,
+       0.816
+      ],
+      [
+       168.7,
+       0.014
+      ],
+      [
+       168.7,
+       0.37
+      ],
+      [
+       170.5,
+       0.459
+      ],
+      [
+       181.9,
+       0.459
+      ],
+      [
+       183.7,
+       0.415
+      ],
+      [
+       194.2,
+       0.415
+      ],
+      [
+       195.1,
+       0.37
+      ],
+      [
+       212.7,
+       0.37
+      ],
+      [
+       213.6,
+       0.325
+      ],
+      [
+       237.3,
+       0.325
+      ],
+      [
+       238.2,
+       0.281
+      ],
+      [
+       247.8,
+       0.281
+      ]
+     ],
+     "axis": "y2"
+    }
+   ],
+   "y2": {
+    "label": "Battery current",
+    "unit": "A",
+    "scale": "linear"
+   }
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "98% efficient 50W (25V, 2A) buck-boost LED driver",
+   "page": 1,
+   "description": "A 6V to 55V supply drives a 25V, 2A LED string through four N-channel switches around one 10µH inductor. The 0.004Ω resistor between SW1 and the inductor gives the controller its inductor current; the 0.05Ω resistor in the output path sets 2A at the 100mV full-scale threshold, with CTRL2 tied to VREF and CTRL1 pulled up to VREF and open to an analog dimming signal. The 1M/34.8k divider on FB sets the open-LED output limit. A PMOS driven by PWMTG disconnects the string while PWM DIM is low. RT = 100k sets 400kHz; RP and SYNC/SPRD are grounded, so the part runs from its own oscillator and dims from the external PWM signal. 499k/221k on EN/UVLO set the input undervoltage lockout.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT8391"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN 6V to 55V",
+     "note": "supply input"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "33µF 63V",
+     "note": "bulk input capacitor, polarized"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7µF 100V ×2",
+     "note": "ceramic input capacitors"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "499k",
+     "note": "UVLO divider, top"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "221k",
+     "note": "UVLO divider, bottom"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "INTVCC bypass"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k",
+     "note": "FAULT pull-up to INTVCC"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.47µF",
+     "note": "VREF bypass"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "100k",
+     "note": "CTRL1 pull-up to VREF"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "ANALOG DIM",
+     "note": "analog dimming input on CTRL1"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "soft-start"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "2.2k",
+     "note": "compensation resistor"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10nF",
+     "note": "compensation capacitor"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "100k (400kHz)",
+     "note": "sets the switching frequency"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST1 bootstrap capacitor"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST2 bootstrap capacitor"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "0.004Ω",
+     "note": "inductor current sense resistor RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH Cooper HC9-100R"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "5.1Ω",
+     "note": "gate resistor for switch C"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "1M",
+     "note": "FB divider, top"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "34.8k",
+     "note": "FB divider, bottom"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "10µF 50V ×2",
+     "note": "output capacitors"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "0.05Ω",
+     "note": "LED current sense resistor RLED"
+    },
+    {
+     "ref": "M5",
+     "type": "pmos",
+     "value": "Vishay Si7611DN",
+     "note": "high-side PWM dimming switch"
+    },
+    {
+     "ref": "LED1",
+     "type": "led",
+     "value": "25V 2A",
+     "note": "LED string"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS3",
+     "note": "switch A"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS3",
+     "note": "switch B"
+    },
+    {
+     "ref": "M3",
+     "type": "nmos",
+     "value": "Infineon BSC093N04LS",
+     "note": "switch C"
+    },
+    {
+     "ref": "M4",
+     "type": "nmos",
+     "value": "Infineon BSC093N04LS",
+     "note": "switch D"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "FAULT",
+     "note": "fault flag output"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "PWM DIM",
+     "note": "PWM dimming input"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led-50w",
+   "title": "98% efficient 50W (25V 2A) buck-boost LED driver",
+   "page": 28,
+   "description": "The 50W typical-application driver with every option brought out. A switch on RP either grounds it for external PWM dimming or leaves the 200k resistor for 195Hz internal dimming, set by a 100k potentiometer from VREF on the PWM pin. A second switch puts SYNC/SPRD on an external clock, ground (fixed 400kHz) or INTVCC (spread spectrum). 1µF capacitors bypass the VIN and VOUT pins, and an optional Schottky diode goes from LED+ to ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT8391"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN 6V to 55V",
+     "note": "supply input"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "33µF 63V",
+     "note": "bulk input capacitor, polarized"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7µF 100V ×2",
+     "note": "ceramic input capacitors"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "499k",
+     "note": "UVLO divider, top"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "221k",
+     "note": "UVLO divider, bottom"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "INTVCC bypass"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k",
+     "note": "FAULT pull-up to INTVCC"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.47µF",
+     "note": "VREF bypass"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "100k",
+     "note": "CTRL1 pull-up to VREF"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "ANALOG DIM",
+     "note": "analog dimming input on CTRL1"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "soft-start"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "2.2k",
+     "note": "compensation resistor"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10nF",
+     "note": "compensation capacitor"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "100k (400kHz)",
+     "note": "sets the switching frequency"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST1 bootstrap capacitor"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST2 bootstrap capacitor"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "0.004Ω",
+     "note": "inductor current sense resistor RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH Cooper HC9-100R"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "5.1Ω",
+     "note": "gate resistor for switch C"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "1M",
+     "note": "FB divider, top"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "34.8k",
+     "note": "FB divider, bottom"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "10µF 50V ×2",
+     "note": "output capacitors"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "0.05Ω",
+     "note": "LED current sense resistor RLED"
+    },
+    {
+     "ref": "M5",
+     "type": "pmos",
+     "value": "Vishay Si7611DN",
+     "note": "high-side PWM dimming switch"
+    },
+    {
+     "ref": "LED1",
+     "type": "led",
+     "value": "25V 2A",
+     "note": "LED string"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS3",
+     "note": "switch A"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS3",
+     "note": "switch B"
+    },
+    {
+     "ref": "M3",
+     "type": "nmos",
+     "value": "Infineon BSC093N04LS",
+     "note": "switch C"
+    },
+    {
+     "ref": "M4",
+     "type": "nmos",
+     "value": "Infineon BSC093N04LS",
+     "note": "switch D"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VIN pin bypass"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VOUT pin bypass"
+    },
+    {
+     "ref": "RV1",
+     "type": "other",
+     "value": "100k",
+     "note": "potentiometer from VREF to ground, wiper to PWM, for internal PWM dimming; pins 1 (ground end), 2 (VREF end), W (wiper)"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "EXT PWM",
+     "note": "external PWM dimming input"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "200k",
+     "note": "RP resistor, 195Hz internal PWM dimming"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "internal PWM OFF/ON",
+     "note": "COM to RP; OFF grounds RP for external PWM; ON leaves the 200k in place for internal PWM"
+    },
+    {
+     "ref": "S2",
+     "type": "switch",
+     "value": "SYNC/SPRD select",
+     "note": "COM to SYNC/SPRD; EXT to the external clock, NOSPREAD to ground, SPREAD to INTVCC"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "EXT SYNC",
+     "note": "external clock input"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "PMEG6010CEJ",
+     "note": "optional, LED+ to ground"
+    }
+   ],
+   "notes": [
+    "M1, M2: Infineon BSC100N06LS3; M3, M4: Infineon BSC093N04LS; M5: Vishay Si7611DN; L1: Cooper HC9-100R 10µH; D1: NXP PMEG6010CEJ."
+   ]
+  },
+  {
+   "id": "led-12w",
+   "title": "95% efficient 12W (12V 1A) buck-boost LED driver with dual package MOSFETs",
+   "page": 29,
+   "description": "A 12V, 1A version of the same driver from a 5V to 56V input. Each side of the bridge uses one dual MOSFET package: M1 holds switches A and B, M2 holds switches D and C. RSENSE is 0.015Ω, RLED 0.1Ω (1A at 100mV), and 1M/75k on FB sets the output limit. A Si2307DS PMOS on PWMTG does the dimming disconnect; compensation is 2.0k with 4.7nF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT8391"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN 5V to 56V",
+     "note": "supply input"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22µF 63V",
+     "note": "bulk input capacitor, polarized"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "2.2µF 100V ×2",
+     "note": "ceramic input capacitors"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "332k",
+     "note": "UVLO divider, top"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "121k",
+     "note": "UVLO divider, bottom"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "INTVCC bypass"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k",
+     "note": "FAULT pull-up to INTVCC"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.47µF",
+     "note": "VREF bypass"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "100k",
+     "note": "CTRL1 pull-up to VREF"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "ANALOG DIM",
+     "note": "analog dimming input on CTRL1"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "soft-start"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "2.0k",
+     "note": "compensation resistor"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "4.7nF",
+     "note": "compensation capacitor"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "100k (400kHz)",
+     "note": "sets the switching frequency"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST1 bootstrap capacitor"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST2 bootstrap capacitor"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "0.015Ω",
+     "note": "inductor current sense resistor RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH Würth 74437336100"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "5.1Ω",
+     "note": "gate resistor for switch C"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "1M",
+     "note": "FB divider, top"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "75k",
+     "note": "FB divider, bottom"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "10µF 25V",
+     "note": "output capacitors"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "0.1Ω",
+     "note": "LED current sense resistor RLED"
+    },
+    {
+     "ref": "M3",
+     "type": "pmos",
+     "value": "Vishay Si2307DS",
+     "note": "high-side PWM dimming switch"
+    },
+    {
+     "ref": "LED1",
+     "type": "led",
+     "value": "12V 1A",
+     "note": "LED string"
+    },
+    {
+     "ref": "M1A",
+     "type": "nmos",
+     "value": "Infineon IPG20N06S4L-11",
+     "note": "switch A, one half of the dual MOSFET M1"
+    },
+    {
+     "ref": "M1B",
+     "type": "nmos",
+     "value": "Infineon IPG20N06S4L-11",
+     "note": "switch B, other half of M1"
+    },
+    {
+     "ref": "M2A",
+     "type": "nmos",
+     "value": "Vishay SiZ342DT",
+     "note": "switch D, one half of the dual MOSFET M2"
+    },
+    {
+     "ref": "M2B",
+     "type": "nmos",
+     "value": "Vishay SiZ342DT",
+     "note": "switch C, other half of M2"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VIN pin bypass"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VOUT pin bypass"
+    },
+    {
+     "ref": "RV1",
+     "type": "other",
+     "value": "100k",
+     "note": "potentiometer from VREF to ground, wiper to PWM, for internal PWM dimming; pins 1 (ground end), 2 (VREF end), W (wiper)"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "EXT PWM",
+     "note": "external PWM dimming input"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "200k",
+     "note": "RP resistor, 195Hz internal PWM dimming"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "internal PWM OFF/ON",
+     "note": "COM to RP; OFF grounds RP for external PWM; ON leaves the 200k in place for internal PWM"
+    },
+    {
+     "ref": "S2",
+     "type": "switch",
+     "value": "SYNC/SPRD select",
+     "note": "COM to SYNC/SPRD; EXT to the external clock, NOSPREAD to ground, SPREAD to INTVCC"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "EXT SYNC",
+     "note": "external clock input"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "PMEG6010CEJ",
+     "note": "optional, LED+ to ground"
+    }
+   ],
+   "notes": [
+    "Misprint: TG1 should go to the gate of switch A and BST1 to the 0.1µF capacitor; the two are swapped.",
+    "M1: Infineon IPG20N06S4L-11; M2: Vishay SiZ342DT; M3: Vishay Si2307DS; L1: Würth 74437336100; D1: NXP PMEG6010CEJ."
+   ]
+  },
+  {
+   "id": "led-24vac",
+   "title": "93% efficient 84W buck-boost LED driver from 24VAC",
+   "page": 30,
+   "description": "24VAC at 60Hz feeds a bridge of four N-channel MOSFETs driven by an LT4320, giving a rail PVIN that pulses at 120Hz with 1µF capacitors on it. The LT8391 runs from PVIN at 500kHz (RT = 75.0k). CTRL1 takes a 1M/37.4k divider from PVIN; the LED string (15V to 25V) carries 0A to 6A pulsing at 120Hz, and the input power factor is 98%. PWM is tied to INTVCC, PWMTG is unconnected, and 100k from SS to VREF selects keep-running fault mode.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT8391"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "LT4320",
+     "note": "drives the four bridge MOSFETs",
+     "external": true
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "24VAC 60Hz",
+     "note": "AC input; pins 1 and 2"
+    },
+    {
+     "ref": "M5",
+     "type": "nmos",
+     "value": "Infineon BSZ100N06LS3",
+     "note": "bridge, top, AC1 side"
+    },
+    {
+     "ref": "M6",
+     "type": "nmos",
+     "value": "Infineon BSZ100N06LS3",
+     "note": "bridge, top, AC2 side"
+    },
+    {
+     "ref": "M7",
+     "type": "nmos",
+     "value": "Infineon BSZ100N06LS3",
+     "note": "bridge, bottom, AC1 side"
+    },
+    {
+     "ref": "M8",
+     "type": "nmos",
+     "value": "Infineon BSZ100N06LS3",
+     "note": "bridge, bottom, AC2 side"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1µF 50V",
+     "note": "rectified rail"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1M",
+     "note": "CTRL1 divider from PVIN, top"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "37.4k",
+     "note": "CTRL1 divider, bottom"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "68.1k",
+     "note": "EN/UVLO divider, top"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "30.1k",
+     "note": "EN/UVLO divider, bottom"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF 50V",
+     "note": "CIN"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7µF 10V",
+     "note": "INTVCC bypass"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "100k",
+     "note": "FAULT pull-up"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.47µF",
+     "note": "VREF bypass"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "100k",
+     "note": "SS to VREF: keep-running fault mode"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "soft-start"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "3k",
+     "note": "compensation"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10nF",
+     "note": "compensation"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "75.0k",
+     "note": "RT, 500kHz"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "1µF 50V",
+     "note": "VOUT pin bypass"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Infineon BSC067N06LS3",
+     "note": "switch A"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "Infineon BSC067N06LS3",
+     "note": "switch B"
+    },
+    {
+     "ref": "M3",
+     "type": "nmos",
+     "value": "Infineon BSC032N04LS",
+     "note": "switch C"
+    },
+    {
+     "ref": "M4",
+     "type": "nmos",
+     "value": "Infineon BSC032N04LS",
+     "note": "switch D"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST1"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST2"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "0.004Ω",
+     "note": "RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "7.8µH Würth 744325780"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "5.1Ω",
+     "note": "gate resistor for switch C"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "1M",
+     "note": "FB divider, top"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "36.5k",
+     "note": "FB divider, bottom"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "4.7µF 50V ×4",
+     "note": "COUT"
+    },
+    {
+     "ref": "R13",
+     "type": "resistor",
+     "value": "0.015Ω",
+     "note": "RLED"
+    },
+    {
+     "ref": "LED1",
+     "type": "led",
+     "value": "15V–25V, 0A–6A",
+     "note": "LED string, pulsating at 120Hz"
+    }
+   ],
+   "notes": [
+    "Power factor 98% from 60Hz 24VAC input.",
+    "M1, M2: Infineon BSC067N06LS3; M3, M4: Infineon BSC032N04LS; M5–M8: Infineon BSZ100N06LS3; L1: Würth 744325780 7.8µH."
+   ]
+  },
+  {
+   "id": "sla-charger",
+   "title": "97% efficient 8A buck-boost SLA battery charger",
+   "page": 31,
+   "description": "The controller charges a sealed lead-acid battery from an 8V to 60V input. A 0.012Ω resistor, with two 10Ω resistors and 2.2µF between it and ISP/ISN, senses the 7.8A charge current; CTRL1 sits on a 10k/15k divider from VREF. FB takes a 100k/7.87k divider from the output, plus a second 100k to ground through M5, whose gate is on the active-low C/10 flag (FAULT, pulled up by 10k). Charge voltage is 14.6V and float voltage 13.6V. CTRL2 is pulled to VREF by 10k and brought out as a current-adjust input. PWM is tied to INTVCC, RP is grounded, 174k sets 250kHz and 100k from SS to VREF selects keep-running mode.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT8391"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN 8V to 60V",
+     "note": "supply input"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "33µF 100V",
+     "note": "bulk input, polarized"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VIN pin bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7µF 100V ×2",
+     "note": "ceramic input"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "374k",
+     "note": "UVLO divider, top"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "68.1k",
+     "note": "UVLO divider, bottom"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "INTVCC bypass"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10k",
+     "note": "FAULT (C/10) pull-up"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "C/10",
+     "note": "active-low end-of-charge flag (FAULT)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "CURRENT ADJUST",
+     "note": "input on CTRL2"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10k",
+     "note": "CTRL2 to VREF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.47µF",
+     "note": "VREF bypass"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10k",
+     "note": "CTRL1 divider from VREF, top"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "15k",
+     "note": "CTRL1 divider, bottom"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "174k",
+     "note": "RT, 250kHz"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "SYNC/SPRD select",
+     "note": "COM to SYNC/SPRD; EXT to the external clock, NOSPREAD to ground, SPREAD to INTVCC"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "EXT SYNC",
+     "note": "external clock input"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "100k",
+     "note": "SS to VREF: keep-running fault mode"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "soft-start"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "22nF",
+     "note": "compensation"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VOUT pin bypass"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS",
+     "note": "switch A"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS",
+     "note": "switch B"
+    },
+    {
+     "ref": "M3",
+     "type": "nmos",
+     "value": "Infineon BSZ014NE2LS5IF",
+     "note": "switch C"
+    },
+    {
+     "ref": "M4",
+     "type": "nmos",
+     "value": "Infineon BSZ014NE2LS5IF",
+     "note": "switch D"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST1"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST2"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "0.002Ω",
+     "note": "RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "4.2µH Würth 7443630420"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "5.1Ω",
+     "note": "gate resistor for switch C"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "100k",
+     "note": "FB divider, top"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "7.87k",
+     "note": "FB divider, bottom"
+    },
+    {
+     "ref": "R13",
+     "type": "resistor",
+     "value": "100k",
+     "note": "switched into FB by M5"
+    },
+    {
+     "ref": "M5",
+     "type": "nmos",
+     "value": "NXP 2N7002",
+     "note": "gate on C/10; switches R13 from FB to ground"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "4.7µF 50V ×4",
+     "note": "ceramic output"
+    },
+    {
+     "ref": "C12",
+     "type": "capacitor",
+     "value": "100µF 25V ×4",
+     "note": "bulk output, polarized"
+    },
+    {
+     "ref": "R14",
+     "type": "resistor",
+     "value": "0.012Ω",
+     "note": "charge current sense"
+    },
+    {
+     "ref": "R15",
+     "type": "resistor",
+     "value": "10Ω",
+     "note": "ISP filter"
+    },
+    {
+     "ref": "R16",
+     "type": "resistor",
+     "value": "10Ω",
+     "note": "ISN filter"
+    },
+    {
+     "ref": "C13",
+     "type": "capacitor",
+     "value": "2.2µF",
+     "note": "sense filter across ISP and ISN"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "SLA battery",
+     "note": "lead-acid battery; pins + and -"
+    }
+   ],
+   "notes": [
+    "VCHRG = 14.6V; VFLOAT = 13.6V; charge current 7.8A.",
+    "M1, M2: Infineon BSC100N06LS; M3, M4: Infineon BSZ014NE2LS5IF; M5: NXP 2N7002; L1: Würth 7443630420."
+   ]
+  },
+  {
+   "id": "led-100w",
+   "title": "98% efficient 100W (33.3V 3A) buck-boost LED driver",
+   "page": 34,
+   "description": "The 50W driver with all options, re-valued for a 33.3V, 3A string from 15V to 58V: RLED 0.033Ω, FB divider 1M over 26.7k, UVLO divider 499k over 52.3k, and RT = 140k for 300kHz. Dimming and clock options are the same switches and potentiometer.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT8391"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN 15V to 58V",
+     "note": "supply input"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "33µF 63V",
+     "note": "bulk input capacitor, polarized"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7µF 100V ×2",
+     "note": "ceramic input capacitors"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "499k",
+     "note": "UVLO divider, top"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "52.3k",
+     "note": "UVLO divider, bottom"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "INTVCC bypass"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k",
+     "note": "FAULT pull-up to INTVCC"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.47µF",
+     "note": "VREF bypass"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "100k",
+     "note": "CTRL1 pull-up to VREF"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "ANALOG DIM",
+     "note": "analog dimming input on CTRL1"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "soft-start"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "2.2k",
+     "note": "compensation resistor"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10nF",
+     "note": "compensation capacitor"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "140k (300kHz)",
+     "note": "sets the switching frequency"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST1 bootstrap capacitor"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "0.1µF",
+     "note": "BST2 bootstrap capacitor"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "0.004Ω",
+     "note": "inductor current sense resistor RSENSE"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH Cooper HC9-100R"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "5.1Ω",
+     "note": "gate resistor for switch C"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "1M",
+     "note": "FB divider, top"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "26.7k",
+     "note": "FB divider, bottom"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "10µF 50V ×2",
+     "note": "output capacitors"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "0.033Ω",
+     "note": "LED current sense resistor RLED"
+    },
+    {
+     "ref": "M5",
+     "type": "pmos",
+     "value": "Vishay Si7611DN",
+     "note": "high-side PWM dimming switch"
+    },
+    {
+     "ref": "LED1",
+     "type": "led",
+     "value": "33.3V 3A",
+     "note": "LED string"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS3",
+     "note": "switch A"
+    },
+    {
+     "ref": "M2",
+     "type": "nmos",
+     "value": "Infineon BSC100N06LS3",
+     "note": "switch B"
+    },
+    {
+     "ref": "M3",
+     "type": "nmos",
+     "value": "Infineon BSC093N04LS",
+     "note": "switch C"
+    },
+    {
+     "ref": "M4",
+     "type": "nmos",
+     "value": "Infineon BSC093N04LS",
+     "note": "switch D"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VIN pin bypass"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "VOUT pin bypass"
+    },
+    {
+     "ref": "RV1",
+     "type": "other",
+     "value": "100k",
+     "note": "potentiometer from VREF to ground, wiper to PWM, for internal PWM dimming; pins 1 (ground end), 2 (VREF end), W (wiper)"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "EXT PWM",
+     "note": "external PWM dimming input"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "200k",
+     "note": "RP resistor, 195Hz internal PWM dimming"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "internal PWM OFF/ON",
+     "note": "COM to RP; OFF grounds RP for external PWM; ON leaves the 200k in place for internal PWM"
+    },
+    {
+     "ref": "S2",
+     "type": "switch",
+     "value": "SYNC/SPRD select",
+     "note": "COM to SYNC/SPRD; EXT to the external clock, NOSPREAD to ground, SPREAD to INTVCC"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "EXT SYNC",
+     "note": "external clock input"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "PMEG6010CEJ",
+     "note": "optional, LED+ to ground"
+    }
+   ],
+   "notes": [
+    "M1, M2: Infineon BSC100N06LS3; M3, M4: Infineon BSC093N04LS; M5: Vishay Si7611DN; L1: Cooper HC9-100R 10µH; D1: NXP PMEG6010CEJ."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "LED current from CTRL pins",
+   "expr": "ILED = Min(VCTRL1 – 0.25V, VCTRL2 – 0.25V, 1V) / (10 • RLED)",
+   "where": {
+    "VCTRL1, VCTRL2": "CTRL pin voltages",
+    "RLED": "LED current sense resistor between ISP and ISN"
+   },
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "LED current, linear range",
+   "expr": "ILED = (Min(VCTRL1, VCTRL2) – 250mV) / (10 • RLED)",
+   "where": {
+    "Min(VCTRL1, VCTRL2)": "the lower of the two CTRL voltages"
+   },
+   "note": "Holds while the lower CTRL voltage is below 1.15V; between 1.15V and 1.35V the current falls increasingly short of it (Table 2).",
+   "page": 23
+  },
+  {
+   "name": "LED current, full scale",
+   "expr": "ILED = 100mV / RLED",
+   "where": {
+    "RLED": "LED current sense resistor"
+   },
+   "note": "For Min(VCTRL1, VCTRL2) above 1.35V.",
+   "page": 23
+  },
+  {
+   "name": "Minimum inductance, buck region",
+   "expr": "LBUCK > VOUT • (VIN(MAX) – VOUT) / (f • ILED(MAX) • ΔIL% • VIN(MAX))",
+   "where": {
+    "f": "switching frequency",
+    "ΔIL%": "allowed inductor ripple current",
+    "VIN(MAX)": "maximum input voltage",
+    "VOUT": "output voltage",
+    "ILED(MAX)": "maximum LED current"
+   },
+   "note": "Ripple is largest in the buck region at VIN(MAX).",
+   "page": 19
+  },
+  {
+   "name": "Minimum inductance, boost region",
+   "expr": "LBOOST > VIN(MIN)² • (VOUT – VIN(MIN)) / (f • ILED(MAX) • ΔIL% • VOUT²)",
+   "where": {
+    "VIN(MIN)": "minimum input voltage"
+   },
+   "note": "Ripple is smallest in the boost region at VIN(MIN).",
+   "page": 19
+  },
+  {
+   "name": "Minimum inductance for slope compensation",
+   "expr": "L > 10 • VOUT • RSENSE / f",
+   "where": {
+    "RSENSE": "inductor current sense resistor"
+   },
+   "note": "Keeps current-mode control free of subharmonic oscillation.",
+   "page": 19
+  },
+  {
+   "name": "Maximum output current, boost region",
+   "expr": "IOUT(MAX_BOOST) = (50mV / RSENSE – ΔIL(BOOST) / 2) • VIN(MIN) / VOUT",
+   "where": {
+    "ΔIL(BOOST)": "peak-to-peak inductor ripple in the boost region"
+   },
+   "note": "Lowest at VIN(MIN).",
+   "page": 20
+  },
+  {
+   "name": "Inductor ripple, boost region",
+   "expr": "ΔIL(BOOST) = VIN(MIN) • (VOUT – VIN(MIN)) / (f • L • VOUT)",
+   "where": {
+    "L": "inductance"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Maximum output current, buck region",
+   "expr": "IOUT(MAX_BUCK) = 50mV / RSENSE – ΔIL(BUCK) / 2",
+   "where": {
+    "ΔIL(BUCK)": "peak-to-peak inductor ripple in the buck region"
+   },
+   "note": "Lowest at VIN(MAX).",
+   "page": 20
+  },
+  {
+   "name": "Inductor ripple, buck region",
+   "expr": "ΔIL(BUCK) = VOUT • (VIN(MAX) – VOUT) / (f • L • VIN(MAX))",
+   "where": {},
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Largest RSENSE, boost region",
+   "expr": "RSENSE(BOOST) = 2 • 50mV • VIN(MIN) / (2 • ILED(MAX) • VOUT + ΔIL(BOOST) • VIN(MIN))",
+   "where": {},
+   "note": "Choose RSENSE below both this and the buck value, with 20% to 30% margin.",
+   "page": 20
+  },
+  {
+   "name": "Largest RSENSE, buck region",
+   "expr": "RSENSE(BUCK) = 2 • 50mV / (2 • ILED(MAX) + ΔIL(BUCK))",
+   "where": {},
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "INTVCC gate charge current",
+   "expr": "IINTVCC = f • (QgA + QgB + QgC + QgD)",
+   "where": {
+    "QgA, QgB, QgC, QgD": "total gate charge of MOSFETs A, B, C and D"
+   },
+   "note": "The total must stay inside the INTVCC current limit.",
+   "page": 20
+  },
+  {
+   "name": "Power path resistance limit for smooth region transitions",
+   "expr": "ILED(MAX) ≤ 0.025 • VOUT / (RA,B + RC,D + RSENSE + RL)",
+   "where": {
+    "RA,B": "maximum RDS(ON) at 25°C of MOSFET A or B",
+    "RC,D": "maximum RDS(ON) at 25°C of MOSFET C or D",
+    "RL": "maximum inductor DCR at 25°C"
+   },
+   "note": "Temperature rise of RDS(ON) and process spread are already allowed for.",
+   "page": 20
+  },
+  {
+   "name": "Switch A dissipation, boost region",
+   "expr": "PA(BOOST) = (ILED(MAX) • VOUT / VIN)² • ρT • RDS(ON)",
+   "where": {
+    "ρT": "on-resistance normalized to 25°C; about 0.4%/°C, 1.5 is reasonable for a 125°C junction"
+   },
+   "note": "Switch A is on all the time in the boost region.",
+   "page": 20
+  },
+  {
+   "name": "Switch B dissipation, buck region",
+   "expr": "PB(BUCK) = (VIN – VOUT) / VIN • ILED(MAX)² • ρT • RDS(ON)",
+   "where": {},
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Switch C dissipation, boost region",
+   "expr": "PC(BOOST) = (VOUT – VIN) • VOUT / VIN² • ILED(MAX)² • ρT • RDS(ON) + k • VOUT³ • ILED(MAX) / VIN • CRSS • f",
+   "where": {
+    "CRSS": "MOSFET reverse transfer capacitance",
+    "k": "reverse-recovery loss constant, empirically 1.7, inversely proportional to gate drive current"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Switch D dissipation, boost region",
+   "expr": "PD(BOOST) = VOUT / VIN • ILED(MAX)² • ρT • RDS(ON)",
+   "where": {},
+   "note": "Worst when its duty cycle is above 50%.",
+   "page": 21
+  },
+  {
+   "name": "MOSFET junction temperature",
+   "expr": "TJ = TA + P • RTH(JA)",
+   "where": {
+    "RTH(JA)": "junction-to-ambient thermal resistance, RTH(JC) plus RTH(CA)"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Input RMS current, buck region",
+   "expr": "IRMS ≈ ILED(MAX) • (VOUT / VIN) • √(VIN / VOUT – 1)",
+   "where": {},
+   "note": "Peaks at VIN = 2VOUT, where IRMS = ILED(MAX) / 2.",
+   "page": 22
+  },
+  {
+   "name": "Output ripple from bulk capacitance, boost region",
+   "expr": "ΔVCAP(BOOST) = ILED • (VOUT – VIN(MIN)) / (COUT • VOUT • f)",
+   "where": {
+    "COUT": "output capacitance"
+   },
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Output ripple from bulk capacitance, buck region",
+   "expr": "ΔVCAP(BUCK) = VOUT • (1 – VOUT / VIN(MAX)) / (8 • L • f² • COUT)",
+   "where": {},
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Output ripple from ESR, boost region",
+   "expr": "ΔVESR(BOOST) = VOUT • ILED(MAX) / VIN(MIN) • ESR",
+   "where": {
+    "ESR": "output capacitor equivalent series resistance"
+   },
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Output ripple from ESR, buck region",
+   "expr": "ΔVESR(BUCK) = VOUT • (1 – VOUT / VIN(MAX)) / (L • f) • ESR",
+   "where": {},
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Controller junction temperature",
+   "expr": "TJ = TA + PD • θJA",
+   "where": {
+    "PD": "controller dissipation, VIN • IINTVCC",
+    "θJA": "package thermal resistance"
+   },
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Input UVLO rising threshold",
+   "expr": "VIN(UVLO+) = 1.227V • (R1 + R2) / R2 + 2.5µA • R1",
+   "where": {
+    "R1": "divider resistor from VIN to EN/UVLO",
+    "R2": "divider resistor from EN/UVLO to ground"
+   },
+   "note": "",
+   "page": 23
+  },
+  {
+   "name": "Input UVLO falling threshold",
+   "expr": "VIN(UVLO–) = 1.214V • (R1 + R2) / R2",
+   "where": {},
+   "note": "",
+   "page": 23
+  },
+  {
+   "name": "Constant output voltage",
+   "expr": "VOUT = 1.00V • (R3 + R4) / R4",
+   "where": {
+    "R3": "divider resistor from VOUT to FB",
+    "R4": "divider resistor from FB to ground"
+   },
+   "note": "",
+   "page": 25
+  },
+  {
+   "name": "Output overvoltage threshold",
+   "expr": "VOUT(OVP) = 1.05V • (R3 + R4) / R4",
+   "where": {},
+   "note": "",
+   "page": 25
+  },
+  {
+   "name": "FB window in normal operation",
+   "expr": "0.3V ≤ VLED • R4 / (R3 + R4) ≤ 0.9V",
+   "where": {
+    "VLED": "LED string voltage"
+   },
+   "note": "Between the short-LED rising and open-LED falling thresholds; with full open-LED protection the highest LED string voltage is 51V.",
+   "page": 25
+  },
+  {
+   "name": "Soft-start time",
+   "expr": "tSS = VLED • R4 / (R3 + R4) • CSS / 12.5µA",
+   "where": {
+    "CSS": "capacitor from SS to ground"
+   },
+   "note": "CSS should be five to ten times the VC compensation capacitor; 0.1µF is a starting value.",
+   "page": 25
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 14,
+   "text": "Four external N-channel switches and one inductor form a buck-boost stage: A from VIN to SW1, B from SW1 to ground, C from SW2 to ground and D from SW2 to VOUT, with the inductor and RSENSE in series between SW1 and SW2. RSENSE, read at LSP and LSN, serves both peak current control and reverse current detection in all three regions. The controller chooses one of four states from the VIN/VOUT ratio, with hysteresis at every boundary: peak-buck control in the buck region, peak-buck in the buck-boost region, peak-boost in the buck-boost region, and peak-boost in the boost region."
+  },
+  {
+   "topic": "Region and mode boundaries",
+   "page": 14,
+   "text": "Peak-buck control hands over to peak-boost at a VIN/VOUT ratio of 0.98 and returns at 1.02. Boost operation extends up to a ratio of 0.75 to 0.85 (enter buck-boost at 0.85 rising, back to boost at 0.75 falling); buck operation starts above 1.18 to 1.33 (enter buck at 1.33 rising, back to buck-boost at 1.18 falling)."
+  },
+  {
+   "topic": "Buck region (VIN much higher than VOUT)",
+   "page": 14,
+   "text": "D stays on and C stays off. Each cycle A turns on; when the inductor current reaches the peak level set by VC at comparator A3, A turns off and B conducts for the rest of the cycle, as in a synchronous buck."
+  },
+  {
+   "topic": "Buck-boost region, peak-buck (VIN a little above VOUT)",
+   "page": 15,
+   "text": "Each cycle starts with A and C on. C turns off after 15% of the cycle and D conducts for the remaining 85%. When the inductor current reaches the peak-buck level during A+D, A turns off and B turns on until the cycle ends."
+  },
+  {
+   "topic": "Buck-boost region, peak-boost (VIN a little below VOUT)",
+   "page": 15,
+   "text": "A is on for the first 85% of the cycle and B for the last 15%. Each cycle starts with A and C on; when the inductor current reaches the peak-boost level set by VC at comparator A4, C turns off and D turns on. After 85% of the cycle A gives way to B."
+  },
+  {
+   "topic": "Boost region (VIN much lower than VOUT)",
+   "page": 15,
+   "text": "A stays on and B stays off. Each cycle C turns on; at the peak-boost current C turns off and D conducts until the cycle ends, as in a synchronous boost."
+  },
+  {
+   "topic": "Main control loop",
+   "page": 16,
+   "text": "The control is fixed-frequency current mode. Amplifier A1 amplifies the RSENSE voltage and adds an oscillator slope-compensation ramp; the sum goes to the buck and boost comparators, whose thresholds come from VC. VC is the diode-OR of EA1, which holds FB at 1V, and EA2, which holds V(ISP-ISN) at the level set by CTRL1 or CTRL2. The two amplifiers are gain-matched so the hand-over between constant voltage and constant current is smooth on one compensation network."
+  },
+  {
+   "topic": "Light load",
+   "page": 16,
+   "text": "Both reverse current thresholds sit at –4mV, so a little energy returns from output to input each cycle and the part normally keeps full switching frequency in CCM or DCM; this keeps pulse skipping from dropping below 100Hz, which would make the LEDs flicker. In the buck region B turns off when the buck reverse threshold trips during B+D; in the boost region D turns off when the boost threshold trips during A+D; in buck-boost D turns off on the boost threshold in A+D and both B and D turn off on the buck threshold in B+D. With a small inductor and large ripple the part can skip pulses for several cycles."
+  },
+  {
+   "topic": "Bootstrap charge path",
+   "page": 16,
+   "text": "Each top driver runs from its bootstrap capacitor, recharged from INTVCC through internal diode D1 or D2 while its top switch is off. When the part stays in the buck or boost region one top switch never turns off, so an internal path keeps that capacitor at 4.6V: BST1 is fed from VOUT and BST2, and BST2 is fed from VIN and BST1. Buck and boost operation therefore need no periodic top-switch refresh, and make none of its noise."
+  },
+  {
+   "topic": "Shutdown and power-on",
+   "page": 17,
+   "text": "Below the 0.3V minimum shutdown threshold on EN/UVLO the part draws under 2µA. Above 1V maximum it starts its bandgap and the INTVCC regulator and sits in UVLO, sinking 2.5µA into EN/UVLO. Once INTVCC is above its 3.78V typical rising threshold, EN/UVLO is above 1.227V typical and the junction is below the 165°C typical thermal shutdown, the hysteresis current switches off and VREF starts charging. Power-on reset lasts until VREF passes its 1.89V typical rising threshold; the part then waits for CTRL1, CTRL2 and PWM to allow switching."
+  },
+  {
+   "topic": "Start-up sequence",
+   "page": 17,
+   "text": "In POR the SS pin is held down through 100Ω. SS must fall below 0.2V to enter INIT, where the part waits 10µs for SS to discharge fully. It moves to UP/PRE when PWMON goes high, which needs both CTRL pins above their rising dim-off threshold (0.228V typical) and external or internal PWM on. In UP/PRE 12.5µA charges SS with switching and PWMTG off. Above 0.25V on SS it enters UP/TRY: PWMTG turns on with switching still off, to confirm the output capacitor voltage suits the LED string before any energy is delivered. If excess current trips the ISP/ISN overcurrent comparator (ISOC) the part returns to POR, so it hiccups with SS between 0V and 0.25V and bleeds the output down. After 10µs in UP/TRY without ISOC it enters UP/RUN."
+  },
+  {
+   "topic": "Soft-start",
+   "page": 18,
+   "text": "In UP/RUN switching is enabled and, while SS is below 1V, FB is regulated to the SS voltage instead of 1V. The 12.5µA current ramps SS from 0.25V up through 1V so VOUT rises smoothly to the LED string voltage. Above 1.75V on SS the part enters OK/RUN and open and short LED detection becomes active."
+  },
+  {
+   "topic": "LED fault handling",
+   "page": 18,
+   "text": "Open LED means VFB > 0.95V with V(ISP-ISN) < 10mV; short LED means VFB < 0.25V. Either one pulls FAULT low and moves the part to FAULT/RUN, where 1.25µA discharges SS. Below 1.7V on SS it enters DOWN/STOP: switching stops and detection is off, with the fault held. Below 0.2V, with PWMON still high, it goes back to UP/RUN. A resistor from SS to VREF picks the behaviour: none gives hiccup (SS cycling between 0.2V and 1.75V until the fault clears), 499k gives latch-off until EN/UVLO is toggled low and high, and 100k gives keep-running, where the part keeps regulating the programmed VOUT during an open LED or the current during a short LED."
+  },
+  {
+   "topic": "Overvoltage",
+   "page": 25,
+   "text": "With small output capacitors VOUT can overshoot well past the regulated level when the LED string opens, since the 1V FB loop is too slow to catch it. When FB reaches 1.05V switching stops (TG1, BG1, TG2, BG2 off) and PWMTG turns off to disconnect the LEDs."
+  },
+  {
+   "topic": "FAULT pin",
+   "page": 25,
+   "text": "Open-drain, pulled low on an open or short LED. The status is updated only when SS is above 1.75V and PWM is high, and held while PWM is low."
+  },
+  {
+   "topic": "Switching frequency",
+   "page": 18,
+   "text": "Fixed frequency from 150kHz to 650kHz, set by RT to ground with SYNC/SPRD grounded (Table 1). Lower frequency cuts MOSFET switching loss and suits high power; higher frequency shrinks the inductor and capacitors and suits low power. Noise-sensitive systems may place the frequency to keep switching noise out of a sensitive band."
+  },
+  {
+   "topic": "Spread spectrum",
+   "page": 19,
+   "text": "With SYNC/SPRD tied to INTVCC the frequency is swept in a triangle ±15% around the RT frequency to lower EMI. The internal oscillator is synchronized to the rising edge of PWM in both fixed-frequency and spread spectrum operation, so PWM dimming is flicker-free. Conducted EMI of the 50W typical application was compared with spread spectrum on and off against the CISPR25 average and peak limits over 150kHz to 2000kHz."
+  },
+  {
+   "topic": "External synchronization",
+   "page": 19,
+   "text": "A clock on SYNC/SPRD sets the switching frequency through an internal PLL, so the clock need not be near the RT frequency. 50% duty is best; otherwise keep it between 10% and 90%. Each rising edge starts a cycle, turning on A and C or A and D. With an external clock, SYNC and PWM need aligned rising edges for flicker-free PWM dimming."
+  },
+  {
+   "topic": "Inductor",
+   "page": 19,
+   "text": "Higher frequency allows smaller inductance. Pick a low-core-loss inductor such as ferrite, with low DC resistance, rated for the peak current without saturating; a shielded part lowers radiated noise."
+  },
+  {
+   "topic": "Current sense resistor RSENSE",
+   "page": 19,
+   "text": "The 50mV maximum thresholds in peak-buck and peak-boost are independent of duty cycle and set the peak inductor current in every region. Size RSENSE for both the buck case at VIN(MAX) and the boost case at VIN(MIN) and use the smaller value, with 20% to 30% margin."
+  },
+  {
+   "topic": "Power MOSFETs",
+   "page": 20,
+   "text": "Four N-channel MOSFETs are needed, two top (A, D) and two bottom (B, C). Gate drive comes from 5V INTVCC, so they must be logic-level types. Key ratings are VBR(DSS), VGS(TH), RDS(ON), CRSS and IDS(MAX). Because region changes go by the VIN/VOUT ratio, large IR drops in the power path can upset smooth transitions; choose low RDS(ON) and low DCR to meet the path resistance limit. For a given output, the worst case for switch A is buck operation at highest input, and for switch C boost operation at lowest input. For low-Qg MOSFETs a 5.1Ω gate resistor is needed on switch C."
+  },
+  {
+   "topic": "Optional Schottky diodes DB and DD",
+   "page": 21,
+   "text": "Schottky diodes across B and D carry current in the dead time so the MOSFET body diodes do not turn on and store charge. DB cuts reverse recovery current between B off and A on; DD does the same between D off and C on. They raise efficiency and lower switch stress, and must sit right next to their MOSFET to keep loop inductance low."
+  },
+  {
+   "topic": "Input and output capacitors",
+   "page": 21,
+   "text": "Input current is most discontinuous in the buck region and output current in the boost region; both networks need low ESR and enough capacitance. Parallel combinations of tantalum, polymer, aluminium electrolytic and ceramic parts are typical, including low-ESR OS-CON or POSCAP types. Place ceramics of at least 1µF from VIN and VOUT to GND close to the pins. X5R and X7R hold capacitance over voltage and temperature; small 0805 and 0603 ceramics lose much of theirs at working voltage."
+  },
+  {
+   "topic": "INTVCC regulator",
+   "page": 22,
+   "text": "An internal P-channel LDO makes 5V at INTVCC from VIN to power the control circuits and gate drivers. It can source 110mA peak and needs at least 4.7µF ceramic to ground. Supply current is mostly gate charge; dissipation is VIN • IINTVCC, so large MOSFETs at high frequency and high VIN can push the junction past its limit. Check input current at maximum VIN in continuous mode."
+  },
+  {
+   "topic": "Bootstrap capacitors CBST1, CBST2",
+   "page": 22,
+   "text": "TG1 and TG2 swing between their SW and BST pins. CBST1 and CBST2 charge to INTVCC through the internal diodes while the matching top switch is off and should hold about 100 times the top-switch gate charge; 0.1µF to 0.47µF X5R or X7R is enough in most designs."
+  },
+  {
+   "topic": "Input undervoltage lockout",
+   "page": 23,
+   "text": "A divider from VIN to EN/UVLO sets the input UVLO. The enable falling threshold is 1.214V with 10mV hysteresis, and the pin sinks 2.5µA below 1.214V, so the top resistor R1 adds hysteresis. An NMOS from EN/UVLO to ground gives run/stop control while keeping UVLO; when on it holds the part in shutdown below 2µA."
+  },
+  {
+   "topic": "Programming LED current",
+   "page": 23,
+   "text": "RLED in series with the LEDs is Kelvin-sensed at ISP and ISN. Above 1.35V on both CTRL pins the threshold is the full 100mV; either pin can dim the current to zero, with relative accuracy falling as the threshold falls. Do not leave CTRL1 or CTRL2 open; tie an unused one to VREF. A CTRL pin can also take a thermistor divider for LED overtemperature protection, or a divider from VIN to cut power and switch current at low VIN. Some switching-frequency ripple across ISP-ISN is normal and grows with LED current, lower frequency and smaller output capacitance; the VC capacitor averages it. Ripple above 20mV peak-to-peak does not cause misoperation but can offset the average from the programmed value."
+  },
+  {
+   "topic": "Dimming",
+   "page": 24,
+   "text": "Analog dimming adjusts the current through CTRL1 or CTRL2 (20:1 range, ±3% at 100mV full scale); PWM dimming switches the current between zero and full and gives much higher ratios without colour shift. While PWM is low the switch demand is held on VC, shortening recovery when PWM goes high, and a high-side PMOS in the LED path keeps the output capacitor from discharging. The shortest usable PWM on-time depends on frequency, inductance and compensation. External PWM dimming uses RP below 30k and a clock on PWM. Internal PWM dimming uses one of the five RP values of Table 3 to set the dimming frequency and a DC level from 1V to 2V on PWM (a source or a divider from VREF) to set duty from 0% to 100% in 1/128 steps; a 1µF ceramic on PWM limits duty jitter from switching noise."
+  },
+  {
+   "topic": "High-side PMOS PWM switch",
+   "page": 24,
+   "text": "Recommended in most designs to get the highest dimming ratio and to protect the LEDs during faults; unlike a low-side NMOS it needs only one wire out to the LEDs, returning through the chassis. Its VDS rating needs to be above the FB-programmed open-LED output voltage, |VGS(TH)| should be below 3V, and its ID rating above ILED(MAX)."
+  },
+  {
+   "topic": "Loop compensation",
+   "page": 26,
+   "text": "The VC pin of the transconductance error amplifier carries the compensation. For typical LED designs 10nF on VC is enough; always add a series resistor, which speeds VC slewing and keeps LED current tighter during fast input transients."
+  },
+  {
+   "topic": "Efficiency",
+   "page": 26,
+   "text": "Main losses: DC I²R in the MOSFETs, sense resistor, inductor and traces, dominant at high current; transition loss while A or C switches, depending on input voltage, load current, drive strength and MOSFET capacitance; INTVCC current for drivers and control; RMS current in CIN (buck region) and COUT (boost region); and smaller items such as DB and DD conduction, inductor core loss at light load, and reverse recovery from A in buck and C in boost. Input current is the best indicator when tuning efficiency."
+  },
+  {
+   "topic": "Board layout",
+   "page": 26,
+   "text": "Use a dedicated ground plane with no traces, on the layer next to the power MOSFETs; multilayer boards help with heat. Group CIN, A, B and DB in one tight area and COUT, C, D and DD in another, with short loops. Give each power part several large vias to ground and use planes for VIN and VOUT; flood unused areas with copper tied to a DC net. Return small-signal parts to the exposed pad, joined to power ground near the sources of B and C. Keep A and C close to the controller with short power ground, BG and SW traces. Keep SW1, SW2, BST1, BST2, TG1 and TG2 away from sensitive nodes. Join the output and input capacitor negative terminals as closely as possible. Put CBST1 at BST1-SW1 and CBST2 at BST2-SW2, and CIN and COUT close to the MOSFETs. Run LSP and LSN together at minimum spacing away from switch nodes, with their filter capacitor near the IC and Kelvin taps at RSENSE. Put the VC network near the IC to signal ground, and CINTVCC near the IC between INTVCC and power ground."
+  }
+ ],
+ "packages": [
+  {
+   "name": "FE (28-lead TSSOP 4.4mm, exposed pad variation EB, LTC DWG 05-08-1663 Rev K)",
+   "page": 32,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "body length (excluding mold flash)",
+     "9.60 – 9.80"
+    ],
+    [
+     "body width (excluding mold flash)",
+     "4.30 – 4.50"
+    ],
+    [
+     "overall width over leads",
+     "6.40 BSC"
+    ],
+    [
+     "overall height",
+     "1.20 MAX"
+    ],
+    [
+     "standoff",
+     "0.05 – 0.15"
+    ],
+    [
+     "lead pitch",
+     "0.65 BSC"
+    ],
+    [
+     "lead width",
+     "0.195 – 0.30"
+    ],
+    [
+     "lead thickness",
+     "0.09 – 0.20"
+    ],
+    [
+     "foot length",
+     "0.50 – 0.75"
+    ],
+    [
+     "gauge plane",
+     "0.25 REF"
+    ],
+    [
+     "foot angle",
+     "0° – 8°"
+    ],
+    [
+     "exposed pad length",
+     "4.75"
+    ],
+    [
+     "exposed pad width",
+     "2.74"
+    ],
+    [
+     "land pattern: outer span",
+     "6.60 ±0.10"
+    ],
+    [
+     "land pattern: inner span",
+     "4.50 ±0.10"
+    ],
+    [
+     "land pattern: pad width",
+     "0.45 ±0.05"
+    ],
+    [
+     "land pattern: pad length",
+     "1.05 ±0.10"
+    ],
+    [
+     "land pattern: pitch",
+     "0.65 BSC"
+    ],
+    [
+     "land pattern: exposed pad land (minimum metal)",
+     "4.75 × 2.74"
+    ],
+    [
+     "mold flash per side",
+     "0.150 max"
+    ]
+   ]
+  },
+  {
+   "name": "UFD (28-lead 4mm × 5mm QFN, LTC DWG 05-08-1712 Rev C)",
+   "page": 32,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "body width",
+     "4.00 ±0.10"
+    ],
+    [
+     "body length",
+     "5.00 ±0.10"
+    ],
+    [
+     "overall height",
+     "0.75 ±0.05"
+    ],
+    [
+     "standoff",
+     "0.00 – 0.05"
+    ],
+    [
+     "lead frame thickness",
+     "0.200 REF"
+    ],
+    [
+     "lead width",
+     "0.25 ±0.05"
+    ],
+    [
+     "lead pitch",
+     "0.50 BSC"
+    ],
+    [
+     "lead length",
+     "0.40 ±0.10"
+    ],
+    [
+     "exposed pad",
+     "2.65 ±0.10 × 3.65 ±0.10"
+    ],
+    [
+     "lead row span, short side",
+     "2.50 REF"
+    ],
+    [
+     "lead row span, long side",
+     "3.50 REF"
+    ],
+    [
+     "pin 1 notch",
+     "R = 0.20 or 0.35 × 45° chamfer"
+    ],
+    [
+     "corner radii",
+     "R = 0.05 TYP; R = 0.115 TYP"
+    ],
+    [
+     "land pattern: outer width",
+     "4.50 ±0.05"
+    ],
+    [
+     "land pattern: outer length",
+     "5.50 ±0.05"
+    ],
+    [
+     "land pattern: inner width",
+     "3.10 ±0.05"
+    ],
+    [
+     "land pattern: inner length",
+     "4.10 ±0.05"
+    ],
+    [
+     "land pattern: exposed pad",
+     "2.65 ±0.05 × 3.65 ±0.05"
+    ],
+    [
+     "land pattern: pad length",
+     "0.70 ±0.05"
+    ],
+    [
+     "land pattern: pad width",
+     "0.25 ±0.05"
+    ],
+    [
+     "land pattern: pitch",
+     "0.50 BSC"
+    ],
+    [
+     "mold flash on exposed pad, any side",
+     "0.15 max"
+    ]
+   ],
+   "notes": [
+    "Proposed as JEDEC MO-220 variation WGHD-3. The exposed pad is solder plated."
+   ]
+  }
+ ]
+}

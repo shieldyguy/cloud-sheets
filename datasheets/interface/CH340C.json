@@ -1,0 +1,2485 @@
+{
+ "sheet": 1,
+ "name": "CH340C",
+ "kind": "interface",
+ "manufacturer": "WCH (Jiangsu Qinheng)",
+ "title": "CH340 family: USB 2.0 full-speed to UART bridge with modem lines",
+ "source": {
+  "revision": "Version 3C",
+  "pages": 16
+ },
+ "summary": "A USB full-speed device that appears to the host as a serial port and drives a TTL UART at 50 bps to 2 Mbps, with the six classic modem handshake lines on the larger packages. It runs from 5 V or 3.3 V and needs no resistors on the USB lines. Nine versions differ in package, pins and clock: CH340G, T and R need a 12 MHz crystal; CH340C, N, K, E, X and B have the oscillator inside, and the CH340B adds an EEPROM for its serial number and USB strings. Level shifters turn it into RS232, RS485 or RS422; the CH340R is the IrDA infrared version. Drivers are those of the CH341.",
+ "key_figures": [
+  [
+   "Interface",
+   "USB 2.0 full speed device to asynchronous serial"
+  ],
+  [
+   "Baud rate",
+   "50 bps to 2 Mbps"
+  ],
+  [
+   "Supply",
+   "4.0 to 5.3 V (5 V mode); 3.1 to 3.6 V (3.3 V mode, internal-clock parts)"
+  ],
+  [
+   "Operating current",
+   "7 mA typ, 20 mA max at 5 V"
+  ],
+  [
+   "USB suspend current",
+   "0.05 mA typ, 0.15 mA max (CH340C/N/E/X, 5 V)"
+  ],
+  [
+   "Clock",
+   "internal on CH340C/N/K/E/X/B; 12 MHz crystal on CH340G/T/R"
+  ],
+  [
+   "Transmit baud error",
+   "under 1.2 % internal clock; under 0.3 % crystal"
+  ],
+  [
+   "Ambient",
+   "-20 to 70 °C (CH340C); -40 to 85 °C (CH340X, lot-4 CH340C/N)"
+  ],
+  [
+   "Packages",
+   "SOP-16, SOP-8, ESSOP-10, MSOP-10, SSOP-20"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "order model",
+   "package",
+   "package description",
+   "shaping width (mm)",
+   "shaping width (mil)",
+   "pin spacing (mm)",
+   "pin spacing (mil)",
+   "clock",
+   "what sets it apart"
+  ],
+  "rows": [
+   [
+    "CH340G",
+    "SOP-16",
+    "Small Out-Line Package",
+    "3.9mm",
+    "150mil",
+    "1.27mm",
+    "50mil",
+    "12 MHz crystal",
+    "R232 auxiliary RS232 input; full modem set"
+   ],
+   [
+    "CH340C",
+    "SOP-16",
+    "Small Out-Line Package",
+    "3.9mm",
+    "150mil",
+    "1.27mm",
+    "50mil",
+    "internal",
+    "no crystal; NC on pin 7, OUT# on pin 8, a second DTR# on lots starting 4 past B40"
+   ],
+   [
+    "CH340B",
+    "SOP-16",
+    "Small Out-Line Package",
+    "3.9mm",
+    "150mil",
+    "1.27mm",
+    "50mil",
+    "internal",
+    "EEPROM for serial number and strings; RST# input; TNOW"
+   ],
+   [
+    "CH340N",
+    "SOP-8",
+    "Small Out-Line Package",
+    "3.9mm",
+    "150mil",
+    "1.27mm",
+    "50mil",
+    "internal",
+    "TXD, RXD and RTS# only"
+   ],
+   [
+    "CH340K",
+    "ESSOP-10",
+    "Exposed Shrink Small Outline Package",
+    "3.9mm",
+    "150mil",
+    "1.00mm",
+    "39mil",
+    "internal",
+    "series diodes inside TXD, RTS#, RXD against back-feeding; DTR#, CTS#"
+   ],
+   [
+    "CH340E",
+    "MSOP-10",
+    "Miniature Small Outline Package",
+    "3.0mm",
+    "118mil",
+    "0.50mm",
+    "19.7mil",
+    "internal",
+    "RTS#, CTS#, TNOW"
+   ],
+   [
+    "CH340X",
+    "MSOP-10",
+    "Miniature Small Outline Package",
+    "3.0mm",
+    "118mil",
+    "0.50mm",
+    "19.7mil",
+    "internal",
+    "CH340E with 5 V tolerant I/O at 3.3 V; pin 6 TNOW or DTR#"
+   ],
+   [
+    "CH340T",
+    "SSOP-20",
+    "Shrink Small Outline Package",
+    "5.3mm",
+    "209mil",
+    "0.65mm",
+    "25mil",
+    "12 MHz crystal",
+    "adds CKO, ACT#, NOS#, TNOW"
+   ],
+   [
+    "CH340R",
+    "SSOP-20",
+    "Shrink Small Outline Package",
+    "5.3mm",
+    "209mil",
+    "0.65mm",
+    "25mil",
+    "12 MHz crystal",
+    "inverted TXD and modem lines; IR# selects IrDA SIR; discontinued"
+   ]
+  ],
+  "notes": [
+   "For a smaller package the CH343P is suggested in place of the CH340B."
+  ]
+ },
+ "pins": [
+  {
+   "package": "SOP-16 (CH340G)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, tied directly to USB ground."
+    },
+    {
+     "pin": "2",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "3",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in; internal pull-up and pull-down that the chip switches."
+    },
+    {
+     "pin": "4",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    },
+    {
+     "pin": "5",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "6",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "7",
+     "name": "XI",
+     "type": "input",
+     "function": "Oscillator input; the 12 MHz crystal and one load capacitor connect to it."
+    },
+    {
+     "pin": "8",
+     "name": "XO",
+     "type": "output",
+     "function": "Oscillator output; the other side of the 12 MHz crystal and its load capacitor."
+    },
+    {
+     "pin": "9",
+     "name": "CTS#",
+     "type": "input",
+     "function": "Modem input, clear to send, active low."
+    },
+    {
+     "pin": "10",
+     "name": "DSR#",
+     "type": "input",
+     "function": "Modem input, data set ready, active low."
+    },
+    {
+     "pin": "11",
+     "name": "RI#",
+     "type": "input",
+     "function": "Modem input, ring indicator, active low."
+    },
+    {
+     "pin": "12",
+     "name": "DCD#",
+     "type": "input",
+     "function": "Modem input, carrier detect, active low."
+    },
+    {
+     "pin": "13",
+     "name": "DTR#",
+     "type": "output",
+     "function": "Modem output, data terminal ready, active low. Before USB configuration it is read as an input: a 4.7 kΩ pull-down makes the device ask the host for a larger supply current."
+    },
+    {
+     "pin": "14",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active low."
+    },
+    {
+     "pin": "15",
+     "name": "R232",
+     "type": "input",
+     "function": "Auxiliary RS232 enable, active high, internal pull-down. When high, RXD is inverted inside the chip."
+    },
+    {
+     "pin": "16",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    }
+   ]
+  },
+  {
+   "package": "SOP-16 (CH340C)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, tied directly to USB ground."
+    },
+    {
+     "pin": "2",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "3",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in; internal pull-up and pull-down that the chip switches."
+    },
+    {
+     "pin": "4",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    },
+    {
+     "pin": "5",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "6",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "7",
+     "name": "NC",
+     "type": "not connected",
+     "function": "No connection; must be left floating."
+    },
+    {
+     "pin": "8",
+     "name": "OUT#",
+     "type": "output",
+     "function": "General-purpose modem output, active low, set by software. On lots beginning with 4 whose last three characters are above B40, a 4.7 kΩ pull-down turns it into a second, open-drain DTR#; while powering up or in reset it is weakly pulled up."
+    },
+    {
+     "pin": "9",
+     "name": "CTS#",
+     "type": "input",
+     "function": "Modem input, clear to send, active low."
+    },
+    {
+     "pin": "10",
+     "name": "DSR#",
+     "type": "input",
+     "function": "Modem input, data set ready, active low."
+    },
+    {
+     "pin": "11",
+     "name": "RI#",
+     "type": "input",
+     "function": "Modem input, ring indicator, active low."
+    },
+    {
+     "pin": "12",
+     "name": "DCD#",
+     "type": "input",
+     "function": "Modem input, carrier detect, active low."
+    },
+    {
+     "pin": "13",
+     "name": "DTR#",
+     "type": "output",
+     "function": "Modem output, data terminal ready, active low. Before USB configuration it is read as an input: a 4.7 kΩ pull-down makes the device ask the host for a larger supply current."
+    },
+    {
+     "pin": "14",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active low."
+    },
+    {
+     "pin": "15",
+     "name": "R232",
+     "type": "input",
+     "function": "Auxiliary RS232 enable, active high, internal pull-down. When high, RXD is inverted inside the chip."
+    },
+    {
+     "pin": "16",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    }
+   ]
+  },
+  {
+   "package": "SOP-16 (CH340B)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, tied directly to USB ground."
+    },
+    {
+     "pin": "2",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "3",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in; internal pull-up and pull-down that the chip switches."
+    },
+    {
+     "pin": "4",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    },
+    {
+     "pin": "5",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "6",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "7",
+     "name": "RST#",
+     "type": "input",
+     "function": "External reset, active low, internal pull-up."
+    },
+    {
+     "pin": "8",
+     "name": "NC",
+     "type": "not connected",
+     "function": "No connection; must be left floating."
+    },
+    {
+     "pin": "9",
+     "name": "CTS#",
+     "type": "input",
+     "function": "Modem input, clear to send, active low."
+    },
+    {
+     "pin": "10",
+     "name": "DSR#",
+     "type": "input",
+     "function": "Modem input, data set ready, active low."
+    },
+    {
+     "pin": "11",
+     "name": "RI#",
+     "type": "input",
+     "function": "Modem input, ring indicator, active low."
+    },
+    {
+     "pin": "12",
+     "name": "DCD#",
+     "type": "input",
+     "function": "Modem input, carrier detect, active low."
+    },
+    {
+     "pin": "13",
+     "name": "DTR#",
+     "type": "output",
+     "function": "Modem output, data terminal ready, active low."
+    },
+    {
+     "pin": "14",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active low."
+    },
+    {
+     "pin": "15",
+     "name": "TNOW",
+     "type": "output",
+     "function": "High while the UART is transmitting, low once the last bit is out; for switching a half-duplex transceiver."
+    },
+    {
+     "pin": "16",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    }
+   ]
+  },
+  {
+   "package": "SSOP-20 (CH340T)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CKO",
+     "type": "output",
+     "function": "Clock output."
+    },
+    {
+     "pin": "2",
+     "name": "ACT#",
+     "type": "output",
+     "function": "Low once the device has been configured by the USB host."
+    },
+    {
+     "pin": "3",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "4",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in; internal pull-up and pull-down that the chip switches."
+    },
+    {
+     "pin": "5",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    },
+    {
+     "pin": "6",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "7",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "8",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, tied directly to USB ground."
+    },
+    {
+     "pin": "9",
+     "name": "XI",
+     "type": "input",
+     "function": "Oscillator input; the 12 MHz crystal and one load capacitor connect to it."
+    },
+    {
+     "pin": "10",
+     "name": "XO",
+     "type": "output",
+     "function": "Oscillator output; the other side of the 12 MHz crystal and its load capacitor."
+    },
+    {
+     "pin": "11",
+     "name": "CTS#",
+     "type": "input",
+     "function": "Modem input, clear to send, active low."
+    },
+    {
+     "pin": "12",
+     "name": "DSR#",
+     "type": "input",
+     "function": "Modem input, data set ready, active low."
+    },
+    {
+     "pin": "13",
+     "name": "RI#",
+     "type": "input",
+     "function": "Modem input, ring indicator, active low."
+    },
+    {
+     "pin": "14",
+     "name": "DCD#",
+     "type": "input",
+     "function": "Modem input, carrier detect, active low."
+    },
+    {
+     "pin": "15",
+     "name": "DTR#",
+     "type": "output",
+     "function": "Modem output, data terminal ready, active low. Before USB configuration it is read as an input: a 4.7 kΩ pull-down makes the device ask the host for a larger supply current."
+    },
+    {
+     "pin": "16",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active low."
+    },
+    {
+     "pin": "17",
+     "name": "TNOW",
+     "type": "output",
+     "function": "High while the UART is transmitting, low once the last bit is out; for switching a half-duplex transceiver."
+    },
+    {
+     "pin": "18",
+     "name": "R232",
+     "type": "input",
+     "function": "Auxiliary RS232 enable, active high, internal pull-down. When high, RXD is inverted inside the chip."
+    },
+    {
+     "pin": "19",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    },
+    {
+     "pin": "20",
+     "name": "NOS#",
+     "type": "input",
+     "function": "Low stops the device entering USB suspend; internal pull-up."
+    }
+   ]
+  },
+  {
+   "package": "SSOP-20 (CH340R)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "NC",
+     "type": "not connected",
+     "function": "No connection; must be left floating."
+    },
+    {
+     "pin": "2",
+     "name": "ACT#",
+     "type": "output",
+     "function": "Low once the device has been configured by the USB host; for example, an infrared adapter ready."
+    },
+    {
+     "pin": "3",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out, inverted."
+    },
+    {
+     "pin": "4",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in; internal pull-up and pull-down that the chip switches."
+    },
+    {
+     "pin": "5",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    },
+    {
+     "pin": "6",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "7",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "8",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, tied directly to USB ground."
+    },
+    {
+     "pin": "9",
+     "name": "XI",
+     "type": "input",
+     "function": "Oscillator input; the 12 MHz crystal and one load capacitor connect to it."
+    },
+    {
+     "pin": "10",
+     "name": "XO",
+     "type": "output",
+     "function": "Oscillator output; the other side of the 12 MHz crystal and its load capacitor."
+    },
+    {
+     "pin": "11",
+     "name": "CTS#",
+     "type": "input",
+     "function": "Modem input, clear to send, active high on this part."
+    },
+    {
+     "pin": "12",
+     "name": "DSR#",
+     "type": "input",
+     "function": "Modem input, data set ready, active high on this part."
+    },
+    {
+     "pin": "13",
+     "name": "RI#",
+     "type": "input",
+     "function": "Modem input, ring indicator, active high on this part."
+    },
+    {
+     "pin": "14",
+     "name": "DCD#",
+     "type": "input",
+     "function": "Modem input, carrier detect, active high on this part."
+    },
+    {
+     "pin": "15",
+     "name": "DTR#",
+     "type": "output",
+     "function": "Modem output, data terminal ready, active high on this part."
+    },
+    {
+     "pin": "16",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active high on this part."
+    },
+    {
+     "pin": "17",
+     "name": "IR#",
+     "type": "input",
+     "function": "Serial mode select, internal pull-up: low gives an IrDA SIR infrared port, high an ordinary UART. Read once after power-on reset."
+    },
+    {
+     "pin": "18",
+     "name": "R232",
+     "type": "input",
+     "function": "Auxiliary RS232 enable, active high, internal pull-down. When high, RXD is inverted inside the chip."
+    },
+    {
+     "pin": "19",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    },
+    {
+     "pin": "20",
+     "name": "NOS#",
+     "type": "input",
+     "function": "Low stops the device entering USB suspend; internal pull-up."
+    }
+   ]
+  },
+  {
+   "package": "ESSOP-10 (CH340K)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "0",
+     "name": "GND",
+     "type": "ground",
+     "function": "Exposed pad, ground. Connecting it is optional."
+    },
+    {
+     "pin": "1",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "2",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; must be connected, directly to USB ground."
+    },
+    {
+     "pin": "4",
+     "name": "DTR#",
+     "type": "output",
+     "function": "Modem output, data terminal ready, active low. Ordinary push-pull with no blocking diode. Before USB configuration it is read as an input: a 4.7 kΩ pull-down makes the device ask the host for a larger supply current."
+    },
+    {
+     "pin": "5",
+     "name": "CTS#",
+     "type": "input",
+     "function": "Modem input, clear to send, active low, internal pull-up, no blocking diode."
+    },
+    {
+     "pin": "6",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active low. Series diode inside and a weak pull-up of about 75 kΩ."
+    },
+    {
+     "pin": "7",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    },
+    {
+     "pin": "8",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out. Series diode inside and a weak pull-up of about 75 kΩ, so its idle high is weak."
+    },
+    {
+     "pin": "9",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in. Series diode inside and a weak pull-up of about 75 kΩ."
+    },
+    {
+     "pin": "10",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    }
+   ]
+  },
+  {
+   "package": "MSOP-10 (CH340E, CH340X)",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "2",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, tied directly to USB ground."
+    },
+    {
+     "pin": "4",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active low."
+    },
+    {
+     "pin": "5",
+     "name": "CTS#",
+     "type": "input",
+     "function": "Modem input, clear to send, active low."
+    },
+    {
+     "pin": "6",
+     "name": "TNOW",
+     "type": "output",
+     "function": "CH340E: high while the UART is transmitting. CH340X: TNOW by default, weak pull-up at power-on and reset; 4.7 kΩ to ground turns it into open-drain DTR#, 4.7 kΩ to pin 5 into push-pull DTR#."
+    },
+    {
+     "pin": "7",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    },
+    {
+     "pin": "8",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "9",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in; internal pull-up and pull-down that the chip switches."
+    },
+    {
+     "pin": "10",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    }
+   ]
+  },
+  {
+   "package": "SOP-8 (CH340N)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "UD+",
+     "type": "USB I/O",
+     "function": "USB D+. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "2",
+     "name": "UD-",
+     "type": "USB I/O",
+     "function": "USB D-. Goes straight to the bus line, no series resistor."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, tied directly to USB ground."
+    },
+    {
+     "pin": "4",
+     "name": "RTS#",
+     "type": "output",
+     "function": "Modem output, request to send, active low."
+    },
+    {
+     "pin": "5",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Positive supply. Bypass with 0.1 µF."
+    },
+    {
+     "pin": "6",
+     "name": "TXD",
+     "type": "output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "7",
+     "name": "RXD",
+     "type": "input",
+     "function": "Serial data in; internal pull-up and pull-down that the chip switches."
+    },
+    {
+     "pin": "8",
+     "name": "V3",
+     "type": "power",
+     "function": "Internal 3.3 V node. In 5 V operation it takes a 0.1 µF capacitor to ground only; in 3.3 V operation it is joined to VCC and the supply."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Ambient temperature during operation",
+     "TA",
+     "CH340G/CH340T/CH340R",
+     "-40",
+     "85",
+     "℃"
+    ],
+    [
+     "Ambient temperature during operation",
+     "TA",
+     "CH340C/CH340N/CH340K/CH340E/CH340B",
+     "-20",
+     "70",
+     "℃"
+    ],
+    [
+     "Ambient temperature during operation",
+     "TA",
+     "CH340X/Lot 4 beginning CH340C/N",
+     "-40",
+     "85",
+     "℃"
+    ],
+    [
+     "Ambient temperature during storage",
+     "TS",
+     "",
+     "-55",
+     "125",
+     "℃"
+    ],
+    [
+     "Power supply voltage",
+     "VCC",
+     "VCC to supply, GND to ground",
+     "-0.5",
+     "6.0",
+     "V"
+    ],
+    [
+     "Voltage on an input or output pin",
+     "VIO",
+     "",
+     "-0.5",
+     "VCC+0.5",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Reaching or passing these limits can make the chip misbehave or destroy it."
+   ]
+  },
+  {
+   "title": "5 V electrical characteristics",
+   "page": 8,
+   "conditions": "TA = 25℃, VCC = 5V; USB bus pins excluded",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Power voltage",
+     "VCC",
+     "V3 has only its external capacitor, not tied to VCC",
+     "4.0",
+     "5",
+     "5.3",
+     "V"
+    ],
+    [
+     "Total supply current during operation",
+     "ICC",
+     "CH340G/C/N/K/E/X/T/R",
+     "",
+     "7",
+     "20",
+     "mA"
+    ],
+    [
+     "Total supply current during operation",
+     "ICC",
+     "CH340B",
+     "",
+     "6",
+     "15",
+     "mA"
+    ],
+    [
+     "Total supply current in USB suspend",
+     "ISLP",
+     "CH340G/K/T/R/B",
+     "",
+     "0.09",
+     "0.2",
+     "mA"
+    ],
+    [
+     "Total supply current in USB suspend",
+     "ISLP",
+     "CH340C/N/E/X",
+     "",
+     "0.05",
+     "0.15",
+     "mA"
+    ],
+    [
+     "Low level input voltage",
+     "VIL",
+     "",
+     "0",
+     "",
+     "0.9",
+     "V"
+    ],
+    [
+     "High level input voltage",
+     "VIH",
+     "",
+     "2.3",
+     "",
+     "VCC",
+     "V"
+    ],
+    [
+     "Low level output voltage",
+     "VOL",
+     "6mA sink current",
+     "",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "High level output voltage",
+     "VOH",
+     "2mA output current (only 100uA during chip reset)",
+     "VCC-0.6",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input current, input with built-in pull-up",
+     "IUP",
+     "",
+     "3",
+     "150",
+     "300",
+     "uA"
+    ],
+    [
+     "Input current, input with built-in pull-down",
+     "IDN",
+     "",
+     "-40",
+     "-100",
+     "-300",
+     "uA"
+    ],
+    [
+     "Power-on reset voltage threshold",
+     "VR",
+     "",
+     "2.4",
+     "2.6",
+     "2.8",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "3.3 V electrical characteristics",
+   "page": 9,
+   "conditions": "TA = 25℃, VCC = V3 = 3.3V; USB bus pins excluded",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Power voltage",
+     "VCC",
+     "V3 tied to VCC; CH340G/T/R",
+     "2.9",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Power voltage",
+     "VCC",
+     "V3 tied to VCC; CH340C/N/K/E/X/B",
+     "3.1",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Total supply current during operation",
+     "ICC",
+     "CH340G/C/N/K/E/X/T/R",
+     "",
+     "4",
+     "12",
+     "mA"
+    ],
+    [
+     "Total supply current during operation",
+     "ICC",
+     "CH340B",
+     "",
+     "3",
+     "9",
+     "mA"
+    ],
+    [
+     "Total supply current in USB suspend",
+     "ISLP",
+     "CH340G/K/T/R/B",
+     "",
+     "0.08",
+     "0.2",
+     "mA"
+    ],
+    [
+     "Total supply current in USB suspend",
+     "ISLP",
+     "CH340C/N/E/X",
+     "",
+     "0.04",
+     "0.15",
+     "mA"
+    ],
+    [
+     "Low level input voltage",
+     "VIL",
+     "",
+     "0",
+     "",
+     "0.8",
+     "V"
+    ],
+    [
+     "High level input voltage",
+     "VIH",
+     "",
+     "1.9",
+     "",
+     "VCC",
+     "V"
+    ],
+    [
+     "Low level output voltage",
+     "VOL",
+     "4mA sink current",
+     "",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "High level output voltage",
+     "VOH",
+     "2mA output current (only 40uA during chip reset)",
+     "VCC-0.6",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input current, input with built-in pull-up",
+     "IUP",
+     "",
+     "3",
+     "70",
+     "200",
+     "uA"
+    ],
+    [
+     "Input current, input with built-in pull-down",
+     "IDN",
+     "",
+     "-30",
+     "-70",
+     "-200",
+     "uA"
+    ],
+    [
+     "Power-on reset voltage threshold",
+     "VR",
+     "",
+     "2.4",
+     "2.6",
+     "2.8",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Timing",
+   "page": 9,
+   "conditions": "TA = 25℃, VCC = 5V or 3.3V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input clock frequency at XI",
+     "FCLK",
+     "",
+     "11.98",
+     "12.00",
+     "12.02",
+     "MHz"
+    ],
+    [
+     "Power-on reset time",
+     "TPR",
+     "",
+     "20",
+     "35",
+     "50",
+     "mS"
+    ]
+   ],
+   "notes": [
+    "The power-on reset time unit mS should read ms."
+   ]
+  },
+  {
+   "title": "Serial baud-rate accuracy",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "conditions",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Allowable baud-rate error of received data",
+     "",
+     "about 2",
+     "%"
+    ],
+    [
+     "Baud-rate error of transmitted data",
+     "CH340G/CH340T/CH340R",
+     "less than 0.3",
+     "%"
+    ],
+    [
+     "Baud-rate error of transmitted data",
+     "CH340C/340N/340K/340E/340X/340B",
+     "less than 1.2",
+     "%"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "CH340B configuration EEPROM map",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "byte address",
+    "abbreviation",
+    "content",
+    "default value"
+   ],
+   "rows": [
+    [
+     "00H",
+     "SIG",
+     "Valid-data flag. CH340B internal configuration: 5BH. CH340H/S external configuration chip: 53H. Any other value is invalid.",
+     "00H"
+    ],
+    [
+     "01H",
+     "MODE",
+     "Serial port mode; always 23H.",
+     "23H"
+    ],
+    [
+     "02H",
+     "CFG",
+     "Configuration bits; bit 5 enables the serial number string (0 = used, 1 = not used).",
+     "FEH"
+    ],
+    [
+     "03H",
+     "WP",
+     "Write protection of the internal configuration; 57H makes it read-only, any other value leaves it writable.",
+     "00H"
+    ],
+    [
+     "05H~04H",
+     "VID",
+     "USB vendor ID, high byte at the higher address; any value. 0000H or 0FFFFH selects the default VID and PID.",
+     "1A86H"
+    ],
+    [
+     "07H~06H",
+     "PID",
+     "USB product ID, high byte at the higher address; any value.",
+     "7523H"
+    ],
+    [
+     "0AH",
+     "PWR",
+     "Maximum supply current requested, in units of 2 mA.",
+     "31H"
+    ],
+    [
+     "17H~10H",
+     "SN",
+     "Serial number, eight ASCII characters. If the first byte is outside 21H to 7FH, no serial number is reported.",
+     "12345678"
+    ],
+    [
+     "3FH~1AH",
+     "PROD",
+     "CH340B product string in Unicode: byte 0 is the total length (26H at most), byte 1 is 03H, the string follows. Anything else falls back to the built-in description.",
+     "first byte 00H: built-in product description"
+    ],
+    [
+     "Other addresses",
+     "",
+     "Reserved.",
+     "00H or FFH"
+    ]
+   ],
+   "notes": [
+    "The contents are written chip by chip with a PC configuration tool."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "usb-rs232-db9",
+   "title": "USB to nine-wire RS232 port (CH340T)",
+   "page": 10,
+   "description": "A full nine-signal PC serial port on USB. The CH340T feeds its TTL data and all six modem lines into a MAX213, whose charge pump (C46 to C49) makes the RS232 levels for the DB9 at P11; the DB9 is wired like a computer's COM port. VCC comes straight from the USB connector P2, with C10 and C9 across it; C8 decouples V3, the chip's internal 3.3 V node. X2 with C6 and C7 is the 12 MHz oscillator; a part with a built-in clock (CH340C, CH340B) leaves all three out. With U8 and its five capacitors left off, the same chip gives a TTL serial port, of which only TXD, RXD and ground are needed.",
+   "parts": [
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "CH340T"
+    },
+    {
+     "ref": "U8",
+     "type": "ic",
+     "value": "MAX213",
+     "note": "MAX213, ADM213, SP213 or MAX211 class level shifter",
+     "external": true
+    },
+    {
+     "ref": "P2",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "P11",
+     "type": "connector",
+     "value": "DB9"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C46",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C47",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C48",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C49",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C40",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "X2",
+     "type": "crystal",
+     "value": "12 MHz"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "33 pF"
+    }
+   ],
+   "notes": [
+    "U8 transmitter T4 is unused; its input T4I, EN and SD# are all tied to VCC."
+   ]
+  },
+  {
+   "id": "usb-rs232-db9-ch340b",
+   "title": "USB to nine-wire RS232 port (CH340B)",
+   "page": 11,
+   "description": "A full nine-signal PC serial port on USB. The CH340B feeds its TTL data and all six modem lines into a MAX213, whose charge pump (C46 to C49) makes the RS232 levels for the DB9 at P11; the DB9 is wired like a computer's COM port. VCC comes straight from the USB connector P2, with C10 and C9 across it; C8 decouples V3, the chip's internal 3.3 V node. The CH340B has its clock inside; RST# is left open. With U8 and its five capacitors left off, the same chip gives a TTL serial port, of which only TXD, RXD and ground are needed.",
+   "parts": [
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "CH340B"
+    },
+    {
+     "ref": "U8",
+     "type": "ic",
+     "value": "MAX213",
+     "note": "MAX213, ADM213, SP213 or MAX211 class level shifter",
+     "external": true
+    },
+    {
+     "ref": "P2",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "P11",
+     "type": "connector",
+     "value": "DB9"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C46",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C47",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C48",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C49",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C40",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    }
+   ],
+   "notes": [
+    "U8 transmitter T4 is unused; its input T4I, EN and SD# are all tied to VCC.",
+    "RST# is left unconnected, on its internal pull-up."
+   ]
+  },
+  {
+   "id": "usb-rs232-3wire",
+   "title": "USB to three-wire RS232 port",
+   "page": 11,
+   "description": "The plainest RS232 link: transmit, receive and ground. A CH340G on USB power passes TXD and RXD through one driver and one receiver of a MAX232, which makes its own RS232 rails with four 0.47 µF pump capacitors (C25 to C28); C29 bypasses its supply. The DB9 uses pin 2 for receive, pin 3 for transmit and pin 5 for ground. X4, C21 and C22 form the 12 MHz oscillator and are dropped for the parts with a built-in clock. Unused modem pins stay open.",
+   "parts": [
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "CH340G"
+    },
+    {
+     "ref": "U5",
+     "type": "ic",
+     "value": "MAX232",
+     "note": "MAX232, ICL232, SP232 class",
+     "external": true
+    },
+    {
+     "ref": "P5",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "P6",
+     "type": "connector",
+     "value": "DB9"
+    },
+    {
+     "ref": "X4",
+     "type": "crystal",
+     "value": "12 MHz"
+    },
+    {
+     "ref": "C21",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C22",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C24",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C23",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C25",
+     "type": "capacitor",
+     "value": "0.47 µF"
+    },
+    {
+     "ref": "C26",
+     "type": "capacitor",
+     "value": "0.47 µF"
+    },
+    {
+     "ref": "C27",
+     "type": "capacitor",
+     "value": "0.47 µF"
+    },
+    {
+     "ref": "C28",
+     "type": "capacitor",
+     "value": "0.47 µF"
+    },
+    {
+     "ref": "C29",
+     "type": "capacitor",
+     "value": "0.47 µF"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "usb-rs232-simplified",
+   "title": "USB to three-wire RS232 port, discrete level shifting",
+   "page": 11,
+   "description": "The same three-wire RS232 port with the level-shifter chip replaced by a few discrete parts, at a slightly smaller RS232 swing. R232 is tied high, which inserts an inverter on RXD inside the chip, so the RS232 receive line reaches RXD through just R1. The clock output CKO drives a diode charge pump (C15, D1, D2, C16) that holds a rail near -4 V. TXD switches the PNP T1 through R2: T1 pulls the transmit line up to VCC, and R3 pulls it down to the negative rail when T1 is off.",
+   "parts": [
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "CH340T"
+    },
+    {
+     "ref": "P3",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "P4",
+     "type": "connector",
+     "value": "DB9"
+    },
+    {
+     "ref": "X3",
+     "type": "crystal",
+     "value": "12 MHz"
+    },
+    {
+     "ref": "C11",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C12",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C14",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C13",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C15",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C16",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "4.7 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "4.7 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "2.2 kΩ"
+    },
+    {
+     "ref": "T1",
+     "type": "pnp",
+     "value": "9012"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "B0520 or 1N4148"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "B0520 or 1N4148"
+    }
+   ],
+   "notes": [
+    "The negative rail is -4 V."
+   ]
+  },
+  {
+   "id": "usb-irda",
+   "title": "USB infrared (IrDA SIR) adapter",
+   "page": 12,
+   "description": "A CH340R with IR# grounded runs its serial port in SIR infrared mode and talks to an IrDA transceiver module U14 over TXD and RXD; the module's shutdown pin SD is held low. The infrared LED anode takes its current from the USB 5 V through R14, sized to the value the transceiver's own data recommends. R13, 10 Ω, separates the chip's VCC from the 5 V so the LED pulses disturb the rest less; it may be left out where that matters little. C55 and C54 smooth the two rails, C53 decouples V3, and X7 is the 12 MHz crystal.",
+   "parts": [
+    {
+     "ref": "U9",
+     "type": "ic",
+     "value": "CH340R"
+    },
+    {
+     "ref": "U14",
+     "type": "ic",
+     "value": "ZHX1810, HSDL3000 or TFBS4711",
+     "note": "IrDA infrared transceiver",
+     "external": true
+    },
+    {
+     "ref": "P12",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "X7",
+     "type": "crystal",
+     "value": "12 MHz"
+    },
+    {
+     "ref": "C51",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C52",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C55",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "C54",
+     "type": "capacitor",
+     "value": "0.47 µF"
+    },
+    {
+     "ref": "C53",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "R13",
+     "type": "resistor",
+     "value": "10 Ω",
+     "note": "optional"
+    },
+    {
+     "ref": "R14",
+     "type": "resistor",
+     "value": "6.8 Ω",
+     "note": "value from the transceiver's data"
+    }
+   ],
+   "notes": [
+    "U14 pin 5 goes to VCC and pin 6 to ground."
+   ]
+  },
+  {
+   "id": "mcu-shared-supply",
+   "title": "Microcontroller UART on one shared supply",
+   "page": 12,
+   "description": "The CH340 and a microcontroller run from one self-powered VCC rail of 5 V or 3.3 V, and VBUS from the USB socket powers nothing. With both chips on the same rail no current can leak from one into the other through their I/O pins. The serial lines cross over: MCU TXD into RXD, TXD into MCU RXD. TNOW and ACT# may go to spare MCU inputs. At 3.3 V, V3 is joined to VCC; at 5 V it keeps C42. X6, C17 and C18 are needed only by the parts with an external crystal.",
+   "parts": [
+    {
+     "ref": "U7",
+     "type": "ic",
+     "value": "CH340T"
+    },
+    {
+     "ref": "U16",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "P9",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "J_VBUS",
+     "type": "terminal",
+     "value": "VBUS"
+    },
+    {
+     "ref": "X6",
+     "type": "crystal",
+     "value": "12 MHz"
+    },
+    {
+     "ref": "C17",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C18",
+     "type": "capacitor",
+     "value": "33 pF"
+    },
+    {
+     "ref": "C41",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C42",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C43",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    }
+   ],
+   "notes": [
+    "The TNOW and ACT# links to the MCU GPIO pins are optional.",
+    "VBUS can be brought to an MCU input through a series resistor to sense the USB cable."
+   ]
+  },
+  {
+   "id": "mcu-separate-supplies-two-way",
+   "title": "Microcontroller UART on separate supplies, blocked both ways",
+   "page": 13,
+   "description": "The CH340 runs from USB VBUS and the microcontroller from its own VDD, which may be 5 V, 3.3 V, 2.5 V or 1.8 V. Three parts keep a powered CH340 from feeding a dead MCU through the MCU's pin protection diodes. D6 lets TXD only pull MCU RXD low, so its high level never reaches that pin; D7 does the same between RTS# and the active-low boot pin. Q5, gate on VDD, passes MCU TXD to RXD only while VDD is up, so the RXD pull-up cannot feed the MCU through its TXD. The reverse case, a live MCU and an unpowered CH340, is handled inside the CH340K, CH340X and the lot-4 CH340C and CH340N.",
+   "parts": [
+    {
+     "ref": "U9",
+     "type": "ic",
+     "value": "CH340K, CH340N, CH340E, CH340X or CH340C"
+    },
+    {
+     "ref": "U17",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "P12",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "C45",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C44",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C19",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "Q5",
+     "type": "nmos",
+     "value": "2SK3018 or 1012"
+    },
+    {
+     "ref": "D6",
+     "type": "schottky",
+     "value": "B0520 or BAS70"
+    },
+    {
+     "ref": "D7",
+     "type": "schottky",
+     "value": "B0520 or BAS70",
+     "note": "optional"
+    }
+   ],
+   "notes": [
+    "MCU RXD needs a pull-up to VDD, its own or an external 2 kΩ to 22 kΩ, since D6 only pulls low.",
+    "The D7 link from RTS# to the boot pin is optional.",
+    "On the ESSOP-10 CH340K the two ground pins are 0 (the exposed pad) and 3.",
+    "For other CH340 parts and lots, which lack internal blocking, a Schottky diode in series with Q5's drain, anode at CH340 RXD, and an NMOS between D6 and CH340 TXD, drain to D6 and gate to CH340 VCC, block the reverse direction too.",
+    "Where one direction of leakage cannot happen (an MCU with 5 V tolerant or blocking pins, or one that is always powered), D6, D7 and Q5 may be replaced by wire."
+   ]
+  },
+  {
+   "id": "mcu-separate-supplies-ch340k",
+   "title": "CH340K to a microcontroller on separate supplies",
+   "page": 14,
+   "description": "A CH340K on USB VBUS wired straight to a microcontroller on its own VDD (5 V down to 1.8 V), with no external blocking parts. TXD, RTS# and RXD of the CH340K carry series diodes inside and weak pull-ups of about 75 kΩ, so they pull low hard and high only weakly: a powered MCU cannot push current into an unpowered CH340K, and a powered CH340K leaks no more than 150 µA into an unpowered MCU. RTS# drives the MCU's active-low boot pin. DTR# is brought out to work a VDD power switch.",
+   "parts": [
+    {
+     "ref": "U10",
+     "type": "ic",
+     "value": "CH340K"
+    },
+    {
+     "ref": "U11",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "P13",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_DTR",
+     "type": "terminal",
+     "value": "DTR#"
+    },
+    {
+     "ref": "C38",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C39",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C50",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    }
+   ],
+   "notes": [
+    "The exposed pad, pin 0, is a ground that may be left unconnected; pin 3 must be grounded.",
+    "At 120 kbps and above, give MCU RX a pull-up of 2 kΩ to 22 kΩ, internal or external.",
+    "DTR# is an ordinary push-pull output and CTS# an input with a pull-up; neither has the internal diode, and neither is meant for an MCU pin.",
+    "To stop all leakage from the CH340K supply into an unpowered MCU, add the NMOS and diodes of the two-way blocking circuit."
+   ]
+  },
+  {
+   "id": "dtr-switch-t4",
+   "title": "DTR#-controlled VDD switch, NPN follower",
+   "page": 15,
+   "description": "A single 8050 NPN with its collector on VCC and its emitter feeding VDD; DTR# drives the base, so VDD follows DTR# one base-emitter drop down. A simple scheme: VDD sits about 0.8 V under VCC and is good for at most 200 mA.",
+   "parts": [
+    {
+     "ref": "T4",
+     "type": "npn",
+     "value": "8050"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_DTR",
+     "type": "terminal",
+     "value": "DTR#"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "dtr-switch-t6",
+   "title": "DTR#-controlled VDD switch, PNP with NPN driver",
+   "page": 15,
+   "description": "A full switch: the 8550 PNP T6 connects VCC to VDD as a saturated switch. The 9013 NPN T5, base on DTR#, pulls T6's base down through R31 (2 kΩ) in its emitter, which also sets T6's base current.",
+   "parts": [
+    {
+     "ref": "T6",
+     "type": "pnp",
+     "value": "8550"
+    },
+    {
+     "ref": "T5",
+     "type": "npn",
+     "value": "9013"
+    },
+    {
+     "ref": "R31",
+     "type": "resistor",
+     "value": "2 kΩ"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_DTR",
+     "type": "terminal",
+     "value": "DTR#"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "dtr-switch-q1",
+   "title": "DTR#-controlled VDD switch, NMOS follower",
+   "page": 15,
+   "description": "A simple scheme with the 2312 N-MOSFET Q1 as a source follower: drain from VCC through the B0520 Schottky D10, source and body to VDD, gate on DTR#. VDD sits roughly 0.8 V under VCC and carries at most 200 mA, so Q1 should be a low-threshold part. D10 keeps VDD from back-feeding VCC and is optional.",
+   "parts": [
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "2312"
+    },
+    {
+     "ref": "D10",
+     "type": "schottky",
+     "value": "B0520",
+     "note": "optional"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_DTR",
+     "type": "terminal",
+     "value": "DTR#"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "dtr-switch-q3",
+   "title": "DTR#-controlled VDD switch, back-to-back PMOS",
+   "page": 15,
+   "description": "A full switch from two 2301 P-MOSFETs in series with their sources joined, so neither body diode can conduct from VDD back to VCC when off. R32, 47 kΩ, holds both gates at the common source, keeping them off. The 2302 N-MOSFET Q2, gate on DTR#, pulls the gates to ground to turn the pair on.",
+   "parts": [
+    {
+     "ref": "Q4",
+     "type": "pmos",
+     "value": "2301"
+    },
+    {
+     "ref": "Q3",
+     "type": "pmos",
+     "value": "2301"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "2302"
+    },
+    {
+     "ref": "R32",
+     "type": "resistor",
+     "value": "47 kΩ"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_DTR",
+     "type": "terminal",
+     "value": "DTR#"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "mcu-one-click-download",
+   "title": "One-click firmware download to a microcontroller",
+   "page": 15,
+   "description": "Lets a PC load firmware into a microcontroller with no jumpers or reset button. The 4.7 kΩ pull-down on pin 6 of the CH340X selects open-drain DTR# there and doubles as the BOOT0 pull-down, so BOOT0 rests low and the MCU runs its application. RTS#, idle high, drives NRST. The loader sets DTR# high, then pulses RTS# low, and the MCU restarts into its boot loader; afterwards DTR# low and another RTS# pulse restart the application. VCC is either the MCU's own supply or USB VBUS.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "CH340X"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCU",
+     "note": "an MCU with an active-low NRST and a BOOT0 that selects the loader when high, such as a 32F103",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "USB"
+    },
+    {
+     "ref": "J_VBUS",
+     "type": "terminal",
+     "value": "VBUS"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "4.7 kΩ",
+     "note": "3 kΩ to 5.6 kΩ"
+    }
+   ],
+   "notes": [
+    "Modem data bits and pin levels are of opposite sense.",
+    "Sharing the MCU supply costs a CH340X sleep current of some tens of µA; running the CH340X from VBUS draws nothing from the MCU supply, but then a powered CH340X may feed an unpowered MCU, which the two-way blocking parts prevent.",
+    "For a manual reset as well, put 1 kΩ to 2 kΩ, or a diode with its anode at NRST, between RTS# and NRST.",
+    "A lot-4 CH340C past B40 can drive BOOT0 from OUT# with a pull-down, as its second DTR#.",
+    "For an MCU whose boot pin has the opposite sense, use the default-high DTR# of the CH340C or CH340G, or CH340X pin 6 with 4.7 kΩ to pin 5 (push-pull DTR#, default high)."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "CH340B requested supply current",
+   "expr": "Imax = PWR × 2 mA",
+   "where": {
+    "PWR": "value of EEPROM byte 0AH (default 31H)",
+    "Imax": "largest bus current the device asks the host for"
+   },
+   "note": "",
+   "page": 6
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Function",
+   "page": 1,
+   "text": "A USB full-speed device, compatible with USB 2.0, that acts as a serial port on the PC. One full-duplex hardware UART with transmit and receive buffers, 50 bps to 2 Mbps, plus the modem signals RTS, DTR, DCD, RI, DSR and CTS. Existing Windows serial software runs unchanged; the CH341 VCP driver serves it. The chip also has a USB printer-port mode."
+  },
+  {
+   "topic": "Serial format",
+   "page": 7,
+   "text": "Simplex, half or full duplex. One start bit (low), 5 to 8 data bits, 1 or 2 stop bits (high), parity odd, even, mark or space, or none. Standard rates: 50, 75, 100, 110, 134.5, 150, 300, 600, 900, 1200, 1800, 2400, 3600, 4800, 9600, 14400, 19200, 28800, 33600, 38400, 56000, 57600, 76800, 115200, 128000, 153600, 230400, 460800, 921600, 1500000 and 2000000 bps. For a stream of 1 Mbps or more in one direction, or 500 kbps or more both ways, the CH343 with automatic hardware flow control is advised."
+  },
+  {
+   "topic": "Clock",
+   "page": 5,
+   "text": "CH340G, CH340T and CH340R need 12 MHz at XI, normally from a crystal between XI and XO driven by the on-chip inverter, with a load capacitor from each pin to ground. CH340C, N, K, E, X and B generate their clock inside and take no crystal or capacitors."
+  },
+  {
+   "topic": "Crystal parts",
+   "page": 10,
+   "text": "A 12 MHz quartz crystal with two 33 pF monolithic or high-frequency ceramic capacitors. A low-cost ceramic resonator takes the load capacitance its maker gives, usually 47 pF. If a crystal is slow to start, halve the capacitor on XI."
+  },
+  {
+   "topic": "Reset",
+   "page": 5,
+   "text": "Power-on reset is built in (threshold VR, duration TPR). The CH340B also has an active-low reset input, RST#."
+  },
+  {
+   "topic": "Supply",
+   "page": 5,
+   "text": "At 5 V, VCC takes the supply and V3 has only a 0.1 µF capacitor to ground. At 3.3 V, V3 and VCC are joined and both take the supply, and nothing connected to the chip should then exceed 3.3 V. VCC needs 0.1 µF of decoupling. Both capacitors belong as close to their pins as possible."
+  },
+  {
+   "topic": "USB connection",
+   "page": 5,
+   "text": "The USB pull-up and the transceiver are inside. UD+ and UD- connect directly to the bus with no series or extra resistors. Route D+ and D- as a close parallel pair with ground or copper on both sides."
+  },
+  {
+   "topic": "Bus power",
+   "page": 10,
+   "text": "The bus offers up to 500 mA, enough for the chip and other low-power circuits. A product with its own supply should run the CH340 from that supply too, so no current flows between it and the USB 5 V through the I/O. If both are needed, the USB 5 V and the local 5 V can be joined through about 1 Ω, with the grounds joined directly."
+  },
+  {
+   "topic": "Suspend",
+   "page": 5,
+   "text": "The device enters USB suspend by itself to save power. Holding NOS# low prevents it."
+  },
+  {
+   "topic": "Supply current request",
+   "page": 5,
+   "text": "On the CH340G, C, T and K, DTR# is sampled before USB configuration finishes. A 4.7 kΩ pull-down gives it a low level, which the device reports in its configuration descriptor to ask the host for more supply current."
+  },
+  {
+   "topic": "Idle levels",
+   "page": 5,
+   "text": "RXD should idle high. TXD idles high on the CH340G, C, N, E, X, B and T, weakly high on the CH340K and low on the CH340R."
+  },
+  {
+   "topic": "Auxiliary RS232",
+   "page": 5,
+   "text": "On the CH340G, C, T and R, R232 high adds an inverter inside RXD, which then rests low. It allows the discrete RS232 interface. R232 and IR# are read only once, after power-on reset."
+  },
+  {
+   "topic": "Infrared mode",
+   "page": 5,
+   "text": "On the CH340R, IR# low selects an IrDA SIR infrared port at 2400 bps to 115200 bps; one infrared transceiver module completes a PC infrared adapter."
+  },
+  {
+   "topic": "Status outputs",
+   "page": 5,
+   "text": "ACT# goes low when USB configuration is complete. TNOW is high while the UART sends and drops when sending ends, so in RS485 and other half-duplex links it can drive a transceiver's DE (transmit enable, active high) and RE# (receive enable, active low). The modem lines, and the CH340C's OUT#, are set and read by the PC application."
+  },
+  {
+   "topic": "CH340X pin 6",
+   "page": 6,
+   "text": "Pin 6 is TNOW by default and is weakly pulled up while powering up or in reset. 4.7 kΩ from pin 6 to ground selects open-drain DTR#: off by default and held low by the resistor, while software can make it drive high or release it; meant for an MCU boot pin that must rest low. 4.7 kΩ from pin 6 to pin 5 selects push-pull DTR#, driven high or low by software, for a control pin that must rest high."
+  },
+  {
+   "topic": "CH340C pin 8",
+   "page": 6,
+   "text": "On lots beginning with 4 whose last three characters are above B40, pin 8 is OUT# by default, with a weak pull-up at power-on and reset. A 4.7 kΩ pull-down makes it a second, open-drain DTR#, low by default and driven high or released by software, for an MCU boot pin that rests low; the regular DTR# on pin 13 serves the default-high case."
+  },
+  {
+   "topic": "CH340B EEPROM",
+   "page": 5,
+   "text": "An internal configuration area holds the serial number, USB IDs, current request and product string, written per chip with a PC tool. Some other functions can also be customised."
+  },
+  {
+   "topic": "5 V tolerance and back-feeding",
+   "page": 5,
+   "text": "The I/O of the CH340X and of CH340C and CH340N lots beginning with 4 is 5 V tolerant and blocks current flowing into an unpowered chip; the CH340X adds this to the CH340E when run at 3.3 V. The CH340K blocks inflow too and also limits what it drives out, reducing current pushed into an unpowered MCU."
+  },
+  {
+   "topic": "Separate supplies",
+   "page": 13,
+   "text": "Running the CH340 and the MCU from separate supplies is not advised; where it is needed, the CH340K, or the CH343 with its separate VIO pin, suits it. For blocking parts, low-power Schottky diodes such as BAS70, BAT54 or B0520, and small low-capacitance N-MOSFETs such as 2SK3018 or 1012, are preferred."
+  },
+  {
+   "topic": "DTR# power switching",
+   "page": 14,
+   "text": "DTR# can switch power from VCC to VDD for the circuit beyond. Four schemes: the T4 and Q1 followers are simple, give about VCC - 0.8 V and up to 200 mA; the T6 and Q3 switches are complete. D10 stops VDD back-feeding VCC and may be omitted."
+  },
+  {
+   "topic": "Layout",
+   "page": 10,
+   "text": "Keep the decoupling capacitors close to their pins, run D+ and D- in parallel with ground alongside, and keep the XI and XO traces short; ground guard traces or copper round the oscillator parts cut high-frequency interference."
+  },
+  {
+   "topic": "Unused pins",
+   "page": 4,
+   "text": "Unused I/O pins may be left open."
+  },
+  {
+   "topic": "Level conversion",
+   "page": 7,
+   "text": "Adding level-conversion parts gives RS232, RS485 or RS422 ports."
+  },
+  {
+   "topic": "Availability",
+   "page": 2,
+   "text": "The CH340R is discontinued."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SOP-16",
+   "page": 2,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "shaping width",
+     "",
+     "3.9",
+     ""
+    ],
+    [
+     "",
+     "pin spacing",
+     "",
+     "1.27",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "SOP-8",
+   "page": 2,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "shaping width",
+     "",
+     "3.9",
+     ""
+    ],
+    [
+     "",
+     "pin spacing",
+     "",
+     "1.27",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "ESSOP-10",
+   "page": 2,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "shaping width",
+     "",
+     "3.9",
+     ""
+    ],
+    [
+     "",
+     "pin spacing",
+     "",
+     "1.00",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "MSOP-10",
+   "page": 2,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "shaping width",
+     "",
+     "3.0",
+     ""
+    ],
+    [
+     "",
+     "pin spacing",
+     "",
+     "0.50",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "SSOP-20",
+   "page": 2,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "shaping width",
+     "",
+     "5.3",
+     ""
+    ],
+    [
+     "",
+     "pin spacing",
+     "",
+     "0.65",
+     ""
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,4937 @@
+{
+ "sheet": 1,
+ "name": "LSM6DSLTR",
+ "kind": "sensor",
+ "manufacturer": "STMicroelectronics",
+ "title": "iNEMO 6-axis inertial module: 3D accelerometer and 3D gyroscope",
+ "source": {
+  "revision": "DocID028475 Rev 6, May 2017",
+  "pages": 115
+ },
+ "summary": "A 6-axis inertial module combining a 3-axis accelerometer (±2/±4/±8/±16 g) and a 3-axis gyroscope (±125 to ±2000 dps) with a temperature sensor in a 2.5 x 3 x 0.83 mm 14-lead LGA. Both run together on 0.65 mA in high-performance mode, 0.45 mA in normal mode and 0.29 mA in low-power mode, from a 1.71 V to 3.6 V core supply and a separate 1.62 V to 3.6 V I/O supply. It talks I2C or SPI, buffers up to 4 kbytes in a FIFO and detects free-fall, wake-up, 6D orientation, taps, steps, tilt, wrist tilt and significant motion in hardware. A second I2C port can read up to four external sensors.",
+ "key_figures": [
+  [
+   "Accelerometer full scale",
+   "±2, ±4, ±8, ±16 g"
+  ],
+  [
+   "Gyroscope full scale",
+   "±125, ±245, ±500, ±1000, ±2000 dps"
+  ],
+  [
+   "Output data rate",
+   "1.6 Hz (accelerometer low power) or 12.5 Hz to 6.66 kHz"
+  ],
+  [
+   "Supply current",
+   "0.65 mA typ high-performance (1.6 kHz), 0.45 mA normal (208 Hz), 0.29 mA low-power (52 Hz); 3 μA power-down"
+  ],
+  [
+   "Noise",
+   "gyroscope 4 mdps/√Hz; accelerometer 90 μg/√Hz (±2 g) in high-performance mode"
+  ],
+  [
+   "Zero-g offset",
+   "±40 mg typ"
+  ],
+  [
+   "Zero-rate level",
+   "±3 dps typ"
+  ],
+  [
+   "Supplies",
+   "Vdd 1.71 V to 3.6 V; Vdd_IO 1.62 V to 3.6 V"
+  ],
+  [
+   "Interfaces",
+   "I2C up to 400 kHz, SPI 3/4-wire up to 10 MHz; I2C master for external sensors"
+  ],
+  [
+   "FIFO",
+   "4 kbytes"
+  ],
+  [
+   "Shock",
+   "10,000 g for 0.2 ms"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +85 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "temperature range [°C]",
+   "package",
+   "packing"
+  ],
+  "rows": [
+   [
+    "LSM6DSL",
+    "-40 to +85",
+    "LGA-14L (2.5x3x0.83mm)",
+    "Tray"
+   ],
+   [
+    "LSM6DSLTR",
+    "-40 to +85",
+    "LGA-14L (2.5x3x0.83mm)",
+    "Tape & Reel"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "LGA-14L",
+   "page": 20,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SDO/SA0",
+     "type": "digital I/O",
+     "function": "SPI 4-wire data output (SDO); in I2C it sets bit 0 of the slave address (SA0): high gives 1101011b, low gives 1101010b. Same in Mode 1 and Mode 2."
+    },
+    {
+     "pin": "2",
+     "name": "SDx",
+     "type": "digital I/O",
+     "function": "Mode 1: tie to VDDIO or GND. Mode 2: data line of the I2C master to external sensors (MSDA)."
+    },
+    {
+     "pin": "3",
+     "name": "SCx",
+     "type": "digital I/O",
+     "function": "Mode 1: tie to VDDIO or GND. Mode 2: clock line of the I2C master to external sensors (MSCL)."
+    },
+    {
+     "pin": "4",
+     "name": "INT1",
+     "type": "digital output",
+     "function": "Programmable interrupt output 1."
+    },
+    {
+     "pin": "5",
+     "name": "VDDIO",
+     "type": "power in",
+     "function": "Supply of the I/O pins, 1.62 V to 3.6 V; 100 nF to ground."
+    },
+    {
+     "pin": "6",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "8",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Core supply, 1.71 V to 3.6 V; 100 nF to ground."
+    },
+    {
+     "pin": "9",
+     "name": "INT2",
+     "type": "digital I/O",
+     "function": "Programmable interrupt output 2, or data enable input (DEN). In Mode 2 it may also carry the external sync signal of the I2C master (MDRDY)."
+    },
+    {
+     "pin": "10",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Left open, but soldered to its pad; internal pull-up on by default."
+    },
+    {
+     "pin": "11",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Left open, but soldered to its pad; internal pull-up on by default."
+    },
+    {
+     "pin": "12",
+     "name": "CS",
+     "type": "digital input",
+     "function": "Interface select: high gives I2C with SPI idle, low gives SPI with I2C off. Tie to VDDIO for I2C."
+    },
+    {
+     "pin": "13",
+     "name": "SCL",
+     "type": "digital input",
+     "function": "I2C clock (SCL) or SPI clock (SPC)."
+    },
+    {
+     "pin": "14",
+     "name": "SDA",
+     "type": "digital I/O",
+     "function": "I2C data (SDA), SPI data input (SDI), or data output in 3-wire SPI."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Mechanical characteristics",
+   "page": 21,
+   "conditions": "Vdd = 1.8 V, T = 25 °C unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Linear acceleration measurement range",
+     "LA_FS",
+     "",
+     "",
+     "±2",
+     "",
+     "g"
+    ],
+    [
+     "Linear acceleration measurement range",
+     "LA_FS",
+     "",
+     "",
+     "±4",
+     "",
+     "g"
+    ],
+    [
+     "Linear acceleration measurement range",
+     "LA_FS",
+     "",
+     "",
+     "±8",
+     "",
+     "g"
+    ],
+    [
+     "Linear acceleration measurement range",
+     "LA_FS",
+     "",
+     "",
+     "±16",
+     "",
+     "g"
+    ],
+    [
+     "Angular rate measurement range",
+     "G_FS",
+     "",
+     "",
+     "±125",
+     "",
+     "dps"
+    ],
+    [
+     "Angular rate measurement range",
+     "G_FS",
+     "",
+     "",
+     "±245",
+     "",
+     "dps"
+    ],
+    [
+     "Angular rate measurement range",
+     "G_FS",
+     "",
+     "",
+     "±500",
+     "",
+     "dps"
+    ],
+    [
+     "Angular rate measurement range",
+     "G_FS",
+     "",
+     "",
+     "±1000",
+     "",
+     "dps"
+    ],
+    [
+     "Angular rate measurement range",
+     "G_FS",
+     "",
+     "",
+     "±2000",
+     "",
+     "dps"
+    ],
+    [
+     "Linear acceleration sensitivity (2)",
+     "LA_So",
+     "FS = ±2",
+     "",
+     "0.061",
+     "",
+     "mg/LSB"
+    ],
+    [
+     "Linear acceleration sensitivity (2)",
+     "LA_So",
+     "FS = ±4",
+     "",
+     "0.122",
+     "",
+     "mg/LSB"
+    ],
+    [
+     "Linear acceleration sensitivity (2)",
+     "LA_So",
+     "FS = ±8",
+     "",
+     "0.244",
+     "",
+     "mg/LSB"
+    ],
+    [
+     "Linear acceleration sensitivity (2)",
+     "LA_So",
+     "FS = ±16",
+     "",
+     "0.488",
+     "",
+     "mg/LSB"
+    ],
+    [
+     "Angular rate sensitivity (2)",
+     "G_So",
+     "FS = ±125",
+     "",
+     "4.375",
+     "",
+     "mdps/LSB"
+    ],
+    [
+     "Angular rate sensitivity (2)",
+     "G_So",
+     "FS = ±245",
+     "",
+     "8.75",
+     "",
+     "mdps/LSB"
+    ],
+    [
+     "Angular rate sensitivity (2)",
+     "G_So",
+     "FS = ±500",
+     "",
+     "17.50",
+     "",
+     "mdps/LSB"
+    ],
+    [
+     "Angular rate sensitivity (2)",
+     "G_So",
+     "FS = ±1000",
+     "",
+     "35",
+     "",
+     "mdps/LSB"
+    ],
+    [
+     "Angular rate sensitivity (2)",
+     "G_So",
+     "FS = ±2000",
+     "",
+     "70",
+     "",
+     "mdps/LSB"
+    ],
+    [
+     "Sensitivity tolerance (3)",
+     "G_So%",
+     "at component level",
+     "",
+     "±1",
+     "",
+     "%"
+    ],
+    [
+     "Linear acceleration sensitivity change vs. temperature (4)",
+     "LA_SoDr",
+     "from -40° to +85°",
+     "",
+     "±0.01",
+     "",
+     "%/°C"
+    ],
+    [
+     "Angular rate sensitivity change vs. temperature (4)",
+     "G_SoDr",
+     "from -40° to +85°",
+     "",
+     "±0.007",
+     "",
+     "%/°C"
+    ],
+    [
+     "Linear acceleration zero-g level offset accuracy (5)",
+     "LA_TyOff",
+     "",
+     "",
+     "±40",
+     "",
+     "mg"
+    ],
+    [
+     "Angular rate zero-rate level (4)",
+     "G_TyOff",
+     "",
+     "",
+     "±3",
+     "",
+     "dps"
+    ],
+    [
+     "Linear acceleration zero-g level change vs. temperature (4)",
+     "LA_OffDr",
+     "",
+     "",
+     "±0.1",
+     "",
+     "mg/ °C"
+    ],
+    [
+     "Angular rate typical zero-rate level change vs. temperature (4)",
+     "G_OffDr",
+     "",
+     "",
+     "±0.015",
+     "",
+     "dps/°C"
+    ],
+    [
+     "Rate noise density in high-performance mode (6)",
+     "Rn",
+     "",
+     "",
+     "4",
+     "",
+     "mdps/√Hz"
+    ],
+    [
+     "Gyroscope RMS noise in normal/low-power mode (7)",
+     "RnRMS",
+     "",
+     "",
+     "75",
+     "",
+     "mdps"
+    ],
+    [
+     "Acceleration noise density in high-performance mode (8)",
+     "An",
+     "FS = ±2 g",
+     "",
+     "90",
+     "",
+     "μg/√Hz"
+    ],
+    [
+     "Acceleration noise density in high-performance mode (8)",
+     "An",
+     "FS = ±4 g",
+     "",
+     "90",
+     "",
+     "μg/√Hz"
+    ],
+    [
+     "Acceleration noise density in high-performance mode (8)",
+     "An",
+     "FS = ±8 g",
+     "",
+     "90",
+     "",
+     "μg/√Hz"
+    ],
+    [
+     "Acceleration noise density in high-performance mode (8)",
+     "An",
+     "FS = ±16 g",
+     "",
+     "130",
+     "",
+     "μg/√Hz"
+    ],
+    [
+     "Acceleration RMS noise in normal/low-power mode (9)(10)",
+     "RMS",
+     "FS = ±2 g",
+     "",
+     "1.8",
+     "",
+     "mg(RMS)"
+    ],
+    [
+     "Acceleration RMS noise in normal/low-power mode (9)(10)",
+     "RMS",
+     "FS = ±4 g",
+     "",
+     "2.0",
+     "",
+     "mg(RMS)"
+    ],
+    [
+     "Acceleration RMS noise in normal/low-power mode (9)(10)",
+     "RMS",
+     "FS = ±8 g",
+     "",
+     "2.4",
+     "",
+     "mg(RMS)"
+    ],
+    [
+     "Acceleration RMS noise in normal/low-power mode (9)(10)",
+     "RMS",
+     "FS = ±16 g",
+     "",
+     "3.0",
+     "",
+     "mg(RMS)"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "1.6 (11)",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "12.5",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "26",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "52",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "104",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "208",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "416",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "833",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "1666",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "3332",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration output data rate",
+     "LA_ODR",
+     "",
+     "",
+     "6664",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "12.5",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "26",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "52",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "104",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "208",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "416",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "833",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "1666",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "3332",
+     "",
+     "Hz"
+    ],
+    [
+     "Angular rate output data rate",
+     "G_ODR",
+     "",
+     "",
+     "6664",
+     "",
+     "Hz"
+    ],
+    [
+     "Linear acceleration self-test output change (12)(13)(14)",
+     "Vst",
+     "",
+     "90",
+     "",
+     "1700",
+     "mg"
+    ],
+    [
+     "Angular rate self-test output change (15)(16)",
+     "Vst",
+     "FS = 245 dps",
+     "20",
+     "",
+     "80",
+     "dps"
+    ],
+    [
+     "Angular rate self-test output change (15)(16)",
+     "Vst",
+     "FS = 2000 dps",
+     "150",
+     "",
+     "700",
+     "dps"
+    ],
+    [
+     "Operating temperature range",
+     "Top",
+     "",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "1. Typical figures carry no guarantee.",
+    "2. Sensitivity figures hold after factory calibration and trimming.",
+    "3. The figure may change.",
+    "4. Characterization data from a limited number of samples in a uniform temperature setup; not tested in production.",
+    "5. Figure after factory calibration and trimming.",
+    "6. The gyroscope noise density in high-performance mode does not depend on ODR or full scale.",
+    "7. The gyroscope RMS noise in normal and low-power mode does not depend on ODR or full scale.",
+    "8. The accelerometer noise density in high-performance mode does not depend on ODR.",
+    "9. The accelerometer RMS noise in normal and low-power mode does not depend on ODR.",
+    "10. Bandwidth for the RMS figure is ODR/2; with bandwidth ODR/9 the typical figure is the one given times 0.6.",
+    "11. 1.6 Hz is offered only with the accelerometer in low-power mode.",
+    "12. The STx_XL bits of CTRL5_C (14h) set the sign of the accelerometer self-test change on all axes.",
+    "13. Accelerometer self-test change: with the part at rest, |OUTPUT[LSb] with self-test on - OUTPUT[LSb] with self-test off|; 1 LSb = 0.061 mg at ±2 g.",
+    "14. The accelerometer self-test limits are the same at every full scale.",
+    "15. The STx_G bits of CTRL5_C (14h) set the sign of the gyroscope self-test change on all axes.",
+    "16. Gyroscope self-test change: with the part at rest, |OUTPUT[LSb] with self-test on - OUTPUT[LSb] with self-test off|; 1 LSb = 70 mdps at ±2000 dps."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 24,
+   "conditions": "Vdd = 1.8 V, T = 25 °C unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "Vdd",
+     "",
+     "1.71",
+     "1.8",
+     "3.6",
+     "V"
+    ],
+    [
+     "Power supply for I/O",
+     "Vdd_IO",
+     "",
+     "1.62",
+     "",
+     "3.6",
+     "V"
+    ],
+    [
+     "Gyroscope and accelerometer current consumption in high-performance mode",
+     "IddHP",
+     "ODR = 1.6 kHz",
+     "",
+     "0.65",
+     "",
+     "mA"
+    ],
+    [
+     "Gyroscope and accelerometer current consumption in normal mode",
+     "IddNM",
+     "ODR = 208 Hz",
+     "",
+     "0.45",
+     "",
+     "mA"
+    ],
+    [
+     "Gyroscope and accelerometer current consumption in low-power mode",
+     "IddLP",
+     "ODR = 52 Hz",
+     "",
+     "0.29",
+     "",
+     "mA"
+    ],
+    [
+     "Accelerometer current consumption in high-performance mode",
+     "LA_IddHP",
+     "ODR < 1.6 kHz",
+     "",
+     "150",
+     "",
+     "μA"
+    ],
+    [
+     "Accelerometer current consumption in high-performance mode",
+     "LA_IddHP",
+     "ODR ≥ 1.6 kHz",
+     "",
+     "160",
+     "",
+     "μA"
+    ],
+    [
+     "Accelerometer current consumption in normal mode",
+     "LA_IddNM",
+     "ODR = 208 Hz",
+     "",
+     "85",
+     "",
+     "μA"
+    ],
+    [
+     "Accelerometer current consumption in low-power mode",
+     "LA_IddLM",
+     "ODR = 52 Hz",
+     "",
+     "25",
+     "",
+     "μA"
+    ],
+    [
+     "Accelerometer current consumption in low-power mode",
+     "LA_IddLM",
+     "ODR = 12.5 Hz",
+     "",
+     "9",
+     "",
+     "μA"
+    ],
+    [
+     "Accelerometer current consumption in low-power mode",
+     "LA_IddLM",
+     "ODR = 1.6 Hz",
+     "",
+     "4.5",
+     "",
+     "μA"
+    ],
+    [
+     "Gyroscope and accelerometer current consumption during power-down",
+     "IddPD",
+     "",
+     "",
+     "3",
+     "",
+     "μA"
+    ],
+    [
+     "Turn-on time",
+     "Ton",
+     "",
+     "",
+     "35",
+     "",
+     "ms"
+    ],
+    [
+     "Digital high-level input voltage",
+     "VIH",
+     "",
+     "0.7 *VDD_IO",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Digital low-level input voltage",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.3 *VDD_IO",
+     "V"
+    ],
+    [
+     "High-level output voltage",
+     "VOH",
+     "IOH = 4 mA (2)",
+     "VDD_IO - 0.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Low-level output voltage",
+     "VOL",
+     "IOL = 4 mA (2)",
+     "",
+     "",
+     "0.2",
+     "V"
+    ],
+    [
+     "Operating temperature range",
+     "Top",
+     "",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "1. Typical figures carry no guarantee.",
+    "2. 4 mA is the largest DC current a digital pad can source or sink and still hold VOH and VOL."
+   ]
+  },
+  {
+   "title": "Temperature sensor characteristics",
+   "page": 25,
+   "conditions": "Vdd = 1.8 V, T = 25 °C unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Temperature refresh rate",
+     "TODR (2)",
+     "",
+     "",
+     "52",
+     "",
+     "Hz"
+    ],
+    [
+     "Temperature offset (3)",
+     "Toff",
+     "",
+     "-15",
+     "",
+     "+15",
+     "°C"
+    ],
+    [
+     "Temperature sensitivity",
+     "TSen",
+     "",
+     "",
+     "256",
+     "",
+     "LSB/°C"
+    ],
+    [
+     "Temperature stabilization time (4)",
+     "TST",
+     "",
+     "",
+     "",
+     "500",
+     "μs"
+    ],
+    [
+     "Temperature ADC resolution",
+     "T_ADC_res",
+     "",
+     "",
+     "16",
+     "",
+     "bit"
+    ],
+    [
+     "Operating temperature range",
+     "Top",
+     "",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "1. Typical figures carry no guarantee.",
+    "2. With the accelerometer in low-power mode and the gyroscope off, TODR equals the accelerometer ODR.",
+    "3. The sensor reads 0 LSB (typ) at 25 °C.",
+    "4. From setting the power-on bit to valid data; characterization data."
+   ]
+  },
+  {
+   "title": "SPI slave timing values",
+   "page": 26,
+   "conditions": "Vdd and Top within the general operating conditions; timing measured at 0.2·Vdd_IO and 0.8·Vdd_IO on inputs and outputs",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tc(SPC)",
+     "SPI clock cycle",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "fc(SPC)",
+     "SPI clock frequency",
+     "",
+     "10",
+     "MHz"
+    ],
+    [
+     "tsu(CS)",
+     "CS setup time",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "th(CS)",
+     "CS hold time",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "tsu(SI)",
+     "SDI input setup time",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "th(SI)",
+     "SDI input hold time",
+     "15",
+     "",
+     "ns"
+    ],
+    [
+     "tv(SO)",
+     "SDO valid output time",
+     "",
+     "50",
+     "ns"
+    ],
+    [
+     "th(SO)",
+     "SDO output hold time",
+     "5",
+     "",
+     "ns"
+    ],
+    [
+     "tdis(SO)",
+     "SDO output disable time",
+     "",
+     "50",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "1. Guaranteed at a 10 MHz clock in both 3-wire and 4-wire SPI from characterization; not tested in production."
+   ]
+  },
+  {
+   "title": "I2C slave timing values",
+   "page": 27,
+   "conditions": "Vdd and Top within the general operating conditions; timing measured at 0.2·Vdd_IO and 0.8·Vdd_IO",
+   "columns": [
+    "symbol",
+    "parameter",
+    "standard mode min",
+    "standard mode max",
+    "fast mode min",
+    "fast mode max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "f(SCL)",
+     "SCL clock frequency",
+     "0",
+     "100",
+     "0",
+     "400",
+     "kHz"
+    ],
+    [
+     "tw(SCLL)",
+     "SCL clock low time",
+     "4.7",
+     "",
+     "1.3",
+     "",
+     "μs"
+    ],
+    [
+     "tw(SCLH)",
+     "SCL clock high time",
+     "4.0",
+     "",
+     "0.6",
+     "",
+     "μs"
+    ],
+    [
+     "tsu(SDA)",
+     "SDA setup time",
+     "250",
+     "",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "th(SDA)",
+     "SDA data hold time",
+     "0",
+     "3.45",
+     "0",
+     "0.9",
+     "μs"
+    ],
+    [
+     "th(ST)",
+     "START condition hold time",
+     "4",
+     "",
+     "0.6",
+     "",
+     "μs"
+    ],
+    [
+     "tsu(SR)",
+     "Repeated START condition setup time",
+     "4.7",
+     "",
+     "0.6",
+     "",
+     "μs"
+    ],
+    [
+     "tsu(SP)",
+     "STOP condition setup time",
+     "4",
+     "",
+     "0.6",
+     "",
+     "μs"
+    ],
+    [
+     "tw(SP:SR)",
+     "Bus free time between STOP and START condition",
+     "4.7",
+     "",
+     "1.3",
+     "",
+     "μs"
+    ]
+   ],
+   "notes": [
+    "1. Figures follow the standard I2C protocol requirement; not tested in production."
+   ]
+  },
+  {
+   "title": "I2C master timing values",
+   "page": 28,
+   "conditions": "Mode 2 master interface to an external sensor; fast mode only",
+   "columns": [
+    "symbol",
+    "parameter",
+    "I2C master",
+    "I2C fast mode (min)",
+    "unit"
+   ],
+   "rows": [
+    [
+     "f(SCL)",
+     "SCL clock frequency",
+     "116.3",
+     "0 (400 kHz max)",
+     "kHz"
+    ],
+    [
+     "tw(SCLL)",
+     "SCL clock low time",
+     "5.86",
+     "1.3",
+     "μs"
+    ],
+    [
+     "tw(SCLH)",
+     "SCL clock high time",
+     "2.74",
+     "0.6",
+     "ns"
+    ],
+    [
+     "",
+     "Data valid time",
+     "3.9",
+     "-",
+     "μs"
+    ],
+    [
+     "",
+     "SDA hold time",
+     "≥0",
+     "0",
+     "ns"
+    ],
+    [
+     "",
+     "SDA setup time",
+     "≥100",
+     "100",
+     "ns"
+    ],
+    [
+     "tsu(SR)",
+     "Repeated START condition setup time",
+     "1.56",
+     "0.6",
+     "μs"
+    ],
+    [
+     "tsu(HD)",
+     "Repeated START condition hold time",
+     "1.56",
+     "0.6",
+     "μs"
+    ],
+    [
+     "tsu(SP)",
+     "STOP condition setup time",
+     "2.73",
+     "0.6",
+     "μs"
+    ],
+    [
+     "tw(SP:SR)",
+     "Bus free time between STOP and START condition",
+     "21",
+     "1.3",
+     "μs"
+    ]
+   ],
+   "notes": [
+    "The unit of tw(SCLH) reads ns; the figures are microseconds."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "rating",
+    "maximum value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vdd",
+     "Supply voltage",
+     "-0.3 to 4.8",
+     "V"
+    ],
+    [
+     "TSTG",
+     "Storage temperature range",
+     "-40 to +125",
+     "°C"
+    ],
+    [
+     "Sg",
+     "Acceleration g for 0.2 ms",
+     "10,000",
+     "g"
+    ],
+    [
+     "ESD",
+     "Electrostatic discharge protection (HBM)",
+     "2",
+     "kV"
+    ],
+    [
+     "Vin",
+     "Input voltage on any control pin (including CS, SCL/SPC, SDA/SDI/SDO, SDO/SA0)",
+     "0.3 to Vdd_IO +0.3",
+     "V"
+    ]
+   ],
+   "notes": [
+    "No pin may see more than 4.8 V.",
+    "The part can be damaged by mechanical shock and by electrostatic discharge.",
+    "The Vin lower limit reads 0.3 V; it should read -0.3 V."
+   ]
+  },
+  {
+   "title": "Internal pin status",
+   "page": 46,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "name",
+    "pin status mode 1",
+    "pin status mode 2"
+   ],
+   "rows": [
+    [
+     "1",
+     "SDO/SA0",
+     "Input, no pull-up by default; pull-up on when SIM = 1 (SPI 3-wire) in 12h",
+     "Input, no pull-up by default; pull-up on when SIM = 1 (SPI 3-wire) in 12h"
+    ],
+    [
+     "2",
+     "SDx",
+     "Input, no pull-up by default; pull-up on when PULL_UP_EN = 1 in 1Ah",
+     "Input, no pull-up by default; pull-up on when PULL_UP_EN = 1 in 1Ah"
+    ],
+    [
+     "3",
+     "SCx",
+     "Input, no pull-up by default; pull-up on when PULL_UP_EN = 1 in 1Ah",
+     "Input, no pull-up by default; pull-up on when PULL_UP_EN = 1 in 1Ah"
+    ],
+    [
+     "4",
+     "INT1",
+     "Output held at ground by default",
+     "Output held at ground by default"
+    ],
+    [
+     "5",
+     "Vdd_IO",
+     "",
+     ""
+    ],
+    [
+     "6",
+     "GND",
+     "",
+     ""
+    ],
+    [
+     "7",
+     "GND",
+     "",
+     ""
+    ],
+    [
+     "8",
+     "Vdd",
+     "",
+     ""
+    ],
+    [
+     "9",
+     "INT2",
+     "Output held at ground by default",
+     "Output held at ground by default"
+    ],
+    [
+     "10",
+     "NC",
+     "Input with pull-up by default",
+     "Input with pull-up by default"
+    ],
+    [
+     "11",
+     "NC",
+     "Input with pull-up by default",
+     "Input with pull-up by default"
+    ],
+    [
+     "12",
+     "CS",
+     "Input with pull-up by default; pull-up off when I2C_disable = 1 in 13h",
+     "Input with pull-up by default; pull-up off when I2C_disable = 1 in 13h"
+    ],
+    [
+     "13",
+     "SCL",
+     "Input without pull-up",
+     "Input without pull-up"
+    ],
+    [
+     "14",
+     "SDA",
+     "Input without pull-up",
+     "Input without pull-up"
+    ]
+   ],
+   "notes": [
+    "The internal pull-ups are 30 kΩ to 50 kΩ, depending on VDDIO.",
+    "Pull-ups on pins 10 and 11 are switched off by writing 80h to address 00h, then 01h to address 05h, then 00h to address 00h."
+   ]
+  },
+  {
+   "title": "SAD+Read/Write patterns",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "command",
+    "SAD[6:1]",
+    "SAD[0] = SA0",
+    "R/W",
+    "SAD+R/W"
+   ],
+   "rows": [
+    [
+     "Read",
+     "110101",
+     "0",
+     "1",
+     "11010101 (D5h)"
+    ],
+    [
+     "Write",
+     "110101",
+     "0",
+     "0",
+     "11010100 (D4h)"
+    ],
+    [
+     "Read",
+     "110101",
+     "1",
+     "1",
+     "11010111 (D7h)"
+    ],
+    [
+     "Write",
+     "110101",
+     "1",
+     "0",
+     "11010110 (D6h)"
+    ]
+   ]
+  },
+  {
+   "title": "I2C transfer sequences",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "transfer",
+    "master",
+    "slave"
+   ],
+   "rows": [
+    [
+     "Write one byte",
+     "ST, SAD+W, SUB, DATA, SP",
+     "SAK after SAD+W, SUB and DATA"
+    ],
+    [
+     "Write several bytes",
+     "ST, SAD+W, SUB, DATA, DATA, ..., SP",
+     "SAK after SAD+W, SUB and each DATA"
+    ],
+    [
+     "Read one byte",
+     "ST, SAD+W, SUB, SR, SAD+R, NMAK, SP",
+     "SAK after SAD+W, SUB and SAD+R, then DATA"
+    ],
+    [
+     "Read several bytes",
+     "ST, SAD+W, SUB, SR, SAD+R, MAK after each DATA but the last, NMAK, SP",
+     "SAK after SAD+W, SUB and SAD+R, then DATA, DATA, ..."
+    ]
+   ],
+   "notes": [
+    "ST start, SR repeated start, SP stop, SAK slave acknowledge, MAK master acknowledge, NMAK no master acknowledge, SUB register sub-address."
+   ]
+  },
+  {
+   "title": "Registers address map",
+   "page": 48,
+   "conditions": "",
+   "columns": [
+    "name",
+    "type",
+    "hex",
+    "binary",
+    "default",
+    "comment"
+   ],
+   "rows": [
+    [
+     "RESERVED",
+     "-",
+     "00",
+     "00000000",
+     "-",
+     "Reserved"
+    ],
+    [
+     "FUNC_CFG_ACCESS",
+     "r/w",
+     "01",
+     "00000001",
+     "00000000",
+     "Embedded functions configuration register"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "02",
+     "00000010",
+     "-",
+     "Reserved"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "03",
+     "00000011",
+     "-",
+     "Reserved"
+    ],
+    [
+     "SENSOR_SYNC_TIME_FRAME",
+     "r/w",
+     "04",
+     "00000100",
+     "00000000",
+     "Sensor sync configuration register"
+    ],
+    [
+     "SENSOR_SYNC_RES_RATIO",
+     "r/w",
+     "05",
+     "00000101",
+     "00000000",
+     "Sensor sync configuration register"
+    ],
+    [
+     "FIFO_CTRL1",
+     "r/w",
+     "06",
+     "00000110",
+     "00000000",
+     "FIFO configuration registers"
+    ],
+    [
+     "FIFO_CTRL2",
+     "r/w",
+     "07",
+     "00000111",
+     "00000000",
+     "FIFO configuration registers"
+    ],
+    [
+     "FIFO_CTRL3",
+     "r/w",
+     "08",
+     "00001000",
+     "00000000",
+     "FIFO configuration registers"
+    ],
+    [
+     "FIFO_CTRL4",
+     "r/w",
+     "09",
+     "00001001",
+     "00000000",
+     "FIFO configuration registers"
+    ],
+    [
+     "FIFO_CTRL5",
+     "r/w",
+     "0A",
+     "00001010",
+     "00000000",
+     "FIFO configuration registers"
+    ],
+    [
+     "DRDY_PULSE_CFG_G",
+     "r/w",
+     "0B",
+     "00001011",
+     "00000000",
+     ""
+    ],
+    [
+     "RESERVED",
+     "-",
+     "0C",
+     "00001100",
+     "-",
+     "Reserved"
+    ],
+    [
+     "INT1_CTRL",
+     "r/w",
+     "0D",
+     "00001101",
+     "00000000",
+     "INT1 pin control"
+    ],
+    [
+     "INT2_CTRL",
+     "r/w",
+     "0E",
+     "00001110",
+     "00000000",
+     "INT2 pin control"
+    ],
+    [
+     "WHO_AM_I",
+     "r",
+     "0F",
+     "00001111",
+     "01101010",
+     "Who I am ID"
+    ],
+    [
+     "CTRL1_XL",
+     "r/w",
+     "10",
+     "00010000",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL2_G",
+     "r/w",
+     "11",
+     "00010001",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL3_C",
+     "r/w",
+     "12",
+     "00010010",
+     "00000100",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL4_C",
+     "r/w",
+     "13",
+     "00010011",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL5_C",
+     "r/w",
+     "14",
+     "00010100",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL6_C",
+     "r/w",
+     "15",
+     "00010101",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL7_G",
+     "r/w",
+     "16",
+     "00010110",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL8_XL",
+     "r/w",
+     "17",
+     "0001 0111",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL9_XL",
+     "r/w",
+     "18",
+     "00011000",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "CTRL10_C",
+     "r/w",
+     "19",
+     "00011001",
+     "00000000",
+     "Accelerometer and gyroscope control registers"
+    ],
+    [
+     "MASTER_CONFIG",
+     "r/w",
+     "1A",
+     "00011010",
+     "00000000",
+     "I2C master configuration register"
+    ],
+    [
+     "WAKE_UP_SRC",
+     "r",
+     "1B",
+     "00011011",
+     "output",
+     "Interrupt registers"
+    ],
+    [
+     "TAP_SRC",
+     "r",
+     "1C",
+     "00011100",
+     "output",
+     "Interrupt registers"
+    ],
+    [
+     "D6D_SRC",
+     "r",
+     "1D",
+     "00011101",
+     "output",
+     "Interrupt registers"
+    ],
+    [
+     "STATUS_REG",
+     "r",
+     "1E",
+     "00011110",
+     "output",
+     "Status data register for user interface"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "1F",
+     "00011111",
+     "-",
+     ""
+    ],
+    [
+     "OUT_TEMP_L",
+     "r",
+     "20",
+     "00100000",
+     "output",
+     "Temperature output data registers"
+    ],
+    [
+     "OUT_TEMP_H",
+     "r",
+     "21",
+     "00100001",
+     "output",
+     "Temperature output data registers"
+    ],
+    [
+     "OUTX_L_G",
+     "r",
+     "22",
+     "00100010",
+     "output",
+     "Gyroscope output registers for user interface"
+    ],
+    [
+     "OUTX_H_G",
+     "r",
+     "23",
+     "00100011",
+     "output",
+     "Gyroscope output registers for user interface"
+    ],
+    [
+     "OUTY_L_G",
+     "r",
+     "24",
+     "00100100",
+     "output",
+     "Gyroscope output registers for user interface"
+    ],
+    [
+     "OUTY_H_G",
+     "r",
+     "25",
+     "00100101",
+     "output",
+     "Gyroscope output registers for user interface"
+    ],
+    [
+     "OUTZ_L_G",
+     "r",
+     "26",
+     "00100110",
+     "output",
+     "Gyroscope output registers for user interface"
+    ],
+    [
+     "OUTZ_H_G",
+     "r",
+     "27",
+     "00100111",
+     "output",
+     "Gyroscope output registers for user interface"
+    ],
+    [
+     "OUTX_L_XL",
+     "r",
+     "28",
+     "00101000",
+     "output",
+     "Accelerometer output registers"
+    ],
+    [
+     "OUTX_H_XL",
+     "r",
+     "29",
+     "00101001",
+     "output",
+     "Accelerometer output registers"
+    ],
+    [
+     "OUTY_L_XL",
+     "r",
+     "2A",
+     "00101010",
+     "output",
+     "Accelerometer output registers"
+    ],
+    [
+     "OUTY_H_XL",
+     "r",
+     "2B",
+     "00101011",
+     "output",
+     "Accelerometer output registers"
+    ],
+    [
+     "OUTZ_L_XL",
+     "r",
+     "2C",
+     "00101100",
+     "output",
+     "Accelerometer output registers"
+    ],
+    [
+     "OUTZ_H_XL",
+     "r",
+     "2D",
+     "00101101",
+     "output",
+     "Accelerometer output registers"
+    ],
+    [
+     "SENSORHUB1_REG",
+     "r",
+     "2E",
+     "00101110",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB2_REG",
+     "r",
+     "2F",
+     "00101111",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB3_REG",
+     "r",
+     "30",
+     "00110000",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB4_REG",
+     "r",
+     "31",
+     "00110001",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB5_REG",
+     "r",
+     "32",
+     "00110010",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB6_REG",
+     "r",
+     "33",
+     "00110011",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB7_REG",
+     "r",
+     "34",
+     "00110100",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB8_REG",
+     "r",
+     "35",
+     "00110101",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB9_REG",
+     "r",
+     "36",
+     "00110110",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB10_REG",
+     "r",
+     "37",
+     "00110111",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB11_REG",
+     "r",
+     "38",
+     "00111000",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB12_REG",
+     "r",
+     "39",
+     "00111001",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "FIFO_STATUS1",
+     "r",
+     "3A",
+     "00111010",
+     "output",
+     "FIFO status registers"
+    ],
+    [
+     "FIFO_STATUS2",
+     "r",
+     "3B",
+     "00111011",
+     "output",
+     "FIFO status registers"
+    ],
+    [
+     "FIFO_STATUS3",
+     "r",
+     "3C",
+     "00111100",
+     "output",
+     "FIFO status registers"
+    ],
+    [
+     "FIFO_STATUS4",
+     "r",
+     "3D",
+     "00111101",
+     "output",
+     "FIFO status registers"
+    ],
+    [
+     "FIFO_DATA_OUT_L",
+     "r",
+     "3E",
+     "00111110",
+     "output",
+     "FIFO data output registers"
+    ],
+    [
+     "FIFO_DATA_OUT_H",
+     "r",
+     "3F",
+     "00111111",
+     "output",
+     "FIFO data output registers"
+    ],
+    [
+     "TIMESTAMP0_REG",
+     "r",
+     "40",
+     "01000000",
+     "output",
+     "Timestamp output registers"
+    ],
+    [
+     "TIMESTAMP1_REG",
+     "r",
+     "41",
+     "01000001",
+     "output",
+     "Timestamp output registers"
+    ],
+    [
+     "TIMESTAMP2_REG",
+     "r/w",
+     "42",
+     "01000010",
+     "output",
+     "Timestamp output registers"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "43-48",
+     "",
+     "-",
+     "Reserved"
+    ],
+    [
+     "STEP_TIMESTAMP_L",
+     "r",
+     "49",
+     "0100 1001",
+     "output",
+     "Step counter timestamp registers"
+    ],
+    [
+     "STEP_TIMESTAMP_H",
+     "r",
+     "4A",
+     "0100 1010",
+     "output",
+     "Step counter timestamp registers"
+    ],
+    [
+     "STEP_COUNTER_L",
+     "r",
+     "4B",
+     "01001011",
+     "output",
+     "Step counter output registers"
+    ],
+    [
+     "STEP_COUNTER_H",
+     "r",
+     "4C",
+     "01001100",
+     "output",
+     "Step counter output registers"
+    ],
+    [
+     "SENSORHUB13_REG",
+     "r",
+     "4D",
+     "01001101",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB14_REG",
+     "r",
+     "4E",
+     "01001110",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB15_REG",
+     "r",
+     "4F",
+     "01001111",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB16_REG",
+     "r",
+     "50",
+     "01010000",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB17_REG",
+     "r",
+     "51",
+     "01010001",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "SENSORHUB18_REG",
+     "r",
+     "52",
+     "01010010",
+     "output",
+     "Sensor hub output registers"
+    ],
+    [
+     "FUNC_SRC1",
+     "r",
+     "53",
+     "01010011",
+     "output",
+     "Interrupt registers"
+    ],
+    [
+     "FUNC_SRC2",
+     "r",
+     "54",
+     "01010100",
+     "output",
+     "Interrupt registers"
+    ],
+    [
+     "WRIST_TILT_IA",
+     "r",
+     "55",
+     "01010101",
+     "output",
+     "Interrupt register"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "56-57",
+     "",
+     "-",
+     "Reserved"
+    ],
+    [
+     "TAP_CFG",
+     "r/w",
+     "58",
+     "01011000",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "TAP_THS_6D",
+     "r/w",
+     "59",
+     "01011001",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "INT_DUR2",
+     "r/w",
+     "5A",
+     "01011010",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "WAKE_UP_THS",
+     "r/w",
+     "5B",
+     "01011011",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "WAKE_UP_DUR",
+     "r/w",
+     "5C",
+     "01011100",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "FREE_FALL",
+     "r/w",
+     "5D",
+     "01011101",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "MD1_CFG",
+     "r/w",
+     "5E",
+     "01011110",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "MD2_CFG",
+     "r/w",
+     "5F",
+     "01011111",
+     "00000000",
+     "Interrupt registers"
+    ],
+    [
+     "MASTER_CMD_CODE",
+     "r/w",
+     "60",
+     "01100000",
+     "00000000",
+     ""
+    ],
+    [
+     "SENS_SYNC_SPI_ERROR_CODE",
+     "r/w",
+     "61",
+     "0110 0001",
+     "00000000",
+     ""
+    ],
+    [
+     "RESERVED",
+     "-",
+     "62-65",
+     "",
+     "-",
+     "Reserved"
+    ],
+    [
+     "OUT_MAG_RAW_X_L",
+     "r",
+     "66",
+     "01100110",
+     "output",
+     "External magnetometer raw data output registers"
+    ],
+    [
+     "OUT_MAG_RAW_X_H",
+     "r",
+     "67",
+     "01100111",
+     "output",
+     "External magnetometer raw data output registers"
+    ],
+    [
+     "OUT_MAG_RAW_Y_L",
+     "r",
+     "68",
+     "01101000",
+     "output",
+     "External magnetometer raw data output registers"
+    ],
+    [
+     "OUT_MAG_RAW_Y_H",
+     "r",
+     "69",
+     "01101001",
+     "output",
+     "External magnetometer raw data output registers"
+    ],
+    [
+     "OUT_MAG_RAW_Z_L",
+     "r",
+     "6A",
+     "01101010",
+     "output",
+     "External magnetometer raw data output registers"
+    ],
+    [
+     "OUT_MAG_RAW_Z_H",
+     "r",
+     "6B",
+     "01101011",
+     "output",
+     "External magnetometer raw data output registers"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "6C-72",
+     "",
+     "-",
+     "Reserved"
+    ],
+    [
+     "X_OFS_USR",
+     "r/w",
+     "73",
+     "01110011",
+     "00000000",
+     "Accelerometer user offset correction"
+    ],
+    [
+     "Y_OFS_USR",
+     "r/w",
+     "74",
+     "01110100",
+     "00000000",
+     "Accelerometer user offset correction"
+    ],
+    [
+     "Z_OFS_USR",
+     "r/w",
+     "75",
+     "01110101",
+     "00000000",
+     "Accelerometer user offset correction"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "76-7F",
+     "",
+     "-",
+     "Reserved"
+    ]
+   ],
+   "notes": [
+    "Register addresses are 7 bits wide.",
+    "Reserved registers are not to be written: a write can damage the part permanently. Registers loaded at boot hold factory calibration and are restored at every power-up; they are not to be changed."
+   ]
+  },
+  {
+   "title": "Register bit assignments",
+   "page": 52,
+   "conditions": "",
+   "columns": [
+    "register",
+    "address",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0"
+   ],
+   "rows": [
+    [
+     "FUNC_CFG_ACCESS",
+     "01h",
+     "FUNC_CFG_EN",
+     "0",
+     "FUNC_CFG_EN_B",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "SENSOR_SYNC_TIME_FRAME",
+     "04h",
+     "0",
+     "0",
+     "0",
+     "0",
+     "TPH_3",
+     "TPH_2",
+     "TPH_1",
+     "TPH_0"
+    ],
+    [
+     "SENSOR_SYNC_RES_RATIO",
+     "05h",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "RR_1",
+     "RR_0"
+    ],
+    [
+     "FIFO_CTRL1",
+     "06h",
+     "FTH_7",
+     "FTH_6",
+     "FTH_5",
+     "FTH_4",
+     "FTH_3",
+     "FTH_2",
+     "FTH_1",
+     "FTH_0"
+    ],
+    [
+     "FIFO_CTRL2",
+     "07h",
+     "TIMER_PEDO_FIFO_EN",
+     "TIMER_PEDO_FIFO_DRDY",
+     "0",
+     "0",
+     "FIFO_TEMP_EN",
+     "FTH_10",
+     "FTH_9",
+     "FTH_8"
+    ],
+    [
+     "FIFO_CTRL3",
+     "08h",
+     "0",
+     "0",
+     "DEC_FIFO_GYRO2",
+     "DEC_FIFO_GYRO1",
+     "DEC_FIFO_GYRO0",
+     "DEC_FIFO_XL2",
+     "DEC_FIFO_XL1",
+     "DEC_FIFO_XL0"
+    ],
+    [
+     "FIFO_CTRL4",
+     "09h",
+     "STOP_ON_FTH",
+     "ONLY_HIGH_DATA",
+     "DEC_DS4_FIFO2",
+     "DEC_DS4_FIFO1",
+     "DEC_DS4_FIFO0",
+     "DEC_DS3_FIFO2",
+     "DEC_DS3_FIFO1",
+     "DEC_DS3_FIFO0"
+    ],
+    [
+     "FIFO_CTRL5",
+     "0Ah",
+     "0",
+     "ODR_FIFO_3",
+     "ODR_FIFO_2",
+     "ODR_FIFO_1",
+     "ODR_FIFO_0",
+     "FIFO_MODE_2",
+     "FIFO_MODE_1",
+     "FIFO_MODE_0"
+    ],
+    [
+     "DRDY_PULSE_CFG_G",
+     "0Bh",
+     "DRDY_PULSED",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "INT2_WRIST_TILT"
+    ],
+    [
+     "INT1_CTRL",
+     "0Dh",
+     "INT1_STEP_DETECTOR",
+     "INT1_SIGN_MOT",
+     "INT1_FULL_FLAG",
+     "INT1_FIFO_OVR",
+     "INT1_FTH",
+     "INT1_BOOT",
+     "INT1_DRDY_G",
+     "INT1_DRDY_XL"
+    ],
+    [
+     "INT2_CTRL",
+     "0Eh",
+     "INT2_STEP_DELTA",
+     "INT2_STEP_COUNT_OV",
+     "INT2_FULL_FLAG",
+     "INT2_FIFO_OVR",
+     "INT2_FTH",
+     "INT2_DRDY_TEMP",
+     "INT2_DRDY_G",
+     "INT2_DRDY_XL"
+    ],
+    [
+     "WHO_AM_I",
+     "0Fh",
+     "0",
+     "1",
+     "1",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0"
+    ],
+    [
+     "CTRL1_XL",
+     "10h",
+     "ODR_XL3",
+     "ODR_XL2",
+     "ODR_XL1",
+     "ODR_XL0",
+     "FS_XL1",
+     "FS_XL0",
+     "LPF1_BW_SEL",
+     "BW0_XL"
+    ],
+    [
+     "CTRL2_G",
+     "11h",
+     "ODR_G3",
+     "ODR_G2",
+     "ODR_G1",
+     "ODR_G0",
+     "FS_G1",
+     "FS_G0",
+     "FS_125",
+     "0"
+    ],
+    [
+     "CTRL3_C",
+     "12h",
+     "BOOT",
+     "BDU",
+     "H_LACTIVE",
+     "PP_OD",
+     "SIM",
+     "IF_INC",
+     "BLE",
+     "SW_RESET"
+    ],
+    [
+     "CTRL4_C",
+     "13h",
+     "DEN_XL_EN",
+     "SLEEP",
+     "INT2_on_INT1",
+     "DEN_DRDY_INT1",
+     "DRDY_MASK",
+     "I2C_disable",
+     "LPF1_SEL_G",
+     "0"
+    ],
+    [
+     "CTRL5_C",
+     "14h",
+     "ROUNDING2",
+     "ROUNDING1",
+     "ROUNDING0",
+     "DEN_LH",
+     "ST1_G",
+     "ST0_G",
+     "ST1_XL",
+     "ST0_XL"
+    ],
+    [
+     "CTRL6_C",
+     "15h",
+     "TRIG_EN",
+     "LVL_EN",
+     "LVL2_EN",
+     "XL_HM_MODE",
+     "USR_OFF_W",
+     "0",
+     "FTYPE_1",
+     "FTYPE_0"
+    ],
+    [
+     "CTRL7_G",
+     "16h",
+     "G_HM_MODE",
+     "HP_EN_G",
+     "HPM1_G",
+     "HPM0_G",
+     "0",
+     "ROUNDING_STATUS",
+     "0",
+     "0"
+    ],
+    [
+     "CTRL8_XL",
+     "17h",
+     "LPF2_XL_EN",
+     "HPCF_XL1",
+     "HPCF_XL0",
+     "HP_REF_MODE",
+     "INPUT_COMPOSITE",
+     "HP_SLOPE_XL_EN",
+     "0",
+     "LOW_PASS_ON_6D"
+    ],
+    [
+     "CTRL9_XL",
+     "18h",
+     "DEN_X",
+     "DEN_Y",
+     "DEN_Z",
+     "DEN_XL_G",
+     "0",
+     "SOFT_EN",
+     "0",
+     "0"
+    ],
+    [
+     "CTRL10_C",
+     "19h",
+     "WRIST_TILT_EN",
+     "0",
+     "TIMER_EN",
+     "PEDO_EN",
+     "TILT_EN",
+     "FUNC_EN",
+     "PEDO_RST_STEP",
+     "SIGN_MOTION_EN"
+    ],
+    [
+     "MASTER_CONFIG",
+     "1Ah",
+     "DRDY_ON_INT1",
+     "DATA_VALID_SEL_FIFO",
+     "0",
+     "START_CONFIG",
+     "PULL_UP_EN",
+     "PASS_THROUGH_MODE",
+     "IRON_EN",
+     "MASTER_ON"
+    ],
+    [
+     "WAKE_UP_SRC",
+     "1Bh",
+     "0",
+     "0",
+     "FF_IA",
+     "SLEEP_STATE_IA",
+     "WU_IA",
+     "X_WU",
+     "Y_WU",
+     "Z_WU"
+    ],
+    [
+     "TAP_SRC",
+     "1Ch",
+     "0",
+     "TAP_IA",
+     "SINGLE_TAP",
+     "DOUBLE_TAP",
+     "TAP_SIGN",
+     "X_TAP",
+     "Y_TAP",
+     "Z_TAP"
+    ],
+    [
+     "D6D_SRC",
+     "1Dh",
+     "DEN_DRDY",
+     "D6D_IA",
+     "ZH",
+     "ZL",
+     "YH",
+     "YL",
+     "XH",
+     "XL"
+    ],
+    [
+     "STATUS_REG",
+     "1Eh",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "TDA",
+     "GDA",
+     "XLDA"
+    ],
+    [
+     "FIFO_STATUS2",
+     "3Bh",
+     "WaterM",
+     "OVER_RUN",
+     "FIFO_FULL_SMART",
+     "FIFO_EMPTY",
+     "0",
+     "DIFF_FIFO_10",
+     "DIFF_FIFO_9",
+     "DIFF_FIFO_8"
+    ],
+    [
+     "FIFO_STATUS4",
+     "3Dh",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "FIFO_PATTERN_9",
+     "FIFO_PATTERN_8"
+    ],
+    [
+     "FUNC_SRC1",
+     "53h",
+     "STEP_COUNT_DELTA_IA",
+     "SIGN_MOTION_IA",
+     "TILT_IA",
+     "STEP_DETECTED",
+     "STEP_OVERFLOW",
+     "HI_FAIL",
+     "SI_END_OP",
+     "SENSORHUB_END_OP"
+    ],
+    [
+     "FUNC_SRC2",
+     "54h",
+     "0",
+     "SLAVE3_NACK",
+     "SLAVE2_NACK",
+     "SLAVE1_NACK",
+     "SLAVE0_NACK",
+     "0",
+     "0",
+     "WRIST_TILT_IA"
+    ],
+    [
+     "WRIST_TILT_IA",
+     "55h",
+     "WRIST_TILT_IA_Xpos",
+     "WRIST_TILT_IA_Xneg",
+     "WRIST_TILT_IA_Ypos",
+     "WRIST_TILT_IA_Yneg",
+     "WRIST_TILT_IA_Zpos",
+     "WRIST_TILT_IA_Zneg",
+     "0",
+     "0"
+    ],
+    [
+     "TAP_CFG",
+     "58h",
+     "INTERRUPTS_ENABLE",
+     "INACT_EN1",
+     "INACT_EN0",
+     "SLOPE_FDS",
+     "TAP_X_EN",
+     "TAP_Y_EN",
+     "TAP_Z_EN",
+     "LIR"
+    ],
+    [
+     "TAP_THS_6D",
+     "59h",
+     "D4D_EN",
+     "SIXD_THS1",
+     "SIXD_THS0",
+     "TAP_THS4",
+     "TAP_THS3",
+     "TAP_THS2",
+     "TAP_THS1",
+     "TAP_THS0"
+    ],
+    [
+     "INT_DUR2",
+     "5Ah",
+     "DUR3",
+     "DUR2",
+     "DUR1",
+     "DUR0",
+     "QUIET1",
+     "QUIET0",
+     "SHOCK1",
+     "SHOCK0"
+    ],
+    [
+     "WAKE_UP_THS",
+     "5Bh",
+     "SINGLE_DOUBLE_TAP",
+     "0",
+     "WK_THS5",
+     "WK_THS4",
+     "WK_THS3",
+     "WK_THS2",
+     "WK_THS1",
+     "WK_THS0"
+    ],
+    [
+     "WAKE_UP_DUR",
+     "5Ch",
+     "FF_DUR5",
+     "WAKE_DUR1",
+     "WAKE_DUR0",
+     "TIMER_HR",
+     "SLEEP_DUR3",
+     "SLEEP_DUR2",
+     "SLEEP_DUR1",
+     "SLEEP_DUR0"
+    ],
+    [
+     "FREE_FALL",
+     "5Dh",
+     "FF_DUR4",
+     "FF_DUR3",
+     "FF_DUR2",
+     "FF_DUR1",
+     "FF_DUR0",
+     "FF_THS2",
+     "FF_THS1",
+     "FF_THS0"
+    ],
+    [
+     "MD1_CFG",
+     "5Eh",
+     "INT1_INACT_STATE",
+     "INT1_SINGLE_TAP",
+     "INT1_WU",
+     "INT1_FF",
+     "INT1_DOUBLE_TAP",
+     "INT1_6D",
+     "INT1_TILT",
+     "INT1_TIMER"
+    ],
+    [
+     "MD2_CFG",
+     "5Fh",
+     "INT2_INACT_STATE",
+     "INT2_SINGLE_TAP",
+     "INT2_WU",
+     "INT2_FF",
+     "INT2_DOUBLE_TAP",
+     "INT2_6D",
+     "INT2_TILT",
+     "INT2_IRON"
+    ]
+   ],
+   "notes": [
+    "A bit shown as 0 in a read/write register is kept at 0 for correct operation.",
+    "Registers not listed hold one data byte: FIFO_CTRL1 the threshold low byte, FIFO_STATUS1 DIFF_FIFO_[7:0], FIFO_STATUS3 FIFO_PATTERN_[7:0], the output, sensor hub, timestamp, step counter, FIFO data, magnetometer and offset registers their data byte, MASTER_CMD_CODE and SENS_SYNC_SPI_ERROR_CODE an 8-bit code."
+   ]
+  },
+  {
+   "title": "Configuration of embedded functions register banks",
+   "page": 52,
+   "conditions": "FUNC_CFG_ACCESS (01h)",
+   "columns": [
+    "FUNC_CFG_EN",
+    "FUNC_CFG_EN_B",
+    "status of embedded register banks"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Bank A and B disabled (default)"
+    ],
+    [
+     "0",
+     "1",
+     "Forbidden"
+    ],
+    [
+     "1",
+     "0",
+     "Bank A enabled"
+    ],
+    [
+     "1",
+     "1",
+     "Bank B enabled"
+    ]
+   ]
+  },
+  {
+   "title": "Sensor synchronization resolution ratio",
+   "page": 53,
+   "conditions": "SENSOR_SYNC_RES_RATIO (05h)",
+   "columns": [
+    "RR_[1:0]",
+    "Res_Ratio"
+   ],
+   "rows": [
+    [
+     "00",
+     "2-11"
+    ],
+    [
+     "01",
+     "2-12"
+    ],
+    [
+     "10",
+     "2-13"
+    ],
+    [
+     "11",
+     "2-14"
+    ]
+   ],
+   "notes": [
+    "The ratios read 2-11 to 2-14; they are 2^-11 to 2^-14."
+   ]
+  },
+  {
+   "title": "FIFO data set decimation setting",
+   "page": 55,
+   "conditions": "FIFO_CTRL3 (08h), FIFO_CTRL4 (09h)",
+   "columns": [
+    "code [2:0]",
+    "DEC_FIFO_GYRO (first data set)",
+    "DEC_FIFO_XL (second data set)",
+    "DEC_DS3_FIFO (third data set)",
+    "DEC_DS4_FIFO (fourth data set)"
+   ],
+   "rows": [
+    [
+     "000",
+     "Gyro sensor not in FIFO",
+     "Accelerometer sensor not in FIFO",
+     "Third FIFO data set not in FIFO",
+     "Fourth FIFO data set not in FIFO"
+    ],
+    [
+     "001",
+     "No decimation",
+     "No decimation",
+     "No decimation",
+     "No decimation"
+    ],
+    [
+     "010",
+     "Decimation with factor 2",
+     "Decimation with factor 2",
+     "Decimation with factor 2",
+     "Decimation with factor 2"
+    ],
+    [
+     "011",
+     "Decimation with factor 3",
+     "Decimation with factor 3",
+     "Decimation with factor 3",
+     "Decimation with factor 3"
+    ],
+    [
+     "100",
+     "Decimation with factor 4",
+     "Decimation with factor 4",
+     "Decimation with factor 4",
+     "Decimation with factor 4"
+    ],
+    [
+     "101",
+     "Decimation with factor 8",
+     "Decimation with factor 8",
+     "Decimation with factor 8",
+     "Decimation with factor 8"
+    ],
+    [
+     "110",
+     "Decimation with factor 16",
+     "Decimation with factor 16",
+     "Decimation with factor 16",
+     "Decimation with factor 16"
+    ],
+    [
+     "111",
+     "Decimation with factor 32",
+     "Decimation with factor 32",
+     "Decimation with factor 32",
+     "Decimation with factor 32"
+    ]
+   ]
+  },
+  {
+   "title": "FIFO ODR selection",
+   "page": 57,
+   "conditions": "FIFO_CTRL5 (0Ah)",
+   "columns": [
+    "ODR_FIFO_[3:0]",
+    "FIFO ODR"
+   ],
+   "rows": [
+    [
+     "0000",
+     "FIFO disabled"
+    ],
+    [
+     "0001",
+     "12.5 Hz"
+    ],
+    [
+     "0010",
+     "26 Hz"
+    ],
+    [
+     "0011",
+     "52 Hz"
+    ],
+    [
+     "0100",
+     "104 Hz"
+    ],
+    [
+     "0101",
+     "208 Hz"
+    ],
+    [
+     "0110",
+     "416 Hz"
+    ],
+    [
+     "0111",
+     "833 Hz"
+    ],
+    [
+     "1000",
+     "1.66 kHz"
+    ],
+    [
+     "1001",
+     "3.33 kHz"
+    ],
+    [
+     "1010",
+     "6.66 kHz"
+    ]
+   ],
+   "notes": [
+    "When the sensors run slower than the selected rate, the FIFO rate is held to theirs. These bits act only with DATA_VALID_SEL_FIFO (1Ah) and TIMER_PEDO_FIFO_DRDY (07h) both at 0."
+   ]
+  },
+  {
+   "title": "FIFO mode selection",
+   "page": 57,
+   "conditions": "FIFO_CTRL5 (0Ah)",
+   "columns": [
+    "FIFO_MODE_[2:0]",
+    "mode"
+   ],
+   "rows": [
+    [
+     "000",
+     "Bypass mode; FIFO disabled"
+    ],
+    [
+     "001",
+     "FIFO mode; collection stops when full"
+    ],
+    [
+     "010",
+     "Reserved"
+    ],
+    [
+     "011",
+     "Continuous mode until the trigger is deasserted, then FIFO mode"
+    ],
+    [
+     "100",
+     "Bypass mode until the trigger is deasserted, then Continuous mode"
+    ],
+    [
+     "101",
+     "Reserved"
+    ],
+    [
+     "110",
+     "Continuous mode; when full, each new sample overwrites the oldest"
+    ],
+    [
+     "111",
+     "Reserved"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer full-scale selection",
+   "page": 60,
+   "conditions": "CTRL1_XL (10h); default 00",
+   "columns": [
+    "FS_XL [1:0]",
+    "full scale"
+   ],
+   "rows": [
+    [
+     "00",
+     "±2 g"
+    ],
+    [
+     "01",
+     "±16 g"
+    ],
+    [
+     "10",
+     "±4 g"
+    ],
+    [
+     "11",
+     "±8 g"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer analog chain bandwidth",
+   "page": 60,
+   "conditions": "CTRL1_XL (10h); accelerometer ODR ≥ 1.67 kHz only",
+   "columns": [
+    "BW0_XL",
+    "bandwidth"
+   ],
+   "rows": [
+    [
+     "0",
+     "1.5 kHz"
+    ],
+    [
+     "1",
+     "400 Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer ODR register setting",
+   "page": 60,
+   "conditions": "CTRL1_XL (10h); default 0000",
+   "columns": [
+    "ODR_XL[3:0]",
+    "ODR when XL_HM_MODE = 1",
+    "ODR when XL_HM_MODE = 0"
+   ],
+   "rows": [
+    [
+     "0000",
+     "Power-down",
+     "Power-down"
+    ],
+    [
+     "1011",
+     "1.6 Hz (low power only)",
+     "12.5 Hz (high performance)"
+    ],
+    [
+     "0001",
+     "12.5 Hz (low power)",
+     "12.5 Hz (high performance)"
+    ],
+    [
+     "0010",
+     "26 Hz (low power)",
+     "26 Hz (high performance)"
+    ],
+    [
+     "0011",
+     "52 Hz (low power)",
+     "52 Hz (high performance)"
+    ],
+    [
+     "0100",
+     "104 Hz (normal mode)",
+     "104 Hz (high performance)"
+    ],
+    [
+     "0101",
+     "208 Hz (normal mode)",
+     "208 Hz (high performance)"
+    ],
+    [
+     "0110",
+     "416 Hz (high performance)",
+     "416 Hz (high performance)"
+    ],
+    [
+     "0111",
+     "833 Hz (high performance)",
+     "833 Hz (high performance)"
+    ],
+    [
+     "1000",
+     "1.66 kHz (high performance)",
+     "1.66 kHz (high performance)"
+    ],
+    [
+     "1001",
+     "3.33 kHz (high performance)",
+     "3.33 kHz (high performance)"
+    ],
+    [
+     "1010",
+     "6.66 kHz (high performance)",
+     "6.66 kHz (high performance)"
+    ],
+    [
+     "11xx",
+     "Not allowed",
+     "Not allowed"
+    ]
+   ]
+  },
+  {
+   "title": "Gyroscope ODR configuration setting",
+   "page": 61,
+   "conditions": "CTRL2_G (11h); default 0000",
+   "columns": [
+    "ODR_G[3:0]",
+    "ODR when G_HM_MODE = 1",
+    "ODR when G_HM_MODE = 0"
+   ],
+   "rows": [
+    [
+     "0000",
+     "Power down",
+     "Power down"
+    ],
+    [
+     "0001",
+     "12.5 Hz (low power)",
+     "12.5 Hz (high performance)"
+    ],
+    [
+     "0010",
+     "26 Hz (low power)",
+     "26 Hz (high performance)"
+    ],
+    [
+     "0011",
+     "52 Hz (low power)",
+     "52 Hz (high performance)"
+    ],
+    [
+     "0100",
+     "104 Hz (normal mode)",
+     "104 Hz (high performance)"
+    ],
+    [
+     "0101",
+     "208 Hz (normal mode)",
+     "208 Hz (high performance)"
+    ],
+    [
+     "0110",
+     "416 Hz (high performance)",
+     "416 Hz (high performance)"
+    ],
+    [
+     "0111",
+     "833 Hz (high performance)",
+     "833 Hz (high performance)"
+    ],
+    [
+     "1000",
+     "1.66 kHz (high performance)",
+     "1.66 kHz (high performance)"
+    ],
+    [
+     "1001",
+     "3.33 kHz (high performance",
+     "3.33 kHz (high performance)"
+    ],
+    [
+     "1010",
+     "6.66 kHz (high performance",
+     "6.66 kHz (high performance)"
+    ],
+    [
+     "1011",
+     "Not available",
+     "Not available"
+    ]
+   ]
+  },
+  {
+   "title": "Gyroscope full-scale selection",
+   "page": 61,
+   "conditions": "CTRL2_G (11h); defaults 0 and 00",
+   "columns": [
+    "FS_125",
+    "FS_G [1:0]",
+    "full scale"
+   ],
+   "rows": [
+    [
+     "0",
+     "00",
+     "245 dps"
+    ],
+    [
+     "0",
+     "01",
+     "500 dps"
+    ],
+    [
+     "0",
+     "10",
+     "1000 dps"
+    ],
+    [
+     "0",
+     "11",
+     "2000 dps"
+    ],
+    [
+     "1",
+     "",
+     "125 dps"
+    ]
+   ]
+  },
+  {
+   "title": "Output registers rounding pattern",
+   "page": 64,
+   "conditions": "CTRL5_C (14h); default 000",
+   "columns": [
+    "ROUNDING[2:0]",
+    "rounding pattern"
+   ],
+   "rows": [
+    [
+     "000",
+     "No rounding"
+    ],
+    [
+     "001",
+     "Accelerometer only"
+    ],
+    [
+     "010",
+     "Gyroscope only"
+    ],
+    [
+     "011",
+     "Gyroscope + accelerometer"
+    ],
+    [
+     "100",
+     "SENSORHUB1_REG (2Eh) to SENSORHUB6_REG (33h) only"
+    ],
+    [
+     "101",
+     "Accelerometer + SENSORHUB1_REG (2Eh) to SENSORHUB6_REG (33h)"
+    ],
+    [
+     "110",
+     "Gyroscope + accelerometer + SENSORHUB1_REG (2Eh) to SENSORHUB6_REG (33h) + SENSORHUB7_REG (34h) to SENSORHUB12_REG (39h)"
+    ],
+    [
+     "111",
+     "Gyroscope + accelerometer + SENSORHUB1_REG (2Eh) to SENSORHUB6_REG (33h)"
+    ]
+   ]
+  },
+  {
+   "title": "Angular rate sensor self-test mode selection",
+   "page": 64,
+   "conditions": "CTRL5_C (14h)",
+   "columns": [
+    "ST1_G",
+    "ST0_G",
+    "self-test mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Normal mode"
+    ],
+    [
+     "0",
+     "1",
+     "Positive sign self-test"
+    ],
+    [
+     "1",
+     "0",
+     "Not allowed"
+    ],
+    [
+     "1",
+     "1",
+     "Negative sign self-test"
+    ]
+   ]
+  },
+  {
+   "title": "Linear acceleration sensor self-test mode selection",
+   "page": 64,
+   "conditions": "CTRL5_C (14h)",
+   "columns": [
+    "ST1_XL",
+    "ST0_XL",
+    "self-test mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Normal mode"
+    ],
+    [
+     "0",
+     "1",
+     "Positive sign self-test"
+    ],
+    [
+     "1",
+     "0",
+     "Negative sign self-test"
+    ],
+    [
+     "1",
+     "1",
+     "Not allowed"
+    ]
+   ]
+  },
+  {
+   "title": "DEN trigger mode selection",
+   "page": 65,
+   "conditions": "CTRL6_C (15h)",
+   "columns": [
+    "TRIG_EN, LVL_EN, LVL2_EN",
+    "trigger mode"
+   ],
+   "rows": [
+    [
+     "100",
+     "Edge-sensitive trigger"
+    ],
+    [
+     "010",
+     "Level-sensitive trigger"
+    ],
+    [
+     "011",
+     "Level-sensitive latched"
+    ],
+    [
+     "110",
+     "Level-sensitive FIFO enable"
+    ]
+   ]
+  },
+  {
+   "title": "Gyroscope LPF1 bandwidth selection",
+   "page": 65,
+   "conditions": "CTRL6_C (15h); LPF1 on with LPF1_SEL_G = 1 in CTRL4_C (13h)",
+   "columns": [
+    "FTYPE[1:0]",
+    "ODR = 800 Hz",
+    "ODR = 1.6 kHz",
+    "ODR = 3.3 kHz",
+    "ODR = 6.6 kHz"
+   ],
+   "rows": [
+    [
+     "00",
+     "245 Hz",
+     "315 Hz",
+     "343 Hz",
+     "351 Hz"
+    ],
+    [
+     "01",
+     "195 Hz",
+     "224 Hz",
+     "234 Hz",
+     "237 Hz"
+    ],
+    [
+     "10",
+     "155 Hz",
+     "168 Hz",
+     "172 Hz",
+     "173 Hz"
+    ],
+    [
+     "11",
+     "293 Hz",
+     "505 Hz",
+     "925 Hz",
+     "937 Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Gyroscope high-pass filter cutoff",
+   "page": 66,
+   "conditions": "CTRL7_G (16h); default 00; the filter runs only with HP_EN_G = 1 and the gyroscope in high-performance mode",
+   "columns": [
+    "HPM_G[1:0]",
+    "cutoff"
+   ],
+   "rows": [
+    [
+     "00",
+     "16 mHz"
+    ],
+    [
+     "01",
+     "65 mHz"
+    ],
+    [
+     "10",
+     "260 mHz"
+    ],
+    [
+     "11",
+     "1.04 Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer bandwidth selection",
+   "page": 67,
+   "conditions": "CTRL1_XL (10h), CTRL8_XL (17h)",
+   "columns": [
+    "HP_SLOPE_XL_EN",
+    "LPF2_XL_EN",
+    "LPF1_BW_SEL",
+    "HPCF_XL[1:0]",
+    "INPUT_COMPOSITE",
+    "bandwidth"
+   ],
+   "rows": [
+    [
+     "0 (low-pass path) (1)",
+     "0",
+     "0",
+     "-",
+     "-",
+     "ODR/2"
+    ],
+    [
+     "0 (low-pass path) (1)",
+     "0",
+     "1",
+     "-",
+     "-",
+     "ODR/4"
+    ],
+    [
+     "0 (low-pass path) (1)",
+     "1",
+     "-",
+     "00",
+     "1 (low noise) / 0 (low latency)",
+     "ODR/50"
+    ],
+    [
+     "0 (low-pass path) (1)",
+     "1",
+     "-",
+     "01",
+     "1 (low noise) / 0 (low latency)",
+     "ODR/100"
+    ],
+    [
+     "0 (low-pass path) (1)",
+     "1",
+     "-",
+     "10",
+     "1 (low noise) / 0 (low latency)",
+     "ODR/9"
+    ],
+    [
+     "0 (low-pass path) (1)",
+     "1",
+     "-",
+     "11",
+     "1 (low noise) / 0 (low latency)",
+     "ODR/400"
+    ],
+    [
+     "1 (high-pass path) (2)",
+     "-",
+     "-",
+     "00",
+     "0",
+     "ODR/4"
+    ],
+    [
+     "1 (high-pass path) (2)",
+     "-",
+     "-",
+     "01",
+     "0",
+     "ODR/100"
+    ],
+    [
+     "1 (high-pass path) (2)",
+     "-",
+     "-",
+     "10",
+     "0",
+     "ODR/9"
+    ],
+    [
+     "1 (high-pass path) (2)",
+     "-",
+     "-",
+     "11",
+     "0",
+     "ODR/400"
+    ]
+   ],
+   "notes": [
+    "1. The bandwidth is that of LPF1 when LPF2_XL_EN = 0, of LPF2 when LPF2_XL_EN = 1.",
+    "2. The bandwidth is that of the slope filter when HPCF_XL[1:0] = 00, of the high-pass filter for 01, 10 and 11."
+   ]
+  },
+  {
+   "title": "Inactivity function setting",
+   "page": 87,
+   "conditions": "TAP_CFG (58h); default 00",
+   "columns": [
+    "INACT_EN[1:0]",
+    "action"
+   ],
+   "rows": [
+    [
+     "00",
+     "Disabled"
+    ],
+    [
+     "01",
+     "Accelerometer to 12.5 Hz low-power mode; gyroscope unchanged"
+    ],
+    [
+     "10",
+     "Accelerometer to 12.5 Hz low-power mode; gyroscope to sleep mode"
+    ],
+    [
+     "11",
+     "Accelerometer to 12.5 Hz low-power mode; gyroscope to power-down"
+    ]
+   ]
+  },
+  {
+   "title": "Threshold for D4D/D6D function",
+   "page": 88,
+   "conditions": "TAP_THS_6D (59h); default 00",
+   "columns": [
+    "SIXD_THS[1:0]",
+    "threshold"
+   ],
+   "rows": [
+    [
+     "00",
+     "80 degrees"
+    ],
+    [
+     "01",
+     "70 degrees"
+    ],
+    [
+     "10",
+     "60 degrees"
+    ],
+    [
+     "11",
+     "50 degrees"
+    ]
+   ]
+  },
+  {
+   "title": "Threshold for free-fall function",
+   "page": 90,
+   "conditions": "FREE_FALL (5Dh); default 000",
+   "columns": [
+    "FF_THS[2:0]",
+    "threshold"
+   ],
+   "rows": [
+    [
+     "000",
+     "156 mg"
+    ],
+    [
+     "001",
+     "219 mg"
+    ],
+    [
+     "010",
+     "250 mg"
+    ],
+    [
+     "011",
+     "312 mg"
+    ],
+    [
+     "100",
+     "344 mg"
+    ],
+    [
+     "101",
+     "406 mg"
+    ],
+    [
+     "110",
+     "469 mg"
+    ],
+    [
+     "111",
+     "500 mg"
+    ]
+   ]
+  },
+  {
+   "title": "Register field scaling",
+   "page": 52,
+   "conditions": "",
+   "columns": [
+    "field",
+    "register",
+    "1 LSB",
+    "default"
+   ],
+   "rows": [
+    [
+     "TPH_[3:0] sensor sync time frame",
+     "SENSOR_SYNC_TIME_FRAME (04h)",
+     "500 ms (full range 5 s)",
+     "0000 (sync off)"
+    ],
+    [
+     "FTH_[10:0] FIFO threshold",
+     "FIFO_CTRL1 (06h), FIFO_CTRL2 (07h)",
+     "2 bytes (one word)",
+     "0"
+    ],
+    [
+     "DRDY_PULSED data-ready pulse length",
+     "DRDY_PULSE_CFG_G (0Bh)",
+     "75 μs pulse",
+     "0 (latched)"
+    ],
+    [
+     "X/Y/Z_OFS_USR user offset, USR_OFF_W = 0",
+     "73h to 75h, CTRL6_C (15h)",
+     "2^-10 g",
+     "0"
+    ],
+    [
+     "X/Y/Z_OFS_USR user offset, USR_OFF_W = 1",
+     "73h to 75h, CTRL6_C (15h)",
+     "2^-6 g",
+     "0"
+    ],
+    [
+     "TAP_THS[4:0] tap threshold",
+     "TAP_THS_6D (59h)",
+     "FS_XL/2^5",
+     "00000"
+    ],
+    [
+     "DUR[3:0] double-tap gap",
+     "INT_DUR2 (5Ah)",
+     "32 ODR_XL periods (0000 = 16 periods)",
+     "0000"
+    ],
+    [
+     "QUIET[1:0] quiet time after a tap",
+     "INT_DUR2 (5Ah)",
+     "4 ODR_XL periods (00 = 2 periods)",
+     "00"
+    ],
+    [
+     "SHOCK[1:0] longest over-threshold event",
+     "INT_DUR2 (5Ah)",
+     "8 ODR_XL periods (00 = 4 periods)",
+     "00"
+    ],
+    [
+     "WK_THS[5:0] wake-up threshold",
+     "WAKE_UP_THS (5Bh)",
+     "FS_XL/2^6",
+     "000000"
+    ],
+    [
+     "FF_DUR[5:0] free-fall duration",
+     "WAKE_UP_DUR (5Ch), FREE_FALL (5Dh)",
+     "1 ODR period",
+     "0"
+    ],
+    [
+     "WAKE_DUR[1:0] wake-up duration",
+     "WAKE_UP_DUR (5Ch)",
+     "1 ODR period",
+     "00"
+    ],
+    [
+     "TIMER_HR timestamp resolution",
+     "WAKE_UP_DUR (5Ch)",
+     "0: 6.4 ms; 1: 25 μs",
+     "0"
+    ],
+    [
+     "SLEEP_DUR[3:0] time before sleep",
+     "WAKE_UP_DUR (5Ch)",
+     "512 ODR periods (0000 = 16 ODR)",
+     "0000"
+    ],
+    [
+     "ths_min_[4:0] pedometer peak threshold",
+     "CONFIG_PEDO_THS_MIN (0Fh, bank A)",
+     "",
+     "10h"
+    ],
+    [
+     "SM_THS[7:0] significant motion threshold",
+     "SM_THS (13h, bank A)",
+     "",
+     "00000110"
+    ],
+    [
+     "DEB_TIME[4:0] pedometer debounce time",
+     "PEDO_DEB_REG (14h, bank A)",
+     "80 ms",
+     "01101"
+    ],
+    [
+     "DEB_STEP[2:0] steps before counting",
+     "PEDO_DEB_REG (14h, bank A)",
+     "1 step",
+     "110"
+    ],
+    [
+     "SC_DELTA[7:0] step delta time period",
+     "STEP_COUNT_DELTA (15h, bank A)",
+     "1.6384 s",
+     "0"
+    ],
+    [
+     "WRIST_TILT_TIMER[7:0] wrist tilt latency",
+     "A_WRIST_TILT_LAT (50h, bank B)",
+     "40 ms",
+     "0Fh (600 ms)"
+    ],
+    [
+     "WRIST_TILT_THS[7:0] wrist tilt threshold",
+     "A_WRIST_TILT_THS (54h, bank B)",
+     "15.625 mg",
+     "20h (500 mg)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Sensor hub read settings",
+   "page": 99,
+   "conditions": "SLAVEx_CONFIG, bank A (Slavex_rate in each of 04h, 07h, 0Ah, 0Dh; Aux_sens_on in SLAVE0_CONFIG (04h) only); defaults 00",
+   "columns": [
+    "field",
+    "code",
+    "setting"
+   ],
+   "rows": [
+    [
+     "Slavex_rate[1:0]",
+     "00",
+     "No decimation"
+    ],
+    [
+     "Slavex_rate[1:0]",
+     "01",
+     "Update every 2 samples"
+    ],
+    [
+     "Slavex_rate[1:0]",
+     "10",
+     "Update every 4 samples"
+    ],
+    [
+     "Slavex_rate[1:0]",
+     "11",
+     "Update every 8 samples"
+    ],
+    [
+     "Aux_sens_on[1:0]",
+     "00",
+     "One sensor"
+    ],
+    [
+     "Aux_sens_on[1:0]",
+     "01",
+     "Two sensors"
+    ],
+    [
+     "Aux_sens_on[1:0]",
+     "10",
+     "Three sensors"
+    ],
+    [
+     "Aux_sens_on[1:0]",
+     "11",
+     "Four sensors"
+    ]
+   ]
+  },
+  {
+   "title": "Register address map - Bank A - embedded functions",
+   "page": 96,
+   "conditions": "Open with FUNC_CFG_EN = 1 in FUNC_CFG_ACCESS (01h)",
+   "columns": [
+    "name",
+    "type",
+    "hex",
+    "binary",
+    "default"
+   ],
+   "rows": [
+    [
+     "SLV0_ADD",
+     "r/w",
+     "02",
+     "00000010",
+     "00000000"
+    ],
+    [
+     "SLV0_SUBADD",
+     "r/w",
+     "03",
+     "00000011",
+     "00000000"
+    ],
+    [
+     "SLAVE0_CONFIG",
+     "r/w",
+     "04",
+     "00000100",
+     "00000000"
+    ],
+    [
+     "SLV1_ADD",
+     "r/w",
+     "05",
+     "00000101",
+     "00000000"
+    ],
+    [
+     "SLV1_SUBADD",
+     "r/w",
+     "06",
+     "00000110",
+     "00000000"
+    ],
+    [
+     "SLAVE1_CONFIG",
+     "r/w",
+     "07",
+     "00000111",
+     "00000000"
+    ],
+    [
+     "SLV2_ADD",
+     "r/w",
+     "08",
+     "00001000",
+     "00000000"
+    ],
+    [
+     "SLV2_SUBADD",
+     "r/w",
+     "09",
+     "00001001",
+     "00000000"
+    ],
+    [
+     "SLAVE2_CONFIG",
+     "r/w",
+     "0A",
+     "00001010",
+     "00000000"
+    ],
+    [
+     "SLV3_ADD",
+     "r/w",
+     "0B",
+     "00001011",
+     "00000000"
+    ],
+    [
+     "SLV3_SUBADD",
+     "r/w",
+     "0C",
+     "00001100",
+     "00000000"
+    ],
+    [
+     "SLAVE3_CONFIG",
+     "r/w",
+     "0D",
+     "00001101",
+     "00000000"
+    ],
+    [
+     "DATAWRITE_SRC_MODE_SUB_SLV0",
+     "r/w",
+     "0E",
+     "00001110",
+     "00000000"
+    ],
+    [
+     "CONFIG_PEDO_THS_MIN",
+     "r/w",
+     "0F",
+     "00001111",
+     "00010000"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "10-12",
+     "",
+     ""
+    ],
+    [
+     "SM_THS",
+     "r/w",
+     "13",
+     "00010011",
+     "00000110"
+    ],
+    [
+     "PEDO_DEB_REG",
+     "r/w",
+     "14",
+     "00010100",
+     "01101110"
+    ],
+    [
+     "STEP_COUNT_DELTA",
+     "r/w",
+     "15",
+     "0001 0101",
+     "00000000"
+    ],
+    [
+     "MAG_SI_XX",
+     "r/w",
+     "24",
+     "00100100",
+     "00001000"
+    ],
+    [
+     "MAG_SI_XY",
+     "r/w",
+     "25",
+     "00100101",
+     "00000000"
+    ],
+    [
+     "MAG_SI_XZ",
+     "r/w",
+     "26",
+     "00100110",
+     "00000000"
+    ],
+    [
+     "MAG_SI_YX",
+     "r/w",
+     "27",
+     "00100111",
+     "00000000"
+    ],
+    [
+     "MAG_SI_YY",
+     "r/w",
+     "28",
+     "00101000",
+     "00001000"
+    ],
+    [
+     "MAG_SI_YZ",
+     "r/w",
+     "29",
+     "00101001",
+     "00000000"
+    ],
+    [
+     "MAG_SI_ZX",
+     "r/w",
+     "2A",
+     "00101010",
+     "00000000"
+    ],
+    [
+     "MAG_SI_ZY",
+     "r/w",
+     "2B",
+     "00101011",
+     "00000000"
+    ],
+    [
+     "MAG_SI_ZZ",
+     "r/w",
+     "2C",
+     "00101100",
+     "00001000"
+    ],
+    [
+     "MAG_OFFX_L",
+     "r/w",
+     "2D",
+     "00101101",
+     "00000000"
+    ],
+    [
+     "MAG_OFFX_H",
+     "r/w",
+     "2E",
+     "00101110",
+     "00000000"
+    ],
+    [
+     "MAG_OFFY_L",
+     "r/w",
+     "2F",
+     "00101111",
+     "00000000"
+    ],
+    [
+     "MAG_OFFY_H",
+     "r/w",
+     "30",
+     "00110000",
+     "00000000"
+    ],
+    [
+     "MAG_OFFZ_L",
+     "r/w",
+     "31",
+     "00110001",
+     "00000000"
+    ],
+    [
+     "MAG_OFFZ_H",
+     "r/w",
+     "32",
+     "00110010",
+     "00000000"
+    ]
+   ],
+   "notes": [
+    "Embedded function registers are changed only with the device in power-down.",
+    "MAG_SI_xx are the soft-iron matrix coefficients in sign-magnitude form; MAG_OFFx_L/H are 16-bit two's-complement hard-iron offsets."
+   ]
+  },
+  {
+   "title": "Register address map - Bank B - embedded functions",
+   "page": 97,
+   "conditions": "Open with FUNC_CFG_EN = 1 and FUNC_CFG_EN_B = 1 in FUNC_CFG_ACCESS (01h)",
+   "columns": [
+    "name",
+    "type",
+    "hex",
+    "binary",
+    "default"
+   ],
+   "rows": [
+    [
+     "A_WRIST_TILT_LAT",
+     "r/w",
+     "50",
+     "01010000",
+     "00001111"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "51-53",
+     "",
+     ""
+    ],
+    [
+     "A_WRIST_TILT_THS",
+     "r/w",
+     "54",
+     "01010100",
+     "00100000"
+    ],
+    [
+     "RESERVED",
+     "-",
+     "55-58",
+     "",
+     ""
+    ],
+    [
+     "A_WRIST_TILT_Mask",
+     "r/w",
+     "59",
+     "01011001",
+     "11000000"
+    ]
+   ],
+   "notes": [
+    "A_WRIST_TILT_Mask bits 7 to 2 enable the X+, X-, Y+, Y-, Z+ and Z- semi-axes; bits 1 and 0 are 0. By default only X+ and X- are on."
+   ]
+  },
+  {
+   "title": "Bank A embedded register bit assignments",
+   "page": 98,
+   "conditions": "",
+   "columns": [
+    "register",
+    "address",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0"
+   ],
+   "rows": [
+    [
+     "SLV0_ADD",
+     "02h",
+     "Slave0_add6",
+     "Slave0_add5",
+     "Slave0_add4",
+     "Slave0_add3",
+     "Slave0_add2",
+     "Slave0_add1",
+     "Slave0_add0",
+     "rw_0"
+    ],
+    [
+     "SLAVE0_CONFIG",
+     "04h",
+     "Slave0_rate1",
+     "Slave0_rate0",
+     "Aux_sens_on1",
+     "Aux_sens_on0",
+     "Src_mode",
+     "Slave0_numop2",
+     "Slave0_numop1",
+     "Slave0_numop0"
+    ],
+    [
+     "SLV1_ADD",
+     "05h",
+     "Slave1_add6",
+     "Slave1_add5",
+     "Slave1_add4",
+     "Slave1_add3",
+     "Slave1_add2",
+     "Slave1_add1",
+     "Slave1_add0",
+     "r_1"
+    ],
+    [
+     "SLAVE1_CONFIG",
+     "07h",
+     "Slave1_rate1",
+     "Slave1_rate0",
+     "write_once",
+     "0",
+     "0",
+     "Slave1_numop2",
+     "Slave1_numop1",
+     "Slave1_numop0"
+    ],
+    [
+     "SLV2_ADD",
+     "08h",
+     "Slave2_add6",
+     "Slave2_add5",
+     "Slave2_add4",
+     "Slave2_add3",
+     "Slave2_add2",
+     "Slave2_add1",
+     "Slave2_add0",
+     "r_2"
+    ],
+    [
+     "SLAVE2_CONFIG",
+     "0Ah",
+     "Slave2_rate1",
+     "Slave2_rate0",
+     "0",
+     "0",
+     "0",
+     "Slave2_numop2",
+     "Slave2_numop1",
+     "Slave2_numop0"
+    ],
+    [
+     "SLV3_ADD",
+     "0Bh",
+     "Slave3_add6",
+     "Slave3_add5",
+     "Slave3_add4",
+     "Slave3_add3",
+     "Slave3_add2",
+     "Slave3_add1",
+     "Slave3_add0",
+     "r_3"
+    ],
+    [
+     "SLAVE3_CONFIG",
+     "0Dh",
+     "Slave3_rate1",
+     "Slave3_rate0",
+     "0",
+     "0",
+     "0",
+     "Slave3_numop2",
+     "Slave3_numop1",
+     "Slave3_numop0"
+    ],
+    [
+     "CONFIG_PEDO_THS_MIN",
+     "0Fh",
+     "PEDO_FS",
+     "0",
+     "0",
+     "ths_min_4",
+     "ths_min_3",
+     "ths_min_2",
+     "ths_min_1",
+     "ths_min_0"
+    ],
+    [
+     "PEDO_DEB_REG",
+     "14h",
+     "DEB_TIME4",
+     "DEB_TIME3",
+     "DEB_TIME2",
+     "DEB_TIME1",
+     "DEB_TIME0",
+     "DEB_STEP2",
+     "DEB_STEP1",
+     "DEB_STEP0"
+    ]
+   ],
+   "notes": [
+    "SLVx_SUBADD (03h, 06h, 09h, 0Ch) hold the register address inside external sensor x; DATAWRITE_SRC_MODE_SUB_SLV0 (0Eh) holds the byte written to sensor 1, or the address checked in source mode."
+   ]
+  },
+  {
+   "title": "Reel dimensions for carrier tape of LGA-14 package",
+   "page": 112,
+   "conditions": "",
+   "columns": [
+    "dimension",
+    "value (mm)"
+   ],
+   "rows": [
+    [
+     "A (max)",
+     "330"
+    ],
+    [
+     "B (min)",
+     "1.5"
+    ],
+    [
+     "C",
+     "13 ±0.25"
+    ],
+    [
+     "D (min)",
+     "20.2"
+    ],
+    [
+     "N (min)",
+     "60"
+    ],
+    [
+     "G",
+     "12.4 +2/-0"
+    ],
+    [
+     "T (max)",
+     "18.4"
+    ]
+   ]
+  },
+  {
+   "title": "Carrier tape dimensions for LGA-14 package",
+   "page": 111,
+   "conditions": "",
+   "columns": [
+    "dimension",
+    "value (mm)",
+    "tolerance (mm)"
+   ],
+   "rows": [
+    [
+     "Ao",
+     "2.80",
+     "+/- 0.05"
+    ],
+    [
+     "Bo",
+     "3.30",
+     "+/- 0.05"
+    ],
+    [
+     "Ko",
+     "1.00",
+     "+/- 0.10"
+    ],
+    [
+     "F",
+     "5.50",
+     "+/- 0.05"
+    ],
+    [
+     "P1",
+     "8.00",
+     "+/- 0.10"
+    ],
+    [
+     "W",
+     "12.00",
+     "+/- 0.30"
+    ],
+    [
+     "T",
+     "0.30",
+     "±0.05"
+    ],
+    [
+     "Do",
+     "1.50",
+     "+0.10 / 0.00"
+    ],
+    [
+     "D1",
+     "1.50 MIN.",
+     ""
+    ],
+    [
+     "P2",
+     "2.00",
+     "±0.05"
+    ],
+    [
+     "Po",
+     "4.00",
+     "±0.10"
+    ],
+    [
+     "E1",
+     "1.75",
+     "±0.10"
+    ],
+    [
+     "Pocket corner radius",
+     "R0.20 TYP.",
+     ""
+    ]
+   ],
+   "notes": [
+    "P2 and F run from the sprocket hole centreline to the pocket centreline; over 10 sprocket holes the Po tolerance adds up to ±0.20.",
+    "Press-formed tape; 170 m on a 22B3 reel. The pin-1 corner sits toward the sprocket holes, ahead in the feed direction."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "mode1",
+   "title": "Electrical connections in Mode 1",
+   "page": 44,
+   "description": "The part alone on the host's bus, I2C or 3/4-wire SPI. VDD and VDDIO each get a 100 nF ceramic capacitor to ground close to the pin. SDx and SCx, unused in this mode, are tied together to GND or to VDDIO. SDA, SCL and CS run to the host, SDO/SA0 serves as SPI data out or as the address select, and INT1 and INT2 are interrupt outputs. Pins 10 and 11 stay unconnected. On an I2C host bus SCL and SDA each take a 10 kΩ pull-up to Vdd_IO.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LSM6DSL"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "ceramic, at VDD"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "ceramic, at VDDIO"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SCL pull-up to VDDIO, I2C host bus only"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SDA pull-up to VDDIO, I2C host bus only"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "Vdd"
+    },
+    {
+     "ref": "J_VDDIO",
+     "type": "terminal",
+     "value": "Vdd_IO"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J_SDA",
+     "type": "terminal",
+     "value": "SDA (to host)"
+    },
+    {
+     "ref": "J_SCL",
+     "type": "terminal",
+     "value": "SCL (to host)"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS (to host)"
+    },
+    {
+     "ref": "J_SDO",
+     "type": "terminal",
+     "value": "SDO/SA0"
+    },
+    {
+     "ref": "J_INT1",
+     "type": "terminal",
+     "value": "INT1"
+    },
+    {
+     "ref": "J_INT2",
+     "type": "terminal",
+     "value": "INT2"
+    },
+    {
+     "ref": "J_SXC",
+     "type": "terminal",
+     "value": "GND or VDDIO"
+    }
+   ],
+   "notes": [
+    "Pins 10 and 11 are soldered to their pads and connected to nothing."
+   ]
+  },
+  {
+   "id": "mode2",
+   "title": "Electrical connections in Mode 2",
+   "page": 45,
+   "description": "The host interface as in Mode 1, plus the part's own I2C master on SDx (MSDA) and SCx (MSCL) for up to four external sensors such as a magnetometer. INT2 doubles as MDRDY, the master's external sync line. VDD and VDDIO each get a 100 nF ceramic capacitor to ground close to the pin; on an I2C host bus SCL and SDA each take a 10 kΩ pull-up to Vdd_IO. Pins 10 and 11 stay unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LSM6DSL"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "ceramic, at VDD"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "ceramic, at VDDIO"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SCL pull-up to VDDIO, I2C host bus only"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SDA pull-up to VDDIO, I2C host bus only"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "Vdd"
+    },
+    {
+     "ref": "J_VDDIO",
+     "type": "terminal",
+     "value": "Vdd_IO"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "J_SDA",
+     "type": "terminal",
+     "value": "SDA (to host)"
+    },
+    {
+     "ref": "J_SCL",
+     "type": "terminal",
+     "value": "SCL (to host)"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS (to host)"
+    },
+    {
+     "ref": "J_SDO",
+     "type": "terminal",
+     "value": "SDO/SA0"
+    },
+    {
+     "ref": "J_INT1",
+     "type": "terminal",
+     "value": "INT1"
+    },
+    {
+     "ref": "J_INT2",
+     "type": "terminal",
+     "value": "MDRDY/INT2"
+    },
+    {
+     "ref": "J_MSDA",
+     "type": "terminal",
+     "value": "MSDA (to external sensors)"
+    },
+    {
+     "ref": "J_MSCL",
+     "type": "terminal",
+     "value": "MSCL (to external sensors)"
+    }
+   ],
+   "notes": [
+    "Pins 10 and 11 are soldered to their pads and connected to nothing.",
+    "The master lines have internal pull-ups, switched on by PULL_UP_EN in MASTER_CONFIG (1Ah)."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Acceleration from output code",
+   "expr": "a = OUT_XL × LA_So",
+   "where": {
+    "OUT_XL": "16-bit two's-complement accelerometer output (OUTx_H_XL:OUTx_L_XL)",
+    "LA_So": "sensitivity at the selected full scale: 0.061, 0.122, 0.244 or 0.488 mg/LSB"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Angular rate from output code",
+   "expr": "Ω = OUT_G × G_So",
+   "where": {
+    "OUT_G": "16-bit two's-complement gyroscope output (OUTx_H_G:OUTx_L_G)",
+    "G_So": "sensitivity at the selected full scale: 4.375, 8.75, 17.50, 35 or 70 mdps/LSB"
+   },
+   "note": "",
+   "page": 21
+  },
+  {
+   "name": "Temperature from output code",
+   "expr": "T = 25 °C + OUT_TEMP / 256",
+   "where": {
+    "OUT_TEMP": "16-bit two's-complement temperature output (OUT_TEMP_H:OUT_TEMP_L)",
+    "256": "TSen, LSB per °C"
+   },
+   "note": "Zero code at 25 °C (typ); offset -15 °C to +15 °C.",
+   "page": 25
+  },
+  {
+   "name": "Self-test output change",
+   "expr": "Vst = |OUTPUT(self-test on) - OUTPUT(self-test off)|",
+   "where": {
+    "OUTPUT": "output code in LSb with the part at rest"
+   },
+   "note": "Accelerometer limits 90 mg to 1700 mg at any full scale; gyroscope 20 dps to 80 dps at 245 dps, 150 dps to 700 dps at 2000 dps.",
+   "page": 23
+  },
+  {
+   "name": "Accelerometer sensitivity by ±1 g",
+   "expr": "So = (OUT(+1 g) - OUT(-1 g)) / 2",
+   "where": {
+    "OUT(+1 g)": "output with the axis pointing up, away from the ground",
+    "OUT(-1 g)": "output with the axis turned 180° to point at the ground"
+   },
+   "note": "So comes out in LSB per g.",
+   "page": 30
+  },
+  {
+   "name": "I2C slave address",
+   "expr": "SAD = 110101 SA0 (b)",
+   "where": {
+    "SA0": "level of pin SDO/SA0: 1 gives 1101011b (6Bh), 0 gives 1101010b (6Ah)"
+   },
+   "note": "",
+   "page": 38
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 15,
+   "text": "A system-in-package with a 3-axis MEMS accelerometer and a 3-axis MEMS gyroscope, a CMOS interface chip trimmed to the sensing elements, an on-chip temperature sensor, a 4 kbyte FIFO and hardware blocks for motion events, pedometer, tilt, significant motion and timestamping. It can also act as a hub, reading up to four external sensors over its own I2C master and correcting an external magnetometer for hard and soft iron."
+  },
+  {
+   "topic": "Sensing axes",
+   "page": 18,
+   "text": "The pin 1 view marks linear axes X, Y and Z and the rotations about them: pitch (ΩP) about X, roll (ΩR) about Y, yaw (ΩY) about Z. The gyroscope output goes positive for counterclockwise rotation about an axis."
+  },
+  {
+   "topic": "Connection modes",
+   "page": 19,
+   "text": "Mode 1: the host talks to the part over I2C or 3/4-wire SPI and SDx/SCx are tied to VDDIO or GND. Mode 2: the same host interface, plus an I2C master on SDx/SCx (MSDA/MSCL) for external sensors, with INT2 able to serve as the master's sync input MDRDY."
+  },
+  {
+   "topic": "Operating modes",
+   "page": 31,
+   "text": "Accelerometer and gyroscope switch on and off on their own, each with its own ODR and power mode: accelerometer only, gyroscope only, or both. Writing ODR_XL[3:0] in CTRL1_XL (10h) wakes the accelerometer from power-down; ODR_G[3:0] in CTRL2_G (11h) wakes the gyroscope."
+  },
+  {
+   "topic": "Gyroscope power modes",
+   "page": 31,
+   "text": "Power-down, low-power, normal and high-performance. With G_HM_MODE = 0 in CTRL7_G (16h) every ODR from 12.5 Hz to 6.66 kHz runs in high-performance mode. With G_HM_MODE = 1, 12.5, 26 and 52 Hz run in low-power mode and 104 and 208 Hz in normal mode."
+  },
+  {
+   "topic": "Accelerometer power modes",
+   "page": 31,
+   "text": "Power-down, low-power, normal and high-performance. With XL_HM_MODE = 0 in CTRL6_C (15h) every ODR from 12.5 Hz to 6.66 kHz is high-performance. With XL_HM_MODE = 1, 1.6, 12.5, 26 and 52 Hz run in low-power mode and 104 and 208 Hz in normal mode."
+  },
+  {
+   "topic": "Gyroscope filter chain",
+   "page": 32,
+   "text": "ADC, an optional high-pass filter (HP_EN_G, cutoff by HPM_G), an optional low-pass LPF1 (LPF1_SEL_G, bandwidth by FTYPE[1:0]) and a final low-pass set by ODR_G, then the output registers and the FIFO. Mode 1 and Mode 2 use the same chain."
+  },
+  {
+   "topic": "Accelerometer filter chain",
+   "page": 33,
+   "text": "An analog anti-aliasing low-pass, the ADC, a digital LPF1 (LPF1_BW_SEL in CTRL1_XL) and a composite filter whose input is chosen by INPUT_COMPOSITE in CTRL8_XL: ODR/2 or ODR/4 low-passed data. The composite stage offers LPF2, a slope filter and a high-pass filter; the slope or high-pass output feeds wake-up and activity/inactivity (SLOPE_FDS), LPF2 can feed 6D/4D (LOW_PASS_ON_6D), and free-fall and the embedded functions take their own taps. With HP_REF_MODE on, the first output sample is not valid and must be thrown away."
+  },
+  {
+   "topic": "FIFO",
+   "page": 34,
+   "text": "4 kbytes, up to 4096 16-bit words, holding gyroscope, accelerometer, external sensor, step counter with timestamp, and temperature data. Writes are paced by the accelerometer/gyroscope data-ready (FIFO ODR no higher than either sensor's ODR), by the sensor hub data-ready, or by each detected step. Each data set can be decimated by 2, 3, 4, 8, 16 or 32 (FIFO_CTRL3, FIFO_CTRL4). The threshold FTH[10:0] sits in FIFO_CTRL1/2. FIFO_STATUS1 to 4 give overrun, full, empty, threshold and the count of unread words; INT1_CTRL and INT2_CTRL route these to the pins. Discard the first sample after switching into or out of FIFO mode."
+  },
+  {
+   "topic": "FIFO modes",
+   "page": 34,
+   "text": "Bypass (000): FIFO off and empty; also used to clear it. FIFO (001): fills until full, then stops; with STOP_ON_FTH = 1 the depth is cut to FTH. Continuous (110): newest data replaces oldest; OVER_RUN flags an overwrite, FTH flags reaching the threshold and a full flag can raise an interrupt. Continuous-to-FIFO (011): continuous while the chosen trigger bit (in FUNC_SRC1, TAP_SRC, WAKE_UP_SRC or D6D_SRC) is 0, FIFO mode once it is 1. Bypass-to-Continuous (100): held empty until the trigger is 1, then continuous."
+  },
+  {
+   "topic": "FIFO data sets",
+   "page": 36,
+   "text": "Samples are stored as up to four 6-byte data sets: gyroscope first, accelerometer second, SENSORHUB1 to 6 third, and fourth either SENSORHUB7 to 12, step counter with timestamp, or temperature. Data are read 16 bits at a time from FIFO_DATA_OUT_L/H (3Eh/3Fh); FIFO_STATUS3/4 give the position in the repeating pattern of the next word. Set BDU for a clean read of the status and data registers."
+  },
+  {
+   "topic": "Tilt detection",
+   "page": 16,
+   "text": "Hardware tilt detection on the accelerometer alone signals whenever the device changes its tilt, with a programmable averaging window and threshold. In a trouser pocket it fires on sitting down or standing up and stays quiet while walking, running or climbing stairs."
+  },
+  {
+   "topic": "Absolute wrist tilt",
+   "page": 17,
+   "text": "Fires when the angle between a chosen accelerometer semi-axis (positive X by default) and the horizontal stays above a threshold for at least a latency time. It runs at 26 Hz from the accelerometer, so the accelerometer ODR must be 26 Hz or more. Enable with FUNC_EN and WRIST_TILT_EN in CTRL10_C (19h); route to INT2 with INT2_WRIST_TILT in DRDY_PULSE_CFG_G (0Bh); read WRIST_TILT_IA in FUNC_SRC2 (54h), which also clears a latched interrupt; WRIST_TILT_IA (55h) names the triggering axis. Threshold, latency and axis mask sit in bank B."
+  },
+  {
+   "topic": "Event interrupts",
+   "page": 16,
+   "text": "Free-fall, wake-up, 6D/4D orientation, single and double tap, and activity/inactivity are detected in hardware and enabled together by INTERRUPTS_ENABLE in TAP_CFG (58h). MD1_CFG (5Eh) and MD2_CFG (5Fh) route each event to INT1 or INT2; INT1_CTRL and INT2_CTRL route data-ready, FIFO and pedometer events. Each pin outputs the OR of the signals routed to it; INT2_on_INT1 puts everything on INT1. LIR in TAP_CFG latches the interrupt requests. Interrupt pins are push-pull or open-drain (PP_OD) and active high or low (H_LACTIVE)."
+  },
+  {
+   "topic": "Pedometer and significant motion",
+   "page": 102,
+   "text": "Step detector and step counter run in hardware once FUNC_EN and PEDO_EN are set; the count sits in STEP_COUNTER_L/H (4Bh/4Ch) and overflow is flagged at 2^16. The minimum peak threshold, 2 g or 4 g processing (PEDO_FS), debounce steps and debounce time sit in bank A. Significant motion uses SM_THS (default 6). The timestamp of the last step is copied to STEP_TIMESTAMP_L/H."
+  },
+  {
+   "topic": "Timestamp",
+   "page": 81,
+   "text": "TIMER_EN in CTRL10_C starts a 24-bit counter in TIMESTAMP0 to 2 (40h to 42h), with 1 LSB of 6.4 ms or 25 μs set by TIMER_HR. Writing AAh to TIMESTAMP2_REG resets it."
+  },
+  {
+   "topic": "Sensor hub",
+   "page": 98,
+   "text": "In Mode 2 the I2C master (MASTER_ON, needs FUNC_EN) reads up to four external sensors, set up through bank A: a 7-bit address and read/write bit, a register sub-address, a read count and a decimation for each. Results land in SENSORHUB1 to 18 (2Eh to 39h, 4Dh to 52h). The master is triggered by the accelerometer/gyroscope data-ready or by an external signal on INT2 (START_CONFIG). Pass-through mode connects the host bus to the external sensors. Hard-iron (IRON_EN) and soft-iron (SOFT_EN) correction can be applied to an external magnetometer, whose raw data appear in 66h to 6Bh."
+  },
+  {
+   "topic": "Data enable (DEN)",
+   "page": 65,
+   "text": "INT2 can serve as a DEN input that stamps the LSB of selected gyroscope or accelerometer axes (DEN_X/Y/Z, DEN_XL_G in CTRL9_XL). Edge, level, latched-level or FIFO-enable triggering is chosen in CTRL6_C; DEN_LH sets its active level."
+  },
+  {
+   "topic": "Output registers",
+   "page": 72,
+   "text": "Each axis is a 16-bit two's-complement word in an L/H register pair; BLE swaps the byte order and BDU holds an output pair until both bytes are read. IF_INC (on by default) advances the address during multi-byte reads; the ROUNDING bits make burst reads wrap round a chosen set of output registers. STATUS_REG (1Eh) flags new temperature, gyroscope and accelerometer data. WHO_AM_I (0Fh) reads 6Ah."
+  },
+  {
+   "topic": "User offset",
+   "page": 95,
+   "text": "X_OFS_USR and Y_OFS_USR are added to and Z_OFS_USR subtracted from the measured acceleration on their axes; each is two's complement from -127 to 127, weighted 2^-10 g or 2^-6 g by USR_OFF_W."
+  },
+  {
+   "topic": "Reset and boot",
+   "page": 62,
+   "text": "SW_RESET in CTRL3_C resets the device and clears itself; BOOT reloads the trimming values from memory. Turn-on time is 35 ms typ."
+  },
+  {
+   "topic": "I2C interface",
+   "page": 38,
+   "text": "Slave in standard (100 kHz) and fast (400 kHz) mode, chosen by pulling CS high. SCL and SDA need external pull-ups to Vdd_IO. The address is 110101xb with x set by SDO/SA0, so two parts can share a bus. After the address byte comes an 8-bit register sub-address; reads use a repeated start. Writing I2C_disable = 1 in CTRL4_C leaves SPI only."
+  },
+  {
+   "topic": "SPI interface",
+   "page": 40,
+   "text": "Slave, 4-wire (CS, SPC, SDI, SDO) by default or 3-wire with SIM = 1 in CTRL3_C, up to 10 MHz. CS goes low for a transfer; SPC idles high. Data change on the falling edge of SPC and are sampled on the rising edge. A transfer is 16 clocks: bit 0 is R/W (1 = read), bits 1 to 7 the register address, bits 8 to 15 the data, MSb first; each extra byte adds 8 clocks."
+  },
+  {
+   "topic": "Supply and decoupling",
+   "page": 44,
+   "text": "The core runs from Vdd and the I/O from Vdd_IO. Each takes a 100 nF ceramic capacitor placed as close to its pin as possible."
+  },
+  {
+   "topic": "Embedded function registers",
+   "page": 96,
+   "text": "Bank A (sensor hub, pedometer, significant motion, magnetometer correction) opens with FUNC_CFG_EN = 1 in FUNC_CFG_ACCESS (01h); bank B (wrist tilt) when both FUNC_CFG_EN_B and FUNC_CFG_EN are 1. Change them only in power-down."
+  },
+  {
+   "topic": "Soldering",
+   "page": 109,
+   "text": "The LGA is ECOPACK, RoHS and Green compliant and qualified for soldering heat to JEDEC J-STD-020."
+  },
+  {
+   "topic": "Offset after mounting",
+   "page": 30,
+   "text": "Zero-g and zero-rate levels come partly from mechanical stress on the MEMS, so they can shift a little after soldering to a board or other heavy stress. At rest on a level surface X and Y read 0 g and Z reads 1 g."
+  }
+ ],
+ "packages": [
+  {
+   "name": "LGA-14L",
+   "page": 110,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "dimension",
+    "tolerance"
+   ],
+   "rows": [
+    [
+     "L",
+     "body length",
+     "2.50",
+     "±0.1"
+    ],
+    [
+     "W",
+     "body width",
+     "3.00",
+     "±0.1"
+    ],
+    [
+     "H",
+     "height",
+     "0.86",
+     "MAX"
+    ],
+    [
+     "",
+     "pad pitch",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "pad width, 14 places",
+     "0.25",
+     "±0.05"
+    ],
+    [
+     "",
+     "pad length, 14 places",
+     "0.475",
+     "±0.05"
+    ],
+    [
+     "",
+     "centres of the outer pads of a 4-pad side row",
+     "1.5",
+     ""
+    ],
+    [
+     "",
+     "centres of the outer pads of a 3-pad row",
+     "1",
+     ""
+    ],
+    [
+     "",
+     "pad end to body edge, 4 places",
+     "(0.1)",
+     ""
+    ]
+   ],
+   "notes": [
+    "Unstated tolerances are ±0.1 mm.",
+    "Pins 1 to 4 and 8 to 11 sit in two rows of four along the 2.5 mm sides, pins 5 to 7 and 12 to 14 in two rows of three along the 3.0 mm sides; pin 1 carries a chamfered pad and a top-side dot.",
+    "Typical size 2.5 x 3 x 0.83 mm."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2734 @@
+{
+ "sheet": 1,
+ "name": "MPL3115A2R1",
+ "kind": "sensor",
+ "manufacturer": "NXP",
+ "title": "MPL3115A2: I²C absolute pressure sensor with altimeter and thermometer outputs, 20 to 110 kPa",
+ "source": {
+  "revision": "Rev. 5.1, 13 September 2016",
+  "pages": 50
+ },
+ "summary": "A piezoresistive MEMS absolute pressure sensor in a 3 mm × 5 mm × 1.1 mm 8-pin LGA with a metal lid and an air vent hole. An on-chip temperature sensor and ADC give compensated pressure in pascals (20-bit, Q18.2), altitude in metres (20-bit signed, Q16.4) or raw counts, plus temperature in °C (12-bit, Q8.4), over I²C at address 0x60. It runs 20 to 110 kPa, is calibrated 50 to 110 kPa, and holds a 32-sample FIFO, min/max and delta registers, threshold and window alarms on two programmable interrupt pins, and an autonomous acquisition timer from 1 s to 9 h. MPL3115A2R1 is the tape-and-reel part; MPL3115A2 ships in trays.",
+ "key_figures": [
+  [
+   "Pressure range",
+   "20 to 110 kPa operating; 50 to 110 kPa calibrated"
+  ],
+  [
+   "Absolute pressure accuracy",
+   "±0.4 kPa max, 50 to 110 kPa, 0 °C to 50 °C"
+  ],
+  [
+   "Relative pressure accuracy",
+   "±0.05 kPa typ, 70 to 110 kPa at constant temperature"
+  ],
+  [
+   "Resolution",
+   "0.25 Pa (barometer), 0.0625 m (altimeter) per LSB; 1.5 Pa / 0.3 m typ at 128x oversample"
+  ],
+  [
+   "Pressure noise",
+   "19 Pa RMS at 1x, 1.5 Pa RMS at 128x oversample"
+  ],
+  [
+   "Temperature accuracy",
+   "±1 °C typ at 25 °C, ±3 °C typ over range"
+  ],
+  [
+   "Supply",
+   "VDD 1.95 to 3.6 V; VDDIO 1.62 to 3.6 V"
+  ],
+  [
+   "Supply current",
+   "8.5 µA (OSR 1), 40 µA (OSR 16), 265 µA (OSR 128) at 1 update/s; 2 µA standby"
+  ],
+  [
+   "Interface",
+   "I²C, 7-bit address 0x60, up to 400 kHz (4 MHz at Cb = 20 pF)"
+  ],
+  [
+   "Operating temperature",
+   "−40 °C to +85 °C"
+  ],
+  [
+   "Maximum applied pressure",
+   "500 kPa"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "shipping",
+   "package",
+   "ports",
+   "pressure type",
+   "digital interface"
+  ],
+  "rows": [
+   [
+    "MPL3115A2",
+    "Tray",
+    "98ASA002260D",
+    "None",
+    "Absolute",
+    "yes"
+   ],
+   [
+    "MPL3115A2R1",
+    "Tape and reel",
+    "98ASA002260D",
+    "None",
+    "Absolute",
+    "yes"
+   ]
+  ],
+  "notes": [
+   "Package code 98ASA002260D is a misprint for case 98ASA00260D."
+  ]
+ },
+ "pins": [
+  {
+   "package": "LGA-8 (98ASA00260D), 3 mm × 5 mm",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Main supply, 1.95 to 3.6 V. Decouple with 100 nF ceramic plus 10 µF, close to this pin."
+    },
+    {
+     "pin": "2",
+     "name": "CAP",
+     "type": "passive",
+     "function": "Internal regulator output; takes a 100 nF capacitor to ground."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "4",
+     "name": "VDDIO",
+     "type": "power in",
+     "function": "Supply for the digital interface pins, 1.62 to 3.6 V."
+    },
+    {
+     "pin": "5",
+     "name": "INT2",
+     "type": "output",
+     "function": "Interrupt output 2. Carries every interrupt source whose CTRL_REG5 bit is 0, the reset state. Polarity and push-pull or open-drain set in CTRL_REG3."
+    },
+    {
+     "pin": "6",
+     "name": "INT1",
+     "type": "output",
+     "function": "Interrupt output 1, for sources whose CTRL_REG5 bit is 1. Polarity and push-pull or open-drain set in CTRL_REG3."
+    },
+    {
+     "pin": "7",
+     "name": "SDA",
+     "type": "bidirectional",
+     "function": "I²C serial data. Pin label SDL is a misprint for SDA."
+    },
+    {
+     "pin": "8",
+     "name": "SCL",
+     "type": "input",
+     "function": "I²C clock input."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Maximum ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "characteristic",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Pmax",
+     "Maximum applied pressure",
+     "500",
+     "kPa"
+    ],
+    [
+     "VDD",
+     "Supply voltage",
+     "−0.3 to 3.6",
+     "V"
+    ],
+    [
+     "VDDIO",
+     "Interface supply voltage",
+     "−0.3 to 3.6",
+     "V"
+    ],
+    [
+     "VIN",
+     "Input voltage on any control pin (SCL, SDA)",
+     "−0.3 to VDDIO + 0.3",
+     "V"
+    ],
+    [
+     "TOP",
+     "Operating temperature range",
+     "−40 to +85",
+     "°C"
+    ],
+    [
+     "TSTG",
+     "Storage temperature range",
+     "−40 to +125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress limits only: the part is not guaranteed to work at them, and long exposure can shorten its life."
+   ]
+  },
+  {
+   "title": "ESD and latchup protection characteristics",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "rating",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "HBM",
+     "Human body model",
+     "±2000",
+     "V"
+    ],
+    [
+     "CDM",
+     "Charge device model",
+     "±500",
+     "V"
+    ],
+    [
+     "",
+     "Latchup current at T = 85 °C",
+     "±100",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "The part can be damaged by mechanical shock and by electrostatic discharge."
+   ]
+  },
+  {
+   "title": "Mechanical characteristics",
+   "page": 6,
+   "conditions": "VDD = 2.5 V, T = 25 °C, over 50 kPa to 110 kPa, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Pressure sensor: measurement range",
+     "PFS",
+     "Calibrated range",
+     "50",
+     "",
+     "110",
+     "kPa"
+    ],
+    [
+     "Pressure sensor: measurement range",
+     "PFS",
+     "Operational range",
+     "20",
+     "",
+     "110",
+     "kPa"
+    ],
+    [
+     "Pressure reading noise [1]",
+     "",
+     "1x oversample",
+     "",
+     "19",
+     "",
+     "Pa RMS"
+    ],
+    [
+     "Pressure reading noise [1]",
+     "",
+     "128x oversample",
+     "",
+     "1.5",
+     "",
+     "Pa RMS"
+    ],
+    [
+     "Pressure absolute accuracy",
+     "",
+     "50 to 110 kPa over 0 °C to 50 °C",
+     "–0.4",
+     "",
+     "0.4",
+     "kPa"
+    ],
+    [
+     "Pressure absolute accuracy",
+     "",
+     "50 to 110 kPa over −10 °C to 70 °C",
+     "",
+     "±0.4",
+     "",
+     "kPa"
+    ],
+    [
+     "Pressure relative accuracy",
+     "",
+     "Relative accuracy during pressure change between 70 to 110 kPa at any constant temperature between −10 °C to 50 °C",
+     "",
+     "±0.05",
+     "",
+     "kPa"
+    ],
+    [
+     "Pressure relative accuracy",
+     "",
+     "Relative accuracy during changing temperature between −10 °C to 50 °C at any constant pressure between 50 kPa to 110 kPa",
+     "",
+     "±0.1",
+     "",
+     "kPa"
+    ],
+    [
+     "Pressure/altitude resolution [2][3][4]",
+     "",
+     "Barometer mode",
+     "0.25",
+     "1.5",
+     "",
+     "Pa"
+    ],
+    [
+     "Pressure/altitude resolution [2][3][4]",
+     "",
+     "Altimeter mode",
+     "0.0625",
+     "0.3",
+     "",
+     "m"
+    ],
+    [
+     "Output data rate",
+     "",
+     "One-shot mode",
+     "",
+     "100",
+     "",
+     "Hz"
+    ],
+    [
+     "Output data rate",
+     "",
+     "FIFO mode",
+     "",
+     "",
+     "1",
+     "Hz"
+    ],
+    [
+     "Board mount drift",
+     "",
+     "After solder reflow",
+     "",
+     "±0.15",
+     "",
+     "kPa"
+    ],
+    [
+     "Long term drift",
+     "",
+     "After a period of 1 year",
+     "",
+     "±0.1",
+     "",
+     "kPa"
+    ],
+    [
+     "Temperature sensor: measurement range",
+     "TFS",
+     "",
+     "–40",
+     "",
+     "+85",
+     "°C"
+    ],
+    [
+     "Temperature accuracy",
+     "",
+     "@25 °C",
+     "",
+     "±1",
+     "",
+     "°C"
+    ],
+    [
+     "Temperature accuracy",
+     "",
+     "Over temperature range",
+     "",
+     "±3",
+     "",
+     "°C"
+    ],
+    [
+     "Operating temperature range",
+     "TOP",
+     "",
+     "–40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "[1] Oversampling (OSR) averages several internal samples into one result to lower noise.",
+    "[2] Min is the value of one LSB of the output register, in pascals or metres. A change in altitude of about 0.3 m is resolved in practice.",
+    "[3] Sea-level reference pressure 101.325 kPa.",
+    "[4] Typical figures at an oversample ratio of 128."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 7,
+   "conditions": "@ VDD = 2.5 V, T = 25 °C unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "I/O supply voltage",
+     "VDDIO",
+     "",
+     "1.62",
+     "1.8",
+     "3.6",
+     "V"
+    ],
+    [
+     "Operating supply voltage",
+     "VDD",
+     "",
+     "1.95",
+     "2.5",
+     "3.6",
+     "V"
+    ],
+    [
+     "Integrated current 1 update per second",
+     "IDD",
+     "Highest speed mode oversample = 1",
+     "",
+     "8.5",
+     "",
+     "µA"
+    ],
+    [
+     "Integrated current 1 update per second",
+     "IDD",
+     "Standard mode oversample = 16",
+     "",
+     "40",
+     "",
+     "µA"
+    ],
+    [
+     "Integrated current 1 update per second",
+     "IDD",
+     "High resolution mode oversample = 128",
+     "",
+     "265",
+     "",
+     "µA"
+    ],
+    [
+     "Max current during acquisition and conversion",
+     "IDDMAX",
+     "During acquisition/conversion",
+     "",
+     "2",
+     "",
+     "mA"
+    ],
+    [
+     "Supply current drain in STANDBY mode",
+     "IDDSTBY",
+     "STANDBY mode selected SBYB = 0",
+     "",
+     "2",
+     "",
+     "µA"
+    ],
+    [
+     "Digital high level input voltage SCL, SDA",
+     "VIH",
+     "",
+     "0.75",
+     "",
+     "",
+     "VDDIO"
+    ],
+    [
+     "Digital low level input voltage SCL, SDA",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.3",
+     "VDDIO"
+    ],
+    [
+     "High level output voltage INT1, INT2",
+     "VOH",
+     "IO = 500 µA",
+     "0.9",
+     "",
+     "",
+     "VDDIO"
+    ],
+    [
+     "Low level output voltage INT1, INT2",
+     "VOL",
+     "IO = 500 µA",
+     "",
+     "",
+     "0.1",
+     "VDDIO"
+    ],
+    [
+     "Low level output voltage SDA",
+     "VOLS",
+     "IO = 500 µA",
+     "",
+     "",
+     "0.1",
+     "VDDIO"
+    ],
+    [
+     "Turn-on time [1][2][3]",
+     "TON",
+     "High speed mode",
+     "",
+     "",
+     "60",
+     "ms"
+    ],
+    [
+     "Turn-on time [1][2][3]",
+     "TON",
+     "High resolution mode",
+     "",
+     "",
+     "1000",
+     "ms"
+    ],
+    [
+     "Operating temperature range",
+     "TOP",
+     "",
+     "−40",
+     "25",
+     "+85",
+     "°C"
+    ],
+    [
+     "I²C Address",
+     "",
+     "",
+     "",
+     "0x60",
+     "",
+     "Hex"
+    ]
+   ],
+   "notes": [
+    "7-bit address 60h (110 0000); the general call address 000 0000 is not acknowledged. As 8-bit bytes the read address is C1h and the write address C0h.",
+    "[1] Time from switching STANDBY to ACTIVE until valid data is available.",
+    "[2] High speed mode means an oversample ratio of 1x.",
+    "[3] High resolution mode means an oversample ratio of 128x."
+   ]
+  },
+  {
+   "title": "Serial interface pin descriptions",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "name",
+    "description"
+   ],
+   "rows": [
+    [
+     "SCL",
+     "I²C serial clock"
+    ],
+    [
+     "SDA",
+     "I²C serial data"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "I²C slave timing values",
+   "page": 9,
+   "conditions": "All values referred to VIH(min) and VIL(max) levels.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "condition",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "fSCL",
+     "SCL clock frequency",
+     "Pull-up = 1 kΩ, Cb = 400 pF",
+     "0",
+     "400",
+     "kHz"
+    ],
+    [
+     "fSCL",
+     "SCL clock frequency",
+     "Pull-up = 1 kΩ, Cb = 20 pF",
+     "0",
+     "4",
+     "MHz"
+    ],
+    [
+     "tBUF",
+     "Bus free time between STOP and START condition",
+     "",
+     "1.3",
+     "",
+     "µs"
+    ],
+    [
+     "tHD;STA",
+     "Repeated START hold time",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "tSU;STA",
+     "Repeated START setup time",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "tSU;STO",
+     "STOP condition setup time",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "tHD;DAT",
+     "SDA data hold time [1][2][3]",
+     "",
+     "50",
+     "",
+     "ns"
+    ],
+    [
+     "tSU;DAT",
+     "SDA setup time [4]",
+     "",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "tLOW",
+     "SCL clock low time",
+     "",
+     "1.3",
+     "",
+     "µs"
+    ],
+    [
+     "tHIGH",
+     "SCL clock high time",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "tr",
+     "SDA and SCL rise time [5]",
+     "",
+     "20 + 0.1Cb",
+     "300",
+     "ns"
+    ],
+    [
+     "tf",
+     "SDA and SCL fall Time [2][5][6][7]",
+     "",
+     "20+ 0.1Cb",
+     "300",
+     "ns"
+    ],
+    [
+     "tSP",
+     "Pulse width of spikes that are suppressed by internal input filter",
+     "",
+     "",
+     "50",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "[1] tHD;DAT is taken from the falling edge of SCL, for data bits and for the acknowledge.",
+    "[2] Inside the device, SDA is held for at least 300 ns after SCL reaches VIH(min), covering the undefined part of the SCL falling edge.",
+    "[3] The longest tHD;DAT must be shorter than the longer of tVD;DAT and tVD;ACK by one transition time. The device never stretches tLOW.",
+    "[4] On a standard-mode bus a fast-mode part must meet tSU;DAT of 250 ns; a part that does not stretch SCL low meets it automatically. A part that stretches SCL low must put the next data bit on SDA tr(max) + tSU;DAT = 1000 + 250 = 1250 ns before releasing SCL, and the acknowledge must meet the same setup time.",
+    "[5] Cb: capacitance of a single bus line in total, pF.",
+    "[6] Bus-line fall time is 300 ns max and the SDA output stage fall time 250 ns max, which leaves room for series resistors between the pins and the bus lines.",
+    "[7] In fast-mode plus the output stage and the bus share one fall-time limit; series resistors must be counted in the bus timing."
+   ]
+  },
+  {
+   "title": "Mode of operation description",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "I²C-bus state",
+    "VDD",
+    "condition",
+    "function"
+   ],
+   "rows": [
+    [
+     "OFF",
+     "Powered down",
+     "< 1.62 V",
+     "< VDD + 0.3 V",
+     "Device powered off."
+    ],
+    [
+     "STANDBY",
+     "I²C/SPI communication possible",
+     "ON",
+     "SBYB bit of CTRL_REG1 cleared",
+     "POR and digital blocks on; analog off."
+    ],
+    [
+     "ACTIVE",
+     "I²C/SPI communication possible",
+     "ON",
+     "SBYB bit of CTRL_REG1 set",
+     "POR, digital and analog blocks all on."
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register address map",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "address",
+    "name",
+    "access",
+    "reset",
+    "description",
+    "reset STBY to Active",
+    "auto-increment address",
+    "notes"
+   ],
+   "rows": [
+    [
+     "00h",
+     "STATUS",
+     "R",
+     "00h",
+     "Sensor status register; alias of DR_STATUS or F_STATUS",
+     "Yes",
+     "01h",
+     "[1][2]"
+    ],
+    [
+     "01h",
+     "OUT_P_MSB",
+     "R",
+     "00h",
+     "Pressure data out MSB, bits 12 to 19 of the 20-bit sample; FIFO data root pointer",
+     "Yes",
+     "02h / 01h",
+     "[1][2]"
+    ],
+    [
+     "02h",
+     "OUT_P_CSB",
+     "R",
+     "00h",
+     "Pressure data out CSB, bits 4 to 11",
+     "Yes",
+     "03h",
+     "[1][2]"
+    ],
+    [
+     "03h",
+     "OUT_P_LSB",
+     "R",
+     "00h",
+     "Pressure data out LSB, bits 0 to 3",
+     "Yes",
+     "04h",
+     "[1][2]"
+    ],
+    [
+     "04h",
+     "OUT_T_MSB",
+     "R",
+     "00h",
+     "Temperature data out MSB, bits 4 to 11 of the 12-bit sample",
+     "Yes",
+     "05h",
+     "[1][2]"
+    ],
+    [
+     "05h",
+     "OUT_T_LSB",
+     "R",
+     "00h",
+     "Temperature data out LSB, bits 0 to 3",
+     "Yes",
+     "00h",
+     "[1][2]"
+    ],
+    [
+     "06h/00h",
+     "DR_STATUS",
+     "R",
+     "00h",
+     "Data ready status",
+     "Yes",
+     "07h",
+     "[1][2]"
+    ],
+    [
+     "07h",
+     "OUT_P_DELTA_MSB",
+     "R",
+     "00h",
+     "Pressure delta, bits 12 to 19",
+     "Yes",
+     "08h",
+     "[1][2]"
+    ],
+    [
+     "08h",
+     "OUT_P_DELTA_CSB",
+     "R",
+     "00h",
+     "Pressure delta, bits 4 to 11",
+     "Yes",
+     "09h",
+     "[1][2]"
+    ],
+    [
+     "09h",
+     "OUT_P_DELTA_LSB",
+     "R",
+     "00h",
+     "Pressure delta, bits 0 to 3",
+     "Yes",
+     "0Ah",
+     "[1][2]"
+    ],
+    [
+     "0Ah",
+     "OUT_T_DELTA_MSB",
+     "R",
+     "00h",
+     "Temperature delta, bits 4 to 11",
+     "Yes",
+     "0Bh",
+     "[1][2]"
+    ],
+    [
+     "0Bh",
+     "OUT_T_DELTA_LSB",
+     "R",
+     "00h",
+     "Temperature delta, bits 0 to 3",
+     "Yes",
+     "06h",
+     "[1][2]"
+    ],
+    [
+     "0Ch",
+     "WHO_AM_I",
+     "R",
+     "C4h",
+     "Device identification, fixed",
+     "No",
+     "0Dh",
+     ""
+    ],
+    [
+     "0Dh",
+     "F_STATUS",
+     "R",
+     "00h",
+     "FIFO status",
+     "Yes",
+     "0Eh",
+     "[1][2]"
+    ],
+    [
+     "0Eh/01h",
+     "F_DATA",
+     "R",
+     "00h",
+     "FIFO 8-bit data access",
+     "Yes",
+     "0Eh",
+     "[1][2]"
+    ],
+    [
+     "0Fh",
+     "F_SETUP",
+     "R/W",
+     "00h",
+     "FIFO setup",
+     "No",
+     "10h",
+     "[1][3]"
+    ],
+    [
+     "10h",
+     "TIME_DLY",
+     "R",
+     "00h",
+     "Time since FIFO overflow",
+     "Yes",
+     "11h",
+     "[1][2]"
+    ],
+    [
+     "11h",
+     "SYSMOD",
+     "R",
+     "00h",
+     "Current system mode",
+     "Yes",
+     "12h",
+     "[2]"
+    ],
+    [
+     "12h",
+     "INT_SOURCE",
+     "R",
+     "00h",
+     "Interrupt source status",
+     "No",
+     "13h",
+     "[1]"
+    ],
+    [
+     "13h",
+     "PT_DATA_CFG",
+     "R/W",
+     "00h",
+     "Data event flag configuration",
+     "No",
+     "14h",
+     "[1][3]"
+    ],
+    [
+     "14h",
+     "BAR_IN_MSB",
+     "R/W",
+     "C5h",
+     "Barometric input for altitude, bits 8 to 15",
+     "No",
+     "15h",
+     "[1][3]"
+    ],
+    [
+     "15h",
+     "BAR_IN_LSB",
+     "R/W",
+     "E7h",
+     "Barometric input for altitude, bits 0 to 7",
+     "No",
+     "16h",
+     "[1][3]"
+    ],
+    [
+     "16h",
+     "P_TGT_MSB",
+     "R/W",
+     "00h",
+     "Pressure/altitude target, bits 8 to 15",
+     "No",
+     "17h",
+     "[1][3]"
+    ],
+    [
+     "17h",
+     "P_TGT_LSB",
+     "R/W",
+     "00h",
+     "Pressure/altitude target, bits 0 to 7",
+     "No",
+     "18h",
+     "[1][3]"
+    ],
+    [
+     "18h",
+     "T_TGT",
+     "R/W",
+     "00h",
+     "Temperature target",
+     "No",
+     "19h",
+     "[1][3]"
+    ],
+    [
+     "19h",
+     "P_WND_MSB",
+     "R/W",
+     "00h",
+     "Pressure/altitude window, bits 8 to 15",
+     "No",
+     "1Ah",
+     "[1][3]"
+    ],
+    [
+     "1Ah",
+     "P_WND_LSB",
+     "R/W",
+     "00h",
+     "Pressure/altitude window, bits 0 to 7",
+     "No",
+     "1Bh",
+     "[1][3]"
+    ],
+    [
+     "1Bh",
+     "T_WND",
+     "R/W",
+     "00h",
+     "Temperature window",
+     "No",
+     "1Ch",
+     "[1][3]"
+    ],
+    [
+     "1Ch",
+     "P_MIN_MSB",
+     "R/W",
+     "00h",
+     "Minimum pressure/altitude, bits 12 to 19",
+     "No",
+     "1Dh",
+     "[1][3]"
+    ],
+    [
+     "1Dh",
+     "P_MIN_CSB",
+     "R/W",
+     "00h",
+     "Minimum pressure/altitude, bits 4 to 11",
+     "No",
+     "1Eh",
+     "[1][3]"
+    ],
+    [
+     "1Eh",
+     "P_MIN_LSB",
+     "R/W",
+     "00h",
+     "Minimum pressure/altitude, bits 0 to 3",
+     "No",
+     "1Fh",
+     "[1][3]"
+    ],
+    [
+     "1Fh",
+     "T_MIN_MSB",
+     "R/W",
+     "00h",
+     "Minimum temperature, bits 8 to 15",
+     "No",
+     "20h",
+     "[1][3]"
+    ],
+    [
+     "20h",
+     "T_MIN_LSB",
+     "R/W",
+     "00h",
+     "Minimum temperature, bits 0 to 7",
+     "No",
+     "21h",
+     "[1][3]"
+    ],
+    [
+     "21h",
+     "P_MAX_MSB",
+     "R/W",
+     "00h",
+     "Maximum pressure/altitude, bits 12 to 19",
+     "No",
+     "22h",
+     "[1][3]"
+    ],
+    [
+     "22h",
+     "P_MAX_CSB",
+     "R/W",
+     "00h",
+     "Maximum pressure/altitude, bits 4 to 11",
+     "No",
+     "23h",
+     "[1][3]"
+    ],
+    [
+     "23h",
+     "P_MAX_LSB",
+     "R/W",
+     "00h",
+     "Maximum pressure/altitude, bits 0 to 3",
+     "No",
+     "24h",
+     "[1][3]"
+    ],
+    [
+     "24h",
+     "T_MAX_MSB",
+     "R/W",
+     "00h",
+     "Maximum temperature, bits 8 to 15",
+     "No",
+     "25h",
+     "[1][3]"
+    ],
+    [
+     "25h",
+     "T_MAX_LSB",
+     "R/W",
+     "00h",
+     "Maximum temperature, bits 0 to 7",
+     "No",
+     "26h",
+     "[1][3]"
+    ],
+    [
+     "26h",
+     "CTRL_REG1",
+     "R/W",
+     "00h",
+     "Control register 1: modes, oversampling",
+     "No",
+     "27h",
+     "[1][4]"
+    ],
+    [
+     "27h",
+     "CTRL_REG2",
+     "R/W",
+     "00h",
+     "Control register 2: acquisition time step",
+     "No",
+     "28h",
+     "[1]"
+    ],
+    [
+     "28h",
+     "CTRL_REG3",
+     "R/W",
+     "00h",
+     "Control register 3: interrupt pin configuration",
+     "No",
+     "29h",
+     "[1][4]"
+    ],
+    [
+     "29h",
+     "CTRL_REG4",
+     "R/W",
+     "00h",
+     "Control register 4: interrupt enables",
+     "No",
+     "2Ah",
+     "[1][4]"
+    ],
+    [
+     "2Ah",
+     "CTRL_REG5",
+     "R/W",
+     "00h",
+     "Control register 5: interrupt output pin assignment",
+     "No",
+     "2Bh",
+     "[1][4]"
+    ],
+    [
+     "2Bh",
+     "OFF_P",
+     "R/W",
+     "00h",
+     "Pressure data user offset",
+     "No",
+     "2Ch",
+     ""
+    ],
+    [
+     "2Ch",
+     "OFF_T",
+     "R/W",
+     "00h",
+     "Temperature data user offset",
+     "No",
+     "2Dh",
+     ""
+    ],
+    [
+     "2Dh",
+     "OFF_H",
+     "R/W",
+     "00h",
+     "Altitude data user offset",
+     "No",
+     "0Ch",
+     ""
+    ]
+   ],
+   "notes": [
+    "[1] Contents are kept on going from ACTIVE to STANDBY.",
+    "[2] Contents are cleared on going from STANDBY to ACTIVE.",
+    "[3] Writable at any time, in STANDBY or ACTIVE.",
+    "[4] Writable only in STANDBY, apart from the SBYB, OST and RST fields of CTRL_REG1.",
+    "Addresses 00h to 05h change meaning with F_MODE in F_SETUP: with F_MODE = 00 (FIFO off) they are DR_STATUS and the live pressure and temperature bytes; with F_MODE = 01 (circular) or 10 (stop when full), 00h reads F_STATUS, 01h reads F_DATA and 02h to 05h read 00h."
+   ]
+  },
+  {
+   "title": "Register bit allocation",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0"
+   ],
+   "rows": [
+    [
+     "06h",
+     "DR_STATUS",
+     "PTOW",
+     "POW",
+     "TOW",
+     "reserved",
+     "PTDR",
+     "PDR",
+     "TDR",
+     "reserved"
+    ],
+    [
+     "01h",
+     "OUT_P_MSB",
+     "PD[19:12]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "02h",
+     "OUT_P_CSB",
+     "PD[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "03h",
+     "OUT_P_LSB",
+     "PD[3:0]",
+     "",
+     "",
+     "",
+     "reserved",
+     "",
+     "",
+     ""
+    ],
+    [
+     "04h",
+     "OUT_T_MSB",
+     "TD[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "05h",
+     "OUT_T_LSB",
+     "TD[3:0]",
+     "",
+     "",
+     "",
+     "reserved",
+     "",
+     "",
+     ""
+    ],
+    [
+     "07h",
+     "OUT_P_DELTA_MSB",
+     "PDD[19:12]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "08h",
+     "OUT_P_DELTA_CSB",
+     "PDD[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "09h",
+     "OUT_P_DELTA_LSB",
+     "PDD[3:0]",
+     "",
+     "",
+     "",
+     "reserved",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0Ah",
+     "OUT_T_DELTA_MSB",
+     "TDD[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0Bh",
+     "OUT_T_DELTA_LSB",
+     "TDD[3:0]",
+     "",
+     "",
+     "",
+     "reserved",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0Ch",
+     "WHO_AM_I",
+     "WHO_AM_I[7:0] (NVM, C4h: 1)",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0"
+    ],
+    [
+     "0Dh",
+     "F_STATUS",
+     "F_OVF",
+     "F_WMRK_FLAG",
+     "F_CNT[5:0]",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0Eh",
+     "F_DATA",
+     "F_DATA[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0Fh",
+     "F_SETUP",
+     "F_MODE[1:0]",
+     "",
+     "F_WMRK[5:0]",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "10h",
+     "TIME_DLY",
+     "TD[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "11h",
+     "SYSMOD",
+     "reserved",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "SYSMOD"
+    ],
+    [
+     "12h",
+     "INT_SOURCE",
+     "SRC_DRDY",
+     "SRC_FIFO",
+     "SRC_PW",
+     "SRC_TW",
+     "SRC_PTH",
+     "SRC_TTH",
+     "SRC_PCHG",
+     "SRC_TCHG"
+    ],
+    [
+     "13h",
+     "PT_DATA_CFG",
+     "reserved",
+     "",
+     "",
+     "",
+     "",
+     "DREM",
+     "PDEFE",
+     "TDEFE"
+    ],
+    [
+     "14h",
+     "BAR_IN_MSB",
+     "BAR[15:8] (reset 1100 0101)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "15h",
+     "BAR_IN_LSB",
+     "BAR[7:0] (reset 1110 0111)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "16h",
+     "P_TGT_MSB",
+     "P_TGT[15:8]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "17h",
+     "P_TGT_LSB",
+     "P_TGT[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "18h",
+     "T_TGT",
+     "T_TGT[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "19h",
+     "P_WND_MSB",
+     "P_W[15:8]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "1Ah",
+     "P_WND_LSB",
+     "P_W[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "1Bh",
+     "T_WND",
+     "T_WND[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "1Ch",
+     "P_MIN_MSB",
+     "P_MIN[19:12]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "1Dh",
+     "P_MIN_CSB",
+     "P_MIN[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "1Eh",
+     "P_MIN_LSB",
+     "P_MIN[3:0]",
+     "",
+     "",
+     "",
+     "reserved (R)",
+     "",
+     "",
+     ""
+    ],
+    [
+     "21h",
+     "P_MAX_MSB",
+     "P_MAX[19:12]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "22h",
+     "P_MAX_CSB",
+     "P_MAX[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "23h",
+     "P_MAX_LSB",
+     "P_MAX[3:0]",
+     "",
+     "",
+     "",
+     "reserved (R)",
+     "",
+     "",
+     ""
+    ],
+    [
+     "1Fh",
+     "T_MIN_MSB",
+     "T_MIN[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "20h",
+     "T_MIN_LSB",
+     "T_MIN[3:0]",
+     "",
+     "",
+     "",
+     "reserved (R)",
+     "",
+     "",
+     ""
+    ],
+    [
+     "24h",
+     "T_MAX_MSB",
+     "T_MAX[11:4]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "25h",
+     "T_MAX_LSB",
+     "T_MAX[3:0]",
+     "",
+     "",
+     "",
+     "reserved (R)",
+     "",
+     "",
+     ""
+    ],
+    [
+     "26h",
+     "CTRL_REG1",
+     "ALT",
+     "RAW",
+     "OS[2:0]",
+     "",
+     "",
+     "0 (R) / RST (W)",
+     "OST",
+     "SBYB"
+    ],
+    [
+     "27h",
+     "CTRL_REG2",
+     "reserved",
+     "",
+     "LOAD_OUTPUT",
+     "ALARM_SEL",
+     "ST[3:0]",
+     "",
+     "",
+     ""
+    ],
+    [
+     "28h",
+     "CTRL_REG3",
+     "reserved",
+     "",
+     "IPOL1",
+     "PP_OD1",
+     "reserved",
+     "",
+     "IPOL2",
+     "PP_OD2"
+    ],
+    [
+     "29h",
+     "CTRL_REG4",
+     "INT_EN_DRDY",
+     "INT_EN_FIFO",
+     "INT_EN_PW",
+     "INT_EN_TW",
+     "INT_EN_PTH",
+     "INT_EN_TTH",
+     "INT_EN_PCHG",
+     "INT_EN_TCHG"
+    ],
+    [
+     "2Ah",
+     "CTRL_REG5",
+     "INT_CFG_DRDY",
+     "INT_CFG_FIFO",
+     "INT_CFG_PW",
+     "INT_CFG_TW",
+     "INT_CFG_PTH",
+     "INT_CFG_TTH",
+     "INT_CFG_PCHG",
+     "INT_CFG_TCHG"
+    ],
+    [
+     "2Bh",
+     "OFF_P",
+     "OFF_P[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "2Ch",
+     "OFF_T",
+     "OFF_T[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "2Dh",
+     "OFF_H",
+     "OFF_H[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Every bit resets to 0 except WHO_AM_I (C4h) and BAR_IN (C5E7h).",
+    "T_WIN at 18h is a misprint for T_WND at 1Bh.",
+    "P_WND_LSB at 19h and P_WND_MSB at 1Ah are misprints: 19h is P_WND_MSB and 1Ah is P_WND_LSB.",
+    "F_SETUP is R/W; its bit allocation misprints the bits as R."
+   ]
+  },
+  {
+   "title": "Register bit descriptions",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bit",
+    "symbol",
+    "function"
+   ],
+   "rows": [
+    [
+     "DR_STATUS",
+     "7",
+     "PTOW",
+     "1: a pressure/altitude or temperature result was overwritten before being read. Cleared by reading OUT_P_MSB or OUT_T_MSB (F_MODE = 0) or F_DATA (F_MODE > 0). Needs DREM enabled."
+    ],
+    [
+     "DR_STATUS",
+     "6",
+     "POW",
+     "1: a pressure/altitude result was overwritten unread. Cleared by reading OUT_P_MSB (F_MODE = 0) or F_DATA (F_MODE > 0). Needs PDEFE = 1."
+    ],
+    [
+     "DR_STATUS",
+     "5",
+     "TOW",
+     "1: a temperature result was overwritten unread. Cleared by reading OUT_T_MSB (F_MODE = 0) or F_DATA (F_MODE > 0). Needs TDEFE = 1."
+    ],
+    [
+     "DR_STATUS",
+     "3",
+     "PTDR",
+     "1: new pressure/altitude or temperature data. Cleared by reading OUT_P_MSB or OUT_T_MSB (F_MODE = 0) or F_DATA (F_MODE > 0). Needs DREM enabled."
+    ],
+    [
+     "DR_STATUS",
+     "2",
+     "PDR",
+     "1: new pressure/altitude data. Cleared by reading OUT_P_MSB (F_MODE = 0) or F_DATA (F_MODE > 0). Needs PDEFE = 1."
+    ],
+    [
+     "DR_STATUS",
+     "1",
+     "TDR",
+     "1: new temperature data. Cleared by reading OUT_T_MSB (F_MODE = 0) or F_DATA (F_MODE > 0). Needs TDEFE = 1."
+    ],
+    [
+     "F_STATUS",
+     "7",
+     "F_OVF",
+     "1: FIFO has overflowed; stays set while the overflow lasts."
+    ],
+    [
+     "F_STATUS",
+     "6",
+     "F_WMRK_FLAG",
+     "1: FIFO sample count has passed the watermark; stays set while F_CNT exceeds F_WMRK."
+    ],
+    [
+     "F_STATUS",
+     "5 to 0",
+     "F_CNT",
+     "Samples held in the FIFO: 00_0000 empty (reset), 00_0001 to 10_0000 for 1 to 32."
+    ],
+    [
+     "F_SETUP",
+     "7 to 6",
+     "F_MODE",
+     "00 FIFO off (reset); 01 circular, oldest sample dropped on overflow; 10 stops filling on overflow; 11 unused. The FIFO empties when disabled or on STANDBY to ACTIVE. Disabling zeroes F_OVF, F_WMRK_FLAG and F_CNT. Change mode by writing 00 first; 01 and 10 cannot be swapped directly."
+    ],
+    [
+     "F_SETUP",
+     "5 to 0",
+     "F_WMRK",
+     "Sample count that raises F_WMRK_FLAG when F_CNT equals it. 00_0000 (reset) turns the watermark flag off."
+    ],
+    [
+     "TIME_DLY",
+     "7 to 0",
+     "TD",
+     "Sample-time ticks since the last FIFO byte was written; counts from overflow or wrap, clears when the last FIFO byte is read."
+    ],
+    [
+     "SYSMOD",
+     "0",
+     "SYSMOD",
+     "0 STANDBY (reset), 1 ACTIVE. Bits 7 to 1 read 0."
+    ],
+    [
+     "INT_SOURCE",
+     "7",
+     "SRC_DRDY",
+     "Data-ready interrupt active (PTOW and/or PTDR set with the block enabled). Cleared by reading STATUS and the data registers."
+    ],
+    [
+     "INT_SOURCE",
+     "6",
+     "SRC_FIFO",
+     "FIFO overflow or watermark (F_CNT = F_WMRK) interrupt. Cleared by reading F_STATUS."
+    ],
+    [
+     "INT_SOURCE",
+     "5",
+     "SRC_PW",
+     "Pressure/altitude within target ± window. Needs a non-zero window."
+    ],
+    [
+     "INT_SOURCE",
+     "4",
+     "SRC_TW",
+     "Temperature within target ± window. Needs a non-zero window."
+    ],
+    [
+     "INT_SOURCE",
+     "3",
+     "SRC_PTH",
+     "Pressure/altitude threshold crossed: the centre only with a zero window; upper, centre or lower with a non-zero window."
+    ],
+    [
+     "INT_SOURCE",
+     "2",
+     "SRC_TTH",
+     "Temperature threshold crossed: the centre only with a zero window; upper, centre or lower with a non-zero window."
+    ],
+    [
+     "INT_SOURCE",
+     "1",
+     "SRC_PCHG",
+     "Pressure/altitude change interrupt."
+    ],
+    [
+     "INT_SOURCE",
+     "0",
+     "SRC_TCHG",
+     "Temperature change interrupt."
+    ],
+    [
+     "PT_DATA_CFG",
+     "2",
+     "DREM",
+     "0 (reset): with a data flag enabled, a flag on every new acquisition. 1: data-ready flags on new pressure/altitude or temperature data, raised when the data changes state."
+    ],
+    [
+     "PT_DATA_CFG",
+     "1",
+     "PDEFE",
+     "1: flag on new pressure/altitude data. 0 (reset) off."
+    ],
+    [
+     "PT_DATA_CFG",
+     "0",
+     "TDEFE",
+     "1: flag on new temperature data. 0 (reset) off."
+    ],
+    [
+     "CTRL_REG1",
+     "7",
+     "ALT",
+     "0 barometer (reset), 1 altimeter."
+    ],
+    [
+     "CTRL_REG1",
+     "6",
+     "RAW",
+     "1: ADC output with oversampling only, no scaling or offsets; overrides ALT. FIFO must be off; alarms, deltas and other interrupts stop."
+    ],
+    [
+     "CTRL_REG1",
+     "5 to 3",
+     "OS[2:0]",
+     "Oversample ratio 2^OS; 000 (reset) gives 1."
+    ],
+    [
+     "CTRL_REG1",
+     "2",
+     "RST",
+     "Write 1 for software reset: from ACTIVE the part first drops to STANDBY, then all registers reload their defaults and the I²C block resets. The bit clears itself and reads 0."
+    ],
+    [
+     "CTRL_REG1",
+     "1",
+     "OST",
+     "One-shot. With SBYB = 1, starts a measurement at once and the part then returns to the ST timer; the bit stays set and must be cleared and set again. With SBYB = 0, the part goes active for one pressure/altitude plus temperature measurement, clears OST and returns to STANDBY; read OST before writing it again."
+    ],
+    [
+     "CTRL_REG1",
+     "0",
+     "SBYB",
+     "0 STANDBY (reset), 1 ACTIVE: measurements repeat at the ST interval."
+    ],
+    [
+     "CTRL_REG2",
+     "5",
+     "LOAD_OUTPUT",
+     "1: the next OUT_P/OUT_T become the targets for SRC_PW/SRC_TW and SRC_PTH/SRC_TTH. Set at least once when ALARM_SEL = 1; clear and set again to reload."
+    ],
+    [
+     "CTRL_REG2",
+     "4",
+     "ALARM_SEL",
+     "0 (reset): targets from P_TGT and T_TGT. 1: targets from OUT_P/OUT_T."
+    ],
+    [
+     "CTRL_REG2",
+     "3 to 0",
+     "ST[3:0]",
+     "Auto-acquisition step 2^ST seconds, 1 s to 2^15 s (9 hours). Reset 0."
+    ],
+    [
+     "CTRL_REG3",
+     "5",
+     "IPOL1",
+     "INT1 polarity: 0 active low (reset), 1 active high."
+    ],
+    [
+     "CTRL_REG3",
+     "4",
+     "PP_OD1",
+     "INT1 driver: 0 push-pull with internal pull-up (reset), 1 open drain, for wire-ORing several interrupt lines."
+    ],
+    [
+     "CTRL_REG3",
+     "1",
+     "IPOL2",
+     "INT2 polarity: 0 active low (reset), 1 active high."
+    ],
+    [
+     "CTRL_REG3",
+     "0",
+     "PP_OD2",
+     "INT2 driver: 0 push-pull with internal pull-up (reset), 1 open drain."
+    ],
+    [
+     "CTRL_REG4",
+     "7 to 0",
+     "INT_EN_x",
+     "1 enables the interrupt of that source (DRDY, FIFO, PW, TW, PTH, TTH, PCHG, TCHG); 0 (reset) disables it."
+    ],
+    [
+     "CTRL_REG5",
+     "7 to 0",
+     "INT_CFG_x",
+     "Routing of that source: 0 to INT2 (reset), 1 to INT1."
+    ]
+   ],
+   "notes": [
+    "CTRL_REG3 bit 1 is IPOL2; its description misprints the symbol as PP_OD2.",
+    "CTRL_REG5 bit 7 is INT_CFG_DRDY; its description misprints the symbol as INT_EN_DRDY."
+   ]
+  },
+  {
+   "title": "System output sample rate selection",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "OS2",
+    "OS1",
+    "OS0",
+    "oversample ratio",
+    "minimum time between data samples"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "6 ms"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "2",
+     "10 ms"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "4",
+     "18 ms"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "8",
+     "34 ms"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "16",
+     "66 ms"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "32",
+     "130 ms"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "64",
+     "258 ms"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "128",
+     "512 ms"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Read accesses through F_DATA",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "read",
+    "byte returned"
+   ],
+   "rows": [
+    [
+     "1st",
+     "OUT_P_MSB (oldest)"
+    ],
+    [
+     "2nd",
+     "OUT_P_CSB (oldest)"
+    ],
+    [
+     "3rd",
+     "OUT_P_LSB (oldest)"
+    ],
+    [
+     "4th",
+     "OUT_T_MSB (oldest)"
+    ],
+    [
+     "5th",
+     "OUT_T_LSB (oldest)"
+    ],
+    [
+     "...",
+     "..."
+    ],
+    [
+     "",
+     "OUT_T_LSB (oldest)"
+    ],
+    [
+     "",
+     "00h"
+    ],
+    [
+     "",
+     "00h"
+    ]
+   ],
+   "notes": [
+    "Up to 32 samples, 5 × 32 = 160 bytes. Each byte read removes it from the FIFO and F_CNT falls by one per sample; reading continues while acquisition goes on."
+   ]
+  },
+  {
+   "title": "Offset correction registers",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "register",
+    "address",
+    "format",
+    "range",
+    "LSB"
+   ],
+   "rows": [
+    [
+     "OFF_P",
+     "2Bh",
+     "8-bit two's complement",
+     "−512 to +508 Pa",
+     "4 Pa"
+    ],
+    [
+     "OFF_T",
+     "2Ch",
+     "8-bit two's complement",
+     "−8 to +7.9375 °C",
+     "0.0625 °C"
+    ],
+    [
+     "OFF_H",
+     "2Dh",
+     "8-bit two's complement",
+     "−128 to +127 m",
+     "1 m"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Recommended PCB landing pattern",
+   "page": 42,
+   "conditions": "",
+   "columns": [
+    "feature",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Land length along the pin row (8X)",
+     "0.55",
+     "mm"
+    ],
+    [
+     "Land extension past package pad, outer edge (8X)",
+     "0.10",
+     "mm"
+    ],
+    [
+     "Land extension past package pad, inner edge (8X)",
+     "0.05",
+     "mm"
+    ],
+    [
+     "Package pad, along the row (8X)",
+     "0.5±0.05",
+     "mm"
+    ],
+    [
+     "Package pad, across the row (8X)",
+     "0.8±0.05",
+     "mm"
+    ],
+    [
+     "Pad pitch (6X)",
+     "1.25",
+     "mm"
+    ],
+    [
+     "Pad row centre from package centreline (2X)",
+     "0.625",
+     "mm"
+    ],
+    [
+     "Pad centre from package centreline, across (8X)",
+     "1",
+     "mm"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Embossed carrier tape, LGA 3 mm × 5 mm",
+   "page": 43,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "dimension",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Ao",
+     "3.35 ± 0.10",
+     "mm"
+    ],
+    [
+     "Bo",
+     "5.35 ± 0.10",
+     "mm"
+    ],
+    [
+     "Ko",
+     "1.20 ± 0.10",
+     "mm"
+    ],
+    [
+     "F",
+     "5.50 ± 0.10 (III)",
+     "mm"
+    ],
+    [
+     "P1",
+     "8.00 ± 0.10",
+     "mm"
+    ],
+    [
+     "W",
+     "12.00 ± 0.10",
+     "mm"
+    ],
+    [
+     "T",
+     "0.25 ± 0.05",
+     "mm"
+    ],
+    [
+     "Do",
+     "ø 1.55 ± 0.05",
+     "mm"
+    ],
+    [
+     "D1",
+     "ø 1.50 min.",
+     "mm"
+    ],
+    [
+     "P2",
+     "2.00 ± 0.10 (I)",
+     "mm"
+    ],
+    [
+     "Po",
+     "4.00 ± 0.10 (II)",
+     "mm"
+    ],
+    [
+     "E1",
+     "1.75 ± 0.10",
+     "mm"
+    ],
+    [
+     "",
+     "R0.25 typ.",
+     "mm"
+    ],
+    [
+     "",
+     "REF. 6°",
+     "°"
+    ],
+    [
+     "",
+     "REF. 30°",
+     "°"
+    ]
+   ],
+   "notes": [
+    "(I) and (III): from the sprocket-hole centreline to the pocket centreline.",
+    "(II): ten sprocket pitches accumulate at most ±0.20.",
+    "(IV): other tape material is available.",
+    "The pin 1 index area of each part sits toward the sprocket holes."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application diagram",
+   "page": 3,
+   "description": "The sensor on its own supplies and bus. VDD carries C1, 100 nF, and C2, 10 µF, to ground, both close to pin 1. CAP, the internal regulator's pin, gets its own 100 nF, C3, to ground. VDDIO feeds the interface. SCL comes in, SDA goes both ways and INT1 and INT2 go out to the host.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MPL3115A2"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "ceramic, VDD decoupling at pin 1"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "bulk or ceramic, at pin 1"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "regulator bypass on CAP"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO"
+    },
+    {
+     "ref": "SCL",
+     "type": "terminal",
+     "value": "SCL"
+    },
+    {
+     "ref": "SDA",
+     "type": "terminal",
+     "value": "SDA"
+    },
+    {
+     "ref": "INT1",
+     "type": "terminal",
+     "value": "INT1"
+    },
+    {
+     "ref": "INT2",
+     "type": "terminal",
+     "value": "INT2"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Altitude from pressure",
+   "page": 5,
+   "expr": "h = 44330.77 × {1 − (p / p0)^0.1902632} + OFF_H (Register value)",
+   "where": {
+    "h": "altitude, m",
+    "p": "measured pressure, Pa",
+    "p0": "sea-level pressure, 101,326 Pa by default (BAR_IN)",
+    "OFF_H": "altitude user offset register, m"
+   },
+   "note": "Based on the US Standard Atmosphere 1976."
+  },
+  {
+   "name": "Pressure/altitude alarm window",
+   "page": 17,
+   "expr": "Window = P_TGT(MSB,LSB) + P_WIND(MSB,LSB)",
+   "where": {
+    "P_TGT": "pressure/altitude target, 16-bit",
+    "P_WIND": "pressure/altitude window, 16-bit (P_WND)"
+   },
+   "note": "SRC_PW sets within target ± window. A zero P_WND gives no interrupt."
+  },
+  {
+   "name": "Temperature alarm window",
+   "page": 17,
+   "expr": "Window = T_TGT ± T_WIND",
+   "where": {
+    "T_TGT": "temperature target, °C, signed 8-bit",
+    "T_WIND": "temperature window, °C, unsigned 8-bit (T_WND)"
+   },
+   "note": "A zero T_WND gives no interrupt."
+  },
+  {
+   "name": "Oversample ratio",
+   "page": 33,
+   "expr": "OSR = 2^OS",
+   "where": {
+    "OS": "CTRL_REG1 bits 5 to 3, 0 to 7"
+   },
+   "note": ""
+  },
+  {
+   "name": "Auto-acquisition interval",
+   "page": 35,
+   "expr": "t_step = 2^ST s",
+   "where": {
+    "ST": "CTRL_REG2 bits 3 to 0, 0 to 15"
+   },
+   "note": "1 s to 32768 s (9 hours)."
+  },
+  {
+   "name": "Barometric input",
+   "page": 29,
+   "expr": "p0 = 2 Pa × BAR_IN[15:0]",
+   "where": {
+    "BAR_IN": "unsigned 16-bit value in BAR_IN_MSB:BAR_IN_LSB, reset C5E7h"
+   },
+   "note": "Reset value C5E7h = 50663, giving 101,326 Pa."
+  },
+  {
+   "name": "Pressure output",
+   "page": 22,
+   "expr": "P (Pa) = PD[19:0] / 4",
+   "where": {
+    "PD": "20-bit unsigned Q18.2 across the three OUT_P bytes (MSB, CSB, then LSB bits 7 to 4)"
+   },
+   "note": "18 integer bits and 2 fractional bits; 0.25 Pa per LSB."
+  },
+  {
+   "name": "Altitude output",
+   "page": 22,
+   "expr": "h (m) = PD[19:0] / 16",
+   "where": {
+    "PD": "20-bit two's complement Q16.4: integer metres in the MSB and CSB bytes of OUT_P, fraction in LSB bits 7 to 4"
+   },
+   "note": "0.0625 m per LSB."
+  },
+  {
+   "name": "Temperature output",
+   "page": 23,
+   "expr": "T (°C) = TD[11:0] / 16",
+   "where": {
+    "TD": "12-bit two's complement Q8.4: OUT_T_MSB integer degrees, OUT_T_LSB bits 7 to 4 fraction"
+   },
+   "note": "0.0625 °C per LSB."
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Sensing",
+   "page": 1,
+   "text": "A piezoresistive MEMS element measures pressure against a vacuum sealed in its reference chamber. The on-chip temperature sensor compensates it, and a high-resolution ADC and digital processing deliver pressure in pascals or altitude in metres, and temperature in °C, so the host does no compensation or unit conversion."
+  },
+  {
+   "topic": "Factory calibration and user offsets",
+   "page": 15,
+   "text": "Sensitivity and offset for pressure and temperature are trimmed at the factory and kept in NVM; these values load at every power-up and need no further calibration. For best accuracy the offsets can be trimmed after power-up through OFF_P, OFF_T and OFF_H, which are volatile. Using the offset correction to remove board-mount and long-term offset shift is strongly urged to reach the full accuracy. Offset shift cancels in relative measurements, where two absolute readings are subtracted."
+  },
+  {
+   "topic": "Barometer and altimeter modes",
+   "page": 15,
+   "text": "ALT in CTRL_REG1 picks the mode. Barometer mode reports 20-bit unsigned pascals; altimeter mode converts to altitude with the US Standard Atmosphere and reports 20-bit two's complement metres. Both modes give temperature as well. Altitude needs the local sea-level pressure written to BAR_IN in 2 Pa units; it resets to 101,326 Pa. Pressure resolves below 1 Pa and altitude better than 1 m at sea level."
+  },
+  {
+   "topic": "RAW mode",
+   "page": 15,
+   "text": "With RAW set the ADC result, oversampled but unscaled, fills all 24 bits of OUT_P and all 16 of OUT_T in either mode. The FIFO must be disabled, and alarms, deltas and other interrupts do not run; the delta registers are not updated."
+  },
+  {
+   "topic": "Power modes",
+   "page": 11,
+   "text": "OFF: VDD below 1.62 V, no function. STANDBY (SBYB = 0, the reset state): digital logic and POR run, the analog chain is off, registers can be read and written, 2 µA typ. ACTIVE (SBYB = 1): everything runs and measurements repeat at the ST interval. Inside ACTIVE the part moves between WAKE and SLEEP. CTRL_REG1, CTRL_REG3, CTRL_REG4 and CTRL_REG5 are written only in STANDBY, apart from the SBYB, OST and RST fields. Valid data comes 60 ms max after entering ACTIVE at OSR 1, 1000 ms max at OSR 128."
+  },
+  {
+   "topic": "Oversampling and current",
+   "page": 34,
+   "text": "OS sets an oversample ratio of 1 to 128. More oversampling lowers noise (19 Pa RMS at 1x, 1.5 Pa RMS at 128x) and lengthens the minimum sample spacing from 6 ms to 512 ms, and raises average current at one update per second from 8.5 µA to 265 µA; 40 µA at OSR 16 gives a steady 10 cm resolution. Peak current during a conversion is 2 mA typ."
+  },
+  {
+   "topic": "One-shot and autonomous acquisition",
+   "page": 16,
+   "text": "In STANDBY, setting OST takes one pressure/altitude and temperature reading and returns to STANDBY, clearing OST. In ACTIVE the part acquires every 2^ST seconds, 1 s to 9 h, and can fill the 32-sample FIFO, logging up to about 12 days."
+  },
+  {
+   "topic": "FIFO",
+   "page": 16,
+   "text": "The 32-sample FIFO stores pressure/altitude and temperature together. F_MODE picks off, circular (newest kept) or stop-when-full. With the FIFO on, it is read through address 01h with an I²C burst read, five bytes per sample, oldest first; 02h to 05h read 00h. Overflow and watermark events raise interrupts. TIME_DLY counts sample ticks after overflow."
+  },
+  {
+   "topic": "Interrupts",
+   "page": 16,
+   "text": "Eight sources: data ready, FIFO, pressure window, temperature window, pressure threshold, temperature threshold, pressure change and temperature change. CTRL_REG4 enables each, CTRL_REG5 sends each to INT1 or INT2 (INT2 by default), and the sources on one pin are ORed, so the host reads INT_SOURCE to see which fired. Each pin has its own polarity and push-pull or open-drain choice in CTRL_REG3. Status bits set on a rising event and clear when the relevant register is read."
+  },
+  {
+   "topic": "Threshold, window and change alarms",
+   "page": 16,
+   "text": "The threshold flag sets when the reading reaches the target in P_TGT or T_TGT; with a non-zero window it also sets at target plus and minus the window, so a 3000 m target with 100 m window fires at 2900, 3000 and 3100 m. The window flag sets while the reading sits within target ± window and never with a zero window. The change flags set when consecutive readings differ by more than the window value. ALARM_SEL and LOAD_OUTPUT can take the targets from the current reading instead of the target registers. In barometer mode targets and windows are pressures in 2 Pa units; in altimeter mode metres."
+  },
+  {
+   "topic": "Delta and min/max registers",
+   "page": 17,
+   "text": "OUT_P_DELTA and OUT_T_DELTA hold the difference from the previous sample, in the same formats as the outputs, whatever F_MODE is. P_MIN, P_MAX, T_MIN and T_MAX capture extremes; they clear at power-up or when 0 is written."
+  },
+  {
+   "topic": "I²C interface",
+   "page": 10,
+   "text": "Slave only, 7-bit address 60h (C0h write, C1h read); other addresses on request from the factory. Up to 400 kHz with 1 kΩ pull-ups at 400 pF, 4 MHz at 20 pF. Reads of a chosen register use a repeated START. Register addresses auto-increment, so STATUS, three pressure bytes and two temperature bytes come out of 00h to 05h in one 6-byte read; the delta block and FIFO have their own wrap points. WHO_AM_I at 0Ch reads C4h."
+  },
+  {
+   "topic": "Polling start-up",
+   "page": 13,
+   "text": "Example at OSR 128 in altimeter mode: write B8h to CTRL_REG1 (26h), write 07h to PT_DATA_CFG (13h) to enable the data flags, write B9h to CTRL_REG1 to go ACTIVE. Then read STATUS (00h) until bit 3 (08h, PTDR) is set and read 01h to 05h, which clears the data-ready flag."
+  },
+  {
+   "topic": "Interrupt start-up",
+   "page": 14,
+   "text": "Same as polling, plus 11h to CTRL_REG3 (28h) for active-low open-drain outputs and 80h to CTRL_REG4 (29h) to enable the data-ready interrupt, before B9h to CTRL_REG1. On an INT2 assertion read INT_SOURCE (12h); if bit 7 (SRC_DRDY) is set read 01h to 05h, otherwise service the other source."
+  },
+  {
+   "topic": "Supply decoupling",
+   "page": 4,
+   "text": "VDD takes 100 nF ceramic plus a 10 µF bulk or ceramic capacitor, as close to pin 1 as possible. CAP takes a separate 100 nF to bypass the internal regulator."
+  },
+  {
+   "topic": "Package and handling",
+   "page": 41,
+   "text": "RoHS-compliant LGA with a metal lid and an air vent hole of 0.5 mm diameter in the top. The pin 1 index area on the underside has no electrical connection. The part is sensitive to mechanical shock. NXP notes AN1984 and AN3150 cover handling and soldering of its pressure sensors."
+  }
+ ],
+ "packages": [
+  {
+   "name": "LGA-8, 98ASA00260D (SOT1768-1), 3 × 5 × 1.25 pitch",
+   "page": 40,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "",
+     "5",
+     ""
+    ],
+    [
+     "",
+     "body width",
+     "",
+     "3",
+     ""
+    ],
+    [
+     "",
+     "metal lid length",
+     "4.47",
+     "4.55",
+     "4.63"
+    ],
+    [
+     "",
+     "metal lid width",
+     "2.47",
+     "2.55",
+     "2.63"
+    ],
+    [
+     "",
+     "overall height",
+     "1.0",
+     "1.1",
+     "1.2"
+    ],
+    [
+     "",
+     "pad length, along the row (8X)",
+     "0.45",
+     "0.5",
+     "0.55"
+    ],
+    [
+     "",
+     "pad width, across the row (8X)",
+     "0.75",
+     "0.8",
+     "0.85"
+    ],
+    [
+     "",
+     "pad pitch (6X)",
+     "",
+     "1.25",
+     ""
+    ],
+    [
+     "",
+     "pad row from body centreline, along (2X)",
+     "",
+     "0.625",
+     ""
+    ],
+    [
+     "",
+     "pad centre from body centreline, across (8X)",
+     "",
+     "1",
+     ""
+    ],
+    [
+     "",
+     "air vent hole diameter",
+     "",
+     "(0.5)",
+     ""
+    ],
+    [
+     "",
+     "air vent hole centre from body end",
+     "",
+     "(1.3)",
+     ""
+    ],
+    [
+     "",
+     "top flatness",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "line profile tolerance (4X)",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "pad position tolerance to A, B, C",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "pad position tolerance to A",
+     "",
+     "",
+     "0.05"
+    ]
+   ]
+  }
+ ]
+}

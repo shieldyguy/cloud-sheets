@@ -1,0 +1,6408 @@
+{
+ "sheet": 1,
+ "name": "AD4003BRMZ-RL7",
+ "kind": "adc",
+ "manufacturer": "Analog Devices",
+ "title": "AD4003: 18-bit, 2 MSPS differential SAR ADC, 1.8 V core, SPI, MSOP-10 and LFCSP-10",
+ "source": {
+  "document": "D14957-0-10/16",
+  "revision": "Rev. 0, October 2016",
+  "pages": 34
+ },
+ "summary": "An 18-bit successive-approximation converter with a fully differential input of ±VREF, sampling at up to 2 MSPS with no pipeline delay. The core runs from 1.8 V and the serial interface from a separate 1.71 V to 5.5 V logic rail; the reference (2.4 V to 5.1 V) is external. Features that ease driving it: high-Z mode lowers input current, span compression lets single-supply drivers stay off the rails, an internal clamp guards the inputs against overvoltage, and turbo mode allows 2 MSPS from a 75 MHz clock. It comes in a 10-lead MSOP and a 3 mm × 3 mm 10-lead LFCSP, specified from −40 °C to +125 °C.",
+ "key_figures": [
+  [
+   "Resolution",
+   "18 bits, no missing codes"
+  ],
+  [
+   "Throughput",
+   "2 MSPS max (turbo mode, SCK ≥ 75 MHz)"
+  ],
+  [
+   "INL",
+   "±1.0 LSB max (±3.8 ppm)"
+  ],
+  [
+   "SNR",
+   "100.5 dB typ at 1 kHz, 99 dB typ at 100 kHz (VREF = 5 V)"
+  ],
+  [
+   "THD",
+   "−123 dB typ at 1 kHz, −100 dB typ at 100 kHz"
+  ],
+  [
+   "Input range",
+   "±VREF differential; VREF 2.4 V to 5.1 V"
+  ],
+  [
+   "Supplies",
+   "VDD 1.71 V to 1.89 V; VIO 1.71 V to 5.5 V"
+  ],
+  [
+   "Power",
+   "16 mW typ at 2 MSPS; 80 µW at 10 kSPS"
+  ],
+  [
+   "Interface",
+   "SPI-compatible, 3- or 4-wire, daisy chain, busy indicator"
+  ],
+  [
+   "Temperature",
+   "−40 °C to +125 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 34,
+  "columns": [
+   "part number",
+   "INL",
+   "temperature range",
+   "packing",
+   "package",
+   "package option",
+   "branding"
+  ],
+  "rows": [
+   [
+    "AD4003BRMZ",
+    "±1.0 LSB",
+    "−40°C to +125°C",
+    "Tube, 50",
+    "10-Lead MSOP",
+    "RM-10",
+    "C8C"
+   ],
+   [
+    "AD4003BRMZ-RL7",
+    "±1.0 LSB",
+    "−40°C to +125°C",
+    "Reel, 1000",
+    "10-Lead MSOP",
+    "RM-10",
+    "C8C"
+   ],
+   [
+    "AD4003BCPZ-RL7",
+    "±1.0 LSB",
+    "−40°C to +125°C",
+    "Reel, 1500",
+    "10-Lead LFCSP",
+    "CP-10-9",
+    "C8C"
+   ],
+   [
+    "EVAL-AD4003FMCZ",
+    "",
+    "",
+    "",
+    "AD4003 evaluation board, compatible with EVAL-SDP-CH1Z",
+    "",
+    ""
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "10-lead MSOP (RM-10)",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "REF",
+     "type": "analog input",
+     "function": "Reference input, 2.4 V to 5.1 V, referred to GND. Needs a 10 µF X7R ceramic capacitor placed tight against the REF and GND pins."
+    },
+    {
+     "pin": "2",
+     "name": "VDD",
+     "type": "power",
+     "function": "Core supply, 1.71 V to 1.89 V (1.8 V nominal). Decouple to GND with 0.1 µF ceramic."
+    },
+    {
+     "pin": "3",
+     "name": "IN+",
+     "type": "analog input",
+     "function": "Positive side of the differential analog input."
+    },
+    {
+     "pin": "4",
+     "name": "IN-",
+     "type": "analog input",
+     "function": "Negative side of the differential analog input."
+    },
+    {
+     "pin": "5",
+     "name": "GND",
+     "type": "power",
+     "function": "Ground for the supplies and the reference."
+    },
+    {
+     "pin": "6",
+     "name": "CNV",
+     "type": "digital input",
+     "function": "Convert start. Its rising edge begins a conversion and, together with the SDI level at that moment, picks CS mode or daisy-chain mode. In CS mode SDO is driven while CNV is low; in daisy-chain mode data are read while CNV is high."
+    },
+    {
+     "pin": "7",
+     "name": "SDO",
+     "type": "digital output",
+     "function": "Serial data out: the conversion result, clocked by SCK."
+    },
+    {
+     "pin": "8",
+     "name": "SCK",
+     "type": "digital input",
+     "function": "Serial clock; shifts the result out of SDO when the part is selected."
+    },
+    {
+     "pin": "9",
+     "name": "SDI",
+     "type": "digital input",
+     "function": "Serial data in, also a mode select. Low at the CNV rising edge selects daisy-chain mode, where SDI takes the upstream converter's data and passes it to SDO 18 SCK cycles later. High at the CNV rising edge selects CS mode, where a low on SDI or CNV enables SDO; if either is low at the end of a conversion the busy indicator is enabled. With CNV low, a 16-bit configuration word is clocked in on SDI on SCK rising edges."
+    },
+    {
+     "pin": "10",
+     "name": "VIO",
+     "type": "power",
+     "function": "Logic interface supply, 1.71 V to 5.5 V, normally the host's logic rail (1.8 V, 2.5 V, 3 V or 5 V). Decouple to GND with 0.1 µF ceramic."
+    }
+   ]
+  },
+  {
+   "package": "10-lead LFCSP (CP-10-9)",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "REF",
+     "type": "analog input",
+     "function": "Reference input, 2.4 V to 5.1 V, referred to GND. Needs a 10 µF X7R ceramic capacitor placed tight against the REF and GND pins."
+    },
+    {
+     "pin": "2",
+     "name": "VDD",
+     "type": "power",
+     "function": "Core supply, 1.71 V to 1.89 V (1.8 V nominal). Decouple to GND with 0.1 µF ceramic."
+    },
+    {
+     "pin": "3",
+     "name": "IN+",
+     "type": "analog input",
+     "function": "Positive side of the differential analog input."
+    },
+    {
+     "pin": "4",
+     "name": "IN-",
+     "type": "analog input",
+     "function": "Negative side of the differential analog input."
+    },
+    {
+     "pin": "5",
+     "name": "GND",
+     "type": "power",
+     "function": "Ground for the supplies and the reference."
+    },
+    {
+     "pin": "6",
+     "name": "CNV",
+     "type": "digital input",
+     "function": "Convert start. Its rising edge begins a conversion and, together with the SDI level at that moment, picks CS mode or daisy-chain mode. In CS mode SDO is driven while CNV is low; in daisy-chain mode data are read while CNV is high."
+    },
+    {
+     "pin": "7",
+     "name": "SDO",
+     "type": "digital output",
+     "function": "Serial data out: the conversion result, clocked by SCK."
+    },
+    {
+     "pin": "8",
+     "name": "SCK",
+     "type": "digital input",
+     "function": "Serial clock; shifts the result out of SDO when the part is selected."
+    },
+    {
+     "pin": "9",
+     "name": "SDI",
+     "type": "digital input",
+     "function": "Serial data in, also a mode select. Low at the CNV rising edge selects daisy-chain mode, where SDI takes the upstream converter's data and passes it to SDO 18 SCK cycles later. High at the CNV rising edge selects CS mode, where a low on SDI or CNV enables SDO; if either is low at the end of a conversion the busy indicator is enabled. With CNV low, a 16-bit configuration word is clocked in on SDI on SCK rising edges."
+    },
+    {
+     "pin": "10",
+     "name": "VIO",
+     "type": "power",
+     "function": "Logic interface supply, 1.71 V to 5.5 V, normally the host's logic rail (1.8 V, 2.5 V, 3 V or 5 V). Decouple to GND with 0.1 µF ceramic."
+    },
+    {
+     "pin": "EPAD",
+     "name": "EPAD",
+     "type": "power",
+     "function": "Exposed pad, LFCSP only. Tie it to GND; the specified performance does not depend on it."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Electrical specifications",
+   "page": 4,
+   "conditions": "VDD = 1.71 V to 1.89 V; VIO = 1.71 V to 5.5 V; VREF = 5 V; TMIN to TMAX; high-Z mode disabled, span compression disabled, turbo mode enabled (fS = 2 MSPS), unless noted",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Resolution",
+     "",
+     "18",
+     "",
+     "",
+     "Bits"
+    ],
+    [
+     "Analog input voltage range",
+     "VIN+ − VIN−",
+     "−VREF",
+     "",
+     "+VREF",
+     "V"
+    ],
+    [
+     "Analog input voltage range",
+     "Span compression enabled",
+     "−VREF × 0.8",
+     "",
+     "+VREF × 0.8",
+     "V"
+    ],
+    [
+     "Operating input voltage",
+     "VIN+, VIN− to GND",
+     "-0.1",
+     "",
+     "VREF + 0.1",
+     "V"
+    ],
+    [
+     "Operating input voltage",
+     "Span compression enabled",
+     "0.1 × VREF",
+     "",
+     "0.9 × VREF",
+     "V"
+    ],
+    [
+     "Common-mode input range",
+     "",
+     "VREF/2 − 0.125",
+     "VREF/2",
+     "VREF/2 + 0.125",
+     "V"
+    ],
+    [
+     "Common-mode rejection ratio (CMRR)",
+     "fIN = 500 kHz",
+     "",
+     "68",
+     "",
+     "dB"
+    ],
+    [
+     "Analog input current",
+     "Acquisition phase, T = 25°C",
+     "",
+     "0.3",
+     "",
+     "nA"
+    ],
+    [
+     "Analog input current",
+     "High-Z mode enabled, converting dc input at 2 MSPS",
+     "",
+     "1",
+     "",
+     "µA"
+    ],
+    [
+     "Complete cycle",
+     "",
+     "500",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Conversion time",
+     "",
+     "",
+     "290",
+     "320",
+     "ns"
+    ],
+    [
+     "Acquisition phase (1)",
+     "",
+     "290",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Throughput rate (2)",
+     "",
+     "0",
+     "",
+     "2",
+     "MSPS"
+    ],
+    [
+     "Transient response (3)",
+     "",
+     "",
+     "250",
+     "",
+     "ns"
+    ],
+    [
+     "No missing codes",
+     "",
+     "18",
+     "",
+     "",
+     "Bits"
+    ],
+    [
+     "Integral linearity error",
+     "",
+     "-1.0",
+     "±0.4",
+     "+1.0",
+     "LSB"
+    ],
+    [
+     "Integral linearity error",
+     "",
+     "-3.8",
+     "±1.52",
+     "+3.8",
+     "ppm"
+    ],
+    [
+     "Differential linearity error",
+     "",
+     "-0.75",
+     "±0.3",
+     "+0.75",
+     "LSB"
+    ],
+    [
+     "Transition noise",
+     "",
+     "",
+     "0.8",
+     "",
+     "LSB"
+    ],
+    [
+     "Zero error",
+     "",
+     "-7",
+     "",
+     "+7",
+     "LSB"
+    ],
+    [
+     "Zero error drift (4)",
+     "",
+     "-0.21",
+     "",
+     "+0.21",
+     "ppm/°C"
+    ],
+    [
+     "Gain error",
+     "",
+     "-26",
+     "±3",
+     "+26",
+     "LSB"
+    ],
+    [
+     "Gain error drift (4)",
+     "",
+     "-1.23",
+     "",
+     "+1.23",
+     "ppm/°C"
+    ],
+    [
+     "Power supply sensitivity",
+     "VDD = 1.8 V ± 5%",
+     "",
+     "1.5",
+     "",
+     "LSB"
+    ],
+    [
+     "1/f noise (5)",
+     "Bandwidth = 0.1 Hz to 10 Hz",
+     "",
+     "6",
+     "",
+     "µV p-p"
+    ],
+    [
+     "Dynamic range",
+     "",
+     "",
+     "101",
+     "",
+     "dB"
+    ],
+    [
+     "Total RMS noise",
+     "",
+     "",
+     "31.5",
+     "",
+     "µV rms"
+    ],
+    [
+     "Signal-to-noise ratio (SNR)",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 5 V",
+     "99",
+     "100.5",
+     "",
+     "dB"
+    ],
+    [
+     "Spurious-free dynamic range (SFDR)",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "122",
+     "",
+     "dB"
+    ],
+    [
+     "Total harmonic distortion (THD)",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "-123",
+     "",
+     "dB"
+    ],
+    [
+     "Signal-to-noise-and-distortion ratio (SINAD)",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 5 V",
+     "98.5",
+     "100",
+     "",
+     "dB"
+    ],
+    [
+     "Oversampled dynamic range",
+     "fIN = 1 kHz, −0.5 dBFS; oversampling ratio (OSR) = 256, VREF = 5 V",
+     "",
+     "122",
+     "",
+     "dB"
+    ],
+    [
+     "SNR",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 2.5 V",
+     "93.5",
+     "94.5",
+     "",
+     "dB"
+    ],
+    [
+     "SFDR",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 2.5 V",
+     "",
+     "122",
+     "",
+     "dB"
+    ],
+    [
+     "THD",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 2.5 V",
+     "",
+     "-119",
+     "",
+     "dB"
+    ],
+    [
+     "SINAD",
+     "fIN = 1 kHz, −0.5 dBFS, VREF = 2.5 V",
+     "93",
+     "94",
+     "",
+     "dB"
+    ],
+    [
+     "SNR",
+     "fIN = 100 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "99",
+     "",
+     "dB"
+    ],
+    [
+     "THD",
+     "fIN = 100 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "-100",
+     "",
+     "dB"
+    ],
+    [
+     "SINAD",
+     "fIN = 100 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "96.5",
+     "",
+     "dB"
+    ],
+    [
+     "SNR",
+     "fIN = 400 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "91.5",
+     "",
+     "dB"
+    ],
+    [
+     "THD",
+     "fIN = 400 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "-94",
+     "",
+     "dB"
+    ],
+    [
+     "SINAD",
+     "fIN = 400 kHz, −0.5 dBFS, VREF = 5 V",
+     "",
+     "90",
+     "",
+     "dB"
+    ],
+    [
+     "−3 dB input bandwidth",
+     "",
+     "",
+     "10",
+     "",
+     "MHz"
+    ],
+    [
+     "Aperture delay",
+     "",
+     "",
+     "1",
+     "",
+     "ns"
+    ],
+    [
+     "Aperture jitter",
+     "",
+     "",
+     "1",
+     "",
+     "ps rms"
+    ],
+    [
+     "Reference voltage range (VREF)",
+     "",
+     "2.4",
+     "",
+     "5.1",
+     "V"
+    ],
+    [
+     "Reference current",
+     "2 MSPS, VREF = 5 V",
+     "",
+     "1.1",
+     "",
+     "mA"
+    ],
+    [
+     "Overvoltage clamp IIN+/IIN−",
+     "VREF = 5 V",
+     "",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "Overvoltage clamp IIN+/IIN−",
+     "VREF = 2.5 V",
+     "",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "VIN+/VIN− at maximum IIN+/IIN−",
+     "VREF = 5 V",
+     "",
+     "5.4",
+     "",
+     "V"
+    ],
+    [
+     "VIN+/VIN− at maximum IIN+/IIN−",
+     "VREF = 2.5 V",
+     "",
+     "3.1",
+     "",
+     "V"
+    ],
+    [
+     "VIN+/VIN− clamp on/off threshold",
+     "VREF = 5 V",
+     "5.25",
+     "5.4",
+     "",
+     "V"
+    ],
+    [
+     "VIN+/VIN− clamp on/off threshold",
+     "VREF = 2.5 V",
+     "2.68",
+     "2.8",
+     "",
+     "V"
+    ],
+    [
+     "Clamp deactivation time",
+     "",
+     "",
+     "360",
+     "",
+     "ns"
+    ],
+    [
+     "REF current at maximum IIN+/IIN−",
+     "VIN+/VIN− > VREF",
+     "",
+     "100",
+     "",
+     "µA"
+    ],
+    [
+     "Input low voltage, VIL",
+     "VIO > 2.7 V",
+     "-0.3",
+     "",
+     "+0.3 × VIO",
+     "V"
+    ],
+    [
+     "Input low voltage, VIL",
+     "VIO ≤ 2.7 V",
+     "-0.3",
+     "",
+     "+0.2 × VIO",
+     "V"
+    ],
+    [
+     "Input high voltage, VIH",
+     "VIO > 2.7 V",
+     "0.7 × VIO",
+     "",
+     "VIO + 0.3",
+     "V"
+    ],
+    [
+     "Input high voltage, VIH",
+     "VIO ≤ 2.7 V",
+     "0.8 × VIO",
+     "",
+     "VIO + 0.3",
+     "V"
+    ],
+    [
+     "Input low current, IIL",
+     "",
+     "-1",
+     "",
+     "+1",
+     "µA"
+    ],
+    [
+     "Input high current, IIH",
+     "",
+     "-1",
+     "",
+     "+1",
+     "µA"
+    ],
+    [
+     "Input pin capacitance",
+     "",
+     "",
+     "6",
+     "",
+     "pF"
+    ],
+    [
+     "Data format",
+     "",
+     "",
+     "Serial 18 bits, twos complement",
+     "",
+     ""
+    ],
+    [
+     "Pipeline delay",
+     "",
+     "",
+     "Conversion results available immediately after completed conversion",
+     "",
+     ""
+    ],
+    [
+     "Output low voltage, VOL",
+     "ISINK = 500 µA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Output high voltage, VOH",
+     "ISOURCE = −500 µA",
+     "VIO − 0.3",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "VDD",
+     "",
+     "1.71",
+     "1.8",
+     "1.89",
+     "V"
+    ],
+    [
+     "VIO",
+     "",
+     "1.71",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Standby current",
+     "VDD = 1.8 V, VIO = 1.8 V, T = 25°C",
+     "",
+     "1.6",
+     "",
+     "µA"
+    ],
+    [
+     "Power dissipation",
+     "VDD = 1.8 V, VIO = 1.8 V, VREF = 5 V; 10 kSPS, high-Z mode disabled",
+     "",
+     "80",
+     "",
+     "µW"
+    ],
+    [
+     "Power dissipation",
+     "VDD = 1.8 V, VIO = 1.8 V, VREF = 5 V; 1 MSPS, high-Z mode disabled",
+     "",
+     "8",
+     "",
+     "mW"
+    ],
+    [
+     "Power dissipation",
+     "VDD = 1.8 V, VIO = 1.8 V, VREF = 5 V; 2 MSPS, high-Z mode disabled",
+     "",
+     "16",
+     "18.5",
+     "mW"
+    ],
+    [
+     "Power dissipation",
+     "VDD = 1.8 V, VIO = 1.8 V, VREF = 5 V; 1 MSPS, high-Z mode enabled",
+     "",
+     "10",
+     "",
+     "mW"
+    ],
+    [
+     "Power dissipation",
+     "VDD = 1.8 V, VIO = 1.8 V, VREF = 5 V; 2 MSPS, high-Z mode enabled",
+     "",
+     "20",
+     "24.5",
+     "mW"
+    ],
+    [
+     "Power dissipation, VDD only",
+     "2 MSPS, high-Z mode disabled",
+     "",
+     "9.5",
+     "",
+     "mW"
+    ],
+    [
+     "Power dissipation, REF only",
+     "2 MSPS, high-Z mode disabled",
+     "",
+     "5.5",
+     "",
+     "mW"
+    ],
+    [
+     "Power dissipation, VIO only",
+     "2 MSPS, high-Z mode disabled",
+     "",
+     "1.0",
+     "",
+     "mW"
+    ],
+    [
+     "Energy per conversion",
+     "",
+     "",
+     "8",
+     "",
+     "nJ/sample"
+    ],
+    [
+     "Specified performance temperature range",
+     "TMIN to TMAX",
+     "-40",
+     "",
+     "+125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) Acquisition phase: the time the input sampling capacitors have to take in a new input while the converter runs at 2 MSPS.",
+    "(2) 2 MSPS needs turbo mode on and SCK at 75 MHz or faster.",
+    "(3) Transient response: how long a full-scale step at the input takes to settle within ±1 LSB.",
+    "(4) Min and max set by characterization; not tested in production.",
+    "(5) 1/f noise taken over 0.1 Hz to 10 Hz at 50 kSPS, each reading the average of 2500 samples."
+   ]
+  },
+  {
+   "title": "Digital interface timing",
+   "page": 6,
+   "conditions": "VDD = 1.71 V to 1.89 V; VIO = 1.71 V to 5.5 V; VREF = 5 V; TMIN to TMAX; high-Z mode disabled, span compression disabled, turbo mode enabled (fS = 2 MSPS), unless noted (1)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Conversion time, CNV rising edge to data available",
+     "tCONV",
+     "",
+     "",
+     "290",
+     "320",
+     "ns"
+    ],
+    [
+     "Acquisition phase (2)",
+     "tACQ",
+     "",
+     "290",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Time between conversions",
+     "tCYC",
+     "",
+     "500",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CNV pulse width, CS mode (3)",
+     "tCNVH",
+     "",
+     "10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK period, CS mode (4)",
+     "tSCK",
+     "VIO > 2.7 V",
+     "9.8",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK period, CS mode (4)",
+     "tSCK",
+     "VIO > 1.7 V",
+     "12.3",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK period, daisy-chain mode (5)",
+     "tSCK",
+     "VIO > 2.7 V",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK period, daisy-chain mode (5)",
+     "tSCK",
+     "VIO > 1.7 V",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK low time",
+     "tSCKL",
+     "",
+     "3",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK high time",
+     "tSCKH",
+     "",
+     "3",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK falling edge to data remains valid delay",
+     "tHSDO",
+     "",
+     "1.5",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK falling edge to data valid delay",
+     "tDSDO",
+     "VIO > 2.7 V",
+     "",
+     "",
+     "7.5",
+     "ns"
+    ],
+    [
+     "SCK falling edge to data valid delay",
+     "tDSDO",
+     "VIO > 1.7 V",
+     "",
+     "",
+     "10.5",
+     "ns"
+    ],
+    [
+     "CNV or SDI low to SDO D17 MSB valid delay, CS mode",
+     "tEN",
+     "VIO > 2.7 V",
+     "",
+     "",
+     "10",
+     "ns"
+    ],
+    [
+     "CNV or SDI low to SDO D17 MSB valid delay, CS mode",
+     "tEN",
+     "VIO > 1.7 V",
+     "",
+     "",
+     "13",
+     "ns"
+    ],
+    [
+     "CNV rising edge to first SCK rising edge delay",
+     "tQUIET1",
+     "",
+     "190",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Last SCK falling edge to CNV rising edge delay (6)",
+     "tQUIET2",
+     "",
+     "60",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CNV or SDI high or last SCK falling edge to SDO high impedance, CS mode",
+     "tDIS",
+     "",
+     "",
+     "",
+     "20",
+     "ns"
+    ],
+    [
+     "SDI valid setup time from CNV rising edge",
+     "tSSDICNV",
+     "",
+     "2",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI valid hold time from CNV rising edge, CS mode",
+     "tHSDICNV",
+     "",
+     "2",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK valid hold time from CNV rising edge, daisy-chain mode",
+     "tHSCKCNV",
+     "",
+     "12",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI valid setup time from SCK rising edge, daisy-chain mode",
+     "tSSDISCK",
+     "",
+     "2",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI valid hold time from SCK rising edge, daisy-chain mode",
+     "tHSDISCK",
+     "",
+     "2",
+     "",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "(1) Timing is measured between logic levels: for VIO ≤ 2.7 V the output levels are 80 % and 20 % of VIO, for VIO > 2.7 V 70 % and 30 % of VIO; inputs use the minimum VIH and maximum VIL of the electrical table.",
+    "(2) Time the sampling capacitors have to take in a new input at 2 MSPS.",
+    "(3) In turbo mode tCNVH has to equal the tQUIET1 minimum.",
+    "(4) 2 MSPS needs turbo mode on and SCK at 75 MHz or faster.",
+    "(5) SCK at 50 % duty cycle.",
+    "(6) SINAD depends on tQUIET2."
+   ]
+  },
+  {
+   "title": "Register read/write timing",
+   "page": 7,
+   "conditions": "VDD = 1.71 V to 1.89 V; VIO = 1.71 V to 5.5 V; VREF = 5 V; TMIN to TMAX; high-Z mode disabled, span compression disabled, turbo mode enabled (fS = 2 MSPS), unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Read/write: CNV pulse width (1)",
+     "tCNVH",
+     "",
+     "10",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Read/write: SCK period",
+     "tSCK",
+     "VIO > 2.7 V",
+     "9.8",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Read/write: SCK period",
+     "tSCK",
+     "VIO > 1.7 V",
+     "12.3",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Read/write: SCK low time",
+     "tSCKL",
+     "",
+     "3",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Read/write: SCK high time",
+     "tSCKH",
+     "",
+     "3",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Read: CNV low to SDO D17 MSB valid delay",
+     "tEN",
+     "VIO > 2.7 V",
+     "",
+     "",
+     "10",
+     "ns"
+    ],
+    [
+     "Read: CNV low to SDO D17 MSB valid delay",
+     "tEN",
+     "VIO > 1.7 V",
+     "",
+     "",
+     "13",
+     "ns"
+    ],
+    [
+     "Read: SCK falling edge to data remains valid",
+     "tHSDO",
+     "",
+     "1.5",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Read: SCK falling edge to data valid delay",
+     "tDSDO",
+     "VIO > 2.7 V",
+     "",
+     "",
+     "7.5",
+     "ns"
+    ],
+    [
+     "Read: SCK falling edge to data valid delay",
+     "tDSDO",
+     "VIO > 1.7 V",
+     "",
+     "",
+     "10.5",
+     "ns"
+    ],
+    [
+     "Read: CNV rising edge to SDO high impedance",
+     "tDIS",
+     "",
+     "",
+     "",
+     "20",
+     "ns"
+    ],
+    [
+     "Write: SDI valid setup time from SCK rising edge",
+     "tSSDISCK",
+     "",
+     "2",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Write: SDI valid hold time from SCK rising edge",
+     "tHSDISCK",
+     "",
+     "2",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Write: CNV rising edge to SCK edge hold time",
+     "tHCNVSCK",
+     "",
+     "0",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Write: CNV falling edge to SCK active edge setup time",
+     "tSCNVSCK",
+     "",
+     "6",
+     "",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "(1) In turbo mode tCNVH has to equal the tQUIET1 minimum."
+   ]
+  },
+  {
+   "title": "Achievable throughput for each interface mode",
+   "page": 7,
+   "conditions": "VDD = 1.71 V to 1.89 V; VIO = 1.71 V to 5.5 V; VREF = 5 V; TMIN to TMAX; high-Z mode disabled, span compression disabled, turbo mode enabled (fS = 2 MSPS), unless noted",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CS mode, 3-wire and 4-wire turbo mode",
+     "fSCK = 100 MHz, VIO ≥ 2.7 V",
+     "",
+     "",
+     "2",
+     "MSPS"
+    ],
+    [
+     "CS mode, 3-wire and 4-wire turbo mode",
+     "fSCK = 80 MHz, VIO < 2.7 V",
+     "",
+     "",
+     "2",
+     "MSPS"
+    ],
+    [
+     "CS mode, 3-wire and 4-wire turbo mode and six status bits",
+     "fSCK = 100 MHz, VIO ≥ 2.7 V",
+     "",
+     "",
+     "2",
+     "MSPS"
+    ],
+    [
+     "CS mode, 3-wire and 4-wire turbo mode and six status bits",
+     "fSCK = 80 MHz, VIO < 2.7 V",
+     "",
+     "",
+     "1.78",
+     "MSPS"
+    ],
+    [
+     "CS mode, 3-wire and 4-wire mode",
+     "fSCK = 100 MHz, VIO ≥ 2.7 V",
+     "",
+     "",
+     "1.75",
+     "MSPS"
+    ],
+    [
+     "CS mode, 3-wire and 4-wire mode",
+     "fSCK = 80 MHz, VIO < 2.7 V",
+     "",
+     "",
+     "1.62",
+     "MSPS"
+    ],
+    [
+     "CS mode, 3-wire and 4-wire mode and six status bits",
+     "fSCK = 100 MHz, VIO ≥ 2.7 V",
+     "",
+     "",
+     "1.59",
+     "MSPS"
+    ],
+    [
+     "CS mode, 3-wire and 4-wire mode and six status bits",
+     "fSCK = 80 MHz, VIO < 2.7 V",
+     "",
+     "",
+     "1.44",
+     "MSPS"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Analog inputs IN+, IN− to GND",
+     "−0.3 V to VREF + 0.4 V or ± 50 mA"
+    ],
+    [
+     "Supply voltage REF, VIO to GND",
+     "−0.3 V to +6.0 V"
+    ],
+    [
+     "Supply voltage VDD to GND",
+     "−0.3 V to +2.1 V"
+    ],
+    [
+     "Supply voltage VDD to VIO",
+     "−6 V to +2.4 V"
+    ],
+    [
+     "Digital inputs to GND",
+     "−0.3 V to VIO + 0.3 V"
+    ],
+    [
+     "Digital outputs to GND",
+     "−0.3 V to VIO + 0.3 V"
+    ],
+    [
+     "Storage temperature range",
+     "−65°C to +150°C"
+    ],
+    [
+     "Junction temperature",
+     "150°C"
+    ],
+    [
+     "Lead temperature, soldering",
+     "260°C reflow as per JEDEC J-STD-020"
+    ],
+    [
+     "ESD, human body model",
+     "4 kV"
+    ],
+    [
+     "ESD, machine model",
+     "200 V"
+    ],
+    [
+     "ESD, field-induced charged device model",
+     "1.25 kV"
+    ]
+   ],
+   "notes": [
+    "The input clamp does not hold an overvoltage indefinitely."
+   ]
+  },
+  {
+   "title": "Thermal resistance",
+   "page": 8,
+   "conditions": "Simulated on a 2S2P JEDEC board (test condition 1)",
+   "columns": [
+    "package",
+    "θJA",
+    "θJC",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RM-10 (10-lead MSOP)",
+     "147",
+     "38",
+     "°C/W"
+    ],
+    [
+     "CP-10-9 (10-lead LFCSP)",
+     "114",
+     "33",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Output codes and ideal input voltages",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "description",
+    "analog input, VREF = 5 V",
+    "VREF = 5 V with span compression enabled",
+    "digital output code (hex)"
+   ],
+   "rows": [
+    [
+     "FSR − 1 LSB",
+     "+4.999962 V",
+     "+3.999969 V",
+     "0x1FFFF (1)"
+    ],
+    [
+     "Midscale + 1 LSB",
+     "+38.15 µV",
+     "+30.5 µV",
+     "0x00001"
+    ],
+    [
+     "Midscale",
+     "0 V",
+     "0 V",
+     "0x00000"
+    ],
+    [
+     "Midscale − 1 LSB",
+     "−38.15 µV",
+     "−30.5 µV",
+     "0x3FFFF"
+    ],
+    [
+     "−FSR + 1 LSB",
+     "−4.999962 V",
+     "−3.999969 V",
+     "0x20001"
+    ],
+    [
+     "−FSR",
+     "−5 V",
+     "−4 V",
+     "0x20000 (2)"
+    ]
+   ],
+   "notes": [
+    "(1) An input above +VREF (overrange) also reads 0x1FFFF.",
+    "(2) An input below −VREF (underrange) also reads 0x20000."
+   ]
+  },
+  {
+   "title": "RC filter and amplifier selection by input bandwidth",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "input signal bandwidth (kHz)",
+    "R (Ω)",
+    "C (pF)",
+    "recommended amplifier",
+    "recommended fully differential amplifier"
+   ],
+   "rows": [
+    [
+     "<10",
+     "",
+     "",
+     "See the High-Z Mode section",
+     "ADA4940-1"
+    ],
+    [
+     "<200",
+     "200",
+     "180",
+     "ADA4807-1",
+     "ADA4940-1"
+    ],
+    [
+     ">200",
+     "200",
+     "120",
+     "ADA4897-1",
+     "ADA4932-1"
+    ],
+    [
+     "Multiplexed",
+     "200",
+     "120",
+     "ADA4897-1",
+     "ADA4932-1"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Pin-compatible 14-, 16- and 18-bit precision SAR ADCs (MSOP, LFCSP)",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "100 kSPS",
+    "250 kSPS",
+    "400 kSPS to 500 kSPS",
+    "≥1000 kSPS"
+   ],
+   "rows": [
+    [
+     "18 (1)",
+     "AD7989-1 (2)",
+     "AD7691 (2)",
+     "AD7690 (2), AD7989-5 (2)",
+     "AD4003, AD7982 (2), AD7984 (2)"
+    ],
+    [
+     "16 (1)",
+     "AD7684",
+     "AD7687",
+     "AD7688 (2), AD7693 (2)",
+     "AD7915 (2)"
+    ],
+    [
+     "16 (3)",
+     "AD7680, AD7683, AD7988-1 (2)",
+     "AD7685 (2), AD7694",
+     "AD7686 (2), AD7988-5",
+     "AD4000"
+    ],
+    [
+     "14 (3)",
+     "AD7940",
+     "AD7942 (2)",
+     "AD7946 (2)",
+     "AD7980 (2), AD7983 (2)"
+    ]
+   ],
+   "notes": [
+    "(1) True differential input.",
+    "(2) Pin for pin compatible.",
+    "(3) Pseudo differential input."
+   ]
+  },
+  {
+   "title": "SDO state at power-up",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "CNV",
+    "SDI",
+    "SDO"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Low"
+    ],
+    [
+     "0",
+     "1",
+     "High-Z"
+    ],
+    [
+     "1",
+     "0",
+     "Low"
+    ],
+    [
+     "1",
+     "1",
+     "High-Z"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register bits",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "register bit",
+    "default status"
+   ],
+   "rows": [
+    [
+     "Overvoltage (OV) clamp flag",
+     "1 bit (default 1: inactive)"
+    ],
+    [
+     "Span compression",
+     "1 bit (default 0: disabled)"
+    ],
+    [
+     "High-Z mode",
+     "1 bit (default 0: disabled)"
+    ],
+    [
+     "Turbo mode",
+     "1 bit (default 0: disabled)"
+    ],
+    [
+     "Enable six status bits",
+     "1 bit (default 0: disabled)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Command register",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "Bit 7",
+    "Bit 6",
+    "Bit 5",
+    "Bit 4",
+    "Bit 3",
+    "Bit 2",
+    "Bit 1",
+    "Bit 0"
+   ],
+   "rows": [
+    [
+     "WEN",
+     "R/W",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0"
+    ]
+   ],
+   "notes": [
+    "A register write uses command 0x14 (WEN = 0, R/W = 0); a register read uses 0x54 (WEN = 0, R/W = 1)."
+   ]
+  },
+  {
+   "title": "Register map",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "ADDR[1:0]",
+    "Bit 7",
+    "Bit 6",
+    "Bit 5",
+    "Bit 4",
+    "Bit 3",
+    "Bit 2",
+    "Bit 1",
+    "Bit 0",
+    "reset"
+   ],
+   "rows": [
+    [
+     "0x0",
+     "Reserved",
+     "Reserved",
+     "Reserved",
+     "Enable six status bits",
+     "Span compression",
+     "High-Z mode",
+     "Turbo mode",
+     "Overvoltage (OV) clamp flag (read only sticky bit)",
+     "0xE1"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Status bits (default conditions)",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "Bit 5",
+    "Bit 4",
+    "Bit 3",
+    "Bit 2",
+    "Bit 1",
+    "Bit 0"
+   ],
+   "rows": [
+    [
+     "Overvoltage (OV) clamp flag",
+     "Span compression",
+     "High-Z mode",
+     "Turbo mode",
+     "Reserved",
+     "Reserved"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Transition noise against reference voltage",
+   "page": 11,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Reference voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Transition noise",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "+125 °C",
+     "points": [
+      [
+       2.507,
+       1.752
+      ],
+      [
+       3.299,
+       1.343
+      ],
+      [
+       4.094,
+       1.097
+      ],
+      [
+       4.99,
+       0.925
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       2.507,
+       1.654
+      ],
+      [
+       3.299,
+       1.253
+      ],
+      [
+       4.094,
+       1.02
+      ],
+      [
+       4.99,
+       0.85
+      ]
+     ]
+    },
+    {
+     "label": "−40 °C",
+     "points": [
+      [
+       2.507,
+       1.576
+      ],
+      [
+       3.299,
+       1.203
+      ],
+      [
+       4.094,
+       0.979
+      ],
+      [
+       4.99,
+       0.815
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SNR, SINAD and ENOB against reference voltage",
+   "page": 13,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Reference voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SNR, SINAD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "ENOB",
+    "unit": "bits",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SNR",
+     "points": [
+      [
+       2.408,
+       94.792
+      ],
+      [
+       2.675,
+       95.675
+      ],
+      [
+       3.013,
+       96.661
+      ],
+      [
+       3.397,
+       97.667
+      ],
+      [
+       3.735,
+       98.45
+      ],
+      [
+       3.997,
+       99.0
+      ],
+      [
+       4.386,
+       99.729
+      ],
+      [
+       4.512,
+       99.892
+      ],
+      [
+       4.699,
+       100.222
+      ],
+      [
+       5.089,
+       100.806
+      ]
+     ]
+    },
+    {
+     "label": "SINAD",
+     "points": [
+      [
+       2.408,
+       94.764
+      ],
+      [
+       2.823,
+       96.1
+      ],
+      [
+       3.098,
+       96.861
+      ],
+      [
+       3.473,
+       97.807
+      ],
+      [
+       3.997,
+       98.931
+      ],
+      [
+       4.373,
+       99.678
+      ],
+      [
+       4.5,
+       99.847
+      ],
+      [
+       4.699,
+       100.208
+      ],
+      [
+       5.089,
+       100.792
+      ]
+     ]
+    },
+    {
+     "label": "ENOB",
+     "points": [
+      [
+       2.408,
+       15.456
+      ],
+      [
+       2.798,
+       15.669
+      ],
+      [
+       3.325,
+       15.906
+      ],
+      [
+       3.997,
+       16.15
+      ],
+      [
+       4.361,
+       16.273
+      ],
+      [
+       4.5,
+       16.302
+      ],
+      [
+       4.699,
+       16.362
+      ],
+      [
+       5.089,
+       16.462
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "THD and SFDR against reference voltage",
+   "page": 13,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Reference voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "THD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "SFDR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "THD",
+     "points": [
+      [
+       2.408,
+       -117.31
+      ],
+      [
+       2.611,
+       -118.01
+      ],
+      [
+       2.798,
+       -118.36
+      ],
+      [
+       2.985,
+       -118.4
+      ],
+      [
+       3.098,
+       -118.19
+      ],
+      [
+       3.186,
+       -118.5
+      ],
+      [
+       3.258,
+       -118.57
+      ],
+      [
+       3.372,
+       -118.49
+      ],
+      [
+       3.495,
+       -118.22
+      ],
+      [
+       3.573,
+       -118.3
+      ],
+      [
+       3.609,
+       -117.91
+      ],
+      [
+       3.685,
+       -115.72
+      ],
+      [
+       3.709,
+       -115.44
+      ],
+      [
+       3.733,
+       -115.46
+      ],
+      [
+       3.795,
+       -115.94
+      ],
+      [
+       3.994,
+       -116.83
+      ],
+      [
+       4.095,
+       -117.39
+      ],
+      [
+       4.16,
+       -117.57
+      ],
+      [
+       4.185,
+       -117.73
+      ],
+      [
+       4.294,
+       -120.72
+      ],
+      [
+       4.317,
+       -120.98
+      ],
+      [
+       4.395,
+       -121.36
+      ],
+      [
+       4.505,
+       -123.25
+      ],
+      [
+       4.793,
+       -126.42
+      ],
+      [
+       4.881,
+       -127.58
+      ],
+      [
+       4.932,
+       -127.97
+      ],
+      [
+       4.98,
+       -128.15
+      ],
+      [
+       5.017,
+       -128.15
+      ],
+      [
+       5.093,
+       -127.94
+      ]
+     ]
+    },
+    {
+     "label": "SFDR",
+     "points": [
+      [
+       2.408,
+       126.911
+      ],
+      [
+       2.475,
+       127.01
+      ],
+      [
+       2.523,
+       127.24
+      ],
+      [
+       2.7,
+       128.6
+      ],
+      [
+       2.785,
+       129.534
+      ],
+      [
+       2.808,
+       129.666
+      ],
+      [
+       2.876,
+       129.7
+      ],
+      [
+       2.899,
+       129.779
+      ],
+      [
+       2.996,
+       130.958
+      ],
+      [
+       3.048,
+       131.15
+      ],
+      [
+       3.075,
+       131.18
+      ],
+      [
+       3.11,
+       131.164
+      ],
+      [
+       3.173,
+       130.974
+      ],
+      [
+       3.21,
+       130.719
+      ],
+      [
+       3.271,
+       129.977
+      ],
+      [
+       3.309,
+       129.767
+      ],
+      [
+       3.334,
+       129.814
+      ],
+      [
+       3.398,
+       130.071
+      ],
+      [
+       3.484,
+       130.04
+      ],
+      [
+       3.56,
+       130.253
+      ],
+      [
+       3.609,
+       130.663
+      ],
+      [
+       3.698,
+       132.186
+      ],
+      [
+       3.719,
+       132.233
+      ],
+      [
+       3.795,
+       132.064
+      ],
+      [
+       3.871,
+       132.473
+      ],
+      [
+       3.896,
+       132.538
+      ],
+      [
+       3.922,
+       132.466
+      ],
+      [
+       3.994,
+       132.052
+      ],
+      [
+       4.019,
+       132.092
+      ],
+      [
+       4.095,
+       132.417
+      ],
+      [
+       4.133,
+       132.444
+      ],
+      [
+       4.171,
+       132.413
+      ],
+      [
+       4.208,
+       132.307
+      ],
+      [
+       4.269,
+       131.932
+      ],
+      [
+       4.294,
+       131.857
+      ],
+      [
+       4.319,
+       131.876
+      ],
+      [
+       4.395,
+       132.161
+      ],
+      [
+       4.493,
+       132.417
+      ],
+      [
+       4.594,
+       132.173
+      ],
+      [
+       4.695,
+       132.319
+      ],
+      [
+       4.793,
+       132.149
+      ],
+      [
+       4.894,
+       132.21
+      ],
+      [
+       4.991,
+       132.125
+      ],
+      [
+       5.093,
+       132.125
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "SNR against decimation rate for two input frequencies",
+   "page": 13,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Decimation rate",
+    "unit": "",
+    "scale": "log"
+   },
+   "y": {
+    "label": "SNR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Dynamic range",
+     "points": [
+      [
+       1.008,
+       100.69
+      ],
+      [
+       4.053,
+       106.74
+      ],
+      [
+       65.5,
+       118.33
+      ],
+      [
+       131.3,
+       120.62
+      ],
+      [
+       263.3,
+       122.5
+      ],
+      [
+       1059,
+       129.72
+      ],
+      [
+       2123,
+       131.11
+      ]
+     ]
+    },
+    {
+     "label": "fIN = 1 kHz",
+     "points": [
+      [
+       1.008,
+       100.28
+      ],
+      [
+       8.126,
+       107.99
+      ],
+      [
+       32.67,
+       111.74
+      ],
+      [
+       65.5,
+       113.33
+      ],
+      [
+       131.3,
+       114.51
+      ],
+      [
+       528.0,
+       115.83
+      ],
+      [
+       1059,
+       120.69
+      ],
+      [
+       2123,
+       126.39
+      ]
+     ]
+    },
+    {
+     "label": "fIN = 10 kHz",
+     "points": [
+      [
+       1.008,
+       97.92
+      ],
+      [
+       2.021,
+       100.21
+      ],
+      [
+       4.053,
+       100.69
+      ],
+      [
+       16.29,
+       102.29
+      ],
+      [
+       32.67,
+       103.82
+      ],
+      [
+       65.5,
+       105.07
+      ],
+      [
+       131.3,
+       107.78
+      ],
+      [
+       263.3,
+       115.0
+      ],
+      [
+       528.0,
+       118.82
+      ],
+      [
+       1059,
+       124.79
+      ],
+      [
+       2123,
+       127.78
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reference current against reference voltage",
+   "page": 13,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Reference voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Reference current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Reference current",
+     "points": [
+      [
+       2.408,
+       0.4948
+      ],
+      [
+       3.199,
+       0.654
+      ],
+      [
+       3.949,
+       0.8122
+      ],
+      [
+       4.524,
+       0.9393
+      ],
+      [
+       5.089,
+       1.0708
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SINAD against tQUIET2",
+   "page": 13,
+   "conditions": "VDD = 1.8 V, VREF = 5 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "tQUIET2",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SINAD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIO = 1.89 V",
+     "points": [
+      [
+       0.22,
+       100.25
+      ],
+      [
+       2.44,
+       99.76
+      ],
+      [
+       5.0,
+       100.219
+      ],
+      [
+       7.44,
+       100.271
+      ],
+      [
+       22.44,
+       100.313
+      ],
+      [
+       40.0,
+       100.292
+      ],
+      [
+       42.44,
+       100.313
+      ],
+      [
+       75.0,
+       100.323
+      ],
+      [
+       79.67,
+       100.302
+      ]
+     ]
+    },
+    {
+     "label": "VIO = 3.6 V",
+     "points": [
+      [
+       6.44,
+       95.021
+      ],
+      [
+       7.44,
+       100.135
+      ],
+      [
+       10.0,
+       99.115
+      ],
+      [
+       12.44,
+       100.188
+      ],
+      [
+       15.0,
+       99.656
+      ],
+      [
+       17.44,
+       100.042
+      ],
+      [
+       20.0,
+       100.24
+      ],
+      [
+       22.44,
+       100.24
+      ],
+      [
+       25.0,
+       100.281
+      ],
+      [
+       27.44,
+       100.146
+      ],
+      [
+       30.0,
+       100.302
+      ],
+      [
+       32.44,
+       100.271
+      ],
+      [
+       42.44,
+       100.302
+      ],
+      [
+       50.0,
+       100.281
+      ],
+      [
+       57.44,
+       100.313
+      ],
+      [
+       79.67,
+       100.313
+      ]
+     ]
+    },
+    {
+     "label": "VIO = 5.5 V",
+     "points": [
+      [
+       7.44,
+       95.021
+      ],
+      [
+       10.0,
+       100.063
+      ],
+      [
+       12.44,
+       98.323
+      ],
+      [
+       15.0,
+       99.344
+      ],
+      [
+       17.44,
+       100.125
+      ],
+      [
+       20.0,
+       99.885
+      ],
+      [
+       22.44,
+       100.167
+      ],
+      [
+       25.0,
+       99.948
+      ],
+      [
+       27.44,
+       100.271
+      ],
+      [
+       30.0,
+       100.26
+      ],
+      [
+       32.44,
+       100.302
+      ],
+      [
+       35.0,
+       100.229
+      ],
+      [
+       42.44,
+       100.302
+      ],
+      [
+       45.0,
+       100.271
+      ],
+      [
+       47.44,
+       100.292
+      ],
+      [
+       79.67,
+       100.292
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SNR, SINAD and ENOB against temperature, fIN = 1 kHz",
+   "page": 14,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SNR, SINAD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "ENOB",
+    "unit": "bits",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SNR",
+     "points": [
+      [
+       -39.6,
+       100.697
+      ],
+      [
+       -14.7,
+       100.497
+      ],
+      [
+       -1.3,
+       100.401
+      ],
+      [
+       4.6,
+       100.372
+      ],
+      [
+       18.9,
+       100.321
+      ],
+      [
+       51.1,
+       100.112
+      ],
+      [
+       86.8,
+       99.858
+      ],
+      [
+       119.6,
+       99.604
+      ]
+     ]
+    },
+    {
+     "label": "SINAD",
+     "points": [
+      [
+       -39.6,
+       100.598
+      ],
+      [
+       -14.7,
+       100.397
+      ],
+      [
+       -1.3,
+       100.299
+      ],
+      [
+       4.6,
+       100.27
+      ],
+      [
+       18.9,
+       100.222
+      ],
+      [
+       51.1,
+       100.013
+      ],
+      [
+       86.8,
+       99.758
+      ],
+      [
+       119.6,
+       99.502
+      ]
+     ]
+    },
+    {
+     "label": "ENOB",
+     "points": [
+      [
+       -39.6,
+       16.4095
+      ],
+      [
+       -1.3,
+       16.37
+      ],
+      [
+       15.5,
+       16.3572
+      ],
+      [
+       22.9,
+       16.3502
+      ],
+      [
+       81.1,
+       16.28
+      ],
+      [
+       119.6,
+       16.2304
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "THD and SFDR against temperature, fIN = 1 kHz",
+   "page": 14,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "THD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "SFDR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "THD",
+     "points": [
+      [
+       -39.5,
+       -115.519
+      ],
+      [
+       -13.8,
+       -116.541
+      ],
+      [
+       -0.3,
+       -117.002
+      ],
+      [
+       5.6,
+       -117.152
+      ],
+      [
+       11.1,
+       -117.25
+      ],
+      [
+       14.0,
+       -117.273
+      ],
+      [
+       17.1,
+       -117.274
+      ],
+      [
+       20.6,
+       -117.251
+      ],
+      [
+       30.4,
+       -117.094
+      ],
+      [
+       37.4,
+       -116.941
+      ],
+      [
+       53.4,
+       -116.545
+      ],
+      [
+       69.8,
+       -116.103
+      ],
+      [
+       95.4,
+       -115.366
+      ],
+      [
+       123.6,
+       -114.414
+      ]
+     ]
+    },
+    {
+     "label": "SFDR",
+     "points": [
+      [
+       -39.5,
+       117.503
+      ],
+      [
+       -9.0,
+       117.747
+      ],
+      [
+       -0.3,
+       117.8
+      ],
+      [
+       3.0,
+       117.813
+      ],
+      [
+       5.9,
+       117.82
+      ],
+      [
+       11.0,
+       117.822
+      ],
+      [
+       24.5,
+       117.8
+      ],
+      [
+       53.4,
+       117.781
+      ],
+      [
+       61.7,
+       117.771
+      ],
+      [
+       69.8,
+       117.755
+      ],
+      [
+       77.4,
+       117.732
+      ],
+      [
+       84.2,
+       117.699
+      ],
+      [
+       90.0,
+       117.657
+      ],
+      [
+       100.3,
+       117.543
+      ],
+      [
+       123.6,
+       117.206
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Operating currents against temperature",
+   "page": 14,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Operating current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD, high-Z disabled",
+     "points": [
+      [
+       -39.5,
+       5.056
+      ],
+      [
+       -30,
+       5.088
+      ],
+      [
+       -20,
+       5.126
+      ],
+      [
+       -10,
+       5.165
+      ],
+      [
+       0,
+       5.195
+      ],
+      [
+       10,
+       5.236
+      ],
+      [
+       20,
+       5.278
+      ],
+      [
+       30,
+       5.312
+      ],
+      [
+       40,
+       5.348
+      ],
+      [
+       50,
+       5.389
+      ],
+      [
+       60,
+       5.418
+      ],
+      [
+       70,
+       5.468
+      ],
+      [
+       80,
+       5.499
+      ],
+      [
+       90,
+       5.543
+      ],
+      [
+       100,
+       5.582
+      ],
+      [
+       110,
+       5.619
+      ],
+      [
+       120,
+       5.659
+      ],
+      [
+       122.5,
+       5.659
+      ]
+     ]
+    },
+    {
+     "label": "VDD, high-Z enabled",
+     "points": [
+      [
+       -39.2,
+       6.585
+      ],
+      [
+       -1.9,
+       6.829
+      ],
+      [
+       35.2,
+       7.087
+      ],
+      [
+       123.3,
+       7.722
+      ]
+     ]
+    },
+    {
+     "label": "REF, high-Z disabled",
+     "points": [
+      [
+       -39.5,
+       1.103
+      ],
+      [
+       -30,
+       1.103
+      ],
+      [
+       -20,
+       1.09
+      ],
+      [
+       -10,
+       1.09
+      ],
+      [
+       0,
+       1.09
+      ],
+      [
+       10,
+       1.09
+      ],
+      [
+       20,
+       1.077
+      ],
+      [
+       30,
+       1.077
+      ],
+      [
+       40,
+       1.077
+      ],
+      [
+       50,
+       1.081
+      ],
+      [
+       60,
+       1.09
+      ],
+      [
+       70,
+       1.09
+      ],
+      [
+       80,
+       1.09
+      ],
+      [
+       90,
+       1.09
+      ],
+      [
+       100,
+       1.09
+      ],
+      [
+       110,
+       1.09
+      ],
+      [
+       120,
+       1.09
+      ],
+      [
+       122.5,
+       1.09
+      ]
+     ]
+    },
+    {
+     "label": "REF, high-Z enabled",
+     "points": [
+      [
+       -39.5,
+       1.318
+      ],
+      [
+       35.2,
+       1.319
+      ],
+      [
+       123.3,
+       1.335
+      ]
+     ]
+    },
+    {
+     "label": "VIO, high-Z disabled",
+     "points": [
+      [
+       -39.5,
+       0.256
+      ],
+      [
+       -30,
+       0.263
+      ],
+      [
+       -20,
+       0.27
+      ],
+      [
+       -10,
+       0.27
+      ],
+      [
+       0,
+       0.27
+      ],
+      [
+       10,
+       0.27
+      ],
+      [
+       20,
+       0.27
+      ],
+      [
+       30,
+       0.27
+      ],
+      [
+       40,
+       0.27
+      ],
+      [
+       50,
+       0.27
+      ],
+      [
+       60,
+       0.27
+      ],
+      [
+       70,
+       0.27
+      ],
+      [
+       80,
+       0.27
+      ],
+      [
+       90,
+       0.27
+      ],
+      [
+       100,
+       0.27
+      ],
+      [
+       110,
+       0.27
+      ],
+      [
+       120,
+       0.27
+      ],
+      [
+       122.5,
+       0.27
+      ]
+     ]
+    },
+    {
+     "label": "VIO, high-Z enabled",
+     "points": [
+      [
+       -39.5,
+       0.347
+      ],
+      [
+       123.3,
+       0.347
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Standby current against temperature",
+   "page": 14,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Standby current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Standby current",
+     "points": [
+      [
+       -39.6,
+       0.86
+      ],
+      [
+       -31.7,
+       0.85
+      ],
+      [
+       -9.1,
+       0.2
+      ],
+      [
+       -1.3,
+       0.14
+      ],
+      [
+       7.0,
+       0.34
+      ],
+      [
+       16.0,
+       0.91
+      ],
+      [
+       25.8,
+       1.95
+      ],
+      [
+       36.8,
+       3.55
+      ],
+      [
+       48.7,
+       5.62
+      ],
+      [
+       61.2,
+       8.07
+      ],
+      [
+       126.8,
+       22.01
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Zero error and gain error against temperature",
+   "page": 14,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Zero error and gain error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PFS gain error",
+     "points": [
+      [
+       -39.6,
+       -0.28
+      ],
+      [
+       -32.0,
+       0.13
+      ],
+      [
+       -10.5,
+       1.82
+      ],
+      [
+       -3.0,
+       2.27
+      ],
+      [
+       4.9,
+       2.52
+      ],
+      [
+       13.4,
+       2.5
+      ],
+      [
+       22.9,
+       2.12
+      ],
+      [
+       33.4,
+       1.31
+      ],
+      [
+       44.7,
+       0.15
+      ],
+      [
+       56.7,
+       -1.3
+      ],
+      [
+       119.5,
+       -9.79
+      ]
+     ]
+    },
+    {
+     "label": "NFS gain error",
+     "points": [
+      [
+       -39.6,
+       0.66
+      ],
+      [
+       -32.0,
+       0.2
+      ],
+      [
+       -10.5,
+       -1.64
+      ],
+      [
+       -3.0,
+       -2.14
+      ],
+      [
+       4.9,
+       -2.44
+      ],
+      [
+       13.4,
+       -2.46
+      ],
+      [
+       22.9,
+       -2.12
+      ],
+      [
+       33.4,
+       -1.36
+      ],
+      [
+       44.7,
+       -0.24
+      ],
+      [
+       56.7,
+       1.15
+      ],
+      [
+       119.5,
+       9.45
+      ]
+     ]
+    },
+    {
+     "label": "Zero error",
+     "points": [
+      [
+       -39.6,
+       2.88
+      ],
+      [
+       13.4,
+       2.56
+      ],
+      [
+       119.3,
+       2.54
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "tDSDO against load capacitance",
+   "page": 14,
+   "conditions": "VDD = 1.8 V, VREF = 5 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Load capacitance",
+    "unit": "pF",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "tDSDO",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIO = 5 V",
+     "points": [
+      [
+       1.9,
+       6.18
+      ],
+      [
+       9.3,
+       6.22
+      ],
+      [
+       11.9,
+       6.31
+      ],
+      [
+       22.1,
+       7.1
+      ],
+      [
+       31.7,
+       7.52
+      ],
+      [
+       48.6,
+       7.9
+      ],
+      [
+       83.1,
+       8.4
+      ],
+      [
+       100.9,
+       8.81
+      ],
+      [
+       219.2,
+       12.28
+      ]
+     ]
+    },
+    {
+     "label": "VIO = 3.3 V",
+     "points": [
+      [
+       1.9,
+       6.37
+      ],
+      [
+       8.0,
+       6.37
+      ],
+      [
+       11.9,
+       6.47
+      ],
+      [
+       23.5,
+       7.4
+      ],
+      [
+       34.6,
+       7.87
+      ],
+      [
+       48.6,
+       8.22
+      ],
+      [
+       75.7,
+       8.48
+      ],
+      [
+       100.9,
+       9.0
+      ],
+      [
+       140.4,
+       10.29
+      ],
+      [
+       219.2,
+       13.06
+      ]
+     ]
+    },
+    {
+     "label": "VIO = 1.8 V",
+     "points": [
+      [
+       1.9,
+       8.91
+      ],
+      [
+       8.0,
+       8.87
+      ],
+      [
+       11.9,
+       9.0
+      ],
+      [
+       22.1,
+       10.34
+      ],
+      [
+       27.8,
+       10.82
+      ],
+      [
+       100.9,
+       14.81
+      ],
+      [
+       219.2,
+       22.06
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Common-mode rejection ratio against frequency",
+   "page": 19,
+   "conditions": "VIO = 3.3 V, VREF = 5 V, 25 °C",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "CMRR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "CMRR",
+     "points": [
+      [
+       101.5,
+       71.125
+      ],
+      [
+       202.4,
+       71.125
+      ],
+      [
+       403.9,
+       71.042
+      ],
+      [
+       708.6,
+       71.095
+      ],
+      [
+       1001,
+       71.072
+      ],
+      [
+       1997,
+       71.135
+      ],
+      [
+       4949,
+       71.145
+      ],
+      [
+       6990,
+       71.062
+      ],
+      [
+       8925,
+       71.135
+      ],
+      [
+       9872,
+       71.105
+      ],
+      [
+       29660,
+       71.145
+      ],
+      [
+       48810,
+       71.082
+      ],
+      [
+       68940,
+       71.0
+      ],
+      [
+       78380,
+       70.885
+      ],
+      [
+       88040,
+       70.885
+      ],
+      [
+       194300,
+       70.209
+      ],
+      [
+       387500,
+       69.177
+      ],
+      [
+       583700,
+       68.354
+      ],
+      [
+       682100,
+       67.948
+      ],
+      [
+       868300,
+       67.282
+      ],
+      [
+       963400,
+       66.761
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SNR, SINAD and ENOB against input frequency",
+   "page": 20,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Input frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "SNR, SINAD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "ENOB",
+    "unit": "bits",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SNR",
+     "points": [
+      [
+       1019,
+       100.62
+      ],
+      [
+       7175,
+       99.38
+      ],
+      [
+       19550,
+       98.84
+      ],
+      [
+       86540,
+       98.84
+      ],
+      [
+       94730,
+       98.77
+      ],
+      [
+       122500,
+       97.99
+      ],
+      [
+       146700,
+       97.16
+      ],
+      [
+       288300,
+       93.13
+      ],
+      [
+       386500,
+       91.67
+      ],
+      [
+       434200,
+       91.32
+      ],
+      [
+       549500,
+       90.9
+      ],
+      [
+       944700,
+       90.5
+      ]
+     ]
+    },
+    {
+     "label": "SINAD",
+     "points": [
+      [
+       1019,
+       100.56
+      ],
+      [
+       7258,
+       98.35
+      ],
+      [
+       19960,
+       97.31
+      ],
+      [
+       26130,
+       97.12
+      ],
+      [
+       33090,
+       97.04
+      ],
+      [
+       59030,
+       97.04
+      ],
+      [
+       70130,
+       96.96
+      ],
+      [
+       83410,
+       96.77
+      ],
+      [
+       99980,
+       96.41
+      ],
+      [
+       120600,
+       95.83
+      ],
+      [
+       145200,
+       95.06
+      ],
+      [
+       292900,
+       91.34
+      ],
+      [
+       398200,
+       89.99
+      ],
+      [
+       449500,
+       89.68
+      ],
+      [
+       568900,
+       89.34
+      ],
+      [
+       971100,
+       89.12
+      ]
+     ]
+    },
+    {
+     "label": "ENOB",
+     "points": [
+      [
+       1019,
+       16.406
+      ],
+      [
+       7258,
+       16.041
+      ],
+      [
+       19960,
+       15.869
+      ],
+      [
+       33090,
+       15.826
+      ],
+      [
+       59030,
+       15.825
+      ],
+      [
+       70130,
+       15.811
+      ],
+      [
+       83410,
+       15.778
+      ],
+      [
+       99980,
+       15.718
+      ],
+      [
+       120600,
+       15.624
+      ],
+      [
+       145200,
+       15.498
+      ],
+      [
+       292900,
+       14.884
+      ],
+      [
+       398200,
+       14.661
+      ],
+      [
+       453000,
+       14.602
+      ],
+      [
+       573600,
+       14.54
+      ],
+      [
+       971100,
+       14.505
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "THD and SFDR against input frequency",
+   "page": 20,
+   "conditions": "VDD = 1.8 V, VIO = 3.3 V, VREF = 5 V, T = 25 °C, high-Z mode off, span compression off, turbo mode on, fS = 2 MSPS",
+   "x": {
+    "label": "Input frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "THD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "SFDR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "THD",
+     "points": [
+      [
+       1019,
+       -115.41
+      ],
+      [
+       7260,
+       -106.13
+      ],
+      [
+       19940,
+       -101.87
+      ],
+      [
+       25790,
+       -101.13
+      ],
+      [
+       32560,
+       -100.67
+      ],
+      [
+       40300,
+       -100.43
+      ],
+      [
+       70590,
+       -100.21
+      ],
+      [
+       99980,
+       -99.69
+      ],
+      [
+       145200,
+       -98.38
+      ],
+      [
+       398400,
+       -93.8
+      ],
+      [
+       577500,
+       -92.85
+      ],
+      [
+       982200,
+       -92.03
+      ]
+     ]
+    },
+    {
+     "label": "SFDR",
+     "points": [
+      [
+       1019,
+       117.39
+      ],
+      [
+       10480,
+       105.92
+      ],
+      [
+       19940,
+       103.13
+      ],
+      [
+       25790,
+       102.25
+      ],
+      [
+       40300,
+       101.23
+      ],
+      [
+       70590,
+       100.56
+      ],
+      [
+       99980,
+       99.9
+      ],
+      [
+       145200,
+       98.59
+      ],
+      [
+       292900,
+       95.59
+      ],
+      [
+       398400,
+       94.69
+      ],
+      [
+       455500,
+       94.53
+      ],
+      [
+       577500,
+       94.63
+      ],
+      [
+       982200,
+       95.79
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Input current against input differential voltage",
+   "page": 21,
+   "conditions": "VIO = 3.3 V, VREF = 5 V",
+   "x": {
+    "label": "Input differential voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Input current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "25 °C, high-Z enabled",
+     "points": [
+      [
+       -4.996,
+       0.08
+      ],
+      [
+       -3.197,
+       -0.19
+      ],
+      [
+       1.084,
+       -0.4
+      ],
+      [
+       4.18,
+       -0.81
+      ],
+      [
+       4.975,
+       -1.13
+      ]
+     ]
+    },
+    {
+     "label": "25 °C, high-Z disabled",
+     "points": [
+      [
+       -4.996,
+       -11.6
+      ],
+      [
+       -4.09,
+       -9.77
+      ],
+      [
+       -3.992,
+       -9.77
+      ],
+      [
+       -3.797,
+       -9.24
+      ],
+      [
+       -3.699,
+       -8.51
+      ],
+      [
+       -3.392,
+       -8.04
+      ],
+      [
+       -2.904,
+       -6.99
+      ],
+      [
+       -2.695,
+       -6.73
+      ],
+      [
+       -2.598,
+       -6.47
+      ],
+      [
+       -2.5,
+       -5.26
+      ],
+      [
+       -2.207,
+       -4.58
+      ],
+      [
+       -1.301,
+       -3.01
+      ],
+      [
+       -1.203,
+       -2.28
+      ],
+      [
+       -1.105,
+       -2.02
+      ],
+      [
+       -0.506,
+       -0.97
+      ],
+      [
+       -0.394,
+       -0.08
+      ],
+      [
+       -0.018,
+       0.02
+      ],
+      [
+       0.191,
+       1.49
+      ],
+      [
+       1.182,
+       3.53
+      ],
+      [
+       1.279,
+       4.26
+      ],
+      [
+       2.381,
+       6.52
+      ],
+      [
+       2.478,
+       7.77
+      ],
+      [
+       3.273,
+       9.55
+      ],
+      [
+       3.371,
+       10.23
+      ],
+      [
+       3.58,
+       10.7
+      ],
+      [
+       3.678,
+       11.54
+      ],
+      [
+       3.873,
+       12.33
+      ],
+      [
+       3.971,
+       12.38
+      ],
+      [
+       4.18,
+       13.01
+      ],
+      [
+       4.277,
+       12.59
+      ],
+      [
+       4.57,
+       13.48
+      ],
+      [
+       4.668,
+       13.53
+      ],
+      [
+       4.975,
+       14.42
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "THD against input frequency for several source impedances",
+   "page": 21,
+   "conditions": "VREF = 5 V",
+   "x": {
+    "label": "Input frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "THD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "1 kΩ, high-Z disabled",
+     "points": [
+      [
+       1,
+       -85.94
+      ],
+      [
+       10,
+       -86.0
+      ],
+      [
+       20,
+       -89.94
+      ]
+     ]
+    },
+    {
+     "label": "1 kΩ, high-Z enabled",
+     "points": [
+      [
+       1,
+       -96.6
+      ],
+      [
+       10,
+       -95.49
+      ],
+      [
+       20,
+       -95.42
+      ]
+     ]
+    },
+    {
+     "label": "510 Ω, high-Z disabled",
+     "points": [
+      [
+       1,
+       -93.44
+      ],
+      [
+       10,
+       -93.92
+      ],
+      [
+       20,
+       -97.08
+      ]
+     ]
+    },
+    {
+     "label": "510 Ω, high-Z enabled",
+     "points": [
+      [
+       1,
+       -106.11
+      ],
+      [
+       10,
+       -104.38
+      ],
+      [
+       20,
+       -102.71
+      ]
+     ]
+    },
+    {
+     "label": "150 Ω, high-Z disabled",
+     "points": [
+      [
+       1,
+       -123.92
+      ],
+      [
+       10,
+       -117.33
+      ],
+      [
+       20,
+       -107.69
+      ]
+     ]
+    },
+    {
+     "label": "150 Ω, high-Z enabled",
+     "points": [
+      [
+       1,
+       -120.49
+      ],
+      [
+       10,
+       -116.94
+      ],
+      [
+       20,
+       -107.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SNR against RC filter bandwidth for two precision drivers",
+   "page": 21,
+   "conditions": "VREF = 5 V, fIN = 1 kHz, turbo mode on",
+   "x": {
+    "label": "RC filter case: 1 = 260 kHz (1.3 kΩ, 470 pF), 2 = 498 kHz (680 Ω, 470 pF), 3 = 1.3 MHz (680 Ω, 180 pF), 4 = 2.27 MHz (390 Ω, 180 pF), 5 = 4.42 MHz (200 Ω, 180 pF)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SNR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ADA4077-1, high-Z disabled",
+     "points": [
+      [
+       1.0,
+       74.36
+      ],
+      [
+       1.125,
+       74.97
+      ],
+      [
+       1.625,
+       78.28
+      ],
+      [
+       2.0,
+       80.33
+      ],
+      [
+       2.125,
+       80.79
+      ],
+      [
+       2.25,
+       81.08
+      ],
+      [
+       2.75,
+       82.58
+      ],
+      [
+       3.0,
+       84.07
+      ],
+      [
+       3.25,
+       86.69
+      ],
+      [
+       3.375,
+       88.52
+      ],
+      [
+       3.5,
+       90.1
+      ],
+      [
+       3.75,
+       93.48
+      ],
+      [
+       4.0,
+       95.83
+      ],
+      [
+       4.125,
+       96.42
+      ],
+      [
+       4.25,
+       96.75
+      ],
+      [
+       4.375,
+       96.91
+      ],
+      [
+       5.0,
+       96.72
+      ]
+     ]
+    },
+    {
+     "label": "ADA4077-1, high-Z enabled",
+     "points": [
+      [
+       1.0,
+       98.65
+      ],
+      [
+       1.25,
+       98.71
+      ],
+      [
+       1.75,
+       98.88
+      ],
+      [
+       1.875,
+       98.9
+      ],
+      [
+       2.0,
+       98.91
+      ],
+      [
+       2.125,
+       98.9
+      ],
+      [
+       2.375,
+       98.86
+      ],
+      [
+       3.126,
+       98.62
+      ],
+      [
+       3.626,
+       98.5
+      ],
+      [
+       3.876,
+       98.41
+      ],
+      [
+       4.001,
+       98.34
+      ],
+      [
+       4.126,
+       98.25
+      ],
+      [
+       4.376,
+       98.05
+      ],
+      [
+       5.001,
+       97.45
+      ]
+     ]
+    },
+    {
+     "label": "ADA4610-1, high-Z disabled",
+     "points": [
+      [
+       1.0,
+       74.3
+      ],
+      [
+       1.125,
+       74.92
+      ],
+      [
+       1.25,
+       75.74
+      ],
+      [
+       1.375,
+       76.73
+      ],
+      [
+       1.5,
+       77.25
+      ],
+      [
+       1.875,
+       79.28
+      ],
+      [
+       2.125,
+       80.34
+      ],
+      [
+       2.75,
+       82.05
+      ],
+      [
+       3.0,
+       83.19
+      ],
+      [
+       3.25,
+       85.47
+      ],
+      [
+       3.625,
+       89.72
+      ],
+      [
+       3.75,
+       91.02
+      ],
+      [
+       3.875,
+       92.14
+      ],
+      [
+       4.0,
+       92.97
+      ],
+      [
+       4.125,
+       93.42
+      ],
+      [
+       4.375,
+       93.72
+      ],
+      [
+       4.875,
+       93.23
+      ],
+      [
+       5.0,
+       93.21
+      ]
+     ]
+    },
+    {
+     "label": "ADA4610-1, high-Z enabled",
+     "points": [
+      [
+       1.0,
+       98.44
+      ],
+      [
+       1.5,
+       98.49
+      ],
+      [
+       1.625,
+       98.5
+      ],
+      [
+       1.75,
+       98.49
+      ],
+      [
+       1.875,
+       98.45
+      ],
+      [
+       2.0,
+       98.39
+      ],
+      [
+       2.125,
+       98.3
+      ],
+      [
+       2.25,
+       98.17
+      ],
+      [
+       2.375,
+       98.03
+      ],
+      [
+       2.5,
+       97.87
+      ],
+      [
+       3.001,
+       97.19
+      ],
+      [
+       3.626,
+       96.42
+      ],
+      [
+       3.876,
+       96.08
+      ],
+      [
+       4.001,
+       95.89
+      ],
+      [
+       4.126,
+       95.66
+      ],
+      [
+       4.251,
+       95.42
+      ],
+      [
+       4.376,
+       95.16
+      ],
+      [
+       4.876,
+       94.07
+      ],
+      [
+       5.001,
+       93.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "THD against RC filter bandwidth for two precision drivers",
+   "page": 22,
+   "conditions": "VREF = 5 V, fIN = 1 kHz, turbo mode on",
+   "x": {
+    "label": "RC filter case: 1 = 260 kHz (1.3 kΩ, 470 pF), 2 = 498 kHz (680 Ω, 470 pF), 3 = 1.3 MHz (680 Ω, 180 pF), 4 = 2.27 MHz (390 Ω, 180 pF), 5 = 4.42 MHz (200 Ω, 180 pF)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "THD",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ADA4077-1, high-Z disabled",
+     "points": [
+      [
+       1.0,
+       -81.48
+      ],
+      [
+       1.25,
+       -83.05
+      ],
+      [
+       1.375,
+       -83.5
+      ],
+      [
+       1.625,
+       -85.2
+      ],
+      [
+       1.75,
+       -86.39
+      ],
+      [
+       2.125,
+       -87.64
+      ],
+      [
+       2.625,
+       -87.94
+      ],
+      [
+       2.75,
+       -88.16
+      ],
+      [
+       2.875,
+       -88.66
+      ],
+      [
+       3.0,
+       -89.52
+      ],
+      [
+       3.125,
+       -90.65
+      ],
+      [
+       3.25,
+       -92.4
+      ],
+      [
+       3.375,
+       -94.42
+      ],
+      [
+       3.5,
+       -96.64
+      ],
+      [
+       3.75,
+       -100.59
+      ],
+      [
+       4.0,
+       -103.64
+      ],
+      [
+       4.125,
+       -104.5
+      ],
+      [
+       4.25,
+       -105.18
+      ],
+      [
+       4.375,
+       -105.59
+      ],
+      [
+       4.625,
+       -105.78
+      ],
+      [
+       5.0,
+       -106.44
+      ]
+     ]
+    },
+    {
+     "label": "ADA4077-1, high-Z enabled",
+     "points": [
+      [
+       1.0,
+       -91.25
+      ],
+      [
+       1.125,
+       -91.93
+      ],
+      [
+       1.25,
+       -92.65
+      ],
+      [
+       1.5,
+       -94.13
+      ],
+      [
+       1.625,
+       -94.84
+      ],
+      [
+       1.75,
+       -95.51
+      ],
+      [
+       1.875,
+       -96.1
+      ],
+      [
+       2.0,
+       -96.6
+      ],
+      [
+       2.125,
+       -96.91
+      ],
+      [
+       2.25,
+       -97.02
+      ],
+      [
+       2.376,
+       -97.01
+      ],
+      [
+       2.501,
+       -96.98
+      ],
+      [
+       2.626,
+       -97.01
+      ],
+      [
+       2.751,
+       -97.2
+      ],
+      [
+       2.876,
+       -97.64
+      ],
+      [
+       3.001,
+       -98.4
+      ],
+      [
+       3.126,
+       -99.6
+      ],
+      [
+       3.251,
+       -101.2
+      ],
+      [
+       3.376,
+       -103.06
+      ],
+      [
+       3.626,
+       -107.09
+      ],
+      [
+       3.751,
+       -109.02
+      ],
+      [
+       3.876,
+       -110.73
+      ],
+      [
+       4.001,
+       -112.09
+      ],
+      [
+       4.126,
+       -113.13
+      ],
+      [
+       4.251,
+       -113.93
+      ],
+      [
+       4.376,
+       -114.56
+      ],
+      [
+       4.501,
+       -115.06
+      ],
+      [
+       4.751,
+       -115.9
+      ],
+      [
+       4.876,
+       -116.34
+      ],
+      [
+       5.001,
+       -116.88
+      ]
+     ]
+    },
+    {
+     "label": "ADA4610-1, high-Z disabled",
+     "points": [
+      [
+       1.0,
+       -81.21
+      ],
+      [
+       1.5,
+       -84.28
+      ],
+      [
+       1.625,
+       -85.41
+      ],
+      [
+       1.75,
+       -86.25
+      ],
+      [
+       1.875,
+       -86.62
+      ],
+      [
+       2.0,
+       -87.2
+      ],
+      [
+       2.25,
+       -87.97
+      ],
+      [
+       2.375,
+       -87.84
+      ],
+      [
+       2.625,
+       -88.02
+      ],
+      [
+       2.75,
+       -88.27
+      ],
+      [
+       2.875,
+       -88.72
+      ],
+      [
+       3.0,
+       -89.41
+      ],
+      [
+       3.125,
+       -90.29
+      ],
+      [
+       3.625,
+       -96.5
+      ],
+      [
+       3.75,
+       -98.31
+      ],
+      [
+       4.125,
+       -103.04
+      ],
+      [
+       4.25,
+       -104.3
+      ],
+      [
+       4.75,
+       -110.72
+      ],
+      [
+       4.875,
+       -111.78
+      ],
+      [
+       5.0,
+       -113.28
+      ]
+     ]
+    },
+    {
+     "label": "ADA4610-1, high-Z enabled",
+     "points": [
+      [
+       1.0,
+       -91.25
+      ],
+      [
+       1.125,
+       -91.95
+      ],
+      [
+       1.5,
+       -94.23
+      ],
+      [
+       1.625,
+       -94.96
+      ],
+      [
+       1.75,
+       -95.63
+      ],
+      [
+       1.875,
+       -96.23
+      ],
+      [
+       2.0,
+       -96.74
+      ],
+      [
+       2.125,
+       -97.03
+      ],
+      [
+       2.25,
+       -97.14
+      ],
+      [
+       2.376,
+       -97.14
+      ],
+      [
+       2.501,
+       -97.11
+      ],
+      [
+       2.626,
+       -97.13
+      ],
+      [
+       2.751,
+       -97.27
+      ],
+      [
+       2.876,
+       -97.63
+      ],
+      [
+       3.001,
+       -98.26
+      ],
+      [
+       3.126,
+       -99.24
+      ],
+      [
+       3.251,
+       -100.51
+      ],
+      [
+       3.376,
+       -101.99
+      ],
+      [
+       3.501,
+       -103.6
+      ],
+      [
+       3.626,
+       -105.25
+      ],
+      [
+       3.751,
+       -106.86
+      ],
+      [
+       3.876,
+       -108.36
+      ],
+      [
+       4.001,
+       -109.66
+      ],
+      [
+       4.126,
+       -110.77
+      ],
+      [
+       4.251,
+       -111.8
+      ],
+      [
+       4.376,
+       -112.74
+      ],
+      [
+       4.501,
+       -113.64
+      ],
+      [
+       4.876,
+       -116.25
+      ],
+      [
+       5.001,
+       -117.16
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PSRR against frequency",
+   "page": 22,
+   "conditions": "VIO = 3.3 V, VREF = 5 V",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "PSRR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "PSRR",
+     "points": [
+      [
+       102.6,
+       75.26
+      ],
+      [
+       304.3,
+       75.16
+      ],
+      [
+       3004,
+       75.26
+      ],
+      [
+       3981,
+       75.16
+      ],
+      [
+       77420,
+       75.42
+      ],
+      [
+       194500,
+       74.95
+      ],
+      [
+       289100,
+       73.49
+      ],
+      [
+       388000,
+       70.0
+      ],
+      [
+       672600,
+       56.51
+      ],
+      [
+       857600,
+       52.55
+      ],
+      [
+       962300,
+       51.46
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power dissipation against throughput",
+   "page": 22,
+   "conditions": "VIO = 1.8 V, VREF = 5 V",
+   "x": {
+    "label": "Throughput",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Power dissipation",
+    "unit": "µW",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "VDD",
+     "points": [
+      [
+       10.54,
+       1.981
+      ],
+      [
+       42.75,
+       2.03
+      ],
+      [
+       100.6,
+       2.278
+      ],
+      [
+       315.9,
+       3.359
+      ],
+      [
+       992.4,
+       6.239
+      ],
+      [
+       2372,
+       12.25
+      ],
+      [
+       13340,
+       61.41
+      ],
+      [
+       1945000,
+       8060
+      ]
+     ]
+    },
+    {
+     "label": "VIO",
+     "points": [
+      [
+       10.54,
+       0.06894
+      ],
+      [
+       56.62,
+       0.0655
+      ],
+      [
+       100.6,
+       0.07929
+      ],
+      [
+       133.9,
+       0.09683
+      ],
+      [
+       237.3,
+       0.1684
+      ],
+      [
+       992.4,
+       0.9048
+      ],
+      [
+       9963,
+       9.763
+      ],
+      [
+       1945000,
+       1779
+      ]
+     ]
+    },
+    {
+     "label": "VREF",
+     "points": [
+      [
+       10.54,
+       0.7867
+      ],
+      [
+       42.75,
+       0.7908
+      ],
+      [
+       100.6,
+       0.8798
+      ],
+      [
+       315.9,
+       1.416
+      ],
+      [
+       992.4,
+       2.931
+      ],
+      [
+       3165,
+       7.859
+      ],
+      [
+       44420,
+       101.5
+      ],
+      [
+       1945000,
+       5151
+      ]
+     ]
+    },
+    {
+     "label": "Total power",
+     "points": [
+      [
+       10.54,
+       2.85
+      ],
+      [
+       42.75,
+       2.884
+      ],
+      [
+       100.6,
+       3.278
+      ],
+      [
+       315.9,
+       5.058
+      ],
+      [
+       992.4,
+       10.04
+      ],
+      [
+       4218,
+       34.56
+      ],
+      [
+       1945000,
+       14920
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "dual-supply",
+   "title": "Typical connection with split amplifier supplies",
+   "page": 17,
+   "description": "Two unity-gain op amps on a +6.5 V or higher and −0.5 V or lower rail each buffer one half of an antiphase signal that swings 0 V to VREF around VREF/2, and feed IN+ and IN− through an R-C low-pass. A reference, buffered by an op amp, gives 5 V at REF with 10 µF to ground; a 10 kΩ/10 kΩ divider off that node gives the VREF/2 common mode. An LDO on V+ makes the 1.8 V VDD rail; VIO comes from the host's supply. The serial lines run straight to the host, 3-wire or 4-wire. The amplifier rails can be chosen for the widest signal range.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "op amp, IN+ driver (unity-gain buffer)",
+     "external": true
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "op amp, IN- driver (unity-gain buffer)",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+ ≥ +6.5 V"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "signal, positive side: 0 V to VREF about VCM = VREF/2"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "signal, negative side (antiphase): 0 V to VREF about VCM = VREF/2"
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "voltage reference",
+     "external": true
+    },
+    {
+     "ref": "U5",
+     "type": "ic",
+     "value": "op amp, reference buffer",
+     "external": true
+    },
+    {
+     "ref": "U6",
+     "type": "ic",
+     "value": "LDO regulator, 1.8 V output",
+     "external": true
+    },
+    {
+     "ref": "U7",
+     "type": "ic",
+     "value": "digital host (microprocessor or FPGA)",
+     "external": true
+    },
+    {
+     "ref": "U8",
+     "type": "source",
+     "value": "host supply, 1.8 V to 5 V"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "X7R ceramic"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD decoupling"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VIO decoupling"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "VCM = VREF/2"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "V- ≤ −0.5 V"
+    }
+   ],
+   "notes": [
+    "SDI connects to the host, or may instead be tied to VIO.",
+    "The reference, its buffer and the LDO are fed from the V+ rail."
+   ]
+  },
+  {
+   "id": "single-supply",
+   "title": "Typical connection from one +5 V supply, span compression on",
+   "page": 17,
+   "description": "The same arrangement run from a single +5 V rail: the two buffer amplifiers have their negative supply at ground, the buffered reference is 4.096 V, and span compression is turned on so each input only needs to travel from 0.1 × VREF to 0.9 × VREF while all output codes are still used. Suited to systems with few rails where power matters most.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "op amp, IN+ driver (unity-gain buffer)",
+     "external": true
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "op amp, IN- driver (unity-gain buffer)",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+ = +5 V"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "signal, positive side: 0.1 × VREF to 0.9 × VREF about VCM = VREF/2"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "signal, negative side (antiphase): 0.1 × VREF to 0.9 × VREF about VCM = VREF/2"
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "voltage reference",
+     "external": true
+    },
+    {
+     "ref": "U5",
+     "type": "ic",
+     "value": "op amp, reference buffer",
+     "external": true
+    },
+    {
+     "ref": "U6",
+     "type": "ic",
+     "value": "LDO regulator, 1.8 V output",
+     "external": true
+    },
+    {
+     "ref": "U7",
+     "type": "ic",
+     "value": "digital host (microprocessor or FPGA)",
+     "external": true
+    },
+    {
+     "ref": "U8",
+     "type": "source",
+     "value": "host supply, 1.8 V to 5 V"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "X7R ceramic"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD decoupling"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VIO decoupling"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "VCM = VREF/2"
+    }
+   ],
+   "notes": [
+    "R and C follow the RC filter table: 200 Ω with 180 pF up to 200 kHz signal bandwidth, 200 Ω with 120 pF above 200 kHz or multiplexed.",
+    "SDI connects to the host, or may instead be tied to VIO.",
+    "The reference, its buffer and the LDO are fed from the V+ rail.",
+    "Span compression is enabled in the configuration register."
+   ]
+  },
+  {
+   "id": "fda-differential",
+   "title": "Typical connection with a fully differential amplifier",
+   "page": 18,
+   "description": "A fully differential amplifier on +5 V, with 1 kΩ input and 1 kΩ feedback resistors on each side, takes an antiphase signal pair centred on VREF/2 and drives IN+ from its −OUT and IN− from its +OUT through R-C filters. Its VOCM pin sits at VREF/2 with 0.1 µF to ground and sets the output common mode. The buffered 4.096 V reference, divider, LDO and host wiring are the same as in the single-supply connection.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "fully differential amplifier",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+ = +5 V"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "VOCM = VREF/2"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "signal, positive side: 0 to VREF about VCM = VREF/2"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "signal, negative side (antiphase): 0 to VREF about VCM = VREF/2"
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "voltage reference",
+     "external": true
+    },
+    {
+     "ref": "U5",
+     "type": "ic",
+     "value": "op amp, reference buffer",
+     "external": true
+    },
+    {
+     "ref": "U6",
+     "type": "ic",
+     "value": "LDO regulator, 1.8 V output",
+     "external": true
+    },
+    {
+     "ref": "U7",
+     "type": "ic",
+     "value": "digital host (microprocessor or FPGA)",
+     "external": true
+    },
+    {
+     "ref": "U8",
+     "type": "source",
+     "value": "host supply, 1.8 V to 5 V"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "X7R ceramic"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD decoupling"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VIO decoupling"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "VCM = VREF/2"
+    }
+   ],
+   "notes": [
+    "SDI connects to the host, or may instead be tied to VIO.",
+    "The reference, its buffer and the LDO are fed from the V+ rail."
+   ]
+  },
+  {
+   "id": "fda-single-ended",
+   "title": "Single-ended to differential conversion with a fully differential amplifier",
+   "page": 18,
+   "description": "The fully differential amplifier turns a ground-referenced single-ended signal of ±VREF into the differential drive for IN+ and IN−. The signal enters through R3 (1 kΩ) on the +IN side, the R1 leg on the −IN side is returned to ground, and R4 and R2 (1 kΩ) close the two feedback loops. VOCM at VREF/2, decoupled with 0.1 µF, centres the outputs. The rest of the circuit matches the single-supply connection.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "fully differential amplifier",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "R"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "C"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+ = +5 V"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "VOCM = VREF/2"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "single-ended signal, +VREF to −VREF about 0 V"
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "voltage reference",
+     "external": true
+    },
+    {
+     "ref": "U5",
+     "type": "ic",
+     "value": "op amp, reference buffer",
+     "external": true
+    },
+    {
+     "ref": "U6",
+     "type": "ic",
+     "value": "LDO regulator, 1.8 V output",
+     "external": true
+    },
+    {
+     "ref": "U7",
+     "type": "ic",
+     "value": "digital host (microprocessor or FPGA)",
+     "external": true
+    },
+    {
+     "ref": "U8",
+     "type": "source",
+     "value": "host supply, 1.8 V to 5 V"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "X7R ceramic"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD decoupling"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VIO decoupling"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "VCM = VREF/2"
+    }
+   ],
+   "notes": [
+    "SDI connects to the host, or may instead be tied to VIO.",
+    "The reference, its buffer and the LDO are fed from the V+ rail."
+   ]
+  },
+  {
+   "id": "cs-3wire",
+   "title": "CS mode, 3-wire, no busy indicator",
+   "page": 27,
+   "description": "One converter on an SPI host. SDI is tied to VIO so every CNV rising edge selects CS mode; the host's convert line drives CNV, its clock drives SCK and SDO returns the data.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "digital host",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIO"
+    }
+   ],
+   "notes": [
+    "Supplies, reference and analog inputs connect as in the typical connections."
+   ]
+  },
+  {
+   "id": "cs-3wire-busy",
+   "title": "CS mode, 3-wire, with busy indicator",
+   "page": 28,
+   "description": "As the plain 3-wire hookup, with a 47 kΩ pull-up from SDO to VIO and SDO also wired to the host's interrupt input. The low-going edge on SDO at the end of a conversion tells the host to start reading.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "digital host",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIO"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "47 kΩ"
+    }
+   ],
+   "notes": [
+    "Supplies, reference and analog inputs connect as in the typical connections."
+   ]
+  },
+  {
+   "id": "cs-4wire-two",
+   "title": "CS mode, 4-wire, two converters, no busy indicator",
+   "page": 30,
+   "description": "Two converters share the host's convert, clock and data-in lines. The host's CS2 line drives device A's SDI and CS1 drives device B's SDI, so both sample together and are read one after the other.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003",
+     "note": "device A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "AD4003",
+     "note": "device B"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "digital host",
+     "external": true
+    }
+   ],
+   "notes": [
+    "Supplies, reference and analog inputs connect as in the typical connections."
+   ]
+  },
+  {
+   "id": "cs-4wire-busy",
+   "title": "CS mode, 4-wire, with busy indicator",
+   "page": 31,
+   "description": "CNV takes the host's convert line alone, so sampling stays independent of read-back; SDI is the chip select. A 47 kΩ pull-up from SDO to VIO and a link from SDO to the host interrupt give the end-of-conversion signal.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "digital host",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIO"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "47 kΩ"
+    }
+   ],
+   "notes": [
+    "Supplies, reference and analog inputs connect as in the typical connections."
+   ]
+  },
+  {
+   "id": "daisy-chain",
+   "title": "Daisy-chain mode, two converters",
+   "page": 32,
+   "description": "Device A's SDI is grounded and its SDO feeds device B's SDI; B's SDO goes to the host. Both CNV pins share the convert line and both SCK pins the clock, so the pair shifts out 36 bits like one shift register, B's result first.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AD4003",
+     "note": "device A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "AD4003",
+     "note": "device B"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "digital host",
+     "external": true
+    }
+   ],
+   "notes": [
+    "Supplies, reference and analog inputs connect as in the typical connections."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Effective number of bits",
+   "expr": "ENOB = (SINAD_dB − 1.76) / 6.02",
+   "where": {
+    "SINAD_dB": "signal-to-noise-and-distortion ratio in dB"
+   },
+   "note": "Result in bits.",
+   "page": 10
+  },
+  {
+   "name": "Noise-free code resolution",
+   "expr": "NFCR = log2(2^N / peak-to-peak noise)",
+   "where": {
+    "N": "resolution in bits (18)",
+    "peak-to-peak noise": "output noise in LSB peak to peak"
+   },
+   "note": "Result in bits; the count of bits above which single codes can no longer be told apart.",
+   "page": 10
+  },
+  {
+   "name": "Effective resolution",
+   "expr": "Effective resolution = log2(2^N / RMS input noise)",
+   "where": {
+    "N": "resolution in bits (18)",
+    "RMS input noise": "input-referred noise in LSB rms"
+   },
+   "note": "Result in bits.",
+   "page": 10
+  },
+  {
+   "name": "Common-mode rejection ratio",
+   "expr": "CMRR (dB) = 10 log(PADC_IN / PADC_OUT)",
+   "where": {
+    "PADC_IN": "common-mode test sine of 200 mV p-p at f, on IN+ and IN− together",
+    "PADC_OUT": "power at f in the converter output"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Power supply rejection ratio",
+   "expr": "PSRR (dB) = 10 log(PVDD_IN / PADC_OUT)",
+   "where": {
+    "PVDD_IN": "test sine of 200 mV p-p at f, on VDD",
+    "PADC_OUT": "power at f in the converter output"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "SNR loss from the driver amplifier",
+   "expr": "SNR_LOSS = 20 log( 31.5 / sqrt( 31.5² + (π/2) × f−3dB × (N × eN)² ) )",
+   "where": {
+    "31.5": "converter noise, µV rms",
+    "f−3dB": "bandwidth in MHz: the converter's 10 MHz input bandwidth, or the input filter's cutoff when one is fitted",
+    "N": "noise gain of the amplifier (1 for a buffer)",
+    "eN": "amplifier input voltage noise density, nV/√Hz"
+   },
+   "note": "Result in dB (negative).",
+   "page": 20
+  },
+  {
+   "name": "SNR change with span compression",
+   "expr": "ΔSNR = 20 × log(8/10) ≈ −1.9 dB",
+   "where": {
+    "8/10": "ratio of the compressed input span to the full span"
+   },
+   "note": "",
+   "page": 20
+  },
+  {
+   "name": "Daisy-chain read-back clocks",
+   "expr": "clocks = 18 × N",
+   "where": {
+    "N": "number of converters in the chain"
+   },
+   "note": "Six more clocks per converter when status bits are on.",
+   "page": 32
+  },
+  {
+   "name": "Daisy-chain register write, same contents to all",
+   "expr": "clocks = 8 × (N + 1)",
+   "where": {
+    "N": "number of converters in the chain"
+   },
+   "note": "To give each converter its own contents, write the farthest first with 8 × (N + 1) clocks, the next with 8 × N, and so on down to 16 clocks for the nearest.",
+   "page": 32
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 15,
+   "text": "A charge-redistribution SAR converter: two matched arrays of 18 binary-weighted capacitors sit on the inputs of a comparator. During acquisition the comparator side of each array is held at GND through SW+ and SW− while the other plates follow IN+ and IN−, so the arrays act as the sampling capacitors. When CNV rises, SW+ and SW− open, the arrays are switched off the inputs onto GND, and the control logic steps each capacitor between GND and VREF from the MSB down (steps of VREF/2, VREF/4 … VREF/262,144) until the comparator balances. The result and a busy signal follow. The conversion clock is internal; SCK plays no part in converting."
+  },
+  {
+   "topic": "Throughput and power",
+   "page": 15,
+   "text": "Up to 2 MSPS, with no pipeline delay: each result belongs to the sample just taken, which suits multiplexed inputs. The core powers down after each conversion, so power falls in proportion to sample rate (about 80 µW at 10 kSPS), and the first conversion after a long idle period is valid. 2 MSPS needs turbo mode and an SCK of at least 75 MHz."
+  },
+  {
+   "topic": "Long acquisition phase",
+   "page": 22,
+   "text": "Conversion takes 290 ns, and the input returns to tracking about 100 ns before the conversion ends, which lengthens the acquisition window. The longer window relaxes driver settling, permits a lower RC cutoff and a larger filter resistor with a smaller capacitor, and lowers dynamic power in the driver."
+  },
+  {
+   "topic": "Input overvoltage clamp",
+   "page": 18,
+   "text": "An internal clamp on IN+ and IN− turns on when an input rises 0.4 V above VREF, ahead of the ESD diode to REF, and sinks up to 50 mA to ground so the reference is not pulled up; this matters when several converters share one reference. With an external series resistor (REXT, 200 Ω up to 20 kΩ for 15 V protection) and a filter capacitor of at least 100 pF, no external protection diodes are needed. The clamp draws no static power while off but cannot hold an overvoltage forever. When active it clears the OV clamp flag (active low) in the register, a sticky bit cleared by reading it once the overvoltage is gone, and in the status bits, where it updates every conversion."
+  },
+  {
+   "topic": "Input model",
+   "page": 19,
+   "text": "During acquisition each input looks like a pin capacitance CPIN in parallel with RIN (about 400 Ω, switch resistance plus series resistance) in series with CIN (about 40 pF, mostly the sampling capacitor). During conversion only CPIN remains. RIN and CIN form a single-pole low-pass that limits noise and aliasing."
+  },
+  {
+   "topic": "Differential input",
+   "page": 19,
+   "text": "The inputs sample the true difference IN+ − IN−, rejecting what is common to both. The two halves have to be exact antiphase (180°) so the common mode stays within VREF/2 ± 0.125 V."
+  },
+  {
+   "topic": "RC filter and driver choice",
+   "page": 19,
+   "text": "Choose the RC filter and amplifier by signal bandwidth at full 2 MSPS (RC filter table); 200 Ω with 180 pF and the ADA4807-1 give the best general results. The large R and small C lighten the dynamic load and phase-margin burden on the amplifier and limit current into the input when the amplifier overdrives it. The driver's noise, filtered by the input RC or the internal RIN-CIN pole, has to stay small against the converter's 31.5 µV rms (driver SNR-loss equation); for ac work its THD has to match the converter's; for multiplexed use the driver and input must settle a full-scale step to 18-bit accuracy (3.84 ppm, 0.000384 %), which is much tighter than the 0.1 % to 0.01 % figures amplifier datasheets usually give. For single-ended sources the ADA4940-1 makes the differential drive. Performance holds up to Nyquist."
+  },
+  {
+   "topic": "High-Z mode",
+   "page": 21,
+   "text": "Set in the configuration register (off by default). It cuts the nonlinear kickback when the capacitor DAC switches back onto the inputs as acquisition begins, bringing input current down to the sub-microampere range for slow or dc signals and improving THD by about 10 dB up to 100 kHz, even with large source resistance. It costs about 2 mW per MSPS. Turn it off above 100 kHz input frequency and when multiplexing. With it, low-power precision amplifiers such as the ADA4077-1 (400 µA) and ADA4610-1 (1.5 mA) reach 96 dB to 99 dB SNR and better than −110 dB THD, and the filter resistor can be about ten times larger than on earlier SAR converters."
+  },
+  {
+   "topic": "Input span compression",
+   "page": 20,
+   "text": "Set in the configuration register (off by default). Each input then only needs to swing from 10 % to 90 % of VREF (for example 0.41 V to 3.69 V with a 4.096 V reference) while all codes are still produced, which gives a single-supply driver its headroom and footroom. The differential full scale becomes ±0.8 × VREF and SNR drops by about 1.9 dB."
+  },
+  {
+   "topic": "Reference",
+   "page": 22,
+   "text": "The REF input impedance changes dynamically. Bypass it with a 10 µF X7R ceramic in 0805 size. The ADR4550 gives best performance and drift; the ADR3450 saves power with slightly more noise. A buffer such as the ADA4807-1 between reference and REF is recommended, with the REF capacitance chosen both to keep the buffer stable and to meet the converter's own requirement."
+  },
+  {
+   "topic": "Power supplies",
+   "page": 22,
+   "text": "Two supplies: VDD (core, 1.8 V) and VIO (logic, 1.8 V to 5.5 V). For 1.8 V logic VIO and VDD can share one rail. The ADP7118 LDO is suggested for VDD and VIO. No sequencing is needed between VIO and VDD, and the converter rejects supply ripple over a wide frequency range."
+  },
+  {
+   "topic": "Interface mode selection",
+   "page": 23,
+   "text": "The SDI level at the CNV rising edge picks the mode: high selects CS mode, low selects daisy-chain mode. Because of the SDI hold time, tying SDI to CNV always gives daisy-chain mode. In CS mode the interface is 3-wire (CNV, SCK, SDO) or 4-wire (SDI, CNV, SCK, SDO, with CNV free of the read timing for low-jitter or simultaneous sampling). The busy indicator, a start bit ahead of the data that can interrupt the host, is enabled in CS mode when CNV or SDI is low at the end of a conversion; without it the host waits out the maximum conversion time. At power-up SDO is low or high-Z according to CNV and SDI (SDO power-up table)."
+  },
+  {
+   "topic": "Turbo mode",
+   "page": 23,
+   "text": "Set in the configuration register; available in 3-wire and 4-wire CS modes and not in daisy-chain mode. It replaces the busy indicator and lets the previous result be read during the end of the current conversion, so a slower SCK suffices. It is required for 2 MSPS. In 4-wire turbo mode, wait tQUIET1 after CNV rises before pulling SDI low to read the previous result; leave tQUIET2 between the last SCK falling edge and the next CNV rising edge."
+  },
+  {
+   "topic": "Status bits",
+   "page": 25,
+   "text": "When enabled, six status bits (OV clamp flag, span compression, high-Z, turbo, two reserved) follow the 18 data bits. SDO goes high-Z after the sixth (not in daisy-chain mode), and the host need not clock them all before the next conversion."
+  },
+  {
+   "topic": "Register access",
+   "page": 23,
+   "text": "One configuration register, written or read with a 16-bit frame while CNV is low: an 8-bit command (a 0, then seven command bits; leading 1s are ignored) followed by 8 bits of data. SDI is sampled on SCK rising edges and SDO changes on falling edges. A write needs SCK, CNV and SDI; to read the current result on SDO during a write, bring CNV low only after the conversion has finished, or the result may be wrong (the write still happens). Daisy-chain mode permits writes only, no reads. At the end of a transfer SDO goes high-Z on the CNV rising edge, or low if daisy-chain mode is on. Each register's LSB is reserved so that a 16-bit host can still set the final SDI level, which carries into the mode selection at the next CNV edge. For isolated systems the ADuM141D (75 MHz) supports 2 MSPS."
+  },
+  {
+   "topic": "CS mode, 3-wire",
+   "page": 27,
+   "text": "With SDI held high, a CNV rising edge starts a conversion, selects CS mode and puts SDO in high-Z; the conversion completes whatever CNV does afterwards. Without the busy indicator, CNV may go low during conversion to select other devices (a multiplexer, say) but has to return high within the minimum conversion time and stay high until the maximum has passed, then a CNV low puts the MSB on SDO. With the busy indicator, CNV goes back low within the minimum conversion time and stays low; SDO stays high-Z until the end of conversion, then drives low, which with a pull-up serves as an interrupt, and the data follow MSB first with an optional 19th clock. Data change on SCK falling edges and are valid on both edges; capturing on the falling edge allows a faster clock if the host's hold time allows. SDO returns to high-Z after the 18th (or 19th) falling edge, or earlier if CNV rises. Keep SCK quiet during conversion. Several busy-indicator converters selected together can contend on SDO without damage or latch-up."
+  },
+  {
+   "topic": "CS mode, 4-wire",
+   "page": 30,
+   "text": "With SDI high at the CNV rising edge, CNV starts the conversion and must stay high through conversion and read-back; SDI then acts as chip select. Without the busy indicator, SDI may select other devices early in the conversion but must be high again before the minimum conversion time and kept high through the maximum; afterwards, pulling each converter's SDI low in turn puts its MSB on SDO, so several converters share one data line. With the busy indicator, SDI goes low before the minimum conversion time and stays low; SDO drives low at the end of conversion as an interrupt with a pull-up. If SDI and CNV are both low, SDO is driven low."
+  },
+  {
+   "topic": "Daisy-chain mode",
+   "page": 32,
+   "text": "SDO is held low while SDI and CNV are both low. A CNV rising edge with SCK low starts a conversion, selects daisy-chain mode and disables the busy indicator; CNV stays high through conversion and read-back. At the end of conversion the MSB appears on SDO and the remaining bits shift out on SCK falling edges while SDI shifts in the upstream converter's bits on rising edges, so N converters need 18 × N clocks and the maximum rate drops with the longer read-back. Registers can be written through the chain (4-wire, CNV low) but not read; status bits can be enabled to report each converter's configuration. Turbo mode is not available."
+  },
+  {
+   "topic": "Layout",
+   "page": 33,
+   "text": "Keep analog and digital sections apart; the pinout puts analog pins on one side and digital on the other. Do not route digital lines under the part unless a ground plane beneath it shields them, keep CNV and clocks away from analog paths, and avoid analog-digital crossings. Use at least one ground plane, common or split; split planes join under the converter. Put the REF capacitor right against the REF and GND pins with wide, low-impedance traces, and place 100 nF ceramics for VDD and VIO close to the part with short, wide traces."
+  },
+  {
+   "topic": "Evaluation",
+   "page": 33,
+   "text": "EVAL-AD4003FMCZ is the evaluation board, controlled from a PC through EVAL-SDP-CH1Z."
+  },
+  {
+   "topic": "Transfer function",
+   "page": 16,
+   "text": "Output is 18-bit twos complement. 1 LSB is 38.15 µV with VREF = 5 V (30.5 µV with span compression). The first transition sits ½ LSB above −FSR and the last 1½ LSB below +FSR (−4.999981 V and +4.999943 V for the ±5 V range); zero error is measured at midscale and gain error from the first and last transitions."
+  },
+  {
+   "topic": "Family",
+   "page": 1,
+   "text": "Pin compatible with the 16-bit, 2 MSPS AD4000 and the other MSOP/LFCSP precision SAR converters in the family table."
+  }
+ ],
+ "packages": [
+  {
+   "name": "10-lead MSOP (RM-10), JEDEC MO-187-BA",
+   "page": 34,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "2.90",
+     "3.00",
+     "3.10"
+    ],
+    [
+     "",
+     "body width",
+     "2.90",
+     "3.00",
+     "3.10"
+    ],
+    [
+     "",
+     "overall width across leads",
+     "4.65",
+     "4.90",
+     "5.15"
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.10"
+    ],
+    [
+     "",
+     "body thickness",
+     "0.75",
+     "0.85",
+     "0.95"
+    ],
+    [
+     "",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "lead width",
+     "0.15",
+     "",
+     "0.30"
+    ],
+    [
+     "",
+     "lead thickness",
+     "0.13",
+     "",
+     "0.23"
+    ],
+    [
+     "",
+     "foot length",
+     "0.40",
+     "0.55",
+     "0.70"
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "6°"
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.10"
+    ]
+   ]
+  },
+  {
+   "name": "10-lead LFCSP 3 mm × 3 mm, 0.75 mm high (CP-10-9)",
+   "page": 34,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body size (square)",
+     "2.90",
+     "3.00",
+     "3.10"
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "",
+     "package height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "",
+     "standoff",
+     "",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "",
+     "lead frame thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "",
+     "exposed pad length",
+     "2.23",
+     "2.38",
+     "2.48"
+    ],
+    [
+     "",
+     "exposed pad width",
+     "1.49",
+     "1.64",
+     "1.74"
+    ],
+    [
+     "",
+     "terminal length",
+     "0.30",
+     "0.40",
+     "0.50"
+    ],
+    [
+     "",
+     "terminal width",
+     "0.20",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "",
+     "terminal to exposed pad",
+     "0.20",
+     "",
+     ""
+    ],
+    [
+     "",
+     "pin 1 indicator radius",
+     "",
+     "(R 0.15)",
+     ""
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.08"
+    ]
+   ]
+  }
+ ]
+}

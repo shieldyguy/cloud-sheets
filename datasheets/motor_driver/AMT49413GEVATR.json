@@ -1,0 +1,2528 @@
+{
+ "sheet": 1,
+ "name": "AMT49413GEVATR",
+ "kind": "motor_driver",
+ "manufacturer": "Allegro MicroSystems",
+ "title": "AMT49413: three-phase BLDC controller and N-channel MOSFET gate driver",
+ "source": {
+  "document": "AMT49413-DS, MCO-0000124",
+  "revision": "Rev. 4, June 5, 2026",
+  "pages": 21
+ },
+ "summary": "A controller for three-phase brushless DC motors with Hall sensors that drives six external N-channel MOSFETs. It decodes the Hall signals, sets dead time with one resistor, regulates the motor current with a fixed-frequency PWM loop and a gain-19 sense amplifier, and accepts an external PWM. A charge pump makes the 13 V gate supply, bootstrap capacitors with top-off pumps drive the high sides up to 100% duty, and short, undervoltage, overtemperature, Hall and low-load faults are reported on two flags. It runs from 5.5 to 50 V in a 7 × 7 mm 48-pin QFN.",
+ "key_figures": [
+  [
+   "Supply VBB",
+   "5.5 to 50 V functional; parameters at 7 to 45 V"
+  ],
+  [
+   "Gate supply VREG",
+   "13 V typ (VBB ≥ 7.4 V)"
+  ],
+  [
+   "Gate drive",
+   "4 Ω pull-up, 1.5 Ω pull-down typ; -500 mA / 850 mA short-circuit"
+  ],
+  [
+   "Sense amplifier gain",
+   "19 V/V typ"
+  ],
+  [
+   "Dead time",
+   "180 ns (5 kΩ) to 6 µs (RDEAD to V5) typ"
+  ],
+  [
+   "Sleep current",
+   "10 µA max"
+  ],
+  [
+   "Operating ambient",
+   "-40 to 105 °C"
+  ],
+  [
+   "Package",
+   "48-pin 7 × 7 mm QFN, exposed pad, RθJA 24 °C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "packing",
+   "package"
+  ],
+  "rows": [
+   [
+    "AMT49413GEVATR",
+    "1000 pieces per 7-inch reel",
+    "7 × 7 mm QFN with exposed pad"
+   ]
+  ],
+  "notes": [
+   "G: -40 to 105 °C operating temperature range. EV: the 48-terminal QFN package. The package is lead (Pb) free with 100% matte-tin leadframe plating."
+  ]
+ },
+ "pins": [
+  {
+   "package": "EV (48-pin QFN)",
+   "page": 19,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected."
+    },
+    {
+     "pin": "2",
+     "name": "RESET",
+     "type": "digital input",
+     "function": "Sleep control. Low puts the whole chip, the V5 regulator included, into its low-current sleep state; high runs it. Internal 50 kΩ pull-down and a 6 V clamp."
+    },
+    {
+     "pin": "3",
+     "name": "V5BD",
+     "type": "analog output",
+     "function": "Base drive for the external NPN pass transistor of the 5 V regulator. Tie to V5 when no external 5 V rail is wanted."
+    },
+    {
+     "pin": "4",
+     "name": "V5",
+     "type": "power out",
+     "function": "5 V regulator sense and output; feeds the internal logic and external pull-ups. Needs a capacitor to AGND."
+    },
+    {
+     "pin": "5",
+     "name": "FF2",
+     "type": "open-drain output",
+     "function": "Fault flag 2, coded with FF1 per the fault table."
+    },
+    {
+     "pin": "6",
+     "name": "FF1",
+     "type": "open-drain output",
+     "function": "Fault flag 1, coded with FF2 per the fault table."
+    },
+    {
+     "pin": "7",
+     "name": "TACHO",
+     "type": "digital output",
+     "function": "Speed output: toggles at every commutation point whatever the direction."
+    },
+    {
+     "pin": "8",
+     "name": "BRAKE",
+     "type": "digital input",
+     "function": "Active low. Low switches every low-side FET on and every high-side FET off."
+    },
+    {
+     "pin": "9",
+     "name": "DIR",
+     "type": "digital input",
+     "function": "Sets the direction of motor torque per the commutation table."
+    },
+    {
+     "pin": "10",
+     "name": "H1",
+     "type": "digital input",
+     "function": "Hall sensor input 1; internal pull-up to 5 V (100 kΩ typ in series with a diode)."
+    },
+    {
+     "pin": "11",
+     "name": "H2",
+     "type": "digital input",
+     "function": "Hall sensor input 2; internal pull-up to 5 V."
+    },
+    {
+     "pin": "12",
+     "name": "H3",
+     "type": "digital input",
+     "function": "Hall sensor input 3; internal pull-up to 5 V."
+    },
+    {
+     "pin": "13",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected."
+    },
+    {
+     "pin": "14",
+     "name": "PWM",
+     "type": "digital input",
+     "function": "External PWM. Low turns the selected drivers off and the current recirculates; high turns on the drivers chosen by the Hall inputs."
+    },
+    {
+     "pin": "15",
+     "name": "MODE",
+     "type": "digital input",
+     "function": "Decay select: high is slow decay, low is fast decay."
+    },
+    {
+     "pin": "16",
+     "name": "RC",
+     "type": "analog",
+     "function": "Oscillator timing: RT and CT in parallel to AGND set the internal PWM frequency and blank time. Tied to AGND it disables the internal PWM oscillator."
+    },
+    {
+     "pin": "17",
+     "name": "TEST",
+     "type": "other",
+     "function": "Factory test; connect to AGND."
+    },
+    {
+     "pin": "18",
+     "name": "RDEAD",
+     "type": "analog",
+     "function": "Dead-time set: a resistor to AGND (5 to 400 kΩ). Open or tied to V5 gives the longest dead time, about 6 µs."
+    },
+    {
+     "pin": "19",
+     "name": "CSOUT",
+     "type": "analog output",
+     "function": "Output of the current-sense amplifier (gain 19 typ)."
+    },
+    {
+     "pin": "20",
+     "name": "REF",
+     "type": "analog input",
+     "function": "Current-limit reference compared with CSOUT; internally clamped to 4 V, so a resistor to V5 sets the maximum."
+    },
+    {
+     "pin": "21",
+     "name": "CSN",
+     "type": "analog input",
+     "function": "Current-sense amplifier inverting input, to the low end of the sense resistor."
+    },
+    {
+     "pin": "22",
+     "name": "CSP",
+     "type": "analog input",
+     "function": "Current-sense amplifier non-inverting input, to the high end of the sense resistor."
+    },
+    {
+     "pin": "23",
+     "name": "VDSTH",
+     "type": "analog input",
+     "function": "Threshold voltage for the drain-source short monitors (0.3 to 4 V)."
+    },
+    {
+     "pin": "24",
+     "name": "VDRAIN",
+     "type": "analog input",
+     "function": "Kelvin sense of the high-side FET drains (top of the bridge), for short-to-ground detection."
+    },
+    {
+     "pin": "25",
+     "name": "SC",
+     "type": "power",
+     "function": "Phase C motor node: high-side source, bootstrap capacitor low end and return of the floating driver."
+    },
+    {
+     "pin": "26",
+     "name": "GHC",
+     "type": "output",
+     "function": "Phase C high-side gate drive."
+    },
+    {
+     "pin": "27",
+     "name": "CC",
+     "type": "power",
+     "function": "Phase C bootstrap capacitor high end; supply of the high-side driver."
+    },
+    {
+     "pin": "28",
+     "name": "SB",
+     "type": "power",
+     "function": "Phase B motor node: high-side source, bootstrap capacitor low end and return of the floating driver."
+    },
+    {
+     "pin": "29",
+     "name": "GHB",
+     "type": "output",
+     "function": "Phase B high-side gate drive."
+    },
+    {
+     "pin": "30",
+     "name": "CB",
+     "type": "power",
+     "function": "Phase B bootstrap capacitor high end; supply of the high-side driver."
+    },
+    {
+     "pin": "31",
+     "name": "SA",
+     "type": "power",
+     "function": "Phase A motor node: high-side source, bootstrap capacitor low end and return of the floating driver."
+    },
+    {
+     "pin": "32",
+     "name": "GHA",
+     "type": "output",
+     "function": "Phase A high-side gate drive."
+    },
+    {
+     "pin": "33",
+     "name": "CA",
+     "type": "power",
+     "function": "Phase A bootstrap capacitor high end; supply of the high-side driver."
+    },
+    {
+     "pin": "34",
+     "name": "GLC",
+     "type": "output",
+     "function": "Phase C low-side gate drive."
+    },
+    {
+     "pin": "35",
+     "name": "GLB",
+     "type": "output",
+     "function": "Phase B low-side gate drive."
+    },
+    {
+     "pin": "36",
+     "name": "GLA",
+     "type": "output",
+     "function": "Phase A low-side gate drive."
+    },
+    {
+     "pin": "37",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected."
+    },
+    {
+     "pin": "38",
+     "name": "LSS",
+     "type": "power",
+     "function": "Low-side gate discharge return; run as its own low-impedance trace to the joined low-side FET sources."
+    },
+    {
+     "pin": "39",
+     "name": "ESF",
+     "type": "digital input",
+     "function": "Enable stop on fault: high makes a detected short disable all gate drives and latch; low leaves the bridge running and only flags."
+    },
+    {
+     "pin": "40",
+     "name": "VREG",
+     "type": "power out",
+     "function": "Gate-drive supply made by the charge pump (13 V nominal); needs a low-ESR storage capacitor to AGND."
+    },
+    {
+     "pin": "41",
+     "name": "AGND",
+     "type": "ground",
+     "function": "The single ground of the chip; reference for current trip, VDS threshold and timing parts."
+    },
+    {
+     "pin": "42",
+     "name": "CP1",
+     "type": "power",
+     "function": "Charge-pump capacitor terminal."
+    },
+    {
+     "pin": "43",
+     "name": "CP2",
+     "type": "power",
+     "function": "Charge-pump capacitor terminal."
+    },
+    {
+     "pin": "44",
+     "name": "DIRO",
+     "type": "digital output",
+     "function": "Direction output from the Hall sequence: high for forward, low for reverse; updated at each commutation."
+    },
+    {
+     "pin": "45",
+     "name": "VBB",
+     "type": "power in",
+     "function": "Main supply, 5.5 to 50 V; connect through reverse-battery protection."
+    },
+    {
+     "pin": "46",
+     "name": "COAST",
+     "type": "digital input",
+     "function": "Active low. Low turns every FET off while the supplies and logic stay up."
+    },
+    {
+     "pin": "47",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected."
+    },
+    {
+     "pin": "48",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected."
+    },
+    {
+     "pin": "PAD",
+     "name": "PAD",
+     "type": "ground",
+     "function": "Exposed thermal pad; tie to AGND."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "rating",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Load Supply Voltage",
+     "VBB",
+     "VBB pin",
+     "-0.3 to 50",
+     "V"
+    ],
+    [
+     "Logic Input/Output Voltage",
+     "VRESET",
+     "RESET pin input",
+     "-0.3 to 6",
+     "V"
+    ],
+    [
+     "Logic Input/Output Voltage",
+     "",
+     "Remaining logic pins",
+     "-0.3 to 7",
+     "V"
+    ],
+    [
+     "Output Voltage Range",
+     "VGHx",
+     "GHA, GHB, and GHC pins",
+     "VSx to VSx + 15",
+     "V"
+    ],
+    [
+     "Output Voltage Range",
+     "VGLx",
+     "GLA, GLB, and GLC pins",
+     "-5 to 16",
+     "V"
+    ],
+    [
+     "Output Voltage Range",
+     "VCx",
+     "CA, CB, and CC pins",
+     "VSx+ 15",
+     "V"
+    ],
+    [
+     "Output Voltage Range",
+     "VSx",
+     "SA, SB, and SC pins",
+     "-5 to 55",
+     "V"
+    ],
+    [
+     "Output Voltage Range",
+     "",
+     "CSP, CSN, and LSS pins",
+     "-4 to 6.5",
+     "V"
+    ],
+    [
+     "Output Voltage Range",
+     "",
+     "CSO, VDSTH pins",
+     "-0.3 to 6.5",
+     "V"
+    ],
+    [
+     "Output Voltage Range",
+     "",
+     "VDRAIN pin",
+     "-0.3 to 55",
+     "V"
+    ],
+    [
+     "Operating Temperature Range (G)",
+     "TA",
+     "",
+     "-40 to 105",
+     "°C"
+    ],
+    [
+     "Junction Temperature",
+     "TJ",
+     "",
+     "150",
+     "°C"
+    ],
+    [
+     "Transient Junction Temperature",
+     "TtJ",
+     "Overtemperature event not exceeding 1 s, lifetime duration not exceeding 10 hr; guaranteed by design characterization",
+     "175",
+     "°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "Tstg",
+     "",
+     "-55 to 150",
+     "°C"
+    ],
+    [
+     "ESD Rating, Human Body Model",
+     "",
+     "AEC-Q100-002, all pins except CP1",
+     "2000",
+     "V"
+    ],
+    [
+     "ESD Rating, Human Body Model",
+     "",
+     "AEC-Q100-002, pin CP1",
+     "1000",
+     "V"
+    ],
+    [
+     "ESD Rating, Charged Device Model",
+     "",
+     "AEC-Q100-011, all pins",
+     "1050",
+     "V"
+    ]
+   ],
+   "notes": [
+    "CSO stands for the CSOUT pin."
+   ]
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 2,
+   "conditions": "Derating may be needed at the maximum conditions.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Package Thermal Resistance",
+     "RθJA",
+     "High-K PCB (multilayer with significant copper areas, based on JEDEC standard JESD51-7)",
+     "24",
+     "°C/W"
+    ],
+    [
+     "Die-to-Exposed Pad Thermal Resistance",
+     "RθJP",
+     "",
+     "2",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply and reference",
+   "page": 4,
+   "conditions": "TA = 25 °C, VBB = 7 to 45 V, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VBB Functional Operating Range (note 1)",
+     "VBB",
+     "Function correct, parameters not guaranteed",
+     "5.5",
+     "",
+     "50",
+     "V"
+    ],
+    [
+     "VBB Quiescent Current",
+     "IBBQ",
+     "RESET = High, outputs = Low",
+     "",
+     "11",
+     "14",
+     "mA"
+    ],
+    [
+     "VBB Quiescent Current",
+     "IBBS",
+     "RESET = Low, sleep mode",
+     "",
+     "",
+     "10",
+     "µA"
+    ],
+    [
+     "V5 Quiescent Current",
+     "IV5Q",
+     "RESET = High, outputs = Low",
+     "",
+     "",
+     "5",
+     "mA"
+    ],
+    [
+     "VREG Output Voltage",
+     "VREG",
+     "VBB ≥ 7.4 V, IREG = 0 to 15 mA",
+     "12.10",
+     "13",
+     "13.75",
+     "V"
+    ],
+    [
+     "VREG Output Voltage",
+     "VREG",
+     "6 V < VBB < 7.4 V, IREG = 0 to 15 mA",
+     "2 × VBB -2.7",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "VREG Output Voltage",
+     "VREG",
+     "5.5 V < VBB < 6 V, IREG < 10 mA",
+     "9",
+     "10",
+     "",
+     "V"
+    ],
+    [
+     "Bootstrap Diode Forward Voltage",
+     "VfBOOT",
+     "ID = 10 mA",
+     "0.4",
+     "0.7",
+     "1.0",
+     "V"
+    ],
+    [
+     "Bootstrap Diode Forward Voltage",
+     "VfBOOT",
+     "ID = 100 mA",
+     "1.5",
+     "2.2",
+     "2.8",
+     "V"
+    ],
+    [
+     "Bootstrap Diode Resistance",
+     "rD",
+     "rD(100 mA) = (VfBOOT(150 mA) - VfBOOT(50 mA)) / 100 mA",
+     "6",
+     "10",
+     "20",
+     "Ω"
+    ],
+    [
+     "Bootstrap Diode Current Limit",
+     "IDBOOT",
+     "",
+     "250",
+     "500",
+     "750",
+     "mA"
+    ],
+    [
+     "Top-Off Charge Pump Current Limit",
+     "ITOCPM",
+     "",
+     "",
+     "200",
+     "",
+     "µA"
+    ],
+    [
+     "High-Side Gate Drive Static Load Resistance",
+     "RGSH",
+     "",
+     "250",
+     "",
+     "",
+     "kΩ"
+    ],
+    [
+     "V5 Output Voltage",
+     "V5",
+     "",
+     "4.75",
+     "5",
+     "5.25",
+     "V"
+    ],
+    [
+     "VBE of External Transistor QV5",
+     "VBEEXT",
+     "",
+     "",
+     "",
+     "1",
+     "V"
+    ],
+    [
+     "V5BD Base Drive Capability for QV5 (note 2)",
+     "I5BD",
+     "",
+     "",
+     "",
+     "-2",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "Note 1: VBB functional range: the part works from 5.5 V to 50 V, but its parameters are guaranteed only from 7 V to 45 V.",
+    "Note 2: A negative current flows out of the pin named."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: gate output drive",
+   "page": 4,
+   "conditions": "TA = 25 °C, VBB = 7 to 45 V, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Turn-On Rise Time",
+     "tr",
+     "CLOAD = 3300 pF, 20% to 80% points",
+     "",
+     "60",
+     "",
+     "ns"
+    ],
+    [
+     "Turn-Off Fall Time",
+     "tf",
+     "CLOAD = 3300 pF, 80% to 20% points",
+     "",
+     "40",
+     "",
+     "ns"
+    ],
+    [
+     "Pull-Up On Resistance",
+     "RDS(on)UP",
+     "IGHx = -150 mA",
+     "3",
+     "4",
+     "5",
+     "Ω"
+    ],
+    [
+     "Pull-Down On Resistance",
+     "RDS(on)DN",
+     "IGLx = 150 mA",
+     "1",
+     "1.5",
+     "2",
+     "Ω"
+    ],
+    [
+     "Short-Circuit Current – Source (note 2)",
+     "ISC(source)",
+     "",
+     "",
+     "-500",
+     "",
+     "mA"
+    ],
+    [
+     "Short-Circuit Current – Sink",
+     "ISC(sink)",
+     "",
+     "",
+     "850",
+     "",
+     "mA"
+    ],
+    [
+     "GHx Output Voltage",
+     "VGHx",
+     "tw < 10 µs, bootstrap capacitor fully charged",
+     "VCx - 0.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "GLx Output Voltage",
+     "VGLx",
+     "",
+     "VREG-0.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Turn-Off Propagation Delay",
+     "tp(off)",
+     "From Hall input change to unloaded gate output change",
+     "300",
+     "500",
+     "700",
+     "ns"
+    ],
+    [
+     "Turn-Off Propagation Delay",
+     "tp(off)",
+     "From other control input change to unloaded gate output change",
+     "",
+     "150",
+     "200",
+     "ns"
+    ],
+    [
+     "Dead Time (turn-off to turn-on delay)",
+     "tDEAD",
+     "RDEAD = 5 kΩ",
+     "",
+     "180",
+     "",
+     "ns"
+    ],
+    [
+     "Dead Time (turn-off to turn-on delay)",
+     "tDEAD",
+     "RDEAD = 50 kΩ",
+     "835",
+     "960",
+     "1090",
+     "ns"
+    ],
+    [
+     "Dead Time (turn-off to turn-on delay)",
+     "tDEAD",
+     "RDEAD = 400 kΩ",
+     "",
+     "3.3",
+     "",
+     "µs"
+    ],
+    [
+     "Dead Time (turn-off to turn-on delay)",
+     "tDEAD",
+     "RDEAD = tied to V5",
+     "",
+     "6",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": [
+    "Note 2: A negative current flows out of the pin named."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: logic inputs and outputs",
+   "page": 5,
+   "conditions": "TA = 25 °C, VBB = 7 to 45 V, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "FFx Fault Output (Open Drain)",
+     "VOL",
+     "IOL = 1 mA, fault asserted",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "FFx Fault Output Leakage Current (note 2)",
+     "IOH",
+     "VO = 5 V, fault not asserted",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "TACHO and DIRO Output High Voltage",
+     "VOH",
+     "IOH = -1 mA",
+     "V5 - 1 V",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "TACHO and DIRO Output Low Voltage",
+     "VOL",
+     "IOL = 1 mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Input Low Voltage",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.8",
+     "V"
+    ],
+    [
+     "Input High Voltage (except RESET)",
+     "VIH",
+     "",
+     "2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "RESET Input High Voltage",
+     "VIHR",
+     "",
+     "2.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input Hysteresis",
+     "VIHys",
+     "",
+     "300",
+     "500",
+     "",
+     "mV"
+    ],
+    [
+     "Input Current (except H1, H2, H3, and RESET) (note 2)",
+     "IIN",
+     "",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "RESET Input Pull-Down Resistor",
+     "RPD",
+     "VIN = 5 V",
+     "",
+     "50",
+     "",
+     "kΩ"
+    ],
+    [
+     "Hx Input Pull-Up Resistor",
+     "RPU",
+     "VIN = 0 V",
+     "",
+     "100",
+     "",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "Note 2: A negative current flows out of the pin named."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: current sense differential amplifier",
+   "page": 5,
+   "conditions": "TA = 25 °C, VBB = 7 to 45 V, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Bias Current (note 2)",
+     "IIBS",
+     "CSP = CSN = 0 V",
+     "-300",
+     "-200",
+     "-150",
+     "µA"
+    ],
+    [
+     "Input Offset Current (note 2)",
+     "IIOS",
+     "CSP = CSN = 0 V",
+     "-10",
+     "",
+     "10",
+     "µA"
+    ],
+    [
+     "CSP Input Resistance",
+     "RCSP",
+     "Measured with respect to AGND",
+     "",
+     "80",
+     "",
+     "kΩ"
+    ],
+    [
+     "CSN Input Resistance",
+     "RCSN",
+     "Measured with respect to AGND",
+     "",
+     "4",
+     "",
+     "kΩ"
+    ],
+    [
+     "Differential Input Voltage",
+     "VID",
+     "VID = CSP - CSN, -1.3 V < CSP < 4 V, -1.3 V < CSN < 4 V",
+     "0",
+     "",
+     "200",
+     "mV"
+    ],
+    [
+     "Output Offset Voltage",
+     "VOOS",
+     "CSP = CSN = 0 V",
+     "100",
+     "320",
+     "550",
+     "mV"
+    ],
+    [
+     "Output Offset Voltage Drift",
+     "VOOS(Δt)",
+     "CSP = CSN = 0 V",
+     "",
+     "100",
+     "",
+     "µV/°C"
+    ],
+    [
+     "Input Common Mode Range",
+     "VCM",
+     "CSP = CSN",
+     "-1.5",
+     "",
+     "4",
+     "V"
+    ],
+    [
+     "Differential Input Voltage Gain",
+     "AV",
+     "40 mV < VID < 175 mV, VCM in range",
+     "18.5",
+     "19",
+     "19.5",
+     "V/V"
+    ],
+    [
+     "Low Output Voltage Error",
+     "Verr",
+     "0 < VID < 40 mV, VCSOUT = (19 × VID) + VOOS + Verr",
+     "-20",
+     "",
+     "20",
+     "mV"
+    ],
+    [
+     "DC Common Mode Gain",
+     "ACMdc",
+     "CSP = CSN = 200 mV",
+     "",
+     "-30",
+     "",
+     "dB"
+    ],
+    [
+     "Source Resistance",
+     "rCSOUT",
+     "VCSOUT = 2 V, -2 mA < ICSOUT < 0.5 mA",
+     "",
+     "80",
+     "",
+     "Ω"
+    ],
+    [
+     "Output Dynamic Range",
+     "VCSOUT",
+     "-100 µA < ICSOUT < 100 µA",
+     "0.1",
+     "",
+     "V5 - 0.2",
+     "V"
+    ],
+    [
+     "Output Current – Sink",
+     "ICSOUT(sink)",
+     "VCSOUT = 2 V ±5%",
+     "",
+     "1",
+     "",
+     "mA"
+    ],
+    [
+     "Output Current – Source (note 2)",
+     "ICSOUT(source)",
+     "VCSOUT = 2 V ±5%",
+     "",
+     "-19",
+     "",
+     "mA"
+    ],
+    [
+     "Supply Rejection",
+     "PSRR",
+     "CSP = CSN = AGND, 0 to 300 kHz",
+     "",
+     "45",
+     "",
+     "dB"
+    ],
+    [
+     "Small Signal 3 dB Bandwidth Frequency",
+     "f3dB",
+     "VID = 10 mVPP",
+     "",
+     "1.6",
+     "",
+     "MHz"
+    ],
+    [
+     "Settling Time",
+     "tSETTLE",
+     "To within 10%, VCSOUT = 1 VPP square wave",
+     "",
+     "400",
+     "",
+     "ns"
+    ],
+    [
+     "AC Common Mode Gain",
+     "ACMac",
+     "VICR = 250 mVPP, 0 to 1 MHz",
+     "",
+     "-28",
+     "",
+     "dB"
+    ],
+    [
+     "Common Mode Recovery Time",
+     "tCMrec",
+     "To within 100 mV, VICR = +4.1 to 0 V step",
+     "",
+     "1",
+     "",
+     "µs"
+    ],
+    [
+     "Output Slew Rate",
+     "SR",
+     "10% to 90% points, VID = 0 to 175 mV step",
+     "",
+     "20",
+     "",
+     "V/µs"
+    ],
+    [
+     "Input Overload Recovery Time",
+     "tIDREC",
+     "To within 10%, VID = 250 mV to 0 V step",
+     "",
+     "500",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "Note 2: A negative current flows out of the pin named."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: current limit",
+   "page": 6,
+   "conditions": "TA = 25 °C, VBB = 7 to 45 V, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Reference Comparator Input Offset Voltage",
+     "VIOC",
+     "",
+     "-15",
+     "0",
+     "15",
+     "mV"
+    ],
+    [
+     "Reference Input Clamp Voltage",
+     "VREFC",
+     "External pull-up to 5 V RREF = 200 kΩ",
+     "3.75",
+     "4",
+     "4.2",
+     "V"
+    ],
+    [
+     "Comparator Blank Time",
+     "tRC",
+     "RT = 56 kΩ, CT = 470 pF",
+     "",
+     "650",
+     "",
+     "ns"
+    ],
+    [
+     "REF Input Bias Current",
+     "IIBREF",
+     "",
+     "",
+     "0",
+     "",
+     "µA"
+    ],
+    [
+     "RC Charge Current (note 2)",
+     "IRC",
+     "",
+     "-1.15",
+     "-1",
+     "-0.85",
+     "mA"
+    ],
+    [
+     "RC High Voltage Threshold",
+     "VRCH",
+     "",
+     "1.7",
+     "1.9",
+     "2.1",
+     "V"
+    ],
+    [
+     "RC Low Voltage Threshold",
+     "VRCL",
+     "",
+     "0.6",
+     "0.7",
+     "0.8",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Note 2: A negative current flows out of the pin named."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: protection",
+   "page": 6,
+   "conditions": "TA = 25 °C, VBB = 7 to 45 V, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VREG Undervoltage Lockout",
+     "VREGUV",
+     "VREG rising",
+     "7.5",
+     "8",
+     "8.5",
+     "V"
+    ],
+    [
+     "VREG Undervoltage Lockout",
+     "VREGUV",
+     "VREG falling",
+     "6.75",
+     "7.25",
+     "7.75",
+     "V"
+    ],
+    [
+     "Bootstrap Capacitor Undervoltage Lockout",
+     "VBOOTUV",
+     "VBOOT falling, VCx - VSx",
+     "59",
+     "",
+     "69",
+     "%"
+    ],
+    [
+     "Bootstrap Capacitor Undervoltage Lockout Hysteresis",
+     "VBOOTUVHys",
+     "VBOOTUVHys = %VREG",
+     "",
+     "13",
+     "",
+     "%"
+    ],
+    [
+     "V5 Undervoltage Lockout",
+     "V5UV",
+     "V5 falling",
+     "3.4",
+     "3.65",
+     "4.0",
+     "V"
+    ],
+    [
+     "V5 Undervoltage Lockout Hysteresis",
+     "V5UVHys",
+     "",
+     "300",
+     "400",
+     "500",
+     "mV"
+    ],
+    [
+     "VDSTH Input Voltage Range",
+     "VDSTH",
+     "",
+     "0.3",
+     "",
+     "4",
+     "V"
+    ],
+    [
+     "VDSTH Input Current (note 2)",
+     "IDSTH",
+     "",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "VDRAIN Input Voltage Range",
+     "VDRAIN",
+     "",
+     "7",
+     "VBB",
+     "45",
+     "V"
+    ],
+    [
+     "Short-to-Ground Threshold Offset (notes 3, 5)",
+     "VSTGO",
+     "VDSTH > 1 V",
+     "",
+     "±300",
+     "",
+     "mV"
+    ],
+    [
+     "Short-to-Ground Threshold Offset (notes 3, 5)",
+     "VSTGO",
+     "VDSTH ≤ 1 V, 7 V ≤ VDRAIN ≤ 30 V",
+     "-150",
+     "",
+     "150",
+     "mV"
+    ],
+    [
+     "Short-to-Battery Threshold Offset (notes 4, 5)",
+     "VSTBO",
+     "VDSTH > 1 V",
+     "",
+     "±300",
+     "",
+     "mV"
+    ],
+    [
+     "Short-to-Battery Threshold Offset (notes 4, 5)",
+     "VSTBO",
+     "VDSTH ≤ 1 V, 7 V ≤ VDRAIN ≤ 30 V",
+     "-150",
+     "",
+     "150",
+     "mV"
+    ],
+    [
+     "Low Load Current Detection Voltage",
+     "VCSOL",
+     "",
+     "",
+     "500",
+     "",
+     "mV"
+    ],
+    [
+     "Overtemperature Flag",
+     "TJF",
+     "Temperature increasing",
+     "",
+     "170",
+     "",
+     "°C"
+    ],
+    [
+     "Overtemperature Flag Hysteresis",
+     "TJFHys",
+     "Recovery = TJF - TJFHys",
+     "",
+     "15",
+     "",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 2: A negative current flows out of the pin named.",
+    "Note 3: With the high-side FET on, a fault is flagged when VSx falls far enough that VBAT - VSx exceeds VSTG.",
+    "Note 4: With the low-side FET on, a fault is flagged when VSx rises far enough that VSx - VLSS exceeds VSTB.",
+    "Note 5: The short-to-ground threshold VSTG equals VDSTH + VSTGO; the short-to-battery threshold VSTB equals VDSTH + VSTBO."
+   ]
+  },
+  {
+   "title": "Fault action table",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "FF1",
+    "FF2",
+    "fault",
+    "action, ESF = 0",
+    "action, ESF = 1"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Undervoltage",
+     "Disable",
+     "Disable"
+    ],
+    [
+     "0",
+     "0",
+     "Overtemperature",
+     "No Action",
+     "No Action"
+    ],
+    [
+     "0",
+     "0",
+     "Logic fault",
+     "Disable",
+     "Disable"
+    ],
+    [
+     "1",
+     "0",
+     "Short to ground",
+     "No Action",
+     "Disable"
+    ],
+    [
+     "1",
+     "0",
+     "Short to supply",
+     "No Action",
+     "Disable"
+    ],
+    [
+     "1",
+     "0",
+     "Shorted motor winding",
+     "No Action",
+     "Disable"
+    ],
+    [
+     "0",
+     "1",
+     "Low load current",
+     "No Action",
+     "No Action"
+    ],
+    [
+     "1",
+     "1",
+     "None",
+     "No Action",
+     "No Action"
+    ]
+   ],
+   "notes": [
+    "Disable: every gate output low, so all the MOSFETs are off."
+   ]
+  },
+  {
+   "title": "Commutation truth table",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "H1",
+    "H2",
+    "H3",
+    "DIR",
+    "GLA",
+    "GLB",
+    "GLC",
+    "GHA",
+    "GHB",
+    "GHC",
+    "SA",
+    "SB",
+    "SC"
+   ],
+   "rows": [
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "High",
+     "Z",
+     "Low"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "Z",
+     "High",
+     "Low"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "Low",
+     "High",
+     "Z"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "Low",
+     "Z",
+     "High"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "Z",
+     "Low",
+     "High"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0",
+     "High",
+     "Low",
+     "Z"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "X",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "Z",
+     "Z",
+     "Z"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "X",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "Z",
+     "Z",
+     "Z"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "Low",
+     "Z",
+     "High"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "Z",
+     "Low",
+     "High"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0",
+     "High",
+     "Low",
+     "Z"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "High",
+     "Z",
+     "Low"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "Z",
+     "High",
+     "Low"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0",
+     "Low",
+     "High",
+     "Z"
+    ]
+   ],
+   "notes": [
+    "X: either level. Z: high impedance, both FETs of that phase off."
+   ]
+  },
+  {
+   "title": "Input logic",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "MODE",
+    "PWM",
+    "BRAKE",
+    "COAST",
+    "RESET",
+    "decay",
+    "mode of operation"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "1",
+     "Fast",
+     "PWM chop – current decay with opposite of selected drivers ON"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "1",
+     "Fast",
+     "Peak current limit – selected drivers ON"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "1",
+     "Slow",
+     "PWM chop – current decay with both low-side drivers ON"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "Slow",
+     "Peak current limit – selected drivers ON"
+    ],
+    [
+     "X",
+     "X",
+     "0",
+     "1",
+     "1",
+     "n/a",
+     "Brake mode – All low-side gates ON"
+    ],
+    [
+     "X",
+     "X",
+     "X",
+     "0",
+     "1",
+     "X",
+     "Coast mode – All gates OFF"
+    ],
+    [
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "X",
+     "Sleep mode – All gates OFF, low power state, 5 V OFF"
+    ]
+   ],
+   "notes": [
+    "X: either level."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 1,
+   "description": "The controller runs a three-phase N-channel MOSFET bridge from VBAT+ for a BLDC motor with Hall sensors. Each phase has a high-side FET (gate on GHx, source on Sx) and a low-side FET (gate on GLx), with a bootstrap capacitor from Cx to Sx feeding the floating high-side driver. One pump capacitor sits across CP1 and CP2. The low-side sources join at LSS and CSP and return to ground through the sense resistor, whose ground end goes to CSN and AGND. The three Hall outputs go to H1 to H3; Direction drives DIR and the Current Limit voltage drives REF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AMT49413"
+    },
+    {
+     "ref": "CP",
+     "type": "capacitor",
+     "value": "pump capacitor",
+     "note": "470 nF typical"
+    },
+    {
+     "ref": "CBOOTA",
+     "type": "capacitor",
+     "value": "bootstrap capacitor"
+    },
+    {
+     "ref": "CBOOTB",
+     "type": "capacitor",
+     "value": "bootstrap capacitor"
+    },
+    {
+     "ref": "CBOOTC",
+     "type": "capacitor",
+     "value": "bootstrap capacitor"
+    },
+    {
+     "ref": "QHA",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QHB",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QHC",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QLA",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QLB",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QLC",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "sense resistor"
+    },
+    {
+     "ref": "M1",
+     "type": "other",
+     "value": "3-phase BLDC motor with three Hall sensors"
+    },
+    {
+     "ref": "J_VBAT",
+     "type": "terminal",
+     "value": "VBAT+"
+    },
+    {
+     "ref": "J_DIR",
+     "type": "terminal",
+     "value": "Direction"
+    },
+    {
+     "ref": "J_RUN",
+     "type": "terminal",
+     "value": "Run/Stop"
+    },
+    {
+     "ref": "J_ILIM",
+     "type": "terminal",
+     "value": "Current Limit"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": [
+    "Run/Stop drives one of U1's logic inputs."
+   ]
+  },
+  {
+   "id": "supply-ground",
+   "title": "Supply and ground connections",
+   "page": 17,
+   "description": "The bridge, its supply and the controller's own parts arranged for a clean ground. VBB and VDRAIN both come from the + Supply rail, VDRAIN tapping it at the high-side drains. Gate resistors sit in series with all six gates. The low-side sources join LSS and return to Supply Common through RSENSE, the power ground. VBB, VREG and V5 capacitors go to a controller supply ground; the VDSTH divider from V5, RT and CT on RC, and RDEAD go to a quiet ground. Both grounds meet at AGND, which runs on its own trace to Supply Common at one point. A zener and diode in series, and a capacitor, between LSS and AGND are optional clamps for LSS transients. Two capacitors bypass the bridge supply.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "AMT49413"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "VBB decoupling capacitor",
+     "note": "at least 100 nF ceramic, VBB to AGND"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "VREG capacitor",
+     "note": "low ESR and ESL ceramic such as X7R, at least 20 times the bootstrap capacitor"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "V5 decoupling capacitor"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "VDSTH divider, upper"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "VDSTH divider, lower"
+    },
+    {
+     "ref": "CT",
+     "type": "capacitor",
+     "value": "timing capacitor CT"
+    },
+    {
+     "ref": "RT",
+     "type": "resistor",
+     "value": "timing resistor RT",
+     "note": "5 to 400 kΩ"
+    },
+    {
+     "ref": "RDEAD",
+     "type": "resistor",
+     "value": "dead-time resistor",
+     "note": "5 to 400 kΩ"
+    },
+    {
+     "ref": "RGHA",
+     "type": "resistor",
+     "value": "gate resistor"
+    },
+    {
+     "ref": "RGHB",
+     "type": "resistor",
+     "value": "gate resistor"
+    },
+    {
+     "ref": "RGHC",
+     "type": "resistor",
+     "value": "gate resistor"
+    },
+    {
+     "ref": "RGLA",
+     "type": "resistor",
+     "value": "gate resistor"
+    },
+    {
+     "ref": "RGLB",
+     "type": "resistor",
+     "value": "gate resistor"
+    },
+    {
+     "ref": "RGLC",
+     "type": "resistor",
+     "value": "gate resistor"
+    },
+    {
+     "ref": "QHA",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QHB",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QHC",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QLA",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QLB",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "QLC",
+     "type": "nmos",
+     "value": "N-channel power MOSFET"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "sense resistor"
+    },
+    {
+     "ref": "DZ1",
+     "type": "zener",
+     "value": "LSS clamp zener",
+     "note": "optional"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "LSS clamp diode",
+     "note": "optional"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "LSS capacitor",
+     "note": "optional"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "bridge supply capacitor"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "bridge supply capacitor"
+    },
+    {
+     "ref": "J_SUP",
+     "type": "terminal",
+     "value": "+ Supply"
+    },
+    {
+     "ref": "J_COM",
+     "type": "terminal",
+     "value": "Supply Common"
+    },
+    {
+     "ref": "J_MA",
+     "type": "terminal",
+     "value": "Motor phase A"
+    },
+    {
+     "ref": "J_MB",
+     "type": "terminal",
+     "value": "Motor phase B"
+    },
+    {
+     "ref": "J_MC",
+     "type": "terminal",
+     "value": "Motor phase C"
+    }
+   ],
+   "notes": [
+    "Quiet ground, controller supply ground, AGND, power ground and Supply Common are one node, joined in a star: the two controller grounds at the AGND pin, the AGND trace and the power ground at Supply Common."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Current-sense amplifier output",
+   "expr": "VCSOUT ≈ (ILOAD × AV × RSENSE) + VOOS",
+   "where": {
+    "ILOAD": "load current through RSENSE",
+    "AV": "differential gain, 19 typical",
+    "RSENSE": "sense resistor between CSP and CSN",
+    "VOOS": "output offset voltage, the output at zero current"
+   },
+   "note": "",
+   "page": 9
+  },
+  {
+   "name": "Trip current",
+   "expr": "ITRIP = (VREF - VOOS) / (RSENSE × AV)",
+   "where": {
+    "VREF": "voltage on REF",
+    "VOOS": "sense amplifier output offset",
+    "RSENSE": "sense resistor",
+    "AV": "sense amplifier gain"
+   },
+   "note": "",
+   "page": 9
+  },
+  {
+   "name": "Internal PWM frequency",
+   "expr": "fOSC ≈ 1 / (RT × CT + tBLANK + tDEAD)",
+   "where": {
+    "RT": "timing resistor, RC to AGND, 5 to 400 kΩ",
+    "CT": "timing capacitor in parallel with RT",
+    "tBLANK": "blank time",
+    "tDEAD": "dead time"
+   },
+   "note": "fOSC lies between 20 and 50 kHz.",
+   "page": 9
+  },
+  {
+   "name": "Blank time, internal PWM",
+   "expr": "tBLANK (µs) = 1260 × CT (µF)",
+   "where": {
+    "CT": "timing capacitor"
+   },
+   "note": "CT = 680 pF gives 860 ns.",
+   "page": 10
+  },
+  {
+   "name": "Blank time, external PWM",
+   "expr": "tBLANK (µs) = 2000 × CT (µF)",
+   "where": {
+    "CT": "timing capacitor"
+   },
+   "note": "CT = 680 pF gives 1.3 µs.",
+   "page": 10
+  },
+  {
+   "name": "Low output voltage error",
+   "expr": "VCSOUT = (19 × VID) + VOOS + Verr",
+   "where": {
+    "VID": "CSP - CSN, 0 to 40 mV",
+    "Verr": "error, -20 to 20 mV"
+   },
+   "note": "",
+   "page": 5
+  },
+  {
+   "name": "Bootstrap diode resistance",
+   "expr": "rD(100 mA) = (VfBOOT(150 mA) - VfBOOT(50 mA)) / 100 mA",
+   "where": {
+    "VfBOOT": "bootstrap diode forward voltage at the current given"
+   },
+   "note": "",
+   "page": 4
+  },
+  {
+   "name": "Short thresholds",
+   "expr": "VSTG = VDSTH + VSTGO;  VSTB = VDSTH + VSTBO",
+   "where": {
+    "VDSTH": "voltage on the VDSTH pin",
+    "VSTGO": "short-to-ground threshold offset",
+    "VSTBO": "short-to-battery threshold offset"
+   },
+   "note": "",
+   "page": 6
+  },
+  {
+   "name": "Total power",
+   "expr": "PTOT = PBIAS + PCPUMP + PSWITCHING",
+   "where": {
+    "PBIAS": "bias power",
+    "PCPUMP": "charge-pump power",
+    "PSWITCHING": "gate switching power"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Bias power",
+   "expr": "PBIAS = VBB × IBB",
+   "where": {
+    "IBB": "supply current, 3 mA typical"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Charge-pump power, VBB < 15 V",
+   "expr": "PCPUMP = (2 × VBB - VREG) × IAV",
+   "where": {
+    "IAV": "average gate-drive current"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Charge-pump power, VBB > 15 V",
+   "expr": "PCPUMP = (VBB - VREG) × IAV",
+   "where": {
+    "IAV": "average gate-drive current"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Average gate-drive current",
+   "expr": "IAV = QGATE × N × fPWM",
+   "where": {
+    "QGATE": "gate charge of one external MOSFET",
+    "N": "2 for slow decay, 4 for fast decay",
+    "fPWM": "PWM frequency"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Switching power",
+   "expr": "PSWITCHING = QGATE × VREG × N × fPWM × Ratio",
+   "where": {
+    "N": "2 for slow decay, 4 for fast decay",
+    "Ratio": "10 / (RGATE + 10)",
+    "RGATE": "external series gate resistance, Ω"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Bootstrap capacitor",
+   "expr": "QBOOT = CBOOT × VBOOT = QGATE × 20;  CBOOT = QGATE × 20 / VBOOT",
+   "where": {
+    "QBOOT": "charge stored on the bootstrap capacitor",
+    "VBOOT": "bootstrap voltage",
+    "QGATE": "MOSFET gate charge"
+   },
+   "note": "QBOOT is made 20 times QGATE.",
+   "page": 13
+  },
+  {
+   "name": "Bootstrap droop at turn-on",
+   "expr": "ΔV = QGATE / CBOOT",
+   "where": {
+    "ΔV": "drop on the Cx pin while the MOSFET turns on"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Minimum bootstrap charge time",
+   "expr": "tCHARGE(min) ≈ CBOOT × ΔV / 250 mA",
+   "where": {
+    "ΔV": "voltage to restore: the full high-side drive, 12 V, from a discharged capacitor; otherwise the drop in one charge transfer, 400 mV or less"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Dead time",
+   "expr": "tDEAD(nom) (µs) ≈ 0.1 + 33 / (5 + IDEAD);  IDEAD = 2000 / RDEAD",
+   "where": {
+    "IDEAD": "µA",
+    "RDEAD": "kΩ, 5 to 400"
+   },
+   "note": "At 25 °C; most accurate for RDEAD from 10 to 100 kΩ.",
+   "page": 15
+  },
+  {
+   "name": "Braking current",
+   "expr": "IBRAKE ≈ VBEMF / RLOAD",
+   "where": {
+    "VBEMF": "motor back EMF",
+    "RLOAD": "winding resistance in the brake path"
+   },
+   "note": "",
+   "page": 15
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 7,
+   "text": "The chip commutates and current-limits a three-phase BLDC motor with Hall sensors through an external N-channel MOSFET bridge, using fixed-frequency PWM. It decodes the three Hall signals, keeps the two FETs of a leg from conducting together, and has separate DIR, BRAKE and COAST controls. A sense resistor in the bridge ground return is amplified and compared with REF to limit the current cycle by cycle; an external PWM signal can control the bridge instead, with the internal loop off or setting a ceiling."
+  },
+  {
+   "topic": "Supplies",
+   "page": 7,
+   "text": "All internal circuits run from integrated regulators, so VBB is the only supply; it is fed through reverse-battery protection. Gate drive stays above 10 V on both sides down to VBB = 7 V; from 7 V to 5.5 V the part still works with less gate drive."
+  },
+  {
+   "topic": "5 V regulator",
+   "page": 7,
+   "text": "V5 comes from a regulator controller driving an external NPN, QV5: V5BD gives the base current and V5 senses the output. It also powers the internal logic. V5 needs at least 200 nF to AGND and V5BD 100 nF to AGND. When V5 with QV5 also powers other circuits, put 10 µF from V5 to AGND close to the pins (with 100 nF ceramic in parallel if electrolytic). Without QV5, join V5 to V5BD and decouple with at least 220 nF."
+  },
+  {
+   "topic": "Charge pump and VREG",
+   "page": 7,
+   "text": "A charge pump with a capacitor across CP1 and CP2 (470 nF typical) makes VREG, 13 V nominal, which powers all six drivers and charges the bootstrap capacitors. It doubles at low supply and drops out at the nominal 14 V to keep its dissipation down. The VREG capacitor carries the low-side gate transients: at least 20 times the bootstrap capacitor, low ESR and ESL, X7R ceramic at best, or an electrolytic with about 100 nF ceramic beside it, placed at the pin with its ground near AGND."
+  },
+  {
+   "topic": "High-side drive",
+   "page": 7,
+   "text": "Each high-side driver floats on its Sx pin and is supplied from a bootstrap capacitor on Cx, charged to about VREG while Sx is low. A trickle top-off charge pump per phase (under 100 µA typical) replaces the floating circuit's bias draw (under 20 µA), so a high-side FET can stay on indefinitely (100% duty). The charge to first turn a gate on always comes from the bootstrap capacitor."
+  },
+  {
+   "topic": "Hall inputs",
+   "page": 7,
+   "text": "H1 to H3 expect sensors 120 electrical degrees apart; 60° sensors work with an external inverter. Open-collector sensors need pull-ups to 5 V, which V5 can supply. The inputs have about 500 mV hysteresis and a filter, and each is pulled up internally through 100 kΩ and a diode, so a missing sensor reads high. All three at the same level is a logic fault. A microcontroller can drive the inputs directly."
+  },
+  {
+   "topic": "Gate outputs",
+   "page": 8,
+   "text": "GHx and GLx source current from their upper (PMOS) half when at 1 and sink from their lower (NMOS) half when at 0; GHx sinks into Sx, GLx into LSS. Series gate resistors near each FET gate set the slew rate and with it the current and voltage slew at the phase node. Sx and LSS carry the gate discharge currents and need low-impedance traces to the bridge."
+  },
+  {
+   "topic": "Dead time",
+   "page": 15,
+   "text": "A dead time between one FET turning off and its partner turning on is set by RDEAD to AGND, from 96 ns to 6.3 µs; RDEAD open or tied to V5 gives about 6 µs. It must cover the spread in MOSFET gate capacitance and in the gate resistance inside and outside the chip."
+  },
+  {
+   "topic": "RESET and sleep",
+   "page": 8,
+   "text": "RESET low shuts every internal circuit down, V5 included. On wake the gate outputs are held off until the charge pump is up, about 3 ms in normal conditions. RESET has a 50 kΩ pull-down and a 6 V clamp; to start without a logic signal a resistor of more than 20 kΩ to the battery can hold it high, small enough still to reach the RESET high threshold."
+  },
+  {
+   "topic": "COAST, BRAKE, MODE, DIR",
+   "page": 8,
+   "text": "COAST low turns every FET off with the supplies and logic still running. BRAKE low turns all low-side FETs on and high-side FETs off, shorting the windings' back EMF; the braking torque depends on speed and the winding current is not controlled. RESET low or COAST low overrides BRAKE. MODE high selects slow decay (only the high-side FET switches off in the PWM off-time, low ripple, slower response, suited to near-constant speed); MODE low selects fast decay (both FETs switch, quicker response, more ripple, suited to start-stop and positioning). DIR sets the torque direction; with a high-inertia load and fast decay, reversing DIR brakes the motor."
+  },
+  {
+   "topic": "Current regulation",
+   "page": 9,
+   "text": "The sense amplifier output is compared with REF; at the trip point the source driver is latched off and the current recirculates, in the path MODE selects, until the next PWM period. With PWM held high, torque follows the REF voltage. REF clamps at 4 V internally, so a resistor RREF of 20 to 200 kΩ to V5 sets the maximum without an external reference. CSOUT is also available for an external loop."
+  },
+  {
+   "topic": "Internal and external PWM",
+   "page": 9,
+   "text": "RT and CT in parallel from RC to AGND set the internal oscillator. Pulling RC to AGND stops the oscillator and holds the PWM latch on, for purely external PWM; current is then not limited by the chip, though short detection still works and an external loop using CSOUT must blank the switching transients itself. With both in use the internal frequency is set below the external one: PWM low discharges CT, so the external signal synchronises the internal circuit and dead time, the comparator and blanking all stay active. The PWM frequency should be above the audible range and low enough for the bootstrap capacitor to charge."
+  },
+  {
+   "topic": "Blank time",
+   "page": 9,
+   "text": "When a source driver turns on, recovery currents of the body diodes and load capacitance cause a spike; the current comparator is ignored for tBLANK, set by CT, so the spike does not trip it. CT must be large enough to cover the spike. The blank masks only the internal comparator."
+  },
+  {
+   "topic": "Bootstrap capacitor choice",
+   "page": 13,
+   "text": "Too large a bootstrap capacitor wastes charging time and limits duty cycle and PWM frequency; too small one droops when its charge moves to the gate. QBOOT about 20 times QGATE is used. The capacitor charges through the internal bootstrap diode from VREG whenever Sx is pulled low by a GLx cycle."
+  },
+  {
+   "topic": "Bootstrap charge monitor",
+   "page": 14,
+   "text": "Each phase's bootstrap voltage is watched against VBOOTUV. If it falls below, the chip turns on that phase's low-side FET until the voltage exceeds VBOOTUV plus its hysteresis; charging takes at least 7 µs typically, longer for CBOOT above 1000 nF. If the threshold is not reached within about 200 µs an undervoltage fault is flagged."
+  },
+  {
+   "topic": "Synchronous rectification",
+   "page": 15,
+   "text": "During the PWM off-time the chip turns on the FET that MODE selects so the recirculating current flows in the channel, not the body diode; the diodes conduct only during dead time. With internal current control in fast decay, synchronous rectification turns off at zero current so the current does not reverse. With external PWM in fast decay, the current is allowed to rise in reverse to the set limit before synchronous rectification is disabled."
+  },
+  {
+   "topic": "Braking current",
+   "page": 15,
+   "text": "Brake current does not pass through RSENSE, so the FET ratings must be checked. A PWM signal on BRAKE can limit braking current, its duty found for each condition, typically starting at a current-limiting value and falling to 0% (BRAKE held low) to hold the motor still. With RESET = 1, COAST = 0 takes priority over BRAKE: every bridge FET goes off and the motor freewheels."
+  },
+  {
+   "topic": "Driving a full bridge",
+   "page": 15,
+   "text": "A brush DC motor can be driven as a full bridge by fixing the Hall inputs to one state and leaving the phase that state makes high-impedance unconnected: with H1 = H2 = 1 and H3 = 0, CC, GHC, SC and GLC float. DIR then sets rotation and PWM and MODE set the current behaviour."
+  },
+  {
+   "topic": "TACHO and DIRO",
+   "page": 10,
+   "text": "TACHO changes state at every commutation point in either direction. DIRO is updated at each commutation: high for forward (the Hall sequence running down the commutation table), low for reverse (running up). DIRO can differ from DIR, for example while a high-inertia load is being braked after DIR is reversed; it does not change during that braking."
+  },
+  {
+   "topic": "Fault flags and ESF",
+   "page": 10,
+   "text": "Two open-drain flags, FF1 and FF2, code the fault per the fault action table; with several faults at once each flag is the AND of the fault states. With ESF = 1 a short fault turns all gate drives off and coasts the motor, latched until the next commutation or COAST or RESET goes low, so a running motor coasts safely to the next commutation. With ESF = 0 the flags still assert but the bridge keeps running and is not protected; the host must act, by RESET or COAST. Tying FF1 and FF2 to COAST with a pull-up to V5 gives a simple disable."
+  },
+  {
+   "topic": "Undervoltage",
+   "page": 10,
+   "text": "During power-up both flags are pulled low and the motor coasts until VREG exceeds about 8 V. That is enough to turn the FETs on at a 5.5 V battery but not to reach their rated on-resistance, which can overheat them. The bootstrap voltage and V5 are monitored too; either below its lockout sets the flags."
+  },
+  {
+   "topic": "Overtemperature",
+   "page": 10,
+   "text": "Overtemperature pulls both flags low and disables nothing; turning the part off is left to the system."
+  },
+  {
+   "topic": "Hall logic fault",
+   "page": 10,
+   "text": "All three Hall inputs equal is an illegal code: both flags go low and the motor coasts. The fault is not latched, so the FETs are driven again per the commutation table once the inputs are valid. The pull-ups make an open sensor wire show as this fault."
+  },
+  {
+   "topic": "Short detection",
+   "page": 11,
+   "text": "Short to ground: the voltage across each high-side FET (VDRAIN minus Sx) is compared with VDSTH. Short to supply: the voltage across each low-side FET (Sx minus LSS) is compared with VDSTH. A shorted winding is seen across both FETs of a phase. Each pulls FF2 low. The voltages are sampled only one dead time after a FET turns on, to ignore motor capacitance. With ESF = 0 the internal current limit gives little or no protection, above all when a phase is shorted to ground."
+  },
+  {
+   "topic": "Low load current",
+   "page": 11,
+   "text": "If the sense amplifier output stays below VCSOL through a commutation period, FF1 goes low and nothing else happens; an open phase may still let a running motor turn at reduced performance. The flag is set at the next commutation and cleared after a later period without the fault. After start-up or reset it stays set until the current first exceeds VCSOL, so an open phase is seen even if the motor cannot start. A motor with no mechanical load can also trip it."
+  },
+  {
+   "topic": "Decoupling",
+   "page": 13,
+   "text": "VBB: at least 100 nF ceramic to AGND, with about 10 µF electrolytic in parallel. Every supply pin's capacitor goes close to its pin."
+  },
+  {
+   "topic": "Grounding",
+   "page": 13,
+   "text": "AGND is the single ground pin and carries only the controller's current; FET gate currents return elsewhere. It is the reference for the current trip, the VDS threshold and the timing parts and must stay quiet. RDEAD and VDSTH parts go to a quiet ground taken straight to AGND, never to supply common or power ground. VBB, VREG and V5 decoupling go to a controller supply ground joined near AGND. Timing parts may use either, not power ground. The exposed pad ties to AGND. With little room the two may be combined if RDEAD's return is close to AGND. AGND runs on its own low-impedance trace to supply common at one point."
+  },
+  {
+   "topic": "Layout",
+   "page": 16,
+   "text": "Keep GHx, GLx, Sx and LSS traces short. Run LSS on its own trace to the bridge common, not to AGND, and not shared with CSP. Route CSP and CSN as separate, matched traces. Use short wide copper at all power FET drains and sources, motor leads and supply bus. 100 nF ceramic across each FET's drain and source can limit spikes. Check LSS transients against AGND with a short-ground probe; if they pass the absolute maximum, add clamping, capacitance or both between LSS and AGND. Tie TEST to AGND. VDRAIN is a Kelvin trace from the high-side drains."
+  },
+  {
+   "topic": "Power dissipation",
+   "page": 13,
+   "text": "At high ambient temperature the chip's own dissipation, estimated with the power equations, must keep the junction in its safe range."
+  }
+ ],
+ "packages": [
+  {
+   "name": "EV, 48-terminal QFN with exposed thermal pad",
+   "page": 20,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value",
+    "note"
+   ],
+   "rows": [
+    [
+     "Body length and width",
+     "7.00 BSC",
+     ""
+    ],
+    [
+     "Overall height",
+     "0.90 ±0.10",
+     "seating plane to top"
+    ],
+    [
+     "Terminal width",
+     "0.25 +0.05/-0.07",
+     ""
+    ],
+    [
+     "Terminal pitch",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "Terminal length",
+     "0.40 NOM",
+     ""
+    ],
+    [
+     "Exposed pad length and width",
+     "5.15 ±0.10",
+     ""
+    ],
+    [
+     "Coplanarity",
+     "0.08",
+     "49 places, exposed pad and terminals included"
+    ],
+    [
+     "Profile tolerance of body sides",
+     "0.15",
+     "datum C, 2 places each side"
+    ],
+    [
+     "Land pattern: pad width",
+     "0.30",
+     "IPC7351 QFN50P700X700X100-49M"
+    ],
+    [
+     "Land pattern: pad pitch",
+     "0.50",
+     ""
+    ],
+    [
+     "Land pattern: pad length",
+     "1.00",
+     ""
+    ],
+    [
+     "Land pattern: thermal pad length and width",
+     "5.15",
+     ""
+    ],
+    [
+     "Land pattern: centre-to-centre span of pad rows",
+     "7.0",
+     ""
+    ],
+    [
+     "Land pattern: corner clearance",
+     "0.20 MIN",
+     "4 places; every pad at least 0.20 from its neighbours"
+    ]
+   ],
+   "notes": [
+    "Thermal vias in the exposed pad land help on a multilayer board (JESD51-5).",
+    "Marking: line 1 part number; line 2 logo and 4-digit date code; line 3 characters 5 to 8 of the assembly lot number."
+   ]
+  }
+ ]
+}

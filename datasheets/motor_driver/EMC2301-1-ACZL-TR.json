@@ -1,0 +1,4578 @@
+{
+ "sheet": 1,
+ "name": "EMC2301-1-ACZL-TR",
+ "kind": "motor_driver",
+ "manufacturer": "Microchip",
+ "title": "EMC2301/2/3/5: SMBus fan controllers, one to five RPM-based PWM channels",
+ "source": {
+  "document": "DS20006532A",
+  "revision": "Revision A, April 2021",
+  "pages": 70
+ },
+ "summary": "A family of SMBus fan controllers for 4-wire fans, with one (EMC2301), two (EMC2302), three (EMC2303) or five (EMC2305) PWM outputs, each paired with a tachometer input. Every channel runs either in direct duty mode or under a closed-loop PID algorithm that holds a target tach count, with spin-up, ramp-rate limiting, stall and aging-fan detection, and an ALERT output. A watchdog drives every fan to full speed when the host goes quiet for 4 s. EMC2301-1-ACZL-TR is the one-channel part in MSOP-8 at fixed address 0101_111, on tape and reel.",
+ "key_figures": [
+  [
+   "Fan channels",
+   "1 / 2 / 3 / 5 (EMC2301 / 2302 / 2303 / 2305)"
+  ],
+  [
+   "Supply voltage",
+   "3.0 V to 3.6 V"
+  ],
+  [
+   "Supply current",
+   "350 µA typ, 475 µA max (EMC2301)"
+  ],
+  [
+   "PWM base frequency",
+   "26.00, 19.531, 4.882 or 2.441 kHz, divided by 1 to 255"
+  ],
+  [
+   "PWM resolution",
+   "256 steps"
+  ],
+  [
+   "Tachometer range",
+   "480 to 16000 RPM"
+  ],
+  [
+   "Tachometer accuracy",
+   "±1% max with 32.768 kHz external clock, ±2% max internal"
+  ],
+  [
+   "Output drive",
+   "8 mA at VOH = VDD - 0.4 V / VOL = 0.4 V"
+  ],
+  [
+   "SMBus clock",
+   "10 kHz to 400 kHz"
+  ],
+  [
+   "Ambient temperature under bias",
+   "-40 °C to +125 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 67,
+  "columns": [
+   "part number",
+   "device",
+   "fan channels",
+   "SMBus address",
+   "package",
+   "packing",
+   "product ID"
+  ],
+  "rows": [
+   [
+    "EMC2301-1-ACZL-TR",
+    "EMC2301",
+    "1",
+    "0101_111(r/w)",
+    "MSOP-8",
+    "tape and reel",
+    "37h"
+   ],
+   [
+    "EMC2302-1-AIZL-TR",
+    "EMC2302",
+    "2",
+    "0101_110(r/w)",
+    "MSOP-10",
+    "tape and reel",
+    "36h"
+   ],
+   [
+    "EMC2302-2-AIZL-TR",
+    "EMC2302",
+    "2",
+    "0101_111(r/w)",
+    "MSOP-10",
+    "tape and reel",
+    "36h"
+   ],
+   [
+    "EMC2303-1-KP-TR",
+    "EMC2303",
+    "3",
+    "selectable by ADDR_SEL, 6 addresses",
+    "QFN-12, 4 x 4 mm",
+    "tape and reel",
+    "35h"
+   ],
+   [
+    "EMC2305-1-AP-TR",
+    "EMC2305",
+    "5",
+    "selectable by ADDR_SEL, 6 addresses",
+    "QFN-16, 4 x 4 mm",
+    "tape and reel",
+    "34h"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "EMC2301, MSOP-8",
+   "page": 11,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SMDATA",
+     "type": "DIOD",
+     "function": "SMBus data, bidirectional, open drain; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "2",
+     "name": "SMCLK",
+     "type": "DI",
+     "function": "SMBus clock input; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "3",
+     "name": "VDD",
+     "type": "Power",
+     "function": "Supply, 3.0 V to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "Power",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "PWM1",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 1; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "6",
+     "name": "TACH1",
+     "type": "DI",
+     "function": "Tachometer input from fan 1; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "7",
+     "name": "CLK",
+     "type": "DI/DO",
+     "function": "32.768 kHz clock: input for accurate tach timing, or push-pull output of the internal clock to other controllers. On EMC2303/5 its pull-up can instead choose the default fan drive."
+    },
+    {
+     "pin": "8",
+     "name": "ALERT",
+     "type": "OD",
+     "function": "Active-low interrupt and SMBus alert, open drain; needs a pull-up. 5 V tolerant."
+    }
+   ]
+  },
+  {
+   "package": "EMC2302, MSOP-10",
+   "page": 11,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SMDATA",
+     "type": "DIOD",
+     "function": "SMBus data, bidirectional, open drain; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "2",
+     "name": "SMCLK",
+     "type": "DI",
+     "function": "SMBus clock input; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "3",
+     "name": "VDD",
+     "type": "Power",
+     "function": "Supply, 3.0 V to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "Power",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "PWM1",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 1; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "6",
+     "name": "TACH1",
+     "type": "DI",
+     "function": "Tachometer input from fan 1; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "7",
+     "name": "PWM2",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 2; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "8",
+     "name": "TACH2",
+     "type": "DI",
+     "function": "Tachometer input from fan 2; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "9",
+     "name": "CLK",
+     "type": "DI/DO",
+     "function": "32.768 kHz clock: input for accurate tach timing, or push-pull output of the internal clock to other controllers. On EMC2303/5 its pull-up can instead choose the default fan drive."
+    },
+    {
+     "pin": "10",
+     "name": "ALERT",
+     "type": "OD",
+     "function": "Active-low interrupt and SMBus alert, open drain; needs a pull-up. 5 V tolerant."
+    }
+   ]
+  },
+  {
+   "package": "EMC2303, QFN-12 4 x 4 mm",
+   "page": 11,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SMDATA",
+     "type": "DIOD",
+     "function": "SMBus data, bidirectional, open drain; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "2",
+     "name": "SMCLK",
+     "type": "DI",
+     "function": "SMBus clock input; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "3",
+     "name": "VDD",
+     "type": "Power",
+     "function": "Supply, 3.0 V to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "ADDR_SEL",
+     "type": "AIO",
+     "function": "Analog input whose pull-up resistor value, read at power-up, sets the SMBus address and whether CLK sets the default drive. Needs a pull-up."
+    },
+    {
+     "pin": "5",
+     "name": "PWM1",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 1; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "6",
+     "name": "TACH1",
+     "type": "DI",
+     "function": "Tachometer input from fan 1; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "7",
+     "name": "PWM2",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 2; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "8",
+     "name": "TACH2",
+     "type": "DI",
+     "function": "Tachometer input from fan 2; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "9",
+     "name": "CLK",
+     "type": "DI/DO",
+     "function": "32.768 kHz clock: input for accurate tach timing, or push-pull output of the internal clock to other controllers. On EMC2303/5 its pull-up can instead choose the default fan drive."
+    },
+    {
+     "pin": "10",
+     "name": "ALERT",
+     "type": "OD",
+     "function": "Active-low interrupt and SMBus alert, open drain; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "11",
+     "name": "PWM3",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 3; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "12",
+     "name": "TACH3",
+     "type": "DI",
+     "function": "Tachometer input from fan 3; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "EP13",
+     "name": "GND",
+     "type": "Power",
+     "function": "Exposed pad; the device ground."
+    }
+   ]
+  },
+  {
+   "package": "EMC2305, QFN-16 4 x 4 mm",
+   "page": 11,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SMDATA",
+     "type": "DIOD",
+     "function": "SMBus data, bidirectional, open drain; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "2",
+     "name": "SMCLK",
+     "type": "DI",
+     "function": "SMBus clock input; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "3",
+     "name": "VDD",
+     "type": "Power",
+     "function": "Supply, 3.0 V to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "ADDR_SEL",
+     "type": "AIO",
+     "function": "Analog input whose pull-up resistor value, read at power-up, sets the SMBus address and whether CLK sets the default drive. Needs a pull-up."
+    },
+    {
+     "pin": "5",
+     "name": "PWM1",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 1; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "6",
+     "name": "TACH1",
+     "type": "DI",
+     "function": "Tachometer input from fan 1; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "7",
+     "name": "PWM2",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 2; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "8",
+     "name": "TACH2",
+     "type": "DI",
+     "function": "Tachometer input from fan 2; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "9",
+     "name": "PWM3",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 3; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "10",
+     "name": "TACH3",
+     "type": "DI",
+     "function": "Tachometer input from fan 3; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "11",
+     "name": "CLK",
+     "type": "DI/DO",
+     "function": "32.768 kHz clock: input for accurate tach timing, or push-pull output of the internal clock to other controllers. On EMC2303/5 its pull-up can instead choose the default fan drive."
+    },
+    {
+     "pin": "12",
+     "name": "ALERT",
+     "type": "OD",
+     "function": "Active-low interrupt and SMBus alert, open drain; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "13",
+     "name": "PWM4",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 4; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "14",
+     "name": "TACH4",
+     "type": "DI",
+     "function": "Tachometer input from fan 4; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "15",
+     "name": "PWM5",
+     "type": "DO/OD",
+     "function": "PWM drive to fan 5; push-pull or, by default, open drain; polarity selectable."
+    },
+    {
+     "pin": "16",
+     "name": "TACH5",
+     "type": "DI",
+     "function": "Tachometer input from fan 5; needs a pull-up. 5 V tolerant."
+    },
+    {
+     "pin": "EP17",
+     "name": "GND",
+     "type": "Power",
+     "function": "Exposed pad; the device ground."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Device features",
+   "page": 1,
+   "conditions": "",
+   "columns": [
+    "device",
+    "PWM fan control channels",
+    "SMBus address",
+    "default start-up RPM select"
+   ],
+   "rows": [
+    [
+     "EMC2301",
+     "1",
+     "Fixed",
+     "No"
+    ],
+    [
+     "EMC2302",
+     "2",
+     "Fixed",
+     "No"
+    ],
+    [
+     "EMC2303",
+     "3",
+     "6 Selectable",
+     "Yes"
+    ],
+    [
+     "EMC2305",
+     "5",
+     "6 Selectable",
+     "Yes"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Ambient temperature under bias",
+     "-40°C to +125°C"
+    ],
+    [
+     "Storage temperature",
+     "-55°C to +150°C"
+    ],
+    [
+     "Voltage on VDD with respect to GND",
+     "-0.3V to 4V"
+    ],
+    [
+     "Voltage on 5V tolerant pins (|V5VT_pin - VDD| with respect to GND) (Note 1)",
+     "0V to 3.6V"
+    ],
+    [
+     "Voltage on 5V tolerant pins with respect to GND",
+     "-0.3V to 5.5V"
+    ],
+    [
+     "Voltage on any other pin with respect to GND",
+     "-0.3V to VDD +0.3V"
+    ],
+    [
+     "Package thermal resistance, junction to ambient (θJA), QFN-16",
+     "40°C/W"
+    ],
+    [
+     "Package thermal resistance, junction to ambient (θJA), QFN-12",
+     "50°C/W"
+    ],
+    [
+     "Package thermal resistance, junction to ambient (θJA), MSOP-10",
+     "132°C/W"
+    ],
+    [
+     "Package thermal resistance, junction to ambient (θJA), MSOP-8",
+     "141°C/W"
+    ],
+    [
+     "ESD rating, all pins, HBM",
+     "2 kV"
+    ]
+   ],
+   "notes": [
+    "Note 1: on the 5 V tolerant pins that carry a pull-up (SMCLK, SMDATA, TACH, ALERT), the pull-up voltage stays at or below 3.6 V while the device has no power."
+   ]
+  },
+  {
+   "title": "DC characteristics",
+   "page": 4,
+   "conditions": "VDD = 3.0V to 3.6V unless noted; typical values at TA = +27°C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply Voltage",
+     "VDD",
+     "",
+     "3",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Supply Current",
+     "IDD",
+     "EMC2301, channel active",
+     "—",
+     "350",
+     "475",
+     "µA"
+    ],
+    [
+     "Supply Current",
+     "IDD",
+     "EMC2302, all channels active",
+     "—",
+     "400",
+     "550",
+     "µA"
+    ],
+    [
+     "Supply Current",
+     "IDD",
+     "EMC2303, all channels active",
+     "—",
+     "475",
+     "600",
+     "µA"
+    ],
+    [
+     "Supply Current",
+     "IDD",
+     "EMC2305, all channels active",
+     "—",
+     "625",
+     "800",
+     "µA"
+    ],
+    [
+     "PWM Resolution",
+     "PWM",
+     "",
+     "—",
+     "256",
+     "—",
+     "Steps"
+    ],
+    [
+     "PWM Duty Cycle",
+     "DUTY",
+     "",
+     "0",
+     "—",
+     "100",
+     "%"
+    ],
+    [
+     "Tachometer Range",
+     "TACH",
+     "",
+     "480",
+     "—",
+     "16000",
+     "RPM"
+    ],
+    [
+     "Tachometer Setting Accuracy",
+     "ΔTACH",
+     "External oscillator 32.768kHz",
+     "—",
+     "±0.5",
+     "±1",
+     "%"
+    ],
+    [
+     "Tachometer Setting Accuracy",
+     "ΔTACH",
+     "Internal oscillator",
+     "—",
+     "±1",
+     "±2",
+     "%"
+    ],
+    [
+     "Input High Voltage",
+     "VIH",
+     "",
+     "2.0",
+     "—",
+     "—",
+     "V"
+    ],
+    [
+     "Input Low Voltage",
+     "VIL",
+     "",
+     "—",
+     "—",
+     "0.8",
+     "V"
+    ],
+    [
+     "Output High Voltage",
+     "VOH",
+     "8 mA current drive",
+     "VDD - 0.4",
+     "—",
+     "—",
+     "V"
+    ],
+    [
+     "Output Low Voltage",
+     "VOL",
+     "8 mA current sink",
+     "—",
+     "—",
+     "0.4",
+     "V"
+    ],
+    [
+     "Leakage Current",
+     "ILEAK",
+     "ALERT pin powered and unpowered; 0°C < TA < 85°C; pull-up voltage ≤ 3.6V",
+     "—",
+     "—",
+     "±5",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "SMBus module DC characteristics",
+   "page": 4,
+   "conditions": "VDD = 3V to 3.6V, TA = -40°C to +125°C unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input High Voltage",
+     "VIH",
+     "",
+     "2.0",
+     "—",
+     "—",
+     "V"
+    ],
+    [
+     "Input Low Voltage",
+     "VIL",
+     "",
+     "—",
+     "—",
+     "0.8",
+     "V"
+    ],
+    [
+     "Output High Voltage",
+     "VOH",
+     "",
+     "VDD - 0.4",
+     "—",
+     "—",
+     "V"
+    ],
+    [
+     "Output Low Voltage",
+     "VOL",
+     "4 mA current sink",
+     "—",
+     "—",
+     "0.4",
+     "V"
+    ],
+    [
+     "Input High/Low Current",
+     "IIH/IIL",
+     "Powered and unpowered; 0°C < TA < 85°C",
+     "—",
+     "—",
+     "±5",
+     "µA"
+    ],
+    [
+     "Input Capacitance",
+     "CIN",
+     "",
+     "—",
+     "5",
+     "—",
+     "pF"
+    ],
+    [
+     "Clock Frequency",
+     "fSMB",
+     "",
+     "10",
+     "—",
+     "400",
+     "kHz"
+    ],
+    [
+     "Spike Suppression",
+     "tSP",
+     "",
+     "—",
+     "—",
+     "50",
+     "ns"
+    ],
+    [
+     "Bus free time Start to Stop",
+     "tBUF",
+     "",
+     "1.3",
+     "—",
+     "—",
+     "µs"
+    ],
+    [
+     "Setup Time: Start",
+     "tSU:STA",
+     "",
+     "0.6",
+     "—",
+     "—",
+     "µs"
+    ],
+    [
+     "Setup Time: Stop",
+     "tSU:STP",
+     "",
+     "0.6",
+     "—",
+     "—",
+     "µs"
+    ],
+    [
+     "Data Hold Time",
+     "tHD:DAT",
+     "",
+     "0",
+     "—",
+     "—",
+     "µs"
+    ],
+    [
+     "Data Setup Time",
+     "tSU:DAT",
+     "",
+     "0.6",
+     "—",
+     "—",
+     "µs"
+    ],
+    [
+     "Clock Low Period",
+     "tLOW",
+     "",
+     "1.3",
+     "—",
+     "—",
+     "µs"
+    ],
+    [
+     "Clock High Period",
+     "tHIGH",
+     "",
+     "0.6",
+     "—",
+     "—",
+     "µs"
+    ],
+    [
+     "Clock/Data Fall Time",
+     "tFALL",
+     "Min. = 20 + 0.1CLOAD ns",
+     "—",
+     "—",
+     "300",
+     "ns"
+    ],
+    [
+     "Clock/Data Rise Time",
+     "tRISE",
+     "Min. = 20 + 0.1CLOAD ns",
+     "—",
+     "—",
+     "300",
+     "ns"
+    ],
+    [
+     "Capacitive Load",
+     "CLOAD",
+     "Per bus line",
+     "—",
+     "—",
+     "400",
+     "pF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Pin types",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "pin type",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "Power",
+     "Supply or ground."
+    ],
+    [
+     "DI",
+     "Digital input, 5 V tolerant."
+    ],
+    [
+     "DO",
+     "Push-pull digital output, sources and sinks."
+    ],
+    [
+     "DIOD",
+     "Digital input with open-drain output; needs a pull-up; 5 V tolerant."
+    ],
+    [
+     "OD",
+     "Open-drain digital output; needs a pull-up; 5 V tolerant."
+    ],
+    [
+     "AIO",
+     "Analog input/output."
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Fan controls active in each operating mode",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "Direct Setting mode",
+    "FSC mode"
+   ],
+   "rows": [
+    [
+     "Fan Driver Setting (read/write)",
+     "Fan Driver Setting (read only)"
+    ],
+    [
+     "EDGES[1:0]",
+     "EDGES[1:0] (Fan Configuration)"
+    ],
+    [
+     "—",
+     "RANGE[1:0] (Fan Configuration)"
+    ],
+    [
+     "UPDATE[2:0] (Fan Configuration)",
+     "UPDATE[2:0] (Fan Configuration)"
+    ],
+    [
+     "LEVEL (Spin Up Configuration)",
+     "LEVEL (Spin Up Configuration)"
+    ],
+    [
+     "SPINUP_TIME[1:0] (Spin Up Configuration)",
+     "SPINUP_TIME[1:0] (Spin Up Configuration)"
+    ],
+    [
+     "Fan Step",
+     "Fan Step"
+    ],
+    [
+     "—",
+     "Fan Minimum Drive"
+    ],
+    [
+     "Valid TACH Count",
+     "Valid TACH Count"
+    ],
+    [
+     "—",
+     "TACH Target (read/write)"
+    ],
+    [
+     "TACH Reading",
+     "TACH Reading"
+    ],
+    [
+     "—",
+     "DRIVE_FAIL_CNT[1:0] and Drive Band Fail registers"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "PWM base frequency (PWM_BASEx[1:0])",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "PWM_BASEx[1:0]",
+    "base frequency"
+   ],
+   "rows": [
+    [
+     "00",
+     "26.00 kHz (default)"
+    ],
+    [
+     "01",
+     "19.531 kHz"
+    ],
+    [
+     "10",
+     "4.882 kHz"
+    ],
+    [
+     "11",
+     "2.441 kHz"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Update time (UPDATEx[2:0])",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "UPDATEx[2:0]",
+    "update time"
+   ],
+   "rows": [
+    [
+     "000",
+     "100 ms"
+    ],
+    [
+     "001",
+     "200 ms"
+    ],
+    [
+     "010",
+     "300 ms"
+    ],
+    [
+     "011",
+     "400 ms (default)"
+    ],
+    [
+     "100",
+     "500 ms"
+    ],
+    [
+     "101",
+     "800 ms"
+    ],
+    [
+     "110",
+     "1200 ms"
+    ],
+    [
+     "111",
+     "1600 ms"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Error range options (ERGx[1:0])",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "ERGx[1:0]",
+    "error window"
+   ],
+   "rows": [
+    [
+     "00",
+     "0 RPM (default)"
+    ],
+    [
+     "01",
+     "50 RPM"
+    ],
+    [
+     "10",
+     "100 RPM"
+    ],
+    [
+     "11",
+     "200 RPM"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Derivative options (DPTx[1:0])",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "DPTx[1:0]",
+    "name",
+    "operation"
+   ],
+   "rows": [
+    [
+     "00",
+     "NONE",
+     "No derivative term."
+    ],
+    [
+     "01",
+     "BASIC",
+     "Derivative of the present error is added with the P and I terms to the drive setting each iteration."
+    ],
+    [
+     "10",
+     "STEP",
+     "As BASIC, without the limit of the maximum step register."
+    ],
+    [
+     "11",
+     "BOTH",
+     "BASIC and STEP together, in effect a gain of 2."
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Gain decode (GAIND, GAINP, GAINI[1:0])",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "bits [1:0]",
+    "gain factor"
+   ],
+   "rows": [
+    [
+     "00",
+     "1x"
+    ],
+    [
+     "01",
+     "2x"
+    ],
+    [
+     "10",
+     "4x (default)"
+    ],
+    [
+     "11",
+     "8x"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Minimum edges for fan rotation (EDGx[1:0])",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "EDGx[1:0]",
+    "minimum TACH edges",
+    "number of fan poles",
+    "effective TACH multiplier (based on 2-pole fans)"
+   ],
+   "rows": [
+    [
+     "00",
+     "3",
+     "1",
+     "0.5"
+    ],
+    [
+     "01",
+     "5",
+     "2 (default)",
+     "1"
+    ],
+    [
+     "10",
+     "7",
+     "3",
+     "1.5"
+    ],
+    [
+     "11",
+     "9",
+     "4",
+     "2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Drive fail sample time (DFCx[1:0])",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "DFCx[1:0]",
+    "number of update periods"
+   ],
+   "rows": [
+    [
+     "00",
+     "Disabled (default)"
+    ],
+    [
+     "01",
+     "16"
+    ],
+    [
+     "10",
+     "32"
+    ],
+    [
+     "11",
+     "64"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "CLK pin pull-up decode (EMC2303/5)",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "pull-up resistor",
+    "fan default drive setting"
+   ],
+   "rows": [
+    [
+     "4.7k Ohm ±5%",
+     "0% - OFF"
+    ],
+    [
+     "6.8k Ohm ±5%",
+     "30%"
+    ],
+    [
+     "10k Ohm ±5%",
+     "50%"
+    ],
+    [
+     "15k Ohm ±5%",
+     "75%"
+    ],
+    [
+     "22k Ohm ±5%",
+     "100%"
+    ],
+    [
+     "33k Ohm ±5%",
+     "0% - OFF"
+    ]
+   ],
+   "notes": [
+    "Applies only when ADDR_SEL carries the 33 k pull-up."
+   ]
+  },
+  {
+   "title": "Spin level (SPLVx[2:0])",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "SPLVx[2:0]",
+    "spin-up drive level"
+   ],
+   "rows": [
+    [
+     "000",
+     "30%"
+    ],
+    [
+     "001",
+     "35%"
+    ],
+    [
+     "010",
+     "40%"
+    ],
+    [
+     "011",
+     "45%"
+    ],
+    [
+     "100",
+     "50%"
+    ],
+    [
+     "101",
+     "55%"
+    ],
+    [
+     "110",
+     "60% (default)"
+    ],
+    [
+     "111",
+     "65%"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Spin time (SPTx[1:0])",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "SPTx[1:0]",
+    "total spin-up time"
+   ],
+   "rows": [
+    [
+     "00",
+     "250 ms"
+    ],
+    [
+     "01",
+     "500 ms (default)"
+    ],
+    [
+     "10",
+     "1 sec"
+    ],
+    [
+     "11",
+     "2 sec"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "ADDR_SEL pin decode (EMC2303/5 only)",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "pull-up resistor",
+    "SMBus address",
+    "additional functions"
+   ],
+   "rows": [
+    [
+     "4.7 k ± 5%",
+     "0101_110(r/w)",
+     "None; CLK is a clock input or output"
+    ],
+    [
+     "6.8 k ± 5%",
+     "0101_111(r/w)",
+     "None; CLK is a clock input or output"
+    ],
+    [
+     "10 k ± 5%",
+     "0101_100(r/w)",
+     "None; CLK is a clock input or output"
+    ],
+    [
+     "15 k ± 5%",
+     "0101_101(r/w)",
+     "None; CLK is a clock input or output"
+    ],
+    [
+     "22 k ± 5%",
+     "1001_100(r/w)",
+     "None; CLK is a clock input or output"
+    ],
+    [
+     "33 k ± 5%",
+     "1001_101(r/w)",
+     "CLK pull-up sets the default fan drive; CLK is not a clock input or output"
+    ]
+   ],
+   "notes": [
+    "Fixed addresses: EMC2301 0101_111(r/w)b; EMC2302-1 0101_110(r/w)b; EMC2302-2 0101_111(r/w)b."
+   ]
+  },
+  {
+   "title": "Register set in hexadecimal order",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "register",
+    "address",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0",
+    "lock",
+    "POR value"
+   ],
+   "rows": [
+    [
+     "Configuration",
+     "20h",
+     "MASK",
+     "DIS_TO",
+     "WD_EN",
+     "—",
+     "—",
+     "—",
+     "DRECK",
+     "USECK",
+     "SWL",
+     "40h"
+    ],
+    [
+     "Fan Status",
+     "24h",
+     "WATCH",
+     "—",
+     "—",
+     "—",
+     "—",
+     "DVFAIL",
+     "FNSPIN",
+     "FNSTL",
+     "No",
+     "00h"
+    ],
+    [
+     "Fan Stall Status",
+     "25h",
+     "—",
+     "—",
+     "—",
+     "F5STL",
+     "F4STL",
+     "F3STL",
+     "F2STL",
+     "F1STL",
+     "No",
+     "00h"
+    ],
+    [
+     "Fan Spin Status",
+     "26h",
+     "—",
+     "—",
+     "—",
+     "F5SPIN",
+     "F4SPIN",
+     "F3SPIN",
+     "F2SPIN",
+     "F1SPIN",
+     "No",
+     "00h"
+    ],
+    [
+     "Drive Fail Status",
+     "27h",
+     "—",
+     "—",
+     "—",
+     "DRVF5",
+     "DRVF4",
+     "DRVF3",
+     "DRVF2",
+     "DRVF1",
+     "No",
+     "00h"
+    ],
+    [
+     "Fan Interrupt Enable Register",
+     "29h",
+     "—",
+     "—",
+     "—",
+     "F5ITEN",
+     "F4ITEN",
+     "F3ITEN",
+     "F2ITEN",
+     "F1ITEN",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM Polarity Config",
+     "2Ah",
+     "—",
+     "—",
+     "—",
+     "PLRTY5",
+     "PLRTY4",
+     "PLRTY3",
+     "PLRTY2",
+     "PLRTY1",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM Output Config",
+     "2Bh",
+     "—",
+     "—",
+     "—",
+     "PM5OT",
+     "PM4OT",
+     "PM3OT",
+     "PM2OT",
+     "PM1OT",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM BaseF45",
+     "2Ch",
+     "—",
+     "—",
+     "—",
+     "—",
+     "PMB51",
+     "PMB50",
+     "PMB41",
+     "PMB40",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM BaseF123",
+     "2Dh",
+     "—",
+     "—",
+     "PMB31",
+     "PMB30",
+     "PMB21",
+     "PMB20",
+     "PMB11",
+     "PMB10",
+     "No",
+     "00h"
+    ],
+    [
+     "Fan 1 Setting",
+     "30h",
+     "F1SP7",
+     "F1SP6",
+     "F1SP5",
+     "F1SP4",
+     "F1SP3",
+     "F1SP2",
+     "F1SP1",
+     "F1SP0",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM 1 Divide",
+     "31h",
+     "PM1D7",
+     "PM1D6",
+     "PM1D5",
+     "PM1D4",
+     "PM1D3",
+     "PM1D2",
+     "PM1D1",
+     "PM1D0",
+     "No",
+     "01h"
+    ],
+    [
+     "Fan 1 Configuration 1",
+     "32h",
+     "ENAG1",
+     "RNG11",
+     "RNG10",
+     "EDG11",
+     "EDG10",
+     "UDT12",
+     "UDT11",
+     "UDT10",
+     "No",
+     "2Bh"
+    ],
+    [
+     "Fan 1 Configuration 2",
+     "33h",
+     "—",
+     "ENRC1",
+     "GHEN1",
+     "DPT11",
+     "DPT10",
+     "ERG11",
+     "ERG10",
+     "—",
+     "SWL",
+     "28h"
+    ],
+    [
+     "Gain 1",
+     "35h",
+     "—",
+     "—",
+     "GDE11",
+     "GDE10",
+     "GIN11",
+     "GIN10",
+     "GPR11",
+     "GPR10",
+     "SWL",
+     "2Ah"
+    ],
+    [
+     "Fan 1 Spin Up Configuration",
+     "36h",
+     "DFC11",
+     "DFC10",
+     "NKCK1",
+     "SPLV12",
+     "SPLV11",
+     "SPLV10",
+     "SPT11",
+     "SPT10",
+     "SWL",
+     "19h"
+    ],
+    [
+     "Fan 1 Max Step",
+     "37h",
+     "—",
+     "—",
+     "F1MS5",
+     "F1MS4",
+     "F1MS3",
+     "F1MS2",
+     "F1MS1",
+     "F1MS0",
+     "SWL",
+     "10h"
+    ],
+    [
+     "Fan 1 Minimum Drive",
+     "38h",
+     "F1MN7",
+     "F1MN6",
+     "F1MN5",
+     "F1MN4",
+     "F1MN3",
+     "F1MN2",
+     "F1MN1",
+     "F1MN0",
+     "SWL",
+     "66h (40%)"
+    ],
+    [
+     "Fan 1 Valid TACH Count",
+     "39h",
+     "F1VT7",
+     "F1VT6",
+     "F1VT5",
+     "F1VT4",
+     "F1VT3",
+     "F1VT2",
+     "F1VT1",
+     "F1VT0",
+     "SWL",
+     "F5h"
+    ],
+    [
+     "Fan 1 Drive Fail Band Low Byte",
+     "3Ah",
+     "F1DF4",
+     "F1DF3",
+     "F1DF2",
+     "F1DF1",
+     "F1DF0",
+     "—",
+     "—",
+     "—",
+     "SWL",
+     "00h"
+    ],
+    [
+     "Fan 1 Drive Fail Band High Byte",
+     "3Bh",
+     "F1DF12",
+     "F1DF11",
+     "F1DF10",
+     "F1DF9",
+     "F1DF8",
+     "F1DF7",
+     "F1DF6",
+     "F1DF5",
+     "SWL",
+     "00h"
+    ],
+    [
+     "TACH 1 Target Low Byte",
+     "3Ch",
+     "F1TT4",
+     "F1TT3",
+     "F1TT2",
+     "F1TT1",
+     "F1TT0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "TACH 1 Target High Byte",
+     "3Dh",
+     "F1TT12",
+     "F1TT11",
+     "F1TT10",
+     "F1TT9",
+     "F1TT8",
+     "F1TT7",
+     "F1TT6",
+     "F1TT5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 1 Reading High Byte",
+     "3Eh",
+     "F1TR12",
+     "F1TR11",
+     "F1TR10",
+     "F1TR9",
+     "F1TR8",
+     "F1TR7",
+     "F1TR6",
+     "F1TR5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 1 Reading Low Byte",
+     "3Fh",
+     "F1TR4",
+     "F1TR3",
+     "F1TR2",
+     "F1TR1",
+     "F1TR0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "Fan 2 Setting",
+     "40h",
+     "F2SP7",
+     "F2SP6",
+     "F2SP5",
+     "F2SP4",
+     "F2SP3",
+     "F2SP2",
+     "F2SP1",
+     "F2SP0",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM 2 Divide",
+     "41h",
+     "PM2D7",
+     "PM2D6",
+     "PM2D5",
+     "PM2D4",
+     "PM2D3",
+     "PM2D2",
+     "PM2D1",
+     "PM2D0",
+     "No",
+     "01h"
+    ],
+    [
+     "Fan 2 Configuration 1",
+     "42h",
+     "ENAG2",
+     "RNG21",
+     "RNG20",
+     "EDG21",
+     "EDG20",
+     "UDT22",
+     "UDT21",
+     "UDT20",
+     "No",
+     "2Bh"
+    ],
+    [
+     "Fan 2 Configuration 2",
+     "43h",
+     "—",
+     "ENRC2",
+     "GHEN2",
+     "DPT21",
+     "DPT20",
+     "ERG21",
+     "ERG20",
+     "—",
+     "SWL",
+     "28h"
+    ],
+    [
+     "Gain 2",
+     "45h",
+     "—",
+     "—",
+     "GDE21",
+     "GDE20",
+     "GIN21",
+     "GIN20",
+     "GPR21",
+     "GPR20",
+     "SWL",
+     "2Ah"
+    ],
+    [
+     "Fan 2 Spin Up Configuration",
+     "46h",
+     "DFC21",
+     "DFC20",
+     "NKCK2",
+     "SPLV22",
+     "SPLV21",
+     "SPLV20",
+     "SPT21",
+     "SPT20",
+     "SWL",
+     "19h"
+    ],
+    [
+     "Fan 2 Max Step",
+     "47h",
+     "—",
+     "—",
+     "F2MS5",
+     "F2MS4",
+     "F2MS3",
+     "F2MS2",
+     "F2MS1",
+     "F2MS0",
+     "SWL",
+     "10h"
+    ],
+    [
+     "Fan 2 Minimum Drive",
+     "48h",
+     "F2MN7",
+     "F2MN6",
+     "F2MN5",
+     "F2MN4",
+     "F2MN3",
+     "F2MN2",
+     "F2MN1",
+     "F2MN0",
+     "SWL",
+     "66h (40%)"
+    ],
+    [
+     "Fan 2 Valid TACH Count",
+     "49h",
+     "F2VT7",
+     "F2VT6",
+     "F2VT5",
+     "F2VT4",
+     "F2VT3",
+     "F2VT2",
+     "F2VT1",
+     "F2VT0",
+     "SWL",
+     "F5h"
+    ],
+    [
+     "Fan 2 Drive Fail Band Low Byte",
+     "4Ah",
+     "F2DF4",
+     "F2DF3",
+     "F2DF2",
+     "F2DF1",
+     "F2DF0",
+     "—",
+     "—",
+     "—",
+     "SWL",
+     "00h"
+    ],
+    [
+     "Fan 2 Drive Fail Band High Byte",
+     "4Bh",
+     "F2DF12",
+     "F2DF11",
+     "F2DF10",
+     "F2DF9",
+     "F2DF8",
+     "F2DF7",
+     "F2DF6",
+     "F2DF5",
+     "SWL",
+     "00h"
+    ],
+    [
+     "TACH 2 Target Low Byte",
+     "4Ch",
+     "F2TT4",
+     "F2TT3",
+     "F2TT2",
+     "F2TT1",
+     "F2TT0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8"
+    ],
+    [
+     "TACH 2 Target High Byte",
+     "4Dh",
+     "F2TT12",
+     "F2TT11",
+     "F2TT10",
+     "F2TT9",
+     "F2TT8",
+     "F2TT7",
+     "F2TT6",
+     "F2TT5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 2 Reading High Byte",
+     "4Eh",
+     "F2TR12",
+     "F2TR11",
+     "F2TR10",
+     "F2TR9",
+     "F2TR8",
+     "F2TR7",
+     "F2TR6",
+     "F2TR5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 2 Reading Low Byte",
+     "4Fh",
+     "F2TR4",
+     "F2TR3",
+     "F2TR2",
+     "F2TR1",
+     "F2TR0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "Fan 3 Setting",
+     "50h",
+     "F3SP7",
+     "F3SP6",
+     "F3SP5",
+     "F3SP4",
+     "F3SP3",
+     "F3SP2",
+     "F3SP1",
+     "F3SP0",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM 3 Divide",
+     "51h",
+     "PM3D7",
+     "PM3D6",
+     "PM3D5",
+     "PM3D4",
+     "PM3D3",
+     "PM3D2",
+     "PM3D1",
+     "PM3D0",
+     "No",
+     "01h"
+    ],
+    [
+     "Fan 3 Configuration 1",
+     "52h",
+     "ENAG3",
+     "RNG31",
+     "RNG30",
+     "EDG31",
+     "EDG30",
+     "UDT32",
+     "UDT31",
+     "UDT30",
+     "No",
+     "2Bh"
+    ],
+    [
+     "Fan 3 Configuration 2",
+     "53h",
+     "—",
+     "ENRC3",
+     "GHEN3",
+     "DPT34",
+     "DPT30",
+     "ERG31",
+     "ERG30",
+     "—",
+     "SWL",
+     "28h"
+    ],
+    [
+     "Gain 3",
+     "55h",
+     "—",
+     "—",
+     "GDE31",
+     "GDE30",
+     "GIN31",
+     "GIN30",
+     "GPR31",
+     "GPR30",
+     "SWL",
+     "2Ah"
+    ],
+    [
+     "Fan 3 Spin Up Configuration",
+     "56h",
+     "DFC31",
+     "DFC30",
+     "NKCK3",
+     "SPLV32",
+     "SPLV31",
+     "SPLV30",
+     "SPT31",
+     "SPT30",
+     "SWL",
+     "19h"
+    ],
+    [
+     "Fan 3 Max Step",
+     "57h",
+     "—",
+     "—",
+     "F3MS5",
+     "F3MS4",
+     "F3MS3",
+     "F3MS2",
+     "F3MS1",
+     "F3MS0",
+     "SWL",
+     "10h"
+    ],
+    [
+     "Fan 3 Minimum Drive",
+     "58h",
+     "F3MN7",
+     "F3MN6",
+     "F3MN5",
+     "F3MN4",
+     "F3MN3",
+     "F3MN2",
+     "F3MN1",
+     "F3MN0",
+     "SWL",
+     "66h (40%)"
+    ],
+    [
+     "Fan 3 Valid TACH Count",
+     "59h",
+     "F3VT7",
+     "F3VT6",
+     "F3VT5",
+     "F3VT4",
+     "F3VT3",
+     "F3VT2",
+     "F3VT1",
+     "F3VT0",
+     "SWL",
+     "F5h"
+    ],
+    [
+     "Fan 3 Drive Fail Band Low Byte",
+     "5Ah",
+     "F3DF4",
+     "F3DF3",
+     "F3DF2",
+     "F3DF1",
+     "F3DF0",
+     "—",
+     "—",
+     "—",
+     "SWL",
+     "00h"
+    ],
+    [
+     "Fan 3 Drive Fail Band High Byte",
+     "5Bh",
+     "F3DF12",
+     "F3DF11",
+     "F3DF10",
+     "F3DF9",
+     "F3DF8",
+     "F3DF7",
+     "F3DF6",
+     "F3DF5",
+     "SWL",
+     "00h"
+    ],
+    [
+     "TACH 3 Target Low Byte",
+     "5Ch",
+     "F3TT4",
+     "F3TT3",
+     "F3TT2",
+     "F3TT1",
+     "F3TT0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "TACH 3 Target High Byte",
+     "5Dh",
+     "F3TT12",
+     "F3TT11",
+     "F3TT10",
+     "F3TT9",
+     "F3TT8",
+     "F3TT7",
+     "F3TT6",
+     "F3TT5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 3 Reading High Byte",
+     "5Eh",
+     "F3TR12",
+     "F3TR11",
+     "F3TR10",
+     "F3TR9",
+     "F3TR8",
+     "F3TR7",
+     "F3TR6",
+     "F3TR5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 3 Reading Low Byte",
+     "5Fh",
+     "F3TR4",
+     "F3TR3",
+     "F3TR2",
+     "F3TR1",
+     "F3TR0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "Fan 4 Setting",
+     "60h",
+     "F4SP7",
+     "F4SP6",
+     "F4SP5",
+     "F4SP4",
+     "F4SP3",
+     "F4SP2",
+     "F4SP1",
+     "F4SP0",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM 4 Divide",
+     "61h",
+     "PM4D7",
+     "PM4D6",
+     "PM4D5",
+     "PM4D4",
+     "PM4D3",
+     "PM4D2",
+     "PM4D1",
+     "PM4D0",
+     "No",
+     "01h"
+    ],
+    [
+     "Fan 4 Configuration 1",
+     "62h",
+     "ENAG4",
+     "RNG41",
+     "RNG40",
+     "EDG41",
+     "EDG40",
+     "UDT42",
+     "UDT41",
+     "UDT40",
+     "No",
+     "2Bh"
+    ],
+    [
+     "Fan 4 Configuration 2",
+     "63h",
+     "—",
+     "ENRC4",
+     "GHEN4",
+     "DPT41",
+     "DPT40",
+     "ERG41",
+     "ERG40",
+     "—",
+     "SWL",
+     "28h"
+    ],
+    [
+     "Gain 4",
+     "65h",
+     "—",
+     "—",
+     "GDE41",
+     "GDE40",
+     "GIN41",
+     "GIN40",
+     "GPR41",
+     "GPR40",
+     "SWL",
+     "2Ah"
+    ],
+    [
+     "Fan 4 Spin Up Configuration",
+     "66h",
+     "DFC41",
+     "DFC40",
+     "NKCK4",
+     "SPLV42",
+     "SPLV41",
+     "SPLV40",
+     "SPT41",
+     "SPT40",
+     "SWL",
+     "19h"
+    ],
+    [
+     "Fan 4 Max Step",
+     "67h",
+     "—",
+     "—",
+     "F4MS5",
+     "F4MS4",
+     "F4MS3",
+     "F4MS2",
+     "F4MS1",
+     "F4MS0",
+     "SWL",
+     "10h"
+    ],
+    [
+     "Fan 4 Minimum Drive",
+     "68h",
+     "F4MN7",
+     "F4MN6",
+     "F4MN5",
+     "F4MN4",
+     "F4MN3",
+     "F4MN2",
+     "F4MN1",
+     "F4MN0",
+     "SWL",
+     "66h (40%)"
+    ],
+    [
+     "Fan 4 Valid TACH Count",
+     "69h",
+     "F4VT7",
+     "F4VT6",
+     "F4VT5",
+     "F4VT4",
+     "F4VT3",
+     "F4VT2",
+     "F4VT1",
+     "F4VT0",
+     "SWL",
+     "F5h"
+    ],
+    [
+     "Fan 4 Drive Fail Band Low Byte",
+     "6Ah",
+     "F4DF4",
+     "F4DF3",
+     "F4DF2",
+     "F4DF1",
+     "F4DF0",
+     "—",
+     "—",
+     "—",
+     "SWL",
+     "00h"
+    ],
+    [
+     "Fan 4 Drive Fail Band High Byte",
+     "6Bh",
+     "F4DF12",
+     "F4DF11",
+     "F4DF10",
+     "F4DF9",
+     "F4DF8",
+     "F4DF7",
+     "F4DF6",
+     "F4DF5",
+     "SWL",
+     "00h"
+    ],
+    [
+     "TACH 4 Target Low Byte",
+     "6Ch",
+     "F4TT4",
+     "F4TT3",
+     "F4TT2",
+     "F4TT1",
+     "F4TT0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "TACH 4 Target High Byte",
+     "6Dh",
+     "F4TT12",
+     "F4TT11",
+     "F4TT10",
+     "F4TT9",
+     "F4TT8",
+     "F4TT7",
+     "F4TT6",
+     "F4TT5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 4 Reading High Byte",
+     "6Eh",
+     "F4TR12",
+     "F4TR11",
+     "F4TR10",
+     "F4TR9",
+     "F4TR8",
+     "F4TR7",
+     "F4TR6",
+     "F4TR5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 4 Reading Low Byte",
+     "6Fh",
+     "F4TR4",
+     "F4TR3",
+     "F4TR2",
+     "F4TR1",
+     "F4TR0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "Fan 5 Setting",
+     "70h",
+     "F5SP7",
+     "F5SP6",
+     "F5SP5",
+     "F5SP4",
+     "F5SP3",
+     "F5SP2",
+     "F5SP1",
+     "F5SP0",
+     "No",
+     "00h"
+    ],
+    [
+     "PWM 5 Divide",
+     "71h",
+     "PM5D7",
+     "PM5D6",
+     "PM5D5",
+     "PM5D4",
+     "PM5D3",
+     "PM5D2",
+     "PM5D1",
+     "PM5D0",
+     "No",
+     "01h"
+    ],
+    [
+     "Fan 5 Configuration 1",
+     "72h",
+     "ENAG5",
+     "RNG51",
+     "RNG50",
+     "EDG51",
+     "EDG50",
+     "UDT52",
+     "UDT51",
+     "UDT50",
+     "No",
+     "2Bh"
+    ],
+    [
+     "Fan 5 Configuration 2",
+     "73h",
+     "—",
+     "ENRC5",
+     "GHEN5",
+     "DPT51",
+     "DPT50",
+     "ERG51",
+     "ERG50",
+     "—",
+     "SWL",
+     "28h"
+    ],
+    [
+     "Gain 5",
+     "75h",
+     "—",
+     "—",
+     "GDE51",
+     "GDE50",
+     "GIN51",
+     "GIN50",
+     "GPR51",
+     "GPR50",
+     "SWL",
+     "2Ah"
+    ],
+    [
+     "Fan 5 Spin Up Configuration",
+     "76h",
+     "DFC51",
+     "DFC50",
+     "NKCK5",
+     "SPLV52",
+     "SPLV51",
+     "SPLV50",
+     "SPT51",
+     "SPT50",
+     "SWL",
+     "19h"
+    ],
+    [
+     "Fan 5 Max Step",
+     "77h",
+     "—",
+     "—",
+     "F5MS5",
+     "F5MS4",
+     "F5MS3",
+     "F5MS2",
+     "F5MS1",
+     "F5MS0",
+     "SWL",
+     "10h"
+    ],
+    [
+     "Fan 5 Minimum Drive",
+     "78h",
+     "F5MN7",
+     "F5MN6",
+     "F5MN5",
+     "F5MN4",
+     "F5MN3",
+     "F5MN2",
+     "F5MN1",
+     "F5MN0",
+     "SWL",
+     "66h (40%)"
+    ],
+    [
+     "Fan 5 Valid TACH Count",
+     "79h",
+     "F5VT7",
+     "F5VT6",
+     "F5VT5",
+     "F5VT4",
+     "F5VT3",
+     "F5VT2",
+     "F5VT1",
+     "F5VT0",
+     "SWL",
+     "F5h"
+    ],
+    [
+     "Fan 5 Drive Fail Band Low Byte",
+     "7Ah",
+     "F5DF4",
+     "F5DF3",
+     "F5DF2",
+     "F5DF1",
+     "F5DF0",
+     "—",
+     "—",
+     "—",
+     "SWL",
+     "00h"
+    ],
+    [
+     "Fan 5 Drive Fail Band High Byte",
+     "7Bh",
+     "F5DF12",
+     "F5DF11",
+     "F5DF10",
+     "F5DF9",
+     "F5DF8",
+     "F5DF7",
+     "F5DF6",
+     "F5DF5",
+     "SWL",
+     "00h"
+    ],
+    [
+     "TACH 5 Target Low Byte",
+     "7Ch",
+     "F5TT4",
+     "F5TT3",
+     "F5TT2",
+     "F5TT1",
+     "F5TT0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "TACH 5 Target High Byte",
+     "7Dh",
+     "F5TT12",
+     "F5TT11",
+     "F5TT10",
+     "F5TT9",
+     "F5TT8",
+     "F5TT7",
+     "F5TT6",
+     "F5TT5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 5 Reading High Byte",
+     "7Eh",
+     "F5TR12",
+     "F5TR11",
+     "F5TR10",
+     "F5TR9",
+     "F5TR8",
+     "F5TR7",
+     "F5TR6",
+     "F5TR5",
+     "No",
+     "FFh"
+    ],
+    [
+     "TACH 5 Reading Low Byte",
+     "7Fh",
+     "F5TR4",
+     "F5TR3",
+     "F5TR2",
+     "F5TR1",
+     "F5TR0",
+     "—",
+     "—",
+     "—",
+     "No",
+     "F8h"
+    ],
+    [
+     "Software Lock",
+     "EFh",
+     "—",
+     "—",
+     "—",
+     "—",
+     "—",
+     "—",
+     "—",
+     "LOCK",
+     "No",
+     "F8h"
+    ],
+    [
+     "Product Features (EMC2305 and EMC2303 only)",
+     "FCh",
+     "—",
+     "—",
+     "ADR2",
+     "ADR1",
+     "ADR0",
+     "FSP2",
+     "FSP1",
+     "FSP0",
+     "No",
+     "00h"
+    ],
+    [
+     "Product ID (EMC2305)",
+     "FDh",
+     "PID7",
+     "PID6",
+     "PID5",
+     "PID4",
+     "PID3",
+     "PID2",
+     "PID1",
+     "PID0",
+     "No",
+     "34h"
+    ],
+    [
+     "Product ID (EMC2303)",
+     "FDh",
+     "PID7",
+     "PID6",
+     "PID5",
+     "PID4",
+     "PID3",
+     "PID2",
+     "PID1",
+     "PID0",
+     "No",
+     "35h"
+    ],
+    [
+     "Product ID (EMC2302)",
+     "FDh",
+     "PID7",
+     "PID6",
+     "PID5",
+     "PID4",
+     "PID3",
+     "PID2",
+     "PID1",
+     "PID0",
+     "No",
+     "36h"
+    ],
+    [
+     "Product ID (EMC2301)",
+     "FDh",
+     "PID7",
+     "PID6",
+     "PID5",
+     "PID4",
+     "PID3",
+     "PID2",
+     "PID1",
+     "PID0",
+     "No",
+     "37h"
+    ],
+    [
+     "Manufacturer ID",
+     "FEh",
+     "MID7",
+     "MID6",
+     "MID5",
+     "MID4",
+     "MID3",
+     "MID2",
+     "MID1",
+     "MID0",
+     "No",
+     "5Dh"
+    ],
+    [
+     "Revision",
+     "FFh",
+     "REV7",
+     "REV6",
+     "REV5",
+     "REV4",
+     "REV3",
+     "REV2",
+     "REV1",
+     "REV0",
+     "No",
+     "80h"
+    ]
+   ],
+   "notes": [
+    "SWL registers become read-only once the LOCK bit is set.",
+    "Reads of undefined addresses return 00h; writes to them do nothing.",
+    "Misprint: DPT34 at 53h bit 4 should read DPT31.",
+    "Misprint: the 4Ch POR value F8 should read F8h.",
+    "PLRTYx and PMxOT are also named PLRITYx and PMOTx."
+   ]
+  },
+  {
+   "title": "Register bit fields",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "bits",
+    "field",
+    "setting",
+    "meaning",
+    "page"
+   ],
+   "rows": [
+    [
+     "20h",
+     "Configuration",
+     "7",
+     "MASK",
+     "1",
+     "ALERT is held off whatever the status bits say.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "7",
+     "MASK",
+     "0",
+     "ALERT goes low when any status bit is set, unless that fan's interrupt enable is clear.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "6",
+     "DIS_TO",
+     "1",
+     "SMBus time-out off; the interface behaves as plain I2C.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "6",
+     "DIS_TO",
+     "0",
+     "SMBus time-out on.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "5",
+     "WD_EN",
+     "1",
+     "Watchdog runs continuously.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "5",
+     "WD_EN",
+     "0",
+     "Watchdog runs only once, after power-up.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "1",
+     "DRECK",
+     "1",
+     "CLK is a push-pull output carrying the internal tachometer clock.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "1",
+     "DRECK",
+     "0",
+     "CLK is an input.",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "0",
+     "USECK",
+     "1",
+     "Tachometer timing uses the clock on CLK (ignored while CLK is driven out).",
+     "29"
+    ],
+    [
+     "20h",
+     "Configuration",
+     "0",
+     "USECK",
+     "0",
+     "Tachometer timing uses the internal oscillator.",
+     "29"
+    ],
+    [
+     "24h",
+     "Fan Status",
+     "7",
+     "WATCH",
+     "1",
+     "Watchdog has expired; every fan is at 100% duty until reprogrammed. Clears on read.",
+     "30"
+    ],
+    [
+     "24h",
+     "Fan Status",
+     "2",
+     "DVFAIL",
+     "1",
+     "At least one bit of Drive Fail Status (27h) is set.",
+     "30"
+    ],
+    [
+     "24h",
+     "Fan Status",
+     "1",
+     "FNSPIN",
+     "1",
+     "At least one bit of Fan Spin Status (26h) is set.",
+     "30"
+    ],
+    [
+     "24h",
+     "Fan Status",
+     "0",
+     "FNSTL",
+     "1",
+     "At least one bit of Fan Stall Status (25h) is set.",
+     "30"
+    ],
+    [
+     "25h",
+     "Fan Stall Status",
+     "4-0",
+     "FxSTL",
+     "1",
+     "Fan x tach count is above its Valid TACH Count: stalled. Clears on read once the fault has gone.",
+     "30"
+    ],
+    [
+     "26h",
+     "Fan Spin Status",
+     "4-0",
+     "FxSPIN",
+     "1",
+     "Spin-up of fan x did not get it turning. Clears on read once the fault has gone.",
+     "31"
+    ],
+    [
+     "27h",
+     "Drive Fail Status",
+     "4-0",
+     "DRVFx",
+     "1",
+     "Fan x cannot reach its commanded speed at 100% PWM. Clears on read once the fault has gone.",
+     "32"
+    ],
+    [
+     "29h",
+     "Fan Interrupt Enable",
+     "4-0",
+     "FxITEN",
+     "1",
+     "A stall, spin-up or drive-fail fault on fan x pulls ALERT low.",
+     "33"
+    ],
+    [
+     "29h",
+     "Fan Interrupt Enable",
+     "4-0",
+     "FxITEN",
+     "0",
+     "Faults on fan x set the status bits only (default).",
+     "33"
+    ],
+    [
+     "2Ah",
+     "PWM Polarity Config",
+     "4-0",
+     "PLRITYx",
+     "1",
+     "Inverted: setting 00h gives 100% duty, FFh gives 0%.",
+     "34"
+    ],
+    [
+     "2Ah",
+     "PWM Polarity Config",
+     "4-0",
+     "PLRITYx",
+     "0",
+     "Normal: setting 00h gives 0% duty, FFh gives 100%.",
+     "34"
+    ],
+    [
+     "2Bh",
+     "PWM Output Config",
+     "4-0",
+     "PMOTx",
+     "1",
+     "PWM x output is push-pull.",
+     "35"
+    ],
+    [
+     "2Bh",
+     "PWM Output Config",
+     "4-0",
+     "PMOTx",
+     "0",
+     "PWM x output is open drain.",
+     "35"
+    ],
+    [
+     "2Ch / 2Dh",
+     "PWM BaseF45 / BaseF123",
+     "two bits per channel",
+     "PMBx[1:0]",
+     "11 / 10 / 01 / 00",
+     "Base frequency 2.441 kHz / 4.882 kHz / 19.53 kHz / 26.00 kHz.",
+     "36"
+    ],
+    [
+     "30h, 40h, 50h, 60h, 70h",
+     "Fan Drive Setting",
+     "7-0",
+     "FxSP[7:0]",
+     "00h-FFh",
+     "Present drive of fan x, whatever the mode; read-only while the closed loop is on. Duty follows Equation 4-1.",
+     "37"
+    ],
+    [
+     "31h, 41h, 51h, 61h, 71h",
+     "PWM Divide",
+     "7-0",
+     "PWMxD[7:0]",
+     "00h-FFh",
+     "Divides the base frequency to give the PWM frequency; 00h counts as 01h. Duty is unchanged.",
+     "38"
+    ],
+    [
+     "32h, 42h, 52h, 62h, 72h",
+     "Fan Configuration 1",
+     "7",
+     "ENAGx",
+     "1 / 0",
+     "1: closed-loop speed control on, writes to Fan Setting ignored. 0: Direct Setting mode, Fan Setting sets the duty.",
+     "38"
+    ],
+    [
+     "32h, 42h, 52h, 62h, 72h",
+     "Fan Configuration 1",
+     "6-5",
+     "RNGx[1:0]",
+     "11 / 10 / 01 / 00",
+     "Lowest speed measured 4000 / 2000 / 1000 / 500 RPM; count multiplier m = 8 / 4 / 2 / 1.",
+     "38"
+    ],
+    [
+     "32h, 42h, 52h, 62h, 72h",
+     "Fan Configuration 1",
+     "4-3",
+     "EDGx[1:0]",
+     "11 / 10 / 01 / 00",
+     "9 / 7 / 5 / 3 edges sampled (4 / 3 / 2 / 1 poles); effective multiplier 2 / 1.5 / 1 / 0.5 referred to a 2-pole fan.",
+     "39"
+    ],
+    [
+     "32h, 42h, 52h, 62h, 72h",
+     "Fan Configuration 1",
+     "2-0",
+     "UDTx[2:0]",
+     "111 ... 000",
+     "PID update interval 1600, 1200, 800, 500, 400, 300, 200, 100 ms.",
+     "39"
+    ],
+    [
+     "33h, 43h, 53h, 63h, 73h",
+     "Fan Configuration 2",
+     "6",
+     "ENRCx",
+     "1 / 0",
+     "Ramp rate control on / off; applies only while ENAGx = 0.",
+     "39"
+    ],
+    [
+     "33h, 43h, 53h, 63h, 73h",
+     "Fan Configuration 2",
+     "5",
+     "GHENx",
+     "1 / 0",
+     "Glitch filter on TACHx on / off.",
+     "39"
+    ],
+    [
+     "33h, 43h, 53h, 63h, 73h",
+     "Fan Configuration 2",
+     "4-3",
+     "DPTx[1:0]",
+     "11 / 10 / 01 / 00",
+     "Derivative option BOTH / STEP / BASIC / NONE.",
+     "40"
+    ],
+    [
+     "33h, 43h, 53h, 63h, 73h",
+     "Fan Configuration 2",
+     "2-1",
+     "ERGx[1:0]",
+     "11 / 10 / 01 / 00",
+     "Error window 200 / 100 / 50 / 0 RPM: inside it the drive is left alone.",
+     "40"
+    ],
+    [
+     "35h, 45h, 55h, 65h, 75h",
+     "PID Gain",
+     "5-4 / 3-2 / 1-0",
+     "GDEx / GINx / GPRx",
+     "11 / 10 / 01 / 00",
+     "Derivative / integral / proportional gain 8x / 4x / 2x / 1x.",
+     "40"
+    ],
+    [
+     "36h, 46h, 56h, 66h, 76h",
+     "Fan Spin Up Configuration",
+     "7-6",
+     "DFCx[1:0]",
+     "11 / 10 / 01 / 00",
+     "Drive-fail (aging fan) detection over 64 / 32 / 16 update periods, or off.",
+     "41"
+    ],
+    [
+     "36h, 46h, 56h, 66h, 76h",
+     "Fan Spin Up Configuration",
+     "5",
+     "NKCKx",
+     "1 / 0",
+     "1: spin-up skips the 100% kick. 0: spin-up starts with 100% for a quarter of the spin time.",
+     "41"
+    ],
+    [
+     "36h, 46h, 56h, 66h, 76h",
+     "Fan Spin Up Configuration",
+     "4-2",
+     "SPLVx[2:0]",
+     "111 ... 000",
+     "Spin-up drive 65, 60, 55, 50, 45, 40, 35, 30 %.",
+     "41"
+    ],
+    [
+     "36h, 46h, 56h, 66h, 76h",
+     "Fan Spin Up Configuration",
+     "1-0",
+     "SPTx[1:0]",
+     "11 / 10 / 01 / 00",
+     "Spin-up time 2 s / 1 s / 500 ms / 250 ms.",
+     "41"
+    ],
+    [
+     "37h, 47h, 57h, 67h, 77h",
+     "Maximum Step Size",
+     "5-0",
+     "FxMS[5:0]",
+     "",
+     "Largest change of drive allowed per update.",
+     "42"
+    ],
+    [
+     "38h, 48h, 58h, 68h, 78h",
+     "Fan Minimum Drive",
+     "7-0",
+     "FxMS[7:0]",
+     "",
+     "Lowest drive the closed loop will use.",
+     "42"
+    ],
+    [
+     "39h, 49h, 59h, 69h, 79h",
+     "Valid TACH Count",
+     "7-0",
+     "FxVT[7:0]",
+     "",
+     "Highest tach reading still taken as a turning fan; bit 7 weighs 4096 counts, halving down to 32 at bit 0.",
+     "43"
+    ],
+    [
+     "3Bh, 4Bh, 5Bh, 6Bh, 7Bh",
+     "Drive Fail Band High Byte",
+     "7-0",
+     "FxDF[12:5]",
+     "",
+     "Band of tach counts for drive-fail detection; bit 7 = 4096 down to bit 0 = 32.",
+     "44"
+    ],
+    [
+     "3Ah, 4Ah, 5Ah, 6Ah, 7Ah",
+     "Drive Fail Band Low Byte",
+     "7-3",
+     "FxDF[4:0]",
+     "",
+     "Low bits of the band; bit 7 = 16 down to bit 3 = 1.",
+     "44"
+    ],
+    [
+     "3Dh, 4Dh, 5Dh, 6Dh, 7Dh",
+     "TACH Target High Byte",
+     "7-0",
+     "FxTT[12:5]",
+     "",
+     "Target tach count for the closed loop; bit 7 = 4096 down to bit 0 = 32. The target takes effect when this byte is written.",
+     "45"
+    ],
+    [
+     "3Ch, 4Ch, 5Ch, 6Ch, 7Ch",
+     "TACH Target Low Byte",
+     "7-3",
+     "FxTT[4:0]",
+     "",
+     "Low bits of the target; bit 7 = 16 down to bit 3 = 1.",
+     "46"
+    ],
+    [
+     "3Eh, 4Eh, 5Eh, 6Eh, 7Eh",
+     "TACH Reading High Byte",
+     "7-0",
+     "FxTR[12:5]",
+     "",
+     "Measured tach count; bit 7 = 4096 down to bit 0 = 32.",
+     "47"
+    ],
+    [
+     "3Fh, 4Fh, 5Fh, 6Fh, 7Fh",
+     "TACH Reading Low Byte",
+     "7-3",
+     "FxTR[4:0]",
+     "",
+     "Low bits of the measured count; bit 7 = 16 down to bit 3 = 1.",
+     "47"
+    ],
+    [
+     "EFh",
+     "Software Lock",
+     "0",
+     "LOCK",
+     "1 / 0",
+     "1: all SWL registers become read-only until power is cycled. 0: they can be written.",
+     "48"
+    ],
+    [
+     "FCh",
+     "Product Features (EMC2303/5)",
+     "5-3",
+     "ADR[2:0]",
+     "101 / 100 / 011 / 010 / 001 / 000",
+     "Address decoded from ADDR_SEL: 1001_101, 1001_100, 0101_101, 0101_100, 0101_111, 0101_110.",
+     "48"
+    ],
+    [
+     "FCh",
+     "Product Features (EMC2303/5)",
+     "2-0",
+     "FSP[2:0]",
+     "100 / 011 / 010 / 001 / 000",
+     "Default drive decoded from CLK (when ADDR_SEL allows it): 100%, 75%, 50%, 30%, 0%.",
+     "48"
+    ],
+    [
+     "FDh",
+     "Product ID",
+     "7-2",
+     "PID[7:2]",
+     "0011_01b",
+     "Fixed.",
+     "49"
+    ],
+    [
+     "FDh",
+     "Product ID",
+     "1-0",
+     "PID[1:0]",
+     "11 / 10 / 01 / 00",
+     "EMC2301 / EMC2302 / EMC2303 / EMC2305.",
+     "49"
+    ],
+    [
+     "FEh",
+     "Manufacturer ID",
+     "7-0",
+     "MID[7:0]",
+     "5Dh",
+     "Fixed.",
+     "49"
+    ],
+    [
+     "FFh",
+     "Revision",
+     "7-0",
+     "REV[7:0]",
+     "80h",
+     "Silicon revision.",
+     "49"
+    ]
+   ],
+   "notes": [
+    "x is the fan channel, 1 to 5, as far as the device has it.",
+    "Misprint: the 38h field FxMS[7:0] should read FxMN[7:0]."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "EMC2301 supply current vs. ambient temperature",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2301",
+     "points": [
+      [
+       -39.8,
+       272.9
+      ],
+      [
+       -24.1,
+       272.9
+      ],
+      [
+       -9.6,
+       271.1
+      ],
+      [
+       6.6,
+       272.9
+      ],
+      [
+       15.7,
+       275.7
+      ],
+      [
+       25.3,
+       280.3
+      ],
+      [
+       47.6,
+       296.7
+      ],
+      [
+       72.9,
+       318.7
+      ],
+      [
+       125.3,
+       368.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EMC2302 supply current vs. ambient temperature",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2302",
+     "points": [
+      [
+       -40.2,
+       345.3
+      ],
+      [
+       -17.4,
+       349.3
+      ],
+      [
+       -2.2,
+       350.7
+      ],
+      [
+       15.6,
+       356.0
+      ],
+      [
+       25.0,
+       361.5
+      ],
+      [
+       30.0,
+       365.3
+      ],
+      [
+       35.8,
+       368.7
+      ],
+      [
+       47.8,
+       377.8
+      ],
+      [
+       125.0,
+       444.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EMC2303 supply current vs. ambient temperature",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2303",
+     "points": [
+      [
+       -40.2,
+       431.5
+      ],
+      [
+       6.4,
+       439.5
+      ],
+      [
+       24.7,
+       449.1
+      ],
+      [
+       60.0,
+       479.5
+      ],
+      [
+       99.1,
+       519.4
+      ],
+      [
+       125.0,
+       544.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EMC2301 supply current vs. supply voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2301",
+     "points": [
+      [
+       2.969,
+       279.3
+      ],
+      [
+       3.631,
+       282.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EMC2302 supply current vs. supply voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2302",
+     "points": [
+      [
+       2.971,
+       362.0
+      ],
+      [
+       3.631,
+       364.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EMC2303 supply current vs. supply voltage",
+   "page": 7,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2303",
+     "points": [
+      [
+       2.969,
+       449.1
+      ],
+      [
+       3.301,
+       449.1
+      ],
+      [
+       3.633,
+       452.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EMC2305 supply current vs. ambient temperature",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2305",
+     "points": [
+      [
+       -40.2,
+       587.6
+      ],
+      [
+       -1.6,
+       587.6
+      ],
+      [
+       15.5,
+       591.8
+      ],
+      [
+       24.9,
+       597.1
+      ],
+      [
+       35.8,
+       605.3
+      ],
+      [
+       73.1,
+       642.0
+      ],
+      [
+       85.7,
+       656.3
+      ],
+      [
+       125.0,
+       698.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Tachometer measurement accuracy vs. ambient temperature",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Tachometer measurement accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "accuracy",
+     "points": [
+      [
+       -40.3,
+       0.715
+      ],
+      [
+       -32.4,
+       0.601
+      ],
+      [
+       -2.0,
+       0.11
+      ],
+      [
+       5.9,
+       0.005
+      ],
+      [
+       15.0,
+       -0.09
+      ],
+      [
+       24.7,
+       -0.165
+      ],
+      [
+       35.7,
+       -0.222
+      ],
+      [
+       47.2,
+       -0.251
+      ],
+      [
+       59.9,
+       -0.27
+      ],
+      [
+       98.8,
+       -0.279
+      ],
+      [
+       125.0,
+       -0.297
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "EMC2305 supply current vs. supply voltage",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "EMC2305",
+     "points": [
+      [
+       2.969,
+       598.6
+      ],
+      [
+       3.3,
+       597.2
+      ],
+      [
+       3.633,
+       600.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Tachometer measurement accuracy vs. supply voltage",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Tachometer measurement accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "accuracy",
+     "points": [
+      [
+       2.97,
+       -0.168
+      ],
+      [
+       3.299,
+       -0.168
+      ],
+      [
+       3.63,
+       -0.137
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PWM frequency vs. ambient temperature",
+   "page": 9,
+   "conditions": "VDD = 3.3 V, base frequency = 26 kHz",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "PWM frequency",
+    "unit": "Hz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "26 kHz base",
+     "points": [
+      [
+       -40.2,
+       25807
+      ],
+      [
+       6.4,
+       25935
+      ],
+      [
+       25.0,
+       25965
+      ],
+      [
+       47.4,
+       25995
+      ],
+      [
+       125.0,
+       26054
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PWM frequency vs. supply voltage",
+   "page": 9,
+   "conditions": "TA = 25 °C, base frequency = 26 kHz",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "PWM frequency",
+    "unit": "Hz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "26 kHz base",
+     "points": [
+      [
+       2.969,
+       25969
+      ],
+      [
+       3.216,
+       25969
+      ],
+      [
+       3.299,
+       25980
+      ],
+      [
+       3.631,
+       26062
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [],
+ "equations": [
+  {
+   "name": "Drive from register value",
+   "expr": "Drive = (VALUE / 255) × 100%",
+   "where": {
+    "VALUE": "Fan Drive Setting register contents, 0 to 255",
+    "Drive": "PWM duty cycle"
+   },
+   "note": "",
+   "page": 13
+  },
+  {
+   "name": "Tachometer count to RPM",
+   "expr": "RPM = (1 / poles) × ((n - 1) / (COUNT × (1 / m))) × fTACH × 60",
+   "where": {
+    "poles": "fan poles, usually 2",
+    "n": "edges measured, usually 5 for a 2-pole fan",
+    "m": "multiplier set by the RNG bits (1, 2, 4 or 8)",
+    "fTACH": "tachometer clock, usually 32.768 kHz",
+    "COUNT": "TACH Reading register value, decimal"
+   },
+   "note": "",
+   "page": 16
+  },
+  {
+   "name": "Tachometer count to RPM, simplified",
+   "expr": "RPM = 3932160 × m / COUNT",
+   "where": {
+    "m": "multiplier set by the RNG bits",
+    "COUNT": "TACH Reading register value, decimal"
+   },
+   "note": "Assumes a 2-pole fan, five edges and a 32.768 kHz clock.",
+   "page": 17
+  },
+  {
+   "name": "PWM output frequency",
+   "expr": "fPWM = fBASE / PWMxD",
+   "where": {
+    "fBASE": "base frequency chosen by PMBx[1:0]: 26.00, 19.531, 4.882 or 2.441 kHz",
+    "PWMxD": "PWM Divide register value, 1 to 255 (00h is taken as 01h)"
+   },
+   "note": "From 2.441 kHz divided by 255 the lowest frequency is about 9.5 Hz.",
+   "page": 14
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Two ways to drive each fan",
+   "page": 13,
+   "text": "Each channel works in one of two modes. In Direct Setting mode the host writes a duty value to the Fan Setting register and the output follows at once (Equation 4-1); ramp-rate limiting is available through ENRCx. In Fan Speed Control (FSC) mode, enabled by ENAGx, the host writes a target tachometer count and a PID loop adjusts the duty to reach it, with spin-up and ramp control. Entering Direct Setting mode restores the last value written to Fan Setting."
+  },
+  {
+   "topic": "PWM outputs",
+   "page": 14,
+   "text": "Each output is open drain by default and can be made push-pull, with normal or inverted polarity. Its frequency is one of four base frequencies (26.00 kHz, 19.531 kHz, 4.882 kHz, 2.441 kHz) divided by the 8-bit PWM Divide register, which reaches about 9.5 Hz from the 2.441 kHz base. Divide values 00h and 01h both mean 1. Duty has 256 steps."
+  },
+  {
+   "topic": "Closed-loop speed control",
+   "page": 15,
+   "text": "The loop uses proportional, integral and derivative terms, and its accuracy follows the accuracy of the clock. The target is the number of 32.768 kHz periods in one fan revolution; for a 2-pole fan at 3000 RPM that is 1296 (51h in the TACH Target register). A target of FFh turns the fan off for lower supply current. The loop is off after power-up. Its defaults suit many fans, so writing the TACH Target alone sets a speed; the loop works with fans up to 16000 RPM that give a valid tach signal."
+  },
+  {
+   "topic": "Setting up the loop",
+   "page": 15,
+   "text": "Optional steps first, if the defaults do not suit: spin-up level and time; fan step size; minimum drive that keeps the fan turning; update time and edge count; the Valid TACH Count, as the highest count that still means the fan is turning. Then write the TACH Target and set ENAGx. Microchip application note AN17.4 tabulates RPM against tach counts for the 500, 1k, 2k and 4k ranges."
+  },
+  {
+   "topic": "Error window",
+   "page": 15,
+   "text": "An error window of 0, 50, 100 or 200 RPM around the target stops the loop adjusting the drive once the speed is close enough, which avoids hunting (motor-boating) with awkward fans. The loop still computes corrections inside the window but does not apply them."
+  },
+  {
+   "topic": "Derivative options and gains",
+   "page": 15,
+   "text": "DPTx picks the derivative form (none, basic, step, both). The Gain register scales KP, KI and KD by 1x, 2x, 4x (default) or 8x each."
+  },
+  {
+   "topic": "Ramp rate and maximum step",
+   "page": 16,
+   "text": "The Max Step register (1 to 31 counts) and the update time (100 ms to 1.6 s) limit how fast the drive changes: when a new setting differs from the present one by more than the step, the drive moves one step per update period until it arrives. Under FSC ramp control is always on; in Direct Setting mode it is on when ENRCx is set. With the FSC defaults of Fan Configuration 2, the maximum step is not applied."
+  },
+  {
+   "topic": "Minimum drive",
+   "page": 16,
+   "text": "Under FSC the drive never falls below the Fan Minimum Drive value unless the target is FFh. Should the fan halt for whatever cause, low drive included, the loop tries to restart it; a minimum drive that keeps the fan running avoids oscillation between stalling and restarting."
+  },
+  {
+   "topic": "Tachometer measurement",
+   "page": 16,
+   "text": "The TACHx input is timed continuously: the reading is the number of clock periods across the chosen number of edges (3, 5, 7 or 9), shown as a count proportional to the revolution period. With five edges on a 2-pole fan and the 32.768 kHz clock, the count is the clock periods per revolution. The measurement runs in either mode, so in Direct Setting mode it serves as a diagnostic; a drive too low for the fan, zero included, can then report a stall and raise an interrupt. Measuring more edges than the fan's poles give scales the reported speed by the effective multiplier, and the target must be adjusted to match; Microchip gives settings for fans with other than two poles on request."
+  },
+  {
+   "topic": "Stall detection",
+   "page": 17,
+   "text": "A reading above the Valid TACH Count means a stalled fan: the stall bit is set, an interrupt raised and, under FSC, the loop runs spin-up again and keeps retrying until the fan turns or the loop is disabled. A target above the Valid TACH Count is ignored and the present drive kept. In Direct Setting mode, and during spin-up, the stall interrupt is masked for the programmed spin-up time; in Direct Setting mode the stall bit is otherwise set whenever the reading passes the Valid count. Under FSC the check happens at each update, not continuously."
+  },
+  {
+   "topic": "Aging fan (drive fail) detection",
+   "page": 17,
+   "text": "With the drive at full scale, if the measured speed stays short of the target by more than the Drive Fail Band for 16, 32 or 64 update periods (DFCx), the DRVFx bit is set and ALERT asserted. This flags a fan whose top speed has dropped with age or a target faster than the fan can turn. It is used only while FSC is active; it is off by default."
+  },
+  {
+   "topic": "Spin-up routine",
+   "page": 18,
+   "text": "Spin-up starts in Direct Setting mode when the setting goes from 00h to any other value, and under FSC when the target changes from FFh to a value below the Valid TACH Count or when the reading rises above the Valid TACH Count. The output goes to 100% for the first quarter of the spin-up time (unless NKCKx skips this kick), then holds the spin level (30% to 65%) for the rest. At the end the tach is checked: a reading still above the Valid TACH Count sets FNSPIN and the routine retries."
+  },
+  {
+   "topic": "CLK pin and clock source",
+   "page": 18,
+   "text": "Tach timing uses either an external 32.768 kHz clock driven into CLK or the internal 32 kHz oscillator; accuracy follows the clock's. With DRECK set, CLK drives the internal clock out push-pull so other controllers can share it. What CLK does at power-up does not depend on how it is configured afterwards. The added CLK roles are on EMC2303/5 only."
+  },
+  {
+   "topic": "Address and default speed by pull-up (EMC2303/5)",
+   "page": 17,
+   "text": "At power-up ADDR_SEL reads one of six pull-up values to choose the SMBus address. With 33 k on ADDR_SEL, the pull-up on CLK selects the default drive of every fan (0, 30, 50, 75 or 100%), and CLK then carries only that pull-up to VDD and is not otherwise used. A non-zero default drive is applied without spin-up, and the watchdog keeps working."
+  },
+  {
+   "topic": "Watchdog",
+   "page": 19,
+   "text": "If 4 s pass without SMBus activity, the watchdog sets WATCH, drives every fan to full scale until it is reprogrammed, asserts ALERT and turns FSC off; turning the watchdog off afterwards neither restores the drive nor re-enables FSC. In power-up mode it runs once from power-on and stops for good when it fires or when the host writes a Fan Setting register or sets ENAGx; other register writes do not stop it, and no stall check runs while it is active. With WD_EN set it runs continuously, restarting after every access to the register set."
+  },
+  {
+   "topic": "SMBus interface",
+   "page": 21,
+   "text": "SMBus 2.0 client with Write Byte, Read Byte, Send Byte, Receive Byte and Block Read/Write (Block transfers in I2C format only), with the register pointer auto-incrementing and wrapping from FFh to 00h. The device accepts clock stretching but never stretches the clock. EMC2301 answers at 0101_111. A time-out resets the interface after 30 ms of inactivity; it is off by default (DIS_TO set) and enabled by clearing DIS_TO. The interface also resets when both lines stay high for more than 150 µs. When ALERT is asserted the device answers the Alert Response Address 0001_100 with its own address and, once the address has gone out whole, sets MASK to release ALERT."
+  },
+  {
+   "topic": "Register reset and reading",
+   "page": 28,
+   "text": "Defaults load at power-on reset when VDD rises past the POR level. Reading a high byte copies the matching low byte to a shadow register so the pair is consistent; a later read of the high byte refreshes it. Status bits clear when read once the fault has gone. Setting LOCK makes all SWL registers read-only until power is cycled."
+  },
+  {
+   "topic": "Package marking",
+   "page": 50,
+   "text": "MSOP parts carry two customer-specific lines on the front (2301 or 2302 with a code) and year, week and traceability codes on the back; QFN parts carry the part number with a year-week-traceability line. e3 marks matte tin, Pb-free."
+  }
+ ],
+ "packages": [
+  {
+   "name": "MSOP-8 (UA), EMC2301",
+   "page": 53,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "-",
+     "-",
+     "1.10"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "0.75",
+     "0.85",
+     "0.95"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "-",
+     "0.15"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "4.90 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "0.60",
+     "0.80"
+    ],
+    [
+     "L1",
+     "footprint",
+     "",
+     "0.95 REF",
+     ""
+    ],
+    [
+     "φ",
+     "foot angle",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.08",
+     "-",
+     "0.23"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.22",
+     "-",
+     "0.40"
+    ]
+   ],
+   "notes": [
+    "D and E1 exclude mold flash and protrusions, which are at most 0.15 mm per side."
+   ]
+  },
+  {
+   "name": "MSOP-8 (UA) recommended land pattern",
+   "page": 54,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "C",
+     "contact pad spacing",
+     "",
+     "4.40",
+     ""
+    ],
+    [
+     "Z",
+     "overall width",
+     "",
+     "",
+     "5.85"
+    ],
+    [
+     "X1",
+     "contact pad width (x8)",
+     "",
+     "",
+     "0.45"
+    ],
+    [
+     "Y1",
+     "contact pad length (x8)",
+     "",
+     "",
+     "1.45"
+    ],
+    [
+     "G1",
+     "distance between pads",
+     "2.95",
+     "",
+     ""
+    ],
+    [
+     "GX",
+     "distance between pads",
+     "0.20",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "MSOP-10 (MS), EMC2302",
+   "page": 56,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "10",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "-",
+     "-",
+     "1.10"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "0.75",
+     "0.85",
+     "0.95"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "-",
+     "0.15"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "4.90 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "0.60",
+     "0.80"
+    ],
+    [
+     "L1",
+     "footprint",
+     "",
+     "0.95 REF",
+     ""
+    ],
+    [
+     "θ",
+     "mold draft angle",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "θ1",
+     "foot angle",
+     "5°",
+     "-",
+     "15°"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.08",
+     "-",
+     "0.23"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.15",
+     "-",
+     "0.33"
+    ]
+   ],
+   "notes": [
+    "D and E1 exclude mold flash and protrusions, which are at most 0.15 mm per side."
+   ]
+  },
+  {
+   "name": "MSOP-10 (MS) recommended land pattern",
+   "page": 57,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "C",
+     "contact pad spacing",
+     "",
+     "4.40",
+     ""
+    ],
+    [
+     "Z",
+     "overall width",
+     "",
+     "",
+     "5.80"
+    ],
+    [
+     "X1",
+     "contact pad width (x10)",
+     "",
+     "",
+     "0.30"
+    ],
+    [
+     "Y1",
+     "contact pad length (x10)",
+     "",
+     "",
+     "1.40"
+    ],
+    [
+     "G1",
+     "distance between pads (x5)",
+     "3.00",
+     "",
+     ""
+    ],
+    [
+     "G",
+     "distance between pads (x8)",
+     "0.20",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "QFN-12 (UL / KP) 4 x 4 mm, EMC2303",
+   "page": 59,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of terminals",
+     "",
+     "12",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.80 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "0.80",
+     "0.85",
+     "0.90"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "(A3)",
+     "terminal thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "4.00 BSC",
+     ""
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "2.00",
+     "2.10",
+     "2.20"
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "4.00 BSC",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "2.00",
+     "2.10",
+     "2.20"
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.25",
+     "0.30",
+     "0.35"
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.40",
+     "0.50",
+     "0.60"
+    ],
+    [
+     "K",
+     "terminal to exposed pad",
+     "0.35",
+     "-",
+     "-"
+    ]
+   ],
+   "notes": [
+    "Saw singulated."
+   ]
+  },
+  {
+   "name": "QFN-12 recommended land pattern",
+   "page": 60,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.80 BSC",
+     ""
+    ],
+    [
+     "X2",
+     "optional center pad width",
+     "",
+     "",
+     "2.20"
+    ],
+    [
+     "Y2",
+     "optional center pad length",
+     "",
+     "",
+     "2.20"
+    ],
+    [
+     "C1",
+     "contact pad spacing",
+     "",
+     "4.00",
+     ""
+    ],
+    [
+     "C2",
+     "contact pad spacing",
+     "",
+     "4.00",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (x12)",
+     "",
+     "",
+     "0.37"
+    ],
+    [
+     "Y1",
+     "contact pad length (x12)",
+     "",
+     "",
+     "0.95"
+    ],
+    [
+     "G1",
+     "contact pad to center pad (x12)",
+     "0.45",
+     "",
+     ""
+    ],
+    [
+     "V",
+     "thermal via diameter",
+     "",
+     "0.30",
+     ""
+    ],
+    [
+     "EV",
+     "thermal via pitch",
+     "",
+     "1.00",
+     ""
+    ]
+   ],
+   "notes": [
+    "Thermal vias, where used, are filled or tented so solder is not lost in reflow."
+   ]
+  },
+  {
+   "name": "QFN-16 (AP) 4 x 4 mm, EMC2305",
+   "page": 62,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of terminals",
+     "",
+     "16",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "0.80",
+     "0.90",
+     "1.00"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "A3",
+     "terminal thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "4.00 BSC",
+     ""
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "2.00",
+     "2.10",
+     "2.20"
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "4.00 BSC",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "2.00",
+     "2.10",
+     "2.20"
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.25",
+     "0.30",
+     "0.35"
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.40",
+     "0.50",
+     "0.60"
+    ],
+    [
+     "K",
+     "terminal to exposed pad",
+     "0.35",
+     "-",
+     "-"
+    ]
+   ],
+   "notes": [
+    "Saw singulated."
+   ]
+  },
+  {
+   "name": "QFN-16 recommended land pattern",
+   "page": 63,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "X2",
+     "optional center pad width",
+     "",
+     "",
+     "2.20"
+    ],
+    [
+     "Y2",
+     "optional center pad length",
+     "",
+     "",
+     "2.20"
+    ],
+    [
+     "C1",
+     "contact pad spacing",
+     "",
+     "3.70",
+     ""
+    ],
+    [
+     "C2",
+     "contact pad spacing",
+     "",
+     "3.70",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (x16)",
+     "",
+     "",
+     "0.37"
+    ],
+    [
+     "Y1",
+     "contact pad length (x16)",
+     "",
+     "0.79",
+     "1.10"
+    ],
+    [
+     "G1",
+     "space between pads",
+     "0.30",
+     "",
+     ""
+    ],
+    [
+     "G2",
+     "contact pad to center pad (x16)",
+     "0.20",
+     "",
+     ""
+    ],
+    [
+     "V",
+     "thermal via diameter",
+     "",
+     "0.30",
+     ""
+    ],
+    [
+     "EV",
+     "thermal via pitch",
+     "",
+     "1.00",
+     ""
+    ]
+   ],
+   "notes": [
+    "Thermal vias, where used, are filled or tented so solder is not lost in reflow."
+   ]
+  }
+ ]
+}

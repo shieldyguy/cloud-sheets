@@ -1,0 +1,2092 @@
+{
+ "sheet": 1,
+ "name": "BQ27441DRZR-G1B",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "Single-cell Li-ion system-side fuel gauge with I2C interface (bq27441-G1)",
+ "source": {
+  "document": "SLUSBH1C",
+  "revision": "Rev C, December 2014",
+  "pages": 28
+ },
+ "summary": "The bq27441-G1 is a battery fuel gauge for one Li-ion cell that sits on the system board, not in the pack, and is powered straight from the cell through its own 1.8 V LDO. It measures cell voltage, current through a 10 mΩ high-side sense resistor and temperature, and runs the Impedance Track algorithm to report remaining capacity in mAh, state of charge in percent and state of health over a 400 kHz I2C bus. The G1A and G1B versions carry different preloaded LiCoO2 chemistry profiles for 4.2 V and 4.3 to 4.35 V charge limits.",
+ "key_figures": [
+  [
+   "Cells",
+   "1, Li-ion (LiCoO2 profile)"
+  ],
+  [
+   "BAT input range",
+   "2.45 V to 4.5 V"
+  ],
+  [
+   "Sense resistor",
+   "10 mΩ, 1 %, high side"
+  ],
+  [
+   "Supply current",
+   "93 µA NORMAL, 21 µA SLEEP, 9 µA HIBERNATE, 0.6 µA SHUTDOWN (typ)"
+  ],
+  [
+   "Interface",
+   "I2C, up to 400 kHz, address 0x55 (7-bit)"
+  ],
+  [
+   "Internal LDO",
+   "1.8 V on VDD"
+  ],
+  [
+   "Operating temperature",
+   "–40 °C to 85 °C"
+  ],
+  [
+   "Package",
+   "VSON-12 (DRZ), 2.50 mm × 4.00 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 3,
+  "columns": [
+   "part number",
+   "battery type",
+   "CHEM_ID",
+   "DM_CODE",
+   "firmware version",
+   "package",
+   "packing",
+   "marking"
+  ],
+  "rows": [
+   [
+    "BQ27441DRZR-G1A",
+    "LiCoO2 (4.2 V maximum charge)",
+    "0x0128",
+    "0x48",
+    "1.09 (0x0109)",
+    "SON (DRZ) 12",
+    "3000, large tape and reel",
+    "BQ27 441A"
+   ],
+   [
+    "BQ27441DRZT-G1A",
+    "LiCoO2 (4.2 V maximum charge)",
+    "0x0128",
+    "0x48",
+    "1.09 (0x0109)",
+    "SON (DRZ) 12",
+    "250, small tape and reel",
+    "BQ27 441A"
+   ],
+   [
+    "BQ27441DRZR-G1B",
+    "LiCoO2 (4.3 to 4.35 V maximum charge)",
+    "0x0312",
+    "0x58",
+    "1.09 (0x0109)",
+    "SON (DRZ) 12",
+    "3000, large tape and reel",
+    "BQ27 441B"
+   ],
+   [
+    "BQ27441DRZT-G1B",
+    "LiCoO2 (4.3 to 4.35 V maximum charge)",
+    "0x0312",
+    "0x58",
+    "1.09 (0x0109)",
+    "SON (DRZ) 12",
+    "250, small tape and reel",
+    "BQ27 441B"
+   ]
+  ],
+  "notes": [
+   "CHEM_ID, DM_CODE and firmware version can be read back from the device with the CHEM_ID, DM_CODE and FW_VERSION control subcommands.",
+   "The orderable list also carries BQ27441DRZR-G1AG4 and the .A variants (BQ27441DRZR-G1A.A, BQ27441DRZR-G1AG4.A, BQ27441DRZR-G1B.A, BQ27441DRZT-G1A.A, BQ27441DRZT-G1B.A), with the same package, packing and marking as their base numbers.",
+   "All are RoHS: yes, NiPdAu lead finish, MSL level 2 at 260 °C peak for 1 year, rated –40 °C to 85 °C."
+  ]
+ },
+ "pins": [
+  {
+   "package": "VSON-12 (DRZ)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SDA",
+     "type": "digital I/O, open drain",
+     "function": "I2C data, slave to the host. Needs an external pullup, 10 kΩ typical. If the pullups can be switched off during operation, add 1 MΩ to VSS so the input does not float."
+    },
+    {
+     "pin": "2",
+     "name": "SCL",
+     "type": "digital I/O, open drain",
+     "function": "I2C clock, slave to the host. Needs an external pullup, 10 kΩ typical. If the pullups can be switched off during operation, add 1 MΩ to VSS so the input does not float."
+    },
+    {
+     "pin": "3",
+     "name": "VSS",
+     "type": "power",
+     "function": "Ground. This pin is the device's ground reference."
+    },
+    {
+     "pin": "4",
+     "name": "NC",
+     "type": "—",
+     "function": "Not connected inside; leave open or connect to VSS."
+    },
+    {
+     "pin": "5",
+     "name": "VDD",
+     "type": "power out",
+     "function": "Output of the internal 1.8 V regulator. Bypass to VSS with a 0.47 µF ceramic capacitor. Not meant to supply other circuits."
+    },
+    {
+     "pin": "6",
+     "name": "BAT",
+     "type": "power in, analog in",
+     "function": "Supplies the LDO and is the cell-voltage measurement input. Run a Kelvin sense line to the pack positive terminal (PACKP) and fit a 1 µF capacitor from BAT to VSS near the IC."
+    },
+    {
+     "pin": "7",
+     "name": "SRN",
+     "type": "analog in",
+     "function": "Coulomb-counter input, system side. Kelvin-connect to the end of the 10 mΩ high-side sense resistor that goes to VSYS."
+    },
+    {
+     "pin": "8",
+     "name": "SRP",
+     "type": "analog in",
+     "function": "Coulomb-counter input, battery side. Kelvin-connect to the end of the 10 mΩ sense resistor at PACKP. The gauge comes calibrated for a 10 mΩ, 1 % resistor, so no calibration is needed."
+    },
+    {
+     "pin": "9",
+     "name": "NC",
+     "type": "—",
+     "function": "Not connected inside; leave open or connect to VSS."
+    },
+    {
+     "pin": "10",
+     "name": "BIN",
+     "type": "digital in",
+     "function": "Battery-present input. With OpConfig [BI_PU_EN] = 1 (the default) a low level means a battery is inserted. For a removable pack the pack pulls BIN low through its resistor, typically its 10 kΩ thermistor, and the board pulls it up with 1.8 MΩ to VDD so it reads high with the pack out. For an embedded cell keep [BI_PU_EN] = 1 and fit 10 kΩ from BIN to VSS. With [BI_PU_EN] = 0 the host reports insertion and removal with BAT_INSERT and BAT_REMOVE. Keep a 10 kΩ pulldown to VSS even when the pin is unused. Never short BIN straight to a rail; a pullup may go to VDD only, never to another supply."
+    },
+    {
+     "pin": "11",
+     "name": "NC",
+     "type": "—",
+     "function": "Not connected inside; leave open or connect to VSS."
+    },
+    {
+     "pin": "12",
+     "name": "GPOUT",
+     "type": "digital out, open drain",
+     "function": "Interrupt output. By default ([BATLOWEN] cleared) it gives interrupt pulses (SOC_INT), for instance when state of charge changes; with OpConfig [BATLOWEN] set it signals BAT_LOW instead. [GPIOPOL] sets its polarity. Do not leave it floating: a 10 kΩ pullup is suggested. A toggle on GPOUT brings the gauge out of SHUTDOWN, so wiring it to a host GPIO is advised."
+    },
+    {
+     "pin": "13",
+     "name": "PWPD",
+     "type": "thermal pad",
+     "function": "Exposed pad under the package; solder it to the board. Connected to PGND in the typical application."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 5,
+   "conditions": "over operating free-air temperature range (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "BAT pin input voltage range",
+     "VBAT",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "SRP and SRN pins input voltage range",
+     "VSR",
+     "–0.3",
+     "VBAT + 0.3",
+     "V"
+    ],
+    [
+     "Differential voltage across SRP and SRN. ABS(SRP – SRN)",
+     "VSR",
+     "",
+     "2",
+     "V"
+    ],
+    [
+     "VDD pin supply voltage range (LDO output)",
+     "VDD",
+     "–0.3",
+     "2",
+     "V"
+    ],
+    [
+     "Open-drain IO pins (SDA, SCL)",
+     "VIOD",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Push-pull IO pins (BIN)",
+     "VIOPP",
+     "–0.3",
+     "VDD + 0.3",
+     "V"
+    ],
+    [
+     "Operating free-air temperature range",
+     "TA",
+     "–40",
+     "85",
+     "°C"
+    ],
+    [
+     "Storage temperature",
+     "Tstg",
+     "–65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Going past these limits may damage the device for good. They are stress limits only; operation at them, or anywhere outside the recommended conditions, is not implied, and long exposure to them may reduce reliability."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Human body model (HBM), per ANSI/ESDA/JEDEC JS-001",
+     "±1500",
+     "V"
+    ],
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Charged-device model (CDM), per JEDEC specification JESD22-C101",
+     "±250",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEDEC JEP155: 500 V HBM is safe to manufacture with a standard ESD control process.",
+    "JEDEC JEP157: 250 V CDM is safe to manufacture with a standard ESD control process."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 5,
+   "conditions": "TA = 30°C and VREGIN = VBAT = 3.6 V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "External input capacitor for internal LDO between BAT and VSS",
+     "CBAT",
+     "Nominal capacitor values specified. Recommend a 5% ceramic X5R-type capacitor located close to the device.",
+     "",
+     "0.1",
+     "",
+     "μF"
+    ],
+    [
+     "External output capacitor for internal LDO between VDD and VSS",
+     "CLDO18",
+     "Nominal capacitor values specified. Recommend a 5% ceramic X5R-type capacitor located close to the device.",
+     "",
+     "0.47",
+     "",
+     "μF"
+    ],
+    [
+     "External pullup voltage for open-drain pins (SDA, SCL, GPOUT)",
+     "VPU",
+     "",
+     "1.62",
+     "",
+     "3.6",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Guaranteed by design, without production test."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "metric",
+    "symbol",
+    "DRZ (12 pins)",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Junction-to-ambient thermal resistance",
+     "RθJA",
+     "64.1",
+     "°C/W"
+    ],
+    [
+     "Junction-to-case (top) thermal resistance",
+     "RθJCtop",
+     "59.8",
+     "°C/W"
+    ],
+    [
+     "Junction-to-board thermal resistance",
+     "RθJB",
+     "52.7",
+     "°C/W"
+    ],
+    [
+     "Junction-to-top characterization parameter",
+     "ψJT",
+     "0.3",
+     "°C/W"
+    ],
+    [
+     "Junction-to-board characterization parameter",
+     "ψJB",
+     "28.3",
+     "°C/W"
+    ],
+    [
+     "Junction-to-case (bottom) thermal resistance",
+     "RθJCbot",
+     "2.4",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Supply current",
+   "page": 6,
+   "conditions": "TA = 30°C and VREGIN = VBAT = 3.6V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "NORMAL mode current",
+     "ICC",
+     "ILOAD > Sleep Current",
+     "",
+     "93",
+     "",
+     "μA"
+    ],
+    [
+     "SLEEP mode current",
+     "ISLP",
+     "ILOAD < Sleep Current",
+     "",
+     "21",
+     "",
+     "μA"
+    ],
+    [
+     "HIBERNATE mode current",
+     "IHIB",
+     "ILOAD < Hibernate Current",
+     "",
+     "9",
+     "",
+     "μA"
+    ],
+    [
+     "SHUTDOWN mode current",
+     "ISD",
+     "Fuel gauge in host commanded SHUTDOWN mode. (LDO regulator output disabled)",
+     "",
+     "0.6",
+     "",
+     "μA"
+    ]
+   ],
+   "notes": [
+    "Guaranteed by design, without production test.",
+    "The NORMAL, SLEEP and HIBERNATE figures are with the wake comparator off."
+   ]
+  },
+  {
+   "title": "Digital input and output DC characteristics",
+   "page": 6,
+   "conditions": "TA = –40°C to 85°C, typical values at TA = 30°C and VREGIN = 3.6 V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage, high (open-drain pins)",
+     "VIH(OD)",
+     "External pullup resistor to VPU",
+     "VPU × 0.7",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input voltage, high (push-pull pin)",
+     "VIH(PP)",
+     "",
+     "1.4",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input voltage, low",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "Output voltage, low",
+     "VOL",
+     "",
+     "",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "Output source current, high",
+     "IOH",
+     "",
+     "",
+     "",
+     "0.5",
+     "mA"
+    ],
+    [
+     "Output sink current, low",
+     "IOL(OD)",
+     "",
+     "",
+     "",
+     "–3",
+     "mA"
+    ],
+    [
+     "Input capacitance",
+     "CIN",
+     "",
+     "",
+     "",
+     "5",
+     "pF"
+    ],
+    [
+     "Input leakage current (SCL, SDA, BIN)",
+     "Ilkg",
+     "",
+     "",
+     "",
+     "0.1",
+     "μA"
+    ],
+    [
+     "Input leakage current (GPOUT)",
+     "Ilkg",
+     "",
+     "",
+     "",
+     "1",
+     "μA"
+    ]
+   ],
+   "notes": [
+    "Guaranteed by design, without production test.",
+    "Open-drain pins are SCL, SDA and GPOUT; the push-pull pin is BIN."
+   ]
+  },
+  {
+   "title": "LDO regulator, wake-up and auto-shutdown DC characteristics",
+   "page": 7,
+   "conditions": "TA = –40°C to 85°C, typical values at TA = 30°C and VREGIN = 3.6 V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "BAT pin regulator input",
+     "VBAT",
+     "",
+     "2.45",
+     "",
+     "4.5",
+     "V"
+    ],
+    [
+     "Regulator output voltage",
+     "VDD",
+     "",
+     "",
+     "1.8",
+     "",
+     "V"
+    ],
+    [
+     "VBAT undervoltage lock-out LDO wake-up rising threshold",
+     "UVLOIT+",
+     "",
+     "",
+     "2",
+     "",
+     "V"
+    ],
+    [
+     "VBAT undervoltage lock-out LDO auto-shutdown falling threshold",
+     "UVLOIT–",
+     "",
+     "",
+     "1.95",
+     "",
+     "V"
+    ],
+    [
+     "GPOUT (input) LDO Wake-up rising edge threshold",
+     "VWU+",
+     "LDO Wake-up from SHUTDOWN mode",
+     "1.2",
+     "",
+     "",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Guaranteed by design, without production test.",
+    "When SHUTDOWN is commanded over I2C while VBAT is above UVLOIT+, waking needs a rising edge on GPOUT."
+   ]
+  },
+  {
+   "title": "LDO regulator, wake-up and auto-shutdown AC characteristics",
+   "page": 7,
+   "conditions": "TA = –40°C to 85°C, typical values at TA = 30°C and VREGIN = 3.6 V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SHUTDOWN entry time",
+     "tSHDN",
+     "Time delay from SHUTDOWN command to LDO output disable.",
+     "",
+     "",
+     "250",
+     "ms"
+    ],
+    [
+     "SHUTDOWN GPOUT low time",
+     "tSHUP",
+     "Minimum low time of GPOUT (input) in SHUTDOWN before WAKEUP",
+     "10",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Initial VDD output delay",
+     "tVDD",
+     "",
+     "",
+     "13",
+     "",
+     "ms"
+    ],
+    [
+     "Wake-up VDD output delay",
+     "tWUVDD",
+     "Time delay from rising edge of GPOUT (input) to nominal VDD output.",
+     "",
+     "8",
+     "",
+     "ms"
+    ],
+    [
+     "Power-up communication delay",
+     "tPUCD",
+     "Time delay from rising edge of REGIN to the Active state. Includes firmware initialization time.",
+     "",
+     "250",
+     "",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "tSHDN, tSHUP, tVDD and tWUVDD are set by design and not tested in production."
+   ]
+  },
+  {
+   "title": "ADC (temperature and cell measurement) characteristics",
+   "page": 7,
+   "conditions": "TA = –40°C to 85°C, typical values at TA = 30°C and VREGIN = 3.6 V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "BAT pin voltage measurement range",
+     "VIN(BAT)",
+     "Voltage divider enabled",
+     "2.45",
+     "",
+     "4.5",
+     "V"
+    ],
+    [
+     "Conversion time",
+     "tADC_CONV",
+     "",
+     "",
+     "125",
+     "",
+     "ms"
+    ],
+    [
+     "Effective resolution",
+     "",
+     "",
+     "",
+     "15",
+     "",
+     "bits"
+    ]
+   ],
+   "notes": [
+    "Guaranteed by design, without production test."
+   ]
+  },
+  {
+   "title": "Integrating ADC (coulomb counter) characteristics",
+   "page": 7,
+   "conditions": "TA = –40°C to 85°C, typical values at TA = 30°C and VREGIN = 3.6 V (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage range from BAT to SRX pins",
+     "VSR",
+     "",
+     "",
+     "BAT ± 25",
+     "",
+     "mV"
+    ],
+    [
+     "Conversion time",
+     "tSR_CONV",
+     "Single conversion",
+     "",
+     "1",
+     "",
+     "s"
+    ],
+    [
+     "Effective Resolution",
+     "",
+     "Single conversion",
+     "",
+     "16",
+     "",
+     "bits"
+    ]
+   ],
+   "notes": [
+    "Guaranteed by design, without production test."
+   ]
+  },
+  {
+   "title": "I2C-compatible interface timing characteristics",
+   "page": 8,
+   "conditions": "TA = –40°C to 85°C, typical values at TA = 30°C and VREGIN = 3.6 V (unless otherwise noted)",
+   "columns": [
+    "mode",
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Standard (100 kHz)",
+     "Start to first falling edge of SCL",
+     "td(STA)",
+     "",
+     "4",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Standard (100 kHz)",
+     "SCL pulse duration (low)",
+     "tw(L)",
+     "",
+     "4.7",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Standard (100 kHz)",
+     "SCL pulse duration (high)",
+     "tw(H)",
+     "",
+     "4",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Standard (100 kHz)",
+     "Setup for repeated start",
+     "tsu(STA)",
+     "",
+     "4.7",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Standard (100 kHz)",
+     "Data setup time",
+     "tsu(DAT)",
+     "Host drives SDA",
+     "250",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Standard (100 kHz)",
+     "Data hold time",
+     "th(DAT)",
+     "Host drives SDA",
+     "0",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Standard (100 kHz)",
+     "Setup time for stop",
+     "tsu(STOP)",
+     "",
+     "4",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Standard (100 kHz)",
+     "Bus free time between stop and start",
+     "t(BUF)",
+     "Includes Command Waiting Time",
+     "66",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Standard (100 kHz)",
+     "SCL or SDA fall time",
+     "tf",
+     "",
+     "",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "Standard (100 kHz)",
+     "SCL or SDA rise time",
+     "tr",
+     "",
+     "",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "Standard (100 kHz)",
+     "Clock frequency",
+     "fSCL",
+     "",
+     "",
+     "",
+     "100",
+     "kHz"
+    ],
+    [
+     "Fast (400 kHz)",
+     "Start to first falling edge of SCL",
+     "td(STA)",
+     "",
+     "600",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "SCL pulse duration (low)",
+     "tw(L)",
+     "",
+     "1300",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "SCL pulse duration (high)",
+     "tw(H)",
+     "",
+     "600",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "Setup for repeated start",
+     "tsu(STA)",
+     "",
+     "600",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "Data setup time",
+     "tsu(DAT)",
+     "Host drives SDA",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "Data hold time",
+     "th(DAT)",
+     "Host drives SDA",
+     "0",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "Setup time for stop",
+     "tsu(STOP)",
+     "",
+     "600",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "Bus free time between stop and start",
+     "t(BUF)",
+     "Includes Command Waiting Time",
+     "66",
+     "",
+     "",
+     "μs"
+    ],
+    [
+     "Fast (400 kHz)",
+     "SCL or SDA fall time",
+     "tf",
+     "",
+     "",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "SCL or SDA rise time",
+     "tr",
+     "",
+     "",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "Fast (400 kHz)",
+     "Clock frequency",
+     "fSCL",
+     "",
+     "",
+     "",
+     "400",
+     "kHz"
+    ]
+   ],
+   "notes": [
+    "tf and tr are set by design and not tested in production.",
+    "Above 100 kHz, write with 1-byte write commands; every other transaction type works at 400 kHz."
+   ]
+  },
+  {
+   "title": "Standard commands",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "name",
+    "short name",
+    "command code",
+    "unit",
+    "sealed access"
+   ],
+   "rows": [
+    [
+     "Control()",
+     "CNTL",
+     "0x00 and 0x01",
+     "NA",
+     "RW"
+    ],
+    [
+     "Temperature()",
+     "TEMP",
+     "0x02 and 0x03",
+     "0.1°K",
+     "RW"
+    ],
+    [
+     "Voltage()",
+     "VOLT",
+     "0x04 and 0x05",
+     "mV",
+     "R"
+    ],
+    [
+     "Flags()",
+     "FLAGS",
+     "0x06 and 0x07",
+     "NA",
+     "R"
+    ],
+    [
+     "NominalAvailableCapacity()",
+     "",
+     "0x08 and 0x09",
+     "mAh",
+     "R"
+    ],
+    [
+     "FullAvailableCapacity()",
+     "",
+     "0x0A and 0x0B",
+     "mAh",
+     "R"
+    ],
+    [
+     "RemainingCapacity()",
+     "RM",
+     "0x0C and 0x0D",
+     "mAh",
+     "R"
+    ],
+    [
+     "FullChargeCapacity()",
+     "FCC",
+     "0x0E and 0x0F",
+     "mAh",
+     "R"
+    ],
+    [
+     "AverageCurrent()",
+     "",
+     "0x10 and 0x11",
+     "mA",
+     "R"
+    ],
+    [
+     "StandbyCurrent()",
+     "",
+     "0x12 and 0x13",
+     "mA",
+     "R"
+    ],
+    [
+     "MaxLoadCurrent()",
+     "",
+     "0x14 and 0x15",
+     "mA",
+     "R"
+    ],
+    [
+     "AveragePower()",
+     "",
+     "0x18 and 0x19",
+     "mW",
+     "R"
+    ],
+    [
+     "StateOfCharge()",
+     "SOC",
+     "0x1C and 0x1D",
+     "%",
+     "R"
+    ],
+    [
+     "InternalTemperature()",
+     "",
+     "0x1E and 0x1F",
+     "0.1°K",
+     "R"
+    ],
+    [
+     "StateOfHealth()",
+     "SOH",
+     "0x20 and 0x21",
+     "num / %",
+     "R"
+    ],
+    [
+     "RemainingCapacityUnfiltered()",
+     "",
+     "0x28 and 0x29",
+     "mAh",
+     "R"
+    ],
+    [
+     "RemainingCapacityFiltered()",
+     "",
+     "0x2A and 0x2B",
+     "mAh",
+     "R"
+    ],
+    [
+     "FullChargeCapacityUnfiltered()",
+     "",
+     "0x2C and 0x2D",
+     "mAh",
+     "R"
+    ],
+    [
+     "FullChargeCapacityFiltered()",
+     "",
+     "0x2E and 0x2F",
+     "mAh",
+     "R"
+    ],
+    [
+     "StateOfChargeUnfiltered()",
+     "",
+     "0x30 and 0x31",
+     "%",
+     "R"
+    ],
+    [
+     "TrueRemainingCapacity()",
+     "",
+     "0x6A and 0x6B",
+     "mAh",
+     "R"
+    ]
+   ]
+  },
+  {
+   "title": "Control() subcommands",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "function",
+    "data",
+    "sealed access",
+    "action"
+   ],
+   "rows": [
+    [
+     "CONTROL_STATUS",
+     "0x0000",
+     "Yes",
+     "Returns the device status word."
+    ],
+    [
+     "FW_VERSION",
+     "0x0002",
+     "Yes",
+     "Returns the firmware version."
+    ],
+    [
+     "DM_CODE",
+     "0x0004",
+     "Yes",
+     "Returns the data memory code held in NVM."
+    ],
+    [
+     "PREV_MACWRITE",
+     "0x0007",
+     "Yes",
+     "Returns the last MAC command code."
+    ],
+    [
+     "CHEM_ID",
+     "0x0008",
+     "Yes",
+     "Returns the identifier of the loaded battery chemistry profile."
+    ],
+    [
+     "BAT_INSERT",
+     "0x000C",
+     "Yes",
+     "Sets Flags() [BAT_DET] when OpConfig [BIE] is 0."
+    ],
+    [
+     "BAT_REMOVE",
+     "0x000D",
+     "Yes",
+     "Clears Flags() [BAT_DET] when OpConfig [BIE] is 0."
+    ],
+    [
+     "SET_HIBERNATE",
+     "0x0011",
+     "Yes",
+     "Sets CONTROL_STATUS [HIBERNATE]."
+    ],
+    [
+     "CLEAR_HIBERNATE",
+     "0x0012",
+     "Yes",
+     "Clears CONTROL_STATUS [HIBERNATE]."
+    ],
+    [
+     "SET_CFGUPDATE",
+     "0x0013",
+     "No",
+     "Sets CONTROL_STATUS [CFGUPMODE]; the gauge goes into CONFIG UPDATE mode."
+    ],
+    [
+     "SHUTDOWN_ENABLE",
+     "0x001B",
+     "No",
+     "Allows SHUTDOWN mode."
+    ],
+    [
+     "SHUTDOWN",
+     "0x001C",
+     "No",
+     "Puts the device into SHUTDOWN mode."
+    ],
+    [
+     "SEALED",
+     "0x0020",
+     "No",
+     "Puts the device into SEALED access mode."
+    ],
+    [
+     "TOGGLE_GPOUT",
+     "0x0023",
+     "Yes",
+     "Toggles GPOUT for 1 ms."
+    ],
+    [
+     "RESET",
+     "0x0041",
+     "No",
+     "Full device reset."
+    ],
+    [
+     "SOFT_RESET",
+     "0x0042",
+     "No",
+     "Leaves CONFIG UPDATE mode."
+    ],
+    [
+     "EXIT_CFGUPDATE",
+     "0x0043",
+     "No",
+     "Leaves CONFIG UPDATE mode with no OCV measurement and no resimulation of StateOfCharge()."
+    ],
+    [
+     "EXIT_RESIM",
+     "0x0044",
+     "No",
+     "Leaves CONFIG UPDATE mode with no OCV measurement, resimulating StateOfCharge() from the new configuration."
+    ]
+   ]
+  },
+  {
+   "title": "Extended commands",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "name",
+    "command code",
+    "unit",
+    "sealed access",
+    "unsealed access"
+   ],
+   "rows": [
+    [
+     "OpConfig()",
+     "0x3A and 0x3B",
+     "NA",
+     "R",
+     "R"
+    ],
+    [
+     "DesignCapacity()",
+     "0x3C and 0x3D",
+     "mAh",
+     "R",
+     "R"
+    ],
+    [
+     "DataClass()",
+     "0x3E",
+     "NA",
+     "NA",
+     "RW"
+    ],
+    [
+     "DataBlock()",
+     "0x3F",
+     "NA",
+     "RW",
+     "RW"
+    ],
+    [
+     "BlockData()",
+     "0x40 through 0x5F",
+     "NA",
+     "R",
+     "RW"
+    ],
+    [
+     "BlockDataCheckSum()",
+     "0x60",
+     "NA",
+     "RW",
+     "RW"
+    ],
+    [
+     "BlockDataControl()",
+     "0x61",
+     "NA",
+     "NA",
+     "RW"
+    ],
+    [
+     "Reserved",
+     "0x62 through 0x7F",
+     "NA",
+     "R",
+     "R"
+    ]
+   ],
+   "notes": [
+    "SEALED and UNSEALED states are changed through Control() at 0x00 and 0x01.",
+    "In SEALED mode, commands 0x3E and 0x3F give no access to data."
+   ]
+  },
+  {
+   "title": "Recommended SCL and SDA pullup resistors",
+   "page": 18,
+   "conditions": "bus capacitance 10 pF",
+   "columns": [
+    "VPU",
+    "RPU range",
+    "RPU typical"
+   ],
+   "rows": [
+    [
+     "1.8 V",
+     "400 Ω ≤ RPU ≤ 37.6 kΩ",
+     "10 kΩ"
+    ],
+    [
+     "3.3 V",
+     "900 Ω ≤ RPU ≤ 29.2 kΩ",
+     "5.1 kΩ"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel",
+   "page": 23,
+   "conditions": "All dimensions are nominal",
+   "columns": [
+    "device",
+    "package",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ27441DRZR-G1A",
+     "SON DRZ",
+     "12",
+     "3000",
+     "330.0",
+     "12.4",
+     "2.8",
+     "4.3",
+     "1.2",
+     "4.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ27441DRZR-G1AG4",
+     "SON DRZ",
+     "12",
+     "3000",
+     "330.0",
+     "12.4",
+     "2.8",
+     "4.3",
+     "1.2",
+     "4.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ27441DRZR-G1B",
+     "SON DRZ",
+     "12",
+     "3000",
+     "330.0",
+     "12.4",
+     "2.8",
+     "4.3",
+     "1.2",
+     "4.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ27441DRZT-G1A",
+     "SON DRZ",
+     "12",
+     "250",
+     "180.0",
+     "12.4",
+     "2.8",
+     "4.3",
+     "1.2",
+     "4.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ27441DRZT-G1B",
+     "SON DRZ",
+     "12",
+     "250",
+     "180.0",
+     "12.4",
+     "2.8",
+     "4.3",
+     "1.2",
+     "4.0",
+     "12.0",
+     "Q2"
+    ]
+   ],
+   "notes": [
+    "A0, B0 and K0 are the pocket width, length and depth; W is the tape width and P1 the pocket pitch."
+   ]
+  },
+  {
+   "title": "Tape and reel box",
+   "page": 24,
+   "conditions": "All dimensions are nominal",
+   "columns": [
+    "device",
+    "package",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ27441DRZR-G1A",
+     "SON DRZ",
+     "12",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ27441DRZR-G1AG4",
+     "SON DRZ",
+     "12",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ27441DRZR-G1B",
+     "SON DRZ",
+     "12",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ27441DRZT-G1A",
+     "SON DRZ",
+     "12",
+     "250",
+     "210.0",
+     "185.0",
+     "35.0"
+    ],
+    [
+     "BQ27441DRZT-G1B",
+     "SON DRZ",
+     "12",
+     "250",
+     "210.0",
+     "185.0",
+     "35.0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Voltage Accuracy",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage accuracy error",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Voltage accuracy error",
+     "points": [
+      [
+       -40,
+       0.0896
+      ],
+      [
+       -20,
+       0.06
+      ],
+      [
+       0,
+       0.0203
+      ],
+      [
+       30,
+       0.06
+      ],
+      [
+       60,
+       0.09
+      ],
+      [
+       85,
+       0.13
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Temperature Accuracy",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Temperature accuracy error",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Temperature accuracy error",
+     "points": [
+      [
+       -40,
+       -7.48
+      ],
+      [
+       -20,
+       -13.22
+      ],
+      [
+       0,
+       -4.0
+      ],
+      [
+       30,
+       5.26
+      ],
+      [
+       60,
+       2.2
+      ],
+      [
+       85,
+       1.23
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current Accuracy",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current accuracy error",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Current accuracy error",
+     "points": [
+      [
+       -40,
+       -0.5108
+      ],
+      [
+       -20,
+       -0.57
+      ],
+      [
+       0,
+       -0.58
+      ],
+      [
+       30,
+       -0.48
+      ],
+      [
+       60,
+       -0.3
+      ],
+      [
+       85,
+       -0.09
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 15,
+   "description": "The gauge watches a one-cell pack on a three-way connector (PACKP, BIN, PACKN). BAT is tied to PACKP with C2 (1.0 µF) to ground beside it; C1 (0.47 µF) bypasses the 1.8 V VDD output. R1, 0.010 Ω at 1 %, is in the positive lead between PACKP and the system load or charger (VSYS); SRP senses its pack end and SRN its system end. SDA, SCL and GPOUT each have a 5.1 kΩ pullup to VPU. BIN is pulled up to VPU by R5 (1.8 MΩ) and runs to pin 2 of J5. NC pins are left open and VSS and the exposed pad go to PGND.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq27441-G1"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "0.010 Ω",
+     "note": "1 % tolerance, sense resistor"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "5.1 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "5.1 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "5.1 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "1.8 MΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.47 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1.0 µF"
+    },
+    {
+     "ref": "J5",
+     "type": "connector",
+     "value": "3-pin battery pack connector",
+     "note": "1 PACKN, 2 BIN, 3 PACKP"
+    },
+    {
+     "ref": "J_VPU",
+     "type": "terminal",
+     "value": "VPU"
+    },
+    {
+     "ref": "J_SDA",
+     "type": "terminal",
+     "value": "SDA"
+    },
+    {
+     "ref": "J_SCL",
+     "type": "terminal",
+     "value": "SCL"
+    },
+    {
+     "ref": "J_GPOUT",
+     "type": "terminal",
+     "value": "GPOUT"
+    },
+    {
+     "ref": "J_VSYS",
+     "type": "terminal",
+     "value": "VSYS",
+     "note": "system load or charger"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [],
+ "operation": [
+  {
+   "topic": "Gauging method",
+   "page": 10,
+   "text": "Current is found from the voltage across a small sense resistor in the battery path, and is integrated by a coulomb counter. With a cell attached the gauge works out cell impedance from current, open-circuit voltage and loaded voltage, and the Impedance Track algorithm uses these to predict state of charge, adjusting for ageing, self-discharge, temperature and load rate. Cell temperature comes from an on-chip sensor or can be written by the host. Fuller detail is in the technical reference manual SLUUAC9."
+  },
+  {
+   "topic": "Configuration memory",
+   "page": 15,
+   "text": "Settings live in one-time-programmable NVM. From the factory, the chemistry-related parameters are loaded and most others are zero. On reset the OTP contents are copied into RAM data memory, and every RAM parameter must be set up before use: written into data memory during development, or programmed into OTP for production. Default and typical values are in chapter 6 of SLUUAC9."
+  },
+  {
+   "topic": "Power modes",
+   "page": 11,
+   "text": "The gauge moves between INITIALIZATION, NORMAL, SLEEP and HIBERNATE on its own as conditions change, and the host can force some of these. SHUTDOWN is entered on command: SHUTDOWN_ENABLE then SHUTDOWN; the LDO turns off within 250 ms (tSHDN) and the supply current drops to 0.6 µA typical. To wake it, hold GPOUT low for at least 10 µs and then raise it; VDD returns about 8 ms after the rising edge and the gauge talks again after tPUCD."
+  },
+  {
+   "topic": "Start-up and undervoltage",
+   "page": 7,
+   "text": "The LDO starts when VBAT rises past 2 V (UVLOIT+) and shuts off automatically when VBAT falls below 1.95 V (UVLOIT–). At first power the VDD output appears after about 13 ms, and the gauge is ready on I2C about 250 ms after the supply rises, firmware start included."
+  },
+  {
+   "topic": "I2C interface",
+   "page": 13,
+   "text": "The bus engine handles single and incremental reads, quick reads, and single-byte or incremental writes. The 7-bit address is fixed at 1010101, so the address byte is 0xAA for a write and 0xAB for a read. An internal address pointer steps on each acknowledged byte, so quick reads and writes reach consecutive command locations. Standard commands are 2-byte words; extended commands range from one byte to many. Writing a read-only location gets a NACK after the data, and reading above 0x6B gets a NACK on the command."
+  },
+  {
+   "topic": "I2C timeout and clock stretching",
+   "page": 13,
+   "text": "If the bus stays low for 2 s the gauge lets go of SDA and SCL; if something outside is holding a line low it then drops into SLEEP. The gauge may stretch the clock in any mode: up to 100 µs in SLEEP and HIBERNATE while it wakes for a packet, and up to 4 ms in INITIALIZATION and NORMAL."
+  },
+  {
+   "topic": "I2C command waiting time",
+   "page": 14,
+   "text": "Leave at least 66 µs of bus-free time, t(BUF), between packets sent to the gauge. Above 100 kHz send each byte as its own 1-byte write; at 100 kHz or less a 2-byte incremental write of a subcommand is acceptable. A read-write standard command needs at least 2 s before its result is updated. Read-only standard commands need no wait, but no standard command may be sent over twice per second, or the watchdog may expire and reset the gauge."
+  },
+  {
+   "topic": "BAT sense and decoupling",
+   "page": 16,
+   "text": "BAT both powers the gauge and measures the cell. A ceramic capacitor at BAT keeps load ripple off this high-impedance node and so out of the voltage reading; it matters most with pulsed loads such as phones and is advised in every design. Fit at least 1 µF from BAT to VSS, and it is required when the lead from the pack can pick up noise. VDD, about 1.8 V, needs at least 0.47 µF to VSS. Both capacitors go close to the IC on short traces."
+  },
+  {
+   "topic": "Sense resistor choice",
+   "page": 16,
+   "text": "Any error in the resistance between SRP and SRN becomes current error, so the resistor should have tight tolerance and low TCR. The usual pick is 1 % tolerance, 50 ppm drift and 1 W rating, at 10 mΩ, which the gauge is calibrated for."
+  },
+  {
+   "topic": "Layout",
+   "page": 18,
+   "text": "Kelvin-connect SRP and SRN right at the sense resistor pads, SRP on the pack side and SRN on the system side, and Kelvin-connect BAT at the pack positive terminal with short leads. Pin 3 (VSS) is the device ground; the capacitor ground goes to power ground through a via. Use copper pours for the battery power path to cut IR loss. The I2C pullups go to the host's pullup supply, not to the gauge's VDD; if they are switched off in low-power operation, add 1 MΩ pulldowns to VSS on SCL and SDA. Choose pullup values for the pullup voltage and bus capacitance. An unused GPOUT is still pulled up to VDD with 4.7 kΩ or 10 kΩ. Without a pack thermistor on BIN, pull BIN to VSS with 10 kΩ; never short it to VDD or VSS."
+  },
+  {
+   "topic": "Package",
+   "page": 25,
+   "text": "The DRZ package is a 12-pin VSON, 1 mm maximum height, with an exposed thermal pad (pin 13) that must be soldered to the board for heat and mechanical strength. Vias in the pad are optional; vias under paste are best filled, plugged or tented. The suggested stencil prints 79 % of the exposed pad area with a 0.1 mm stencil."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DRZ0012A (VSON-12)",
+   "page": 25,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length (4 mm side)",
+     "3.85",
+     "",
+     "4.15"
+    ],
+    [
+     "",
+     "body width (2.5 mm side; each pin row runs along it)",
+     "2.35",
+     "",
+     "2.65"
+    ],
+    [
+     "",
+     "overall height",
+     "0.8",
+     "",
+     "1"
+    ],
+    [
+     "",
+     "standoff",
+     "0",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "exposed pad length (along the 4 mm side)",
+     "2.35",
+     "",
+     "2.55"
+    ],
+    [
+     "",
+     "exposed pad width (along the pin rows)",
+     "1.85",
+     "",
+     "2.05"
+    ],
+    [
+     "",
+     "pin pitch (10X)",
+     "",
+     "0.4",
+     ""
+    ],
+    [
+     "",
+     "first to last pin centre in a row (2X)",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "",
+     "terminal width (12X)",
+     "0.1",
+     "",
+     "0.3"
+    ],
+    [
+     "",
+     "terminal length (12X)",
+     "0.3",
+     "",
+     "0.5"
+    ],
+    [
+     "",
+     "exposed pad notch to pad edge (2X)",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "terminal side exposure",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "",
+     "terminal position tolerance to C A B",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "terminal position tolerance to C",
+     "",
+     "",
+     "0.05"
+    ]
+   ]
+  },
+  {
+   "name": "DRZ0012A land pattern",
+   "page": 26,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "Terminal pad length (12X)",
+     "(0.6)"
+    ],
+    [
+     "Terminal pad width (12X)",
+     "(0.2)"
+    ],
+    [
+     "Terminal pad pitch (10X)",
+     "(0.4)"
+    ],
+    [
+     "First to last pad centre in a row (2X)",
+     "(2)"
+    ],
+    [
+     "Pad row centre to centre",
+     "(3.8)"
+    ],
+    [
+     "Thermal pad overall width",
+     "(2.45)"
+    ],
+    [
+     "Thermal pad overall height",
+     "(2.9)"
+    ],
+    [
+     "Thermal pad centre section height",
+     "(1.95)"
+    ],
+    [
+     "Thermal pad side strip centre spacing (2X)",
+     "(2.25)"
+    ],
+    [
+     "Thermal pad side strip width (4X)",
+     "(0.2)"
+    ],
+    [
+     "Via diameter",
+     "(Ø0.2)"
+    ],
+    [
+     "Via spacing from centre, horizontal (2X)",
+     "(0.975)"
+    ],
+    [
+     "Via spacing from centre, vertical (2X)",
+     "(0.725)"
+    ],
+    [
+     "Pad corner radius",
+     "(R0.05)"
+    ],
+    [
+     "Solder mask opening to metal, non solder mask defined (preferred)",
+     "0.05 max all around"
+    ],
+    [
+     "Metal under solder mask, solder mask defined",
+     "0.05 min all around"
+    ]
+   ]
+  },
+  {
+   "name": "DRZ0012A stencil",
+   "page": 27,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "Stencil thickness",
+     "0.1"
+    ],
+    [
+     "Terminal aperture length (12X)",
+     "(0.6)"
+    ],
+    [
+     "Terminal aperture width (12X)",
+     "(0.2)"
+    ],
+    [
+     "Terminal aperture pitch (10X)",
+     "(0.4)"
+    ],
+    [
+     "Aperture row centre to centre",
+     "(3.8)"
+    ],
+    [
+     "Exposed pad paste coverage",
+     "79%"
+    ],
+    [
+     "Thermal-pad centre aperture width (2X)",
+     "(1.08)"
+    ],
+    [
+     "Thermal-pad centre aperture height (2X)",
+     "(1.75)"
+    ],
+    [
+     "Centre aperture centre from package centre, horizontal (2X)",
+     "(0.64)"
+    ],
+    [
+     "Corner aperture width (4X)",
+     "(0.2)"
+    ],
+    [
+     "Corner aperture height (4X)",
+     "(0.375)"
+    ],
+    [
+     "Corner aperture centre spacing, horizontal (2X)",
+     "(2.25)"
+    ],
+    [
+     "Corner aperture centre from package centre, vertical (4X)",
+     "(1.2625)"
+    ],
+    [
+     "Terminal aperture corner radius",
+     "(0.05)"
+    ]
+   ]
+  }
+ ]
+}

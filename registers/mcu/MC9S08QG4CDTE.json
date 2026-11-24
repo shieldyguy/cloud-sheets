@@ -1,0 +1,5451 @@
+{
+ "registers": 1,
+ "name": "MC9S08QG4CDTE",
+ "manufacturer": "NXP",
+ "source": {
+  "document": "MC9S08QG4CDTE.pdf",
+  "revision": "MC9S08QG8 Rev. 1.01, 10/2005",
+  "pages": 300
+ },
+ "peripherals": [
+  {
+   "name": "FLASH",
+   "title": "Memory Map and Register Deﬁnition",
+   "page": 51,
+   "instances": [],
+   "registers": [
+    {
+     "name": "FCDIV",
+     "title": "FLASH Clock Divider Register",
+     "offset": "0x1820",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 51,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "DIVLD",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only; reset clears it and the first write to FCDIV sets it, whatever value is written.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "FCDIV not written since reset; FLASH erase and program are blocked."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "FCDIV written since reset; FLASH erase and program are allowed."
+        }
+       ]
+      },
+      {
+       "name": "PRDIV8",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Divides the FLASH clock by 8 before the divider.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Divider input is the bus clock."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Divider input is the bus clock divided by 8."
+        }
+       ]
+      },
+      {
+       "name": "DIV",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "FLASH clock divisor: fFCLK = fBus / (DIV + 1) with PRDIV8 = 0, or fBus / (8 x (DIV + 1)) with PRDIV8 = 1. fFCLK must lie between 150 kHz and 200 kHz for FLASH operations; one fFCLK cycle (5 us to 6.7 us) is the program/erase pulse, and erase and program each take a whole number of these pulses.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "FOPT",
+     "title": "FLASH Options Register",
+     "offset": "0x1821",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R",
+     "page": 52,
+     "property": [],
+     "notes": [
+      "Reset loads it from NVOPT.",
+      "The field table names SEC0 SEC0[1:0]."
+     ],
+     "fields": [
+      {
+       "name": "KEYEN",
+       "bits": "7",
+       "access": "R",
+       "reset": "x",
+       "text": "Backdoor key mechanism enable. At 0 the backdoor key cannot release security. Only user (secured) firmware can use the key; BDM commands cannot write the key comparison values.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Backdoor key access not allowed."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Security is released until the next MCU reset when user firmware writes 8 bytes matching NVBACKKEY to NVBACKKEY+7, in order."
+        }
+       ]
+      },
+      {
+       "name": "FNORED",
+       "bits": "6",
+       "access": "R",
+       "reset": "x",
+       "text": "Vector redirection disable; 1 turns vector redirection off.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Vector redirection on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Vector redirection off."
+        }
+       ]
+      },
+      {
+       "name": "SEC0",
+       "bits": "1:0",
+       "access": "R",
+       "reset": "x",
+       "text": "Two-bit code for the MCU security state, SEC01:SEC00: 0:0, 0:1 and 1:1 secure; 1:0 unsecured. While secure, no unsecured source, the background debug interface included, can access RAM or FLASH by instructions. SEC01:SEC00 becomes 1:0 after a correct backdoor key entry or a passing FLASH blank check.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "FCNFG",
+     "title": "FLASH Conﬁguration Register",
+     "offset": "0x1823",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 53,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "KEYACC",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Lets writes go to the backdoor comparison key.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Writes to 0xFFB0-0xFFB7 start a FLASH program or erase command."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Writes to NVBACKKEY (0xFFB0-0xFFB7) are taken as comparison key writes."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "FPROT",
+     "title": "FLASH Protection Register",
+     "offset": "0x1824",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R/W",
+     "page": 53,
+     "property": [],
+     "notes": [
+      "Reset loads it from NVPROT."
+     ],
+     "fields": [
+      {
+       "name": "FPS",
+       "bits": "7:1",
+       "access": "R/W",
+       "reset": "x",
+       "text": "With FPDIS = 0, sets the last address of the unprotected FLASH at the top end of FLASH; protected locations cannot be erased or programmed.",
+       "values": []
+      },
+      {
+       "name": "FPDIS",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "FLASH protection disable.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "The FLASH block set by FPS7:FPS1 is protected from program and erase."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "No FLASH block is protected."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "FSTAT",
+     "title": "FLASH Status Register",
+     "offset": "0x1825",
+     "bits": 8,
+     "reset": "0xC0",
+     "access": "R, R/W",
+     "page": 54,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "FCBEF",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Launches commands and shows the command buffer is empty for the next command in burst programming. Cleared by writing 1 or when a burst program command moves to the array. Only burst program commands are buffered.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Command buffer full; no more commands accepted."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Command buffer ready for a new burst program command."
+        }
+       ]
+      },
+      {
+       "name": "FCCF",
+       "bits": "6",
+       "access": "R",
+       "reset": "1",
+       "text": "Set by hardware when the command buffer is empty and no command is running; cleared by hardware when a command starts (a 1 written to FCBEF). Writes do nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Command running."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "All commands finished."
+        }
+       ]
+      },
+      {
+       "name": "FPVIOL",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Set by hardware when a command registered by clearing FCBEF tries to erase or program a protected block; that command is ignored. Write 1 to clear.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No protection violation."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Erase or program of a protected location was attempted."
+        }
+       ]
+      },
+      {
+       "name": "FACCERR",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Set by hardware when the command sequence is broken (the command is ignored), when program or erase is tried before FCDIV is set, or when the MCU enters stop during a command. Write 1 to clear; writing 0 does nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No access error."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Access error occurred."
+        }
+       ]
+      },
+      {
+       "name": "FBLANK",
+       "bits": "2",
+       "access": "R",
+       "reset": "0",
+       "text": "Set by hardware at the end of a blank check that finds the whole FLASH array erased; cleared when FCBEF is cleared to write a new valid command. Writes do nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "With the blank check done and FCCF = 1: FLASH array not fully erased."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "With the blank check done and FCCF = 1: FLASH array fully erased (all 0xFF)."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "FCMD",
+     "title": "FLASH Command Register",
+     "offset": "0x1826",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "W",
+     "page": 55,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "FCMD",
+       "bits": "7:0",
+       "access": "W",
+       "reset": "0x0",
+       "text": "FLASH command code, write only, reads 0. Five codes are accepted in normal user modes: 0x05 blank check, 0x20 byte program, 0x25 burst byte program, 0x40 page erase (512-byte page), 0x41 mass erase (all FLASH). Any other code is illegal and raises an access error. A blank check is not needed after mass erase; it is needed only in the security unlock sequence.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "NVBACKKEY",
+     "title": "",
+     "offset": "0xFFB0",
+     "repeat": {
+      "count": 8,
+      "step": "0x01"
+     },
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 42,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": [
+      {
+       "name": "ComparisonKey",
+       "bits": "3",
+       "access": "",
+       "reset": "x",
+       "text": "Eight-byte comparison key at 0xFFB0-0xFFB7, held in FLASH, for the backdoor security release.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "NVPROT",
+     "title": "FLASH Protection Register",
+     "offset": "0xFFBD",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R/W",
+     "page": 53,
+     "property": [],
+     "notes": [
+      "Reset loads it from NVPROT.",
+      "Shares its figure with FPROT."
+     ],
+     "fields": [
+      {
+       "name": "FPS",
+       "bits": "7:1",
+       "access": "R/W",
+       "reset": "x",
+       "text": "With FPDIS = 0, sets the last address of the unprotected FLASH at the top end of FLASH; protected locations cannot be erased or programmed.",
+       "values": []
+      },
+      {
+       "name": "FPDIS",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "x",
+       "text": "FLASH protection disable.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "The FLASH block set by FPS7:FPS1 is protected from program and erase."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "No FLASH block is protected."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "NVOPT",
+     "title": "FLASH Options Register",
+     "offset": "0xFFBF",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "R",
+     "page": 52,
+     "property": [],
+     "notes": [
+      "Reset loads it from NVOPT.",
+      "The field table names SEC0 SEC0[1:0].",
+      "Shares its figure with FOPT."
+     ],
+     "fields": [
+      {
+       "name": "KEYEN",
+       "bits": "7",
+       "access": "R",
+       "reset": "x",
+       "text": "Backdoor key mechanism enable. At 0 the backdoor key cannot release security. Only user (secured) firmware can use the key; BDM commands cannot write the key comparison values.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Backdoor key access not allowed."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Security is released until the next MCU reset when user firmware writes 8 bytes matching NVBACKKEY to NVBACKKEY+7, in order."
+        }
+       ]
+      },
+      {
+       "name": "FNORED",
+       "bits": "6",
+       "access": "R",
+       "reset": "x",
+       "text": "Vector redirection disable; 1 turns vector redirection off.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Vector redirection on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Vector redirection off."
+        }
+       ]
+      },
+      {
+       "name": "SEC0",
+       "bits": "1:0",
+       "access": "R",
+       "reset": "x",
+       "text": "Two-bit code for the MCU security state, SEC01:SEC00: 0:0, 0:1 and 1:1 secure; 1:0 unsecured. While secure, no unsecured source, the background debug interface included, can access RAM or FLASH by instructions. SEC01:SEC00 becomes 1:0 after a correct backdoor key entry or a passing FLASH blank check.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "SYSTEM",
+   "title": "Resets, Interrupts, and General System Control",
+   "page": 65,
+   "instances": [],
+   "registers": [
+    {
+     "name": "IRQSC",
+     "title": "Interrupt Request Status and Control Register",
+     "offset": "0x000F",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W, W",
+     "page": 65,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "IRQPDD",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns off the IRQ pin's internal pullup while the IRQ pin is enabled (IRQPE = 1), so an external pull device can be used.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "IRQ pull device on when IRQPE = 1."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "IRQ pull device off when IRQPE = 1."
+        }
+       ]
+      },
+      {
+       "name": "IRQPE",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on the IRQ pin function so the pin can request interrupts.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "IRQ pin function off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "IRQ pin function on."
+        }
+       ]
+      },
+      {
+       "name": "IRQF",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only; shows an interrupt request event has happened.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No IRQ request."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "IRQ event seen."
+        }
+       ]
+      },
+      {
+       "name": "IRQACK",
+       "bits": "2",
+       "access": "W",
+       "reset": "0",
+       "text": "Write-only; writing 1 clears IRQF, writing 0 does nothing, reads give 0. With edge-and-level detection (IRQMOD = 1), IRQF stays set while the IRQ pin is held at its active level.",
+       "values": []
+      },
+      {
+       "name": "IRQIE",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Chooses whether IRQ events request an interrupt.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No interrupt on IRQF; poll it."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Interrupt requested while IRQF = 1."
+        }
+       ]
+      },
+      {
+       "name": "IRQMOD",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Chooses edge-only or edge-and-level detection.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "IRQ event on falling edges only."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "IRQ event on a falling edge or while the pin is low."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SRS",
+     "title": "System Reset Status",
+     "offset": "0x1800",
+     "bits": 8,
+     "reset": "0x82",
+     "access": "R",
+     "page": 66,
+     "property": [],
+     "notes": [
+      "LVR: 0bu0000010.",
+      "Any other reset: 0b0xxxx000.",
+      "The reset carried is the POR row."
+     ],
+     "fields": [
+      {
+       "name": "POR",
+       "bits": "7",
+       "access": "R",
+       "reset": "1",
+       "text": "Reset came from power-on detection. LVD is set too, since the internal supply was still ramping and under the LVR threshold.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not a power-on reset."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Power-on reset."
+        }
+       ]
+      },
+      {
+       "name": "PIN",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "Reset came from a low level on the external reset pin.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not from the reset pin."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "From the reset pin."
+        }
+       ]
+      },
+      {
+       "name": "COP",
+       "bits": "5",
+       "access": "R",
+       "reset": "0",
+       "text": "Reset came from a COP watchdog timeout; COPE = 0 blocks this source.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not a COP timeout."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "COP timeout."
+        }
+       ]
+      },
+      {
+       "name": "ILOP",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "Reset came from executing an unimplemented or illegal opcode. STOP counts as illegal when STOPE = 0 in SOPT, and BGND when ENBDM = 0 in BDCSC.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not an illegal opcode."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Illegal opcode."
+        }
+       ]
+      },
+      {
+       "name": "ILAD",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Reset came from a data or instruction access to an unimplemented address.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not an illegal address."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Illegal address."
+        }
+       ]
+      },
+      {
+       "name": "LVD",
+       "bits": "1",
+       "access": "R",
+       "reset": "1",
+       "text": "Set by an LVD reset (supply below the LVD trip voltage with LVDRE set) and also by POR.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not an LVD trip or POR."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "LVD trip or POR."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SBDFR",
+     "title": "System Background Debug Force Reset Register",
+     "offset": "0x1801",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "W",
+     "page": 67,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "BDFR",
+       "bits": "0",
+       "access": "W",
+       "reset": "0",
+       "text": "Writing 1 resets the MCU; only a debug host can write it, through a background command like WRITE_BYTE, never the user program. PTA4/ACMPO/BKGD/MS high just after the WRITE_BYTE gives user mode; low gives BDM.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SOPT1",
+     "title": "System Options Register 1",
+     "offset": "0x1802",
+     "bits": 8,
+     "reset": "0b1101001u",
+     "access": "R/W",
+     "page": 68,
+     "property": [],
+     "notes": [
+      "POR: 0b11010010.",
+      "LVR: 0b11010010."
+     ],
+     "fields": [
+      {
+       "name": "COPE",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Write-once; enables the COP watchdog.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "COP watchdog off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "COP watchdog on; a timeout resets the MCU."
+        }
+       ]
+      },
+      {
+       "name": "COPT",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Write-once; picks the COP timeout, together with COPCLKS in SOPT2.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Short timeout."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Long timeout."
+        }
+       ]
+      },
+      {
+       "name": "STOPE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Write-once; enables stop mode. With stop disabled, a STOP instruction forces an illegal opcode reset.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Stop mode off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Stop mode on."
+        }
+       ]
+      },
+      {
+       "name": "BKGDPE",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Write-once; gives PTA4/ACMPO/BKGD/MS the BKGD/MS function when set, or one of its output-only functions when clear. Every MCU reset returns the pin to BKGD/MS.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Pin works as PTA4 or ACMPO."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Pin works as BKGD/MS."
+        }
+       ]
+      },
+      {
+       "name": "RSTPE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "u",
+       "text": "Write-once; gives PTA5/IRQ/TCLK/RESET the RESET function when set, with an internal pullup on RESET, or one of its input-only functions when clear. After POR the pin is its input-only port function.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Pin works as PTA5, IRQ or TCLK."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Pin works as RESET."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SOPT2",
+     "title": "System Options Register 2",
+     "offset": "0x1803",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 69,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "COPCLKS",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Write-once; picks the COP watchdog clock.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "COP runs from the internal 1 kHz clock."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "COP runs from the bus clock."
+        }
+       ]
+      },
+      {
+       "name": "IICPS",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks which pins carry the IIC SDA and SCL.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "SDA on PTA2, SCL on PTA3."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "SDA on PTB6, SCL on PTB7."
+        }
+       ]
+      },
+      {
+       "name": "ACIC",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Routes the ACMP output to TPM input channel 0.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "ACMP output not routed to TPM channel 0."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "ACMP output routed to TPM channel 0."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SDIDH",
+     "title": "System Device Identiﬁcation Register — High",
+     "offset": "0x1806",
+     "bits": 8,
+     "reset": "0bxxxx0000",
+     "access": "R",
+     "page": 70,
+     "property": [],
+     "notes": [
+      "The field table names ID ID[11:8]."
+     ],
+     "fields": [
+      {
+       "name": "ID",
+       "bits": "3:0",
+       "access": "R",
+       "reset": "0x0",
+       "text": "Upper bits of the part identification number, unique to each HCS08 derivative; fixed at 0x009 for the MC9S08QG8.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SDIDL",
+     "title": "System Device Identiﬁcation Register — Low",
+     "offset": "0x1807",
+     "bits": 8,
+     "reset": "0x09",
+     "access": "R",
+     "page": 70,
+     "property": [],
+     "notes": [
+      "The field table names ID ID[7:0]."
+     ],
+     "fields": [
+      {
+       "name": "ID",
+       "bits": "7:0",
+       "access": "R",
+       "reset": "0x9",
+       "text": "Lower bits of the part identification number, unique to each HCS08 derivative; fixed at 0x009 for the MC9S08QG8.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SRTISC",
+     "title": "System RTI Status and Control Register",
+     "offset": "0x1808",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W, W",
+     "page": 71,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "RTIF",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only; shows the periodic wakeup timer has timed out.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Periodic wakeup timer not timed out."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Periodic wakeup timer timed out."
+        }
+       ]
+      },
+      {
+       "name": "RTIACK",
+       "bits": "6",
+       "access": "W",
+       "reset": "0",
+       "text": "Write-only; writing 1 clears RTIF, writing 0 does nothing, reads give 0.",
+       "values": []
+      },
+      {
+       "name": "RTICLKS",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks the real-time interrupt clock.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Internal 1 kHz oscillator."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "External clock."
+        }
+       ]
+      },
+      {
+       "name": "RTIE",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Enables real-time interrupts.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Real-time interrupts off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Real-time interrupts on."
+        }
+       ]
+      },
+      {
+       "name": "RTIS",
+       "bits": "2:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Picks the real-time interrupt period, RTIS2:RTIS1:RTIS0. With the internal 1 kHz clock (tRTI = 1 ms): 000 RTI off, 001 8 ms, 010 32 ms, 011 64 ms, 100 128 ms, 101 256 ms, 110 512 ms, 111 1.024 s; the first timeout can be up to one 1 kHz period short. With the external clock, the period is text (the external crystal period) times 256, 1024, 2048, 4096, 8192, 16384 or 32768 for 001 to 111; 000 turns RTI off.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SPMSC1",
+     "title": "System Power Management Status and Control 1 Register",
+     "offset": "0x1809",
+     "bits": 8,
+     "reset": "0x1C",
+     "access": "R, R/W, W",
+     "page": 72,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "LVDF",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only; with LVDE = 1, shows a low-voltage detect event.",
+       "values": []
+      },
+      {
+       "name": "LVDACK",
+       "bits": "6",
+       "access": "W",
+       "reset": "0",
+       "text": "Write-only; writing 1 clears LVDF. Reads give 0.",
+       "values": []
+      },
+      {
+       "name": "LVDIE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Enables hardware interrupt requests from LVDF.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No hardware interrupt; poll LVDF."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Hardware interrupt when LVDF = 1."
+        }
+       ]
+      },
+      {
+       "name": "LVDRE",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Write-once; with LVDE = 1, lets LVDF events reset the MCU.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "LVDF does not reset the MCU."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "MCU reset when LVDF = 1."
+        }
+       ]
+      },
+      {
+       "name": "LVDSE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "1",
+       "text": "With LVDE = 1, chooses whether low-voltage detect runs in stop mode.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Low-voltage detect off in stop."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Low-voltage detect on in stop."
+        }
+       ]
+      },
+      {
+       "name": "LVDE",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Write-once; turns on the low-voltage detect logic and gates the other bits of this register.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "LVD logic off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "LVD logic on."
+        }
+       ]
+      },
+      {
+       "name": "BGBE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on a buffer for the bandgap reference, used by the ADC on an internal channel or by the ACMP as a reference.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Bandgap buffer off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Bandgap buffer on."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SPMSC2",
+     "title": "System Power Management Status and Control 2 Register",
+     "offset": "0x180A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W, W",
+     "page": 73,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "PDF",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only; shows the MCU has come back from stop1.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not recovered from stop1."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Recovered from stop1."
+        }
+       ]
+      },
+      {
+       "name": "PPDF",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only; shows the MCU has come back from stop2.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not recovered from stop2."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Recovered from stop2."
+        }
+       ]
+      },
+      {
+       "name": "PPDACK",
+       "bits": "2",
+       "access": "W",
+       "reset": "0",
+       "text": "Writing 1 clears PPDF and PDF.",
+       "values": []
+      },
+      {
+       "name": "PDC",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Allows entry to the power-down modes, stop2 and stop1.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Power-down modes off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Power-down modes on."
+        }
+       ]
+      },
+      {
+       "name": "PPDC",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks which power-down mode is used.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Stop1 (full power down) when PDC is set."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Stop2 (partial power down) when PDC is set."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SPMSC3",
+     "title": "System Power Management Status and Control 3 Register",
+     "offset": "0x180C",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W, W",
+     "page": 74,
+     "property": [],
+     "notes": [
+      "LVR: 0b00uu0000.",
+      "Any other reset: 0b00uu0000.",
+      "The reset carried is the POR row."
+     ],
+     "fields": [
+      {
+       "name": "LVWF",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Low-voltage warning status.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No low-voltage warning."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Low-voltage warning present now or earlier."
+        }
+       ]
+      },
+      {
+       "name": "LVWACK",
+       "bits": "6",
+       "access": "W",
+       "reset": "0",
+       "text": "Writing 1 clears LVWF to 0 when no low-voltage warning is present.",
+       "values": []
+      },
+      {
+       "name": "LVDV",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks the LVD trip voltage VLVD.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Low trip point, VLVD = VLVDL."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "High trip point, VLVD = VLVDH."
+        }
+       ]
+      },
+      {
+       "name": "LVWV",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks the LVW trip voltage VLVW.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Low trip point, VLVW = VLVWL."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "High trip point, VLVW = VLVWH."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "PORT",
+   "title": "Parallel Input/Output Control",
+   "page": 77,
+   "instances": [],
+   "registers": [
+    {
+     "name": "PTAD",
+     "title": "Port A Data Register",
+     "offset": "0x0000",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 77,
+     "property": [],
+     "notes": [
+      "The field table names PTAD PTAD[5:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTAD",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Port A data. A read gives the pin level for an input pin and the last value written for an output pin. Writes are latched into every bit and driven onto the pins set as outputs. Reset clears PTAD to 0s, but they are not driven, since reset also makes every port pin a high-impedance input with pullups off.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PTADD",
+     "title": "Port A Data Direction Register",
+     "offset": "0x0001",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 78,
+     "property": [],
+     "notes": [
+      "The field table names PTADD PTADD[5:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTADD",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Sets the direction of each port A pin and what a PTAD read returns.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Input, output driver off; reads give the pin level."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Output driver on for port A bit n; PTAD reads give PTADn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PTBD",
+     "title": "Port B Data Register",
+     "offset": "0x0002",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 81,
+     "property": [],
+     "notes": [
+      "The field table names PTBD PTBD[7:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTBD",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Port B data. A read gives the pin level for an input pin and the last value written for an output pin. Writes are latched into every bit and driven onto the pins set as outputs. Reset clears PTBD to 0s, but they are not driven, since reset also makes every port pin a high-impedance input with pullups off.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "PTBDD",
+     "title": "Data Direction for Port B",
+     "offset": "0x0003",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 81,
+     "property": [],
+     "notes": [
+      "The field table names PTBDD PTBDD[7:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTBDD",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Sets the direction of each port B pin and what a PTBD read returns.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Input, output driver off; reads give the pin level."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Output driver on for port B bit n; PTBD reads give PTBDn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PTAPE",
+     "title": "Internal Pullup Enable for Port A Register",
+     "offset": "0x1840",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 79,
+     "property": [],
+     "notes": [
+      "The field table names PTAPE PTAPE[5:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTAPE",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Turns on the internal pullup of each PTA pin. On pins set as outputs these bits do nothing and the pullups are off.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Pullup off for port A bit n."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Pullup on for port A bit n."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PTASE",
+     "title": "Slew Rate Enable for Port A Register",
+     "offset": "0x1841",
+     "bits": 8,
+     "reset": "0x3F",
+     "access": "R/W",
+     "page": 79,
+     "property": [],
+     "notes": [
+      "The field table names PTASE PTASE[5:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTASE",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "0x3F",
+       "text": "Turns on output slew rate control for each PTA pin. On pins set as inputs these bits do nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Slew rate control off for port A bit n."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Slew rate control on for port A bit n."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PTADS",
+     "title": "Drive Strength Selection for Port A Register",
+     "offset": "0x1842",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 80,
+     "property": [],
+     "notes": [
+      "The field table names PTADS PTADS[5:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTADS",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Picks low or high output drive for each PTA pin. On pins set as inputs these bits do nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Low drive for port A bit n."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "High drive for port A bit n."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PTBPE",
+     "title": "Internal Pullup Enable for Port B Register",
+     "offset": "0x1844",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 82,
+     "property": [],
+     "notes": [
+      "The field table names PTBPE PTBPE[7:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTBPE",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Turns on the internal pullup of each PTB pin. On pins set as outputs these bits do nothing and the pullups are off.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Pullup off for port B bit n."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Pullup on for port B bit n."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PTBSE",
+     "title": "Slew Rate Enable for Port B Register",
+     "offset": "0x1845",
+     "bits": 8,
+     "reset": "0xFF",
+     "access": "R/W",
+     "page": 82,
+     "property": [],
+     "notes": [
+      "The field table names PTBSE PTBSE[7:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTBSE",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0xFF",
+       "text": "Turns on output slew rate control for each PTB pin. On pins set as inputs these bits do nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Slew rate control off for port B bit n."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Slew rate control on for port B bit n."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PTBDS",
+     "title": "Drive Strength Selection for Port B Register",
+     "offset": "0x1846",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 83,
+     "property": [],
+     "notes": [
+      "The field table names PTBDS PTBDS[7:0]."
+     ],
+     "fields": [
+      {
+       "name": "PTBDS",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Picks low or high output drive for each PTB pin. On pins set as inputs these bits do nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Low drive for port B bit n."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "High drive for port B bit n."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ACMP",
+   "title": "Analog Comparator",
+   "page": 110,
+   "instances": [],
+   "registers": [
+    {
+     "name": "ACMPSC",
+     "title": "ACMP Status and Control Register",
+     "offset": "0x001A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 110,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ACME",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on the ACMP module.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "ACMP off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "ACMP on."
+        }
+       ]
+      },
+      {
+       "name": "ACBGS",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks the bandgap reference or the ACMP+ pin for the comparator's non-inverting input.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "ACMP+ pin on the non-inverting input."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Internal reference on the non-inverting input."
+        }
+       ]
+      },
+      {
+       "name": "ACF",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Set on a compare event, as chosen by ACMOD; write 1 to clear.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No compare event."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Compare event happened."
+        }
+       ]
+      },
+      {
+       "name": "ACIE",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Enables the ACMP interrupt, asserted when ACF is set.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Interrupt off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Interrupt on."
+        }
+       ]
+      },
+      {
+       "name": "ACO",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Reads the present comparator output; reset to 0 and reads 0 while ACME = 0.",
+       "values": []
+      },
+      {
+       "name": "ACOPE",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Puts the comparator output on the ACMPO pin.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Comparator output not on ACMPO."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Comparator output driven on ACMPO."
+        }
+       ]
+      },
+      {
+       "name": "ACMOD",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Picks which comparator output change sets ACF.",
+       "values": [
+        {
+         "value": "00",
+         "name": "",
+         "text": "Falling edge."
+        },
+        {
+         "value": "01",
+         "name": "",
+         "text": "Rising edge."
+        },
+        {
+         "value": "10",
+         "name": "",
+         "text": "Falling edge."
+        },
+        {
+         "value": "11",
+         "name": "",
+         "text": "Rising or falling edge."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ADC",
+   "title": "Analog-to-Digital Converter",
+   "page": 120,
+   "instances": [],
+   "registers": [
+    {
+     "name": "ADCSC1",
+     "title": "Status and Control Register",
+     "offset": "0x0010",
+     "bits": 8,
+     "reset": "0x1F",
+     "access": "R, R/W",
+     "page": 120,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "COCO",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only. With the compare function off (ACFE = 0) it sets at the end of every conversion; with it on (ACFE = 1) only when the compare result is true. Cleared by a write to ADCSC1 or a read of ADCRL.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Conversion not finished."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Conversion finished."
+        }
+       ]
+      },
+      {
+       "name": "AIEN",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Enables the conversion complete interrupt, asserted when COCO sets with AIEN high.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Conversion complete interrupt off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Conversion complete interrupt on."
+        }
+       ]
+      },
+      {
+       "name": "ADCO",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Enables continuous conversions.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "One conversion per ADCSC1 write (software trigger) or per ADHWT assertion (hardware trigger)."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Conversions repeat, starting from an ADCSC1 write (software trigger) or an ADHWT event (hardware trigger)."
+        }
+       ]
+      },
+      {
+       "name": "ADCH",
+       "bits": "4:0",
+       "access": "R/W",
+       "reset": "0x1F",
+       "text": "Five-bit input channel select. All 1s turns off the converter and isolates the input from every source, and ends continuous conversion without one more conversion. All 1s is not needed for low power outside continuous mode: the module enters a low-power state by itself when a conversion ends.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ADCSC2",
+     "title": "Status and Control Register 2",
+     "offset": "0x0011",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 121,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADACT",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Shows a conversion is running: set when one starts, cleared when it finishes or is aborted.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No conversion running."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Conversion running."
+        }
+       ]
+      },
+      {
+       "name": "ADTRG",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks the conversion trigger: software, where a write to ADCSC1 starts a conversion, or hardware, where ADHWT assertion starts it.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Software trigger."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Hardware trigger."
+        }
+       ]
+      },
+      {
+       "name": "ACFE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on the compare function.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Compare off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Compare on."
+        }
+       ]
+      },
+      {
+       "name": "ACFGT",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Makes the compare trigger when the result is at or above the compare value; otherwise it triggers when the result is below it.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Triggers when the input is below the compare level."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Triggers when the input is at or above the compare level."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ADCRH",
+     "title": "Data Result High Register",
+     "offset": "0x0012",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R",
+     "page": 122,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADR9",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 9 of a 10-bit conversion result; reads 0 in 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR8",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 8 of a 10-bit conversion result; reads 0 in 8-bit mode.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ADCRL",
+     "title": "Data Result Low Register",
+     "offset": "0x0013",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R",
+     "page": 123,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADR7",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 7 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR6",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 6 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR5",
+       "bits": "5",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 5 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR4",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 4 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR3",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 3 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR2",
+       "bits": "2",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 2 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR1",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 1 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADR0",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 0 of the conversion result, in 10-bit or 8-bit mode.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ADCCVH",
+     "title": "Compare Value High Register",
+     "offset": "0x0014",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 123,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADCV9",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 9 of the 10-bit compare value, matched against the result's upper bits in 10-bit mode with compare on; unused in 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV8",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 8 of the 10-bit compare value, matched against the result's upper bits in 10-bit mode with compare on; unused in 8-bit mode.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ADCCVL",
+     "title": "Compare Value Low Register",
+     "offset": "0x0015",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 123,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADCV7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 7 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 6 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 5 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 4 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 3 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 2 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 1 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      },
+      {
+       "name": "ADCV0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Bit 0 of the compare value, matched against the result's lower 8 bits in 10-bit or 8-bit mode.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ADCCFG",
+     "title": "Conﬁguration Register",
+     "offset": "0x0016",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 124,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADLPC",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Trades converter speed against power, to save power when high sample rates are not needed.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "High speed."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Low power; lower maximum clock speed."
+        }
+       ]
+      },
+      {
+       "name": "ADIV",
+       "bits": "6:5",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Divide ratio from the input clock to the internal ADC clock ADCK: 00 divide by 1, 01 by 2, 10 by 4, 11 by 8.",
+       "values": []
+      },
+      {
+       "name": "ADLSMP",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks a long or short sample time: longer for higher-impedance inputs or lower power in continuous conversion, shorter for faster conversion of low-impedance inputs.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Short sample time."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Long sample time."
+        }
+       ]
+      },
+      {
+       "name": "MODE",
+       "bits": "3:2",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Picks the conversion resolution: 00 8-bit (N = 8), 10 10-bit (N = 10); 01 and 11 reserved.",
+       "values": []
+      },
+      {
+       "name": "ADICLK",
+       "bits": "1:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Picks the input clock from which ADCK is made: 00 the bus clock, 01 half the bus clock, 10 ALTCLK, the alternate clock, 11 ADACK, the asynchronous clock.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "APCTL1",
+     "title": "Pin Control 1 Register",
+     "offset": "0x0017",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 125,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "ADPC7",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD7.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD7 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD7 pin I/O control off."
+        }
+       ]
+      },
+      {
+       "name": "ADPC6",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD6.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD6 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD6 pin I/O control off."
+        }
+       ]
+      },
+      {
+       "name": "ADPC5",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD5.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD5 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD5 pin I/O control off."
+        }
+       ]
+      },
+      {
+       "name": "ADPC4",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD4.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD4 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD4 pin I/O control off."
+        }
+       ]
+      },
+      {
+       "name": "ADPC3",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD3.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD3 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD3 pin I/O control off."
+        }
+       ]
+      },
+      {
+       "name": "ADPC2",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD2.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD2 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD2 pin I/O control off."
+        }
+       ]
+      },
+      {
+       "name": "ADPC1",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD1.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD1 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD1 pin I/O control off."
+        }
+       ]
+      },
+      {
+       "name": "ADPC0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Controls the pin of ADC channel AD0.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "AD0 pin I/O control on."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "AD0 pin I/O control off."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ICS",
+   "title": "Internal Clock Source",
+   "page": 145,
+   "instances": [],
+   "registers": [
+    {
+     "name": "ICSC1",
+     "title": "ICS Control Register 1",
+     "offset": "0x0038",
+     "bits": 8,
+     "reset": "0x04",
+     "access": "R/W",
+     "page": 145,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "CLKS",
+       "bits": "7:6",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Picks the clock that sets the bus frequency, which is then divided by BDIV.",
+       "values": [
+        {
+         "value": "00",
+         "name": "",
+         "text": "FLL output."
+        },
+        {
+         "value": "01",
+         "name": "",
+         "text": "Internal reference clock."
+        },
+        {
+         "value": "10",
+         "name": "",
+         "text": "External reference clock."
+        },
+        {
+         "value": "11",
+         "name": "",
+         "text": "Reserved; acts as 00."
+        }
+       ]
+      },
+      {
+       "name": "RDIV",
+       "bits": "5:3",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Divides the FLL reference clock picked by IREFS; the result must be 31.25 kHz to 39.0625 kHz.",
+       "values": [
+        {
+         "value": "000",
+         "name": "",
+         "text": "Divide by 1. Reset value."
+        },
+        {
+         "value": "001",
+         "name": "",
+         "text": "Divide by 2."
+        },
+        {
+         "value": "010",
+         "name": "",
+         "text": "Divide by 4."
+        },
+        {
+         "value": "011",
+         "name": "",
+         "text": "Divide by 8."
+        },
+        {
+         "value": "100",
+         "name": "",
+         "text": "Divide by 16."
+        },
+        {
+         "value": "101",
+         "name": "",
+         "text": "Divide by 32."
+        },
+        {
+         "value": "110",
+         "name": "",
+         "text": "Divide by 64."
+        },
+        {
+         "value": "111",
+         "name": "",
+         "text": "Divide by 128."
+        }
+       ]
+      },
+      {
+       "name": "IREFS",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Picks the FLL reference clock.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "Internal reference clock."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "External reference clock."
+        }
+       ]
+      },
+      {
+       "name": "IRCLKEN",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on the internal reference clock as ICSIRCLK.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "ICSIRCLK on."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "ICSIRCLK off."
+        }
+       ]
+      },
+      {
+       "name": "IREFSTEN",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Chooses whether the internal reference clock keeps running when the ICS enters stop.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "Internal reference keeps running in stop if IRCLKEN is set or the ICS was in FEI, FBI or FBILP before stop."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "Internal reference off in stop."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ICSC2",
+     "title": "ICS Control Register 2",
+     "offset": "0x0039",
+     "bits": 8,
+     "reset": "0x40",
+     "access": "R/W",
+     "page": 146,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "BDIV",
+       "bits": "7:6",
+       "access": "R/W",
+       "reset": "0x1",
+       "text": "Divides the clock picked by CLKS to set the bus frequency.",
+       "values": [
+        {
+         "value": "00",
+         "name": "",
+         "text": "Divide by 1."
+        },
+        {
+         "value": "01",
+         "name": "",
+         "text": "Divide by 2. Reset value."
+        },
+        {
+         "value": "10",
+         "name": "",
+         "text": "Divide by 4."
+        },
+        {
+         "value": "11",
+         "name": "",
+         "text": "Divide by 8."
+        }
+       ]
+      },
+      {
+       "name": "RANGE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks the external oscillator frequency range.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "High range."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "Low range."
+        }
+       ]
+      },
+      {
+       "name": "HGO",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Sets the external oscillator's operating mode.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "High gain."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "Low power."
+        }
+       ]
+      },
+      {
+       "name": "LP",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Chooses whether the FLL is turned off in the FLL bypassed modes.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "FLL off in bypass modes unless BDM is active."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "FLL stays on in bypass modes."
+        }
+       ]
+      },
+      {
+       "name": "EREFS",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Picks the source of the external reference clock.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "Oscillator."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "External clock source."
+        }
+       ]
+      },
+      {
+       "name": "ERCLKEN",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on the external reference clock as ICSERCLK.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "ICSERCLK on."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "ICSERCLK off."
+        }
+       ]
+      },
+      {
+       "name": "EREFSTEN",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Chooses whether the external reference clock keeps running when the ICS enters stop.",
+       "values": [
+        {
+         "value": "1",
+         "name": "",
+         "text": "External reference keeps running in stop if ERCLKEN is set or the ICS was in FEE, FBE or FBELP before stop."
+        },
+        {
+         "value": "0",
+         "name": "",
+         "text": "External reference off in stop."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ICSTRM",
+     "title": "ICS Trim Register",
+     "offset": "0x003A",
+     "bits": 8,
+     "reset": "0x80",
+     "access": "R/W",
+     "page": 147,
+     "property": [],
+     "notes": [
+      "Reset: 0buuuuuuuu.",
+      "The reset carried is the POR row."
+     ],
+     "fields": [
+      {
+       "name": "TRIM",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x80",
+       "text": "Trims the internal reference clock period, bits binary weighted: a larger value gives a longer period, a smaller one a shorter period. FTRIM in ICSSC adds one finer step.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "ICSSC",
+     "title": "ICS Status and Control Register",
+     "offset": "0x003B",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 147,
+     "property": [],
+     "notes": [
+      "Reset: 0b0000000u.",
+      "The reset carried is the POR row."
+     ],
+     "fields": [
+      {
+       "name": "CLKST",
+       "bits": "3:2",
+       "access": "R",
+       "reset": "0x0",
+       "text": "Present clock mode. It lags a write to CLKS because of synchronisation between clock domains.",
+       "values": [
+        {
+         "value": "00",
+         "name": "",
+         "text": "FLL output."
+        },
+        {
+         "value": "01",
+         "name": "",
+         "text": "FLL bypassed, internal reference clock."
+        },
+        {
+         "value": "10",
+         "name": "",
+         "text": "FLL bypassed, external reference clock."
+        },
+        {
+         "value": "11",
+         "name": "",
+         "text": "Reserved."
+        }
+       ]
+      },
+      {
+       "name": "OSCINIT",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when the external oscillator finishes its start-up cycles, provided EREFS is set and the external reference is in use through ERCLKEN or FEE, FBE or FBELP mode. Cleared only when ERCLKEN or EREFS is cleared.",
+       "values": []
+      },
+      {
+       "name": "FTRIM",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Smallest trim step of the internal reference clock: 1 lengthens the period, 0 shortens it.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "IIC",
+   "title": "Inter-Integrated Circuit",
+   "page": 161,
+   "instances": [],
+   "registers": [
+    {
+     "name": "IICA",
+     "title": "IIC Address Register",
+     "offset": "0x0030",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 161,
+     "property": [],
+     "notes": [
+      "The field table names ADDR ADDR[7:1]."
+     ],
+     "fields": [
+      {
+       "name": "ADDR",
+       "bits": "7:1",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Slave address the IIC module answers to when addressed as a slave.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "IICF",
+     "title": "IIC Frequency Divider Register",
+     "offset": "0x0031",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 161,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "MULT",
+       "bits": "7:6",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Sets the multiplier mul, used with the SCL divider to make the IIC baud rate.",
+       "values": [
+        {
+         "value": "00",
+         "name": "",
+         "text": "mul = 1."
+        },
+        {
+         "value": "01",
+         "name": "",
+         "text": "mul = 2."
+        },
+        {
+         "value": "10",
+         "name": "",
+         "text": "mul = 4."
+        },
+        {
+         "value": "11",
+         "name": "",
+         "text": "Reserved."
+        }
+       ]
+      },
+      {
+       "name": "ICR",
+       "bits": "5:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Prescales the bus clock for the bit rate; it fixes the SCL divider and also the SDA hold value. Baud rate = bus frequency (Hz) / (mul x SCL divider). SDA hold time, from SCL falling to SDA changing, = bus period (s) x SDA hold value.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "IICC",
+     "title": "IIC Control Register",
+     "offset": "0x0032",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W, W",
+     "page": 164,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "IICEN",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on the IIC module.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "IIC off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "IIC on."
+        }
+       ]
+      },
+      {
+       "name": "IICIE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Enables the IIC interrupt request.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "IIC interrupt off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "IIC interrupt on."
+        }
+       ]
+      },
+      {
+       "name": "MST",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Going from 0 to 1 generates a START on the bus and selects master mode; going from 1 to 0 generates a STOP and returns to slave mode.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Slave."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Master."
+        }
+       ]
+      },
+      {
+       "name": "TX",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Transfer direction, for master and slave. As master it is set for the transfer wanted and is high for address cycles; as an addressed slave, software sets it from SRW.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Receive."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Transmit."
+        }
+       ]
+      },
+      {
+       "name": "TXAK",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Level driven on SDA in data acknowledge cycles, for master and slave receivers.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Acknowledge sent after each received byte."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "No acknowledge sent."
+        }
+       ]
+      },
+      {
+       "name": "RSTA",
+       "bits": "2",
+       "access": "W",
+       "reset": "0",
+       "text": "Writing 1 generates a repeated START when the module is the current master. Always reads 0. A repeat at the wrong time loses arbitration.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "IICS",
+     "title": "IIC Status Register",
+     "offset": "0x0033",
+     "bits": 8,
+     "reset": "0x80",
+     "access": "R, R/W",
+     "page": 165,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TCF",
+       "bits": "7",
+       "access": "R",
+       "reset": "1",
+       "text": "Set when a byte transfer finishes; valid only during or just after a transfer to or from the IIC module. Cleared by reading IICD in receive mode or writing IICD in transmit mode.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Transfer running."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Transfer finished."
+        }
+       ]
+      },
+      {
+       "name": "IAAS",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Set when the calling address matches the module's own address; cleared by a write to IICC.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not addressed."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Addressed as a slave."
+        }
+       ]
+      },
+      {
+       "name": "BUSY",
+       "bits": "5",
+       "access": "R",
+       "reset": "0",
+       "text": "Bus state in either mode: set on a detected START, cleared on a detected STOP.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Bus idle."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Bus busy."
+        }
+       ]
+      },
+      {
+       "name": "ARBL",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Set by hardware when arbitration is lost; software clears it by writing 1.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Normal bus operation."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Arbitration lost."
+        }
+       ]
+      },
+      {
+       "name": "SRW",
+       "bits": "2",
+       "access": "R",
+       "reset": "0",
+       "text": "As an addressed slave, the R/W bit of the calling address.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Slave receive; master writes to the slave."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Slave transmit; master reads from the slave."
+        }
+       ]
+      },
+      {
+       "name": "IICIF",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Set when an interrupt is pending: a byte transfer finishes, the slave address matches the calling address, or arbitration is lost. Software clears it by writing 1, in the interrupt routine.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No interrupt pending."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Interrupt pending."
+        }
+       ]
+      },
+      {
+       "name": "RXAK",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "Low when an acknowledge was received after a byte was sent on the bus; high when none was detected.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Acknowledge received."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "No acknowledge received."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "IICD",
+     "title": "IIC Data I/O Register",
+     "offset": "0x0034",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 166,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "DATA",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "IIC data. In master transmit, a write starts a transfer, MSB first; in master receive, a read starts reception of the next byte. Leave master receive before reading IICD so as not to start an unwanted receive. As a slave the same functions apply after an address match. TX in IICC must match the transfer direction for a transfer to start. A read gives the last byte received in master or slave receive; IICD does not show every byte on the bus and cannot be read back to check a write. In master transmit, the first byte written after MST is asserted carries the calling address in bits 7-1 and the R/W bit in bit 0.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "KBI",
+   "title": "Keyboard Interrupt",
+   "page": 177,
+   "instances": [],
+   "registers": [
+    {
+     "name": "KBISC",
+     "title": "KBI Status and Control Register",
+     "offset": "0x000C",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W, W",
+     "page": 177,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "KBF",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Shows a keyboard interrupt was detected; writes do not change it.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No keyboard interrupt detected."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Keyboard interrupt detected."
+        }
+       ]
+      },
+      {
+       "name": "KBACK",
+       "bits": "2",
+       "access": "W",
+       "reset": "0",
+       "text": "Writing 1 is part of clearing KBF. Reads give 0.",
+       "values": []
+      },
+      {
+       "name": "KBIE",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Enables the keyboard interrupt request.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Keyboard interrupt request off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Keyboard interrupt request on."
+        }
+       ]
+      },
+      {
+       "name": "KBMOD",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "With the KBEDG bits, sets how the keyboard interrupt pins are detected.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Edges only."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Edges and levels."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "KBIPE",
+     "title": "KBI Pin Enable Register",
+     "offset": "0x000D",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 178,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "KBIPEn",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Each bit enables its keyboard interrupt pin.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Pin not a keyboard interrupt."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Pin is a keyboard interrupt."
+        }
+       ],
+       "each": true
+      }
+     ]
+    },
+    {
+     "name": "KBIES",
+     "title": "KBI Edge Select Register",
+     "offset": "0x000E",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 178,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "KBEDGn",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Each bit picks, for its pin, detection on falling edges and low levels or on rising edges and high levels.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Falling edge/low level."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Rising edge/high level."
+        }
+       ],
+       "each": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MTIM",
+   "title": "Modulo Timer",
+   "page": 185,
+   "instances": [],
+   "registers": [
+    {
+     "name": "MTIMSC",
+     "title": "MTIM Status and Control Register",
+     "offset": "0x003C",
+     "bits": 8,
+     "reset": "0x10",
+     "access": "R, R/W, W",
+     "page": 185,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TOF",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Read-only flag that goes to 1 when the MTIM counter wraps to 0x00 after reaching the MTIMMOD value. Cleared by reading MTIMSC with TOF at 1 and then writing 0 to TOF, by writing 1 to TRST, or by any write to MTIMMOD.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Counter has not reached the MTIMMOD overflow value."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Counter has reached the MTIMMOD overflow value."
+        }
+       ]
+      },
+      {
+       "name": "TOIE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Read/write enable for the MTIM overflow interrupt: when 1, TOF = 1 raises an interrupt. Cleared by reset. Clear TOF before setting TOIE; do not set it while TOF = 1.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "TOF interrupt off; TOF is polled in software."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "TOF interrupt on."
+        }
+       ]
+      },
+      {
+       "name": "TRST",
+       "bits": "5",
+       "access": "W",
+       "reset": "0",
+       "text": "Write-only: writing 1 sets the MTIM counter to 0x00 and clears TOF. Always reads 0.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No effect; the counter keeps its value."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Counter set to 0x00."
+        }
+       ]
+      },
+      {
+       "name": "TSTP",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Read/write: 1 holds the MTIM counter at its present value; clearing it lets counting carry on from that value. Reset sets TSTP, so the MTIM does not count after reset.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Counter running."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Counter stopped."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "MTIMCLK",
+     "title": "MTIM Clock Conﬁguration Register",
+     "offset": "0x003D",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 186,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "CLKS",
+       "bits": "5:4",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Read/write pair choosing which of four clocks feeds the MTIM prescaler. A change while counting leaves the count as it is and counting goes on from the new clock. Reset sets 00.",
+       "values": [
+        {
+         "value": "00",
+         "name": "",
+         "text": "Bus clock (BUSCLK)."
+        },
+        {
+         "value": "01",
+         "name": "",
+         "text": "Fixed-frequency clock (XCLK)."
+        },
+        {
+         "value": "10",
+         "name": "",
+         "text": "TCLK pin, falling edge."
+        },
+        {
+         "value": "11",
+         "name": "",
+         "text": "TCLK pin, rising edge."
+        }
+       ]
+      },
+      {
+       "name": "PS",
+       "bits": "3:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Read/write, picks one of nine taps of the 8-bit prescaler. A change while counting leaves the count as it is and counting goes on at the new rate. Reset sets 0000. Codes not listed give the clock source divided by 256.",
+       "values": [
+        {
+         "value": "0000",
+         "name": "",
+         "text": "Clock source /1."
+        },
+        {
+         "value": "0001",
+         "name": "",
+         "text": "Clock source /2."
+        },
+        {
+         "value": "0010",
+         "name": "",
+         "text": "Clock source /4."
+        },
+        {
+         "value": "0011",
+         "name": "",
+         "text": "Clock source /8."
+        },
+        {
+         "value": "0100",
+         "name": "",
+         "text": "Clock source /16."
+        },
+        {
+         "value": "0101",
+         "name": "",
+         "text": "Clock source /32."
+        },
+        {
+         "value": "0110",
+         "name": "",
+         "text": "Clock source /64."
+        },
+        {
+         "value": "0111",
+         "name": "",
+         "text": "Clock source /128."
+        },
+        {
+         "value": "1000",
+         "name": "",
+         "text": "Clock source /256."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "MTIMCNT",
+     "title": "MTIM Counter Register",
+     "offset": "0x003E",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R",
+     "page": 187,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "COUNT",
+       "bits": "7:0",
+       "access": "R",
+       "reset": "0x0",
+       "text": "Read-only present value of the 8-bit MTIM counter; writes do nothing. Reset sets 0x00.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "MTIMMOD",
+     "title": "MTIM Modulo Register",
+     "offset": "0x003F",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 187,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "MOD",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Read/write value at which the count resets and TOF is set; 0x00 makes the MTIM free-running. A write to MTIMMOD sets COUNT to 0x00 and clears TOF. Reset sets 0x00.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "SCI",
+   "title": "Serial Communications Interface",
+   "page": 197,
+   "instances": [],
+   "registers": [
+    {
+     "name": "SCIBDH",
+     "title": "SCI Baud Rate Register",
+     "offset": "0x0020",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 197,
+     "property": [],
+     "notes": [
+      "The field table names SBR SBR[12:8]."
+     ],
+     "fields": [
+      {
+       "name": "SBR",
+       "bits": "4:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Upper five bits of the 13-bit baud divisor BR (SBR[12:0] across SCIBDH and SCIBDL). BR = 0 turns the SCI baud generator off to save supply current; BR = 1 to 8191 gives a baud rate of BUSCLK/(16 x BR).",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SCIBDL",
+     "title": "SCI Baud Rate Register",
+     "offset": "0x0021",
+     "bits": 8,
+     "reset": "0x04",
+     "access": "R/W",
+     "page": 197,
+     "property": [],
+     "notes": [
+      "The field table names SBR SBR[7:0]."
+     ],
+     "fields": [
+      {
+       "name": "SBR",
+       "bits": "7:0",
+       "access": "R/W",
+       "reset": "0x4",
+       "text": "Lower eight bits of the 13-bit baud divisor BR (SBR[12:0] across SCIBDH and SCIBDL). BR = 0 turns the SCI baud generator off to save supply current; BR = 1 to 8191 gives a baud rate of BUSCLK/(16 x BR).",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SCIC1",
+     "title": "SCI Control Register 1",
+     "offset": "0x0022",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 198,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "LOOPS",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Chooses loop-back operation or normal full-duplex operation on two pins. With LOOPS = 1 the transmitter output feeds the receiver input inside the SCI.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Normal: RxD and TxD are separate pins."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Loop or single-wire mode, set by RSRC: transmitter output tied to receiver input inside the SCI; the SCI does not use the RxD pin."
+        }
+       ]
+      },
+      {
+       "name": "SCISWAI",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "SCI stops in wait mode.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "SCI clocks keep running in wait mode, so an SCI interrupt can wake the CPU."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "SCI clocks halt while the CPU is in wait mode."
+        }
+       ]
+      },
+      {
+       "name": "RSRC",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Only acts when LOOPS = 1. Then the receiver input is tied internally to the TxD pin, and RSRC chooses whether that node is also tied to the transmitter output.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "With LOOPS = 1: internal loop-back; the SCI does not use RxD."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Single-wire mode: the TxD pin carries both transmitter output and receiver input."
+        }
+       ]
+      },
+      {
+       "name": "M",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "9-bit or 8-bit character select.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Start bit, 8 data bits LSB first, stop bit."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Start bit, 8 data bits LSB first, a ninth data bit, stop bit, for both receiver and transmitter."
+        }
+       ]
+      },
+      {
+       "name": "WAKE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Chooses how the receiver wakes from standby.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Idle line."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Address mark."
+        }
+       ]
+      },
+      {
+       "name": "ILT",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "When 1, the stop bit and trailing 1 bits of a character are not counted toward the 10 or 11 high bit times the idle-line detector looks for.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Idle bit count begins after the start bit."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Idle bit count begins after the stop bit."
+        }
+       ]
+      },
+      {
+       "name": "PE",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns on hardware parity generation and checking. The top bit of the character (the eighth or ninth data bit) then serves as the parity bit.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Parity generation and checking off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Parity on."
+        }
+       ]
+      },
+      {
+       "name": "PT",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "With PE = 1, chooses even or odd parity: the count of 1s in the character, parity bit included, is even or odd to match.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Even."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Odd."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SCIC2",
+     "title": "SCI Control Register 2",
+     "offset": "0x0023",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 199,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TIE",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Transmit interrupt enable, for TDRE.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "TDRE interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "TDRE = 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "TCIE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Transmission-complete interrupt enable, for TC.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "TC = 1 requests an interrupt."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "TC interrupt off; poll the flag."
+        }
+       ]
+      },
+      {
+       "name": "RIE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Receiver interrupt enable, for RDRF.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "RDRF interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "RDRF = 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "ILIE",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Idle-line interrupt enable, for IDLE.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "IDLE interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "IDLE = 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "TE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Transmitter enable; must be 1 to use the SCI transmitter. With TE = 1 the SCI normally drives TxD as an output, but with LOOPS = 1 and RSRC = 0 TxD goes back to port B general-purpose I/O even with TE = 1. In single-wire mode (LOOPS = RSRC = 1) TXDIR sets the direction on TxD. Writing TE = 0 then TE = 1 during a transmission queues an idle character. After TE is written 0, the transmitter holds TxD until queued data, idle or break finishes sending, then the pin returns to general-purpose I/O.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Transmitter off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Transmitter on."
+        }
+       ]
+      },
+      {
+       "name": "RE",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns the SCI receiver on or off. With the receiver off, RxD returns to general-purpose port I/O.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Receiver off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Receiver on."
+        }
+       ]
+      },
+      {
+       "name": "RWU",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Writing 1 puts the receiver in standby until hardware sees the wakeup condition chosen by WAKE: an idle line between messages (WAKE = 0) or a 1 in the top data bit of a character (WAKE = 1). Software sets RWU; the chosen hardware condition normally clears it.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Receiver runs normally."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Receiver in standby until the wakeup condition."
+        }
+       ]
+      },
+      {
+       "name": "SBK",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Writing 1 then 0 queues one break character for transmission. While SBK stays 1, more breaks of 10 or 11 bit times of 0 are queued; depending on when SBK is set and cleared against the data being sent, a second break may be queued before software clears it.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Transmitter runs normally."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Break characters queued for sending."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SCIS1",
+     "title": "SCI Status Register 1",
+     "offset": "0x0024",
+     "bits": 8,
+     "reset": "0xC0",
+     "access": "R",
+     "page": 200,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "TDRE",
+       "bits": "7",
+       "access": "R",
+       "reset": "1",
+       "text": "Set at reset and whenever a value moves from the transmit buffer to the transmit shifter, freeing the buffer for a new character. Cleared by reading SCIS1 with TDRE = 1 and then writing SCID.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Transmit buffer full."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Transmit buffer empty."
+        }
+       ]
+      },
+      {
+       "name": "TC",
+       "bits": "6",
+       "access": "R",
+       "reset": "1",
+       "text": "Set at reset and when TDRE = 1 with no data, preamble or break being sent. Cleared by reading SCIS1 with TC = 1 and then either writing SCID with new data, queuing a preamble by taking TE from 0 to 1, or queuing a break by writing 1 to SBK in SCIC2.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Transmitter busy sending data, a preamble or a break."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Transmitter idle."
+        }
+       ]
+      },
+      {
+       "name": "RDRF",
+       "bits": "5",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when a character moves from the receive shifter into SCID. Cleared by reading SCIS1 with RDRF = 1 and then reading SCID.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Receive buffer empty."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Receive buffer full."
+        }
+       ]
+      },
+      {
+       "name": "IDLE",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when the receive line has been idle for one full character time after activity. With ILT = 0 idle bit times are counted from the start bit, so the 1 bits and stop bit of an all-ones character count toward the 10 or 11 high bit times (set by M) needed; with ILT = 1 counting begins after the stop bit, so trailing high bits and the stop bit of the last character do not count. Cleared by reading SCIS1 with IDLE = 1 and then reading SCID. Once cleared, IDLE cannot set again until a new character has arrived and set RDRF; it sets only once however long the line stays idle.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No idle line seen."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Idle line seen."
+        }
+       ]
+      },
+      {
+       "name": "OR",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when a fresh character is waiting to enter SCID but the last one has not been read yet; the fresh character and its error information are lost. Cleared by reading SCIS1 with OR = 1 and then reading SCID.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No overrun."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Overrun; new data lost."
+        }
+       ]
+      },
+      {
+       "name": "NF",
+       "bits": "2",
+       "access": "R",
+       "reset": "0",
+       "text": "The receiver samples the start bit seven times and each data bit and the stop bit three times; if any sample in a bit time disagrees with the others, NF is set together with RDRF for that character. Cleared by reading SCIS1 and then reading SCID.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No noise seen."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Noise seen in the character in SCID."
+        }
+       ]
+      },
+      {
+       "name": "FE",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "Set together with RDRF when the receiver finds a 0 where the stop bit should be, a sign that it was out of step with the character frame. Cleared by reading SCIS1 with FE = 1 and then reading SCID.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No framing error seen; framing is not thereby confirmed correct."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Framing error."
+        }
+       ]
+      },
+      {
+       "name": "PF",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "Set together with RDRF when PE = 1 and the received parity bit does not match the expected parity. Cleared by reading SCIS1 and then reading SCID.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No parity error."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Parity error."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SCIS2",
+     "title": "SCI Status Register 2",
+     "offset": "0x0025",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 202,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "BRK13",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Selects a longer break character. Framing error detection is the same either way.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Break is 10 bit times, 11 with M = 1."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Break is 13 bit times, 14 with M = 1."
+        }
+       ]
+      },
+      {
+       "name": "RAF",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when the receiver sees the start of a valid start bit; cleared by hardware when it sees an idle line. Can be checked to see whether a character is arriving before the MCU is put in stop mode.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Receiver idle, waiting for a start bit."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Receiver busy; RxD not idle."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SCIC3",
+     "title": "SCI Control Register 3",
+     "offset": "0x0026",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 202,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "R8",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "In 9-bit mode (M = 1), the ninth received data bit, sitting above the MSB of SCID. Read R8 before SCID: reading SCID finishes the flag-clearing sequences, after which new data can overwrite R8 and SCID.",
+       "values": []
+      },
+      {
+       "name": "T8",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "In 9-bit mode (M = 1), the ninth transmit data bit, sitting above the MSB of SCID. All nine bits go to the shifter once SCID is written, so write T8 first when it must change; if it stays the same (for example when used for mark or space parity), there is no need to rewrite it on each SCID write.",
+       "values": []
+      },
+      {
+       "name": "TXDIR",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Sets the direction of data on TxD in single-wire half-duplex mode (LOOPS = RSRC = 1).",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "TxD is an input."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "TxD is an output."
+        }
+       ]
+      },
+      {
+       "name": "TXINV",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "1 inverts the polarity of the transmitted data.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Not inverted."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Inverted."
+        }
+       ]
+      },
+      {
+       "name": "ORIE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Lets the overrun flag OR request a hardware interrupt.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "OR interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "OR = 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "NEIE",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Lets the noise flag NF request a hardware interrupt.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "NF interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "NF = 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "FEIE",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Lets the framing error flag FE request a hardware interrupt.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "FE interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "FE = 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "PEIE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Lets the parity error flag PF request a hardware interrupt.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "PF interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "PF = 1 requests an interrupt."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SCID",
+     "title": "SCI Data Register",
+     "offset": "0x0027",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, W",
+     "page": 203,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "R7",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 7 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T7",
+       "bits": "7",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 7 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      },
+      {
+       "name": "R6",
+       "bits": "6",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 6 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T6",
+       "bits": "6",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 6 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      },
+      {
+       "name": "R5",
+       "bits": "5",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 5 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T5",
+       "bits": "5",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 5 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      },
+      {
+       "name": "R4",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 4 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T4",
+       "bits": "4",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 4 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      },
+      {
+       "name": "R3",
+       "bits": "3",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 3 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T3",
+       "bits": "3",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 3 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      },
+      {
+       "name": "R2",
+       "bits": "2",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 2 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T2",
+       "bits": "2",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 2 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      },
+      {
+       "name": "R1",
+       "bits": "1",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 1 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T1",
+       "bits": "1",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 1 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      },
+      {
+       "name": "R0",
+       "bits": "0",
+       "access": "R",
+       "reset": "0",
+       "text": "Bit 0 of the read-only receive data buffer; a read of SCID returns it. SCID reads also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "R"
+      },
+      {
+       "name": "T0",
+       "bits": "0",
+       "access": "W",
+       "reset": "0",
+       "text": "Bit 0 of the write-only transmit data buffer; a write to SCID goes to it. SCID writes also take part in clearing the SCI status flags.",
+       "values": [],
+       "mode": "W"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "SPI",
+   "title": "Serial Peripheral Interface",
+   "page": 217,
+   "instances": [],
+   "registers": [
+    {
+     "name": "SPIC1",
+     "title": "SPI Control Register 1",
+     "offset": "0x0028",
+     "bits": 8,
+     "reset": "0x04",
+     "access": "R/W",
+     "page": 217,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "SPIE",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Interrupt enable for the receive-buffer-full flag SPRF and the mode-fault flag MODF.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "SPRF and MODF interrupts off; poll the flags."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "SPRF or MODF at 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "SPE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Turns the SPI on. Turning it off stops any transfer under way, empties the data buffers and resets the internal state machines; SPRF clears and SPTEF sets to show an empty transmit buffer.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "SPI off."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "SPI on."
+        }
+       ]
+      },
+      {
+       "name": "SPTIE",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Interrupt enable for the transmit-buffer-empty flag SPTEF.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "SPTEF interrupt off; poll the flag."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "SPTEF at 1 requests an interrupt."
+        }
+       ]
+      },
+      {
+       "name": "MSTR",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Master or slave mode select.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Slave."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Master."
+        }
+       ]
+      },
+      {
+       "name": "CPOL",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Inverts the SPI clock, whether sent by a master or received by a slave.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Active-high clock, low when idle."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Active-low clock, high when idle."
+        }
+       ]
+      },
+      {
+       "name": "CPHA",
+       "bits": "2",
+       "access": "R/W",
+       "reset": "1",
+       "text": "Chooses between two SPI clock formats, to suit different synchronous serial devices.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "First SPSCK edge in the middle of the first of the 8 transfer cycles."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "First SPSCK edge at the start of the first of the 8 transfer cycles."
+        }
+       ]
+      },
+      {
+       "name": "SSOE",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Together with MODFEN in SPIC2 and MSTR, decides what the SS pin does. In master mode: MODFEN = 0 makes SS general-purpose I/O outside the SPI whatever SSOE is; MODFEN = 1 with SSOE = 0 makes SS the mode-fault input, with SSOE = 1 an automatic slave-select output. In slave mode SS is always the slave select input.",
+       "values": []
+      },
+      {
+       "name": "LSBFE",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "LSB first; sets the shifter direction.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Transfers begin with the MSB."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Transfers begin with the LSB."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SPIC2",
+     "title": "SPI Control Register 2",
+     "offset": "0x0029",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 218,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "MODFEN",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "In slave mode it does nothing, SS being the slave select input. In master mode it decides how the SS pin is used.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Mode fault off; in master mode SS is general-purpose I/O outside SPI control."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Mode fault on; in master mode SS serves as mode-fault input or as slave-select output."
+        }
+       ]
+      },
+      {
+       "name": "BIDIROE",
+       "bits": "3",
+       "access": "R/W",
+       "reset": "0",
+       "text": "With single-wire bidirectional mode on (SPC0 = 1), turns the SPI data output driver on the one data pin on or off: MOSI (MOMI) for a master, MISO (SISO) for a slave. Does nothing when SPC0 = 0.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Driver off; the data pin is an input."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Data pin is an output."
+        }
+       ]
+      },
+      {
+       "name": "SPISWAI",
+       "bits": "1",
+       "access": "R/W",
+       "reset": "0",
+       "text": "SPI stops in wait mode.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "SPI clocks keep running in wait mode."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "SPI clocks halt when the MCU enters wait mode."
+        }
+       ]
+      },
+      {
+       "name": "SPC0",
+       "bits": "0",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Selects single-wire bidirectional mode. A slave (MSTR = 0) then moves data on MISO (SISO), a master (MSTR = 1) on MOSI (MOMI). With SPC0 = 1, BIDIROE turns the output driver on that pin on or off.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Separate data input and output pins."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Single-wire bidirectional."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SPIBR",
+     "title": "SPI Baud Rate Register",
+     "offset": "0x002A",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 219,
+     "property": [],
+     "notes": [
+      "The field table names SPPR SPPR[2:0].",
+      "The field table names SPR SPR[2:0]."
+     ],
+     "fields": [
+      {
+       "name": "SPPR",
+       "bits": "6:4",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "3-bit field selecting the SPI baud prescaler divisor: code 000 to 111 divides by 1 to 8 (code plus one). Its input is BUSCLK and its output feeds the SPI baud rate divider.",
+       "values": []
+      },
+      {
+       "name": "SPR",
+       "bits": "2:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "3-bit field selecting the SPI baud rate divider's divisor: 000 /2, 001 /4, 010 /8, 011 /16, 100 /32, 101 /64, 110 /128, 111 /256. Its input comes from the prescaler; its output is the master-mode bit rate clock.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "SPIS",
+     "title": "SPI Status Register",
+     "offset": "0x002B",
+     "bits": 8,
+     "reset": "0x20",
+     "access": "R",
+     "page": 220,
+     "property": [],
+     "notes": [],
+     "fields": [
+      {
+       "name": "SPRF",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when an SPI transfer completes, meaning received data can be read from SPID. Cleared by reading SPRF while it is 1 and then reading SPID.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Receive buffer empty."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Receive buffer holds data."
+        }
+       ]
+      },
+      {
+       "name": "SPTEF",
+       "bits": "5",
+       "access": "R",
+       "reset": "1",
+       "text": "Set when the transmit buffer has room. Cleared by reading SPIS with SPTEF = 1 and then writing a value to SPID; a write to SPID without that read of SPIS is ignored. With SPTIE in SPIC1 set, SPTEF requests an interrupt. It sets again whenever a byte moves from the buffer to the shift register. On an idle SPI, a byte written to SPID moves to the shifter at once and SPTEF sets within two bus cycles, so a second byte can be queued; when the shifter finishes, the queued byte moves in and SPTEF sets again. With nothing queued, SPTEF stays set and nothing moves.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Transmit buffer not empty."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Transmit buffer empty."
+        }
+       ]
+      },
+      {
+       "name": "MODF",
+       "bits": "4",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when the SPI is a master and its slave select input goes low, meaning another device is also acting as master. SS is a mode-fault input only with MSTR = 1, MODFEN = 1 and SSOE = 0; otherwise MODF never sets. Cleared by reading MODF while it is 1 and then writing SPIC1.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No mode fault."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Mode fault detected."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SPID",
+     "title": "SPI Data Register",
+     "offset": "0x002D",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 221,
+     "property": [],
+     "notes": [],
+     "fields": []
+    }
+   ]
+  },
+  {
+   "name": "TPM",
+   "title": "Timer/PWM",
+   "page": 231,
+   "instances": [],
+   "registers": [
+    {
+     "name": "TPMSC",
+     "title": "Timer Status and Control Register",
+     "offset": "0x0040",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R, R/W",
+     "page": 231,
+     "property": [],
+     "notes": [
+      "The field table names CLKS CLKS[B:A].",
+      "The field table names PS PS[2:0]."
+     ],
+     "fields": [
+      {
+       "name": "TOF",
+       "bits": "7",
+       "access": "R",
+       "reset": "0",
+       "text": "Set when the TPM counter goes to 0x0000 after reaching the modulo value; in CPWM mode, set when the counter, having reached the modulo value, steps to the next lower count. Cleared by reading TPMSC with TOF set and then writing 0 to TOF; if another overflow comes before that sequence is done, the sequence restarts and TOF stays set. Cleared by reset; writing 1 does nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Counter has not reached the modulo value or overflowed."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Counter has overflowed."
+        }
+       ]
+      },
+      {
+       "name": "TOIE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Read/write enable for the TPM overflow interrupt: when 1, TOF = 1 raises an interrupt. Cleared by reset.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "TOF interrupt off; poll in software."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "TOF interrupt on."
+        }
+       ]
+      },
+      {
+       "name": "CPWMS",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Read/write selection of center-aligned PWM. Reset clears it, so the TPM counts up, serving edge-aligned PWM, output compare and input capture; when set, the counter counts up and down for CPWM.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Each channel works in the mode its own MSnB:MSnA bits choose: edge-aligned PWM, output compare or input capture."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Every channel runs center-aligned PWM."
+        }
+       ]
+      },
+      {
+       "name": "CLKS",
+       "bits": "4:3",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "2-bit field that turns the TPM off or picks one of three clocks feeding the counter's prescaler: 00 no clock (TPM off), 01 BUSCLK, 10 XCLK, 11 external TPMCLK, at most a quarter of the bus frequency. XCLK and the external clock are synchronized to the bus clock on chip. With the external clock shared with channel n, that channel's ELSnB:ELSnA is set to 0:0 so the pin has one function.",
+       "values": []
+      },
+      {
+       "name": "PS",
+       "bits": "2:0",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "3-bit field selecting the TPM clock input divisor: 000 /1, 001 /2, 010 /4, 011 /8, 100 /16, 101 /32, 110 /64, 111 /128. The prescaler comes after clock selection and synchronization, so it divides whichever clock is chosen.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TPMCNTH",
+     "title": "Timer Counter Register High",
+     "offset": "0x0041",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R",
+     "page": 232,
+     "property": [],
+     "notes": [],
+     "fields": []
+    },
+    {
+     "name": "TPMCNTL",
+     "title": "Timer Counter Register Low",
+     "offset": "0x0042",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R",
+     "page": 233,
+     "property": [],
+     "notes": [],
+     "fields": []
+    },
+    {
+     "name": "TPMMODH",
+     "title": "Timer Counter Modulo Register High",
+     "offset": "0x0043",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 233,
+     "property": [],
+     "notes": [],
+     "fields": []
+    },
+    {
+     "name": "TPMMODL",
+     "title": "Timer Counter Modulo Register Low",
+     "offset": "0x0044",
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 233,
+     "property": [],
+     "notes": [],
+     "fields": []
+    },
+    {
+     "name": "TPMCnSC",
+     "title": "Timer Channel n Status and Control Register",
+     "offset": "0x0045",
+     "repeat": {
+      "count": 2,
+      "step": "0x03"
+     },
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 234,
+     "property": [],
+     "notes": [
+      "The field table names ELSn ELSn[B:A]."
+     ],
+     "fields": [
+      {
+       "name": "CHnF",
+       "bits": "7",
+       "access": "R/W",
+       "reset": "0",
+       "text": "In input capture, set when an active edge arrives on the channel pin; in output compare or edge-aligned PWM, set when the TPM counter equals the channel value registers. In center-aligned PWM it sets on every match, at both edges of the active duty period, so it is little used there. With CHnIE = 1 it requests an interrupt. Cleared by reading TPMCnSC with CHnF set and then writing 0 to CHnF; another request before that sequence is done restarts it and CHnF stays set, so no request is lost. Cleared by reset; writing 1 does nothing.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "No input capture or output compare event on the channel."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Input capture or output compare event on the channel."
+        }
+       ]
+      },
+      {
+       "name": "CHnIE",
+       "bits": "6",
+       "access": "R/W",
+       "reset": "0",
+       "text": "Read/write enable for the channel's interrupt. Cleared by reset.",
+       "values": [
+        {
+         "value": "0",
+         "name": "",
+         "text": "Channel interrupt off; poll in software."
+        },
+        {
+         "value": "1",
+         "name": "",
+         "text": "Channel interrupt on."
+        }
+       ]
+      },
+      {
+       "name": "MSnB",
+       "bits": "5",
+       "access": "R/W",
+       "reset": "0",
+       "text": "With CPWMS = 0, MSnB = 1 puts the channel in edge-aligned PWM mode.",
+       "values": []
+      },
+      {
+       "name": "MSnA",
+       "bits": "4",
+       "access": "R/W",
+       "reset": "0",
+       "text": "With CPWMS = 0 and MSnB = 0, MSnA picks input capture or output compare for the channel.",
+       "values": []
+      },
+      {
+       "name": "ELSn",
+       "bits": "3:2",
+       "access": "R/W",
+       "reset": "0x0",
+       "text": "Depending on the channel mode set by CPWMS:MSnB:MSnA, picks the input edge that triggers a capture, the level driven on an output compare match, or the PWM output polarity. ELSnB:ELSnA = 0:0 leaves the pin as general-purpose I/O with no channel function, as used to pause an input capture channel, to free the pin for a channel used as a software timer, or for channel 0 when TPMCH0 is the external clock input.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "TPMCnVH",
+     "title": "Timer Channel Value Register High",
+     "offset": "0x0046",
+     "repeat": {
+      "count": 2,
+      "step": "0x03"
+     },
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 235,
+     "property": [],
+     "notes": [],
+     "fields": []
+    },
+    {
+     "name": "TPMCnVL",
+     "title": "Timer Channel Value Register Low",
+     "offset": "0x0047",
+     "repeat": {
+      "count": 2,
+      "step": "0x03"
+     },
+     "bits": 8,
+     "reset": "0x00",
+     "access": "R/W",
+     "page": 235,
+     "property": [],
+     "notes": [],
+     "fields": []
+    }
+   ]
+  },
+  {
+   "name": "DBG",
+   "title": "",
+   "page": 41,
+   "instances": [],
+   "registers": [
+    {
+     "name": "DBGCAH",
+     "title": "",
+     "offset": "0x1810",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 41,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": []
+    },
+    {
+     "name": "DBGCAL",
+     "title": "",
+     "offset": "0x1811",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 41,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": []
+    },
+    {
+     "name": "DBGCBH",
+     "title": "",
+     "offset": "0x1812",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 41,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": []
+    },
+    {
+     "name": "DBGCBL",
+     "title": "",
+     "offset": "0x1813",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 41,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": []
+    },
+    {
+     "name": "DBGFH",
+     "title": "",
+     "offset": "0x1814",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 41,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": []
+    },
+    {
+     "name": "DBGFL",
+     "title": "",
+     "offset": "0x1815",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 41,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": []
+    },
+    {
+     "name": "DBGC",
+     "title": "",
+     "offset": "0x1816",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 41,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": [
+      {
+       "name": "DBGEN",
+       "bits": "7",
+       "access": "",
+       "reset": "x",
+       "text": "Debug enable.",
+       "values": []
+      },
+      {
+       "name": "ARM",
+       "bits": "6",
+       "access": "",
+       "reset": "x",
+       "text": "Arm.",
+       "values": []
+      },
+      {
+       "name": "TAG",
+       "bits": "5",
+       "access": "",
+       "reset": "x",
+       "text": "Tag.",
+       "values": []
+      },
+      {
+       "name": "BRKEN",
+       "bits": "4",
+       "access": "",
+       "reset": "x",
+       "text": "Break enable.",
+       "values": []
+      },
+      {
+       "name": "RWA",
+       "bits": "3",
+       "access": "",
+       "reset": "x",
+       "text": "Read/write A.",
+       "values": []
+      },
+      {
+       "name": "RWAEN",
+       "bits": "2",
+       "access": "",
+       "reset": "x",
+       "text": "Read/write A enable.",
+       "values": []
+      },
+      {
+       "name": "RWB",
+       "bits": "1",
+       "access": "",
+       "reset": "x",
+       "text": "Read/write B.",
+       "values": []
+      },
+      {
+       "name": "RWBEN",
+       "bits": "0",
+       "access": "",
+       "reset": "x",
+       "text": "Read/write B enable.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "DBGT",
+     "title": "",
+     "offset": "0x1817",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 42,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": [
+      {
+       "name": "TRGSEL",
+       "bits": "7",
+       "access": "",
+       "reset": "x",
+       "text": "Trigger select.",
+       "values": []
+      },
+      {
+       "name": "BEGIN",
+       "bits": "6",
+       "access": "",
+       "reset": "x",
+       "text": "Begin.",
+       "values": []
+      },
+      {
+       "name": "TRG3",
+       "bits": "3",
+       "access": "",
+       "reset": "x",
+       "text": "Trigger mode bit 3.",
+       "values": []
+      },
+      {
+       "name": "TRG2",
+       "bits": "2",
+       "access": "",
+       "reset": "x",
+       "text": "Trigger mode bit 2.",
+       "values": []
+      },
+      {
+       "name": "TRG1",
+       "bits": "1",
+       "access": "",
+       "reset": "x",
+       "text": "Trigger mode bit 1.",
+       "values": []
+      },
+      {
+       "name": "TRG0",
+       "bits": "0",
+       "access": "",
+       "reset": "x",
+       "text": "Trigger mode bit 0.",
+       "values": []
+      }
+     ]
+    },
+    {
+     "name": "DBGS",
+     "title": "",
+     "offset": "0x1818",
+     "bits": 8,
+     "reset": "0bxxxxxxxx",
+     "access": "",
+     "page": 42,
+     "property": [],
+     "notes": [
+      "Only the register summary gives it."
+     ],
+     "fields": [
+      {
+       "name": "AF",
+       "bits": "7",
+       "access": "",
+       "reset": "x",
+       "text": "A flag.",
+       "values": []
+      },
+      {
+       "name": "BF",
+       "bits": "6",
+       "access": "",
+       "reset": "x",
+       "text": "B flag.",
+       "values": []
+      },
+      {
+       "name": "ARMF",
+       "bits": "5",
+       "access": "",
+       "reset": "x",
+       "text": "Arm flag.",
+       "values": []
+      },
+      {
+       "name": "CNT3",
+       "bits": "3",
+       "access": "",
+       "reset": "x",
+       "text": "Count bit 3.",
+       "values": []
+      },
+      {
+       "name": "CNT2",
+       "bits": "2",
+       "access": "",
+       "reset": "x",
+       "text": "Count bit 2.",
+       "values": []
+      },
+      {
+       "name": "CNT1",
+       "bits": "1",
+       "access": "",
+       "reset": "x",
+       "text": "Count bit 1.",
+       "values": []
+      },
+      {
+       "name": "CNT0",
+       "bits": "0",
+       "access": "",
+       "reset": "x",
+       "text": "Count bit 0.",
+       "values": []
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

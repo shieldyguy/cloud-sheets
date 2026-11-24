@@ -1,0 +1,2932 @@
+{
+ "sheet": 1,
+ "name": "NCP1380BDR2G",
+ "kind": "switching_regulator",
+ "manufacturer": "onsemi",
+ "title": "NCP1380: quasi-resonant current-mode PWM controller with valley lockout for high-power off-line supplies",
+ "source": {
+  "document": "NCP1380/D",
+  "revision": "Rev. 7, June 2024",
+  "pages": 28
+ },
+ "summary": "An eight-pin SOIC controller for offline flyback converters that turn on at a minimum of the drain ringing. It locks into the 1st to 4th valley according to the feedback level and, at lighter load still, folds the frequency back with the peak current frozen, for low standby power. It has adjustable over-power protection from the ZCD pin, a fixed 4 ms soft-start, an 80 ms overload timer, a fast winding-short comparator and a +500/−800 mA gate driver, and runs from VCC up to 28 V. Versions A and B use pin 7 for overvoltage and NTC overtemperature sensing, C and D for brown-out and overvoltage; A and C latch after an overload, B and D restart on their own.",
+ "key_figures": [
+  [
+   "VCC startup / stop",
+   "17 V / 9 V typ"
+  ],
+  [
+   "VCC range",
+   "up to 28 V"
+  ],
+  [
+   "Startup current",
+   "10 µA typ, 20 µA max"
+  ],
+  [
+   "Current sense threshold",
+   "0.8 V typ"
+  ],
+  [
+   "Gate drive",
+   "+500 mA / −800 mA"
+  ],
+  [
+   "Overload timer",
+   "85 ms typ"
+  ],
+  [
+   "Soft-start",
+   "3.8 ms typ"
+  ],
+  [
+   "Over-power cut",
+   "37.5% at VZCD = −300 mV"
+  ],
+  [
+   "Supply current switching",
+   "2.65 mA typ at 65 kHz, 1 nF"
+  ],
+  [
+   "Package",
+   "SOIC-8"
+  ]
+ ],
+ "part_numbers": {
+  "page": 25,
+  "columns": [
+   "part number",
+   "version",
+   "pin 7 function",
+   "overcurrent protection",
+   "package",
+   "marking",
+   "shipping"
+  ],
+  "rows": [
+   [
+    "NCP1380ADR2G",
+    "A",
+    "OVP / OTP",
+    "latched",
+    "SOIC-8 (Pb-Free)",
+    "1380A",
+    "2500 / Tape & Reel"
+   ],
+   [
+    "NCP1380BDR2G",
+    "B",
+    "OVP / OTP",
+    "auto-recovery",
+    "SOIC-8 (Pb-Free)",
+    "1380B",
+    "2500 / Tape & Reel"
+   ],
+   [
+    "NCP1380CDR2G",
+    "C",
+    "Brown-out / OVP",
+    "latched",
+    "SOIC-8 (Pb-Free)",
+    "1380C",
+    "2500 / Tape & Reel"
+   ],
+   [
+    "NCP1380DDR2G",
+    "D",
+    "Brown-out / OVP",
+    "auto-recovery",
+    "SOIC-8 (Pb-Free)",
+    "1380D",
+    "2500 / Tape & Reel"
+   ]
+  ],
+  "notes": [
+   "The top line of the marking is 1380 and the version letter; below it come assembly location (A), wafer lot (L), year (Y) and work week (W), with a dot for the Pb-free package."
+  ]
+ },
+ "pins": [
+  {
+   "package": "SOIC-8",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "ZCD",
+     "type": "input",
+     "function": "Zero-crossing detection and over-power adjust. Fed from the auxiliary winding; it sees the core reset and the valleys, and a negative voltage on it during the on-time, down to −300 mV, lowers the peak-current setpoint."
+    },
+    {
+     "pin": "2",
+     "name": "FB",
+     "type": "input",
+     "function": "Feedback input with an internal 18 kΩ pull-up; the optocoupler collector ties straight to it for regulation."
+    },
+    {
+     "pin": "3",
+     "name": "CS",
+     "type": "input",
+     "function": "Current sense: reads the primary peak current as a voltage across a source resistor."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Controller ground."
+    },
+    {
+     "pin": "5",
+     "name": "DRV",
+     "type": "output",
+     "function": "Gate drive output for the external MOSFET."
+    },
+    {
+     "pin": "6",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Controller supply, taken from an external auxiliary voltage."
+    },
+    {
+     "pin": "7",
+     "name": "Fault",
+     "type": "input",
+     "function": "A and B: overvoltage and overtemperature input; an NTC pulling it down or a zener pulling it up latches the controller off. C and D: brown-out and overvoltage input; it watches the bulk rail and stops the controller when the mains is low, and latches it off on an overvoltage."
+    },
+    {
+     "pin": "8",
+     "name": "CT",
+     "type": "analog",
+     "function": "Timing capacitor to ground; sets the switching period in frequency-foldback (VCO) mode."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Device options",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "version",
+    "OTP",
+    "OVP",
+    "Brown-out",
+    "auto-recovery overcurrent protection",
+    "latched overcurrent protection"
+   ],
+   "rows": [
+    [
+     "NCP1380 / A",
+     "Yes",
+     "Yes",
+     "",
+     "",
+     "Yes"
+    ],
+    [
+     "NCP1380 / B",
+     "Yes",
+     "Yes",
+     "",
+     "Yes",
+     ""
+    ],
+    [
+     "NCP1380 / C",
+     "",
+     "Yes",
+     "Yes",
+     "",
+     "Yes"
+    ],
+    [
+     "NCP1380 / D",
+     "",
+     "Yes",
+     "Yes",
+     "Yes",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Maximum ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "rating",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC(MAX)",
+     "Maximum Power Supply voltage, VCC pin, continuous voltage",
+     "−0.3 to 28",
+     "V"
+    ],
+    [
+     "ICC(MAX)",
+     "Maximum current for VCC pin",
+     "±30",
+     "mA"
+    ],
+    [
+     "VDRV(MAX)",
+     "Maximum driver pin voltage, DRV pin, continuous voltage",
+     "−0.3 to 20",
+     "V"
+    ],
+    [
+     "IDRV(MAX)",
+     "Maximum current for DRV pin",
+     "±1000",
+     "mA"
+    ],
+    [
+     "VMAX",
+     "Maximum voltage on low power pins (except pins DRV and VCC)",
+     "−0.3 to 10",
+     "V"
+    ],
+    [
+     "IMAX",
+     "Current range for low power pins (except pins ZCD, DRV and VCC)",
+     "±10",
+     "mA"
+    ],
+    [
+     "IZCD(MAX)",
+     "Maximum current for ZCD pin",
+     "+3 / −2",
+     "mA"
+    ],
+    [
+     "RθJA",
+     "Thermal Resistance Junction-to-Air",
+     "120",
+     "°C/W"
+    ],
+    [
+     "TJ(MAX)",
+     "Maximum Junction Temperature",
+     "150",
+     "°C"
+    ],
+    [
+     "",
+     "Operating Temperature Range",
+     "−40 to +125",
+     "°C"
+    ],
+    [
+     "",
+     "Storage Temperature Range",
+     "−60 to +150",
+     "°C"
+    ],
+    [
+     "",
+     "ESD Capability, HBM Model (Note 1)",
+     "4",
+     "kV"
+    ],
+    [
+     "",
+     "ESD Capability, MM Model (Note 1)",
+     "200",
+     "V"
+    ],
+    [
+     "",
+     "ESD Capability, CDM Model (Note 1)",
+     "2",
+     "kV"
+    ]
+   ],
+   "notes": [
+    "Operating beyond any of these ratings can damage the part; once one is exceeded, correct function and reliability cannot be counted on.",
+    "Note 1: ESD tested to 4000 V human body model (JESD22 Method A114E), 200 V machine model (JESD22 Method A115A) and 2000 V charged device model (JESD22-C101D).",
+    "Note 2: latch-up immunity is above 100 mA, tested to JESD78."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply section, startup and supply circuits",
+   "page": 6,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Startup Threshold",
+     "VCC(on)",
+     "VCC increasing",
+     "16",
+     "17",
+     "18",
+     "V"
+    ],
+    [
+     "Minimum Operating Voltage",
+     "VCC(off)",
+     "VCC decreasing",
+     "8.3",
+     "9",
+     "9.4",
+     "V"
+    ],
+    [
+     "Hysteresis VCC(on) − VCC(off)",
+     "VCC(HYS)",
+     "",
+     "7.2",
+     "8.0",
+     "9.2",
+     "V"
+    ],
+    [
+     "Clamped VCC when latched-off",
+     "VCC(latch)",
+     "VCC decreasing, ICC = 30 µA",
+     "6.2",
+     "7.2",
+     "8.2",
+     "V"
+    ],
+    [
+     "Internal logic reset",
+     "VCC(reset)",
+     "",
+     "6",
+     "7",
+     "8",
+     "V"
+    ],
+    [
+     "VCC(off) noise filter",
+     "tVCC(off)",
+     "",
+     "–",
+     "5",
+     "–",
+     "µs"
+    ],
+    [
+     "VCC(reset) noise filter",
+     "tVCC(reset)",
+     "",
+     "–",
+     "20",
+     "–",
+     "µs"
+    ],
+    [
+     "Startup current",
+     "ICC(start)",
+     "FB pin open, VCC = VCC(on) − 0.5 V",
+     "–",
+     "10",
+     "20",
+     "µA"
+    ],
+    [
+     "Current that discharges VCC when the controller gets latched",
+     "ICC(disch)",
+     "VCC = 12 V",
+     "3.0",
+     "4.0",
+     "5.0",
+     "mA"
+    ],
+    [
+     "Current into VCC that keeps the controller latched (Note 3)",
+     "ICC(latch)",
+     "VCC = VCC(latch)",
+     "30",
+     "–",
+     "–",
+     "µA"
+    ],
+    [
+     "Supply current, Device Disabled/Fault (Note 3), B, C, and D only",
+     "ICC1",
+     "VCC > VCC(off)",
+     "–",
+     "1.7",
+     "2.0",
+     "mA"
+    ],
+    [
+     "Supply current, Device Enabled/No output load on pin 5",
+     "ICC2",
+     "Fsw = 10 kHz",
+     "–",
+     "1.7",
+     "2.0",
+     "mA"
+    ],
+    [
+     "Supply current, Device Switching (FSW = 65 kHz)",
+     "ICC3A",
+     "CDRV = 1 nF, FSW = 65 kHz",
+     "–",
+     "2.65",
+     "3.0",
+     "mA"
+    ],
+    [
+     "Supply current, Device Switching VCO mode",
+     "ICC3B",
+     "CDRV = 1 nF, VFB = 1.25 V",
+     "–",
+     "2.0",
+     "–",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "Note 3: ensured by design."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: current comparator, current sense",
+   "page": 6,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Current Sense Voltage Threshold",
+     "VILIM",
+     "VFB = 4 V, VCS increasing",
+     "0.76",
+     "0.8",
+     "0.84",
+     "V"
+    ],
+    [
+     "Leading Edge Blanking Duration for VILIM",
+     "tLEB",
+     "Minimum on time minus tILIM",
+     "210",
+     "275",
+     "330",
+     "ns"
+    ],
+    [
+     "Input Bias Current (Note 3)",
+     "Ibias",
+     "DRV high",
+     "−2",
+     "–",
+     "2",
+     "µA"
+    ],
+    [
+     "Propagation Delay",
+     "tILIM",
+     "VCS > VILIM to DRV turn-off",
+     "–",
+     "125",
+     "175",
+     "ns"
+    ],
+    [
+     "Percentage of maximum peak current level at which VCO takes over (Note 4)",
+     "Ipeak(VCO)",
+     "VFB = 0.4 V, VCS increasing",
+     "15.4",
+     "17.5",
+     "19.6",
+     "%"
+    ],
+    [
+     "Setpoint decrease for VZCD = −300 mV (Note 5)",
+     "VOPP(MAX)",
+     "VZCD = −300 mV, VFB = 4 V, VCS increasing",
+     "35",
+     "37.5",
+     "40",
+     "%"
+    ],
+    [
+     "Threshold for immediate fault protection activation",
+     "VCS(stop)",
+     "",
+     "1.125",
+     "1.200",
+     "1.275",
+     "V"
+    ],
+    [
+     "Leading Edge Blanking Duration for VCS(stop)",
+     "tBCS",
+     "",
+     "–",
+     "120",
+     "–",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "Note 3: ensured by design.",
+    "Note 4: the peak-current setpoint falls as the load falls, until it reaches Ipeak(VCO); below that point it holds constant.",
+    "Note 5: when ZCD is pulled more negative than −300 mV, the drop in current setpoint is no longer assured to be linear."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: drive output, gate drive",
+   "page": 7,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Drive Resistance, DRV Sink",
+     "RSNK",
+     "VDRV = 10 V",
+     "–",
+     "12.5",
+     "–",
+     "Ω"
+    ],
+    [
+     "Drive Resistance, DRV Source",
+     "RSRC",
+     "VDRV = 2 V",
+     "–",
+     "20",
+     "–",
+     "Ω"
+    ],
+    [
+     "Drive current capability, DRV Sink",
+     "ISNK",
+     "VDRV = 10 V",
+     "–",
+     "800",
+     "–",
+     "mA"
+    ],
+    [
+     "Drive current capability, DRV Source",
+     "ISRC",
+     "VDRV = 2 V",
+     "–",
+     "500",
+     "–",
+     "mA"
+    ],
+    [
+     "Rise Time (10% to 90%)",
+     "tr",
+     "CDRV = 1 nF, VDRV from 0 to 12 V",
+     "–",
+     "40",
+     "75",
+     "ns"
+    ],
+    [
+     "Fall Time (90% to 10%)",
+     "tf",
+     "CDRV = 1 nF, VDRV from 0 to 12 V",
+     "–",
+     "25",
+     "60",
+     "ns"
+    ],
+    [
+     "DRV Low Voltage",
+     "VDRV(low)",
+     "VCC = VCC(off) + 0.2 V, CDRV = 1 nF, RDRV = 33 kΩ",
+     "8.4",
+     "9.1",
+     "–",
+     "V"
+    ],
+    [
+     "DRV High Voltage (Note 6)",
+     "VDRV(high)",
+     "VCC = VCC(MAX), CDRV = 1 nF",
+     "10.5",
+     "13.0",
+     "15.5",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Note 6: the minimum applies at TJ = 125°C."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: demagnetization input, zero voltage detection circuit",
+   "page": 7,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "ZCD threshold voltage",
+     "VZCD(TH)",
+     "VZCD decreasing",
+     "35",
+     "55",
+     "90",
+     "mV"
+    ],
+    [
+     "ZCD hysteresis",
+     "VZCD(HYS)",
+     "VZCD increasing",
+     "15",
+     "35",
+     "55",
+     "mV"
+    ],
+    [
+     "Input clamp voltage, High state",
+     "VCH",
+     "Ipin1 = 3.0 mA",
+     "8",
+     "10",
+     "12",
+     "V"
+    ],
+    [
+     "Input clamp voltage, Low state",
+     "VCL",
+     "Ipin1 = −2.0 mA",
+     "−0.9",
+     "−0.7",
+     "−0.3",
+     "V"
+    ],
+    [
+     "Propagation Delay",
+     "tDEM",
+     "VZCD decreasing from 4 V to −0.3 V",
+     "–",
+     "150",
+     "250",
+     "ns"
+    ],
+    [
+     "Internal input capacitance",
+     "CPAR",
+     "",
+     "–",
+     "10",
+     "–",
+     "pF"
+    ],
+    [
+     "Blanking delay after on-time",
+     "tBLANK",
+     "",
+     "2.30",
+     "3.15",
+     "4.00",
+     "µs"
+    ],
+    [
+     "Timeout after last demag transition",
+     "toutSS",
+     "During soft-start",
+     "28",
+     "41",
+     "54",
+     "µs"
+    ],
+    [
+     "Timeout after last demag transition",
+     "tout",
+     "After the end of soft-start",
+     "5.0",
+     "5.9",
+     "6.7",
+     "µs"
+    ],
+    [
+     "Pulldown resistor (Note 3)",
+     "RZCD(pdown)",
+     "",
+     "140",
+     "320",
+     "700",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "Note 3: ensured by design."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: timing capacitor",
+   "page": 7,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Maximum voltage on CT pin",
+     "VCT(MAX)",
+     "VFB < VFB(TH)",
+     "5.15",
+     "5.40",
+     "5.65",
+     "V"
+    ],
+    [
+     "Source current",
+     "ICT",
+     "VCT = 0 V",
+     "18",
+     "20",
+     "22",
+     "µA"
+    ],
+    [
+     "Minimum voltage on CT pin, discharge switch activated",
+     "VCT(MIN)",
+     "",
+     "–",
+     "–",
+     "90",
+     "mV"
+    ],
+    [
+     "Recommended timing capacitor value",
+     "CT",
+     "",
+     "",
+     "220",
+     "",
+     "pF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: feedback section",
+   "page": 7,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Internal pullup resistor",
+     "RFB(pullup)",
+     "",
+     "15",
+     "18",
+     "22",
+     "kΩ"
+    ],
+    [
+     "Pin FB to current setpoint division ratio",
+     "Iratio",
+     "",
+     "3.8",
+     "4.0",
+     "4.2",
+     ""
+    ],
+    [
+     "FB pin threshold under which CT is clamped to VCT(MAX)",
+     "VFB(TH)",
+     "",
+     "0.26",
+     "0.3",
+     "0.34",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where 1st valley ends and 2nd valley starts",
+     "VH2D",
+     "VFB decreases",
+     "1.316",
+     "1.4",
+     "1.484",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where 2nd valley ends and 3rd valley starts",
+     "VH3D",
+     "VFB decreases",
+     "1.128",
+     "1.2",
+     "1.272",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where 3rd valley ends and 4th valley starts",
+     "VH4D",
+     "VFB decreases",
+     "0.846",
+     "0.9",
+     "0.954",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where 4th valley ends and VCO starts",
+     "VHVCOD",
+     "VFB decreases",
+     "0.732",
+     "0.8",
+     "0.828",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where VCO ends and 4th valley starts",
+     "VHVCOI",
+     "VFB increases",
+     "1.316",
+     "1.4",
+     "1.484",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where 4th valley ends and 3rd valley starts",
+     "VH4I",
+     "VFB increases",
+     "1.504",
+     "1.6",
+     "1.696",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where 3rd valley ends and 2nd valley starts",
+     "VH3I",
+     "VFB increases",
+     "1.692",
+     "1.8",
+     "1.908",
+     "V"
+    ],
+    [
+     "Valley threshold: FB voltage where 2nd valley ends and 1st valley starts",
+     "VH2I",
+     "VFB increases",
+     "1.880",
+     "2.0",
+     "2.120",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: fault protection (all versions)",
+   "page": 8,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Thermal Shutdown",
+     "TSHDN",
+     "Device switching (FSW around 65 kHz)",
+     "140",
+     "–",
+     "170",
+     "°C"
+    ],
+    [
+     "Thermal Shutdown Hysteresis",
+     "TSHDN(HYS)",
+     "",
+     "–",
+     "40",
+     "–",
+     "°C"
+    ],
+    [
+     "Overload Timer",
+     "tOVLD",
+     "VFB = 4 V, VCS > VILIM",
+     "75",
+     "85",
+     "95",
+     "ms"
+    ],
+    [
+     "Soft-start duration",
+     "tSSTART",
+     "VFB = 4 V, VCS ramping up, measured from 1st DRV pulse to VCS(peak) = 90% of VILIM",
+     "2.8",
+     "3.8",
+     "4.8",
+     "ms"
+    ],
+    [
+     "Clamp series resistor",
+     "RFault(clamp)",
+     "",
+     "1.3",
+     "1.55",
+     "1.8",
+     "kΩ"
+    ],
+    [
+     "Fault detection level for OVP",
+     "VOVP",
+     "VFault increasing",
+     "2.35",
+     "2.5",
+     "2.65",
+     "V"
+    ],
+    [
+     "Delay before latch confirmation",
+     "tlatch(delay)",
+     "",
+     "22.5",
+     "30",
+     "37.5",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: fault protection, A and B versions",
+   "page": 8,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Reference current for direct connection of an NTC (Note 7)",
+     "IOTP(REF)",
+     "VFault = VOTP + 0.2 V",
+     "85",
+     "91",
+     "97",
+     "µA"
+    ],
+    [
+     "Fault detection level for OTP",
+     "VOTP",
+     "VFault decreasing",
+     "0.744",
+     "0.8",
+     "0.856",
+     "V"
+    ],
+    [
+     "Clamped voltage (Fault pin left open)",
+     "VFault(clamp)",
+     "Fault pin open",
+     "1.13",
+     "1.35",
+     "1.57",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Note 7: measured with an NTC whose R110 is 8.8 kΩ."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: fault protection, C and D versions",
+   "page": 8,
+   "conditions": "For typical values TJ = 25°C, VCC = 12 V, VZCD = 0 V, VFB = 3 V, VCS = 0 V, Vfault = 1.5 V, CT = 680 pF; for min/max values TJ = −40°C to +125°C, Max TJ = 150°C, VCC = 12 V; unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Brown-Out level",
+     "VBO",
+     "VFault decreasing",
+     "0.744",
+     "0.8",
+     "0.856",
+     "V"
+    ],
+    [
+     "Sourced hysteresis current VFault > VBO",
+     "IBO",
+     "VFault = VBO + 0.2 V",
+     "9",
+     "10",
+     "11",
+     "µA"
+    ],
+    [
+     "Delay before entering and exiting Brown-out",
+     "tBO(delay)",
+     "",
+     "22.5",
+     "30",
+     "37.5",
+     "µs"
+    ],
+    [
+     "Clamped voltage (Fault pin left open)",
+     "VFault(clamp)",
+     "Fault pin open",
+     "1.0",
+     "1.2",
+     "1.4",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Operating mode against FB voltage",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "operating mode",
+    "VFB falling",
+    "VFB rising"
+   ],
+   "rows": [
+    [
+     "1st valley",
+     "above 1.4 V",
+     "above 2.0 V"
+    ],
+    [
+     "2nd valley",
+     "1.2 V to 1.4 V",
+     "1.8 V to 2.0 V"
+    ],
+    [
+     "3rd valley",
+     "0.9 V to 1.2 V",
+     "1.6 V to 1.8 V"
+    ],
+    [
+     "4th valley",
+     "0.8 V to 0.9 V",
+     "1.4 V to 1.6 V"
+    ],
+    [
+     "VCO (frequency foldback)",
+     "below 0.8 V",
+     "below 1.4 V"
+    ],
+    [
+     "Fault",
+     "above 3.2 V",
+     "above 3.2 V"
+    ]
+   ],
+   "notes": [
+    "Each boundary is a typical valley threshold (VH2D to VH2I); the gap between the falling and rising boundaries is the hysteresis that keeps the controller in one valley."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Figure 5. VCC(on) vs. Junction Temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Startup threshold VCC(on)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.3,
+       17.1745
+      ],
+      [
+       -32.5,
+       17.1588
+      ],
+      [
+       -27.3,
+       17.1518
+      ],
+      [
+       7.1,
+       17.1274
+      ],
+      [
+       28.5,
+       17.1144
+      ],
+      [
+       78.8,
+       17.0923
+      ],
+      [
+       102.4,
+       17.0805
+      ],
+      [
+       107.4,
+       17.081
+      ],
+      [
+       111.7,
+       17.087
+      ],
+      [
+       117.6,
+       17.1045
+      ],
+      [
+       121.7,
+       17.1277
+      ],
+      [
+       124.8,
+       17.1398
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6. VCC(off) vs. Junction Temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Minimum operating voltage VCC(off)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       8.8224
+      ],
+      [
+       -27.1,
+       8.8461
+      ],
+      [
+       -19.7,
+       8.8545
+      ],
+      [
+       2.5,
+       8.8739
+      ],
+      [
+       33.1,
+       8.8944
+      ],
+      [
+       87.9,
+       8.9129
+      ],
+      [
+       102.3,
+       8.9112
+      ],
+      [
+       125.4,
+       8.9039
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 7. ICC2 vs. Junction Temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current ICC2",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       1.7351
+      ],
+      [
+       -9.5,
+       1.677
+      ],
+      [
+       57.7,
+       1.5666
+      ],
+      [
+       90.7,
+       1.5205
+      ],
+      [
+       126.0,
+       1.4774
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8. ICC3A vs. Junction Temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current ICC3A",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.0,
+       2.6752
+      ],
+      [
+       -13.0,
+       2.6261
+      ],
+      [
+       42.4,
+       2.5377
+      ],
+      [
+       85.8,
+       2.4804
+      ],
+      [
+       125.2,
+       2.4384
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 9. ICC3B vs. Junction Temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current ICC3B",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.0,
+       2.1517
+      ],
+      [
+       -34.5,
+       2.1281
+      ],
+      [
+       -18.0,
+       2.0739
+      ],
+      [
+       26.4,
+       1.9462
+      ],
+      [
+       43.8,
+       1.9018
+      ],
+      [
+       59.4,
+       1.8682
+      ],
+      [
+       124.8,
+       1.7511
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 10. ICC(start) vs. Junction Temperature",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Startup current ICC(start)",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.0,
+       7.738
+      ],
+      [
+       -25.1,
+       7.962
+      ],
+      [
+       1.7,
+       8.196
+      ],
+      [
+       17.8,
+       8.358
+      ],
+      [
+       76.3,
+       8.62
+      ],
+      [
+       98.3,
+       8.683
+      ],
+      [
+       107.4,
+       8.744
+      ],
+      [
+       113.7,
+       8.867
+      ],
+      [
+       125.4,
+       9.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 11. VILIM vs. Junction Temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current sense threshold VILIM",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.2,
+       796.27
+      ],
+      [
+       -31.6,
+       797.76
+      ],
+      [
+       -22.2,
+       798.79
+      ],
+      [
+       17.6,
+       801.46
+      ],
+      [
+       29.4,
+       801.82
+      ],
+      [
+       42.3,
+       801.89
+      ],
+      [
+       63.7,
+       801.72
+      ],
+      [
+       106.1,
+       800.97
+      ],
+      [
+       116.2,
+       800.46
+      ],
+      [
+       125.2,
+       799.06
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 12. TLEB vs. Junction Temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Leading edge blanking tLEB",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       281.3
+      ],
+      [
+       -7.6,
+       272.9
+      ],
+      [
+       69.1,
+       255.9
+      ],
+      [
+       92.2,
+       251.8
+      ],
+      [
+       124.7,
+       248.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 13. VCS(stop) vs. Junction Temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Fault threshold VCS(stop)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.0,
+       1.2009
+      ],
+      [
+       -9.8,
+       1.2079
+      ],
+      [
+       32.5,
+       1.2152
+      ],
+      [
+       89.9,
+       1.2216
+      ],
+      [
+       125.0,
+       1.2216
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 14. VOPP(MAX) vs. Junction Temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Setpoint decrease VOPP(MAX)",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       37.661
+      ],
+      [
+       -20.1,
+       37.569
+      ],
+      [
+       -2.0,
+       37.51
+      ],
+      [
+       35.5,
+       37.457
+      ],
+      [
+       68.0,
+       37.444
+      ],
+      [
+       86.3,
+       37.404
+      ],
+      [
+       92.6,
+       37.37
+      ],
+      [
+       101.0,
+       37.283
+      ],
+      [
+       124.3,
+       36.93
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 15. VDRV(low) vs. Junction Temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "DRV low voltage VDRV(low)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       9.0582
+      ],
+      [
+       -20.7,
+       9.0854
+      ],
+      [
+       -9.5,
+       9.0972
+      ],
+      [
+       17.3,
+       9.1186
+      ],
+      [
+       39.6,
+       9.1304
+      ],
+      [
+       75.7,
+       9.1398
+      ],
+      [
+       96.1,
+       9.1401
+      ],
+      [
+       104.5,
+       9.135
+      ],
+      [
+       125.3,
+       9.1144
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 16. VDRV(high) vs. Junction Temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "DRV high voltage VDRV(high)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -39.9,
+       11.45
+      ],
+      [
+       62.8,
+       12.853
+      ],
+      [
+       92.2,
+       13.196
+      ],
+      [
+       124.3,
+       13.501
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 17. VZCD(th) vs. Junction Temperature",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ZCD threshold VZCD(th)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.0,
+       42.35
+      ],
+      [
+       -27.7,
+       45.18
+      ],
+      [
+       -1.5,
+       48.9
+      ],
+      [
+       9.2,
+       50.69
+      ],
+      [
+       75.0,
+       63.78
+      ],
+      [
+       106.6,
+       69.05
+      ],
+      [
+       118.9,
+       71.61
+      ],
+      [
+       125.7,
+       73.48
+      ]
+     ]
+    }
+   ],
+   "note": "The axis unit reads V; the values are millivolts."
+  },
+  {
+   "title": "Figure 18. VZCD(hys) vs. Junction Temperature",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ZCD hysteresis VZCD(hys)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       25.14
+      ],
+      [
+       -18.0,
+       27.37
+      ],
+      [
+       0.5,
+       28.64
+      ],
+      [
+       22.7,
+       31.08
+      ],
+      [
+       38.9,
+       32.54
+      ],
+      [
+       83.7,
+       36.5
+      ],
+      [
+       125.4,
+       39.81
+      ]
+     ]
+    }
+   ],
+   "note": "The axis unit reads V; the values are millivolts."
+  },
+  {
+   "title": "Figure 19. TBLANK vs. Junction Temperature",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Blanking delay tBLANK",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       3.1485
+      ],
+      [
+       4.7,
+       3.1596
+      ],
+      [
+       34.6,
+       3.1722
+      ],
+      [
+       70.9,
+       3.1961
+      ],
+      [
+       107.0,
+       3.2158
+      ],
+      [
+       125.0,
+       3.2406
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 20. ToutSS vs. Junction Temperature",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Soft-start timeout toutSS",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       41.08
+      ],
+      [
+       3.9,
+       41.74
+      ],
+      [
+       41.4,
+       42.54
+      ],
+      [
+       108.9,
+       43.86
+      ],
+      [
+       125.2,
+       44.25
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 21. Tout vs. Junction Temperature",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Timeout tout",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       5.749
+      ],
+      [
+       35.2,
+       5.879
+      ],
+      [
+       107.5,
+       6.036
+      ],
+      [
+       125.8,
+       6.087
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 22. VOTP vs. Junction Temperature",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OTP level VOTP",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.0,
+       789.99
+      ],
+      [
+       -31.1,
+       791.03
+      ],
+      [
+       -9.6,
+       793.06
+      ],
+      [
+       15.9,
+       794.95
+      ],
+      [
+       29.1,
+       795.46
+      ],
+      [
+       52.4,
+       795.87
+      ],
+      [
+       88.6,
+       795.82
+      ],
+      [
+       105.9,
+       795.47
+      ],
+      [
+       125.6,
+       794.73
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 23. IOTP vs. Junction Temperature",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "NTC reference current IOTP",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.0,
+       88.207
+      ],
+      [
+       -26.7,
+       88.623
+      ],
+      [
+       -13.5,
+       88.892
+      ],
+      [
+       16.6,
+       89.395
+      ],
+      [
+       36.9,
+       89.585
+      ],
+      [
+       73.3,
+       89.795
+      ],
+      [
+       91.8,
+       89.83
+      ],
+      [
+       107.3,
+       89.734
+      ],
+      [
+       119.5,
+       89.579
+      ],
+      [
+       125.7,
+       89.468
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 24. VBO vs. Junction Temperature",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Brown-out level VBO",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.1,
+       791.91
+      ],
+      [
+       -29.7,
+       793.09
+      ],
+      [
+       -21.1,
+       793.86
+      ],
+      [
+       9.4,
+       796.16
+      ],
+      [
+       24.2,
+       796.97
+      ],
+      [
+       42.5,
+       797.44
+      ],
+      [
+       73.9,
+       797.85
+      ],
+      [
+       106.7,
+       797.77
+      ],
+      [
+       125.2,
+       797.12
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 25. IBO vs. Junction Temperature",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Brown-out hysteresis current IBO",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "typical",
+     "points": [
+      [
+       -40.4,
+       9.748
+      ],
+      [
+       -20.9,
+       9.808
+      ],
+      [
+       -8.9,
+       9.829
+      ],
+      [
+       14.5,
+       9.856
+      ],
+      [
+       29.7,
+       9.851
+      ],
+      [
+       62.7,
+       9.799
+      ],
+      [
+       90.0,
+       9.749
+      ],
+      [
+       116.8,
+       9.637
+      ],
+      [
+       125.0,
+       9.573
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical-ab",
+   "title": "Typical application, A and B versions",
+   "page": 2,
+   "description": "An offline flyback converter run from the rectified bulk rail. The NCP1380 drives the MOSFET through a gate resistor and reads its current across the source resistor on CS. An RCD network clamps the drain. The auxiliary winding does three jobs: through D2 it keeps VCC up once R1 has started the chip; through RZCD, Ropu and Ropl it gives ZCD the demagnetisation edge in the off-time and a negative image of the input in the on-time, for over-power protection, with D3 shorting Ropu while the winding is positive. On the secondary, a rectifier and capacitor make Vout; a reference and the optocoupler LED pull FB down to regulate. Pin 7 carries an NTC to ground for overtemperature and a zener from VCC for overvoltage.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP1380 A/B"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "bulk capacitor, polarised"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "startup resistor from the bulk rail to VCC"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "VCC reservoir, polarised"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "clamp resistor"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "clamp capacitor"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "",
+     "note": "clamp diode"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "flyback transformer",
+     "note": "P1-P2 primary, A1-A2 auxiliary, S1-S2 secondary; the dotted ends are P2, A1 and S1"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "power MOSFET"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "",
+     "note": "gate resistor"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "",
+     "note": "current-sense resistor"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "",
+     "note": "auxiliary winding rectifier feeding VCC"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "RZCD, series resistor from the auxiliary winding"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "Ropu, upper OPP resistor"
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": "",
+     "note": "bypasses Ropu while the auxiliary winding is positive"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "",
+     "note": "Ropl, lower OPP resistor"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "ZCD filter capacitor"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "",
+     "note": "FB capacitor"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "",
+     "note": "CT timing capacitor"
+    },
+    {
+     "ref": "D4",
+     "type": "zener",
+     "value": "",
+     "note": "OVP zener from VCC to the Fault pin"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "optocoupler",
+     "note": "A, K the LED; C, E the phototransistor"
+    },
+    {
+     "ref": "D5",
+     "type": "diode",
+     "value": "",
+     "note": "output rectifier"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor, polarised"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "",
+     "note": "LED series resistor"
+    },
+    {
+     "ref": "D6",
+     "type": "zener",
+     "value": "",
+     "note": "output voltage reference in series with the LED"
+    },
+    {
+     "ref": "HV",
+     "type": "terminal",
+     "value": "HV Bulk"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "Vout"
+    },
+    {
+     "ref": "GNDO",
+     "type": "terminal",
+     "value": "GND (output)"
+    },
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "NTC",
+     "note": "thermistor for overtemperature sensing"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "typical-cd",
+   "title": "Typical application, C and D versions",
+   "page": 2,
+   "description": "The same flyback converter as the A and B circuit, with pin 7 used for brown-out and overvoltage instead: a divider from the bulk rail (Rbou above, Rbol below) feeds the pin so the controller stops when the input sags, and the zener from VCC lifts it to the overvoltage level when the auxiliary rail climbs.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP1380 C/D"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "bulk capacitor, polarised"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "startup resistor from the bulk rail to VCC"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "VCC reservoir, polarised"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "clamp resistor"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "clamp capacitor"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "",
+     "note": "clamp diode"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "flyback transformer",
+     "note": "P1-P2 primary, A1-A2 auxiliary, S1-S2 secondary; the dotted ends are P2, A1 and S1"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "power MOSFET"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "",
+     "note": "gate resistor"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "",
+     "note": "current-sense resistor"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "",
+     "note": "auxiliary winding rectifier feeding VCC"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "RZCD, series resistor from the auxiliary winding"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "Ropu, upper OPP resistor"
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": "",
+     "note": "bypasses Ropu while the auxiliary winding is positive"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "",
+     "note": "Ropl, lower OPP resistor"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "ZCD filter capacitor"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "",
+     "note": "FB capacitor"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "",
+     "note": "CT timing capacitor"
+    },
+    {
+     "ref": "D4",
+     "type": "zener",
+     "value": "",
+     "note": "OVP zener from VCC to the Fault pin"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "optocoupler",
+     "note": "A, K the LED; C, E the phototransistor"
+    },
+    {
+     "ref": "D5",
+     "type": "diode",
+     "value": "",
+     "note": "output rectifier"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "",
+     "note": "output capacitor, polarised"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "",
+     "note": "LED series resistor"
+    },
+    {
+     "ref": "D6",
+     "type": "zener",
+     "value": "",
+     "note": "output voltage reference in series with the LED"
+    },
+    {
+     "ref": "HV",
+     "type": "terminal",
+     "value": "HV Bulk"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": "Vout"
+    },
+    {
+     "ref": "GNDO",
+     "type": "terminal",
+     "value": "GND (output)"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "",
+     "note": "Rbou, upper brown-out divider resistor"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "",
+     "note": "Rbol, lower brown-out divider resistor"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "VCO threshold",
+   "expr": "VFBth = 6.5 − (10/3) × VFB",
+   "where": {
+    "VFBth": "internal threshold the CT ramp is compared with in VCO mode, V",
+    "VFB": "FB pin voltage, V"
+   },
+   "note": "Below VFB = 0.3 V the CT voltage is clamped at VCT(MAX), 5.5 V typical.",
+   "page": 19
+  },
+  {
+   "name": "Over-power divider",
+   "expr": "(RZCD + Ropu) / Ropl = −(Np,aux × Vin − VOPP) / VOPP",
+   "where": {
+    "RZCD": "series resistor from the auxiliary winding",
+    "Ropu": "upper OPP resistor, bypassed by a diode in the off-time",
+    "Ropl": "lower OPP resistor, ZCD pin to ground",
+    "Np,aux": "auxiliary to primary turns ratio, Naux / Np",
+    "Vin": "DC input voltage",
+    "VOPP": "negative voltage on ZCD during the on-time"
+   },
+   "note": "Choose Ropl first, then solve for Ropu.",
+   "page": 22
+  },
+  {
+   "name": "ZCD voltage in the off-time",
+   "expr": "VZCD = Ropl / (RZCD + Ropl) × (Vaux − Vd)",
+   "where": {
+    "VZCD": "ZCD pin voltage while the auxiliary winding is positive",
+    "Vaux": "auxiliary winding voltage in the off-time",
+    "Vd": "forward drop of the bypass diode"
+   },
+   "note": "At least 8 V on ZCD in the off-time is recommended; the pin's maximum is 10 V.",
+   "page": 22
+  },
+  {
+   "name": "RZCD against Ropl",
+   "expr": "RZCD / Ropl = (Vaux − Vd − VZCD) / VZCD",
+   "where": {
+    "VZCD": "wanted ZCD voltage in the off-time"
+   },
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Design example: RZCD against Ropl",
+   "expr": "RZCD / Ropl = (18 − 0.6 − 8) / 8 ≈ 1.2",
+   "where": {
+    "Vaux": "18 V",
+    "Vd": "0.6 V",
+    "VZCD": "8 V"
+   },
+   "note": "RZCD = 1 kΩ and Ropl = 1 kΩ are chosen.",
+   "page": 22
+  },
+  {
+   "name": "Design example: OPP voltage",
+   "expr": "VOPP = 0.375 × VILIM = −300 mV",
+   "where": {
+    "0.375": "a 37.5% cut in peak current at high line, 370 Vdc",
+    "VILIM": "current sense threshold, 0.8 V"
+   },
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Design example: divider ratio",
+   "expr": "(RZCD + Ropu) / Ropl = (−0.18 × 370 − (−0.3)) / (−0.3) = 221",
+   "where": {
+    "Np,aux": "0.18",
+    "Vin": "370 Vdc",
+    "VOPP": "−0.3 V"
+   },
+   "note": "The denominator of the left side reads Ropt; it is Ropl.",
+   "page": 22
+  },
+  {
+   "name": "Design example: Ropu",
+   "expr": "Ropu = 221 × Ropl − RZCD = 221 × 1k − 1k = 220 kΩ",
+   "where": {},
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "Brown-out lower resistor",
+   "expr": "Rbol = VBO × (Vbulk(on) − Vbulk(off)) / (IBO × (Vbulk(on) − VBO))",
+   "where": {
+    "VBO": "brown-out level, 0.8 V typical",
+    "IBO": "brown-out hysteresis current, 10 µA typical",
+    "Vbulk(on)": "bulk voltage at which switching starts",
+    "Vbulk(off)": "bulk voltage at which switching stops"
+   },
+   "note": "",
+   "page": 25
+  },
+  {
+   "name": "Brown-out upper resistor",
+   "expr": "Rbou = Rbol × (Vbulk(on) − VBO) / VBO",
+   "where": {},
+   "note": "",
+   "page": 25
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Versions",
+   "page": 1,
+   "text": "Four versions differ in two ways. Pin 7 is a combined overvoltage and overtemperature input on A and B, and a combined brown-out and overvoltage input on C and D. After an overload or a winding short, A and C latch off and stay off; B and D restart on their own. The marking code is 1380 followed by the version letter."
+  },
+  {
+   "topic": "Startup and VCC",
+   "page": 6,
+   "text": "The controller draws about 10 µA (20 µA max) until VCC climbs to VCC(on), 17 V typical, then starts switching with a soft-start. It keeps running down to VCC(off), 9 V typical, with a 5 µs filter on that threshold. VCC may run up to 28 V. Internal logic resets below VCC(reset), 7 V typical. In the typical circuits a resistor from the bulk rail charges VCC at start and the auxiliary winding takes over through a diode."
+  },
+  {
+   "topic": "Quasi-resonant operation",
+   "page": 13,
+   "text": "The NCP1380 is a peak current-mode controller that turns the MOSFET on in a valley of the drain ringing after the transformer has demagnetised. In this mode the peak current setpoint is one quarter of the FB voltage (Iratio = 4). As the load falls the controller moves from the 1st valley to the 2nd, 3rd and 4th; each change happens at a set FB voltage, with hysteresis between falling and rising FB so that it stays locked in one valley and does not hop back and forth. Below 0.8 V on FB (falling), or 1.4 V (rising), it leaves the 4th valley for VCO mode."
+  },
+  {
+   "topic": "Valley detection",
+   "page": 14,
+   "text": "The auxiliary winding voltage is watched on ZCD. Each time it falls through the 55 mV threshold a valley is counted, and the count picked by FB decides which valley starts the next cycle. Detection is blanked for tBLANK, about 3 µs, after each on-time so the leakage ringing is not taken for a valley. ZCD is clamped at about 10 V and −0.7 V internally."
+  },
+  {
+   "topic": "Time-out",
+   "page": 17,
+   "text": "If the drain ringing is too damped for ZCD to detect valleys, a 5.5 µs time-out (tout) supplies the missing valley pulses to the valley counter, which keeps the switching frequency from jumping. While soft-start runs, the time-out is 40 µs (toutSS). At startup the auxiliary winding carries only a small reflected output voltage, further reduced by the drop of the OPP diode, so ZCD may stay below threshold; with the 5.5 µs time-out this could restart the MOSFET before the transformer has fully demagnetised and run a few continuous-conduction cycles, which the 40 µs time-out avoids."
+  },
+  {
+   "topic": "VCO mode (frequency foldback)",
+   "page": 19,
+   "text": "Once in VCO mode, the controller holds the peak current at 17.5% of its maximum and the switching frequency falls as the load falls, cutting switching losses and standby power. Each period ends when the CT capacitor, charged by a 20 µA source, reaches a threshold set by FB (VFBth); the capacitor is then dumped to 0 V and the next period begins. The threshold rises as FB falls. With FB below 0.3 V the CT voltage is clamped at VCT(MAX), 5.4 V typical. The recommended CT is 220 pF."
+  },
+  {
+   "topic": "Valley transitions under falling load",
+   "page": 15,
+   "text": "A simulated 19 V, 60 W adapter at 120 Vdc input, with output current falling from 2.8 A to 100 mA, passes from the 1st valley through the 4th into VCO mode at FB levels of about 1.4, 1.2, 0.9 and 0.8 V with no instability at any change."
+  },
+  {
+   "topic": "Over-power protection",
+   "page": 22,
+   "text": "While the MOSFET is on, the auxiliary winding swings negative in proportion to the input voltage. Through the RZCD, Ropu and Ropl divider this negative voltage reaches ZCD and lowers the internal current limit reference, so the peak current, and with it the power, is cut more at high line. −300 mV on ZCD cuts the setpoint by 37.5% typical; beyond −300 mV the cut is no longer assured to be linear. A diode across Ropu takes it out of circuit in the off-time so that ZCD still sees enough voltage for valley detection."
+  },
+  {
+   "topic": "Soft-start",
+   "page": 13,
+   "text": "A fixed internal soft-start of about 4 ms (tSSTART 2.8 to 4.8 ms) ramps the peak current at each start so the power switch is not stressed."
+  },
+  {
+   "topic": "Overload and short-circuit protection",
+   "page": 20,
+   "text": "When the sensed current reaches VILIM, 0.8 V on CS, a digital timer counts up one step every 10 ms; once the current is back under the limit it counts down at the same rate. If it reaches 8 steps (80 ms; tOVLD 85 ms typical) while the fault is still present, the pulses stop. On A and C the controller latches: DRV stays low and the chip holds VCC at VCC(latch), 7.2 V typical, until the current into VCC drops below ICC(latch), which in practice means unplugging the supply. On B and D it stops, lets VCC fall through its own consumption (ICC1) to VCC(off), then goes through a new startup, so a lasting fault gives short bursts with long gaps. The timer works from the current rather than the auxiliary winding, so it also acts when poor coupling keeps the auxiliary voltage from collapsing in a short."
+  },
+  {
+   "topic": "Winding short-circuit protection",
+   "page": 20,
+   "text": "A second comparator on CS trips at VCS(stop), 1.2 V typical (1.5 × VILIM), after a shorter blanking of tBCS, 120 ns, and shuts the controller down at once. It works only inside the main blanking window tLEB, for noise immunity. It latches or auto-recovers the same way as the overload protection of each version."
+  },
+  {
+   "topic": "Overvoltage and overtemperature (A and B)",
+   "page": 23,
+   "text": "Pin 7 sources IOTP(REF), 91 µA typical, into an NTC to ground, which sets the pin's DC level; with a high NTC resistance an internal clamp holds it near 1.2 V (above 100 kΩ at 25 °C, for example). As temperature rises the NTC resistance falls; when the pin drops to VOTP, 0.8 V typical, the controller latches off. A zener from VCC (or another monitored voltage) to pin 7 conducts in an overvoltage and drives current into the internal clamp resistor, about 1.55 kΩ; when the pin reaches VOVP, 2.5 V typical, the controller latches off. In either latch DRV goes quiet and VCC is held at VCC(latch), 7.2 V typical; it resets only when the current into VCC falls below ICC(latch), so the supply must be unplugged and plugged in again."
+  },
+  {
+   "topic": "Brown-out and overvoltage (C and D)",
+   "page": 24,
+   "text": "Pin 7 watches the bulk rail, scaled down by a resistor divider. When it falls below VBO, 0.8 V typical, switching stops; when the bulk voltage recovers, the controller restarts only once VCC reaches VCC(on), through a full startup with latch reset and soft-start. Hysteresis comes from the 10 µA current IBO. Entering and leaving brown-out each wait tBO(delay), 30 µs typical. In normal running the pin is clamped internally at Vclamp, leaving room above it for overvoltage detection: a zener from VCC drives current into the clamp resistor, and when the pin passes 2.5 V the controller latches off until the supply is cycled."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 8,
+   "text": "The controller stops when the junction reaches 140 to 170 °C and recovers about 40 °C lower."
+  },
+  {
+   "topic": "Gate drive",
+   "page": 7,
+   "text": "DRV sources 500 mA and sinks 800 mA typical and drives a 1 nF load in 40 ns rising and 25 ns falling. Its high level is clamped to 13 V typical (15.5 V max) at the highest VCC."
+  },
+  {
+   "topic": "Feedback",
+   "page": 7,
+   "text": "FB has an internal 18 kΩ pull-up; an optocoupler collector connected straight to the pin pulls it down to regulate. The FB voltage sets both the peak current and the operating valley or VCO mode. Above 3.2 V on FB the controller is in the fault region."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SOIC-8 NB (case 751-07)",
+   "page": 26,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "max",
+    "min (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "A",
+     "body length",
+     "4.80",
+     "5.00",
+     "0.189",
+     "0.197"
+    ],
+    [
+     "B",
+     "body width",
+     "3.80",
+     "4.00",
+     "0.150",
+     "0.157"
+    ],
+    [
+     "C",
+     "overall height",
+     "1.35",
+     "1.75",
+     "0.053",
+     "0.069"
+    ],
+    [
+     "D",
+     "lead width",
+     "0.33",
+     "0.51",
+     "0.013",
+     "0.020"
+    ],
+    [
+     "G",
+     "lead pitch",
+     "1.27 BSC",
+     "",
+     "0.050 BSC",
+     ""
+    ],
+    [
+     "H",
+     "standoff",
+     "0.10",
+     "0.25",
+     "0.004",
+     "0.010"
+    ],
+    [
+     "J",
+     "lead thickness",
+     "0.19",
+     "0.25",
+     "0.007",
+     "0.010"
+    ],
+    [
+     "K",
+     "foot length",
+     "0.40",
+     "1.27",
+     "0.016",
+     "0.050"
+    ],
+    [
+     "M",
+     "foot angle",
+     "0°",
+     "8°",
+     "0°",
+     "8°"
+    ],
+    [
+     "N",
+     "corner chamfer (× 45°)",
+     "0.25",
+     "0.50",
+     "0.010",
+     "0.020"
+    ],
+    [
+     "S",
+     "overall width over the leads",
+     "5.80",
+     "6.20",
+     "0.228",
+     "0.244"
+    ]
+   ],
+   "notes": [
+    "Millimetres control; dimensioning and tolerancing follow ANSI Y14.5M-1982.",
+    "A and B leave out mold protrusion, which is at most 0.15 mm (0.006 in) on each side.",
+    "D leaves out dambar protrusion; up to 0.127 mm (0.005 in) in total over D is allowed at maximum material condition.",
+    "Lead position tolerance 0.25 mm (0.010 in) at maximum material condition; seating-plane flatness 0.10 mm (0.004 in)."
+   ]
+  },
+  {
+   "name": "SOIC-8 NB footprint",
+   "page": 26,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "mm",
+    "in"
+   ],
+   "rows": [
+    [
+     "pad length",
+     "1.52",
+     "0.060"
+    ],
+    [
+     "pad width",
+     "0.6",
+     "0.024"
+    ],
+    [
+     "pad pitch",
+     "1.270",
+     "0.050"
+    ],
+    [
+     "outer edge to outer edge of the two pad rows",
+     "7.0",
+     "0.275"
+    ],
+    [
+     "gap between the two pad rows",
+     "4.0",
+     "0.155"
+    ]
+   ]
+  }
+ ]
+}

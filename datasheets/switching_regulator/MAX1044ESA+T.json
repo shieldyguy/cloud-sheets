@@ -1,0 +1,3295 @@
+{
+ "sheet": 1,
+ "name": "MAX1044ESA+T",
+ "kind": "switching_regulator",
+ "manufacturer": "Analog Devices (Maxim Integrated)",
+ "title": "MAX1044 / ICL7660: CMOS switched-capacitor voltage converters, 1.5V to 10V",
+ "source": {
+  "document": "19-4667",
+  "revision": "Rev 3, 6/19",
+  "pages": 14
+ },
+ "summary": "The MAX1044 and ICL7660 are CMOS charge pumps that turn a positive supply of 1.5V to 10V into its negative; in other connections they double it (with two diodes), halve it, or give a negative multiple of it. The basic inverter needs only two outside capacitors; four power MOSFET switches and the oscillator are on chip, and no output diode is needed. The output is not regulated: it falls with load through the output resistance (65Ω typ for the MAX1044 at 5V), and 10mA comes with a 0.5V drop. On the MAX1044, tying BOOST to V+ speeds the oscillator up about six times; both are pin compatible with the ICL7660 and LTC1044.",
+ "key_figures": [
+  [
+   "Supply voltage",
+   "1.5V to 10V (LV to GND, MAX1044)"
+  ],
+  [
+   "No-load supply current",
+   "30µA typ, 200µA max at 5V (MAX1044)"
+  ],
+  [
+   "Output resistance",
+   "65Ω typ, 100Ω max at 20mA, 25°C (MAX1044)"
+  ],
+  [
+   "Power efficiency",
+   "98% typ, RL = 5kΩ"
+  ],
+  [
+   "Voltage conversion efficiency",
+   "99.9% typ, no load"
+  ],
+  [
+   "Oscillator frequency",
+   "5kHz min at 5V (MAX1044); 10kHz typ (ICL7660)"
+  ],
+  [
+   "External clock",
+   "up to 400kHz"
+  ],
+  [
+   "MAX1044ESA package and range",
+   "8 SO, -40°C to +85°C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 12,
+  "columns": [
+   "part number",
+   "temp. range",
+   "pin-package",
+   "note"
+  ],
+  "rows": [
+   [
+    "MAX1044CPA",
+    "0°C to +70°C",
+    "8 Plastic DIP",
+    ""
+   ],
+   [
+    "MAX1044CSA",
+    "0°C to +70°C",
+    "8 SO",
+    ""
+   ],
+   [
+    "MAX1044C/D+*",
+    "0°C to +70°C",
+    "Dice*",
+    "dice: specifications from the factory; not tested"
+   ],
+   [
+    "MAX1044EPA",
+    "-40°C to +85°C",
+    "8 Plastic DIP",
+    ""
+   ],
+   [
+    "MAX1044ESA",
+    "-40°C to +85°C",
+    "8 SO",
+    ""
+   ],
+   [
+    "MAX1044MJA",
+    "-55°C to +125°C",
+    "8 CERDIP**",
+    "availability from the factory"
+   ],
+   [
+    "ICL7660CPA",
+    "0°C to +70°C",
+    "8 Plastic DIP",
+    ""
+   ],
+   [
+    "ICL7660CSA",
+    "0°C to +70°C",
+    "8 SO",
+    ""
+   ],
+   [
+    "ICL7660CUA",
+    "0°C to +70°C",
+    "8 μMAX",
+    ""
+   ],
+   [
+    "ICL7660C/D",
+    "0°C to +70°C",
+    "Dice*",
+    "dice: specifications from the factory; not tested"
+   ],
+   [
+    "ICL7660EPA",
+    "-40°C to +85°C",
+    "8 Plastic DIP",
+    ""
+   ],
+   [
+    "ICL7660ESA",
+    "-40°C to +85°C",
+    "8 SO",
+    ""
+   ],
+   [
+    "ICL7660AMJA†",
+    "-55°C to +125°C",
+    "8 CERDIP**",
+    "availability from the factory; meets or exceeds all A and S specifications"
+   ],
+   [
+    "ICL7660AMTV†",
+    "-55°C to +125°C",
+    "8 TO-99**",
+    "availability from the factory; meets or exceeds all A and S specifications"
+   ]
+  ],
+  "notes": [
+   "† The Maxim ICL7660 meets or beats every \"A\" and \"S\" grade specification.",
+   "The MAX1044 has the BOOST pin; on the ICL7660 pin 1 is not connected. The two are pin compatible with the ICL7660 and LTC1044."
+  ]
+ },
+ "pins": [
+  {
+   "package": "8-pin DIP / SO / µMAX (MAX1044, ICL7660)",
+   "page": 1,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "BOOST",
+     "type": "input",
+     "function": "MAX1044: frequency boost. Tied to V+ it speeds the oscillator up by six times. It does nothing when OSC is driven from outside, and is left open then. On the ICL7660 pin 1 is not connected (N.C.)."
+    },
+    {
+     "pin": "2",
+     "name": "CAP+",
+     "type": "power",
+     "function": "Positive side of the pump capacitor."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground. Usually the reservoir capacitor's positive side connects to it."
+    },
+    {
+     "pin": "4",
+     "name": "CAP-",
+     "type": "power",
+     "function": "Negative side of the pump capacitor."
+    },
+    {
+     "pin": "5",
+     "name": "VOUT",
+     "type": "power out",
+     "function": "Negative output. Usually the reservoir capacitor's negative side connects to it."
+    },
+    {
+     "pin": "6",
+     "name": "LV",
+     "type": "input",
+     "function": "Low-voltage operation. Grounded for supplies under 3.5V. On the ICL7660 it is left open for supplies over 5V."
+    },
+    {
+     "pin": "7",
+     "name": "OSC",
+     "type": "input",
+     "function": "Oscillator control. A capacitor from OSC lowers the oscillator frequency; an outside clock may drive it. Keep stray capacitance on this pin low."
+    },
+    {
+     "pin": "8",
+     "name": "V+",
+     "type": "power in",
+     "function": "Positive supply input, 1.5V to 10V. Also the substrate connection."
+    }
+   ]
+  },
+  {
+   "package": "TO-99 (ICL7660)",
+   "page": 1,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "N.C.",
+     "type": "nc",
+     "function": "Not connected."
+    },
+    {
+     "pin": "2",
+     "name": "CAP+",
+     "type": "power",
+     "function": "Positive side of the pump capacitor."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "4",
+     "name": "CAP-",
+     "type": "power",
+     "function": "Negative side of the pump capacitor."
+    },
+    {
+     "pin": "5",
+     "name": "VOUT",
+     "type": "power out",
+     "function": "Negative output."
+    },
+    {
+     "pin": "6",
+     "name": "LV",
+     "type": "input",
+     "function": "Low-voltage operation."
+    },
+    {
+     "pin": "7",
+     "name": "OSC",
+     "type": "input",
+     "function": "Oscillator control."
+    },
+    {
+     "pin": "8",
+     "name": "V+",
+     "type": "power in",
+     "function": "Positive supply input; the metal case is tied to V+."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "conditions",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Supply Voltage",
+     "V+ to GND, or GND to VOUT",
+     "10.5V"
+    ],
+    [
+     "Input Voltage on Pins 1, 6, and 7",
+     "",
+     "-0.3V ≤ VIN ≤ (V+ + 0.3V)"
+    ],
+    [
+     "LV Input Current",
+     "",
+     "20μA"
+    ],
+    [
+     "Output Short-Circuit Duration",
+     "V+ ≤ 5.5V",
+     "Continuous"
+    ],
+    [
+     "Continuous Power Dissipation, Plastic DIP",
+     "TA = +70°C; derate 9.09mW/°C above +70°C",
+     "727mW"
+    ],
+    [
+     "Continuous Power Dissipation, SO",
+     "TA = +70°C; derate 5.88mW/°C above +70°C",
+     "471mW"
+    ],
+    [
+     "Continuous Power Dissipation, μMAX",
+     "TA = +70°C; derate 4.1mW/°C above +70°C",
+     "330mW"
+    ],
+    [
+     "Continuous Power Dissipation, CERDIP",
+     "TA = +70°C; derate 8.00mW/°C above +70°C",
+     "640mW"
+    ],
+    [
+     "Continuous Power Dissipation, TO-99",
+     "TA = +70°C; derate 6.67mW/°C above +70°C",
+     "533mW"
+    ],
+    [
+     "Operating Temperature Range",
+     "MAX1044C_ _ /ICL7660C_ _",
+     "0°C to +70°C"
+    ],
+    [
+     "Operating Temperature Range",
+     "MAX1044E_ _ /ICL7660E_ _",
+     "-40°C to +85°C"
+    ],
+    [
+     "Operating Temperature Range",
+     "MAX1044M_ _ /ICL7660M_ _",
+     "-55°C to +125°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "",
+     "-65°C to + 150°C"
+    ],
+    [
+     "Lead Temperature",
+     "soldering, 10sec",
+     "+300°C"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these ratings can damage the part for good; they are not operating conditions, and long exposure at them can reduce reliability."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 2,
+   "conditions": "Circuit of Figure 1, V+ = 5.0V, LV pin = 0V, BOOST pin = open, ILOAD = 0mA, TA = TMIN to TMAX, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "MAX1044 min",
+    "MAX1044 typ",
+    "MAX1044 max",
+    "ICL7660 min",
+    "ICL7660 typ",
+    "ICL7660 max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply Current",
+     "RL = ∞, pins 1 and 7 no connection, LV open, TA = +25°C",
+     "",
+     "30",
+     "200",
+     "",
+     "80",
+     "175",
+     "µA"
+    ],
+    [
+     "Supply Current",
+     "RL = ∞, pins 1 and 7 no connection, LV open, TA = 0°C to +70°C",
+     "",
+     "",
+     "200",
+     "",
+     "",
+     "225",
+     "µA"
+    ],
+    [
+     "Supply Current",
+     "RL = ∞, pins 1 and 7 no connection, LV open, TA = -40°C to +85°C",
+     "",
+     "",
+     "200",
+     "",
+     "",
+     "250",
+     "µA"
+    ],
+    [
+     "Supply Current",
+     "RL = ∞, pins 1 and 7 no connection, LV open, TA = -55°C to +125°C",
+     "",
+     "",
+     "200",
+     "",
+     "",
+     "250",
+     "µA"
+    ],
+    [
+     "Supply Current",
+     "RL = ∞, pins 1 and 7 = V+ = 3V",
+     "",
+     "10",
+     "",
+     "",
+     "",
+     "",
+     "µA"
+    ],
+    [
+     "Supply Voltage Range (Note 1)",
+     "RL = 10kΩ, LV open",
+     "",
+     "",
+     "",
+     "3.0",
+     "",
+     "10.0",
+     "V"
+    ],
+    [
+     "Supply Voltage Range (Note 1)",
+     "RL = 10kΩ, LV to GND",
+     "1.5",
+     "",
+     "10",
+     "1.5",
+     "",
+     "3.5",
+     "V"
+    ],
+    [
+     "Output Resistance",
+     "IL = 20mA, fOSC = 5kHz, LV open, TA = +25°C",
+     "",
+     "65",
+     "100",
+     "",
+     "55",
+     "100",
+     "Ω"
+    ],
+    [
+     "Output Resistance",
+     "IL = 20mA, fOSC = 5kHz, LV open, TA = 0°C to +70°C",
+     "",
+     "",
+     "130",
+     "",
+     "",
+     "120",
+     "Ω"
+    ],
+    [
+     "Output Resistance",
+     "IL = 20mA, fOSC = 5kHz, LV open, TA = -40°C to +85°C",
+     "",
+     "",
+     "130",
+     "",
+     "",
+     "140",
+     "Ω"
+    ],
+    [
+     "Output Resistance",
+     "IL = 20mA, fOSC = 5kHz, LV open, TA = -55°C to +125°C",
+     "",
+     "",
+     "150",
+     "",
+     "",
+     "150",
+     "Ω"
+    ],
+    [
+     "Output Resistance",
+     "fOSC = 2.7kHz (ICL7660), fOSC = 1kHz (MAX1044), V+ = 2V, IL = 3mA, LV to GND, TA = +25°C",
+     "",
+     "",
+     "325",
+     "",
+     "",
+     "250",
+     "Ω"
+    ],
+    [
+     "Output Resistance",
+     "fOSC = 2.7kHz (ICL7660), fOSC = 1kHz (MAX1044), V+ = 2V, IL = 3mA, LV to GND, TA = 0°C to +70°C",
+     "",
+     "",
+     "325",
+     "",
+     "",
+     "300",
+     "Ω"
+    ],
+    [
+     "Output Resistance",
+     "fOSC = 2.7kHz (ICL7660), fOSC = 1kHz (MAX1044), V+ = 2V, IL = 3mA, LV to GND, TA = -40°C to +85°C",
+     "",
+     "",
+     "325",
+     "",
+     "",
+     "300",
+     "Ω"
+    ],
+    [
+     "Output Resistance",
+     "fOSC = 2.7kHz (ICL7660), fOSC = 1kHz (MAX1044), V+ = 2V, IL = 3mA, LV to GND, TA = -55°C to +125°C",
+     "",
+     "",
+     "400",
+     "",
+     "",
+     "400",
+     "Ω"
+    ],
+    [
+     "Oscillator Frequency",
+     "COSC = 1pF, LV to GND (Note 2), V+ = 5V",
+     "5",
+     "",
+     "",
+     "",
+     "10",
+     "",
+     "kHz"
+    ],
+    [
+     "Oscillator Frequency",
+     "COSC = 1pF, LV to GND (Note 2), V+ = 2V",
+     "1",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "kHz"
+    ],
+    [
+     "Power Efficiency",
+     "RL = 5kΩ, TA = +25°C, fOSC 5kHz, LV open",
+     "95",
+     "98",
+     "",
+     "95",
+     "98",
+     "",
+     "%"
+    ],
+    [
+     "Voltage Conversion Efficiency",
+     "RL = ∞, TA = +25°C, LV open",
+     "97.0",
+     "99.9",
+     "",
+     "99.0",
+     "99.9",
+     "",
+     "%"
+    ],
+    [
+     "Oscillator Sink or Source Current",
+     "VOSC = 0V or V+, LV open, Pin 1 = 0V",
+     "",
+     "",
+     "3",
+     "",
+     "",
+     "",
+     "µA"
+    ],
+    [
+     "Oscillator Sink or Source Current",
+     "VOSC = 0V or V+, LV open, Pin 1 = V+",
+     "",
+     "",
+     "20",
+     "",
+     "",
+     "",
+     "µA"
+    ],
+    [
+     "Oscillator Impedance",
+     "TA = +25°C, V+ = 2V",
+     "",
+     "1.0",
+     "",
+     "",
+     "1.0",
+     "",
+     "MΩ"
+    ],
+    [
+     "Oscillator Impedance",
+     "TA = +25°C, V+ = 5V",
+     "",
+     "100",
+     "",
+     "",
+     "100",
+     "",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "Note 1: neither part needs an external output diode anywhere in its temperature and voltage ranges, and the tests run with none. When standing in for the Intersil ICL7660, the Maxim ICL7660 also works with a diode in series with pin 5, cathode toward VOUT.",
+    "Note 2: fOSC is measured with COSC = 100pF, which keeps the fixture's own capacitance from mattering; the 1pF figure is correlated from that measurement and stands for pin 7's capacitance in a socket with nothing fitted. LV is grounded for the test to match the original manufacturer's device, which grounds that pin itself above 3V."
+   ]
+  },
+  {
+   "title": "Package information",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "package type",
+    "package code",
+    "outline no.",
+    "land pattern no."
+   ],
+   "rows": [
+    [
+     "8 Plastic DIP",
+     "P8+1",
+     "21-0043",
+     "—"
+    ],
+    [
+     "8 SOIC",
+     "S8+2",
+     "21-0041",
+     "90-0096"
+    ],
+    [
+     "8 CERDIP",
+     "J8+2",
+     "21-0045",
+     "—"
+    ],
+    [
+     "8 µMAX",
+     "U8+1",
+     "21-0036",
+     "90-0092"
+    ],
+    [
+     "8 TO-99",
+     "T99-8",
+     "21-0022",
+     "—"
+    ]
+   ],
+   "notes": [
+    "A +, # or - in the package code marks RoHS status only; the outline is the same whatever that character is."
+   ]
+  },
+  {
+   "title": "Chip topography",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "die",
+    "width",
+    "height",
+    "transistor count",
+    "substrate"
+   ],
+   "rows": [
+    [
+     "MAX1044",
+     "0.076\" (1.930mm)",
+     "0.076\" (1.930mm)",
+     "72",
+     "connected to V+"
+    ],
+    [
+     "ICL7660",
+     "0.060\" (1.5mm)",
+     "0.084\" (2.1mm)",
+     "71",
+     "connected to V+"
+    ]
+   ],
+   "notes": [
+    "MAX1044 pads: GND, CAP+ and BOOST along the top edge, CAP- and VOUT on the left, V+ on the right, LV and OSC along the bottom. ICL7660 pads: V+, OSC, LV and VOUT on the right, CAP+, GND and CAP- on the left."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Output voltage and output ripple against load current",
+   "page": 3,
+   "conditions": "V+ = 2V, LV = GND, CBYPASS = 0.1µF, C1 = C2 = 10µF, OSC open, TA = +25°C",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Output ripple",
+    "unit": "mVp-p",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output voltage",
+     "points": [
+      [
+       0.0161,
+       -2.0
+      ],
+      [
+       10.0,
+       -0.968
+      ]
+     ]
+    },
+    {
+     "label": "Output ripple, A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       0,
+       0.387
+      ],
+      [
+       10.0,
+       53.6
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "Output ripple, B: ICL7660",
+     "points": [
+      [
+       0,
+       0.387
+      ],
+      [
+       10.0,
+       200
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "Output ripple, C: MAX1044, BOOST open",
+     "points": [
+      [
+       0,
+       0.387
+      ],
+      [
+       9.97,
+       289
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Output voltage and output ripple against load current",
+   "page": 3,
+   "conditions": "V+ = 5V, LV open, CBYPASS = 0.1µF, C1 = C2 = 10µF, OSC open, TA = +25°C",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Output ripple",
+    "unit": "mVp-p",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output voltage, A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       0,
+       -5.0
+      ],
+      [
+       39.9,
+       -3.45
+      ]
+     ]
+    },
+    {
+     "label": "Output voltage, B: ICL7660",
+     "points": [
+      [
+       0,
+       -5.0
+      ],
+      [
+       39.9,
+       -3.03
+      ]
+     ]
+    },
+    {
+     "label": "Output voltage, C: MAX1044, BOOST open",
+     "points": [
+      [
+       0,
+       -5.0
+      ],
+      [
+       20.0,
+       -3.99
+      ],
+      [
+       39.9,
+       -2.22
+      ]
+     ]
+    },
+    {
+     "label": "Output ripple, A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       0.0323,
+       0.837
+      ],
+      [
+       39.9,
+       114
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "Output ripple, B: ICL7660",
+     "points": [
+      [
+       0.0323,
+       0.837
+      ],
+      [
+       39.9,
+       539
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "Output ripple, C: MAX1044, BOOST open",
+     "points": [
+      [
+       0.0323,
+       0.193
+      ],
+      [
+       39.9,
+       729
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Output voltage and output ripple against load current",
+   "page": 3,
+   "conditions": "V+ = 10V, LV open, CBYPASS = 0.1µF, C1 = C2 = 10µF, OSC open, TA = +25°C",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Output ripple",
+    "unit": "mVp-p",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output voltage, A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       0.0161,
+       -10.0
+      ],
+      [
+       40.0,
+       -8.97
+      ]
+     ]
+    },
+    {
+     "label": "Output voltage, B: ICL7660",
+     "points": [
+      [
+       0.0484,
+       -10.0
+      ],
+      [
+       40.0,
+       -8.47
+      ]
+     ]
+    },
+    {
+     "label": "Output voltage, C: MAX1044, BOOST open",
+     "points": [
+      [
+       0.0161,
+       -10.0
+      ],
+      [
+       40.0,
+       -8.38
+      ]
+     ]
+    },
+    {
+     "label": "Output ripple, A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       0.0161,
+       0.282
+      ],
+      [
+       39.9,
+       87.1
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "Output ripple, B: ICL7660",
+     "points": [
+      [
+       0.0161,
+       0.282
+      ],
+      [
+       39.9,
+       407
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "Output ripple, C: MAX1044, BOOST open",
+     "points": [
+      [
+       0.0161,
+       0.282
+      ],
+      [
+       40.0,
+       629
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Efficiency and supply current against load current",
+   "page": 3,
+   "conditions": "V+ = 2V, LV = GND, CBYPASS = 0.1µF, C1 = C2 = 10µF, OSC open, TA = +25°C",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency",
+     "points": [
+      [
+       0.0468,
+       0.121
+      ],
+      [
+       0.0468,
+       94.6
+      ],
+      [
+       0.0629,
+       95.9
+      ],
+      [
+       0.176,
+       97.6
+      ],
+      [
+       0.377,
+       98.1
+      ],
+      [
+       0.837,
+       97.3
+      ],
+      [
+       9.97,
+       74.3
+      ]
+     ]
+    },
+    {
+     "label": "Supply current",
+     "points": [
+      [
+       0.00645,
+       0.00403
+      ],
+      [
+       9.97,
+       9.97
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Efficiency and supply current against load current",
+   "page": 3,
+   "conditions": "V+ = 5V, LV open, CBYPASS = 0.1µF, C1 = C2 = 10µF, OSC open, TA = +25°C",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency below 20mA, faster-rising curve",
+     "points": [
+      [
+       0.23,
+       0
+      ],
+      [
+       0.23,
+       94.7
+      ],
+      [
+       0.44,
+       97.0
+      ],
+      [
+       0.7,
+       97.5
+      ],
+      [
+       1.49,
+       97.6
+      ],
+      [
+       3.29,
+       96.6
+      ],
+      [
+       9.84,
+       94.2
+      ],
+      [
+       19.97,
+       91.0
+      ]
+     ]
+    },
+    {
+     "label": "Efficiency below 20mA, slower-rising curve",
+     "points": [
+      [
+       0.2,
+       0
+      ],
+      [
+       0.2,
+       80.1
+      ],
+      [
+       0.56,
+       87.3
+      ],
+      [
+       1.52,
+       90.9
+      ],
+      [
+       2.36,
+       92.3
+      ],
+      [
+       3.51,
+       93.2
+      ],
+      [
+       5.02,
+       93.8
+      ],
+      [
+       19.97,
+       90.1
+      ]
+     ]
+    },
+    {
+     "label": "Efficiency, A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       19.97,
+       91.0
+      ],
+      [
+       39.87,
+       84.8
+      ]
+     ]
+    },
+    {
+     "label": "Efficiency, B: ICL7660",
+     "points": [
+      [
+       19.97,
+       90.1
+      ],
+      [
+       39.87,
+       79.2
+      ]
+     ]
+    },
+    {
+     "label": "Efficiency, C: MAX1044, BOOST open",
+     "points": [
+      [
+       19.97,
+       90.1
+      ],
+      [
+       39.87,
+       57.2
+      ]
+     ]
+    },
+    {
+     "label": "Supply current",
+     "points": [
+      [
+       0.0419,
+       0.0161
+      ],
+      [
+       39.9,
+       40.3
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Efficiency and supply current against load current",
+   "page": 3,
+   "conditions": "V+ = 10V, LV open, CBYPASS = 0.1µF, C1 = C2 = 10µF, OSC open, TA = +25°C",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency, A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       0.294,
+       0.386
+      ],
+      [
+       0.294,
+       60.3
+      ],
+      [
+       0.874,
+       75.1
+      ],
+      [
+       4.58,
+       87.7
+      ],
+      [
+       5.74,
+       90.1
+      ],
+      [
+       7.94,
+       92.4
+      ],
+      [
+       11.7,
+       94.1
+      ],
+      [
+       20.0,
+       95.8
+      ],
+      [
+       39.9,
+       95.5
+      ]
+     ]
+    },
+    {
+     "label": "Efficiency, B: ICL7660 and C: MAX1044, BOOST open",
+     "points": [
+      [
+       0.294,
+       0.145
+      ],
+      [
+       0.294,
+       80.3
+      ],
+      [
+       0.616,
+       89.3
+      ],
+      [
+       1.49,
+       93.3
+      ],
+      [
+       5.07,
+       97.3
+      ],
+      [
+       14.9,
+       97.6
+      ],
+      [
+       30.0,
+       95.6
+      ],
+      [
+       39.8,
+       93.6
+      ]
+     ]
+    },
+    {
+     "label": "Supply current",
+     "points": [
+      [
+       0.0355,
+       0.0322
+      ],
+      [
+       39.9,
+       40.8
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Efficiency against oscillator frequency",
+   "page": 4,
+   "conditions": "TA = +25°C; external HCMOS oscillator",
+   "x": {
+    "label": "Oscillator frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "C1, C2 = 100µF",
+     "points": [
+      [
+       20.3,
+       36.3
+      ],
+      [
+       39.2,
+       39.6
+      ],
+      [
+       70.6,
+       94.5
+      ],
+      [
+       148,
+       95.6
+      ],
+      [
+       585,
+       96.7
+      ],
+      [
+       4970,
+       96.9
+      ],
+      [
+       19500,
+       96.4
+      ],
+      [
+       40500,
+       94.2
+      ],
+      [
+       112000,
+       89.7
+      ],
+      [
+       197000,
+       85.8
+      ],
+      [
+       572000,
+       69.1
+      ]
+     ]
+    },
+    {
+     "label": "C1, C2 = 10µF",
+     "points": [
+      [
+       203,
+       46.9
+      ],
+      [
+       996,
+       91.0
+      ],
+      [
+       1380,
+       92.6
+      ],
+      [
+       2490,
+       94.6
+      ],
+      [
+       5840,
+       96.2
+      ],
+      [
+       9860,
+       96.7
+      ],
+      [
+       19500,
+       96.4
+      ],
+      [
+       23800,
+       96.0
+      ],
+      [
+       40500,
+       94.2
+      ],
+      [
+       112000,
+       89.7
+      ],
+      [
+       197000,
+       85.8
+      ],
+      [
+       572000,
+       69.1
+      ]
+     ]
+    },
+    {
+     "label": "C1, C2 = 1µF",
+     "points": [
+      [
+       2030,
+       34.8
+      ],
+      [
+       3980,
+       42.6
+      ],
+      [
+       9690,
+       87.7
+      ],
+      [
+       19500,
+       91.6
+      ],
+      [
+       39800,
+       92.3
+      ],
+      [
+       70900,
+       91.7
+      ],
+      [
+       112000,
+       89.7
+      ],
+      [
+       197000,
+       85.8
+      ],
+      [
+       572000,
+       69.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Oscillator frequency against external capacitance",
+   "page": 4,
+   "conditions": "TA = +25°C",
+   "x": {
+    "label": "COSC",
+    "unit": "pF",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Oscillator frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "MAX1044, BOOST = V+",
+     "points": [
+      [
+       0.947,
+       50100
+      ],
+      [
+       4.53,
+       49000
+      ],
+      [
+       10.5,
+       41500
+      ],
+      [
+       38.5,
+       13300
+      ],
+      [
+       21400,
+       38.8
+      ],
+      [
+       47700,
+       22.8
+      ],
+      [
+       95000,
+       12.2
+      ]
+     ]
+    },
+    {
+     "label": "ICL7660 and MAX1044, BOOST open",
+     "points": [
+      [
+       1.0,
+       9450
+      ],
+      [
+       9.44,
+       3180
+      ],
+      [
+       31.4,
+       1490
+      ],
+      [
+       76.0,
+       756
+      ],
+      [
+       1980,
+       37.1
+      ],
+      [
+       29100,
+       3.55
+      ],
+      [
+       95000,
+       0.692
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Oscillator frequency against supply voltage",
+   "page": 4,
+   "conditions": "TA = +25°C",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Oscillator frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "MAX1044, BOOST = V+, LV = GND",
+     "points": [
+      [
+       1.53,
+       10800
+      ],
+      [
+       1.7,
+       17100
+      ],
+      [
+       1.98,
+       25100
+      ],
+      [
+       2.38,
+       31800
+      ],
+      [
+       3.15,
+       42500
+      ],
+      [
+       4.09,
+       54400
+      ],
+      [
+       5.7,
+       73200
+      ],
+      [
+       6.72,
+       83500
+      ],
+      [
+       7.85,
+       92700
+      ],
+      [
+       9.09,
+       98500
+      ]
+     ]
+    },
+    {
+     "label": "MAX1044, BOOST = V+, LV open",
+     "points": [
+      [
+       1.48,
+       243
+      ],
+      [
+       1.95,
+       4090
+      ],
+      [
+       2.57,
+       13900
+      ],
+      [
+       2.88,
+       22400
+      ],
+      [
+       3.07,
+       27000
+      ],
+      [
+       3.43,
+       32900
+      ],
+      [
+       3.98,
+       40000
+      ],
+      [
+       6.09,
+       62400
+      ],
+      [
+       6.87,
+       64900
+      ],
+      [
+       9.98,
+       64900
+      ]
+     ]
+    },
+    {
+     "label": "ICL7660, LV = GND",
+     "points": [
+      [
+       1.5,
+       3720
+      ],
+      [
+       1.7,
+       5010
+      ],
+      [
+       1.98,
+       6230
+      ],
+      [
+       2.61,
+       7500
+      ],
+      [
+       3.98,
+       10200
+      ],
+      [
+       6.89,
+       14800
+      ],
+      [
+       9.98,
+       20400
+      ]
+     ]
+    },
+    {
+     "label": "ICL7660, LV open",
+     "points": [
+      [
+       1.98,
+       1710
+      ],
+      [
+       2.54,
+       3740
+      ],
+      [
+       2.81,
+       4840
+      ],
+      [
+       2.97,
+       5350
+      ],
+      [
+       3.63,
+       6700
+      ],
+      [
+       4.72,
+       8830
+      ],
+      [
+       5.94,
+       11000
+      ],
+      [
+       6.49,
+       11600
+      ],
+      [
+       6.97,
+       11800
+      ],
+      [
+       7.71,
+       11400
+      ],
+      [
+       8.98,
+       10200
+      ],
+      [
+       9.98,
+       10200
+      ]
+     ]
+    },
+    {
+     "label": "MAX1044, BOOST open, LV = GND",
+     "points": [
+      [
+       1.5,
+       1990
+      ],
+      [
+       1.72,
+       2810
+      ],
+      [
+       1.98,
+       3550
+      ],
+      [
+       2.58,
+       4300
+      ],
+      [
+       3.5,
+       5290
+      ],
+      [
+       4.34,
+       6160
+      ],
+      [
+       5.89,
+       7540
+      ],
+      [
+       8.8,
+       10600
+      ],
+      [
+       9.98,
+       11800
+      ]
+     ]
+    },
+    {
+     "label": "MAX1044, BOOST open, LV open",
+     "points": [
+      [
+       1.48,
+       101
+      ],
+      [
+       1.95,
+       971
+      ],
+      [
+       2.39,
+       2130
+      ],
+      [
+       2.73,
+       3250
+      ],
+      [
+       2.97,
+       4040
+      ],
+      [
+       3.31,
+       4500
+      ],
+      [
+       4.93,
+       6200
+      ],
+      [
+       4.98,
+       6270
+      ],
+      [
+       5.83,
+       7050
+      ],
+      [
+       9.98,
+       7250
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Oscillator frequency against temperature",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Oscillator frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "A: MAX1044, BOOST = V+",
+     "points": [
+      [
+       -50.0,
+       81.1
+      ],
+      [
+       -37.8,
+       73.2
+      ],
+      [
+       -29.6,
+       68.6
+      ],
+      [
+       22.4,
+       49.0
+      ],
+      [
+       38.1,
+       43.9
+      ],
+      [
+       54.2,
+       39.3
+      ],
+      [
+       71.2,
+       35.9
+      ],
+      [
+       89.6,
+       33.5
+      ],
+      [
+       110,
+       32.5
+      ]
+     ]
+    },
+    {
+     "label": "B: ICL7660",
+     "points": [
+      [
+       -50.0,
+       13.1
+      ],
+      [
+       37.5,
+       7.6
+      ],
+      [
+       124,
+       4.7
+      ]
+     ]
+    },
+    {
+     "label": "C: MAX1044, BOOST open",
+     "points": [
+      [
+       -50.0,
+       8.41
+      ],
+      [
+       124,
+       3.33
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent current against oscillator frequency",
+   "page": 4,
+   "conditions": "TA = +25°C",
+   "x": {
+    "label": "Oscillator frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Quiescent current",
+    "unit": "µA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "Using an external capacitor",
+     "points": [
+      [
+       1.01,
+       10.0
+      ],
+      [
+       17.3,
+       11.7
+      ],
+      [
+       204,
+       15.4
+      ],
+      [
+       674,
+       18.5
+      ],
+      [
+       1380,
+       22.6
+      ],
+      [
+       2040,
+       26.8
+      ],
+      [
+       3110,
+       36.0
+      ],
+      [
+       4740,
+       58.3
+      ]
+     ]
+    },
+    {
+     "label": "Using an external HCMOS oscillator",
+     "points": [
+      [
+       0.96,
+       1.07
+      ],
+      [
+       31.1,
+       1.45
+      ],
+      [
+       124,
+       1.79
+      ],
+      [
+       173,
+       1.99
+      ],
+      [
+       488,
+       4.21
+      ],
+      [
+       3960,
+       25.3
+      ],
+      [
+       27500,
+       176
+      ],
+      [
+       435000,
+       2190
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent current against supply voltage",
+   "page": 5,
+   "conditions": "CBYPASS = 0.1µF, C1 = C2 = 10µF, OSC open, TA = +25°C",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Quiescent current",
+    "unit": "µA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "A: MAX1044, BOOST = V+, LV = GND",
+     "points": [
+      [
+       1.5,
+       11.3
+      ],
+      [
+       1.92,
+       25.9
+      ],
+      [
+       2.96,
+       111
+      ],
+      [
+       4.87,
+       350
+      ],
+      [
+       6.55,
+       814
+      ],
+      [
+       8.05,
+       1360
+      ],
+      [
+       8.73,
+       1620
+      ],
+      [
+       9.96,
+       2020
+      ]
+     ]
+    },
+    {
+     "label": "B: MAX1044, BOOST = V+, LV open",
+     "points": [
+      [
+       1.5,
+       0.535
+      ],
+      [
+       1.96,
+       6.64
+      ],
+      [
+       3.0,
+       61.8
+      ],
+      [
+       4.39,
+       154
+      ],
+      [
+       5.16,
+       239
+      ],
+      [
+       6.86,
+       529
+      ],
+      [
+       7.82,
+       729
+      ],
+      [
+       8.85,
+       947
+      ],
+      [
+       9.96,
+       1110
+      ]
+     ]
+    },
+    {
+     "label": "C: ICL7660 and MAX1044, BOOST open, LV = GND (above 5V, MAX1044 only)",
+     "points": [
+      [
+       1.42,
+       2.02
+      ],
+      [
+       1.94,
+       5.85
+      ],
+      [
+       2.99,
+       17.0
+      ],
+      [
+       5.99,
+       106
+      ],
+      [
+       9.97,
+       350
+      ]
+     ]
+    },
+    {
+     "label": "D: ICL7660 and MAX1044, BOOST open, LV open",
+     "points": [
+      [
+       1.46,
+       0.214
+      ],
+      [
+       1.96,
+       2.64
+      ],
+      [
+       2.96,
+       11.9
+      ],
+      [
+       5.59,
+       53.1
+      ],
+      [
+       6.96,
+       101
+      ],
+      [
+       8.15,
+       135
+      ],
+      [
+       8.97,
+       149
+      ],
+      [
+       9.96,
+       155
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent current against temperature",
+   "page": 5,
+   "conditions": "V+ = 5V, CBYPASS = 0.1µF, C1 = C2 = 10µF, LV open, OSC open",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Quiescent current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1044, BOOST = V+",
+     "points": [
+      [
+       -49.7,
+       493
+      ],
+      [
+       -45.4,
+       477
+      ],
+      [
+       -35.3,
+       455
+      ],
+      [
+       -18.4,
+       412
+      ],
+      [
+       -2.66,
+       381
+      ],
+      [
+       9.88,
+       353
+      ],
+      [
+       17.8,
+       340
+      ],
+      [
+       79.3,
+       282
+      ],
+      [
+       111,
+       277
+      ]
+     ]
+    },
+    {
+     "label": "ICL7660, MAX1044 with BOOST open",
+     "points": [
+      [
+       -49.9,
+       86.7
+      ],
+      [
+       -8.29,
+       73.0
+      ],
+      [
+       33.8,
+       62.1
+      ],
+      [
+       111,
+       49.6
+      ],
+      [
+       124,
+       49.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output resistance against oscillator frequency",
+   "page": 5,
+   "conditions": "V+ = 5V, CBYPASS = 0.1µF, LV open, TA = +25°C; external HCMOS oscillator",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Output resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "C1, C2 = 100µF",
+     "points": [
+      [
+       17.4,
+       949
+      ],
+      [
+       37.4,
+       699
+      ],
+      [
+       47.5,
+       600
+      ],
+      [
+       58.9,
+       499
+      ],
+      [
+       77.2,
+       304
+      ],
+      [
+       98.9,
+       202
+      ],
+      [
+       136,
+       146
+      ],
+      [
+       175,
+       115
+      ],
+      [
+       200,
+       104
+      ],
+      [
+       484,
+       57.3
+      ],
+      [
+       592,
+       50.9
+      ],
+      [
+       980,
+       45.2
+      ],
+      [
+       97900,
+       35.6
+      ]
+     ]
+    },
+    {
+     "label": "C1, C2 = 10µF",
+     "points": [
+      [
+       206,
+       982
+      ],
+      [
+       526,
+       600
+      ],
+      [
+       642,
+       499
+      ],
+      [
+       826,
+       304
+      ],
+      [
+       1040,
+       202
+      ],
+      [
+       1440,
+       146
+      ],
+      [
+       2120,
+       104
+      ],
+      [
+       5090,
+       57.3
+      ],
+      [
+       6220,
+       50.9
+      ],
+      [
+       10400,
+       45.2
+      ],
+      [
+       98500,
+       38.8
+      ]
+     ]
+    },
+    {
+     "label": "C1, C2 = 1µF",
+     "points": [
+      [
+       2060,
+       997
+      ],
+      [
+       3140,
+       790
+      ],
+      [
+       5250,
+       593
+      ],
+      [
+       6410,
+       491
+      ],
+      [
+       8250,
+       297
+      ],
+      [
+       10400,
+       195
+      ],
+      [
+       14000,
+       139
+      ],
+      [
+       20100,
+       96.8
+      ],
+      [
+       46300,
+       50.9
+      ],
+      [
+       55500,
+       44.4
+      ],
+      [
+       98500,
+       38.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output resistance against supply voltage",
+   "page": 5,
+   "conditions": "CBYPASS = 0.1µF, C1 = C2 = 10µF, LV open, OSC open, TA = +25°C",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output resistance",
+     "points": [
+      [
+       1.76,
+       200
+      ],
+      [
+       2.3,
+       120
+      ],
+      [
+       2.76,
+       79.7
+      ],
+      [
+       3.3,
+       60.4
+      ],
+      [
+       3.96,
+       52.0
+      ],
+      [
+       5.22,
+       40.9
+      ],
+      [
+       6.96,
+       31.7
+      ],
+      [
+       8.96,
+       29.7
+      ],
+      [
+       9.96,
+       29.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output resistance against temperature",
+   "page": 5,
+   "conditions": "V+ = 5V, CBYPASS = 0.1µF, C1 = C2 = 10µF, LV open, OSC open",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICL7660, MAX1044 with BOOST open",
+     "points": [
+      [
+       -58.1,
+       29.9
+      ],
+      [
+       124,
+       68.9
+      ]
+     ]
+    },
+    {
+     "label": "MAX1044, BOOST = V+",
+     "points": [
+      [
+       -58.1,
+       22.1
+      ],
+      [
+       112,
+       47.8
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "test-circuit",
+   "title": "Test circuit for the electrical characteristics",
+   "page": 6,
+   "fixture": true,
+   "description": "The circuit the electrical table is measured in: a 10µF pump capacitor across CAP+ and CAP-, a 10µF reservoir from VOUT to ground, a 0.1µF bypass on V+ and a load resistor RL from V+ to VOUT. Switches set the test state: one joins BOOST to V+, one connects OSC either to an external clock or to a timing capacitor COSC, and one grounds LV.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044 / ICL7660"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "CBYPASS",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "COSC",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "RL",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "SPST",
+     "note": "BOOST to V+"
+    },
+    {
+     "ref": "S2",
+     "type": "switch",
+     "value": "SPDT",
+     "note": "OSC to the external clock or to COSC"
+    },
+    {
+     "ref": "S3",
+     "type": "switch",
+     "value": "SPST",
+     "note": "LV to ground"
+    },
+    {
+     "ref": "OSC1",
+     "type": "source",
+     "value": "external oscillator"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "basic-inverter",
+   "title": "Basic negative voltage converter",
+   "page": 8,
+   "description": "The plain inverter: the pump capacitor C1 sits across CAP+ and CAP-, the reservoir C2 holds the output with its positive side on ground, and a bypass capacitor sits on V+. The output settles near the negative of the supply. BOOST and OSC are left unconnected so the internal oscillator runs at its nominal rate.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "CBYPASS",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -(V+)"
+    }
+   ],
+   "notes": [
+    "LV to ground is required for V+ below 3.5V."
+   ]
+  },
+  {
+   "id": "inverter-cosc-boost",
+   "title": "Negative voltage converter with COSC and BOOST",
+   "page": 8,
+   "description": "The inverter with its oscillator adjusted: BOOST is wired to V+ to raise the rate about six times, and a capacitor COSC from OSC to ground lowers it. LV is left open.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF",
+     "note": "Misprinted 10F; should read 10µF."
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF",
+     "note": "Misprinted 10F; should read 10µF."
+    },
+    {
+     "ref": "COSC",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -(V+)"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "external-clock",
+   "title": "External clocking",
+   "page": 9,
+   "description": "The inverter run from an outside clock: a CMOS or TTL gate, its two inputs tied together to take the clock, drives OSC. A 10kΩ resistor from V+ to OSC pulls the clock up to the supply; it is required with a TTL gate.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10kΩ",
+     "note": "needed for TTL"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "CMOS or TTL gate",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -(V+)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "CLOCK"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "inverter-boost-lv",
+   "title": "Negative voltage converter with BOOST and LV connections",
+   "page": 10,
+   "description": "The common inverter with a 0.1µF bypass on V+ and LV grounded. BOOST may be joined to V+ to run the oscillator faster.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "CBYPASS",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -(V+)"
+    }
+   ],
+   "notes": [
+    "The BOOST to V+ link is optional; without it BOOST is left open.",
+    "A bypass capacitor of 0.1µF to 10µF on V+ is recommended."
+   ]
+  },
+  {
+   "id": "doubler",
+   "title": "Voltage doubler",
+   "page": 10,
+   "description": "A positive doubler driven from CAP+: one diode from V+ feeds the top of the pump capacitor C1, whose other side is on CAP+, and a second diode passes that charge to the reservoir C2. VOUT pin is grounded. The output is twice V+ less two diode drops; Schottky diodes reduce the drops.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = 2(V+) - 2VD"
+    }
+   ],
+   "notes": [
+    "LV is shown optionally grounded."
+   ]
+  },
+  {
+   "id": "divider",
+   "title": "Voltage divider",
+   "page": 11,
+   "description": "Splits the supply in half: the part runs from V+ with its VOUT pin grounded, and its GND pin is the half-supply output, held by C2 to ground. C1 is the pump capacitor across CAP+ and CAP-. LV may be tied to the half-supply node.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = 1/2 V+"
+    }
+   ],
+   "notes": [
+    "The LV link to the half-supply node is optional.",
+    "A third capacitor may be added between V+ and the output."
+   ]
+  },
+  {
+   "id": "positive-negative",
+   "title": "Combined positive and negative converter",
+   "page": 11,
+   "description": "One part gives both a negative rail and a doubled positive rail. C1 and C3 are pump and reservoir for the inverted output; C2 and C4 are pump and reservoir for the doubled output. C2 runs from CAP+ to a node fed from V+ through one diode, and a second diode passes that charge to C4. Both outputs have higher output impedance because they share one charge-pump driver.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -(V+)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "VOUT = 2(V+) - 2VD"
+    }
+   ],
+   "notes": [
+    "LV is shown optionally grounded."
+   ]
+  },
+  {
+   "id": "cascade",
+   "title": "Cascading devices for a larger negative output",
+   "page": 11,
+   "description": "Three inverters stacked to give about -3 times V+. Each later stage is powered between the two rails before it: the second takes ground as its V+ and the first output as its GND, the third takes the first output as its V+ and the second output as its GND. Each stage has its own 10µF pump capacitor and 10µF reservoir to ground. Output resistance grows quickly with each stage.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -n(V+)"
+    }
+   ],
+   "notes": [
+    "n is the number of devices in the chain."
+   ]
+  },
+  {
+   "id": "parallel",
+   "title": "Paralleling devices to reduce output resistance",
+   "page": 12,
+   "description": "Two or more inverters in parallel, each with its own pump capacitor C1, all driving one shared reservoir C2. Output resistance falls as one over the number of devices and the current available rises.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "pump capacitor of U1"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "shared reservoir"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "pump capacitor of U2 (C1 of the second device)"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -(V+)"
+    }
+   ],
+   "notes": [
+    "Device n repeats the second device; LV is shown optionally grounded on each."
+   ]
+  },
+  {
+   "id": "shutdown-diode",
+   "title": "Shutdown by a gate and diode on OSC",
+   "page": 12,
+   "description": "A logic gate stops the oscillator through a 1N4148 diode into OSC, with a 10kΩ pull-up from V+ on the gate side (needed for TTL). The gate's inputs are tied together as the shutdown control. Of the three shutdown methods this one loads OSC least, and turning the diode round sets whether a high or a low level shuts the converter down.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1044"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10kΩ",
+     "note": "needed for TTL"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "CMOS or TTL gate",
+     "external": true
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VOUT = -(V+)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SHUTDOWN"
+    }
+   ],
+   "notes": [
+    "LV is shown optionally grounded."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Charge moved per cycle",
+   "expr": "ΔQ = C1 × (V+ − VOUT)",
+   "where": {
+    "C1": "pump (bucket) capacitor",
+    "V+": "supply voltage",
+    "VOUT": "output voltage"
+   },
+   "note": "",
+   "page": 6
+  },
+  {
+   "name": "Current through the switched capacitor",
+   "expr": "I = f × ΔQ = f × C1 × (V+ − VOUT) = (V+ − VOUT) / (1 / (f × C1))",
+   "where": {
+    "f": "switching frequency, half the oscillator frequency"
+   },
+   "note": "",
+   "page": 6
+  },
+  {
+   "name": "Equivalent resistance of the switched capacitor",
+   "expr": "REQUIV = 1 / (f × C1)",
+   "where": {
+    "f": "half the oscillator frequency",
+    "C1": "pump capacitor"
+   },
+   "note": "This term is a large part of the converter's output impedance.",
+   "page": 7
+  },
+  {
+   "name": "Total power loss",
+   "expr": "ΣPLOSS = PINTERNAL + PSWITCH + PPUMP + PCONVERSION",
+   "where": {
+    "PINTERNAL": "losses inside the IC (switch drive, oscillator); they depend on input voltage, temperature, frequency and the LV, BOOST and OSC connections",
+    "PSWITCH": "loss in the on-resistance of the MOSFET switches",
+    "PPUMP": "loss in the ESR of the pump capacitors",
+    "PCONVERSION": "loss when charge moves between C1 and C2 at different voltages"
+   },
+   "note": "",
+   "page": 9
+  },
+  {
+   "name": "Switch and pump-capacitor losses",
+   "expr": "PPUMP + PSWITCH = IOUT² × ROUT",
+   "where": {
+    "IOUT": "output current",
+    "ROUT": "output resistance"
+   },
+   "note": "",
+   "page": 9
+  },
+  {
+   "name": "Output resistance",
+   "expr": "ROUT ≅ 1 / ((fOSC / 2) × C1) + 4 × (2 × RSWITCHES + ESRC1) + ESRC2",
+   "where": {
+    "fOSC": "oscillator frequency",
+    "RSWITCHES": "on-resistance of the internal switches",
+    "ESRC1": "ESR of the pump capacitor",
+    "ESRC2": "ESR of the reservoir capacitor"
+   },
+   "note": "The first term is the switched capacitor's own resistance.",
+   "page": 9
+  },
+  {
+   "name": "Conversion loss",
+   "expr": "PCONV.LOSS ≅ [½ × C1 × ((V+)² − VOUT²) + ½ × C2 × (VRIPPLE² − 2 × VOUT × VRIPPLE)] × fOSC / 2",
+   "where": {
+    "C2": "reservoir capacitor",
+    "VRIPPLE": "output ripple voltage"
+   },
+   "note": "",
+   "page": 9
+  },
+  {
+   "name": "Output ripple",
+   "expr": "VRIPPLE ≅ (1 / (2 × fOSC × C2) + 2 × ESRC2) × IOUT",
+   "where": {
+    "fOSC": "oscillator frequency",
+    "C2": "reservoir capacitor",
+    "ESRC2": "ESR of C2",
+    "IOUT": "output current"
+   },
+   "note": "C2 alone carries the load for half of each pump cycle.",
+   "page": 10
+  },
+  {
+   "name": "Doubler output",
+   "expr": "VOUT = 2(V+) − 2VD",
+   "where": {
+    "VD": "forward drop of each diode"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Divider output",
+   "expr": "VOUT = ½ V+",
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Cascaded output",
+   "expr": "VOUT = −n(V+)",
+   "where": {
+    "n": "number of devices in the chain"
+   },
+   "note": "Nominal; each stage's output resistance times the next stage's quiescent current lowers it slightly.",
+   "page": 11
+  },
+  {
+   "name": "Paralleled output resistance",
+   "expr": "ROUT = ROUT(of MAX1044 or ICL7660) / n",
+   "where": {
+    "n": "number of devices in parallel"
+   },
+   "note": "",
+   "page": 12
+  }
+ ],
+ "operation": [
+  {
+   "topic": "How it works",
+   "page": 6,
+   "text": "A charge pump with four internal MOSFET switches. In one half cycle S1 and S3 close and the pump capacitor C1 charges to V+. In the other half S2 and S4 close, which puts C1's positive side on ground and its negative side on VOUT, so C1 sits in parallel with the reservoir C2 and tops it up. Over many cycles C2 approaches -(V+); switch resistance and load current keep the real output a little short of that."
+  },
+  {
+   "topic": "Inside the part",
+   "page": 7,
+   "text": "Besides the switches the part holds their drive circuits, an oscillator followed by a divide-by-two stage, and an internal regulator that the LV pin can bypass. A 1MΩ resistor inside joins BOOST to V+."
+  },
+  {
+   "topic": "Choosing capacitors",
+   "page": 7,
+   "text": "Most uses need only the pump and reservoir capacitors, and their type is not critical. A bypass capacitor of 0.1µF to 10µF on V+ is recommended. Larger, low-ESR capacitors reduce both ripple and output impedance and so raise efficiency. Smaller values will do at smaller output currents."
+  },
+  {
+   "topic": "LV pin",
+   "page": 7,
+   "text": "LV bypasses the internal regulator, which improves low-voltage behaviour and allows operation down to 1.5V. For compatibility with the ICL7660 and LTC1044, ground LV below 3.5V and leave it open above 3.5V. On the MAX1044, LV may be grounded at any supply: this improves low-voltage performance and raises the oscillator frequency, at the cost of more quiescent current and lower efficiency at high supply voltages. On the Maxim ICL7660 LV must be open above 5V. At low supplies with LV open, keep the LV, BOOST and OSC connections short or shielded so that interference does not jitter the oscillator."
+  },
+  {
+   "topic": "Oscillator frequency",
+   "page": 8,
+   "text": "Normally BOOST and OSC are left open and the internal oscillator runs at its nominal rate. A higher frequency lowers audio interference, output resistance, ripple and the capacitor sizes needed; a lower frequency lowers quiescent current and raises efficiency. The frequency is not precise: only a minimum of 1kHz and 5kHz for the MAX1044 and a typical 10kHz for the ICL7660 are given. Where an exact frequency is needed, drive OSC from an outside oscillator."
+  },
+  {
+   "topic": "BOOST",
+   "page": 8,
+   "text": "On the MAX1044, joining BOOST to V+ raises the oscillator frequency about six times. That lowers output impedance and ripple, allows smaller capacitors and moves switching noise above the audio band. With OSC driven from outside BOOST has no effect and is left open; it is also left open in normal use."
+  },
+  {
+   "topic": "Lowering the frequency with COSC",
+   "page": 8,
+   "text": "A capacitor from OSC to ground slows the oscillator. That improves efficiency at light load because quiescent current falls, but raises ripple and output impedance; bigger C1 and C2 make up for it. Keep the OSC trace short so stray capacitance does not pull the frequency down. For example, an inverter pumping at 4kHz to 5kHz with 10µF capacitors draws about 70µA quiescent while giving 20mA. 100pF on OSC sets the oscillator to 400Hz and the quiescent current to about 15µA; holding 20mA then needs 100µF capacitors. 1000pF on OSC sets 40Hz, the highest efficiency possible: with 100µF capacitors the output reaches 2mA, no-load quiescent current is 10µA and power conversion efficiency 98%."
+  },
+  {
+   "topic": "External clock",
+   "page": 8,
+   "text": "OSC can be driven by an outside clock up to 400kHz, to synchronise the converter or to push it higher out of the audio band. The pump and ripple frequencies are half the clock frequency. A faster clock allows smaller capacitors and raises quiescent current. OSC switches at V+ - 2.5V for V+ ≥ 5V, and at V+ / 2 below 5V. A clock that does not swing up to V+ needs a 10kΩ pull-up."
+  },
+  {
+   "topic": "Output voltage",
+   "page": 8,
+   "text": "The output is not regulated; it falls with load by the output resistance, which depends mostly on oscillator frequency and capacitor size, and so also on temperature and supply voltage. With 5V in and 10µF capacitors the output resistance is typically 50Ω: about -5V at light load and about -4.5V at 10mA. Analog loads should be checked for their supply rejection, since ripple and drop grow at heavy load. Output impedance comes down by paralleling parts, using bigger C1 and C2, or tying the MAX1044's BOOST to V+."
+  },
+  {
+   "topic": "Inrush and EMI",
+   "page": 9,
+   "text": "C1 and C2 must charge at start-up, so the part draws an inrush current, and in operation it takes short current bursts from the supply. A high-impedance supply can sag too far during these bursts for the part to work. High supply or ground impedance, or long traces and large loops to the pump capacitors, create switching noise and EMI. Remedies: feed the part from a low-impedance source; put a low-ESR bypass capacitor close to the IC from V+ to ground; keep the traces to the pump capacitors short; keep the ground pins of the capacitors and the IC close together; and leave copper around the converter as power and ground planes, which a two-sided board makes easy."
+  },
+  {
+   "topic": "Doubler",
+   "page": 11,
+   "text": "Schottky diodes reduce the diode drops VD. For true doubling or more output current the MAX660 is suggested."
+  },
+  {
+   "topic": "Cascading",
+   "page": 11,
+   "text": "Three or more devices can be chained, but output impedance climbs steeply: two cascaded MAX1044s have about five times the output resistance of one. An inductive switching regulator (MAX755, MAX759, MAX764 or MAX774) may serve better."
+  },
+  {
+   "topic": "Shutdown",
+   "page": 12,
+   "text": "Three ways to shut the converter down all act on OSC, and the extra capacitance they put on OSC lowers the oscillator frequency. (a) A CMOS or TTL gate drives OSC through a 1N4148 diode with a 10kΩ pull-up to V+ for TTL; it loads OSC least, and the diode's direction picks a high or low shutdown level. (b) An open-drain 74HC03 or open-collector 74LS03 NAND gate, powered from V+ and ground, with its inputs tied together, pulls OSC directly. (c) A 74HC126 or 74LS126 three-state buffer, powered from V+ and ground, drives OSC, controlled by its output-enable input."
+  },
+  {
+   "topic": "Precautions",
+   "page": 10,
+   "text": "Taking any input above V+ or below ground can latch the part up, so outside signal sources must not be applied before the part is powered. Never exceed the maximum supply rating. Fit C1 and C2 the right way round. Do not hold V+ shorted to ground for long while other pins see more than 5.5V. VOUT (pin 5) must not rise above GND (pin 3); a diode across C2, anode at VOUT and cathode at LV, prevents it."
+  }
+ ]
+}

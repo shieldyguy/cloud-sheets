@@ -1,0 +1,2491 @@
+{
+ "sheet": 1,
+ "name": "SHT30-DIS-B10KS",
+ "kind": "sensor",
+ "manufacturer": "Sensirion",
+ "title": "SHT3x-DIS (SHT30, SHT31, SHT35): digital humidity and temperature sensor, I2C, 2.5 mm DFN-8",
+ "source": {
+  "revision": "Version 7, December 2022",
+  "pages": 22
+ },
+ "summary": "A calibrated relative-humidity and temperature sensor that reports linearised 16-bit readings over I2C at up to 1 MHz, with CRC on every word and two selectable addresses (0x44, 0x45). It runs from 2.15 V to 5.5 V, idles at 0.2 µA in single shot mode and also offers periodic acquisition, an alert output, a reset pin and an on-chip heater. The three grades differ only in accuracy: SHT30 ±2 %RH and ±0.2 °C typ, SHT31 ±2 %RH and ±0.2 °C over a wider span, SHT35 ±1.5 %RH and ±0.1 °C. The package is an open-cavity 2.5 mm × 2.5 mm × 0.9 mm DFN-8.",
+ "key_figures": [
+  [
+   "RH accuracy",
+   "±2 %RH typ (SHT30, SHT31); ±1.5 %RH typ (SHT35)"
+  ],
+  [
+   "Temperature accuracy",
+   "±0.2 °C typ, 0 °C to 65 °C (SHT30); ±0.2 °C typ, 0 °C to 90 °C (SHT31); ±0.1 °C typ, 20 °C to 60 °C (SHT35)"
+  ],
+  [
+   "Specified range",
+   "0 to 100 %RH; -40 °C to 125 °C"
+  ],
+  [
+   "Resolution",
+   "0.01 %RH; 0.01 °C"
+  ],
+  [
+   "RH response time",
+   "8 s (τ63%)"
+  ],
+  [
+   "Supply voltage",
+   "2.15 V to 5.5 V"
+  ],
+  [
+   "Supply current",
+   "0.2 µA typ idle (single shot); 600 µA typ measuring; 1.7 µA average at 1 reading/s"
+  ],
+  [
+   "Measurement time",
+   "2.5 / 4.5 / 12.5 ms typ (low / medium / high repeatability)"
+  ],
+  [
+   "Interface",
+   "I2C, 0 to 1000 kHz, address 0x44 or 0x45"
+  ],
+  [
+   "Package",
+   "DFN-8, 2.5 mm × 2.5 mm × 0.9 mm, MSL 1"
+  ]
+ ],
+ "part_numbers": {
+  "page": 19,
+  "columns": [
+   "name",
+   "accuracy class",
+   "quantity",
+   "order number"
+  ],
+  "rows": [
+   [
+    "SHT30-DIS-B2.5kS",
+    "SHT30",
+    "2500",
+    "1-101400-01"
+   ],
+   [
+    "SHT30-DIS-B10kS",
+    "SHT30",
+    "10000",
+    "1-101173-01"
+   ],
+   [
+    "SHT31-DIS-B2.5kS",
+    "SHT31",
+    "2500",
+    "1-101386-01"
+   ],
+   [
+    "SHT31-DIS-B10kS",
+    "SHT31",
+    "10000",
+    "1-101147-01"
+   ],
+   [
+    "SHT35-DIS-B2.5kS",
+    "SHT35",
+    "2500",
+    "1-101388-01"
+   ],
+   [
+    "SHT35-DIS-B10kS",
+    "SHT35",
+    "10000",
+    "1-101479-01"
+   ]
+  ],
+  "notes": [
+   "All are tape and reel; the quantity is parts per reel. The grades share pins, package and interface and differ in RH and temperature accuracy."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DFN-8 (2.5 mm × 2.5 mm)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SDA",
+     "type": "digital I/O, open drain",
+     "function": "I2C data line, bidirectional. Needs an external pull-up."
+    },
+    {
+     "pin": "2",
+     "name": "ADDR",
+     "type": "digital input",
+     "function": "Address select: low gives 0x44, high gives 0x45. Must be tied to a logic level, never left open."
+    },
+    {
+     "pin": "3",
+     "name": "ALERT",
+     "type": "digital output",
+     "function": "Goes high when an alert condition is met. Leave unconnected when not used."
+    },
+    {
+     "pin": "4",
+     "name": "SCL",
+     "type": "digital I/O, open drain",
+     "function": "I2C clock line; the sensor holds it low during clock stretching. Needs an external pull-up."
+    },
+    {
+     "pin": "5",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply, 2.15 V to 5.5 V. Decouple with 100 nF next to the pin."
+    },
+    {
+     "pin": "6",
+     "name": "nRESET",
+     "type": "digital input",
+     "function": "Active-low reset with an internal pull-up to VDD (50 kΩ typ). Leave open when unused, or tie to VDD through 2 kΩ or more."
+    },
+    {
+     "pin": "7",
+     "name": "R",
+     "type": "other",
+     "function": "No electrical function. Connect to VSS."
+    },
+    {
+     "pin": "8",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "EP",
+     "name": "PAD",
+     "type": "ground",
+     "function": "Centre (die) pad on the underside, tied to VSS inside. Soldered to the board for mechanical strength; a triangular notch marks the pin-1 corner."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Humidity sensor specification (Table 1)",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "condition",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SHT30 accuracy tolerance",
+     "Typ.",
+     "±2",
+     "%RH"
+    ],
+    [
+     "SHT30 accuracy tolerance",
+     "Max.",
+     "Figure 2",
+     "-"
+    ],
+    [
+     "SHT31 accuracy tolerance",
+     "Typ.",
+     "±2",
+     "%RH"
+    ],
+    [
+     "SHT31 accuracy tolerance",
+     "Max.",
+     "Figure 3",
+     "-"
+    ],
+    [
+     "SHT35 accuracy tolerance",
+     "Typ.",
+     "±1.5",
+     "%RH"
+    ],
+    [
+     "SHT35 accuracy tolerance",
+     "Max.",
+     "Figure 4",
+     "-"
+    ],
+    [
+     "Repeatability",
+     "Low, typ.",
+     "0.21",
+     "%RH"
+    ],
+    [
+     "Repeatability",
+     "Medium, typ.",
+     "0.15",
+     "%RH"
+    ],
+    [
+     "Repeatability",
+     "High, typ.",
+     "0.08",
+     "%RH"
+    ],
+    [
+     "Resolution",
+     "Typ.",
+     "0.01",
+     "%RH"
+    ],
+    [
+     "Hysteresis",
+     "at 25°C",
+     "±0.8",
+     "%RH"
+    ],
+    [
+     "Specified range",
+     "extended",
+     "0 to 100",
+     "%RH"
+    ],
+    [
+     "Response time",
+     "τ63%",
+     "8",
+     "s"
+    ],
+    [
+     "Long-term drift",
+     "Typ.",
+     "<0.25",
+     "%RH/yr"
+    ]
+   ],
+   "notes": [
+    "Typical and maximum accuracy tolerance are defined in Sensirion's Humidity Sensor Specification Statement.",
+    "Repeatability is three standard deviations (3σ) of repeated back-to-back readings under steady conditions, a figure for the noise on the output; the low, medium and high settings are the three measurement modes.",
+    "Specified range: the span over which the specification holds. The extended range is the full 0 to 100 %RH; the normal range for best performance is under Recommended operating condition.",
+    "Response time: time to reach 63 % of a step in humidity, at 25 °C with 1 m/s air flow. In a product it depends on how the sensor is mounted. With ART enabled it is shorter by a factor of 2.",
+    "Long-term drift is typical for use inside the normal RH/T range; the maximum is < 0.5 %RH/yr. Solvent vapours and outgassing from tapes, adhesives or packaging can raise it."
+   ]
+  },
+  {
+   "title": "Temperature sensor specification (Table 2)",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "condition",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SHT30 accuracy tolerance",
+     "typ., 0°C to 65°C",
+     "±0.2",
+     "°C"
+    ],
+    [
+     "SHT30 accuracy tolerance",
+     "Max.",
+     "Figure 8",
+     "-"
+    ],
+    [
+     "SHT31 accuracy tolerance",
+     "typ., 0°C to 90°C",
+     "±0.2",
+     "°C"
+    ],
+    [
+     "SHT31 accuracy tolerance",
+     "Max.",
+     "Figure 9",
+     "-"
+    ],
+    [
+     "SHT35 accuracy tolerance",
+     "typ., 20°C to 60°C",
+     "±0.1",
+     "°C"
+    ],
+    [
+     "SHT35 accuracy tolerance",
+     "Max.",
+     "Figure 10",
+     "-"
+    ],
+    [
+     "Repeatability",
+     "Low, typ.",
+     "0.15",
+     "°C"
+    ],
+    [
+     "Repeatability",
+     "Medium, typ.",
+     "0.08",
+     "°C"
+    ],
+    [
+     "Repeatability",
+     "High, typ.",
+     "0.04",
+     "°C"
+    ],
+    [
+     "Resolution",
+     "Typ.",
+     "0.01",
+     "°C"
+    ],
+    [
+     "Specified range",
+     "-",
+     "-40 to 125",
+     "°C"
+    ],
+    [
+     "Response time",
+     "τ63%",
+     ">2",
+     "s"
+    ],
+    [
+     "Long-term drift",
+     "max",
+     "<0.03",
+     "°C/yr"
+    ]
+   ],
+   "notes": [
+    "Accuracy and repeatability are defined as for Table 1.",
+    "Temperature response time is set mostly by how heat reaches the part: the exposed sensor area, the mounting and the surroundings."
+   ]
+  },
+  {
+   "title": "Figure 5: typical tolerance of RH over T for SHT30",
+   "page": 4,
+   "conditions": "Tolerance in %RH, by relative humidity (rows) and temperature (columns)",
+   "columns": [
+    "RH (%RH)",
+    "0 °C",
+    "10 °C",
+    "20 °C",
+    "30 °C",
+    "40 °C",
+    "50 °C",
+    "60 °C",
+    "70 °C",
+    "80 °C"
+   ],
+   "rows": [
+    [
+     "100",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4"
+    ],
+    [
+     "90",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "80",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "70",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "60",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "50",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "40",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "30",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "20",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "10",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "0",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4",
+     "±4"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 6: typical tolerance of RH over T for SHT31",
+   "page": 4,
+   "conditions": "Tolerance in %RH, by relative humidity (rows) and temperature (columns)",
+   "columns": [
+    "RH (%RH)",
+    "0 °C",
+    "10 °C",
+    "20 °C",
+    "30 °C",
+    "40 °C",
+    "50 °C",
+    "60 °C",
+    "70 °C",
+    "80 °C"
+   ],
+   "rows": [
+    [
+     "100",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "90",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "80",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "70",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "60",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "50",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "40",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "30",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "20",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "10",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "0",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 7: typical tolerance of RH over T for SHT35",
+   "page": 4,
+   "conditions": "Tolerance in %RH, by relative humidity (rows) and temperature (columns)",
+   "columns": [
+    "RH (%RH)",
+    "0 °C",
+    "10 °C",
+    "20 °C",
+    "30 °C",
+    "40 °C",
+    "50 °C",
+    "60 °C",
+    "70 °C",
+    "80 °C"
+   ],
+   "rows": [
+    [
+     "100",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "90",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "80",
+     "±2",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2",
+     "±2",
+     "±2"
+    ],
+    [
+     "70",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2",
+     "±2"
+    ],
+    [
+     "60",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2",
+     "±2"
+    ],
+    [
+     "50",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2",
+     "±2"
+    ],
+    [
+     "40",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2"
+    ],
+    [
+     "30",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2"
+    ],
+    [
+     "20",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2"
+    ],
+    [
+     "10",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2"
+    ],
+    [
+     "0",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±1.5",
+     "±2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical specifications (Table 3)",
+   "page": 6,
+   "conditions": "Typical values at T = 25 °C; min. and max. values over T = -40 °C to 125 °C",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "comments"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VDD",
+     "",
+     "2.15",
+     "3.3",
+     "5.5",
+     "V",
+     ""
+    ],
+    [
+     "Power-up/down level",
+     "VPOR",
+     "",
+     "1.8",
+     "2.10",
+     "2.15",
+     "V",
+     ""
+    ],
+    [
+     "Slew rate change of the supply voltage",
+     "VDD,slew",
+     "",
+     "-",
+     "-",
+     "20",
+     "V/ms",
+     "Any change of VDD within VDD,min to VDD,max must be slower than this; a faster change can reset the part."
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "idle state (single shot mode), T=25°C",
+     "-",
+     "0.2",
+     "2.0",
+     "µA",
+     "Single shot mode, no measurement running."
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "idle state (single shot mode), T=125°C",
+     "-",
+     "-",
+     "6.0",
+     "µA",
+     "Single shot mode, no measurement running."
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "idle state (periodic data acquisition mode)",
+     "-",
+     "45",
+     "-",
+     "µA",
+     "Periodic mode, between measurements."
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Measuring",
+     "-",
+     "600",
+     "1500",
+     "µA",
+     "During a measurement."
+    ],
+    [
+     "Supply current",
+     "IDD",
+     "Average",
+     "-",
+     "1.7",
+     "-",
+     "µA",
+     "One measurement each second, low repeatability, single shot mode."
+    ],
+    [
+     "Alert Output driving strength",
+     "IOH",
+     "",
+     "",
+     "1.5x VDD",
+     "",
+     "mA",
+     "See ALERT pin."
+    ],
+    [
+     "Heater power",
+     "PHeater",
+     "Heater running",
+     "3.6",
+     "-",
+     "33",
+     "mW",
+     "Varies with supply voltage."
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "System timing specification, 2.4 V to 5.5 V (Table 4)",
+   "page": 7,
+   "conditions": "T = -40 °C to 125 °C, VDD = 2.4 V … 5.5 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "comments"
+   ],
+   "rows": [
+    [
+     "Power-up time",
+     "tPU",
+     "After hard reset, VDD ≥ VPOR",
+     "-",
+     "0.5",
+     "1",
+     "ms",
+     "From VDD crossing VPOR until the part is idle."
+    ],
+    [
+     "Soft reset time",
+     "tSR",
+     "After soft reset.",
+     "-",
+     "0.5",
+     "1.5",
+     "ms",
+     "From the acknowledge of the soft reset command until the part is idle."
+    ],
+    [
+     "Duration of reset pulse",
+     "tRESETN",
+     "",
+     "1",
+     "-",
+     "-",
+     "µs",
+     "See nRESET pin."
+    ],
+    [
+     "Measurement duration",
+     "tMEAS,l",
+     "Low repeatability",
+     "-",
+     "2.5",
+     "4",
+     "ms",
+     "Repeatability mode sets measurement time, noise and energy."
+    ],
+    [
+     "Measurement duration",
+     "tMEAS,m",
+     "Medium repeatability",
+     "-",
+     "4.5",
+     "6",
+     "ms",
+     ""
+    ],
+    [
+     "Measurement duration",
+     "tMEAS,h",
+     "High repeatability",
+     "-",
+     "12.5",
+     "15",
+     "ms",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "System timing specification, 2.15 V to below 2.4 V (Table 5)",
+   "page": 7,
+   "conditions": "T = -40 °C to 125 °C, VDD = 2.15 V … < 2.4 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "comments"
+   ],
+   "rows": [
+    [
+     "Power-up time",
+     "tPU",
+     "After hard reset, VDD ≥ VPOR",
+     "-",
+     "0.5",
+     "1.5",
+     "ms",
+     "From VDD crossing VPOR until the part is idle."
+    ],
+    [
+     "Measurement duration",
+     "tMEAS,l",
+     "Low repeatability",
+     "-",
+     "2.5",
+     "4.5",
+     "ms",
+     "Repeatability mode sets measurement time, noise and energy."
+    ],
+    [
+     "Measurement duration",
+     "tMEAS,m",
+     "Medium repeatability",
+     "-",
+     "4.5",
+     "6.5",
+     "ms",
+     ""
+    ],
+    [
+     "Measurement duration",
+     "tMEAS,h",
+     "High repeatability",
+     "-",
+     "12.5",
+     "15.5",
+     "ms",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Absolute minimum and maximum ratings (Table 6)",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage VDD",
+     "-0.3 to 6",
+     "V"
+    ],
+    [
+     "Max voltage on pins (pin 1 (SDA); pin 2 (ADDR); pin 3 (ALERT); pin 4 (SCL); pin 6 (nRESET))",
+     "-0.3 to VDD+0.3",
+     "V"
+    ],
+    [
+     "Input current on any pin",
+     "±100",
+     "mA"
+    ],
+    [
+     "Operating temperature range",
+     "-40 to 125",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "-40 to 150",
+     "°C"
+    ],
+    [
+     "ESD HBM (human body model)",
+     "4",
+     "kV"
+    ],
+    [
+     "ESD CDM (charge device model)",
+     "750",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Stress past these ratings can damage the part or shorten its life; operation at the ratings is not guaranteed. Each rating is tested on its own, and the voltages are for short periods only.",
+    "HBM to ANSI/ESDA/JEDEC JS-001-2014 and AEC-Q100-002; CDM to ANSI/ESD S5.3.1-2009 and AEC-Q100-011."
+   ]
+  },
+  {
+   "title": "I2C device addresses (Table 8)",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "SHT3x-DIS",
+    "I2C address (hex)",
+    "condition"
+   ],
+   "rows": [
+    [
+     "I2C address A",
+     "0x44 (default)",
+     "ADDR (pin 2) connected to logic low"
+    ],
+    [
+     "I2C address B",
+     "0x45",
+     "ADDR (pin 2) connected to logic high"
+    ]
+   ],
+   "notes": [
+    "The address is the upper 7 bits of the I2C header byte; the lowest bit selects read or write."
+   ]
+  },
+  {
+   "title": "Measurement commands in single shot mode (Table 9)",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "repeatability",
+    "clock stretching",
+    "MSB",
+    "LSB"
+   ],
+   "rows": [
+    [
+     "High",
+     "enabled",
+     "0x2C",
+     "06"
+    ],
+    [
+     "Medium",
+     "enabled",
+     "0x2C",
+     "0D"
+    ],
+    [
+     "Low",
+     "enabled",
+     "0x2C",
+     "10"
+    ],
+    [
+     "High",
+     "disabled",
+     "0x24",
+     "00"
+    ],
+    [
+     "Medium",
+     "disabled",
+     "0x24",
+     "0B"
+    ],
+    [
+     "Low",
+     "disabled",
+     "0x24",
+     "16"
+    ]
+   ],
+   "notes": [
+    "Example: 0x2C06 starts a high-repeatability measurement with clock stretching on. At least 1 ms of idle SCL must pass after the command before the next transfer."
+   ]
+  },
+  {
+   "title": "Measurement commands for periodic data acquisition mode (Table 10)",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "repeatability",
+    "mps",
+    "MSB",
+    "LSB"
+   ],
+   "rows": [
+    [
+     "High",
+     "0.5",
+     "0x20",
+     "32"
+    ],
+    [
+     "Medium",
+     "0.5",
+     "0x20",
+     "24"
+    ],
+    [
+     "Low",
+     "0.5",
+     "0x20",
+     "2F"
+    ],
+    [
+     "High",
+     "1",
+     "0x21",
+     "30"
+    ],
+    [
+     "Medium",
+     "1",
+     "0x21",
+     "26"
+    ],
+    [
+     "Low",
+     "1",
+     "0x21",
+     "2D"
+    ],
+    [
+     "High",
+     "2",
+     "0x22",
+     "36"
+    ],
+    [
+     "Medium",
+     "2",
+     "0x22",
+     "20"
+    ],
+    [
+     "Low",
+     "2",
+     "0x22",
+     "2B"
+    ],
+    [
+     "High",
+     "4",
+     "0x23",
+     "34"
+    ],
+    [
+     "Medium",
+     "4",
+     "0x23",
+     "22"
+    ],
+    [
+     "Low",
+     "4",
+     "0x23",
+     "29"
+    ],
+    [
+     "High",
+     "10",
+     "0x27",
+     "37"
+    ],
+    [
+     "Medium",
+     "10",
+     "0x27",
+     "21"
+    ],
+    [
+     "Low",
+     "10",
+     "0x27",
+     "2A"
+    ]
+   ],
+   "notes": [
+    "mps: measurements per second. Example: 0x2130 is high repeatability at 1 mps. The sensor can warm itself at 10 mps."
+   ]
+  },
+  {
+   "title": "Fetch data and ART commands (Tables 11, 12)",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "command",
+    "hex code"
+   ],
+   "rows": [
+    [
+     "Fetch Data",
+     "0xE000"
+    ],
+    [
+     "Periodic Measurement with ART",
+     "0x2B32"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Break, soft reset and general call reset commands (Tables 13, 14, 15)",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "command",
+    "code"
+   ],
+   "rows": [
+    [
+     "Break",
+     "0x3093"
+    ],
+    [
+     "Soft Reset",
+     "0x30A2"
+    ],
+    [
+     "Reset command using the general call address (address byte 0x00, second byte 0x06)",
+     "0x0006"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Heater and status register commands (Tables 16, 17, 19)",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "command",
+    "hex code"
+   ],
+   "rows": [
+    [
+     "Heater Enable",
+     "0x306D"
+    ],
+    [
+     "Heater Disabled",
+     "0x3066"
+    ],
+    [
+     "Read Out of status register",
+     "0xF32D"
+    ],
+    [
+     "Clear status register",
+     "0x3041"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Status register (Table 18)",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "field",
+    "meaning",
+    "default value"
+   ],
+   "rows": [
+    [
+     "15",
+     "Alert pending status",
+     "'0': no pending alerts; '1': at least one pending alert",
+     "'1'"
+    ],
+    [
+     "14",
+     "Reserved",
+     "",
+     "'0'"
+    ],
+    [
+     "13",
+     "Heater status",
+     "'0': heater OFF; '1': heater ON",
+     "'0'"
+    ],
+    [
+     "12",
+     "Reserved",
+     "",
+     "'0'"
+    ],
+    [
+     "11",
+     "RH tracking alert",
+     "'0': no alert; '1': alert",
+     "'0'"
+    ],
+    [
+     "10",
+     "T tracking alert",
+     "'0': no alert; '1': alert",
+     "'0'"
+    ],
+    [
+     "9:5",
+     "Reserved",
+     "",
+     "'xxxxx'"
+    ],
+    [
+     "4",
+     "System reset detected",
+     "'0': no reset since the last clear status register command; '1': reset seen (hard reset, soft reset command or supply fail)",
+     "'1'"
+    ],
+    [
+     "3:2",
+     "Reserved",
+     "",
+     "'00'"
+    ],
+    [
+     "1",
+     "Command status",
+     "'0': last command executed successfully; '1': last command not processed (invalid, or its checksum failed)",
+     "'0'"
+    ],
+    [
+     "0",
+     "Write data checksum status",
+     "'0': checksum of the last write transfer correct; '1': it failed",
+     "'0'"
+    ]
+   ],
+   "notes": [
+    "The clear status register command sets bits 15, 11, 10 and 4 to zero."
+   ]
+  },
+  {
+   "title": "I2C CRC properties (Table 20)",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "property",
+    "value"
+   ],
+   "rows": [
+    [
+     "Name",
+     "CRC-8"
+    ],
+    [
+     "Width",
+     "8 bit"
+    ],
+    [
+     "Protected data",
+     "read and/or write data"
+    ],
+    [
+     "Polynomial",
+     "0x31 (x8 + x5 + x4 + 1)"
+    ],
+    [
+     "Initialization",
+     "0xFF"
+    ],
+    [
+     "Reflect input",
+     "False"
+    ],
+    [
+     "Reflect output",
+     "False"
+    ],
+    [
+     "Final XOR",
+     "0x00"
+    ],
+    [
+     "Examples",
+     "CRC (0xBEEF) = 0x92"
+    ]
+   ],
+   "notes": [
+    "The CRC is computed over the two data bytes sent just before it."
+   ]
+  },
+  {
+   "title": "Timing specifications for I2C communication (Table 21)",
+   "page": 14,
+   "conditions": "T = -40 °C … 125 °C, VDD = VDDmin … VDDmax; symbols as in NXP UM10204 Rev. 6",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "comments"
+   ],
+   "rows": [
+    [
+     "SCL clock frequency",
+     "fSCL",
+     "",
+     "0",
+     "-",
+     "1000",
+     "kHz",
+     ""
+    ],
+    [
+     "Hold time (repeated) START condition",
+     "tHD;STA",
+     "After this period, the first clock pulse is generated",
+     "0.24",
+     "-",
+     "-",
+     "µs",
+     ""
+    ],
+    [
+     "LOW period of the SCL clock",
+     "tLOW",
+     "",
+     "0.53",
+     "-",
+     "-",
+     "µs",
+     ""
+    ],
+    [
+     "HIGH period of the SCL clock",
+     "tHIGH",
+     "",
+     "0.26",
+     "-",
+     "-",
+     "µs",
+     ""
+    ],
+    [
+     "SDA hold time",
+     "tHD;DAT",
+     "",
+     "0",
+     "-",
+     "250",
+     "ns",
+     "Transmitting data"
+    ],
+    [
+     "SDA hold time",
+     "tHD;DAT",
+     "",
+     "0",
+     "-",
+     "-",
+     "ns",
+     "Receiving data"
+    ],
+    [
+     "SDA set-up time",
+     "tSU;DAT",
+     "",
+     "100",
+     "-",
+     "-",
+     "ns",
+     ""
+    ],
+    [
+     "SCL/SDA rise time",
+     "tR",
+     "",
+     "-",
+     "-",
+     "300",
+     "ns",
+     ""
+    ],
+    [
+     "SCL/SDA fall time",
+     "tF",
+     "",
+     "-",
+     "-",
+     "300",
+     "ns",
+     ""
+    ],
+    [
+     "SDA valid time",
+     "tVD;DAT",
+     "",
+     "-",
+     "-",
+     "0.9",
+     "µs",
+     ""
+    ],
+    [
+     "Set-up time for a repeated START condition",
+     "tSU;STA",
+     "",
+     "0.26",
+     "-",
+     "-",
+     "µs",
+     ""
+    ],
+    [
+     "Set-up time for STOP condition",
+     "tSU;STO",
+     "",
+     "0.26",
+     "-",
+     "-",
+     "µs",
+     ""
+    ],
+    [
+     "Capacitive load on bus line",
+     "CB",
+     "",
+     "-",
+     "-",
+     "400",
+     "pF",
+     ""
+    ],
+    [
+     "Low level input voltage",
+     "VIL",
+     "",
+     "0",
+     "-",
+     "0.3xVDD",
+     "V",
+     ""
+    ],
+    [
+     "High level input voltage",
+     "VIH",
+     "",
+     "0.7xVDD",
+     "-",
+     "1xVDD",
+     "V",
+     ""
+    ],
+    [
+     "Low level output voltage",
+     "VOL",
+     "3 mA sink current",
+     "-",
+     "-",
+     "0.4",
+     "V",
+     ""
+    ]
+   ],
+   "notes": [
+    "Edges are timed at 30 % and 70 % of VDD. SDA valid time runs from the falling SCL edge before it."
+   ]
+  },
+  {
+   "title": "Recommended land pattern and stencil aperture (Figure 15)",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "feature",
+    "land pattern (mm)",
+    "stencil aperture (mm)"
+   ],
+   "rows": [
+    [
+     "I/O pad centre to centre, across the package",
+     "2.35",
+     "2.55"
+    ],
+    [
+     "I/O pad pitch",
+     "0.5",
+     "0.5"
+    ],
+    [
+     "I/O pad width",
+     "0.25",
+     "0.25"
+    ],
+    [
+     "I/O pad length",
+     "0.55",
+     "0.55"
+    ],
+    [
+     "Centre pad width (across the rows)",
+     "1",
+     "0.9"
+    ],
+    [
+     "Centre pad length (along the rows)",
+     "1.7",
+     "1.6"
+    ],
+    [
+     "I/O pad overhang past the package outline",
+     "(0.2)",
+     "(0.3)"
+    ]
+   ],
+   "notes": [
+    "The centre pad has its pin-1 corner cut off."
+   ]
+  },
+  {
+   "title": "Packaging tape (Figure 16)",
+   "page": 18,
+   "conditions": "Dimensions in mm; tolerances unless noted: 1 place ±.2, 2 places ±.10",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "Tape width",
+     "12.0 +0.3/-0.1"
+    ],
+    [
+     "Sprocket hole pitch",
+     "4.00"
+    ],
+    [
+     "Sprocket hole diameter",
+     "Ø1.5 +.1 /-0.0"
+    ],
+    [
+     "Pocket pitch",
+     "4.00"
+    ],
+    [
+     "Sprocket hole to pocket, along the tape",
+     "2.00 ±.05"
+    ],
+    [
+     "Sprocket hole row to tape edge",
+     "1.75 ±.1"
+    ],
+    [
+     "Sprocket hole row to pocket centre",
+     "5.50 ±.05"
+    ],
+    [
+     "Pocket hole diameter",
+     "Ø1.00 MIN"
+    ],
+    [
+     "Tape thickness",
+     "0.30 ±.05"
+    ],
+    [
+     "A0",
+     "2.75"
+    ],
+    [
+     "B0",
+     "2.75"
+    ],
+    [
+     "K0",
+     "1.20"
+    ],
+    [
+     "Pocket corner radius",
+     "R 0.25 TYP."
+    ],
+    [
+     "Section corner radius",
+     "R 0.2 MAX."
+    ]
+   ],
+   "notes": [
+    "Cumulative tolerance over 10 sprocket pitches is ±0.2. Pocket position is the true position of the pocket relative to the sprocket hole. A0 and B0 are taken on a plane a distance R above the pocket floor."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Figure 2: tolerance of RH at 25 °C for SHT30",
+   "page": 3,
+   "conditions": "T = 25 °C",
+   "x": {
+    "label": "Relative humidity",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RH tolerance ΔRH (±)",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "maximal tolerance",
+     "points": [
+      [
+       0,
+       7.498
+      ],
+      [
+       10.0,
+       4.499
+      ],
+      [
+       90.0,
+       4.499
+      ],
+      [
+       100.0,
+       7.498
+      ]
+     ]
+    },
+    {
+     "label": "typical tolerance",
+     "points": [
+      [
+       0,
+       4.0
+      ],
+      [
+       10.0,
+       2.0
+      ],
+      [
+       90.0,
+       2.0
+      ],
+      [
+       100.0,
+       4.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 3: tolerance of RH at 25 °C for SHT31",
+   "page": 3,
+   "conditions": "T = 25 °C",
+   "x": {
+    "label": "Relative humidity",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RH tolerance ΔRH (±)",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "maximal tolerance",
+     "points": [
+      [
+       0.01,
+       2.5
+      ],
+      [
+       89.99,
+       2.5
+      ],
+      [
+       99.98,
+       3.501
+      ]
+     ]
+    },
+    {
+     "label": "typical tolerance",
+     "points": [
+      [
+       0.01,
+       2.0
+      ],
+      [
+       99.98,
+       2.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 4: tolerance of RH at 25 °C for SHT35",
+   "page": 3,
+   "conditions": "T = 25 °C",
+   "x": {
+    "label": "Relative humidity",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RH tolerance ΔRH (±)",
+    "unit": "%RH",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "maximal tolerance",
+     "points": [
+      [
+       0.01,
+       2.0
+      ],
+      [
+       79.99,
+       2.0
+      ],
+      [
+       100.01,
+       3.0
+      ]
+     ]
+    },
+    {
+     "label": "typical tolerance",
+     "points": [
+      [
+       0.01,
+       1.5
+      ],
+      [
+       79.99,
+       1.5
+      ],
+      [
+       100.01,
+       2.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8: temperature accuracy of the SHT30",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Temperature tolerance ΔT (±)",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "maximal tolerance",
+     "points": [
+      [
+       -40.0,
+       1.0
+      ],
+      [
+       0,
+       0.4
+      ],
+      [
+       65.0,
+       0.4
+      ],
+      [
+       125.0,
+       1.0
+      ]
+     ]
+    },
+    {
+     "label": "typical tolerance",
+     "points": [
+      [
+       -40.0,
+       0.6
+      ],
+      [
+       0,
+       0.2
+      ],
+      [
+       65.0,
+       0.2
+      ],
+      [
+       125.0,
+       0.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 9: temperature accuracy of the SHT31",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Temperature tolerance ΔT (±)",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "maximal tolerance",
+     "points": [
+      [
+       -40.0,
+       0.4
+      ],
+      [
+       90.0,
+       0.4
+      ],
+      [
+       125.0,
+       0.7
+      ]
+     ]
+    },
+    {
+     "label": "typical tolerance",
+     "points": [
+      [
+       -40.0,
+       0.3
+      ],
+      [
+       0,
+       0.2
+      ],
+      [
+       90.0,
+       0.2
+      ],
+      [
+       125.0,
+       0.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 10: temperature accuracy of the SHT35",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Temperature tolerance ΔT (±)",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "maximal tolerance",
+     "points": [
+      [
+       -40.0,
+       0.3
+      ],
+      [
+       90.0,
+       0.3
+      ],
+      [
+       125.0,
+       0.6
+      ]
+     ]
+    },
+    {
+     "label": "typical tolerance",
+     "points": [
+      [
+       -40.0,
+       0.2
+      ],
+      [
+       0,
+       0.2
+      ],
+      [
+       20.0,
+       0.1
+      ],
+      [
+       60.0,
+       0.1
+      ],
+      [
+       90.0,
+       0.2
+      ],
+      [
+       125.0,
+       0.4
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application circuit (Figure 11)",
+   "page": 8,
+   "description": "The sensor on an I2C bus. VDD is decoupled to ground by 100 nF at the pin; SCL and SDA each have a pull-up RP to VDD and run out to the bus master. ADDR is grounded, so the address is 0x44. VSS, the centre pad and pin R all go to ground. nRESET and ALERT run out to the host and may be left open.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "SHT30-DIS"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "supply decoupling at VDD"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RP",
+     "note": "SCL pull-up; 10 kΩ is an example value, sized for bus capacitance and clock rate"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "RP",
+     "note": "SDA pull-up; 10 kΩ is an example value, sized for bus capacitance and clock rate"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "nRESET"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "ALERT"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "SCL"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "SDA"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": [
+    "Pull-ups inside a microcontroller's I/O can serve as RP."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Relative humidity from the raw reading",
+   "expr": "RH = 100 × SRH / (2^16 − 1)",
+   "where": {
+    "RH": "relative humidity, %RH",
+    "SRH": "raw 16-bit humidity word, taken as an unsigned decimal number"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Temperature in °C from the raw reading",
+   "expr": "T[°C] = −45 + 175 × ST / (2^16 − 1)",
+   "where": {
+    "T[°C]": "temperature, °C",
+    "ST": "raw 16-bit temperature word, taken as an unsigned decimal number"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "Temperature in °F from the raw reading",
+   "expr": "T[°F] = −49 + 315 × ST / (2^16 − 1)",
+   "where": {
+    "T[°F]": "temperature, °F",
+    "ST": "raw 16-bit temperature word"
+   },
+   "note": "",
+   "page": 14
+  }
+ ],
+ "operation": [
+  {
+   "topic": "What the part holds",
+   "page": 1,
+   "text": "One chip carries a humidity element and a temperature element feeding one shared ADC, plus calibration memory, linearisation and processing, alert logic, a power-on reset and the I2C interface. Readings leave the part already calibrated, linearised and corrected for temperature and supply voltage."
+  },
+  {
+   "topic": "Recommended operating condition",
+   "page": 6,
+   "text": "Best performance is within 5 °C to 60 °C and 20 %RH to 80 %RH. Long stays outside this window, high humidity above all, can shift the RH reading for a while (about +3 %RH after 60 h above 80 %RH); back inside the window it drifts back to calibration unaided. Long exposure to extremes can speed ageing. Sensirion's SHT handling instructions apply in storage, assembly and use."
+  },
+  {
+   "topic": "Supply and decoupling",
+   "page": 8,
+   "text": "VDD is decoupled by a 100 nF capacitor placed as close to the sensor as possible. The supply may move no faster than 20 V/ms within its range or the part may reset."
+  },
+  {
+   "topic": "I2C bus",
+   "page": 8,
+   "text": "SCL and SDA are open-drain with diodes to VDD and VSS, and every device on the bus only pulls low; external pull-ups (10 kΩ, for example) bring the lines high, sized for the bus capacitance and clock rate. The clock runs anywhere from 0 to 1000 kHz; up to 400 kHz the bus follows I2C Fast Mode. Clock stretching is supported and is chosen per command."
+  },
+  {
+   "topic": "Address select",
+   "page": 8,
+   "text": "ADDR low gives address 0x44, ADDR high gives 0x45; the pin is never left floating. It can be switched while running, as long as its level holds from START to the end of the transfer. Giving each sensor its own ADDR line and switching them lets more than two sensors share one bus."
+  },
+  {
+   "topic": "ALERT pin",
+   "page": 9,
+   "text": "ALERT can drive a microcontroller interrupt input. It reflects the RH and T readings against programmable limits, set as described in a separate application note, and goes high when an alert condition is met. Current drawn from it heats the sensor; driving only a transistor gate or base avoids that. Leave it open when unused."
+  },
+  {
+   "topic": "nRESET pin",
+   "page": 9,
+   "text": "Pulling nRESET low for at least 1 µs resets the part much like a power cycle. It has an internal 50 kΩ (typ) pull-up to VDD; when unused it is left open or tied to VDD through 2 kΩ or more."
+  },
+  {
+   "topic": "Centre pad",
+   "page": 8,
+   "text": "The centre pad is connected to VSS inside, so its wiring is free electrically; it is soldered to the board for mechanical reasons. The SHTxx/STSxx design guide covers design-in."
+  },
+  {
+   "topic": "Power-up",
+   "page": 9,
+   "text": "When VDD passes VPOR the part starts up and becomes idle after tPU, ready for commands. Whenever it is neither measuring nor talking it drops to idle by itself to save power; idle cannot be commanded."
+  },
+  {
+   "topic": "Commands and checksums",
+   "page": 9,
+   "text": "Each transfer opens with START and closes with STOP. Commands are 16 bits and already carry a 3-bit CRC. Every 16-bit data word sent or received is followed by an 8-bit CRC. On writes the checksum must be sent, as the part ignores data without a correct one; on reads the master may check it or not. After any command the part needs at least 1 ms before it accepts the next."
+  },
+  {
+   "topic": "Single shot measurement",
+   "page": 9,
+   "text": "The master sends the write header and a 16-bit measurement command; the sensor acknowledges each byte by pulling SDA low after the 8th SCL falling edge and starts converting on the command's acknowledge. Each command gives one temperature and one humidity result. The repeatability setting (low, medium, high) trades measurement time and energy against noise."
+  },
+  {
+   "topic": "Single shot readout",
+   "page": 10,
+   "text": "After the conversion the master sends START and a read header. The sensor returns two temperature bytes and a CRC, then two humidity bytes and a CRC, continuing only while each byte is acknowledged; the master ends with NACK and STOP. A NACK after any byte stops the transfer early, so a master that skips the checksums can read temperature with its CRC and humidity without, then NACK."
+  },
+  {
+   "topic": "Clock stretching",
+   "page": 10,
+   "text": "With a no-stretch command, a read header sent before data is ready is answered with NACK. With a stretch command, the sensor acknowledges the read header and holds SCL low until the conversion is finished, then releases it and sends the result."
+  },
+  {
+   "topic": "Periodic mode",
+   "page": 10,
+   "text": "One periodic command starts a continuous series of temperature and humidity pairs at 0.5, 1, 2, 4 or 10 measurements per second, at the chosen repeatability; clock stretching is not available in this mode. Rate and repeatability set the current drawn. Results are read with Fetch Data (0xE000); if no new result is waiting the read header gets a NACK and the transfer ends, and each fetch empties the result memory. A measurement command sent while a measurement is under way is best preceded by Break."
+  },
+  {
+   "topic": "ART",
+   "page": 11,
+   "text": "ART (accelerated response time), command 0x2B32, runs periodic acquisition at 4 Hz. It is started, read and stopped like any other periodic command. Sensirion's EK-H5 evaluation kit can demonstrate it."
+  },
+  {
+   "topic": "Break",
+   "page": 11,
+   "text": "Break (0x3093) ends periodic mode: the part abandons the measurement in progress and returns to single shot mode within 1 ms. It is sent before any other command except Fetch Data."
+  },
+  {
+   "topic": "Interface reset",
+   "page": 12,
+   "text": "If communication is lost, keep SDA high and clock SCL nine or more times, then send a START before the next command. Only the interface is reset; the status register keeps its contents."
+  },
+  {
+   "topic": "Soft reset",
+   "page": 12,
+   "text": "In idle, the soft reset command 0x30A2 resets the system controller and reloads calibration data, without removing power. Calibration data is also reloaded before every measurement by default. No commands are processed while any reset is under way."
+  },
+  {
+   "topic": "General call reset",
+   "page": 12,
+   "text": "Sending 0x06 to the general call address 0x00 resets the part the same way as the nRESET pin, but every device on the bus that answers general calls resets too. It works only while the sensor can still process I2C commands. For a full reset without a power cycle, nRESET is the preferred route."
+  },
+  {
+   "topic": "Hard reset",
+   "page": 12,
+   "text": "A hard reset is VDD switched off and on. SDA, SCL and ADDR must be brought down as well, so that the part is not fed through its ESD diodes."
+  },
+  {
+   "topic": "Heater",
+   "page": 12,
+   "text": "The built-in heater is for plausibility checks only. It warms the sensor by a few degrees, the amount depending on conditions, draws 3.6 mW to 33 mW depending on supply, is switched by command (0x306D on, 0x3066 off), shows in status bit 13, and is off after any reset."
+  },
+  {
+   "topic": "Status register",
+   "page": 13,
+   "text": "A 16-bit status word, read with 0xF32D, reports heater state, alert flags, whether a reset has happened and whether the last command and last write checksum were accepted. 0x3041 clears the flags."
+  },
+  {
+   "topic": "Output format",
+   "page": 13,
+   "text": "Readings are unsigned 16-bit integers, already linearised and compensated; the conversion equations turn them into %RH, °C and °F."
+  },
+  {
+   "topic": "Package",
+   "page": 16,
+   "text": "Open-cavity DFN (dual flat no leads), with the humidity opening centred on the top. The silicon die sits on a copper lead frame plated Ni/Pd/Au, overmolded in epoxy with the centre pad and I/O pads left bare. The sawn side walls show unplated lead-frame copper. Apart from the opening the outline follows JEDEC publication 95, design registration 4.20 (QFN/SON), Issue D.01, September 2009. MSL 1 to IPC/JEDEC J-STD-020; process within one year of delivery."
+  },
+  {
+   "topic": "Marking",
+   "page": 16,
+   "text": "Laser marked on top: a pin-1 mark and the product name SHT3x, where x is the accuracy class, on the first line; six characters XYABCD on the second. XY (DI) is the output mode, A the year of manufacture (4 = 2014, 5 = 2015 and so on), BCD a tracking code only Sensirion can decode, available on justified request."
+  },
+  {
+   "topic": "Land pattern and stencil",
+   "page": 17,
+   "text": "Non-solder-mask-defined pads with 60 µm to 75 µm clearance from copper to mask; at 0.5 mm pitch, one mask opening per row of four I/O pads. Stencil: laser-cut stainless steel, electropolished trapezoidal walls, 0.1 mm or 0.125 mm thick. I/O apertures are as long as the pads but moved 0.1 mm outward from the package centre. The centre aperture covers about 70 % to 90 % of the pad, around 0.9 mm × 1.6 mm."
+  },
+  {
+   "topic": "Quality and materials",
+   "page": 19,
+   "text": "Qualified to JEDEC JESD47. RoHS and WEEE compliant, free of Pb, Cd and Hg. Reels ship sealed in antistatic ESD bags."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DFN-8 (2.5 mm × 2.5 mm)",
+   "page": 17,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max",
+    "comments"
+   ],
+   "rows": [
+    [
+     "A",
+     "Package height",
+     "0.8",
+     "0.9",
+     "1",
+     ""
+    ],
+    [
+     "A3",
+     "Leadframe height",
+     "-",
+     "0.2",
+     "-",
+     ""
+    ],
+    [
+     "b",
+     "Pad width",
+     "0.2",
+     "0.25",
+     "0.3",
+     ""
+    ],
+    [
+     "D",
+     "Package width",
+     "2.4",
+     "2.5",
+     "2.6",
+     ""
+    ],
+    [
+     "D2",
+     "Center pad length",
+     "1",
+     "1.1",
+     "1.2",
+     ""
+    ],
+    [
+     "E",
+     "Package length",
+     "2.4",
+     "2.5",
+     "2.6",
+     ""
+    ],
+    [
+     "E2",
+     "Center pad width",
+     "1.7",
+     "1.8",
+     "1.9",
+     ""
+    ],
+    [
+     "e",
+     "Pad pitch",
+     "-",
+     "0.5",
+     "",
+     ""
+    ],
+    [
+     "L",
+     "Pad length",
+     "0.25",
+     "0.35",
+     "0.45",
+     ""
+    ],
+    [
+     "S",
+     "Max cavity",
+     "-",
+     "-",
+     "1.5",
+     "Guidance only; covers all tolerances including placement, and the real opening is usually smaller."
+    ],
+    [
+     "T1xT2",
+     "Center pad marking",
+     "-",
+     "0.3x45°",
+     "-",
+     "Chamfer on the centre pad at the pin-1 corner."
+    ]
+   ]
+  }
+ ]
+}

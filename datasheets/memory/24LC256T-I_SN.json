@@ -1,0 +1,2643 @@
+{
+ "sheet": 1,
+ "name": "24LC256T-I_SN",
+ "kind": "memory",
+ "manufacturer": "Microchip",
+ "title": "256 Kbit (32K x 8) I2C serial EEPROM",
+ "source": {
+  "document": "DS20001203W",
+  "revision": "Revision W (08/2019)",
+  "pages": 42
+ },
+ "summary": "A 256 Kbit EEPROM organised as 32,768 bytes, read and written over a two-wire I2C bus. Writes go in single bytes or in pages of up to 64 bytes, each finished by a self-timed cycle of 5 ms at most; reads may run sequentially through the whole array. Three address pins put up to eight parts on one bus, and a WP pin locks the array against writes. The 24LC256 runs from 2.5 V to 5.5 V at up to 400 kHz; the 24AA256 and 24FC256 run down to 1.7 V, the 24FC256 at up to 1 MHz.",
+ "key_figures": [
+  [
+   "Organisation",
+   "32K x 8 (256 Kbit)"
+  ],
+  [
+   "Supply (24LC256)",
+   "2.5 V to 5.5 V"
+  ],
+  [
+   "Supply (24AA256, 24FC256)",
+   "1.7 V to 5.5 V"
+  ],
+  [
+   "Clock",
+   "400 kHz max (24AA256, 24LC256); 1 MHz max (24FC256)"
+  ],
+  [
+   "Page buffer",
+   "64 bytes"
+  ],
+  [
+   "Write cycle",
+   "5 ms max, byte or page"
+  ],
+  [
+   "Write current",
+   "3 mA max at 5.5 V"
+  ],
+  [
+   "Read current",
+   "400 µA max at 5.5 V, 400 kHz"
+  ],
+  [
+   "Standby current",
+   "1 µA max at 3.6 V (I-temp)"
+  ],
+  [
+   "Endurance",
+   "1,000,000 cycles min (25 °C, 5.5 V, page mode)"
+  ],
+  [
+   "Data retention",
+   ">200 years"
+  ],
+  [
+   "ESD",
+   ">4000 V"
+  ],
+  [
+   "Temperature",
+   "-40 °C to +85 °C (I), -40 °C to +125 °C (E)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "VCC range",
+   "max. clock frequency",
+   "temperature ranges",
+   "packages"
+  ],
+  "rows": [
+   [
+    "24AA256",
+    "1.7V-5.5V",
+    "400 kHz (1)",
+    "I, E",
+    "MF, MS, P, SN, SM, MNY, ST, CS"
+   ],
+   [
+    "24LC256",
+    "2.5V-5.5V",
+    "400 kHz",
+    "I, E",
+    "MF, MS, P, SN, SM, MNY, ST"
+   ],
+   [
+    "24FC256",
+    "1.7V-5.5V",
+    "1 MHz (2)",
+    "I",
+    "MF, MS, P, SN, SM, MNY, ST"
+   ]
+  ],
+  "notes": [
+   "(1) 100 kHz when VCC is below 2.5V.",
+   "(2) 400 kHz when VCC is below 2.5V.",
+   "An order code reads device, then T for tape and reel (blank for tube or tray), then -I or -E for the temperature range, then /package code: 24LC256T-I/SN is a 24LC256 on tape and reel, industrial range, in the 3.90 mm SOIC. The CSP is ordered as 24AA256T-CS16K.",
+   "Automotive AEC-Q100 grades carry their own order codes, given by Microchip on request."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DFN-S, PDIP, SOIC, SOIJ, TDFN, TSSOP",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "A0",
+     "type": "input",
+     "function": "Chip address input, compared with the A0 bit of the control byte. Tie to VCC or VSS."
+    },
+    {
+     "pin": "2",
+     "name": "A1",
+     "type": "input",
+     "function": "Chip address input, compared with the A1 bit of the control byte. Tie to VCC or VSS."
+    },
+    {
+     "pin": "3",
+     "name": "A2",
+     "type": "input",
+     "function": "Chip address input, compared with the A2 bit of the control byte. Tie to VCC or VSS."
+    },
+    {
+     "pin": "4",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "SDA",
+     "type": "open-drain I/O",
+     "function": "Bidirectional serial address and data line. Open drain; needs a pull-up to VCC, typically 10 kΩ at 100 kHz and 2 kΩ at 400 kHz or 1 MHz."
+    },
+    {
+     "pin": "6",
+     "name": "SCL",
+     "type": "input",
+     "function": "Serial clock input; times every transfer on SDA."
+    },
+    {
+     "pin": "7",
+     "name": "WP",
+     "type": "input",
+     "function": "Write-protect input. At VSS writes are allowed; at VCC the whole array is protected from writes while reads go on normally. Must be tied to VCC or VSS."
+    },
+    {
+     "pin": "8",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "thermal pad",
+     "function": "Exposed pad on the underside; connect it to VSS or leave it unconnected."
+    }
+   ],
+   "notes": [
+    "Only the DFN-S and TDFN have the exposed pad."
+   ]
+  },
+  {
+   "package": "MSOP",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected in the MSOP. The A0 bit of the control byte must be sent as 0."
+    },
+    {
+     "pin": "2",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected in the MSOP. The A1 bit of the control byte must be sent as 0."
+    },
+    {
+     "pin": "3",
+     "name": "A2",
+     "type": "input",
+     "function": "Chip address input, compared with the A2 bit of the control byte. Tie to VCC or VSS."
+    },
+    {
+     "pin": "4",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "SDA",
+     "type": "open-drain I/O",
+     "function": "Bidirectional serial address and data line. Open drain; needs a pull-up to VCC, typically 10 kΩ at 100 kHz and 2 kΩ at 400 kHz or 1 MHz."
+    },
+    {
+     "pin": "6",
+     "name": "SCL",
+     "type": "input",
+     "function": "Serial clock input; times every transfer on SDA."
+    },
+    {
+     "pin": "7",
+     "name": "WP",
+     "type": "input",
+     "function": "Write-protect input. At VSS writes are allowed; at VCC the whole array is protected from writes while reads go on normally. Must be tied to VCC or VSS."
+    },
+    {
+     "pin": "8",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply."
+    }
+   ]
+  },
+  {
+   "package": "CSP (8 balls)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply."
+    },
+    {
+     "pin": "2",
+     "name": "A1",
+     "type": "input",
+     "function": "Chip address input, compared with the A1 bit of the control byte. Tie to VCC or VSS."
+    },
+    {
+     "pin": "3",
+     "name": "A0",
+     "type": "input",
+     "function": "Chip address input, compared with the A0 bit of the control byte. Tie to VCC or VSS."
+    },
+    {
+     "pin": "4",
+     "name": "WP",
+     "type": "input",
+     "function": "Write-protect input. At VSS writes are allowed; at VCC the whole array is protected from writes while reads go on normally. Must be tied to VCC or VSS."
+    },
+    {
+     "pin": "5",
+     "name": "A2",
+     "type": "input",
+     "function": "Chip address input, compared with the A2 bit of the control byte. Tie to VCC or VSS."
+    },
+    {
+     "pin": "6",
+     "name": "SDA",
+     "type": "open-drain I/O",
+     "function": "Bidirectional serial address and data line. Open drain; needs a pull-up to VCC, typically 10 kΩ at 100 kHz and 2 kΩ at 400 kHz or 1 MHz."
+    },
+    {
+     "pin": "7",
+     "name": "SCL",
+     "type": "input",
+     "function": "Serial clock input; times every transfer on SDA."
+    },
+    {
+     "pin": "8",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    }
+   ],
+   "notes": [
+    "Ball positions, top view: 1 VCC, 2 A1, 3 A0 in the first row; 4 WP, 5 A2 in the middle row; 6 SDA, 7 SCL, 8 VSS in the last row."
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "6.5V"
+    ],
+    [
+     "All inputs and outputs w.r.t. VSS",
+     "-0.6V to VCC +1.0V"
+    ],
+    [
+     "Storage temperature",
+     "-65°C to +150°C"
+    ],
+    [
+     "Ambient temperature with power applied",
+     "-40°C to +125°C"
+    ],
+    [
+     "ESD protection on all pins",
+     "≥4 kV"
+    ]
+   ],
+   "notes": [
+    "These are stress limits; running the part at them is not implied, and long exposure to them can reduce reliability."
+   ]
+  },
+  {
+   "title": "DC characteristics",
+   "page": 3,
+   "conditions": "Industrial (I): VCC = +1.7V to 5.5V, TA = -40°C to +85°C; Extended (E): VCC = +1.7V to 5.5V, TA = -40°C to +125°C",
+   "columns": [
+    "param. no.",
+    "symbol",
+    "characteristic",
+    "min",
+    "max",
+    "units",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "D1",
+     "VIH",
+     "High-Level Input Voltage",
+     "0.7 VCC",
+     "—",
+     "V",
+     ""
+    ],
+    [
+     "D2",
+     "VIL",
+     "Low-Level Input Voltage",
+     "—",
+     "0.3 VCC",
+     "V",
+     "VCC ≥ 2.5V"
+    ],
+    [
+     "D2",
+     "VIL",
+     "Low-Level Input Voltage",
+     "—",
+     "0.2 VCC",
+     "V",
+     "VCC < 2.5V"
+    ],
+    [
+     "D3",
+     "VHYS",
+     "Hysteresis of Schmitt Trigger Inputs (SDA, SCL pins)",
+     "0.05 VCC",
+     "—",
+     "V",
+     "VCC ≥ 2.5V (Note)"
+    ],
+    [
+     "D4",
+     "VOL",
+     "Low-Level Output Voltage",
+     "—",
+     "0.40",
+     "V",
+     "IOL = 3.0 mA @ VCC = 4.5V; IOL = 2.1 mA @ VCC = 2.5V"
+    ],
+    [
+     "D5",
+     "ILI",
+     "Input Leakage Current",
+     "—",
+     "±1",
+     "µA",
+     "VIN = VSS or VCC, WP = VSS; VIN = VSS or VCC, WP = VCC"
+    ],
+    [
+     "D6",
+     "ILO",
+     "Output Leakage Current",
+     "—",
+     "±1",
+     "µA",
+     "VOUT = VSS or VCC"
+    ],
+    [
+     "D7",
+     "CIN, COUT",
+     "Pin Capacitance (all inputs/outputs)",
+     "—",
+     "10",
+     "pF",
+     "VCC = 5.0V (Note), TA = 25°C, FCLK = 1 MHz"
+    ],
+    [
+     "D8",
+     "ICC Read",
+     "Operating Current",
+     "—",
+     "400",
+     "µA",
+     "VCC = 5.5V, SCL = 400 kHz"
+    ],
+    [
+     "D8",
+     "ICC Write",
+     "Operating Current",
+     "—",
+     "3",
+     "mA",
+     "VCC = 5.5V"
+    ],
+    [
+     "D9",
+     "ICCS",
+     "Standby Current",
+     "—",
+     "1",
+     "µA",
+     "SDA = SCL = VCC = 3.6V, A0, A1, A2, WP = VSS, I-Temp."
+    ],
+    [
+     "D9",
+     "ICCS",
+     "Standby Current",
+     "—",
+     "1.5",
+     "µA",
+     "SDA = SCL = VCC = 5.5V, A0, A1, A2, WP = VSS, I-Temp."
+    ],
+    [
+     "D9",
+     "ICCS",
+     "Standby Current",
+     "—",
+     "5",
+     "µA",
+     "SDA = SCL = VCC = 5.5V, A0, A1, A2, WP = VSS, E-Temp."
+    ]
+   ],
+   "notes": [
+    "(Note) Sampled periodically; not tested on every part."
+   ]
+  },
+  {
+   "title": "AC characteristics",
+   "page": 4,
+   "conditions": "Industrial (I): VCC = +1.7V to 5.5V, TA = -40°C to +85°C; Extended (E): VCC = +1.7V to 5.5V, TA = -40°C to +125°C",
+   "columns": [
+    "param. no.",
+    "symbol",
+    "characteristic",
+    "min",
+    "max",
+    "units",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "1",
+     "FCLK",
+     "Clock Frequency",
+     "—",
+     "100",
+     "kHz",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "1",
+     "FCLK",
+     "Clock Frequency",
+     "—",
+     "400",
+     "kHz",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "1",
+     "FCLK",
+     "Clock Frequency",
+     "—",
+     "400",
+     "kHz",
+     "1.7V ≤ VCC < 2.5V (24FC256)"
+    ],
+    [
+     "1",
+     "FCLK",
+     "Clock Frequency",
+     "—",
+     "1000",
+     "kHz",
+     "2.5V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "2",
+     "THIGH",
+     "Clock High Time",
+     "4000",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "2",
+     "THIGH",
+     "Clock High Time",
+     "600",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "2",
+     "THIGH",
+     "Clock High Time",
+     "600",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (24FC256)"
+    ],
+    [
+     "2",
+     "THIGH",
+     "Clock High Time",
+     "500",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "3",
+     "TLOW",
+     "Clock Low Time",
+     "4700",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "3",
+     "TLOW",
+     "Clock Low Time",
+     "1300",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "3",
+     "TLOW",
+     "Clock Low Time",
+     "1300",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (24FC256)"
+    ],
+    [
+     "3",
+     "TLOW",
+     "Clock Low Time",
+     "500",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "4",
+     "TR",
+     "SDA and SCL Rise Time",
+     "—",
+     "1000",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (Note 1)"
+    ],
+    [
+     "4",
+     "TR",
+     "SDA and SCL Rise Time",
+     "—",
+     "300",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V (Note 1)"
+    ],
+    [
+     "4",
+     "TR",
+     "SDA and SCL Rise Time",
+     "—",
+     "300",
+     "ns",
+     "1.7V ≤ VCC ≤ 5.5V (24FC256) (Note 1)"
+    ],
+    [
+     "5",
+     "TF",
+     "SDA and SCL Fall Time",
+     "—",
+     "300",
+     "ns",
+     "All except 24FC256 (Note 1)"
+    ],
+    [
+     "5",
+     "TF",
+     "SDA and SCL Fall Time",
+     "—",
+     "100",
+     "ns",
+     "1.7V ≤ VCC ≤ 5.5V (24FC256) (Note 1)"
+    ],
+    [
+     "6",
+     "THD:STA",
+     "Start Condition Hold Time",
+     "4000",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "6",
+     "THD:STA",
+     "Start Condition Hold Time",
+     "600",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "6",
+     "THD:STA",
+     "Start Condition Hold Time",
+     "600",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (24FC256)"
+    ],
+    [
+     "6",
+     "THD:STA",
+     "Start Condition Hold Time",
+     "250",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "7",
+     "TSU:STA",
+     "Start Condition Setup Time",
+     "4700",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "7",
+     "TSU:STA",
+     "Start Condition Setup Time",
+     "600",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "7",
+     "TSU:STA",
+     "Start Condition Setup Time",
+     "600",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (24FC256)"
+    ],
+    [
+     "7",
+     "TSU:STA",
+     "Start Condition Setup Time",
+     "250",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "8",
+     "THD:DAT",
+     "Data Input Hold Time",
+     "0",
+     "—",
+     "ns",
+     "Note 2"
+    ],
+    [
+     "9",
+     "TSU:DAT",
+     "Data Input Setup Time",
+     "250",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "9",
+     "TSU:DAT",
+     "Data Input Setup Time",
+     "100",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "9",
+     "TSU:DAT",
+     "Data Input Setup Time",
+     "100",
+     "—",
+     "ns",
+     "1.7V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "10",
+     "TSU:STO",
+     "Stop Condition Setup Time",
+     "4000",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "10",
+     "TSU:STO",
+     "Stop Condition Setup Time",
+     "600",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "10",
+     "TSU:STO",
+     "Stop Condition Setup Time",
+     "600",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (24FC256)"
+    ],
+    [
+     "10",
+     "TSU:STO",
+     "Stop Condition Setup Time",
+     "250",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "11",
+     "TSU:WP",
+     "WP Setup Time",
+     "4000",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "11",
+     "TSU:WP",
+     "WP Setup Time",
+     "600",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "11",
+     "TSU:WP",
+     "WP Setup Time",
+     "600",
+     "—",
+     "ns",
+     "1.7V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "12",
+     "THD:WP",
+     "WP Hold Time",
+     "4700",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "12",
+     "THD:WP",
+     "WP Hold Time",
+     "1300",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "12",
+     "THD:WP",
+     "WP Hold Time",
+     "1300",
+     "—",
+     "ns",
+     "1.7V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "13",
+     "TAA",
+     "Output Valid from Clock",
+     "—",
+     "3500",
+     "ns",
+     "1.7 V ≤ VCC < 2.5V (Note 2)"
+    ],
+    [
+     "13",
+     "TAA",
+     "Output Valid from Clock",
+     "—",
+     "900",
+     "ns",
+     "2.5 V ≤ VCC ≤ 5.5V (Note 2)"
+    ],
+    [
+     "13",
+     "TAA",
+     "Output Valid from Clock",
+     "—",
+     "900",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (24FC256) (Note 2)"
+    ],
+    [
+     "13",
+     "TAA",
+     "Output Valid from Clock",
+     "—",
+     "400",
+     "ns",
+     "2.5 V ≤ VCC ≤ 5.5V (24FC256) (Note 2)"
+    ],
+    [
+     "14",
+     "TBUF",
+     "Bus Free Time: The time the bus must be free before a new transmission can start",
+     "4700",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V"
+    ],
+    [
+     "14",
+     "TBUF",
+     "Bus Free Time: The time the bus must be free before a new transmission can start",
+     "1300",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V"
+    ],
+    [
+     "14",
+     "TBUF",
+     "Bus Free Time: The time the bus must be free before a new transmission can start",
+     "1300",
+     "—",
+     "ns",
+     "1.7V ≤ VCC < 2.5V (24FC256)"
+    ],
+    [
+     "14",
+     "TBUF",
+     "Bus Free Time: The time the bus must be free before a new transmission can start",
+     "500",
+     "—",
+     "ns",
+     "2.5V ≤ VCC ≤ 5.5V (24FC256)"
+    ],
+    [
+     "15",
+     "TOF",
+     "Output fall time from VIH minimum to VIL maximum, CB ≤ 100 pF",
+     "10 + 0.1CB",
+     "250",
+     "ns",
+     "All except 24FC256 (Note 1)"
+    ],
+    [
+     "15",
+     "TOF",
+     "Output fall time from VIH minimum to VIL maximum, CB ≤ 100 pF",
+     "10 + 0.1CB",
+     "250",
+     "ns",
+     "All except 24FC256 (Note 1)"
+    ],
+    [
+     "16",
+     "TSP",
+     "Input Filter Spike Suppression (SDA and SCL pins)",
+     "—",
+     "50",
+     "ns",
+     "All except 24FC256 (Notes 1 and 3)"
+    ],
+    [
+     "17",
+     "TWC",
+     "Write Cycle Time (byte or page)",
+     "—",
+     "5",
+     "ms",
+     ""
+    ],
+    [
+     "18",
+     "",
+     "Endurance",
+     "1,000,000",
+     "—",
+     "cycles",
+     "25°C, 5.5V, Page mode (Note 4)"
+    ]
+   ],
+   "notes": [
+    "Note 1: Not 100% tested. CB is the capacitance a single bus line carries in total, in pF.",
+    "Note 2: When it transmits, the device inserts its own delay of at least 300 ns to clear the undefined zone of the SCL falling edge, so it never produces a false Start or Stop.",
+    "Note 3: TSP together with VHYS come from the Schmitt trigger inputs, which reject noise spikes; with them no TI figure is needed for standard operation.",
+    "Note 4: Not tested; ensured by characterization. Microchip's Total Endurance model estimates endurance for a given application."
+   ]
+  },
+  {
+   "title": "Ordering code fields",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "field",
+    "code",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "Device",
+     "24AA256",
+     "1.7V, 256-Kbit I2C Serial EEPROM"
+    ],
+    [
+     "Device",
+     "24LC256",
+     "2.5V, 256-Kbit I2C Serial EEPROM"
+    ],
+    [
+     "Device",
+     "24FC256",
+     "1.7V, High Speed, 256-Kbit I2C Serial EEPROM"
+    ],
+    [
+     "Tape and reel option",
+     "blank",
+     "Standard packaging (tube or tray)"
+    ],
+    [
+     "Tape and reel option",
+     "T",
+     "Tape and Reel (1)"
+    ],
+    [
+     "Temperature range",
+     "I",
+     "-40°C to +85°C (Industrial)"
+    ],
+    [
+     "Temperature range",
+     "E",
+     "-40°C to +125°C (Extended)"
+    ],
+    [
+     "Package",
+     "MF",
+     "Plastic Dual Flat, No Lead – 5x6x0.85 mm body, 8-lead (DFN-S)"
+    ],
+    [
+     "Package",
+     "MS",
+     "Plastic Micro Small Outline, 8-lead (MSOP)"
+    ],
+    [
+     "Package",
+     "P",
+     "Plastic Dual In-Line – 300 mil body, 8-lead (PDIP)"
+    ],
+    [
+     "Package",
+     "SN",
+     "Plastic Small Outline - Narrow, 3.90 mm body, 8-lead (SOIC)"
+    ],
+    [
+     "Package",
+     "SM",
+     "Plastic Small Outline - Medium, 5.28 mm body, 8-lead (SOIJ)"
+    ],
+    [
+     "Package",
+     "MNY",
+     "Plastic Dual Flat, No Lead - 2x3x0.8 mm body, 8-lead (TDFN)"
+    ],
+    [
+     "Package",
+     "ST",
+     "Plastic Thin Shrink Small Outline – 4.4 mm, 8-lead (TSSOP)"
+    ],
+    [
+     "Package",
+     "CS16K (2)",
+     "Chip Scale, 8-lead (CSP)"
+    ]
+   ],
+   "notes": [
+    "(1) The T appears only in the order code; it is not marked on the package.",
+    "(2) 16K stands for the 160K process technology.",
+    "(3) Automotive grade order codes come from Microchip."
+   ]
+  },
+  {
+   "title": "Ordering examples",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "part number",
+    "packing",
+    "temperature",
+    "VCC",
+    "speed",
+    "package"
+   ],
+   "rows": [
+    [
+     "24AA256-I/P",
+     "tube or tray",
+     "Industrial",
+     "1.7V",
+     "",
+     "PDIP"
+    ],
+    [
+     "24AA256T-I/SN",
+     "tape and reel",
+     "Industrial",
+     "1.7V",
+     "",
+     "SOIC"
+    ],
+    [
+     "24AA256-I/ST",
+     "tube or tray",
+     "Industrial",
+     "1.7V",
+     "",
+     "TSSOP"
+    ],
+    [
+     "24AA256-I/MS",
+     "tube or tray",
+     "Industrial",
+     "1.7V",
+     "",
+     "MSOP"
+    ],
+    [
+     "24LC256-E/P",
+     "tube or tray",
+     "Extended",
+     "2.5V",
+     "",
+     "PDIP"
+    ],
+    [
+     "24LC256-I/SN",
+     "tube or tray",
+     "Industrial",
+     "2.5V",
+     "",
+     "SOIC"
+    ],
+    [
+     "24LC256T-I/SN",
+     "tape and reel",
+     "Industrial",
+     "2.5V",
+     "",
+     "SOIC"
+    ],
+    [
+     "24LC256-I/MS",
+     "tube or tray",
+     "Industrial",
+     "2.5V",
+     "",
+     "MSOP"
+    ],
+    [
+     "24FC256-I/P",
+     "tube or tray",
+     "Industrial",
+     "1.7V",
+     "High Speed",
+     "PDIP"
+    ],
+    [
+     "24FC256-I/SN",
+     "tube or tray",
+     "Industrial",
+     "1.7V",
+     "High Speed",
+     "SOIC"
+    ],
+    [
+     "24FC256T-I/SN",
+     "tape and reel",
+     "Industrial",
+     "1.7V",
+     "High Speed",
+     "SOIC"
+    ],
+    [
+     "24AA256T-CS16K",
+     "tape and reel",
+     "Industrial",
+     "1.7V",
+     "",
+     "Chip Scale"
+    ],
+    [
+     "24AA256T-E/SN",
+     "tape and reel",
+     "Extended",
+     "1.7V",
+     "",
+     "SOIC"
+    ]
+   ]
+  },
+  {
+   "title": "First-line marking codes",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "part no.",
+    "DFN",
+    "MSOP",
+    "PDIP",
+    "SOIC",
+    "SOIJ",
+    "TDFN I-temp.",
+    "TDFN E-temp.",
+    "TSSOP",
+    "CSP"
+   ],
+   "rows": [
+    [
+     "24AA256",
+     "24AA256",
+     "4A256T(1)",
+     "24AA256",
+     "24AA256T(1)",
+     "24AA256",
+     "EF6",
+     "EF5",
+     "4AD",
+     "249"
+    ],
+    [
+     "24LC256",
+     "24LC256",
+     "4L256T(1)",
+     "24LC256",
+     "24LC256T(1)",
+     "24LC256",
+     "EF4",
+     "EF3",
+     "4LD",
+     "—"
+    ],
+    [
+     "24FC256",
+     "24FC256",
+     "4F256T(1)",
+     "24FC256",
+     "24FC256T(1)",
+     "24FC256",
+     "EF8",
+     "—",
+     "4FD",
+     "—"
+    ]
+   ],
+   "notes": [
+    "(1) T is the temperature grade letter, I or E.",
+    "Below the first line the marking carries a year code (Y or YY), a week code (WW, week 01 holds 1 January) and a traceability code (NNN, two characters on small packages). e3 marks matte tin plating; on packages too small for it, it is on the carton or reel label only."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [],
+ "equations": [
+  {
+   "name": "Output fall time, minimum",
+   "expr": "TOF(min) = 10 + 0.1 × CB",
+   "where": {
+    "TOF(min)": "least fall time of SDA from VIH minimum to VIL maximum, ns",
+    "CB": "total capacitance of one bus line, pF, up to 100 pF"
+   },
+   "note": "Applies to all versions except the 24FC256.",
+   "page": 5
+  },
+  {
+   "name": "Address space across several devices",
+   "expr": "A15 = A0 bit, A16 = A1 bit, A17 = A2 bit of the control byte",
+   "where": {
+    "A15, A16, A17": "upper address bits of an 18-bit (2 Mbit) space spread over eight devices"
+   },
+   "note": "With the MSOP only A2 (as A17) is used, for two devices and 512 Kbit; the A0 and A1 bits are sent as 0.",
+   "page": 10
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Bus roles",
+   "page": 8,
+   "text": "The device is always a slave on a two-wire bus. A master drives SCL, grants bus access and issues every Start and Stop; either side can transmit or receive, as the master decides."
+  },
+  {
+   "topic": "Bus conditions",
+   "page": 8,
+   "text": "The bus is idle when SDA and SCL are both high, and a transfer may only begin then. SDA may change only while SCL is low; SDA falling while SCL is high is a Start, and SDA rising while SCL is high is a Stop. Every command opens with a Start and every operation closes with a Stop. A bit is valid while SDA is steady through the SCL high time, one bit per clock."
+  },
+  {
+   "topic": "Acknowledge",
+   "page": 8,
+   "text": "After each byte the receiver pulls SDA low through a ninth clock pulse that the master supplies, and holds it low for the whole high time of that pulse. To end a read the master leaves the last byte unacknowledged; the device then releases SDA high so the master can send Stop. During an internal write cycle the device acknowledges nothing."
+  },
+  {
+   "topic": "Transfer length on writes",
+   "page": 8,
+   "text": "The master sets how many bytes pass between Start and Stop, with no limit, but in a write only the final 64 bytes are kept; earlier bytes are overwritten first-in, first-out."
+  },
+  {
+   "topic": "Control byte and addressing",
+   "page": 10,
+   "text": "The first byte after Start is the control byte: the code 1010, then chip select bits A2, A1, A0, then R/W (1 read, 0 write). The device answers only when the chip select bits match the levels on its A2, A1 and A0 pins, so up to eight can share a bus (two in the MSOP, whose A0 and A1 bits must be 0). For a write or address set, two address bytes follow, high byte first. Only A14 to A0 are used; the bit above A14 in the high byte is ignored."
+  },
+  {
+   "topic": "Address pins",
+   "page": 7,
+   "text": "A0, A1 and A2 must sit at VCC or VSS. They are usually wired to fixed levels; when a microcontroller drives them instead, they must reach their logic levels before the device is used."
+  },
+  {
+   "topic": "Byte write",
+   "page": 11,
+   "text": "The master sends the control byte with R/W = 0, the address high byte, the address low byte and one data byte, each acknowledged, then a Stop. The Stop starts the internal write cycle, during which the device does not acknowledge. After it the address counter points to the next location."
+  },
+  {
+   "topic": "Page write",
+   "page": 11,
+   "text": "As a byte write, but the master may send up to 63 more data bytes before Stop. They collect in the 64-byte page buffer and are programmed together once Stop arrives. The lower six address bits count up after each byte; past 64 bytes they wrap and the earliest data is overwritten. Pages begin at multiples of 64, and a write that runs past the end of a page wraps to the start of the same page, overwriting what is there, so software must keep each page write inside one page."
+  },
+  {
+   "topic": "Endurance per page",
+   "page": 11,
+   "text": "A write of fewer than 64 bytes refreshes the rest of its page too, so the whole page goes through a write cycle; that is why endurance is rated per page."
+  },
+  {
+   "topic": "Write protection",
+   "page": 11,
+   "text": "With WP at VCC the whole array (0000-7FFF) is protected; with WP at VSS it is not. WP is read at the Stop of each write command, and changing it after that Stop does not affect the write in progress. A write sent while WP is high is acknowledged, but nothing is written, no write cycle starts, and the device is ready for the next command at once."
+  },
+  {
+   "topic": "Acknowledge polling",
+   "page": 12,
+   "text": "Because the device stays silent during a write cycle, the master can find the end of the cycle instead of waiting the full time. Right after the Stop that begins the write, it sends Start and a control byte with R/W = 0. No acknowledge means the cycle is still running, and the master repeats Start and control byte; an acknowledge means the cycle is done and the next read or write can follow."
+  },
+  {
+   "topic": "Current address read",
+   "page": 13,
+   "text": "The address counter holds the address after the last one accessed. A control byte with R/W = 1 makes the device acknowledge and send the byte at that address; the master does not acknowledge it and sends Stop."
+  },
+  {
+   "topic": "Random read",
+   "page": 13,
+   "text": "To read from a chosen address, the master first sends a write control byte and the two address bytes, then, instead of data, a new Start and a control byte with R/W = 1. The address pointer is already loaded, so the device acknowledges and sends that byte; the master leaves it unacknowledged and sends Stop. The counter then points to the following address."
+  },
+  {
+   "topic": "Sequential read",
+   "page": 13,
+   "text": "Started like a random or current address read, but the master acknowledges each byte and the device sends the next address in turn, so the whole array can be read in one pass. The last byte is left unacknowledged and followed by Stop. The pointer wraps from 7FFF to 0000. A sequential read does not cross from one device into the next on the bus."
+  },
+  {
+   "topic": "Inputs and outputs",
+   "page": 1,
+   "text": "SDA and SCL have Schmitt trigger inputs for noise rejection, and the output edge rate is controlled to avoid ground bounce."
+  },
+  {
+   "topic": "Exposed pad",
+   "page": 7,
+   "text": "On the DFN-S and TDFN the exposed pad may go to VSS or be left floating."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DFN-S (MF), 6x5 mm body, 8-lead",
+   "page": 17,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "0.80",
+     "0.85",
+     "1.00"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.01",
+     "0.05"
+    ],
+    [
+     "A3",
+     "contact thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "5.00 BSC",
+     ""
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "6.00 BSC",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "3.90",
+     "4.00",
+     "4.10"
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "2.20",
+     "2.30",
+     "2.40"
+    ],
+    [
+     "b",
+     "contact width",
+     "0.35",
+     "0.40",
+     "0.48"
+    ],
+    [
+     "L",
+     "contact length",
+     "0.50",
+     "0.60",
+     "0.75"
+    ],
+    [
+     "K",
+     "contact to exposed pad",
+     "0.20",
+     "–",
+     "–"
+    ]
+   ],
+   "notes": [
+    "The pin-1 mark may take any form but sits inside the pin-1 corner zone.",
+    "Exposed tie bars may show at the ends of the body.",
+    "The package is saw singulated.",
+    "Dimensions and tolerances follow ASME Y14.5M.",
+    "BSC marks a basic dimension, exact and without tolerance; REF marks a reference dimension, for information only."
+   ]
+  },
+  {
+   "name": "DFN-S (MF) recommended land pattern",
+   "page": 18,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "W2",
+     "optional centre pad width",
+     "",
+     "",
+     "2.40"
+    ],
+    [
+     "T2",
+     "optional centre pad length",
+     "",
+     "",
+     "4.10"
+    ],
+    [
+     "C",
+     "contact pad spacing",
+     "",
+     "5.60",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.45"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "1.10"
+    ]
+   ],
+   "notes": [
+    "The DFN-S also fits the land pattern of the 8-lead 3.90 mm SOIC.",
+    "Dimensions and tolerances follow ASME Y14.5M; BSC marks a basic dimension, exact and without tolerance."
+   ]
+  },
+  {
+   "name": "MSOP (MS), 8-lead",
+   "page": 20,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "-",
+     "-",
+     "1.10"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "0.75",
+     "0.85",
+     "0.95"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "-",
+     "0.15"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "4.90 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "0.60",
+     "0.80"
+    ],
+    [
+     "L1",
+     "footprint",
+     "",
+     "0.95 REF",
+     ""
+    ],
+    [
+     "φ",
+     "foot angle",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.08",
+     "-",
+     "0.23"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.22",
+     "-",
+     "0.40"
+    ]
+   ],
+   "notes": [
+    "The pin-1 mark may take any form but sits inside the pin-1 corner zone.",
+    "D and E1 exclude mold flash and protrusions, which are at most 0.15 mm per side.",
+    "Dimensions and tolerances follow ASME Y14.5M.",
+    "BSC marks a basic dimension, exact and without tolerance; REF marks a reference dimension, for information only."
+   ]
+  },
+  {
+   "name": "MSOP (MS) recommended land pattern",
+   "page": 21,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "C",
+     "contact pad spacing",
+     "",
+     "4.40",
+     ""
+    ],
+    [
+     "Z",
+     "overall width",
+     "",
+     "",
+     "5.85"
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.45"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "1.45"
+    ],
+    [
+     "G1",
+     "distance between pads",
+     "2.95",
+     "",
+     ""
+    ],
+    [
+     "GX",
+     "distance between pads",
+     "0.20",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Dimensions and tolerances follow ASME Y14.5M; BSC marks a basic dimension, exact and without tolerance."
+   ]
+  },
+  {
+   "name": "PDIP (P), 300 mil body, 8-lead",
+   "page": 23,
+   "unit": "inch",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     ".100 BSC",
+     ""
+    ],
+    [
+     "A",
+     "top to seating plane",
+     "-",
+     "-",
+     ".210"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     ".115",
+     ".130",
+     ".195"
+    ],
+    [
+     "A1",
+     "base to seating plane",
+     ".015",
+     "-",
+     "-"
+    ],
+    [
+     "E",
+     "shoulder to shoulder width",
+     ".290",
+     ".310",
+     ".325"
+    ],
+    [
+     "E1",
+     "molded package width",
+     ".240",
+     ".250",
+     ".280"
+    ],
+    [
+     "D",
+     "overall length",
+     ".348",
+     ".365",
+     ".400"
+    ],
+    [
+     "L",
+     "tip to seating plane",
+     ".115",
+     ".130",
+     ".150"
+    ],
+    [
+     "c",
+     "lead thickness",
+     ".008",
+     ".010",
+     ".015"
+    ],
+    [
+     "b1",
+     "upper lead width",
+     ".040",
+     ".060",
+     ".070"
+    ],
+    [
+     "b",
+     "lower lead width",
+     ".014",
+     ".018",
+     ".022"
+    ],
+    [
+     "eB §",
+     "overall row spacing",
+     "-",
+     "-",
+     ".430"
+    ]
+   ],
+   "notes": [
+    "The pin-1 mark may take any form but sits inside the pin-1 corner zone.",
+    "§ marks a significant characteristic.",
+    "D and E1 exclude mold flash and protrusions, which are at most .010\" per side.",
+    "The lead shape varies by vendor.",
+    "Dimensions and tolerances follow ASME Y14.5M.",
+    "BSC marks a basic dimension, exact and without tolerance."
+   ]
+  },
+  {
+   "name": "SOIC (SN), narrow 3.90 mm body, 8-lead",
+   "page": 25,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "-",
+     "-",
+     "1.75"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "1.25",
+     "-",
+     "-"
+    ],
+    [
+     "A1 §",
+     "standoff",
+     "0.10",
+     "-",
+     "0.25"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "6.00 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "",
+     "3.90 BSC",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "4.90 BSC",
+     ""
+    ],
+    [
+     "h",
+     "chamfer (optional)",
+     "0.25",
+     "-",
+     "0.50"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "-",
+     "1.27"
+    ],
+    [
+     "L1",
+     "footprint",
+     "",
+     "1.04 REF",
+     ""
+    ],
+    [
+     "φ",
+     "foot angle",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.17",
+     "-",
+     "0.25"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.31",
+     "-",
+     "0.51"
+    ],
+    [
+     "α",
+     "mold draft angle top",
+     "5°",
+     "-",
+     "15°"
+    ],
+    [
+     "β",
+     "mold draft angle bottom",
+     "5°",
+     "-",
+     "15°"
+    ]
+   ],
+   "notes": [
+    "The pin-1 mark may take any form but sits inside the pin-1 corner zone.",
+    "§ marks a significant characteristic.",
+    "D and E1 exclude mold flash and protrusions, which are at most 0.15mm per side.",
+    "Dimensions and tolerances follow ASME Y14.5M.",
+    "BSC marks a basic dimension, exact and without tolerance; REF marks a reference dimension, for information only.",
+    "Datums A and B are set at datum H."
+   ]
+  },
+  {
+   "name": "SOIC (SN) recommended land pattern",
+   "page": 26,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "C",
+     "contact pad spacing",
+     "",
+     "5.40",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.60"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "1.55"
+    ]
+   ],
+   "notes": [
+    "Dimensions and tolerances follow ASME Y14.5M; BSC marks a basic dimension, exact and without tolerance."
+   ]
+  },
+  {
+   "name": "SOIJ (SM), medium 5.28 mm body, 8-lead",
+   "page": 28,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "1.77",
+     "-",
+     "2.03"
+    ],
+    [
+     "A1 §",
+     "standoff",
+     "0.05",
+     "",
+     "0.25"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "1.75",
+     "-",
+     "1.98"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "7.94 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "",
+     "5.25 BSC",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "5.26 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.51",
+     "-",
+     "0.76"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.15",
+     "-",
+     "0.25"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.36",
+     "-",
+     "0.51"
+    ],
+    [
+     "θ1",
+     "mold draft angle",
+     "-",
+     "-",
+     "15°"
+    ],
+    [
+     "θ2",
+     "lead angle",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "θ3",
+     "foot angle",
+     "0°",
+     "-",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "SOIJ is the JEITA/EIAJ outline once called SOIC.",
+    "§ marks a significant characteristic.",
+    "D and E1 exclude mold flash and protrusions, which are at most 0.25mm per side."
+   ]
+  },
+  {
+   "name": "SOIJ (SM) recommended land pattern",
+   "page": 29,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "Z1",
+     "overall width",
+     "",
+     "",
+     "9.00"
+    ],
+    [
+     "C1",
+     "contact pad spacing",
+     "",
+     "7.30",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.65"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "1.70"
+    ],
+    [
+     "G1",
+     "distance between pads",
+     "5.60",
+     "",
+     ""
+    ],
+    [
+     "G",
+     "distance between pads",
+     "0.62",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Dimensions and tolerances follow ASME Y14.5M; BSC marks a basic dimension, exact and without tolerance."
+   ]
+  },
+  {
+   "name": "TDFN (MN), 2x3x0.75 mm body, 8-lead",
+   "page": 31,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "A3",
+     "contact thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "2.00 BSC",
+     ""
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "3.00 BSC",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "1.20",
+     "-",
+     "1.60"
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "1.20",
+     "-",
+     "1.60"
+    ],
+    [
+     "b",
+     "contact width",
+     "0.20",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "L",
+     "contact length",
+     "0.25",
+     "0.30",
+     "0.45"
+    ],
+    [
+     "K",
+     "contact to exposed pad",
+     "0.20",
+     "-",
+     "-"
+    ]
+   ],
+   "notes": [
+    "The pin-1 mark may take any form but sits inside the pin-1 corner zone.",
+    "Exposed tie bars may show at the ends of the body.",
+    "The package is saw singulated.",
+    "Dimensions and tolerances follow ASME Y14.5M.",
+    "BSC marks a basic dimension, exact and without tolerance; REF marks a reference dimension, for information only."
+   ]
+  },
+  {
+   "name": "TDFN (MN) recommended land pattern",
+   "page": 32,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "W2",
+     "optional centre pad width",
+     "",
+     "",
+     "1.46"
+    ],
+    [
+     "T2",
+     "optional centre pad length",
+     "",
+     "",
+     "1.36"
+    ],
+    [
+     "C1",
+     "contact pad spacing",
+     "",
+     "3.00",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.30"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "0.75"
+    ],
+    [
+     "G",
+     "distance between pads",
+     "0.20",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Dimensions and tolerances follow ASME Y14.5M; BSC marks a basic dimension, exact and without tolerance."
+   ]
+  },
+  {
+   "name": "TSSOP (ST), 4.4 mm body, 8-lead",
+   "page": 33,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of pins",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "–",
+     "–",
+     "1.20"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "0.80",
+     "1.00",
+     "1.05"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "–",
+     "0.15"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "6.40 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "molded package width",
+     "4.30",
+     "4.40",
+     "4.50"
+    ],
+    [
+     "D",
+     "molded package length",
+     "2.90",
+     "3.00",
+     "3.10"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.45",
+     "0.60",
+     "0.75"
+    ],
+    [
+     "L1",
+     "footprint",
+     "",
+     "1.00 REF",
+     ""
+    ],
+    [
+     "φ",
+     "foot angle",
+     "0°",
+     "–",
+     "8°"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.09",
+     "–",
+     "0.20"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.19",
+     "–",
+     "0.30"
+    ]
+   ],
+   "notes": [
+    "The pin-1 mark may take any form but sits inside the pin-1 corner zone.",
+    "D and E1 exclude mold flash and protrusions, which are at most 0.15 mm per side.",
+    "Dimensions and tolerances follow ASME Y14.5M.",
+    "BSC marks a basic dimension, exact and without tolerance; REF marks a reference dimension, for information only."
+   ]
+  },
+  {
+   "name": "TSSOP (ST) recommended land pattern",
+   "page": 34,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "contact pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "C1",
+     "contact pad spacing",
+     "",
+     "5.90",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad width (X8)",
+     "",
+     "",
+     "0.45"
+    ],
+    [
+     "Y1",
+     "contact pad length (X8)",
+     "",
+     "",
+     "1.45"
+    ],
+    [
+     "G",
+     "distance between pads",
+     "0.20",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Dimensions and tolerances follow ASME Y14.5M; BSC marks a basic dimension, exact and without tolerance."
+   ]
+  },
+  {
+   "name": "CSP (CS), 8-ball chip scale",
+   "page": 36,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of contacts",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "E1",
+     "overall grid X-pitch",
+     "",
+     "0.886 BSC",
+     ""
+    ],
+    [
+     "D1",
+     "overall grid Y-pitch",
+     "",
+     "1.00 BSC",
+     ""
+    ],
+    [
+     "eE",
+     "adjacent column X-pitch",
+     "",
+     "0.443 BSC",
+     ""
+    ],
+    [
+     "eD",
+     "adjacent row Y-pitch",
+     "",
+     "0.25 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "0.53",
+     "0.59",
+     "0.64"
+    ],
+    [
+     "A2",
+     "die height",
+     "0.33",
+     "0.36",
+     "0.38"
+    ],
+    [
+     "A1",
+     "bump height",
+     "0.20",
+     "0.23",
+     "0.26"
+    ],
+    [
+     "E",
+     "overall width",
+     "",
+     "NOTE 4",
+     ""
+    ],
+    [
+     "D",
+     "overall length",
+     "",
+     "NOTE 4",
+     ""
+    ],
+    [
+     "b",
+     "ball diameter",
+     "0.30",
+     "0.32",
+     "0.34"
+    ]
+   ],
+   "notes": [
+    "The orientation mark may take any form but sits inside the ball-A corner zone.",
+    "The package is saw singulated.",
+    "Dimensions and tolerances follow ASME Y14.5M.",
+    "BSC marks a basic dimension, exact and without tolerance; REF marks a reference dimension, for information only.",
+    "Note 4: the body size depends on the device; Microchip gives it on request."
+   ]
+  },
+  {
+   "name": "CSP (CS) recommended land pattern",
+   "page": 37,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "N",
+     "number of contacts",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "eE",
+     "contact pitch Y",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "eD",
+     "contact pitch X",
+     "",
+     "0.443",
+     ""
+    ],
+    [
+     "E1",
+     "contact pad spacing",
+     "",
+     "1.00",
+     ""
+    ],
+    [
+     "D1",
+     "contact pad spacing",
+     "",
+     "0.886",
+     ""
+    ],
+    [
+     "X1",
+     "contact pad diameter (X8)",
+     "",
+     "",
+     "0.32"
+    ],
+    [
+     "G1",
+     "distance between pads",
+     "0.18",
+     "",
+     ""
+    ],
+    [
+     "G2",
+     "distance between pads",
+     "0.56",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Dimensions and tolerances follow ASME Y14.5M; BSC marks a basic dimension, exact and without tolerance."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,4249 @@
+{
+ "sheet": 1,
+ "name": "BQ24166RGER",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "bq24165/bq24166/bq24167: 2.5 A dual-input single-cell Li-ion switch-mode charger with power-path management",
+ "source": {
+  "document": "SLUSAP4B",
+  "revision": "December 2011, revised March 2013",
+  "pages": 39
+ },
+ "summary": "A one-cell Li-ion and Li-polymer charger built round a 1.5 MHz synchronous buck converter with its switches inside. It has two isolated supply inputs, IN (up to 2.5 A, overvoltage trip at 10.5 V) and USB (up to 1.5 A, trip at 6.5 V), with IN taking priority; both survive 20 V. The converter feeds a system rail SYS, and an internal FET from SYS to BAT charges the cell and lets the cell top up the system, so the system starts at once with a flat or missing battery; SYS is held at no less than about 3.5 V. Charge current, IN current limit and the IN input-voltage DPM point are set with resistors. The bq24165 takes two host inputs (CE1, CE2) to cut charge current or voltage for JEITA; the bq24166 watches a pack NTC for hot and cold; the bq24167 adds the warm and cool JEITA bands. Packages are a 2.8 mm 49-ball WCSP (YFF) and a 4 mm 24-pin VQFN (RGE).",
+ "key_figures": [
+  [
+   "Charge current",
+   "550 mA to 2500 mA, set by RISET"
+  ],
+  [
+   "Battery regulation voltage",
+   "4.2 V typ (4.179 to 4.221 V at 25 °C); 4.06 V reduced setting"
+  ],
+  [
+   "IN input",
+   "4.2 V to 10 V operating, 18 V max recommended; OVP 10.5 V typ; current limit 1000 to 2500 mA by RILIM"
+  ],
+  [
+   "USB input",
+   "4.2 V to 6 V operating; OVP 6.5 V typ; 100/150/500/800/900/1500 mA limits"
+  ],
+  [
+   "Pin voltage, IN and USB",
+   "–2 V to 20 V absolute maximum"
+  ],
+  [
+   "Minimum system voltage",
+   "3.5 V typ"
+  ],
+  [
+   "Switching frequency",
+   "1.50 MHz typ"
+  ],
+  [
+   "Internal BAT-SYS FET",
+   "37 mΩ typ (YFF), 50 mΩ typ (RGE)"
+  ],
+  [
+   "Safety timer",
+   "360 min typ"
+  ],
+  [
+   "Operating free-air temperature",
+   "–40°C to 85°C"
+  ],
+  [
+   "Packages",
+   "49-ball WCSP 2.78 × 2.78 mm (YFF); 24-pin VQFN 4 × 4 mm (RGE)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "USB OVP",
+   "IN OVP",
+   "NTC monitoring (TS)",
+   "JEITA compatible",
+   "package"
+  ],
+  "rows": [
+   [
+    "bq24165YFFR",
+    "6.5V",
+    "10.5 V",
+    "No",
+    "Yes",
+    "WCSP"
+   ],
+   [
+    "bq24165YFFT",
+    "6.5 V",
+    "10.5 V",
+    "No",
+    "Yes",
+    "WCSP"
+   ],
+   [
+    "bq24165RGER",
+    "6.5V",
+    "10.5 V",
+    "No",
+    "Yes",
+    "QFN"
+   ],
+   [
+    "bq24165RGET",
+    "6.5 V",
+    "10.5 V",
+    "No",
+    "Yes",
+    "QFN"
+   ],
+   [
+    "bq24166YFFR",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "No",
+    "WCSP"
+   ],
+   [
+    "bq24166YFFT",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "No",
+    "WCSP"
+   ],
+   [
+    "bq24166RGER",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "No",
+    "QFN"
+   ],
+   [
+    "bq24166RGET",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "No",
+    "QFN"
+   ],
+   [
+    "bq24167YFFR",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "Yes",
+    "WCSP"
+   ],
+   [
+    "bq24167YFFT",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "Yes",
+    "WCSP"
+   ],
+   [
+    "bq24167RGER",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "Yes",
+    "QFN"
+   ],
+   [
+    "bq24167RGET",
+    "6.5 V",
+    "10.5 V",
+    "Yes",
+    "Yes",
+    "QFN"
+   ]
+  ],
+  "notes": [
+   "The three devices differ in how battery temperature reaches the charger: the bq24165 has the CE1 and CE2 selector inputs driven by a host; the bq24166 has a TS input with hot and cold limits; the bq24167 has a TS input with hot, warm, cool and cold limits. The bq24166 and bq24167 have a single CE enable input.",
+   "YFF is the 49-ball WCSP, RGE the 24-pin QFN. An R suffix is a 3000-piece reel, a T suffix a 250-piece reel."
+  ]
+ },
+ "pins": [
+  {
+   "package": "RGE (24-pin VQFN, 4 mm × 4 mm)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VDPM",
+     "type": "analog in",
+     "function": "Centre of a resistor divider from IN to ground; sets the IN input voltage at which the charger starts cutting input current (VIN-DPM)."
+    },
+    {
+     "pin": "2",
+     "name": "IUSB3",
+     "type": "digital in",
+     "function": "One of three inputs that select the USB input current limit (Table 1). No effect on the IN input."
+    },
+    {
+     "pin": "3",
+     "name": "IUSB2",
+     "type": "digital in",
+     "function": "One of three inputs that select the USB input current limit (Table 1). No effect on the IN input."
+    },
+    {
+     "pin": "4",
+     "name": "IUSB1",
+     "type": "digital in",
+     "function": "One of three inputs that select the USB input current limit (Table 1). No effect on the IN input."
+    },
+    {
+     "pin": "5",
+     "name": "ISET",
+     "type": "analog in",
+     "function": "A resistor from ISET to ground sets the fast-charge current, 550 mA to 2.5 A."
+    },
+    {
+     "pin": "6",
+     "name": "DRV",
+     "type": "power out",
+     "function": "Output of the internal gate-drive regulator; bypass to PGND with 1 µF ceramic. Can supply up to 10 mA to outside loads. On whenever an input above VUVLO and above VBAT + VSLP is present."
+    },
+    {
+     "pin": "7",
+     "name": "PG",
+     "type": "open drain out",
+     "function": "Power-good, open drain. Pulled low while a supply between VBAT+VSLP and VOVP is on USB or IN; high-impedance otherwise."
+    },
+    {
+     "pin": "8",
+     "name": "CHG",
+     "type": "open drain out",
+     "function": "Charge status, open drain. Low from the start of a charge cycle until it ends; high-impedance after termination and with no supply. Recharge cycles do not pull it low."
+    },
+    {
+     "pin": "9",
+     "name": "CE2",
+     "type": "digital in",
+     "function": "bq24165 only. With CE1, picks normal charging, half charge current, a 140 mV lower regulation voltage, or no charging (Table 2), for JEITA."
+    },
+    {
+     "pin": "9",
+     "name": "TS",
+     "type": "analog in",
+     "function": "bq24166/7 only. Pack NTC input: the centre of a divider from DRV to ground, with the NTC from TS to ground. Two thresholds (hot, cold) on the bq24166, four (adding warm, cool) on the bq24167. Tying TS to DRV turns the function off."
+    },
+    {
+     "pin": "10",
+     "name": "BGATE",
+     "type": "analog out",
+     "function": "Gate drive for an optional external P-channel FET from battery to system that gives a lower-resistance discharge path. Low in high-impedance mode and with no input. Leave open when not used."
+    },
+    {
+     "pin": "11, 12",
+     "name": "BAT",
+     "type": "power",
+     "function": "Battery positive terminal. Bypass to ground with 1 µF or more."
+    },
+    {
+     "pin": "13, 14",
+     "name": "SYS",
+     "type": "power",
+     "function": "System output and its sense point, and one end of the internal battery FET. Connect at the output bulk capacitors; at least 10 µF locally, 47 µF for the best load-step response."
+    },
+    {
+     "pin": "15",
+     "name": "ILIM",
+     "type": "analog in",
+     "function": "A resistor from ILIM to ground sets the IN input current limit, 1 A to 2.5 A. It does not act on the USB input."
+    },
+    {
+     "pin": "16, 17",
+     "name": "PGND",
+     "type": "ground",
+     "function": "Power ground. Ties to the board ground plane and, on the QFN, to the exposed pad."
+    },
+    {
+     "pin": "18",
+     "name": "SW",
+     "type": "power out",
+     "function": "Switching node; goes to the switched end of the inductor."
+    },
+    {
+     "pin": "19",
+     "name": "BOOT",
+     "type": "power in",
+     "function": "Bootstrap supply for the high-side gate drive: a 0.01 µF ceramic capacitor rated above 10 V goes from BOOT to SW."
+    },
+    {
+     "pin": "20",
+     "name": "PMIDI",
+     "type": "power out",
+     "function": "Node between the IN reverse-blocking FET and the high-side switch. Needs a ceramic capacitor of 4.7 µF or more to ground. It has no current limit; a short on it damages the IC, so take care hanging any load on it."
+    },
+    {
+     "pin": "21",
+     "name": "IN",
+     "type": "power in",
+     "function": "Supply input from an adapter or other DC source. Needs a ceramic capacitor of 1 µF or more to PGND."
+    },
+    {
+     "pin": "22",
+     "name": "USB",
+     "type": "power in",
+     "function": "Supply input from a USB port or adapter. Needs a ceramic capacitor of 1 µF or more to PGND."
+    },
+    {
+     "pin": "23",
+     "name": "PMIDU",
+     "type": "power out",
+     "function": "Node between the USB reverse-blocking FET and the high-side switch. Needs a ceramic capacitor of 4.7 µF or more to ground. It has no current limit; a short on it damages the IC, so take care hanging any load on it."
+    },
+    {
+     "pin": "24",
+     "name": "CE1",
+     "type": "digital in",
+     "function": "bq24165 only. With CE2, picks normal charging, half charge current, a 140 mV lower regulation voltage, or no charging (Table 2), for JEITA."
+    },
+    {
+     "pin": "24",
+     "name": "CE",
+     "type": "digital in",
+     "function": "bq24166/7 only. Charge enable, active low: low charges, high stops charging. With charging off SYS stays regulated and BAT is cut from SYS, though supplement mode still works if the load needs it. BGATE is high-impedance while CE is high."
+    },
+    {
+     "pin": "Pad",
+     "name": "Thermal Pad",
+     "type": "ground",
+     "function": "QFN only. Internally joined to PGND; solder to a board pad at PGND potential. It is not to be the main ground connection: PGND must always be grounded."
+    }
+   ],
+   "notes": [
+    "Pin 9 is CE2 on the bq24165 and TS on the bq24166/7; pin 24 is CE1 on the bq24165 and CE on the bq24166/7. CE, CE1, CE2, PG and CHG are active low."
+   ]
+  },
+  {
+   "package": "YFF (49-ball WCSP, 2.8 mm × 2.8 mm)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "A1–A4",
+     "name": "IN",
+     "type": "power in",
+     "function": "Supply input from an adapter or other DC source. Needs a ceramic capacitor of 1 µF or more to PGND."
+    },
+    {
+     "pin": "A5–A7",
+     "name": "USB",
+     "type": "power in",
+     "function": "Supply input from a USB port or adapter. Needs a ceramic capacitor of 1 µF or more to PGND."
+    },
+    {
+     "pin": "B1–B4",
+     "name": "PMIDI",
+     "type": "power out",
+     "function": "Node between the IN reverse-blocking FET and the high-side switch. Needs a ceramic capacitor of 4.7 µF or more to ground. It has no current limit; a short on it damages the IC, so take care hanging any load on it."
+    },
+    {
+     "pin": "B5–B7",
+     "name": "PMIDU",
+     "type": "power out",
+     "function": "Node between the USB reverse-blocking FET and the high-side switch. Needs a ceramic capacitor of 4.7 µF or more to ground. It has no current limit; a short on it damages the IC, so take care hanging any load on it."
+    },
+    {
+     "pin": "C1–C7",
+     "name": "SW",
+     "type": "power out",
+     "function": "Switching node; goes to the switched end of the inductor."
+    },
+    {
+     "pin": "D1–D7",
+     "name": "PGND",
+     "type": "ground",
+     "function": "Power ground. Ties to the board ground plane and, on the QFN, to the exposed pad."
+    },
+    {
+     "pin": "E1",
+     "name": "ILIM",
+     "type": "analog in",
+     "function": "A resistor from ILIM to ground sets the IN input current limit, 1 A to 2.5 A. It does not act on the USB input."
+    },
+    {
+     "pin": "E2",
+     "name": "IUSB3",
+     "type": "digital in",
+     "function": "One of three inputs that select the USB input current limit (Table 1). No effect on the IN input."
+    },
+    {
+     "pin": "E3",
+     "name": "VDPM",
+     "type": "analog in",
+     "function": "Centre of a resistor divider from IN to ground; sets the IN input voltage at which the charger starts cutting input current (VIN-DPM)."
+    },
+    {
+     "pin": "E4",
+     "name": "CE1",
+     "type": "digital in",
+     "function": "bq24165 only. With CE2, picks normal charging, half charge current, a 140 mV lower regulation voltage, or no charging (Table 2), for JEITA."
+    },
+    {
+     "pin": "E4",
+     "name": "CE",
+     "type": "digital in",
+     "function": "bq24166/7 only. Charge enable, active low: low charges, high stops charging. With charging off SYS stays regulated and BAT is cut from SYS, though supplement mode still works if the load needs it. BGATE is high-impedance while CE is high."
+    },
+    {
+     "pin": "E5",
+     "name": "IUSB1",
+     "type": "digital in",
+     "function": "One of three inputs that select the USB input current limit (Table 1). No effect on the IN input."
+    },
+    {
+     "pin": "E6",
+     "name": "IUSB2",
+     "type": "digital in",
+     "function": "One of three inputs that select the USB input current limit (Table 1). No effect on the IN input."
+    },
+    {
+     "pin": "E7",
+     "name": "BOOT",
+     "type": "power in",
+     "function": "Bootstrap supply for the high-side gate drive: a 0.01 µF ceramic capacitor rated above 10 V goes from BOOT to SW."
+    },
+    {
+     "pin": "F1–F4",
+     "name": "SYS",
+     "type": "power",
+     "function": "System output and its sense point, and one end of the internal battery FET. Connect at the output bulk capacitors; at least 10 µF locally, 47 µF for the best load-step response."
+    },
+    {
+     "pin": "F5",
+     "name": "BGATE",
+     "type": "analog out",
+     "function": "Gate drive for an optional external P-channel FET from battery to system that gives a lower-resistance discharge path. Low in high-impedance mode and with no input. Leave open when not used."
+    },
+    {
+     "pin": "F6",
+     "name": "PG",
+     "type": "open drain out",
+     "function": "Power-good, open drain. Pulled low while a supply between VBAT+VSLP and VOVP is on USB or IN; high-impedance otherwise."
+    },
+    {
+     "pin": "F7",
+     "name": "DRV",
+     "type": "power out",
+     "function": "Output of the internal gate-drive regulator; bypass to PGND with 1 µF ceramic. Can supply up to 10 mA to outside loads. On whenever an input above VUVLO and above VBAT + VSLP is present."
+    },
+    {
+     "pin": "G1–G4",
+     "name": "BAT",
+     "type": "power",
+     "function": "Battery positive terminal. Bypass to ground with 1 µF or more."
+    },
+    {
+     "pin": "G5",
+     "name": "CE2",
+     "type": "digital in",
+     "function": "bq24165 only. With CE1, picks normal charging, half charge current, a 140 mV lower regulation voltage, or no charging (Table 2), for JEITA."
+    },
+    {
+     "pin": "G5",
+     "name": "TS",
+     "type": "analog in",
+     "function": "bq24166/7 only. Pack NTC input: the centre of a divider from DRV to ground, with the NTC from TS to ground. Two thresholds (hot, cold) on the bq24166, four (adding warm, cool) on the bq24167. Tying TS to DRV turns the function off."
+    },
+    {
+     "pin": "G6",
+     "name": "CHG",
+     "type": "open drain out",
+     "function": "Charge status, open drain. Low from the start of a charge cycle until it ends; high-impedance after termination and with no supply. Recharge cycles do not pull it low."
+    },
+    {
+     "pin": "G7",
+     "name": "ISET",
+     "type": "analog in",
+     "function": "A resistor from ISET to ground sets the fast-charge current, 550 mA to 2.5 A."
+    }
+   ],
+   "notes": [
+    "Ball G5 is CE2 on the bq24165 and TS on the bq24166/7; ball E4 is CE1 on the bq24165 and CE on the bq24166/7."
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 3,
+   "conditions": "over operating free-air temperature range (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "pins",
+    "value"
+   ],
+   "rows": [
+    [
+     "Pin voltage range (with respect to PGND)",
+     "IN, USB",
+     "–2 V to 20 V"
+    ],
+    [
+     "Pin voltage range (with respect to PGND)",
+     "PMIDI, PMIDU, BOOT",
+     "–0.3 V to 20 V"
+    ],
+    [
+     "Pin voltage range (with respect to PGND)",
+     "SW",
+     "–0.7 V to 12V"
+    ],
+    [
+     "Pin voltage range (with respect to PGND)",
+     "ISET, ILIM, SCL, SYS, BAT, BGATE, DRV, PG, CHG, VDPM, IUSB_, CE_,TS",
+     "–0.3 V to 7 V"
+    ],
+    [
+     "BOOT to SW",
+     "",
+     "–0.3 V to 7 V"
+    ],
+    [
+     "Output current (Continuous)",
+     "SW",
+     "4.5 A"
+    ],
+    [
+     "Output current (Continuous)",
+     "SYS, BAT",
+     "3.5 A"
+    ],
+    [
+     "Input current (Continuous)",
+     "IN",
+     "2.75 A"
+    ],
+    [
+     "Input current (Continuous)",
+     "USB",
+     "1.75 A"
+    ],
+    [
+     "Output sink current",
+     "PG, CHG",
+     "10 mA"
+    ],
+    [
+     "Operating free-air temperature range",
+     "",
+     "–40°C to 85°C"
+    ],
+    [
+     "Junction temperature, TJ",
+     "",
+     "–40°C to 125°C"
+    ],
+    [
+     "Storage temperature, TSTG",
+     "",
+     "–65°C to 150°C"
+    ],
+    [
+     "Lead temperature (soldering, 10 s)",
+     "",
+     "300°C"
+    ]
+   ],
+   "notes": [
+    "Stress above these limits can damage the device for good; running at them is not implied, and long spells at them can shorten its life. Voltages are referred to the ground terminal unless stated."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "49 pins (YFF)",
+    "24 pins (RGE)",
+    "unit"
+   ],
+   "rows": [
+    [
+     "θJA",
+     "Junction-to-ambient thermal resistance",
+     "49.8",
+     "32.6",
+     "°C/W"
+    ],
+    [
+     "θJCtop",
+     "Junction-to-case (top) thermal resistance",
+     "0.2",
+     "30.5",
+     "°C/W"
+    ],
+    [
+     "θJB",
+     "Junction-to-board thermal resistance",
+     "1.1",
+     "3.3",
+     "°C/W"
+    ],
+    [
+     "ψJT",
+     "Junction-to-top characterization parameter",
+     "1.1",
+     "0.4",
+     "°C/W"
+    ],
+    [
+     "ψJB",
+     "Junction-to-board characterization parameter",
+     "6.6",
+     "9.3",
+     "°C/W"
+    ],
+    [
+     "θJCbot",
+     "Junction-to-case (bottom) thermal resistance",
+     "n/a",
+     "2.6",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 3,
+   "conditions": "over operating free-air temperature range (unless otherwise noted)",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "IN voltage range",
+     "4.2",
+     "18 (1)",
+     "V"
+    ],
+    [
+     "",
+     "IN operating voltage range",
+     "4.2",
+     "10",
+     ""
+    ],
+    [
+     "VUSB",
+     "USB voltage range",
+     "4.2",
+     "18 (1)",
+     "V"
+    ],
+    [
+     "",
+     "USB operating range",
+     "4.2",
+     "6",
+     ""
+    ],
+    [
+     "IIN",
+     "Input current, IN input",
+     "",
+     "2.5",
+     "A"
+    ],
+    [
+     "IUSB",
+     "Input current USB input",
+     "",
+     "1.5",
+     "A"
+    ],
+    [
+     "ISYS",
+     "Ouput current from SW, DC",
+     "",
+     "3",
+     "A"
+    ],
+    [
+     "IBAT",
+     "Charging",
+     "",
+     "2.5",
+     "A"
+    ],
+    [
+     "",
+     "Discharging, using internal battery FET",
+     "",
+     "2.5",
+     "A"
+    ],
+    [
+     "TJ",
+     "Operating junction temperature range",
+     "0",
+     "125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) Switching spikes on BOOT and SW must stay inside their absolute maximum ratings; a compact layout keeps them down."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: supply",
+   "page": 4,
+   "conditions": "Circuit of Figure 1, VSUPPLY = VUSB or VIN (whichever is supplying the IC), VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, TJ = 0°C–125°C and TJ = 25ºC for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply current for control (VIN or VUSB)",
+     "ISUPPLY",
+     "VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, PWM switching",
+     "",
+     "15",
+     "",
+     "mA"
+    ],
+    [
+     "Supply current for control (VIN or VUSB)",
+     "ISUPPLY",
+     "VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, PWM NOT switching",
+     "",
+     "",
+     "5",
+     "mA"
+    ],
+    [
+     "Supply current for control (VIN or VUSB)",
+     "ISUPPLY",
+     "0°C < TJ < 85°C, High-Z Mode",
+     "",
+     "",
+     "175",
+     "μA"
+    ],
+    [
+     "Leakage current from BAT to the Supply",
+     "IBATLEAK",
+     "0°C < TJ < 85°C, VBAT = 4.2 V, VUSB = VIN = 0 V",
+     "",
+     "",
+     "5",
+     "μA"
+    ],
+    [
+     "Battery discharge current in high impedance mode, (BAT, SW, SYS)",
+     "IBAT_HIZ",
+     "0°C < TJ < 85°C, VBAT = 4.2 V, VSUPPLY = 0 V or 5V IUSB1=IUSB2=IUSB3=1, High-Z mode",
+     "",
+     "",
+     "55",
+     "μA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: power path management",
+   "page": 4,
+   "conditions": "Circuit of Figure 1, VSUPPLY = VUSB or VIN (whichever is supplying the IC), VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, TJ = 0°C–125°C and TJ = 25ºC for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "System regulation voltage",
+     "VSYS(REG)",
+     "VBAT < VMINSYS",
+     "3.6",
+     "3.7",
+     "3.82",
+     "V"
+    ],
+    [
+     "System regulation voltage",
+     "VSYSREGFETOFF",
+     "Battery FET turned off, Charge disable or termination",
+     "4.26",
+     "4.33",
+     "4.37",
+     "V"
+    ],
+    [
+     "Minimum system regulation voltage",
+     "VMINSYS",
+     "VBAT < VMINSYS, Input current limit or VINDPM active",
+     "3.4",
+     "3.5",
+     "3.62",
+     "V"
+    ],
+    [
+     "Enter supplement mode threshold",
+     "VBSUP1",
+     "VBAT > 2.5 V",
+     "",
+     "VBAT – 40mV",
+     "",
+     "V"
+    ],
+    [
+     "Exit supplement mode threshold",
+     "VBSUP2",
+     "VBAT > 2.5 V",
+     "",
+     "VBAT – 10mV",
+     "",
+     "V"
+    ],
+    [
+     "Current limit, discharge or supplement mode",
+     "ILIM(Discharge)",
+     "Current monitored in internal FET only.",
+     "",
+     "7",
+     "",
+     "A"
+    ],
+    [
+     "Deglitch time, OUT short circuit during discharge or supplement mode",
+     "tDGL(SC1)",
+     "Measured from(VBAT -VSYS) = 300mV to VBGATE = (VBAT - 600mV)",
+     "",
+     "250",
+     "",
+     "μs"
+    ],
+    [
+     "Recovery time, OUT short circuit during discharge or supplement mode",
+     "tREC(SC1)",
+     "",
+     "",
+     "60",
+     "",
+     "ms"
+    ],
+    [
+     "Battery range for BGATE operation",
+     "",
+     "",
+     "2.5",
+     "",
+     "4.5",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: battery charger",
+   "page": 4,
+   "conditions": "Circuit of Figure 1, VSUPPLY = VUSB or VIN (whichever is supplying the IC), VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, TJ = 0°C–125°C and TJ = 25ºC for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Internal battery charger MOSFET on-resistance",
+     "RON(BAT-SYS)",
+     "Measured from BAT to SYS, VBAT = 4.2 V, YFF pkg",
+     "",
+     "37",
+     "57",
+     "mΩ"
+    ],
+    [
+     "Internal battery charger MOSFET on-resistance",
+     "RON(BAT-SYS)",
+     "Measured from BAT to SYS, VBAT = 4.2 V, RGE pkg",
+     "",
+     "50",
+     "70",
+     "mΩ"
+    ],
+    [
+     "Battery regulation voltage",
+     "VBATREG",
+     "TA = 25°C, CE1 = CE2 = 0",
+     "4.179",
+     "4.2",
+     "4.221",
+     "V"
+    ],
+    [
+     "Battery regulation voltage",
+     "VBATREG",
+     "CE1=CE2 = 0 or VWARM < VTS < VCOOL",
+     "4.160",
+     "4.2",
+     "4.24",
+     "V"
+    ],
+    [
+     "Battery regulation voltage",
+     "VBATREG",
+     "TA = 25°C, CE1=1, CE2=0",
+     "4.04",
+     "4.06",
+     "4.08",
+     "V"
+    ],
+    [
+     "Battery regulation voltage",
+     "VBATREG",
+     "CE1=1, CE2=0 or VHOT < VTS < VWARM",
+     "4.02",
+     "4.06",
+     "4.1",
+     "V"
+    ],
+    [
+     "Charge current programmable range",
+     "ICHARGE",
+     "ICHARGE = KISET / RISET",
+     "550",
+     "",
+     "2500",
+     "mA"
+    ],
+    [
+     "Programmable fast charge current factor",
+     "KISET",
+     "TA = 0°C to 125°C, CE1=CE2=0 or VWARM < VTS < VCOOL",
+     "450",
+     "490",
+     "540",
+     "AΩ"
+    ],
+    [
+     "Programmable fast charge current factor",
+     "KISET",
+     "TA = 0°C to 125°C, CE1 = 1, CE2 = 0 or VCOLD < VTS < VCOOL",
+     "225",
+     "245",
+     "270",
+     "AΩ"
+    ],
+    [
+     "Battery short threshold",
+     "VBATSHRT",
+     "VBAT Rising",
+     "2.9",
+     "3.0",
+     "3.1",
+     "V"
+    ],
+    [
+     "Battery short threshold hysteresis",
+     "VBATSHRThys",
+     "VBAT Falling",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Battery short current",
+     "IBATSHRT",
+     "VBAT < VBATSHRT",
+     "",
+     "50.0",
+     "",
+     "mA"
+    ],
+    [
+     "Deglitch time for battery short to fastcharge transition",
+     "tDGL(BATSHRT)",
+     "",
+     "32",
+     "",
+     "",
+     "ms"
+    ],
+    [
+     "Termination charge current",
+     "ITERM",
+     "ICHARGE ≤ 1 A",
+     "7",
+     "10",
+     "11.5",
+     "%ICHARGE"
+    ],
+    [
+     "Termination charge current",
+     "ITERM",
+     "ICHARGE >1 A",
+     "8",
+     "10",
+     "11",
+     "%ICHARGE"
+    ],
+    [
+     "Deglitch time for charge termination",
+     "tDGL(TERM)",
+     "Both rising and falling, 2-mV over- drive, tRISE, tFALL = 100 ns",
+     "",
+     "32",
+     "",
+     "ms"
+    ],
+    [
+     "Recharge threshold voltage",
+     "VRCH",
+     "Below VBATREG",
+     "",
+     "120",
+     "",
+     "mV"
+    ],
+    [
+     "Deglitch time",
+     "tDGL(RCH)",
+     "VBAT falling below VRCH, tFALL=100ns",
+     "",
+     "32",
+     "",
+     "ms"
+    ],
+    [
+     "Battery detection current before charge done (sink current)",
+     "IDETECT",
+     "",
+     "",
+     "2.5",
+     "",
+     "mA"
+    ],
+    [
+     "Battery detection time",
+     "tDETECT",
+     "",
+     "",
+     "250",
+     "",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "The half-current KISET condition should read CE1 = 0, CE2 = 1 (Table 2); CE1 = 1, CE2 = 0 is the 4.06 V setting."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: input protection",
+   "page": 4,
+   "conditions": "Circuit of Figure 1, VSUPPLY = VUSB or VIN (whichever is supplying the IC), VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, TJ = 0°C–125°C and TJ = 25ºC for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input current limiting threshold (USB input only)",
+     "IIN_USB",
+     "USB charge mode, VUSB = 5V, Current pulled from PMIDU, IINUSB=USB100",
+     "90",
+     "95",
+     "100",
+     "mA"
+    ],
+    [
+     "Input current limiting threshold (USB input only)",
+     "IIN_USB",
+     "USB charge mode, VUSB = 5V, Current pulled from PMIDU, IINUSB=USB500",
+     "450",
+     "475",
+     "500",
+     "mA"
+    ],
+    [
+     "Input current limiting threshold (USB input only)",
+     "IIN_USB",
+     "USB charge mode, VUSB = 5V, Current pulled from PMIDU, IINUSB=USB150",
+     "135",
+     "142.5",
+     "150",
+     "mA"
+    ],
+    [
+     "Input current limiting threshold (USB input only)",
+     "IIN_USB",
+     "USB charge mode, VUSB = 5V, Current pulled from PMIDU, IINUSB=USB900",
+     "800",
+     "850",
+     "900",
+     "mA"
+    ],
+    [
+     "Input current limiting threshold (USB input only)",
+     "IIN_USB",
+     "USB charge mode, VUSB = 5V, Current pulled from PMIDU, IINUSB=USB800",
+     "700",
+     "750",
+     "800",
+     "mA"
+    ],
+    [
+     "Input current limiting threshold (USB input only)",
+     "IIN_USB",
+     "USB charge mode, VUSB = 5V, Current pulled from PMIDU, IINUSB=1.5A",
+     "1250",
+     "1400",
+     "1500",
+     "mA"
+    ],
+    [
+     "Maximum input current limit programmable range for IN input",
+     "IINLIM",
+     "IINLIM = KILIM / RILIM",
+     "1000",
+     "",
+     "2500",
+     "mA"
+    ],
+    [
+     "Maximum input current factor for IN input",
+     "KILIM",
+     "",
+     "238",
+     "251",
+     "264",
+     "AΩ"
+    ],
+    [
+     "VIN_DPM threshold programmable range for IN Input",
+     "VIN_DPM_IN",
+     "",
+     "4.2",
+     "",
+     "10",
+     "V"
+    ],
+    [
+     "VDPM threshold",
+     "",
+     "",
+     "1.18",
+     "1.2",
+     "1.22",
+     "V"
+    ],
+    [
+     "VIN_DPM threshold for USB Input",
+     "VIN_DPM_USB",
+     "USB100, USB150",
+     "4.175",
+     "4.28",
+     "4.36",
+     "V"
+    ],
+    [
+     "VIN_DPM threshold for USB Input",
+     "VIN_DPM_USB",
+     "USB500, USB800, USB900, 1.5A current limit selected",
+     "4.35",
+     "4.44",
+     "4.52",
+     "V"
+    ],
+    [
+     "Internal bias regulator voltage",
+     "VDRV",
+     "VSUPPLY > 5.45V",
+     "5",
+     "5.2",
+     "5.45",
+     "V"
+    ],
+    [
+     "DRV Output current",
+     "IDRV",
+     "",
+     "10",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "DRV Dropout voltage (VSUPPLY – VDRV)",
+     "VDO_DRV",
+     "ISUPPLY = 1 A, VSUPPLY = 5 V, IDRV = 10 mA",
+     "",
+     "",
+     "450",
+     "mV"
+    ],
+    [
+     "Under-voltage lockout threshold voltage",
+     "VUVLO",
+     "VIN or VUSB rising, 150mV Hysteresis",
+     "3.6",
+     "3.8",
+     "4.0",
+     "V"
+    ],
+    [
+     "Sleep-mode entry threshold, VSUPPLY-VBAT",
+     "VSLP",
+     "2.0 V ≤ VBAT ≤ VOREG, VIN falling",
+     "0",
+     "40",
+     "100",
+     "mV"
+    ],
+    [
+     "Sleep-mode exit hysteresis",
+     "VSLP_EXIT",
+     "2.0 V ≤ VBAT ≤ VOREG",
+     "40",
+     "100",
+     "175",
+     "mV"
+    ],
+    [
+     "Deglitch time for supply rising above VSLP+VSLP_EXIT",
+     "",
+     "Rising voltage, 2-mV over drive, tRISE = 100 ns",
+     "",
+     "30",
+     "",
+     "ms"
+    ],
+    [
+     "Input supply OVP threshold voltage",
+     "VOVP",
+     "USB, VUSB Rising",
+     "6.3",
+     "6.5",
+     "6.7",
+     "V"
+    ],
+    [
+     "Input supply OVP threshold voltage",
+     "VOVP",
+     "IN, VIN Rising",
+     "10.3",
+     "10.5",
+     "10.7",
+     "V"
+    ],
+    [
+     "VOVP hysteresis",
+     "VOVP(HYS)",
+     "Supply falling from VOVP",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Battery OVP threshold voltage",
+     "VBOVP",
+     "VBAT threshold over VOREG to turn off charger during charge",
+     "1.025 × VBATREG",
+     "1.05 × VBATREG",
+     "1.075 × VBATREG",
+     "V"
+    ],
+    [
+     "Battery UVLO threshold voltage",
+     "VBATUVLO",
+     "",
+     "",
+     "2.5",
+     "",
+     "V"
+    ],
+    [
+     "Cycle by Cycle current limit",
+     "ILIMIT",
+     "",
+     "4.1",
+     "4.9",
+     "5.6",
+     "A"
+    ],
+    [
+     "Thermal shutdown",
+     "TSHUTDWN",
+     "10C Hysteresis",
+     "",
+     "165",
+     "",
+     "C"
+    ],
+    [
+     "Thermal regulation threshold",
+     "TREG",
+     "",
+     "",
+     "120",
+     "",
+     "C"
+    ],
+    [
+     "Safety Timer",
+     "",
+     "",
+     "324",
+     "360",
+     "396",
+     "min"
+    ]
+   ],
+   "notes": [
+    "Unit C should read °C."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: IUSB_, CE_, PG, CHG",
+   "page": 5,
+   "conditions": "Circuit of Figure 1, VSUPPLY = VUSB or VIN (whichever is supplying the IC), VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, TJ = 0°C–125°C and TJ = 25ºC for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input high threshold",
+     "VIH",
+     "",
+     "1.3",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input low threshold",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "High-level leakage current",
+     "IIH",
+     "V CHG = V PG = 5V",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Low-level output saturation voltage",
+     "VOL",
+     "IO = 10 mA, sink current",
+     "",
+     "",
+     "0.4",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PWM converter",
+   "page": 5,
+   "conditions": "Circuit of Figure 1, VSUPPLY = VUSB or VIN (whichever is supplying the IC), VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, TJ = 0°C–125°C and TJ = 25ºC for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Internal top reverse blocking MOSFET on-resistance",
+     "",
+     "IIN_LIMIT = 500 mA, Measured from VUSB to PMIDU",
+     "95",
+     "",
+     "175",
+     "mΩ"
+    ],
+    [
+     "Internal top reverse blocking MOSFET on-resistance",
+     "",
+     "IIN_LIMIT = 500 mA, Measured from VIN to PMIDI",
+     "45",
+     "",
+     "80",
+     "mΩ"
+    ],
+    [
+     "Internal top N-channel Switching MOSFET on-resistance",
+     "",
+     "Measured from PMIDU to SW",
+     "100",
+     "",
+     "175",
+     "mΩ"
+    ],
+    [
+     "Internal top N-channel Switching MOSFET on-resistance",
+     "",
+     "Measured from PMIDI to SW",
+     "65",
+     "",
+     "110",
+     "mΩ"
+    ],
+    [
+     "Internal bottom N-channel MOSFET on-resistance",
+     "",
+     "Measured from SW to PGND",
+     "65",
+     "",
+     "115",
+     ""
+    ],
+    [
+     "Oscillator frequency",
+     "fOSC",
+     "",
+     "1.35",
+     "1.50",
+     "1.65",
+     "MHz"
+    ],
+    [
+     "Maximum duty cycle",
+     "DMAX",
+     "",
+     "",
+     "95%",
+     "",
+     ""
+    ],
+    [
+     "Minimum duty cycle",
+     "DMIN",
+     "",
+     "0",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "The bottom-FET on-resistance unit, left blank, should read mΩ."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: battery-pack NTC monitor (bq24166, bq24167)",
+   "page": 5,
+   "conditions": "Circuit of Figure 1, VSUPPLY = VUSB or VIN (whichever is supplying the IC), VUVLO < VSUPPLY < VOVP and VSUPPLY > VBAT+VSLP, TJ = 0°C–125°C and TJ = 25ºC for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "High temperature threshold",
+     "VHOT",
+     "VTS falling",
+     "29.7",
+     "30",
+     "30.5",
+     "%VDRV"
+    ],
+    [
+     "Hysteresis on high threshold",
+     "VHYS(HOT)",
+     "VTS rising",
+     "",
+     "1",
+     "",
+     "%VDRV"
+    ],
+    [
+     "Warm temperature threshold",
+     "VWARM",
+     "VTS falling, bq24167 only",
+     "37.9",
+     "38.3",
+     "39.6",
+     "%VDRV"
+    ],
+    [
+     "Hysteresis on high threshold",
+     "VHYS(WARM)",
+     "VTS rising, bq24167 only",
+     "",
+     "1",
+     "",
+     "%VDRV"
+    ],
+    [
+     "Cool temperature threshold",
+     "VCOOL",
+     "VTS rising, bq24167 only",
+     "56.0",
+     "56.5",
+     "56.9",
+     "%VDRV"
+    ],
+    [
+     "Hysteresis on low threshold",
+     "VHYS(COOL)",
+     "VTS falling, bq24167 only",
+     "",
+     "1",
+     "",
+     "%VDRV"
+    ],
+    [
+     "Low temperature threshold",
+     "VCOLD",
+     "VTS rising",
+     "59.5",
+     "60",
+     "60.4",
+     "%VDRV"
+    ],
+    [
+     "Hysteresis on low threshold",
+     "VHYS(COLD)",
+     "VTS falling",
+     "",
+     "1",
+     "",
+     "%VDRV"
+    ],
+    [
+     "TS Disable threshold",
+     "TSOFF",
+     "VTS rising, 2%VDRV Hysteresis",
+     "70",
+     "",
+     "73",
+     "%VDRV"
+    ],
+    [
+     "Deglitch time on TS change",
+     "tDGL(TS)",
+     "",
+     "",
+     "50",
+     "",
+     "ms"
+    ]
+   ]
+  },
+  {
+   "title": "Table 1. USB1, USB2 and USB3 input table",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "IUSB3",
+    "IUSB2",
+    "IUSB1",
+    "input current limit",
+    "VINDPM threshold"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "100 mA",
+     "4.28 V"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "500 mA",
+     "4.44 V"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1.5 A",
+     "4.44 V"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "High Impedance Mode",
+     "None"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "150 mA",
+     "4.28 V"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "900 mA",
+     "4.44 V"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "800 mA",
+     "4.44 V"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "High Impedance Mode",
+     "None"
+    ]
+   ],
+   "notes": [
+    "Termination is off in the 100 mA (USB100) setting."
+   ]
+  },
+  {
+   "title": "Table 2. CE1, CE2 input table (bq24165)",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "CE1",
+    "CE2",
+    "function"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Normal Charging"
+    ],
+    [
+     "0",
+     "1",
+     "Charge current reduced by half"
+    ],
+    [
+     "1",
+     "0",
+     "VBAT(REG) reduced to 4.06 V"
+    ],
+    [
+     "1",
+     "1",
+     "Charging Suspended"
+    ]
+   ]
+  },
+  {
+   "title": "Table 3. PG status indicator",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "charge state",
+    "PG behavior"
+   ],
+   "rows": [
+    [
+     "VSUPPLY < VUVLO",
+     "High-Impedance"
+    ],
+    [
+     "VSUPPLY < (VBAT+VSLP)",
+     "High-Impedance"
+    ],
+    [
+     "(VBAT+VSLP) < VSUPPLY < VOVP",
+     "Low"
+    ],
+    [
+     "VSUPPLY > VOVP",
+     "High-Impedance"
+    ]
+   ]
+  },
+  {
+   "title": "Table 4. CHG status indicator",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "charge state",
+    "CHG behavior"
+   ],
+   "rows": [
+    [
+     "New Charge Cycle in progress; Charging suspend by TS fault; Charging suspended by thermal loop",
+     "Low (first charge cycle); High-Impedance (recharge cycles)"
+    ],
+    [
+     "New Cycle Charge Done",
+     "High-Impedance"
+    ],
+    [
+     "Recharge Cycle after Termination",
+     "High-Impedance"
+    ],
+    [
+     "Timer Fault",
+     "High-Impedance"
+    ],
+    [
+     "No Valid Supply",
+     "High-Impedance"
+    ],
+    [
+     "No Battery Present",
+     "High-Impedance"
+    ]
+   ]
+  },
+  {
+   "title": "JEITA charge limits by battery temperature",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "temperature range",
+    "maximum charge current",
+    "maximum charge voltage"
+   ],
+   "rows": [
+    [
+     "T1 (0°C) to T2 (10°C)",
+     "0.5 C",
+     "4.25 V (4.2 V Typical)"
+    ],
+    [
+     "T2 (10°C) to T3 (45°C)",
+     "1 C",
+     "4.25 V (4.2 V Typical)"
+    ],
+    [
+     "T3 (45°C) to T4 (50°C)",
+     "1 C",
+     "4.15 V Maximum"
+    ],
+    [
+     "T4 (50°C) to T5 (60°C)",
+     "1 C",
+     "4.10 V Maximum"
+    ]
+   ],
+   "notes": [
+    "No charging below T1 or above T5."
+   ]
+  },
+  {
+   "title": "Packaging information",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "orderable part number",
+    "status",
+    "material type",
+    "package | pins",
+    "package qty | carrier",
+    "RoHS",
+    "lead finish/ball material",
+    "MSL rating/peak reflow",
+    "op temp (°C)",
+    "part marking"
+   ],
+   "rows": [
+    [
+     "BQ24165RGER",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ 24165"
+    ],
+    [
+     "BQ24165RGER.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ 24165"
+    ],
+    [
+     "BQ24165RGER.B",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ 24165"
+    ],
+    [
+     "BQ24165RGET",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ 24165"
+    ],
+    [
+     "BQ24165RGET.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ 24165"
+    ],
+    [
+     "BQ24165RGET.B",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 85",
+     "BQ 24165"
+    ],
+    [
+     "BQ24165YFFR",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "3000 | LARGE T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24165"
+    ],
+    [
+     "BQ24165YFFR.A",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "3000 | LARGE T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24165"
+    ],
+    [
+     "BQ24165YFFT",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "250 | SMALL T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24165"
+    ],
+    [
+     "BQ24165YFFT.A",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "250 | SMALL T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24165"
+    ],
+    [
+     "BQ24166RGER",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGER.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGER.B",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGERG4",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGERG4.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGERG4.B",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGET",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGET.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166RGET.B",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24166"
+    ],
+    [
+     "BQ24166YFFR",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "3000 | LARGE T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24166"
+    ],
+    [
+     "BQ24166YFFT",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "250 | SMALL T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24166"
+    ],
+    [
+     "BQ24167RGER",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24167"
+    ],
+    [
+     "BQ24167RGER.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24167"
+    ],
+    [
+     "BQ24167RGER.B",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24167"
+    ],
+    [
+     "BQ24167RGET",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24167"
+    ],
+    [
+     "BQ24167RGET.A",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24167"
+    ],
+    [
+     "BQ24167RGET.B",
+     "Active",
+     "Production",
+     "VQFN (RGE) | 24",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ 24167"
+    ],
+    [
+     "BQ24167YFFR",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "3000 | LARGE T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24167"
+    ],
+    [
+     "BQ24167YFFT",
+     "Active",
+     "Production",
+     "DSBGA (YFF) | 49",
+     "250 | SMALL T&R",
+     "Yes",
+     "SNAGCU",
+     "Level-1-260C-UNLIM",
+     "-40 to 85",
+     "BQ24167"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel information",
+   "page": 32,
+   "conditions": "All dimensions are nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ24165RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ24165RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "180.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ24165YFFR",
+     "DSBGA",
+     "YFF",
+     "49",
+     "3000",
+     "180.0",
+     "8.4",
+     "2.93",
+     "2.93",
+     "0.81",
+     "4.0",
+     "8.0",
+     "Q1"
+    ],
+    [
+     "BQ24165YFFT",
+     "DSBGA",
+     "YFF",
+     "49",
+     "250",
+     "180.0",
+     "8.4",
+     "2.93",
+     "2.93",
+     "0.81",
+     "4.0",
+     "8.0",
+     "Q1"
+    ],
+    [
+     "BQ24166RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ24166RGERG4",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ24166RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "180.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ24166YFFR",
+     "DSBGA",
+     "YFF",
+     "49",
+     "3000",
+     "180.0",
+     "8.4",
+     "2.93",
+     "2.93",
+     "0.81",
+     "4.0",
+     "8.0",
+     "Q1"
+    ],
+    [
+     "BQ24166YFFT",
+     "DSBGA",
+     "YFF",
+     "49",
+     "250",
+     "180.0",
+     "8.4",
+     "2.93",
+     "2.93",
+     "0.81",
+     "4.0",
+     "8.0",
+     "Q1"
+    ],
+    [
+     "BQ24167RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ24167RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "180.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ24167YFFR",
+     "DSBGA",
+     "YFF",
+     "49",
+     "3000",
+     "180.0",
+     "8.4",
+     "2.93",
+     "2.93",
+     "0.81",
+     "4.0",
+     "8.0",
+     "Q1"
+    ],
+    [
+     "BQ24167YFFT",
+     "DSBGA",
+     "YFF",
+     "49",
+     "250",
+     "180.0",
+     "8.4",
+     "2.93",
+     "2.93",
+     "0.81",
+     "4.0",
+     "8.0",
+     "Q1"
+    ]
+   ],
+   "notes": [
+    "A0, B0 and K0 are the pocket's width, length and depth; W is the carrier tape width; P1 the pocket pitch."
+   ]
+  },
+  {
+   "title": "Tape and reel box dimensions",
+   "page": 33,
+   "conditions": "All dimensions are nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ24165RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ24165RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "210.0",
+     "185.0",
+     "35.0"
+    ],
+    [
+     "BQ24165YFFR",
+     "DSBGA",
+     "YFF",
+     "49",
+     "3000",
+     "182.0",
+     "182.0",
+     "20.0"
+    ],
+    [
+     "BQ24165YFFT",
+     "DSBGA",
+     "YFF",
+     "49",
+     "250",
+     "182.0",
+     "182.0",
+     "20.0"
+    ],
+    [
+     "BQ24166RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ24166RGERG4",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ24166RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "182.0",
+     "182.0",
+     "20.0"
+    ],
+    [
+     "BQ24166YFFR",
+     "DSBGA",
+     "YFF",
+     "49",
+     "3000",
+     "182.0",
+     "182.0",
+     "20.0"
+    ],
+    [
+     "BQ24166YFFT",
+     "DSBGA",
+     "YFF",
+     "49",
+     "250",
+     "182.0",
+     "182.0",
+     "20.0"
+    ],
+    [
+     "BQ24167RGER",
+     "VQFN",
+     "RGE",
+     "24",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ24167RGET",
+     "VQFN",
+     "RGE",
+     "24",
+     "250",
+     "182.0",
+     "182.0",
+     "20.0"
+    ],
+    [
+     "BQ24167YFFR",
+     "DSBGA",
+     "YFF",
+     "49",
+     "3000",
+     "182.0",
+     "182.0",
+     "20.0"
+    ],
+    [
+     "BQ24167YFFT",
+     "DSBGA",
+     "YFF",
+     "49",
+     "250",
+     "182.0",
+     "182.0",
+     "20.0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "USB plug-in with battery connected",
+   "page": 11,
+   "conditions": "USB500, 925mA Charge Setting",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VUSB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "IBAT",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VUSB",
+     "points": [
+      [
+       0.1,
+       -0.05
+      ],
+      [
+       14.8,
+       -0.05
+      ],
+      [
+       15.8,
+       0.19
+      ],
+      [
+       18.6,
+       0.24
+      ],
+      [
+       19.3,
+       2.53
+      ],
+      [
+       20.8,
+       3.63
+      ],
+      [
+       23.3,
+       4.44
+      ],
+      [
+       27.2,
+       4.87
+      ],
+      [
+       42.0,
+       5.06
+      ],
+      [
+       199.8,
+       4.92
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       0.1,
+       0.013
+      ],
+      [
+       126.3,
+       0.013
+      ],
+      [
+       127.1,
+       0.065
+      ],
+      [
+       141.1,
+       0.063
+      ],
+      [
+       142.1,
+       0.071
+      ],
+      [
+       143.8,
+       0.588
+      ],
+      [
+       199.8,
+       0.59
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "IN plug-in with battery connected",
+   "page": 11,
+   "conditions": "1500mA ILIM, 1300mA Charge Setting",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "IBAT",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       0.2,
+       -0.05
+      ],
+      [
+       17.0,
+       0
+      ],
+      [
+       20.5,
+       3.38
+      ],
+      [
+       23.4,
+       4.42
+      ],
+      [
+       27.6,
+       4.85
+      ],
+      [
+       47.7,
+       5.04
+      ],
+      [
+       199.8,
+       4.85
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       0.2,
+       0.019
+      ],
+      [
+       123.5,
+       0.019
+      ],
+      [
+       124.3,
+       0.188
+      ],
+      [
+       138.3,
+       0.184
+      ],
+      [
+       139.8,
+       0.212
+      ],
+      [
+       142.7,
+       1.333
+      ],
+      [
+       199.8,
+       1.333
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Adapter detection, USB",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VUSB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "IUSB",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VUSB",
+     "points": [
+      [
+       0.0,
+       -0.05
+      ],
+      [
+       12.8,
+       -0.05
+      ],
+      [
+       13.5,
+       0.19
+      ],
+      [
+       16.5,
+       0.33
+      ],
+      [
+       17.0,
+       2.57
+      ],
+      [
+       17.7,
+       3.19
+      ],
+      [
+       18.9,
+       3.81
+      ],
+      [
+       20.9,
+       4.43
+      ],
+      [
+       24.0,
+       4.81
+      ],
+      [
+       40.8,
+       5.04
+      ],
+      [
+       99.9,
+       5.0
+      ]
+     ]
+    },
+    {
+     "label": "IUSB",
+     "points": [
+      [
+       0.0,
+       0.001
+      ],
+      [
+       16.6,
+       0.001
+      ],
+      [
+       22.1,
+       0.0033
+      ],
+      [
+       22.4,
+       0.0056
+      ],
+      [
+       23.0,
+       0.0536
+      ],
+      [
+       50.4,
+       0.0521
+      ],
+      [
+       51.8,
+       0.0526
+      ],
+      [
+       52.3,
+       0.0574
+      ],
+      [
+       56.0,
+       0.0569
+      ],
+      [
+       56.5,
+       0.0209
+      ],
+      [
+       57.0,
+       0.0209
+      ],
+      [
+       57.4,
+       0.0112
+      ],
+      [
+       57.7,
+       0.014
+      ],
+      [
+       99.9,
+       0.0126
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "IN efficiency",
+   "page": 12,
+   "conditions": "Charge Disabled, SYS loaded, VBATREG = 3.6V, IN2500 ILIM",
+   "x": {
+    "label": "System current",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 5 V",
+     "points": [
+      [
+       0.1,
+       87.7
+      ],
+      [
+       0.2126,
+       92.5
+      ],
+      [
+       0.3934,
+       93.9
+      ],
+      [
+       0.6956,
+       94.0
+      ],
+      [
+       1.119,
+       93.1
+      ],
+      [
+       1.719,
+       91.1
+      ],
+      [
+       2.322,
+       88.8
+      ],
+      [
+       3.0,
+       85.5
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 7 V",
+     "points": [
+      [
+       0.1,
+       78.1
+      ],
+      [
+       0.2126,
+       87.9
+      ],
+      [
+       0.3027,
+       90.4
+      ],
+      [
+       0.3934,
+       91.3
+      ],
+      [
+       0.6955,
+       92.5
+      ],
+      [
+       1.206,
+       92.0
+      ],
+      [
+       2.021,
+       89.9
+      ],
+      [
+       3.0,
+       86.5
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 9 V",
+     "points": [
+      [
+       0.1,
+       71.1
+      ],
+      [
+       0.2125,
+       83.6
+      ],
+      [
+       0.3027,
+       87.4
+      ],
+      [
+       0.3933,
+       89.1
+      ],
+      [
+       0.6956,
+       90.8
+      ],
+      [
+       1.206,
+       91.0
+      ],
+      [
+       2.021,
+       89.2
+      ],
+      [
+       3.0,
+       86.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "USB efficiency",
+   "page": 12,
+   "conditions": "Charge Disabled, SYS loaded, VBATREG = 3.6V, USB1500 ILIM",
+   "x": {
+    "label": "System current",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VUSB = 5 V",
+     "points": [
+      [
+       0.1,
+       87.8
+      ],
+      [
+       0.2132,
+       92.4
+      ],
+      [
+       0.3938,
+       93.3
+      ],
+      [
+       0.6054,
+       93.0
+      ],
+      [
+       0.8161,
+       92.3
+      ],
+      [
+       1.119,
+       91.0
+      ],
+      [
+       1.51,
+       88.8
+      ]
+     ]
+    },
+    {
+     "label": "VUSB = 6 V",
+     "points": [
+      [
+       0.1,
+       82.6
+      ],
+      [
+       0.2131,
+       90.3
+      ],
+      [
+       0.3032,
+       91.7
+      ],
+      [
+       0.5157,
+       92.4
+      ],
+      [
+       0.816,
+       92.1
+      ],
+      [
+       1.207,
+       90.8
+      ],
+      [
+       1.72,
+       88.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SYSREG and MINSYS regulation vs. temperature",
+   "page": 12,
+   "conditions": "VBAT = 3V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SYSREG and MINSYS regulation",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SYSREG regulation",
+     "points": [
+      [
+       -40.0,
+       3.6892
+      ],
+      [
+       0,
+       3.6943
+      ],
+      [
+       125.0,
+       3.6971
+      ]
+     ]
+    },
+    {
+     "label": "MINSYS regulation",
+     "points": [
+      [
+       -40.0,
+       3.4953
+      ],
+      [
+       0,
+       3.4949
+      ],
+      [
+       105.0,
+       3.4841
+      ],
+      [
+       125.0,
+       3.4853
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Battery regulation vs temperature",
+   "page": 12,
+   "conditions": "VBATREG = 4.2V, No load, Termination Disabled",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery regulation",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Battery regulation",
+     "points": [
+      [
+       0,
+       4.2019
+      ],
+      [
+       25.0,
+       4.1997
+      ],
+      [
+       85.0,
+       4.1984
+      ],
+      [
+       105.0,
+       4.1973
+      ],
+      [
+       125.0,
+       4.195
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "USB input current limit vs. temperature",
+   "page": 13,
+   "conditions": "USB100 and USB500 current limit, VUSB = 5V, VBAT = 3.6V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "USB input current limit",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "USB100 current limit",
+     "points": [
+      [
+       -40.0,
+       93.0
+      ],
+      [
+       125.0,
+       98.3
+      ]
+     ]
+    },
+    {
+     "label": "USB500 current limit",
+     "points": [
+      [
+       -40.0,
+       461.8
+      ],
+      [
+       0,
+       471.4
+      ],
+      [
+       125.0,
+       491.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "6.5V OVP threshold vs. temperature",
+   "page": 13,
+   "conditions": "USB input and IN input (bq24168)",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "6.5 V OVP threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Falling edge",
+     "points": [
+      [
+       -40.0,
+       6.34
+      ],
+      [
+       0,
+       6.341
+      ],
+      [
+       85.0,
+       6.324
+      ],
+      [
+       125.0,
+       6.312
+      ]
+     ]
+    },
+    {
+     "label": "Rising edge",
+     "points": [
+      [
+       -40.0,
+       6.496
+      ],
+      [
+       0,
+       6.497
+      ],
+      [
+       125.0,
+       6.466
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "10.5V OVP threshold vs. temperature",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "10.5 V OVP threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Falling edge",
+     "points": [
+      [
+       -40.0,
+       10.275
+      ],
+      [
+       0,
+       10.273
+      ],
+      [
+       25.0,
+       10.257
+      ],
+      [
+       105.0,
+       10.222
+      ],
+      [
+       125.0,
+       10.208
+      ]
+     ]
+    },
+    {
+     "label": "Rising edge",
+     "points": [
+      [
+       -40.0,
+       10.531
+      ],
+      [
+       0,
+       10.528
+      ],
+      [
+       85.0,
+       10.489
+      ],
+      [
+       125.0,
+       10.464
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge current vs. battery voltage",
+   "page": 13,
+   "conditions": "ICHARGE = 2A, VIN = 5V, VBATREG = 4.44V",
+   "x": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Charge current",
+     "points": [
+      [
+       2.0,
+       2.035
+      ],
+      [
+       2.5,
+       2.056
+      ],
+      [
+       3.0,
+       2.075
+      ],
+      [
+       3.651,
+       2.077
+      ],
+      [
+       3.653,
+       2.078
+      ],
+      [
+       3.728,
+       2.078
+      ],
+      [
+       3.824,
+       2.077
+      ],
+      [
+       3.92,
+       2.077
+      ],
+      [
+       4.016,
+       2.076
+      ],
+      [
+       4.112,
+       2.076
+      ],
+      [
+       4.208,
+       2.075
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IBATSHRT vs. battery voltage",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBATSHRT",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IBATSHRT",
+     "points": [
+      [
+       0.034,
+       0.054489
+      ],
+      [
+       0.127,
+       0.05084
+      ],
+      [
+       0.223,
+       0.050485
+      ],
+      [
+       0.51,
+       0.05058
+      ],
+      [
+       0.702,
+       0.050684
+      ],
+      [
+       0.797,
+       0.050699
+      ],
+      [
+       0.893,
+       0.050775
+      ],
+      [
+       1.181,
+       0.050895
+      ],
+      [
+       1.468,
+       0.051007
+      ],
+      [
+       1.66,
+       0.051053
+      ],
+      [
+       1.756,
+       0.05107
+      ],
+      [
+       1.851,
+       0.051037
+      ],
+      [
+       1.947,
+       0.051099
+      ],
+      [
+       2.043,
+       0.051101
+      ],
+      [
+       2.139,
+       0.051133
+      ],
+      [
+       2.33,
+       0.051131
+      ],
+      [
+       2.426,
+       0.051159
+      ],
+      [
+       2.522,
+       0.051162
+      ],
+      [
+       2.617,
+       0.051108
+      ],
+      [
+       2.713,
+       0.051134
+      ],
+      [
+       2.809,
+       0.051118
+      ],
+      [
+       2.905,
+       0.051143
+      ],
+      [
+       3.0,
+       0.051134
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "bq24165-discharge-fet-gsm",
+   "title": "bq24165 with external discharge FET and a GSM PA on SYS",
+   "page": 10,
+   "description": "The bq24165 runs from either a DC adapter on IN or a USB port on USB, each with a small input capacitor and a 4.7 µF capacitor on its PMID node. A divider from IN sets the IN DPM voltage, RILIM the IN current limit and RISET the charge current. The buck stage drives the system rail through the inductor, with a 0.01 µF bootstrap capacitor and 10 µF on SYS. A P-channel FET gated by BGATE parallels the internal battery FET for discharge. A GSM power amplifier hangs on SYS, so a call can go out with the battery flat or absent. The host reads the pack thermistor itself and drives CE1, CE2 and IUSB1 to IUSB3 from GPIOs; PG and CHG light LEDs fed from DRV.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq24165"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "adapter jack",
+     "note": "DC adapter input"
+    },
+    {
+     "ref": "J2",
+     "type": "connector",
+     "value": "USB connector",
+     "note": "VBUS, D+, D-, GND"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "IN bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "PMIDI bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "USB bypass; the USB pin calls for 1 µF or more"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "PMIDU bypass"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "DRV bypass"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "bootstrap, BOOT to SW, rated above 10 V"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "SYS bypass at the IC"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "COUT",
+     "note": "bulk capacitor at the system load"
+    },
+    {
+     "ref": "C9",
+     "type": "capacitor",
+     "value": "CPA",
+     "note": "supply capacitor at the GSM power amplifier"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "BAT bypass"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "1.5 µH to 2.2 µH",
+     "note": "buck inductor"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RTOP",
+     "note": "upper VDPM divider resistor, from Equation 7"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "lower VDPM divider resistor"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "RILIM",
+     "note": "sets the IN current limit, Equation 2"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "RLED",
+     "note": "PG LED current limit"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "RLED",
+     "note": "CHG LED current limit"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "RISET",
+     "note": "sets the fast-charge current, Equation 1"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "charge status"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "LED",
+     "note": "power good"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "P-channel MOSFET",
+     "note": "optional external discharge FET driven by BGATE"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "GSM PA",
+     "external": true,
+     "note": "power amplifier supplied from SYS"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "single-cell Li-ion pack with NTC",
+     "note": "pins PACK+, PACK-, TEMP"
+    },
+    {
+     "ref": "LOAD",
+     "type": "load",
+     "value": "system load"
+    },
+    {
+     "ref": "T_NTC",
+     "type": "terminal",
+     "value": "host NTC monitor input"
+    },
+    {
+     "ref": "T_CE1",
+     "type": "terminal",
+     "value": "host GPIO to CE1"
+    },
+    {
+     "ref": "T_CE2",
+     "type": "terminal",
+     "value": "host GPIO to CE2"
+    },
+    {
+     "ref": "T_IUSB1",
+     "type": "terminal",
+     "value": "host GPIO to IUSB1"
+    },
+    {
+     "ref": "T_IUSB2",
+     "type": "terminal",
+     "value": "host GPIO to IUSB2"
+    },
+    {
+     "ref": "T_IUSB3",
+     "type": "terminal",
+     "value": "host GPIO to IUSB3"
+    },
+    {
+     "ref": "T_PAIN",
+     "type": "terminal",
+     "value": "PA RF input"
+    },
+    {
+     "ref": "T_PAOUT",
+     "type": "terminal",
+     "value": "PA RF output"
+    }
+   ],
+   "notes": [
+    "Q1's source is on SYS and its drain on BAT."
+   ]
+  },
+  {
+   "id": "bq24166-ntc",
+   "title": "bq24166 or bq24167 with pack NTC on TS, no discharge FET",
+   "page": 10,
+   "description": "Same supply, power-stage and LED arrangement as the bq24165 circuit, without the external discharge FET (BGATE left open). The pack thermistor sits from TS to ground, with RHI from DRV to TS and RLO from TS to ground setting the temperature thresholds. The host drives IUSB1 to IUSB3 and CE from GPIOs.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq24166 or bq24167"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "adapter jack",
+     "note": "DC adapter input"
+    },
+    {
+     "ref": "J2",
+     "type": "connector",
+     "value": "USB connector",
+     "note": "VBUS, D+, D-, GND"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "IN bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "PMIDI bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "USB bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "PMIDU bypass"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "DRV bypass; the DRV pin calls for 1 µF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "bootstrap, BOOT to SW, rated above 10 V"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "SYS bypass at the IC"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "COUT",
+     "note": "bulk capacitor at the system load"
+    },
+    {
+     "ref": "C10",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "BAT bypass"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "1.5 µH to 2.2 µH",
+     "note": "buck inductor"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RTOP",
+     "note": "upper VDPM divider resistor, from Equation 7"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "lower VDPM divider resistor"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "RILIM",
+     "note": "sets the IN current limit, Equation 2"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "RLED",
+     "note": "PG LED current limit"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "RLED",
+     "note": "CHG LED current limit"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "RISET",
+     "note": "sets the fast-charge current, Equation 1"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "RHI",
+     "note": "TS divider, DRV to TS, Equation 4"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "RLO",
+     "note": "TS divider, TS to ground, Equation 3"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "charge status"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "LED",
+     "note": "power good"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "single-cell Li-ion pack with NTC",
+     "note": "pins PACK+, PACK-, TEMP"
+    },
+    {
+     "ref": "LOAD",
+     "type": "load",
+     "value": "system load"
+    },
+    {
+     "ref": "T_IUSB1",
+     "type": "terminal",
+     "value": "host GPIO to IUSB1"
+    },
+    {
+     "ref": "T_IUSB2",
+     "type": "terminal",
+     "value": "host GPIO to IUSB2"
+    },
+    {
+     "ref": "T_IUSB3",
+     "type": "terminal",
+     "value": "host GPIO to IUSB3"
+    },
+    {
+     "ref": "T_CE",
+     "type": "terminal",
+     "value": "host GPIO to CE"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Charge current resistor",
+   "expr": "RISET = KISET / ICHARGE",
+   "page": 15,
+   "where": {
+    "ICHARGE": "fast-charge current wanted",
+    "KISET": "charge current factor, 490 AΩ typ (245 AΩ in the half-current setting)"
+   },
+   "note": ""
+  },
+  {
+   "name": "IN current limit resistor",
+   "expr": "RILIM = KILIM / IIN_LIM",
+   "page": 17,
+   "where": {
+    "IIN_LIM": "IN input current limit wanted, 1000 mA to 2.5 A",
+    "KILIM": "input current factor, 251 AΩ typ"
+   },
+   "note": ""
+  },
+  {
+   "name": "TS lower resistor",
+   "expr": "RLO = VDRV × RCOLD × RHOT × (1/VCOLD − 1/VHOT) / (RHOT × (VDRV/VHOT − 1) − RCOLD × (VDRV/VCOLD − 1))",
+   "page": 20,
+   "where": {
+    "VCOLD": "0.60 × VDRV",
+    "VHOT": "0.30 × VDRV",
+    "RHOT": "NTC resistance at the hot limit",
+    "RCOLD": "NTC resistance at the cold limit",
+    "VDRV": "DRV output voltage"
+   },
+   "note": ""
+  },
+  {
+   "name": "TS upper resistor",
+   "expr": "RHI = (VDRV/VCOLD − 1) / (1/RLO + 1/RCOLD)",
+   "page": 20,
+   "where": {
+    "VCOLD": "0.60 × VDRV",
+    "RCOLD": "NTC resistance at the cold limit",
+    "RLO": "TS lower resistor"
+   },
+   "note": ""
+  },
+  {
+   "name": "bq24167 cool-threshold NTC resistance",
+   "expr": "RCOOL = RLO × 0.564 × RHI / (RLO − RLO × 0.564 − RHI × 0.564)",
+   "page": 20,
+   "where": {
+    "RLO": "TS lower resistor",
+    "RHI": "TS upper resistor"
+   },
+   "note": "The warm and cool points follow from RHI and RLO; they cannot be set on their own."
+  },
+  {
+   "name": "bq24167 warm-threshold NTC resistance",
+   "expr": "RWARM = RLO × 0.383 × RHI / (RLO − RLO × 0.383 − RHI × 0.383)",
+   "page": 20,
+   "where": {
+    "RLO": "TS lower resistor",
+    "RHI": "TS upper resistor"
+   },
+   "note": ""
+  },
+  {
+   "name": "IN DPM divider top resistor",
+   "expr": "RTOP = 10 kΩ × (VINDPM − VDPM) / VDPM",
+   "page": 22,
+   "where": {
+    "VINDPM": "IN voltage at which DPM acts",
+    "VDPM": "VDPM pin threshold, 1.2 V typ",
+    "10 kΩ": "the bottom resistor"
+   },
+   "note": ""
+  },
+  {
+   "name": "Inductor peak current",
+   "expr": "IPEAK = ILOAD(MAX) × (1 + %RIPPLE / 2)",
+   "page": 25,
+   "where": {
+    "ILOAD(MAX)": "largest load current",
+    "%RIPPLE": "inductor ripple current as a fraction of load"
+   },
+   "note": "The inductor's saturation current must exceed IPEAK."
+  },
+  {
+   "name": "Inductor heating current",
+   "expr": "ITEMPRISE = ILOAD + D × (IPEAK – ILOAD)",
+   "page": 25,
+   "where": {
+    "ILOAD": "typical DC load",
+    "IPEAK": "load peak",
+    "D": "fraction of time at the peak"
+   },
+   "note": "Worked case: 1.5 A DC with 2.5 A peaks 20 % of the time gives 1.7 A, which the inductor's 40 °C-rise current rating must exceed."
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Charge profile",
+   "page": 14,
+   "text": "Charge current flows through the internal battery FET. Six control loops act on it: constant current, constant voltage, input current, die temperature, minimum system voltage and input-voltage DPM; whichever asks for least wins. Once the battery is above 3.5 V, SYS is joined to the battery. Below that, SYS is held at VSYS(REG), so the system runs even with a missing or deeply flat cell. A charge passes through conditioning, then constant current, then constant voltage."
+  },
+  {
+   "topic": "PWM converter",
+   "page": 14,
+   "text": "A fixed 1.5 MHz voltage-mode synchronous buck with internal compensation, stable with small low-ESR ceramic output capacitors. The input stage blocks battery current back to a supply lower than the battery and keeps the two inputs apart. DRV powers the gate drivers, and a bootstrap capacitor lifts the high-side gate drive. Each input has a cycle-by-cycle limit of nominally 5 A peak, sensed in the internal FETs, plus its own input current limit."
+  },
+  {
+   "topic": "Charging process",
+   "page": 15,
+   "text": "With a supply present and a deeply discharged or shorted cell attached, the charger feeds 50 mA (IBATSHRT) into it while the battery FET runs linearly to keep SYS at VSYS(REG). Above VBATSHRT the current steps up to the fast-charge setting, still through the linear FET, until SYS would rise above VSYS(REG); then the FET turns fully on and the ISET current flows. If the input is at its current limit or DPM, charge current is cut first to serve the system; at zero charge current the battery begins to supplement SYS. The rise of fast-charge current is slew-limited. Near VBATREG the constant-voltage loop takes over and the current tapers; the voltage is sensed between BAT and PGND."
+  },
+  {
+   "topic": "Termination and recharge",
+   "page": 15,
+   "text": "Charge ends, and the battery FET opens, when the cell sits over the recharge level and the tapering current has stayed below ITERM for 32 ms without a supplement event. Termination is held off while SYS is above VMINSYS and charge current is being cut by VINDPM, the input current loop, thermal regulation, or USB100 mode. After termination SYS is regulated at the battery regulation voltage and supplement mode stays available. Charging resumes when the battery drops below VBAT(REG) − VRCH, on supply power-on reset, on toggling CE1/CE2 or CE, or on toggling high-impedance mode through the IUSB pins; only a supply POR or a battery swap starts a fresh cycle. A battery above VBOVP turns the buck off and the battery FET on so the cell can discharge."
+  },
+  {
+   "topic": "Battery detection",
+   "page": 16,
+   "text": "When termination conditions are met, the charger sinks IDETECT from BAT for tDETECT. If the voltage holds above the detection level, a battery is present and the charger reports charge done. If not, it sources IBATSHRT for tDETECT, then sinks again, and keeps alternating until a battery is found or charging is turned off; finding one clears the fault and starts a new cycle. With termination off, detection is off."
+  },
+  {
+   "topic": "Power path with a supply present",
+   "page": 16,
+   "text": "With a source on IN or USB the buck starts and, if enabled, charging begins. Above 3.5 V battery the FET is fully on and SYS follows the battery; when SYS falls to VSYS(REG) the buck holds it there and the battery FET regulates charge current linearly. If SYS drops to VMINSYS the DPPM loop lowers charge current to keep the load supplied; once charge current reaches zero and the load still grows, the battery FET turns on and the cell supplements the load. Whenever DPPM trims charge current, the safety timer slows to half rate."
+  },
+  {
+   "topic": "Battery above regulation",
+   "page": 17,
+   "text": "If the battery is above VBAT(REG), the battery FET opens and SYS is regulated to VSYSREG(FETOFF). At 5 % above regulation the battery OVP stops the converter and closes the battery FET to bleed the cell down."
+  },
+  {
+   "topic": "USB input current limit",
+   "page": 17,
+   "text": "IUSB1, IUSB2 and IUSB3 select 100, 150, 500, 800, 900 mA or 1.5 A (Table 1), covering USB 2.0, USB 3.0 and wall adapters. IUSB1 and IUSB2 both high shuts the buck down in high-impedance mode whatever is on the inputs. USB100 disables termination."
+  },
+  {
+   "topic": "IN current limit and input priority",
+   "page": 17,
+   "text": "RILIM from ILIM to ground sets the IN limit between 1000 mA and 2.5 A. When both inputs are valid, IN is used. The inputs stay isolated from each other; if IN is above its OVP trip while USB is valid, charging runs from USB with both USB and the battery cut off from IN."
+  },
+  {
+   "topic": "Battery only",
+   "page": 18,
+   "text": "With no supply, the internal battery FET is on, as in supplement mode, with no current regulation but a short-circuit limit. On reaching it the FET opens for the deglitch time, then closes to test whether the short is gone, repeating until it is."
+  },
+  {
+   "topic": "External discharge FET (BGATE)",
+   "page": 18,
+   "text": "BGATE drives an optional external P-channel FET between battery and SYS that shares the discharge current with the internal FET, giving a low-impedance discharge path. It is on with no valid supply and in high-impedance mode. The short-circuit limit does not protect the external FET."
+  },
+  {
+   "topic": "Safety timer",
+   "page": 18,
+   "text": "A 6-hour timer starts with charging and covers the whole charge. If charge has not terminated when it runs out, charging stops and the battery FET opens. The fault clears by toggling CE1/CE2 (bq24165) or CE (bq24166/7), by high-impedance mode, by supply POR, or by a battery swap. In fast charge the timer runs at half rate while the system load, the input current loop, VINDPM, or thermal regulation reduces charge current, while CE1/CE2 reduce current or voltage, while the battery is below VBATSHORT, and while TS or CE1/CE2 put it in the JEITA warm or cold band. A new cycle, a CE toggle, or a thermal shutdown resets it."
+  },
+  {
+   "topic": "DRV regulator",
+   "page": 19,
+   "text": "DRV is a linear regulator feeding the internal drivers and up to 10 mA of outside load such as a status LED or a USB transceiver; it is at most 5.45 V. It runs while either IN or USB has a supply, and off below UVLO, when the supply is less than VSLP above the battery, and in thermal shutdown."
+  },
+  {
+   "topic": "CE1/CE2 charge selection (bq24165)",
+   "page": 19,
+   "text": "For systems where the host measures pack temperature, two host GPIOs on CE1 and CE2 halve the charge current, drop the regulation voltage to 4.06 V, or suspend charging (Table 2), so the NTC need not be shared between ICs and the host picks the temperature points. Suspending charge through CE1/CE2 leaves the buck running."
+  },
+  {
+   "topic": "TS NTC monitoring (bq24166/7)",
+   "page": 20,
+   "text": "TS compares the voltage of a DRV-fed divider with the pack NTC against fractions of VDRV. The bq24166 checks cold (below 0 °C, VCOLD) and hot (above 60 °C, VHOT): outside them charging and the timers pause. The bq24167 adds cool (0 to 10 °C, VCOOL), where charge current is halved, and warm (45 to 60 °C, VWARM), where the regulation voltage drops 140 mV. RLO and RHI follow from the NTC's hot and cold resistances (Equations 3 and 4); on the bq24167 they then fix the warm and cool points (Equations 5 and 6)."
+  },
+  {
+   "topic": "Thermal regulation and shutdown",
+   "page": 21,
+   "text": "Charge current is tapered once the junction reaches the regulation threshold (TREG, 120 °C typ) and reaches zero about 10 °C higher, after which the battery carries more of the system load. Above TSHUTDWN (165 °C typ) charging stops and the buck is disabled, and the timer resets; operation resumes about 10 °C lower."
+  },
+  {
+   "topic": "Sleep mode",
+   "page": 21,
+   "text": "With the supply above VUVLO but below VBAT + VSLP, the converter stops and the battery FET and BGATE turn on, so the battery is not drained into a missing supply. A new charge cycle starts once the supply rises above VBAT + VSLP."
+  },
+  {
+   "topic": "Input voltage DPM",
+   "page": 22,
+   "text": "If the source cannot carry the requested current, its voltage sags; at VIN_DPM (set by the IUSB pins on USB, by the VDPM divider on IN) the input current is cut to stop it sagging further. The VDPM divider uses 10 kΩ at the bottom. On the QFN a 10 pF to 100 pF capacitor from VDPM to ground may be added when the divider sits away from the pins and VDPM picks up noise."
+  },
+  {
+   "topic": "Bad source detection",
+   "page": 22,
+   "text": "On connection the charger loads the source with 30 mA (USB) or 75 mA (IN) for 32 ms. If the voltage stays above the VINDPM level plus hysteresis, the buck starts; if not, the sink stops for 2 s and tries again, indefinitely, until a good source appears on either input. A source that falls to the bad-source level in operation stops the converter and the battery FET turns on. With two supplies IN is tested first; one failure switches to USB for 2 s before retrying IN, and a second failure locks IN out until it drops below UVLO."
+  },
+  {
+   "topic": "Input overvoltage protection",
+   "page": 23,
+   "text": "Above VOVP on the active input the converter stops, charging pauses, and the battery FET and BGATE turn on. The previous operation resumes when the overvoltage goes away."
+  },
+  {
+   "topic": "Reverse boost prevention",
+   "page": 23,
+   "text": "The buck is held in continuous conduction even at light load for fast load response, so a battery above VBATREG could drive current back to the input and raise a source that cannot sink. When reverse current not caused by supplement mode is sensed, the battery FET opens and feedback moves to VSYSREG for 1 ms, then the FET closes and the test repeats. This is active only while VBOVP > VBAT > VBATREG − VRCH; with termination off in that window (for example CE1 = 1, CE2 = 0 with the cell above 4.06 V) it gives about 100 mV of 1 kHz ripple on SYS. Termination enabled with ITERM above 150 mA, or high battery-line impedance, makes it much less likely. A SYS load step that causes supplement during this state can stop charging, which resumes below VBATREG − VRCH, so large load steps can leave the cell a little short of full."
+  },
+  {
+   "topic": "Status outputs",
+   "page": 24,
+   "text": "PG and CHG are open-drain. PG pulls low when the supply exceeds VUVLO and lies between VBAT + VSLP and VOVP. CHG goes low at the start of a new charge cycle (begun by a battery swap or supply cycling), and stays low through TS or thermal suspensions until termination, a battery removal, a timer fault or loss of supply; it does not go low for recharges. Either output can drive an LED from DRV or use a 100 kΩ pull-up to the logic rail."
+  },
+  {
+   "topic": "Inductor and output capacitor",
+   "page": 25,
+   "text": "The converter is meant for 1.5 µH to 2.2 µH. 2.2 µH has less ripple and a little more efficiency but is physically larger; 1.5 µH balances size and efficiency. Saturation current must exceed IPEAK (Equation 8), and the inductor's 40 °C-rise current must cover the duty-weighted load (Equation 9). Thanks to internal compensation, anywhere from 10 µF to 200 µF placed locally on SYS keeps the loop stable; more may sit further along the rail. 10 µF to 47 µF of ceramic is the local SYS bypass, 47 µF giving the best transient response."
+  },
+  {
+   "topic": "PCB layout",
+   "page": 26,
+   "text": "Put the 4.7 µF PMID capacitors right at the PMID and PGND pins to keep the high-frequency loop small, and ground the 1 µF input capacitors close to the PMID capacitor ground and PGND. Keep BAT to the battery connector short; add BAT capacitance if its inductance is large. Return the SYS capacitor to PGND close to the IC so the SW–LC–PGND loop is small. Put the ISET and ILIM resistors at their pins and all decoupling close to its pin and PGND, without breaking the power-stage paths, and route small signals away from high current. Use a ground plane reached by vias: two per power-stage capacitor, one per small-signal capacitor, and vias in the PGND pads where possible; a single plane works for this layout. Size IN, USB, BAT, SYS and SW traces for full charge current, and on WCSP give the power balls as much copper as possible for heat."
+  },
+  {
+   "topic": "WCSP marking",
+   "page": 27,
+   "text": "The top of the YFF package carries the A1 corner mark, TI letters, a year-month date code, a four-character lot code, an assembly site code and the device name."
+  }
+ ],
+ "packages": [
+  {
+   "name": "RGE0024H (24-pin VQFN)",
+   "page": 35,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "",
+     "body width",
+     "3.9",
+     "",
+     "4.1"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "terminal pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "terminal width (24X)",
+     "0.18",
+     "",
+     "0.30"
+    ],
+    [
+     "",
+     "terminal length (24X)",
+     "0.28",
+     "",
+     "0.48"
+    ],
+    [
+     "",
+     "terminal thickness",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "exposed pad, square",
+     "",
+     "2.7±0.1",
+     ""
+    ],
+    [
+     "",
+     "terminal row span, centre to centre (2X)",
+     "",
+     "2.5",
+     ""
+    ],
+    [
+     "",
+     "terminal position tolerance, to C A B (24X)",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "terminal position tolerance, to C (24X)",
+     "",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.08"
+    ]
+   ],
+   "notes": [
+    "The exposed pad (pin 25) is soldered to the board for heat and strength.",
+    "Example land pattern: pads (0.24) × (0.58) on (0.5) pitch, (3.825) across pad rows, (R0.05) pad corners, thermal land (2.7) square with (Ø0.2) vias at (1.1) spacing; solder mask opening 0.07 max all round the pad when non-solder-mask-defined (preferred), mask 0.07 min over the pad edge when solder-mask-defined.",
+    "Example stencil, 0.125 mm thick: four (1.188) square openings on the exposed pad at (0.694) from centre, 78 % paste coverage."
+   ]
+  },
+  {
+   "name": "YFF (49-ball WCSP)",
+   "page": 27,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "D",
+     "body length",
+     "",
+     "2.78 ±0.05",
+     ""
+    ],
+    [
+     "E",
+     "body width",
+     "",
+     "2.78 ±0.05",
+     ""
+    ]
+   ],
+   "notes": [
+    "7 × 7 ball array, rows A to G and columns 1 to 7."
+   ]
+  }
+ ]
+}

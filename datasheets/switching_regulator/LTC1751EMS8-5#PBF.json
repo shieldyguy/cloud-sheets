@@ -1,0 +1,5035 @@
+{
+ "sheet": 1,
+ "name": "LTC1751EMS8-5#PBF",
+ "kind": "switching_regulator",
+ "manufacturer": "Analog Devices (Linear Technology)",
+ "title": "LTC1751 family: micropower regulated charge pump doubler, 3.3 V, 5 V or adjustable output",
+ "source": {
+  "document": "LTC1751/LTC1751-3.3/LTC1751-5",
+  "revision": "1751f, LT/TP 0401",
+  "pages": 12
+ },
+ "summary": "The LTC1751, LTC1751-3.3 and LTC1751-5 are inductorless step-up converters: a switched-capacitor voltage doubler with burst regulation that holds its output at 3.3 V, 5 V or a resistor-set level from an input of 2 V to 5.5 V. Only a flying capacitor and input and output bypass capacitors are needed outside. The fixed versions deliver up to 100 mA (5 V, VIN at least 3 V) or 80 mA (3.3 V, VIN at least 2.5 V), draw about 20 µA unloaded and under 2 µA in shutdown, and cut the output off from the input when shut down. They add a power-good output, an SS pin for soft-start, short-circuit and thermal protection, and come in an 8-lead MSOP.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "2V to 5.5V (LTC1751-5: 2.7V to 5.5V)"
+  ],
+  [
+   "Output",
+   "3.3V ±4%, 5V ±4%, or adjustable (FB 1.205V)"
+  ],
+  [
+   "Output current",
+   "100mA at 5V (VIN ≥ 3V); 80mA at 3.3V (VIN ≥ 2.5V)"
+  ],
+  [
+   "Quiescent current",
+   "20µA typ (LTC1751-5, no load)"
+  ],
+  [
+   "Shutdown current",
+   "<2µA"
+  ],
+  [
+   "Switching frequency",
+   "800kHz"
+  ],
+  [
+   "Package",
+   "8-lead MSOP (MS8), θJA = 160°C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "output voltage",
+   "pin 1",
+   "package",
+   "MS8 part marking",
+   "temperature range"
+  ],
+  "rows": [
+   [
+    "LTC1751EMS8",
+    "adjustable",
+    "FB",
+    "MS8, 8-lead plastic MSOP",
+    "LTKL",
+    "-40°C to 85°C"
+   ],
+   [
+    "LTC1751EMS8-3.3",
+    "3.3V",
+    "PGOOD",
+    "MS8, 8-lead plastic MSOP",
+    "LTKN",
+    "-40°C to 85°C"
+   ],
+   [
+    "LTC1751EMS8-5",
+    "5V",
+    "PGOOD",
+    "MS8, 8-lead plastic MSOP",
+    "LTKP",
+    "-40°C to 85°C"
+   ]
+  ],
+  "notes": [
+   "The three versions share one pinout except pin 1: the fixed-output parts bring out the power-good flag there, the adjustable part its feedback input. Parts for a wider temperature range are available on request to the factory."
+  ]
+ },
+ "pins": [
+  {
+   "package": "MS8",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "PGOOD",
+     "type": "open-drain output",
+     "function": "LTC1751-3.3 and LTC1751-5 only. Power-good flag: held low at start-up until VOUT comes within about 4.5% of its regulated value, then released to high impedance; pulled low again if VOUT later sags about 7% under regulation. Needs a pull-up resistor to whatever logic rail suits."
+    },
+    {
+     "pin": "1",
+     "name": "FB",
+     "type": "analog input",
+     "function": "LTC1751 (adjustable) only. Feedback input, compared against the internal 1.205V reference to regulate the output; a resistor divider from VOUT to this pin sets the output voltage."
+    },
+    {
+     "pin": "2",
+     "name": "VOUT",
+     "type": "power out",
+     "function": "Regulated output. Bypass it with a low-ESR capacitor of at least 6.8µF placed as near the pin as can be managed."
+    },
+    {
+     "pin": "3",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input. Bypass it with a low-ESR capacitor of at least 6.8µF."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; connect to a ground plane for best results."
+    },
+    {
+     "pin": "5",
+     "name": "C-",
+     "type": "passive",
+     "function": "Flying capacitor, negative side."
+    },
+    {
+     "pin": "6",
+     "name": "C+",
+     "type": "passive",
+     "function": "Flying capacitor, positive side."
+    },
+    {
+     "pin": "7",
+     "name": "SHDN",
+     "type": "digital input",
+     "function": "Shutdown input, active low: a low level turns the part off. It must always be driven, never left open."
+    },
+    {
+     "pin": "8",
+     "name": "SS",
+     "type": "analog",
+     "function": "Soft-start: a capacitor from this pin sets how fast the output ramps at turn-on, keeping the start-up input surge down."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Rated output current",
+   "page": 1,
+   "conditions": "",
+   "columns": [
+    "version",
+    "output",
+    "output current",
+    "condition"
+   ],
+   "rows": [
+    [
+     "LTC1751-5",
+     "5V",
+     "100mA",
+     "VIN ≥ 3V"
+    ],
+    [
+     "LTC1751-3.3",
+     "3.3V",
+     "80mA",
+     "VIN ≥ 2.5V"
+    ]
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "Note 1",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VIN to GND",
+     "-0.3V to 6V"
+    ],
+    [
+     "PGOOD, FB, VOUT to GND",
+     "-0.3V to 6V"
+    ],
+    [
+     "SS, SHDN to GND",
+     "-0.3V to (VIN + 0.3V)"
+    ],
+    [
+     "VOUT short-circuit duration",
+     "Indefinite"
+    ],
+    [
+     "IOUT (Note 2)",
+     "125mA"
+    ],
+    [
+     "Operating temperature range (Note 3)",
+     "-40°C to 85°C"
+    ],
+    [
+     "Storage temperature range",
+     "-65°C to 150°C"
+    ],
+    [
+     "Lead temperature (soldering, 10 sec)",
+     "300°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: stress above these limits can shorten the part's life or damage it.",
+    "Note 2: the IOUT limit comes from long-term current density in the metal.",
+    "Note 3: the LTC1751EMS8-X is guaranteed to its specifications over 0°C to 70°C; across -40°C to 85°C, design, characterization and statistical process control correlation stand behind them instead."
+   ]
+  },
+  {
+   "title": "Thermal and package data",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value"
+   ],
+   "rows": [
+    [
+     "Maximum junction temperature",
+     "TJMAX",
+     "150°C"
+    ],
+    [
+     "Junction-to-ambient thermal resistance, MS8",
+     "θJA",
+     "160°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: LTC1751-3.3",
+   "page": 2,
+   "conditions": "TA = 25°C unless marked ● (full specified temperature range); CFLY = 1µF, CIN = 10µF, COUT = 10µF unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Supply Voltage",
+     "VIN",
+     "",
+     "●",
+     "2",
+     "",
+     "4.4",
+     "V"
+    ],
+    [
+     "Output Voltage",
+     "VOUT",
+     "2V ≤ VIN ≤ 4.4V, IOUT ≤ 40mA",
+     "●",
+     "3.17",
+     "3.3",
+     "3.43",
+     "V"
+    ],
+    [
+     "Output Voltage",
+     "VOUT",
+     "2.5V ≤ VIN ≤ 4.4V, IOUT ≤ 80mA",
+     "●",
+     "3.17",
+     "3.3",
+     "3.43",
+     "V"
+    ],
+    [
+     "Operating Supply Current",
+     "ICC",
+     "2V ≤ VIN ≤ 4.4V, IOUT = 0mA, SHDN = VIN",
+     "●",
+     "",
+     "18",
+     "40",
+     "µA"
+    ],
+    [
+     "Output Ripple",
+     "VR",
+     "VIN = 2.5V, IOUT = 40mA",
+     "",
+     "",
+     "68",
+     "",
+     "mVP-P"
+    ],
+    [
+     "Efficiency",
+     "η",
+     "VIN = 2V, IOUT = 40mA",
+     "",
+     "",
+     "80",
+     "",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: LTC1751-5",
+   "page": 2,
+   "conditions": "TA = 25°C unless marked ● (full specified temperature range); CFLY = 1µF, CIN = 10µF, COUT = 10µF unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Supply Voltage",
+     "VIN",
+     "",
+     "●",
+     "2.7",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Output Voltage",
+     "VOUT",
+     "2.7V ≤ VIN ≤ 5.5V, IOUT ≤ 50mA",
+     "●",
+     "4.8",
+     "5",
+     "5.2",
+     "V"
+    ],
+    [
+     "Output Voltage",
+     "VOUT",
+     "3V ≤ VIN ≤ 5.5V, IOUT ≤ 100mA",
+     "●",
+     "4.8",
+     "5",
+     "5.2",
+     "V"
+    ],
+    [
+     "Operating Supply Current",
+     "ICC",
+     "2.7V ≤ VIN ≤ 5.5V, IOUT = 0mA, SHDN = VIN",
+     "●",
+     "",
+     "20",
+     "50",
+     "µA"
+    ],
+    [
+     "Output Ripple",
+     "VR",
+     "VIN = 3V, IOUT = 50mA",
+     "",
+     "",
+     "75",
+     "",
+     "mVP-P"
+    ],
+    [
+     "Efficiency",
+     "η",
+     "VIN = 3V, IOUT = 50mA",
+     "",
+     "",
+     "82",
+     "",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: LTC1751 (adjustable)",
+   "page": 2,
+   "conditions": "TA = 25°C unless marked ● (full specified temperature range); CFLY = 1µF, CIN = 10µF, COUT = 10µF unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Supply Voltage",
+     "VIN",
+     "",
+     "●",
+     "2",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Operating Supply Current",
+     "ICC",
+     "2V ≤ VIN ≤ 5.5V, IOUT = 0mA, SHDN = VIN (Note 4)",
+     "●",
+     "",
+     "16",
+     "40",
+     "µA"
+    ],
+    [
+     "FB Regulation Voltage",
+     "VFB",
+     "2V ≤ VIN ≤ 5.5V, IOUT ≤ 20mA",
+     "●",
+     "1.157",
+     "1.205",
+     "1.253",
+     "V"
+    ],
+    [
+     "FB Input Current",
+     "IFB",
+     "VFB = 1.3V",
+     "●",
+     "-50",
+     "",
+     "50",
+     "nA"
+    ],
+    [
+     "Open-Loop Charge Pump Strength",
+     "ROUT",
+     "VIN = 2V, VOUT = 3.3V (Note 5)",
+     "●",
+     "",
+     "8.5",
+     "20",
+     "Ω"
+    ],
+    [
+     "Open-Loop Charge Pump Strength",
+     "ROUT",
+     "VIN = 2.7V, VOUT = 5V (Note 5)",
+     "●",
+     "",
+     "6.0",
+     "12",
+     "Ω"
+    ]
+   ],
+   "notes": [
+    "Note 4: unloaded, the input draws roughly ICC plus two times the current flowing in the external output divider.",
+    "Note 5: ROUT is defined as (2VIN - VOUT)/IOUT."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PGOOD (LTC1751-3.3/LTC1751-5)",
+   "page": 3,
+   "conditions": "TA = 25°C unless marked ● (full specified temperature range); CFLY = 1µF, CIN = 10µF, COUT = 10µF unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "PGOOD Undervoltage Low Threshold",
+     "UVL",
+     "Relative to Regulated VOUT (Note 6)",
+     "●",
+     "-11",
+     "-7",
+     "-3",
+     "%"
+    ],
+    [
+     "PGOOD Undervoltage High Threshold",
+     "UVH",
+     "Relative to Regulated VOUT (Note 6)",
+     "●",
+     "-8",
+     "-4.5",
+     "-2",
+     "%"
+    ],
+    [
+     "PGOOD Low Output Voltage",
+     "VOL",
+     "IPGOOD = -500µA",
+     "●",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "PGOOD High Output Leakage",
+     "IOH",
+     "VPGOOD = 5.5V",
+     "●",
+     "",
+     "",
+     "1",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "Note 6: Figure 2 relates UVL, UVH and the 10% to 90% rise time tr to the SHDN, PGOOD and VOUT waveforms at start-up and during an undervoltage fault."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: all versions (LTC1751/LTC1751-3.3/LTC1751-5)",
+   "page": 3,
+   "conditions": "TA = 25°C unless marked ● (full specified temperature range); CFLY = 1µF, CIN = 10µF, COUT = 10µF unless noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Shutdown Supply Current",
+     "ISHDN",
+     "VIN ≤ 3.6V, VOUT = 0V, VSHDN = 0V",
+     "●",
+     "",
+     "0.01",
+     "2",
+     "µA"
+    ],
+    [
+     "Shutdown Supply Current",
+     "ISHDN",
+     "3.6V < VIN, VOUT = 0V, VSHDN = 0V",
+     "●",
+     "",
+     "",
+     "5",
+     "µA"
+    ],
+    [
+     "SHDN Input Threshold (High)",
+     "VIH",
+     "",
+     "●",
+     "1.5",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "SHDN Input Threshold (Low)",
+     "VIL",
+     "",
+     "●",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "SHDN Input Current (High)",
+     "IIH",
+     "SHDN = VIN",
+     "●",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "SHDN Input Current (Low)",
+     "IIL",
+     "SHDN = 0V",
+     "●",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "VOUT Rise Time",
+     "tr",
+     "VIN = 3V, IOUT = 0mA, 10% to 90% (Note 6)",
+     "",
+     "",
+     "0.6ms/nF • CSS",
+     "",
+     "sec"
+    ],
+    [
+     "Switching Frequency",
+     "fOSC",
+     "Oscillator Free Running",
+     "",
+     "",
+     "800",
+     "",
+     "kHz"
+    ]
+   ]
+  },
+  {
+   "title": "Ceramic capacitor manufacturers",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "manufacturer",
+    "web"
+   ],
+   "rows": [
+    [
+     "AVX",
+     "www.avxcorp.com"
+    ],
+    [
+     "Kemet",
+     "www.kemet.com"
+    ],
+    [
+     "Murata",
+     "www.murata.com"
+    ],
+    [
+     "Taiyo Yuden",
+     "www.t-yuden.com"
+    ],
+    [
+     "Vishay",
+     "www.vishay.com"
+    ]
+   ]
+  },
+  {
+   "title": "Related parts",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "part number",
+    "description",
+    "comments"
+   ],
+   "rows": [
+    [
+     "LTC1144",
+     "Charge Pump Inverter with Shutdown",
+     "VIN = 2V to 18V, 15V to -15V Supply"
+    ],
+    [
+     "LTC1262",
+     "12V, 30mA Flash Memory Prog. Supply",
+     "Regulated 12V ±5% Output, IQ = 500µA"
+    ],
+    [
+     "LTC1514/LTC1515",
+     "Buck/Boost Charge Pumps with IQ = 60µA",
+     "50mA Output at 3V, 3.3V or 5V; 2V to 10V Input"
+    ],
+    [
+     "LTC1516",
+     "Micropower 5V Charge Pump",
+     "IQ = 12µA, Up to 50mA Output, VIN = 2V to 5V"
+    ],
+    [
+     "LTC1517-5/LTC1517-3.3",
+     "Micropower 5V/3.3V Doubler Charge Pumps",
+     "IQ = 6µA, Up to 20mA Output"
+    ],
+    [
+     "LTC1522",
+     "Micropower 5V Doubler Charge Pump",
+     "IQ = 6µA, Up to 20mA Output"
+    ],
+    [
+     "LTC1555/LTC1556",
+     "SIM Card Interface",
+     "Step-Up/Step-Down Charge Pump, VIN = 2.7V to 10V"
+    ],
+    [
+     "LTC1682",
+     "Low Noise Doubler Charge Pump",
+     "Output Noise = 60µVRMS, 2.5V to 5.5V Output"
+    ],
+    [
+     "LTC1754-5",
+     "Micropower 5V Doubler Charge Pump",
+     "IQ = 13µA, Up to 50mA Output, SOT-23 Package"
+    ],
+    [
+     "LTC1755",
+     "Smart Card Interface",
+     "Buck/Boost Charge Pump, IQ = 60µA, VIN = 2.7V to 6V"
+    ],
+    [
+     "LTC3200",
+     "Constant Frequency Doubler Charge Pump",
+     "Low Noise, 5V Output or Adjustable"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "LTC1751-5 output voltage vs input voltage",
+   "page": 1,
+   "conditions": "IOUT = 50mA, CFLY = 1µF, COUT = 10µF",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = 85°C",
+     "points": [
+      [
+       2.698,
+       4.955
+      ],
+      [
+       2.881,
+       4.962
+      ],
+      [
+       2.968,
+       4.965
+      ],
+      [
+       3.051,
+       4.968
+      ],
+      [
+       3.13,
+       4.97
+      ],
+      [
+       3.204,
+       4.973
+      ],
+      [
+       3.335,
+       4.976
+      ],
+      [
+       3.39,
+       4.978
+      ],
+      [
+       3.508,
+       4.98
+      ],
+      [
+       3.589,
+       4.982
+      ],
+      [
+       3.735,
+       4.985
+      ],
+      [
+       3.839,
+       4.987
+      ],
+      [
+       3.932,
+       4.988
+      ],
+      [
+       4.0,
+       4.99
+      ],
+      [
+       4.135,
+       4.99
+      ],
+      [
+       4.219,
+       4.991
+      ],
+      [
+       4.316,
+       4.992
+      ],
+      [
+       4.421,
+       4.993
+      ],
+      [
+       4.53,
+       4.994
+      ],
+      [
+       4.64,
+       4.996
+      ],
+      [
+       4.745,
+       4.997
+      ],
+      [
+       4.843,
+       4.999
+      ],
+      [
+       4.928,
+       5.001
+      ],
+      [
+       4.997,
+       5.004
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       2.696,
+       4.961
+      ],
+      [
+       2.816,
+       4.965
+      ],
+      [
+       2.943,
+       4.97
+      ],
+      [
+       3.083,
+       4.976
+      ],
+      [
+       3.175,
+       4.98
+      ],
+      [
+       3.333,
+       4.986
+      ],
+      [
+       3.429,
+       4.989
+      ],
+      [
+       3.562,
+       4.993
+      ],
+      [
+       3.697,
+       4.996
+      ],
+      [
+       3.797,
+       4.998
+      ],
+      [
+       3.934,
+       5.0
+      ],
+      [
+       4.03,
+       5.0
+      ],
+      [
+       4.164,
+       5.0
+      ],
+      [
+       4.27,
+       5.0
+      ],
+      [
+       4.414,
+       5.0
+      ],
+      [
+       4.515,
+       5.001
+      ],
+      [
+       4.639,
+       5.002
+      ],
+      [
+       4.808,
+       5.003
+      ],
+      [
+       4.911,
+       5.004
+      ],
+      [
+       5.013,
+       5.005
+      ],
+      [
+       5.133,
+       5.007
+      ],
+      [
+       5.302,
+       5.01
+      ],
+      [
+       5.407,
+       5.011
+      ],
+      [
+       5.498,
+       5.013
+      ]
+     ]
+    },
+    {
+     "label": "TA = -40°C",
+     "points": [
+      [
+       2.696,
+       4.949
+      ],
+      [
+       2.849,
+       4.955
+      ],
+      [
+       2.943,
+       4.958
+      ],
+      [
+       3.09,
+       4.964
+      ],
+      [
+       3.191,
+       4.968
+      ],
+      [
+       3.302,
+       4.972
+      ],
+      [
+       3.447,
+       4.978
+      ],
+      [
+       3.551,
+       4.982
+      ],
+      [
+       3.683,
+       4.984
+      ],
+      [
+       3.839,
+       4.987
+      ],
+      [
+       3.932,
+       4.988
+      ],
+      [
+       4.073,
+       4.991
+      ],
+      [
+       4.169,
+       4.993
+      ],
+      [
+       4.325,
+       4.996
+      ],
+      [
+       4.416,
+       4.997
+      ],
+      [
+       4.545,
+       4.998
+      ],
+      [
+       4.684,
+       5.0
+      ],
+      [
+       4.794,
+       5.001
+      ],
+      [
+       4.94,
+       5.003
+      ],
+      [
+       5.049,
+       5.006
+      ],
+      [
+       5.159,
+       5.011
+      ],
+      [
+       5.295,
+       5.018
+      ],
+      [
+       5.395,
+       5.024
+      ],
+      [
+       5.498,
+       5.03
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-3.3 output voltage vs load current",
+   "page": 3,
+   "conditions": "TA = 25°C, CFLY = 1µF",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 2.5V",
+     "points": [
+      [
+       0.12,
+       3.315
+      ],
+      [
+       10.41,
+       3.312
+      ],
+      [
+       19.07,
+       3.31
+      ],
+      [
+       29.49,
+       3.308
+      ],
+      [
+       41.25,
+       3.306
+      ],
+      [
+       53.91,
+       3.303
+      ],
+      [
+       67.03,
+       3.301
+      ],
+      [
+       80.19,
+       3.299
+      ],
+      [
+       92.94,
+       3.297
+      ],
+      [
+       104.86,
+       3.295
+      ],
+      [
+       115.52,
+       3.294
+      ],
+      [
+       124.47,
+       3.294
+      ],
+      [
+       125.36,
+       3.294
+      ],
+      [
+       126.15,
+       3.294
+      ],
+      [
+       126.83,
+       3.294
+      ],
+      [
+       130.35,
+       3.294
+      ],
+      [
+       130.99,
+       3.28
+      ],
+      [
+       131.12,
+       3.27
+      ],
+      [
+       131.3,
+       3.249
+      ],
+      [
+       131.36,
+       3.237
+      ],
+      [
+       131.42,
+       3.226
+      ],
+      [
+       131.47,
+       3.217
+      ],
+      [
+       131.53,
+       3.209
+      ],
+      [
+       131.68,
+       3.2
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 2V",
+     "points": [
+      [
+       0.12,
+       3.306
+      ],
+      [
+       7.24,
+       3.303
+      ],
+      [
+       12.29,
+       3.302
+      ],
+      [
+       18.06,
+       3.3
+      ],
+      [
+       24.34,
+       3.299
+      ],
+      [
+       30.95,
+       3.297
+      ],
+      [
+       37.66,
+       3.296
+      ],
+      [
+       44.29,
+       3.294
+      ],
+      [
+       50.63,
+       3.293
+      ],
+      [
+       56.48,
+       3.292
+      ],
+      [
+       61.64,
+       3.291
+      ],
+      [
+       66.78,
+       3.29
+      ],
+      [
+       72.24,
+       3.289
+      ],
+      [
+       72.79,
+       3.279
+      ],
+      [
+       72.95,
+       3.273
+      ],
+      [
+       73.63,
+       3.264
+      ],
+      [
+       74.66,
+       3.251
+      ],
+      [
+       75.29,
+       3.243
+      ],
+      [
+       75.95,
+       3.235
+      ],
+      [
+       76.6,
+       3.227
+      ],
+      [
+       77.23,
+       3.219
+      ],
+      [
+       77.79,
+       3.212
+      ],
+      [
+       78.26,
+       3.206
+      ],
+      [
+       78.79,
+       3.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-3.3 output voltage vs input voltage",
+   "page": 3,
+   "conditions": "IOUT = 40mA, CFLY = 1µF, COUT = 10µF",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = -40°C",
+     "points": [
+      [
+       2.006,
+       3.287
+      ],
+      [
+       2.127,
+       3.292
+      ],
+      [
+       2.238,
+       3.297
+      ],
+      [
+       2.34,
+       3.3
+      ],
+      [
+       2.457,
+       3.302
+      ],
+      [
+       2.588,
+       3.303
+      ],
+      [
+       2.739,
+       3.305
+      ],
+      [
+       2.811,
+       3.306
+      ],
+      [
+       2.934,
+       3.308
+      ],
+      [
+       3.052,
+       3.31
+      ],
+      [
+       3.192,
+       3.31
+      ],
+      [
+       3.3,
+       3.311
+      ],
+      [
+       3.401,
+       3.312
+      ],
+      [
+       3.534,
+       3.314
+      ],
+      [
+       3.623,
+       3.317
+      ],
+      [
+       3.727,
+       3.322
+      ],
+      [
+       3.831,
+       3.327
+      ],
+      [
+       3.957,
+       3.333
+      ],
+      [
+       4.053,
+       3.337
+      ],
+      [
+       4.149,
+       3.343
+      ],
+      [
+       4.266,
+       3.35
+      ],
+      [
+       4.324,
+       3.354
+      ],
+      [
+       4.426,
+       3.36
+      ],
+      [
+       4.497,
+       3.365
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       1.999,
+       3.297
+      ],
+      [
+       2.139,
+       3.299
+      ],
+      [
+       2.251,
+       3.3
+      ],
+      [
+       2.362,
+       3.301
+      ],
+      [
+       2.452,
+       3.302
+      ],
+      [
+       2.572,
+       3.303
+      ],
+      [
+       2.667,
+       3.305
+      ],
+      [
+       2.819,
+       3.309
+      ],
+      [
+       2.91,
+       3.311
+      ],
+      [
+       3.0,
+       3.313
+      ],
+      [
+       3.138,
+       3.316
+      ],
+      [
+       3.234,
+       3.318
+      ],
+      [
+       3.333,
+       3.32
+      ],
+      [
+       3.465,
+       3.322
+      ],
+      [
+       3.538,
+       3.324
+      ],
+      [
+       3.682,
+       3.324
+      ],
+      [
+       3.786,
+       3.324
+      ],
+      [
+       3.881,
+       3.323
+      ],
+      [
+       3.998,
+       3.323
+      ],
+      [
+       4.138,
+       3.328
+      ],
+      [
+       4.246,
+       3.332
+      ],
+      [
+       4.3,
+       3.334
+      ],
+      [
+       4.401,
+       3.338
+      ],
+      [
+       4.494,
+       3.342
+      ]
+     ]
+    },
+    {
+     "label": "TA = 85°C",
+     "points": [
+      [
+       1.999,
+       3.297
+      ],
+      [
+       2.121,
+       3.3
+      ],
+      [
+       2.225,
+       3.302
+      ],
+      [
+       2.334,
+       3.304
+      ],
+      [
+       2.43,
+       3.306
+      ],
+      [
+       2.562,
+       3.307
+      ],
+      [
+       2.647,
+       3.308
+      ],
+      [
+       2.792,
+       3.308
+      ],
+      [
+       2.887,
+       3.309
+      ],
+      [
+       3.0,
+       3.309
+      ],
+      [
+       3.112,
+       3.31
+      ],
+      [
+       3.215,
+       3.312
+      ],
+      [
+       3.323,
+       3.314
+      ],
+      [
+       3.418,
+       3.316
+      ],
+      [
+       3.54,
+       3.319
+      ],
+      [
+       3.627,
+       3.321
+      ],
+      [
+       3.771,
+       3.324
+      ],
+      [
+       3.864,
+       3.325
+      ],
+      [
+       3.974,
+       3.326
+      ],
+      [
+       4.082,
+       3.327
+      ],
+      [
+       4.188,
+       3.329
+      ],
+      [
+       4.305,
+       3.33
+      ],
+      [
+       4.412,
+       3.332
+      ],
+      [
+       4.497,
+       3.333
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-3.3 no-load supply current vs input voltage",
+   "page": 3,
+   "conditions": "IOUT = 0mA, CFLY = 1µF, VSHDN = VIN",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = 85°C",
+     "points": [
+      [
+       2.0,
+       24.0
+      ],
+      [
+       4.5,
+       24.0
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       2.0,
+       18.0
+      ],
+      [
+       4.5,
+       18.0
+      ]
+     ]
+    },
+    {
+     "label": "TA = -40°C",
+     "points": [
+      [
+       2.0,
+       11.9
+      ],
+      [
+       4.5,
+       11.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-3.3 power efficiency vs load current",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF, COUT = 10µF",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 2V",
+     "points": [
+      [
+       0.00101,
+       7.5
+      ],
+      [
+       0.00156,
+       15.6
+      ],
+      [
+       0.00212,
+       20.8
+      ],
+      [
+       0.00299,
+       26.4
+      ],
+      [
+       0.00432,
+       32.2
+      ],
+      [
+       0.00627,
+       38.0
+      ],
+      [
+       0.009,
+       43.6
+      ],
+      [
+       0.0126,
+       48.7
+      ],
+      [
+       0.01691,
+       53.2
+      ],
+      [
+       0.02141,
+       56.7
+      ],
+      [
+       0.02516,
+       59.2
+      ],
+      [
+       0.02702,
+       60.2
+      ],
+      [
+       0.03342,
+       63.4
+      ],
+      [
+       0.04102,
+       66.2
+      ],
+      [
+       0.05015,
+       68.8
+      ],
+      [
+       0.06133,
+       71.1
+      ],
+      [
+       0.07532,
+       73.1
+      ],
+      [
+       0.11693,
+       76.3
+      ],
+      [
+       0.19382,
+       78.6
+      ],
+      [
+       0.3543,
+       80.0
+      ],
+      [
+       0.57041,
+       80.4
+      ],
+      [
+       0.91361,
+       80.6
+      ],
+      [
+       1.7464,
+       80.8
+      ],
+      [
+       3.48996,
+       81.0
+      ],
+      [
+       4.81297,
+       81.1
+      ],
+      [
+       8.01964,
+       81.3
+      ],
+      [
+       13.73432,
+       81.2
+      ],
+      [
+       25.76247,
+       80.9
+      ],
+      [
+       40.11466,
+       80.6
+      ],
+      [
+       68.36345,
+       80.3
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 2.75V",
+     "points": [
+      [
+       0.001,
+       6.0
+      ],
+      [
+       0.00158,
+       8.7
+      ],
+      [
+       0.00257,
+       13.7
+      ],
+      [
+       0.00335,
+       17.0
+      ],
+      [
+       0.0046,
+       21.1
+      ],
+      [
+       0.00657,
+       25.6
+      ],
+      [
+       0.00955,
+       30.4
+      ],
+      [
+       0.01387,
+       35.2
+      ],
+      [
+       0.01975,
+       39.7
+      ],
+      [
+       0.02705,
+       43.7
+      ],
+      [
+       0.03498,
+       47.0
+      ],
+      [
+       0.04189,
+       49.2
+      ],
+      [
+       0.04559,
+       50.2
+      ],
+      [
+       0.05639,
+       52.2
+      ],
+      [
+       0.0696,
+       53.9
+      ],
+      [
+       0.10669,
+       56.5
+      ],
+      [
+       0.16825,
+       58.3
+      ],
+      [
+       0.27956,
+       59.3
+      ],
+      [
+       0.50138,
+       59.8
+      ],
+      [
+       0.69616,
+       59.9
+      ],
+      [
+       1.15036,
+       60.0
+      ],
+      [
+       2.24813,
+       60.0
+      ],
+      [
+       3.59263,
+       60.0
+      ],
+      [
+       6.04945,
+       60.1
+      ],
+      [
+       10.44044,
+       60.1
+      ],
+      [
+       17.96415,
+       60.1
+      ],
+      [
+       29.97548,
+       60.2
+      ],
+      [
+       47.18279,
+       60.2
+      ],
+      [
+       68.14678,
+       60.2
+      ],
+      [
+       98.32115,
+       60.2
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 3.3V",
+     "points": [
+      [
+       0.001,
+       4.5
+      ],
+      [
+       0.00152,
+       6.5
+      ],
+      [
+       0.00223,
+       9.1
+      ],
+      [
+       0.00304,
+       12.5
+      ],
+      [
+       0.00381,
+       15.0
+      ],
+      [
+       0.00505,
+       18.2
+      ],
+      [
+       0.00695,
+       21.7
+      ],
+      [
+       0.00975,
+       25.5
+      ],
+      [
+       0.01374,
+       29.3
+      ],
+      [
+       0.0191,
+       33.0
+      ],
+      [
+       0.02576,
+       36.2
+      ],
+      [
+       0.03315,
+       38.9
+      ],
+      [
+       0.04,
+       40.9
+      ],
+      [
+       0.05745,
+       43.8
+      ],
+      [
+       0.08846,
+       45.9
+      ],
+      [
+       0.14601,
+       47.4
+      ],
+      [
+       0.25828,
+       48.3
+      ],
+      [
+       0.35254,
+       48.6
+      ],
+      [
+       0.69168,
+       48.9
+      ],
+      [
+       0.99417,
+       49.0
+      ],
+      [
+       1.5239,
+       49.0
+      ],
+      [
+       2.24813,
+       49.0
+      ],
+      [
+       3.59263,
+       49.0
+      ],
+      [
+       6.04945,
+       49.1
+      ],
+      [
+       10.44044,
+       49.1
+      ],
+      [
+       17.96415,
+       49.1
+      ],
+      [
+       29.97548,
+       49.2
+      ],
+      [
+       47.18279,
+       49.2
+      ],
+      [
+       68.14678,
+       49.2
+      ],
+      [
+       98.32115,
+       49.2
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 4.4V",
+     "points": [
+      [
+       0.001,
+       3.4
+      ],
+      [
+       0.0019,
+       6.6
+      ],
+      [
+       0.00269,
+       8.8
+      ],
+      [
+       0.00383,
+       11.3
+      ],
+      [
+       0.00547,
+       14.1
+      ],
+      [
+       0.00775,
+       16.9
+      ],
+      [
+       0.01086,
+       19.7
+      ],
+      [
+       0.01494,
+       22.5
+      ],
+      [
+       0.02007,
+       25.0
+      ],
+      [
+       0.02613,
+       27.2
+      ],
+      [
+       0.0328,
+       29.1
+      ],
+      [
+       0.04801,
+       31.6
+      ],
+      [
+       0.05902,
+       32.7
+      ],
+      [
+       0.09216,
+       34.6
+      ],
+      [
+       0.15142,
+       36.1
+      ],
+      [
+       0.26405,
+       37.1
+      ],
+      [
+       0.35754,
+       37.5
+      ],
+      [
+       0.49301,
+       37.8
+      ],
+      [
+       0.99417,
+       38.0
+      ],
+      [
+       1.5239,
+       38.0
+      ],
+      [
+       2.24813,
+       38.0
+      ],
+      [
+       3.59263,
+       38.1
+      ],
+      [
+       6.04945,
+       38.1
+      ],
+      [
+       10.44044,
+       38.1
+      ],
+      [
+       17.96415,
+       38.1
+      ],
+      [
+       29.97548,
+       38.2
+      ],
+      [
+       47.18279,
+       38.2
+      ],
+      [
+       68.14678,
+       38.2
+      ],
+      [
+       87.84918,
+       38.2
+      ],
+      [
+       98.32115,
+       38.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-3.3 short-circuit output current vs input voltage",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       2.001,
+       110.5
+      ],
+      [
+       2.054,
+       120.6
+      ],
+      [
+       2.135,
+       135.6
+      ],
+      [
+       2.183,
+       144.1
+      ],
+      [
+       2.234,
+       153.1
+      ],
+      [
+       2.286,
+       162.2
+      ],
+      [
+       2.339,
+       171.1
+      ],
+      [
+       2.391,
+       179.7
+      ],
+      [
+       2.44,
+       187.6
+      ],
+      [
+       2.487,
+       194.5
+      ],
+      [
+       2.533,
+       200.9
+      ],
+      [
+       2.603,
+       210.1
+      ],
+      [
+       2.701,
+       210.8
+      ],
+      [
+       2.783,
+       203.8
+      ],
+      [
+       2.875,
+       195.6
+      ],
+      [
+       2.972,
+       189.1
+      ],
+      [
+       3.062,
+       183.9
+      ],
+      [
+       3.166,
+       178.2
+      ],
+      [
+       3.282,
+       172.3
+      ],
+      [
+       3.41,
+       166.3
+      ],
+      [
+       3.548,
+       160.1
+      ],
+      [
+       3.694,
+       153.9
+      ],
+      [
+       3.847,
+       147.9
+      ],
+      [
+       4.006,
+       142.0
+      ],
+      [
+       4.168,
+       136.4
+      ],
+      [
+       4.333,
+       131.2
+      ],
+      [
+       4.499,
+       126.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-5 output voltage vs output current",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF",
+   "x": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 3V",
+     "points": [
+      [
+       0.1,
+       4.985
+      ],
+      [
+       11.1,
+       4.983
+      ],
+      [
+       21.4,
+       4.981
+      ],
+      [
+       34.0,
+       4.979
+      ],
+      [
+       48.2,
+       4.977
+      ],
+      [
+       63.3,
+       4.974
+      ],
+      [
+       78.6,
+       4.971
+      ],
+      [
+       93.4,
+       4.969
+      ],
+      [
+       107.1,
+       4.966
+      ],
+      [
+       118.9,
+       4.964
+      ],
+      [
+       128.2,
+       4.962
+      ],
+      [
+       134.2,
+       4.96
+      ],
+      [
+       138.3,
+       4.959
+      ],
+      [
+       142.1,
+       4.957
+      ],
+      [
+       145.6,
+       4.955
+      ],
+      [
+       154.5,
+       4.947
+      ],
+      [
+       161.3,
+       4.935
+      ],
+      [
+       166.0,
+       4.921
+      ],
+      [
+       170.5,
+       4.891
+      ],
+      [
+       171.6,
+       4.879
+      ],
+      [
+       173.5,
+       4.852
+      ],
+      [
+       174.3,
+       4.84
+      ],
+      [
+       175.4,
+       4.818
+      ],
+      [
+       176.2,
+       4.8
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 2.7V",
+     "points": [
+      [
+       0.3,
+       4.969
+      ],
+      [
+       9.5,
+       4.967
+      ],
+      [
+       14.4,
+       4.966
+      ],
+      [
+       25.4,
+       4.964
+      ],
+      [
+       31.0,
+       4.963
+      ],
+      [
+       36.3,
+       4.962
+      ],
+      [
+       41.1,
+       4.961
+      ],
+      [
+       48.0,
+       4.96
+      ],
+      [
+       55.7,
+       4.958
+      ],
+      [
+       61.0,
+       4.956
+      ],
+      [
+       65.3,
+       4.953
+      ],
+      [
+       71.9,
+       4.945
+      ],
+      [
+       76.0,
+       4.936
+      ],
+      [
+       78.9,
+       4.925
+      ],
+      [
+       80.7,
+       4.913
+      ],
+      [
+       83.7,
+       4.893
+      ],
+      [
+       85.6,
+       4.881
+      ],
+      [
+       87.5,
+       4.868
+      ],
+      [
+       89.5,
+       4.854
+      ],
+      [
+       91.5,
+       4.841
+      ],
+      [
+       93.3,
+       4.829
+      ],
+      [
+       94.8,
+       4.819
+      ],
+      [
+       96.1,
+       4.81
+      ],
+      [
+       97.3,
+       4.801
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-5 no-load supply current vs input voltage",
+   "page": 4,
+   "conditions": "CFLY = 1µF, IOUT = 0, VSHDN = VIN",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = 85°C",
+     "points": [
+      [
+       2.696,
+       23.0
+      ],
+      [
+       5.498,
+       24.8
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       2.696,
+       17.0
+      ],
+      [
+       5.498,
+       20.6
+      ]
+     ]
+    },
+    {
+     "label": "TA = -40°C",
+     "points": [
+      [
+       2.696,
+       10.9
+      ],
+      [
+       5.498,
+       12.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-3.3 start-up",
+   "page": 4,
+   "conditions": "CSS = 10nF",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SHDN",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       4.55,
+       0.0
+      ],
+      [
+       4.55,
+       2.06
+      ],
+      [
+       20.0,
+       2.06
+      ]
+     ]
+    },
+    {
+     "label": "PGOOD",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       11.8,
+       0.0
+      ],
+      [
+       11.8,
+       3.1
+      ],
+      [
+       20.0,
+       3.1
+      ]
+     ]
+    },
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       0.15,
+       0.0
+      ],
+      [
+       0.61,
+       0.0
+      ],
+      [
+       1.06,
+       0.0
+      ],
+      [
+       1.52,
+       0.0
+      ],
+      [
+       1.97,
+       0.0
+      ],
+      [
+       2.42,
+       0.0
+      ],
+      [
+       2.88,
+       0.0
+      ],
+      [
+       3.33,
+       0.0
+      ],
+      [
+       3.79,
+       0.0
+      ],
+      [
+       4.24,
+       0.0
+      ],
+      [
+       4.7,
+       0.0
+      ],
+      [
+       5.15,
+       0.0
+      ],
+      [
+       5.61,
+       0.11
+      ],
+      [
+       6.06,
+       0.26
+      ],
+      [
+       6.52,
+       0.45
+      ],
+      [
+       6.97,
+       0.71
+      ],
+      [
+       7.42,
+       0.93
+      ],
+      [
+       7.88,
+       1.16
+      ],
+      [
+       8.33,
+       1.42
+      ],
+      [
+       8.79,
+       1.68
+      ],
+      [
+       9.24,
+       1.91
+      ],
+      [
+       9.7,
+       2.17
+      ],
+      [
+       10.15,
+       2.43
+      ],
+      [
+       10.61,
+       2.65
+      ],
+      [
+       11.06,
+       2.92
+      ],
+      [
+       11.52,
+       3.03
+      ],
+      [
+       11.97,
+       3.1
+      ],
+      [
+       12.42,
+       3.07
+      ],
+      [
+       12.88,
+       3.07
+      ],
+      [
+       13.33,
+       3.07
+      ],
+      [
+       13.79,
+       3.07
+      ],
+      [
+       14.24,
+       3.07
+      ],
+      [
+       14.7,
+       3.07
+      ],
+      [
+       15.15,
+       3.07
+      ],
+      [
+       15.61,
+       3.07
+      ],
+      [
+       16.06,
+       3.07
+      ],
+      [
+       16.52,
+       3.07
+      ],
+      [
+       16.97,
+       3.07
+      ],
+      [
+       17.42,
+       3.07
+      ],
+      [
+       17.88,
+       3.1
+      ],
+      [
+       18.33,
+       3.07
+      ],
+      [
+       18.79,
+       3.07
+      ],
+      [
+       19.24,
+       3.07
+      ],
+      [
+       19.7,
+       3.07
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-3.3 output ripple",
+   "page": 4,
+   "conditions": "VIN = 2.5V, IOUT = 80mA, COUT = 10µF; VOUT AC coupled",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage, AC component",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       0.76,
+       -18.4
+      ],
+      [
+       1.52,
+       -7.2
+      ],
+      [
+       2.27,
+       7.8
+      ],
+      [
+       3.03,
+       11.5
+      ],
+      [
+       3.79,
+       19.0
+      ],
+      [
+       4.55,
+       26.4
+      ],
+      [
+       5.3,
+       22.7
+      ],
+      [
+       6.06,
+       15.2
+      ],
+      [
+       6.82,
+       7.8
+      ],
+      [
+       7.58,
+       0.3
+      ],
+      [
+       8.33,
+       -7.2
+      ],
+      [
+       9.09,
+       -14.7
+      ],
+      [
+       9.85,
+       -22.2
+      ],
+      [
+       10.61,
+       -29.6
+      ],
+      [
+       11.36,
+       -33.4
+      ],
+      [
+       12.12,
+       -7.2
+      ],
+      [
+       12.88,
+       2.1
+      ],
+      [
+       13.64,
+       7.8
+      ],
+      [
+       14.39,
+       19.0
+      ],
+      [
+       15.15,
+       22.7
+      ],
+      [
+       15.91,
+       22.7
+      ],
+      [
+       16.67,
+       15.2
+      ],
+      [
+       17.42,
+       7.8
+      ],
+      [
+       18.18,
+       0.3
+      ],
+      [
+       18.94,
+       -7.2
+      ],
+      [
+       19.7,
+       -14.7
+      ],
+      [
+       20.45,
+       -22.2
+      ],
+      [
+       21.21,
+       -29.6
+      ],
+      [
+       21.97,
+       -35.2
+      ],
+      [
+       22.73,
+       -9.1
+      ],
+      [
+       23.48,
+       -1.6
+      ],
+      [
+       24.24,
+       7.8
+      ],
+      [
+       25.0,
+       17.1
+      ],
+      [
+       25.76,
+       20.8
+      ],
+      [
+       26.52,
+       24.6
+      ],
+      [
+       27.27,
+       15.2
+      ],
+      [
+       28.03,
+       9.6
+      ],
+      [
+       28.79,
+       0.3
+      ],
+      [
+       29.55,
+       -7.2
+      ],
+      [
+       30.3,
+       -14.7
+      ],
+      [
+       31.06,
+       -22.2
+      ],
+      [
+       31.82,
+       -29.6
+      ],
+      [
+       32.58,
+       -35.2
+      ],
+      [
+       33.33,
+       -9.1
+      ],
+      [
+       34.09,
+       -3.5
+      ],
+      [
+       34.85,
+       5.9
+      ],
+      [
+       35.61,
+       17.1
+      ],
+      [
+       36.36,
+       19.0
+      ],
+      [
+       37.12,
+       26.4
+      ],
+      [
+       37.88,
+       19.0
+      ],
+      [
+       38.64,
+       11.5
+      ],
+      [
+       39.39,
+       4.0
+      ],
+      [
+       40.15,
+       -3.5
+      ],
+      [
+       40.91,
+       -10.9
+      ],
+      [
+       41.67,
+       -18.4
+      ],
+      [
+       42.42,
+       -27.8
+      ],
+      [
+       43.18,
+       -35.2
+      ],
+      [
+       43.94,
+       -16.5
+      ],
+      [
+       44.7,
+       -7.2
+      ],
+      [
+       45.45,
+       7.8
+      ],
+      [
+       46.21,
+       13.4
+      ],
+      [
+       46.97,
+       15.2
+      ],
+      [
+       47.73,
+       26.4
+      ],
+      [
+       48.48,
+       20.8
+      ],
+      [
+       49.24,
+       13.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-5 power efficiency vs load current",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, COUT = 10µF",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 2.7V",
+     "points": [
+      [
+       0.001,
+       8.3
+      ],
+      [
+       0.0016,
+       17.9
+      ],
+      [
+       0.00214,
+       23.3
+      ],
+      [
+       0.00292,
+       28.8
+      ],
+      [
+       0.00402,
+       34.4
+      ],
+      [
+       0.00551,
+       39.9
+      ],
+      [
+       0.00745,
+       45.0
+      ],
+      [
+       0.00982,
+       49.7
+      ],
+      [
+       0.01249,
+       53.7
+      ],
+      [
+       0.01516,
+       56.9
+      ],
+      [
+       0.01734,
+       59.2
+      ],
+      [
+       0.01851,
+       60.4
+      ],
+      [
+       0.02349,
+       64.9
+      ],
+      [
+       0.02775,
+       67.8
+      ],
+      [
+       0.04257,
+       74.3
+      ],
+      [
+       0.05524,
+       77.5
+      ],
+      [
+       0.07394,
+       80.6
+      ],
+      [
+       0.14524,
+       85.8
+      ],
+      [
+       0.21307,
+       87.6
+      ],
+      [
+       0.32216,
+       88.8
+      ],
+      [
+       0.62531,
+       89.1
+      ],
+      [
+       1.3204,
+       89.1
+      ],
+      [
+       2.13179,
+       89.1
+      ],
+      [
+       3.57423,
+       89.1
+      ],
+      [
+       6.07367,
+       89.1
+      ],
+      [
+       10.20903,
+       89.1
+      ],
+      [
+       25.32651,
+       89.2
+      ],
+      [
+       35.604,
+       89.2
+      ],
+      [
+       59.19888,
+       89.0
+      ],
+      [
+       98.2968,
+       87.2
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 4.1V",
+     "points": [
+      [
+       0.001,
+       5.3
+      ],
+      [
+       0.00164,
+       11.1
+      ],
+      [
+       0.0022,
+       14.6
+      ],
+      [
+       0.00308,
+       18.6
+      ],
+      [
+       0.00439,
+       22.7
+      ],
+      [
+       0.00626,
+       26.8
+      ],
+      [
+       0.00878,
+       30.8
+      ],
+      [
+       0.01188,
+       34.3
+      ],
+      [
+       0.01524,
+       37.2
+      ],
+      [
+       0.01821,
+       39.2
+      ],
+      [
+       0.01991,
+       40.3
+      ],
+      [
+       0.02968,
+       44.6
+      ],
+      [
+       0.03687,
+       46.9
+      ],
+      [
+       0.05914,
+       51.3
+      ],
+      [
+       0.07648,
+       53.4
+      ],
+      [
+       0.1338,
+       56.9
+      ],
+      [
+       0.18133,
+       58.3
+      ],
+      [
+       0.35094,
+       60.0
+      ],
+      [
+       0.50194,
+       60.2
+      ],
+      [
+       0.84182,
+       60.2
+      ],
+      [
+       1.33456,
+       60.2
+      ],
+      [
+       2.31732,
+       60.2
+      ],
+      [
+       4.26471,
+       60.2
+      ],
+      [
+       8.04965,
+       60.2
+      ],
+      [
+       15.07914,
+       60.2
+      ],
+      [
+       27.12793,
+       60.2
+      ],
+      [
+       45.35497,
+       60.2
+      ],
+      [
+       68.19137,
+       60.2
+      ],
+      [
+       89.21918,
+       60.2
+      ],
+      [
+       98.2968,
+       60.2
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 5.5V",
+     "points": [
+      [
+       0.001,
+       3.2
+      ],
+      [
+       0.00182,
+       6.6
+      ],
+      [
+       0.00242,
+       8.6
+      ],
+      [
+       0.00319,
+       10.8
+      ],
+      [
+       0.00535,
+       15.7
+      ],
+      [
+       0.00682,
+       18.2
+      ],
+      [
+       0.0086,
+       20.7
+      ],
+      [
+       0.01074,
+       23.2
+      ],
+      [
+       0.01621,
+       27.8
+      ],
+      [
+       0.01962,
+       29.9
+      ],
+      [
+       0.02941,
+       33.9
+      ],
+      [
+       0.03662,
+       35.8
+      ],
+      [
+       0.05892,
+       39.2
+      ],
+      [
+       0.07628,
+       40.6
+      ],
+      [
+       0.13367,
+       43.1
+      ],
+      [
+       0.18124,
+       44.0
+      ],
+      [
+       0.24995,
+       44.6
+      ],
+      [
+       0.50194,
+       45.2
+      ],
+      [
+       0.84182,
+       45.2
+      ],
+      [
+       1.33456,
+       45.2
+      ],
+      [
+       2.31732,
+       45.2
+      ],
+      [
+       4.26471,
+       45.2
+      ],
+      [
+       8.04965,
+       45.2
+      ],
+      [
+       15.07914,
+       45.2
+      ],
+      [
+       27.12793,
+       45.2
+      ],
+      [
+       45.35497,
+       45.2
+      ],
+      [
+       68.19137,
+       45.2
+      ],
+      [
+       89.21918,
+       45.2
+      ],
+      [
+       98.2968,
+       45.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-5 short-circuit output current vs input voltage",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       2.005,
+       105.6
+      ],
+      [
+       2.066,
+       111.5
+      ],
+      [
+       2.128,
+       119.9
+      ],
+      [
+       2.19,
+       130.1
+      ],
+      [
+       2.252,
+       141.7
+      ],
+      [
+       2.313,
+       154.0
+      ],
+      [
+       2.373,
+       166.5
+      ],
+      [
+       2.43,
+       178.7
+      ],
+      [
+       2.485,
+       189.9
+      ],
+      [
+       2.536,
+       199.6
+      ],
+      [
+       2.583,
+       207.3
+      ],
+      [
+       2.625,
+       212.3
+      ],
+      [
+       2.662,
+       214.1
+      ],
+      [
+       2.706,
+       212.7
+      ],
+      [
+       2.762,
+       208.9
+      ],
+      [
+       2.837,
+       203.0
+      ],
+      [
+       2.937,
+       195.1
+      ],
+      [
+       3.071,
+       185.7
+      ],
+      [
+       3.243,
+       175.0
+      ],
+      [
+       3.462,
+       163.3
+      ],
+      [
+       3.734,
+       150.9
+      ],
+      [
+       4.066,
+       138.2
+      ],
+      [
+       4.464,
+       125.4
+      ],
+      [
+       4.936,
+       112.8
+      ],
+      [
+       5.488,
+       100.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-5 start-up",
+   "page": 5,
+   "conditions": "CSS = 10nF",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SHDN",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       2.12,
+       0.0
+      ],
+      [
+       2.12,
+       1.97
+      ],
+      [
+       20.0,
+       1.97
+      ]
+     ]
+    },
+    {
+     "label": "PGOOD",
+     "points": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       12.4,
+       0.0
+      ],
+      [
+       12.4,
+       4.67
+      ],
+      [
+       20.0,
+       4.67
+      ]
+     ]
+    },
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       0.15,
+       0.0
+      ],
+      [
+       0.61,
+       0.0
+      ],
+      [
+       1.06,
+       0.0
+      ],
+      [
+       1.52,
+       0.0
+      ],
+      [
+       1.97,
+       0.0
+      ],
+      [
+       2.42,
+       0.0
+      ],
+      [
+       2.88,
+       0.0
+      ],
+      [
+       3.33,
+       0.0
+      ],
+      [
+       3.79,
+       0.07
+      ],
+      [
+       4.24,
+       0.3
+      ],
+      [
+       4.7,
+       0.6
+      ],
+      [
+       5.15,
+       0.82
+      ],
+      [
+       5.61,
+       1.12
+      ],
+      [
+       6.06,
+       1.42
+      ],
+      [
+       6.52,
+       1.72
+      ],
+      [
+       6.97,
+       2.02
+      ],
+      [
+       7.42,
+       2.32
+      ],
+      [
+       7.88,
+       2.62
+      ],
+      [
+       8.33,
+       2.92
+      ],
+      [
+       8.79,
+       3.29
+      ],
+      [
+       9.24,
+       3.59
+      ],
+      [
+       9.7,
+       3.89
+      ],
+      [
+       10.15,
+       4.19
+      ],
+      [
+       10.61,
+       4.49
+      ],
+      [
+       11.06,
+       4.64
+      ],
+      [
+       11.52,
+       4.71
+      ],
+      [
+       11.97,
+       4.79
+      ],
+      [
+       12.42,
+       4.79
+      ],
+      [
+       12.88,
+       4.79
+      ],
+      [
+       13.33,
+       4.79
+      ],
+      [
+       13.79,
+       4.86
+      ],
+      [
+       14.24,
+       4.86
+      ],
+      [
+       14.7,
+       4.86
+      ],
+      [
+       15.15,
+       4.86
+      ],
+      [
+       15.61,
+       4.86
+      ],
+      [
+       16.06,
+       4.86
+      ],
+      [
+       16.52,
+       4.86
+      ],
+      [
+       16.97,
+       4.86
+      ],
+      [
+       17.42,
+       4.86
+      ],
+      [
+       17.88,
+       4.86
+      ],
+      [
+       18.33,
+       4.93
+      ],
+      [
+       18.79,
+       4.93
+      ],
+      [
+       19.24,
+       4.93
+      ],
+      [
+       19.7,
+       4.93
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LTC1751-5 output ripple",
+   "page": 5,
+   "conditions": "VIN = 3V, IOUT = 100mA, COUT = 10µF; VOUT AC coupled",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage, AC component",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       0.76,
+       -46.4
+      ],
+      [
+       2.27,
+       -22.1
+      ],
+      [
+       3.41,
+       -7.2
+      ],
+      [
+       4.17,
+       4.1
+      ],
+      [
+       4.92,
+       4.1
+      ],
+      [
+       5.68,
+       15.3
+      ],
+      [
+       6.44,
+       26.5
+      ],
+      [
+       7.2,
+       26.5
+      ],
+      [
+       7.95,
+       34.0
+      ],
+      [
+       8.71,
+       26.5
+      ],
+      [
+       9.47,
+       15.3
+      ],
+      [
+       10.23,
+       7.8
+      ],
+      [
+       10.98,
+       -5.3
+      ],
+      [
+       11.74,
+       -16.5
+      ],
+      [
+       12.5,
+       -27.7
+      ],
+      [
+       13.26,
+       -40.8
+      ],
+      [
+       14.02,
+       -53.9
+      ],
+      [
+       15.15,
+       -24.0
+      ],
+      [
+       15.91,
+       -9.0
+      ],
+      [
+       16.67,
+       -5.3
+      ],
+      [
+       17.42,
+       4.1
+      ],
+      [
+       18.18,
+       15.3
+      ],
+      [
+       18.94,
+       20.9
+      ],
+      [
+       19.7,
+       24.6
+      ],
+      [
+       20.45,
+       34.0
+      ],
+      [
+       21.21,
+       26.5
+      ],
+      [
+       21.97,
+       19.0
+      ],
+      [
+       22.73,
+       9.7
+      ],
+      [
+       23.48,
+       -1.6
+      ],
+      [
+       24.24,
+       -14.6
+      ],
+      [
+       25.0,
+       -27.7
+      ],
+      [
+       25.76,
+       -38.9
+      ],
+      [
+       26.52,
+       -53.9
+      ],
+      [
+       27.27,
+       -24.0
+      ],
+      [
+       28.03,
+       -24.0
+      ],
+      [
+       28.79,
+       -7.2
+      ],
+      [
+       29.55,
+       2.2
+      ],
+      [
+       30.3,
+       5.9
+      ],
+      [
+       31.06,
+       15.3
+      ],
+      [
+       31.82,
+       24.6
+      ],
+      [
+       32.58,
+       30.2
+      ],
+      [
+       33.33,
+       32.1
+      ],
+      [
+       34.09,
+       22.7
+      ],
+      [
+       34.85,
+       15.3
+      ],
+      [
+       35.61,
+       5.9
+      ],
+      [
+       36.36,
+       -5.3
+      ],
+      [
+       37.12,
+       -18.4
+      ],
+      [
+       37.88,
+       -29.6
+      ],
+      [
+       38.64,
+       -42.7
+      ],
+      [
+       39.39,
+       -55.8
+      ],
+      [
+       40.53,
+       -25.9
+      ],
+      [
+       41.29,
+       -7.2
+      ],
+      [
+       42.05,
+       -1.6
+      ],
+      [
+       42.8,
+       4.1
+      ],
+      [
+       43.56,
+       15.3
+      ],
+      [
+       44.32,
+       22.7
+      ],
+      [
+       45.08,
+       26.5
+      ],
+      [
+       45.83,
+       34.0
+      ],
+      [
+       46.59,
+       26.5
+      ],
+      [
+       47.35,
+       19.0
+      ],
+      [
+       48.11,
+       7.8
+      ],
+      [
+       48.86,
+       0.3
+      ],
+      [
+       49.24,
+       -7.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Typical ROUT vs input voltage (Figure 5)",
+   "page": 10,
+   "conditions": "TA = 25°C, CFLY = 1µF",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IOUT = 100mA",
+     "points": [
+      [
+       2.492,
+       7.39
+      ],
+      [
+       2.558,
+       7.08
+      ],
+      [
+       2.635,
+       6.84
+      ],
+      [
+       2.719,
+       6.64
+      ],
+      [
+       2.809,
+       6.5
+      ],
+      [
+       2.9,
+       6.38
+      ],
+      [
+       2.991,
+       6.28
+      ],
+      [
+       3.074,
+       6.19
+      ],
+      [
+       3.192,
+       6.1
+      ],
+      [
+       3.271,
+       6.05
+      ],
+      [
+       3.369,
+       6.01
+      ],
+      [
+       3.487,
+       5.97
+      ],
+      [
+       3.63,
+       5.93
+      ],
+      [
+       3.799,
+       5.9
+      ],
+      [
+       3.998,
+       5.87
+      ],
+      [
+       4.23,
+       5.86
+      ],
+      [
+       4.498,
+       5.85
+      ]
+     ]
+    },
+    {
+     "label": "IOUT = 50mA",
+     "points": [
+      [
+       2.006,
+       8.38
+      ],
+      [
+       2.115,
+       7.67
+      ],
+      [
+       2.176,
+       7.37
+      ],
+      [
+       2.242,
+       7.12
+      ],
+      [
+       2.311,
+       6.89
+      ],
+      [
+       2.462,
+       6.53
+      ],
+      [
+       2.543,
+       6.38
+      ],
+      [
+       2.628,
+       6.26
+      ],
+      [
+       2.806,
+       6.06
+      ],
+      [
+       2.9,
+       5.98
+      ],
+      [
+       3.051,
+       5.86
+      ],
+      [
+       3.212,
+       5.76
+      ],
+      [
+       3.38,
+       5.67
+      ],
+      [
+       3.55,
+       5.59
+      ],
+      [
+       3.719,
+       5.52
+      ],
+      [
+       3.881,
+       5.47
+      ],
+      [
+       4.033,
+       5.42
+      ],
+      [
+       4.171,
+       5.38
+      ],
+      [
+       4.29,
+       5.35
+      ],
+      [
+       4.387,
+       5.33
+      ],
+      [
+       4.458,
+       5.31
+      ],
+      [
+       4.498,
+       5.31
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical-5v",
+   "title": "Regulated 5V output from a 2.7V to 5.5V input",
+   "page": 1,
+   "description": "LTC1751-5 doubling a 2.7V to 5.5V input to a regulated 5V ±4%, good for 100mA with VIN at least 3V or 50mA with VIN at least 2.7V. C2 bypasses the input, C1 the output, CFLY is the pump capacitor across C+ and C-. SHDN is the on/off control. R1 pulls the open-drain PGOOD flag up to VOUT. SS is left open.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751-5"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF",
+     "note": "Murata GRM40X5R106K6.3AJ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF",
+     "note": "Murata GRM40X5R106K6.3AJ"
+    },
+    {
+     "ref": "CFLY",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "Murata GRM39X5R105K6.3AJ"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN 2.7V to 5.5V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT 5V ±4%"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "OFF/ON"
+    },
+    {
+     "ref": "J_PGOOD",
+     "type": "terminal",
+     "value": "PGOOD"
+    }
+   ],
+   "notes": [
+    "IOUT ≤ 100mA with VIN ≥ 3V; IOUT ≤ 50mA with VIN ≥ 2.7V."
+   ]
+  },
+  {
+   "id": "ripple-filter",
+   "title": "Output ripple reduction (Figure 1)",
+   "page": 9,
+   "description": "An RC stage after the output of an LTC1751-X: the regulator's output capacitor, a 1Ω series resistor and a second capacitor form a low-pass that removes the high-frequency charge-transfer spikes before the 5V load.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751-X"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF",
+     "note": "tantalum"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF",
+     "note": "tantalum"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1Ω"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT 5V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "adjustable-divider",
+   "title": "Programming the adjustable LTC1751 (Figure 3)",
+   "page": 10,
+   "description": "The adjustable part's output set by R1 from VOUT to FB and R2 from FB to GND, giving VOUT = 1.205V(1 + R1/R2); COUT is the output capacitor.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "COUT"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT = 1.205V(1 + R1/R2)"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "usb-5v",
+   "title": "USB port to regulated 5V supply with soft-start",
+   "page": 11,
+   "description": "An LTC1751-5 run from a USB port's supply. The port feeds VIN through a 1Ω resistor, with 10µF at VIN after it; SHDN is tied to VIN so the converter is always on. A 1nF capacitor on SS gives a soft-start ramp to hold down the inrush the port sees. Output is 5V on a 10µF capacitor, and a 100k pull-up to VOUT serves the PGOOD flag.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751-5"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1Ω"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1nF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "J_USB",
+     "type": "terminal",
+     "value": "USB port supply"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT = 5V"
+    },
+    {
+     "ref": "J_PGOOD",
+     "type": "terminal",
+     "value": "PGOOD"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "nicd-3v3",
+   "title": "2-cell NiCd or NiMH to 3.3V with low standby current",
+   "page": 11,
+   "description": "An LTC1751-3.3 making 3.3V at 40mA from two NiCd or NiMH cells. 10µF capacitors bypass input and output and a 1µF capacitor is the flying capacitor. SHDN takes an external on/off signal. 1nF on SS sets the soft-start, and 100k from VOUT pulls PGOOD up.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751-3.3"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "2-cell NiCd or NiMH"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "OFF/ON"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "3.3V 40mA"
+    },
+    {
+     "ref": "J_PGOOD",
+     "type": "terminal",
+     "value": "PGOOD"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "current-source",
+   "title": "Boosted constant current source",
+   "page": 11,
+   "description": "The adjustable LTC1751 regulating current instead of voltage: the load sits between VOUT and FB, and RX from FB to ground senses its current, so the loop holds 1.205V across RX and IL = 1.205V/RX, as long as the needed VOUT stays at or below 2VIN. 10µF bypasses VIN and VOUT, 1µF is the flying capacitor, SHDN is the on/off control and SS is unused.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "RX",
+     "type": "resistor",
+     "value": "RX"
+    },
+    {
+     "ref": "LOAD",
+     "type": "load",
+     "value": "LOAD"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "OFF/ON"
+    }
+   ],
+   "notes": [
+    "IL = 1.205V/RX; VOUT ≤ 2VIN."
+   ]
+  },
+  {
+   "id": "battery-backup",
+   "title": "Low power battery backup with auto switchover and no reverse current",
+   "page": 11,
+   "description": "A 5V rail kept alive from a 3-cell NiCd pack. While the 5V input is present, P-channel MOSFET Q1 (Si4435DY) connects it straight to VOUT and the pack trickle-charges through D1 and 75k. An LTC1540 comparator watches the input through the 1.43M/475k divider against its reference, with hysteresis set by 10k and 1M; it is powered from the higher of battery and VOUT through the BAT54C dual Schottky. When the input fails, the comparator output goes high: it turns Q1 off, so no current flows back into the input, and enables the LTC1751-5 through SHDN, which then makes 5V (up to 100mA) from the battery. 330pF on SS sets the soft-start. PGOOD, pulled to VOUT by 100k, reads high in backup mode.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751-5"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "LTC1540",
+     "external": true
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "Si4435DY"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "IN4148",
+     "note": "1N4148"
+    },
+    {
+     "ref": "D2",
+     "type": "other",
+     "value": "BAT54C",
+     "note": "dual Schottky, common cathode"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "3-cell NiCd battery"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "330pF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "75k"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1.43M"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "475k"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "1M"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN = 5V"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT = 5V, IOUT ≤ 100mA"
+    },
+    {
+     "ref": "J_MODE",
+     "type": "terminal",
+     "value": "HIGH = BACKUP MODE"
+    }
+   ],
+   "notes": [
+    "D1 is marked IN4148; the part is the 1N4148."
+   ]
+  },
+  {
+   "id": "led-driver",
+   "title": "Current mode white or blue LED driver with PWM brightness control",
+   "page": 12,
+   "description": "The adjustable LTC1751 driving up to six white or blue LEDs from a 3V to 4.5V Li-Ion cell. Each LED has its own 82Ω ballast resistor to ground; the first LED's resistor is also the sense resistor on FB, so the loop holds 1.205V across it and the other strings follow. Brightness is set by pulse-width modulating SHDN with a 17ms period. C1 and C2 (10µF) bypass input and output, C4 (1µF) is the flying capacitor and C3 (680pF) on SS sets the soft-start.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC1751"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "Li-Ion battery, 3V to 4.5V"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "680pF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "VSHDN, PWM, 17ms period"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "white or blue LED"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "white or blue LED"
+    },
+    {
+     "ref": "D3",
+     "type": "led",
+     "value": "white or blue LED"
+    },
+    {
+     "ref": "D4",
+     "type": "led",
+     "value": "white or blue LED"
+    },
+    {
+     "ref": "D5",
+     "type": "led",
+     "value": "white or blue LED"
+    },
+    {
+     "ref": "D6",
+     "type": "led",
+     "value": "white or blue LED"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "82Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "82Ω"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "82Ω"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "82Ω"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "82Ω"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "82Ω"
+    }
+   ],
+   "notes": [
+    "Up to six LEDs."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Ideal doubler efficiency",
+   "expr": "η = POUT / PIN = (VOUT • IOUT) / (VIN • 2IOUT) = VOUT / (2VIN)",
+   "where": {
+    "VOUT": "regulated output voltage",
+    "VIN": "input voltage",
+    "IOUT": "load current"
+   },
+   "note": "Valid at moderate to high load, where switching losses and quiescent current are small. Example: LTC1751-5 at VIN = 3V, IOUT = 50mA computes to 83.3%; 82% is measured.",
+   "page": 7
+  },
+  {
+   "name": "Minimum output resistance of a doubler",
+   "expr": "ROUT(MIN) ≡ (2VIN - VOUT) / IOUT = 1 / (f • C)",
+   "where": {
+    "f": "switching frequency",
+    "C": "flying capacitance",
+    "VIN": "input voltage",
+    "VOUT": "output voltage",
+    "IOUT": "load current"
+   },
+   "note": "With f in MHz and C in µF the units cancel to ohms. Real switch resistance makes the pump weaker than this bound; for light loads the formula serves as a starting point for the flying capacitor.",
+   "page": 8
+  },
+  {
+   "name": "Soft-start rise time",
+   "expr": "tr = 0.6ms/nF • CSS",
+   "where": {
+    "tr": "10% to 90% output rise time",
+    "CSS": "capacitor on the SS pin, nF"
+   },
+   "note": "Example: 4.7nF gives about 2.8ms. With a 10µF output capacitor an LTC1751-5 then charges it at 4V/2.8ms • 10µF, about 14mA, so the input draws about 28mA.",
+   "page": 9
+  },
+  {
+   "name": "Output voltage, adjustable LTC1751",
+   "expr": "VOUT = 1.205V • (1 + R1/R2);  R1/R2 = VOUT/1.205V - 1",
+   "where": {
+    "R1": "divider resistor from VOUT to FB",
+    "R2": "divider resistor from FB to GND",
+    "1.205V": "FB regulation voltage"
+   },
+   "note": "VOUT cannot exceed 2VIN. The divider's standing current, 1.205V/R2, appears doubled in the input current; total divider resistance usually lies between a few kΩ and 1MΩ.",
+   "page": 10
+  },
+  {
+   "name": "Available output current",
+   "expr": "IOUT = (2VIN - VOUT) / ROUT",
+   "where": {
+    "ROUT": "effective open-loop output resistance (Figure 5, table)",
+    "VIN": "input voltage, use VIN(MIN)",
+    "VOUT": "desired output voltage"
+   },
+   "note": "From the equivalent open-loop model: a source of 2VIN behind ROUT driving the output.",
+   "page": 10
+  },
+  {
+   "name": "Constant-current source load current",
+   "expr": "IL = 1.205V / RX",
+   "where": {
+    "IL": "current through the load",
+    "RX": "sense resistor from FB to GND"
+   },
+   "note": "Needs VOUT ≤ 2VIN.",
+   "page": 11
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Regulation",
+   "page": 7,
+   "text": "A switched-capacitor doubler raises VIN. An internal divider (external on the adjustable part) feeds comparator COMP1; when the divided output falls under its lower threshold the pump runs, driven by a two-phase non-overlapping clock. In the first phase the flying capacitor charges to VIN; in the second it is placed in series with VIN and dumps into VOUT. Pumping goes on at the clock rate until the upper threshold is reached, then stops. While stopped the part takes under 20µA typical, which keeps light-load efficiency high (Burst Mode operation)."
+  },
+  {
+   "topic": "Shutdown",
+   "page": 7,
+   "text": "A logic low on SHDN turns all circuitry off; the input then supplies only leakage, and VOUT is disconnected from VIN. SHDN is a CMOS gate input switching at about 0.8V. Driving it high with a level below VIN raises quiescent current slightly compared with driving it fully to VIN. Because it is high impedance it must always be held at a valid logic level, never left floating. SS is pulled to ground while SHDN is low."
+  },
+  {
+   "topic": "Efficiency",
+   "page": 7,
+   "text": "A doubler's input current is about twice its output current, so it behaves like a linear regulator fed from 2VIN: efficiency is close to VOUT/(2VIN). The low-power design keeps efficiency good down to fairly light loads."
+  },
+  {
+   "topic": "Short-circuit and thermal protection",
+   "page": 7,
+   "text": "With VOUT shorted the part pulls 200mA to 400mA from VIN and heats up. Thermal shutdown stops the pump at roughly 160°C junction and restarts it near 150°C; the part cycles this way indefinitely, without latch-up or damage, until the short is removed."
+  },
+  {
+   "topic": "Input and output capacitors",
+   "page": 7,
+   "text": "Capacitor type and value set output ripple, pump strength and minimum start-up time. Use low-ESR (< 0.1Ω) ceramic or tantalum parts of 6.8µF or more for CIN and COUT; aluminum electrolytics have too much ESR. If the source feeding VIN is low impedance up to several MHz, CIN can be omitted or made smaller, at the cost of more ripple on VIN. A larger COUT (10µF or more) lowers output ripple but lengthens the minimum turn-on time and raises start-up current."
+  },
+  {
+   "topic": "Flying capacitor",
+   "page": 8,
+   "text": "Never use a polarized (tantalum or aluminum) flying capacitor: its voltage can reverse at start-up. Use low-ESR ceramic. Its value sets pump strength: at least 0.6µF of real capacitance is needed for rated output current, so allow for loss with temperature and voltage. X7R holds its value well from -40°C to 85°C; Z5U and Y5V lose much of it over temperature and can drop 50% or more at rated voltage. An X7R of 1µF minimum is the usual choice; for very light loads 0.01µF to 0.68µF can be used, which lowers output ripple but also maximum output current and efficiency."
+  },
+  {
+   "topic": "Output ripple",
+   "page": 8,
+   "text": "Two components. A low-frequency sawtooth comes from comparator hysteresis and control delays; its size and rate depend on load, VIN and COUT. At high VIN the stronger pump can overshoot in one cycle instead of bursting, and the average output creeps up; a larger COUT keeps it bursting. A high-frequency spike appears during each charging phase, equal to charging current times COUT's ESR, and grows with VIN, flying capacitance and ESR. Typical total ripple for an LTC1751-5 at VIN = 3V and full load is 75mVP-P with a 10µF low-ESR output capacitor; a smaller COUT or heavier load increases it."
+  },
+  {
+   "topic": "Reducing ripple",
+   "page": 9,
+   "text": "For VIN above 3.3V or ripple under 100mVP-P, use COUT of 22µF or more, which lowers both ripple components through slower slew and lower ESR. A low-ESR ceramic COUT cuts the spikes but only a large value cuts the sawtooth. An RC filter after VOUT (Figure 1: 1Ω with 10µF tantalum on each side) also removes the spikes. A larger output capacitor lengthens the minimum turn-on time."
+  },
+  {
+   "topic": "Soft-start",
+   "page": 9,
+   "text": "About 2µA flows out of SS into its capacitor; the regulation loop follows the resulting ramp until the output is in regulation, limiting inrush from VIN. The capacitor is optional: without it the output rises as fast as the pump allows, at a rate set by temperature, load, pump and flying capacitor values and VIN."
+  },
+  {
+   "topic": "PGOOD and undervoltage detection",
+   "page": 9,
+   "text": "On the fixed versions PGOOD has two jobs. After SHDN goes high, VOUT follows the SS ramp and PGOOD stays low until VOUT reaches regulation (the UVH threshold, -4.5% of nominal), then goes high impedance. If VOUT is later dragged down by overload to the UVL threshold (-7% of nominal), PGOOD pulls low again; with a short holding VOUT down it never releases. Figure 2 shows SHDN, PGOOD and VOUT through a normal start-up, with tr measured from 10% to 90%, and then an undervoltage event. The pull-up may go to any available supply, VOUT included; an unused PGOOD can be tied to GND."
+  },
+  {
+   "topic": "Adjustable output",
+   "page": 10,
+   "text": "The adjustable LTC1751 sets VOUT with an external divider from VOUT to FB to GND (Figure 3); the fixed parts have the divider inside. Output cannot exceed twice the input. Large divider values keep quiescent current low."
+  },
+  {
+   "topic": "Maximum output current",
+   "page": 10,
+   "text": "Model the adjustable part as a 2VIN source behind its open-loop resistance ROUT (Figure 4) and use the lowest VIN; typical ROUT against VIN at 50mA and 100mA is in Figure 5."
+  },
+  {
+   "topic": "Layout",
+   "page": 10,
+   "text": "The 800kHz switching and fast current edges call for a true ground plane and short traces to every capacitor; Figure 6 is the recommended arrangement, with VIN, VOUT and GND copper next to the package and the capacitors beside the pins."
+  },
+  {
+   "topic": "Thermal management",
+   "page": 10,
+   "text": "At high VIN and full load the part can dissipate enough to reach the roughly 160°C thermal shutdown. Connect GND (pin 4) to plane copper and keep solid ground copper under the package on two layers to cut the thermal resistance considerably."
+  }
+ ],
+ "packages": [
+  {
+   "name": "MS8, 8-lead plastic MSOP (LTC DWG # 05-08-1660)",
+   "page": 12,
+   "unit": "inch (mm)",
+   "columns": [
+    "dimension",
+    "inch",
+    "mm"
+   ],
+   "rows": [
+    [
+     "Body length along the lead rows (*)",
+     "0.118 ± 0.004",
+     "(3.00 ± 0.102)"
+    ],
+    [
+     "Body width between the lead rows (**)",
+     "0.118 ± 0.004",
+     "(3.00 ± 0.102)"
+    ],
+    [
+     "Overall width across the lead tips",
+     "0.193 ± 0.006",
+     "(4.90 ± 0.15)"
+    ],
+    [
+     "Overall height",
+     "0.043 MAX",
+     "(1.10) MAX"
+    ],
+    [
+     "Body thickness",
+     "0.034 REF",
+     "(0.86) REF"
+    ],
+    [
+     "Standoff, seating plane to body",
+     "0.005 ± 0.002",
+     "(0.13 ± 0.05)"
+    ],
+    [
+     "Lead width",
+     "0.009 - 0.015",
+     "(0.22 - 0.38)"
+    ],
+    [
+     "Lead pitch",
+     "0.0256 BSC",
+     "(0.65) BSC"
+    ],
+    [
+     "Lead foot length",
+     "0.021 ± 0.006",
+     "(0.53 ± 0.015)"
+    ],
+    [
+     "Lead thickness",
+     "0.007",
+     "(0.18)"
+    ],
+    [
+     "Foot angle",
+     "0° - 6° TYP",
+     ""
+    ]
+   ],
+   "notes": [
+    "(*) Mold flash, protrusions and gate burrs are excluded and may add up to 0.006\" (0.152mm) per side.",
+    "(**) Interlead flash and protrusions are excluded and may add up to 0.006\" (0.152mm) per side.",
+    "Foot length in mm: the tolerance should read ±0.15.",
+    "Pins 1 to 4 run along one side and 5 to 8 along the opposite side; a dot marks pin 1."
+   ]
+  }
+ ]
+}

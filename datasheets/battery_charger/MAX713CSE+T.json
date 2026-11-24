@@ -1,0 +1,4098 @@
+{
+ "sheet": 1,
+ "name": "MAX713CSE+T",
+ "kind": "battery_charger",
+ "manufacturer": "Maxim Integrated (Analog Devices)",
+ "title": "NiCd/NiMH battery fast-charge controllers",
+ "source": {
+  "document": "19-0100",
+  "revision": "Rev 6, 12/08",
+  "pages": 17
+ },
+ "summary": "The MAX712 and MAX713 are linear fast-charge controllers for 1 to 16 series NiCd or NiMH cells. They drive an external PNP pass transistor, regulate charge current through a low-side sense resistor, and end fast charge on voltage slope, battery temperature or a timer, then fall back to a trickle rate. The MAX712 stops on zero voltage slope and the MAX713 on a negative slope; nothing else separates them. An internal 5 V shunt regulator runs the chip from the DC source, and with that source gone the battery drain is 5 µA at most.",
+ "key_figures": [
+  [
+   "Cells",
+   "1 to 16 in series, set by PGM0/PGM1"
+  ],
+  [
+   "Chemistry",
+   "NiCd or NiMH"
+  ],
+  [
+   "Fast-charge rate",
+   "C/4 to 4C"
+  ],
+  [
+   "Trickle rate",
+   "C/16 at fast rates of C/2, C, 2C or 4C"
+  ],
+  [
+   "Fast-charge sense voltage",
+   "250 mV typ (225 to 275 mV), IFAST = 0.25 V / RSENSE"
+  ],
+  [
+   "Termination",
+   "voltage slope (MAX712 zero, MAX713 -2.5 mV/tA per cell), THI/TLO temperature window, 22 to 264 min timer"
+  ],
+  [
+   "DC source",
+   "above 6 V and at least 1.5 V over the highest battery voltage"
+  ],
+  [
+   "Battery drain without input",
+   "5 µA max"
+  ],
+  [
+   "V+ shunt regulator",
+   "4.5 to 5.5 V at 5 to 20 mA"
+  ],
+  [
+   "Reference",
+   "2 V, 1.96 to 2.04 V"
+  ],
+  [
+   "Packages",
+   "16-pin plastic DIP, 16-pin narrow SO, 16-pin CERDIP, dice"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "voltage-slope termination",
+   "temperature range",
+   "package"
+  ],
+  "rows": [
+   [
+    "MAX712CPE",
+    "zero slope",
+    "0°C to +70°C",
+    "16 Plastic DIP"
+   ],
+   [
+    "MAX712CSE",
+    "zero slope",
+    "0°C to +70°C",
+    "16 Narrow SO"
+   ],
+   [
+    "MAX712C/D",
+    "zero slope",
+    "0°C to +70°C",
+    "Dice*"
+   ],
+   [
+    "MAX712EPE",
+    "zero slope",
+    "-40°C to +85°C",
+    "16 Plastic DIP"
+   ],
+   [
+    "MAX712ESE",
+    "zero slope",
+    "-40°C to +85°C",
+    "16 Narrow SO"
+   ],
+   [
+    "MAX712MJE",
+    "zero slope",
+    "-55°C to +125°C",
+    "16 CERDIP**"
+   ],
+   [
+    "MAX713CPE",
+    "negative slope",
+    "0°C to +70°C",
+    "16 Plastic DIP"
+   ],
+   [
+    "MAX713CSE",
+    "negative slope",
+    "0°C to +70°C",
+    "16 Narrow SO"
+   ],
+   [
+    "MAX713C/D",
+    "negative slope",
+    "0°C to +70°C",
+    "Dice*"
+   ],
+   [
+    "MAX713EPE",
+    "negative slope",
+    "-40°C to +85°C",
+    "16 Plastic DIP"
+   ],
+   [
+    "MAX713ESE",
+    "negative slope",
+    "-40°C to +85°C",
+    "16 Narrow SO"
+   ],
+   [
+    "MAX713MJE",
+    "negative slope",
+    "-55°C to +125°C",
+    "16 CERDIP**"
+   ]
+  ],
+  "notes": [
+   "* Dice specifications come from the factory on request.",
+   "** CERDIP availability and MIL-STD-883 processing are by factory inquiry."
+  ]
+ },
+ "pins": [
+  {
+   "package": "16-pin DIP / SO (top view)",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VLIMIT",
+     "type": "analog input",
+     "function": "Cell voltage ceiling. BATT+ to BATT- is held at or below VLIMIT times the programmed cell count. Keep it at 2.5 V or lower; for normal use it is tied to REF."
+    },
+    {
+     "pin": "2",
+     "name": "BATT+",
+     "type": "power",
+     "function": "Battery positive terminal."
+    },
+    {
+     "pin": "3",
+     "name": "PGM0",
+     "type": "program input",
+     "function": "Cell-count strap, with PGM1: each is tied to V+, REF or BATT- or left open, giving 1 to 16 cells (Table 2). Above 11 cells the BATT+ voltage needs external limiting when DC IN is absent. A battery with more or fewer cells than programmed can defeat voltage-slope termination."
+    },
+    {
+     "pin": "4",
+     "name": "PGM1",
+     "type": "program input",
+     "function": "Cell-count strap, with PGM0 (Table 2)."
+    },
+    {
+     "pin": "5",
+     "name": "THI",
+     "type": "analog input",
+     "function": "Over-temperature threshold. Fast charge stops when TEMP rises past THI."
+    },
+    {
+     "pin": "6",
+     "name": "TLO",
+     "type": "analog input",
+     "function": "Under-temperature threshold. If TEMP is below TLO at power-on, fast charge waits until TEMP climbs above TLO."
+    },
+    {
+     "pin": "7",
+     "name": "TEMP",
+     "type": "analog input",
+     "function": "Thermistor sense input: a voltage that tracks battery temperature."
+    },
+    {
+     "pin": "8",
+     "name": "FASTCHG",
+     "type": "open-drain output",
+     "function": "Active-low fast-charge status. Sinks current during fast charge and stops sinking when the part drops to trickle charge."
+    },
+    {
+     "pin": "9",
+     "name": "PGM2",
+     "type": "program input",
+     "function": "Fast-charge timeout strap, with PGM3: V+, REF, BATT- or open, giving 22 to 264 min and turning voltage-slope termination on or off (Table 3)."
+    },
+    {
+     "pin": "10",
+     "name": "PGM3",
+     "type": "program input",
+     "function": "Timeout strap with PGM2 (Table 3); also sets the ratio of fast to trickle current (Table 5)."
+    },
+    {
+     "pin": "11",
+     "name": "CC",
+     "type": "analog",
+     "function": "Compensation node of the constant-current loop; C2 goes from CC to BATT-."
+    },
+    {
+     "pin": "12",
+     "name": "BATT-",
+     "type": "power",
+     "function": "Battery negative terminal and the reference for every specified voltage."
+    },
+    {
+     "pin": "13",
+     "name": "GND",
+     "type": "ground",
+     "function": "System ground. The sense resistor sits between BATT- and GND and measures battery current."
+    },
+    {
+     "pin": "14",
+     "name": "DRV",
+     "type": "output",
+     "function": "Current-sink output that drives the base of the external PNP pass transistor."
+    },
+    {
+     "pin": "15",
+     "name": "V+",
+     "type": "power in",
+     "function": "Shunt-regulated supply, held at 5 V above BATT-; the shunt current is what powers the chip."
+    },
+    {
+     "pin": "16",
+     "name": "REF",
+     "type": "output",
+     "function": "2 V reference."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "conditions",
+    "rating",
+    "unit"
+   ],
+   "rows": [
+    [
+     "V+ to BATT-",
+     "",
+     "-0.3, +7",
+     "V"
+    ],
+    [
+     "BATT- to GND",
+     "",
+     "±1",
+     "V"
+    ],
+    [
+     "BATT+ to BATT-",
+     "Power not applied",
+     "±20",
+     "V"
+    ],
+    [
+     "BATT+ to BATT-",
+     "With power applied",
+     "The higher of ±20 or ±2 x (programmed cells)",
+     "V"
+    ],
+    [
+     "DRV to GND",
+     "",
+     "-0.3, +20",
+     "V"
+    ],
+    [
+     "FASTCHG to BATT-",
+     "",
+     "-0.3, +12",
+     "V"
+    ],
+    [
+     "All other pins to GND",
+     "",
+     "-0.3, (V+ + 0.3)",
+     "V"
+    ],
+    [
+     "V+ current",
+     "",
+     "100",
+     "mA"
+    ],
+    [
+     "DRV current",
+     "",
+     "100",
+     "mA"
+    ],
+    [
+     "REF current",
+     "",
+     "10",
+     "mA"
+    ],
+    [
+     "Continuous power dissipation, Plastic DIP",
+     "TA = +70°C, derate 10.53mW/°C above +70°C",
+     "842",
+     "mW"
+    ],
+    [
+     "Continuous power dissipation, Narrow SO",
+     "TA = +70°C, derate 8.70mW/°C above +70°C",
+     "696",
+     "mW"
+    ],
+    [
+     "Continuous power dissipation, CERDIP",
+     "TA = +70°C, derate 10.00mW/°C above +70°C",
+     "800",
+     "mW"
+    ],
+    [
+     "Operating temperature range",
+     "MAX71_C_E",
+     "0 to +70",
+     "°C"
+    ],
+    [
+     "Operating temperature range",
+     "MAX71_E_E",
+     "-40 to +85",
+     "°C"
+    ],
+    [
+     "Operating temperature range",
+     "MAX71_MJE",
+     "-55 to +125",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "",
+     "-65 to +150",
+     "°C"
+    ],
+    [
+     "Lead temperature",
+     "soldering, 10s",
+     "+300",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Ratings are stress limits only; running the part at them is not implied, and long exposure can reduce reliability."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 2,
+   "conditions": "IV+ = 10mA, TA = TMIN to TMAX, unless otherwise noted. Typical Operating Circuit. All measurements with respect to BATT-, not GND.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "V+ Voltage",
+     "",
+     "5mA < IV+ < 20mA",
+     "4.5",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "IV+ (Note 1)",
+     "IV+",
+     "",
+     "5",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "BATT+ Leakage",
+     "",
+     "V+ = 0V, BATT+ = 17V",
+     "",
+     "",
+     "5",
+     "µA"
+    ],
+    [
+     "BATT+ Resistance with Power On",
+     "",
+     "PGM0 = PGM1 = BATT-, BATT+ = 30V",
+     "30",
+     "",
+     "",
+     "kΩ"
+    ],
+    [
+     "C1 Capacitance",
+     "",
+     "",
+     "0.5",
+     "",
+     "",
+     "µF"
+    ],
+    [
+     "C2 Capacitance",
+     "",
+     "",
+     "5",
+     "",
+     "",
+     "nF"
+    ],
+    [
+     "REF Voltage",
+     "",
+     "0mA < IREF < 1mA",
+     "1.96",
+     "",
+     "2.04",
+     "V"
+    ],
+    [
+     "Undervoltage Lockout",
+     "",
+     "Per cell",
+     "0.35",
+     "",
+     "0.50",
+     "V"
+    ],
+    [
+     "External VLIMIT Input Range",
+     "",
+     "",
+     "1.25",
+     "",
+     "2.50",
+     "V"
+    ],
+    [
+     "THI, TLO, TEMP Input Range",
+     "",
+     "",
+     "0",
+     "",
+     "2",
+     "V"
+    ],
+    [
+     "THI, TLO Offset Voltage (Note 2)",
+     "",
+     "0V < TEMP < 2V, TEMP voltage rising",
+     "-10",
+     "",
+     "10",
+     "mV"
+    ],
+    [
+     "THI, TLO, TEMP, VLIMIT Input Bias Current",
+     "",
+     "",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "VLIMIT Accuracy",
+     "",
+     "1.2V < VLIMIT < 2.5V, 5mA < IDRV < 20mA, PGM0 = PGM1 = V+",
+     "-30",
+     "",
+     "30",
+     "mV"
+    ],
+    [
+     "Internal Cell Voltage Limit",
+     "",
+     "VLIMIT = V+",
+     "1.6",
+     "1.65",
+     "1.7",
+     "V"
+    ],
+    [
+     "Fast-Charge VSENSE",
+     "VSENSE",
+     "",
+     "225",
+     "250",
+     "275",
+     "mV"
+    ],
+    [
+     "Trickle-Charge VSENSE",
+     "VSENSE",
+     "PGM3 = V+",
+     "1.5",
+     "3.9",
+     "7.0",
+     "mV"
+    ],
+    [
+     "Trickle-Charge VSENSE",
+     "VSENSE",
+     "PGM3 = open",
+     "4.5",
+     "7.8",
+     "12.0",
+     "mV"
+    ],
+    [
+     "Trickle-Charge VSENSE",
+     "VSENSE",
+     "PGM3 = REF",
+     "12.0",
+     "15.6",
+     "20.0",
+     "mV"
+    ],
+    [
+     "Trickle-Charge VSENSE",
+     "VSENSE",
+     "PGM3 = BATT-",
+     "26.0",
+     "31.3",
+     "38.0",
+     "mV"
+    ],
+    [
+     "Voltage-Slope Sensitivity (Note 3)",
+     "",
+     "MAX713",
+     "",
+     "-2.5",
+     "",
+     "mV/tA per cell"
+    ],
+    [
+     "Voltage-Slope Sensitivity (Note 3)",
+     "",
+     "MAX712",
+     "",
+     "0",
+     "",
+     "mV/tA per cell"
+    ],
+    [
+     "Timer Accuracy",
+     "",
+     "",
+     "-15",
+     "",
+     "15",
+     "%"
+    ],
+    [
+     "Battery-Voltage to Cell-Voltage Divider Accuracy",
+     "",
+     "",
+     "-1.5",
+     "",
+     "1.5",
+     "%"
+    ],
+    [
+     "DRV Sink Current",
+     "",
+     "VDRV = 10V",
+     "30",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "FASTCHG Low Current",
+     "",
+     "VFASTCHG = 0.4V",
+     "2",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "FASTCHG High Current",
+     "",
+     "VFASTCHG = 10V",
+     "",
+     "",
+     "10",
+     "µA"
+    ],
+    [
+     "A/D Input Range (Note 4)",
+     "",
+     "Battery voltage ÷ number of cells programmed",
+     "1.4",
+     "",
+     "1.9",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Note 1: The chip runs on current into V+. Because V+ is shunt-regulated at 5 V, R1 has to be low enough to pass 5 mA or more into V+.",
+    "Note 2: The THI and TLO comparator offsets are measured against TEMP.",
+    "Note 3: tA is the converter's sample interval, listed in Table 3.",
+    "Note 4: A battery with more or fewer cells than programmed can fall outside this range. Voltage-slope termination works only while the highest battery voltage divided by the programmed cell count stays inside it."
+   ]
+  },
+  {
+   "title": "Table 1. Fast-charge termination methods",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "charge rate",
+    "NiMH batteries",
+    "NiCd batteries"
+   ],
+   "rows": [
+    [
+     "> 2C",
+     "ΔV/Δt and temperature, MAX712 or MAX713",
+     "ΔV/Δt and/or temperature, MAX713"
+    ],
+    [
+     "2C to C/2",
+     "ΔV/Δt and/or temperature, MAX712 or MAX713",
+     "ΔV/Δt and/or temperature, MAX713"
+    ],
+    [
+     "< C/2",
+     "ΔV/Δt and/or temperature, MAX712",
+     "ΔV/Δt and/or temperature, MAX713"
+    ]
+   ],
+   "notes": [
+    "A general guide; the cell manufacturer's figures for maximum charge current and termination take precedence."
+   ]
+  },
+  {
+   "title": "Table 2. Programming the number of cells",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "number of cells",
+    "PGM1 connection",
+    "PGM0 connection"
+   ],
+   "rows": [
+    [
+     "1",
+     "V+",
+     "V+"
+    ],
+    [
+     "2",
+     "Open",
+     "V+"
+    ],
+    [
+     "3",
+     "REF",
+     "V+"
+    ],
+    [
+     "4",
+     "BATT-",
+     "V+"
+    ],
+    [
+     "5",
+     "V+",
+     "Open"
+    ],
+    [
+     "6",
+     "Open",
+     "Open"
+    ],
+    [
+     "7",
+     "REF",
+     "Open"
+    ],
+    [
+     "8",
+     "BATT-",
+     "Open"
+    ],
+    [
+     "9",
+     "V+",
+     "REF"
+    ],
+    [
+     "10",
+     "Open",
+     "REF"
+    ],
+    [
+     "11",
+     "REF",
+     "REF"
+    ],
+    [
+     "12",
+     "BATT-",
+     "REF"
+    ],
+    [
+     "13",
+     "V+",
+     "BATT-"
+    ],
+    [
+     "14",
+     "Open",
+     "BATT-"
+    ],
+    [
+     "15",
+     "REF",
+     "BATT-"
+    ],
+    [
+     "16",
+     "BATT-",
+     "BATT-"
+    ]
+   ]
+  },
+  {
+   "title": "Table 3. Programming the maximum charge time",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "timeout (min)",
+    "A/D sampling interval tA (s)",
+    "voltage-slope termination",
+    "PGM3 connection",
+    "PGM2 connection"
+   ],
+   "rows": [
+    [
+     "22",
+     "21",
+     "Disabled",
+     "V+",
+     "Open"
+    ],
+    [
+     "22",
+     "21",
+     "Enabled",
+     "V+",
+     "REF"
+    ],
+    [
+     "33",
+     "21",
+     "Disabled",
+     "V+",
+     "V+"
+    ],
+    [
+     "33",
+     "21",
+     "Enabled",
+     "V+",
+     "BATT-"
+    ],
+    [
+     "45",
+     "42",
+     "Disabled",
+     "Open",
+     "Open"
+    ],
+    [
+     "45",
+     "42",
+     "Enabled",
+     "Open",
+     "REF"
+    ],
+    [
+     "66",
+     "42",
+     "Disabled",
+     "Open",
+     "V+"
+    ],
+    [
+     "66",
+     "42",
+     "Enabled",
+     "Open",
+     "BATT-"
+    ],
+    [
+     "90",
+     "84",
+     "Disabled",
+     "REF",
+     "Open"
+    ],
+    [
+     "90",
+     "84",
+     "Enabled",
+     "REF",
+     "REF"
+    ],
+    [
+     "132",
+     "84",
+     "Disabled",
+     "REF",
+     "V+"
+    ],
+    [
+     "132",
+     "84",
+     "Enabled",
+     "REF",
+     "BATT-"
+    ],
+    [
+     "180",
+     "168",
+     "Disabled",
+     "BATT-",
+     "Open"
+    ],
+    [
+     "180",
+     "168",
+     "Enabled",
+     "BATT-",
+     "REF"
+    ],
+    [
+     "264",
+     "168",
+     "Disabled",
+     "BATT-",
+     "V+"
+    ],
+    [
+     "264",
+     "168",
+     "Enabled",
+     "BATT-",
+     "BATT-"
+    ]
+   ]
+  },
+  {
+   "title": "Table 4. Charge-state transition table",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "POWER_ON_RESET (active low)",
+    "UNDER_VOLTAGE",
+    "IN_REGULATION (active low)",
+    "COLD (active low)",
+    "HOT (active low)",
+    "result*"
+   ],
+   "rows": [
+    [
+     "0",
+     "x",
+     "x",
+     "x",
+     "x",
+     "Set trickle"
+    ],
+    [
+     "↑",
+     "1",
+     "x",
+     "x",
+     "x",
+     "No change"
+    ],
+    [
+     "↑",
+     "x",
+     "1",
+     "x",
+     "x",
+     "No change"
+    ],
+    [
+     "↑",
+     "x",
+     "x",
+     "0",
+     "x",
+     "No change"
+    ],
+    [
+     "↑",
+     "x",
+     "x",
+     "x",
+     "0",
+     "No change***"
+    ],
+    [
+     "↑",
+     "0",
+     "0",
+     "1",
+     "1",
+     "Set fast"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "No change"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "↓",
+     "1",
+     "No change"
+    ],
+    [
+     "1",
+     "↓",
+     "0",
+     "1",
+     "1",
+     "Set fast"
+    ],
+    [
+     "1",
+     "0",
+     "↓",
+     "1",
+     "1",
+     "Set fast"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "↑",
+     "No change***"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "↑",
+     "1",
+     "Set fast**"
+    ],
+    [
+     "1",
+     "x",
+     "x",
+     "0",
+     "x",
+     "Trickle to fast transition inhibited"
+    ],
+    [
+     "1",
+     "x",
+     "x",
+     "x",
+     "0",
+     "Trickle to fast transition inhibited"
+    ],
+    [
+     "1",
+     "↑",
+     "0",
+     "x",
+     "x",
+     "Set trickle"
+    ],
+    [
+     "1",
+     "0",
+     "↑",
+     "x",
+     "x",
+     "Set trickle"
+    ],
+    [
+     "1",
+     "x",
+     "x",
+     "x",
+     "↓",
+     "Set trickle"
+    ]
+   ],
+   "notes": [
+    "The part has two states only: fast charge and trickle charge.",
+    "* Timer expiry or slope detection forces trickle charge whatever the other signals are.",
+    "** If the battery starts out cold, COLD's first rise starts fast charge; any further rise is ignored.",
+    "*** A battery too hot at insertion or power-up does not start fast charge until it has cooled and power has been cycled."
+   ]
+  },
+  {
+   "title": "Current-sense amplifier gain",
+   "page": 10,
+   "conditions": "Current and voltage regulator, linear mode",
+   "columns": [
+    "PGM3",
+    "FAST_CHARGE",
+    "AV"
+   ],
+   "rows": [
+    [
+     "X",
+     "1",
+     "8"
+    ],
+    [
+     "V+",
+     "0",
+     "512"
+    ],
+    [
+     "OPEN",
+     "0",
+     "256"
+    ],
+    [
+     "REF",
+     "0",
+     "128"
+    ],
+    [
+     "BATT-",
+     "0",
+     "64"
+    ]
+   ],
+   "notes": [
+    "X: any PGM3 connection. FAST_CHARGE = 1 is the fast-charge state, 0 the trickle state."
+   ]
+  },
+  {
+   "title": "Table 5. Trickle-charge current determination from PGM3",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "PGM3",
+    "fast-charge rate",
+    "trickle-charge current (ITRICKLE)"
+   ],
+   "rows": [
+    [
+     "V+",
+     "4C",
+     "IFAST/64"
+    ],
+    [
+     "OPEN",
+     "2C",
+     "IFAST/32"
+    ],
+    [
+     "REF",
+     "C",
+     "IFAST/16"
+    ],
+    [
+     "BATT-",
+     "C/2",
+     "IFAST/8"
+    ]
+   ]
+  },
+  {
+   "title": "Package information",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "package type",
+    "package code",
+    "document no."
+   ],
+   "rows": [
+    [
+     "16 Plastic DIP",
+     "P16-1",
+     "21-0043"
+    ],
+    [
+     "16 Narrow SO",
+     "S16-1",
+     "21-0041"
+    ],
+    [
+     "16 CERDIP",
+     "J16-3",
+     "21-0045"
+    ]
+   ]
+  },
+  {
+   "title": "Chip topography",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "item",
+    "value"
+   ],
+   "rows": [
+    [
+     "Die size, height",
+     "0.126\" (3.200mm)"
+    ],
+    [
+     "Die size, width",
+     "0.80\" (2.032mm)"
+    ],
+    [
+     "Transistor count",
+     "2193"
+    ],
+    [
+     "Substrate",
+     "connected to V+"
+    ]
+   ],
+   "notes": [
+    "Misprint: the die width should read 0.080\" (2.032mm)."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Current-sense amplifier frequency response (C2 = 15 pF)",
+   "page": 3,
+   "conditions": "C2 = 15 pF, FASTCHG = 0 V, TA = +25 °C",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Gain",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Phase",
+    "unit": "degrees",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Gain (AV)",
+     "points": [
+      [
+       992.6,
+       17.69
+      ],
+      [
+       53030.0,
+       17.38
+      ],
+      [
+       68890.0,
+       17.23
+      ],
+      [
+       89890.0,
+       16.55
+      ],
+      [
+       122400.0,
+       15.24
+      ],
+      [
+       182600.0,
+       13.13
+      ],
+      [
+       312700.0,
+       10.02
+      ],
+      [
+       554900.0,
+       6.223
+      ],
+      [
+       2843000.0,
+       -5.68
+      ],
+      [
+       9659000.0,
+       -15.51
+      ]
+     ]
+    },
+    {
+     "label": "Phase",
+     "axis": "y2",
+     "points": [
+      [
+       1014.0,
+       0.0623
+      ],
+      [
+       18740.0,
+       0.04716
+      ],
+      [
+       23650.0,
+       -0.8794
+      ],
+      [
+       30050.0,
+       -5.25
+      ],
+      [
+       67270.0,
+       -24.04
+      ],
+      [
+       678800.0,
+       -89.89
+      ],
+      [
+       798600.0,
+       -93.53
+      ],
+      [
+       871900.0,
+       -94.37
+      ],
+      [
+       1193000.0,
+       -94.75
+      ],
+      [
+       9867000.0,
+       -94.64
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current-sense amplifier frequency response (C2 = 10 nF)",
+   "page": 3,
+   "conditions": "C2 = 10 nF, FASTCHG = 0 V, TA = +25 °C",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Gain",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Phase",
+    "unit": "degrees",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Gain (AV)",
+     "points": [
+      [
+       10.06,
+       17.32
+      ],
+      [
+       81.77,
+       17.23
+      ],
+      [
+       129.5,
+       16.5
+      ],
+      [
+       169.9,
+       15.74
+      ],
+      [
+       203.7,
+       14.96
+      ],
+      [
+       334.5,
+       12.27
+      ],
+      [
+       523.5,
+       9.448
+      ],
+      [
+       1042.0,
+       4.197
+      ],
+      [
+       3244.0,
+       -6.069
+      ],
+      [
+       7498.0,
+       -14.63
+      ],
+      [
+       9839.0,
+       -17.04
+      ]
+     ]
+    },
+    {
+     "label": "Phase",
+     "axis": "y2",
+     "points": [
+      [
+       10.06,
+       -2.221
+      ],
+      [
+       37.15,
+       -2.469
+      ],
+      [
+       46.55,
+       -3.633
+      ],
+      [
+       56.54,
+       -5.925
+      ],
+      [
+       84.44,
+       -15.92
+      ],
+      [
+       524.6,
+       -66.87
+      ],
+      [
+       889.7,
+       -79.85
+      ],
+      [
+       1301.0,
+       -83.75
+      ],
+      [
+       2023.0,
+       -86.29
+      ],
+      [
+       4006.0,
+       -88.38
+      ],
+      [
+       9683.0,
+       -88.89
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current error-amplifier transconductance",
+   "page": 3,
+   "conditions": "FASTCHG = 0 V, V+ = 5 V, TA = +25 °C",
+   "x": {
+    "label": "Voltage on CC pin",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "DRV pin sink current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "DRV sink current",
+     "points": [
+      [
+       1.95,
+       59.98
+      ],
+      [
+       1.96,
+       59.67
+      ],
+      [
+       1.967,
+       53.62
+      ],
+      [
+       1.977,
+       37.25
+      ],
+      [
+       1.985,
+       22.27
+      ],
+      [
+       1.99,
+       14.4
+      ],
+      [
+       1.999,
+       6.394
+      ],
+      [
+       2.024,
+       0.455
+      ],
+      [
+       2.039,
+       0.09845
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Shunt-regulator voltage vs. current",
+   "page": 3,
+   "conditions": "TA = +25 °C",
+   "x": {
+    "label": "Current into V+ pin",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "V+ voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "DRV not sinking current",
+     "points": [
+      [
+       1.317,
+       4.435
+      ],
+      [
+       2.004,
+       4.643
+      ],
+      [
+       3.373,
+       4.761
+      ],
+      [
+       5.932,
+       4.851
+      ],
+      [
+       9.067,
+       4.93
+      ],
+      [
+       13.83,
+       5.028
+      ],
+      [
+       23.16,
+       5.19
+      ],
+      [
+       58.91,
+       5.752
+      ]
+     ]
+    },
+    {
+     "label": "DRV sinking current",
+     "points": [
+      [
+       5.762,
+       4.008
+      ],
+      [
+       5.778,
+       4.399
+      ],
+      [
+       6.384,
+       4.623
+      ],
+      [
+       7.504,
+       4.739
+      ],
+      [
+       9.61,
+       4.837
+      ],
+      [
+       11.25,
+       4.885
+      ],
+      [
+       13.35,
+       4.93
+      ],
+      [
+       20.78,
+       5.063
+      ],
+      [
+       49.65,
+       5.519
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Alpha Sensors part No. 14A1002 thermistor, Steinhart-Hart interpolation",
+   "page": 3,
+   "conditions": "",
+   "x": {
+    "label": "Battery temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "TEMP pin voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Battery thermistor resistance",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TEMP pin voltage",
+     "points": [
+      [
+       -0.000969,
+       0.4605
+      ],
+      [
+       14.68,
+       0.7705
+      ],
+      [
+       33.04,
+       1.135
+      ],
+      [
+       58.66,
+       1.601
+      ]
+     ]
+    },
+    {
+     "label": "Battery thermistor resistance",
+     "axis": "y2",
+     "points": [
+      [
+       -0.000969,
+       33.52
+      ],
+      [
+       1.726,
+       29.95
+      ],
+      [
+       3.261,
+       27.55
+      ],
+      [
+       5.394,
+       24.77
+      ],
+      [
+       8.197,
+       21.76
+      ],
+      [
+       11.74,
+       18.65
+      ],
+      [
+       16.1,
+       15.59
+      ],
+      [
+       20.85,
+       12.79
+      ],
+      [
+       25.6,
+       10.37
+      ],
+      [
+       30.46,
+       8.307
+      ],
+      [
+       35.51,
+       6.579
+      ],
+      [
+       40.86,
+       5.16
+      ],
+      [
+       46.63,
+       4.025
+      ],
+      [
+       52.9,
+       3.152
+      ],
+      [
+       59.78,
+       2.515
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX713 NiCd battery charging characteristics at C rate",
+   "page": 4,
+   "conditions": "TA = +25 °C",
+   "x": {
+    "label": "Charge time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Cell voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Cell temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Cell voltage (V)",
+     "points": [
+      [
+       0.6536,
+       1.415
+      ],
+      [
+       4.347,
+       1.44
+      ],
+      [
+       10.28,
+       1.468
+      ],
+      [
+       14.74,
+       1.484
+      ],
+      [
+       20.4,
+       1.501
+      ],
+      [
+       27.41,
+       1.518
+      ],
+      [
+       32.07,
+       1.524
+      ],
+      [
+       47.21,
+       1.53
+      ],
+      [
+       53.22,
+       1.535
+      ],
+      [
+       58.24,
+       1.544
+      ],
+      [
+       62.3,
+       1.559
+      ],
+      [
+       63.53,
+       1.561
+      ],
+      [
+       65.55,
+       1.56
+      ],
+      [
+       69.37,
+       1.552
+      ],
+      [
+       71.11,
+       1.467
+      ],
+      [
+       72.98,
+       1.433
+      ],
+      [
+       74.53,
+       1.425
+      ],
+      [
+       77.63,
+       1.422
+      ],
+      [
+       84.29,
+       1.422
+      ],
+      [
+       88.19,
+       1.424
+      ],
+      [
+       89.5,
+       1.427
+      ]
+     ]
+    },
+    {
+     "label": "Cell temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       -7.118,
+       25.17
+      ],
+      [
+       18.83,
+       25.29
+      ],
+      [
+       32.08,
+       25.53
+      ],
+      [
+       41.02,
+       26.16
+      ],
+      [
+       51.95,
+       27.39
+      ],
+      [
+       55.66,
+       28.04
+      ],
+      [
+       58.88,
+       28.88
+      ],
+      [
+       61.67,
+       29.84
+      ],
+      [
+       66.16,
+       31.98
+      ],
+      [
+       72.17,
+       35.63
+      ],
+      [
+       75.96,
+       36.84
+      ],
+      [
+       77.41,
+       36.76
+      ],
+      [
+       78.78,
+       36.25
+      ],
+      [
+       84.02,
+       33.61
+      ],
+      [
+       86.65,
+       32.82
+      ],
+      [
+       89.99,
+       32.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX713 NiMH battery charging characteristics at C rate",
+   "page": 4,
+   "conditions": "TA = +25 °C",
+   "x": {
+    "label": "Charge time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Cell voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Cell temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Cell voltage (V)",
+     "points": [
+      [
+       0.08353,
+       1.464
+      ],
+      [
+       1.798,
+       1.482
+      ],
+      [
+       4.535,
+       1.495
+      ],
+      [
+       6.717,
+       1.501
+      ],
+      [
+       9.574,
+       1.506
+      ],
+      [
+       14.96,
+       1.513
+      ],
+      [
+       43.75,
+       1.546
+      ],
+      [
+       50.89,
+       1.556
+      ],
+      [
+       57.27,
+       1.567
+      ],
+      [
+       62.5,
+       1.579
+      ],
+      [
+       65.03,
+       1.587
+      ],
+      [
+       71.94,
+       1.618
+      ],
+      [
+       73.62,
+       1.623
+      ],
+      [
+       75.58,
+       1.627
+      ],
+      [
+       77.97,
+       1.628
+      ],
+      [
+       79.21,
+       1.626
+      ],
+      [
+       80.18,
+       1.619
+      ],
+      [
+       82.38,
+       1.611
+      ],
+      [
+       83.48,
+       1.593
+      ],
+      [
+       87.19,
+       1.487
+      ],
+      [
+       88.38,
+       1.475
+      ],
+      [
+       89.99,
+       1.47
+      ]
+     ]
+    },
+    {
+     "label": "Cell temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       0.4108,
+       25.21
+      ],
+      [
+       20.01,
+       25.29
+      ],
+      [
+       43.26,
+       25.72
+      ],
+      [
+       60.97,
+       26.27
+      ],
+      [
+       68.64,
+       26.81
+      ],
+      [
+       72.18,
+       27.4
+      ],
+      [
+       75.5,
+       28.16
+      ],
+      [
+       79.49,
+       29.65
+      ],
+      [
+       81.29,
+       31.03
+      ],
+      [
+       84.04,
+       34.23
+      ],
+      [
+       84.8,
+       34.44
+      ],
+      [
+       85.82,
+       34.42
+      ],
+      [
+       89.99,
+       33.79
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX713 NiCd battery charging characteristics at C/2 rate",
+   "page": 4,
+   "conditions": "TA = +25 °C",
+   "x": {
+    "label": "Charge time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Cell voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Cell temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Cell voltage (V)",
+     "points": [
+      [
+       -0.5075,
+       1.391
+      ],
+      [
+       6.937,
+       1.406
+      ],
+      [
+       15.15,
+       1.419
+      ],
+      [
+       21.38,
+       1.425
+      ],
+      [
+       45.25,
+       1.438
+      ],
+      [
+       68.72,
+       1.453
+      ],
+      [
+       76.12,
+       1.459
+      ],
+      [
+       108.6,
+       1.489
+      ],
+      [
+       120.2,
+       1.512
+      ],
+      [
+       123.1,
+       1.515
+      ],
+      [
+       126.9,
+       1.517
+      ],
+      [
+       129.2,
+       1.518
+      ],
+      [
+       131.2,
+       1.517
+      ],
+      [
+       148.1,
+       1.502
+      ],
+      [
+       150.9,
+       1.497
+      ],
+      [
+       152.1,
+       1.491
+      ],
+      [
+       153.6,
+       1.44
+      ],
+      [
+       154.4,
+       1.437
+      ],
+      [
+       156.4,
+       1.436
+      ],
+      [
+       159.1,
+       1.436
+      ],
+      [
+       161.1,
+       1.438
+      ]
+     ]
+    },
+    {
+     "label": "Cell temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       -1.229,
+       24.96
+      ],
+      [
+       37.55,
+       24.8
+      ],
+      [
+       66.35,
+       24.91
+      ],
+      [
+       85.64,
+       25.13
+      ],
+      [
+       100.1,
+       25.58
+      ],
+      [
+       110.0,
+       26.21
+      ],
+      [
+       124.3,
+       28.37
+      ],
+      [
+       132.0,
+       29.94
+      ],
+      [
+       147.0,
+       33.72
+      ],
+      [
+       150.4,
+       34.21
+      ],
+      [
+       152.9,
+       34.4
+      ],
+      [
+       155.4,
+       34.38
+      ],
+      [
+       156.6,
+       34.26
+      ],
+      [
+       160.7,
+       32.27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX713 NiMH battery charging characteristics at C/2 rate",
+   "page": 4,
+   "conditions": "TA = +25 °C",
+   "x": {
+    "label": "Charge time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Cell voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Cell temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Cell voltage (V)",
+     "points": [
+      [
+       0.2944,
+       1.41
+      ],
+      [
+       2.819,
+       1.416
+      ],
+      [
+       7.934,
+       1.424
+      ],
+      [
+       16.6,
+       1.434
+      ],
+      [
+       29.78,
+       1.446
+      ],
+      [
+       85.2,
+       1.486
+      ],
+      [
+       102.4,
+       1.5
+      ],
+      [
+       115.4,
+       1.518
+      ],
+      [
+       142.3,
+       1.563
+      ],
+      [
+       147.6,
+       1.57
+      ],
+      [
+       151.8,
+       1.572
+      ],
+      [
+       155.6,
+       1.57
+      ],
+      [
+       158.2,
+       1.567
+      ],
+      [
+       159.8,
+       1.561
+      ],
+      [
+       160.9,
+       1.547
+      ],
+      [
+       160.9,
+       1.52
+      ],
+      [
+       162.2,
+       1.505
+      ],
+      [
+       166.6,
+       1.487
+      ],
+      [
+       171.7,
+       1.478
+      ]
+     ]
+    },
+    {
+     "label": "Cell temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       8.005,
+       25.1
+      ],
+      [
+       70.94,
+       25.16
+      ],
+      [
+       111.1,
+       25.01
+      ],
+      [
+       122.7,
+       25.09
+      ],
+      [
+       133.0,
+       25.32
+      ],
+      [
+       141.0,
+       25.72
+      ],
+      [
+       145.9,
+       26.37
+      ],
+      [
+       151.3,
+       28.22
+      ],
+      [
+       157.7,
+       31.62
+      ],
+      [
+       159.9,
+       32.27
+      ],
+      [
+       161.9,
+       32.18
+      ],
+      [
+       168.6,
+       31.07
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX713 charging characteristics of a fully charged NiMH battery, 5-minute rest between charges",
+   "page": 4,
+   "conditions": "TA = +25 °C",
+   "x": {
+    "label": "Charge time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Cell voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Cell temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Cell voltage (V)",
+     "points": [
+      [
+       0.1568,
+       1.537
+      ],
+      [
+       0.695,
+       1.594
+      ],
+      [
+       0.9791,
+       1.608
+      ],
+      [
+       1.387,
+       1.621
+      ],
+      [
+       1.951,
+       1.631
+      ],
+      [
+       2.703,
+       1.636
+      ],
+      [
+       3.194,
+       1.636
+      ],
+      [
+       4.181,
+       1.634
+      ],
+      [
+       5.604,
+       1.625
+      ],
+      [
+       6.371,
+       1.561
+      ],
+      [
+       7.179,
+       1.513
+      ],
+      [
+       7.645,
+       1.495
+      ],
+      [
+       8.135,
+       1.484
+      ],
+      [
+       8.915,
+       1.472
+      ],
+      [
+       9.464,
+       1.467
+      ],
+      [
+       10.31,
+       1.464
+      ],
+      [
+       16.3,
+       1.463
+      ],
+      [
+       18.51,
+       1.461
+      ]
+     ]
+    },
+    {
+     "label": "Cell temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       0.1105,
+       26.35
+      ],
+      [
+       1.044,
+       26.46
+      ],
+      [
+       2.149,
+       26.81
+      ],
+      [
+       4.333,
+       27.87
+      ],
+      [
+       6.831,
+       29.41
+      ],
+      [
+       9.222,
+       31.41
+      ],
+      [
+       10.67,
+       32.47
+      ],
+      [
+       12.12,
+       33.23
+      ],
+      [
+       12.8,
+       33.41
+      ],
+      [
+       13.48,
+       33.22
+      ],
+      [
+       15.02,
+       32.03
+      ],
+      [
+       15.85,
+       31.62
+      ],
+      [
+       17.95,
+       31.31
+      ],
+      [
+       19.93,
+       31.27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX713 charging characteristics of a fully charged NiMH battery, 5-hour rest between charges",
+   "page": 4,
+   "conditions": "TA = +25 °C",
+   "x": {
+    "label": "Charge time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Cell voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Cell temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Cell voltage (V)",
+     "points": [
+      [
+       0.0006474,
+       1.501
+      ],
+      [
+       1.291,
+       1.528
+      ],
+      [
+       3.057,
+       1.56
+      ],
+      [
+       5.505,
+       1.594
+      ],
+      [
+       7.202,
+       1.609
+      ],
+      [
+       9.062,
+       1.622
+      ],
+      [
+       11.45,
+       1.633
+      ],
+      [
+       12.61,
+       1.635
+      ],
+      [
+       13.84,
+       1.632
+      ],
+      [
+       15.54,
+       1.625
+      ],
+      [
+       16.55,
+       1.619
+      ],
+      [
+       16.79,
+       1.616
+      ],
+      [
+       16.94,
+       1.607
+      ],
+      [
+       17.05,
+       1.577
+      ],
+      [
+       17.48,
+       1.536
+      ],
+      [
+       18.08,
+       1.497
+      ],
+      [
+       18.61,
+       1.484
+      ],
+      [
+       19.39,
+       1.478
+      ],
+      [
+       20.0,
+       1.475
+      ]
+     ]
+    },
+    {
+     "label": "Cell temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       0.0006474,
+       25.12
+      ],
+      [
+       3.403,
+       25.44
+      ],
+      [
+       5.703,
+       25.81
+      ],
+      [
+       9.73,
+       26.82
+      ],
+      [
+       11.07,
+       27.4
+      ],
+      [
+       12.93,
+       28.61
+      ],
+      [
+       15.73,
+       30.69
+      ],
+      [
+       17.13,
+       32.1
+      ],
+      [
+       17.83,
+       32.6
+      ],
+      [
+       18.3,
+       32.72
+      ],
+      [
+       19.11,
+       32.52
+      ],
+      [
+       20.0,
+       31.91
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sony AC-190 radio AC adapter load characteristic, 9 VDC 800 mA",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "High peak",
+     "points": [
+      [
+       0.8795,
+       11.0
+      ],
+      [
+       47.18,
+       10.33
+      ],
+      [
+       202.3,
+       9.97
+      ],
+      [
+       401.3,
+       9.473
+      ],
+      [
+       825.0,
+       8.639
+      ],
+      [
+       996.2,
+       7.991
+      ]
+     ]
+    },
+    {
+     "label": "Low peak",
+     "points": [
+      [
+       0.8795,
+       11.0
+      ],
+      [
+       26.34,
+       10.11
+      ],
+      [
+       998.6,
+       6.359
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sony AC-96N CD player AC adapter load characteristic, 9 VDC 600 mA",
+   "page": 14,
+   "conditions": "",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "High peak",
+     "points": [
+      [
+       37.91,
+       10.99
+      ],
+      [
+       49.49,
+       10.54
+      ],
+      [
+       135.1,
+       9.862
+      ],
+      [
+       996.2,
+       7.209
+      ]
+     ]
+    },
+    {
+     "label": "Low peak",
+     "points": [
+      [
+       26.34,
+       11.0
+      ],
+      [
+       21.71,
+       10.24
+      ],
+      [
+       146.7,
+       9.306
+      ],
+      [
+       998.6,
+       5.459
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Panasonic KX-A11 modem AC adapter load characteristic, 12 VDC 500 mA",
+   "page": 14,
+   "conditions": "",
+   "x": {
+    "label": "Load current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "High peak",
+     "points": [
+      [
+       57.1,
+       17.95
+      ],
+      [
+       117.6,
+       15.69
+      ],
+      [
+       196.9,
+       14.99
+      ],
+      [
+       380.5,
+       12.82
+      ],
+      [
+       601.6,
+       10.99
+      ],
+      [
+       822.7,
+       9.02
+      ]
+     ]
+    },
+    {
+     "label": "Low peak",
+     "points": [
+      [
+       34.16,
+       17.95
+      ],
+      [
+       123.9,
+       14.99
+      ],
+      [
+       374.2,
+       11.84
+      ],
+      [
+       799.8,
+       8.001
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "3 NiMH cells charged with MAX712",
+   "page": 14,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Battery temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Battery voltage (V)",
+     "points": [
+      [
+       0.1782,
+       4.363
+      ],
+      [
+       4.64,
+       4.466
+      ],
+      [
+       8.969,
+       4.517
+      ],
+      [
+       13.67,
+       4.557
+      ],
+      [
+       33.06,
+       4.663
+      ],
+      [
+       52.29,
+       4.785
+      ],
+      [
+       62.43,
+       4.857
+      ],
+      [
+       64.9,
+       4.885
+      ],
+      [
+       69.06,
+       4.885
+      ],
+      [
+       71.93,
+       4.436
+      ],
+      [
+       72.34,
+       4.401
+      ],
+      [
+       73.3,
+       4.368
+      ],
+      [
+       74.75,
+       4.344
+      ],
+      [
+       77.97,
+       4.332
+      ],
+      [
+       80.62,
+       4.33
+      ],
+      [
+       89.67,
+       4.336
+      ]
+     ]
+    },
+    {
+     "label": "Battery temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       0.1782,
+       24.96
+      ],
+      [
+       20.11,
+       25.84
+      ],
+      [
+       28.48,
+       26.34
+      ],
+      [
+       42.43,
+       27.52
+      ],
+      [
+       50.0,
+       28.34
+      ],
+      [
+       56.16,
+       29.11
+      ],
+      [
+       59.68,
+       29.72
+      ],
+      [
+       63.45,
+       30.74
+      ],
+      [
+       69.48,
+       33.83
+      ],
+      [
+       72.5,
+       34.91
+      ],
+      [
+       73.6,
+       35.11
+      ],
+      [
+       74.96,
+       35.17
+      ],
+      [
+       76.15,
+       35.0
+      ],
+      [
+       78.85,
+       32.85
+      ],
+      [
+       80.15,
+       32.27
+      ],
+      [
+       83.66,
+       31.75
+      ],
+      [
+       89.88,
+       31.58
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "NiMH cells charged with MAX713",
+   "page": 14,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Battery temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Battery voltage (V)",
+     "points": [
+      [
+       0.1825,
+       4.363
+      ],
+      [
+       4.644,
+       4.466
+      ],
+      [
+       8.973,
+       4.517
+      ],
+      [
+       13.67,
+       4.557
+      ],
+      [
+       29.1,
+       4.64
+      ],
+      [
+       37.35,
+       4.689
+      ],
+      [
+       45.73,
+       4.746
+      ],
+      [
+       62.82,
+       4.873
+      ],
+      [
+       66.36,
+       4.89
+      ],
+      [
+       69.81,
+       4.892
+      ],
+      [
+       78.29,
+       4.875
+      ],
+      [
+       76.58,
+       4.451
+      ],
+      [
+       77.2,
+       4.376
+      ],
+      [
+       78.18,
+       4.357
+      ],
+      [
+       80.34,
+       4.345
+      ],
+      [
+       90.22,
+       4.339
+      ]
+     ]
+    },
+    {
+     "label": "Battery temperature (T)",
+     "axis": "y2",
+     "points": [
+      [
+       0.46,
+       25.03
+      ],
+      [
+       9.551,
+       25.32
+      ],
+      [
+       19.12,
+       25.8
+      ],
+      [
+       30.45,
+       26.61
+      ],
+      [
+       42.34,
+       27.81
+      ],
+      [
+       53.59,
+       29.49
+      ],
+      [
+       63.01,
+       31.73
+      ],
+      [
+       69.41,
+       34.58
+      ],
+      [
+       73.51,
+       36.7
+      ],
+      [
+       78.01,
+       38.63
+      ],
+      [
+       79.62,
+       38.97
+      ],
+      [
+       81.31,
+       39.03
+      ],
+      [
+       82.4,
+       38.92
+      ],
+      [
+       86.61,
+       38.0
+      ],
+      [
+       90.22,
+       37.4
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical operating circuit",
+   "page": 1,
+   "description": "Linear charger with the battery's load hung across it. The wall cube's positive output is DC IN, held up by a 10 µF capacitor. Q1, a 2N6109 PNP, passes charge current from DC IN through D1 (1N4001) to the battery; DRV sinks Q1's base current, R2 (150 Ω) pulls the base up to DC IN and C4 (0.01 µF) sits across R2. R1 feeds the V+ shunt regulator, bypassed by C1 (1 µF) to BATT-; THI is tied to V+. VLIMIT is tied to REF, and R3 (68 kΩ) with R4 (22 kΩ) divides REF down to TEMP: the fixed divider used in place of thermistors when temperature cutoff is off. TLO goes to BATT-, so there is no cold inhibit. C2 (0.01 µF) compensates the current loop from CC to BATT-. RSENSE runs from the battery's negative terminal (BATT-) to GND, and the load and C3 (10 µF) are connected from BATT+ to GND.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "WC1",
+     "type": "source",
+     "value": "wall cube",
+     "note": "DC source; lowest output above 6 V and 1.5 V over the highest battery voltage"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "polarised, across DC IN"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1",
+     "note": "from the R1 equation: 5 to 20 mA into V+"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.01 µF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "150 Ω"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "2N6109"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "1N4001"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "68 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "22 kΩ"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.01 µF"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "battery"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "RL",
+     "type": "load",
+     "value": "load"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "RSENSE",
+     "note": "0.25 V / IFAST"
+    }
+   ],
+   "notes": [
+    "PGM0 to PGM3 are strapped per Tables 2 and 3 to set the cell count and timeout."
+   ]
+  },
+  {
+   "id": "charging-example",
+   "title": "Charging example: 3 NiMH AA cells at 1 A",
+   "page": 13,
+   "description": "The typical operating circuit with the thermistor network of the temperature-comparator circuit, as used to charge three 1000 mAh Gold Peak GP1000AAH NiMH cells at 1 A from a Sony AC-190 adapter (9 VDC, 800 mA). RSENSE is 0.25 Ω, so the fast-charge current is 1 A; R1 is 200 Ω. PGM0 to V+ and PGM1 to REF set 3 cells; PGM2 and PGM3 to REF set a 90 min timeout with voltage-slope termination on. VLIMIT goes to REF. R3 (10 kΩ) and R4 (15 kΩ) divide REF to set THI, with 0.022 µF on THI; thermistor T1, on the battery, runs from REF to TEMP and T2, at ambient, from TEMP to BATT-, with 1 µF on TEMP. R5 and T3 are left out and TLO is tied to BATT-.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "WC1",
+     "type": "source",
+     "value": "Sony AC-190, 9 VDC 800 mA"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "polarised, across DC IN"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "200 Ω"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.01 µF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "150 Ω"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "2N6109"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "1N4001"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.01 µF"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "15 kΩ"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.022 µF",
+     "note": "on THI"
+    },
+    {
+     "ref": "T1",
+     "type": "resistor",
+     "value": "Alpha Sensors 14A1002",
+     "note": "NTC thermistor in thermal contact with the battery"
+    },
+    {
+     "ref": "T2",
+     "type": "resistor",
+     "value": "Alpha Sensors 14A1002",
+     "note": "NTC thermistor at ambient temperature"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "on TEMP"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "3 x GP1000AAH NiMH, 1000 mAh"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "RL",
+     "type": "load",
+     "value": "load"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "0.25 Ω"
+    }
+   ],
+   "notes": [
+    "Results with each part are the curves '3 NiMH cells charged with MAX712' and 'NiMH cells charged with MAX713'."
+   ]
+  },
+  {
+   "id": "drv-cascode",
+   "title": "DRV pin cascode connection",
+   "page": 9,
+   "description": "Partial circuit for a DC IN above 20 V, or to take dissipation off the chip in linear mode. A 2N3904 NPN sits between DRV and the base of the pass transistor Q1: its emitter on DRV, its collector on Q1's base, and its base on V+, so DRV never sees the full DC IN voltage. R1 from DC IN feeds V+; R2 pulls Q1's base to DC IN. Q1's collector feeds the battery through D1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "J_DCIN",
+     "type": "terminal",
+     "value": "DC IN"
+    },
+    {
+     "ref": "J_OUT",
+     "type": "terminal",
+     "value": "to battery"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "Q1",
+     "note": "power PNP pass transistor"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "2N3904"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "D1"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "trickle-reduction",
+   "title": "Reduction of trickle current for NiMH batteries (linear mode)",
+   "page": 11,
+   "description": "Partial circuit that takes the trickle current below C/16. FASTCHG, pulled up to V+ by 10 kΩ, drives NPN Q2 through another 10 kΩ. During fast charge FASTCHG is low and Q2 is off. In trickle charge FASTCHG releases, Q2 turns on and R7 carries part of the regulated trickle current from the pass-transistor side of D1 round the battery to its negative terminal, so less of it flows in the cells. R7 comes from the R7 equation.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "J_DCIN",
+     "type": "terminal",
+     "value": "DC IN"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "GND"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "Q1",
+     "note": "power PNP pass transistor"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "D1"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "R7",
+     "note": "from the R7 equation"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "FASTCHG pull-up"
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "Q2 base"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "Q2"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "battery"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "RSENSE"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "temp-comparators",
+   "title": "Temperature comparators",
+   "page": 13,
+   "description": "Partial circuit: the thermistor network. T1, in thermal contact with the battery, runs from REF to TEMP, and T2, at ambient, from TEMP to BATT-, so TEMP sits near 1 V when battery and ambient match and rises as the battery warms. R3 and R4 divide REF to set THI, with 0.022 µF on THI. R5 from REF and ambient thermistor T3 to BATT- set TLO, with 0.022 µF on TLO, and 1 µF filters TEMP. T1 and T2 are the same model. For an absolute-temperature cutoff, T2 and T3 can be fixed resistors.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "R3"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "R4"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "R5"
+    },
+    {
+     "ref": "T1",
+     "type": "resistor",
+     "value": "NTC thermistor",
+     "note": "in thermal contact with the battery"
+    },
+    {
+     "ref": "T2",
+     "type": "resistor",
+     "value": "NTC thermistor",
+     "note": "ambient temperature"
+    },
+    {
+     "ref": "T3",
+     "type": "resistor",
+     "value": "NTC thermistor",
+     "note": "ambient temperature"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.022 µF",
+     "note": "on THI"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.022 µF",
+     "note": "on TLO"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "on TEMP"
+    }
+   ],
+   "notes": [
+    "Resistances in the network are chosen between 10 kΩ and 500 kΩ."
+   ]
+  },
+  {
+   "id": "temp-comparators-alt",
+   "title": "Alternative temperature comparator configuration",
+   "page": 13,
+   "description": "Partial circuit for packs whose own thermistor is tied to the pack's negative terminal. The battery thermistor T1 runs from THI to BATT-, under ambient thermistor T2 from REF. R3 and R4 divide REF to set TEMP, with 1 µF on TEMP. R5 from REF and ambient thermistor T3 to BATT- set TLO. THI and TLO each carry 0.022 µF. T2 and T3 can be fixed resistors for an absolute-temperature cutoff.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "R3"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "R4"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "R5"
+    },
+    {
+     "ref": "T1",
+     "type": "resistor",
+     "value": "NTC thermistor",
+     "note": "in thermal contact with the battery"
+    },
+    {
+     "ref": "T2",
+     "type": "resistor",
+     "value": "NTC thermistor",
+     "note": "ambient temperature"
+    },
+    {
+     "ref": "T3",
+     "type": "resistor",
+     "value": "NTC thermistor",
+     "note": "ambient temperature"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.022 µF",
+     "note": "on THI"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.022 µF",
+     "note": "on TLO"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "on TEMP"
+    }
+   ],
+   "notes": [
+    "Resistances in the network are chosen between 10 kΩ and 500 kΩ."
+   ]
+  },
+  {
+   "id": "high-cell-cascode",
+   "title": "Cascoding to accommodate high cell counts for linear-mode circuits",
+   "page": 15,
+   "description": "Partial circuit for more than 11 cells, which keeps BATT+ inside its unpowered rating when DC IN is absent. NPN Q2 sits between the battery's positive terminal (collector) and BATT+ (emitter), its base fed from DC IN through 33 kΩ. DRV drives the base of pass transistor Q1 through 500 Ω, R2 (150 Ω) pulls that base up to DC IN, and Q1 charges the battery through D1.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "J_DCIN",
+     "type": "terminal",
+     "value": "DC IN"
+    },
+    {
+     "ref": "J_BAT",
+     "type": "terminal",
+     "value": "battery positive terminal"
+    },
+    {
+     "ref": "Q1",
+     "type": "pnp",
+     "value": "Q1",
+     "note": "power PNP pass transistor"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "D1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "150 Ω"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "500 Ω"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "33 kΩ"
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "Q2"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "rsense-shunt",
+   "title": "Shunting RSENSE for efficiency improvement",
+   "page": 15,
+   "description": "Partial circuit that bypasses the sense resistor while the charger is unpowered, for stacks of more than 4 cells. A low-on-resistance logic-level N-channel MOSFET sits across RSENSE, drain on the battery's negative terminal and source on GND. Its gate is pulled up to the battery's positive side by 100 kΩ, so it conducts when the charger is off. An NPN whose base is fed from V+ through 100 kΩ pulls the gate to GND while V+ is up, leaving RSENSE in circuit during charging.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "J_IN",
+     "type": "terminal",
+     "value": "from Q1 collector"
+    },
+    {
+     "ref": "J_OUT",
+     "type": "terminal",
+     "value": "battery output"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "D1"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "battery, >4 cells"
+    },
+    {
+     "ref": "R10",
+     "type": "resistor",
+     "value": "100 kΩ",
+     "note": "gate pull-up"
+    },
+    {
+     "ref": "R11",
+     "type": "resistor",
+     "value": "100 kΩ",
+     "note": "NPN base"
+    },
+    {
+     "ref": "Q3",
+     "type": "npn",
+     "value": "NPN"
+    },
+    {
+     "ref": "M1",
+     "type": "nmos",
+     "value": "logic-level N-channel power MOSFET",
+     "note": "low on-resistance"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "RSENSE"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "logic-status",
+   "title": "Logic-level status outputs",
+   "page": 15,
+   "description": "Two logic signals for a host. V+ serves directly as a power flag: 0 V with no input, 5 V with the charger powered. FASTCHG, pulled up to the host's VCC by 10 kΩ, reads 0 V during fast charge and VCC in trickle charge or with no power.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "J_PWR",
+     "type": "terminal",
+     "value": "power status: 0 V no power, 5 V power"
+    },
+    {
+     "ref": "J_VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "J_FAST",
+     "type": "terminal",
+     "value": "charge status: 0 V fast, VCC trickle or no power"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led-status",
+   "title": "LED connection for status outputs",
+   "page": 15,
+   "description": "Two indicator LEDs in one string. From DC IN, R1 feeds the charge-power LED into V+, so it lights whenever the shunt regulator draws current. From V+, a resistor of 470 Ω or more feeds the fast-charge LED into FASTCHG, which lights it only while FASTCHG sinks current during fast charge.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX712/MAX713"
+    },
+    {
+     "ref": "J_DCIN",
+     "type": "terminal",
+     "value": "DC IN"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "charge power"
+    },
+    {
+     "ref": "R12",
+     "type": "resistor",
+     "value": "470 Ω min"
+    },
+    {
+     "ref": "D3",
+     "type": "led",
+     "value": "fast charge"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Fast-charge current from capacity and time",
+   "expr": "IFAST = (battery capacity in mAh) / (charge time in hours)",
+   "where": {
+    "IFAST": "fast-charge current, mA"
+   },
+   "note": "Charge efficiency can be as low as 80 %, so a C/3 charge can take 3 h 45 min.",
+   "page": 6
+  },
+  {
+   "name": "Pass-transistor dissipation",
+   "expr": "PD(PNP) = (VDCIN(max, loaded) - VBATT(min)) × ICHARGE",
+   "where": {
+    "VDCIN(max, loaded)": "highest wall-cube voltage under load",
+    "VBATT(min)": "lowest battery voltage",
+    "ICHARGE": "charge current, A"
+   },
+   "note": "Worst-case dissipation of Q1 and D1 together in a linear design, in watts.",
+   "page": 6
+  },
+  {
+   "name": "V+ feed resistor",
+   "expr": "R1 = (VDCIN(min) - 5 V) / 5 mA",
+   "where": {
+    "VDCIN(min)": "lowest wall-cube voltage"
+   },
+   "note": "For a fixed or narrow input range; current into V+ is kept between 5 mA and 20 mA.",
+   "page": 6
+  },
+  {
+   "name": "Sense resistor",
+   "expr": "RSENSE = 0.25 V / IFAST",
+   "where": {
+    "IFAST": "fast-charge current, A"
+   },
+   "note": "",
+   "page": 6
+  },
+  {
+   "name": "Minimum DC input voltage",
+   "expr": "VDCIN(min) = 1.5 V + 1.9 V × N",
+   "where": {
+    "N": "largest number of cells to be charged"
+   },
+   "note": "Below this the part can swing between fast and trickle charge and never finish fast charge.",
+   "page": 10
+  },
+  {
+   "name": "Maximum current into V+",
+   "expr": "IV+(max) = (VDCIN(max) - 5 V) / R1",
+   "where": {
+    "VDCIN(max)": "highest DC IN voltage"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Shunt-regulator dissipation",
+   "expr": "PSHUNT = 5 V × IV+(max)",
+   "where": {},
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Trickle-current shunt resistor",
+   "expr": "R7 = (VBATT + 0.4 V) / (ITRICKLE - IBATT)",
+   "where": {
+    "VBATT": "battery voltage when charged",
+    "ITRICKLE": "the controller's trickle-charge current setting",
+    "IBATT": "wanted battery trickle current"
+   },
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Maximum BATT+ voltage",
+   "expr": "VBATT+(max) = VLIMIT × N",
+   "where": {
+    "N": "cell count set by PGM0 and PGM1"
+   },
+   "note": "Referred to BATT-, for VLIMIT below 2.5 V.",
+   "page": 11
+  },
+  {
+   "name": "Output capacitor without a battery",
+   "expr": "COUT = (50 × ILOAD) / (VOUT × BWVRL)",
+   "where": {
+    "ILOAD": "external load current, A",
+    "VOUT": "programmed output voltage, VLIMIT × number of cells",
+    "BWVRL": "voltage-loop bandwidth, Hz; 10,000 recommended"
+   },
+   "note": "COUT in farads, and more than 10 µF.",
+   "page": 12
+  },
+  {
+   "name": "Current-loop bandwidth",
+   "expr": "BWCRL = gm / C2",
+   "where": {
+    "gm": "0.0018 S",
+    "C2": "CC compensation capacitor, F"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Pass-transistor pole",
+   "expr": "fB = fT / B0",
+   "where": {
+    "fT": "Q1 transition frequency, Hz",
+    "B0": "Q1 DC current gain"
+   },
+   "note": "The current loop is stable when BWCRL < fB.",
+   "page": 12
+  },
+  {
+   "name": "DRV dissipation",
+   "expr": "PDRV = IDRV × VDRV",
+   "where": {
+    "IDRV": "current into DRV",
+    "VDRV": "voltage on DRV"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Fast-charge current from RSENSE",
+   "expr": "IFAST = 0.25 V / RSENSE",
+   "where": {},
+   "note": "",
+   "page": 10
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Two charge states",
+   "page": 8,
+   "text": "The part is always either fast charging or trickle charging. It forces a constant current into the battery and watches three things to decide when it is full: the slope of battery voltage, battery temperature and elapsed time. Any one of them ends fast charge."
+  },
+  {
+   "topic": "Power-up and undervoltage lockout",
+   "page": 8,
+   "text": "With no input the chip draws negligible current from the battery. When DC IN arrives, power-on reset holds trickle charge; when reset clears, fast charge begins provided the battery voltage divided by the cell count is above the 0.4 V undervoltage lockout. A negative voltage slope then ends fast charge, and on removal of input the drain falls back to negligible."
+  },
+  {
+   "topic": "Cold battery at start",
+   "page": 8,
+   "text": "A pack too cold for fast charge stays in trickle charge until it warms to a safe temperature; fast charge then starts, and ends when the temperature passes the THI limit."
+  },
+  {
+   "topic": "Battery insertion",
+   "page": 9,
+   "text": "With no battery, the output is regulated at VLIMIT times the cell count. When a battery is inserted the part sees current flow into it and goes to fast charge, then to trickle once full. If the battery is pulled out it stays in trickle and returns to regulating the output voltage."
+  },
+  {
+   "topic": "Choosing the DC source",
+   "page": 6,
+   "text": "The source's lowest output, ripple included, must be above 6 V and at least 1.5 V higher than the highest battery voltage during charge. Correct fast-charge termination depends on meeting this. Plain wall cubes (transformer, bridge, capacitor) have large 120 Hz ripple, so the low point of the ripple at full load is what counts. Pack voltage during fast charge can reach 1.9 V per cell, and the 1.5 V margin covers Q1, D1 and RSENSE."
+  },
+  {
+   "topic": "Getting started",
+   "page": 6,
+   "text": "Pick termination per Table 1 and the cell manufacturer's limits; choose the rate (C/4 is the slowest, since the longest timeout is 264 min); set the cell count with PGM0/PGM1 and recheck it whenever the cell count changes; choose the DC source; work out Q1 and D1 dissipation; size R1 for 5 to 20 mA into V+; choose RSENSE; set the straps before power is applied. The timeout is set to 1.5 to 2 times the expected charge time, for example 3 or 4 hours at C/2."
+  },
+  {
+   "topic": "A/D input range",
+   "page": 6,
+   "text": "The voltage-slope converter sees battery voltage divided by the programmed cell count, and that must stay between 1.4 V and 1.9 V. A battery with more or fewer cells than programmed can push it out of range and disable voltage-slope termination."
+  },
+  {
+   "topic": "Supply and V+ current",
+   "page": 10,
+   "text": "With no wall cube the part is idle and takes 5 µA at most from the battery; D1 blocks current back into DRV. On connection, C1 charges through R1 (or a current-limiting diode) to 5 V, the shunt regulator starts sinking current to hold V+ at 5 V, and fast charge begins. R1 or the limiting part must pass at least 5 mA at the lowest DC IN. Above 20 V of DC IN, a cascode transistor in series with DRV keeps DRV within its rating. Shunt current and DRV sink current both heat the chip, and their sum must stay inside the package dissipation limit."
+  },
+  {
+   "topic": "Entering fast charge",
+   "page": 10,
+   "text": "Fast charge begins at power-up with a battery already fitted, when battery current is detected (GND below BATT-), TEMP lies between TLO and THI, and the cell voltage is above the lockout; or at battery insertion under the same temperature and voltage conditions."
+  },
+  {
+   "topic": "Current regulation",
+   "page": 10,
+   "text": "In fast charge the loop holds BATT- to GND at 250 mV: DRV sinks more current when the sense voltage is below 250 mV and less when it is above. RSENSE alone therefore sets the fast-charge current."
+  },
+  {
+   "topic": "Trickle charge",
+   "page": 10,
+   "text": "Trickle current is set by raising the gain of the current-sense amplifier, which lowers the regulated sense voltage. With IFAST at C/2, C, 2C or 4C and PGM3 matched per Table 5, the trickle is C/16; other fast rates give a trickle that is not exactly C/16."
+  },
+  {
+   "topic": "Non-standard trickle example",
+   "page": 11,
+   "text": "Two Panasonic P-50AA 500 mAh AA NiCd cells at C/3, 264 min timeout, negative-slope cutoff on and a 6 V minimum input: MAX713 with PGM0 = V+, PGM1 = open, PGM2 = BATT-, PGM3 = BATT-, RSENSE = 1.5 Ω (IFAST = 167 mA) and R1 = 200 Ω. With PGM3 on BATT-, the trickle sense voltage is 31.3 mV, a current of 20.7 mA, which is C/25 rather than C/16."
+  },
+  {
+   "topic": "Regulation loop",
+   "page": 11,
+   "text": "One loop controls both the BATT+ to BATT- voltage and the battery current: DRV sink current is cut back when the output exceeds VLIMIT times the cell count or the battery current exceeds its programmed value. In a linear charger this lets the battery be removed without interrupting the load while the charger is powered, and, with the load wired as in the typical circuit, battery current stays regulated whatever the load draws, as long as the source can supply both."
+  },
+  {
+   "topic": "Voltage loop and VLIMIT",
+   "page": 11,
+   "text": "With VLIMIT below 2.5 V, BATT+ is limited to VLIMIT times the programmed cell count. VLIMIT belongs between 1.9 V and 2.5 V; set below the highest cell voltage it can stop fast charge from terminating properly. Tying VLIMIT to REF is the normal choice. With no battery the part does not regulate current; it holds BATT+ at that maximum voltage."
+  },
+  {
+   "topic": "Output capacitor",
+   "page": 12,
+   "text": "The output filter capacitor stabilises the voltage loop. A large one is needed only when the charger has to supply the load with no battery fitted; then it is sized by the COUT equation."
+  },
+  {
+   "topic": "Current-loop stability",
+   "page": 12,
+   "text": "C2 sets the current-loop bandwidth, which must stay below the PNP's own pole, found as a single-pole fT/B0 response from its data. The DRV current-voltage product heats the chip; the cascode connection reduces it."
+  },
+  {
+   "topic": "Voltage-slope cutoff",
+   "page": 12,
+   "text": "The internal converter resolves 2.5 mV. Each decision cycle is two tA intervals (21 s to 168 s, Table 3), each followed by a 5 ms battery-voltage conversion; the two readings are compared, and if fast charge does not end the cycle starts again. A MAX712 ends fast charge when the reading has not changed; a MAX713 ends it when the reading has fallen by 2.5 mV per cell or more. The two parts differ in nothing else."
+  },
+  {
+   "topic": "Temperature cutoff",
+   "page": 12,
+   "text": "Negative-coefficient thermistors sense over- and under-temperature. With T1 and T2 the same model, TEMP reads 1 V above BATT- with battery and surroundings at one temperature. Once TEMP climbs past THI, fast charge stops for good; a later drop below THI does not restart it. If TLO is above TEMP at start-up, fast charge waits until TEMP exceeds TLO. Cold inhibit is off with TLO tied to BATT- and R5, T3 and the TLO capacitor left out. Temperature cutoff is off altogether with THI tied to V+, TLO tied to BATT-, the thermistor network (T1 to T3, R3 to R5 and their capacitors) left out, and a 68 kΩ / 22 kΩ divider from REF to TEMP to BATT-."
+  },
+  {
+   "topic": "Thermistor on the pack's negative terminal",
+   "page": 13,
+   "text": "Packs with a built-in thermistor tied to the negative terminal use the alternative comparator network. T2 and T3 can be fixed resistors when an absolute-temperature cutoff is acceptable. All network resistances are chosen between 10 kΩ and 500 kΩ."
+  },
+  {
+   "topic": "Battery-charging examples",
+   "page": 13,
+   "text": "Three Gold Peak GP1000AAH 1000 mAh NiMH AA cells charged at 1 A with each part, on the typical circuit with the temperature-comparator thermistors: Sony AC-190 (9 VDC, 800 mA) input; PGM0 = V+, PGM1 = REF, PGM2 = REF, PGM3 = REF; R1 = 200 Ω, R2 = 150 Ω, RSENSE = 0.25 Ω; C1 = 1 µF, C2 = 0.01 µF, C3 = 10 µF, VLIMIT = REF; R3 = 10 kΩ, R4 = 15 kΩ; T1 and T2 Alpha Sensors 14A1002; R5 and T3 omitted, TLO = BATT-."
+  },
+  {
+   "topic": "High series cell count",
+   "page": 14,
+   "text": "BATT+ is rated higher when the part is powered. Above 11 cells the BATT+ voltage has to be limited by external parts while DC IN is absent, for example with the cascode transistor of the high-cell-count circuit."
+  },
+  {
+   "topic": "Efficiency during discharge",
+   "page": 14,
+   "text": "RSENSE costs a little efficiency while the battery is in use, which matters only when RSENSE is large next to the stack's internal resistance. A MOSFET can short RSENSE whenever the charger is unpowered."
+  },
+  {
+   "topic": "Status outputs",
+   "page": 14,
+   "text": "V+ and FASTCHG give charger status as logic levels, or can drive LEDs for charge power and fast charge."
+  },
+  {
+   "topic": "PGM pin inputs",
+   "page": 7,
+   "text": "Inside, each of PGM0 to PGM3 is tied to V+ by 100 kΩ and to REF by 100 kΩ."
+  }
+ ]
+}

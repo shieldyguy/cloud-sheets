@@ -1,0 +1,4961 @@
+{
+ "sheet": 1,
+ "name": "TMC2209-LA-T",
+ "kind": "motor_driver",
+ "manufacturer": "TRINAMIC",
+ "title": "Two-phase bipolar stepper motor driver, STEP/DIR with single-wire UART, 2.8 A peak",
+ "source": {
+  "revision": "Rev. 1.03, 2019-06-26",
+  "pages": 83
+ },
+ "summary": "The TMC2209 drives one two-phase bipolar stepper motor from 4.75 V to 29 V with two integrated H-bridges of 170 mΩ per switch, up to 2 A RMS (2.8 A peak) per coil. Motion comes from STEP and DIR inputs, interpolated to 256 microsteps, or from an internal step generator. It offers a silent voltage-mode chopper (StealthChop2) and a cycle-by-cycle current chopper (SpreadCycle), sensorless load and stall measurement (StallGuard4), load-adaptive current (CoolStep), current sensing by external resistors or by MOSFET on-resistance, and configuration by pins, OTP or a single-wire UART. It comes in a 5 mm x 5 mm QFN28 with exposed pad.",
+ "key_figures": [
+  [
+   "Motor supply",
+   "4.75 V to 29 V (5.5 V to 29 V with the internal regulator)"
+  ],
+  [
+   "Coil current",
+   "1.4 A RMS design guideline, 2.0 A RMS with duty limit, 2.8 A peak"
+  ],
+  [
+   "RDSon",
+   "0.170 Ω typ high side and low side at 25 °C"
+  ],
+  [
+   "Microsteps",
+   "8, 16, 32, 64 by pins; up to 256 by UART, interpolated to 256"
+  ],
+  [
+   "Interface",
+   "STEP/DIR, single-wire UART 9000 baud to fCLK/16, four addresses"
+  ],
+  [
+   "Standby supply current",
+   "160 µA typ"
+  ],
+  [
+   "Clock",
+   "12 MHz internal, or external 4 MHz to 16 MHz"
+  ],
+  [
+   "Package",
+   "QFN28 5 x 5 mm, 0.5 mm pitch, exposed pad"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "order code",
+   "PN",
+   "description",
+   "size [mm2]"
+  ],
+  "rows": [
+   [
+    "TMC2209-LA",
+    "00-0173",
+    "StealthChop standalone driver; QFN28 (RoHS compliant)",
+    "5 x 5"
+   ],
+   [
+    "TMC2209-LA-T",
+    "00-0173-T",
+    "as TMC2209-LA, tape on reel packing",
+    ""
+   ],
+   [
+    "TMC2209-EVAL",
+    "40-0169",
+    "Evaluation board for TMC2209",
+    "85 x 55"
+   ],
+   [
+    "ESELSBRÜCKE",
+    "40-0098",
+    "Connector board for Landungsbrücke",
+    "61 x 38"
+   ],
+   [
+    "LANDUNGSBRÜCKE",
+    "40-0167",
+    "Baseboard for TMC2209-EVAL and further evaluation boards",
+    "85 x 55"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "QFN28",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "OB2",
+     "type": "power out",
+     "function": "Coil B, second output."
+    },
+    {
+     "pin": "2",
+     "name": "ENN",
+     "type": "DI",
+     "function": "Driver enable, active low: a high level turns the power stage off and lets every motor output float."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; tie to the ground plane right at the pin."
+    },
+    {
+     "pin": "4",
+     "name": "CPO",
+     "type": "analog",
+     "function": "Charge pump capacitor, output side."
+    },
+    {
+     "pin": "5",
+     "name": "CPI",
+     "type": "analog",
+     "function": "Charge pump capacitor, input side; 22 nF 50 V from CPO."
+    },
+    {
+     "pin": "6",
+     "name": "VCP",
+     "type": "analog",
+     "function": "Charge pump voltage; 100 nF to VS."
+    },
+    {
+     "pin": "7",
+     "name": "SPREAD",
+     "type": "DI (pd)",
+     "function": "Chopper select: low gives StealthChop, high gives SpreadCycle; may stay open."
+    },
+    {
+     "pin": "8",
+     "name": "5VOUT",
+     "type": "power out",
+     "function": "Internal 5 V regulator output; 2.2 µF to 4.7 µF ceramic to GND close to the pin, with the shortest loop back to the GND pad."
+    },
+    {
+     "pin": "9",
+     "name": "MS1_AD0",
+     "type": "DI (pd)",
+     "function": "Microstep select bit MS1 with pull-down; in UART use, address bit 0."
+    },
+    {
+     "pin": "10",
+     "name": "MS2_AD1",
+     "type": "DI (pd)",
+     "function": "Microstep select bit MS2 with pull-down; in UART use, address bit 1. MS2, MS1 = 00: 1/8, 01: 1/32, 10: 1/64, 11: 1/16."
+    },
+    {
+     "pin": "11",
+     "name": "DIAG",
+     "type": "DO",
+     "function": "Diagnostics and stall output, high on a stall or driver error; ENN high resets the error."
+    },
+    {
+     "pin": "12",
+     "name": "INDEX",
+     "type": "DO",
+     "function": "Index output, configurable; pulses at the index position."
+    },
+    {
+     "pin": "13",
+     "name": "CLK",
+     "type": "DI",
+     "function": "Clock input: short to GND for the internal oscillator, or feed an external clock."
+    },
+    {
+     "pin": "14",
+     "name": "PDN_UART",
+     "type": "DIO",
+     "function": "Power-down control, low selects automatic standstill current reduction; also the single-wire UART data line, where the power-down function can be switched off."
+    },
+    {
+     "pin": "15",
+     "name": "VCC_IO",
+     "type": "power in",
+     "function": "Supply for all digital pins, 3.3 V to 5 V."
+    },
+    {
+     "pin": "16",
+     "name": "STEP",
+     "type": "DI",
+     "function": "Step input."
+    },
+    {
+     "pin": "17",
+     "name": "VREF",
+     "type": "AI",
+     "function": "Current scaling input: a voltage sets the scale, or with internal sensing a current into the pin sets it."
+    },
+    {
+     "pin": "18",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; tie to the ground plane right at the pin."
+    },
+    {
+     "pin": "19",
+     "name": "DIR",
+     "type": "DI (pd)",
+     "function": "Direction input with pull-down."
+    },
+    {
+     "pin": "20",
+     "name": "STDBY",
+     "type": "DI (pd)",
+     "function": "Standby: a high level shuts off the internal supply regulator for a low-power state. 100 kΩ pull-down; may stay open. ENN and VREF should also be at 0 V during standby."
+    },
+    {
+     "pin": "21",
+     "name": "OA2",
+     "type": "power out",
+     "function": "Coil A, second output."
+    },
+    {
+     "pin": "22",
+     "name": "VS",
+     "type": "power in",
+     "function": "Motor supply; place filter capacitance close by with the shortest loop to the GND pad."
+    },
+    {
+     "pin": "23",
+     "name": "BRA",
+     "type": "analog",
+     "function": "Coil A sense resistor connection; resistor to GND close to the pin, or pin straight to GND with internal sensing."
+    },
+    {
+     "pin": "24",
+     "name": "OA1",
+     "type": "power out",
+     "function": "Coil A, first output."
+    },
+    {
+     "pin": "25",
+     "name": "-",
+     "type": "unused",
+     "function": "Not used; may be tied to GND to ease routing."
+    },
+    {
+     "pin": "26",
+     "name": "OB1",
+     "type": "power out",
+     "function": "Coil B, first output."
+    },
+    {
+     "pin": "27",
+     "name": "BRB",
+     "type": "analog",
+     "function": "Coil B sense resistor connection; resistor to GND close to the pin, or pin straight to GND with internal sensing."
+    },
+    {
+     "pin": "28",
+     "name": "VS",
+     "type": "power in",
+     "function": "Motor supply; place filter capacitance close by with the shortest loop to the GND pad."
+    },
+    {
+     "pin": "EP",
+     "name": "PAD",
+     "type": "ground",
+     "function": "Exposed die pad: ground for the power stages and analog circuits and the heat path; solder to a ground plane with as many vias as fit."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 72,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage operating with inductive load",
+     "VVS",
+     "-0.5",
+     "32",
+     "V"
+    ],
+    [
+     "Supply and bridge voltage max. *)",
+     "VVMAX",
+     "",
+     "33",
+     "V"
+    ],
+    [
+     "I/O supply voltage",
+     "VVIO",
+     "-0.5",
+     "5.5",
+     "V"
+    ],
+    [
+     "Digital supply voltage (when using external supply)",
+     "V5VOUT",
+     "-0.5",
+     "5.5",
+     "V"
+    ],
+    [
+     "Logic input voltage",
+     "VI",
+     "-0.5",
+     "VVIO+0.5",
+     "V"
+    ],
+    [
+     "VREF input voltage",
+     "VVREF",
+     "-0.5",
+     "6",
+     "V"
+    ],
+    [
+     "Maximum current to / from digital pins and analog low voltage I/Os",
+     "IIO",
+     "",
+     "+/-10",
+     "mA"
+    ],
+    [
+     "5V regulator output current (internal plus external load)",
+     "I5VOUT",
+     "",
+     "25",
+     "mA"
+    ],
+    [
+     "5V regulator continuous power dissipation (VVM-5V) * I5VOUT",
+     "P5VOUT",
+     "",
+     "0.5",
+     "W"
+    ],
+    [
+     "Power bridge repetitive output current",
+     "IOx",
+     "",
+     "3",
+     "A"
+    ],
+    [
+     "Junction temperature",
+     "TJ",
+     "-50",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature",
+     "TSTG",
+     "-55",
+     "150",
+     "°C"
+    ],
+    [
+     "ESD-Protection for interface pins in application (Human body model, HBM)",
+     "VESDAP",
+     "",
+     "4",
+     "kV"
+    ],
+    [
+     "ESD-Protection for handling (Human body model, HBM)",
+     "VESD",
+     "",
+     "1",
+     "kV"
+    ]
+   ],
+   "notes": [
+    "*) Fast output edges together with body-diode reverse recovery make the supply ring on any stray inductance in the GND and VS paths, sense resistors included; a few volts of overshoot are easily reached, which matters when running close to the voltage limit.",
+    "VREF: a VREF voltage more than 10 % above both VCC_IO and 5VOUT switches the part into a test mode.",
+    "No more than one rating should be approached at a time for long periods."
+   ]
+  },
+  {
+   "title": "Operational range",
+   "page": 72,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Junction temperature",
+     "TJ",
+     "-40",
+     "125",
+     "°C"
+    ],
+    [
+     "Supply voltage (using internal +5V regulator)",
+     "VVS",
+     "5.5",
+     "29",
+     "V"
+    ],
+    [
+     "Supply voltage (using internal +5V regulator) for OTP programming",
+     "VVS",
+     "6",
+     "29",
+     "V"
+    ],
+    [
+     "Supply voltage (internal +5V regulator bridged: V5VOUT=VVS)",
+     "VVS",
+     "4.7",
+     "5.4",
+     "V"
+    ],
+    [
+     "I/O supply voltage",
+     "VVIO",
+     "3.00",
+     "5.25",
+     "V"
+    ],
+    [
+     "I/O supply voltage during standby",
+     "VVIO",
+     "1.50",
+     "5.25",
+     "V"
+    ],
+    [
+     "VCC voltage when using optional external source (supplies digital logic and charge pump)",
+     "VVCC",
+     "4.6",
+     "5.25",
+     "V"
+    ],
+    [
+     "RMS motor coil current per coil (value for design guideline)",
+     "IRMS",
+     "",
+     "1.4",
+     "A"
+    ],
+    [
+     "RMS motor coil current per coil with duty cycle limit, e.g. 1s on, 1s standby (value for design guideline)",
+     "IRMS",
+     "",
+     "2.0",
+     "A"
+    ],
+    [
+     "Peak output current per motor coil output (sine wave peak) using external or internal current sensing",
+     "IOx",
+     "",
+     "2.8",
+     "A"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Power supply current",
+   "page": 73,
+   "conditions": "VVS = VVSA = 24.0V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Total supply current, standby",
+     "IS",
+     "ENN=0V, VREF=0V",
+     "",
+     "160",
+     "300",
+     "µA"
+    ],
+    [
+     "Total supply current, driver disabled IVS",
+     "IS",
+     "fCLK=12MHz",
+     "",
+     "7",
+     "10",
+     "mA"
+    ],
+    [
+     "Total supply current, operating, IVS",
+     "IS",
+     "fCLK=12MHz, 35kHz chopper, no load",
+     "",
+     "7.5",
+     "",
+     "mA"
+    ],
+    [
+     "Supply current, driver disabled, dependency on CLK frequency",
+     "IVS",
+     "fCLK variable, additional to IVS0",
+     "",
+     "0.3",
+     "",
+     "mA/MHz"
+    ],
+    [
+     "Internal current consumption from 5V supply on VCC pin",
+     "IVCC",
+     "fCLK=12MHz, 35kHz chopper",
+     "",
+     "4.5",
+     "",
+     "mA"
+    ],
+    [
+     "IO supply current (typ. at 3.3V)",
+     "IVIO",
+     "no load on outputs, inputs at VIO or GND; excludes pull-down resistors",
+     "",
+     "15",
+     "30",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "Min and max cover the full specified supply range unless a row says otherwise; typical figures are the mean of parts measured at +25 °C."
+   ]
+  },
+  {
+   "title": "Motor driver section",
+   "page": 73,
+   "conditions": "VVS = 24.0V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RDSON lowside MOSFET",
+     "RONL",
+     "measure at 200mA, 25°C, static state",
+     "",
+     "0.170",
+     "0.21",
+     "Ω"
+    ],
+    [
+     "RDSON highside MOSFET",
+     "RONH",
+     "measure at 200mA, 25°C, static state",
+     "",
+     "0.170",
+     "0.21",
+     "Ω"
+    ],
+    [
+     "slope, MOSFET turning on",
+     "tSLPON",
+     "measured at 700mA load current (resistive load)",
+     "35",
+     "60",
+     "150",
+     "ns"
+    ],
+    [
+     "slope, MOSFET turning off",
+     "tSLPOFF",
+     "measured at 700mA load current (resistive load)",
+     "35",
+     "60",
+     "150",
+     "ns"
+    ],
+    [
+     "Current sourcing, driver off",
+     "IOIDLE",
+     "OXX pulled to GND",
+     "120",
+     "180",
+     "250",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Charge pump",
+   "page": 73,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Charge pump output voltage",
+     "VVCP-VVS",
+     "operating, typical fchop<40kHz",
+     "4.0",
+     "VVCC - 0.22",
+     "VVCC",
+     "V"
+    ],
+    [
+     "Charge pump voltage threshold for undervoltage detection",
+     "VVCP-VVS",
+     "using internal 5V regulator voltage",
+     "3.3",
+     "3.6",
+     "4.0",
+     "V"
+    ],
+    [
+     "Charge pump frequency",
+     "fCP",
+     "",
+     "",
+     "1/16 fCLKOSC",
+     "",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Linear regulator",
+   "page": 74,
+   "conditions": "VVS = VVSA = 24.0V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output voltage",
+     "V5VOUT",
+     "I5VOUT = 0mA, TJ = 25°C",
+     "4.80",
+     "5.0",
+     "5.25",
+     "V"
+    ],
+    [
+     "Output resistance",
+     "R5VOUT",
+     "Static load",
+     "",
+     "1",
+     "",
+     "Ω"
+    ],
+    [
+     "Deviation of output voltage over the full temperature range",
+     "V5VOUT(DEV)",
+     "I5VOUT = 5mA, TJ = full range",
+     "",
+     "+/-30",
+     "+/-100",
+     "mV"
+    ],
+    [
+     "Deviation of output voltage over the full supply voltage range",
+     "V5VOUT(DEV)",
+     "I5VOUT = 5mA, VVS = variable",
+     "",
+     "+/-15",
+     "+/-30",
+     "mV / 10V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Clock oscillator and input",
+   "page": 74,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Clock oscillator frequency (factory calibrated)",
+     "fCLKOSC",
+     "tJ=-50°C",
+     "",
+     "11.7",
+     "",
+     "MHz"
+    ],
+    [
+     "Clock oscillator frequency (factory calibrated)",
+     "fCLKOSC",
+     "tJ= 25°C",
+     "11.5",
+     "12.0",
+     "12.5",
+     "MHz"
+    ],
+    [
+     "Clock oscillator frequency (factory calibrated)",
+     "fCLKOSC",
+     "tJ=150°C",
+     "",
+     "12.1",
+     "",
+     "MHz"
+    ],
+    [
+     "External clock frequency (operating)",
+     "fCLK",
+     "Typ. at 40%/60% dutycycle, Max at 50% dutycycle",
+     "4",
+     "10-13.4",
+     "16",
+     "MHz"
+    ],
+    [
+     "External clock high / low level time",
+     "tCLKH / tCLKL",
+     "CLK driven to 0.1 VVIO / 0.9 VVIO",
+     "16",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "External clock first pulse to trigger switching to external CLK",
+     "tCLKH / tCLKL",
+     "CLK driven high",
+     "30",
+     "25",
+     "",
+     "ns"
+    ],
+    [
+     "External clock timeout detection in cycles of internal fCLKOSC",
+     "xtimeout",
+     "External clock stuck at low or high",
+     "32",
+     "",
+     "48",
+     "cycles fCLKOSC"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Detector levels",
+   "page": 75,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VVS undervoltage threshold for RESET",
+     "VUV_VS",
+     "VVS rising",
+     "3.5",
+     "4.2",
+     "4.6",
+     "V"
+    ],
+    [
+     "V5VOUT undervoltage threshold for RESET",
+     "VUV_5VOUT",
+     "V5VOUT rising",
+     "",
+     "3.5",
+     "",
+     "V"
+    ],
+    [
+     "VVCC_IO undervoltage threshold for RESET",
+     "VUV_VIO",
+     "VVCC_IO rising (delay typ. 10µs)",
+     "2.1",
+     "2.55",
+     "3.0",
+     "V"
+    ],
+    [
+     "VVCC_IO undervoltage detector hysteresis",
+     "VUV_VIOHYST",
+     "",
+     "",
+     "0.3",
+     "",
+     "V"
+    ],
+    [
+     "Short to GND detector threshold (VVS - VOx)",
+     "VOS2G",
+     "",
+     "2",
+     "2.5",
+     "3",
+     "V"
+    ],
+    [
+     "Short to VS detector threshold (VOx)",
+     "VOS2VS",
+     "",
+     "1.6",
+     "2",
+     "2.3",
+     "V"
+    ],
+    [
+     "Short detector delay (high side / low side switch on to short detected)",
+     "tS2G",
+     "High side output clamped to VSP-3V",
+     "0.8",
+     "1.3",
+     "2",
+     "µs"
+    ],
+    [
+     "Overtemperature prewarning 120°C",
+     "tOTPW",
+     "Temperature rising",
+     "100",
+     "120",
+     "140",
+     "°C"
+    ],
+    [
+     "Overtemperature shutdown or prewarning 143°C (appr. 153°C IC peak temp.)",
+     "tOT143",
+     "Temperature rising",
+     "128",
+     "143",
+     "163",
+     "°C"
+    ],
+    [
+     "Overtemperature shutdown 150°C (appr. 160°C IC peak temp.)",
+     "tOT150",
+     "Temperature rising",
+     "135",
+     "150",
+     "170",
+     "°C"
+    ],
+    [
+     "Overtemperature shutdown 157°C (appr. 167°C IC peak temp.)",
+     "tOT157",
+     "Temperature rising",
+     "142",
+     "157",
+     "177",
+     "°C"
+    ],
+    [
+     "Difference between temperature detector and power stage temperature, slow heat up",
+     "tOTDIFF",
+     "Power stage causing high temperature, normal 4 Layer PCB",
+     "",
+     "10",
+     "",
+     "°C"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Sense resistor voltage levels",
+   "page": 75,
+   "conditions": "fCLK=16MHz",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Sense input peak threshold voltage (low sensitivity)",
+     "VSRTL",
+     "vsense=0, csactual=31, CUR_A/B=248, Hyst.=0; IBRxy=0",
+     "",
+     "325",
+     "",
+     "mV"
+    ],
+    [
+     "Sense input peak threshold voltage (high sensitivity)",
+     "VSRTH",
+     "vsense=1, csactual=31, CUR_A/B=248, Hyst.=0; IBRxy=0",
+     "",
+     "180",
+     "",
+     "mV"
+    ],
+    [
+     "Sense input tolerance / motor current full scale tolerance - using internal reference",
+     "ICOIL",
+     "I_scale_analog=0, vsense=0",
+     "-5",
+     "",
+     "+5",
+     "%"
+    ],
+    [
+     "Sense input tolerance / motor current full scale tolerance - using external reference voltage",
+     "ICOIL",
+     "I_scale_analog=1, VAIN=2V, vsense=0",
+     "-2",
+     "",
+     "+2",
+     "%"
+    ],
+    [
+     "Internal resistance from pin BRxy to internal sense comparator (additional to sense resistor)",
+     "RBRxy",
+     "",
+     "",
+     "20",
+     "",
+     "mΩ"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Digital pins",
+   "page": 76,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage low level",
+     "VINLO",
+     "",
+     "-0.3",
+     "",
+     "0.3 VVIO",
+     "V"
+    ],
+    [
+     "Input voltage high level",
+     "VINHI",
+     "",
+     "0.7 VVIO",
+     "",
+     "VVIO+0.3",
+     "V"
+    ],
+    [
+     "Input Schmitt trigger hysteresis",
+     "VINHYST",
+     "",
+     "",
+     "0.12 VVIO",
+     "",
+     "V"
+    ],
+    [
+     "Output voltage low level",
+     "VOUTLO",
+     "IOUTLO = 2mA",
+     "",
+     "",
+     "0.2",
+     "V"
+    ],
+    [
+     "Output voltage high level",
+     "VOUTHI",
+     "IOUTHI = -2mA",
+     "VVIO-0.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input leakage current",
+     "IILEAK",
+     "",
+     "-10",
+     "",
+     "10",
+     "µA"
+    ],
+    [
+     "Pullup / pull-down resistors",
+     "RPU/RPD",
+     "",
+     "132",
+     "166",
+     "200",
+     "kΩ"
+    ],
+    [
+     "Pull-down resistor STANDBY pin",
+     "RPD",
+     "",
+     "80",
+     "100",
+     "120",
+     "kΩ"
+    ],
+    [
+     "Digital pin capacitance",
+     "C",
+     "",
+     "",
+     "3.5",
+     "",
+     "pF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "AIN/IREF input",
+   "page": 76,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "AIN_IREF input resistance to 2.5V (=5VOUT/2)",
+     "RAIN",
+     "Measured to GND (internalRsense=0)",
+     "260",
+     "330",
+     "400",
+     "kΩ"
+    ],
+    [
+     "AIN_IREF input voltage range for linear current scaling",
+     "VAIN",
+     "Measured to GND (IscaleAnalog=1)",
+     "0",
+     "0.5-2.4",
+     "V5VOUT/2",
+     "V"
+    ],
+    [
+     "AIN_IREF open input voltage level",
+     "VAINO",
+     "Open circuit voltage (internalRsense=0)",
+     "",
+     "V5VOUT/2",
+     "",
+     "V"
+    ],
+    [
+     "AIN_IREF input resistance to GND for reference current input",
+     "RIREF",
+     "Measured to GND (internalRsense=1)",
+     "0.3",
+     "0.45",
+     "0.60",
+     "kΩ"
+    ],
+    [
+     "AIN_IREF current amplification for reference current to coil current at maximum setting",
+     "IREFAMPL",
+     "IIREF = 0.25mA",
+     "",
+     "3000",
+     "",
+     "Times"
+    ],
+    [
+     "Motor current full-scale tolerance - using RDSon measurement (value for design guideline to calculate reproduction of certain motor current & torque)",
+     "ICOIL",
+     "Internal_Rsense=1, vsense=0, IIREF = 0.25mA (after reaching thermal balance)",
+     "-10",
+     "",
+     "+10",
+     "%"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 77,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "typ",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Typical power dissipation",
+     "PD",
+     "StealthChop or SpreadCycle, 1.4A RMS in two phase motor, sinewave, 40 or 20kHz chopper, 24V, 90°C peak surface of package (motor QSH4218-035-10-027, short time operation)",
+     "2.8",
+     "W"
+    ],
+    [
+     "Typical power dissipation",
+     "PD",
+     "StealthChop or SpreadCycle, 1.0A RMS in two phase motor, sinewave, 40 or 20kHz chopper, 24V, 70°C peak surface of package (motor QSH4218-035-10-027)",
+     "1.4",
+     "W"
+    ],
+    [
+     "Thermal resistance junction to ambient on a multilayer board QFN28",
+     "RTMJA",
+     "Dual signal and two internal power plane board (2s2p) as defined in JEDEC EIA JESD51-5 and JESD51-7 (FR4, 35µm CU, 70mm x 133mm, d=1.5mm)",
+     "30",
+     "K/W"
+    ],
+    [
+     "Thermal resistance junction to case",
+     "RTJC",
+     "Junction to heat slug of package",
+     "6",
+     "K/W"
+    ]
+   ],
+   "notes": [
+    "At 30 K/W the package can dissipate 3.3 W continuously at 25 °C ambient while the die stays below 125 °C, given a thermally optimised layout. Real figures depend on board layout, type and size; thicker inner copper and air flow lower the resistance."
+   ]
+  },
+  {
+   "title": "STEP and DIR interface timing",
+   "page": 60,
+   "conditions": "AC characteristics; clock period is tCLK",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "step frequency (at maximum microstep resolution)",
+     "fSTEP",
+     "",
+     "",
+     "",
+     "½ fCLK",
+     ""
+    ],
+    [
+     "fullstep frequency",
+     "fFS",
+     "",
+     "",
+     "",
+     "fCLK/512",
+     ""
+    ],
+    [
+     "STEP input minimum low time",
+     "tSL",
+     "",
+     "max(tFILTSD, tCLK+20)",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "STEP input minimum high time",
+     "tSH",
+     "",
+     "max(tFILTSD, tCLK+20)",
+     "100",
+     "",
+     "ns"
+    ],
+    [
+     "DIR to STEP setup time",
+     "tDSU",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "DIR after STEP hold time",
+     "tDSH",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "STEP and DIR spike filtering time *)",
+     "tFILTSD",
+     "rising and falling edge",
+     "13",
+     "20",
+     "30",
+     "ns"
+    ],
+    [
+     "STEP and DIR sampling relative to rising CLK input",
+     "tSDCLKHI",
+     "before rising edge of CLK input",
+     "",
+     "tFILTSD",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "*) Holds only for a full logic swing at the input; unequal logic levels lengthen tFILTSD because of the RC filter at the input.",
+    "Input filter: 83 kΩ series resistance into a capacitor, R*C = 20 ns +-30 %, followed by a Schmitt trigger switching at 0.56 VCC_IO and 0.44 VCC_IO."
+   ]
+  },
+  {
+   "title": "Package codes",
+   "page": 81,
+   "conditions": "",
+   "columns": [
+    "type",
+    "package",
+    "temperature range",
+    "code & marking"
+   ],
+   "rows": [
+    [
+     "TMC2209-LA",
+     "QFN28 (RoHS)",
+     "-40°C ... +125°C",
+     "TMC2209-LA"
+    ],
+    [
+     "TMC… -T",
+     "",
+     "",
+     "-T suffix: tape on reel packing"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "PDN_UART configuration of standstill power down",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "PDN_UART",
+    "current setting"
+   ],
+   "rows": [
+    [
+     "GND",
+     "Automatic power down enabled in standstill periods"
+    ],
+    [
+     "VCC_IO",
+     "Disabled"
+    ],
+    [
+     "UART interface",
+     "Disable the pin function with GCONF.pdn_disable = 1 and program IHOLD for standstill"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "MS1/MS2 microstep resolution for STEP input",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "MS2",
+    "MS1",
+    "microstep setting"
+   ],
+   "rows": [
+    [
+     "GND",
+     "GND",
+     "8 microsteps"
+    ],
+    [
+     "GND",
+     "VCC_IO",
+     "32 microsteps (different to TMC2208)"
+    ],
+    [
+     "VCC_IO",
+     "GND",
+     "64 microsteps (different to TMC2208)"
+    ],
+    [
+     "VCC_IO",
+     "VCC_IO",
+     "16 microsteps"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "SPREAD chopper mode selection",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "SPREAD",
+    "chopper setting"
+   ],
+   "rows": [
+    [
+     "GND or open",
+     "StealthChop; switching to SpreadCycle above a step frequency can be set in OTP"
+    ],
+    [
+     "VCC_IO",
+     "SpreadCycle"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register map",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "R/W",
+    "addr",
+    "n (bits)",
+    "register",
+    "function",
+    "reset default"
+   ],
+   "rows": [
+    [
+     "RW",
+     "0x00",
+     "10",
+     "GCONF",
+     "Global configuration flags",
+     ""
+    ],
+    [
+     "R+WC",
+     "0x01",
+     "3",
+     "GSTAT",
+     "Global status flags (write 1 to clear)",
+     ""
+    ],
+    [
+     "R",
+     "0x02",
+     "8",
+     "IFCNT",
+     "Interface transmission counter",
+     ""
+    ],
+    [
+     "W",
+     "0x03",
+     "4",
+     "SLAVECONF",
+     "Reply delay for read access",
+     ""
+    ],
+    [
+     "W",
+     "0x04",
+     "16",
+     "OTP_PROG",
+     "OTP programming",
+     ""
+    ],
+    [
+     "R",
+     "0x05",
+     "24",
+     "OTP_READ",
+     "OTP memory read data",
+     ""
+    ],
+    [
+     "R",
+     "0x06",
+     "10+8",
+     "IOIN",
+     "Input pin states and IC version",
+     ""
+    ],
+    [
+     "RW",
+     "0x07",
+     "5+2",
+     "FACTORY_CONF",
+     "Clock trim and overtemperature trim",
+     ""
+    ],
+    [
+     "W",
+     "0x10",
+     "5+5+4",
+     "IHOLD_IRUN",
+     "Driver current control",
+     ""
+    ],
+    [
+     "W",
+     "0x11",
+     "8",
+     "TPOWERDOWN",
+     "Delay from standstill to current power down",
+     "20"
+    ],
+    [
+     "R",
+     "0x12",
+     "20",
+     "TSTEP",
+     "Measured time between 1/256 microsteps",
+     ""
+    ],
+    [
+     "W",
+     "0x13",
+     "20",
+     "TPWMTHRS",
+     "Upper velocity for StealthChop",
+     ""
+    ],
+    [
+     "W",
+     "0x14",
+     "20",
+     "TCOOLTHRS",
+     "Lower velocity for CoolStep and stall output",
+     ""
+    ],
+    [
+     "W",
+     "0x22",
+     "24",
+     "VACTUAL",
+     "Velocity for the internal step generator",
+     ""
+    ],
+    [
+     "W",
+     "0x40",
+     "8",
+     "SGTHRS",
+     "Stall detection threshold",
+     ""
+    ],
+    [
+     "R",
+     "0x41",
+     "10",
+     "SG_RESULT",
+     "StallGuard result",
+     ""
+    ],
+    [
+     "W",
+     "0x42",
+     "16",
+     "COOLCONF",
+     "CoolStep configuration",
+     ""
+    ],
+    [
+     "R",
+     "0x6A",
+     "10",
+     "MSCNT",
+     "Microstep counter",
+     ""
+    ],
+    [
+     "R",
+     "0x6B",
+     "9+9",
+     "MSCURACT",
+     "Actual microstep currents",
+     ""
+    ],
+    [
+     "RW",
+     "0x6C",
+     "32",
+     "CHOPCONF",
+     "Chopper and driver configuration",
+     "0x10000053"
+    ],
+    [
+     "R",
+     "0x6F",
+     "32",
+     "DRV_STATUS",
+     "Driver status flags and current level",
+     ""
+    ],
+    [
+     "RW",
+     "0x70",
+     "22",
+     "PWMCONF",
+     "StealthChop PWM configuration",
+     "0xC10D0024"
+    ],
+    [
+     "R",
+     "0x71",
+     "9+8",
+     "PWM_SCALE",
+     "StealthChop amplitude regulator results",
+     ""
+    ],
+    [
+     "R",
+     "0x72",
+     "8+8",
+     "PWM_AUTO",
+     "Automatically found PWM_OFS and PWM_GRAD",
+     ""
+    ]
+   ],
+   "notes": [
+    "Registers clear to 0 at power-up unless a default is given.",
+    "A write sets bit 7 of the address: add 0x80 to Addr.",
+    "0x marks hexadecimal and % marks binary; R read only, W write only, RW both."
+   ]
+  },
+  {
+   "title": "GCONF (0x00) bits",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "reset default",
+    "function"
+   ],
+   "rows": [
+    [
+     "0",
+     "I_scale_analog",
+     "1",
+     "0: current reference from 5VOUT; 1: voltage on VREF is the current reference"
+    ],
+    [
+     "1",
+     "internal_Rsense",
+     "OTP",
+     "0: external sense resistors; 1: internal sense resistors, the current into VREF is the reference and VREF is pulled to GND inside"
+    ],
+    [
+     "2",
+     "en_SpreadCycle",
+     "OTP",
+     "0: StealthChop (by velocity thresholds; first switch-on only at standstill); 1: SpreadCycle. A high SPREAD pin inverts this bit"
+    ],
+    [
+     "3",
+     "shaft",
+     "0",
+     "1: reverse motor direction"
+    ],
+    [
+     "4",
+     "index_otpw",
+     "0",
+     "0: INDEX shows the sequencer's first microstep position; 1: INDEX shows the overtemperature prewarning (otpw)"
+    ],
+    [
+     "5",
+     "index_step",
+     "0",
+     "0: INDEX as set by index_otpw; 1: INDEX toggles on each step of the internal pulse generator"
+    ],
+    [
+     "6",
+     "pdn_disable",
+     "0",
+     "0: PDN_UART controls standstill current reduction; 1: pin function off (set when the UART is used)"
+    ],
+    [
+     "7",
+     "mstep_reg_select",
+     "0",
+     "0: resolution from MS1, MS2; 1: resolution from the MSTEP register"
+    ],
+    [
+     "8",
+     "multistep_filt",
+     "1",
+     "0: no STEP filtering; 1: step pulse optimisation above roughly 750 Hz fullstep rate, TSTEP then reads filtered values"
+    ],
+    [
+     "9",
+     "test_mode",
+     "0",
+     "Factory test: analog test output on ENN, selected by IHOLD[1..0] (0…2: T120, DAC, VDDH). Keep 0"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "GSTAT (0x01) bits",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function"
+   ],
+   "rows": [
+    [
+     "0",
+     "reset",
+     "1: the IC was reset since GSTAT was last read; registers are at reset values"
+    ],
+    [
+     "1",
+     "drv_err",
+     "1: driver shut down by overtemperature or short detection since the last read; clears only after all error conditions are gone"
+    ],
+    [
+     "2",
+     "uv_cp",
+     "1: charge pump undervoltage, driver disabled; not latched"
+    ]
+   ],
+   "notes": [
+    "A flag clears when 1 is written to it."
+   ]
+  },
+  {
+   "title": "IFCNT, SLAVECONF and OTP_PROG fields",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bits",
+    "name",
+    "function"
+   ],
+   "rows": [
+    [
+     "IFCNT (0x02)",
+     "7..0",
+     "IFCNT",
+     "Counts each accepted UART write, wraps 255 to 0; reads leave it unchanged"
+    ],
+    [
+     "SLAVECONF (0x03)",
+     "11..8",
+     "SENDDELAY",
+     "0, 1: 8 bit times; 2, 3: 3*8; 4, 5: 5*8; 6, 7: 7*8; 8, 9: 9*8; 10, 11: 11*8; 12, 13: 13*8; 14, 15: 15*8 bit times"
+    ],
+    [
+     "OTP_PROG (0x04)",
+     "2..0",
+     "OTPBIT",
+     "OTP bit n (0..7) to program to 1"
+    ],
+    [
+     "OTP_PROG (0x04)",
+     "5..4",
+     "OTPBYTE",
+     "OTP byte to program (0, 1 or 2)"
+    ],
+    [
+     "OTP_PROG (0x04)",
+     "15..8",
+     "OTPMAGIC",
+     "0xbd enables programming; at least 10 ms per bit"
+    ],
+    [
+     "OTP_READ (0x05)",
+     "7..0 / 15..8 / 23..16",
+     "OTP0 / OTP1 / OTP2",
+     "OTP bytes 0, 1, 2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "IOIN (0x06) bits",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name"
+   ],
+   "rows": [
+    [
+     "0",
+     "ENN"
+    ],
+    [
+     "1",
+     "0"
+    ],
+    [
+     "2",
+     "MS1"
+    ],
+    [
+     "3",
+     "MS2"
+    ],
+    [
+     "4",
+     "DIAG"
+    ],
+    [
+     "5",
+     "0"
+    ],
+    [
+     "6",
+     "PDN_UART"
+    ],
+    [
+     "7",
+     "STEP"
+    ],
+    [
+     "8",
+     "SPREAD_EN"
+    ],
+    [
+     "9",
+     "DIR"
+    ],
+    [
+     "31..24",
+     "VERSION: 0x21 = first version of the IC"
+    ]
+   ],
+   "notes": [
+    "Equal VERSION numbers mean fully compatible digital logic."
+   ]
+  },
+  {
+   "title": "FACTORY_CONF (0x07) fields",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "name",
+    "default",
+    "function"
+   ],
+   "rows": [
+    [
+     "4..0",
+     "FCLKTRIM",
+     "OTP",
+     "0…31: lowest to highest clock frequency; factory set to 12 MHz. The span is not guaranteed; tuning to 12 MHz is tested"
+    ],
+    [
+     "9..8",
+     "OTTRIM",
+     "OTP",
+     "%00: OT=143°C, OTPW=120°C; %01: OT=150°C, OTPW=120°C; %10: OT=150°C, OTPW=143°C; %11: OT=157°C, OTPW=143°C"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "OTP_READ (0x05) memory map",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "23",
+     "otp2.7",
+     "otp_en_SpreadCycle",
+     "0: default StealthChop, OTP 1.0…1.7 and 2.0 hold StealthChop settings, SpreadCycle uses HEND=0, HSTART=5, TOFF=3. 1: default SpreadCycle, OTP 1.0…1.7 and 2.0 hold SpreadCycle settings, StealthChop uses PWM_GRAD=0, TPWM_THRS=0, PWM_OFS=36, pwm_autograd=1"
+    ],
+    [
+     "22, 21",
+     "otp2.6, otp2.5",
+     "OTP_IHOLD",
+     "%00: IHOLD=16 (53% of IRUN); %01: IHOLD=2 (9%); %10: IHOLD=8 (28%); %11: IHOLD=24 (78%); IRUN resets to 31"
+    ],
+    [
+     "20, 19",
+     "otp2.4, otp2.3",
+     "OTP_IHOLDDELAY",
+     "%00: 1; %01: 2; %10: 4; %11: 8"
+    ],
+    [
+     "18",
+     "otp2.2",
+     "otp_PWM_FREQ",
+     "0: PWM_FREQ=%01=2/683; 1: PWM_FREQ=%10=2/512"
+    ],
+    [
+     "17",
+     "otp2.1",
+     "otp_PWM_REG",
+     "0: PWM_REG=%1000, max. 4 increments / cycle; 1: PWM_REG=%0010, max. 1 increment / cycle"
+    ],
+    [
+     "16",
+     "otp2.0",
+     "otp_PWM_OFS / OTP_CHOPCONF8",
+     "otp_en_SpreadCycle=0: 0: PWM_OFS=36; 1: PWM_OFS=00 (no feed forward scaling), pwm_autograd=0. otp_en_SpreadCycle=1: reset value of CHOPCONF.8 (hend1)"
+    ],
+    [
+     "15…13",
+     "otp1.7…otp1.5",
+     "OTP_TPWMTHRS / OTP_CHOPCONF7...5",
+     "otp_en_SpreadCycle=0: TPWM_THRS = 0, 200, 300, 400, 500, 800, 1200, 4000 for codes 0…7. otp_en_SpreadCycle=1: reset value of CHOPCONF.5…7 (hstrt1, hstrt2, hend0)"
+    ],
+    [
+     "12",
+     "otp1.4",
+     "otp_pwm_autograd / OTP_CHOPCONF4",
+     "otp_en_SpreadCycle=0: 0: pwm_autograd=1; 1: pwm_autograd=0. otp_en_SpreadCycle=1: reset value of CHOPCONF.4 (hstrt0), pwm_autograd=1"
+    ],
+    [
+     "11…8",
+     "otp1.3…otp1.0",
+     "OTP_PWM_GRAD / OTP_CHOPCONF3...0",
+     "otp_en_SpreadCycle=0: PWM_GRAD = 14, 16, 18, 21, 24, 27, 31, 35, 40, 46, 52, 59, 67, 77, 88, 100 for codes 0…15. otp_en_SpreadCycle=1: reset value of CHOPCONF.0…3 (TOFF)"
+    ],
+    [
+     "7",
+     "otp0.7",
+     "otp_TBL",
+     "0: TBL=%10; 1: TBL=%01"
+    ],
+    [
+     "6",
+     "otp0.6",
+     "otp_internalRsense",
+     "0: external sense resistors; 1: internal sense resistors"
+    ],
+    [
+     "5",
+     "otp0.5",
+     "otp_OTTRIM",
+     "0: OTTRIM=%00 (143°C); 1: OTTRIM=%01 (150°C); the power stage runs about 10°C above the sensor limit"
+    ],
+    [
+     "4…0",
+     "otp0.4…otp0.0",
+     "OTP_FCLKTRIM",
+     "0: lowest to 31: highest frequency; factory-trimmed to 12 MHz per IC, not to be changed"
+    ]
+   ],
+   "notes": [
+    "OTP bits read 0 when blank and can only be set, never cleared. otp0.0…otp0.4 differ from IC to IC because of the factory clock trim."
+   ]
+  },
+  {
+   "title": "IHOLD_IRUN (0x10) and velocity registers",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bits",
+    "name",
+    "reset default",
+    "function"
+   ],
+   "rows": [
+    [
+     "IHOLD_IRUN (0x10)",
+     "4..0",
+     "IHOLD",
+     "OTP",
+     "Standstill current, 0=1/32 … 31=32/32; with StealthChop IHOLD=0 selects freewheeling or passive braking"
+    ],
+    [
+     "IHOLD_IRUN (0x10)",
+     "12..8",
+     "IRUN",
+     "31",
+     "Run current, 0=1/32 … 31=32/32; sense resistors best chosen so IRUN runs 16 to 31"
+    ],
+    [
+     "IHOLD_IRUN (0x10)",
+     "19..16",
+     "IHOLDDELAY",
+     "OTP",
+     "0: instant power down; 1..15: delay per current reduction step in multiples of 2^18 clocks, after stst and TPOWERDOWN"
+    ],
+    [
+     "TPOWERDOWN (0x11)",
+     "7..0",
+     "TPOWERDOWN",
+     "20",
+     "Delay from standstill detection to power down, 0…((2^8)-1) * 2^18 tCLK, about 0 to 5.6 s; at least 2 for StealthChop auto tuning"
+    ],
+    [
+     "TSTEP (0x12)",
+     "19..0",
+     "TSTEP",
+     "",
+     "Time between two 1/256 microsteps in 1/fCLK units; (2^20)-1 on overflow or standstill. Threshold comparisons use (Txxx*15/16)-1 as the lower compare value"
+    ],
+    [
+     "TPWMTHRS (0x13)",
+     "19..0",
+     "TPWMTHRS",
+     "",
+     "StealthChop while TSTEP ≥ TPWMTHRS, SpreadCycle above that velocity; 0: disabled"
+    ],
+    [
+     "TCOOLTHRS (0x14)",
+     "19..0",
+     "TCOOLTHRS",
+     "",
+     "CoolStep and stall output on DIAG active while TCOOLTHRS ≥ TSTEP > TPWMTHRS"
+    ],
+    [
+     "VACTUAL (0x22)",
+     "23..0",
+     "VACTUAL",
+     "",
+     "0: STEP input drives the motor; non-zero: motor runs at ±(2^23)-1 [µsteps / t], sign sets direction, steps visible on INDEX"
+    ],
+    [
+     "SGTHRS (0x40)",
+     "7..0",
+     "SGTHRS",
+     "",
+     "Stall signalled when SG_RESULT ≤ SGTHRS*2"
+    ],
+    [
+     "SG_RESULT (0x41)",
+     "9..0",
+     "SG_RESULT",
+     "",
+     "Load value, updated each fullstep; higher means less load. Bits 9 and 0 read 0. For StealthChop"
+    ],
+    [
+     "MSCNT (0x6A)",
+     "9..0",
+     "MSCNT",
+     "",
+     "Position in the microstep table for CUR_A, 0…1023; CUR_B is offset by 256"
+    ],
+    [
+     "MSCURACT (0x6B)",
+     "8..0",
+     "CUR_A",
+     "",
+     "Signed phase A current from the sine table, +/-0...255, unscaled"
+    ],
+    [
+     "MSCURACT (0x6B)",
+     "24..16",
+     "CUR_B",
+     "",
+     "Signed phase B current from the sine table, +/-0...255, unscaled"
+    ],
+    [
+     "PWM_SCALE (0x71)",
+     "7..0",
+     "PWM_SCALE_SUM",
+     "",
+     "Actual PWM duty cycle 0…255 (255 = max. voltage), scales CUR_A and CUR_B"
+    ],
+    [
+     "PWM_SCALE (0x71)",
+     "24..16",
+     "PWM_SCALE_AUTO",
+     "",
+     "Signed offset -255…+255 from the automatic amplitude regulator"
+    ],
+    [
+     "PWM_AUTO (0x72)",
+     "7..0",
+     "PWM_OFS_AUTO",
+     "",
+     "Automatically found offset, 0…255"
+    ],
+    [
+     "PWM_AUTO (0x72)",
+     "23..16",
+     "PWM_GRAD_AUTO",
+     "",
+     "Automatically found gradient, 0…255"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "COOLCONF (0x42) bits",
+   "page": 27,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function",
+    "setting"
+   ],
+   "rows": [
+    [
+     "15",
+     "seimin",
+     "minimum current for smart current control",
+     "0: 1/2 of IRUN; 1: 1/4 of IRUN"
+    ],
+    [
+     "14, 13",
+     "sedn1, sedn0",
+     "current down step speed",
+     "%00: one step down per 32 StallGuard4 values; %01: per 8; %10: per 2; %11: per 1"
+    ],
+    [
+     "12",
+     "-",
+     "reserved",
+     "set to 0"
+    ],
+    [
+     "11…8",
+     "semax3…semax0",
+     "upper hysteresis for smart current control",
+     "%0000 … %1111: 0 … 15; current is lowered when the result reaches (SEMIN+SEMAX+1)*32"
+    ],
+    [
+     "7",
+     "-",
+     "reserved",
+     "set to 0"
+    ],
+    [
+     "6, 5",
+     "seup1, seup0",
+     "current up step width",
+     "%00 … %11: 1, 2, 4, 8 steps per measured value"
+    ],
+    [
+     "4",
+     "-",
+     "reserved",
+     "set to 0"
+    ],
+    [
+     "3…0",
+     "semin3…semin0",
+     "minimum StallGuard value and CoolStep enable",
+     "%0000: CoolStep off; %0001 … %1111: 1 … 15; current is raised when the result falls below SEMIN*32"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "CHOPCONF (0x6C) bits",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function",
+    "setting"
+   ],
+   "rows": [
+    [
+     "31",
+     "diss2vs",
+     "low side short protection disable",
+     "0: on; 1: disabled"
+    ],
+    [
+     "30",
+     "diss2g",
+     "short to GND protection disable",
+     "0: on; 1: disabled"
+    ],
+    [
+     "29",
+     "dedge",
+     "double edge step pulses",
+     "1: step on both STEP edges; not usable with multistep_filt"
+    ],
+    [
+     "28",
+     "intpol",
+     "interpolation to 256 microsteps",
+     "1: MRES is extrapolated to 256 microsteps (default 1)"
+    ],
+    [
+     "27…24",
+     "mres3…mres0",
+     "MRES micro step resolution",
+     "%0000: 256; %0001 … %1000: 128, 64, 32, 16, 8, 4, 2, FULLSTEP. Microsteps per step pulse = 2^MRES; from pins unless mstep_reg_select"
+    ],
+    [
+     "23…18",
+     "-",
+     "reserved",
+     "set to 0"
+    ],
+    [
+     "17",
+     "vsense",
+     "sense resistor voltage based current scaling",
+     "0: low sensitivity, high sense voltage; 1: high sensitivity, low sense voltage"
+    ],
+    [
+     "16, 15",
+     "tbl1, tbl0",
+     "TBL blank time select",
+     "%00 … %11: 16, 24, 32 or 40 clocks; %00 or %01 for most uses (default OTP)"
+    ],
+    [
+     "14…11",
+     "-",
+     "reserved",
+     "set to 0"
+    ],
+    [
+     "10…7",
+     "hend3…hend0",
+     "HEND hysteresis low value / OFFSET sine wave offset",
+     "%0000 … %1111: -3, -2, -1, 0, 1, …, 12, in 1/512 of the current setting (default OTP, 5 in StealthChop)"
+    ],
+    [
+     "6…4",
+     "hstrt2…hstrt0",
+     "HSTRT hysteresis start value added to HEND",
+     "%000 … %111: add 1, 2, …, 8 to HEND; HEND+HSTRT ≤ 16; decrement every 16 clocks (default OTP, 0 in StealthChop)"
+    ],
+    [
+     "3…0",
+     "toff3…toff0",
+     "TOFF off time and driver enable",
+     "NCLK= 24 + 32*TOFF; %0000: driver off; %0001: 1, only with TBL ≥ 2; %0010 … %1111: 2 … 15 (default OTP, 3 in StealthChop)"
+    ]
+   ],
+   "notes": [
+    "Reset default 0x10000053."
+   ]
+  },
+  {
+   "title": "PWMCONF (0x70) bits",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function",
+    "setting"
+   ],
+   "rows": [
+    [
+     "31…28",
+     "PWM_LIM",
+     "PWM automatic scale amplitude limit when switching on",
+     "Upper limit for bits 7…4 of PWM_SCALE_AUTO when returning from SpreadCycle to StealthChop, lowers the current jerk; does not limit PWM_GRAD (default 12)"
+    ],
+    [
+     "27…24",
+     "PWM_REG",
+     "regulation loop gradient",
+     "1…15: 0.5 to 7.5 increments per half wave with pwm_autoscale=1; 2 is the default with OTP2.1=1, 8 with OTP2.1=0"
+    ],
+    [
+     "23, 22",
+     "-",
+     "reserved",
+     "set to 0"
+    ],
+    [
+     "21, 20",
+     "freewheel1, freewheel0",
+     "standstill mode at IHOLD=0",
+     "%00: normal; %01: freewheeling; %10: coil shorted through LS drivers; %11: coil shorted through HS drivers"
+    ],
+    [
+     "19",
+     "pwm_autograd",
+     "PWM automatic gradient adaptation",
+     "0: PWM_GRAD_AUTO = PWM_GRAD; 1: automatic tuning (with pwm_autoscale=1)"
+    ],
+    [
+     "18",
+     "pwm_autoscale",
+     "PWM automatic amplitude scaling",
+     "0: feed forward amplitude PWM_OFS * ((CS_ACTUAL+1) / 32) + PWM_GRAD * 256 / TSTEP, limited to 0…255, IRUN and IHOLD ignored; 1: automatic current control (reset default)"
+    ],
+    [
+     "17, 16",
+     "pwm_freq1, pwm_freq0",
+     "PWM frequency selection",
+     "%00: fPWM=2/1024 fCLK; %01: 2/683 fCLK; %10: 2/512 fCLK; %11: 2/410 fCLK"
+    ],
+    [
+     "15…8",
+     "PWM_GRAD",
+     "user defined amplitude gradient",
+     "PWM_GRAD * 256 / TSTEP added to the amplitude for back-EMF; start value only with pwm_autoscale=1"
+    ],
+    [
+     "7…0",
+     "PWM_OFS",
+     "user defined amplitude offset",
+     "0-255 at CS_ACTUAL=31 in standstill (reset 36); start value only with pwm_autoscale=1. 0 stops scaling below the regulation threshold; > 0 allows low duty cycles below it"
+    ]
+   ],
+   "notes": [
+    "Reset default 0xC10D0024."
+   ]
+  },
+  {
+   "title": "DRV_STATUS (0x6F) bits",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "function",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "31",
+     "stst",
+     "standstill indicator",
+     "Set 2^20 clocks after the last step pulse, in every mode"
+    ],
+    [
+     "30",
+     "stealth",
+     "StealthChop indicator",
+     "1: StealthChop; 0: SpreadCycle"
+    ],
+    [
+     "29…21",
+     "-",
+     "reserved",
+     "ignore"
+    ],
+    [
+     "20…16",
+     "CS_ACTUAL",
+     "actual motor current / smart energy current",
+     "Actual current scaling"
+    ],
+    [
+     "15…12",
+     "-",
+     "reserved",
+     "ignore"
+    ],
+    [
+     "11",
+     "t157",
+     "157°C comparator",
+     "1: threshold exceeded"
+    ],
+    [
+     "10",
+     "t150",
+     "150°C comparator",
+     "1: threshold exceeded"
+    ],
+    [
+     "9",
+     "t143",
+     "143°C comparator",
+     "1: threshold exceeded"
+    ],
+    [
+     "8",
+     "t120",
+     "120°C comparator",
+     "1: threshold exceeded"
+    ],
+    [
+     "7",
+     "olb",
+     "open load indicator phase B",
+     "1: open load; informative only, no driver action; may false-trigger in fast motion and standstill"
+    ],
+    [
+     "6",
+     "ola",
+     "open load indicator phase A",
+     "as olb"
+    ],
+    [
+     "5",
+     "s2vsb",
+     "low side short indicator phase B",
+     "1: low-side short; driver off until TOFF=0 or ENN; separate per chopper mode"
+    ],
+    [
+     "4",
+     "s2vsa",
+     "low side short indicator phase A",
+     "as s2vsb"
+    ],
+    [
+     "3",
+     "s2gb",
+     "short to ground indicator phase B",
+     "1: short to GND; driver off until TOFF=0 or ENN; separate per chopper mode"
+    ],
+    [
+     "2",
+     "s2ga",
+     "short to ground indicator phase A",
+     "as s2gb"
+    ],
+    [
+     "1",
+     "ot",
+     "overtemperature flag",
+     "1: overtemperature limit reached; drivers stay off until otpw clears; common to both bridges"
+    ],
+    [
+     "0",
+     "otpw",
+     "overtemperature pre-warning flag",
+     "1: prewarning threshold exceeded; common to both bridges"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Automatic tuning timing and border conditions",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "step",
+    "parameter",
+    "conditions",
+    "duration"
+   ],
+   "rows": [
+    [
+     "AT#1",
+     "PWM_OFS_AUTO",
+     "Motor at standstill with current scale CS equal to IRUN (with PDN_UART=0 a single step pulse restores run current); VS and VREF at operating level",
+     "≤ 2^20+2*2^18 tCLK, ≤ 130ms (with internal clock)"
+    ],
+    [
+     "AT#2",
+     "PWM_GRAD_AUTO",
+     "Motor moving fast enough for significant back EMF while full run current is still reached; 1.5 * PWM_OFS_AUTO < PWM_SCALE_SUM < 4 * PWM_OFS_AUTO; PWM_SCALE_SUM < 255. Typical range 60-300 RPM",
+     "8 fullsteps per change of +/-1; for a typical motor with PWM_GRAD_AUTO optimum at 64 or less, up to 400 fullsteps from OTP default 14"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Choice of PWM frequency for StealthChop",
+   "page": 37,
+   "conditions": "",
+   "columns": [
+    "clock frequency fCLK",
+    "PWM_FREQ=%00 fPWM=2/1024 fCLK",
+    "PWM_FREQ=%01 fPWM=2/683 fCLK (default)",
+    "PWM_FREQ=%10 fPWM=2/512 fCLK (OTP option)",
+    "PWM_FREQ=%11 fPWM=2/410 fCLK"
+   ],
+   "rows": [
+    [
+     "18MHz",
+     "35.2kHz",
+     "52.7kHz",
+     "70.3kHz",
+     "87.8kHz"
+    ],
+    [
+     "16MHz",
+     "31.3kHz",
+     "46.9kHz",
+     "62.5kHz",
+     "78.0kHz"
+    ],
+    [
+     "12MHz (internal)",
+     "23.4kHz",
+     "35.1kHz",
+     "46.9kHz",
+     "58.5kHz"
+    ],
+    [
+     "10MHz",
+     "19.5kHz",
+     "29.3kHz",
+     "39.1kHz",
+     "48.8kHz"
+    ],
+    [
+     "8MHz",
+     "15.6kHz",
+     "23.4kHz",
+     "31.2kHz",
+     "39.0kHz"
+    ]
+   ],
+   "notes": [
+    "20-50 kHz suits most applications."
+   ]
+  },
+  {
+   "title": "SpreadCycle parameters",
+   "page": 48,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "setting",
+    "comment"
+   ],
+   "rows": [
+    [
+     "TOFF",
+     "0",
+     "chopper off"
+    ],
+    [
+     "TOFF",
+     "1…15",
+     "off time, NCLK= 24 + 32*TOFF (1 works only with the minimum blank time of 24 clocks)"
+    ],
+    [
+     "TBL",
+     "0 / 1 / 2 / 3",
+     "16 / 24 / 32 / 40 tCLK; 1 or 2 for most uses, 2 or 3 for highly capacitive loads"
+    ],
+    [
+     "HSTRT",
+     "0…7",
+     "HSTRT=1…8, added to HEND"
+    ],
+    [
+     "HEND",
+     "0…2",
+     "-3…-1: negative HEND"
+    ],
+    [
+     "HEND",
+     "3",
+     "0: zero HEND"
+    ],
+    [
+     "HEND",
+     "4…15",
+     "1…12: positive HEND"
+    ]
+   ],
+   "notes": [
+    "The sum HSTRT+HEND has a ceiling of 16, lifted when the current scale is 30 or less (amplitude 240).",
+    "A minimum hysteresis is set by analog circuitry even at HSTRT=0 and HEND=0."
+   ]
+  },
+  {
+   "title": "Choice of RSENSE and resulting max. motor current",
+   "page": 49,
+   "conditions": "VREF=2.5V (or open), IRUN=31, vsense=0 (standard)",
+   "columns": [
+    "RSENSE [Ω]",
+    "RMS current [A]",
+    "fitting motor type (examples)"
+   ],
+   "rows": [
+    [
+     "1.00",
+     "0.23",
+     ""
+    ],
+    [
+     "0.82",
+     "0.27",
+     ""
+    ],
+    [
+     "0.75",
+     "0.30",
+     "300mA motor"
+    ],
+    [
+     "0.68",
+     "0.33",
+     "400mA motor"
+    ],
+    [
+     "0.50",
+     "0.44",
+     ""
+    ],
+    [
+     "470m",
+     "0.47",
+     "500mA motor"
+    ],
+    [
+     "390m",
+     "0.56",
+     "600mA motor"
+    ],
+    [
+     "330m",
+     "0.66",
+     "700mA motor"
+    ],
+    [
+     "270m",
+     "0.79",
+     "800mA motor"
+    ],
+    [
+     "220m",
+     "0.96",
+     "1A motor"
+    ],
+    [
+     "180m",
+     "1.15",
+     "1.2A motor"
+    ],
+    [
+     "150m",
+     "1.35",
+     "1.5A motor"
+    ],
+    [
+     "120m",
+     "1.64",
+     "1.7A motor"
+    ],
+    [
+     "100m",
+     "1.92",
+     "2A motor"
+    ],
+    [
+     "75m",
+     "2.4*)",
+     ""
+    ]
+   ],
+   "notes": [
+    "*) Above the current rating; scale down, e.g. with a lower VREF."
+   ]
+  },
+  {
+   "title": "Methods for scaling motor current",
+   "page": 50,
+   "conditions": "",
+   "columns": [
+    "method",
+    "parameters",
+    "range",
+    "primary use"
+   ],
+   "rows": [
+    [
+     "Pin VREF voltage",
+     "VREF scales IRUN and IHOLD; disabled by GCONF.i_scale_analog",
+     "2.5V: 100% … 0.5V: 20%; >2.5V or open: 100%; <0.5V: not recommended",
+     "Fit the motor, potentiometer trim, soft power-up, standstill reduction (best with SpreadCycle)"
+    ],
+    [
+     "Pin ENN",
+     "Driver stage disable / enable",
+     "0: motor enabled; 1: motor disabled",
+     "Freewheeling"
+    ],
+    [
+     "Pin PDN_UART",
+     "Standstill reduction to IHOLD on / off",
+     "0: reduction enabled; 1: disabled",
+     "Less heating at standstill"
+    ],
+    [
+     "OTP memory",
+     "OTP_IHOLD, OTP_IHOLDDELAY",
+     "9% to 78% standby current; reduction in about 300ms to 2.5s",
+     "Fit current reduction to the application"
+    ],
+    [
+     "OTP memory",
+     "otp_internalRsense",
+     "0: sense resistors; 1: internal resistors",
+     "Drop two sense resistors, set current with one 0603 resistor"
+    ],
+    [
+     "UART interface",
+     "IHOLD_IRUN, TPOWERDOWN, OTP",
+     "IRUN, IHOLD: 1/32 to 32/32 of full scale",
+     "Fine run and hold current, situation-dependent current, OTP options"
+    ],
+    [
+     "UART interface",
+     "CHOPCONF.vsense",
+     "0: normal, most robust; 1: reduced voltage level",
+     "Half the sense resistor dissipation, allows 0.25W resistors"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Parameters for motor current control",
+   "page": 51,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "setting",
+    "comment"
+   ],
+   "rows": [
+    [
+     "IRUN",
+     "0 … 31",
+     "scaling 1/32, 2/32, … 32/32 while running; full scale (31) in standalone mode; 16 to 31 keeps microsteps fine"
+    ],
+    [
+     "IHOLD",
+     "0 … 31",
+     "as IRUN, at standstill"
+    ],
+    [
+     "IHOLDDELAY",
+     "0",
+     "instant IHOLD"
+    ],
+    [
+     "IHOLDDELAY",
+     "1 … 15",
+     "1*2^18 … 15*2^18 clocks per current decrement"
+    ],
+    [
+     "TPOWERDOWN",
+     "0 … 255",
+     "0…((2^8)-1) * 2^18 tCLK, about 0 to 5.6 s; minimum 2 for PWM_OFS_AUTO tuning"
+    ],
+    [
+     "vsense",
+     "0",
+     "VFS = 0.32 V"
+    ],
+    [
+     "vsense",
+     "1",
+     "VFS = 0.18 V"
+    ]
+   ],
+   "notes": [
+    "IRUN=31, IHOLD=16, IHOLDDELAY=4: 15 steps of 4*2^18 clocks, about one second at 16 MHz."
+   ]
+  },
+  {
+   "title": "Internal sense resistors vs. external sense resistors",
+   "page": 53,
+   "conditions": "",
+   "columns": [
+    "item",
+    "internal sense resistors",
+    "external sense resistors"
+   ],
+   "rows": [
+    [
+     "Ease of use",
+     "OTP parameter must be set before motor enable",
+     "(+) Default"
+    ],
+    [
+     "Cost",
+     "(+) No sense resistors",
+     ""
+    ],
+    [
+     "Current precision",
+     "Slightly reduced",
+     "(+) Good"
+    ],
+    [
+     "Current range",
+     "200mA RMS to 1.4A RMS",
+     "50mA to 2A RMS"
+    ],
+    [
+     "Recommended chopper",
+     "StealthChop or SpreadCycle; SpreadCycle shows slightly more distortion at >1.4A RMS",
+     "StealthChop or SpreadCycle"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Choice of RREF for operation without sense resistors",
+   "page": 53,
+   "conditions": "",
+   "columns": [
+    "RREF [Ω]",
+    "peak current [A] (CS=31, vsense=0)",
+    "RMS current [A] (CS=31, vsense=0)"
+   ],
+   "rows": [
+    [
+     "6k2",
+     "2.26",
+     "1.59"
+    ],
+    [
+     "6k8",
+     "1.92",
+     "1.35"
+    ],
+    [
+     "7k5",
+     "1.76",
+     "1.24"
+    ],
+    [
+     "8k2",
+     "1.63",
+     "1.15"
+    ],
+    [
+     "9k1",
+     "1.49",
+     "1.05"
+    ],
+    [
+     "10k",
+     "1.36",
+     "0.96"
+    ],
+    [
+     "12k",
+     "1.15",
+     "0.81"
+    ],
+    [
+     "15k",
+     "0.94",
+     "0.66"
+    ],
+    [
+     "18k",
+     "0.79",
+     "0.55"
+    ],
+    [
+     "22k",
+     "0.65",
+     "0.45"
+    ],
+    [
+     "27k",
+     "0.60",
+     "0.42"
+    ],
+    [
+     "33k",
+     "0.54",
+     "0.38"
+    ]
+   ],
+   "notes": [
+    "vsense=1 gives about 55 % of these peak currents."
+   ]
+  },
+  {
+   "title": "StealthChop parameters",
+   "page": 44,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "setting",
+    "comment"
+   ],
+   "rows": [
+    [
+     "en_spread_cycle",
+     "1 / 0",
+     "1: no StealthChop; 0: StealthChop enabled; SPREAD input XORed with it"
+    ],
+    [
+     "TPWMTHRS",
+     "0…1048575",
+     "upper StealthChop velocity, entered as the TSTEP reading at that velocity"
+    ],
+    [
+     "PWM_LIM",
+     "0 … 15",
+     "upper four bits of the 8 bit amplitude limit on return from SpreadCycle (default 12)"
+    ],
+    [
+     "pwm_autoscale",
+     "0 / 1",
+     "0: forward controlled; 1: automatic scaling with current regulator"
+    ],
+    [
+     "pwm_autograd",
+     "0 / 1",
+     "0: PWM_GRAD from register; 1: automatic tuning"
+    ],
+    [
+     "PWM_FREQ",
+     "0 / 1 / 2 / 3",
+     "fPWM = 2/1024, 2/683, 2/512, 2/410 fCLK; each output shows half of fPWM"
+    ],
+    [
+     "PWM_REG",
+     "1 … 15",
+     "0.5 to 7.5 steps of PWM_SCALE_AUTO per fullstep"
+    ],
+    [
+     "PWM_OFS",
+     "0 … 255",
+     "offset; 0 disables linear current scaling by current setting"
+    ],
+    [
+     "PWM_GRAD",
+     "0 … 255",
+     "gradient; reset value can come from OTP"
+    ],
+    [
+     "FREEWHEEL",
+     "0 / 1 / 2 / 3",
+     "normal / freewheeling / coil short via LS drivers / coil short via HS drivers; only with StealthChop and IHOLD=0"
+    ],
+    [
+     "PWM_SCALE_AUTO",
+     "-255 … 255",
+     "read only; frozen in SpreadCycle; near 0 after tuning"
+    ],
+    [
+     "PWM_GRAD_AUTO, PWM_OFS_AUTO",
+     "0 … 255",
+     "read only"
+    ],
+    [
+     "TOFF",
+     "0 / 1 … 15",
+     "driver off / driver enabled; value has no effect in StealthChop"
+    ],
+    [
+     "TBL",
+     "0 / 1 / 2 / 3",
+     "16 / 24 / 32 / 40 tCLK; 1 or 2 typical, 3 for high capacitive loads; lower settings regulate lower currents"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "StallGuard4 and CoolStep parameters",
+   "page": 55,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "range",
+    "comment"
+   ],
+   "rows": [
+    [
+     "SGTHRS",
+     "0… 255",
+     "twice this value is compared with SG_RESULT; higher is more sensitive"
+    ],
+    [
+     "SG_RESULT (status)",
+     "0… 510",
+     "low value: high load"
+    ],
+    [
+     "SEMIN",
+     "0 / 1…15",
+     "0 disables CoolStep; threshold SEMIN*32; start with 1/16*SGTHRS+1"
+    ],
+    [
+     "SEMAX",
+     "0…15",
+     "upper threshold (SEMIN+SEMAX+1)*32; 0 to 2 recommended"
+    ],
+    [
+     "SEUP",
+     "0…3",
+     "current increment 1, 2, 4, 8"
+    ],
+    [
+     "SEDN",
+     "0…3",
+     "StallGuard readings per decrement 32, 8, 2, 1"
+    ],
+    [
+     "SEIMIN",
+     "0 / 1",
+     "lower CoolStep limit 1/2 / 1/4 of IRUN"
+    ],
+    [
+     "TCOOLTHRS",
+     "1… 2^20-1",
+     "lower velocity for CoolStep and stall output, compared with TSTEP"
+    ],
+    [
+     "TPWMTHRS",
+     "1… 2^20-1",
+     "upper velocity; above it SpreadCycle, CoolStep and StallGuard off"
+    ],
+    [
+     "CSACTUAL (status)",
+     "0…31",
+     "1/32 … 32/32, the scale set by CoolStep"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Microstep table positions",
+   "page": 61,
+   "conditions": "",
+   "columns": [
+    "step position",
+    "table position",
+    "current coil A",
+    "current coil B"
+   ],
+   "rows": [
+    [
+     "Half step 0",
+     "64",
+     "38.3%",
+     "92.4%"
+    ],
+    [
+     "Full step 0",
+     "128",
+     "70.7%",
+     "70.7%"
+    ],
+    [
+     "Half step 1",
+     "192",
+     "92.4%",
+     "38.3%"
+    ],
+    [
+     "Half step 2",
+     "320",
+     "92.4%",
+     "-38.3%"
+    ],
+    [
+     "Full step 1",
+     "384",
+     "70.7%",
+     "-70.7%"
+    ],
+    [
+     "Half step 3",
+     "448",
+     "38.3%",
+     "-92.4%"
+    ],
+    [
+     "Half step 4",
+     "576",
+     "-38.3%",
+     "-92.4%"
+    ],
+    [
+     "Full step 2",
+     "640",
+     "-70.7%",
+     "-70.7%"
+    ],
+    [
+     "Half step 5",
+     "704",
+     "-92.4%",
+     "-38.3%"
+    ],
+    [
+     "Half step 6",
+     "832",
+     "-92.4%",
+     "38.3%"
+    ],
+    [
+     "Full step 3",
+     "896",
+     "-70.7%",
+     "70.7%"
+    ],
+    [
+     "Half step 7",
+     "960",
+     "-38.3%",
+     "92.4%"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Parameter vs. units",
+   "page": 64,
+   "conditions": "",
+   "columns": [
+    "parameter / symbol",
+    "unit",
+    "calculation"
+   ],
+   "rows": [
+    [
+     "fCLK[Hz]",
+     "[Hz]",
+     "clock frequency of the TMC2209"
+    ],
+    [
+     "µstep velocity v[Hz]",
+     "µsteps / s",
+     "v[Hz] = VACTUAL[2209] * ( fCLK[Hz]/2 / 2^23 ); internal oscillator: v[Hz] = VACTUAL[2209] * 0.715Hz"
+    ],
+    [
+     "USC microstep count",
+     "counts",
+     "microsteps between two fullsteps, normally 256"
+    ],
+    [
+     "rotations per second v[rps]",
+     "rotations / s",
+     "v[rps] = v[Hz] / USC / FSC; FSC: motor fullsteps per rotation, e.g. 200"
+    ],
+    [
+     "TSTEP, TPWMTHRS",
+     "-",
+     "TSTEP = fCLK / fSTEP, referred to the microstep frequency"
+    ],
+    [
+     "VACTUAL",
+     "two's complement signed internal velocity",
+     "VACTUAL[2209] = ( fCLK[Hz]/2 / 2^23 ) / v[Hz]; internal oscillator: VACTUAL[2209] = 0.715Hz / v[Hz]"
+    ]
+   ],
+   "notes": [
+    "The VACTUAL formulas are inverted; they should read VACTUAL[2209] = v[Hz] / ( fCLK[Hz]/2 / 2^23 ), and v[Hz] / 0.715Hz with the internal oscillator."
+   ]
+  },
+  {
+   "title": "Temperature thresholds",
+   "page": 65,
+   "conditions": "",
+   "columns": [
+    "overtemperature setting",
+    "prewarning",
+    "comment"
+   ],
+   "rows": [
+    [
+     "143°C",
+     "120°C",
+     "Default; trips before the IC can be destroyed; MOSFETs reach about 150 °C peak on a large PCB"
+    ],
+    [
+     "150°C",
+     "120°C or 143°C",
+     "Optional (OTP or UART); more headroom on small, thermally poor PCBs"
+    ],
+    [
+     "157°C",
+     "143°C",
+     "Optional (UART); highest headroom where a motor stop cannot be accepted"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Energy efficiency with coolStep (example)",
+   "page": 7,
+   "conditions": "42 mm stepper motor; CoolStep enabled above 60 RPM; comparison with 50 % torque reserve",
+   "x": {
+    "label": "Velocity",
+    "unit": "RPM",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency with coolStep",
+     "points": [
+      [
+       0,
+       0.005
+      ],
+      [
+       4.5,
+       0.03
+      ],
+      [
+       13.5,
+       0.06
+      ],
+      [
+       28.6,
+       0.11
+      ],
+      [
+       58.7,
+       0.2
+      ],
+      [
+       60.2,
+       0.339
+      ],
+      [
+       118.2,
+       0.582
+      ],
+      [
+       238,
+       0.738
+      ],
+      [
+       298.2,
+       0.778
+      ]
+     ]
+    },
+    {
+     "label": "Efficiency with 50% torque reserve",
+     "points": [
+      [
+       0,
+       0.005
+      ],
+      [
+       4.5,
+       0.03
+      ],
+      [
+       13.5,
+       0.06
+      ],
+      [
+       28.6,
+       0.11
+      ],
+      [
+       58.7,
+       0.2
+      ],
+      [
+       119,
+       0.337
+      ],
+      [
+       238,
+       0.5
+      ],
+      [
+       298,
+       0.556
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "standard",
+   "title": "Standard application circuit",
+   "page": 11,
+   "description": "The driver with external sense resistors. The 5 V regulator output carries 2.2 µF, the charge pump has 22 nF between CPO and CPI and 100 nF from VCP to VS, and the motor supply is filtered with two 100 nF ceramics and a 100 µF low-ESR electrolytic. RSA and RSB from BRA and BRB to ground set the coil current. VREF scales the current or stays open. Logic inputs are strapped to GND or VCC_IO, or driven by the controller; VCC_IO has its own 100 nF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "2.2 µF",
+     "note": "6.3 V, close to the IC with a short path to the die pad"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 nF",
+     "note": "50 V"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "16 V"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100 µF",
+     "note": "low ESR type"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "J_VIO",
+     "type": "terminal",
+     "value": "VCC_IO, 3.3 V or 5 V"
+    },
+    {
+     "ref": "RSA",
+     "type": "resistor",
+     "value": "RSA",
+     "note": "low-inductance SMD, e.g. 1206 0.5 W; value from the RSENSE table"
+    },
+    {
+     "ref": "RSB",
+     "type": "resistor",
+     "value": "RSB",
+     "note": "low-inductance SMD, e.g. 1206 0.5 W; value from the RSENSE table"
+    },
+    {
+     "ref": "LA",
+     "type": "load",
+     "value": "motor coil A"
+    },
+    {
+     "ref": "LB",
+     "type": "load",
+     "value": "motor coil B"
+    },
+    {
+     "ref": "J_STEP",
+     "type": "terminal",
+     "value": "STEP"
+    },
+    {
+     "ref": "J_DIR",
+     "type": "terminal",
+     "value": "DIR"
+    },
+    {
+     "ref": "J_MS1",
+     "type": "terminal",
+     "value": "MS1 (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_MS2",
+     "type": "terminal",
+     "value": "MS2 (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_SPREAD",
+     "type": "terminal",
+     "value": "SPREAD (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_PDN",
+     "type": "terminal",
+     "value": "PDN_UART (configuration or optional UART)"
+    },
+    {
+     "ref": "J_DIAG",
+     "type": "terminal",
+     "value": "DIAG (driver error)"
+    },
+    {
+     "ref": "J_INDEX",
+     "type": "terminal",
+     "value": "INDEX (index pulse)"
+    },
+    {
+     "ref": "J_CLK",
+     "type": "terminal",
+     "value": "CLK (GND for internal clock, or external 10-16 MHz clock)"
+    },
+    {
+     "ref": "J_STDBY",
+     "type": "terminal",
+     "value": "STDBY (optional low power standby)"
+    },
+    {
+     "ref": "J_ENN",
+     "type": "terminal",
+     "value": "ENN (optional driver enable)"
+    },
+    {
+     "ref": "J_VM",
+     "type": "terminal",
+     "value": "+VM"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "VREF (analog current scaling, or open)"
+    }
+   ],
+   "notes": [
+    "RSA and RSB each return straight to the ground plane."
+   ]
+  },
+  {
+   "id": "rdson",
+   "title": "Application circuit using RDSon based sensing",
+   "page": 12,
+   "description": "The standard circuit without sense resistors: BRA and BRB go straight to the ground plane and the MOSFET on-resistance measures the coil current. A resistor RREF from 5VOUT to VREF sets a reference current that fixes the motor current. Internal sensing (GCONF.1 or OTP0.6) must be set while ENN is high, before the driver is enabled.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "2.2 µF",
+     "note": "6.3 V, close to the IC with a short path to the die pad"
+    },
+    {
+     "ref": "RREF",
+     "type": "resistor",
+     "value": "RREF",
+     "note": "value from the RREF table"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 nF",
+     "note": "50 V"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "16 V"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100 µF",
+     "note": "low ESR type"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "J_VIO",
+     "type": "terminal",
+     "value": "VCC_IO, 3.3 V or 5 V"
+    },
+    {
+     "ref": "LA",
+     "type": "load",
+     "value": "motor coil A"
+    },
+    {
+     "ref": "LB",
+     "type": "load",
+     "value": "motor coil B"
+    },
+    {
+     "ref": "J_STEP",
+     "type": "terminal",
+     "value": "STEP"
+    },
+    {
+     "ref": "J_DIR",
+     "type": "terminal",
+     "value": "DIR"
+    },
+    {
+     "ref": "J_MS1",
+     "type": "terminal",
+     "value": "MS1 (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_MS2",
+     "type": "terminal",
+     "value": "MS2 (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_SPREAD",
+     "type": "terminal",
+     "value": "SPREAD (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_PDN",
+     "type": "terminal",
+     "value": "PDN_UART (configuration or optional UART)"
+    },
+    {
+     "ref": "J_DIAG",
+     "type": "terminal",
+     "value": "DIAG (driver error)"
+    },
+    {
+     "ref": "J_INDEX",
+     "type": "terminal",
+     "value": "INDEX (index pulse)"
+    },
+    {
+     "ref": "J_CLK",
+     "type": "terminal",
+     "value": "CLK (GND for internal clock, or external 10-16 MHz clock)"
+    },
+    {
+     "ref": "J_STDBY",
+     "type": "terminal",
+     "value": "STDBY (optional low power standby)"
+    },
+    {
+     "ref": "J_ENN",
+     "type": "terminal",
+     "value": "ENN (optional driver enable)"
+    },
+    {
+     "ref": "J_VM",
+     "type": "terminal",
+     "value": "+VM"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "5v-only",
+   "title": "5V only operation",
+   "page": 12,
+   "description": "Running from a single 4.7 V to 5.4 V supply. The regulator output gets 10 µF, and an optional 10 Ω from the supply to 5VOUT bridges the internal regulator and forms an RC filter against chopper ripple. With that resistor fitted the supply becomes the reference for the motor current and must stay at or below 5.5 V, and standby no longer works. VREF is left open; sense resistors set the current.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "6.3 V, close to the IC with a short path to the die pad"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 Ω",
+     "note": "optional; leave out if standby is needed"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 nF",
+     "note": "50 V"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "16 V"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100 µF",
+     "note": "low ESR type"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "J_VIO",
+     "type": "terminal",
+     "value": "VCC_IO, 3.3 V or 5 V"
+    },
+    {
+     "ref": "RSA",
+     "type": "resistor",
+     "value": "RSA",
+     "note": "low-inductance SMD, e.g. 1206 0.5 W; value from the RSENSE table"
+    },
+    {
+     "ref": "RSB",
+     "type": "resistor",
+     "value": "RSB",
+     "note": "low-inductance SMD, e.g. 1206 0.5 W; value from the RSENSE table"
+    },
+    {
+     "ref": "LA",
+     "type": "load",
+     "value": "motor coil A"
+    },
+    {
+     "ref": "LB",
+     "type": "load",
+     "value": "motor coil B"
+    },
+    {
+     "ref": "J_STEP",
+     "type": "terminal",
+     "value": "STEP"
+    },
+    {
+     "ref": "J_DIR",
+     "type": "terminal",
+     "value": "DIR"
+    },
+    {
+     "ref": "J_MS1",
+     "type": "terminal",
+     "value": "MS1 (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_MS2",
+     "type": "terminal",
+     "value": "MS2 (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_SPREAD",
+     "type": "terminal",
+     "value": "SPREAD (GND or VCC_IO)"
+    },
+    {
+     "ref": "J_PDN",
+     "type": "terminal",
+     "value": "PDN_UART (configuration or optional UART)"
+    },
+    {
+     "ref": "J_DIAG",
+     "type": "terminal",
+     "value": "DIAG (driver error)"
+    },
+    {
+     "ref": "J_INDEX",
+     "type": "terminal",
+     "value": "INDEX (index pulse)"
+    },
+    {
+     "ref": "J_CLK",
+     "type": "terminal",
+     "value": "CLK (GND for internal clock, or external 10-16 MHz clock)"
+    },
+    {
+     "ref": "J_STDBY",
+     "type": "terminal",
+     "value": "STDBY (optional low power standby)"
+    },
+    {
+     "ref": "J_ENN",
+     "type": "terminal",
+     "value": "ENN (optional driver enable)"
+    },
+    {
+     "ref": "J_VM",
+     "type": "terminal",
+     "value": "4.7-5.4 V supply"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "esd-caps",
+   "title": "Simple ESD enhancement",
+   "page": 14,
+   "description": "Small capacitors from each motor output to ground slow the edge of an ESD hit on the motor lines; values from 100 pF to 1 nF work, larger ones absorb more but add switching loss, most at high supply voltage. Each sense resistor gets 100 nF in parallel.",
+   "parts": [
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "16 V"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "16 V"
+    },
+    {
+     "ref": "RSA",
+     "type": "resistor",
+     "value": "RSA"
+    },
+    {
+     "ref": "RSB",
+     "type": "resistor",
+     "value": "RSB"
+    },
+    {
+     "ref": "LA",
+     "type": "load",
+     "value": "motor coil A"
+    },
+    {
+     "ref": "LB",
+     "type": "load",
+     "value": "motor coil B"
+    },
+    {
+     "ref": "T_OA1",
+     "type": "terminal",
+     "value": "OA1"
+    },
+    {
+     "ref": "T_OA2",
+     "type": "terminal",
+     "value": "OA2"
+    },
+    {
+     "ref": "T_OB1",
+     "type": "terminal",
+     "value": "OB1"
+    },
+    {
+     "ref": "T_OB2",
+     "type": "terminal",
+     "value": "OB2"
+    },
+    {
+     "ref": "T_BRA",
+     "type": "terminal",
+     "value": "BRA"
+    },
+    {
+     "ref": "T_BRB",
+     "type": "terminal",
+     "value": "BRB"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "esd-lc",
+   "title": "Motor output protection with LC filters and varistors",
+   "page": 14,
+   "description": "Each motor output passes through a 50 Ω (at 100 MHz) inductor and then carries 470 pF to ground on the motor side, decoupling the driver from the connector. A varistor across each coil (V1, V2) clamps the coil voltage when a motor is plugged or unplugged live; four more varistors from each line to ground are an option for heavy ESD. Varistors are chosen for the supply voltage.",
+   "parts": [
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "50 Ω at 100 MHz",
+     "note": "SMD, rated for the full coil current"
+    },
+    {
+     "ref": "L2",
+     "type": "inductor",
+     "value": "50 Ω at 100 MHz",
+     "note": "SMD, rated for the full coil current"
+    },
+    {
+     "ref": "L3",
+     "type": "inductor",
+     "value": "50 Ω at 100 MHz",
+     "note": "SMD, rated for the full coil current"
+    },
+    {
+     "ref": "L4",
+     "type": "inductor",
+     "value": "50 Ω at 100 MHz",
+     "note": "SMD, rated for the full coil current"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "470 pF",
+     "note": "100 V"
+    },
+    {
+     "ref": "V1",
+     "type": "other",
+     "value": "varistor",
+     "note": "across coil A"
+    },
+    {
+     "ref": "V2",
+     "type": "other",
+     "value": "varistor",
+     "note": "across coil B"
+    },
+    {
+     "ref": "V1A",
+     "type": "other",
+     "value": "varistor",
+     "note": "optional"
+    },
+    {
+     "ref": "V1B",
+     "type": "other",
+     "value": "varistor",
+     "note": "optional"
+    },
+    {
+     "ref": "V2A",
+     "type": "other",
+     "value": "varistor",
+     "note": "optional"
+    },
+    {
+     "ref": "V2B",
+     "type": "other",
+     "value": "varistor",
+     "note": "optional"
+    },
+    {
+     "ref": "LA",
+     "type": "load",
+     "value": "motor coil A"
+    },
+    {
+     "ref": "LB",
+     "type": "load",
+     "value": "motor coil B"
+    },
+    {
+     "ref": "T_OA1",
+     "type": "terminal",
+     "value": "OA1"
+    },
+    {
+     "ref": "T_OA2",
+     "type": "terminal",
+     "value": "OA2"
+    },
+    {
+     "ref": "T_OB1",
+     "type": "terminal",
+     "value": "OB1"
+    },
+    {
+     "ref": "T_OB2",
+     "type": "terminal",
+     "value": "OB2"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "uart-two-drivers",
+   "title": "Two drivers on one UART with different addresses",
+   "page": 17,
+   "description": "A microcontroller UART runs a single-wire bus: TXD reaches the bus through 1 kΩ and RXD sits on the bus, so the master hears its own transmission and the drivers' replies. Both drivers' PDN_UART pins are on the bus. The first leaves MS1_AD0 and MS2_AD1 open (pull-downs, address 0); the second ties MS1_AD0 to VCC_IO (address 1). Both can be read and written.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "U9",
+     "type": "ic",
+     "value": "microcontroller with UART",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "J_VIO",
+     "type": "terminal",
+     "value": "+VCCIO"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "uart-broadcast",
+   "title": "Drivers sharing one address, write only",
+   "page": 17,
+   "description": "Drivers with the same address all listen to the master's TXD on their PDN_UART pins and take the same settings in parallel, as one device; nothing is read back.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "U9",
+     "type": "ic",
+     "value": "microcontroller with UART",
+     "external": true
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "uart-analog-switch",
+   "title": "Addressing many drivers through analog switches",
+   "page": 18,
+   "description": "Each driver's PDN_UART has a 22 kΩ pull-up to VIO and joins the shared bus through one switch of a 74HC4066, closed by its own port pin, like slave selects on SPI. TXD reaches the bus through 1 kΩ and RXD sits on it; an optional 74HC1G125 buffer, enabled by a further port pin, drives the bus from TXD for long lines or many drivers. The bus carries on to more drivers.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "U9",
+     "type": "ic",
+     "value": "microcontroller with UART",
+     "external": true
+    },
+    {
+     "ref": "SW1",
+     "type": "ic",
+     "value": "74HC4066 (one of four switches)",
+     "external": true
+    },
+    {
+     "ref": "SW2",
+     "type": "ic",
+     "value": "74HC4066 (one of four switches)",
+     "external": true
+    },
+    {
+     "ref": "SW3",
+     "type": "ic",
+     "value": "74HC4066 (one of four switches)",
+     "external": true
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "74HC1G125",
+     "external": true,
+     "note": "optional buffer"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "22 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "22 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "22 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "J_VIO",
+     "type": "terminal",
+     "value": "+VIO"
+    },
+    {
+     "ref": "J_BUS",
+     "type": "terminal",
+     "value": "bus to further drivers"
+    }
+   ],
+   "notes": [
+    "The buffer's enable is active low: the port pin goes low to transmit."
+   ]
+  },
+  {
+   "id": "vref-divider",
+   "title": "Fixed resistor divider to set current scale",
+   "page": 52,
+   "description": "A divider R1/R2 from 5VOUT or a precision reference sets 1 V to 2.4 V on VREF for a fixed current scale; R1+R2 is about 10 kΩ, and an external reference improves precision. An optional BC847, switched through 100 kΩ by a digital line, pulls R3 to ground to lower the scale.",
+   "parts": [
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "R3"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "Q1",
+     "type": "npn",
+     "value": "BC847"
+    },
+    {
+     "ref": "J_REF",
+     "type": "terminal",
+     "value": "5VOUT or precise reference voltage"
+    },
+    {
+     "ref": "J_CTRL",
+     "type": "terminal",
+     "value": "optional digital control"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "VREF"
+    }
+   ],
+   "notes": [
+    "R1+R2≈10K"
+   ]
+  },
+  {
+   "id": "vref-dac",
+   "title": "Precision current scaler",
+   "page": 52,
+   "description": "An 8-bit DAC referenced to a 2.5 V precision reference drives VREF with 0 V to 2.4 V under digital control.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "2.5 V precision reference",
+     "external": true
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "8 bit DAC",
+     "external": true
+    },
+    {
+     "ref": "J_DIG",
+     "type": "terminal",
+     "value": "digital current control"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "VREF"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "vref-pwm",
+   "title": "Simple PWM based current scaler",
+   "page": 52,
+   "description": "A microcontroller PWM above 20 kHz is smoothed by 22 kΩ and 1 µF into 0 V to 2.4 V on VREF; the duty cycle sets the current scale.",
+   "parts": [
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "22 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "J_PWM",
+     "type": "terminal",
+     "value": "PWM output of µC, >20 kHz"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "VREF"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "eval-board",
+   "title": "Layout example schematic",
+   "page": 79,
+   "description": "A complete board around the driver. The motor supply has an SMB28A TVS, two 330 µF 50 V electrolytics, 100 nF and two 10 µF ceramics, and 1 µF in series with 1100 mΩ (R301). The charge pump uses 22 nF and 100 nF. Sense resistors of 120 mΩ 1 W sit on BRA and BRB, each with an open solder jumper across it for internal sensing, and test points. 5VOUT carries 2.2 µF and an SMBJ5A, with an open jumper JP303 to +VM for 5 V only use. UART_TX reaches PDN_UART through 1 kΩ and UART_RX reads the pin directly. Three-pin headers select internal or external STEP and DIR. STDBY is pulled down by 100 kΩ, SPREAD has an unfitted pull-up to VCC_IO, and DIAG lights a white LED through 220 Ω.",
+   "parts": [
+    {
+     "ref": "IC301",
+     "type": "ic",
+     "value": "TMC2209-LA-T"
+    },
+    {
+     "ref": "D301",
+     "type": "zener",
+     "value": "SMB28A",
+     "note": "TVS diode"
+    },
+    {
+     "ref": "C301",
+     "type": "capacitor",
+     "value": "330 µF",
+     "note": "50 V, polarised"
+    },
+    {
+     "ref": "C302",
+     "type": "capacitor",
+     "value": "330 µF",
+     "note": "50 V, polarised"
+    },
+    {
+     "ref": "C303",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "50 V, 0603"
+    },
+    {
+     "ref": "C304",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "50 V, 2220"
+    },
+    {
+     "ref": "C305",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "50 V, 2220"
+    },
+    {
+     "ref": "C306",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "50 V, 1210"
+    },
+    {
+     "ref": "R301",
+     "type": "resistor",
+     "value": "1100 mΩ",
+     "note": "1 %, 0603"
+    },
+    {
+     "ref": "C307",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "50 V, 0603"
+    },
+    {
+     "ref": "C308",
+     "type": "capacitor",
+     "value": "22 nF",
+     "note": "50 V, 0805"
+    },
+    {
+     "ref": "C309",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "50 V, 0603"
+    },
+    {
+     "ref": "C310",
+     "type": "capacitor",
+     "value": "2.2 µF",
+     "note": "50 V, 0603"
+    },
+    {
+     "ref": "D303",
+     "type": "zener",
+     "value": "SMBJ5A",
+     "note": "TVS diode"
+    },
+    {
+     "ref": "JP303",
+     "type": "switch",
+     "value": "solder jumper, open"
+    },
+    {
+     "ref": "R302",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "1 %, 0603"
+    },
+    {
+     "ref": "R303",
+     "type": "resistor",
+     "value": "220 Ω",
+     "note": "1 %, 0603"
+    },
+    {
+     "ref": "D302",
+     "type": "led",
+     "value": "white",
+     "note": "0603"
+    },
+    {
+     "ref": "R304",
+     "type": "resistor",
+     "value": "120 mΩ",
+     "note": "1 W, 2010"
+    },
+    {
+     "ref": "R305",
+     "type": "resistor",
+     "value": "120 mΩ",
+     "note": "1 W, 2010"
+    },
+    {
+     "ref": "JP301",
+     "type": "switch",
+     "value": "solder jumper, open"
+    },
+    {
+     "ref": "JP302",
+     "type": "switch",
+     "value": "solder jumper, open"
+    },
+    {
+     "ref": "R306",
+     "type": "resistor",
+     "value": "not mounted"
+    },
+    {
+     "ref": "R307",
+     "type": "resistor",
+     "value": "100 kΩ",
+     "note": "1 %, 0603"
+    },
+    {
+     "ref": "J301",
+     "type": "connector",
+     "value": "Conn_01x03_Male"
+    },
+    {
+     "ref": "J302",
+     "type": "connector",
+     "value": "Conn_01x03_Male"
+    },
+    {
+     "ref": "TP301",
+     "type": "connector",
+     "value": "TestPoint"
+    },
+    {
+     "ref": "TP302",
+     "type": "connector",
+     "value": "TestPoint"
+    },
+    {
+     "ref": "TP303",
+     "type": "connector",
+     "value": "TestPoint"
+    },
+    {
+     "ref": "TP304",
+     "type": "connector",
+     "value": "TestPoint"
+    },
+    {
+     "ref": "TP305",
+     "type": "connector",
+     "value": "TestPoint"
+    },
+    {
+     "ref": "TP306",
+     "type": "connector",
+     "value": "TestPoint"
+    },
+    {
+     "ref": "T_VM",
+     "type": "terminal",
+     "value": "+VM"
+    },
+    {
+     "ref": "T_RX",
+     "type": "terminal",
+     "value": "UART_RX"
+    },
+    {
+     "ref": "T_TX",
+     "type": "terminal",
+     "value": "UART_TX"
+    },
+    {
+     "ref": "T_VREF",
+     "type": "terminal",
+     "value": "V_ref"
+    },
+    {
+     "ref": "T_ENN",
+     "type": "terminal",
+     "value": "ENN"
+    },
+    {
+     "ref": "T_CLK",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "T_MS1",
+     "type": "terminal",
+     "value": "MS1"
+    },
+    {
+     "ref": "T_MS2",
+     "type": "terminal",
+     "value": "MS2"
+    },
+    {
+     "ref": "T_SPREAD",
+     "type": "terminal",
+     "value": "SPREAD"
+    },
+    {
+     "ref": "T_VIO",
+     "type": "terminal",
+     "value": "Vcc_IO"
+    },
+    {
+     "ref": "T_IST",
+     "type": "terminal",
+     "value": "INT_STEP"
+    },
+    {
+     "ref": "T_EST",
+     "type": "terminal",
+     "value": "EXT_STEP"
+    },
+    {
+     "ref": "T_IDIR",
+     "type": "terminal",
+     "value": "INT_DIR"
+    },
+    {
+     "ref": "T_EDIR",
+     "type": "terminal",
+     "value": "EXT_DIR"
+    },
+    {
+     "ref": "T_INDEX",
+     "type": "terminal",
+     "value": "Index"
+    },
+    {
+     "ref": "T_DIAG",
+     "type": "terminal",
+     "value": "DIAG"
+    },
+    {
+     "ref": "T_5V",
+     "type": "terminal",
+     "value": "+5V_internal"
+    },
+    {
+     "ref": "T_OA1",
+     "type": "terminal",
+     "value": "OA1"
+    },
+    {
+     "ref": "T_OA2",
+     "type": "terminal",
+     "value": "OA2"
+    },
+    {
+     "ref": "T_OB1",
+     "type": "terminal",
+     "value": "OB1"
+    },
+    {
+     "ref": "T_OB2",
+     "type": "terminal",
+     "value": "OB2"
+    },
+    {
+     "ref": "T_BRA",
+     "type": "terminal",
+     "value": "BRA"
+    },
+    {
+     "ref": "T_BRB",
+     "type": "terminal",
+     "value": "BRB"
+    }
+   ],
+   "notes": [
+    "Shorting jumpers U302 and U303 (2.54 mm) plug onto J301 and J302 to pick internal or external STEP and DIR."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "RMS run current, standalone",
+   "expr": "IRMS = 325 mV / (RSENSE + 20 mΩ) × 1/√2 × VVREF / 2.5 V",
+   "where": {
+    "RSENSE": "sense resistor",
+    "20 mΩ": "internal resistance from BRxy to the comparator",
+    "VVREF": "voltage on VREF, 2.5 V or open gives full scale"
+   },
+   "note": "",
+   "page": 50
+  },
+  {
+   "name": "RMS current with current scale",
+   "expr": "IRMS = (CS + 1) / 32 × VFS / (RSENSE + 20 mΩ) × 1/√2",
+   "where": {
+    "CS": "current scale from IRUN or IHOLD, 0…31",
+    "VFS": "full-scale sense voltage set by vsense (VSRTL, VSRTH), 325 mV by default"
+   },
+   "note": "",
+   "page": 50
+  },
+  {
+   "name": "Full-scale voltage with analog scaling",
+   "expr": "VFS' = VFS × VVREF / 2.5 V",
+   "where": {
+    "VVREF": "VREF voltage, 0 V to V5VOUT/2"
+   },
+   "note": "Applies with I_scale_analog=1, the default.",
+   "page": 51
+  },
+  {
+   "name": "Lower coil current limit for StealthChop2 automatic tuning",
+   "expr": "ILower Limit = tBLANK × fPWM × VM / RCOIL",
+   "where": {
+    "tBLANK": "blank time set by TBL",
+    "fPWM": "StealthChop PWM frequency",
+    "VM": "motor supply voltage",
+    "RCOIL": "coil resistance"
+   },
+   "note": "RCOIL = 5 Ω, VM = 24 V, TBL=%01 (24 clocks), PWM_FREQ=%00 (2/1024 clocks): 24/512 × 24 V / 5 Ω = 225 mA, the least run current for tuning.",
+   "page": 39
+  },
+  {
+   "name": "Initial PWM amplitude",
+   "expr": "PWM_AMPL = 374 × RCOIL × ICOIL / VM",
+   "where": {
+    "ICOIL": "target RMS coil current",
+    "RCOIL": "coil resistance",
+    "VM": "motor supply voltage"
+   },
+   "note": "",
+   "page": 40
+  },
+  {
+   "name": "Effective PWM voltage",
+   "expr": "UPWM = VM × PWM_SCALE / 256 × 248 / 256 × 1/√2 = VM × PWM_SCALE / 374",
+   "where": {
+    "PWM_SCALE": "actual 8-bit PWM amplitude",
+    "248": "sine wave peak in the table"
+   },
+   "note": "UPWM is the RMS value, peak/√2.",
+   "page": 40
+  },
+  {
+   "name": "Velocity based PWM amplitude",
+   "expr": "PWM_SCALE_SUM = PWM_OFS + PWM_GRAD × 256 × fSTEP / fCLK",
+   "where": {
+    "fSTEP": "microstep frequency at 256-microstep equivalent",
+    "fCLK": "clock frequency"
+   },
+   "note": "With pwm_autoscale=0.",
+   "page": 40
+  },
+  {
+   "name": "First estimate of PWM_GRAD",
+   "expr": "PWM_GRAD = CBEMF [V/(rad/s)] × 2π × fCLK × 1.46 / (VM × MSPR)",
+   "where": {
+    "CBEMF": "motor back-EMF constant",
+    "MSPR": "microsteps per rotation, e.g. 51200 for 256 µsteps and 200 fullsteps"
+   },
+   "note": "",
+   "page": 40
+  },
+  {
+   "name": "Back-EMF constant from motor data",
+   "expr": "CBEMF [V/(rad/s)] = HoldingTorque [Nm] / (2 × ICOILNOM [A])",
+   "where": {
+    "HoldingTorque": "torque with both coils at ICOILNOM",
+    "ICOILNOM": "rated phase current"
+   },
+   "note": "In SI units CBEMF equals the torque constant numerically; the factor 2 is there because the rating assumes a fullstep position with both coils on, and the result is RMS volts per coil.",
+   "page": 41
+  },
+  {
+   "name": "Slow decay time setting",
+   "expr": "TOFF = (tOFF × fCLK − 24) / 32",
+   "where": {
+    "tOFF": "wanted slow decay time"
+   },
+   "note": "25 kHz chopper with half the cycle in two slow decay phases: tOFF = 1/25 kHz × 50/100 × 1/2 = 10 µs, giving TOFF=3 at 12 MHz and 4.25 (4 or 5) at 16 MHz.",
+   "page": 46
+  },
+  {
+   "name": "Off time in clocks",
+   "expr": "NCLK = 24 + 32 × TOFF",
+   "where": {
+    "TOFF": "CHOPCONF off time 1…15"
+   },
+   "note": "",
+   "page": 31
+  },
+  {
+   "name": "StealthChop PWM frequency",
+   "expr": "fPWM = 2/1024, 2/683, 2/512 or 2/410 × fCLK",
+   "where": {
+    "fCLK": "clock frequency"
+   },
+   "note": "Chosen by PWM_FREQ = %00 … %11; each motor output switches at half fPWM.",
+   "page": 32
+  },
+  {
+   "name": "Internal step generator velocity",
+   "expr": "v[Hz] = VACTUAL × (fCLK[Hz] / 2 / 2^23)",
+   "where": {
+    "v": "microstep rate",
+    "VACTUAL": "register value"
+   },
+   "note": "0.715 Hz per LSB with the internal 12 MHz clock.",
+   "page": 64
+  },
+  {
+   "name": "Rotations per second",
+   "expr": "v[rps] = v[Hz] / USC / FSC",
+   "where": {
+    "USC": "microsteps per fullstep, normally 256",
+    "FSC": "fullsteps per rotation, e.g. 200"
+   },
+   "note": "",
+   "page": 64
+  },
+  {
+   "name": "Step time",
+   "expr": "TSTEP = fCLK / fSTEP",
+   "where": {
+    "fSTEP": "microstep frequency"
+   },
+   "note": "",
+   "page": 64
+  },
+  {
+   "name": "Microsteps per step pulse",
+   "expr": "microsteps = 2^MRES",
+   "where": {
+    "MRES": "CHOPCONF resolution field"
+   },
+   "note": "",
+   "page": 30
+  },
+  {
+   "name": "Stall condition",
+   "expr": "SG_RESULT ≤ SGTHRS × 2",
+   "where": {
+    "SGTHRS": "stall threshold register"
+   },
+   "note": "",
+   "page": 26
+  },
+  {
+   "name": "CoolStep thresholds",
+   "expr": "lower = SEMIN × 32; upper = (SEMIN + SEMAX + 1) × 32",
+   "where": {
+    "SEMIN": "COOLCONF lower threshold, 1…15",
+    "SEMAX": "COOLCONF hysteresis, 0…15"
+   },
+   "note": "",
+   "page": 57
+  },
+  {
+   "name": "SEMIN starting value",
+   "expr": "SEMIN = 1 + SGTHRS / 16",
+   "where": {},
+   "note": "",
+   "page": 59
+  },
+  {
+   "name": "UART CRC polynomial",
+   "expr": "CRC = x^8 + x^2 + x^1 + x^0",
+   "where": {},
+   "note": "CRC8-ATM, start value 0, applied LSB first over every byte including sync and address; per bit the register shifts left and takes in CRC.7 ^ CRC.1 ^ CRC.0 ^ incoming bit; in byte code, XOR with 0x07 when the shifted-out bit differs from the data bit.",
+   "page": 17
+  },
+  {
+   "name": "UART write time",
+   "expr": "t = 8 bytes × (8 + 2) bits × tBIT",
+   "where": {
+    "tBIT": "bit time"
+   },
+   "note": "320 µs at 250 kBaud.",
+   "page": 18
+  },
+  {
+   "name": "Hold current power-down time",
+   "expr": "t = IHOLDDELAY × (IRUN − IHOLD) × 2^18 / fCLK",
+   "where": {},
+   "note": "IRUN=31, IHOLD=16, IHOLDDELAY=4: about 1 s at 16 MHz.",
+   "page": 51
+  },
+  {
+   "name": "Reference current for internal sensing",
+   "expr": "Icoil,peak = 3000 × IIREF",
+   "where": {
+    "IIREF": "current into VREF through RREF from 5VOUT"
+   },
+   "note": "0.33 mA gives 1.0 A peak, 0.7 A RMS; VREF has about 0.45 kΩ to ground, which adds to RREF.",
+   "page": 53
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Control modes",
+   "page": 4,
+   "text": "Three ways to use it: as a plain STEP/DIR driver set up by pins, with VREF for current and INDEX and DIAG as feedback; as a STEP/DIR driver whose defaults have been programmed into OTP or loaded over UART after each power-up (a TXD line alone, or bit-banging, can set many drivers at once); or with PDN_UART on a bidirectional UART, which replaces ENN, DIAG, INDEX, MS1, MS2 and VREF so that STEP, DIR and PDN_UART are enough."
+  },
+  {
+   "topic": "UART interface",
+   "page": 6,
+   "text": "Single-wire, half-duplex, with CRC. It turns on by itself when valid datagrams arrive. The baud rate is found from each datagram's sync nibble: 9000 baud minimum (worst case 20 MHz clock), up to fCLK/16. Four addresses come from MS1_AD0 and MS2_AD1. Frames match the TMC5130, TMC516x and TMC5072. Write-only registers need a shadow copy in the master for read-modify-write. With UART in use, set GCONF.pdn_disable because the line must idle high."
+  },
+  {
+   "topic": "UART datagrams",
+   "page": 15,
+   "text": "Write: 64 bits — sync nibble 1010 plus four reserved bits, slave address 0…3, register address with bit 7 set, 32 data bits high byte first, CRC. Read request: 32 bits — sync, address, register address with bit 7 clear, CRC. The reply is 64 bits with address 0xFF, sent after SENDDELAY (8 bit times by default) at the master's baud rate; the output switches off four bit times after its last stop bit. Bytes are LSB first with start and stop bits. A gap of more than 63 bit times between start bits resets the receiver, which then needs 12 idle bit times; pulses shorter than 16 clocks count as glitches, and a CRC error is treated the same. The baud rate cannot be cut to below 15 % of the previous value in one step. Each accepted write increments IFCNT."
+  },
+  {
+   "topic": "Multiple drivers on one bus",
+   "page": 18,
+   "text": "Up to four drivers can share a bus by address. More need analog switches as selects, which leaves MS1 and MS2 free for resolution as long as the address they make is accounted for. Drivers given the same settings can all be written at once without addressing. With the optional buffer, SENDDELAY must leave the master time to release the bus; the master also receives everything it sends."
+  },
+  {
+   "topic": "STEP/DIR",
+   "page": 6,
+   "text": "Each active STEP edge moves the microstep counter by the selected resolution, up when DIR was low and down when high; DEDGE makes both edges active to halve the step rate. Inputs are synchronised to the clock and filtered against glitches; long or cabled lines need filtering or differential transmission. Resolution can change at any time: the sequencer jumps to the nearest position of the new resolution, so steps stay symmetrical in both directions."
+  },
+  {
+   "topic": "MicroPlyer and standstill",
+   "page": 62,
+   "text": "MicroPlyer splits each input step into equal 1/256 microsteps timed from the previous step interval. The longest interval is 2^20 clocks, so at 12 MHz step rates below roughly 12 Hz count as standstill; stst then sets and, if PDN_UART allows, current reduction begins. It needs a jitter-free step rate."
+  },
+  {
+   "topic": "Microstep table",
+   "page": 61,
+   "text": "1024 sine entries cover one electrical turn (four fullsteps). Fullstep uses positions 128, 384, 640, 896 (both coils at 70.7 %), half step starts at 64 in steps of 128, quarter step starts at 32 in steps of 64; zero-current and full-current positions are never used."
+  },
+  {
+   "topic": "Index output",
+   "page": 63,
+   "text": "INDEX goes active when coil A's sine crosses zero going positive, once per electrical period (four fullsteps); with a home switch it pins homing to one microstep. It can instead show the overtemperature prewarning or toggle on each internal generator step."
+  },
+  {
+   "topic": "Internal step generator",
+   "page": 64,
+   "text": "Writing a non-zero VACTUAL runs the motor at that velocity with direction from the sign; STEP/DIR and the generator can be mixed. There is no ramp: above the motor's start/stop speed the master must change VACTUAL in small steps. Steps can be counted on INDEX (GCONF.index_step) or by polling MSCNT."
+  },
+  {
+   "topic": "StealthChop2",
+   "page": 35,
+   "text": "A voltage-mode PWM chopper, silent at standstill and low speed. Automatic tuning learns the motor in two stages: AT#1 at standstill with run current for over 130 ms sets PWM_OFS_AUTO; AT#2 at a steady medium speed with real back-EMF (typically 60-300 RPM) adjusts PWM_GRAD_AUTO by one per 8 fullsteps. Tuning carries on during later motion. Changing VREF or VS invalidates it until the next AT#1. A minimum TPOWERDOWN of 2 is needed. IRUN should be 8 to 31; use vsense for lower currents. The automatic mode is recommended; the feed-forward mode (pwm_autoscale=0) needs UART and well-known motor and supply."
+  },
+  {
+   "topic": "StealthChop current regulator",
+   "page": 37,
+   "text": "With pwm_autoscale the driver measures coil current during the on time and a proportional loop with gain PWM_REG trims PWM_SCALE_AUTO. A small PWM_REG is stable; faster acceleration in AT#2 needs a larger one. Current can only be measured above a minimum duty cycle set by blank time and PWM frequency, so the minimum regulated current rises with supply voltage and PWM frequency. Lower currents after tuning follow from the learned offset and gradient; freewheeling reaches zero."
+  },
+  {
+   "topic": "Combining StealthChop and SpreadCycle",
+   "page": 41,
+   "text": "TPWMTHRS switches to SpreadCycle above a velocity (and back below it with 1/16 hysteresis); it can be set in OTP for standalone use. Switch at low speed, since back-EMF shifts current against voltage by up to 90° and causes a jerk, even overcurrent, at higher speed. StealthChop keeps its last regulation state while in SpreadCycle, so supply and threshold should not change much meanwhile. Enable StealthChop first at standstill for at least 128 chopper periods. A stall or abrupt stop in StealthChop can raise current for tens of milliseconds and trip short detection; clear flags and restart from zero speed."
+  },
+  {
+   "topic": "Flags in StealthChop",
+   "page": 42,
+   "text": "Current-based flags react slowly in StealthChop. ola and olb show whether full current is reached on each coil: flicker comes from coil or sense asymmetry, steady means an open coil, both can show without a motor or above the PWM limit. PWM_SCALE_SUM at 255 means the supply cannot drive the full current."
+  },
+  {
+   "topic": "Freewheeling and passive braking",
+   "page": 43,
+   "text": "With IHOLD=0 in StealthChop, FREEWHEEL picks normal hold, freewheeling, or a short across each coil through the low-side or high-side MOSFETs, active after TPOWERDOWN and IHOLDDELAY. Shorting gives eddy-current braking at no power but lets a constant torque turn the motor slowly. Regulation freezes at zero current so restart is quick."
+  },
+  {
+   "topic": "SpreadCycle",
+   "page": 45,
+   "text": "A cycle-by-cycle current chopper: on phase until the comparator trips, slow decay timed by TOFF, fast decay, then a second slow decay. Blanking hides switching spikes for one or two microseconds. 16 kHz to 30 kHz suits most motors. Hysteresis is set as HSTRT+HEND at the start of each cycle, stepping down every 16 clocks to HEND, which keeps the frequency out of the audio band. Start with low hysteresis and raise HSTRT until the current is smooth through zero; an effective hysteresis around 4 fits most motors. Very high speeds may gain from TOFF 1 or 2 with TBL 0 or 1. Above roughly 2 A peak, body-diode conduction slightly distorts the SpreadCycle current wave at medium speed; StealthChop does not show this."
+  },
+  {
+   "topic": "Sense resistors",
+   "page": 49,
+   "text": "Choose RSENSE for the full current at VREF 2.5 V and IRUN 31. Use low-inductance film or composition parts, laid out symmetrically with short, equal traces, and never a shared ground path between the two. The resistor carries peak coil current at standstill; 0.5 W covers most uses to 1.2 A RMS, 0.25 W with vsense=1."
+  },
+  {
+   "topic": "VREF analog scaling",
+   "page": 51,
+   "text": "With I_scale_analog (default) VREF is amplified, filtered (3.5 kHz bandwidth inside) and used as reference: 2.5 V to 5 V gives full scale, below that the current scales linearly. Below about 0.5 V to 1 V noise hurts precision; best is full current with VREF near 2 V to 2.4 V. A divider, a DAC, or a PWM above 10 kHz through an RC filter with a time constant of several milliseconds can drive it."
+  },
+  {
+   "topic": "Internal sense resistors",
+   "page": 53,
+   "text": "Setting internal_Rsense (GCONF or OTP) uses the MOSFET on-resistance instead of sense resistors; BRA and BRB then go straight to ground at the package. A resistor RREF from 5VOUT to VREF sets the reference current, amplified 3000 times. Temperature drift is compensated, but with high currents a gradient inside the die gives around 10 % overshoot for about a second at heat-up. Best with StealthChop and up to 1.4 A RMS; SpreadCycle can show chopper noise at high die temperature. Trace resistance on BR pins adds to the result, so calibrate in the application."
+  },
+  {
+   "topic": "StallGuard4",
+   "page": 55,
+   "text": "Load measurement for StealthChop: SG_RESULT falls with load, near-linearly, to a motor-specific low at 90° load angle. It updates each fullstep. DIAG pulses when SG_RESULT drops to twice SGTHRS, only in StealthChop and while TCOOLTHRS ≥ TSTEP > TPWMTHRS. Tune by loading the motor at working speed, start SGTHRS at half the lowest value seen before stall, and check from 80 % to 120 % of speed and across temperature. It is unreliable at very low speed (often under one turn per second) and where back-EMF exceeds the supply."
+  },
+  {
+   "topic": "CoolStep",
+   "page": 57,
+   "text": "Adjusts current to load using SG_RESULT: below SEMIN×32 the current rises by SEUP steps, at or above (SEMIN+SEMAX+1)×32 it falls by one step per SEDN readings, between IRUN and 1/2 or 1/4 of IRUN (SEIMIN). It runs above TCOOLTHRS velocity and only in StealthChop. Energy savings up to 75 %; half the current is a quarter of the power. Rising current can cause false stall detection, so disable CoolStep while homing with StallGuard."
+  },
+  {
+   "topic": "Standstill current reduction",
+   "page": 8,
+   "text": "PDN_UART low enables automatic reduction: after stst and TPOWERDOWN (20 × 2^18 clocks by default) the current steps down to IHOLD, IHOLDDELAY setting the step rate. The default goes to slightly over half the run current, cutting standstill dissipation below 33 %."
+  },
+  {
+   "topic": "Low power standby",
+   "page": 14,
+   "text": "STDBY high switches off the 5 V regulator and all internal blocks, about 2 mW at 12 V and under 1 mW at 5 V. Stop the motor first, hold ENN and VREF low during standby, and keep VCC_IO on (it may drop to 1.5 V). Registers return to power-up defaults on leaving standby."
+  },
+  {
+   "topic": "High motor current",
+   "page": 13,
+   "text": "On-resistance losses rise with the square of current and MOSFET resistance rises about 50 % per 100 °C, so PCB thermal design becomes critical at or above 1.4 A RMS for long periods."
+  },
+  {
+   "topic": "Temperature protection",
+   "page": 65,
+   "text": "A four-level sensor gives prewarning and shutdown; thresholds are set by OTTRIM (UART or OTP). After ot trips the driver stays off until the temperature is below the prewarning level. Heat travels across the die with delay, so gross overcurrent can damage the IC before the sensor reacts."
+  },
+  {
+   "topic": "Short protection",
+   "page": 65,
+   "text": "Every power MOSFET's current is checked; a short must be seen three times before the bridge shuts off, to ignore ESD. The affected bridge goes off and s2ga/s2gb or s2vsa/s2vsb set; disable and re-enable the driver to restart."
+  },
+  {
+   "topic": "Open load detection",
+   "page": 66,
+   "text": "Open load is flagged when the target coil current cannot be reached, so undervoltage, high speed, shorts or overtemperature can also set it. Read it at low or nominal speed, preferably in SpreadCycle; it is informative and the driver does not act on it."
+  },
+  {
+   "topic": "Diagnostic output",
+   "page": 66,
+   "text": "DIAG goes high for stall detection (when enabled), and latches drv_err for overtemperature or short circuit; power-on reset, charge pump undervoltage and power stage disable (ENN) also drive it. Disabling the power stage resets the latch."
+  },
+  {
+   "topic": "OTP programming",
+   "page": 70,
+   "text": "Write the byte, bit and magic code 0xbd to OTP_PROG for each bit, wait 10 ms or more, check OTP_READ, and reprogram missing bits with 100 ms. VS must be at least 6 V. Bits can only be set."
+  },
+  {
+   "topic": "External reset",
+   "page": 71,
+   "text": "Power-on reset loads defaults and OTP values. To reset, cycle VS, 5VOUT (only through VS) or most simply VCC_IO; inputs must be held low meanwhile because their protection diodes clamp to VCC_IO, or have series resistors."
+  },
+  {
+   "topic": "Clock",
+   "page": 71,
+   "text": "CLK tied to GND near the IC selects the internal oscillator, factory-trimmed to 12 MHz. An external clock of 8 to 13.4 MHz (max. 16 MHz, near 50 % duty, clean CMOS levels) takes over at its first rising edge; down to 4 MHz saves power and emissions at some cost in performance. If the external clock stops for 32 internal clocks the driver falls back to the internal one. A shared clock synchronises several drivers."
+  },
+  {
+   "topic": "Supply and layout",
+   "page": 78,
+   "text": "Solder the die pad to a solid ground plane with many vias; the ground below the pad acts as star point and the top layer should spread heat into a large ground plane. Sense resistors see steps down to 0.5 mV: place them close, give each its own via(s) to ground, carry no other current on their returns. Put the 2.2 µF to 4.7 µF 5VOUT ceramic right at the pin with its own direct return to the pad or nearest GND pin. Decouple VS with 47 µF or more electrolytic plus a ceramic close to the device; at least 100 µF near the driver is recommended, low ESR, and its ripple current also depends on the supply's impedance and cable. Keep the fast motor traces away from high-impedance signals."
+  },
+  {
+   "topic": "VCC_IO",
+   "page": 11,
+   "text": "VCC_IO can come from 5VOUT or from an external rail such as a 3.3 V regulator."
+  },
+  {
+   "topic": "ESD and live plugging",
+   "page": 14,
+   "text": "ESD from motors, plastic housings and belts can reach several kV and reset or destroy the driver; grounding the motor bodies or using conductive plastic avoids it."
+  }
+ ],
+ "packages": [
+  {
+   "name": "QFN28",
+   "page": 81,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "total thickness",
+     "0.8",
+     "0.85",
+     "0.9"
+    ],
+    [
+     "A1",
+     "stand off",
+     "0",
+     "0.035",
+     "0.05"
+    ],
+    [
+     "A2",
+     "mold thickness",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "A3",
+     "lead frame thickness",
+     "",
+     "0.203",
+     ""
+    ],
+    [
+     "b",
+     "lead width",
+     "0.2",
+     "0.25",
+     "0.3"
+    ],
+    [
+     "D",
+     "body size X",
+     "",
+     "5.0",
+     ""
+    ],
+    [
+     "E",
+     "body size Y",
+     "",
+     "5.0",
+     ""
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "J",
+     "exposed die pad size X *)",
+     "3.6",
+     "3.7",
+     "3.8"
+    ],
+    [
+     "K",
+     "exposed die pad size Y *)",
+     "3.6",
+     "3.7",
+     "3.8"
+    ],
+    [
+     "L",
+     "lead length *)",
+     "0.35",
+     "0.4",
+     "0.45"
+    ],
+    [
+     "aaa",
+     "package edge tolerance",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "bbb",
+     "mold flatness",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "ccc",
+     "coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "ddd",
+     "lead offset",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "eee",
+     "exposed pad offset",
+     "",
+     "",
+     "0.1"
+    ]
+   ],
+   "notes": [
+    "*) Not the same as the TMC2208 package: the TMC2209 has a larger heat slug and slightly shorter leads."
+   ]
+  }
+ ]
+}

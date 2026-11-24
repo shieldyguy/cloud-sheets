@@ -1,0 +1,4651 @@
+{
+ "sheet": 1,
+ "name": "TJA1145TKJ",
+ "kind": "interface",
+ "manufacturer": "NXP Semiconductors",
+ "title": "High-speed CAN transceiver with partial networking and SPI",
+ "source": {
+  "revision": "Rev. 1, 27 September 2013",
+  "pages": 48
+ },
+ "summary": "A high-speed CAN transceiver for automotive nodes that stay on the battery and sleep when idle. It wakes on a standard CAN wake-up pattern, on an ISO 11898-6 selective wake-up frame matched against stored ID, mask and data registers, or on an edge at WAKE, and its INH output switches the node's regulators off in Sleep. An SPI port (16, 24 or 32 bits) sets modes and reads status and events; VIO sets the logic levels for 3.3 V to 5 V controllers. The /FD types stay asleep through CAN FD traffic, never treating an FD frame as a wake-up. SO14 or HVSON14.",
+ "key_figures": [
+  [
+   "Bit rate",
+   "up to 1 Mbit/s"
+  ],
+  [
+   "Standards",
+   "ISO 11898-2, -5, -6"
+  ],
+  [
+   "Sleep current",
+   "IBAT 40 µA typ, 59 µA max (-40 °C to 85 °C, VBAT 7 V to 18 V)"
+  ],
+  [
+   "Standby current",
+   "IBAT 44 µA typ, 68 µA max"
+  ],
+  [
+   "Supplies",
+   "VBAT 4.5 V to 28 V; VCC 4.5 V to 5.5 V; VIO 2.85 V to 5.5 V"
+  ],
+  [
+   "Bus pin rating",
+   "±58 V; ±8 kV HBM; ±6 kV IEC 61000-4-2"
+  ],
+  [
+   "TXD to RXD delay",
+   "255 ns max"
+  ],
+  [
+   "Junction temperature",
+   "-40 °C to +150 °C"
+  ],
+  [
+   "Packages",
+   "SO14, HVSON14 3 mm × 4.5 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 3,
+  "columns": [
+   "part number",
+   "package",
+   "outline",
+   "CAN FD passive",
+   "identification code"
+  ],
+  "rows": [
+   [
+    "TJA1145T",
+    "SO14, 14 leads, body width 3.9 mm",
+    "SOT108-1",
+    "no",
+    "70h"
+   ],
+   [
+    "TJA1145T/FD",
+    "SO14, 14 leads, body width 3.9 mm",
+    "SOT108-1",
+    "yes",
+    "74h"
+   ],
+   [
+    "TJA1145TK",
+    "HVSON14, 14 terminals, body 3 × 4.5 × 0.85 mm",
+    "SOT1086-2",
+    "no",
+    "70h"
+   ],
+   [
+    "TJA1145TK/FD",
+    "HVSON14, 14 terminals, body 3 × 4.5 × 0.85 mm",
+    "SOT1086-2",
+    "yes",
+    "74h"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "SO14 (SOT108-1)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "TXD",
+     "type": "digital input",
+     "function": "Transmit data from the CAN controller, at VIO levels. An internal pull-up to VIO keeps it recessive when open."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground. On HVSON14 the die ground reaches both this pin and the exposed pad; the pin is to be soldered to the board ground."
+    },
+    {
+     "pin": "3",
+     "name": "VCC",
+     "type": "power in",
+     "function": "5 V supply of the CAN transmitter."
+    },
+    {
+     "pin": "4",
+     "name": "RXD",
+     "type": "digital output",
+     "function": "Receive data from the bus, at VIO levels; driven LOW to flag a wake-up or interrupt event in CAN Offline mode."
+    },
+    {
+     "pin": "5",
+     "name": "VIO",
+     "type": "power in",
+     "function": "I/O supply, taken from the microcontroller supply; sets the levels of TXD, RXD and the SPI pins (2.85 V to 5.5 V)."
+    },
+    {
+     "pin": "6",
+     "name": "SDO",
+     "type": "digital output",
+     "function": "SPI data out; high-impedance while SCSN is HIGH."
+    },
+    {
+     "pin": "7",
+     "name": "INH",
+     "type": "output",
+     "function": "Inhibit output at VBAT level for enabling external regulators; high-ohmic in Sleep and Off modes."
+    },
+    {
+     "pin": "8",
+     "name": "SCK",
+     "type": "digital input",
+     "function": "SPI clock in; held LOW by an internal pull-down."
+    },
+    {
+     "pin": "9",
+     "name": "WAKE",
+     "type": "input",
+     "function": "Local wake-up input, edge-triggered on rising and/or falling edges. Tie to GND when unused, with local wake-up disabled."
+    },
+    {
+     "pin": "10",
+     "name": "BAT",
+     "type": "power in",
+     "function": "Battery supply; also feeds the CAN receiver and the autonomous bus bias."
+    },
+    {
+     "pin": "11",
+     "name": "SDI",
+     "type": "digital input",
+     "function": "SPI data in."
+    },
+    {
+     "pin": "12",
+     "name": "CANL",
+     "type": "bus I/O",
+     "function": "Low-side CAN bus line."
+    },
+    {
+     "pin": "13",
+     "name": "CANH",
+     "type": "bus I/O",
+     "function": "High-side CAN bus line."
+    },
+    {
+     "pin": "14",
+     "name": "SCSN",
+     "type": "digital input",
+     "function": "SPI chip select, active LOW; internal pull-up."
+    }
+   ]
+  },
+  {
+   "package": "HVSON14 (SOT1086-2)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "TXD",
+     "type": "digital input",
+     "function": "Transmit data from the CAN controller, at VIO levels. An internal pull-up to VIO keeps it recessive when open."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground. On HVSON14 the die ground reaches both this pin and the exposed pad; the pin is to be soldered to the board ground."
+    },
+    {
+     "pin": "3",
+     "name": "VCC",
+     "type": "power in",
+     "function": "5 V supply of the CAN transmitter."
+    },
+    {
+     "pin": "4",
+     "name": "RXD",
+     "type": "digital output",
+     "function": "Receive data from the bus, at VIO levels; driven LOW to flag a wake-up or interrupt event in CAN Offline mode."
+    },
+    {
+     "pin": "5",
+     "name": "VIO",
+     "type": "power in",
+     "function": "I/O supply, taken from the microcontroller supply; sets the levels of TXD, RXD and the SPI pins (2.85 V to 5.5 V)."
+    },
+    {
+     "pin": "6",
+     "name": "SDO",
+     "type": "digital output",
+     "function": "SPI data out; high-impedance while SCSN is HIGH."
+    },
+    {
+     "pin": "7",
+     "name": "INH",
+     "type": "output",
+     "function": "Inhibit output at VBAT level for enabling external regulators; high-ohmic in Sleep and Off modes."
+    },
+    {
+     "pin": "8",
+     "name": "SCK",
+     "type": "digital input",
+     "function": "SPI clock in; held LOW by an internal pull-down."
+    },
+    {
+     "pin": "9",
+     "name": "WAKE",
+     "type": "input",
+     "function": "Local wake-up input, edge-triggered on rising and/or falling edges. Tie to GND when unused, with local wake-up disabled."
+    },
+    {
+     "pin": "10",
+     "name": "BAT",
+     "type": "power in",
+     "function": "Battery supply; also feeds the CAN receiver and the autonomous bus bias."
+    },
+    {
+     "pin": "11",
+     "name": "SDI",
+     "type": "digital input",
+     "function": "SPI data in."
+    },
+    {
+     "pin": "12",
+     "name": "CANL",
+     "type": "bus I/O",
+     "function": "Low-side CAN bus line."
+    },
+    {
+     "pin": "13",
+     "name": "CANH",
+     "type": "bus I/O",
+     "function": "High-side CAN bus line."
+    },
+    {
+     "pin": "14",
+     "name": "SCSN",
+     "type": "digital input",
+     "function": "SPI chip select, active LOW; internal pull-up."
+    },
+    {
+     "pin": "EP",
+     "name": "exposed pad",
+     "type": "ground",
+     "function": "Exposed centre pad, joined to die ground; soldering it to board ground improves thermal and electrical performance."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Functional blocks in each operating mode",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "block",
+    "Off",
+    "Standby",
+    "Normal",
+    "Sleep",
+    "Overtemp"
+   ],
+   "rows": [
+    [
+     "SPI",
+     "disabled",
+     "active",
+     "active",
+     "active if VIO supplied",
+     "disabled"
+    ],
+    [
+     "INH",
+     "high-ohmic",
+     "VBAT level",
+     "VBAT level",
+     "high-ohmic",
+     "VBAT level"
+    ],
+    [
+     "CAN",
+     "floating",
+     "Offline",
+     "Active / Offline / Listen-only (set by CMC)",
+     "Offline",
+     "floating"
+    ],
+    [
+     "RXD",
+     "VIO level",
+     "VIO level; LOW if a wake-up event is detected",
+     "CAN bit stream if CMC = 01/10/11; otherwise as in Standby/Sleep",
+     "VIO level; LOW if a wake-up event is detected",
+     "VIO level; LOW if a wake-up is pending"
+    ]
+   ],
+   "notes": [
+    "In Sleep mode the SPI runs at the reduced Sleep-mode timing of the dynamic characteristics."
+   ]
+  },
+  {
+   "title": "Mode control register (01h)",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:3",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "2:0",
+     "MC",
+     "R/W",
+     "001",
+     "Sleep mode"
+    ],
+    [
+     "",
+     "",
+     "",
+     "100",
+     "Standby mode"
+    ],
+    [
+     "",
+     "",
+     "",
+     "111",
+     "Normal mode"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Main status register (03h)",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7",
+     "FSMS",
+     "R",
+     "0",
+     "last entry to Sleep mode was by SPI command"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "last entry to Sleep mode was forced by undervoltage on VCC and/or VIO"
+    ],
+    [
+     "6",
+     "OTWS",
+     "R",
+     "0",
+     "chip temperature below the overtemperature warning threshold"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "chip temperature above the overtemperature warning threshold"
+    ],
+    [
+     "5",
+     "NMS",
+     "R",
+     "0",
+     "Normal mode has been entered since power-up"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "powered up, Normal mode not yet entered"
+    ],
+    [
+     "4:0",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "CAN control register (20h)",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "6",
+     "CFDC",
+     "R/W",
+     "0",
+     "CAN FD tolerance off (bit used by TJA1145T/FD and TJA1145TK/FD only)"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "CAN FD tolerance on"
+    ],
+    [
+     "5",
+     "PNCOK",
+     "R/W",
+     "0",
+     "partial networking configuration not valid; only the standard wake-up pattern wakes the part"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "partial networking registers configured"
+    ],
+    [
+     "4",
+     "CPNC",
+     "R/W",
+     "0",
+     "selective wake-up off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "selective wake-up on (node belongs to a partial network)"
+    ],
+    [
+     "3:2",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "1:0",
+     "CMC",
+     "R/W",
+     "00",
+     "CAN Offline mode (CMC acts in Normal mode, MC = 111)"
+    ],
+    [
+     "",
+     "",
+     "",
+     "01",
+     "CAN Active mode, VCC undervoltage detection acting on the CAN state machine"
+    ],
+    [
+     "",
+     "",
+     "",
+     "10",
+     "CAN Active mode, VCC undervoltage detection not acting on the CAN state machine"
+    ],
+    [
+     "",
+     "",
+     "",
+     "11",
+     "CAN Listen-only mode"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Transceiver status register (22h)",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7",
+     "CTS",
+     "R",
+     "0",
+     "transmitter off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "transmitter ready"
+    ],
+    [
+     "6",
+     "CPNERR",
+     "R",
+     "0",
+     "no partial networking error (PNFDE = 0 and PNCOK = 1)"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "partial networking error (PNFDE = 1 or PNCOK = 0)"
+    ],
+    [
+     "5",
+     "CPNS",
+     "R",
+     "0",
+     "partial networking configuration error (PNCOK = 0)"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "partial networking configuration good (PNCOK = 1)"
+    ],
+    [
+     "4",
+     "COSCS",
+     "R",
+     "0",
+     "partial networking oscillator not at its target frequency"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "partial networking oscillator at its target frequency"
+    ],
+    [
+     "3",
+     "CBSS",
+     "R",
+     "0",
+     "bus active"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "bus inactive for longer than tto(silence)"
+    ],
+    [
+     "2",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "1",
+     "VCS",
+     "R",
+     "0",
+     "VCC above Vuvd(VCC)"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "VCC below Vuvd(VCC)"
+    ],
+    [
+     "0",
+     "CFS",
+     "R",
+     "0",
+     "no TXD dominant time-out"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "transmitter off after a TXD dominant time-out"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Data rate register (26h)",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:3",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "2:0",
+     "CDR",
+     "R/W",
+     "000",
+     "50 kbit/s"
+    ],
+    [
+     "",
+     "",
+     "",
+     "001",
+     "100 kbit/s"
+    ],
+    [
+     "",
+     "",
+     "",
+     "010",
+     "125 kbit/s"
+    ],
+    [
+     "",
+     "",
+     "",
+     "011",
+     "250 kbit/s"
+    ],
+    [
+     "",
+     "",
+     "",
+     "100",
+     "reserved; acts as 500 kbit/s"
+    ],
+    [
+     "",
+     "",
+     "",
+     "101",
+     "500 kbit/s"
+    ],
+    [
+     "",
+     "",
+     "",
+     "110",
+     "reserved; acts as 500 kbit/s"
+    ],
+    [
+     "",
+     "",
+     "",
+     "111",
+     "1000 kbit/s"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Identifier registers (27h to 2Ah)",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "address",
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "27h",
+     "7:0",
+     "ID07:ID00",
+     "R/W",
+     "-",
+     "extended ID bits 7 to 0"
+    ],
+    [
+     "28h",
+     "7:0",
+     "ID15:ID08",
+     "R/W",
+     "-",
+     "extended ID bits 15 to 8"
+    ],
+    [
+     "29h",
+     "7:2",
+     "ID23:ID18",
+     "R/W",
+     "-",
+     "extended ID bits 23 to 18; standard ID bits 5 to 0"
+    ],
+    [
+     "29h",
+     "1:0",
+     "ID17:ID16",
+     "R/W",
+     "-",
+     "extended ID bits 17 and 16"
+    ],
+    [
+     "2Ah",
+     "7:5",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "2Ah",
+     "4:0",
+     "ID28:ID24",
+     "R/W",
+     "-",
+     "extended ID bits 28 to 24; standard ID bits 10 to 6"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Identifier mask registers (2Bh to 2Eh)",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "address",
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "2Bh",
+     "7:0",
+     "M07:M00",
+     "R/W",
+     "-",
+     "mask for extended ID bits 7 to 0"
+    ],
+    [
+     "2Ch",
+     "7:0",
+     "M15:M08",
+     "R/W",
+     "-",
+     "mask for extended ID bits 15 to 8"
+    ],
+    [
+     "2Dh",
+     "7:2",
+     "M23:M18",
+     "R/W",
+     "-",
+     "mask for extended ID bits 23 to 18; standard ID bits 5 to 0"
+    ],
+    [
+     "2Dh",
+     "1:0",
+     "M17:M16",
+     "R/W",
+     "-",
+     "mask for extended ID bits 17 and 16"
+    ],
+    [
+     "2Eh",
+     "7:5",
+     "reserved",
+     "R",
+     "",
+     ""
+    ],
+    [
+     "2Eh",
+     "4:0",
+     "M28:M24",
+     "R/W",
+     "-",
+     "mask for extended ID bits 28 to 24; standard ID bits 10 to 6"
+    ]
+   ],
+   "notes": [
+    "A mask bit of 1 makes that identifier bit don't-care."
+   ]
+  },
+  {
+   "title": "Frame control register (2Fh)",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7",
+     "IDE",
+     "R/W",
+     "0",
+     "standard 11-bit identifier"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "extended 29-bit identifier"
+    ],
+    [
+     "6",
+     "PNDM",
+     "R/W",
+     "0",
+     "DLC and data field ignored for wake-up"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "DLC and data field checked for wake-up"
+    ],
+    [
+     "5:4",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "3:0",
+     "DLC",
+     "R/W",
+     "0000",
+     "0 data bytes expected"
+    ],
+    [
+     "",
+     "",
+     "",
+     "0001",
+     "1"
+    ],
+    [
+     "",
+     "",
+     "",
+     "0010",
+     "2"
+    ],
+    [
+     "",
+     "",
+     "",
+     "0011",
+     "3"
+    ],
+    [
+     "",
+     "",
+     "",
+     "0100",
+     "4"
+    ],
+    [
+     "",
+     "",
+     "",
+     "0101",
+     "5"
+    ],
+    [
+     "",
+     "",
+     "",
+     "0110",
+     "6"
+    ],
+    [
+     "",
+     "",
+     "",
+     "0111",
+     "7"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1000",
+     "8"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1001 to 1111",
+     "accepted; 8 bytes expected and DM0 ignored"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Data mask registers (68h to 6Fh)",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "address",
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "68h",
+     "7:0",
+     "DM0",
+     "R/W",
+     "-",
+     "data mask 0"
+    ],
+    [
+     "69h",
+     "7:0",
+     "DM1",
+     "R/W",
+     "-",
+     "data mask 1"
+    ],
+    [
+     "6Ah",
+     "7:0",
+     "DM2",
+     "R/W",
+     "-",
+     "data mask 2"
+    ],
+    [
+     "6Bh",
+     "7:0",
+     "DM3",
+     "R/W",
+     "-",
+     "data mask 3"
+    ],
+    [
+     "6Ch",
+     "7:0",
+     "DM4",
+     "R/W",
+     "-",
+     "data mask 4"
+    ],
+    [
+     "6Dh",
+     "7:0",
+     "DM5",
+     "R/W",
+     "-",
+     "data mask 5"
+    ],
+    [
+     "6Eh",
+     "7:0",
+     "DM6",
+     "R/W",
+     "-",
+     "data mask 6"
+    ],
+    [
+     "6Fh",
+     "7:0",
+     "DM7",
+     "R/W",
+     "-",
+     "data mask 7"
+    ]
+   ],
+   "notes": [
+    "With DLC = n (1 to 8) the n received data bytes are compared with DM(8-n) to DM7: DLC = 1 uses DM7 alone, DLC = 8 uses DM0 to DM7. With DLC above 8, DM1 to DM7 are used and DM0 is replaced by 00h."
+   ]
+  },
+  {
+   "title": "WAKE status register (4Bh)",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:2",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "1",
+     "WPVS",
+     "R",
+     "0",
+     "WAKE below Vth(sw)"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "WAKE above Vth(sw)"
+    ],
+    [
+     "0",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ]
+   ],
+   "notes": [
+    "WPVS is always valid in Normal mode; in other modes only while WPRE and/or WPFE is 1."
+   ]
+  },
+  {
+   "title": "Regular wake-up events",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "event",
+    "at power-on",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "CW",
+     "CAN wake-up",
+     "disabled",
+     "wake-up seen on the bus while in CAN Offline mode"
+    ],
+    [
+     "WPR",
+     "rising edge on WAKE pin",
+     "disabled",
+     "rising-edge wake-up on WAKE"
+    ],
+    [
+     "WPF",
+     "falling edge on WAKE pin",
+     "disabled",
+     "falling-edge wake-up on WAKE"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Interrupt events",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "event",
+    "at power-on",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "PO",
+     "power-on",
+     "always enabled",
+     "the part has left Off mode after the battery was connected or restored"
+    ],
+    [
+     "OTW",
+     "overtemperature warning",
+     "disabled",
+     "chip above the overtemperature warning threshold; detected in Normal mode only"
+    ],
+    [
+     "SPIF",
+     "SPI failure",
+     "disabled",
+     "wrong number of SPI clocks (16, 24 and 32 are valid), an illegal MC code, or a write to a locked register; not in Sleep mode"
+    ],
+    [
+     "PNFDE",
+     "PN frame detection error",
+     "always enabled",
+     "partial networking frame detection error"
+    ],
+    [
+     "CBS",
+     "CAN bus silence",
+     "disabled",
+     "no bus activity for tto(silence)"
+    ],
+    [
+     "CF",
+     "CAN failure",
+     "disabled",
+     "transceiver switched off by a TXD clamped dominant, or by VCC undervoltage when CMC = 01; not in Sleep mode"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Global event status register (60h)",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:4",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "3",
+     "WPE",
+     "R",
+     "0",
+     "no WAKE pin event"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "WAKE pin event waiting in 64h"
+    ],
+    [
+     "2",
+     "TRXE",
+     "R",
+     "0",
+     "no transceiver event"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "transceiver event waiting in 63h"
+    ],
+    [
+     "1",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "0",
+     "SYSE",
+     "R",
+     "0",
+     "no system event"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "system event waiting in 61h"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "System event status register (61h)",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:5",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "4",
+     "PO",
+     "R/W",
+     "0",
+     "no power-on since last cleared"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "left Off mode after power-on"
+    ],
+    [
+     "3",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "2",
+     "OTW",
+     "R/W",
+     "0",
+     "no overtemperature warning"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "chip temperature passed Tth(warn)otp"
+    ],
+    [
+     "1",
+     "SPIF",
+     "R/W",
+     "0",
+     "no SPI failure"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI failure"
+    ],
+    [
+     "0",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ]
+   ],
+   "notes": [
+    "A forced entry to Sleep mode on undervoltage clears PO; NMS, cleared on the first entry to Normal mode after power-on, still records a cold start."
+   ]
+  },
+  {
+   "title": "Transceiver event status register (63h)",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:6",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "5",
+     "PNFDE",
+     "R/W",
+     "0",
+     "no partial networking frame detection error"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "partial networking frame detection error"
+    ],
+    [
+     "4",
+     "CBS",
+     "R/W",
+     "0",
+     "bus active"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "no bus activity for tto(silence)"
+    ],
+    [
+     "3:2",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "1",
+     "CF",
+     "R/W",
+     "0",
+     "no CAN failure"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "CAN failure: TXD clamped dominant, or VCC undervoltage with CMC = 01; captured only in Normal mode with the transceiver Active"
+    ],
+    [
+     "0",
+     "CW",
+     "R/W",
+     "0",
+     "no CAN wake-up"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "CAN wake-up"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "WAKE pin event status register (64h)",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:2",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "1",
+     "WPR",
+     "R/W",
+     "0",
+     "no rising edge on WAKE"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "rising edge on WAKE"
+    ],
+    [
+     "0",
+     "WPF",
+     "R/W",
+     "0",
+     "no falling edge on WAKE"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "falling edge on WAKE"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "System event capture enable register (04h)",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:3",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "2",
+     "OTWE",
+     "R/W",
+     "0",
+     "overtemperature warning off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "overtemperature warning on"
+    ],
+    [
+     "1",
+     "SPIFE",
+     "R/W",
+     "0",
+     "SPI failure detection off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI failure detection on"
+    ],
+    [
+     "0",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Transceiver event capture enable register (23h)",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:5",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "4",
+     "CBSE",
+     "R/W",
+     "0",
+     "bus silence detection off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "bus silence detection on"
+    ],
+    [
+     "3:2",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "1",
+     "CFE",
+     "R/W",
+     "0",
+     "CAN failure detection off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "CAN failure detection on"
+    ],
+    [
+     "0",
+     "CWE",
+     "R/W",
+     "0",
+     "CAN wake-up detection off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "CAN wake-up detection on"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "WAKE pin event capture enable register (4Ch)",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:2",
+     "reserved",
+     "R",
+     "-",
+     ""
+    ],
+    [
+     "1",
+     "WPRE",
+     "R/W",
+     "0",
+     "rising-edge detection on WAKE off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "rising-edge detection on WAKE on"
+    ],
+    [
+     "0",
+     "WPFE",
+     "R/W",
+     "0",
+     "falling-edge detection on WAKE off"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "falling-edge detection on WAKE on"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Identification register (7Eh)",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7:0",
+     "IDS[7:0]",
+     "R",
+     "70h",
+     "TJA1145T, TJA1145TK"
+    ],
+    [
+     "",
+     "",
+     "",
+     "74h",
+     "TJA1145T/FD, TJA1145TK/FD"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Lock control register (0Ah)",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "symbol",
+    "access",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7",
+     "reserved",
+     "R",
+     "-",
+     "kept clear"
+    ],
+    [
+     "6",
+     "LK6C",
+     "R/W",
+     "0",
+     "SPI writes allowed to 0x68 to 0x6F, partial networking data mask registers"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI writes blocked to 0x68 to 0x6F, partial networking data mask registers"
+    ],
+    [
+     "5",
+     "LK5C",
+     "R/W",
+     "0",
+     "SPI writes allowed to 0x50 to 0x5F"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI writes blocked to 0x50 to 0x5F"
+    ],
+    [
+     "4",
+     "LK4C",
+     "R/W",
+     "0",
+     "SPI writes allowed to 0x40 to 0x4F, WAKE pin configuration"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI writes blocked to 0x40 to 0x4F, WAKE pin configuration"
+    ],
+    [
+     "3",
+     "LK3C",
+     "R/W",
+     "0",
+     "SPI writes allowed to 0x30 to 0x3F"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI writes blocked to 0x30 to 0x3F"
+    ],
+    [
+     "2",
+     "LK2C",
+     "R/W",
+     "0",
+     "SPI writes allowed to 0x20 to 0x2F, transceiver control and partial networking"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI writes blocked to 0x20 to 0x2F, transceiver control and partial networking"
+    ],
+    [
+     "1",
+     "LK1C",
+     "R/W",
+     "0",
+     "SPI writes allowed to 0x10 to 0x1F"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI writes blocked to 0x10 to 0x1F"
+    ],
+    [
+     "0",
+     "LK0C",
+     "R/W",
+     "0",
+     "SPI writes allowed to 0x06 to 0x09, general-purpose memory"
+    ],
+    [
+     "",
+     "",
+     "",
+     "1",
+     "SPI writes blocked to 0x06 to 0x09, general-purpose memory"
+    ]
+   ],
+   "notes": [
+    "A lock blocks SPI writes only; the part still updates its own status bits."
+   ]
+  },
+  {
+   "title": "Register map",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "bit 7",
+    "bit 6",
+    "bit 5",
+    "bit 4",
+    "bit 3",
+    "bit 2",
+    "bit 1",
+    "bit 0"
+   ],
+   "rows": [
+    [
+     "0x01",
+     "Mode control",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "MC",
+     "MC",
+     "MC"
+    ],
+    [
+     "0x03",
+     "Main status",
+     "FSMS",
+     "OTWS",
+     "NMS",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved"
+    ],
+    [
+     "0x04",
+     "System event enable",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "OTWE",
+     "SPIFE",
+     "reserved"
+    ],
+    [
+     "0x06",
+     "Memory 0",
+     "GPM[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x07",
+     "Memory 1",
+     "GPM[15:8]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x08",
+     "Memory 2",
+     "GPM[23:16]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x09",
+     "Memory 3",
+     "GPM[31:24]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x0A",
+     "Lock control",
+     "reserved",
+     "LK6C",
+     "LK5C",
+     "LK4C",
+     "LK3C",
+     "LK2C",
+     "LK1C",
+     "LK0C"
+    ],
+    [
+     "0x20",
+     "CAN control",
+     "reserved",
+     "CFDC",
+     "PNCOK",
+     "CPNC",
+     "reserved",
+     "reserved",
+     "CMC",
+     "CMC"
+    ],
+    [
+     "0x22",
+     "Transceiver status",
+     "CTS",
+     "CPNERR",
+     "CPNS",
+     "COSCS",
+     "CBSS",
+     "reserved",
+     "VCS",
+     "CFS"
+    ],
+    [
+     "0x23",
+     "Transceiver event enable",
+     "reserved",
+     "reserved",
+     "reserved",
+     "CBSE",
+     "reserved",
+     "reserved",
+     "CFE",
+     "CWE"
+    ],
+    [
+     "0x26",
+     "Data rate",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "CDR",
+     "CDR",
+     "CDR"
+    ],
+    [
+     "0x27",
+     "Identifier 0",
+     "ID[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x28",
+     "Identifier 1",
+     "ID[15:8]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x29",
+     "Identifier 2",
+     "ID[23:16]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x2A",
+     "Identifier 3",
+     "reserved",
+     "reserved",
+     "reserved",
+     "ID[28:24]",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x2B",
+     "Mask 0",
+     "M[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x2C",
+     "Mask 1",
+     "M[15:8]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x2D",
+     "Mask 2",
+     "M[23:16]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x2E",
+     "Mask 3",
+     "reserved",
+     "reserved",
+     "reserved",
+     "M[28:24]",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x2F",
+     "Frame control",
+     "IDE",
+     "PNDM",
+     "reserved",
+     "reserved",
+     "DLC",
+     "DLC",
+     "DLC",
+     "DLC"
+    ],
+    [
+     "0x4B",
+     "WAKE pin status",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "WPVS",
+     "reserved"
+    ],
+    [
+     "0x4C",
+     "WAKE pin enable",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "WPRE",
+     "WPFE"
+    ],
+    [
+     "0x60",
+     "Event capture status",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "WPE",
+     "TRXE",
+     "reserved",
+     "SYSE"
+    ],
+    [
+     "0x61",
+     "System event status",
+     "reserved",
+     "reserved",
+     "reserved",
+     "PO",
+     "reserved",
+     "OTW",
+     "SPIF",
+     "reserved"
+    ],
+    [
+     "0x63",
+     "Transceiver event status",
+     "reserved",
+     "reserved",
+     "PNFDE",
+     "CBS",
+     "reserved",
+     "reserved",
+     "CF",
+     "CW"
+    ],
+    [
+     "0x64",
+     "WAKE pin event status",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "reserved",
+     "WPR",
+     "WPF"
+    ],
+    [
+     "0x68 to 0x6F",
+     "Data mask 0 to 7",
+     "DMn[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0x7E",
+     "Identification",
+     "IDS[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register bit values in each operating mode",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "Off (reset value)",
+    "Standby",
+    "Normal",
+    "Sleep",
+    "Overtemp",
+    "Forced Sleep (undervoltage)"
+   ],
+   "rows": [
+    [
+     "CBS",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "CBSE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "CBSS",
+     "1",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state"
+    ],
+    [
+     "CDR",
+     "101",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "CF",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "CFDC",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "CFE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "CFS",
+     "0",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state"
+    ],
+    [
+     "CMC",
+     "01",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "COSCS",
+     "0",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state"
+    ],
+    [
+     "CPNC",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "CPNERR",
+     "1",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state"
+    ],
+    [
+     "CPNS",
+     "0",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state"
+    ],
+    [
+     "CTS",
+     "0",
+     "0",
+     "actual state",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "CW",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "CWE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "1"
+    ],
+    [
+     "DMn",
+     "11111111",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "DLC",
+     "0000",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "FSMS",
+     "0",
+     "no change",
+     "no change",
+     "0",
+     "no change",
+     "1"
+    ],
+    [
+     "GPMn",
+     "00000000",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "IDn",
+     "00000000",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "IDE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "IDS",
+     "01110000",
+     "01110000",
+     "01110000",
+     "01110000",
+     "01110000",
+     "01110000"
+    ],
+    [
+     "LKnC",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "Mn",
+     "00000000",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "MC",
+     "100",
+     "100",
+     "111",
+     "001",
+     "don't care",
+     "001"
+    ],
+    [
+     "NMS",
+     "1",
+     "no change",
+     "0",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "OTW",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "OTWE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "OTWS",
+     "0",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state"
+    ],
+    [
+     "PNCOK",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "PNDM",
+     "1",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "PNFDE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "PO",
+     "1",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "SPIF",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "SPIFE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ],
+    [
+     "SYSE",
+     "1",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "TRXE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "VCS",
+     "0",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state",
+     "actual state"
+    ],
+    [
+     "WPE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "WPF",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "WPFE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "1"
+    ],
+    [
+     "WPR",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "0"
+    ],
+    [
+     "WPRE",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "1"
+    ],
+    [
+     "WPVS",
+     "0",
+     "no change",
+     "no change",
+     "no change",
+     "no change",
+     "no change"
+    ]
+   ],
+   "notes": [
+    "IDS resets to 01110000 (70h); the identification register holds 70h on TJA1145T and TJA1145TK and 74h on TJA1145T/FD and TJA1145TK/FD."
+   ]
+  },
+  {
+   "title": "Limiting values",
+   "page": 30,
+   "conditions": "Absolute Maximum Rating System, IEC 60134",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vx",
+     "voltage on pin x",
+     "DC value; pins VCC, VIO (note 1)",
+     "-0.2",
+     "+6",
+     "V"
+    ],
+    [
+     "Vx",
+     "voltage on pin x",
+     "DC value; pins TXD, RXD, SDI, SDO, SCK, SCSN",
+     "-0.2",
+     "VIO + 0.2",
+     "V"
+    ],
+    [
+     "Vx",
+     "voltage on pin x",
+     "DC value; pins WAKE, INH",
+     "-18",
+     "+40",
+     "V"
+    ],
+    [
+     "Vx",
+     "voltage on pin x",
+     "DC value; pin BAT",
+     "-0.2",
+     "+40",
+     "V"
+    ],
+    [
+     "Vx",
+     "voltage on pin x",
+     "DC value; pins CANH and CANL with respect to any other pin",
+     "-58",
+     "+58",
+     "V"
+    ],
+    [
+     "V(CANH-CANL)",
+     "voltage between pin CANH and pin CANL",
+     "",
+     "-40",
+     "+40",
+     "V"
+    ],
+    [
+     "Vtrt",
+     "transient voltage",
+     "on pins BAT (via reverse polarity diode and capacitor to ground), CANL, CANH, WAKE (note 2)",
+     "-150",
+     "+100",
+     "V"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "IEC 61000-4-2 (note 3); pins CANH and CANL; pin BAT with capacitor; pin WAKE with 10 nF capacitor and 10 kΩ resistor",
+     "-6",
+     "+6",
+     "kV"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "HBM (note 4); pins CANH, CANL (note 5)",
+     "-8",
+     "+8",
+     "kV"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "HBM (note 4); pins BAT, WAKE",
+     "-4",
+     "+4",
+     "kV"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "HBM (note 4); any other pin",
+     "-2",
+     "+2",
+     "kV"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "MM (note 6); any pin",
+     "-100",
+     "+100",
+     "V"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "CDM (note 7); corner pins",
+     "-750",
+     "+750",
+     "V"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "CDM (note 7); any other pin",
+     "-500",
+     "+500",
+     "V"
+    ],
+    [
+     "Tvj",
+     "virtual junction temperature",
+     "(note 8)",
+     "-40",
+     "+150",
+     "°C"
+    ],
+    [
+     "Tstg",
+     "storage temperature",
+     "",
+     "-55",
+     "+150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "1: unpowered, the current into VCC may reach 25 mA at most (IVCC(max)).",
+    "2: an outside test house confirmed the pins survive ISO 7637 part 2 pulses 1, 2a, 3a and 3b.",
+    "3: IEC 61000-4-2 network 150 pF, 330 Ω; an outside test house measured ±6 kV or better.",
+    "4: HBM to AEC-Q100-002, 100 pF and 1.5 kΩ.",
+    "5: measured with VCC, VIO and BAT tied to GND, as in the application.",
+    "6: MM to AEC-Q100-003, 200 pF, 0.75 µH and 10 Ω.",
+    "7: CDM to AEC-Q100-011, field-induced charge, 4 pF.",
+    "8: Tvj per IEC 60747-1; alternatively Tvj = Tamb + P × Rth(j-a) with Rth(j-a) a fixed value. The Tvj limit bounds the combinations of dissipation and ambient temperature."
+   ]
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "typ",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Rth(vj-a)",
+     "thermal resistance from virtual junction to ambient",
+     "SO14",
+     "106",
+     "K/W"
+    ],
+    [
+     "Rth(vj-a)",
+     "thermal resistance from virtual junction to ambient",
+     "HVSON14",
+     "60",
+     "K/W"
+    ]
+   ],
+   "notes": [
+    "JEDEC JESD51-2, JESD51-5 and JESD51-7, still air, 2s2p board: two inner copper layers of 35 µm, with thermal vias beneath the exposed pad reaching the first inner layer of 70 µm."
+   ]
+  },
+  {
+   "title": "Static characteristics: supply, pin BAT",
+   "page": 32,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vth(det)pon",
+     "power-on detection threshold voltage",
+     "VBAT rising",
+     "4.2",
+     "-",
+     "4.55",
+     "V"
+    ],
+    [
+     "Vth(det)poff",
+     "power-off detection threshold voltage",
+     "VBAT falling",
+     "2.8",
+     "-",
+     "3",
+     "V"
+    ],
+    [
+     "Vuvr(CAN)",
+     "CAN undervoltage recovery voltage",
+     "VBAT rising",
+     "4.5",
+     "-",
+     "5",
+     "V"
+    ],
+    [
+     "Vuvd(CAN)",
+     "CAN undervoltage detection voltage",
+     "VBAT falling",
+     "4.2",
+     "-",
+     "4.55",
+     "V"
+    ],
+    [
+     "IBAT",
+     "battery supply current",
+     "Sleep mode; MC = 001; CWE = 1; CAN Offline mode; -40 °C < Tvj < 85 °C; VBAT = 7 V to 18 V",
+     "-",
+     "40",
+     "59",
+     "µA"
+    ],
+    [
+     "IBAT",
+     "battery supply current",
+     "Standby mode; MC = 100; CWE = 1; CAN Offline mode; -40 °C < Tvj < 85 °C; VBAT = 7 V to 18 V",
+     "-",
+     "44",
+     "68",
+     "µA"
+    ],
+    [
+     "IBAT",
+     "battery supply current",
+     "additional current in CAN Offline Bias mode; -40 °C < Tvj < 85 °C",
+     "-",
+     "46",
+     "63",
+     "µA"
+    ],
+    [
+     "IBAT",
+     "battery supply current",
+     "additional current when partial networking enabled; bus active; CPNC = 1; PNCOK = 1",
+     "-",
+     "300",
+     "400",
+     "µA"
+    ],
+    [
+     "IBAT",
+     "battery supply current",
+     "additional current from WAKE input; WPRE = WPFE = 1; -40 °C < Tvj < 85 °C",
+     "",
+     "2",
+     "3",
+     "µA"
+    ],
+    [
+     "IBAT",
+     "battery supply current",
+     "Normal mode; MC = 111",
+     "-",
+     "1",
+     "1.5",
+     "mA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: supply, pin VCC",
+   "page": 32,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vuvd(VCC)",
+     "undervoltage detection voltage on pin VCC",
+     "",
+     "4.5",
+     "-",
+     "4.75",
+     "V"
+    ],
+    [
+     "ICC",
+     "supply current",
+     "CAN Active mode; CAN recessive; VTXD = VIO",
+     "-",
+     "3",
+     "6",
+     "mA"
+    ],
+    [
+     "ICC",
+     "supply current",
+     "CAN Active mode; CAN dominant; VTXD = 0 V",
+     "-",
+     "45",
+     "65",
+     "mA"
+    ],
+    [
+     "ICC",
+     "supply current",
+     "Standby/Normal mode; CAN inactive; -40 °C < Tvj < 85 °C",
+     "-",
+     "4.7",
+     "8.5",
+     "µA"
+    ],
+    [
+     "ICC",
+     "supply current",
+     "Sleep mode; CAN inactive; -40 °C < Tvj < 85 °C",
+     "-",
+     "3.8",
+     "7",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: supply, pin VIO",
+   "page": 32,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vuvd(VIO)",
+     "undervoltage detection voltage on pin VIO",
+     "VBAT > 4.5 V",
+     "2.7",
+     "-",
+     "2.85",
+     "V"
+    ],
+    [
+     "II(VIO)",
+     "input current on pin VIO",
+     "Standby/Normal mode; -40 °C < Tvj < 85 °C",
+     "-",
+     "7.1",
+     "11",
+     "µA"
+    ],
+    [
+     "II(VIO)",
+     "input current on pin VIO",
+     "Sleep mode; -40 °C < Tvj < 85 °C",
+     "-",
+     "5",
+     "8",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: SPI inputs, pins SDI, SCK and SCSN",
+   "page": 33,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vth(sw)",
+     "switching threshold voltage",
+     "VIO = 2.97 V to 5.5 V",
+     "0.25VIO",
+     "-",
+     "0.75VIO",
+     "V"
+    ],
+    [
+     "Rpd(SCK)",
+     "pull-down resistance on pin SCK",
+     "",
+     "40",
+     "60",
+     "80",
+     "kΩ"
+    ],
+    [
+     "Rpu(SCSN)",
+     "pull-up resistance on pin SCSN",
+     "",
+     "40",
+     "60",
+     "80",
+     "kΩ"
+    ],
+    [
+     "ILI(SDI)",
+     "input leakage current on pin SDI",
+     "",
+     "-5",
+     "-",
+     "+5",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: SPI data output, pin SDO",
+   "page": 33,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VOH",
+     "HIGH-level output voltage",
+     "IOH = -4 mA",
+     "VIO - 0.4",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage",
+     "IOL = 4 mA",
+     "-",
+     "-",
+     "0.4",
+     "V"
+    ],
+    [
+     "ILO(off)",
+     "off-state output leakage current",
+     "VSCSN = VIO; VO = 0 V to VIO",
+     "-5",
+     "-",
+     "+5",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: inhibit output, pin INH",
+   "page": 33,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VO",
+     "output voltage",
+     "IINH = -180 µA",
+     "VBAT - 0.8",
+     "-",
+     "VBAT",
+     "V"
+    ],
+    [
+     "Rpd",
+     "pull-down resistance",
+     "Sleep mode",
+     "3",
+     "4",
+     "5",
+     "MΩ"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: CAN transmit data input, pin TXD",
+   "page": 33,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vth(sw)",
+     "switching threshold voltage",
+     "VIO = 2.97 V to 5.5 V",
+     "0.25VIO",
+     "-",
+     "0.75VIO",
+     "V"
+    ],
+    [
+     "Rpu",
+     "pull-up resistance",
+     "",
+     "40",
+     "60",
+     "80",
+     "kΩ"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: CAN receive data output, pin RXD",
+   "page": 33,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VOH",
+     "HIGH-level output voltage",
+     "IOH = -4 mA",
+     "VIO - 0.4",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage",
+     "IOL = 4 mA",
+     "-",
+     "-",
+     "0.4",
+     "V"
+    ],
+    [
+     "Rpu",
+     "pull-up resistance",
+     "CAN Offline mode",
+     "40",
+     "60",
+     "80",
+     "kΩ"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: local wake input, pin WAKE",
+   "page": 33,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vth(sw)r",
+     "rising switching threshold voltage",
+     "",
+     "2.8",
+     "-",
+     "4.1",
+     "V"
+    ],
+    [
+     "Vth(sw)f",
+     "falling switching threshold voltage",
+     "",
+     "2.4",
+     "-",
+     "3.75",
+     "V"
+    ],
+    [
+     "Vhys(i)",
+     "input hysteresis voltage",
+     "",
+     "250",
+     "-",
+     "800",
+     "mV"
+    ],
+    [
+     "Ii",
+     "input current",
+     "Tvj = -40 °C to +85 °C",
+     "-",
+     "-",
+     "1.5",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Static characteristics: CAN bus lines, pins CANH and CANL",
+   "page": 33,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VO(dom)",
+     "dominant output voltage",
+     "CAN Active mode; VTXD = 0 V; pin CANH",
+     "2.75",
+     "3.5",
+     "4.5",
+     "V"
+    ],
+    [
+     "VO(dom)",
+     "dominant output voltage",
+     "CAN Active mode; VTXD = 0 V; pin CANL",
+     "0.5",
+     "1.5",
+     "2.25",
+     "V"
+    ],
+    [
+     "Vdom(TX)sym",
+     "transmitter dominant voltage symmetry",
+     "Vdom(TX)sym = VCC - VCANH - VCANL; VCC = 5 V",
+     "-400",
+     "-",
+     "+400",
+     "mV"
+    ],
+    [
+     "VTXsym",
+     "transmitter voltage symmetry",
+     "VTXsym = VCANH + VCANL; fTXD = 250 kHz; CSPLIT = 4.7 nF (notes 1, 2)",
+     "0.9VCC",
+     "-",
+     "1.1VCC",
+     "V"
+    ],
+    [
+     "VO(dif)bus",
+     "bus differential output voltage",
+     "CAN Active mode (dominant); VTXD = 0 V; VCC = 4.75 V to 5.5 V; R(CANH-CANL) = 45 Ω to 65 Ω",
+     "1.5",
+     "-",
+     "3.0",
+     "V"
+    ],
+    [
+     "VO(dif)bus",
+     "bus differential output voltage",
+     "CAN Active mode (recessive); CAN Listen-only mode; CAN Offline mode; VTXD = VIO; R(CANH-CANL) = no load",
+     "-50",
+     "-",
+     "+50",
+     "mV"
+    ],
+    [
+     "VO(rec)",
+     "recessive output voltage",
+     "CAN Active mode; VTXD = VIO; R(CANH-CANL) = no load",
+     "2",
+     "0.5VCC",
+     "3",
+     "V"
+    ],
+    [
+     "VO(rec)",
+     "recessive output voltage",
+     "CAN Offline mode; R(CANH-CANL) = no load",
+     "-0.1",
+     "-",
+     "+0.1",
+     "V"
+    ],
+    [
+     "VO(rec)",
+     "recessive output voltage",
+     "CAN Offline Bias/Listen-only modes; R(CANH-CANL) = no load; VCC = 0 V",
+     "2",
+     "2.5",
+     "3",
+     "V"
+    ],
+    [
+     "IO(dom)",
+     "dominant output current",
+     "CAN Active mode; VTXD = 0 V; VCC = 5 V; pin CANH; VCANH = 0 V",
+     "-50",
+     "-",
+     "-",
+     "mA"
+    ],
+    [
+     "IO(dom)",
+     "dominant output current",
+     "CAN Active mode; VTXD = 0 V; VCC = 5 V; pin CANL; VCANL = 5 V",
+     "-",
+     "-",
+     "52",
+     "mA"
+    ],
+    [
+     "IO(rec)",
+     "recessive output current",
+     "VCANL = VCANH = -27 V to +32 V; VTXD = VIO",
+     "-3",
+     "-",
+     "+3",
+     "mA"
+    ],
+    [
+     "Vth(RX)dif",
+     "differential receiver threshold voltage",
+     "CAN Active/Listen-only modes; VCANL = VCANH = -12 V to +12 V",
+     "0.5",
+     "0.7",
+     "0.9",
+     "V"
+    ],
+    [
+     "Vth(RX)dif",
+     "differential receiver threshold voltage",
+     "CAN Offline mode; VCANL = VCANH = -12 V to +12 V",
+     "0.4",
+     "0.7",
+     "1.15",
+     "V"
+    ],
+    [
+     "Vhys(RX)dif",
+     "differential receiver hysteresis voltage",
+     "CAN Active/Listen-only modes; VCANL = VCANH = -12 V to +12 V",
+     "50",
+     "200",
+     "400",
+     "mV"
+    ],
+    [
+     "Ri(cm)",
+     "common-mode input resistance",
+     "",
+     "9",
+     "15",
+     "28",
+     "kΩ"
+    ],
+    [
+     "ΔRi",
+     "input resistance deviation",
+     "",
+     "-1",
+     "-",
+     "+1",
+     "%"
+    ],
+    [
+     "Ri(dif)",
+     "differential input resistance",
+     "VCANL = VCANH = -12 V to +12 V",
+     "19",
+     "30",
+     "52",
+     "kΩ"
+    ],
+    [
+     "Ci(cm)",
+     "common-mode input capacitance",
+     "(note 1)",
+     "-",
+     "-",
+     "20",
+     "pF"
+    ],
+    [
+     "Ci(dif)",
+     "differential input capacitance",
+     "(note 1)",
+     "-",
+     "-",
+     "10",
+     "pF"
+    ],
+    [
+     "ILI",
+     "input leakage current",
+     "VBAT = VCC = 0 V or VBAT = VCC = shorted to ground via 47 kΩ; VCANH = VCANL = 5 V",
+     "-5",
+     "-",
+     "+5",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "1: guaranteed by design, not tested in production.",
+    "2: measured in the driver symmetry test circuit (circuit driver-symmetry), which carries CSPLIT."
+   ]
+  },
+  {
+   "title": "Static characteristics: temperature protection",
+   "page": 34,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Tth(act)otp",
+     "overtemperature protection activation threshold temperature",
+     "",
+     "167",
+     "177",
+     "187",
+     "°C"
+    ],
+    [
+     "Tth(rel)otp",
+     "overtemperature protection release threshold temperature",
+     "",
+     "127",
+     "137",
+     "147",
+     "°C"
+    ],
+    [
+     "Tth(warn)otp",
+     "overtemperature protection warning threshold temperature",
+     "",
+     "127",
+     "137",
+     "147",
+     "°C"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Dynamic characteristics: supplies, pins BAT, VCC and VIO",
+   "page": 35,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tstartup",
+     "start-up time",
+     "from VBAT exceeding the power-on detection threshold until INH active",
+     "-",
+     "2.8",
+     "4.7",
+     "ms"
+    ],
+    [
+     "td(uvd)",
+     "undervoltage detection delay time",
+     "",
+     "6",
+     "-",
+     "39",
+     "µs"
+    ],
+    [
+     "td(uvd-sleep)",
+     "delay time from undervoltage detection to sleep mode",
+     "from undervoltage detection on VCC and/or VIO until TJA1145 forced to Sleep mode",
+     "200",
+     "-",
+     "400",
+     "ms"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Dynamic characteristics: SPI timing, pins SCSN, SCK, SDI and SDO",
+   "page": 35,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tcy(clk)",
+     "clock cycle time",
+     "Normal/Standby modes",
+     "250",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tcy(clk)",
+     "clock cycle time",
+     "Sleep mode",
+     "1",
+     "-",
+     "-",
+     "µs"
+    ],
+    [
+     "tSPILEAD",
+     "SPI enable lead time",
+     "Normal/Standby modes",
+     "50",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tSPILEAD",
+     "SPI enable lead time",
+     "Sleep mode",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tSPILAG",
+     "SPI enable lag time",
+     "Normal/Standby modes",
+     "50",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tSPILAG",
+     "SPI enable lag time",
+     "Sleep mode",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tclk(H)",
+     "clock HIGH time",
+     "Normal/Standby modes",
+     "125",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tclk(H)",
+     "clock HIGH time",
+     "Sleep mode",
+     "500",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tclk(L)",
+     "clock LOW time",
+     "Normal/Standby modes",
+     "125",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tclk(L)",
+     "clock LOW time",
+     "Sleep mode",
+     "500",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tsu(D)",
+     "data input set-up time",
+     "Normal/Standby modes",
+     "50",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tsu(D)",
+     "data input set-up time",
+     "Sleep mode",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "th(D)",
+     "data input hold time",
+     "Normal/Standby modes",
+     "50",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "th(D)",
+     "data input hold time",
+     "Sleep mode",
+     "200",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tv(Q)",
+     "data output valid time",
+     "pin SDO; CL = 20 pF; Normal/Standby modes",
+     "-",
+     "-",
+     "50",
+     "ns"
+    ],
+    [
+     "tv(Q)",
+     "data output valid time",
+     "pin SDO; CL = 20 pF; Sleep mode",
+     "-",
+     "-",
+     "200",
+     "ns"
+    ],
+    [
+     "tWH(S)",
+     "chip select pulse width HIGH",
+     "pin SCSN; Normal/Standby modes",
+     "250",
+     "-",
+     "-",
+     "ns"
+    ],
+    [
+     "tWH(S)",
+     "chip select pulse width HIGH",
+     "pin SCSN; Sleep mode",
+     "1",
+     "-",
+     "-",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Dynamic characteristics: CAN transceiver timing, pins CANH, CANL, TXD and RXD",
+   "page": 35,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "td(TXD-RXD)",
+     "delay time from TXD to RXD",
+     "50 % VTXD to 50 % VRXD; CRXD = 15 pF; fTXD = 250 kHz",
+     "-",
+     "-",
+     "255",
+     "ns"
+    ],
+    [
+     "td(TXD-busdom)",
+     "delay time from TXD to bus dominant",
+     "",
+     "-",
+     "80",
+     "-",
+     "ns"
+    ],
+    [
+     "td(TXD-busrec)",
+     "delay time from TXD to bus recessive",
+     "",
+     "-",
+     "80",
+     "-",
+     "ns"
+    ],
+    [
+     "td(busdom-RXD)",
+     "delay time from bus dominant to RXD",
+     "CRXD = 15 pF",
+     "-",
+     "105",
+     "-",
+     "ns"
+    ],
+    [
+     "td(busrec-RXD)",
+     "delay time from bus recessive to RXD",
+     "CRXD = 15 pF",
+     "-",
+     "120",
+     "-",
+     "ns"
+    ],
+    [
+     "twake(busdom)",
+     "bus dominant wake-up time",
+     "first pulse (after first recessive) for wake-up on pins CANH and CANL; CAN Offline mode",
+     "0.5",
+     "-",
+     "3.0",
+     "µs"
+    ],
+    [
+     "twake(busdom)",
+     "bus dominant wake-up time",
+     "second pulse for wake-up on pins CANH and CANL",
+     "0.5",
+     "-",
+     "3.0",
+     "µs"
+    ],
+    [
+     "twake(busrec)",
+     "bus recessive wake-up time",
+     "first pulse for wake-up on pins CANH and CANL; CAN Offline mode",
+     "0.5",
+     "-",
+     "3.0",
+     "µs"
+    ],
+    [
+     "twake(busrec)",
+     "bus recessive wake-up time",
+     "second pulse (after first dominant) for wake-up on pins CANH and CANL",
+     "0.5",
+     "-",
+     "3.0",
+     "µs"
+    ],
+    [
+     "tto(wake)",
+     "wake-up time-out time",
+     "between first and second dominant pulses; CAN Offline mode",
+     "570",
+     "-",
+     "1200",
+     "µs"
+    ],
+    [
+     "tto(dom)TXD",
+     "TXD dominant time-out time",
+     "CAN Active mode; VTXD = 0 V",
+     "2.7",
+     "-",
+     "3.3",
+     "ms"
+    ],
+    [
+     "tto(silence)",
+     "bus silence time-out time",
+     "recessive time measurement started in all CAN modes; RL = 120 Ω",
+     "0.95",
+     "-",
+     "1.17",
+     "s"
+    ],
+    [
+     "td(busact-bias)",
+     "delay time from bus active to bias",
+     "",
+     "-",
+     "-",
+     "200",
+     "µs"
+    ],
+    [
+     "tstartup(CAN)",
+     "CAN start-up time",
+     "when switching to Active mode (CTS = 1)",
+     "-",
+     "-",
+     "220",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Dynamic characteristics: pin RXD interrupt/wake-up event timing, CAN Offline mode only",
+   "page": 36,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "td(event)",
+     "event capture delay time",
+     "CAN Offline mode",
+     "0.9",
+     "-",
+     "1.1",
+     "ms"
+    ],
+    [
+     "tblank",
+     "blanking time",
+     "when switching from Offline to Active/Listen-only mode",
+     "-",
+     "-",
+     "25",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Dynamic characteristics: pins WAKE and INH",
+   "page": 36,
+   "conditions": "Tvj = -40 °C to +150 °C; VBAT = 4.5 V to 28 V; VIO = 2.85 V to 5.5 V; VCC = 4.5 V to 5.5 V; R(CANH-CANL) = 60 Ω; voltages referred to ground; currents into the IC are positive; typical values at VBAT = 13 V; unless otherwise specified",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "twake",
+     "wake-up time",
+     "",
+     "7",
+     "-",
+     "42",
+     "µs"
+    ],
+    [
+     "td(buswake-INHH)",
+     "delay time from bus wake-up to INH HIGH",
+     "",
+     "-",
+     "-",
+     "100",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Reflow peak temperature, SnPb eutectic process (J-STD-020D)",
+   "page": 43,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "volume < 350 mm³ (°C)",
+    "volume ≥ 350 mm³ (°C)"
+   ],
+   "rows": [
+    [
+     "< 2.5",
+     "235",
+     "220"
+    ],
+    [
+     "≥ 2.5",
+     "220",
+     "220"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Reflow peak temperature, lead-free process (J-STD-020D)",
+   "page": 43,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "volume < 350 mm³ (°C)",
+    "volume 350 to 2000 mm³ (°C)",
+    "volume > 2000 mm³ (°C)"
+   ],
+   "rows": [
+    [
+     "< 1.6",
+     "260",
+     "260",
+     "260"
+    ],
+    [
+     "1.6 to 2.5",
+     "260",
+     "250",
+     "245"
+    ],
+    [
+     "> 2.5",
+     "250",
+     "245",
+     "245"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 38,
+   "description": "A battery-powered CAN node. BAT passes a series diode onto a protected rail that carries a 22 µF electrolytic, the TJA1145 BAT pin and the inputs of a 5 V and a 3 V regulator. INH drives the enable inputs of both regulators, so Sleep mode switches the node's supplies off. The 5 V output feeds VCC; the 3 V output feeds VIO and the microcontroller supply. A resistor from the protected rail pulls up a switch to ground; that node has 10 nF to ground and reaches WAKE through 10 kΩ. SCSN, SDO, SCK and SDI go to ordinary microcontroller port pins; RXD and TXD go to the microcontroller's RXD and TXD pins. CANH and CANL each carry an RT to a centre node with 4.7 nF to ground (split termination).",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TJA1145"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "5 V regulator",
+     "external": true
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "3 V regulator",
+     "external": true
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "microcontroller",
+     "external": true
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "",
+     "note": "reverse-battery series diode"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22 µF",
+     "note": "polarised, on the protected battery rail"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "pull-up of the wake switch node"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "wake switch",
+     "note": "to ground"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "10 nF",
+     "note": "wake switch node to ground"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "series resistor into WAKE"
+    },
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "RT",
+     "note": "60 Ω at a bus end node; at a sub-node an optional weak termination, for example 1.3 kΩ, where the OEM asks for it"
+    },
+    {
+     "ref": "RT2",
+     "type": "resistor",
+     "value": "RT",
+     "note": "same as RT1"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7 nF",
+     "note": "split termination centre to ground; value given as an example"
+    },
+    {
+     "ref": "J_BAT",
+     "type": "terminal",
+     "value": "BAT"
+    },
+    {
+     "ref": "J_CANH",
+     "type": "terminal",
+     "value": "CANH"
+    },
+    {
+     "ref": "J_CANL",
+     "type": "terminal",
+     "value": "CANL"
+    }
+   ],
+   "notes": [
+    "RT = 60 Ω on the two nodes at the bus ends; sub-nodes may carry a weak termination such as 1.3 kΩ if the OEM requires one."
+   ]
+  },
+  {
+   "id": "timing-test",
+   "title": "Timing test circuit for CAN transceiver",
+   "page": 38,
+   "fixture": true,
+   "description": "The transceiver timing is measured with RXD loaded by 15 pF to ground and the bus loaded by RL in parallel with 100 pF between CANH and CANL. TXD is driven from a signal input.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TJA1145"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "15 pF"
+    },
+    {
+     "ref": "RL",
+     "type": "resistor",
+     "value": "RL"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 pF"
+    },
+    {
+     "ref": "J_TXD",
+     "type": "terminal",
+     "value": "TXD input"
+    },
+    {
+     "ref": "J_RXD",
+     "type": "terminal",
+     "value": "RXD output"
+    },
+    {
+     "ref": "J_BAT",
+     "type": "terminal",
+     "value": "BAT"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "driver-symmetry",
+   "title": "Test circuit for measuring transceiver driver symmetry",
+   "page": 39,
+   "fixture": true,
+   "description": "A 250 kHz square wave drives TXD. The bus is loaded by two 30 Ω resistors in series from CANH to CANL, and their midpoint carries CSPLIT, 4.7 nF, to ground; VTXsym is measured in this circuit.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "TJA1145"
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "square wave, f = 250 kHz"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "30 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "30 Ω"
+    },
+    {
+     "ref": "CSPLIT",
+     "type": "capacitor",
+     "value": "4.7 nF"
+    },
+    {
+     "ref": "J_RXD",
+     "type": "terminal",
+     "value": "RXD output"
+    },
+    {
+     "ref": "J_BAT",
+     "type": "terminal",
+     "value": "BAT"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Virtual junction temperature",
+   "expr": "Tvj = Tamb + P × Rth(j-a)",
+   "where": {
+    "Tamb": "ambient temperature",
+    "P": "power dissipated in the part",
+    "Rth(j-a)": "fixed junction-to-ambient thermal resistance used for the calculation"
+   },
+   "note": "Alternative definition per IEC 60747-1.",
+   "page": 31
+  },
+  {
+   "name": "Transmitter dominant voltage symmetry",
+   "expr": "Vdom(TX)sym = VCC - VCANH - VCANL",
+   "where": {
+    "VCANH": "CANH voltage, dominant",
+    "VCANL": "CANL voltage, dominant"
+   },
+   "note": "Limit ±400 mV at VCC = 5 V.",
+   "page": 33
+  },
+  {
+   "name": "Transmitter voltage symmetry",
+   "expr": "VTXsym = VCANH + VCANL",
+   "where": {
+    "VCANH": "CANH voltage",
+    "VCANL": "CANL voltage"
+   },
+   "note": "Limit 0.9VCC to 1.1VCC with TXD at 250 kHz and CSPLIT = 4.7 nF.",
+   "page": 33
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Operating modes",
+   "page": 5,
+   "text": "Five operating modes, run by a system controller: Off, Standby, Normal, Sleep and Overtemp. MC in register 01h selects Normal (111), Standby (100) or Sleep (001)."
+  },
+  {
+   "topic": "Normal mode",
+   "page": 5,
+   "text": "Everything is available; the CAN transceiver mode is then chosen with CMC. Normal is entered from Standby or Sleep by SPI."
+  },
+  {
+   "topic": "Standby mode",
+   "page": 5,
+   "text": "Low-current mode: the transceiver cannot send or receive, but INH stays at VBAT so regulators it controls stay on. With CWE = 1 the receiver watches the bus for a wake-up; the bus lines sit at GND through Ri(cm) while idle and near 2.5 V while the bus is active. A standard wake-up pattern wakes the part, or a selective wake-up frame when CPNC = PNCOK = 1. RXD goes LOW on any enabled wake-up or interrupt. Standby is entered from Off once VBAT passes Vth(det)pon, from Overtemp once the chip cools below Tth(rel)otp, from Sleep on a wake-up or interrupt, by SPI (MC = 100), or from Normal when Sleep is requested with a wake-up pending or with every wake-up source disabled."
+  },
+  {
+   "topic": "Sleep mode",
+   "page": 6,
+   "text": "As Standby, but INH goes high-ohmic so regulators it enables turn off and BAT current falls to its minimum. Sleep ends on any wake-up or interrupt that is enabled, or on SPI access while VIO is supplied. A Sleep request (MC = 001) is obeyed only when no wake-up is pending and CAN or WAKE wake-up (a regular source) is enabled; otherwise the part goes to Standby and, with SPIFE = 1, pulls RXD LOW."
+  },
+  {
+   "topic": "Forced Sleep on VCC or VIO undervoltage",
+   "page": 7,
+   "text": "If VCC or VIO stays below its undervoltage threshold for longer than the detection delay, the part is forced into Sleep. Captured events (61h to 64h) are cleared, CAN wake-up (CWE = 1) and both WAKE edges (WPFE = WPRE = 1) are enabled, selective wake-up is disabled (CPNC = 0) and PNCOK is cleared, so the node can always wake. FSMS = 1 records the forced entry, so software can restore its wake-up settings after waking."
+  },
+  {
+   "topic": "Off mode",
+   "page": 7,
+   "text": "Off is the state at first battery connection and whenever VBAT falls below Vth(det)poff; CAN pins and INH are high-ohmic. When VBAT rises above Vth(det)pon the part initialises and enters Standby after tstartup."
+  },
+  {
+   "topic": "Overtemp mode",
+   "page": 7,
+   "text": "From Normal the part enters Overtemp at once when the chip passes Tth(act)otp: transmitter and receiver are off and the CAN pins high-ohmic. No new wake-up is detected, though a pending one still holds RXD LOW. It returns to Standby below Tth(rel)otp, or goes to Off if VBAT falls below Vth(det)poff. Above Tth(warn)otp the part sets OTWS and, with OTWE = 1, raises the OTW interrupt."
+  },
+  {
+   "topic": "CAN transceiver",
+   "page": 9,
+   "text": "High-speed CAN to ISO 11898-2, -5 and -6, up to 1 Mbit/s. VCC supplies the transmitter and BAT the receiver. CANH and CANL are biased to 2.5 V in Active and Listen-only modes. In Offline mode the bias is autonomous, drawn from VBAT: 2.5 V while the bus is active (Offline Bias) and GND after tto(silence) without activity (Offline)."
+  },
+  {
+   "topic": "CAN Active mode",
+   "page": 9,
+   "text": "The transceiver drives and receives the bus when MC = 111, CMC = 01 or 10, and VCC is above Vuvd(VCC). In this mode VCC supplies the bias; a VCC drop under Vuvd(VCC) sends the transceiver to Offline with autonomous bias. If TXD is LOW when Active is selected, the transceiver stays in Listen-only until TXD goes HIGH. With CMC = 10 a VCC undervoltage does not end Active mode at once; the transmitter stays on until the forced Sleep. CTS shows whether the transmitter is ready."
+  },
+  {
+   "topic": "CAN Listen-only mode",
+   "page": 11,
+   "text": "Selected by CMC = 11 in Normal mode: the receiver and bias stay on and the transmitter is off, so the node hears the bus without affecting it. The transceiver also stays in Listen-only when Active is selected while VCC is below 90 % of nominal."
+  },
+  {
+   "topic": "CAN Offline and Offline Bias modes",
+   "page": 11,
+   "text": "Offline watches for a CAN wake-up (with CWE = 1) with the bus biased to GND. Bus activity switches it to Offline Bias, with the bus at 2.5 V, and silence for longer than tto(silence) returns it to Offline. Offline Bias applies in Standby or Sleep, in Normal with CMC = 00, in Normal with CMC = 01 and VCC below 90 %, and after a bus wake-up. Offline applies after those conditions last longer than tto(silence), and on leaving Off or Overtemp."
+  },
+  {
+   "topic": "CAN off",
+   "page": 11,
+   "text": "The transceiver is fully off with floating bus lines in Off and Overtemp modes, and when VBAT is below Vuvd(CAN). It returns via Offline once VBAT exceeds Vuvr(CAN) and the part has left Off/Overtemp."
+  },
+  {
+   "topic": "Standard CAN wake-up",
+   "page": 12,
+   "text": "With the transceiver Offline, CWE = 1, and selective wake-up off (CPNC = 0 or PNCOK = 0), a dominant, recessive, dominant sequence wakes the part: each dominant phase at least twake(busdom), the recessive phase at least twake(busrec), all within tto(wake). Extra pulses between the phases are allowed. A wake-up sets CW and pulls RXD LOW; from Sleep it also switches INH to VBAT and enters Standby."
+  },
+  {
+   "topic": "Selective wake-up (partial networking)",
+   "page": 14,
+   "text": "With CWE = 1, CPNC = 1 and PNCOK = 1 only a matching wake-up frame (ISO 11898-1 frame: ID, DLC, data, CRC with delimiter) wakes the part. IDE picks 11-bit or 29-bit IDs; the ID registers hold the identifier and the mask registers mark don't-care bits. With PNDM = 0 a match needs only the masked ID and an error-free CRC. With PNDM = 1 (default) the frame must also not be a remote frame, its DLC must equal the stored DLC, and for DLC > 0 at least one data bit set to 1 must line up with a 1 in the data masks; each such pair is one group of nodes, up to 64 groups. With DLC = 0 the data masks are ignored; with DLC above 0 and all data mask bits 0 the bus cannot wake the part (data masks reset to all 1s). A DLC mismatch wakes nothing. CDR selects the CAN data rate used for selective wake-up, 50 kbit/s to 1000 kbit/s."
+  },
+  {
+   "topic": "Partial networking error counter",
+   "page": 16,
+   "text": "Frames with errors ahead of the ACK field count up an internal counter; error-free frames count it down. Bus data between the CRC delimiter and the next SOF is ignored. Past 31 the counter sets PNFDE and the part wakes; it resets when the bias switches off and partial networking is enabled again. Writing any partial networking configuration register clears PNCOK, which software sets again after configuring."
+  },
+  {
+   "topic": "CAN FD passive (TJA1145T/FD, TJA1145TK/FD)",
+   "page": 16,
+   "text": "With CFDC = 1 the /FD types count a received CAN FD control field down on the error counter and then ignore the bus until idle, so they stay asleep with partial networking on while CAN FD traffic runs. CAN FD frames never count as wake-up frames, even with PNDM = 0 and a matching ID. In TJA1145T, TJA1145TK, and in /FD types with CFDC = 0, CAN FD frames count as errors, and enough of them overflow the counter and wake the part."
+  },
+  {
+   "topic": "TXD dominant time-out",
+   "page": 19,
+   "text": "In Active mode a LOW on TXD lasting longer than tto(dom)TXD turns the transmitter off and frees the bus to recessive; TXD going HIGH resets the timer. This sets a lowest bit rate of 15 kbit/s. The event sets CFS, clears CTS and, with CFE = 1, raises CF."
+  },
+  {
+   "topic": "VCC undervoltage and loss of BAT",
+   "page": 20,
+   "text": "With CMC = 01, VCC falling below Vuvd(VCC) sets VCS and raises CF if enabled. Losing the BAT supply does not load the bus or the microcontroller, and no reverse current flows from the bus."
+  },
+  {
+   "topic": "Local wake-up via WAKE",
+   "page": 20,
+   "text": "WPRE enables wake-up on a rising edge at WAKE and WPFE on a falling edge. When local wake-up is not used it should be disabled and WAKE tied to GND for best EMI behaviour. WPVS reads the WAKE level."
+  },
+  {
+   "topic": "Wake-up and interrupt events on RXD",
+   "page": 21,
+   "text": "Regular wake-up events are CW, WPR and WPF; interrupt events are PO, OTW, SPIF, PNFDE, CBS and CF. PO and PNFDE are always captured, the rest only when enabled in 04h, 23h and 4Ch. A captured event sets its status bit; in CAN Offline mode RXD goes LOW; in Sleep, INH goes HIGH and the part enters Standby. The global status register 60h shows which group (system, transceiver, WAKE) holds an event. A status bit is cleared by writing 1 to it; clearing only the bits seen set in the last read avoids losing events that arrive just before the write."
+  },
+  {
+   "topic": "Interrupt/wake-up delay",
+   "page": 22,
+   "text": "Clearing an event bit releases RXD HIGH and starts a td(event) timer. Events during the timer are recorded; if any are pending when it expires RXD goes LOW again, so several events cost one interrupt."
+  },
+  {
+   "topic": "Sleep mode protection",
+   "page": 22,
+   "text": "Sleep is entered only when a regular wake-up source (CAN or WAKE) is on and every event status bit is clear; otherwise a Sleep command (MC = 001) leads to Standby."
+  },
+  {
+   "topic": "Device ID, lock and memory",
+   "page": 24,
+   "text": "Register 7Eh identifies the part: 70h for TJA1145T/TK and 74h for the /FD types. Register 0Ah write-protects address areas against SPI writes. Four bytes of general-purpose RAM sit at 06h to 09h."
+  },
+  {
+   "topic": "VIO",
+   "page": 25,
+   "text": "VIO connects to the microcontroller supply; TXD, RXD and the SPI pins then work at the microcontroller's levels without level shifters, from 3.3 V to 5 V."
+  },
+  {
+   "topic": "SPI",
+   "page": 26,
+   "text": "Full-duplex SPI, multi-slave capable: SCSN active LOW, SCK idle LOW (pull-down), SDI in, SDO high-impedance with SCSN HIGH. Data are sampled on the falling SCK edge and shifted on the rising edge, MSB first. The first byte is a 7-bit address followed by a read-only bit (1 = read, SDI data ignored); then one, two or three data bytes follow, giving 16-, 24- or 32-bit frames with the address incrementing per byte. The addressed register contents come back on SDO. A write with a bit count other than 16, 24 or 32 is dropped and sets SPIF. Writes to absent registers are tolerated; writes past 7Fh wrap to 00h. A read longer than 32 bits echoes SDI onto SDO from bit 33. The register space is 128 bytes, 00h to 7Fh. An SPI access under way during an automatic mode change is ignored."
+  },
+  {
+   "topic": "Bus termination",
+   "page": 38,
+   "text": "Split termination: at bus end nodes RT = 60 Ω each from CANH and CANL to a centre point with a capacitor (for example 4.7 nF) to ground; sub-nodes may use a weak termination such as RT = 1.3 kΩ if the OEM requires it."
+  },
+  {
+   "topic": "Qualification",
+   "page": 39,
+   "text": "Qualified to AEC-Q100 for automotive use. ESD: 8 kV HBM on the bus pins; 6 kV IEC 61000-4-2 on BAT, WAKE and the bus pins. Bus pins withstand shorts to 58 V. Suitable for 12 V and 24 V systems."
+  },
+  {
+   "topic": "Soldering",
+   "page": 42,
+   "text": "Both packages are reflow-solderable; peak temperature by package thickness and volume follows J-STD-020D. The moisture sensitivity level marked on the packing applies."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SO14 (SOT108-1)",
+   "page": 40,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.75"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "",
+     "0.25"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "1.25",
+     "",
+     "1.45"
+    ],
+    [
+     "A3",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "bp",
+     "lead width",
+     "0.36",
+     "",
+     "0.49"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.19",
+     "",
+     "0.25"
+    ],
+    [
+     "D",
+     "body length (note 1)",
+     "8.55",
+     "",
+     "8.75"
+    ],
+    [
+     "E",
+     "body width (note 1)",
+     "3.8",
+     "",
+     "4.0"
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "HE",
+     "width across leads",
+     "5.8",
+     "",
+     "6.2"
+    ],
+    [
+     "L",
+     "lead length",
+     "",
+     "1.05",
+     ""
+    ],
+    [
+     "Lp",
+     "foot length",
+     "0.4",
+     "",
+     "1.0"
+    ],
+    [
+     "Q",
+     "",
+     "0.6",
+     "",
+     "0.7"
+    ],
+    [
+     "v",
+     "position tolerance, HE",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "w",
+     "position tolerance, leads",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "Z",
+     "end overhang (note 1)",
+     "0.3",
+     "",
+     "0.7"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "1: D, E and Z exclude plastic or metal protrusions, up to 0.15 mm per side.",
+    "JEDEC MS-012; IEC 076E06."
+   ]
+  },
+  {
+   "name": "HVSON14 (SOT1086-2)",
+   "page": 41,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.80",
+     "0.85",
+     "1.00"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.03",
+     "0.05"
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.29",
+     "0.32",
+     "0.35"
+    ],
+    [
+     "c",
+     "terminal thickness",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "D",
+     "body length",
+     "4.4",
+     "4.5",
+     "4.6"
+    ],
+    [
+     "Dh",
+     "exposed pad length",
+     "4.15",
+     "4.20",
+     "4.25"
+    ],
+    [
+     "E",
+     "body width",
+     "2.9",
+     "3.0",
+     "3.1"
+    ],
+    [
+     "Eh",
+     "exposed pad width",
+     "1.55",
+     "1.60",
+     "1.65"
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "e1",
+     "span, terminal 1 to terminal 7",
+     "",
+     "3.9",
+     ""
+    ],
+    [
+     "k",
+     "terminal to exposed pad",
+     "0.25",
+     "0.30",
+     "0.35"
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.35",
+     "0.40",
+     "0.45"
+    ],
+    [
+     "v",
+     "position tolerance",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "w",
+     "position tolerance",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "y1",
+     "parallelism",
+     "",
+     "0.1",
+     ""
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-229. Body 3 mm × 4.5 mm × 0.85 mm."
+   ]
+  }
+ ]
+}

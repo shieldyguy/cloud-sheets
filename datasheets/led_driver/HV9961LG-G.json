@@ -1,0 +1,1202 @@
+{
+ "sheet": 1,
+ "name": "HV9961LG-G",
+ "kind": "led_driver",
+ "manufacturer": "Microchip",
+ "title": "HV9961: average-current-mode constant-current LED driver controller, 8 V to 450 V",
+ "source": {
+  "document": "DS20005588A",
+  "revision": "Revision A, November 2017",
+  "pages": 16
+ },
+ "summary": "A controller for a low-side buck LED driver that switches an external N-channel MOSFET with a constant off-time and regulates the average current, not the peak, from the switch current alone, so no loop compensation and no high-side sensing are needed and the LED current holds within ±3%. It runs straight from 8 V to 450 V through an internal regulator. The current is set by a 275 mV reference over a sense resistor, or by a 0 V to 1.5 V linear dimming input; a TTL-level PWM input gates the output, and a 0.44 V current-limit comparator gives hiccup short-circuit protection. It is pin-compatible with the HV9910B and can replace it in many designs.",
+ "key_figures": [
+  [
+   "Input supply",
+   "8 V to 450 V"
+  ],
+  [
+   "Current sense reference VCST",
+   "268 / 275 / 286 mV min / typ / max at VLD = 1.5 V"
+  ],
+  [
+   "LED current accuracy",
+   "±3%"
+  ],
+  [
+   "Linear dimming range",
+   "0 V to 1.5 V at LD; CS threshold = 0.185 × VLD"
+  ],
+  [
+   "Internal regulator VDD",
+   "7.5 V typ"
+  ],
+  [
+   "Hiccup threshold VCSH",
+   "440 mV typ; hiccup time 400 µs typ"
+  ],
+  [
+   "Off-time",
+   "10 µs typ at RT = 226 kΩ; 40 µs typ at RT = 1 MΩ"
+  ],
+  [
+   "Maximum duty cycle",
+   "75% min"
+  ],
+  [
+   "Gate drive",
+   "0.165 A min source and sink"
+  ],
+  [
+   "Operating ambient",
+   "–40°C to +125°C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 14,
+  "columns": [
+   "part number",
+   "package",
+   "packing",
+   "marking (line 1)"
+  ],
+  "rows": [
+   [
+    "HV9961LG-G",
+    "8-lead SOIC",
+    "3300/Reel",
+    "HV9961LG"
+   ],
+   [
+    "HV9961NG-G",
+    "16-lead SOIC",
+    "45/Tube",
+    "HV9961NG"
+   ],
+   [
+    "HV9961NG-G-M901",
+    "16-lead SOIC",
+    "2600/Reel",
+    "HV9961NG"
+   ],
+   [
+    "HV9961NG-G-M934",
+    "16-lead SOIC",
+    "2600/Reel",
+    "HV9961NG"
+   ]
+  ],
+  "notes": [
+   "Code: HV9961, then the package (LG = 8-lead SOIC, NG = 16-lead SOIC), then -G for a lead (Pb)-free, RoHS-compliant package, then the media type; a blank media type means 3300/Reel for LG and 45/Tube for NG.",
+   "M901 and M934 both deliver 2600 parts on a reel.",
+   "Marking: 8-lead SOIC carries the product code, then e3 with a YYWW date code, then a three-character traceability code NNN; 16-lead SOIC carries the product code with e3, then YYWWNNN. e3 is the JEDEC matte-tin (Sn) Pb-free mark."
+  ]
+ },
+ "pins": [
+  {
+   "package": "8-lead SOIC",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Input of the internal linear regulator; accepts 8 V to 450 V."
+    },
+    {
+     "pin": "2",
+     "name": "CS",
+     "type": "analog in",
+     "function": "Current sense input: reads the MOSFET current as the voltage across an external sense resistor to ground."
+    },
+    {
+     "pin": "3",
+     "name": "GND",
+     "type": "ground",
+     "function": "Return for every internal circuit; connect it to the power-stage ground."
+    },
+    {
+     "pin": "4",
+     "name": "GATE",
+     "type": "output",
+     "function": "Gate drive output for an external N-channel power MOSFET."
+    },
+    {
+     "pin": "5",
+     "name": "PWMD",
+     "type": "digital in",
+     "function": "PWM dimming input. Low turns the gate drive off; high lets it switch normally. Internal pull-down to GND."
+    },
+    {
+     "pin": "6",
+     "name": "VDD",
+     "type": "power",
+     "function": "Internal supply rail (7.5 V regulated). Bypass to GND with a low-ESR capacitor of 0.1 µF or more."
+    },
+    {
+     "pin": "7",
+     "name": "LD",
+     "type": "analog in",
+     "function": "Linear dimming input. Below 1.5 V its voltage sets the current-sense threshold; below 150 mV the gate output stops, and it restarts above 200 mV."
+    },
+    {
+     "pin": "8",
+     "name": "RT",
+     "type": "analog",
+     "function": "Off-time setting: a resistor from this pin to GND programs the gate off-time."
+    }
+   ]
+  },
+  {
+   "package": "16-lead SOIC",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Input of the internal linear regulator; accepts 8 V to 450 V."
+    },
+    {
+     "pin": "2",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    },
+    {
+     "pin": "3",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    },
+    {
+     "pin": "4",
+     "name": "CS",
+     "type": "analog in",
+     "function": "Current sense input: reads the MOSFET current as the voltage across an external sense resistor to ground."
+    },
+    {
+     "pin": "5",
+     "name": "GND",
+     "type": "ground",
+     "function": "Return for every internal circuit; connect it to the power-stage ground."
+    },
+    {
+     "pin": "6",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    },
+    {
+     "pin": "7",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    },
+    {
+     "pin": "8",
+     "name": "GATE",
+     "type": "output",
+     "function": "Gate drive output for an external N-channel power MOSFET."
+    },
+    {
+     "pin": "9",
+     "name": "PWMD",
+     "type": "digital in",
+     "function": "PWM dimming input. Low turns the gate drive off; high lets it switch normally. Internal pull-down to GND."
+    },
+    {
+     "pin": "10",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    },
+    {
+     "pin": "11",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    },
+    {
+     "pin": "12",
+     "name": "VDD",
+     "type": "power",
+     "function": "Internal supply rail (7.5 V regulated). Bypass to GND with a low-ESR capacitor of 0.1 µF or more."
+    },
+    {
+     "pin": "13",
+     "name": "LD",
+     "type": "analog in",
+     "function": "Linear dimming input. Below 1.5 V its voltage sets the current-sense threshold; below 150 mV the gate output stops, and it restarts above 200 mV."
+    },
+    {
+     "pin": "14",
+     "name": "RT",
+     "type": "analog",
+     "function": "Off-time setting: a resistor from this pin to GND programs the gate off-time."
+    },
+    {
+     "pin": "15",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    },
+    {
+     "pin": "16",
+     "name": "NC",
+     "type": "nc",
+     "function": "Not connected inside the part."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VIN to GND",
+     "–0.5V to +470V"
+    ],
+    [
+     "VDD to GND",
+     "+12V"
+    ],
+    [
+     "CS, LD, PWMD, Gate, RT to GND",
+     "–0.3V to VDD+0.3V"
+    ],
+    [
+     "Junction Temperature, TJ",
+     "–40°C to +150°C"
+    ],
+    [
+     "Storage Temperature, TS",
+     "–65°C to +150°C"
+    ],
+    [
+     "Continuous Power Dissipation (TA = +25°C): 8-lead SOIC",
+     "650 mW"
+    ],
+    [
+     "Continuous Power Dissipation (TA = +25°C): 16-lead SOIC",
+     "1000 mW"
+    ]
+   ],
+   "notes": [
+    "Beyond these limits the part can be damaged; they are stress limits only, operation at them is not implied, and long exposure to them can shorten its life."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 4,
+   "conditions": "TA = 25°C, VIN = 12V, VLD = VDD, and VPWMD = VDD unless otherwise specified.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input DC Supply Voltage Range",
+     "VINDC",
+     "DC input voltage (Note 1 and Note 2)",
+     "8",
+     "—",
+     "450",
+     "V"
+    ],
+    [
+     "Shutdown Mode Supply Current",
+     "IINSD",
+     "Pin PWMD connected to GND (Note 2)",
+     "—",
+     "0.5",
+     "1",
+     "mA"
+    ],
+    [
+     "Internally Regulated Voltage",
+     "VDD",
+     "VIN = 8V, IDD(EXT) = 0 mA, 500 pF at gate, RT = 226 kΩ",
+     "7.25",
+     "7.5",
+     "7.75",
+     "V"
+    ],
+    [
+     "Line Regulation of VDD",
+     "ΔVDD, line",
+     "VIN = 8V–450V, IDD(EXT) = 0 mA, 500 pF at gate, RT = 226 kΩ",
+     "0",
+     "—",
+     "1",
+     "V"
+    ],
+    [
+     "Load Regulation of VDD",
+     "ΔVDD, load",
+     "IDD(EXT) = 0 mA–1 mA, 500 pF at gate, RT = 226 kΩ",
+     "0",
+     "—",
+     "100",
+     "mV"
+    ],
+    [
+     "VDD Undervoltage Lockout Upper Threshold",
+     "VUVLO",
+     "VIN rising (Note 2)",
+     "6.45",
+     "6.7",
+     "6.95",
+     "V"
+    ],
+    [
+     "VDD Undervoltage Lockout Hysteresis",
+     "ΔVUVLO",
+     "VIN falling",
+     "—",
+     "500",
+     "—",
+     "mV"
+    ],
+    [
+     "Maximum Input Current (Limited by UVLO)",
+     "IIN, MAX",
+     "VIN = 8V, TA = 25°C (Note 3)",
+     "3.5",
+     "—",
+     "—",
+     "mA"
+    ],
+    [
+     "Maximum Input Current (Limited by UVLO)",
+     "IIN, MAX",
+     "VIN = 8V, TA = 125°C (Note 3)",
+     "1.5",
+     "—",
+     "—",
+     "mA"
+    ],
+    [
+     "PWMD Input Low Voltage",
+     "VPWMD(LO)",
+     "VIN = 8V–450V (Note 2)",
+     "—",
+     "—",
+     "0.8",
+     "V"
+    ],
+    [
+     "PWMD Input High Voltage",
+     "VPWMD(HI)",
+     "VIN = 8V–450V (Note 2)",
+     "2.2",
+     "—",
+     "—",
+     "V"
+    ],
+    [
+     "PWMD Pull-down Resistance",
+     "RPWMD",
+     "VPWMD = 5V",
+     "50",
+     "100",
+     "150",
+     "kΩ"
+    ],
+    [
+     "Current Sense Reference Voltage",
+     "VCST",
+     "VLD = 1.5V",
+     "268",
+     "275",
+     "286",
+     "mV"
+    ],
+    [
+     "LD-to-CS Voltage Ratio",
+     "AV(LD)",
+     "VLD = 1.2V",
+     "0.182",
+     "0.185",
+     "0.188",
+     "—"
+    ],
+    [
+     "LD-to-CS Voltage Offset",
+     "AV x VLD(OFFSET)",
+     "Offset = VCS – AV(LD) x VLD, VLD = 1.2V",
+     "0",
+     "—",
+     "10",
+     "mV"
+    ],
+    [
+     "CS Threshold Temperature Regulation",
+     "ΔVCST(TEMP)",
+     "(Note 2)",
+     "—",
+     "—",
+     "5",
+     "mV"
+    ],
+    [
+     "LD Input Shutdown Threshold Voltage",
+     "VLD(OFF)",
+     "VLD falling",
+     "—",
+     "150",
+     "—",
+     "mV"
+    ],
+    [
+     "LD Input Enable Threshold Voltage",
+     "VLD(EN)",
+     "VLD rising",
+     "—",
+     "200",
+     "—",
+     "mV"
+    ],
+    [
+     "Current Sense Blanking Interval",
+     "TBLANK",
+     "(Note 2)",
+     "150",
+     "—",
+     "320",
+     "ns"
+    ],
+    [
+     "Minimum On-time",
+     "TON(MIN)",
+     "VCS = VCST + 30 mV",
+     "—",
+     "—",
+     "1000",
+     "ns"
+    ],
+    [
+     "Maximum Steady-state Duty Cycle",
+     "DMAX",
+     "Reduction in output LED current may occur beyond this duty cycle",
+     "75",
+     "—",
+     "—",
+     "%"
+    ],
+    [
+     "Hiccup Threshold Voltage",
+     "VCSH",
+     "",
+     "410",
+     "440",
+     "470",
+     "mV"
+    ],
+    [
+     "Current Limit Delay CS-to-Gate",
+     "TDELAY",
+     "VCS = VCSH + 30 mV",
+     "—",
+     "—",
+     "150",
+     "ns"
+    ],
+    [
+     "Short-circuit Hiccup Time",
+     "THICCUP",
+     "",
+     "350",
+     "400",
+     "550",
+     "µs"
+    ],
+    [
+     "Minimum On-time (Short-circuit)",
+     "TON(MIN),SC",
+     "VCS = VDD",
+     "—",
+     "—",
+     "430",
+     "ns"
+    ],
+    [
+     "Off-time",
+     "TOFF",
+     "RT = 1 MΩ",
+     "32",
+     "40",
+     "48",
+     "µs"
+    ],
+    [
+     "Off-time",
+     "TOFF",
+     "RT = 226 kΩ",
+     "8",
+     "10",
+     "12",
+     "µs"
+    ],
+    [
+     "Gate Sourcing Current",
+     "ISOURCE",
+     "VGATE = 0V, VDD = 7.5V",
+     "0.165",
+     "—",
+     "—",
+     "A"
+    ],
+    [
+     "Gate Sinking Current",
+     "ISINK",
+     "VGATE = VDD, VDD = 7.5V",
+     "0.165",
+     "—",
+     "—",
+     "A"
+    ],
+    [
+     "Gate Output Rise Time",
+     "tr",
+     "CGATE = 500 pF, VDD = 7.5V",
+     "—",
+     "30",
+     "50",
+     "ns"
+    ],
+    [
+     "Gate Output Fall Time",
+     "tf",
+     "CGATE = 500 pF, VDD = 7.5V",
+     "—",
+     "30",
+     "50",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "Note 1: the package power dissipation limit can set a lower bound than this figure; the lower of the two applies.",
+    "Note 2: guaranteed across the whole operating ambient range, –40°C < TA < +125°C.",
+    "Note 3: established by characterization; not tested on every part."
+   ]
+  },
+  {
+   "title": "Temperature specifications",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating Ambient Temperature",
+     "TA",
+     "",
+     "–40",
+     "—",
+     "+125",
+     "°C"
+    ],
+    [
+     "Maximum Junction Temperature",
+     "TJ(MAX)",
+     "",
+     "—",
+     "—",
+     "+150",
+     "°C"
+    ],
+    [
+     "Storage Temperature",
+     "TS",
+     "",
+     "–65",
+     "—",
+     "+150",
+     "°C"
+    ],
+    [
+     "Package thermal resistance, 8-lead SOIC",
+     "θJA",
+     "",
+     "—",
+     "101",
+     "—",
+     "°C/W"
+    ],
+    [
+     "Package thermal resistance, 16-lead SOIC",
+     "θJA",
+     "",
+     "—",
+     "83",
+     "—",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Typical Output Characteristic of an HV9961 LED Driver",
+   "page": 8,
+   "conditions": "VIN = 170VDC",
+   "x": {
+    "label": "Output Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "LED Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "HV9961",
+     "points": [
+      [
+       0.09,
+       0.56
+      ],
+      [
+       0.9,
+       0.5493
+      ],
+      [
+       1.51,
+       0.5458
+      ],
+      [
+       2.08,
+       0.5644
+      ],
+      [
+       4.54,
+       0.3895
+      ],
+      [
+       5.3,
+       0.3645
+      ],
+      [
+       6.19,
+       0.3531
+      ],
+      [
+       9.08,
+       0.3511
+      ],
+      [
+       24.04,
+       0.3493
+      ],
+      [
+       59.75,
+       0.3504
+      ]
+     ]
+    },
+    {
+     "label": "HV9910B",
+     "points": [
+      [
+       19.96,
+       0.377
+      ],
+      [
+       44.95,
+       0.3145
+      ],
+      [
+       59.42,
+       0.2815
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Typical Linear Dimming Response of an HV9961 LED Driver",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "LD",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "LED Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "LD rising",
+     "points": [
+      [
+       0.197,
+       0.0018
+      ],
+      [
+       0.197,
+       0.0545
+      ],
+      [
+       1.499,
+       0.3482
+      ],
+      [
+       1.596,
+       0.349
+      ]
+     ]
+    },
+    {
+     "label": "LD falling",
+     "points": [
+      [
+       0.148,
+       0.0015
+      ],
+      [
+       0.148,
+       0.0434
+      ],
+      [
+       0.195,
+       0.0547
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application circuit",
+   "page": 3,
+   "description": "Low-side buck LED driver. The LED string and the inductor run in series from the input rail down to the MOSFET drain; the diode returns the inductor current to the rail while the switch is off. The HV9961 runs from the same rail through VIN. RCS under the MOSFET source sets the average LED current, RT sets the fixed off-time, and PWMD and LD are tied to VDD so the part runs at full current from the internal 275 mV reference.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "HV9961"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "8V–450V",
+     "note": "DC input"
+    },
+    {
+     "ref": "CIN",
+     "type": "capacitor",
+     "value": "",
+     "note": "input capacitor across the supply"
+    },
+    {
+     "ref": "CDD",
+     "type": "capacitor",
+     "value": "",
+     "note": "VDD bypass, low ESR, at least 0.1 µF"
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": "",
+     "note": "freewheel diode"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "",
+     "note": "buck inductor, sized with the inductance equation"
+    },
+    {
+     "ref": "LED1",
+     "type": "led",
+     "value": "LED load",
+     "note": "the LED string"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "N-channel power MOSFET"
+    },
+    {
+     "ref": "RT",
+     "type": "resistor",
+     "value": "",
+     "note": "sets the off-time"
+    },
+    {
+     "ref": "RCS",
+     "type": "resistor",
+     "value": "",
+     "note": "sets the LED current"
+    }
+   ],
+   "notes": [
+    "RCS, RT and L1 are chosen with the design equations."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Off-time",
+   "expr": "TOFF(µs) = RT(kΩ) / 25 + 0.3",
+   "where": {
+    "TOFF": "gate off-time in microseconds",
+    "RT": "resistor from RT to GND, in kilohms"
+   },
+   "note": "Holds for 30 kΩ ≤ RT ≤ 1 MΩ.",
+   "page": 7
+  },
+  {
+   "name": "LED current, internal reference",
+   "expr": "ILED = 0.275 V / RCS",
+   "where": {
+    "ILED": "average LED current",
+    "RCS": "sense resistor from the MOSFET source to GND"
+   },
+   "note": "For VLD ≥ 1.5 V, in continuous inductor conduction.",
+   "page": 7
+  },
+  {
+   "name": "LED current, linear dimming",
+   "expr": "ILED = VLD × 0.185 / RCS",
+   "where": {
+    "VLD": "voltage at LD",
+    "RCS": "sense resistor"
+   },
+   "note": "For 0.2 V ≤ VLD < 1.5 V, in continuous inductor conduction.",
+   "page": 7
+  },
+  {
+   "name": "Output inductance",
+   "expr": "LO = VO(MAX) × TOFF / (0.4 × IO)",
+   "where": {
+    "LO": "buck inductance",
+    "VO(MAX)": "highest LED string voltage",
+    "TOFF": "off-time",
+    "IO": "average full-load LED current"
+   },
+   "note": "Gives a peak-to-peak ripple of 30% to 40% of the full-load current.",
+   "page": 7
+  },
+  {
+   "name": "Minimum output voltage for regulation",
+   "expr": "VO(MIN) = VIN × DMIN, DMIN = 1 µs / (TOFF + 1 µs)",
+   "where": {
+    "VO(MIN)": "lowest LED string voltage that keeps regulation",
+    "DMIN": "duty cycle at the minimum on-time",
+    "VIN": "input voltage"
+   },
+   "note": "Below VO(MIN) the LED current climbs and may trip the short-circuit comparator.",
+   "page": 7
+  },
+  {
+   "name": "Maximum continuous VIN",
+   "expr": "VIN(MAX) = (TJ(MAX) – TA) / (Rθ,JA × IIN) = 396V",
+   "where": {
+    "TJ(MAX)": "highest working junction temperature, 125°C in the example",
+    "TA": "ambient, 25°C in the example",
+    "Rθ,JA": "junction-to-ambient thermal resistance, 101°C/W (8-lead SOIC)",
+    "IIN": "current into VIN, 2.5 mA in the example"
+   },
+   "note": "A 100 V Zener in series with VIN raises the example's limit to 490 V.",
+   "page": 8
+  },
+  {
+   "name": "VIN input current",
+   "expr": "IIN ≈ 1mA + QG × fS",
+   "where": {
+    "QG": "gate charge of the external MOSFET",
+    "fS": "switching frequency"
+   },
+   "note": "",
+   "page": 9
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Control method",
+   "page": 7,
+   "text": "In a low-side-switch buck converter, the controller averages the MOSFET source current seen at CS and regulates that average in a fast open-loop way, so the LED current does not depend on inductance, switching frequency or output voltage, and the loop needs no compensation. Switching uses a constant off-time; unlike the HV9910B, there is no constant-frequency mode."
+  },
+  {
+   "topic": "Off-time resistor",
+   "page": 7,
+   "text": "RT connects between the RT pin and GND. The HV9910B option of connecting it from RT to GATE is not supported by this part."
+  },
+  {
+   "topic": "Duty-cycle limits",
+   "page": 7,
+   "text": "Regulation works up to D ≤ 0.75: with the LED string above 75% of VIN, the LED current can fall. With the string below VO(MIN) the current rises instead and can trip the short-circuit protection."
+  },
+  {
+   "topic": "Short-circuit protection",
+   "page": 8,
+   "text": "When CS goes above 0.44 V the comparator holds the gate off for THICCUP, 400 µs typical, then retries; this keeps the inductor current from stepping up cycle after cycle into saturation when the output voltage is too low. CS has leading-edge blanking so switching spikes trip neither the current loop nor this comparator."
+  },
+  {
+   "topic": "Linear dimming",
+   "page": 8,
+   "text": "Below 1.5 V at LD, the 275 mV reference gives way to 0.185 × VLD. The gate stops when VLD drops under 150 mV and runs again once VLD rises over 200 mV; some applications use the same brightness signal to turn the lamp off. A PWM signal under 1.5 V in amplitude on LD gives mixed-mode dimming with a wider dimming ratio."
+  },
+  {
+   "topic": "Supply",
+   "page": 8,
+   "text": "With 8 VDC to 450 VDC at VIN, VDD is regulated to 7.5 V. Outside circuits may draw from VDD up to the rated maximum current or the package thermal limit, the lower of the two. VDD takes a low-ESR bypass capacitor, which supplies the gate driver's high-frequency current. Alternatively the part runs from a supply applied directly at VDD, above 7.5 V and below 12 V."
+  },
+  {
+   "topic": "VIN dissipation",
+   "page": 8,
+   "text": "Although VIN is rated 450 V instantaneous, the package dissipation limits the continuous voltage. A resistor or a Zener in series with VIN moves part of the loss out of the chip when a higher supply is needed."
+  },
+  {
+   "topic": "MOSFET choice",
+   "page": 9,
+   "text": "Recommended MOSFET gate charge: below 25 nC up to 100 kHz switching, below 15 nC above 100 kHz."
+  },
+  {
+   "topic": "PWM dimming",
+   "page": 9,
+   "text": "PWMD low stops the gate; high lets it run. Inductor slew limits the current's rise and fall. The first cycle after PWMD goes high ends when CS reaches 275 mV (or 0.185 × VLD), and the current settles within 3 to 4 cycles whatever the switching frequency. The response is close to that of the HV9910B."
+  },
+  {
+   "topic": "Compatibility",
+   "page": 1,
+   "text": "Pin-compatible with the HV9910B and usable as a drop-in replacement in many of its designs, without the peak-to-average current error of that part."
+  }
+ ],
+ "packages": [
+  {
+   "name": "8-lead SOIC (narrow body), LG",
+   "page": 11,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "1.35*",
+     "-",
+     "1.75"
+    ],
+    [
+     "A1",
+     "0.10",
+     "-",
+     "0.25"
+    ],
+    [
+     "A2",
+     "1.25",
+     "-",
+     "1.65*"
+    ],
+    [
+     "b",
+     "0.31",
+     "-",
+     "0.51"
+    ],
+    [
+     "D",
+     "4.80*",
+     "4.90",
+     "5.00*"
+    ],
+    [
+     "E",
+     "5.80*",
+     "6.00",
+     "6.20*"
+    ],
+    [
+     "E1",
+     "3.80*",
+     "3.90",
+     "4.00*"
+    ],
+    [
+     "e",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "h",
+     "0.25",
+     "-",
+     "0.50"
+    ],
+    [
+     "L",
+     "0.40",
+     "-",
+     "1.27"
+    ],
+    [
+     "L1",
+     "",
+     "1.04 REF",
+     ""
+    ],
+    [
+     "L2",
+     "",
+     "0.25 BSC",
+     ""
+    ],
+    [
+     "θ",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "θ1",
+     "5°",
+     "-",
+     "15°"
+    ]
+   ],
+   "notes": [
+    "Body 4.90 × 3.90 mm, 1.75 mm high at most, 1.27 mm pitch. JEDEC MS-012, variation AA, issue E, Sept. 2005.",
+    "* marks a dimension JEDEC does not specify.",
+    "The corner chamfer is optional; without it a pin 1 mark (molded, embedded metal or printed) sits in the index area, D/2 × E1/2."
+   ]
+  },
+  {
+   "name": "16-lead SOIC (narrow body), NG",
+   "page": 12,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "1.35*",
+     "-",
+     "1.75"
+    ],
+    [
+     "A1",
+     "0.10",
+     "-",
+     "0.25"
+    ],
+    [
+     "A2",
+     "1.25",
+     "-",
+     "1.65*"
+    ],
+    [
+     "b",
+     "0.31",
+     "-",
+     "0.51"
+    ],
+    [
+     "D",
+     "9.80*",
+     "9.90",
+     "10.00*"
+    ],
+    [
+     "E",
+     "5.80*",
+     "6.00",
+     "6.20*"
+    ],
+    [
+     "E1",
+     "3.80*",
+     "3.90",
+     "4.00*"
+    ],
+    [
+     "e",
+     "",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "h",
+     "0.25",
+     "-",
+     "0.50"
+    ],
+    [
+     "L",
+     "0.40",
+     "-",
+     "1.27"
+    ],
+    [
+     "L1",
+     "",
+     "1.04 REF",
+     ""
+    ],
+    [
+     "L2",
+     "",
+     "0.25 BSC",
+     ""
+    ],
+    [
+     "θ",
+     "0°",
+     "-",
+     "8°"
+    ],
+    [
+     "θ1",
+     "5°",
+     "-",
+     "15°"
+    ]
+   ],
+   "notes": [
+    "Body 9.90 × 3.90 mm, 1.75 mm high at most, 1.27 mm pitch. JEDEC MS-012, variation AC, issue E, Sept. 2005.",
+    "* marks a dimension JEDEC does not specify.",
+    "The corner chamfer is optional; without it a pin 1 mark (molded, embedded metal or printed) sits in the index area, D/2 × E1/2."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,6150 @@
+{
+ "sheet": 1,
+ "name": "ADM1270ARQZ-R7",
+ "kind": "power_switch",
+ "manufacturer": "Analog Devices",
+ "title": "ADM1270: 4 V to 60 V input protection and hot swap controller for P-channel FETs",
+ "source": {
+  "revision": "Rev. A",
+  "pages": 21
+ },
+ "summary": "The ADM1270 controls an external P-channel MOSFET in a 4 V to 60 V supply line to limit inrush and overcurrent, for modules plugged into live backplanes and for battery-powered gear. It senses current across a resistor, with a limit adjustable from 12.5 mV to 62.5 mV, folds the limit back as the output falls, and times how long the FET may stay in limit before latching off or retrying. It also drives a second P-channel FET as a low-drop reverse-polarity switch, and has UV, OV, enable, fault and power-good functions. Packages are a 16-lead QSOP and a 16-lead LFCSP of 3 mm × 3 mm; ADM1270ARQZ-R7 is the QSOP on a reel.",
+ "key_figures": [
+  [
+   "Supply range",
+   "4 V to 60 V"
+  ],
+  [
+   "Quiescent current",
+   "360 µA typ, 500 µA max"
+  ],
+  [
+   "Current-sense limit",
+   "50 mV typ (47 to 53 mV) default; 12.5 mV to 62.5 mV adjustable"
+  ],
+  [
+   "Severe overcurrent threshold",
+   "100 mV typ at VISET > 2.65 V; response 2.0 µs typ"
+  ],
+  [
+   "Gate drive",
+   "ΔVGATE 12 V typ (10 to 14 V) below VCC"
+  ],
+  [
+   "UV, OV, PWRGD thresholds",
+   "1.0 V typ (0.985 to 1.015 V)"
+  ],
+  [
+   "VCAP regulator",
+   "3.6 V"
+  ],
+  [
+   "Operating temperature",
+   "−40°C to +125°C"
+  ],
+  [
+   "Packages",
+   "16-lead 3 mm × 3 mm LFCSP, 16-lead QSOP"
+  ]
+ ],
+ "part_numbers": {
+  "page": 21,
+  "columns": [
+   "part number",
+   "temperature range",
+   "package",
+   "package option",
+   "brand code"
+  ],
+  "rows": [
+   [
+    "ADM1270ACPZ-R2",
+    "−40°C to +125°C",
+    "16-lead LFCSP_WQ",
+    "CP-16-27",
+    "LNQ"
+   ],
+   [
+    "ADM1270ACPZ-R7",
+    "−40°C to +125°C",
+    "16-lead LFCSP_WQ",
+    "CP-16-27",
+    "LNQ"
+   ],
+   [
+    "ADM1270ARQZ",
+    "−40°C to +125°C",
+    "16-lead QSOP",
+    "RQ-16",
+    ""
+   ],
+   [
+    "ADM1270ARQZ-R7",
+    "−40°C to +125°C",
+    "16-lead QSOP",
+    "RQ-16",
+    ""
+   ],
+   [
+    "ADM1270CP-EVALZ",
+    "",
+    "evaluation board for the LFCSP_WQ",
+    "",
+    ""
+   ],
+   [
+    "ADM1270RQ-EVALZ",
+    "",
+    "evaluation board for the QSOP",
+    "",
+    ""
+   ]
+  ],
+  "notes": [
+   "Z marks a RoHS-compliant part."
+  ]
+ },
+ "pins": [
+  {
+   "package": "16-lead LFCSP",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCAP",
+     "type": "power out",
+     "function": "Output of the internal 3.6 V regulator. Needs a capacitor of 1 µF or more for the part to hold its accuracy. Can serve as the top of a divider that sets the ISET voltage, or as a pull-up rail; keep its load at 100 µA or less to stay within its accuracy figures."
+    },
+    {
+     "pin": "2",
+     "name": "ISET",
+     "type": "analog input",
+     "function": "Sets the current-limit sense voltage. Tied straight to VCAP it selects the internal 2 V reference and the 50 mV default; a divider from VCAP or an outside reference sets any limit from 12.5 mV to 62.5 mV (VISET = 40 × VSENSE)."
+    },
+    {
+     "pin": "3",
+     "name": "UV",
+     "type": "analog input",
+     "function": "Undervoltage comparator input, 1.0 V threshold. A divider from the supply brings the trip point onto this pin; below it the external FET is switched off."
+    },
+    {
+     "pin": "4",
+     "name": "OV",
+     "type": "analog input",
+     "function": "Overvoltage comparator input, 1.0 V threshold. A divider from the supply brings the trip point onto this pin; above it the external FET is switched off."
+    },
+    {
+     "pin": "5",
+     "name": "ENABLE",
+     "type": "digital input",
+     "function": "Logic enable. Must be high, along with valid UV and OV levels, before a power-up sequence starts; low keeps the controller off. No internal pull-up. Tied to FAULT it gives automatic retry."
+    },
+    {
+     "pin": "6",
+     "name": "FAULT",
+     "type": "digital output",
+     "function": "Fault flag, active low: goes low when the controller has shut the FET off after an overcurrent timeout. Wired to ENABLE, with a pull-up to VCAP, it makes the part retry by itself."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "8",
+     "name": "TIMER",
+     "type": "analog",
+     "function": "Capacitor CTIMER to ground sets how long the FET may sit in current limit. When the pin passes VTIMERH (2.0 V) the GATE is turned off."
+    },
+    {
+     "pin": "9",
+     "name": "TIMER_OFF",
+     "type": "analog",
+     "function": "Capacitor CTIMER_OFF to ground sets the power-on delay before the first start and the off time after an overcurrent shutdown; the GATE stays off until this pin passes VTMROFFH (2.0 V)."
+    },
+    {
+     "pin": "10",
+     "name": "FB_PG",
+     "type": "analog input",
+     "function": "Power-good comparator input, 1.0 V rising threshold with 30 mV hysteresis. A divider from the output voltage sets the level at which PWRGD is released."
+    },
+    {
+     "pin": "11",
+     "name": "FLB",
+     "type": "analog input",
+     "function": "Foldback input. A divider from the output lowers the current limit as the output falls, keeping the FET's dissipation inside its safe operating area. Clamped internally to 200 mV minimum so the limit never reaches zero."
+    },
+    {
+     "pin": "12",
+     "name": "PWRGD",
+     "type": "open-drain output",
+     "function": "Power-good output, open drain. Released high when FB_PG rises above 1 V; pulled low when FB_PG falls below 1 V less the hysteresis. Valid for VCC ≥ 1.7 V."
+    },
+    {
+     "pin": "13",
+     "name": "GATE",
+     "type": "analog output",
+     "function": "Drives the gate of the external P-channel pass FET. A pull-down current turns the FET on; the loop regulates this pin to hold the load current at the limit. Held off while the supply is below UVLO. Clamped to less than 14 V below VCC/SENSE+."
+    },
+    {
+     "pin": "14",
+     "name": "SENSE−",
+     "type": "analog input",
+     "function": "Low side of the current sense resistor; the same node feeds the pass FET. The sense voltage is VSENSE+ minus this pin. It also supplies part of the gate-drive bias."
+    },
+    {
+     "pin": "15",
+     "name": "VCC/SENSE+",
+     "type": "power in",
+     "function": "Supply input, 4 V to 60 V, and the high side of the current sense resistor. Supplies most of the bias current. A UVLO circuit holds the part in reset and the GATE off at low supply. No supply sequencing needed."
+    },
+    {
+     "pin": "16",
+     "name": "RPFG",
+     "type": "analog output",
+     "function": "Gate drive for the external reverse-polarity P-channel FET, which replaces a series diode with a low-drop switch. Clamped to less than 14 V below VCC/SENSE+."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "thermal",
+     "function": "Exposed pad on the underside of the LFCSP. Soldered to the board it carries heat away; it may be tied to ground."
+    }
+   ]
+  },
+  {
+   "package": "16-lead QSOP",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC/SENSE+",
+     "type": "power in",
+     "function": "Supply input, 4 V to 60 V, and the high side of the current sense resistor. Supplies most of the bias current. A UVLO circuit holds the part in reset and the GATE off at low supply. No supply sequencing needed."
+    },
+    {
+     "pin": "2",
+     "name": "RPFG",
+     "type": "analog output",
+     "function": "Gate drive for the external reverse-polarity P-channel FET, which replaces a series diode with a low-drop switch. Clamped to less than 14 V below VCC/SENSE+."
+    },
+    {
+     "pin": "3",
+     "name": "VCAP",
+     "type": "power out",
+     "function": "Output of the internal 3.6 V regulator. Needs a capacitor of 1 µF or more for the part to hold its accuracy. Can serve as the top of a divider that sets the ISET voltage, or as a pull-up rail; keep its load at 100 µA or less to stay within its accuracy figures."
+    },
+    {
+     "pin": "4",
+     "name": "ISET",
+     "type": "analog input",
+     "function": "Sets the current-limit sense voltage. Tied straight to VCAP it selects the internal 2 V reference and the 50 mV default; a divider from VCAP or an outside reference sets any limit from 12.5 mV to 62.5 mV (VISET = 40 × VSENSE)."
+    },
+    {
+     "pin": "5",
+     "name": "UV",
+     "type": "analog input",
+     "function": "Undervoltage comparator input, 1.0 V threshold. A divider from the supply brings the trip point onto this pin; below it the external FET is switched off."
+    },
+    {
+     "pin": "6",
+     "name": "OV",
+     "type": "analog input",
+     "function": "Overvoltage comparator input, 1.0 V threshold. A divider from the supply brings the trip point onto this pin; above it the external FET is switched off."
+    },
+    {
+     "pin": "7",
+     "name": "ENABLE",
+     "type": "digital input",
+     "function": "Logic enable. Must be high, along with valid UV and OV levels, before a power-up sequence starts; low keeps the controller off. No internal pull-up. Tied to FAULT it gives automatic retry."
+    },
+    {
+     "pin": "8",
+     "name": "FAULT",
+     "type": "digital output",
+     "function": "Fault flag, active low: goes low when the controller has shut the FET off after an overcurrent timeout. Wired to ENABLE, with a pull-up to VCAP, it makes the part retry by itself."
+    },
+    {
+     "pin": "9",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "10",
+     "name": "TIMER",
+     "type": "analog",
+     "function": "Capacitor CTIMER to ground sets how long the FET may sit in current limit. When the pin passes VTIMERH (2.0 V) the GATE is turned off."
+    },
+    {
+     "pin": "11",
+     "name": "TIMER_OFF",
+     "type": "analog",
+     "function": "Capacitor CTIMER_OFF to ground sets the power-on delay before the first start and the off time after an overcurrent shutdown; the GATE stays off until this pin passes VTMROFFH (2.0 V)."
+    },
+    {
+     "pin": "12",
+     "name": "FB_PG",
+     "type": "analog input",
+     "function": "Power-good comparator input, 1.0 V rising threshold with 30 mV hysteresis. A divider from the output voltage sets the level at which PWRGD is released."
+    },
+    {
+     "pin": "13",
+     "name": "FLB",
+     "type": "analog input",
+     "function": "Foldback input. A divider from the output lowers the current limit as the output falls, keeping the FET's dissipation inside its safe operating area. Clamped internally to 200 mV minimum so the limit never reaches zero."
+    },
+    {
+     "pin": "14",
+     "name": "PWRGD",
+     "type": "open-drain output",
+     "function": "Power-good output, open drain. Released high when FB_PG rises above 1 V; pulled low when FB_PG falls below 1 V less the hysteresis. Valid for VCC ≥ 1.7 V."
+    },
+    {
+     "pin": "15",
+     "name": "GATE",
+     "type": "analog output",
+     "function": "Drives the gate of the external P-channel pass FET. A pull-down current turns the FET on; the loop regulates this pin to hold the load current at the limit. Held off while the supply is below UVLO. Clamped to less than 14 V below VCC/SENSE+."
+    },
+    {
+     "pin": "16",
+     "name": "SENSE−",
+     "type": "analog input",
+     "function": "Low side of the current sense resistor; the same node feeds the pass FET. The sense voltage is VSENSE+ minus this pin. It also supplies part of the gate-drive bias."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Electrical characteristics",
+   "page": 3,
+   "conditions": "VCC/VSENSE+ = 4 V to 60 V, VSENSE = (VSENSE+ − VSENSE−) = 0 V, TA = −40°C to +125°C, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Power supply: operating voltage range",
+     "VCC",
+     "",
+     "4",
+     "",
+     "60",
+     "V"
+    ],
+    [
+     "Power supply: quiescent current",
+     "ICC",
+     "GATE on",
+     "",
+     "360",
+     "500",
+     "µA"
+    ],
+    [
+     "UV pin: input current",
+     "IUV",
+     "UV ≤ 5.5 V, TA = −40°C to +85°C",
+     "",
+     "0.005",
+     "0.2",
+     "µA"
+    ],
+    [
+     "UV pin: input current",
+     "IUV",
+     "UV ≤ 5.5 V, TA = −40°C to +125°C",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ],
+    [
+     "UV threshold",
+     "UVTH",
+     "UV falling",
+     "0.985",
+     "1.0",
+     "1.015",
+     "V"
+    ],
+    [
+     "UV threshold hysteresis",
+     "UVHYST",
+     "",
+     "55",
+     "60",
+     "65",
+     "mV"
+    ],
+    [
+     "UV glitch filter",
+     "UVGF",
+     "50 mV overdrive",
+     "4",
+     "",
+     "7",
+     "µs"
+    ],
+    [
+     "UV propagation delay",
+     "UVPD",
+     "UV low to GATE pull-down circuit active",
+     "",
+     "6",
+     "8",
+     "µs"
+    ],
+    [
+     "OV pin: input current",
+     "IOV",
+     "OV ≤ 5.5 V, TA = −40°C to +85°C",
+     "",
+     "0.005",
+     "0.2",
+     "µA"
+    ],
+    [
+     "OV pin: input current",
+     "IOV",
+     "OV ≤ 5.5 V, TA = −40°C to +125°C",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ],
+    [
+     "OV threshold",
+     "OVTH",
+     "OV rising",
+     "0.985",
+     "1.0",
+     "1.015",
+     "V"
+    ],
+    [
+     "OV threshold hysteresis",
+     "OVHYST",
+     "",
+     "25",
+     "30",
+     "35",
+     "mV"
+    ],
+    [
+     "OV glitch filter",
+     "OVGF",
+     "50 mV overdrive",
+     "0.5",
+     "",
+     "2.0",
+     "µs"
+    ],
+    [
+     "OV propagation delay",
+     "OVPD",
+     "OV high to GATE pull-up circuit active",
+     "",
+     "1.5",
+     "2.5",
+     "µs"
+    ],
+    [
+     "SENSE−: input current",
+     "ISENSE−",
+     "SENSE− = 60 V",
+     "20",
+     "40",
+     "70",
+     "µA"
+    ],
+    [
+     "VCAP pin: internally regulated voltage",
+     "VVCAP",
+     "0 µA ≤ IVCAP ≤ 1 mA, CVCAP = 1 µF",
+     "3.546",
+     "3.6",
+     "3.636",
+     "V"
+    ],
+    [
+     "Undervoltage lockout, rising",
+     "UVLORISE",
+     "VCC rising",
+     "",
+     "",
+     "3.4",
+     "V"
+    ],
+    [
+     "Undervoltage lockout, falling",
+     "UVLOFALL",
+     "VCC falling",
+     "3.0",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Undervoltage lockout, hysteresis",
+     "UVLOHYST",
+     "",
+     "",
+     "230",
+     "",
+     "mV"
+    ],
+    [
+     "ISET pin: input current",
+     "IISET",
+     "VISET ≤ VVCAP, TA = −40°C to +85°C",
+     "",
+     "0.005",
+     "0.2",
+     "µA"
+    ],
+    [
+     "ISET pin: input current",
+     "IISET",
+     "VISET ≤ VVCAP, TA = −40°C to +125°C",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ],
+    [
+     "Reference select threshold",
+     "VISETRSTH",
+     "If VISET > VISETRSTH, an internal reference (VCLREF) is used",
+     "2.55",
+     "2.6",
+     "2.65",
+     "V"
+    ],
+    [
+     "Internal reference",
+     "VCLREF",
+     "Accuracies included in total sense voltage accuracies",
+     "",
+     "2",
+     "",
+     "V"
+    ],
+    [
+     "Gain of current sense amplifier",
+     "AVCSAMP",
+     "Accuracies included in total sense voltage accuracies",
+     "",
+     "40",
+     "",
+     "V/V"
+    ],
+    [
+     "Reverse protection FET gate drive voltage",
+     "VRPFG",
+     "VCC ≤ 10 V",
+     "",
+     "0",
+     "",
+     "V"
+    ],
+    [
+     "Reverse protection FET gate drive voltage offset",
+     "ΔVRPFG",
+     "ΔVRPFG = VCC − VRPFG, 60 V ≥ VCC ≥ 14 V, IRPFG ≤ 5 µA",
+     "10",
+     "12",
+     "14",
+     "V"
+    ],
+    [
+     "RPFG pull-down (on) current",
+     "IRPFGND",
+     "VRPFG = VCC",
+     "7",
+     "9",
+     "12",
+     "µA"
+    ],
+    [
+     "GATE drive voltage",
+     "ΔVGATE",
+     "ΔVGATE = VCC − VGATE, 60 V ≥ VCC ≥ 14 V, IGATE ≤ 5 µA",
+     "10",
+     "12",
+     "14",
+     "V"
+    ],
+    [
+     "GATE pull-down (on) current",
+     "IGATEDN",
+     "VGATE = VCC",
+     "20",
+     "25",
+     "30",
+     "µA"
+    ],
+    [
+     "GATE pull-up (off) current, regulation",
+     "IGATEUP_REG",
+     "ΔVGATE ≥ 2 V, (VSENSE+ − VSENSE−) = 70 mV",
+     "−50",
+     "−65",
+     "−80",
+     "µA"
+    ],
+    [
+     "GATE pull-up (off) current, fault",
+     "IGATEUP_FLT",
+     "ΔVGATE = 2 V",
+     "−7",
+     "−13",
+     "−20",
+     "mA"
+    ],
+    [
+     "Sense voltage current limit (VSENSE+ − VSENSE−)",
+     "VSENSECL",
+     "VISET > 2.65 V, VFLB > 1.1 V, ΔVGATE = 3 V, IGATE = 0 µA",
+     "47",
+     "50",
+     "53",
+     "mV"
+    ],
+    [
+     "Sense voltage, foldback inactive",
+     "",
+     "VISET = 2.5 V, VFLB > 1.35 V, ΔVGATE = 3 V, IGATE = 0 µA",
+     "",
+     "62.5",
+     "",
+     "mV"
+    ],
+    [
+     "Sense voltage, foldback inactive",
+     "",
+     "VISET = 2 V, VFLB > 1.1 V, ΔVGATE = 3 V, IGATE = 0 µA",
+     "47",
+     "50",
+     "53",
+     "mV"
+    ],
+    [
+     "Sense voltage, foldback inactive",
+     "",
+     "VISET = 1 V, VFLB > 0.57 V, ΔVGATE = 3 V, IGATE = 0 µA",
+     "22.5",
+     "25.0",
+     "27.5",
+     "mV"
+    ],
+    [
+     "Sense voltage, foldback inactive",
+     "",
+     "VISET = 0.5 V, VFLB > 0.3 V, ΔVGATE = 3 V, IGATE = 0 µA",
+     "10.0",
+     "12.5",
+     "15.0",
+     "mV"
+    ],
+    [
+     "Sense voltage, foldback active",
+     "",
+     "VFLB = 0 V, ΔVGATE = 3 V, IGATE = 0 µA",
+     "7",
+     "10",
+     "13",
+     "mV"
+    ],
+    [
+     "Sense voltage, foldback active",
+     "",
+     "VISET > 2 V, VFLB = 0.5 V, ΔVGATE = 3 V, IGATE = 0 µA",
+     "22",
+     "25",
+     "28",
+     "mV"
+    ],
+    [
+     "Circuit breaker offset",
+     "VCBOS",
+     "Circuit breaker trip voltage, VCB = VSENSECL − VCBOS",
+     "0.5",
+     "1",
+     "1.5",
+     "mV"
+    ],
+    [
+     "Severe overcurrent voltage threshold",
+     "VSENSEOC",
+     "VISET > 2.65 V",
+     "90",
+     "100",
+     "110",
+     "mV"
+    ],
+    [
+     "Severe overcurrent voltage threshold",
+     "VSENSEOC",
+     "VISET = 0.5 V",
+     "20",
+     "25",
+     "30",
+     "mV"
+    ],
+    [
+     "Severe overcurrent glitch filter duration",
+     "",
+     "",
+     "0.4",
+     "",
+     "1.6",
+     "µs"
+    ],
+    [
+     "Severe overcurrent response time",
+     "",
+     "",
+     "",
+     "2.0",
+     "3.5",
+     "µs"
+    ],
+    [
+     "TIMER pull-up current",
+     "ITIMERUP",
+     "Overcurrent fault, 0.2 V ≤ VTIMER ≤ 2 V",
+     "−18",
+     "−20",
+     "−22",
+     "µA"
+    ],
+    [
+     "TIMER high threshold",
+     "VTIMERH",
+     "",
+     "1.96",
+     "2.0",
+     "2.04",
+     "V"
+    ],
+    [
+     "TIMER low threshold",
+     "VTIMERL",
+     "",
+     "0.075",
+     "0.10",
+     "0.12",
+     "V"
+    ],
+    [
+     "TIMER pull-down current",
+     "ITIMERPD",
+     "Timer pin voltage = 0.2 V",
+     "0.85",
+     "",
+     "1.15",
+     "µA"
+    ],
+    [
+     "TIMER pull-down current",
+     "ITIMERPD",
+     "Timer pin voltage = 0.05 V",
+     "75",
+     "",
+     "105",
+     "µA"
+    ],
+    [
+     "TIMER_OFF power-on reset pull-up current",
+     "IPOR",
+     "Initial power-on reset, VTIMER_OFF = 1 V",
+     "−18",
+     "−20",
+     "−22",
+     "µA"
+    ],
+    [
+     "TIMER_OFF retry pull-up current",
+     "ITMROFF",
+     "After fault when GATE is off, VTIMER_OFF = 1 V",
+     "−0.85",
+     "−1",
+     "−1.15",
+     "µA"
+    ],
+    [
+     "TIMER_OFF high threshold",
+     "VTMROFFH",
+     "",
+     "1.96",
+     "2.0",
+     "2.04",
+     "V"
+    ],
+    [
+     "FLB pin: input current",
+     "IFLB",
+     "VFLB ≤ 5.5 V, TA = −40°C to +85°C",
+     "",
+     "0.005",
+     "0.2",
+     "µA"
+    ],
+    [
+     "FLB pin: input current",
+     "IFLB",
+     "VFLB ≤ 5.5 V, TA = −40°C to +125°C",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ],
+    [
+     "FB_PG pin: input current",
+     "IFBPG",
+     "VFB_PG ≤ 5.5 V, TA = −40°C to +85°C",
+     "",
+     "0.005",
+     "0.2",
+     "µA"
+    ],
+    [
+     "FB_PG pin: input current",
+     "IFBPG",
+     "VFB_PG ≤ 5.5 V, TA = −40°C to +125°C",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ],
+    [
+     "PWRGD rising threshold",
+     "VPGTH",
+     "FB_PG rising",
+     "0.985",
+     "1.0",
+     "1.015",
+     "V"
+    ],
+    [
+     "PWRGD threshold hysteresis",
+     "PGHYST",
+     "",
+     "25",
+     "30",
+     "35",
+     "mV"
+    ],
+    [
+     "Power-good glitch filter",
+     "PGGF",
+     "50 mV overdrive",
+     "0.5",
+     "",
+     "1.5",
+     "µs"
+    ],
+    [
+     "FAULT output low voltage",
+     "VOL_FAULT",
+     "IFAULT = 100 µA",
+     "",
+     "",
+     "0.1",
+     "V"
+    ],
+    [
+     "FAULT output low voltage",
+     "VOL_FAULT",
+     "IFAULT = 1 mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "FAULT leakage current",
+     "IFAULT",
+     "VFAULT = 5.5 V, FAULT output high-Z",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ],
+    [
+     "ENABLE input high voltage",
+     "VIH",
+     "",
+     "1.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "ENABLE input low voltage",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "ENABLE leakage current",
+     "IEN",
+     "VEN = 5.5 V",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ],
+    [
+     "PWRGD output low voltage",
+     "VOL_PWRGD",
+     "IPWRGD = 100 µA",
+     "",
+     "",
+     "0.1",
+     "V"
+    ],
+    [
+     "PWRGD output low voltage",
+     "VOL_PWRGD",
+     "IPWRGD = 1 mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "PWRGD output low voltage",
+     "VOL_PWRGD",
+     "VCC = 1.7 V, ISINK = 100 µA,",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "PWRGD leakage current",
+     "IPWRGD",
+     "VPWRGD = 60 V, PWRGD output high-Z",
+     "",
+     "0.005",
+     "1",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VCC/SENSE+",
+     "−0.3 V to +66 V"
+    ],
+    [
+     "VCAP",
+     "−0.3 V to +6 V"
+    ],
+    [
+     "UV",
+     "−0.3 V to +6 V"
+    ],
+    [
+     "OV",
+     "−0.3 V to +6 V"
+    ],
+    [
+     "ISET",
+     "−0.3 V to VCAP + 0.3 V"
+    ],
+    [
+     "FLB",
+     "−0.3 V to +6 V"
+    ],
+    [
+     "FB_PG",
+     "−0.3 V to +6 V"
+    ],
+    [
+     "TIMER_OFF",
+     "−0.3 V to VCAP + 0.3 V"
+    ],
+    [
+     "TIMER",
+     "−0.3 V to VCAP + 0.3 V"
+    ],
+    [
+     "FAULT",
+     "−0.3 V to +6 V"
+    ],
+    [
+     "ENABLE",
+     "−0.3 V to +6 V"
+    ],
+    [
+     "PWRGD",
+     "−0.3 V to +66 V"
+    ],
+    [
+     "GATE",
+     "−0.3 V to VCC + 0.3 V"
+    ],
+    [
+     "GATE to VCC/SENSE+",
+     "−22 V to +0.3 V"
+    ],
+    [
+     "SENSE−",
+     "−0.3 V to VCC + 0.3 V"
+    ],
+    [
+     "RPFG",
+     "−0.3 V to VCC + 0.3 V"
+    ],
+    [
+     "RPFG to VCC/SENSE+",
+     "−22 V to +0.3 V"
+    ],
+    [
+     "VSENSE (VSENSE+ − VSENSE−)",
+     "±0.3 V"
+    ],
+    [
+     "Continuous current into any pin",
+     "±10 mA"
+    ],
+    [
+     "Storage temperature range",
+     "−65°C to +150°C"
+    ],
+    [
+     "Operating temperature range",
+     "−40°C to +125°C"
+    ],
+    [
+     "Lead temperature, soldering (10 sec)",
+     "300°C"
+    ],
+    [
+     "Junction temperature",
+     "150°C"
+    ]
+   ],
+   "notes": [
+    "These are stress limits; operation at or beyond them is not implied, and long exposure to the maximum operating conditions may reduce reliability."
+   ]
+  },
+  {
+   "title": "Thermal resistance",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "package",
+    "θJA",
+    "θJC",
+    "ΨJB",
+    "unit"
+   ],
+   "rows": [
+    [
+     "16-lead, 3 mm × 3 mm LFCSP",
+     "49.5",
+     "35.2",
+     "29.6",
+     "°C/W"
+    ],
+    [
+     "16-lead QSOP",
+     "106.03",
+     "28.31",
+     "43.22",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "θJA is the worst case: the device soldered to a circuit board."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "VCAP voltage against junction temperature, three loads",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VVCAP",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Load = 100 µA",
+     "points": [
+      [
+       -40,
+       3.5857
+      ],
+      [
+       -5,
+       3.5967
+      ],
+      [
+       25,
+       3.6036
+      ],
+      [
+       85,
+       3.6111
+      ],
+      [
+       125,
+       3.6129
+      ]
+     ]
+    },
+    {
+     "label": "Load = 500 µA",
+     "points": [
+      [
+       -40,
+       3.5857
+      ],
+      [
+       -5,
+       3.5967
+      ],
+      [
+       25,
+       3.6033
+      ],
+      [
+       85,
+       3.6102
+      ],
+      [
+       125,
+       3.6116
+      ]
+     ]
+    },
+    {
+     "label": "Load = 1 mA",
+     "points": [
+      [
+       -40,
+       3.5862
+      ],
+      [
+       -5,
+       3.5963
+      ],
+      [
+       25,
+       3.6028
+      ],
+      [
+       85,
+       3.6099
+      ],
+      [
+       125,
+       3.6108
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VCAP voltage against VCAP load current",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "ILOAD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VVCAP",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VVCAP",
+     "points": [
+      [
+       0.1,
+       3.60397
+      ],
+      [
+       0.618,
+       3.60317
+      ],
+      [
+       1.001,
+       3.60282
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VCAP voltage against input voltage, three loads",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VVCAP",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Load = 100 µA",
+     "points": [
+      [
+       4.05,
+       3.60389
+      ],
+      [
+       5.09,
+       3.60372
+      ],
+      [
+       6.41,
+       3.60372
+      ],
+      [
+       8.49,
+       3.60389
+      ],
+      [
+       9.39,
+       3.60361
+      ],
+      [
+       10.99,
+       3.60361
+      ],
+      [
+       16.19,
+       3.60378
+      ],
+      [
+       18.41,
+       3.60396
+      ],
+      [
+       21.95,
+       3.60396
+      ],
+      [
+       22.99,
+       3.60406
+      ],
+      [
+       26.73,
+       3.60413
+      ],
+      [
+       49.97,
+       3.60424
+      ]
+     ]
+    },
+    {
+     "label": "Load = 500 µA",
+     "points": [
+      [
+       4.05,
+       3.60337
+      ],
+      [
+       5.09,
+       3.60302
+      ],
+      [
+       5.99,
+       3.60337
+      ],
+      [
+       6.41,
+       3.60337
+      ],
+      [
+       9.95,
+       3.60292
+      ],
+      [
+       15.01,
+       3.60285
+      ],
+      [
+       19.17,
+       3.60309
+      ],
+      [
+       22.99,
+       3.60309
+      ],
+      [
+       24.03,
+       3.60319
+      ],
+      [
+       32.07,
+       3.60319
+      ],
+      [
+       49.97,
+       3.60344
+      ]
+     ]
+    },
+    {
+     "label": "Load = 1 mA",
+     "points": [
+      [
+       4.05,
+       3.60274
+      ],
+      [
+       4.19,
+       3.60257
+      ],
+      [
+       4.61,
+       3.6025
+      ],
+      [
+       5.09,
+       3.60274
+      ],
+      [
+       6.41,
+       3.60274
+      ],
+      [
+       8.01,
+       3.60257
+      ],
+      [
+       17.23,
+       3.60257
+      ],
+      [
+       28.19,
+       3.60302
+      ],
+      [
+       36.79,
+       3.60302
+      ],
+      [
+       39.29,
+       3.60292
+      ],
+      [
+       49.97,
+       3.60285
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current against junction temperature, three loads",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Junction temperature TJ",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Load = 100 µA",
+     "points": [
+      [
+       -40,
+       349.4
+      ],
+      [
+       -5,
+       367.7
+      ],
+      [
+       25,
+       380.8
+      ],
+      [
+       85,
+       405.1
+      ],
+      [
+       125,
+       420.8
+      ]
+     ]
+    },
+    {
+     "label": "Load = 500 µA",
+     "points": [
+      [
+       -40,
+       353.8
+      ],
+      [
+       -5,
+       372.1
+      ],
+      [
+       25,
+       386.9
+      ],
+      [
+       85,
+       411.2
+      ],
+      [
+       125,
+       426.9
+      ]
+     ]
+    },
+    {
+     "label": "Load = 1 mA",
+     "points": [
+      [
+       -40,
+       358.1
+      ],
+      [
+       -5,
+       376.4
+      ],
+      [
+       25,
+       391.2
+      ],
+      [
+       85,
+       415.6
+      ],
+      [
+       125,
+       449.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current against VCAP load current",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "ILOAD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICC",
+     "points": [
+      [
+       0.1,
+       381.57
+      ],
+      [
+       0.341,
+       384.71
+      ],
+      [
+       0.5,
+       386.52
+      ],
+      [
+       0.617,
+       387.67
+      ],
+      [
+       1.001,
+       390.77
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current against supply voltage, three loads",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Load = 100 µA",
+     "points": [
+      [
+       4.05,
+       381.4
+      ],
+      [
+       4.75,
+       381.9
+      ],
+      [
+       5.09,
+       381.4
+      ],
+      [
+       6.07,
+       369.4
+      ],
+      [
+       7.11,
+       369.0
+      ],
+      [
+       8.08,
+       370.0
+      ],
+      [
+       9.39,
+       370.0
+      ],
+      [
+       9.95,
+       371.0
+      ],
+      [
+       14.25,
+       385.6
+      ],
+      [
+       15.01,
+       387.1
+      ],
+      [
+       16.12,
+       388.1
+      ],
+      [
+       19.17,
+       386.6
+      ],
+      [
+       22.92,
+       386.6
+      ],
+      [
+       24.1,
+       386.0
+      ],
+      [
+       34.29,
+       386.0
+      ],
+      [
+       36.72,
+       386.6
+      ],
+      [
+       49.97,
+       387.7
+      ]
+     ]
+    },
+    {
+     "label": "Load = 500 µA",
+     "points": [
+      [
+       4.05,
+       386.6
+      ],
+      [
+       4.47,
+       386.0
+      ],
+      [
+       4.96,
+       386.6
+      ],
+      [
+       5.09,
+       386.0
+      ],
+      [
+       5.79,
+       376.7
+      ],
+      [
+       6.07,
+       374.6
+      ],
+      [
+       6.48,
+       373.5
+      ],
+      [
+       8.08,
+       374.6
+      ],
+      [
+       9.39,
+       374.6
+      ],
+      [
+       9.95,
+       375.6
+      ],
+      [
+       14.25,
+       390.8
+      ],
+      [
+       15.01,
+       392.3
+      ],
+      [
+       16.12,
+       393.3
+      ],
+      [
+       17.16,
+       393.3
+      ],
+      [
+       19.17,
+       391.9
+      ],
+      [
+       22.92,
+       391.9
+      ],
+      [
+       24.1,
+       391.2
+      ],
+      [
+       34.29,
+       391.2
+      ],
+      [
+       36.72,
+       391.9
+      ],
+      [
+       49.97,
+       392.9
+      ]
+     ]
+    },
+    {
+     "label": "Load = 1 mA",
+     "points": [
+      [
+       4.05,
+       390.8
+      ],
+      [
+       4.96,
+       390.8
+      ],
+      [
+       5.09,
+       390.2
+      ],
+      [
+       6.07,
+       378.7
+      ],
+      [
+       7.11,
+       378.3
+      ],
+      [
+       8.08,
+       379.4
+      ],
+      [
+       9.39,
+       378.7
+      ],
+      [
+       9.95,
+       379.8
+      ],
+      [
+       13.69,
+       393.3
+      ],
+      [
+       15.57,
+       397.5
+      ],
+      [
+       17.16,
+       397.5
+      ],
+      [
+       19.17,
+       396.4
+      ],
+      [
+       24.1,
+       396.0
+      ],
+      [
+       34.29,
+       396.0
+      ],
+      [
+       49.97,
+       397.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VCAP overcurrent threshold against temperature, three input voltages",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VVCAP OC threshold",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 4.5 V",
+     "points": [
+      [
+       -39.9,
+       10.15
+      ],
+      [
+       22.2,
+       10.88
+      ],
+      [
+       81.8,
+       11.23
+      ],
+      [
+       124.9,
+       11.27
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 6 V",
+     "points": [
+      [
+       -39.9,
+       10.15
+      ],
+      [
+       22.2,
+       10.88
+      ],
+      [
+       81.8,
+       11.23
+      ],
+      [
+       124.9,
+       11.27
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 10 V",
+     "points": [
+      [
+       -39.9,
+       10.15
+      ],
+      [
+       22.2,
+       10.88
+      ],
+      [
+       81.8,
+       11.23
+      ],
+      [
+       124.9,
+       11.27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "GATE voltage against temperature, three input voltages",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VGATE",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 14 V",
+     "points": [
+      [
+       -39.9,
+       11.532
+      ],
+      [
+       38.3,
+       11.765
+      ],
+      [
+       54.4,
+       11.803
+      ],
+      [
+       124.7,
+       12.009
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 25 V",
+     "points": [
+      [
+       -39.9,
+       11.532
+      ],
+      [
+       38.3,
+       11.765
+      ],
+      [
+       54.4,
+       11.803
+      ],
+      [
+       124.7,
+       12.009
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 50 V",
+     "points": [
+      [
+       -39.9,
+       11.539
+      ],
+      [
+       124.7,
+       12.009
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RPFG voltage against temperature, three input voltages",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RPFG voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 14 V",
+     "points": [
+      [
+       -39.8,
+       11.454
+      ],
+      [
+       11.8,
+       11.614
+      ],
+      [
+       124.9,
+       12.014
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 25 V",
+     "points": [
+      [
+       -39.8,
+       11.454
+      ],
+      [
+       8.5,
+       11.6
+      ],
+      [
+       124.9,
+       12.021
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 50 V",
+     "points": [
+      [
+       -39.8,
+       11.454
+      ],
+      [
+       -1.5,
+       11.582
+      ],
+      [
+       19.9,
+       11.642
+      ],
+      [
+       124.9,
+       12.021
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RPFG pull-down current against temperature, three input voltages",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RPFG pull-down current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 14 V",
+     "points": [
+      [
+       -39.9,
+       8.521
+      ],
+      [
+       -1.1,
+       8.649
+      ],
+      [
+       27.8,
+       8.729
+      ],
+      [
+       70.6,
+       8.865
+      ],
+      [
+       96.4,
+       8.951
+      ],
+      [
+       125.0,
+       9.073
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 25 V",
+     "points": [
+      [
+       -39.9,
+       8.528
+      ],
+      [
+       -1.1,
+       8.656
+      ],
+      [
+       27.8,
+       8.736
+      ],
+      [
+       45.9,
+       8.799
+      ],
+      [
+       54.5,
+       8.816
+      ],
+      [
+       70.6,
+       8.871
+      ],
+      [
+       101.4,
+       9.0
+      ],
+      [
+       125.0,
+       9.135
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 50 V",
+     "points": [
+      [
+       -39.9,
+       8.587
+      ],
+      [
+       2.5,
+       8.715
+      ],
+      [
+       31.1,
+       8.812
+      ],
+      [
+       54.5,
+       8.871
+      ],
+      [
+       84.7,
+       8.979
+      ],
+      [
+       96.4,
+       9.042
+      ],
+      [
+       125.0,
+       9.264
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current sense voltage against ISET voltage, three input voltages",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "VISET",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current sense voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       2.5002,
+       0.06394
+      ],
+      [
+       2.5024,
+       0.06407
+      ],
+      [
+       2.508,
+       0.06412
+      ],
+      [
+       2.5102,
+       0.06429
+      ],
+      [
+       2.515,
+       0.06433
+      ],
+      [
+       2.5152,
+       0.06442
+      ],
+      [
+       2.5292,
+       0.06468
+      ],
+      [
+       2.5371,
+       0.06499
+      ],
+      [
+       2.5429,
+       0.06503
+      ],
+      [
+       2.5521,
+       0.06542
+      ],
+      [
+       2.5781,
+       0.06595
+      ],
+      [
+       2.5821,
+       0.06616
+      ],
+      [
+       2.5829,
+       0.05032
+      ],
+      [
+       2.584,
+       0.0504
+      ],
+      [
+       2.5843,
+       0.05032
+      ],
+      [
+       2.5854,
+       0.0504
+      ],
+      [
+       2.5902,
+       0.05032
+      ],
+      [
+       2.5918,
+       0.0504
+      ],
+      [
+       2.5983,
+       0.05032
+      ],
+      [
+       2.5994,
+       0.0504
+      ],
+      [
+       2.6072,
+       0.05032
+      ],
+      [
+       2.6075,
+       0.0504
+      ],
+      [
+       2.6131,
+       0.05032
+      ],
+      [
+       2.6134,
+       0.0504
+      ],
+      [
+       2.6204,
+       0.0504
+      ],
+      [
+       2.622,
+       0.05032
+      ],
+      [
+       2.6223,
+       0.0504
+      ],
+      [
+       2.6243,
+       0.05032
+      ],
+      [
+       2.6251,
+       0.0504
+      ],
+      [
+       2.6338,
+       0.0504
+      ],
+      [
+       2.6352,
+       0.05032
+      ],
+      [
+       2.636,
+       0.0504
+      ],
+      [
+       2.6441,
+       0.0504
+      ],
+      [
+       2.6455,
+       0.05032
+      ],
+      [
+       2.6461,
+       0.0504
+      ],
+      [
+       2.6531,
+       0.0504
+      ],
+      [
+       2.6545,
+       0.05032
+      ],
+      [
+       2.655,
+       0.0504
+      ],
+      [
+       2.6718,
+       0.0504
+      ],
+      [
+       2.6732,
+       0.05032
+      ],
+      [
+       2.6737,
+       0.0504
+      ],
+      [
+       2.6788,
+       0.0504
+      ],
+      [
+       2.6802,
+       0.05032
+      ],
+      [
+       2.681,
+       0.0504
+      ],
+      [
+       2.6989,
+       0.0504
+      ],
+      [
+       2.7,
+       0.05032
+      ]
+     ]
+    },
+    {
+     "label": "25 V",
+     "points": [
+      [
+       2.5002,
+       0.06399
+      ],
+      [
+       2.5069,
+       0.06412
+      ],
+      [
+       2.5094,
+       0.06429
+      ],
+      [
+       2.5292,
+       0.06468
+      ],
+      [
+       2.5315,
+       0.06486
+      ],
+      [
+       2.5365,
+       0.06499
+      ],
+      [
+       2.5421,
+       0.06503
+      ],
+      [
+       2.5513,
+       0.06542
+      ],
+      [
+       2.5642,
+       0.0656
+      ],
+      [
+       2.5664,
+       0.06577
+      ],
+      [
+       2.5734,
+       0.06595
+      ],
+      [
+       2.5781,
+       0.06595
+      ],
+      [
+       2.5821,
+       0.06625
+      ],
+      [
+       2.5829,
+       0.05032
+      ],
+      [
+       2.584,
+       0.0504
+      ],
+      [
+       2.6002,
+       0.0504
+      ],
+      [
+       2.6016,
+       0.05032
+      ],
+      [
+       2.6022,
+       0.0504
+      ],
+      [
+       2.631,
+       0.0504
+      ],
+      [
+       2.6324,
+       0.05032
+      ],
+      [
+       2.6329,
+       0.0504
+      ],
+      [
+       2.6396,
+       0.0504
+      ],
+      [
+       2.6402,
+       0.05032
+      ],
+      [
+       2.6416,
+       0.0504
+      ],
+      [
+       2.6472,
+       0.05032
+      ],
+      [
+       2.648,
+       0.0504
+      ],
+      [
+       2.6589,
+       0.0504
+      ],
+      [
+       2.6603,
+       0.05032
+      ],
+      [
+       2.662,
+       0.0504
+      ],
+      [
+       2.6634,
+       0.05032
+      ],
+      [
+       2.664,
+       0.0504
+      ],
+      [
+       2.6662,
+       0.05032
+      ],
+      [
+       2.667,
+       0.0504
+      ],
+      [
+       2.6989,
+       0.0504
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       2.5002,
+       0.06399
+      ],
+      [
+       2.5069,
+       0.06412
+      ],
+      [
+       2.5141,
+       0.06442
+      ],
+      [
+       2.5222,
+       0.06455
+      ],
+      [
+       2.5225,
+       0.06464
+      ],
+      [
+       2.5281,
+       0.06468
+      ],
+      [
+       2.5303,
+       0.06486
+      ],
+      [
+       2.5421,
+       0.06503
+      ],
+      [
+       2.5443,
+       0.06521
+      ],
+      [
+       2.5499,
+       0.06525
+      ],
+      [
+       2.5521,
+       0.06542
+      ],
+      [
+       2.5569,
+       0.06547
+      ],
+      [
+       2.5572,
+       0.06555
+      ],
+      [
+       2.563,
+       0.0656
+      ],
+      [
+       2.5656,
+       0.06577
+      ],
+      [
+       2.5675,
+       0.06568
+      ],
+      [
+       2.5714,
+       0.0659
+      ],
+      [
+       2.579,
+       0.06603
+      ],
+      [
+       2.5821,
+       0.06625
+      ],
+      [
+       2.5829,
+       0.05032
+      ],
+      [
+       2.584,
+       0.05041
+      ],
+      [
+       2.6989,
+       0.05041
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reference select threshold voltage against temperature",
+   "page": 10,
+   "conditions": "VIN = 4 V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Reference select threshold voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VISETRSTH",
+     "points": [
+      [
+       -39.8,
+       2.567
+      ],
+      [
+       -5.1,
+       2.5738
+      ],
+      [
+       24.9,
+       2.5829
+      ],
+      [
+       125.2,
+       2.585
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reference select threshold voltage against ISET voltage, five temperatures",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "VISET",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Reference select threshold voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       2.4999,
+       0.06334
+      ],
+      [
+       2.5171,
+       0.06373
+      ],
+      [
+       2.5174,
+       0.06382
+      ],
+      [
+       2.521,
+       0.06382
+      ],
+      [
+       2.5244,
+       0.06403
+      ],
+      [
+       2.5277,
+       0.06403
+      ],
+      [
+       2.5333,
+       0.06425
+      ],
+      [
+       2.5352,
+       0.06416
+      ],
+      [
+       2.5413,
+       0.06447
+      ],
+      [
+       2.556,
+       0.06473
+      ],
+      [
+       2.5583,
+       0.0649
+      ],
+      [
+       2.5622,
+       0.0649
+      ],
+      [
+       2.566,
+       0.06512
+      ],
+      [
+       2.5672,
+       0.04942
+      ],
+      [
+       2.568,
+       0.04951
+      ],
+      [
+       2.5769,
+       0.04942
+      ],
+      [
+       2.5772,
+       0.04951
+      ],
+      [
+       2.5819,
+       0.04951
+      ],
+      [
+       2.593,
+       0.04951
+      ],
+      [
+       2.5941,
+       0.04942
+      ],
+      [
+       2.5949,
+       0.04951
+      ],
+      [
+       2.6061,
+       0.04942
+      ],
+      [
+       2.6063,
+       0.04951
+      ],
+      [
+       2.615,
+       0.04951
+      ],
+      [
+       2.6163,
+       0.04942
+      ],
+      [
+       2.6172,
+       0.04951
+      ],
+      [
+       2.6213,
+       0.04942
+      ],
+      [
+       2.6222,
+       0.04951
+      ],
+      [
+       2.6261,
+       0.04942
+      ],
+      [
+       2.6319,
+       0.04951
+      ],
+      [
+       2.6333,
+       0.04942
+      ],
+      [
+       2.6338,
+       0.04951
+      ],
+      [
+       2.6561,
+       0.04951
+      ],
+      [
+       2.6564,
+       0.04942
+      ],
+      [
+       2.6583,
+       0.04951
+      ],
+      [
+       2.6594,
+       0.04942
+      ],
+      [
+       2.66,
+       0.04951
+      ],
+      [
+       2.6711,
+       0.04951
+      ],
+      [
+       2.6725,
+       0.04942
+      ],
+      [
+       2.673,
+       0.04951
+      ],
+      [
+       2.6828,
+       0.04951
+      ],
+      [
+       2.6841,
+       0.04942
+      ],
+      [
+       2.685,
+       0.04951
+      ],
+      [
+       2.695,
+       0.04951
+      ],
+      [
+       2.6964,
+       0.04942
+      ],
+      [
+       2.6989,
+       0.04951
+      ],
+      [
+       2.7,
+       0.04942
+      ]
+     ]
+    },
+    {
+     "label": "-5 °C",
+     "points": [
+      [
+       2.4999,
+       0.06382
+      ],
+      [
+       2.523,
+       0.06438
+      ],
+      [
+       2.5252,
+       0.06455
+      ],
+      [
+       2.5438,
+       0.06494
+      ],
+      [
+       2.5472,
+       0.06512
+      ],
+      [
+       2.553,
+       0.06516
+      ],
+      [
+       2.5552,
+       0.06533
+      ],
+      [
+       2.561,
+       0.06538
+      ],
+      [
+       2.5633,
+       0.06555
+      ],
+      [
+       2.5722,
+       0.06568
+      ],
+      [
+       2.573,
+       0.06581
+      ],
+      [
+       2.5741,
+       0.04998
+      ],
+      [
+       2.5755,
+       0.05011
+      ],
+      [
+       2.5908,
+       0.05007
+      ],
+      [
+       2.5919,
+       0.05016
+      ],
+      [
+       2.593,
+       0.05007
+      ],
+      [
+       2.5972,
+       0.05016
+      ],
+      [
+       2.598,
+       0.05007
+      ],
+      [
+       2.6519,
+       0.05007
+      ],
+      [
+       2.6533,
+       0.05016
+      ],
+      [
+       2.6541,
+       0.05007
+      ],
+      [
+       2.6583,
+       0.05016
+      ],
+      [
+       2.6591,
+       0.05007
+      ],
+      [
+       2.665,
+       0.05007
+      ],
+      [
+       2.6664,
+       0.05016
+      ],
+      [
+       2.6703,
+       0.05007
+      ],
+      [
+       2.6705,
+       0.05016
+      ],
+      [
+       2.673,
+       0.05007
+      ],
+      [
+       2.6853,
+       0.05016
+      ],
+      [
+       2.6869,
+       0.05007
+      ],
+      [
+       2.6961,
+       0.05016
+      ],
+      [
+       2.6989,
+       0.05007
+      ],
+      [
+       2.7,
+       0.05016
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       2.4999,
+       0.06399
+      ],
+      [
+       2.5102,
+       0.06434
+      ],
+      [
+       2.5124,
+       0.06425
+      ],
+      [
+       2.5163,
+       0.06447
+      ],
+      [
+       2.5202,
+       0.06447
+      ],
+      [
+       2.5244,
+       0.06468
+      ],
+      [
+       2.5327,
+       0.06481
+      ],
+      [
+       2.5352,
+       0.06499
+      ],
+      [
+       2.5408,
+       0.06503
+      ],
+      [
+       2.5433,
+       0.0652
+      ],
+      [
+       2.5488,
+       0.06525
+      ],
+      [
+       2.5563,
+       0.06555
+      ],
+      [
+       2.571,
+       0.06581
+      ],
+      [
+       2.5755,
+       0.06603
+      ],
+      [
+       2.5788,
+       0.06603
+      ],
+      [
+       2.5819,
+       0.06624
+      ],
+      [
+       2.5827,
+       0.05037
+      ],
+      [
+       2.66,
+       0.05042
+      ],
+      [
+       2.6602,
+       0.0505
+      ],
+      [
+       2.6622,
+       0.05042
+      ],
+      [
+       2.6989,
+       0.05042
+      ]
+     ]
+    },
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       2.4999,
+       0.06425
+      ],
+      [
+       2.5032,
+       0.06442
+      ],
+      [
+       2.5091,
+       0.06447
+      ],
+      [
+       2.5113,
+       0.06464
+      ],
+      [
+       2.523,
+       0.06481
+      ],
+      [
+       2.5383,
+       0.06533
+      ],
+      [
+       2.5419,
+       0.06533
+      ],
+      [
+       2.5421,
+       0.06542
+      ],
+      [
+       2.5519,
+       0.06559
+      ],
+      [
+       2.5633,
+       0.06598
+      ],
+      [
+       2.568,
+       0.06603
+      ],
+      [
+       2.5713,
+       0.0662
+      ],
+      [
+       2.5819,
+       0.06637
+      ],
+      [
+       2.5827,
+       0.06655
+      ],
+      [
+       2.5838,
+       0.05063
+      ],
+      [
+       2.5849,
+       0.05072
+      ],
+      [
+       2.6419,
+       0.05072
+      ],
+      [
+       2.6422,
+       0.05063
+      ],
+      [
+       2.6439,
+       0.05072
+      ],
+      [
+       2.6452,
+       0.05063
+      ],
+      [
+       2.6469,
+       0.05072
+      ],
+      [
+       2.6989,
+       0.05072
+      ]
+     ]
+    },
+    {
+     "label": "+125 °C",
+     "points": [
+      [
+       2.501,
+       0.06425
+      ],
+      [
+       2.513,
+       0.06455
+      ],
+      [
+       2.5132,
+       0.06464
+      ],
+      [
+       2.5191,
+       0.06468
+      ],
+      [
+       2.526,
+       0.06499
+      ],
+      [
+       2.5319,
+       0.06503
+      ],
+      [
+       2.5341,
+       0.0652
+      ],
+      [
+       2.5399,
+       0.06525
+      ],
+      [
+       2.5421,
+       0.06542
+      ],
+      [
+       2.548,
+       0.06546
+      ],
+      [
+       2.5502,
+       0.06564
+      ],
+      [
+       2.556,
+       0.06568
+      ],
+      [
+       2.5583,
+       0.06585
+      ],
+      [
+       2.5691,
+       0.06603
+      ],
+      [
+       2.5713,
+       0.0662
+      ],
+      [
+       2.5769,
+       0.06624
+      ],
+      [
+       2.5838,
+       0.06655
+      ],
+      [
+       2.5849,
+       0.05063
+      ],
+      [
+       2.5858,
+       0.05072
+      ],
+      [
+       2.6989,
+       0.05072
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "TIMER current against temperature, five input voltages",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "TIMER current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.1,
+       -21.013
+      ],
+      [
+       -0.9,
+       -20.706
+      ],
+      [
+       15.4,
+       -20.552
+      ],
+      [
+       28.0,
+       -20.469
+      ],
+      [
+       70.6,
+       -20.252
+      ],
+      [
+       85.2,
+       -20.21
+      ],
+      [
+       96.7,
+       -20.203
+      ],
+      [
+       125.1,
+       -20.273
+      ]
+     ]
+    },
+    {
+     "label": "6 V",
+     "points": [
+      [
+       -40.1,
+       -21.027
+      ],
+      [
+       -0.9,
+       -20.706
+      ],
+      [
+       15.4,
+       -20.552
+      ],
+      [
+       28.0,
+       -20.469
+      ],
+      [
+       70.6,
+       -20.252
+      ],
+      [
+       85.2,
+       -20.21
+      ],
+      [
+       96.7,
+       -20.203
+      ],
+      [
+       125.1,
+       -20.273
+      ]
+     ]
+    },
+    {
+     "label": "10 V",
+     "points": [
+      [
+       -40.1,
+       -21.027
+      ],
+      [
+       -0.9,
+       -20.706
+      ],
+      [
+       15.4,
+       -20.552
+      ],
+      [
+       28.0,
+       -20.469
+      ],
+      [
+       70.6,
+       -20.252
+      ],
+      [
+       85.2,
+       -20.21
+      ],
+      [
+       96.7,
+       -20.203
+      ],
+      [
+       125.1,
+       -20.273
+      ]
+     ]
+    },
+    {
+     "label": "20 V",
+     "points": [
+      [
+       -40.1,
+       -21.006
+      ],
+      [
+       22.2,
+       -20.489
+      ],
+      [
+       70.6,
+       -20.252
+      ],
+      [
+       85.2,
+       -20.21
+      ],
+      [
+       96.7,
+       -20.203
+      ],
+      [
+       125.1,
+       -20.287
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.1,
+       -21.013
+      ],
+      [
+       22.2,
+       -20.489
+      ],
+      [
+       70.6,
+       -20.252
+      ],
+      [
+       85.2,
+       -20.21
+      ],
+      [
+       96.7,
+       -20.21
+      ],
+      [
+       125.1,
+       -20.329
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "TIMER_OFF retry current against temperature, five input voltages",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "TIMER_OFF current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.2,
+       -1.07
+      ],
+      [
+       19.6,
+       -1.046
+      ],
+      [
+       38.3,
+       -1.042
+      ],
+      [
+       96.3,
+       -1.042
+      ],
+      [
+       125.1,
+       -1.051
+      ]
+     ]
+    },
+    {
+     "label": "6 V",
+     "points": [
+      [
+       -40.2,
+       -1.072
+      ],
+      [
+       -5.2,
+       -1.06
+      ],
+      [
+       19.6,
+       -1.046
+      ],
+      [
+       38.3,
+       -1.042
+      ],
+      [
+       96.3,
+       -1.042
+      ],
+      [
+       125.1,
+       -1.051
+      ]
+     ]
+    },
+    {
+     "label": "10 V",
+     "points": [
+      [
+       -40.2,
+       -1.072
+      ],
+      [
+       19.6,
+       -1.046
+      ],
+      [
+       38.3,
+       -1.042
+      ],
+      [
+       90.6,
+       -1.042
+      ],
+      [
+       125.1,
+       -1.056
+      ]
+     ]
+    },
+    {
+     "label": "20 V",
+     "points": [
+      [
+       -40.2,
+       -1.07
+      ],
+      [
+       19.6,
+       -1.046
+      ],
+      [
+       70.6,
+       -1.041
+      ],
+      [
+       84.8,
+       -1.042
+      ],
+      [
+       125.1,
+       -1.067
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.2,
+       -1.07
+      ],
+      [
+       2.1,
+       -1.055
+      ],
+      [
+       19.6,
+       -1.042
+      ],
+      [
+       81.6,
+       -1.042
+      ],
+      [
+       96.3,
+       -1.056
+      ],
+      [
+       125.1,
+       -1.105
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power-on reset TIMER_OFF current against input voltage, five temperatures",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "POR TIMER_OFF current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       3.98,
+       -20.921
+      ],
+      [
+       49.98,
+       -20.907
+      ]
+     ]
+    },
+    {
+     "label": "-5 °C",
+     "points": [
+      [
+       3.98,
+       -20.664
+      ],
+      [
+       4.51,
+       -20.65
+      ],
+      [
+       10.02,
+       -20.664
+      ],
+      [
+       49.98,
+       -20.65
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       3.98,
+       -20.414
+      ],
+      [
+       49.98,
+       -20.407
+      ]
+     ]
+    },
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       3.98,
+       -20.171
+      ],
+      [
+       6.88,
+       -20.157
+      ],
+      [
+       15.52,
+       -20.171
+      ],
+      [
+       17.2,
+       -20.157
+      ],
+      [
+       49.98,
+       -20.157
+      ]
+     ]
+    },
+    {
+     "label": "+125 °C",
+     "points": [
+      [
+       3.98,
+       -20.268
+      ],
+      [
+       49.98,
+       -20.296
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power-on reset TIMER_OFF current against temperature, five input voltages",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "POR TIMER_OFF current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.0,
+       -20.924
+      ],
+      [
+       -5.0,
+       -20.66
+      ],
+      [
+       22.5,
+       -20.424
+      ],
+      [
+       70.8,
+       -20.201
+      ],
+      [
+       78.3,
+       -20.181
+      ],
+      [
+       96.5,
+       -20.174
+      ],
+      [
+       125.0,
+       -20.264
+      ]
+     ]
+    },
+    {
+     "label": "6 V",
+     "points": [
+      [
+       -40.0,
+       -20.937
+      ],
+      [
+       22.5,
+       -20.424
+      ],
+      [
+       70.8,
+       -20.201
+      ],
+      [
+       78.3,
+       -20.181
+      ],
+      [
+       96.5,
+       -20.174
+      ],
+      [
+       125.0,
+       -20.264
+      ]
+     ]
+    },
+    {
+     "label": "10 V",
+     "points": [
+      [
+       -40.0,
+       -20.937
+      ],
+      [
+       22.5,
+       -20.424
+      ],
+      [
+       70.8,
+       -20.201
+      ],
+      [
+       78.3,
+       -20.181
+      ],
+      [
+       96.5,
+       -20.174
+      ],
+      [
+       125.0,
+       -20.264
+      ]
+     ]
+    },
+    {
+     "label": "20 V",
+     "points": [
+      [
+       -40.0,
+       -20.917
+      ],
+      [
+       -5.0,
+       -20.66
+      ],
+      [
+       22.5,
+       -20.424
+      ],
+      [
+       62.8,
+       -20.222
+      ],
+      [
+       85.0,
+       -20.16
+      ],
+      [
+       96.5,
+       -20.16
+      ],
+      [
+       125.0,
+       -20.278
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.0,
+       -20.903
+      ],
+      [
+       -5.0,
+       -20.653
+      ],
+      [
+       8.7,
+       -20.521
+      ],
+      [
+       22.5,
+       -20.417
+      ],
+      [
+       62.8,
+       -20.222
+      ],
+      [
+       82.0,
+       -20.16
+      ],
+      [
+       91.0,
+       -20.16
+      ],
+      [
+       106.3,
+       -20.215
+      ],
+      [
+       125.0,
+       -20.312
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "GATE voltage against OV input voltage",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "OV input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VGATE",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OV input rising",
+     "points": [
+      [
+       0.92,
+       0
+      ],
+      [
+       1.0,
+       0
+      ],
+      [
+       1.0022,
+       6.004
+      ],
+      [
+       1.05,
+       6.004
+      ]
+     ]
+    },
+    {
+     "label": "OV input falling",
+     "points": [
+      [
+       0.92,
+       0
+      ],
+      [
+       0.9722,
+       0
+      ],
+      [
+       0.9742,
+       6.004
+      ],
+      [
+       1.0481,
+       6.004
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "UV threshold voltage and hysteresis against temperature",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "UV threshold voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "UV rising",
+     "points": [
+      [
+       -39.8,
+       1.0442
+      ],
+      [
+       31.1,
+       1.0486
+      ],
+      [
+       78.0,
+       1.0497
+      ],
+      [
+       128.0,
+       1.052
+      ]
+     ]
+    },
+    {
+     "label": "UV falling",
+     "points": [
+      [
+       -39.8,
+       0.9897
+      ],
+      [
+       -22.2,
+       0.9924
+      ],
+      [
+       -5.2,
+       0.9939
+      ],
+      [
+       27.8,
+       0.9939
+      ],
+      [
+       97.3,
+       0.9984
+      ],
+      [
+       128.0,
+       0.9979
+      ]
+     ]
+    },
+    {
+     "label": "Hysteresis",
+     "points": [
+      [
+       -39.8,
+       0.05392
+      ],
+      [
+       -9.1,
+       0.05183
+      ],
+      [
+       1.8,
+       0.05225
+      ],
+      [
+       15.5,
+       0.05361
+      ],
+      [
+       25.0,
+       0.05392
+      ],
+      [
+       85.0,
+       0.05183
+      ],
+      [
+       97.3,
+       0.05204
+      ],
+      [
+       128.0,
+       0.05392
+      ]
+     ],
+     "axis": "y2"
+    }
+   ],
+   "y2": {
+    "label": "Hysteresis",
+    "unit": "V",
+    "scale": "linear"
+   }
+  },
+  {
+   "title": "OV threshold voltage and hysteresis against temperature",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OV threshold voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OV rising",
+     "points": [
+      [
+       -39.9,
+       0.9858
+      ],
+      [
+       30.9,
+       0.9903
+      ],
+      [
+       78.3,
+       0.9918
+      ],
+      [
+       128.0,
+       0.9918
+      ]
+     ]
+    },
+    {
+     "label": "OV falling",
+     "points": [
+      [
+       -39.9,
+       0.9601
+      ],
+      [
+       -5.1,
+       0.9622
+      ],
+      [
+       15.3,
+       0.9617
+      ],
+      [
+       27.9,
+       0.9622
+      ],
+      [
+       62.4,
+       0.9651
+      ],
+      [
+       97.3,
+       0.9667
+      ],
+      [
+       128.0,
+       0.9662
+      ]
+     ]
+    },
+    {
+     "label": "Hysteresis",
+     "points": [
+      [
+       -39.9,
+       0.02596
+      ],
+      [
+       -22.4,
+       0.0258
+      ],
+      [
+       -5.1,
+       0.02596
+      ],
+      [
+       -1.4,
+       0.02612
+      ],
+      [
+       15.3,
+       0.02774
+      ],
+      [
+       27.9,
+       0.02795
+      ],
+      [
+       38.5,
+       0.02774
+      ],
+      [
+       78.3,
+       0.02612
+      ],
+      [
+       85.0,
+       0.02596
+      ],
+      [
+       97.3,
+       0.0258
+      ],
+      [
+       128.0,
+       0.02596
+      ]
+     ],
+     "axis": "y2"
+    }
+   ],
+   "y2": {
+    "label": "Hysteresis",
+    "unit": "V",
+    "scale": "linear"
+   }
+  },
+  {
+   "title": "Power-good rising threshold against temperature, three input voltages",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Power-good rising threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.1,
+       0.98702
+      ],
+      [
+       -5.0,
+       0.98999
+      ],
+      [
+       24.9,
+       0.99396
+      ],
+      [
+       84.8,
+       0.99501
+      ],
+      [
+       125.0,
+       0.99501
+      ]
+     ]
+    },
+    {
+     "label": "25 V",
+     "points": [
+      [
+       -40.1,
+       0.988
+      ],
+      [
+       -5.0,
+       0.98999
+      ],
+      [
+       24.9,
+       0.99396
+      ],
+      [
+       84.8,
+       0.99501
+      ],
+      [
+       125.0,
+       0.99501
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.1,
+       0.988
+      ],
+      [
+       -5.0,
+       0.98999
+      ],
+      [
+       24.9,
+       0.99396
+      ],
+      [
+       84.8,
+       0.99501
+      ],
+      [
+       125.0,
+       0.99396
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power-good falling threshold against temperature, three input voltages",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Power-good falling threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.0,
+       0.959
+      ],
+      [
+       -5.0,
+       0.96103
+      ],
+      [
+       25.2,
+       0.96599
+      ],
+      [
+       125.0,
+       0.96599
+      ]
+     ]
+    },
+    {
+     "label": "25 V",
+     "points": [
+      [
+       -40.0,
+       0.959
+      ],
+      [
+       -5.0,
+       0.96103
+      ],
+      [
+       25.2,
+       0.96498
+      ],
+      [
+       85.0,
+       0.96599
+      ],
+      [
+       125.0,
+       0.96599
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.0,
+       0.959
+      ],
+      [
+       -5.0,
+       0.96103
+      ],
+      [
+       25.2,
+       0.96498
+      ],
+      [
+       85.0,
+       0.96599
+      ],
+      [
+       125.0,
+       0.96599
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Severe overcurrent threshold against temperature, three input voltages",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Severe OC threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.2,
+       0.102137
+      ],
+      [
+       -5.0,
+       0.104179
+      ],
+      [
+       25.2,
+       0.104179
+      ],
+      [
+       84.9,
+       0.105214
+      ],
+      [
+       124.9,
+       0.106235
+      ]
+     ]
+    },
+    {
+     "label": "25 V",
+     "points": [
+      [
+       -40.2,
+       0.102137
+      ],
+      [
+       -5.0,
+       0.104179
+      ],
+      [
+       25.2,
+       0.104179
+      ],
+      [
+       84.9,
+       0.105214
+      ],
+      [
+       124.9,
+       0.106235
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.2,
+       0.102137
+      ],
+      [
+       -5.0,
+       0.104179
+      ],
+      [
+       25.2,
+       0.104179
+      ],
+      [
+       84.9,
+       0.105214
+      ],
+      [
+       124.9,
+       0.106235
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sense voltage against FLB voltage, five temperatures",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "FLB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSENSE",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       0.1,
+       0.00997
+      ],
+      [
+       0.174,
+       0.00997
+      ],
+      [
+       0.198,
+       0.01022
+      ],
+      [
+       0.209,
+       0.01071
+      ],
+      [
+       0.674,
+       0.03381
+      ],
+      [
+       1.239,
+       0.06314
+      ],
+      [
+       1.344,
+       0.06327
+      ]
+     ]
+    },
+    {
+     "label": "-5 °C",
+     "points": [
+      [
+       0.1,
+       0.01009
+      ],
+      [
+       0.187,
+       0.01022
+      ],
+      [
+       0.225,
+       0.01156
+      ],
+      [
+       0.772,
+       0.03919
+      ],
+      [
+       1.239,
+       0.06363
+      ],
+      [
+       1.344,
+       0.06375
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       0.1,
+       0.01022
+      ],
+      [
+       0.187,
+       0.01022
+      ],
+      [
+       0.225,
+       0.01156
+      ],
+      [
+       0.674,
+       0.03417
+      ],
+      [
+       1.239,
+       0.06375
+      ],
+      [
+       1.344,
+       0.06388
+      ]
+     ]
+    },
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       0.1,
+       0.01022
+      ],
+      [
+       0.192,
+       0.01022
+      ],
+      [
+       0.205,
+       0.01071
+      ],
+      [
+       0.674,
+       0.0343
+      ],
+      [
+       1.233,
+       0.06363
+      ],
+      [
+       1.246,
+       0.06412
+      ],
+      [
+       1.344,
+       0.06412
+      ]
+     ]
+    },
+    {
+     "label": "+125 °C",
+     "points": [
+      [
+       0.1,
+       0.01046
+      ],
+      [
+       0.111,
+       0.01022
+      ],
+      [
+       0.136,
+       0.01046
+      ],
+      [
+       0.187,
+       0.01022
+      ],
+      [
+       0.225,
+       0.01168
+      ],
+      [
+       0.674,
+       0.0343
+      ],
+      [
+       1.233,
+       0.06363
+      ],
+      [
+       1.246,
+       0.06412
+      ],
+      [
+       1.344,
+       0.06412
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "The legend gives the last three temperatures as −25 °C, −85 °C and −125 °C; they should read +25 °C, +85 °C and +125 °C."
+   ]
+  },
+  {
+   "title": "Sense voltage against ISET voltage, five temperatures",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "VISET",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSENSE",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       0.202,
+       0.00985
+      ],
+      [
+       0.391,
+       0.00985
+      ],
+      [
+       0.455,
+       0.01131
+      ],
+      [
+       2.102,
+       0.05292
+      ],
+      [
+       2.5,
+       0.0635
+      ],
+      [
+       2.519,
+       0.06472
+      ],
+      [
+       2.539,
+       0.06496
+      ],
+      [
+       2.553,
+       0.06435
+      ],
+      [
+       2.602,
+       0.04951
+      ],
+      [
+       2.612,
+       0.04927
+      ],
+      [
+       2.646,
+       0.04951
+      ],
+      [
+       3.0,
+       0.04951
+      ]
+     ]
+    },
+    {
+     "label": "-5 °C",
+     "points": [
+      [
+       0.202,
+       0.01021
+      ],
+      [
+       0.372,
+       0.01021
+      ],
+      [
+       0.426,
+       0.01082
+      ],
+      [
+       1.878,
+       0.04756
+      ],
+      [
+       2.403,
+       0.06131
+      ],
+      [
+       2.5,
+       0.06399
+      ],
+      [
+       2.519,
+       0.0652
+      ],
+      [
+       2.544,
+       0.06545
+      ],
+      [
+       2.553,
+       0.06484
+      ],
+      [
+       2.607,
+       0.04999
+      ],
+      [
+       2.646,
+       0.05024
+      ],
+      [
+       3.0,
+       0.05024
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       0.202,
+       0.01021
+      ],
+      [
+       0.372,
+       0.01021
+      ],
+      [
+       0.425,
+       0.01082
+      ],
+      [
+       2.077,
+       0.05291
+      ],
+      [
+       2.403,
+       0.06143
+      ],
+      [
+       2.539,
+       0.06569
+      ],
+      [
+       2.553,
+       0.06496
+      ],
+      [
+       2.578,
+       0.05571
+      ],
+      [
+       2.612,
+       0.04999
+      ],
+      [
+       2.646,
+       0.05036
+      ],
+      [
+       3.0,
+       0.05036
+      ]
+     ]
+    },
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       0.202,
+       0.01021
+      ],
+      [
+       0.401,
+       0.01033
+      ],
+      [
+       2.204,
+       0.05632
+      ],
+      [
+       2.505,
+       0.06447
+      ],
+      [
+       2.539,
+       0.06581
+      ],
+      [
+       2.553,
+       0.0652
+      ],
+      [
+       2.607,
+       0.05048
+      ],
+      [
+       2.646,
+       0.05072
+      ],
+      [
+       3.0,
+       0.05072
+      ]
+     ]
+    },
+    {
+     "label": "+125 °C",
+     "points": [
+      [
+       0.202,
+       0.01033
+      ],
+      [
+       0.372,
+       0.01033
+      ],
+      [
+       0.455,
+       0.01167
+      ],
+      [
+       2.204,
+       0.05632
+      ],
+      [
+       2.505,
+       0.06447
+      ],
+      [
+       2.539,
+       0.06581
+      ],
+      [
+       2.553,
+       0.0652
+      ],
+      [
+       2.607,
+       0.05048
+      ],
+      [
+       2.646,
+       0.05072
+      ],
+      [
+       3.0,
+       0.05072
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OC input current against temperature, six sense voltages",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OC input current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSENSE = 10 mV",
+     "points": [
+      [
+       -39.9,
+       27.69
+      ],
+      [
+       38.4,
+       35.52
+      ],
+      [
+       125.0,
+       45.25
+      ]
+     ]
+    },
+    {
+     "label": "VSENSE = 20 mV",
+     "points": [
+      [
+       -39.9,
+       26.56
+      ],
+      [
+       20.1,
+       32.39
+      ],
+      [
+       125.0,
+       44.03
+      ]
+     ]
+    },
+    {
+     "label": "VSENSE = 30 mV",
+     "points": [
+      [
+       -39.9,
+       25.43
+      ],
+      [
+       38.4,
+       33.17
+      ],
+      [
+       125.0,
+       42.9
+      ]
+     ]
+    },
+    {
+     "label": "VSENSE = 40 mV",
+     "points": [
+      [
+       -39.9,
+       24.22
+      ],
+      [
+       20.1,
+       29.95
+      ],
+      [
+       125.0,
+       41.86
+      ]
+     ]
+    },
+    {
+     "label": "VSENSE = 50 mV",
+     "points": [
+      [
+       -39.9,
+       23.09
+      ],
+      [
+       -13.3,
+       25.87
+      ],
+      [
+       20.1,
+       28.91
+      ],
+      [
+       125.0,
+       40.64
+      ]
+     ]
+    },
+    {
+     "label": "VSENSE = 60 mV",
+     "points": [
+      [
+       -39.9,
+       22.05
+      ],
+      [
+       2.3,
+       26.22
+      ],
+      [
+       20.1,
+       27.69
+      ],
+      [
+       125.0,
+       39.51
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OC input current against sense voltage, five temperatures",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "VSENSE",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OC input current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       0.198,
+       27.76
+      ],
+      [
+       0.427,
+       27.67
+      ],
+      [
+       0.602,
+       27.24
+      ],
+      [
+       1.2,
+       25.33
+      ],
+      [
+       1.326,
+       25.15
+      ],
+      [
+       1.423,
+       24.63
+      ],
+      [
+       1.749,
+       23.68
+      ],
+      [
+       1.875,
+       23.5
+      ],
+      [
+       1.977,
+       22.98
+      ],
+      [
+       2.074,
+       22.9
+      ],
+      [
+       2.454,
+       21.77
+      ],
+      [
+       2.541,
+       21.25
+      ],
+      [
+       2.609,
+       23.24
+      ],
+      [
+       3.003,
+       23.16
+      ]
+     ]
+    },
+    {
+     "label": "-5 °C",
+     "points": [
+      [
+       0.198,
+       31.14
+      ],
+      [
+       0.349,
+       31.32
+      ],
+      [
+       0.602,
+       30.71
+      ],
+      [
+       0.874,
+       29.75
+      ],
+      [
+       0.976,
+       29.67
+      ],
+      [
+       1.073,
+       29.15
+      ],
+      [
+       1.326,
+       28.63
+      ],
+      [
+       1.622,
+       27.58
+      ],
+      [
+       2.147,
+       26.2
+      ],
+      [
+       2.454,
+       25.24
+      ],
+      [
+       2.526,
+       24.72
+      ],
+      [
+       2.551,
+       24.89
+      ],
+      [
+       2.609,
+       26.72
+      ],
+      [
+       3.003,
+       26.63
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       0.199,
+       34.18
+      ],
+      [
+       0.427,
+       34.1
+      ],
+      [
+       1.695,
+       30.19
+      ],
+      [
+       2.074,
+       29.32
+      ],
+      [
+       2.541,
+       27.67
+      ],
+      [
+       2.609,
+       29.49
+      ],
+      [
+       3.003,
+       29.41
+      ]
+     ]
+    },
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       0.199,
+       40.69
+      ],
+      [
+       0.398,
+       40.69
+      ],
+      [
+       0.777,
+       39.65
+      ],
+      [
+       1.875,
+       36.27
+      ],
+      [
+       1.977,
+       36.18
+      ],
+      [
+       2.074,
+       35.66
+      ],
+      [
+       2.177,
+       35.57
+      ],
+      [
+       2.497,
+       34.53
+      ],
+      [
+       2.541,
+       34.18
+      ],
+      [
+       2.609,
+       36.18
+      ],
+      [
+       2.638,
+       36.01
+      ],
+      [
+       3.003,
+       36.01
+      ]
+     ]
+    },
+    {
+     "label": "+125 °C",
+     "points": [
+      [
+       0.199,
+       45.21
+      ],
+      [
+       0.427,
+       45.21
+      ],
+      [
+       1.302,
+       42.52
+      ],
+      [
+       1.423,
+       42.34
+      ],
+      [
+       1.525,
+       41.82
+      ],
+      [
+       1.875,
+       40.78
+      ],
+      [
+       2.352,
+       39.56
+      ],
+      [
+       2.541,
+       38.7
+      ],
+      [
+       2.609,
+       40.69
+      ],
+      [
+       3.003,
+       40.61
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OC TIMER threshold against temperature, two input voltages",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OC TIMER threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.1,
+       1.98898
+      ],
+      [
+       8.5,
+       1.99732
+      ],
+      [
+       19.9,
+       1.99857
+      ],
+      [
+       28.0,
+       1.99919
+      ],
+      [
+       38.5,
+       1.99975
+      ],
+      [
+       62.7,
+       2.00058
+      ],
+      [
+       81.6,
+       2.001
+      ],
+      [
+       96.3,
+       2.001
+      ],
+      [
+       124.9,
+       1.99996
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.1,
+       1.99197
+      ],
+      [
+       -4.8,
+       1.99502
+      ],
+      [
+       19.9,
+       1.99773
+      ],
+      [
+       38.5,
+       1.99892
+      ],
+      [
+       70.4,
+       2.00058
+      ],
+      [
+       90.7,
+       2.00114
+      ],
+      [
+       101.6,
+       2.00093
+      ],
+      [
+       124.9,
+       1.99996
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OC TIMER_OFF threshold against temperature, two input voltages",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "OC TIMER_OFF threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "4 V",
+     "points": [
+      [
+       -40.0,
+       1.97605
+      ],
+      [
+       -1.1,
+       1.98273
+      ],
+      [
+       8.4,
+       1.98419
+      ],
+      [
+       22.5,
+       1.98579
+      ],
+      [
+       54.2,
+       1.98822
+      ],
+      [
+       84.8,
+       1.99003
+      ],
+      [
+       96.2,
+       1.99031
+      ],
+      [
+       124.9,
+       1.99003
+      ]
+     ]
+    },
+    {
+     "label": "50 V",
+     "points": [
+      [
+       -40.0,
+       1.97709
+      ],
+      [
+       -13.3,
+       1.98099
+      ],
+      [
+       2.2,
+       1.98293
+      ],
+      [
+       62.6,
+       1.98843
+      ],
+      [
+       78.1,
+       1.98961
+      ],
+      [
+       90.9,
+       1.99024
+      ],
+      [
+       106.2,
+       1.99031
+      ],
+      [
+       124.9,
+       1.99003
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 14,
+   "description": "A complete input protection stage between a supply VIN and a load. Q2, a P-channel FET driven from RPFG, sits first in the line as a low-drop reverse-polarity switch. RSENSE between VCC/SENSE+ and SENSE− measures load current, and the P-channel pass FET Q1, driven from GATE, limits it. R1, R2 and R3 form one string from the protected input to ground with UV and OV taps. R4 and R5 divide VCAP down to set the ISET voltage and so the current limit. R8, R7 and R9 form a string from VOUT to ground with the FLB tap above the FB_PG tap, giving foldback and the power-good level. CTIMER sets the time allowed in current limit and CTIMER_OFF the start-up delay and the off time after a fault. ENABLE, FAULT and PWRGD leave the circuit as control and status lines.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADM1270"
+    },
+    {
+     "ref": "Q2",
+     "type": "pmos",
+     "value": "",
+     "note": "reverse-polarity protection FET"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "",
+     "note": "pass FET"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R9",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "VCAP capacitor, 1 µF or more"
+    },
+    {
+     "ref": "CTIMER",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CTIMER_OFF",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "LOAD",
+     "type": "load",
+     "value": ""
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "ENABLE",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "FAULT",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "PWRGD",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": [
+    "Q2 has its drain on VIN and its source on the protected rail; Q1 has its source on SENSE− and its drain on VOUT."
+   ]
+  },
+  {
+   "id": "fixed-50mv",
+   "title": "Fixed 50 mV current sense limit",
+   "page": 17,
+   "description": "ISET tied directly to VCAP selects the internal 2 V reference, which gives a 50 mV current-sense limit across RSENSE. C1 bypasses VCAP to ground. The supply, 4 V to 60 V, enters at VCC/SENSE+; Q1 passes current from SENSE− to the output under control of GATE. FLB is left unconnected in this configuration.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADM1270"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "",
+     "note": "pass FET"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "VCAP capacitor"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "4 V to 60 V"
+    },
+    {
+     "ref": "OUT",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "adjustable-limit",
+   "title": "Adjustable 12.5 mV to 62.5 mV current sense limit",
+   "page": 17,
+   "description": "A divider R1 over R2 from VCAP to ground sets the ISET voltage, and the current-sense limit follows as VISET / 40, anywhere from 12.5 mV to 62.5 mV. C1 bypasses VCAP. The power path is the same as in the fixed-limit case: RSENSE from the 4 V to 60 V supply to SENSE−, then the pass FET Q1 driven from GATE. FLB is left unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADM1270"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "",
+     "note": "pass FET"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "VCAP capacitor"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "VCAP to ISET"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "ISET to ground"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "4 V to 60 V"
+    },
+    {
+     "ref": "OUT",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "uv-ov-monitor",
+   "title": "Undervoltage and overvoltage supply monitoring",
+   "page": 19,
+   "description": "One three-resistor string, R1, R2 and R3, runs from the 4 V to 60 V supply to ground. The R1-R2 junction feeds UV and the R2-R3 junction feeds OV, each compared against 1 V inside the part; the FET Q1 is turned off when the supply leaves the window. RSENSE and Q1 form the usual current-limited power path.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADM1270"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "",
+     "note": "pass FET"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "4 V to 60 V"
+    },
+    {
+     "ref": "OUT",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "uv-enable",
+   "title": "UV pin used as an enable",
+   "page": 19,
+   "description": "The UV divider R1 over R2 stays in place, and a system controller's open-drain enable line pulls the UV node low through D1. When the controller's transistor Q1 turns on, D1 conducts and UV drops below its 1 V threshold, turning the hot swap off; when Q1 is off, the controller's own pull-up R3 cannot raise UV because D1 blocks it, so the divider alone sets the threshold. D1 is chosen so that its forward drop plus the enable line's low level stay well under 1.0 V at IF = VIN/R1. With no pull-up on the open-drain line the diode is not needed.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADM1270"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "D1",
+     "type": "diode",
+     "value": ""
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "pull-up inside the system controller"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "",
+     "note": "open-drain driver inside the system controller"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "VPU",
+     "type": "terminal",
+     "value": "",
+     "note": "controller pull-up supply"
+    },
+    {
+     "ref": "CTRL",
+     "type": "terminal",
+     "value": "",
+     "note": "controller drive to Q1 gate"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "power-good",
+   "title": "Generation of the PWRGD signal",
+   "page": 20,
+   "description": "A divider RPG1 over RPG2 from the output to ground feeds FB_PG; PWRGD is released once the output is above 1 V × (1 + RPG1/RPG2). The supply side carries the R1, R2, R3 string for the UV and OV windows, RSENSE in the supply line and the pass FET Q1 driven from GATE.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADM1270"
+    },
+    {
+     "ref": "RSENSE",
+     "type": "resistor",
+     "value": "",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "",
+     "note": "pass FET"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RPG1",
+     "type": "resistor",
+     "value": "",
+     "note": "output to FB_PG"
+    },
+    {
+     "ref": "RPG2",
+     "type": "resistor",
+     "value": "",
+     "note": "FB_PG to ground"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "4 V to 60 V"
+    },
+    {
+     "ref": "OUT",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "ISET voltage for a chosen current limit",
+   "expr": "VISET = VSENSE × 40",
+   "where": {
+    "VISET": "voltage on the ISET pin",
+    "VSENSE": "wanted current-sense voltage limit, 12.5 mV to 62.5 mV"
+   },
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "TIMER capacitor",
+   "expr": "CTIMER = (tON × 20 µA) / VTIMERH",
+   "where": {
+    "tON": "time the FET may spend regulating at the current limit",
+    "VTIMERH": "TIMER high threshold, 2.0 V"
+   },
+   "note": "",
+   "page": 17
+  },
+  {
+   "name": "Fault off time",
+   "expr": "tTIMER_OFF = VTMROFFH × (CTIMER_OFF / 1 µA)",
+   "where": {
+    "VTMROFFH": "TIMER_OFF high threshold, 2.0 V",
+    "CTIMER_OFF": "capacitor on TIMER_OFF"
+   },
+   "note": "100 nF gives about 200 ms, counted from TIMER passing VTIMERH to TIMER_OFF reaching VTMROFFH.",
+   "page": 18
+  },
+  {
+   "name": "Initial power-on delay",
+   "expr": "tINITIAL = VTMROFFH × (CTIMER_OFF / 20 µA)",
+   "where": {
+    "VTMROFFH": "TIMER_OFF high threshold, 2.0 V",
+    "CTIMER_OFF": "capacitor on TIMER_OFF"
+   },
+   "note": "100 nF gives about 10 ms.",
+   "page": 18
+  },
+  {
+   "name": "Retry duty cycle",
+   "expr": "Duty_Cycle = (CTIMER × 1 µA) / (CTIMER_OFF × 20 µA)",
+   "where": {
+    "CTIMER": "capacitor on TIMER",
+    "CTIMER_OFF": "capacitor on TIMER_OFF"
+   },
+   "note": "",
+   "page": 18
+  },
+  {
+   "name": "Retry on time",
+   "expr": "tON = VTIMERH × (CTIMER / 20 µA)",
+   "where": {
+    "VTIMERH": "TIMER high threshold, 2.0 V",
+    "CTIMER": "capacitor on TIMER"
+   },
+   "note": "100 nF gives 10 ms.",
+   "page": 18
+  },
+  {
+   "name": "Retry off time",
+   "expr": "tOFF = VTMROFFH × (CTIMER_OFF / 1 µA)",
+   "where": {
+    "VTMROFFH": "TIMER_OFF high threshold, 2.0 V",
+    "CTIMER_OFF": "capacitor on TIMER_OFF"
+   },
+   "note": "100 nF gives 200 ms.",
+   "page": 18
+  },
+  {
+   "name": "Diode choice for UV used as enable",
+   "expr": "(VF × D1) + (VOL × EN) << 1.0 V (IF = VIN/R1)",
+   "where": {
+    "VF": "forward voltage of D1",
+    "VOL": "low output level of the EN driver",
+    "R1": "upper UV divider resistor"
+   },
+   "note": "The EN sink current must stay within the driver's rated VOL.",
+   "page": 19
+  },
+  {
+   "name": "Power-good threshold",
+   "expr": "VPWRGD = 1 V × (1 + RPG1/RPG2)",
+   "where": {
+    "RPG1": "resistor from VOUT to FB_PG",
+    "RPG2": "resistor from FB_PG to GND"
+   },
+   "note": "",
+   "page": 20
+  }
+ ],
+ "operation": [
+  {
+   "topic": "What it protects against",
+   "page": 15,
+   "text": "Plugging a board into a powered backplane lets empty bypass capacitors draw a surge that can burn connector contacts and pull the shared supply down far enough to reset neighbouring boards. The ADM1270 controls this surge with an external P-channel FET, limits steady overcurrent, and with a second P-channel FET blocks a reversed input."
+  },
+  {
+   "topic": "Powering the part",
+   "page": 16,
+   "text": "VCC/SENSE+ takes 4 V to 60 V and supplies most of the bias. The rest, used for the gate drive and for regulating VGS closely, comes through SENSE−."
+  },
+  {
+   "topic": "Current sensing",
+   "page": 16,
+   "text": "The drop across RSENSE, between VCC/SENSE+ and SENSE−, is amplified 40 times and compared with the current-limit reference. The GATE loop then holds the load current at the limit."
+  },
+  {
+   "topic": "Current-limit reference",
+   "page": 16,
+   "text": "A selector watches ISET and FLB all the time and uses whichever is lower as the reference. In normal running ISET sets the limit; during start-up or a fault, a falling FLB takes over and lowers it."
+  },
+  {
+   "topic": "Setting the current limit",
+   "page": 17,
+   "text": "The sense voltage limit can be set from 12.5 mV to 62.5 mV, which helps when very small sense resistor values are hard to obtain. ISET tied to VCAP selects the internal 2 V reference and a 50 mV limit. For any other value, a divider from the 3.6 V VCAP rail sets VISET = 40 × VSENSE. ISET above VISETRSTH (2.6 V typ) switches to the internal reference. VCAP may also pull up other pins, but loading it beyond 100 µA spoils its accuracy."
+  },
+  {
+   "topic": "Foldback",
+   "page": 17,
+   "text": "With the supply steady, the output voltage tells how much voltage the FET is dropping. A divider from the output to FLB, sized to give VISET/2 at the output level below which the limit should start to fall, makes the current limit shrink as the output falls, keeping FET dissipation down at start-up, in overload and in a short, so a smaller FET can be used. The trip level should sit well below the rail's normal tolerance. FLB is clamped at 200 mV, which is 10 mV across the sense resistor, so the current never folds back to zero; raising or lowering VISET moves that floor as a fraction of full current, for example VISET = 1.6 V puts it at 25 %."
+  },
+  {
+   "topic": "TIMER",
+   "page": 17,
+   "text": "CTIMER is charged by 20 µA and discharged by 1 µA, between thresholds of 0.1 V (VTIMERL) and 2.0 V (VTIMERH). When the sense voltage reaches the circuit-breaker level VCB, slightly below the regulation limit by VCBOS, the 20 µA source starts and the part regulates current. If the overload clears before 2.0 V, the 1 µA sink takes over, and below VTIMERL a strong pull-down empties the pin. If it lasts until 2.0 V, the GATE is switched off and FAULT is pulled low at once. The FET is chosen so that its safe operating area covers this time at the limit current; foldback eases that choice."
+  },
+  {
+   "topic": "Latch-off",
+   "page": 18,
+   "text": "Without automatic retry, TIMER is discharged as it reaches VTIMERH and TIMER_OFF starts to charge. Until TIMER_OFF passes VTMROFFH the controller stays off and FAULT stays low; after that, taking ENABLE low and then high again restarts it."
+  },
+  {
+   "topic": "TIMER_OFF and power-on reset",
+   "page": 18,
+   "text": "When VCC appears, VCAP comes up quickly; once it passes UVLO the part leaves reset, with GATE and TIMER held low during that short period. An initial timing cycle follows: TIMER_OFF charges at 20 µA to 2.0 V. If UV and OV show VCC in range at the end, the hot swap begins. From then on TIMER_OFF times the off period after a fault, charging at 1 µA from the moment TIMER passes 2.0 V until it reaches VTMROFFH."
+  },
+  {
+   "topic": "Automatic retry",
+   "page": 18,
+   "text": "Connecting FAULT to ENABLE, with a pull-up from FAULT to VCAP, makes the part restart on its own. After a timeout turns the FET off, TIMER_OFF charges at 1 µA and the hot swap starts again when it reaches 2.0 V. The ratio of the two currents and of the two capacitors sets the duty cycle: 100 nF on each gives 10 ms on and 200 ms off. Retry repeats indefinitely; holding ENABLE low or breaking the FAULT link stops it. A larger CTIMER_OFF lengthens the off time to limit FET heating."
+  },
+  {
+   "topic": "GATE and RPFG clamps",
+   "page": 19,
+   "text": "Both gate drivers are clamped to less than 14 V below VCC/SENSE+, which keeps both FETs inside their gate-source voltage limit."
+  },
+  {
+   "topic": "Reverse polarity protection",
+   "page": 19,
+   "text": "Q2, driven from RPFG, guards both the ADM1270 and the load. With the supply reversed, so that VCC sits below system ground, the gate of Q2 is at GND and Q2 stays off; no reverse current flows and VOUT cannot go below ground. With normal polarity the gate is pulled down and Q2 conducts forward with low on-resistance, dropping less than a diode would and leaving more headroom and efficiency."
+  },
+  {
+   "topic": "Severe overcurrent",
+   "page": 19,
+   "text": "A second, fast current-sense amplifier catches short circuits: at roughly twice the normal limit the current is brought under control in about 2 µs."
+  },
+  {
+   "topic": "Undervoltage and overvoltage",
+   "page": 19,
+   "text": "UV and OV are compared with an internal 1 V reference, each fed from a resistor divider on the supply. UV below 1 V, or OV above 1 V, turns the FET off with the 10 mA gate pull-up."
+  },
+  {
+   "topic": "Enable",
+   "page": 19,
+   "text": "ENABLE is a separate logic input that can hold the part off even when UV is above 1.0 V and OV below 1.0 V, so UV stays free for undervoltage monitoring. All three conditions must be met before power-up starts. UV can be used as an enable instead; to keep the UV divider as well, a diode from UV to the open-drain enable line isolates the line's pull-up from the divider."
+  },
+  {
+   "topic": "Power good",
+   "page": 20,
+   "text": "PWRGD is open drain. It is released once FB_PG rises above 1 V and pulls low when FB_PG drops below 1 V minus a fixed 30 mV hysteresis. Its state is valid down to VCC = 1.7 V."
+  },
+  {
+   "topic": "Exposed pad",
+   "page": 7,
+   "text": "The LFCSP pad underneath should be soldered to the board for heat removal; it may be connected to ground."
+  }
+ ],
+ "packages": [
+  {
+   "name": "16-lead LFCSP_WQ, 3 mm × 3 mm (CP-16-27)",
+   "page": 21,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "Body size, square",
+     "2.90",
+     "3.00",
+     "3.10"
+    ],
+    [
+     "Exposed pad, square",
+     "1.45",
+     "1.50",
+     "1.65"
+    ],
+    [
+     "Terminal width",
+     "0.20",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "Terminal length",
+     "0.30",
+     "0.40",
+     "0.50"
+    ],
+    [
+     "Terminal pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "Overall height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "Standoff",
+     "",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "Terminal thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "Terminal to exposed pad",
+     "0.20",
+     "",
+     ""
+    ],
+    [
+     "Coplanarity",
+     "",
+     "",
+     "0.08"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-220-WEED-6."
+   ]
+  },
+  {
+   "name": "16-lead QSOP (RQ-16)",
+   "page": 21,
+   "unit": "inch (mm)",
+   "columns": [
+    "dimension",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "Body length",
+     "0.189 (4.80)",
+     "0.193 (4.90)",
+     "0.197 (5.00)"
+    ],
+    [
+     "Body width",
+     "0.150 (3.81)",
+     "0.154 (3.91)",
+     "0.158 (4.01)"
+    ],
+    [
+     "Width across leads",
+     "0.228 (5.79)",
+     "0.236 (5.99)",
+     "0.244 (6.20)"
+    ],
+    [
+     "Overall height",
+     "0.053 (1.35)",
+     "",
+     "0.069 (1.75)"
+    ],
+    [
+     "Body thickness",
+     "0.049 (1.25)",
+     "",
+     "0.065 (1.65)"
+    ],
+    [
+     "Standoff",
+     "0.004 (0.10)",
+     "",
+     "0.010 (0.25)"
+    ],
+    [
+     "Lead pitch",
+     "",
+     "0.025 (0.64) BSC",
+     ""
+    ],
+    [
+     "Lead width",
+     "0.008 (0.20)",
+     "",
+     "0.012 (0.30)"
+    ],
+    [
+     "Lead thickness",
+     "0.006 (0.15)",
+     "",
+     "0.010 (0.25)"
+    ],
+    [
+     "Body edge chamfer",
+     "0.010 (0.25)",
+     "",
+     "0.020 (0.51)"
+    ],
+    [
+     "Foot length",
+     "0.016 (0.41)",
+     "",
+     "0.050 (1.27)"
+    ],
+    [
+     "Footprint",
+     "",
+     "0.041 (1.04) REF",
+     ""
+    ],
+    [
+     "Foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "Coplanarity",
+     "",
+     "",
+     "0.004 (0.10)"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-137-AB. Inch values control; the millimetre values are rounded conversions for reference and are not meant for design."
+   ]
+  }
+ ]
+}

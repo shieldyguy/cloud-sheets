@@ -1,0 +1,3367 @@
+{
+ "sheet": 1,
+ "name": "LT3652IMSE#TRPBF",
+ "kind": "battery_charger",
+ "manufacturer": "Analog Devices (Linear Technology)",
+ "title": "Power tracking 2 A step-down battery charger for solar power",
+ "source": {
+  "revision": "Rev E (3652fe), December 2015",
+  "pages": 26
+ },
+ "summary": "The LT3652 is a 1 MHz non-synchronous buck charger with an integrated 2 A switch, running from 4.95 V to 32 V (40 V absolute maximum). It charges with constant current then constant voltage; the float voltage is set by a divider onto a 3.3 V feedback reference, up to 14.4 V, so it serves Li-ion/polymer, LiFePO4 and sealed lead-acid batteries. An input-voltage regulation loop cuts charge current whenever the input drops below a programmed level, holding a solar panel at its peak-power voltage. Charging ends at C/10 or on a capacitor-set timer, and two open-collector pins report status.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "4.95 V to 32 V (40 V absolute maximum)"
+  ],
+  [
+   "Charge current",
+   "up to 2 A, set by RSENSE"
+  ],
+  [
+   "Float voltage",
+   "up to 14.4 V, from a 3.3 V reference (0.5 %)"
+  ],
+  [
+   "Switching frequency",
+   "1 MHz"
+  ],
+  [
+   "Input regulation reference",
+   "2.7 V"
+  ],
+  [
+   "Standby current",
+   "85 µA typ"
+  ],
+  [
+   "Shutdown current",
+   "15 µA typ"
+  ],
+  [
+   "Packages",
+   "12-lead 3 mm × 3 mm DFN (DD), 12-lead MSOP with exposed pad (MSE)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "lead free finish",
+   "tape and reel",
+   "part marking",
+   "package",
+   "temperature range"
+  ],
+  "rows": [
+   [
+    "LT3652EDD#PBF",
+    "LT3652EDD#TRPBF",
+    "LFHT",
+    "12-Lead Plastic DFN 3mm × 3mm",
+    "–40°C to 125°C"
+   ],
+   [
+    "LT3652IDD#PBF",
+    "LT3652IDD#TRPBF",
+    "LFHT",
+    "12-Lead Plastic DFN 3mm × 3mm",
+    "–40°C to 125°C"
+   ],
+   [
+    "LT3652EMSE#PBF",
+    "LT3652EMSE#TRPBF",
+    "3652",
+    "12-Lead Plastic MSOP",
+    "–40°C to 125°C"
+   ],
+   [
+    "LT3652IMSE#PBF",
+    "LT3652IMSE#TRPBF",
+    "3652",
+    "12-Lead Plastic MSOP",
+    "–40°C to 125°C"
+   ]
+  ],
+  "notes": [
+   "The E and I grades differ in the temperature range over which the electrical figures are guaranteed (Note 2 of the electrical characteristics). Some packages also come on 500-unit reels with a #TRMPBF suffix."
+  ]
+ },
+ "pins": [
+  {
+   "package": "MSE 12-lead MSOP",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input for the charger, 4.95 V to 32 V. For a dependable start it must sit 3.3 V above the programmed float voltage; once BOOST is at least 2 V above SW it runs down to VBAT(FLT) + 0.75 V. Draws about 85 µA after termination."
+    },
+    {
+     "pin": "2",
+     "name": "VIN_REG",
+     "type": "analog in",
+     "function": "Input regulation reference. Under 2.7 V the charger lowers its current limit, so a divider from VIN sets the lowest VIN the charger will pull the supply to, such as a panel's peak-power voltage. Tie to VIN when unused."
+    },
+    {
+     "pin": "3",
+     "name": "SHDN",
+     "type": "digital in",
+     "function": "Precise shutdown input: enables at 1.2 V rising with 120 mV hysteresis, so a divider can make it an undervoltage lockout. Below 0.4 V the part enters low-current shutdown (15 µA from VIN). Bias current is about 10 nA. Tie to VIN when unused."
+    },
+    {
+     "pin": "4",
+     "name": "CHRG",
+     "type": "open collector out",
+     "function": "Charge status. Pulled low while the charge current is above C/10 and during a temperature fault; high impedance after C/10 termination, or when the timer is in use and current has fallen under C/10. Sinks up to 10 mA; may be pulled up as high as VIN."
+    },
+    {
+     "pin": "5",
+     "name": "FAULT",
+     "type": "open collector out",
+     "function": "Fault status. Pulled low for a battery temperature fault and, when the timer is used, for a bad-battery fault; high impedance otherwise. Sinks up to 10 mA; may be pulled up as high as VIN."
+    },
+    {
+     "pin": "6",
+     "name": "TIMER",
+     "type": "analog",
+     "function": "End-of-cycle timer. A capacitor to ground sets the full-charge time (0.68 µF gives 3 hours and a 22.5 minute precondition limit). Grounding the pin disables the timer and charging ends at C/10."
+    },
+    {
+     "pin": "7",
+     "name": "VFB",
+     "type": "analog in",
+     "function": "Float voltage feedback. Charging regulates this pin to 3.3 V through a divider from BAT; a new cycle starts when it falls 2.5 % below. Bias current is 110 nA, cancelled by a 250k equivalent divider resistance."
+    },
+    {
+     "pin": "8",
+     "name": "NTC",
+     "type": "analog in",
+     "function": "Battery thermistor input. Sources 50 µA into a 10 kΩ, B = 3380 NTC to ground. Above 1.36 V (below 0 °C) or below 0.29 V (above 40 °C) charging pauses and both status pins go low; each threshold has about 5 °C hysteresis. Stays enabled while the resistance to ground is under 250k; leave open to disable."
+    },
+    {
+     "pin": "9",
+     "name": "BAT",
+     "type": "analog in",
+     "function": "Charger output monitor and the reference end of the current-sense resistor. Needs 10 µF to ground. Draws under 0.1 µA once charging has ended."
+    },
+    {
+     "pin": "10",
+     "name": "SENSE",
+     "type": "analog in",
+     "function": "Current-sense input: RSENSE sits between SENSE and BAT, and 100 mV across it is the maximum charge current. Draws under 0.1 µA once charging has ended."
+    },
+    {
+     "pin": "11",
+     "name": "BOOST",
+     "type": "power",
+     "function": "Bootstrap supply for the switch driver. A capacitor of 1 µF or more goes to SW; a diode from the battery or another source refreshes it. Operating range 0 V to 8.5 V above SW."
+    },
+    {
+     "pin": "12",
+     "name": "SW",
+     "type": "power out",
+     "function": "Switch output, the emitter of the internal power switch, which connects SW to VIN when on. Effective on-resistance with the boosted drive is 0.175 Ω."
+    },
+    {
+     "pin": "13",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground and exposed thermal pad on the underside; solder it to the board ground plane."
+    }
+   ]
+  },
+  {
+   "package": "DD 12-lead 3 mm × 3 mm DFN",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input for the charger, 4.95 V to 32 V. For a dependable start it must sit 3.3 V above the programmed float voltage; once BOOST is at least 2 V above SW it runs down to VBAT(FLT) + 0.75 V. Draws about 85 µA after termination."
+    },
+    {
+     "pin": "2",
+     "name": "VIN_REG",
+     "type": "analog in",
+     "function": "Input regulation reference. Under 2.7 V the charger lowers its current limit, so a divider from VIN sets the lowest VIN the charger will pull the supply to, such as a panel's peak-power voltage. Tie to VIN when unused."
+    },
+    {
+     "pin": "3",
+     "name": "SHDN",
+     "type": "digital in",
+     "function": "Precise shutdown input: enables at 1.2 V rising with 120 mV hysteresis, so a divider can make it an undervoltage lockout. Below 0.4 V the part enters low-current shutdown (15 µA from VIN). Bias current is about 10 nA. Tie to VIN when unused."
+    },
+    {
+     "pin": "4",
+     "name": "CHRG",
+     "type": "open collector out",
+     "function": "Charge status. Pulled low while the charge current is above C/10 and during a temperature fault; high impedance after C/10 termination, or when the timer is in use and current has fallen under C/10. Sinks up to 10 mA; may be pulled up as high as VIN."
+    },
+    {
+     "pin": "5",
+     "name": "FAULT",
+     "type": "open collector out",
+     "function": "Fault status. Pulled low for a battery temperature fault and, when the timer is used, for a bad-battery fault; high impedance otherwise. Sinks up to 10 mA; may be pulled up as high as VIN."
+    },
+    {
+     "pin": "6",
+     "name": "TIMER",
+     "type": "analog",
+     "function": "End-of-cycle timer. A capacitor to ground sets the full-charge time (0.68 µF gives 3 hours and a 22.5 minute precondition limit). Grounding the pin disables the timer and charging ends at C/10."
+    },
+    {
+     "pin": "7",
+     "name": "VFB",
+     "type": "analog in",
+     "function": "Float voltage feedback. Charging regulates this pin to 3.3 V through a divider from BAT; a new cycle starts when it falls 2.5 % below. Bias current is 110 nA, cancelled by a 250k equivalent divider resistance."
+    },
+    {
+     "pin": "8",
+     "name": "NTC",
+     "type": "analog in",
+     "function": "Battery thermistor input. Sources 50 µA into a 10 kΩ, B = 3380 NTC to ground. Above 1.36 V (below 0 °C) or below 0.29 V (above 40 °C) charging pauses and both status pins go low; each threshold has about 5 °C hysteresis. Stays enabled while the resistance to ground is under 250k; leave open to disable."
+    },
+    {
+     "pin": "9",
+     "name": "BAT",
+     "type": "analog in",
+     "function": "Charger output monitor and the reference end of the current-sense resistor. Needs 10 µF to ground. Draws under 0.1 µA once charging has ended."
+    },
+    {
+     "pin": "10",
+     "name": "SENSE",
+     "type": "analog in",
+     "function": "Current-sense input: RSENSE sits between SENSE and BAT, and 100 mV across it is the maximum charge current. Draws under 0.1 µA once charging has ended."
+    },
+    {
+     "pin": "11",
+     "name": "BOOST",
+     "type": "power",
+     "function": "Bootstrap supply for the switch driver. A capacitor of 1 µF or more goes to SW; a diode from the battery or another source refreshes it. Operating range 0 V to 8.5 V above SW."
+    },
+    {
+     "pin": "12",
+     "name": "SW",
+     "type": "power out",
+     "function": "Switch output, the emitter of the internal power switch, which connects SW to VIN when on. Effective on-resistance with the boosted drive is 0.175 Ω."
+    },
+    {
+     "pin": "13",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground and exposed thermal pad on the underside; solder it to the board ground plane."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "(Note 1)",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "40V"
+    ],
+    [
+     "VIN_REG, SHDN, CHRG, FAULT",
+     "VIN + 0.5V, 40V"
+    ],
+    [
+     "SW",
+     "40V"
+    ],
+    [
+     "SW-VIN",
+     "4.5V"
+    ],
+    [
+     "BOOST",
+     "SW+10V, 50V"
+    ],
+    [
+     "BAT, SENSE",
+     "15V"
+    ],
+    [
+     "BAT-SENSE",
+     "–0.5V to +0.5V"
+    ],
+    [
+     "NTC, TIMER",
+     "2.5V"
+    ],
+    [
+     "VFB",
+     "5V"
+    ],
+    [
+     "Operating Junction Temperature Range (Note 2)",
+     "–40°C to 125°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "–65°C to 150°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: Going past these ratings can destroy the part, and holding it at any of them for long can reduce its reliability and life."
+   ]
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "package",
+    "TJMAX",
+    "θJA",
+    "θJC"
+   ],
+   "rows": [
+    [
+     "DD 12-lead (3mm × 3mm) plastic DFN",
+     "125°C",
+     "43°C/W",
+     "3°C/W"
+    ],
+    [
+     "MSE 12-lead plastic MSOP",
+     "125°C",
+     "43°C/W",
+     "3°C/W"
+    ]
+   ],
+   "notes": [
+    "On both packages the exposed pad (pin 13) is ground and has to be soldered to the board."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 3,
+   "conditions": "Rows marked ● apply over the full operating temperature range; other rows at TA = 25°C (Note 2). VIN = 20V, Boost – SW = 4V, SHDN = 2V, VFB = 3.3V, CTIMER = 0.68µF.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "VIN Operating Range",
+     "VBAT = 4.2 (Notes 3, 4)",
+     "●",
+     "4.95",
+     "",
+     "32",
+     "V"
+    ],
+    [
+     "",
+     "VIN Start Voltage",
+     "VBAT = 4.2 (Note 4)",
+     "●",
+     "7.5",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "VIN(OVLO)",
+     "OVLO Threshold",
+     "VIN Rising",
+     "●",
+     "32",
+     "35",
+     "40",
+     "V"
+    ],
+    [
+     "",
+     "OVLO Hysteresis",
+     "",
+     "",
+     "",
+     "1",
+     "",
+     "V"
+    ],
+    [
+     "VIN(UVLO)",
+     "UVLO Threshold",
+     "VIN Rising",
+     "",
+     "",
+     "4.6",
+     "4.95",
+     "V"
+    ],
+    [
+     "",
+     "UVLO Hysteresis",
+     "",
+     "",
+     "",
+     "0.2",
+     "",
+     "V"
+    ],
+    [
+     "VFB(FLT)",
+     "Float Voltage Reference",
+     "(Note 6)",
+     "",
+     "3.282",
+     "3.3",
+     "3.318",
+     "V"
+    ],
+    [
+     "VFB(FLT)",
+     "Float Voltage Reference",
+     "(Note 6)",
+     "●",
+     "3.26",
+     "",
+     "3.34",
+     "V"
+    ],
+    [
+     "ΔVRECHARGE",
+     "Recharge Reference Threshold",
+     "Voltage Relative to VFB(FLT) (Note 6)",
+     "",
+     "",
+     "82.5",
+     "",
+     "mV"
+    ],
+    [
+     "VFB(PRE)",
+     "Reference Precondition Threshold",
+     "VFB Rising (Note 6)",
+     "",
+     "",
+     "2.3",
+     "",
+     "V"
+    ],
+    [
+     "VFB(PREHYST)",
+     "Reference Precondition Threshold Hysteresis",
+     "Voltage Relative to VFB(PRE) (Note 6)",
+     "",
+     "",
+     "70",
+     "",
+     "mV"
+    ],
+    [
+     "VIN_REG(TH)",
+     "Input Regulation Reference",
+     "VFB = 3V; VSENSE – VBAT = 50mV",
+     "●",
+     "2.65",
+     "2.7",
+     "2.75",
+     "V"
+    ],
+    [
+     "IIN_REG",
+     "Input Regulation Reference Bias Current",
+     "VIN_REG = VIN_REG(TH)",
+     "●",
+     "",
+     "35",
+     "100",
+     "nA"
+    ],
+    [
+     "IVIN",
+     "Operating Input Supply Current",
+     "CC/CV Mode, ISW = 0",
+     "●",
+     "",
+     "2.5",
+     "3.5",
+     "mA"
+    ],
+    [
+     "IVIN",
+     "Operating Input Supply Current",
+     "Standby Mode",
+     "",
+     "",
+     "85",
+     "",
+     "µA"
+    ],
+    [
+     "IVIN",
+     "Operating Input Supply Current",
+     "Shutdown (SHDN = 0)",
+     "",
+     "",
+     "15",
+     "",
+     "µA"
+    ],
+    [
+     "IBOOST",
+     "BOOST Supply Current",
+     "Switch On, ISW = 0, 2.5 < V(BOOST – SW) < 8.5",
+     "",
+     "",
+     "20",
+     "",
+     "mA"
+    ],
+    [
+     "IBOOST/ISW",
+     "BOOST Switch Drive",
+     "ISW = 2A",
+     "",
+     "",
+     "30",
+     "",
+     "mA/A"
+    ],
+    [
+     "VSW(ON)",
+     "Switch-On Voltage Drop",
+     "VIN – VSW, ISW = 2A",
+     "",
+     "",
+     "350",
+     "",
+     "mV"
+    ],
+    [
+     "ISW(MAX)",
+     "Switch Current Limit",
+     "",
+     "●",
+     "2.5",
+     "3",
+     "",
+     "A"
+    ],
+    [
+     "VSENSE(PRE)",
+     "Precondition Sense Voltage",
+     "VSENSE – VBAT; VFB = 2V",
+     "",
+     "",
+     "15",
+     "",
+     "mV"
+    ],
+    [
+     "VSENSE(DC)",
+     "Maximum Sense Voltage",
+     "VSENSE – VBAT; VFB = 3V (Note 7)",
+     "●",
+     "95",
+     "100",
+     "105",
+     "mV"
+    ],
+    [
+     "VSENSE(C/10)",
+     "C/10 Trigger Sense Voltage",
+     "VSENSE – VBAT, Falling",
+     "●",
+     "7.5",
+     "10",
+     "12.5",
+     "mV"
+    ],
+    [
+     "IBAT",
+     "BAT Input Bias Current",
+     "Charging Terminated",
+     "",
+     "",
+     "0.1",
+     "1",
+     "µA"
+    ],
+    [
+     "ISENSE",
+     "SENSE Input Bias Current",
+     "Charging Terminated",
+     "",
+     "",
+     "0.1",
+     "1",
+     "µA"
+    ],
+    [
+     "IREVERSE",
+     "Charger Reverse Current IBAT + ISENSE + ISW",
+     "VIN = 0; VBAT = VSENSE = VSW = 4.2V",
+     "",
+     "",
+     "1",
+     "",
+     "µA"
+    ],
+    [
+     "IVFB",
+     "VFB Input Bias Current",
+     "Charging Terminated",
+     "",
+     "",
+     "65",
+     "",
+     "nA"
+    ],
+    [
+     "IVFB",
+     "VFB Input Bias Current",
+     "CV Operation (Note 5)",
+     "",
+     "",
+     "110",
+     "",
+     "nA"
+    ],
+    [
+     "VNTC(H)",
+     "NTC Range Limit (High)",
+     "VNTC Rising",
+     "●",
+     "1.25",
+     "1.36",
+     "1.45",
+     "V"
+    ],
+    [
+     "VNTC(L)",
+     "NTC Range Limit (Low)",
+     "VNTC Falling",
+     "●",
+     "0.27",
+     "0.29",
+     "0.315",
+     "V"
+    ],
+    [
+     "VNTC(HYST)",
+     "NTC Threshold Hysteresis",
+     "% of threshold",
+     "",
+     "",
+     "20",
+     "",
+     "%"
+    ],
+    [
+     "RNTC(DIS)",
+     "NTC Disable Impedance",
+     "Impedance to ground",
+     "●",
+     "250",
+     "500",
+     "",
+     "kΩ"
+    ],
+    [
+     "INTC",
+     "NTC Bias Current",
+     "VNTC = 0.8V",
+     "●",
+     "47.5",
+     "50",
+     "52.5",
+     "µA"
+    ],
+    [
+     "VSHDN",
+     "Shutdown Threshold",
+     "Rising",
+     "●",
+     "1.15",
+     "1.2",
+     "1.25",
+     "V"
+    ],
+    [
+     "VSHDN(HYST)",
+     "Shutdown Hysteresis",
+     "",
+     "",
+     "",
+     "120",
+     "",
+     "mV"
+    ],
+    [
+     "ISHDN",
+     "SHDN Input Bias Current",
+     "",
+     "",
+     "",
+     "–10",
+     "",
+     "nA"
+    ],
+    [
+     "VCHRG, VFAULT",
+     "Status Low Voltage",
+     "10mA Load",
+     "●",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "ITIMER",
+     "Charge/Discharge Current",
+     "",
+     "",
+     "",
+     "25",
+     "",
+     "µA"
+    ],
+    [
+     "VTIMER(DIS)",
+     "Timer Disable Threshold",
+     "",
+     "●",
+     "0.1",
+     "0.25",
+     "",
+     "V"
+    ],
+    [
+     "tTIMER",
+     "Full Charge Cycle Timeout",
+     "",
+     "",
+     "",
+     "3",
+     "",
+     "hr"
+    ],
+    [
+     "",
+     "Precondition Timeout",
+     "",
+     "",
+     "",
+     "22.5",
+     "",
+     "min"
+    ],
+    [
+     "",
+     "Timer Accuracy",
+     "",
+     "●",
+     "–10",
+     "",
+     "10",
+     "%"
+    ],
+    [
+     "fO",
+     "Operating Frequency",
+     "",
+     "",
+     "",
+     "1",
+     "",
+     "MHz"
+    ],
+    [
+     "DC",
+     "Duty Cycle Range",
+     "Continuous Operation",
+     "●",
+     "15",
+     "",
+     "90",
+     "%"
+    ]
+   ],
+   "notes": [
+    "Note 2: The LT3652E is guaranteed from 0°C to 125°C junction temperature; its figures over –40°C to 125°C rest on design, characterization and statistical process control. The LT3652I is guaranteed over the whole –40°C to 125°C junction range. The highest ambient temperature that still meets these figures depends on the operating conditions, the board layout, the package thermal resistance and the surroundings.",
+    "Note 3: VIN below the start threshold is supported only while (VBOOST – VSW) > 2V.",
+    "Note 4: Applies to programmed battery float voltages up to 4.2V. The lowest operating VIN is VBAT(FLT) + 0.75V; the start voltage is VBAT(FLT) + 3.3V.",
+    "Note 5: A float-voltage divider with a 250k equivalent resistance cancels the error from the VFB input bias current.",
+    "Note 6: Every VFB voltage is measured through a 250k series resistor.",
+    "Note 7: Thermal foldback lowers VSENSE(DC) as the junction temperature nears 125°C."
+   ]
+  },
+  {
+   "title": "Status pin states",
+   "page": 19,
+   "conditions": "ON: pin pulled low. OFF: pin high impedance.",
+   "columns": [
+    "CHRG",
+    "FAULT",
+    "charger status"
+   ],
+   "rows": [
+    [
+     "OFF",
+     "OFF",
+     "Not Charging — Standby or Shutdown Mode"
+    ],
+    [
+     "OFF",
+     "ON",
+     "Bad Battery Fault (Precondition Timeout/EOC Failure)"
+    ],
+    [
+     "ON",
+     "OFF",
+     "Normal Charging at C/10 or Greater"
+    ],
+    [
+     "ON",
+     "ON",
+     "NTC Fault (Pause)"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Solar panel input voltage regulation, tracking the maximum power point to better than 98 %",
+   "page": 1,
+   "conditions": "TA = 25 °C",
+   "x": {
+    "label": "Charger output current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Input regulation voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "98 % of peak power, upper",
+     "points": [
+      [
+       0.202,
+       15.69
+      ],
+      [
+       0.289,
+       16.53
+      ],
+      [
+       0.371,
+       17.01
+      ],
+      [
+       0.532,
+       17.59
+      ],
+      [
+       0.72,
+       18.03
+      ],
+      [
+       0.977,
+       18.5
+      ],
+      [
+       1.256,
+       18.91
+      ],
+      [
+       1.458,
+       19.13
+      ],
+      [
+       2.005,
+       19.6
+      ]
+     ]
+    },
+    {
+     "label": "98 % of peak power, lower",
+     "points": [
+      [
+       0.201,
+       13.07
+      ],
+      [
+       0.228,
+       13.36
+      ],
+      [
+       0.28,
+       13.72
+      ],
+      [
+       0.367,
+       14.17
+      ],
+      [
+       0.53,
+       14.75
+      ],
+      [
+       0.742,
+       15.16
+      ],
+      [
+       1.055,
+       15.4
+      ],
+      [
+       2.005,
+       15.67
+      ]
+     ]
+    },
+    {
+     "label": "95 % of peak power, upper",
+     "points": [
+      [
+       0.2,
+       16.34
+      ],
+      [
+       0.265,
+       17.07
+      ],
+      [
+       0.379,
+       17.75
+      ],
+      [
+       0.543,
+       18.26
+      ],
+      [
+       0.709,
+       18.68
+      ],
+      [
+       1.111,
+       19.49
+      ],
+      [
+       1.348,
+       19.89
+      ],
+      [
+       2.005,
+       20.67
+      ]
+     ]
+    },
+    {
+     "label": "95 % of peak power, lower",
+     "points": [
+      [
+       0.201,
+       12.15
+      ],
+      [
+       0.248,
+       12.6
+      ],
+      [
+       0.388,
+       13.3
+      ],
+      [
+       0.53,
+       13.75
+      ],
+      [
+       0.694,
+       14.03
+      ],
+      [
+       0.843,
+       14.21
+      ],
+      [
+       1.103,
+       14.36
+      ],
+      [
+       2.004,
+       14.55
+      ]
+     ]
+    },
+    {
+     "label": "Input regulation voltage",
+     "points": [
+      [
+       0.2,
+       16.86
+      ],
+      [
+       1.709,
+       17.2
+      ],
+      [
+       1.933,
+       17.3
+      ],
+      [
+       1.972,
+       17.35
+      ],
+      [
+       2.005,
+       17.46
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VIN_REG threshold against temperature, ICHG at 50 %",
+   "page": 5,
+   "conditions": "TJ = 25 °C unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VIN_REG(TH)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN_REG(TH)",
+     "points": [
+      [
+       -49.8,
+       2.7056
+      ],
+      [
+       -30.6,
+       2.704
+      ],
+      [
+       83.4,
+       2.696
+      ],
+      [
+       124.8,
+       2.6929
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VFB reference voltage against temperature",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VFB(FLT)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VFB(FLT)",
+     "points": [
+      [
+       -49.9,
+       3.2983
+      ],
+      [
+       -37.1,
+       3.2988
+      ],
+      [
+       -27.3,
+       3.2991
+      ],
+      [
+       -14.9,
+       3.2994
+      ],
+      [
+       0.2,
+       3.2997
+      ],
+      [
+       17.7,
+       3.2999
+      ],
+      [
+       37.7,
+       3.3
+      ],
+      [
+       57.6,
+       3.2999
+      ],
+      [
+       75.1,
+       3.2997
+      ],
+      [
+       90.1,
+       3.2995
+      ],
+      [
+       102.5,
+       3.2992
+      ],
+      [
+       112.2,
+       3.2989
+      ],
+      [
+       124.8,
+       3.2984
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VIN standby mode current against temperature",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVIN",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVIN",
+     "points": [
+      [
+       -50.6,
+       69.97
+      ],
+      [
+       99.6,
+       99.91
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switch drive (ISW/IBOOST) against switch current",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "Switch current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ISW/IBOOST",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ISW/IBOOST",
+     "points": [
+      [
+       0.004,
+       0.11
+      ],
+      [
+       0.153,
+       8.67
+      ],
+      [
+       0.225,
+       11.96
+      ],
+      [
+       0.343,
+       16.63
+      ],
+      [
+       0.436,
+       19.75
+      ],
+      [
+       0.562,
+       23.39
+      ],
+      [
+       0.653,
+       25.61
+      ],
+      [
+       0.746,
+       27.51
+      ],
+      [
+       0.876,
+       29.65
+      ],
+      [
+       1.03,
+       31.63
+      ],
+      [
+       1.148,
+       32.75
+      ],
+      [
+       1.296,
+       33.78
+      ],
+      [
+       1.472,
+       34.57
+      ],
+      [
+       1.625,
+       34.94
+      ],
+      [
+       1.991,
+       35.13
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switch forward drop (VIN - VSW) against temperature",
+   "page": 5,
+   "conditions": "ISW = 2 A",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSW(ON)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSW(ON)",
+     "points": [
+      [
+       -49.8,
+       336.8
+      ],
+      [
+       -35.1,
+       333.0
+      ],
+      [
+       -22.0,
+       333.7
+      ],
+      [
+       -8.9,
+       336.7
+      ],
+      [
+       11.1,
+       344.2
+      ],
+      [
+       36.7,
+       357.0
+      ],
+      [
+       64.0,
+       373.8
+      ],
+      [
+       99.2,
+       398.1
+      ],
+      [
+       124.6,
+       417.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CC/CV charging: SENSE pin bias current against VSENSE",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "VSENSE",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ISENSE",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ISENSE",
+     "points": [
+      [
+       0.035,
+       -331.6
+      ],
+      [
+       1.118,
+       -146.8
+      ],
+      [
+       1.764,
+       -42.5
+      ],
+      [
+       2.077,
+       5.4
+      ],
+      [
+       2.263,
+       26.8
+      ],
+      [
+       2.342,
+       31.3
+      ],
+      [
+       2.411,
+       32.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "C/10 threshold (VSENSE - VBAT) against temperature",
+   "page": 5,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSENSE(C/10)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSENSE(C/10)",
+     "points": [
+      [
+       -49.7,
+       9.446
+      ],
+      [
+       -38.9,
+       9.565
+      ],
+      [
+       -14.6,
+       9.782
+      ],
+      [
+       18.4,
+       9.977
+      ],
+      [
+       51.5,
+       10.08
+      ],
+      [
+       104.1,
+       10.163
+      ],
+      [
+       124.9,
+       10.254
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum charge current (VSENSE - VBAT) against temperature",
+   "page": 6,
+   "conditions": "VFB = 3 V; TA = 25 °C unless noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSENSE(DC)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSENSE(DC)",
+     "points": [
+      [
+       -49.9,
+       100.072
+      ],
+      [
+       -37.8,
+       100.108
+      ],
+      [
+       -24.8,
+       100.117
+      ],
+      [
+       -9.4,
+       100.106
+      ],
+      [
+       7.9,
+       100.062
+      ],
+      [
+       23.0,
+       100.009
+      ],
+      [
+       42.8,
+       99.922
+      ],
+      [
+       114.4,
+       99.555
+      ],
+      [
+       119.1,
+       99.506
+      ],
+      [
+       121.0,
+       99.443
+      ],
+      [
+       122.6,
+       99.002
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Thermal foldback: maximum charge current (VSENSE - VBAT) against temperature",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSENSE(DC)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSENSE(DC)",
+     "points": [
+      [
+       25.2,
+       99.6
+      ],
+      [
+       114.0,
+       98.4
+      ],
+      [
+       120.1,
+       97.7
+      ],
+      [
+       121.9,
+       94.9
+      ],
+      [
+       123.5,
+       87.9
+      ],
+      [
+       128.9,
+       57.8
+      ],
+      [
+       135.0,
+       19.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum charge current (VSENSE - VBAT) against VIN_REG voltage",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "VIN_REG",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSENSE(DC)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSENSE(DC)",
+     "points": [
+      [
+       2.6503,
+       0.3
+      ],
+      [
+       2.6678,
+       0.4
+      ],
+      [
+       2.6698,
+       0.7
+      ],
+      [
+       2.6716,
+       2.0
+      ],
+      [
+       2.6977,
+       46.4
+      ],
+      [
+       2.7095,
+       64.3
+      ],
+      [
+       2.7211,
+       80.1
+      ],
+      [
+       2.7294,
+       89.8
+      ],
+      [
+       2.7367,
+       96.6
+      ],
+      [
+       2.7418,
+       99.0
+      ],
+      [
+       2.7502,
+       99.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "CC/CV charging: BAT pin bias current against VBAT",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBAT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       0.009,
+       -0.332
+      ],
+      [
+       0.577,
+       -0.235
+      ],
+      [
+       0.767,
+       -0.15
+      ],
+      [
+       1.061,
+       0.121
+      ],
+      [
+       1.505,
+       0.593
+      ],
+      [
+       2.152,
+       1.238
+      ],
+      [
+       2.467,
+       1.516
+      ],
+      [
+       2.953,
+       1.883
+      ],
+      [
+       3.132,
+       1.986
+      ],
+      [
+       3.275,
+       2.016
+      ],
+      [
+       3.54,
+       2.043
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Battery bias current with charger disabled (IBAT + ISENSE + IBOOST + ISW)",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN floating",
+     "points": [
+      [
+       0,
+       0.04
+      ],
+      [
+       0.57,
+       0.11
+      ],
+      [
+       1.0,
+       0.48
+      ],
+      [
+       10.0,
+       9.62
+      ],
+      [
+       14.4,
+       13.91
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 20 V; VSHDN = 0 V",
+     "points": [
+      [
+       0,
+       0.1
+      ],
+      [
+       10.2,
+       0.17
+      ],
+      [
+       14.4,
+       0.36
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VFLOAT programming resistor current against VFLOAT for a 2-resistor network",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "VBAT(FLT)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IRFB",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IRFB",
+     "points": [
+      [
+       3.35,
+       0.02
+      ],
+      [
+       4.03,
+       2.32
+      ],
+      [
+       4.74,
+       3.95
+      ],
+      [
+       5.27,
+       4.88
+      ],
+      [
+       5.88,
+       5.74
+      ],
+      [
+       6.9,
+       6.86
+      ],
+      [
+       8.22,
+       7.89
+      ],
+      [
+       9.82,
+       8.75
+      ],
+      [
+       11.66,
+       9.46
+      ],
+      [
+       14.41,
+       10.18
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge current, efficiency and power loss against time (ICHG(MAX) = 2 A; VFLOAT = 8.2 V)",
+   "page": 6,
+   "conditions": "VIN = 20 V",
+   "x": {
+    "label": "Time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Charge current; power loss",
+    "unit": "A; W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Charge current",
+     "points": [
+      [
+       0.6,
+       1.987
+      ],
+      [
+       48.0,
+       1.965
+      ],
+      [
+       61.7,
+       1.928
+      ],
+      [
+       71.7,
+       1.867
+      ],
+      [
+       74.1,
+       1.817
+      ],
+      [
+       76.4,
+       1.72
+      ],
+      [
+       87.6,
+       1.105
+      ],
+      [
+       92.9,
+       0.885
+      ],
+      [
+       103.2,
+       0.557
+      ],
+      [
+       113.7,
+       0.352
+      ],
+      [
+       122.5,
+       0.229
+      ],
+      [
+       136.8,
+       0.137
+      ],
+      [
+       158.3,
+       0.082
+      ],
+      [
+       180.0,
+       0.068
+      ]
+     ]
+    },
+    {
+     "label": "Power loss",
+     "points": [
+      [
+       0.1,
+       2.527
+      ],
+      [
+       4.9,
+       2.366
+      ],
+      [
+       7.4,
+       2.321
+      ],
+      [
+       26.9,
+       2.332
+      ],
+      [
+       53.4,
+       2.295
+      ],
+      [
+       65.1,
+       2.22
+      ],
+      [
+       71.5,
+       2.155
+      ],
+      [
+       74.6,
+       2.045
+      ],
+      [
+       79.3,
+       1.731
+      ],
+      [
+       83.3,
+       1.364
+      ],
+      [
+       89.5,
+       1.049
+      ],
+      [
+       103.4,
+       0.666
+      ],
+      [
+       111.6,
+       0.516
+      ],
+      [
+       121.0,
+       0.376
+      ],
+      [
+       125.7,
+       0.329
+      ],
+      [
+       137.5,
+       0.254
+      ],
+      [
+       173.8,
+       0.198
+      ],
+      [
+       179.9,
+       0.214
+      ]
+     ]
+    },
+    {
+     "label": "Efficiency",
+     "points": [
+      [
+       0,
+       81.81
+      ],
+      [
+       5.5,
+       85.13
+      ],
+      [
+       7.8,
+       85.62
+      ],
+      [
+       69.5,
+       86.16
+      ],
+      [
+       76.6,
+       86.55
+      ],
+      [
+       84.5,
+       87.5
+      ],
+      [
+       88.8,
+       87.47
+      ],
+      [
+       100.6,
+       86.21
+      ],
+      [
+       132.3,
+       81.56
+      ],
+      [
+       161.2,
+       74.25
+      ],
+      [
+       168.8,
+       73.23
+      ],
+      [
+       176.7,
+       73.08
+      ],
+      [
+       179.3,
+       72.71
+      ],
+      [
+       180.1,
+       72.09
+      ],
+      [
+       180.4,
+       35.09
+      ]
+     ],
+     "axis": "y2"
+    }
+   ],
+   "y2": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   }
+  },
+  {
+   "title": "Charger efficiency against battery voltage (ICHG = 2 A)",
+   "page": 6,
+   "conditions": "VIN = 20 V with input blocking diode",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Efficiency",
+     "points": [
+      [
+       3.32,
+       74.77
+      ],
+      [
+       3.99,
+       77.58
+      ],
+      [
+       4.84,
+       80.25
+      ],
+      [
+       5.81,
+       82.28
+      ],
+      [
+       6.49,
+       83.44
+      ],
+      [
+       7.22,
+       84.45
+      ],
+      [
+       7.99,
+       85.27
+      ],
+      [
+       9.03,
+       86.19
+      ],
+      [
+       10.72,
+       87.33
+      ],
+      [
+       11.94,
+       87.79
+      ],
+      [
+       14.07,
+       88.13
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Switched inductor values for 7.2 V at 1.5 A",
+   "page": 14,
+   "conditions": "",
+   "x": {
+    "label": "Maximum operational VIN voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Switched inductor value",
+    "unit": "µH",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Band, lower edge",
+     "points": [
+      [
+       12.11,
+       5.09
+      ],
+      [
+       13.74,
+       6.26
+      ],
+      [
+       15.47,
+       7.2
+      ],
+      [
+       17.46,
+       8.06
+      ],
+      [
+       19.42,
+       8.73
+      ],
+      [
+       21.97,
+       9.42
+      ],
+      [
+       24.53,
+       9.98
+      ],
+      [
+       28.28,
+       10.58
+      ],
+      [
+       31.97,
+       11.04
+      ]
+     ]
+    },
+    {
+     "label": "Band, upper edge",
+     "points": [
+      [
+       12.1,
+       7.12
+      ],
+      [
+       13.65,
+       8.67
+      ],
+      [
+       15.33,
+       9.99
+      ],
+      [
+       17.26,
+       11.17
+      ],
+      [
+       19.66,
+       12.32
+      ],
+      [
+       22.0,
+       13.18
+      ],
+      [
+       24.66,
+       13.98
+      ],
+      [
+       28.37,
+       14.82
+      ],
+      [
+       32.0,
+       15.47
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Lead-acid 6-cell float charge voltage against temperature, -19.8 mV/°C, using LM234 with feedback network",
+   "page": 18,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VFLOAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VFLOAT",
+     "points": [
+      [
+       -9.87,
+       14.158
+      ],
+      [
+       59.82,
+       12.824
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Thermistor-based temperature compensation network: VFLOAT against temperature for a 6-cell charger",
+   "page": 18,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VFLOAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Theoretical VFLOAT",
+     "points": [
+      [
+       -9.96,
+       14.631
+      ],
+      [
+       0.27,
+       14.24
+      ],
+      [
+       10.54,
+       13.9
+      ],
+      [
+       18.24,
+       13.672
+      ],
+      [
+       27.48,
+       13.443
+      ],
+      [
+       39.27,
+       13.207
+      ],
+      [
+       45.58,
+       13.112
+      ],
+      [
+       49.67,
+       13.085
+      ],
+      [
+       59.87,
+       13.083
+      ]
+     ]
+    },
+    {
+     "label": "Programmed VBAT(FLOAT)",
+     "points": [
+      [
+       -9.86,
+       14.606
+      ],
+      [
+       6.76,
+       13.989
+      ],
+      [
+       15.69,
+       13.712
+      ],
+      [
+       24.4,
+       13.486
+      ],
+      [
+       32.14,
+       13.323
+      ],
+      [
+       40.42,
+       13.186
+      ],
+      [
+       49.3,
+       13.073
+      ],
+      [
+       59.87,
+       12.97
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SH-DC121000 AC adapter V against I characteristics",
+   "page": 22,
+   "conditions": "",
+   "x": {
+    "label": "Output current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Adapter",
+     "points": [
+      [
+       0.008,
+       19.96
+      ],
+      [
+       0.135,
+       17.41
+      ],
+      [
+       0.283,
+       15.9
+      ],
+      [
+       1.758,
+       7.93
+      ],
+      [
+       1.792,
+       7.68
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "solar-lifepo4-2cell",
+   "title": "2 A solar panel power manager with 7.2 V LiFePO4 battery and 17 V peak power tracking",
+   "page": 1,
+   "description": "A solar panel feeds VIN through D1. R1/R2 hold VIN_REG at 2.7 V when the panel is at about 17 V, so the charger backs off its current rather than dragging the panel below its peak-power point. SHDN is tied to VIN, TIMER is grounded for C/10 termination, and the status pins are unused. The buck stage is SW, the 10 µH inductor, the 0.05 Ω sense resistor (2 A) and freewheel diode D2; C2 and D3 from BAT make the bootstrap supply. R4/R5 set the float voltage for a two-cell LiFePO4 pack, and the pack's 10k thermistor watches its temperature. The system load sits on the input rail, and D4 runs from BAT (anode) to that rail (cathode).",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT3652"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "CMSH1-40MA"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "530 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "CMSH3-40MA"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "D3",
+     "type": "diode",
+     "value": "",
+     "note": "bootstrap refresh diode"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10 µH"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "0.05 Ω"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "542 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "459 kΩ"
+    },
+    {
+     "ref": "D4",
+     "type": "schottky",
+     "value": "CMSH3-40MA"
+    },
+    {
+     "ref": "RT1",
+     "type": "other",
+     "value": "10 kΩ",
+     "note": "NTC thermistor, B = 3380, in the battery pack"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "2-cell LiFePO4 (2 × 3.6 V)",
+     "note": "battery pack"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Solar panel input (<40 V open circuit)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "System load"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "liion-2cell-adapter",
+   "title": "2-cell Li-ion charger (8.3 V at 2 A) with 3 hour timer termination from a 12 V, 1 A unregulated wall adapter",
+   "page": 22,
+   "description": "An unregulated 12 V, 1 A adapter feeds VIN through D1. The chain R1, R2, R3 from the adapter sets VIN_REG at its R1/R2 junction so the charger trims its current to keep the adapter from sagging below 12 V, and sets SHDN at the R2/R3 junction. C4 (0.68 µF) on TIMER gives a three-hour end of cycle. LED1 and LED2 with 10k resistors show CHRG and FAULT. The buck stage uses the Vishay 8.2 µH inductor, the 0.05 Ω sense resistor for 2 A, and freewheel diode D3; D2 (1N914) from BAT refreshes the bootstrap capacitor C2. R7/R8 set an 8.3 V float for the removable two-cell pack, whose 10k thermistor goes to NTC. C5 and C6 hold the output up for the system load when the pack is out.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT3652"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS340"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "330 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "47 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "51 kΩ"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "LED1",
+     "type": "led",
+     "value": ""
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "LED2",
+     "type": "led",
+     "value": ""
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.68 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "1N914"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "8.2 µH",
+     "note": "Vishay 1HLP-2525CZ8R2M11"
+    },
+    {
+     "ref": "D3",
+     "type": "schottky",
+     "value": "MBRS340"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "0.05 Ω"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "100 µF"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "626 kΩ"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "412 kΩ"
+    },
+    {
+     "ref": "RT1",
+     "type": "other",
+     "value": "10 kΩ",
+     "note": "NTC thermistor R1, B = 3380, in the pack"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "2-cell Li-ion, 8.3 V float",
+     "note": "removable pack"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Adapter input, 12 V at 1 A (SH-DC121000)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "System load"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "lifepo4-1cell-c10",
+   "title": "Basic 2 A 1-cell LiFePO4 charger (3.6 V float) with C/10 termination",
+   "page": 22,
+   "description": "A minimal charger for one LiFePO4 cell from 5 V to 32 V. VIN_REG and SHDN are tied to VIN, so neither input regulation nor shutdown is used; TIMER is grounded for C/10 termination and NTC, CHRG and FAULT are left open. The buck stage is SW, 5.6 µH, the 0.05 Ω sense resistor for 2 A and freewheel diode D1; D2 (CMDSH2-4L) from BAT refreshes the bootstrap capacitor C2. The float voltage comes from the three-resistor network R2 (30k), R3 (330k) and R4 (223k), which gives 3.6 V with a 250k source resistance at VFB.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT3652"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "5.6 µH"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "CMSH3-40MA"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "CMDSH2-4L"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "0.05 Ω"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "30 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "330 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "223 kΩ"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "LiFePO4 cell"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN, 5 V to 32 V (40 V max)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "System load"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "solar-lead-acid-12v",
+   "title": "1 A solar panel powered 3-stage 12 V lead-acid fast/float charger",
+   "page": 26,
+   "description": "A panel with a 16 V peak-power point feeds VIN through D1; R1/R2 hold VIN_REG at 2.7 V at that voltage, and SHDN is tied to VIN. The 0.1 Ω sense resistor sets 1 A, with 0.15 A trickle charge below 10 V. TIMER has 4.7 µF to ground for timer termination. The float divider R5 (309k) over R6 (100k) through R4 (174k) gives 13.5 V; while CHRG is low (charging above C/10) it pulls the divider's lower node down through R7 (1M) and D4, raising the target to 14.4 V, so the charger fast-charges to 14.4 V, drops to a 13.5 V float once current falls to 0.1 A, and restarts fast charge below 13.2 V. The Murata 10k thermistor with R3 (910 Ω) in series moves the hot limit to 45 °C, for a 0 °C to 45 °C window. The bootstrap supply comes from BAT through zener Z1 (BZX84C6V2L) and D2 (1N914) to keep BOOST within its range at a 14.4 V battery. Inductor is a Würth 22 µH; D3 freewheels.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT3652"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBRS140"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "499 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "4.7 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "D2",
+     "type": "diode",
+     "value": "1N914"
+    },
+    {
+     "ref": "Z1",
+     "type": "zener",
+     "value": "BZX84C6V2L"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "22 µH",
+     "note": "Würth 7447779122"
+    },
+    {
+     "ref": "D3",
+     "type": "schottky",
+     "value": "MBRS340"
+    },
+    {
+     "ref": "R8",
+     "type": "resistor",
+     "value": "0.1 Ω"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "100 µF"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "910 Ω"
+    },
+    {
+     "ref": "RT1",
+     "type": "other",
+     "value": "10 kΩ",
+     "note": "NTC thermistor, B = 3380, Murata NCP18XH103"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "174 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "309 kΩ"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "100 kΩ"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "1 MΩ"
+    },
+    {
+     "ref": "D4",
+     "type": "diode",
+     "value": "1N4148"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "12 V lead-acid battery"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "Solar panel input (<40 V open circuit, 16 V peak power)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "System load"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Charge current sense resistor",
+   "expr": "RSENSE = 0.1 / ICHG(MAX)  (Ω)",
+   "where": {
+    "ICHG(MAX)": "maximum average charge current, A"
+   },
+   "note": "100 mV across RSENSE is full current; 2 A needs 0.05 Ω.",
+   "page": 12
+  },
+  {
+   "name": "Float voltage divider, top resistor",
+   "expr": "RFB1 = (VBAT(FLT) • 2.5 • 10^5) / 3.3  (Ω)",
+   "where": {
+    "RFB1": "resistor from BAT to VFB",
+    "VBAT(FLT)": "battery float voltage, V"
+   },
+   "note": "Gives a 250k equivalent resistance at VFB.",
+   "page": 15
+  },
+  {
+   "name": "Float voltage divider, bottom resistor",
+   "expr": "RFB2 = (RFB1 • 2.5 • 10^5) / (RFB1 – 2.5 • 10^5)  (Ω)",
+   "where": {
+    "RFB2": "resistor from VFB to ground"
+   },
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Divider current from the battery",
+   "expr": "IRFB = 3.3 / RFB2",
+   "where": {
+    "IRFB": "current the float divider draws from the battery"
+   },
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Three-resistor float network ratio",
+   "expr": "RFB2 / RFB1 = 3.3 / (VBAT(FLT) – 3.3)",
+   "where": {
+    "RFB3": "series resistor into VFB, 250k – RFB1||RFB2"
+   },
+   "note": "Worked case for 3.6 V: ratio 11, RFB2 = 330k at 10 µA, RFB1 = 30k, RFB1||RFB2 = 27.5k, RFB3 = 223k.",
+   "page": 15
+  },
+  {
+   "name": "Input regulation divider",
+   "expr": "RIN1 / RIN2 = (VIN(MIN) / 2.7) – 1",
+   "where": {
+    "RIN1": "resistor from the input supply to VIN_REG",
+    "RIN2": "resistor from VIN_REG to ground",
+    "VIN(MIN)": "lowest input voltage to hold"
+   },
+   "note": "",
+   "page": 16
+  },
+  {
+   "name": "End-of-cycle time",
+   "expr": "tEOC = CTIMER • 4.4 • 10^6  (hours, CTIMER in F)",
+   "where": {
+    "CTIMER": "capacitor from TIMER to ground"
+   },
+   "note": "Also written CTIMER = TEOC • 2.27 × 10^–7. 0.68 µF gives 3 hours.",
+   "page": 7
+  },
+  {
+   "name": "Precondition time limit",
+   "expr": "tPRE = CTIMER • 5.5 • 10^5",
+   "where": {
+    "tPRE": "one eighth of tEOC"
+   },
+   "note": "0.68 µF gives 22.5 minutes.",
+   "page": 7
+  },
+  {
+   "name": "Input capacitor RMS ripple current",
+   "expr": "ICVIN(RMS) ≅ ICHG(MAX) • (VBAT / VIN) • ([VIN / VBAT] – 1)^(1/2)",
+   "where": {
+    "ICHG(MAX)": "100 mV / RSENSE"
+   },
+   "note": "Largest at VIN = 2 • VBAT, where it equals ICHG(MAX)/2.",
+   "page": 12
+  },
+  {
+   "name": "Input bulk capacitance",
+   "expr": "CIN(BULK) = ICHG(MAX) • (VBAT / VIN) / ΔVIN  (µF)",
+   "where": {
+    "ΔVIN": "allowed input ripple voltage"
+   },
+   "note": "Input ripple above 0.1 V is not recommended; 10 µF usually suffices.",
+   "page": 12
+  },
+  {
+   "name": "Inductor value",
+   "expr": "L = (10 • RSENSE / (ΔIL / ICHG(MAX))) • VBAT(FLT) • [1 – VBAT(FLT) / VIN(MAX)]  (µH)",
+   "where": {
+    "ΔIL": "peak-to-peak inductor ripple current",
+    "VIN(MAX)": "maximum operating input voltage"
+   },
+   "note": "Ripple is normally chosen between 25 % and 35 % of ICHG(MAX).",
+   "page": 13
+  },
+  {
+   "name": "Inductor volt-second product",
+   "expr": "VBAT(FLT) • (1 – VBAT(FLT) / VIN(MAX))  (V•µs)",
+   "where": {},
+   "note": "Saturation rating at least (1 + ΔIMAX/2) • ICHG(MAX); RMS rating above ICHG(MAX).",
+   "page": 14
+  },
+  {
+   "name": "Freewheel diode average current",
+   "expr": "IDIODE(MAX) > ICHG(MAX) • (VIN(MAX) – VBAT(PRE)) / VIN(MAX)  (A)",
+   "where": {
+    "VBAT(PRE)": "precondition threshold, 0.7 • VBAT(FLT)"
+   },
+   "note": "For 7.2 V, 2 A and 25 V input: above 1.6 A.",
+   "page": 14
+  },
+  {
+   "name": "MPPT temperature compensation with LM234, top resistor",
+   "expr": "RIN1 = –RSET • (TC • 4405)",
+   "where": {
+    "TC": "panel temperature coefficient, V/°C",
+    "RSET": "LM234 set resistor"
+   },
+   "note": "Example: 36-cell panel, VOC 21.7 V, VMP 17.6 V, TC –78 mV/°C, RSET = 1k gives RIN1 = 344k.",
+   "page": 17
+  },
+  {
+   "name": "MPPT temperature compensation with LM234, bottom resistor",
+   "expr": "RIN2 = RIN1 / ({[VMP(25°C) + RIN1 • (0.0674 / RSET)] / VIN_REG} – 1)",
+   "where": {
+    "VMP(25°C)": "panel peak-power voltage at 25 °C"
+   },
+   "note": "Same example gives RIN2 = 24.4k.",
+   "page": 17
+  },
+  {
+   "name": "Battery float temperature compensation with LM234",
+   "expr": "RFB1 = –RSET • (TC • 4405); RFB2 = RFB1 / ({[VFLOAT(25°C) + RFB1 • (0.0674 / RSET)] / VFB} – 1); RFB3 = 250k – RFB1||RFB2",
+   "where": {
+    "TC": "wanted float temperature coefficient, V/°C",
+    "VFLOAT(25°C)": "float voltage at 25 °C"
+   },
+   "note": "6-cell lead-acid, 13.5 V and –19.8 mV/°C with RSET = 2.4k: RFB1 = 210k, RFB2 = 43k, RFB3 = 215k.",
+   "page": 18
+  },
+  {
+   "name": "Ideal lead-acid float voltage per cell",
+   "expr": "VFLOAT(1-CELL) = 4 × 10^–5 (T^2) – 6 × 10^–3 (T) + 2.375",
+   "where": {
+    "T": "temperature, °C"
+   },
+   "note": "Not below 2.18 V.",
+   "page": 18
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 10,
+   "text": "A 1 MHz fixed-frequency, average-current-mode buck. The voltage error amplifier compares VFB with the 3.3 V reference and drives ITH; ITH divided by ten is the current command to a current error amplifier that compares it with the RSENSE voltage, and that amplifier's output sets the switch duty against a ramp. ITH is clamped at 1 V, which caps the sense voltage at 100 mV and so sets the constant-current level. ITH is pulled down when VIN_REG goes under 2.7 V or the die nears 125 °C."
+  },
+  {
+   "topic": "Charge cycle",
+   "page": 11,
+   "text": "Below VFB = 2.3 V (70 % of float) the charger preconditions at 15 % of full current (15 mV across RSENSE), with 70 mV of hysteresis. Above it the charger runs at full current until VFB nears 3.3 V, then holds constant voltage while current tapers. C/10 is detected when ITH reaches 0.1 V (10 mV across RSENSE)."
+  },
+  {
+   "topic": "C/10 termination",
+   "page": 19,
+   "text": "Selected by grounding TIMER. The cycle ends when current falls under one tenth of the programmed maximum; the part goes to standby and CHRG goes high impedance. There is no bad-battery detection in this mode. With the battery removed the output saws by about 100 mV between termination and recharge, which makes an LED on CHRG blink at a rate set by the output capacitance."
+  },
+  {
+   "topic": "Timer termination",
+   "page": 19,
+   "text": "Selected by a capacitor on TIMER. CHRG still drops out at C/10, but charging carries on topping off until the end-of-cycle time (3 hours with 0.68 µF). The cycle only ends if the battery reached at least 97.5 % of float; otherwise the timer restarts for another full cycle."
+  },
+  {
+   "topic": "Bad battery",
+   "page": 20,
+   "text": "With the timer in use, a battery that stays below the precondition threshold longer than 1/8 of the cycle, or drops back into precondition after that point, is a bad-battery fault: charging stops, CHRG goes high impedance and FAULT goes low. The charger then sources 0.5 mA, so pulling the bad battery lets the output rise and a new cycle starts when another battery is fitted; cycling power or SHDN also restarts it."
+  },
+  {
+   "topic": "Standby and recharge",
+   "page": 11,
+   "text": "After termination the internal float reference drops 2.5 %, the voltage error amplifier output falls under 0.3 V and the part goes to standby, drawing 85 µA from VIN. When the battery sags below 97.5 % of float the amplifier output rises again and a new cycle starts."
+  },
+  {
+   "topic": "Input voltage regulation",
+   "page": 16,
+   "text": "If the source cannot supply the charger its voltage falls. A divider from the source to VIN_REG makes the desired minimum correspond to 2.7 V; the charger lowers its current to keep VIN_REG at or above that, which for a solar panel holds it near the peak-power voltage. Tie VIN_REG to VIN when unused."
+  },
+  {
+   "topic": "MPPT temperature compensation",
+   "page": 16,
+   "text": "A crystalline panel's open-circuit voltage falls by roughly 2 mV/°C per cell, and its peak-power voltage follows nearly the same slope. An LM234 temperature sensor in the VIN_REG divider makes the regulation point follow that linear drift."
+  },
+  {
+   "topic": "Start-up and BOOST",
+   "page": 13,
+   "text": "The buck is non-synchronous, so with no bootstrap voltage the switch needs VIN – VSW ≥ 3.3 V; while idle SW sits at the battery voltage, so VIN has to be 3.3 V above VBAT(FLT) to start. Once the BOOST capacitor holds more than 2 V the requirement goes away. BOOST takes a 1 µF or larger capacitor to SW, refreshed by a diode rated above 0.1 A average and above VIN(MAX) reverse, from the battery or another source; for floats above 8.4 V a >100 mA zener in series keeps BOOST within its 8.5 V range. An outside BOOST supply removes the start-up requirement at low VIN."
+  },
+  {
+   "topic": "Shutdown",
+   "page": 10,
+   "text": "SHDN has a precise 1.2 V threshold so a divider can serve as undervoltage lockout. Pulled under 0.4 V the part draws 15 µA from VIN."
+  },
+  {
+   "topic": "Battery temperature",
+   "page": 20,
+   "text": "A 10 kΩ, B = 3380 thermistor near the pack, from NTC to ground, sees 50 µA. Outside 0.29 V to 1.36 V (above 40 °C or below 0 °C) charging is paused, both status pins go low and the timer holds. Each threshold has about 5 °C of hysteresis. A 0.91k resistor in series with the thermistor raises the hot limit to 45 °C. Leave NTC open to disable."
+  },
+  {
+   "topic": "Thermal foldback",
+   "page": 20,
+   "text": "The current limit is cut back as the junction nears 125 °C, usually by only a little. If it falls under C/10 with TIMER grounded, the part suspends charging in standby until it cools."
+  },
+  {
+   "topic": "Input capacitor",
+   "page": 11,
+   "text": "VIN carries large switched currents and needs a low-ESR capacitor rated for the input ripple current; half of ICHG(MAX) is the worst case used for design."
+  },
+  {
+   "topic": "Output capacitor",
+   "page": 13,
+   "text": "BAT needs a 10 µF ceramic in every design. To run a system load with the battery removed, or with long battery leads, add 100 µF of low-ESR non-ceramic capacitance (tantalum or polymer) in parallel; otherwise ripple or oscillation can appear. The capacitor voltage rating must be at least the float voltage."
+  },
+  {
+   "topic": "Freewheel diode",
+   "page": 14,
+   "text": "The SW-to-ground diode must be a Schottky rated above the maximum VIN in reverse; lower forward drop means lower loss."
+  },
+  {
+   "topic": "VFB node",
+   "page": 15,
+   "text": "VFB is high impedance: keep stray capacitance and coupled signals off it. A 20 pF to 50 pF feedforward capacitor from BAT to VFB reduces the effect of parasitics. Board contamination shifts the output voltage, so clean after assembly and use low-leakage flux."
+  },
+  {
+   "topic": "Lead-acid float compensation",
+   "page": 17,
+   "text": "Lead-acid float voltage falls about 3.3 mV/°C per cell (2.25 V per cell at 25 °C). An LM234 in the float divider gives a linear slope; a thermistor network in the divider can approach the slightly curved ideal over a working range."
+  },
+  {
+   "topic": "Layout",
+   "page": 21,
+   "text": "SW edges are under 10 ns: keep the SW trace short and place CIN and the BOOST capacitor close to the IC with short, wide traces. Route SENSE and BAT together and keep them and VFB short, shielded by a ground plane. Keep high switched currents away from battery ground: in the on state the loop runs CIN, switch, inductor, battery; in the off state it runs from ground via the freewheel diode; in both, the return is via CBAT. Solder the exposed pad to as large a copper area as possible."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DD 12-lead plastic DFN (3 mm × 3 mm)",
+   "page": 23,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body size (4 sides)",
+     "2.90",
+     "3.00",
+     "3.10"
+    ],
+    [
+     "",
+     "height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "lead frame thickness",
+     "",
+     "(0.200)",
+     ""
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "0.45",
+     ""
+    ],
+    [
+     "",
+     "lead width",
+     "0.18",
+     "0.23",
+     "0.28"
+    ],
+    [
+     "",
+     "lead length",
+     "0.30",
+     "0.40",
+     "0.50"
+    ],
+    [
+     "",
+     "lead end radius",
+     "",
+     "0.115",
+     ""
+    ],
+    [
+     "",
+     "exposed pad length",
+     "2.28",
+     "2.38",
+     "2.48"
+    ],
+    [
+     "",
+     "exposed pad width",
+     "1.55",
+     "1.65",
+     "1.75"
+    ],
+    [
+     "",
+     "outer lead span along a side",
+     "",
+     "(2.25)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: overall width",
+     "3.45",
+     "3.50",
+     "3.55"
+    ],
+    [
+     "",
+     "land pattern: span between pad rows, inner edges",
+     "2.05",
+     "2.10",
+     "2.15"
+    ],
+    [
+     "",
+     "land pattern: pad length",
+     "0.65",
+     "0.70",
+     "0.75"
+    ],
+    [
+     "",
+     "land pattern: pad width",
+     "0.20",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "",
+     "land pattern: exposed pad length",
+     "2.33",
+     "2.38",
+     "2.43"
+    ],
+    [
+     "",
+     "land pattern: exposed pad width",
+     "1.60",
+     "1.65",
+     "1.70"
+    ]
+   ],
+   "notes": [
+    "Exposed pad size excludes mold flash, which is at most 0.15 mm per side. Pad and tie bars are solder plated. Pin 1 notch: R = 0.20 or 0.25 × 45° chamfer."
+   ]
+  },
+  {
+   "name": "MSE 12-lead plastic MSOP, exposed die pad",
+   "page": 24,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length (note 3)",
+     "3.937",
+     "4.039",
+     "4.141"
+    ],
+    [
+     "",
+     "body width (note 4)",
+     "2.898",
+     "3.00",
+     "3.102"
+    ],
+    [
+     "",
+     "width across leads",
+     "4.748",
+     "4.90",
+     "5.052"
+    ],
+    [
+     "",
+     "height",
+     "",
+     "",
+     "1.10"
+    ],
+    [
+     "",
+     "body thickness",
+     "",
+     "(0.86)",
+     ""
+    ],
+    [
+     "",
+     "standoff",
+     "0.0508",
+     "0.1016",
+     "0.1524"
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "0.650",
+     ""
+    ],
+    [
+     "",
+     "lead width",
+     "0.22",
+     "",
+     "0.38"
+    ],
+    [
+     "",
+     "lead thickness",
+     "",
+     "0.18",
+     ""
+    ],
+    [
+     "",
+     "foot length",
+     "0.378",
+     "0.53",
+     "0.682"
+    ],
+    [
+     "",
+     "gauge plane",
+     "",
+     "0.254",
+     ""
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "6°"
+    ],
+    [
+     "",
+     "exposed pad length",
+     "2.743",
+     "2.845",
+     "2.947"
+    ],
+    [
+     "",
+     "exposed pad width",
+     "1.549",
+     "1.651",
+     "1.753"
+    ],
+    [
+     "",
+     "exposed pad corner tail length",
+     "",
+     "(0.35)",
+     ""
+    ],
+    [
+     "",
+     "exposed pad corner tail width",
+     "",
+     "(0.12)",
+     ""
+    ],
+    [
+     "",
+     "lead tip to body edge",
+     "(0.330)",
+     "(0.406)",
+     "(0.482)"
+    ],
+    [
+     "",
+     "land pattern: span",
+     "5.10",
+     "",
+     ""
+    ],
+    [
+     "",
+     "land pattern: pad length",
+     "0.762",
+     "0.889",
+     "1.016"
+    ],
+    [
+     "",
+     "land pattern: inner pad gap",
+     "3.20",
+     "",
+     "3.45"
+    ],
+    [
+     "",
+     "land pattern: pad width",
+     "0.382",
+     "0.42",
+     "0.458"
+    ],
+    [
+     "",
+     "land pattern: pitch",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "",
+     "land pattern: exposed pad",
+     "",
+     "2.845 × 1.651",
+     ""
+    ]
+   ],
+   "notes": [
+    "Body length excludes mold flash, protrusions and gate burrs, each at most 0.152 mm per side; body width excludes interlead flash, at most 0.152 mm per side. Lead coplanarity 0.102 mm max. The exposed pad size includes mold flash, at most 0.254 mm per side."
+   ]
+  }
+ ]
+}

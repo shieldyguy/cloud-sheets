@@ -1,0 +1,3137 @@
+{
+ "sheet": 1,
+ "name": "BME280",
+ "kind": "sensor",
+ "manufacturer": "Bosch Sensortec",
+ "title": "Combined digital humidity, barometric pressure and temperature sensor, I²C and SPI, 2.5 × 2.5 mm metal-lid LGA",
+ "source": {
+  "document": "BST-BME280-DS001-24",
+  "revision": "Revision 1.24, February 2024",
+  "pages": 60
+ },
+ "summary": "A single package holding three sensing elements: relative humidity, absolute barometric pressure and temperature, each read by a shared ADC and delivered as raw codes that the host turns into physical units with factory calibration words stored on the chip. The core runs from 1.71 V to 3.6 V and the interface rail from 1.2 V to 3.6 V; the host talks to it over I²C up to 3.4 MHz or SPI (3- or 4-wire) up to 10 MHz. Sleep, forced (one conversion on request) and normal (free-running with a programmed idle time) modes, per-channel oversampling and an IIR filter on pressure and temperature trade current against noise; at one reading per second with all three channels it draws 3.6 µA. Registers and pressure/temperature behaviour match the BMP280.",
+ "key_figures": [
+  [
+   "Supply",
+   "VDD 1.71 V to 3.6 V; VDDIO 1.2 V to 3.6 V"
+  ],
+  [
+   "Current at 1 Hz",
+   "1.8 µA humidity + temperature; 2.8 µA pressure + temperature; 3.6 µA all three"
+  ],
+  [
+   "Sleep current",
+   "0.1 µA typ, 0.3 µA max"
+  ],
+  [
+   "Humidity accuracy",
+   "±3 %RH typ (20 to 80 %RH, 25 °C, with hysteresis)"
+  ],
+  [
+   "Humidity response",
+   "τ63% 1 s typ"
+  ],
+  [
+   "Pressure accuracy",
+   "±1.0 hPa typ absolute (300 to 1100 hPa, 0 to 65 °C); ±0.12 hPa relative"
+  ],
+  [
+   "Pressure noise",
+   "0.2 Pa RMS (1.7 cm) with filter, highest oversampling"
+  ],
+  [
+   "Pressure offset tempco",
+   "±1.5 Pa/K (±12.6 cm/K)"
+  ],
+  [
+   "Temperature accuracy",
+   "±0.5 °C typ (0 to 65 °C)"
+  ],
+  [
+   "Operating range",
+   "-40 to +85 °C, 0 to 100 %RH, 300 to 1100 hPa"
+  ],
+  [
+   "Interfaces",
+   "I²C to 3.4 MHz (address 0x76 or 0x77); SPI modes 00 and 11, 3- or 4-wire, to 10 MHz"
+  ],
+  [
+   "Package",
+   "8-pad metal-lid LGA, 2.5 × 2.5 × 0.93 mm, MSL1, RoHS, halogen-free"
+  ]
+ ],
+ "part_numbers": {
+  "page": 44,
+  "columns": [
+   "part number",
+   "sales part number",
+   "package",
+   "chip ID",
+   "marking product code",
+   "packing"
+  ],
+  "rows": [
+   [
+    "BME280",
+    "0 273 141 185",
+    "8-pad LGA, 2.5 × 2.5 × 0.93 mm, metal lid",
+    "0x60",
+    "U",
+    "tape and reel, 10 kpcs"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "LGA-8",
+   "page": 38,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; tie to the board ground in every interface mode."
+    },
+    {
+     "pin": "2",
+     "name": "CSB",
+     "type": "digital input",
+     "function": "Chip select, low active, with an internal pull-up of 70 kΩ to 190 kΩ to VDDIO. Wire straight to VDDIO for I²C; drive it from the host as chip select for 3- or 4-wire SPI. A low level on it at any time after reset locks the part in SPI until the next power-on reset."
+    },
+    {
+     "pin": "3",
+     "name": "SDI",
+     "type": "digital in/out",
+     "function": "SPI 4-wire data in; SPI 3-wire data in and out; I²C SDA (open drain to ground, needs an external pull-up to VDDIO)."
+    },
+    {
+     "pin": "4",
+     "name": "SCK",
+     "type": "digital input",
+     "function": "Serial clock: SPI SCK, or I²C SCL. High-impedance input; the part never stretches the clock."
+    },
+    {
+     "pin": "5",
+     "name": "SDO",
+     "type": "digital in/out",
+     "function": "SPI 4-wire data out. In I²C it sets bit 0 of the address: ground gives 0x76, VDDIO gives 0x77; it must not float. Do not connect in 3-wire SPI, where it is high impedance."
+    },
+    {
+     "pin": "6",
+     "name": "VDDIO",
+     "type": "power in",
+     "function": "Interface supply, 1.2 V to 3.6 V. Bypass with 100 nF to ground."
+    },
+    {
+     "pin": "7",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; tie to the board ground in every interface mode."
+    },
+    {
+     "pin": "8",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Main supply for the analog and digital core, 1.71 V to 3.6 V, ripple 50 mVpp max. Bypass with 100 nF to ground."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Electrical parameter specification",
+   "page": 8,
+   "conditions": "Unless a row says otherwise: values hold over the full supply range; min and max hold over the full-accuracy temperature range; min/max of drifts, offsets and temperature coefficients are ±3σ over lifetime and typ values ±1σ over lifetime; typical currents and state-machine timings are at 25 °C; min/max currents come from corner lots over the whole temperature range; min/max state-machine timings come from corner lots over 0 to +65 °C.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage, internal domains",
+     "VDD",
+     "ripple max. 50 mVpp",
+     "1.71",
+     "1.8",
+     "3.6",
+     "V"
+    ],
+    [
+     "Supply voltage, I/O domain",
+     "VDDIO",
+     "",
+     "1.2",
+     "1.8",
+     "3.6",
+     "V"
+    ],
+    [
+     "Sleep current",
+     "IDDSL",
+     "",
+     "",
+     "0.1",
+     "0.3",
+     "µA"
+    ],
+    [
+     "Standby current (inactive period of normal mode)",
+     "IDDSB",
+     "",
+     "",
+     "0.2",
+     "0.5",
+     "µA"
+    ],
+    [
+     "Current during humidity measurement",
+     "IDDH",
+     "Max value at 85 °C",
+     "",
+     "340",
+     "",
+     "µA"
+    ],
+    [
+     "Current during pressure measurement",
+     "IDDP",
+     "Max value at -40 °C",
+     "",
+     "714",
+     "",
+     "µA"
+    ],
+    [
+     "Current during temperature measurement",
+     "IDDT",
+     "Max value at 85 °C",
+     "",
+     "350",
+     "",
+     "µA"
+    ],
+    [
+     "Start-up time",
+     "tstartup",
+     "Time to first communication after both VDD > 1.58 V and VDDIO > 0.65 V",
+     "",
+     "",
+     "2",
+     "ms"
+    ],
+    [
+     "Power supply rejection ratio (DC)",
+     "PSRR",
+     "full VDD range",
+     "",
+     "",
+     "±0.01",
+     "%RH/V"
+    ],
+    [
+     "Power supply rejection ratio (DC)",
+     "PSRR",
+     "full VDD range",
+     "",
+     "",
+     "±5",
+     "Pa/V"
+    ],
+    [
+     "Standby time accuracy",
+     "Δtstandby",
+     "",
+     "",
+     "±5",
+     "±25",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "Humidity parameter specification",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating range (1)",
+     "RH",
+     "For temperatures < 0 °C and > 60 °C see Figure 1",
+     "-40",
+     "25",
+     "85",
+     "°C"
+    ],
+    [
+     "Operating range (1)",
+     "RH",
+     "For temperatures < 0 °C and > 60 °C see Figure 1",
+     "0",
+     "",
+     "100",
+     "%RH"
+    ],
+    [
+     "Supply current",
+     "IDD,H",
+     "1 Hz forced mode, humidity and temperature",
+     "",
+     "1.8",
+     "2.8",
+     "µA"
+    ],
+    [
+     "Absolute accuracy tolerance",
+     "AH",
+     "20…80 %RH, 25 °C, including hysteresis",
+     "",
+     "±3",
+     "",
+     "%RH"
+    ],
+    [
+     "Hysteresis (2)",
+     "HH",
+     "10→90→10 %RH, 25 °C",
+     "",
+     "±1",
+     "",
+     "%RH"
+    ],
+    [
+     "Nonlinearity (3)",
+     "NLH",
+     "10→90 %RH, 25 °C",
+     "",
+     "1",
+     "",
+     "%RH"
+    ],
+    [
+     "Response time to complete 63% of step (4)",
+     "τ63%",
+     "90→0 or 0→90 %RH, 25°C",
+     "",
+     "1",
+     "",
+     "s"
+    ],
+    [
+     "Resolution",
+     "RH",
+     "",
+     "",
+     "0.008",
+     "",
+     "%RH"
+    ],
+    [
+     "Noise in humidity (RMS)",
+     "NH",
+     "Highest oversampling, see chapter 3.6",
+     "",
+     "0.02",
+     "",
+     "%RH"
+    ],
+    [
+     "Long term stability",
+     "∆Hstab",
+     "10…90 %RH, 25 °C",
+     "",
+     "0.5",
+     "",
+     "%RH/year"
+    ]
+   ],
+   "notes": [
+    "(1) Non-condensing air only. Going outside the operating range, soldering included, temporarily worsens humidity readings; the reconditioning procedure restores them.",
+    "(2) Measured by stepping 10, 30, 50, 70, 90 %RH and back down through 70, 50, 30 to 10 %RH. Hysteresis is how far the rising and the falling branch each lie from the mean of the two.",
+    "(3) The compensation formulas remove the nonlinear part of the raw humidity reading.",
+    "(4) The response time assumes enough air reaches the vent hole to exchange the air inside; an air speed of about 1 m/s is needed to see the stated response."
+   ]
+  },
+  {
+   "title": "Pressure parameter specification",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating temperature range",
+     "TA",
+     "operational",
+     "-40",
+     "25",
+     "+85",
+     "°C"
+    ],
+    [
+     "Operating temperature range",
+     "TA",
+     "full accuracy",
+     "0",
+     "",
+     "+65",
+     "°C"
+    ],
+    [
+     "Operating pressure range",
+     "P",
+     "full accuracy",
+     "300",
+     "",
+     "1100",
+     "hPa"
+    ],
+    [
+     "Supply current",
+     "IDD,LP",
+     "1 Hz forced mode, pressure and temperature, lowest power",
+     "",
+     "2.8",
+     "4.2",
+     "µA"
+    ],
+    [
+     "Temperature coefficient of offset (5)",
+     "TCOP",
+     "25…65 °C, 900 hPa",
+     "",
+     "±1.5",
+     "",
+     "Pa/K"
+    ],
+    [
+     "Temperature coefficient of offset (5)",
+     "TCOP",
+     "25…65 °C, 900 hPa",
+     "",
+     "±12.6",
+     "",
+     "cm/K"
+    ],
+    [
+     "Absolute accuracy pressure",
+     "APext",
+     "300 . . 1100 hPa, -20 . . . 0 °C",
+     "",
+     "±1.7",
+     "",
+     "hPa"
+    ],
+    [
+     "Absolute accuracy pressure",
+     "AP,full",
+     "300 . . . 1100 hPa, 0 . . . 65 °C",
+     "",
+     "±1.0",
+     "",
+     "hPa"
+    ],
+    [
+     "Absolute accuracy pressure",
+     "AP",
+     "1100 . . . 1250 hPa, 25 . . . 40 °C",
+     "",
+     "±1.5",
+     "",
+     "hPa"
+    ],
+    [
+     "Relative accuracy pressure, VDD = 3.3V",
+     "Arel",
+     "700 … 900hPa, 25 . . . 40 °C",
+     "",
+     "±0.12",
+     "",
+     "hPa"
+    ],
+    [
+     "Resolution of pressure output data",
+     "RP",
+     "Highest oversampling",
+     "",
+     "0.18",
+     "",
+     "Pa"
+    ],
+    [
+     "Noise in pressure",
+     "NP,fullBW",
+     "Full bandwidth, highest oversampling, see chapter 3.6",
+     "",
+     "1.3",
+     "",
+     "Pa"
+    ],
+    [
+     "Noise in pressure",
+     "NP,fullBW",
+     "Full bandwidth, highest oversampling, see chapter 3.6",
+     "",
+     "11",
+     "",
+     "cm"
+    ],
+    [
+     "Noise in pressure",
+     "NP,filtered",
+     "Reduced bandwidth, highest oversampling, see chapter 3.6",
+     "",
+     "0.2",
+     "",
+     "Pa"
+    ],
+    [
+     "Noise in pressure",
+     "NP,filtered",
+     "Reduced bandwidth, highest oversampling, see chapter 3.6",
+     "",
+     "1.7",
+     "",
+     "cm"
+    ],
+    [
+     "Solder drift",
+     "",
+     "Minimum solder height 50µm",
+     "-0.5",
+     "",
+     "+2.0",
+     "hPa"
+    ],
+    [
+     "Long term stability (6)",
+     "∆Pstab",
+     "per year",
+     "",
+     "±1.0",
+     "",
+     "hPa"
+    ],
+    [
+     "Possible sampling rate",
+     "fsample_P",
+     "Lowest oversampling, see chapter 9.2",
+     "157",
+     "182",
+     "",
+     "Hz"
+    ]
+   ],
+   "notes": [
+    "(5) A temperature change of 10 °C at fixed pressure or altitude moves the reading by 10 × TCOP.",
+    "(6) Holds over the full-accuracy range of 0 to 65 °C."
+   ]
+  },
+  {
+   "title": "Temperature parameter specification",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating range",
+     "T",
+     "Operational",
+     "-40",
+     "25",
+     "85",
+     "°C"
+    ],
+    [
+     "Operating range",
+     "T",
+     "Full accuracy",
+     "0",
+     "",
+     "65",
+     "°C"
+    ],
+    [
+     "Supply current",
+     "IDD,T",
+     "1 Hz forced mode, temperature measurement only",
+     "",
+     "1.0",
+     "",
+     "µA"
+    ],
+    [
+     "Absolute accuracy temperature (7)",
+     "AT,25",
+     "25 °C",
+     "",
+     "±0.5",
+     "",
+     "°C"
+    ],
+    [
+     "Absolute accuracy temperature (7)",
+     "AT,full",
+     "0…65 °C",
+     "",
+     "±0.5",
+     "",
+     "°C"
+    ],
+    [
+     "Absolute accuracy temperature (7)",
+     "AT,ext (8)",
+     "-20 …. 0 °C",
+     "",
+     "±1.25",
+     "",
+     "°C"
+    ],
+    [
+     "Absolute accuracy temperature (7)",
+     "AT,ext (9)",
+     "-40 … -20 °C",
+     "",
+     "±1.5",
+     "",
+     "°C"
+    ],
+    [
+     "Output resolution",
+     "RT",
+     "API output resolution",
+     "",
+     "0.01",
+     "",
+     "°C"
+    ],
+    [
+     "RMS noise",
+     "NT",
+     "Lowest oversampling",
+     "",
+     "0.005",
+     "",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(7) The figure is the die temperature from the internal sensor. It follows board temperature, self-heating of the sensing element and the surrounding air, and usually reads above the air temperature.",
+    "(8), (9) Target values; not guaranteed."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 13,
+   "conditions": "Determined with corner lots over the complete temperature range.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage at any supply pin",
+     "VDD and VDDIO pin",
+     "-0.3",
+     "4.25",
+     "V"
+    ],
+    [
+     "Voltage at any interface pin",
+     "",
+     "-0.3",
+     "VDDIO + 0.3",
+     "V"
+    ],
+    [
+     "Storage temperature",
+     "≤ 65% RH",
+     "-45",
+     "+85",
+     "°C"
+    ],
+    [
+     "Pressure",
+     "",
+     "0",
+     "20 000",
+     "hPa"
+    ],
+    [
+     "ESD",
+     "HBM, at any pin",
+     "",
+     "±2",
+     "kV"
+    ],
+    [
+     "ESD",
+     "CDM",
+     "",
+     "±500",
+     "V"
+    ],
+    [
+     "ESD",
+     "Machine model",
+     "",
+     "±200",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "IIR filter settings",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "filter coefficient",
+    "samples to reach ≥75 % of step response"
+   ],
+   "rows": [
+    [
+     "Filter off",
+     "1"
+    ],
+    [
+     "2",
+     "2"
+    ],
+    [
+     "4",
+     "5"
+    ],
+    [
+     "8",
+     "11"
+    ],
+    [
+     "16",
+     "22"
+    ]
+   ]
+  },
+  {
+   "title": "Recommended settings by use case",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "use case",
+    "sensor mode",
+    "oversampling",
+    "IIR filter",
+    "current consumption",
+    "RMS noise",
+    "data output rate",
+    "filter bandwidth",
+    "response time (75%)"
+   ],
+   "rows": [
+    [
+     "Weather monitoring",
+     "forced mode, 1 sample / minute",
+     "pressure ×1, temperature ×1, humidity ×1",
+     "filter off",
+     "0.16 µA",
+     "3.3 Pa / 30 cm, 0.07 %RH",
+     "1/60 Hz",
+     "",
+     ""
+    ],
+    [
+     "Humidity sensing",
+     "forced mode, 1 sample / second",
+     "pressure ×0, temperature ×1, humidity ×1",
+     "filter off",
+     "2.9 µA",
+     "0.07 %RH",
+     "1 Hz",
+     "",
+     ""
+    ],
+    [
+     "Indoor navigation",
+     "normal mode, tstandby = 0.5 ms",
+     "pressure ×16, temperature ×2, humidity ×1",
+     "filter coefficient 16",
+     "633 µA",
+     "0.2 Pa / 1.7 cm",
+     "25Hz",
+     "0.53 Hz",
+     "0.9 s"
+    ],
+    [
+     "Gaming",
+     "normal mode, tstandby = 0.5 ms",
+     "pressure ×4, temperature ×1, humidity ×0",
+     "filter coefficient 16",
+     "581 µA",
+     "0.3 Pa / 2.5 cm",
+     "83 Hz",
+     "1.75 Hz",
+     "0.3 s"
+    ]
+   ],
+   "notes": [
+    "Indoor navigation matches the Android rates SENSOR_DELAY_NORMAL and SENSOR_DELAY_UI; gaming matches SENSOR_DELAY_GAMING and SENSOR_DELAY_FASTEST."
+   ]
+  },
+  {
+   "title": "Noise and current for humidity",
+   "page": 21,
+   "conditions": "25 °C; current at 1 Hz forced mode, humidity and temperature measured, sleep current included.",
+   "columns": [
+    "humidity / temperature oversampling",
+    "typical RMS noise in humidity [%RH]",
+    "typical current [µA]"
+   ],
+   "rows": [
+    [
+     "×1 / ×1",
+     "0.07",
+     "1.8"
+    ],
+    [
+     "×2 / ×1",
+     "0.05",
+     "2.5"
+    ],
+    [
+     "×4 / ×1",
+     "0.04",
+     "3.8"
+    ],
+    [
+     "×8 / ×1",
+     "0.03",
+     "6.5"
+    ],
+    [
+     "×16 / ×1",
+     "0.02",
+     "11.7"
+    ]
+   ]
+  },
+  {
+   "title": "Noise and current for pressure",
+   "page": 22,
+   "conditions": "25 °C; current at 1 Hz forced mode, pressure and temperature measured, sleep current included.",
+   "columns": [
+    "pressure / temperature oversampling",
+    "RMS noise [Pa], filter off",
+    "RMS noise [Pa], coefficient 2",
+    "RMS noise [Pa], coefficient 4",
+    "RMS noise [Pa], coefficient 8",
+    "RMS noise [Pa], coefficient 16",
+    "typical current [µA]"
+   ],
+   "rows": [
+    [
+     "×1 / ×1",
+     "3.3",
+     "1.9",
+     "1.2",
+     "0.9",
+     "0.4",
+     "2.8"
+    ],
+    [
+     "×2 / ×1",
+     "2.6",
+     "1.5",
+     "1.0",
+     "0.6",
+     "0.4",
+     "4.2"
+    ],
+    [
+     "×4 / ×1",
+     "2.1",
+     "1.2",
+     "0.8",
+     "0.5",
+     "0.3",
+     "7.1"
+    ],
+    [
+     "×8 / ×1",
+     "1.6",
+     "1.0",
+     "0.6",
+     "0.4",
+     "0.2",
+     "12.8"
+    ],
+    [
+     "×16 / ×2",
+     "1.3",
+     "0.8",
+     "0.5",
+     "0.4",
+     "0.2",
+     "24.9"
+    ]
+   ]
+  },
+  {
+   "title": "Temperature dependence of pressure noise",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "temperature",
+    "typical change in RMS noise compared to 25 °C"
+   ],
+   "rows": [
+    [
+     "-10 °C",
+     "+25 %"
+    ],
+    [
+     "25 °C",
+     "±0 %"
+    ],
+    [
+     "75 °C",
+     "-5 %"
+    ]
+   ]
+  },
+  {
+   "title": "Noise in temperature",
+   "page": 22,
+   "conditions": "25 °C",
+   "columns": [
+    "temperature oversampling",
+    "typical RMS noise in temperature [°C]"
+   ],
+   "rows": [
+    [
+     "×1",
+     "0.005"
+    ],
+    [
+     "×2",
+     "0.004"
+    ],
+    [
+     "×4",
+     "0.003"
+    ],
+    [
+     "×8",
+     "0.003"
+    ],
+    [
+     "×16",
+     "0.002"
+    ]
+   ]
+  },
+  {
+   "title": "Computational requirements for compensation formulas",
+   "page": 24,
+   "conditions": "Clock cycles on an ARM Cortex-M3 without FPU, GCC -O2; floating point emulated.",
+   "columns": [
+    "compensation of",
+    "32 bit integer",
+    "64 bit integer",
+    "double precision"
+   ],
+   "rows": [
+    [
+     "Humidity",
+     "~83",
+     "–",
+     "~2900 (11)"
+    ],
+    [
+     "Temperature",
+     "~46",
+     "–",
+     "~2400 (11)"
+    ],
+    [
+     "Pressure",
+     "~112 (12)",
+     "~1400",
+     "~5400 (11)"
+    ]
+   ],
+   "notes": [
+    "(11) Intended for high-level environments such as Matlab or LabVIEW.",
+    "(12) Intended for 8-bit microcontrollers."
+   ]
+  },
+  {
+   "title": "Compensation parameter storage, naming and data type",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "register address",
+    "register content",
+    "data type"
+   ],
+   "rows": [
+    [
+     "0x88 / 0x89",
+     "dig_T1 [7:0] / [15:8]",
+     "unsigned short"
+    ],
+    [
+     "0x8A / 0x8B",
+     "dig_T2 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x8C / 0x8D",
+     "dig_T3 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x8E / 0x8F",
+     "dig_P1 [7:0] / [15:8]",
+     "unsigned short"
+    ],
+    [
+     "0x90 / 0x91",
+     "dig_P2 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x92 / 0x93",
+     "dig_P3 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x94 / 0x95",
+     "dig_P4 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x96 / 0x97",
+     "dig_P5 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x98 / 0x99",
+     "dig_P6 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x9A / 0x9B",
+     "dig_P7 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x9C / 0x9D",
+     "dig_P8 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0x9E / 0x9F",
+     "dig_P9 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0xA1",
+     "dig_H1 [7:0]",
+     "unsigned char"
+    ],
+    [
+     "0xE1 / 0xE2",
+     "dig_H2 [7:0] / [15:8]",
+     "signed short"
+    ],
+    [
+     "0xE3",
+     "dig_H3 [7:0]",
+     "unsigned char"
+    ],
+    [
+     "0xE4 / 0xE5[3:0]",
+     "dig_H4 [11:4] / [3:0]",
+     "signed short"
+    ],
+    [
+     "0xE5[7:4] / 0xE6",
+     "dig_H5 [3:0] / [11:4]",
+     "signed short"
+    ],
+    [
+     "0xE7",
+     "dig_H6",
+     "signed char"
+    ]
+   ],
+   "notes": [
+    "Registers calib00 to calib41 sit at 0x88 to 0xA1 and 0xE1 to 0xE7. Words are two's complement; each 16-bit word is assembled from two 8-bit registers. The values are written into NVM at production and cannot be changed."
+   ]
+  },
+  {
+   "title": "Register differences from BMP280",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bits",
+    "content",
+    "BMP280",
+    "BME280"
+   ],
+   "rows": [
+    [
+     "0xD0 “id”",
+     "7:0",
+     "chip_id",
+     "Read value is 0x56 / 0x57 (samples), 0x58 (mass production)",
+     "Read value is 0x60"
+    ],
+    [
+     "0xF5 “config”",
+     "7:5",
+     "t_sb",
+     "‘110’: 2000 ms; ‘111’: 4000 ms",
+     "‘110’: 10 ms; ‘111’: 20 ms"
+    ],
+    [
+     "0xF7…0xF9 “press”",
+     "19:0",
+     "press",
+     "Resolution (16…20 bit) depends only on osrs_p",
+     "Without filter, resolution depends on osrs_p; with filter, always 20 bit"
+    ],
+    [
+     "0xFA…0xFC “temp”",
+     "19:0",
+     "temp",
+     "Resolution (16…20 bit) depends only on osrs_t",
+     "Without filter, resolution depends on osrs_t; with filter, always 20 bit"
+    ]
+   ]
+  },
+  {
+   "title": "Memory map",
+   "page": 27,
+   "conditions": "Reserved registers are not listed.",
+   "columns": [
+    "register name",
+    "address",
+    "bit7",
+    "bit6",
+    "bit5",
+    "bit4",
+    "bit3",
+    "bit2",
+    "bit1",
+    "bit0",
+    "reset state",
+    "type"
+   ],
+   "rows": [
+    [
+     "hum_lsb",
+     "0xFE",
+     "hum_lsb<7:0>",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x00",
+     "read only"
+    ],
+    [
+     "hum_msb",
+     "0xFD",
+     "hum_msb<7:0>",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x80",
+     "read only"
+    ],
+    [
+     "temp_xlsb",
+     "0xFC",
+     "temp_xlsb<7:4>",
+     "",
+     "",
+     "",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0x00",
+     "read only"
+    ],
+    [
+     "temp_lsb",
+     "0xFB",
+     "temp_lsb<7:0>",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x00",
+     "read only"
+    ],
+    [
+     "temp_msb",
+     "0xFA",
+     "temp_msb<7:0>",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x80",
+     "read only"
+    ],
+    [
+     "press_xlsb",
+     "0xF9",
+     "press_xlsb<7:4>",
+     "",
+     "",
+     "",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0x00",
+     "read only"
+    ],
+    [
+     "press_lsb",
+     "0xF8",
+     "press_lsb<7:0>",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x00",
+     "read only"
+    ],
+    [
+     "press_msb",
+     "0xF7",
+     "press_msb<7:0>",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x80",
+     "read only"
+    ],
+    [
+     "config",
+     "0xF5",
+     "t_sb[2:0]",
+     "",
+     "",
+     "filter[2:0]",
+     "",
+     "",
+     "",
+     "spi3w_en[0]",
+     "0x00",
+     "read / write"
+    ],
+    [
+     "ctrl_meas",
+     "0xF4",
+     "osrs_t[2:0]",
+     "",
+     "",
+     "osrs_p[2:0]",
+     "",
+     "",
+     "mode[1:0]",
+     "",
+     "0x00",
+     "read / write"
+    ],
+    [
+     "status",
+     "0xF3",
+     "",
+     "",
+     "",
+     "",
+     "measuring[0]",
+     "",
+     "",
+     "im_update[0]",
+     "0x00",
+     "read only"
+    ],
+    [
+     "ctrl_hum",
+     "0xF2",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "osrs_h[2:0]",
+     "",
+     "",
+     "0x00",
+     "read / write"
+    ],
+    [
+     "calib26..calib41",
+     "0xE1…0xF0",
+     "calibration data",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "individual",
+     "read only"
+    ],
+    [
+     "reset",
+     "0xE0",
+     "reset[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x00",
+     "write only"
+    ],
+    [
+     "id",
+     "0xD0",
+     "chip_id[7:0]",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "0x60",
+     "read only"
+    ],
+    [
+     "calib00..calib25",
+     "0x88…0xA1",
+     "calibration data",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "individual",
+     "read only"
+    ]
+   ],
+   "notes": [
+    "Reserved registers must not be written; their read value is undefined."
+   ]
+  },
+  {
+   "title": "Register fields",
+   "page": 27,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bits",
+    "name",
+    "function"
+   ],
+   "rows": [
+    [
+     "0xD0 id",
+     "7:0",
+     "chip_id[7:0]",
+     "Reads 0x60; readable once power-on reset has finished."
+    ],
+    [
+     "0xE0 reset",
+     "7:0",
+     "reset[7:0]",
+     "Writing 0xB6 runs the full power-on reset; any other value does nothing. Reads 0x00."
+    ],
+    [
+     "0xF2 ctrl_hum",
+     "2, 1, 0",
+     "osrs_h[2:0]",
+     "Humidity oversampling. Takes effect only after the next write to ctrl_meas."
+    ],
+    [
+     "0xF3 status",
+     "3",
+     "measuring[0]",
+     "1 while a conversion runs; 0 once results are in the data registers."
+    ],
+    [
+     "0xF3 status",
+     "0",
+     "im_update[0]",
+     "1 while NVM calibration data are copied to the image registers (at power-on reset and before each conversion); 0 when done."
+    ],
+    [
+     "0xF4 ctrl_meas",
+     "7, 6, 5",
+     "osrs_t[2:0]",
+     "Temperature oversampling."
+    ],
+    [
+     "0xF4 ctrl_meas",
+     "4, 3, 2",
+     "osrs_p[2:0]",
+     "Pressure oversampling."
+    ],
+    [
+     "0xF4 ctrl_meas",
+     "1, 0",
+     "mode[1:0]",
+     "Sensor mode."
+    ],
+    [
+     "0xF5 config",
+     "7, 6, 5",
+     "t_sb[2:0]",
+     "Idle time tstandby between conversions in normal mode."
+    ],
+    [
+     "0xF5 config",
+     "4, 3, 2",
+     "filter[2:0]",
+     "IIR filter coefficient."
+    ],
+    [
+     "0xF5 config",
+     "0",
+     "spi3w_en[0]",
+     "1 selects 3-wire SPI."
+    ],
+    [
+     "0xF7 press_msb",
+     "7:0",
+     "press_msb[7:0]",
+     "Raw pressure up[19:12]."
+    ],
+    [
+     "0xF8 press_lsb",
+     "7:0",
+     "press_lsb[7:0]",
+     "Raw pressure up[11:4]."
+    ],
+    [
+     "0xF9 press_xlsb",
+     "7, 6, 5, 4",
+     "press_xlsb[3:0]",
+     "Raw pressure up[3:0]; how many of these bits carry data depends on the resolution."
+    ],
+    [
+     "0xFA temp_msb",
+     "7:0",
+     "temp_msb[7:0]",
+     "Raw temperature ut[19:12]."
+    ],
+    [
+     "0xFB temp_lsb",
+     "7:0",
+     "temp_lsb[7:0]",
+     "Raw temperature ut[11:4]."
+    ],
+    [
+     "0xFC temp_xlsb",
+     "7, 6, 5, 4",
+     "temp_xlsb[3:0]",
+     "Raw temperature ut[3:0]; how many of these bits carry data depends on the resolution."
+    ],
+    [
+     "0xFD hum_msb",
+     "7:0",
+     "hum_msb[7:0]",
+     "Raw humidity uh[15:8]."
+    ],
+    [
+     "0xFE hum_lsb",
+     "7:0",
+     "temp_lsb[7:0]",
+     "Raw humidity uh[7:0]."
+    ]
+   ],
+   "notes": [
+    "The name in the 0xFE row reads temp_lsb[7:0]; the register is hum_lsb.",
+    "A config write can be dropped while in normal mode but is always accepted in sleep mode. Writing filter resets the IIR filter."
+   ]
+  },
+  {
+   "title": "Oversampling settings osrs_h, osrs_p, osrs_t",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "osrs_x[2:0]",
+    "humidity (osrs_h)",
+    "pressure (osrs_p)",
+    "temperature (osrs_t)"
+   ],
+   "rows": [
+    [
+     "000",
+     "Skipped (output set to 0x8000)",
+     "Skipped (output set to 0x80000)",
+     "Skipped (output set to 0x80000)"
+    ],
+    [
+     "001",
+     "oversampling ×1",
+     "oversampling ×1",
+     "oversampling ×1"
+    ],
+    [
+     "010",
+     "oversampling ×2",
+     "oversampling ×2",
+     "oversampling ×2"
+    ],
+    [
+     "011",
+     "oversampling ×4",
+     "oversampling ×4",
+     "oversampling ×4"
+    ],
+    [
+     "100",
+     "oversampling ×8",
+     "oversampling ×8",
+     "oversampling ×8"
+    ],
+    [
+     "101, others",
+     "oversampling ×16",
+     "oversampling ×16",
+     "oversampling ×16"
+    ]
+   ]
+  },
+  {
+   "title": "Mode settings",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "mode[1:0]",
+    "mode"
+   ],
+   "rows": [
+    [
+     "00",
+     "Sleep mode"
+    ],
+    [
+     "01 and 10",
+     "Forced mode"
+    ],
+    [
+     "11",
+     "Normal mode"
+    ]
+   ]
+  },
+  {
+   "title": "Standby time settings t_sb",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "t_sb[2:0]",
+    "tstandby [ms]"
+   ],
+   "rows": [
+    [
+     "000",
+     "0.5"
+    ],
+    [
+     "001",
+     "62.5"
+    ],
+    [
+     "010",
+     "125"
+    ],
+    [
+     "011",
+     "250"
+    ],
+    [
+     "100",
+     "500"
+    ],
+    [
+     "101",
+     "1000"
+    ],
+    [
+     "110",
+     "10"
+    ],
+    [
+     "111",
+     "20"
+    ]
+   ]
+  },
+  {
+   "title": "Filter settings",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "filter[2:0]",
+    "filter coefficient"
+   ],
+   "rows": [
+    [
+     "000",
+     "Filter off"
+    ],
+    [
+     "001",
+     "2"
+    ],
+    [
+     "010",
+     "4"
+    ],
+    [
+     "011",
+     "8"
+    ],
+    [
+     "100, others",
+     "16"
+    ]
+   ]
+  },
+  {
+   "title": "Interface parameters",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input low level",
+     "Vil_si",
+     "VDDIO=1.2 V to 3.6 V",
+     "",
+     "",
+     "20",
+     "%VDDIO"
+    ],
+    [
+     "Input high level",
+     "Vih_si",
+     "VDDIO=1.2 V to 3.6 V",
+     "80",
+     "",
+     "",
+     "%VDDIO"
+    ],
+    [
+     "Output low level I2C",
+     "Vol_SDI",
+     "VDDIO=1.62 V, Iol=3 mA",
+     "",
+     "",
+     "20",
+     "%VDDIO"
+    ],
+    [
+     "Output low level I2C",
+     "Vol_SDI_1.2",
+     "VDDIO=1.20 V, Iol=3 mA",
+     "",
+     "",
+     "23",
+     "%VDDIO"
+    ],
+    [
+     "Output low level SPI",
+     "Vol_SDO",
+     "VDDIO=1.62 V, Iol=1 mA",
+     "",
+     "",
+     "20",
+     "%VDDIO"
+    ],
+    [
+     "Output low level SPI",
+     "Vol_SDO_1.2",
+     "VDDIO=1.20 V, Iol=1 mA",
+     "",
+     "",
+     "23",
+     "%VDDIO"
+    ],
+    [
+     "Output high level",
+     "Voh",
+     "VDDIO=1.62 V, Ioh=1 mA (SDO, SDI)",
+     "80",
+     "",
+     "",
+     "%VDDIO"
+    ],
+    [
+     "Output high level",
+     "Voh_1.2",
+     "VDDIO=1.20 V, Ioh=1 mA (SDO, SDI)",
+     "60",
+     "",
+     "",
+     "%VDDIO"
+    ],
+    [
+     "Pull-up resistor",
+     "Rpull",
+     "Internal CSB pull-up resistance to VDDIO",
+     "70",
+     "120",
+     "190",
+     "kΩ"
+    ],
+    [
+     "I2C bus load capacitor",
+     "Cb",
+     "On SDI and SCK",
+     "",
+     "",
+     "400",
+     "pF"
+    ]
+   ]
+  },
+  {
+   "title": "I²C timings",
+   "page": 36,
+   "conditions": "S&F mode = standard and fast mode; HS mode = high-speed mode; Cb = bus capacitance on SDA. Other symbols follow I²C specification 2.1 (January 2000).",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SDI setup time",
+     "tSU;DAT",
+     "S&F Mode",
+     "160",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI setup time",
+     "tSU;DAT",
+     "HS mode",
+     "30",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI hold time",
+     "tHD;DAT",
+     "S&F Mode, Cb≤100 pF",
+     "80",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI hold time",
+     "tHD;DAT",
+     "S&F Mode, Cb≤400 pF",
+     "90",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI hold time",
+     "tHD;DAT",
+     "HS mode, Cb≤100 pF",
+     "18",
+     "",
+     "115",
+     "ns"
+    ],
+    [
+     "SDI hold time",
+     "tHD;DAT",
+     "HS mode, Cb≤400 pF",
+     "24",
+     "",
+     "150",
+     "ns"
+    ],
+    [
+     "SCK low pulse",
+     "tLOW",
+     "HS mode, Cb≤100 pF, VDDIO = 1.62 V",
+     "160",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK low pulse",
+     "tLOW",
+     "HS mode, Cb≤100 pF, VDDIO = 1.2 V",
+     "210",
+     "",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "These limits include internal delays: the SDI input lags SCK by about 100 ns in standard and fast mode and about 20 ns in high-speed mode; SCK falling edge to SDI output takes about 140 ns in standard and fast mode and about 70 ns in high-speed mode (typical figures)."
+   ]
+  },
+  {
+   "title": "SPI timings",
+   "page": 37,
+   "conditions": "Apply to both 4-wire and 3-wire SPI.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "SPI clock input frequency",
+     "F_spi",
+     "",
+     "0",
+     "",
+     "10",
+     "MHz"
+    ],
+    [
+     "SCK low pulse",
+     "T_low_sck",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCK high pulse",
+     "T_high_sck",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI setup time",
+     "T_setup_sdi",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDI hold time",
+     "T_hold_sdi",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SDO output delay",
+     "T_delay_sdo",
+     "25 pF load, VDDIO=1.6 V min",
+     "",
+     "",
+     "30",
+     "ns"
+    ],
+    [
+     "SDO output delay",
+     "T_delay_sdo",
+     "25 pF load, VDDIO=1.2 V min",
+     "",
+     "",
+     "40",
+     "ns"
+    ],
+    [
+     "CSB setup time",
+     "T_setup_csb",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CSB hold time",
+     "T_hold_csb",
+     "",
+     "20",
+     "",
+     "",
+     "ns"
+    ]
+   ]
+  },
+  {
+   "title": "Marking",
+   "page": 44,
+   "conditions": "",
+   "columns": [
+    "devices",
+    "symbol",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "Mass production",
+     "CCC",
+     "Lot counter, 3 alphanumeric characters, part of the trace code"
+    ],
+    [
+     "Mass production",
+     "T",
+     "Product number, 1 alphanumeric character; T = “U” for BME280 (part number 0 273 141 185)"
+    ],
+    [
+     "Mass production",
+     "L",
+     "Sub-contractor ID, 1 alphanumeric character (L = “P”)"
+    ],
+    [
+     "Engineering samples",
+     "XX",
+     "Sample ID, 2 alphanumeric characters, part of the trace code"
+    ],
+    [
+     "Engineering samples",
+     "N",
+     "Engineering sample ID, 1 character: “ * ”, “e” or “E”"
+    ],
+    [
+     "Engineering samples",
+     "CC",
+     "Counter ID, 2 alphanumeric characters, part of the trace code"
+    ]
+   ],
+   "notes": [
+    "Production parts carry CCC on the first line and TL on the second; samples carry XXN over CC. Both lines read with the vent hole at the left and pin 1 at the lower right."
+   ]
+  },
+  {
+   "title": "Reflow soldering profile (Pb-free assembly)",
+   "page": 45,
+   "conditions": "All temperatures are on the top surface of the package body.",
+   "columns": [
+    "profile feature",
+    "Pb-free assembly"
+   ],
+   "rows": [
+    [
+     "Average ramp-up rate (Tsmax to Tp)",
+     "3° C/second max."
+    ],
+    [
+     "Preheat temperature min (Tsmin)",
+     "150 °C"
+    ],
+    [
+     "Preheat temperature max (Tsmax)",
+     "200 °C"
+    ],
+    [
+     "Preheat time (tsmin to tsmax)",
+     "60-180 seconds"
+    ],
+    [
+     "Time maintained above: temperature (TL)",
+     "217 °C"
+    ],
+    [
+     "Time maintained above: time (tL)",
+     "60-150 seconds"
+    ],
+    [
+     "Peak/classification temperature (Tp)",
+     "260 °C"
+    ],
+    [
+     "Time within 5 °C of actual peak temperature (tp)",
+     "20-40 seconds"
+    ],
+    [
+     "Ramp-down rate",
+     "6 °C/second max."
+    ],
+    [
+     "Time 25 °C to peak temperature",
+     "8 minutes max."
+    ]
+   ]
+  },
+  {
+   "title": "Humidity reconditioning procedures",
+   "page": 46,
+   "conditions": "",
+   "columns": [
+    "option",
+    "step 1",
+    "step 2"
+   ],
+   "rows": [
+    [
+     "A",
+     "Dry-baking: 120 °C at <5% rH for 2 h",
+     "Re-hydration: 70 °C at 75% rH for 6 h"
+    ],
+    [
+     "B",
+     "Dry-baking: 120 °C at <5% rH for 2 h",
+     "Re-hydration: 25 °C at 75% rH for 24 h"
+    ],
+    [
+     "C (after solder reflow only)",
+     "No dry-baking",
+     "Ambient re-hydration: ~25 °C at >40% rH for >5d"
+    ]
+   ]
+  },
+  {
+   "title": "Tape dimensions",
+   "page": 46,
+   "conditions": "Millimetres. Quantity per reel: 10 kpcs.",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "Pocket length Ao",
+     "2.81"
+    ],
+    [
+     "Pocket width Bo",
+     "2.85"
+    ],
+    [
+     "Pocket depth Ko",
+     "1.20"
+    ],
+    [
+     "Tape width",
+     "12.0 +0.3/-0.1"
+    ],
+    [
+     "Pocket pitch",
+     "4.00"
+    ],
+    [
+     "Sprocket hole pitch",
+     "4.00"
+    ],
+    [
+     "Sprocket hole to pocket centre, along tape",
+     "2.00 ±.05"
+    ],
+    [
+     "Sprocket hole row from tape edge",
+     "1.75 ±.10"
+    ],
+    [
+     "Sprocket hole row to pocket centre line",
+     "5.50 ±.05"
+    ],
+    [
+     "Sprocket hole diameter",
+     "ø 1.5 +0.1/-0.0"
+    ],
+    [
+     "Pocket hole diameter",
+     "ø 1.50 MIN"
+    ],
+    [
+     "Tape thickness",
+     "0.30 ±.05"
+    ],
+    [
+     "Pocket corner radius",
+     "R 0.25 TYP."
+    ],
+    [
+     "Pocket wall radius",
+     "R 0.30 MAX."
+    ]
+   ]
+  },
+  {
+   "title": "Self-test return codes",
+   "page": 54,
+   "conditions": "",
+   "columns": [
+    "code",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "0",
+     "Sensor OK"
+    ],
+    [
+     "10",
+     "Communication error or wrong device found"
+    ],
+    [
+     "20",
+     "Trimming data out of bound"
+    ],
+    [
+     "30",
+     "Temperature bond wire failure or MEMS defect"
+    ],
+    [
+     "31",
+     "Pressure bond wire failure or MEMS defect"
+    ],
+    [
+     "40",
+     "Implausible temperature (default limits: 0…40°C)"
+    ],
+    [
+     "41",
+     "Implausible pressure (default limits: 900…1100 hPa)"
+    ],
+    [
+     "42",
+     "Implausible humidity (default limits: 20...80 %rH)"
+    ]
+   ],
+   "notes": [
+    "Checks run in rising code order and stop at the first failure, whose code is returned."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Humidity sensor operating range",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Relative humidity",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Upper limit of operating range",
+     "points": [
+      [
+       -40,
+       68.0
+      ],
+      [
+       -29.3,
+       75.1
+      ],
+      [
+       -19.0,
+       82.8
+      ],
+      [
+       -9.3,
+       91.1
+      ],
+      [
+       0,
+       100.0
+      ],
+      [
+       60,
+       100.0
+      ],
+      [
+       81.9,
+       88.7
+      ],
+      [
+       85,
+       87.0
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "The range is the area from 0 %RH up to this line, between -40 °C and 85 °C."
+   ]
+  },
+  {
+   "title": "Step response at different IIR filter settings",
+   "page": 19,
+   "conditions": "",
+   "x": {
+    "label": "Number of samples",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Response to step",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "filter off",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       99.9
+      ],
+      [
+       32,
+       99.9
+      ]
+     ]
+    },
+    {
+     "label": "coefficient 2",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       49.9
+      ],
+      [
+       2,
+       75.1
+      ],
+      [
+       3,
+       87.6
+      ],
+      [
+       4,
+       93.8
+      ],
+      [
+       5,
+       97.0
+      ],
+      [
+       7,
+       99.3
+      ],
+      [
+       9,
+       99.9
+      ],
+      [
+       32,
+       99.9
+      ]
+     ]
+    },
+    {
+     "label": "coefficient 4",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       25.0
+      ],
+      [
+       2,
+       43.8
+      ],
+      [
+       3,
+       57.8
+      ],
+      [
+       4,
+       68.3
+      ],
+      [
+       5,
+       76.2
+      ],
+      [
+       6,
+       82.4
+      ],
+      [
+       7,
+       86.8
+      ],
+      [
+       9,
+       92.6
+      ],
+      [
+       10,
+       94.4
+      ],
+      [
+       12,
+       97.0
+      ],
+      [
+       15,
+       98.7
+      ],
+      [
+       21,
+       99.9
+      ],
+      [
+       32,
+       99.9
+      ]
+     ]
+    },
+    {
+     "label": "coefficient 8",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       2,
+       23.6
+      ],
+      [
+       3,
+       32.9
+      ],
+      [
+       5,
+       48.7
+      ],
+      [
+       7,
+       60.7
+      ],
+      [
+       8,
+       65.7
+      ],
+      [
+       10,
+       73.9
+      ],
+      [
+       11,
+       77.1
+      ],
+      [
+       12,
+       80.0
+      ],
+      [
+       14,
+       84.7
+      ],
+      [
+       18,
+       91.1
+      ],
+      [
+       21,
+       94.1
+      ],
+      [
+       24,
+       96.1
+      ],
+      [
+       32,
+       98.7
+      ]
+     ]
+    },
+    {
+     "label": "coefficient 16",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       3,
+       17.7
+      ],
+      [
+       5,
+       27.7
+      ],
+      [
+       7,
+       36.4
+      ],
+      [
+       10,
+       47.6
+      ],
+      [
+       12,
+       54.0
+      ],
+      [
+       14,
+       59.5
+      ],
+      [
+       16,
+       64.5
+      ],
+      [
+       19,
+       70.7
+      ],
+      [
+       22,
+       75.9
+      ],
+      [
+       26,
+       81.5
+      ],
+      [
+       32,
+       87.3
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "i2c",
+   "title": "I²C connection",
+   "page": 39,
+   "description": "The sensor on an I²C bus. CSB goes straight to VDDIO, which selects I²C at power-up. R1 and R2 pull SDA and SCL up to VDDIO; 4.7 kΩ is a usual value, chosen in practice from bus load and timing. SDO sets address bit 0: ground for 0x76, VDDIO for 0x77. C1 decouples VDD and C2 decouples VDDIO, 100 nF each.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BME280"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDDIO bypass"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "4.7 kΩ",
+     "note": "SDA pull-up; sized for bus load and timing"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "4.7 kΩ",
+     "note": "SCL pull-up; sized for bus load and timing"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO"
+    },
+    {
+     "ref": "SDA",
+     "type": "terminal",
+     "value": "SDA"
+    },
+    {
+     "ref": "SCL",
+     "type": "terminal",
+     "value": "SCL"
+    },
+    {
+     "ref": "ADDR",
+     "type": "terminal",
+     "value": "I2C address bit 0",
+     "note": "tie to GND for 0x76 or VDDIO for 0x77; never left open"
+    }
+   ],
+   "notes": [
+    "CSB must connect directly to VDDIO."
+   ]
+  },
+  {
+   "id": "spi4",
+   "title": "4-wire SPI connection",
+   "page": 40,
+   "description": "The sensor as a 4-wire SPI peripheral. The host drives CSB, SCK and SDI and reads SDO. VDD and VDDIO each have a 100 nF capacitor to ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BME280"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDDIO bypass"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO"
+    },
+    {
+     "ref": "CSB",
+     "type": "terminal",
+     "value": "CSB"
+    },
+    {
+     "ref": "SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "SDI",
+     "type": "terminal",
+     "value": "SDI"
+    },
+    {
+     "ref": "SDO",
+     "type": "terminal",
+     "value": "SDO"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "spi3",
+   "title": "3-wire SPI connection",
+   "page": 41,
+   "description": "The sensor as a 3-wire SPI peripheral, with spi3w_en set to 1: SDI carries data both ways and SDO is left unconnected. The host drives CSB and SCK. VDD and VDDIO each have a 100 nF capacitor to ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BME280"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDDIO bypass"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "VDDIO",
+     "type": "terminal",
+     "value": "VDDIO"
+    },
+    {
+     "ref": "CSB",
+     "type": "terminal",
+     "value": "CSB"
+    },
+    {
+     "ref": "SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "SDIO",
+     "type": "terminal",
+     "value": "SDI/SDO"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "IIR filter",
+   "expr": "data_filtered = (data_filtered_old × (filter_coefficient − 1) + data_ADC) / filter_coefficient",
+   "where": {
+    "data_filtered_old": "value held in the filter memory before this step",
+    "data_ADC": "new ADC result",
+    "data_filtered": "new filter memory value, also copied to the output registers",
+    "filter_coefficient": "2, 4, 8 or 16, set by filter[2:0]"
+   },
+   "note": "Applies to pressure and temperature; humidity has no filter.",
+   "page": 18
+  },
+  {
+   "name": "Pressure and temperature resolution without filter",
+   "expr": "bits = 16 + (osrs_x − 1)",
+   "where": {
+    "osrs_x": "register code of osrs_p or osrs_t (1 to 5)",
+    "bits": "resolution of the 20-bit output that carries data"
+   },
+   "note": "osrs_x = 3 gives 18 bits. With the IIR filter on, both outputs have 20 bits. Humidity is always 16 bits.",
+   "page": 17
+  },
+  {
+   "name": "Measurement time, typical",
+   "expr": "t_measure,typ = 1 + [2 · T_os]osrs_t≠0 + [2 · P_os + 0.5]osrs_p≠0 + [2 · H_os + 0.5]osrs_h≠0   (ms)",
+   "where": {
+    "T_os, P_os, H_os": "oversampling ratio of temperature, pressure and humidity (1, 2, 4, 8, 16)",
+    "[ ]osrs_x≠0": "the term counts only when that measurement is enabled"
+   },
+   "note": "Temperature ×1, pressure ×4, humidity off gives 11.5 ms.",
+   "page": 51
+  },
+  {
+   "name": "Measurement time, maximum",
+   "expr": "t_measure,max = 1.25 + [2.3 · T_os]osrs_t≠0 + [2.3 · P_os + 0.575]osrs_p≠0 + [2.3 · H_os + 0.575]osrs_h≠0   (ms)",
+   "where": {
+    "T_os, P_os, H_os": "oversampling ratio of temperature, pressure and humidity"
+   },
+   "note": "Temperature ×1, pressure ×4, humidity off gives 13.325 ms.",
+   "page": 51
+  },
+  {
+   "name": "Highest output data rate in forced mode",
+   "expr": "ODR_max,forced = 1000 / t_measure   (Hz, t_measure in ms)",
+   "where": {
+    "t_measure": "measurement time"
+   },
+   "note": "Forcing faster gives no more data. 11.5 ms gives 87 Hz.",
+   "page": 51
+  },
+  {
+   "name": "Output data rate in normal mode",
+   "expr": "ODR_normal_mode = 1000 / (t_measure + t_standby)   (Hz, times in ms)",
+   "where": {
+    "t_measure": "measurement time",
+    "t_standby": "idle time set by t_sb[2:0]; its tolerance is Δtstandby"
+   },
+   "note": "11.5 ms with 62.5 ms standby gives 13.51 Hz.",
+   "page": 51
+  },
+  {
+   "name": "Response time with IIR filter",
+   "expr": "t_response,75% = 1000 · n_samples,75% / ODR   (ms)",
+   "where": {
+    "n_samples,75%": "samples to reach 75 % of a step, from the IIR filter settings table",
+    "ODR": "output data rate in Hz"
+   },
+   "note": "13.51 Hz with coefficient 8 (11 samples) gives 814 ms.",
+   "page": 52
+  },
+  {
+   "name": "Current in forced mode",
+   "expr": "IDD,forced = IDDSL · (1 − t_measure · ODR) + ODR/1000 · (205 + IDDT · [2 · T_os]osrs_t≠0 + IDDP · [2 · P_os + 0.5]osrs_p≠0 + IDDH · [2 · H_os + 0.5]osrs_h≠0)",
+   "where": {
+    "IDDSL": "sleep current",
+    "IDDT, IDDP, IDDH": "current during temperature, pressure and humidity measurement",
+    "t_measure": "measurement time; in the first term it enters in seconds (11.5 ms as 0.0115)",
+    "ODR": "output data rate in Hz"
+   },
+   "note": "The IIR filter setting has no effect on current.",
+   "page": 52
+  },
+  {
+   "name": "Current in normal mode",
+   "expr": "IDD,normal = IDDSB · (1 − t_measure · ODR) + ODR/1000 · (205 + IDDT · [2 · T_os]osrs_t≠0 + IDDP · [2 · P_os + 0.5]osrs_p≠0 + IDDH · [2 · H_os + 0.5]osrs_h≠0)",
+   "where": {
+    "IDDSB": "standby current",
+    "IDDT, IDDP, IDDH": "current during temperature, pressure and humidity measurement",
+    "t_measure": "measurement time, in seconds in the first term",
+    "ODR": "output data rate in Hz"
+   },
+   "note": "Temperature ×1, pressure ×4, humidity off at 13.51 Hz: 0.2 · 0.845 + 13.51/1000 · (205 + 700 + 6069 + 0) = 94.4 µA.",
+   "page": 52
+  },
+  {
+   "name": "Temperature compensation (floating point)",
+   "expr": "v1 = (adc_T/16384 − dig_T1/1024) · dig_T2;  v2 = (adc_T/131072 − dig_T1/8192)² · dig_T3;  t_fine = int(v1 + v2);  T = (v1 + v2) / 5120",
+   "where": {
+    "adc_T": "raw 20-bit temperature ut[19:0]",
+    "dig_T1…dig_T3": "temperature calibration words",
+    "t_fine": "fine temperature carried into the pressure and humidity formulas",
+    "T": "temperature in °C"
+   },
+   "note": "",
+   "page": 49
+  },
+  {
+   "name": "Pressure compensation (floating point)",
+   "expr": "a = t_fine/2 − 64000;  b = a² · dig_P6/32768 + a · dig_P5 · 2;  b = b/4 + dig_P4 · 65536;  a = (dig_P3 · a²/524288 + dig_P2 · a)/524288;  a = (1 + a/32768) · dig_P1;  p = 1048576 − adc_P;  p = (p − b/4096) · 6250 / a;  p = p + (dig_P9 · p²/2147483648 + p · dig_P8/32768 + dig_P7) / 16",
+   "where": {
+    "adc_P": "raw 20-bit pressure up[19:0]",
+    "dig_P1…dig_P9": "pressure calibration words",
+    "p": "pressure in Pa"
+   },
+   "note": "When a is 0 after the dig_P1 step the result is 0 (division guard).",
+   "page": 49
+  },
+  {
+   "name": "Humidity compensation (floating point)",
+   "expr": "h = t_fine − 76800;  h = (adc_H − (dig_H4 · 64 + dig_H5/16384 · h)) · (dig_H2/65536 · (1 + dig_H6/67108864 · h · (1 + dig_H3/67108864 · h)));  h = h · (1 − dig_H1 · h/524288);  RH = h limited to 0 … 100",
+   "where": {
+    "adc_H": "raw 16-bit humidity uh[15:0]",
+    "dig_H1…dig_H6": "humidity calibration words",
+    "RH": "relative humidity in %"
+   },
+   "note": "",
+   "page": 49
+  },
+  {
+   "name": "Fixed-point output formats",
+   "expr": "T = T_int32 / 100 °C;  p = P_uint32 / 256 Pa (Q24.8);  RH = H_uint32 / 1024 %RH (Q22.10)",
+   "where": {
+    "T_int32": "32-bit integer temperature result, 0.01 °C per count (5123 is 51.23 °C)",
+    "P_uint32": "64-bit-arithmetic pressure result (24674867 is 96386.2 Pa)",
+    "H_uint32": "32-bit integer humidity result (47445 is 46.333 %RH)"
+   },
+   "note": "The integer routines work on 32-bit signed raw values. The all-32-bit pressure routine returns whole pascals with about 1 Pa (1σ) accuracy and adds noise at high filter settings.",
+   "page": 25
+  },
+  {
+   "name": "SPI control byte",
+   "expr": "control = (RW << 7) | (register_address & 0x7F)",
+   "where": {
+    "RW": "0 for write, 1 for read",
+    "register_address": "8-bit register address"
+   },
+   "note": "Register 0xF7 is written with control byte 0x77 and read with 0xF7.",
+   "page": 34
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Supplies and power-on reset",
+   "page": 14,
+   "text": "VDD feeds every internal analog and digital block; VDDIO feeds only the interface pads. The POR circuit clears the logic and registers once both rails reach their minimum; the rails may rise in any order and at any rate, and the part then waits in sleep mode. With VDDIO present and VDD absent the interface pins stay high impedance, so the bus can run before the sensor core is powered. A reset comes from cycling VDD or writing 0xB6 to the reset register; cycling VDDIO alone does not reset."
+  },
+  {
+   "topic": "Interface pins with VDDIO off",
+   "page": 14,
+   "text": "No interface pin (SDI, SDO, SCK, CSB) may sit at a logic high while VDDIO is off: current through the ESD diodes can destroy the part."
+  },
+  {
+   "topic": "Sensor modes",
+   "page": 14,
+   "text": "mode[1:0] picks one of three modes. Sleep: nothing is measured, every register can be read and written, current is lowest; the part enters it after reset. Forced: one measurement cycle runs with the current settings, results land in the data registers and the part drops back to sleep; each new reading needs forced mode written again, which suits slow sampling or host-timed reads. Normal: the part loops between a measurement cycle and an idle period set by t_sb (0.5 ms to 1000 ms), and the latest result is always readable without further writes; standby current is a little above sleep current. Normal mode is the one to pair with the IIR filter."
+  },
+  {
+   "topic": "Mode transitions",
+   "page": 15,
+   "text": "From power-off the part goes to sleep once both rails are up. Sleep moves to forced (mode 01) or normal (mode 11); normal returns to sleep with mode 00; forced returns to sleep on its own. A mode command written during a measurement waits until that measurement ends, and further mode commands or writes to ctrl_hum are ignored until it takes effect. Other transitions are tested for stability but are not a recommended use."
+  },
+  {
+   "topic": "Measurement cycle",
+   "page": 17,
+   "text": "Each cycle measures temperature, then pressure, then humidity, each with its own oversampling and each skippable by setting its osrs field to 0; a skipped output reads 0x80000 (pressure, temperature) or 0x8000 (humidity). With the IIR filter on, the first result after a filter reset is copied straight into the filter memory; later results update it, and the filter memory goes to the output registers. Skipping temperature allows faster pressure readings."
+  },
+  {
+   "topic": "IIR filter behaviour",
+   "page": 18,
+   "text": "The filter smooths short pressure disturbances such as a door slamming or wind across the port, lowers the bandwidth of the pressure and temperature outputs and raises their resolution to 20 bits. A larger coefficient slows the response, measured in samples, so the response time depends on the output data rate. Writing the filter field resets it. A channel that is skipped keeps its filter memory unchanged, and when re-enabled it continues from that old memory unless the filter is rewritten. Sampling is not continuous, so disturbances faster than the sample rate alias; pressure changes from windows opening and closing are below 5 Hz, which a 10 Hz output rate covers."
+  },
+  {
+   "topic": "Noise figures",
+   "page": 21,
+   "text": "The noise tables give the mean standard deviation of 32 consecutive readings at the fastest sampling, taken in a controlled setting so that slow drift is excluded. Humidity and pressure noise depend on temperature oversampling too, since the temperature value enters their compensation; the listed combinations give the best ratio of noise to power."
+  },
+  {
+   "topic": "Reading results and register shadowing",
+   "page": 23,
+   "text": "Read the data in one burst: 0xF7 to 0xFC for pressure and temperature, or 0xF7 to 0xFE to add humidity. Pressure and temperature are unsigned 20-bit, humidity unsigned 16-bit. In normal mode a conversion can finish mid-read; the new results then wait in shadow registers and are moved into the data registers when the burst ends (CSB rising in SPI, a stop condition in I²C), so a single burst always returns one consistent set. Separate reads can mix data from different cycles. Under I²C, reading straight through the unused pressure bytes is quicker than two separate reads."
+  },
+  {
+   "topic": "Compensation",
+   "page": 23,
+   "text": "The raw codes become °C, Pa and %RH only through the compensation formulas and the calibration words dig_T1…dig_T3, dig_P1…dig_P9 and dig_H1…dig_H6 stored in the chip's NVM. Temperature is computed first: its t_fine value feeds the pressure and humidity formulas. Bosch Sensortec supplies an API for readout and compensation and recommends it. Integer forms exist for 32-bit and 64-bit arithmetic, a reduced-accuracy all-32-bit pressure form for 8-bit controllers, and a double-precision form for PC tools."
+  },
+  {
+   "topic": "Register writes",
+   "page": 27,
+   "text": "Registers are 8 bits wide. A change to ctrl_hum takes effect only when ctrl_meas is written afterwards. A config write can be dropped while in normal mode but is always accepted in sleep mode. Reserved registers must not be written. Every conversion begins by copying the NVM calibration image again (status bit im_update)."
+  },
+  {
+   "topic": "BMP280 compatibility",
+   "page": 26,
+   "text": "Pressure and temperature control and readout follow the BMP280 register for register. The differences: chip ID 0x60 instead of 0x56/0x57/0x58; t_sb codes 110 and 111 mean 10 ms and 20 ms instead of 2000 ms and 4000 ms; and with the filter on, pressure and temperature are always 20 bits. The BME280 at SDO high answers on the BMP280's I²C address, 0x77."
+  },
+  {
+   "topic": "Interface selection",
+   "page": 32,
+   "text": "CSB high at power-up selects I²C; CSB pulled low selects SPI, and from the first low level on CSB, clocked or not, I²C stays off until the next power-on reset, so SPI traffic to other devices is never taken as I²C. Because start-up waits for both rails, the power-up sequence cannot mis-select. If CSB comes from a host pin instead of VDDIO in an I²C design, that pin must already be at the VDDIO level during the sensor's power-on reset, or the part stays in SPI."
+  },
+  {
+   "topic": "I²C",
+   "page": 32,
+   "text": "A slave compatible with I²C specification 2.1 in standard, fast and high-speed modes. The 7-bit address is 111011x: SDO low gives 0x76, SDO at VDDIO gives 0x77, and SDO may change while running but must not float. Neither bus pad is a true open drain: both carry ESD diodes to VDDIO and to GND. SCL is a high-impedance input because the part never stretches the clock. SDA drives low only and needs an external pull-up to VDDIO. A write sends the address with RW = 0 followed by register-address/data pairs and a stop. A read first writes the register address, then a stop or repeated start, then the address with RW = 1; data come from auto-incremented addresses until the master answers NACK and stops."
+  },
+  {
+   "topic": "SPI",
+   "page": 34,
+   "text": "Modes 00 and 11 are both accepted; the level of SCK when CSB falls tells which. 4-wire uses CSB, SCK, SDI in and SDO out; setting spi3w_en makes it 3-wire, with SDI carrying data both ways and SDO high impedance. CSB is low active with an internal pull-up. Data on SDI are latched on the rising SCK edge and SDO changes on the falling edge; SCK must stay steady while CSB changes. Only seven address bits are sent: bit 7 of the control byte is RW (0 write, 1 read). Writes are control/data pairs repeated inside one CSB low period; a read sends one control byte and then streams auto-incremented registers out of SDO (SDI in 3-wire)."
+  },
+  {
+   "topic": "Supported transactions",
+   "page": 32,
+   "text": "Both interfaces do single-byte writes, multi-byte writes as address/data pairs, single-byte reads, and multi-byte reads from one start address that increments automatically."
+  },
+  {
+   "topic": "Mounting",
+   "page": 48,
+   "text": "Leave at least 0.1 mm above the metal lid. Give the housing a vent if the outside air pressure is to be measured. Keep liquids off the part. The die is light-sensitive while operating (photocurrent in silicon); the vent position limits exposure, and strong light on the sensor should be avoided. Vapour-phase soldering damages the sensor. Solder height after reflow is at least 50 µm, which decouples the sensor mechanically from the board; the solder drift row assumes it."
+  },
+  {
+   "topic": "Soldering and moisture level",
+   "page": 45,
+   "text": "Moisture sensitivity level 1 to IPC/JEDEC J-STD-020C, handled to J-STD-033A, and rated for lead-free reflow with a 260 °C peak. Exposure outside the humidity operating range, reflow included, can leave an offset in the humidity reading; one of the reconditioning procedures is required to restore calibration."
+  },
+  {
+   "topic": "Self-test",
+   "page": 53,
+   "text": "The self-test routine for the API soft-resets the part, checks the chip ID and the range of the calibration words, then measures temperature and pressure and compares them with adjustable plausibility limits (default 0 to 40 °C and 900 to 1100 hPa). Readings stuck at the ADC end-stops point to a broken bond wire or sensing element; some faults do not clip and are caught only by the plausibility limits. It waits 9 ms in all (2 ms after the soft reset, 7 ms for the conversion), issues 4 writes and 6 reads (4 bytes out, 34 bytes in), and the bus time with burst reads is about 6.0 ms at 100 kHz I²C, 1.5 ms at 400 kHz I²C or 0.5 ms at 1 MHz SPI; the whole run takes 10.5 ms at 400 kHz I²C. The soft reset may be left out on a part known to be fresh from power-up. Only the read path is proven by the communication check."
+  },
+  {
+   "topic": "Environmental",
+   "page": 48,
+   "text": "Meets RoHS directive 2011/65/EU with amendment 2015/863/EU, and is halogen-free. The package may come from more than one qualified source; the technical parameters are identical, while chemical content and internal structure can differ."
+  }
+ ],
+ "packages": [
+  {
+   "name": "LGA-8 metal lid, 2.5 × 2.5 mm",
+   "page": 42,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "X",
+     "body length",
+     "",
+     "2.50",
+     ""
+    ],
+    [
+     "Y",
+     "body width",
+     "",
+     "2.50",
+     ""
+    ],
+    [
+     "Z",
+     "overall height",
+     "",
+     "0.93±0.070",
+     "1.00(MAX)"
+    ],
+    [
+     "",
+     "lid outline, each side",
+     "",
+     "(2.30)",
+     ""
+    ],
+    [
+     "",
+     "substrate thickness",
+     "",
+     "(0.130)",
+     ""
+    ],
+    [
+     "",
+     "lid top edge radius",
+     "",
+     "(R0.25)",
+     ""
+    ],
+    [
+     "",
+     "lid corner radii, top view",
+     "",
+     "(R0.12), (R0.30)",
+     ""
+    ],
+    [
+     "",
+     "vent hole diameter",
+     "",
+     "ø0.30",
+     ""
+    ],
+    [
+     "",
+     "vent hole centre to the right edge of the lid outline, top view",
+     "",
+     "(0.625)",
+     ""
+    ],
+    [
+     "",
+     "vent hole centre from the top edge of the body, top view",
+     "",
+     "(1.238)",
+     ""
+    ],
+    [
+     "",
+     "pad size, 8 pads",
+     "",
+     "0.350x0.350",
+     ""
+    ],
+    [
+     "",
+     "pad pitch (6X)",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "",
+     "outer pad centre to outer pad centre along a row (2X)",
+     "",
+     "1.95",
+     ""
+    ],
+    [
+     "",
+     "row centre to row centre (2X)",
+     "",
+     "1.95",
+     ""
+    ],
+    [
+     "",
+     "outer pad centre to body edge",
+     "",
+     "0.275 ±0.05",
+     ""
+    ],
+    [
+     "",
+     "pad edge to body edge, both directions",
+     "",
+     "(0.100)",
+     ""
+    ],
+    [
+     "",
+     "body centre to row centre, and to the first pad column",
+     "",
+     "(0.98)",
+     ""
+    ],
+    [
+     "",
+     "body edge to pin 1 mark on the bottom",
+     "",
+     "0.75",
+     ""
+    ]
+   ],
+   "notes": [
+    "Unless marked: X.X ±0.1, X.XX ±0.05, X.XXX ±0.030, angles ±1°; dimensioned to ASME Y14.5M-1994. Pad position tolerance 0.10 to datums C, A, B and 0.05 to C; lid profile 0.10; top parallel to the seating plane within 0.10.",
+    "Pads are numbered clockwise seen from the top and anticlockwise seen from the bottom. Seen from the top with the vent hole low, pins 1 to 4 run down the right side and pins 8 to 5 down the left."
+   ]
+  },
+  {
+   "name": "Recommended land pattern",
+   "page": 43,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "pad length (across the body)",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "pad width",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "",
+     "pad pitch",
+     "",
+     "0.65",
+     ""
+    ],
+    [
+     "",
+     "body centre line to inner pad edge",
+     "",
+     "0.775",
+     ""
+    ],
+    [
+     "",
+     "body centre line to centre of pads 2, 3, 6, 7",
+     "",
+     "0.325",
+     ""
+    ],
+    [
+     "",
+     "body outline",
+     "",
+     "2.50",
+     ""
+    ]
+   ],
+   "notes": [
+    "The dimensions are the exposed copper. For solder-mask-defined pads they are the mask openings over larger copper; for non-solder-mask-defined pads they are the copper, with larger mask openings."
+   ]
+  }
+ ]
+}

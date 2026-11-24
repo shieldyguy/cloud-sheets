@@ -1,0 +1,5832 @@
+{
+ "sheet": 1,
+ "name": "DRV8311HRRWR",
+ "kind": "motor_driver",
+ "manufacturer": "Texas Instruments",
+ "title": "DRV8311H / DRV8311S / DRV8311P: three-phase PWM motor driver with integrated MOSFETs, current sensing and 3.3 V LDO, 3 V to 20 V, 5 A peak, WQFN-24",
+ "source": {
+  "document": "SLVSFN2B",
+  "revision": "September 2021, revised February 2022",
+  "pages": 101
+ },
+ "summary": "A three-phase brushless-DC motor driver holding three N-channel MOSFET half-bridges (210 mΩ typical, high plus low side), their gate drivers, a charge pump for the high-side gates, three low-side current sense amplifiers that need no shunt resistor, and a 3.3 V, 100 mA linear regulator for outside circuits. It runs from 3 V to 20 V (24 V absolute) and delivers 5 A peak. The H variant is set up by pins (MODE, SLEW, GAIN) and takes 6x or 3x PWM inputs; the S variant is set up over SPI and also offers internal PWM generation; the P variant uses tSPI, which lets several drivers share one chip select, and generates its PWM internally with duty and period written over the bus. Protection covers supply, charge-pump and regulator undervoltage, overcurrent and over-temperature, reported on an open-drain nFAULT pin.",
+ "key_figures": [
+  [
+   "Supply VM",
+   "3 V to 20 V recommended, 24 V absolute maximum"
+  ],
+  [
+   "Peak output current",
+   "5 A"
+  ],
+  [
+   "RDS(on), HS + LS",
+   "210 mΩ typ, 250 mΩ max (VVM ≥ 6 V, 1 A, TJ = 25 °C)"
+  ],
+  [
+   "PWM frequency",
+   "up to 200 kHz"
+  ],
+  [
+   "Sleep current",
+   "1.5 µA typ at VVM = 12 V, 25 °C"
+  ],
+  [
+   "Current sense gain",
+   "0.25, 0.5, 1 or 2 V/A"
+  ],
+  [
+   "AVDD regulator",
+   "3.3 V, up to 100 mA"
+  ],
+  [
+   "Overcurrent trip",
+   "9 A or 5 A typ"
+  ],
+  [
+   "Slew rate",
+   "35, 75, 180 or 230 V/µs typ (rising)"
+  ],
+  [
+   "SPI clock",
+   "10 MHz (tSCLK 100 ns min)"
+  ],
+  [
+   "Package",
+   "WQFN-24 (RRW), 3 mm × 3 mm, 0.4 mm pitch, exposed pad"
+  ]
+ ],
+ "part_numbers": {
+  "page": 87,
+  "columns": [
+   "part number",
+   "variant",
+   "interface",
+   "status",
+   "package",
+   "pins",
+   "packing",
+   "lead finish",
+   "MSL / peak reflow",
+   "operating temperature",
+   "marking"
+  ],
+  "rows": [
+   [
+    "DRV8311HRRWR",
+    "DRV8311H",
+    "hardware (pins)",
+    "ACTIVE",
+    "WQFN (RRW)",
+    "24",
+    "5000, tape and reel",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 125 °C",
+    "8311H"
+   ],
+   [
+    "DRV8311PRRWR",
+    "DRV8311P",
+    "SPI / tSPI",
+    "ACTIVE",
+    "WQFN (RRW)",
+    "24",
+    "5000, tape and reel",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 125 °C",
+    "8311P"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "WQFN-24 (RRW), DRV8311H",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "nFAULT",
+     "type": "open-drain output",
+     "function": "Goes low on a fault. Needs a pull-up to AVDD."
+    },
+    {
+     "pin": "2",
+     "name": "CSAREF",
+     "type": "power in",
+     "function": "Supply and reference for the current sense amplifiers; the zero-current output sits at half this voltage. Bypass to AGND with 0.1 µF, 6.3 V, X5R or X7R."
+    },
+    {
+     "pin": "3",
+     "name": "SOC",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase C."
+    },
+    {
+     "pin": "4",
+     "name": "SOB",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase B."
+    },
+    {
+     "pin": "5",
+     "name": "SOA",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase A."
+    },
+    {
+     "pin": "6",
+     "name": "CP",
+     "type": "power",
+     "function": "Charge pump output. A 0.1 µF, 16 V, X5R or X7R capacitor goes from CP to VM."
+    },
+    {
+     "pin": "7",
+     "name": "VIN_AVDD",
+     "type": "power in",
+     "function": "Input of the AVDD regulator. Bypass to AGND with 0.1 µF ceramic plus at least 10 µF bulk, both rated for the VIN_AVDD voltage. It may be the VM supply or a different one, above or below VM."
+    },
+    {
+     "pin": "8",
+     "name": "VM",
+     "type": "power in",
+     "function": "Motor supply. Bypass to PGND with 0.1 µF ceramic plus at least 10 µF bulk, both rated for VM. The charge-pump capacitor returns to this pin."
+    },
+    {
+     "pin": "9",
+     "name": "PGND",
+     "type": "ground",
+     "function": "Power ground. Connect to system ground."
+    },
+    {
+     "pin": "10",
+     "name": "OUTA",
+     "type": "power output",
+     "function": "Half-bridge output A, to a motor winding."
+    },
+    {
+     "pin": "11",
+     "name": "OUTB",
+     "type": "power output",
+     "function": "Half-bridge output B, to a motor winding."
+    },
+    {
+     "pin": "12",
+     "name": "OUTC",
+     "type": "power output",
+     "function": "Half-bridge output C, to a motor winding."
+    },
+    {
+     "pin": "13",
+     "name": "INHC",
+     "type": "logic input",
+     "function": "High-side control for OUTC in 6x and 3x PWM modes. Internal pulldown."
+    },
+    {
+     "pin": "14",
+     "name": "INHB",
+     "type": "logic input",
+     "function": "High-side control for OUTB in 6x and 3x PWM modes. Internal pulldown."
+    },
+    {
+     "pin": "15",
+     "name": "INHA",
+     "type": "logic input",
+     "function": "High-side control for OUTA in 6x and 3x PWM modes. Internal pulldown."
+    },
+    {
+     "pin": "16",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground. Connect to system ground."
+    },
+    {
+     "pin": "17",
+     "name": "AVDD",
+     "type": "power output",
+     "function": "3.3 V regulator output, up to 100 mA for outside loads. Needs 0.7 µF to 7 µF, 6.3 V, X5R or X7R to AGND."
+    },
+    {
+     "pin": "18",
+     "name": "INLA",
+     "type": "logic input",
+     "function": "Low-side control for OUTA in 6x PWM mode; Hi-Z control in 3x mode. Internal pulldown."
+    },
+    {
+     "pin": "19",
+     "name": "INLB",
+     "type": "logic input",
+     "function": "Low-side control for OUTB in 6x PWM mode; Hi-Z control in 3x mode. On the S variant it takes PWM_SYNC in PWM generation mode. Internal pulldown."
+    },
+    {
+     "pin": "20",
+     "name": "INLC",
+     "type": "logic input",
+     "function": "Low-side control for OUTC in 6x PWM mode; Hi-Z control in 3x mode. Internal pulldown."
+    },
+    {
+     "pin": "21",
+     "name": "GAIN",
+     "type": "four-level input",
+     "function": "H variant. Selects the current sense gain: tie to AGND, 47 kΩ to AGND, leave open, or tie to AVDD."
+    },
+    {
+     "pin": "22",
+     "name": "SLEW",
+     "type": "four-level input",
+     "function": "H variant. Selects the output slew rate by the same four settings."
+    },
+    {
+     "pin": "23",
+     "name": "MODE",
+     "type": "four-level input",
+     "function": "H variant. Selects 6x or 3x PWM and the overcurrent level by the same four settings. Read at power-up."
+    },
+    {
+     "pin": "24",
+     "name": "nSLEEP",
+     "type": "logic input",
+     "function": "H and P variants. Low puts the device in sleep. A low pulse of 15 µs to 50 µs clears latched faults without entering sleep. Internal pulldown."
+    },
+    {
+     "pin": "PAD",
+     "name": "Thermal pad",
+     "type": "ground",
+     "function": "Exposed pad; connect to PGND."
+    }
+   ]
+  },
+  {
+   "package": "WQFN-24 (RRW), DRV8311P",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "nFAULT",
+     "type": "open-drain output",
+     "function": "Goes low on a fault. Needs a pull-up to AVDD."
+    },
+    {
+     "pin": "2",
+     "name": "CSAREF",
+     "type": "power in",
+     "function": "Supply and reference for the current sense amplifiers; the zero-current output sits at half this voltage. Bypass to AGND with 0.1 µF, 6.3 V, X5R or X7R."
+    },
+    {
+     "pin": "3",
+     "name": "SOC",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase C."
+    },
+    {
+     "pin": "4",
+     "name": "SOB",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase B."
+    },
+    {
+     "pin": "5",
+     "name": "SOA",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase A."
+    },
+    {
+     "pin": "6",
+     "name": "CP",
+     "type": "power",
+     "function": "Charge pump output. A 0.1 µF, 16 V, X5R or X7R capacitor goes from CP to VM."
+    },
+    {
+     "pin": "7",
+     "name": "VIN_AVDD",
+     "type": "power in",
+     "function": "Input of the AVDD regulator. Bypass to AGND with 0.1 µF ceramic plus at least 10 µF bulk, both rated for the VIN_AVDD voltage. It may be the VM supply or a different one, above or below VM."
+    },
+    {
+     "pin": "8",
+     "name": "VM",
+     "type": "power in",
+     "function": "Motor supply. Bypass to PGND with 0.1 µF ceramic plus at least 10 µF bulk, both rated for VM. The charge-pump capacitor returns to this pin."
+    },
+    {
+     "pin": "9",
+     "name": "PGND",
+     "type": "ground",
+     "function": "Power ground. Connect to system ground."
+    },
+    {
+     "pin": "10",
+     "name": "OUTA",
+     "type": "power output",
+     "function": "Half-bridge output A, to a motor winding."
+    },
+    {
+     "pin": "11",
+     "name": "OUTB",
+     "type": "power output",
+     "function": "Half-bridge output B, to a motor winding."
+    },
+    {
+     "pin": "12",
+     "name": "OUTC",
+     "type": "power output",
+     "function": "Half-bridge output C, to a motor winding."
+    },
+    {
+     "pin": "13, 18",
+     "name": "NC",
+     "type": "no connect",
+     "function": "P variant. Not connected; leave open."
+    },
+    {
+     "pin": "14",
+     "name": "AD1",
+     "type": "logic input",
+     "function": "P variant. Bit 1 of the tSPI device address."
+    },
+    {
+     "pin": "15",
+     "name": "AD0",
+     "type": "logic input",
+     "function": "P variant. Bit 0 of the tSPI device address."
+    },
+    {
+     "pin": "16",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground. Connect to system ground."
+    },
+    {
+     "pin": "17",
+     "name": "AVDD",
+     "type": "power output",
+     "function": "3.3 V regulator output, up to 100 mA for outside loads. Needs 0.7 µF to 7 µF, 6.3 V, X5R or X7R to AGND."
+    },
+    {
+     "pin": "19",
+     "name": "PWM_SYNC",
+     "type": "logic input",
+     "function": "P variant. Reference signal from the controller that synchronizes the internally generated PWM in PWM generation mode."
+    },
+    {
+     "pin": "20",
+     "name": "nSCS",
+     "type": "logic input",
+     "function": "S and P variants. SPI chip select, active low. Internal pullup."
+    },
+    {
+     "pin": "21",
+     "name": "SDO",
+     "type": "push-pull output",
+     "function": "S and P variants. SPI data out, changes on the SCLK rising edge; Hi-Z while nSCS is high."
+    },
+    {
+     "pin": "22",
+     "name": "SDI",
+     "type": "logic input",
+     "function": "S and P variants. SPI data in, sampled on the SCLK falling edge."
+    },
+    {
+     "pin": "23",
+     "name": "SCLK",
+     "type": "logic input",
+     "function": "S and P variants. SPI clock."
+    },
+    {
+     "pin": "24",
+     "name": "nSLEEP",
+     "type": "logic input",
+     "function": "H and P variants. Low puts the device in sleep. A low pulse of 15 µs to 50 µs clears latched faults without entering sleep. Internal pulldown."
+    },
+    {
+     "pin": "PAD",
+     "name": "Thermal pad",
+     "type": "ground",
+     "function": "Exposed pad; connect to PGND."
+    }
+   ]
+  },
+  {
+   "package": "WQFN-24 (RRW), DRV8311S",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "nFAULT",
+     "type": "open-drain output",
+     "function": "Goes low on a fault. Needs a pull-up to AVDD."
+    },
+    {
+     "pin": "2",
+     "name": "CSAREF",
+     "type": "power in",
+     "function": "Supply and reference for the current sense amplifiers; the zero-current output sits at half this voltage. Bypass to AGND with 0.1 µF, 6.3 V, X5R or X7R."
+    },
+    {
+     "pin": "3",
+     "name": "SOC",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase C."
+    },
+    {
+     "pin": "4",
+     "name": "SOB",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase B."
+    },
+    {
+     "pin": "5",
+     "name": "SOA",
+     "type": "analog output",
+     "function": "Current sense amplifier output, phase A."
+    },
+    {
+     "pin": "6",
+     "name": "CP",
+     "type": "power",
+     "function": "Charge pump output. A 0.1 µF, 16 V, X5R or X7R capacitor goes from CP to VM."
+    },
+    {
+     "pin": "7",
+     "name": "VIN_AVDD",
+     "type": "power in",
+     "function": "Input of the AVDD regulator. Bypass to AGND with 0.1 µF ceramic plus at least 10 µF bulk, both rated for the VIN_AVDD voltage. It may be the VM supply or a different one, above or below VM."
+    },
+    {
+     "pin": "8",
+     "name": "VM",
+     "type": "power in",
+     "function": "Motor supply. Bypass to PGND with 0.1 µF ceramic plus at least 10 µF bulk, both rated for VM. The charge-pump capacitor returns to this pin."
+    },
+    {
+     "pin": "9",
+     "name": "PGND",
+     "type": "ground",
+     "function": "Power ground. Connect to system ground."
+    },
+    {
+     "pin": "10",
+     "name": "OUTA",
+     "type": "power output",
+     "function": "Half-bridge output A, to a motor winding."
+    },
+    {
+     "pin": "11",
+     "name": "OUTB",
+     "type": "power output",
+     "function": "Half-bridge output B, to a motor winding."
+    },
+    {
+     "pin": "12",
+     "name": "OUTC",
+     "type": "power output",
+     "function": "Half-bridge output C, to a motor winding."
+    },
+    {
+     "pin": "13",
+     "name": "INHC",
+     "type": "logic input",
+     "function": "High-side control for OUTC in 6x and 3x PWM modes. Internal pulldown."
+    },
+    {
+     "pin": "14",
+     "name": "INHB",
+     "type": "logic input",
+     "function": "High-side control for OUTB in 6x and 3x PWM modes. Internal pulldown."
+    },
+    {
+     "pin": "15",
+     "name": "INHA",
+     "type": "logic input",
+     "function": "High-side control for OUTA in 6x and 3x PWM modes. Internal pulldown."
+    },
+    {
+     "pin": "16",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground. Connect to system ground."
+    },
+    {
+     "pin": "17",
+     "name": "AVDD",
+     "type": "power output",
+     "function": "3.3 V regulator output, up to 100 mA for outside loads. Needs 0.7 µF to 7 µF, 6.3 V, X5R or X7R to AGND."
+    },
+    {
+     "pin": "18",
+     "name": "INLA",
+     "type": "logic input",
+     "function": "Low-side control for OUTA in 6x PWM mode; Hi-Z control in 3x mode. Internal pulldown."
+    },
+    {
+     "pin": "19",
+     "name": "INLB",
+     "type": "logic input",
+     "function": "Low-side control for OUTB in 6x PWM mode; Hi-Z control in 3x mode. On the S variant it takes PWM_SYNC in PWM generation mode. Internal pulldown."
+    },
+    {
+     "pin": "20",
+     "name": "INLC",
+     "type": "logic input",
+     "function": "Low-side control for OUTC in 6x PWM mode; Hi-Z control in 3x mode. Internal pulldown."
+    },
+    {
+     "pin": "21",
+     "name": "SDO",
+     "type": "push-pull output",
+     "function": "S and P variants. SPI data out, changes on the SCLK rising edge; Hi-Z while nSCS is high."
+    },
+    {
+     "pin": "22",
+     "name": "SDI",
+     "type": "logic input",
+     "function": "S and P variants. SPI data in, sampled on the SCLK falling edge."
+    },
+    {
+     "pin": "23",
+     "name": "SCLK",
+     "type": "logic input",
+     "function": "S and P variants. SPI clock."
+    },
+    {
+     "pin": "24",
+     "name": "nSCS",
+     "type": "logic input",
+     "function": "S and P variants. SPI chip select, active low. Internal pullup."
+    },
+    {
+     "pin": "PAD",
+     "name": "Thermal pad",
+     "type": "ground",
+     "function": "Exposed pad; connect to PGND."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Variant comparison",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "DRV8311H",
+    "DRV8311S",
+    "DRV8311P"
+   ],
+   "rows": [
+    [
+     "Package",
+     "24-pin WQFN (3 mm x 3 mm)",
+     "24-pin WQFN (3 mm x 3 mm)",
+     "24-pin WQFN (3 mm x 3 mm)"
+    ],
+    [
+     "Interface",
+     "Hardware",
+     "SPI",
+     "SPI / tSPI"
+    ],
+    [
+     "nSLEEP input",
+     "Yes",
+     "No",
+     "Yes"
+    ],
+    [
+     "PWM control mode settings",
+     "MODE pin (2 settings)",
+     "PWM_MODE (3 settings)",
+     "PWM_MODE (3 settings)"
+    ],
+    [
+     "Slew rate settings",
+     "SLEW pin (4 settings)",
+     "SLEW_RATE (4 settings)",
+     "SLEW_RATE (4 settings)"
+    ],
+    [
+     "Current sense amplifier gain",
+     "GAIN pin (4 settings)",
+     "CSA_GAIN (4 settings)",
+     "CSA_GAIN (4 settings)"
+    ],
+    [
+     "OCP level settings",
+     "MODE pin (2 settings)",
+     "OCP_LVL (2 settings)",
+     "OCP_LVL (2 settings)"
+    ],
+    [
+     "OCP blanking time",
+     "Fixed to 0.2 us",
+     "OCP_TBLANK (4 settings)",
+     "OCP_TBLANK (4 settings)"
+    ],
+    [
+     "OCP deglitch time",
+     "Fixed to 1 us",
+     "OCP_DEG (4 settings)",
+     "OCP_DEG (4 settings)"
+    ],
+    [
+     "OCP mode",
+     "Fast retry with 5-ms automatic retry",
+     "OCP_MODE (4 settings), configurable retry time",
+     "OCP_MODE (4 settings), configurable retry time"
+    ],
+    [
+     "Dead time",
+     "Fixed based on SLEW pin setting",
+     "TDEAD_CTRL (8 settings)",
+     "TDEAD_CTRL (8 settings)"
+    ],
+    [
+     "Propagation delay",
+     "Fixed based on SLEW pin setting",
+     "Fixed based on SLEW pin setting",
+     "Fixed based on SLEW pin setting"
+    ],
+    [
+     "Driver delay compensation",
+     "Disabled",
+     "DLYCMP_EN (2 settings)",
+     "DLYCMP_EN (2 settings)"
+    ],
+    [
+     "Spread spectrum modulation for internal oscillator",
+     "Enabled",
+     "SSC_DIS (2 settings)",
+     "SSC_DIS (2 settings)"
+    ],
+    [
+     "Undervoltage lockout",
+     "VINAVDD, CP and AVDD UV enabled, CSAREF_UV disabled, tRETRY 5 ms fast automatic retry",
+     "VINAVDD, CP and AVDD UV enabled, CSAREF_UV (2 settings), tRETRY set by UVP_MODE",
+     "VINAVDD, CP and AVDD UV enabled, CSAREF_UV (2 settings), tRETRY set by UVP_MODE"
+    ],
+    [
+     "SPI fault mode",
+     "NA",
+     "SPIFLT_MODE (2 settings)",
+     "SPIFLT_MODE (2 settings)"
+    ],
+    [
+     "Texas Instruments SPI (tSPI)",
+     "NA",
+     "NA",
+     "Available"
+    ],
+    [
+     "Over temperature shutdown (OTSD) mode",
+     "Fast retry with 5-ms automatic retry",
+     "OTSD_MODE (2 settings)",
+     "OTSD_MODE (2 settings)"
+    ]
+   ],
+   "notes": [
+    "DRV8311S is a preview device."
+   ]
+  },
+  {
+   "title": "Orderable part numbers",
+   "page": 94,
+   "conditions": "",
+   "columns": [
+    "part number",
+    "status",
+    "material type",
+    "package | pins",
+    "package qty | carrier",
+    "RoHS",
+    "lead finish",
+    "MSL rating / peak reflow",
+    "op temp (°C)",
+    "marking"
+   ],
+   "rows": [
+    [
+     "DRV8311HRRWR",
+     "Active",
+     "Production",
+     "WQFN (RRW) | 24",
+     "5000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 125",
+     "8311H"
+    ],
+    [
+     "DRV8311HRRWR.A",
+     "Active",
+     "Production",
+     "WQFN (RRW) | 24",
+     "5000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 125",
+     "8311H"
+    ],
+    [
+     "DRV8311PRRWR",
+     "Active",
+     "Production",
+     "WQFN (RRW) | 24",
+     "5000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 125",
+     "8311P"
+    ],
+    [
+     "DRV8311PRRWR.A",
+     "Active",
+     "Production",
+     "WQFN (RRW) | 24",
+     "5000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-1-260C-UNLIM",
+     "-40 to 125",
+     "8311P"
+    ]
+   ],
+   "notes": [
+    "An automotive version, DRV8311-Q1, is qualified to AEC-Q100."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 7,
+   "conditions": "over operating ambient temperature range unless noted",
+   "columns": [
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Power supply pin voltage (VM)",
+     "–0.3",
+     "24",
+     "V"
+    ],
+    [
+     "AVDD regulator input pin voltage (VIN_AVDD)",
+     "–0.3",
+     "24",
+     "V"
+    ],
+    [
+     "Voltage difference between ground pins (PGND, AGND)",
+     "–0.3",
+     "0.3",
+     "V"
+    ],
+    [
+     "Charge pump voltage (CP)",
+     "–0.3",
+     "VM + 6",
+     "V"
+    ],
+    [
+     "Analog regulator output pin voltage (AVDD)",
+     "–0.3",
+     "4",
+     "V"
+    ],
+    [
+     "Logic pin input voltage (INHx, INLx, nSCS, nSLEEP, SCLK, SDI, ADx, GAIN, MODE, SLEW, PWM_SYNC)",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Logic pin output voltage (nFAULT, SDO)",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Open drain output current range (nFAULT)",
+     "0",
+     "5",
+     "mA"
+    ],
+    [
+     "Current sense amplifier reference supply input (CSAREF)",
+     "–0.3",
+     "4",
+     "V"
+    ],
+    [
+     "Current sense amplifier output (SOx)",
+     "–0.3",
+     "4",
+     "V"
+    ],
+    [
+     "Peak output current (OUTA, OUTB, OUTC)",
+     "",
+     "5",
+     "A"
+    ],
+    [
+     "Output pin voltage (OUTA, OUTB, OUTC)",
+     "–1",
+     "VM + 1 (a)",
+     "V"
+    ],
+    [
+     "Ambient temperature, TA",
+     "–40",
+     "125",
+     "°C"
+    ],
+    [
+     "Junction temperature, TJ",
+     "–40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "–65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(a) The lower of VM + 1 V and 24 V.",
+    "Stress beyond these limits can damage the device; they are not operating conditions."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Human body model (HBM), ANSI/ESDA/JEDEC JS-001",
+     "±1500",
+     "V"
+    ],
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Charged device model (CDM), ANSI/ESDA/JEDEC JS-002",
+     "±750",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 7,
+   "conditions": "over operating ambient temperature range unless noted",
+   "columns": [
+    "symbol",
+    "parameter",
+    "pins / conditions",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VVM",
+     "Power supply voltage",
+     "VVM",
+     "3",
+     "12",
+     "20",
+     "V"
+    ],
+    [
+     "VIN_AVDD",
+     "AVDD regulator input pin voltage",
+     "VVIN_AVDD",
+     "3",
+     "12",
+     "20",
+     "V"
+    ],
+    [
+     "fPWM",
+     "Output PWM frequency",
+     "OUTA, OUTB, OUTC",
+     "",
+     "",
+     "200",
+     "kHz"
+    ],
+    [
+     "IOUT (a)",
+     "Peak output current",
+     "OUTA, OUTB, OUTC",
+     "",
+     "",
+     "5",
+     "A"
+    ],
+    [
+     "VIN",
+     "Logic input voltage",
+     "INHx, INLx, nSCS, nSLEEP, SCLK, SDI, ADx, GAIN, MODE, SLEW, PWM_SYNC",
+     "-0.1",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "VOD",
+     "Open drain pullup voltage",
+     "nFAULT",
+     "-0.1",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "IOD",
+     "Open drain output sink current",
+     "nFAULT",
+     "",
+     "",
+     "5",
+     "mA"
+    ],
+    [
+     "VCSAREF",
+     "CSA reference input voltage",
+     "CSAREF",
+     "2",
+     "",
+     "3.6",
+     "V"
+    ],
+    [
+     "ICSAREF",
+     "CSA reference input current",
+     "CSAREF",
+     "",
+     "2.5",
+     "7.5",
+     "mA"
+    ],
+    [
+     "TA",
+     "Operating ambient temperature",
+     "",
+     "–40",
+     "",
+     "125",
+     "°C"
+    ],
+    [
+     "TJ",
+     "Operating junction temperature",
+     "",
+     "–40",
+     "",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(a) Power dissipation and thermal limits apply."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 8,
+   "conditions": "QFN (RRW), 24 pins",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA",
+     "Junction-to-ambient thermal resistance",
+     "42.6",
+     "°C/W"
+    ],
+    [
+     "RθJC(top)",
+     "Junction-to-case (top) thermal resistance",
+     "37.9",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "15.7",
+     "°C/W"
+    ],
+    [
+     "ΨJT",
+     "Junction-to-top characterization parameter",
+     "0.5",
+     "°C/W"
+    ],
+    [
+     "ΨJB",
+     "Junction-to-board characterization parameter",
+     "15.6",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "4.8",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: power supplies",
+   "page": 8,
+   "conditions": "TJ = -40 °C to +150 °C, VVM = 3 V to 20 V unless noted; typical values at TA = 25 °C, VVM = 12 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VM sleep mode current",
+     "IVMQ",
+     "VVM = 12 V, nSLEEP = 0, TA = 25 °C",
+     "",
+     "1.5",
+     "3",
+     "µA"
+    ],
+    [
+     "VM sleep mode current",
+     "IVMQ",
+     "nSLEEP = 0, TA = 125 °C",
+     "",
+     "",
+     "9",
+     "µA"
+    ],
+    [
+     "VM standby mode current",
+     "IVMS",
+     "VVM = 12 V, nSLEEP = 1, INHx = INLx = 0, SPI = 'OFF', TA = 25 °C",
+     "",
+     "7",
+     "12",
+     "mA"
+    ],
+    [
+     "VM standby mode current",
+     "IVMS",
+     "nSLEEP = 1, INHx = INLx = 0, SPI = 'OFF'",
+     "",
+     "8",
+     "12",
+     "mA"
+    ],
+    [
+     "VM operating mode current",
+     "IVM",
+     "VVM = 12 V, nSLEEP = 1, fPWM = 25 kHz, TA = 25 °C",
+     "",
+     "10",
+     "13",
+     "mA"
+    ],
+    [
+     "VM operating mode current",
+     "IVM",
+     "VVM = 12 V, nSLEEP = 1, fPWM = 200 kHz, TA = 25 °C",
+     "",
+     "12",
+     "14",
+     "mA"
+    ],
+    [
+     "VM operating mode current",
+     "IVM",
+     "nSLEEP = 1, fPWM = 25 kHz",
+     "",
+     "10",
+     "15",
+     "mA"
+    ],
+    [
+     "VM operating mode current",
+     "IVM",
+     "nSLEEP = 1, fPWM = 200 kHz",
+     "",
+     "12",
+     "15",
+     "mA"
+    ],
+    [
+     "Analog regulator voltage",
+     "VAVDD",
+     "VVM > 4 V, VVIN_AVDD > 4.5 V, 0 mA ≤ IAVDD ≤ 100 mA",
+     "3.15",
+     "3.3",
+     "3.45",
+     "V"
+    ],
+    [
+     "Analog regulator voltage",
+     "VAVDD",
+     "VVM > 3.5 V, 3.5 V ≤ VVIN_AVDD ≤ 4.5 V, 0 mA ≤ IAVDD ≤ 35 mA",
+     "3",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Analog regulator voltage",
+     "VAVDD",
+     "2.5 V ≤ VVIN_AVDD ≤ 3.5 V, 0 mA ≤ IAVDD ≤ 10 mA",
+     "2.2",
+     "VIN_AVDD -0.3",
+     "3.4",
+     "V"
+    ],
+    [
+     "Analog regulator voltage",
+     "VAVDD",
+     "VVM < 4 V, VVIN_AVDD > 4.5 V, 0 mA ≤ IAVDD ≤ 40 mA",
+     "3",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Analog regulator voltage",
+     "VAVDD",
+     "VVM < 3.5 V, 3.5 V ≤ VVIN_AVDD ≤ 4.5 V, 0 mA ≤ IAVDD ≤ 20 mA",
+     "3",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "External analog regulator current limit",
+     "IAVDD_LIM",
+     "",
+     "148",
+     "200",
+     "250",
+     "mA"
+    ],
+    [
+     "External analog regulator load",
+     "IAVDD",
+     "VVM > 4 V, VVIN_AVDD > 4.5 V",
+     "",
+     "",
+     "100",
+     "mA"
+    ],
+    [
+     "External analog regulator load",
+     "IAVDD",
+     "VVM < 4 V, VVIN_AVDD > 4.5 V",
+     "",
+     "",
+     "40",
+     "mA"
+    ],
+    [
+     "External analog regulator load",
+     "IAVDD",
+     "VVM > 3.5 V, 3.6 V ≤ VVIN_AVDD ≤ 4.5 V",
+     "",
+     "",
+     "35",
+     "mA"
+    ],
+    [
+     "External analog regulator load",
+     "IAVDD",
+     "VVM < 3.5 V, 3.6 V ≤ VVIN_AVDD ≤ 4.5 V",
+     "",
+     "",
+     "20",
+     "mA"
+    ],
+    [
+     "External analog regulator load",
+     "IAVDD",
+     "2.5 V ≤ VVIN_AVDD ≤ 3.6 V",
+     "",
+     "",
+     "10",
+     "mA"
+    ],
+    [
+     "Capacitance on AVDD pin",
+     "CAVDD",
+     "IAVDD ≤ 25 mA",
+     "0.7",
+     "1",
+     "7",
+     "µF"
+    ],
+    [
+     "Capacitance on AVDD pin",
+     "CAVDD",
+     "IAVDD ≥ 25 mA",
+     "3.3",
+     "4.7",
+     "7",
+     "µF"
+    ],
+    [
+     "AVDD output voltage regulation",
+     "RAVDD",
+     "VVIN_AVDD > 4.5 V; IAVDD ≤ 20 mA",
+     "-3",
+     "",
+     "3",
+     "%"
+    ],
+    [
+     "AVDD output voltage regulation",
+     "RAVDD",
+     "VVIN_AVDD > 4.5 V; 20 mA ≤ IAVDD ≤ 40 mA",
+     "-2",
+     "",
+     "2",
+     "%"
+    ],
+    [
+     "AVDD output voltage regulation",
+     "RAVDD",
+     "VVIN_AVDD > 4.5 V; IAVDD ≥ 40 mA",
+     "-3",
+     "",
+     "3",
+     "%"
+    ],
+    [
+     "Charge pump regulator voltage",
+     "VVCP",
+     "VCP with respect to VM",
+     "3",
+     "5",
+     "5.6",
+     "V"
+    ],
+    [
+     "Wakeup time",
+     "tWAKE",
+     "VVM > VUVLO, nSLEEP = 1 to output ready",
+     "",
+     "1",
+     "3",
+     "ms"
+    ],
+    [
+     "Wakeup time for CSA",
+     "tWAKE_CSA",
+     "VCSAREF > VCSAREF_UV to SOx ready, when nSLEEP = 1",
+     "",
+     "30",
+     "50",
+     "µs"
+    ],
+    [
+     "Turn-off time",
+     "tSLEEP",
+     "nSLEEP = 0 to driver tri-stated",
+     "",
+     "100",
+     "200",
+     "µs"
+    ],
+    [
+     "Reset pulse time",
+     "tRST",
+     "nSLEEP = 0 period to reset faults",
+     "10",
+     "",
+     "65",
+     "µs"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: logic inputs and outputs",
+   "page": 9,
+   "conditions": "TJ = -40 °C to +150 °C, VVM = 3 V to 20 V unless noted; typical values at TA = 25 °C, VVM = 12 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input logic low voltage (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "VIL",
+     "",
+     "0",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "Input logic high voltage (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "VIH",
+     "",
+     "1.65",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Input logic hysteresis (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "VHYS",
+     "",
+     "100",
+     "300",
+     "660",
+     "mV"
+    ],
+    [
+     "Input logic low current (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "IIL",
+     "VPIN = 0 V",
+     "–1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Input logic high current (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "IIH",
+     "nSLEEP, VPIN = 5 V",
+     "",
+     "",
+     "30",
+     "µA"
+    ],
+    [
+     "Input logic high current (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "IIH",
+     "Other pins, VPIN = 5 V",
+     "",
+     "",
+     "50",
+     "µA"
+    ],
+    [
+     "Input pulldown resistance (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "RPD",
+     "nSLEEP",
+     "",
+     "230",
+     "300",
+     "kΩ"
+    ],
+    [
+     "Input pulldown resistance (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "RPD",
+     "Other pins",
+     "",
+     "160",
+     "200",
+     "kΩ"
+    ],
+    [
+     "Input capacitance (INHx, INLx, nSLEEP, SCLK, SDI)",
+     "CID",
+     "",
+     "",
+     "30",
+     "",
+     "pF"
+    ],
+    [
+     "Input logic low voltage (nSCS)",
+     "VIL",
+     "",
+     "0",
+     "",
+     "0.6",
+     "V"
+    ],
+    [
+     "Input logic high voltage (nSCS)",
+     "VIH",
+     "",
+     "1.5",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Input logic hysteresis (nSCS)",
+     "VHYS",
+     "",
+     "200",
+     "",
+     "500",
+     "mV"
+    ],
+    [
+     "Input logic low current (nSCS)",
+     "IIL",
+     "VPIN = 0 V",
+     "",
+     "",
+     "90",
+     "µA"
+    ],
+    [
+     "Input logic high current (nSCS)",
+     "IIH",
+     "VPIN = 5 V",
+     "",
+     "",
+     "70",
+     "µA"
+    ],
+    [
+     "Input pullup resistance (nSCS)",
+     "RPU",
+     "",
+     "",
+     "48",
+     "90",
+     "kΩ"
+    ],
+    [
+     "Input capacitance (nSCS)",
+     "CID",
+     "",
+     "",
+     "30",
+     "",
+     "pF"
+    ],
+    [
+     "Input mode 1 voltage (GAIN, MODE, SLEW)",
+     "VL1",
+     "Tied to AGND",
+     "0",
+     "",
+     "0.21*AVDD",
+     "V"
+    ],
+    [
+     "Input mode 2 voltage (GAIN, MODE, SLEW)",
+     "VL2",
+     "47 kΩ +/- 5% tied to GND",
+     "0.25*AVDD",
+     "0.5*AVDD",
+     "0.55*AVDD",
+     "V"
+    ],
+    [
+     "Input mode 3 voltage (GAIN, MODE, SLEW)",
+     "VL3",
+     "Hi-Z",
+     "0.606*AVDD",
+     "0.757*AVDD",
+     "0.909*AVDD",
+     "V"
+    ],
+    [
+     "Input mode 4 voltage (GAIN, MODE, SLEW)",
+     "VL4",
+     "Tied to AVDD",
+     "0.94*AVDD",
+     "",
+     "AVDD",
+     "V"
+    ],
+    [
+     "Input pullup resistance (GAIN, MODE, SLEW)",
+     "RPU",
+     "To AVDD",
+     "",
+     "48",
+     "70",
+     "kΩ"
+    ],
+    [
+     "Input pulldown resistance (GAIN, MODE, SLEW)",
+     "RPD",
+     "To AGND",
+     "",
+     "160",
+     "200",
+     "kΩ"
+    ],
+    [
+     "Output logic low voltage (nFAULT)",
+     "VOL",
+     "IOD = -5 mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Output logic high current (nFAULT)",
+     "IOH",
+     "VOD = 5 V",
+     "–1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Output capacitance (nFAULT)",
+     "COD",
+     "",
+     "",
+     "30",
+     "",
+     "pF"
+    ],
+    [
+     "Output logic low voltage (SDO)",
+     "VOL",
+     "IOP = -5 mA, 2.2 V ≤ VAVDD ≤ 3 V",
+     "0",
+     "",
+     "0.55",
+     "V"
+    ],
+    [
+     "Output logic low voltage (SDO)",
+     "VOL",
+     "IOP = -5 mA, 3 V ≤ VAVDD ≤ 3.6 V",
+     "0",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "Output logic high voltage (SDO)",
+     "VOH",
+     "IOP = 5 mA, 2.2 V ≤ VAVDD ≤ 3 V",
+     "VAVDD - 0.86",
+     "",
+     "3",
+     "V"
+    ],
+    [
+     "Output logic high voltage (SDO)",
+     "VOH",
+     "IOP = 5 mA, 3 V ≤ VAVDD ≤ 3.6 V",
+     "VAVDD - 0.5",
+     "",
+     "3.6",
+     "V"
+    ],
+    [
+     "Output logic low current (SDO)",
+     "IOL",
+     "VOP = 0 V",
+     "–1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Output logic high current (SDO)",
+     "IOH",
+     "VOP = 5 V",
+     "–1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Output capacitance (SDO)",
+     "COD",
+     "",
+     "",
+     "30",
+     "",
+     "pF"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: driver outputs",
+   "page": 10,
+   "conditions": "TJ = -40 °C to +150 °C, VVM = 3 V to 20 V unless noted; typical values at TA = 25 °C, VVM = 12 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Total MOSFET on resistance (high-side + low-side)",
+     "RDS(ON)",
+     "6 V ≥ VVM ≥ 3 V, IOUT = 1 A, TJ = 25 °C",
+     "",
+     "300",
+     "350",
+     "mΩ"
+    ],
+    [
+     "Total MOSFET on resistance (high-side + low-side)",
+     "RDS(ON)",
+     "6 V ≥ VVM ≥ 3 V, IOUT = 1 A, TJ = 150 °C",
+     "",
+     "450",
+     "500",
+     "mΩ"
+    ],
+    [
+     "Total MOSFET on resistance (high-side + low-side)",
+     "RDS(ON)",
+     "VVM ≥ 6 V, IOUT = 1 A, TJ = 25 °C",
+     "",
+     "210",
+     "250",
+     "mΩ"
+    ],
+    [
+     "Total MOSFET on resistance (high-side + low-side)",
+     "RDS(ON)",
+     "VVM ≥ 6 V, IOUT = 1 A, TJ = 150 °C",
+     "",
+     "330",
+     "375",
+     "mΩ"
+    ],
+    [
+     "Phase pin slew rate, low to high (20 % to 80 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 00b (SPI variant) or SLEW pin tied to AGND (HW variant)",
+     "18",
+     "35",
+     "55",
+     "V/us"
+    ],
+    [
+     "Phase pin slew rate, low to high (20 % to 80 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 01b (SPI variant) or SLEW pin to 47 kΩ ±5% tied to AGND (HW variant)",
+     "35",
+     "75",
+     "100",
+     "V/us"
+    ],
+    [
+     "Phase pin slew rate, low to high (20 % to 80 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 10b (SPI variant) or SLEW pin Hi-Z (HW variant)",
+     "90",
+     "180",
+     "225",
+     "V/us"
+    ],
+    [
+     "Phase pin slew rate, low to high (20 % to 80 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 11b (SPI variant) or SLEW pin tied to AVDD (HW variant)",
+     "140",
+     "230",
+     "355",
+     "Vus"
+    ],
+    [
+     "Phase pin slew rate, high to low (80 % to 20 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 00b (SPI variant) or SLEW pin tied to AGND (HW variant)",
+     "20",
+     "35",
+     "50",
+     "V/us"
+    ],
+    [
+     "Phase pin slew rate, high to low (80 % to 20 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 01b (SPI variant) or SLEW pin to 47 kΩ ±5% tied to AGND (HW variant)",
+     "35",
+     "75",
+     "100",
+     "V/us"
+    ],
+    [
+     "Phase pin slew rate, high to low (80 % to 20 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 10b (SPI variant) or SLEW pin Hi-Z (HW variant)",
+     "80",
+     "180",
+     "225",
+     "V/us"
+    ],
+    [
+     "Phase pin slew rate, high to low (80 % to 20 % of VM)",
+     "SR",
+     "VVM = 12 V; SLEW = 11b (SPI variant) or SLEW pin tied to AVDD (HW variant)",
+     "125",
+     "270",
+     "350",
+     "V/us"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V; SLEW = 00b (SPI variant) or SLEW pin tied to AGND (HW variant), DEADTIME = 000b, handshake only",
+     "",
+     "500",
+     "1200",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V; SLEW = 01b (SPI variant) or SLEW pin to 47 kΩ ±5% tied to AGND (HW variant), DEADTIME = 000b, handshake only",
+     "",
+     "450",
+     "760",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V; SLEW = 10b (SPI variant) or SLEW pin Hi-Z (HW variant), DEADTIME = 000b, handshake only",
+     "",
+     "425",
+     "720",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V; SLEW = 11b (SPI variant) or SLEW pin tied to AVDD (HW variant), DEADTIME = 000b, handshake only",
+     "",
+     "425",
+     "710",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V, DEADTIME = 001b",
+     "",
+     "200",
+     "540",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V, DEADTIME = 010b",
+     "",
+     "400",
+     "550",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V, DEADTIME = 011b",
+     "",
+     "600",
+     "760",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V, DEADTIME = 100b",
+     "",
+     "800",
+     "900",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V, DEADTIME = 101b",
+     "",
+     "1000",
+     "1100",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V, DEADTIME = 110b",
+     "",
+     "1200",
+     "1300",
+     "ns"
+    ],
+    [
+     "Output dead time (high to low / low to high)",
+     "tDEAD",
+     "VVM = 12 V, DEADTIME = 111b",
+     "",
+     "1400",
+     "1500",
+     "ns"
+    ],
+    [
+     "Propagation delay (high-side / low-side ON/OFF)",
+     "tPD",
+     "INHx = 1 to OUTx transition, VVM = 12 V; SLEW = 00b (SPI variant) or SLEW pin tied to AGND (HW variant)",
+     "",
+     "1000",
+     "1500",
+     "ns"
+    ],
+    [
+     "Propagation delay (high-side / low-side ON/OFF)",
+     "tPD",
+     "INHx = 1 to OUTx transition, VVM = 12 V; SLEW = 01b (SPI variant) or SLEW pin to 47 kΩ ±5% tied to AGND (HW variant)",
+     "",
+     "650",
+     "1100",
+     "ns"
+    ],
+    [
+     "Propagation delay (high-side / low-side ON/OFF)",
+     "tPD",
+     "INHx = 1 to OUTx transition, VVM = 12 V; SLEW = 10b (SPI variant) or SLEW pin Hi-Z (HW variant)",
+     "",
+     "550",
+     "950",
+     "ns"
+    ],
+    [
+     "Propagation delay (high-side / low-side ON/OFF)",
+     "tPD",
+     "INHx = 1 to OUTx transition, VVM = 12 V; SLEW = 11b (SPI variant) or SLEW pin tied to AVDD (HW variant)",
+     "",
+     "500",
+     "910",
+     "ns"
+    ],
+    [
+     "Minimum output pulse width",
+     "tMIN_PULSE",
+     "SLEW = 11b",
+     "500",
+     "",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "The unit of the fourth rising slew-rate row should read V/µs."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: current sense amplifier",
+   "page": 11,
+   "conditions": "TJ = -40 °C to +150 °C, VVM = 3 V to 20 V unless noted; typical values at TA = 25 °C, VVM = 12 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Current sense gain (SPI device)",
+     "GCSA",
+     "CSA_GAIN = 00 (SPI variant) or GAIN pin tied to AGND (HW variant)",
+     "",
+     "0.25",
+     "",
+     "V/A"
+    ],
+    [
+     "Current sense gain (SPI device)",
+     "GCSA",
+     "CSA_GAIN = 01 (SPI variant) or GAIN pin to 47 kΩ ±5% tied to GND (HW variant)",
+     "",
+     "0.5",
+     "",
+     "V/A"
+    ],
+    [
+     "Current sense gain (SPI device)",
+     "GCSA",
+     "CSA_GAIN = 10 (SPI variant) or GAIN pin Hi-Z (HW variant)",
+     "",
+     "1",
+     "",
+     "V/A"
+    ],
+    [
+     "Current sense gain (SPI device)",
+     "GCSA",
+     "CSA_GAIN = 11 (SPI variant) or GAIN pin tied to AVDD (HW variant)",
+     "",
+     "2",
+     "",
+     "V/A"
+    ],
+    [
+     "Current sense gain error",
+     "GCSA_ERR",
+     "TJ = 25 °C, IPHASE < 2.5 A",
+     "–4",
+     "",
+     "4",
+     "%"
+    ],
+    [
+     "Current sense gain error",
+     "GCSA_ERR",
+     "TJ = 25 °C, IPHASE > 2.5 A",
+     "–5",
+     "",
+     "5",
+     "%"
+    ],
+    [
+     "Current sense gain error",
+     "GCSA_ERR",
+     "IPHASE < 2.5 A",
+     "–5.5",
+     "",
+     "5.5",
+     "%"
+    ],
+    [
+     "Current sense gain error",
+     "GCSA_ERR",
+     "IPHASE > 2.5 A",
+     "–7",
+     "",
+     "7",
+     "%"
+    ],
+    [
+     "Current sense gain error matching between phases A, B and C",
+     "IMATCH",
+     "TJ = 25 °C",
+     "–5",
+     "",
+     "5",
+     "%"
+    ],
+    [
+     "Current sense gain error matching between phases A, B and C",
+     "IMATCH",
+     "",
+     "–5",
+     "",
+     "5",
+     "%"
+    ],
+    [
+     "Full scale positive current measurement",
+     "FSPOS",
+     "",
+     "5",
+     "",
+     "",
+     "A"
+    ],
+    [
+     "Full scale negative current measurement",
+     "FSNEG",
+     "",
+     "",
+     "",
+     "–5",
+     "A"
+    ],
+    [
+     "SOx output voltage linear range",
+     "VLINEAR",
+     "",
+     "0.25",
+     "",
+     "VCSAREF – 0.25",
+     "V"
+    ],
+    [
+     "Current sense offset, low-side current (room temperature)",
+     "IOFFSET_RT",
+     "TJ = 25 °C, phase current = 0 A, GCSA = 0.25 V/A",
+     "–50",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "Current sense offset, low-side current (room temperature)",
+     "IOFFSET_RT",
+     "TJ = 25 °C, phase current = 0 A, GCSA = 0.5 V/A",
+     "–50",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "Current sense offset, low-side current (room temperature)",
+     "IOFFSET_RT",
+     "TJ = 25 °C, phase current = 0 A, GCSA = 1 V/A",
+     "–30",
+     "",
+     "30",
+     "mA"
+    ],
+    [
+     "Current sense offset, low-side current (room temperature)",
+     "IOFFSET_RT",
+     "TJ = 25 °C, phase current = 0 A, GCSA = 2 V/A",
+     "–30",
+     "",
+     "30",
+     "mA"
+    ],
+    [
+     "Current sense offset referred to low-side current",
+     "IOFFSET",
+     "Phase current = 0 A, GCSA = 0.25 V/A",
+     "–70",
+     "",
+     "70",
+     "mA"
+    ],
+    [
+     "Current sense offset referred to low-side current",
+     "IOFFSET",
+     "Phase current = 0 A, GCSA = 0.5 V/A",
+     "–50",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "Current sense offset referred to low-side current",
+     "IOFFSET",
+     "Phase current = 0 A, GCSA = 1 V/A",
+     "–50",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "Current sense offset referred to low-side current",
+     "IOFFSET",
+     "Phase current = 0 A, GCSA = 2 V/A",
+     "–50",
+     "",
+     "50",
+     "mA"
+    ],
+    [
+     "Settling time to ±1%, 30 pF on SOx pin",
+     "tSET",
+     "Step on SOx = 1.2 V, GCSA = 0.25 V/A",
+     "",
+     "",
+     "1",
+     "µs"
+    ],
+    [
+     "Settling time to ±1%, 30 pF on SOx pin",
+     "tSET",
+     "Step on SOx = 1.2 V, GCSA = 0.5 V/A",
+     "",
+     "",
+     "1",
+     "µs"
+    ],
+    [
+     "Settling time to ±1%, 30 pF on SOx pin",
+     "tSET",
+     "Step on SOx = 1.2 V, GCSA = 1 V/A",
+     "",
+     "",
+     "1",
+     "µs"
+    ],
+    [
+     "Settling time to ±1%, 30 pF on SOx pin",
+     "tSET",
+     "Step on SOx = 1.2 V, GCSA = 2 V/A",
+     "",
+     "",
+     "1",
+     "µs"
+    ],
+    [
+     "Drift offset",
+     "VDRIFT",
+     "Phase current = 0 A",
+     "–150",
+     "",
+     "150",
+     "µA/°C"
+    ],
+    [
+     "CSAREF input current",
+     "ICSAREF",
+     "CSAREF = 3.0 V",
+     "",
+     "1.7",
+     "3",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: protection circuits",
+   "page": 12,
+   "conditions": "TJ = -40 °C to +150 °C, VVM = 3 V to 20 V unless noted; typical values at TA = 25 °C, VVM = 12 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply undervoltage lockout (UVLO)",
+     "VUVLO",
+     "VM rising",
+     "2.6",
+     "2.7",
+     "2.8",
+     "V"
+    ],
+    [
+     "Supply undervoltage lockout (UVLO)",
+     "VUVLO",
+     "VM falling",
+     "2.5",
+     "2.6",
+     "2.7",
+     "V"
+    ],
+    [
+     "Supply undervoltage lockout hysteresis",
+     "VUVLO_HYS",
+     "Rising to falling threshold",
+     "60",
+     "125",
+     "210",
+     "mV"
+    ],
+    [
+     "Supply undervoltage deglitch time",
+     "tUVLO",
+     "",
+     "5",
+     "7.5",
+     "13",
+     "µs"
+    ],
+    [
+     "AVDD supply input undervoltage lockout (VINAVDD_UV)",
+     "VVINAVDD_UV",
+     "VIN_AVDD rising",
+     "2.6",
+     "2.7",
+     "2.8",
+     "V"
+    ],
+    [
+     "AVDD supply input undervoltage lockout (VINAVDD_UV)",
+     "VVINAVDD_UV",
+     "VIN_AVDD falling",
+     "2.5",
+     "2.6",
+     "2.7",
+     "V"
+    ],
+    [
+     "AVDD supply input undervoltage lockout hysteresis",
+     "VVINAVDD_UV_HYS",
+     "Rising to falling threshold",
+     "100",
+     "125",
+     "150",
+     "mV"
+    ],
+    [
+     "AVDD supply input undervoltage deglitch time",
+     "tVINAVDD_UV",
+     "",
+     "2.5",
+     "4",
+     "5",
+     "µs"
+    ],
+    [
+     "Charge pump undervoltage lockout (voltage with respect to VM)",
+     "VCPUV",
+     "VCP rising",
+     "2",
+     "2.3",
+     "2.5",
+     "V"
+    ],
+    [
+     "Charge pump undervoltage lockout (voltage with respect to VM)",
+     "VCPUV",
+     "VCP falling",
+     "2",
+     "2.2",
+     "2.4",
+     "V"
+    ],
+    [
+     "Charge pump undervoltage lockout hysteresis",
+     "VCPUV_HYS",
+     "Rising to falling threshold",
+     "65",
+     "100",
+     "125",
+     "mV"
+    ],
+    [
+     "Charge pump undervoltage lockout deglitch time",
+     "tCPUV",
+     "",
+     "",
+     "0.2",
+     "0.5",
+     "µs"
+    ],
+    [
+     "CSA reference undervoltage lockout",
+     "VCSAREF_UV",
+     "VCSAREF rising",
+     "1.68",
+     "1.8",
+     "1.95",
+     "V"
+    ],
+    [
+     "CSA reference undervoltage lockout",
+     "VCSAREF_UV",
+     "VCSAREF falling",
+     "1.6",
+     "1.7",
+     "1.85",
+     "V"
+    ],
+    [
+     "CSA reference undervoltage lockout hysteresis",
+     "VCSAREF_UV_HYS",
+     "Rising to falling threshold",
+     "70",
+     "90",
+     "110",
+     "mV"
+    ],
+    [
+     "Analog regulator undervoltage lockout",
+     "VAVDD_UV",
+     "VAVDD rising",
+     "1.8",
+     "2",
+     "2.2",
+     "V"
+    ],
+    [
+     "Analog regulator undervoltage lockout",
+     "VAVDD_UV",
+     "VAVDD falling",
+     "1.7",
+     "1.8",
+     "1.95",
+     "V"
+    ],
+    [
+     "Overcurrent protection trip point",
+     "IOCP",
+     "OCP_LVL = 0 (SPI variant) or MODE pin tied to AGND or MODE pin Hi-Z (HW variant)",
+     "5.8",
+     "9",
+     "11.5",
+     "A"
+    ],
+    [
+     "Overcurrent protection trip point",
+     "IOCP",
+     "OCP_LVL = 1 (SPI variant) or MODE pin tied to AVDD or MODE pin 47 kΩ ±5% tied to AGND (HW variant)",
+     "3.4",
+     "5",
+     "7.5",
+     "A"
+    ],
+    [
+     "Overcurrent protection blanking time (SPI variant)",
+     "tBLANK",
+     "OCP_TBLANK = 00b",
+     "",
+     "0.2",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection blanking time (SPI variant)",
+     "tBLANK",
+     "OCP_TBLANK = 01b",
+     "",
+     "0.5",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection blanking time (SPI variant)",
+     "tBLANK",
+     "OCP_TBLANK = 10b",
+     "",
+     "0.8",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection blanking time (SPI variant)",
+     "tBLANK",
+     "OCP_TBLANK = 10b",
+     "",
+     "1",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection blanking time (HW variant)",
+     "tBLANK",
+     "",
+     "",
+     "0.2",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection deglitch time (SPI variant)",
+     "tOCP_DEG",
+     "OCP_DEG = 00b",
+     "",
+     "0.2",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection deglitch time (SPI variant)",
+     "tOCP_DEG",
+     "OCP_DEG = 01b",
+     "",
+     "0.5",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection deglitch time (SPI variant)",
+     "tOCP_DEG",
+     "OCP_DEG = 10b",
+     "",
+     "0.8",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection deglitch time (SPI variant)",
+     "tOCP_DEG",
+     "OCP_DEG = 11b",
+     "",
+     "1",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection deglitch time (HW variant)",
+     "tOCP_DEG",
+     "",
+     "",
+     "1",
+     "",
+     "µs"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "FAST_RETRY = 00b",
+     "0.24",
+     "0.5",
+     "0.65",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "FAST_RETRY = 01b",
+     "0.7",
+     "1",
+     "1.2",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "FAST_RETRY = 10b",
+     "1.6",
+     "2",
+     "2.2",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "FAST_RETRY = 11b",
+     "4.4",
+     "5",
+     "5.3",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "SLOW_RETRY = 00b",
+     "390",
+     "500",
+     "525",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "SLOW_RETRY = 01b",
+     "840",
+     "1000",
+     "1050",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "SLOW_RETRY = 10b",
+     "1700",
+     "2000",
+     "2200",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (SPI variant)",
+     "tRETRY",
+     "SLOW_RETRY = 11b",
+     "4400",
+     "5000",
+     "5400",
+     "ms"
+    ],
+    [
+     "Overcurrent protection retry time (HW variant)",
+     "tRETRY",
+     "",
+     "",
+     "5",
+     "",
+     "ms"
+    ],
+    [
+     "Thermal warning temperature",
+     "TOTW",
+     "Die temperature (TJ) rising",
+     "170",
+     "178",
+     "185",
+     "°C"
+    ],
+    [
+     "Thermal warning hysteresis",
+     "TOTW_HYS",
+     "Die temperature (TJ)",
+     "",
+     "25",
+     "30",
+     "°C"
+    ],
+    [
+     "Thermal shutdown temperature",
+     "TTSD",
+     "Die temperature (TJ) rising",
+     "180",
+     "190",
+     "200",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis",
+     "TTSD_HYS",
+     "Die temperature (TJ)",
+     "",
+     "25",
+     "30",
+     "°C"
+    ],
+    [
+     "Thermal shutdown temperature (LDO)",
+     "TTSD",
+     "Die temperature (TJ) rising",
+     "180",
+     "190",
+     "200",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis (LDO)",
+     "TTSD_HYS",
+     "Die temperature (TJ)",
+     "",
+     "25",
+     "30",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "The condition of the fourth SPI blanking-time row should read OCP_TBLANK = 11b."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PWM output accuracy (tSPI)",
+   "page": 14,
+   "conditions": "TJ = -40 °C to +150 °C, VVM = 3 V to 20 V unless noted; typical values at TA = 25 °C, VVM = 12 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output PWM resolution",
+     "RPWM",
+     "PWM frequency = 20 kHz",
+     "",
+     "10",
+     "",
+     "bits"
+    ],
+    [
+     "Output PWM accuracy",
+     "APWM",
+     "VVM < 4.5 V, PWM_SYNC and clock tuning disabled",
+     "-7.5",
+     "",
+     "7.5",
+     "%"
+    ],
+    [
+     "Output PWM accuracy",
+     "APWM",
+     "VVM > 4.5 V, PWM_SYNC and clock tuning disabled",
+     "-4",
+     "",
+     "4",
+     "%"
+    ],
+    [
+     "Output PWM accuracy",
+     "APWM",
+     "PWM_SYNC enabled and clock tuning disabled",
+     "-1",
+     "",
+     "1",
+     "%"
+    ],
+    [
+     "Output PWM accuracy",
+     "APWM",
+     "PWM_SYNC disabled and SPISYNC_ACRCY = 11b",
+     "-2",
+     "",
+     "2",
+     "%"
+    ],
+    [
+     "Output PWM accuracy",
+     "APWM",
+     "PWM_SYNC disabled and SPISYNC_ACRCY = 10b",
+     "-1",
+     "",
+     "1",
+     "%"
+    ],
+    [
+     "Output PWM accuracy",
+     "APWM",
+     "PWM_SYNC disabled and SPISYNC_ACRCY = 01b",
+     "-1",
+     "",
+     "1",
+     "%"
+    ],
+    [
+     "Output PWM accuracy",
+     "APWM",
+     "PWM_SYNC disabled and SPISYNC_ACRCY = 00b",
+     "-1",
+     "",
+     "1",
+     "%"
+    ]
+   ]
+  },
+  {
+   "title": "SPI timing requirements",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tREADY",
+     "SPI ready after power up",
+     "",
+     "",
+     "1",
+     "ms"
+    ],
+    [
+     "tHI_nSCS",
+     "nSCS minimum high time",
+     "300",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tSU_nSCS",
+     "nSCS input setup time",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tHD_nSCS",
+     "nSCS input hold time",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tSCLK",
+     "SCLK minimum period",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tSCLKH",
+     "SCLK minimum high time",
+     "50",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tSCLKL",
+     "SCLK minimum low time",
+     "50",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tSU_SDI",
+     "SDI input data setup time",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tHD_SDI",
+     "SDI input data hold time",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "tDLY_SDO",
+     "SDO output data delay time",
+     "",
+     "",
+     "75",
+     "ns"
+    ],
+    [
+     "tEN_SDO",
+     "SDO enable delay time",
+     "",
+     "",
+     "65",
+     "ns"
+    ],
+    [
+     "tDIS_SDO",
+     "SDO disable delay time",
+     "",
+     "",
+     "50",
+     "ns"
+    ]
+   ]
+  },
+  {
+   "title": "External components",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "component",
+    "pin 1",
+    "pin 2",
+    "recommended"
+   ],
+   "rows": [
+    [
+     "CVM1",
+     "VM",
+     "PGND",
+     "X5R or X7R, 0.1 µF, VM-rated"
+    ],
+    [
+     "CVM2",
+     "VM",
+     "PGND",
+     "≥ 10 µF, VM-rated electrolytic"
+    ],
+    [
+     "CVIN_AVDD1",
+     "VIN_AVDD",
+     "AGND",
+     "X5R or X7R, 0.1 µF, VIN_AVDD-rated"
+    ],
+    [
+     "CVIN_AVDD2",
+     "VIN_AVDD",
+     "AGND",
+     "≥ 10 µF, VIN_AVDD-rated"
+    ],
+    [
+     "CCP",
+     "CP",
+     "VM",
+     "X5R or X7R, 16 V, 0.1 µF"
+    ],
+    [
+     "CAVDD",
+     "AVDD",
+     "AGND",
+     "X5R or X7R, 0.7 µF to 7 µF, 6.3 V"
+    ],
+    [
+     "RnFAULT",
+     "AVDD",
+     "nFAULT",
+     "5.1 kΩ pullup"
+    ],
+    [
+     "RSDO",
+     "AVDD",
+     "SDO",
+     "5.1 kΩ pullup (optional)"
+    ],
+    [
+     "RMODE",
+     "MODE",
+     "AGND or AVDD",
+     "see hardware pin decode"
+    ],
+    [
+     "RSLEW",
+     "SLEW",
+     "AGND or AVDD",
+     "see hardware pin decode"
+    ],
+    [
+     "RGAIN",
+     "GAIN",
+     "AGND or AVDD",
+     "see hardware pin decode"
+    ],
+    [
+     "CCSAREF",
+     "CSAREF",
+     "AGND",
+     "X5R or X7R, 0.1 µF, CSAREF-rated"
+    ]
+   ]
+  },
+  {
+   "title": "PWM control modes",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "MODE pin (DRV8311H)",
+    "PWM_MODE bits (DRV8311S)",
+    "PWM_MODE bits (DRV8311P)",
+    "operation"
+   ],
+   "rows": [
+    [
+     "Mode 1",
+     "tied to AGND, or 47 kΩ to AGND",
+     "00b or 01b",
+     "NA",
+     "6x mode"
+    ],
+    [
+     "Mode 2",
+     "Hi-Z, or tied to AVDD",
+     "10b",
+     "NA",
+     "3x mode"
+    ],
+    [
+     "Mode 3",
+     "NA",
+     "11b",
+     "11b",
+     "PWM generation mode"
+    ]
+   ]
+  },
+  {
+   "title": "6x PWM mode truth table",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "INLx",
+    "INHx",
+    "OUTx"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Hi-Z"
+    ],
+    [
+     "0",
+     "1",
+     "H"
+    ],
+    [
+     "1",
+     "0",
+     "L"
+    ],
+    [
+     "1",
+     "1",
+     "Hi-Z"
+    ]
+   ]
+  },
+  {
+   "title": "3x PWM mode truth table",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "INLx",
+    "INHx",
+    "OUTx"
+   ],
+   "rows": [
+    [
+     "0",
+     "X",
+     "Hi-Z"
+    ],
+    [
+     "1",
+     "0",
+     "L"
+    ],
+    [
+     "1",
+     "1",
+     "H"
+    ]
+   ]
+  },
+  {
+   "title": "Hardware pin decode",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "pin connection",
+    "GAIN",
+    "SLEW",
+    "MODE"
+   ],
+   "rows": [
+    [
+     "Tied to AGND",
+     "0.25 V/A",
+     "35 V/us",
+     "6x PWM mode and 9 A OCP level"
+    ],
+    [
+     "47 kΩ to AGND",
+     "0.5 V/A",
+     "75 V/us",
+     "6x PWM mode and 5 A OCP level"
+    ],
+    [
+     "Hi-Z",
+     "1 V/A",
+     "180 V/us",
+     "3x PWM mode and 9 A OCP level"
+    ],
+    [
+     "Tied to AVDD",
+     "2 V/A",
+     "230 V/us",
+     "3x PWM mode and 5 A OCP level"
+    ]
+   ]
+  },
+  {
+   "title": "Fault action and response",
+   "page": 41,
+   "conditions": "",
+   "columns": [
+    "fault",
+    "condition",
+    "configuration",
+    "report",
+    "H-bridge",
+    "logic",
+    "recovery"
+   ],
+   "rows": [
+    [
+     "VM undervoltage (NPOR)",
+     "VVM < VUVLO",
+     "—",
+     "—",
+     "Hi-Z",
+     "Disabled",
+     "Automatic: VVM > VUVLO_R; CLR_FLT or nSLEEP reset pulse clears the NPOR bit"
+    ],
+    [
+     "VINAVDD undervoltage (VINAVDD_UV)",
+     "VVINAVDD < VVINAVDD_UV",
+     "—",
+     "nFAULT",
+     "Hi-Z",
+     "Active (SPI disabled)",
+     "Set by UVP_MODE"
+    ],
+    [
+     "AVDD undervoltage (AVDD_UV)",
+     "VAVDD < VAVDD_UV",
+     "—",
+     "nFAULT",
+     "Hi-Z",
+     "Active (SPI disabled)",
+     "Set by UVP_MODE"
+    ],
+    [
+     "Charge pump undervoltage (CP_UV)",
+     "VCP < VCPUV",
+     "—",
+     "nFAULT",
+     "Hi-Z",
+     "Active",
+     "Set by UVP_MODE"
+    ],
+    [
+     "CSAREF undervoltage (CSAREF_UV)",
+     "VCSAREF < VCSAREF_UV",
+     "CSAREFUV_EN = 1b",
+     "nFAULT",
+     "Active (CSA disabled)",
+     "Active",
+     "Set by UVP_MODE"
+    ],
+    [
+     "CSAREF undervoltage (CSAREF_UV)",
+     "VCSAREF < VCSAREF_UV",
+     "CSAREFUV_EN = 0b",
+     "None",
+     "Active",
+     "Active",
+     "No action"
+    ],
+    [
+     "Overcurrent protection (OCP)",
+     "IPHASE > IOCP",
+     "OCP_MODE = 000b",
+     "nFAULT",
+     "Hi-Z",
+     "Active",
+     "Automatic retry: SLOW_TRETRY"
+    ],
+    [
+     "Overcurrent protection (OCP)",
+     "IPHASE > IOCP",
+     "OCP_MODE = 001b",
+     "nFAULT",
+     "Hi-Z",
+     "Active",
+     "Automatic retry: FAST_TRETRY"
+    ],
+    [
+     "Overcurrent protection (OCP)",
+     "IPHASE > IOCP",
+     "OCP_MODE = 010b",
+     "nFAULT",
+     "Hi-Z",
+     "Active",
+     "Latched: CLR_FLT, nSLEEP reset pulse"
+    ],
+    [
+     "Overcurrent protection (OCP)",
+     "IPHASE > IOCP",
+     "OCP_MODE = 011b",
+     "nFAULT",
+     "Active",
+     "Active",
+     "No action"
+    ],
+    [
+     "Overcurrent protection (OCP)",
+     "IPHASE > IOCP",
+     "OCP_MODE = 111b",
+     "None",
+     "Active",
+     "Active",
+     "No action"
+    ],
+    [
+     "SPI fault (SPI_FLT)",
+     "SCLK fault and ADDR fault",
+     "SPIFLT_MODE = 0b",
+     "nFAULT",
+     "Active",
+     "Active",
+     "Automatic"
+    ],
+    [
+     "SPI fault (SPI_FLT)",
+     "SCLK fault and ADDR fault",
+     "SPIFLT_MODE = 1b",
+     "None",
+     "Active",
+     "Active",
+     "No action"
+    ],
+    [
+     "Thermal warning (OTW)",
+     "TJ > TOTW",
+     "OTW_EN = 0b",
+     "None",
+     "Active",
+     "Active",
+     "No action"
+    ],
+    [
+     "Thermal warning (OTW)",
+     "TJ > TOTW",
+     "OTW_EN = 1b",
+     "nFAULT",
+     "Active",
+     "Active",
+     "Automatic: TJ < TOTW – THYS"
+    ],
+    [
+     "Thermal shutdown (OTSD)",
+     "TJ > TOTSD",
+     "OTSD_MODE = 00b",
+     "nFAULT",
+     "Hi-Z",
+     "Active",
+     "Automatic, SLOW_TRETRY after TJ < TOTSD – THYS"
+    ],
+    [
+     "Thermal shutdown (OTSD)",
+     "TJ > TOTSD",
+     "OTSD_MODE = 01b",
+     "nFAULT",
+     "Hi-Z",
+     "Active",
+     "Automatic, FAST_TRETRY after TJ < TOTSD – THYS"
+    ]
+   ]
+  },
+  {
+   "title": "SPI frame, SDI input word (24 bits)",
+   "page": 47,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "content"
+   ],
+   "rows": [
+    [
+     "B23",
+     "R/W",
+     "W0: 0 = write, 1 = read"
+    ],
+    [
+     "B22-B17",
+     "ADDRESS",
+     "A5-A0"
+    ],
+    [
+     "B16",
+     "PARITY",
+     "P, header parity"
+    ],
+    [
+     "B15",
+     "PARITY",
+     "P, data parity"
+    ],
+    [
+     "B14-B0",
+     "DATA",
+     "D14-D0"
+    ]
+   ]
+  },
+  {
+   "title": "SPI frame, SDO output word (24 bits)",
+   "page": 47,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "content"
+   ],
+   "rows": [
+    [
+     "B23-B16",
+     "STATUS",
+     "S7-S0"
+    ],
+    [
+     "B15-B0",
+     "DATA",
+     "D15-D0"
+    ]
+   ]
+  },
+  {
+   "title": "tSPI frame, SDI input word (32 bits)",
+   "page": 47,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "content"
+   ],
+   "rows": [
+    [
+     "B31",
+     "R/W",
+     "W0: 0 = write, 1 = read"
+    ],
+    [
+     "B30-B29",
+     "Secondary device ID",
+     "0, 0"
+    ],
+    [
+     "B28-B27",
+     "Secondary device ID",
+     "AD1, AD0"
+    ],
+    [
+     "B26-B19",
+     "ADDRESS",
+     "A7-A0"
+    ],
+    [
+     "B18-B17",
+     "Reserved",
+     "0, 0"
+    ],
+    [
+     "B16",
+     "PARITY",
+     "P, header parity"
+    ],
+    [
+     "B15",
+     "PARITY",
+     "P, data parity"
+    ],
+    [
+     "B14-B0",
+     "DATA",
+     "D14-D0"
+    ]
+   ],
+   "notes": [
+    "The tSPI SDO word has the same 24-bit form as the SPI SDO word."
+   ]
+  },
+  {
+   "title": "Register map",
+   "page": 52,
+   "conditions": "",
+   "columns": [
+    "offset",
+    "acronym",
+    "register",
+    "reset"
+   ],
+   "rows": [
+    [
+     "0h",
+     "DEV_STS1",
+     "Device Status 1",
+     "0080h"
+    ],
+    [
+     "4h",
+     "OT_STS",
+     "Over Temperature Status",
+     "0000h"
+    ],
+    [
+     "5h",
+     "SUP_STS",
+     "Supply Status",
+     "0000h"
+    ],
+    [
+     "6h",
+     "DRV_STS",
+     "Driver Status",
+     "0000h"
+    ],
+    [
+     "7h",
+     "SYS_STS",
+     "System Status",
+     "0000h"
+    ],
+    [
+     "Ch",
+     "PWM_SYNC_PRD",
+     "PWM Sync Period",
+     "0000h"
+    ],
+    [
+     "10h",
+     "FLT_MODE",
+     "Fault Mode",
+     "0115h"
+    ],
+    [
+     "12h",
+     "SYSF_CTRL",
+     "System Fault Control",
+     "0515h"
+    ],
+    [
+     "13h",
+     "DRVF_CTRL",
+     "Driver Fault Control",
+     "0030h"
+    ],
+    [
+     "16h",
+     "FLT_TCTRL",
+     "Fault Timing Control",
+     "0003h"
+    ],
+    [
+     "17h",
+     "FLT_CLR",
+     "Fault Clear",
+     "0000h"
+    ],
+    [
+     "18h",
+     "PWMG_PERIOD",
+     "PWM_GEN Period",
+     "0000h"
+    ],
+    [
+     "19h",
+     "PWMG_A_DUTY",
+     "PWM_GEN A Duty",
+     "0000h"
+    ],
+    [
+     "1Ah",
+     "PWMG_B_DUTY",
+     "PWM_GEN B Duty",
+     "0000h"
+    ],
+    [
+     "1Bh",
+     "PWMG_C_DUTY",
+     "PWM_GEN C Duty",
+     "0000h"
+    ],
+    [
+     "1Ch",
+     "PWM_STATE",
+     "PWM State",
+     "0777h"
+    ],
+    [
+     "1Dh",
+     "PWMG_CTRL",
+     "PWM_GEN Control",
+     "0000h"
+    ],
+    [
+     "20h",
+     "PWM_CTRL1",
+     "PWM Control 1",
+     "0007h"
+    ],
+    [
+     "22h",
+     "DRV_CTRL",
+     "Predriver Control",
+     "0000h"
+    ],
+    [
+     "23h",
+     "CSA_CTRL",
+     "CSA Control",
+     "0008h"
+    ],
+    [
+     "3Fh",
+     "SYS_CTRL",
+     "System Control",
+     "0000h"
+    ]
+   ],
+   "notes": [
+    "Offsets not listed are reserved and are not to be written.",
+    "Access codes: R read, R-0 reads as 0, W write, R/W read and write; -n is the reset value.",
+    "Bit 15 of every register is the parity bit when SPI_PEN = 1, otherwise reserved (R, 0h)."
+   ]
+  },
+  {
+   "title": "Register fields",
+   "page": 53,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bits",
+    "field",
+    "access",
+    "reset",
+    "values"
+   ],
+   "rows": [
+    [
+     "0h DEV_STS1",
+     "8",
+     "OTP_FLT",
+     "R",
+     "0h",
+     "OTP read fault: 1h = detected"
+    ],
+    [
+     "0h DEV_STS1",
+     "7",
+     "RESET",
+     "R",
+     "1h",
+     "Power-on reset: 1h = detected"
+    ],
+    [
+     "0h DEV_STS1",
+     "6",
+     "SPI_FLT",
+     "R",
+     "0h",
+     "SPI communication fault: 1h = detected"
+    ],
+    [
+     "0h DEV_STS1",
+     "5",
+     "OCP",
+     "R",
+     "0h",
+     "Driver overcurrent: 1h = detected"
+    ],
+    [
+     "0h DEV_STS1",
+     "2",
+     "UVP",
+     "R",
+     "0h",
+     "Undervoltage on CP, AVDD or VIN_AVDD: 1h = detected"
+    ],
+    [
+     "0h DEV_STS1",
+     "1",
+     "OT",
+     "R",
+     "0h",
+     "Over-temperature warning or shutdown: 1h = detected"
+    ],
+    [
+     "0h DEV_STS1",
+     "0",
+     "FAULT",
+     "R",
+     "0h",
+     "Any fault: 1h = detected"
+    ],
+    [
+     "4h OT_STS",
+     "2",
+     "OTS_AVDD",
+     "R",
+     "0h",
+     "Over-temperature shutdown near AVDD: 1h = detected"
+    ],
+    [
+     "4h OT_STS",
+     "1",
+     "OTW",
+     "R",
+     "0h",
+     "Over-temperature warning: 1h = detected"
+    ],
+    [
+     "4h OT_STS",
+     "0",
+     "OTSD",
+     "R",
+     "0h",
+     "Over-temperature shutdown: 1h = detected"
+    ],
+    [
+     "5h SUP_STS",
+     "5",
+     "CSAREF_UV",
+     "R",
+     "0h",
+     "CSAREF undervoltage: 1h = detected"
+    ],
+    [
+     "5h SUP_STS",
+     "4",
+     "CP_UV",
+     "R",
+     "0h",
+     "Charge pump undervoltage: 1h = detected"
+    ],
+    [
+     "5h SUP_STS",
+     "2",
+     "AVDD_UV",
+     "R",
+     "0h",
+     "AVDD output undervoltage: 1h = detected"
+    ],
+    [
+     "5h SUP_STS",
+     "0",
+     "VINAVDD_UV",
+     "R",
+     "0h",
+     "VIN_AVDD undervoltage: 1h = detected"
+    ],
+    [
+     "6h DRV_STS",
+     "6",
+     "OCPC_HS",
+     "R",
+     "0h",
+     "Overcurrent, OUTC high-side MOSFET: 1h = detected"
+    ],
+    [
+     "6h DRV_STS",
+     "5",
+     "OCPB_HS",
+     "R",
+     "0h",
+     "Overcurrent, OUTB high-side MOSFET: 1h = detected"
+    ],
+    [
+     "6h DRV_STS",
+     "4",
+     "OCPA_HS",
+     "R",
+     "0h",
+     "Overcurrent, OUTA high-side MOSFET: 1h = detected"
+    ],
+    [
+     "6h DRV_STS",
+     "2",
+     "OCPC_LS",
+     "R",
+     "0h",
+     "Overcurrent, OUTC low-side MOSFET: 1h = detected"
+    ],
+    [
+     "6h DRV_STS",
+     "1",
+     "OCPB_LS",
+     "R",
+     "0h",
+     "Overcurrent, OUTB low-side MOSFET: 1h = detected"
+    ],
+    [
+     "6h DRV_STS",
+     "0",
+     "OCPA_LS",
+     "R",
+     "0h",
+     "Overcurrent, OUTA low-side MOSFET: 1h = detected"
+    ],
+    [
+     "7h SYS_STS",
+     "4",
+     "OTPLD_ERR",
+     "R",
+     "0h",
+     "OTP read error: 1h = detected"
+    ],
+    [
+     "7h SYS_STS",
+     "2",
+     "SPI_PARITY",
+     "R",
+     "0h",
+     "SPI parity error: 1h = detected"
+    ],
+    [
+     "7h SYS_STS",
+     "1",
+     "BUS_CNT",
+     "R",
+     "0h",
+     "SPI bus contention error: 1h = detected"
+    ],
+    [
+     "7h SYS_STS",
+     "0",
+     "FRM_ERR",
+     "R",
+     "0h",
+     "SPI frame error: 1h = detected"
+    ],
+    [
+     "Ch PWM_SYNC_PRD",
+     "11-0",
+     "PWM_SYNC_PRD",
+     "R",
+     "0h",
+     "Measured PWM_SYNC period, 12 bits"
+    ],
+    [
+     "10h FLT_MODE",
+     "8",
+     "OTPFLT_MODE",
+     "R/W",
+     "1h",
+     "0h OTP read fault enabled; 1h disabled"
+    ],
+    [
+     "10h FLT_MODE",
+     "7",
+     "SPIFLT_MODE",
+     "R/W",
+     "0h",
+     "0h SPI fault enabled; 1h disabled"
+    ],
+    [
+     "10h FLT_MODE",
+     "6-4",
+     "OCP_MODE",
+     "R/W",
+     "1h",
+     "0h nFAULT, outputs Hi-Z, slow retry; 1h nFAULT, outputs Hi-Z, fast retry; 2h nFAULT, outputs Hi-Z, latched; 3h nFAULT only, no driver action; 4h-6h reserved; 7h disabled"
+    ],
+    [
+     "10h FLT_MODE",
+     "3-2",
+     "UVP_MODE",
+     "R/W",
+     "1h",
+     "0h nFAULT, outputs Hi-Z, slow retry; 1h nFAULT, outputs Hi-Z, fast retry; 2h, 3h reserved"
+    ],
+    [
+     "10h FLT_MODE",
+     "1-0",
+     "OTSD_MODE",
+     "R/W",
+     "1h",
+     "0h nFAULT, outputs Hi-Z, slow retry; 1h nFAULT, outputs Hi-Z, fast retry; 2h, 3h reserved"
+    ],
+    [
+     "12h SYSF_CTRL",
+     "10",
+     "OTAVDD_EN",
+     "R/W",
+     "1h",
+     "Over-temperature protection near AVDD: 0h off, 1h on"
+    ],
+    [
+     "12h SYSF_CTRL",
+     "9",
+     "OTW_EN",
+     "R/W",
+     "0h",
+     "Over-temperature warning on nFAULT: 0h off, 1h on"
+    ],
+    [
+     "12h SYSF_CTRL",
+     "8-6",
+     "RESERVED",
+     "R-0",
+     "4h",
+     "Reserved"
+    ],
+    [
+     "12h SYSF_CTRL",
+     "5",
+     "CSAREFUV_EN",
+     "R/W",
+     "0h",
+     "CSAREF undervoltage lockout: 0h off, 1h on"
+    ],
+    [
+     "12h SYSF_CTRL",
+     "4, 2, 0",
+     "RESERVED",
+     "R/W",
+     "1h",
+     "Reserved"
+    ],
+    [
+     "13h DRVF_CTRL",
+     "5-4",
+     "OCP_DEG",
+     "R/W",
+     "3h",
+     "OCP deglitch: 0h 0.2 µs, 1h 0.5 µs, 2h 0.8 µs, 3h 1 µs"
+    ],
+    [
+     "13h DRVF_CTRL",
+     "3-2",
+     "OCP_TBLANK",
+     "R/W",
+     "0h",
+     "OCP blanking: 0h 0.2 µs, 1h 0.5 µs, 2h 0.8 µs, 3h 1 µs"
+    ],
+    [
+     "13h DRVF_CTRL",
+     "0",
+     "OCP_LVL",
+     "R/W",
+     "0h",
+     "OCP level: 0h 9 A typ, 1h 5 A typ"
+    ],
+    [
+     "16h FLT_TCTRL",
+     "3-2",
+     "SLOW_TRETRY",
+     "R/W",
+     "0h",
+     "Slow retry: 0h 0.5 s, 1h 1 s, 2h 2 s, 3h 5 s"
+    ],
+    [
+     "16h FLT_TCTRL",
+     "1-0",
+     "FAST_TRETRY",
+     "R/W",
+     "3h",
+     "Fast retry: 0h 0.5 ms, 1h 1 ms, 2h 2 ms, 3h 5 ms"
+    ],
+    [
+     "17h FLT_CLR",
+     "0",
+     "FLT_CLR",
+     "W",
+     "0h",
+     "Write 1h to clear latched fault bits; returns to 0 by itself"
+    ],
+    [
+     "18h PWMG_PERIOD",
+     "11-0",
+     "PWM_PRD_OUT",
+     "R/W",
+     "0h",
+     "PWM period in PWM generation mode, 12 bits"
+    ],
+    [
+     "19h PWMG_A_DUTY",
+     "11-0",
+     "PWM_DUTY_OUTA",
+     "R/W",
+     "0h",
+     "Phase A duty in PWM generation mode, 12 bits"
+    ],
+    [
+     "1Ah PWMG_B_DUTY",
+     "11-0",
+     "PWM_DUTY_OUTB",
+     "R/W",
+     "0h",
+     "Phase B duty in PWM generation mode, 12 bits"
+    ],
+    [
+     "1Bh PWMG_C_DUTY",
+     "11-0",
+     "PWM_DUTY_OUTC",
+     "R/W",
+     "0h",
+     "Phase C duty in PWM generation mode, 12 bits"
+    ],
+    [
+     "1Ch PWM_STATE",
+     "10-8",
+     "PWMC_STATE",
+     "R/W",
+     "7h",
+     "Phase C output: 0h HS off, LS off; 1h HS off, LS on; 2h HS on, LS off; 3h, 4h reserved; 5h HS off, LS PWM; 6h HS PWM, LS off; 7h HS PWM, LS inverted PWM"
+    ],
+    [
+     "1Ch PWM_STATE",
+     "6-4",
+     "PWMB_STATE",
+     "R/W",
+     "7h",
+     "Phase B output: same codes"
+    ],
+    [
+     "1Ch PWM_STATE",
+     "2-0",
+     "PWMA_STATE",
+     "R/W",
+     "7h",
+     "Phase A output: same codes"
+    ],
+    [
+     "1Dh PWMG_CTRL",
+     "10",
+     "PWM_EN",
+     "R/W",
+     "0h",
+     "Internal PWM generation: 0h off, 1h on"
+    ],
+    [
+     "1Dh PWMG_CTRL",
+     "9-8",
+     "PWMCNTR_MODE",
+     "R/W",
+     "0h",
+     "Counter: 0h up and down, 1h up, 2h down, 3h no action"
+    ],
+    [
+     "1Dh PWMG_CTRL",
+     "7-5",
+     "PWM_OSC_SYNC",
+     "R/W",
+     "0h",
+     "0h, 3h, 4h no oscillator sync; 1h PWM_SYNC period measured into PWM_SYNC_PRD; 2h PWM_SYNC sets the PWM period; 5h PWM_SYNC trims the oscillator (20 kHz only); 6h PWM_SYNC trims the oscillator and sets the period (20 kHz only); 7h SCLK trims the oscillator"
+    ],
+    [
+     "1Dh PWMG_CTRL",
+     "4-2",
+     "SPICLK_FREQ_SYNC",
+     "R/W",
+     "0h",
+     "SCLK frequency for oscillator sync: 0h 1 MHz, 1h 1.25 MHz, 2h 2 MHz, 3h 2.5 MHz, 4h 4 MHz, 5h 5 MHz, 6h 8 MHz, 7h 10 MHz"
+    ],
+    [
+     "1Dh PWMG_CTRL",
+     "1-0",
+     "SPISYNC_ACRCY",
+     "R/W",
+     "0h",
+     "SCLK cycles for oscillator sync: 0h 512 (1%), 1h 256 (1%), 2h 128 (1%), 3h 64 (2%)"
+    ],
+    [
+     "20h PWM_CTRL1",
+     "2",
+     "SSC_DIS",
+     "R/W",
+     "1h",
+     "Oscillator spread spectrum: 0h on, 1h off"
+    ],
+    [
+     "20h PWM_CTRL1",
+     "1-0",
+     "PWM_MODE",
+     "R/W",
+     "3h",
+     "0h, 1h 6x mode; 2h 3x mode; 3h PWM generation mode. Resets to 00b on DRV8311S, 11b on DRV8311P"
+    ],
+    [
+     "22h DRV_CTRL",
+     "11-8",
+     "RESERVED",
+     "R/W",
+     "0h",
+     "Reserved"
+    ],
+    [
+     "22h DRV_CTRL",
+     "7",
+     "DLYCMP_EN",
+     "R/W",
+     "0h",
+     "Driver delay compensation: 0h off, 1h on"
+    ],
+    [
+     "22h DRV_CTRL",
+     "6-4",
+     "TDEAD_CTRL",
+     "R/W",
+     "0h",
+     "Dead time: 0h handshake only, 1h 200 ns, 2h 400 ns, 3h 600 ns, 4h 800 ns, 5h 1 µs, 6h 1.2 µs, 7h 1.4 µs"
+    ],
+    [
+     "22h DRV_CTRL",
+     "1-0",
+     "SLEW_RATE",
+     "R/W",
+     "0h",
+     "Slew rate: 0h 35 V/µs, 1h 75 V/µs, 2h 180 V/µs, 3h 230 V/µs"
+    ],
+    [
+     "23h CSA_CTRL",
+     "3",
+     "CSA_EN",
+     "R/W",
+     "1h",
+     "Current sense amplifiers: 0h off, 1h on"
+    ],
+    [
+     "23h CSA_CTRL",
+     "1-0",
+     "CSA_GAIN",
+     "R/W",
+     "0h",
+     "Gain: 0h 0.25 V/A, 1h 0.5 V/A, 2h 1 V/A, 3h 2 V/A"
+    ],
+    [
+     "3Fh SYS_CTRL",
+     "14-12",
+     "WRITE_KEY",
+     "W",
+     "0h",
+     "Must be written as 0x5 for a write to this register"
+    ],
+    [
+     "3Fh SYS_CTRL",
+     "8, 5-4, 3, 2-0",
+     "RESERVED",
+     "R/W",
+     "0h",
+     "Reserved"
+    ],
+    [
+     "3Fh SYS_CTRL",
+     "7",
+     "REG_LOCK",
+     "R/W",
+     "0h",
+     "0h registers unlocked, 1h locked"
+    ],
+    [
+     "3Fh SYS_CTRL",
+     "6",
+     "SPI_PEN",
+     "R/W",
+     "0h",
+     "Parity check for SPI and tSPI: 0h off, 1h on"
+    ]
+   ],
+   "notes": [
+    "Bits not listed are reserved and read as 0."
+   ]
+  },
+  {
+   "title": "Delay times against inputs and output current direction",
+   "page": 76,
+   "conditions": "",
+   "columns": [
+    "OUTx current direction",
+    "INHx",
+    "INLx",
+    "propagation delay (tPD)",
+    "dead time (tdead)",
+    "MCU dead time tdead(MCU) < tdead",
+    "MCU dead time tdead(MCU) > tdead"
+   ],
+   "rows": [
+    [
+     "Out of OUTx",
+     "Rising",
+     "Falling",
+     "Typical",
+     "Typical",
+     "Output dead time = tdead",
+     "Output dead time = tdead(MCU)"
+    ],
+    [
+     "Out of OUTx",
+     "Falling",
+     "Rising",
+     "Smaller than typical",
+     "Smaller than typical",
+     "Output dead time < tdead",
+     "Output dead time < tdead(MCU)"
+    ],
+    [
+     "Into OUTx",
+     "Rising",
+     "Falling",
+     "Smaller than typical",
+     "Smaller than typical",
+     "Output dead time < tdead",
+     "Output dead time < tdead(MCU)"
+    ],
+    [
+     "Into OUTx",
+     "Falling",
+     "Rising",
+     "Typical",
+     "Typical",
+     "Output dead time = tdead",
+     "Output dead time = tdead(MCU)"
+    ]
+   ]
+  },
+  {
+   "title": "Design parameters, three-phase BLDC example",
+   "page": 76,
+   "conditions": "",
+   "columns": [
+    "design parameter",
+    "reference",
+    "example value"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VVM",
+     "12 V"
+    ],
+    [
+     "Motor RMS current",
+     "IRMS",
+     "2 A"
+    ],
+    [
+     "Motor peak current",
+     "IPEAK",
+     "3 A"
+    ],
+    [
+     "PWM frequency",
+     "fPWM",
+     "50 kHz"
+    ],
+    [
+     "Slew rate setting",
+     "SR",
+     "230 V/µs"
+    ],
+    [
+     "VIN_AVDD supply voltage",
+     "VVIN_AVDD",
+     "12 V"
+    ],
+    [
+     "CSA reference voltage",
+     "VCSA_REF",
+     "3.0 V"
+    ],
+    [
+     "System ambient temperature",
+     "TA",
+     "–20°C to +105°C"
+    ]
+   ]
+  },
+  {
+   "title": "Power losses, trapezoidal and field-oriented control",
+   "page": 85,
+   "conditions": "",
+   "columns": [
+    "loss type",
+    "trapezoidal control",
+    "field-oriented control"
+   ],
+   "rows": [
+    [
+     "Standby power",
+     "Pstandby = VVM x IVM_TA",
+     "Pstandby = VVM x IVM_TA"
+    ],
+    [
+     "LDO (from VM)",
+     "PLDO = (VVIN_AVDD - VAVDD) x IAVDD",
+     "PLDO = (VVIN_AVDD - VAVDD) x IAVDD"
+    ],
+    [
+     "FET conduction",
+     "PCON = 2 x (IPK(trap))^2 x RDS,ON(TA)",
+     "PCON = 3 x (IRMS(FOC))^2 x RDS,ON(TA)"
+    ],
+    [
+     "FET switching",
+     "PSW = IPK(trap) x VPK(trap) x trise/fall x fPWM",
+     "PSW = 3 x IRMS(FOC) x VPK(FOC) x trise/fall x fPWM"
+    ],
+    [
+     "Diode (dead time)",
+     "Pdiode = 2 x IPK(trap) x VF(diode) x tDEAD x fPWM",
+     "Pdiode = 6 x IRMS(FOC) x VF(diode) x tDEAD x fPWM"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel",
+   "page": 96,
+   "conditions": "nominal dimensions",
+   "columns": [
+    "device",
+    "package",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "DRV8311HRRWR",
+     "WQFN RRW",
+     "24",
+     "5000",
+     "330.0",
+     "12.4",
+     "3.3",
+     "3.3",
+     "1.1",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "DRV8311PRRWR",
+     "WQFN RRW",
+     "24",
+     "5000",
+     "330.0",
+     "12.4",
+     "3.3",
+     "3.3",
+     "1.1",
+     "8.0",
+     "12.0",
+     "Q2"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel box",
+   "page": 97,
+   "conditions": "nominal dimensions",
+   "columns": [
+    "device",
+    "package",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "DRV8311HRRWR",
+     "WQFN RRW",
+     "24",
+     "5000",
+     "360.0",
+     "360.0",
+     "36.0"
+    ],
+    [
+     "DRV8311PRRWR",
+     "WQFN RRW",
+     "24",
+     "5000",
+     "360.0",
+     "360.0",
+     "36.0"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "RDS(ON) (high and low side combined) for MOSFETs over temperature, VM ≥ 6V",
+   "page": 16,
+   "conditions": "VM ≥ 6 V",
+   "x": {
+    "label": "Junction temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RDS(ON)",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM >= 6 V",
+     "points": [
+      [
+       -39.5,
+       184.7
+      ],
+      [
+       -25.0,
+       190.8
+      ],
+      [
+       25.0,
+       215.4
+      ],
+      [
+       150.0,
+       307.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Operating mode current over supply voltage",
+   "page": 16,
+   "conditions": "",
+   "x": {
+    "label": "VM supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VM operating mode current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fPWM = 25 kHz, TJ = -40 °C",
+     "points": [
+      [
+       3.0,
+       7.14
+      ],
+      [
+       4.0,
+       9.36
+      ],
+      [
+       6.0,
+       8.22
+      ],
+      [
+       19.95,
+       8.49
+      ]
+     ]
+    },
+    {
+     "label": "fPWM = 25 kHz, TJ = 25 °C",
+     "points": [
+      [
+       4.0,
+       9.36
+      ],
+      [
+       6.0,
+       8.36
+      ],
+      [
+       19.95,
+       8.62
+      ]
+     ]
+    },
+    {
+     "label": "fPWM = 25 kHz, TJ = 150 °C",
+     "points": [
+      [
+       3.0,
+       7.15
+      ],
+      [
+       4.0,
+       9.36
+      ],
+      [
+       6.0,
+       8.67
+      ],
+      [
+       12.0,
+       8.74
+      ],
+      [
+       19.95,
+       8.91
+      ]
+     ]
+    },
+    {
+     "label": "fPWM = 200 kHz, TJ = -40 °C",
+     "points": [
+      [
+       3.0,
+       7.83
+      ],
+      [
+       4.0,
+       10.27
+      ],
+      [
+       6.0,
+       10.16
+      ],
+      [
+       12.0,
+       10.8
+      ],
+      [
+       19.95,
+       11.76
+      ]
+     ]
+    },
+    {
+     "label": "fPWM = 200 kHz, TJ = 25 °C",
+     "points": [
+      [
+       3.0,
+       7.84
+      ],
+      [
+       4.0,
+       10.27
+      ],
+      [
+       6.0,
+       10.32
+      ],
+      [
+       12.0,
+       10.94
+      ],
+      [
+       19.95,
+       11.88
+      ]
+     ]
+    },
+    {
+     "label": "fPWM = 200 kHz, TJ = 150 °C",
+     "points": [
+      [
+       3.0,
+       7.84
+      ],
+      [
+       4.0,
+       10.27
+      ],
+      [
+       6.0,
+       10.71
+      ],
+      [
+       12.0,
+       11.25
+      ],
+      [
+       19.95,
+       12.19
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sleep current over supply voltage",
+   "page": 16,
+   "conditions": "",
+   "x": {
+    "label": "VM supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Sleep mode current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = -40 °C",
+     "points": [
+      [
+       3.0,
+       0.172
+      ],
+      [
+       6.0,
+       0.45
+      ],
+      [
+       12.0,
+       2.09
+      ],
+      [
+       19.95,
+       3.796
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 25 °C",
+     "points": [
+      [
+       3.0,
+       0.176
+      ],
+      [
+       6.0,
+       0.413
+      ],
+      [
+       12.0,
+       1.671
+      ],
+      [
+       19.95,
+       3.499
+      ]
+     ]
+    },
+    {
+     "label": "TJ = 150 °C",
+     "points": [
+      [
+       3.0,
+       1.917
+      ],
+      [
+       6.0,
+       2.891
+      ],
+      [
+       12.0,
+       4.42
+      ],
+      [
+       19.95,
+       8.125
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "AVDD regulator output voltage over load current",
+   "page": 16,
+   "conditions": "VM = VINAVDD = 12 V",
+   "x": {
+    "label": "AVDD output load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "AVDD output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM = VINAVDD = 12 V, TJ = -40 °C",
+     "points": [
+      [
+       0.0003,
+       3.3173
+      ],
+      [
+       0.01,
+       3.3104
+      ],
+      [
+       0.0997,
+       3.3036
+      ]
+     ]
+    },
+    {
+     "label": "VM = VINAVDD = 12 V, TJ = 25 °C",
+     "points": [
+      [
+       0.0003,
+       3.3292
+      ],
+      [
+       0.01,
+       3.3241
+      ],
+      [
+       0.02,
+       3.3224
+      ],
+      [
+       0.0997,
+       3.3135
+      ]
+     ]
+    },
+    {
+     "label": "VM = VINAVDD = 12 V, TJ = 150 °C",
+     "points": [
+      [
+       0.0003,
+       3.3499
+      ],
+      [
+       0.01,
+       3.3412
+      ],
+      [
+       0.04,
+       3.3344
+      ],
+      [
+       0.0997,
+       3.3234
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Device power up with VM (VM, nFAULT, nSLEEP, AVDD)",
+   "page": 78,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM",
+     "points": [
+      [
+       0.66,
+       -0.06
+      ],
+      [
+       2.44,
+       0
+      ],
+      [
+       3.44,
+       4.09
+      ],
+      [
+       3.95,
+       6.78
+      ],
+      [
+       4.04,
+       6.89
+      ],
+      [
+       4.38,
+       8.97
+      ],
+      [
+       4.8,
+       12.16
+      ],
+      [
+       9.98,
+       12.05
+      ]
+     ]
+    },
+    {
+     "label": "nFAULT",
+     "points": [
+      [
+       0.66,
+       0.09
+      ],
+      [
+       3.97,
+       0.09
+      ],
+      [
+       4.05,
+       0.36
+      ],
+      [
+       4.45,
+       0.36
+      ],
+      [
+       6.07,
+       2.17
+      ],
+      [
+       6.98,
+       3.03
+      ],
+      [
+       7.29,
+       3.14
+      ],
+      [
+       9.98,
+       3.12
+      ]
+     ]
+    },
+    {
+     "label": "nSLEEP",
+     "points": [
+      [
+       0.66,
+       0
+      ],
+      [
+       2.42,
+       0.02
+      ],
+      [
+       2.69,
+       1.14
+      ],
+      [
+       2.91,
+       1.82
+      ],
+      [
+       3.33,
+       2.29
+      ],
+      [
+       4.33,
+       2.69
+      ],
+      [
+       4.8,
+       2.8
+      ],
+      [
+       6.16,
+       2.85
+      ],
+      [
+       9.98,
+       2.8
+      ]
+     ]
+    },
+    {
+     "label": "AVDD",
+     "points": [
+      [
+       0.66,
+       0.07
+      ],
+      [
+       3.94,
+       0.04
+      ],
+      [
+       4.04,
+       3.12
+      ],
+      [
+       4.08,
+       3.34
+      ],
+      [
+       9.98,
+       3.39
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Device power up with nSLEEP (VM, nFAULT, nSLEEP, AVDD)",
+   "page": 78,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VM",
+     "points": [
+      [
+       0.066,
+       12.05
+      ],
+      [
+       0.745,
+       12.05
+      ],
+      [
+       0.791,
+       11.88
+      ],
+      [
+       0.85,
+       12.16
+      ],
+      [
+       0.926,
+       12.16
+      ],
+      [
+       0.998,
+       12.0
+      ]
+     ]
+    },
+    {
+     "label": "nFAULT",
+     "points": [
+      [
+       0.066,
+       3.32
+      ],
+      [
+       0.754,
+       3.34
+      ],
+      [
+       0.769,
+       3.32
+      ],
+      [
+       0.775,
+       3.16
+      ],
+      [
+       0.794,
+       3.16
+      ],
+      [
+       0.838,
+       3.34
+      ],
+      [
+       0.998,
+       3.34
+      ]
+     ]
+    },
+    {
+     "label": "nSLEEP",
+     "points": [
+      [
+       0.066,
+       0
+      ],
+      [
+       0.088,
+       0
+      ],
+      [
+       0.098,
+       2.71
+      ],
+      [
+       0.103,
+       2.76
+      ],
+      [
+       0.832,
+       2.83
+      ],
+      [
+       0.989,
+       2.8
+      ],
+      [
+       0.998,
+       2.71
+      ]
+     ]
+    },
+    {
+     "label": "AVDD",
+     "points": [
+      [
+       0.066,
+       0.07
+      ],
+      [
+       0.754,
+       0.07
+      ],
+      [
+       0.839,
+       3.3
+      ],
+      [
+       0.998,
+       3.34
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Driver PWM operation with current sense feedback (INHA, OUTA, SOA, I_A)",
+   "page": 78,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Phase A current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "I_A",
+     "points": [
+      [
+       1.34,
+       1.3
+      ],
+      [
+       2.51,
+       1.59
+      ],
+      [
+       2.75,
+       -0.07
+      ],
+      [
+       4.92,
+       -0.07
+      ],
+      [
+       5.57,
+       -1.26
+      ],
+      [
+       7.22,
+       -1.61
+      ],
+      [
+       7.39,
+       -1.08
+      ],
+      [
+       9.45,
+       -1.7
+      ],
+      [
+       10.1,
+       -0.07
+      ],
+      [
+       11.98,
+       -0.07
+      ],
+      [
+       12.28,
+       0.92
+      ],
+      [
+       14.22,
+       1.52
+      ],
+      [
+       14.63,
+       1.03
+      ],
+      [
+       16.75,
+       1.52
+      ],
+      [
+       16.92,
+       -0.04
+      ],
+      [
+       19.22,
+       -0.07
+      ],
+      [
+       19.57,
+       -1.1
+      ],
+      [
+       21.22,
+       -1.61
+      ],
+      [
+       21.63,
+       -1.1
+      ],
+      [
+       23.92,
+       -1.7
+      ],
+      [
+       24.34,
+       -0.07
+      ],
+      [
+       26.39,
+       -0.07
+      ],
+      [
+       26.63,
+       0.87
+      ],
+      [
+       28.39,
+       1.48
+      ],
+      [
+       28.92,
+       1.03
+      ],
+      [
+       31.1,
+       1.55
+      ],
+      [
+       31.28,
+       -0.04
+      ],
+      [
+       33.45,
+       -0.07
+      ],
+      [
+       33.81,
+       -1.08
+      ],
+      [
+       35.34,
+       -1.52
+      ],
+      [
+       35.75,
+       -1.03
+      ],
+      [
+       38.1,
+       -1.66
+      ],
+      [
+       38.45,
+       -0.09
+      ],
+      [
+       39.92,
+       -0.07
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "bldc-spi",
+   "title": "Three-phase BLDC drive, DRV8311S with SPI and 6x PWM",
+   "page": 75,
+   "description": "A microcontroller drives the six PWM inputs directly and configures the driver over SPI. A buck regulator turns VM into the VIN_AVDD supply, and the 3.3 V AVDD output powers the controller, the optional Hall sensors and any other load. A voltage supervisor fed from that rail sets CSAREF, which the controller also reads on an ADC; the three SOx outputs go to three more ADC inputs for phase current. nFAULT is pulled up to the 3.3 V rail and read on a GPIO. The motor's three windings connect to OUTA, OUTB and OUTC.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8311S"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Microcontroller",
+     "external": true
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "Voltage supervisor",
+     "external": true
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "controller supply bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "charge pump, CP to VM"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VM bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VM bulk, polarised"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VIN_AVDD bypass"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VIN_AVDD bulk, polarised"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "0.7 µF to 7 µF",
+     "note": "CAVDD; X5R or X7R, 6.3 V recommended"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "CSAREF bypass; X5R or X7R recommended"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "5.1 kΩ",
+     "note": "RPU1, nFAULT pullup"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "Buck regulator",
+     "external": true
+    },
+    {
+     "ref": "VM",
+     "type": "terminal",
+     "value": "VVM"
+    },
+    {
+     "ref": "LOAD",
+     "type": "terminal",
+     "value": "External load (AVDD)"
+    },
+    {
+     "ref": "SLEEP",
+     "type": "terminal",
+     "value": "Driver control (nSLEEP)"
+    },
+    {
+     "ref": "M1",
+     "type": "other",
+     "value": "BLDC motor",
+     "note": "three windings in star"
+    },
+    {
+     "ref": "HALL",
+     "type": "other",
+     "value": "Hall sensors (optional)",
+     "note": "outputs A, B, C"
+    }
+   ],
+   "notes": [
+    "The DRV8311S has no nSLEEP pin (pin 24 is nSCS); the nSLEEP connection applies to the H and P variants.",
+    "C7, C8 and R1 take the recommended external-component values.",
+    "The third Hall sensor should read C.",
+    "Ground pins of the controller, supervisor, buck regulator and Hall sensors are outside this circuit."
+   ]
+  },
+  {
+   "id": "bldc-tspi",
+   "title": "Three-phase BLDC drive, DRV8311P over tSPI",
+   "page": 79,
+   "description": "The DRV8311P generates its own PWM; the controller sets duty and period over tSPI and sends a PWM_SYNC reference from a GPIO. AD0 and AD1 give the device its address on a bus shared with other DRV8311P parts under one chip select. Power, current sensing, the CSAREF reference (in this circuit from a voltage regulator), nFAULT and the motor connect as in the SPI drive circuit.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8311P"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Microcontroller",
+     "external": true
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "Voltage regulator",
+     "external": true
+    },
+    {
+     "ref": "ADDR0",
+     "type": "terminal",
+     "value": "Address select, AD0 (high or low)"
+    },
+    {
+     "ref": "ADDR1",
+     "type": "terminal",
+     "value": "Address select, AD1 (high or low)"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "controller supply bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "charge pump, CP to VM"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VM bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VM bulk, polarised"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VIN_AVDD bypass"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VIN_AVDD bulk, polarised"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "0.7 µF to 7 µF",
+     "note": "CAVDD; X5R or X7R, 6.3 V recommended"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "CSAREF bypass; X5R or X7R recommended"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "5.1 kΩ",
+     "note": "RPU1, nFAULT pullup"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "Buck regulator",
+     "external": true
+    },
+    {
+     "ref": "VM",
+     "type": "terminal",
+     "value": "VVM"
+    },
+    {
+     "ref": "LOAD",
+     "type": "terminal",
+     "value": "External load (AVDD)"
+    },
+    {
+     "ref": "SLEEP",
+     "type": "terminal",
+     "value": "Driver control (nSLEEP)"
+    },
+    {
+     "ref": "M1",
+     "type": "other",
+     "value": "BLDC motor",
+     "note": "three windings in star"
+    },
+    {
+     "ref": "HALL",
+     "type": "other",
+     "value": "Hall sensors (optional)",
+     "note": "outputs A, B, C"
+    }
+   ],
+   "notes": [
+    "Each address pin is set by a pull-up resistor to AVDD, a pull-down resistor to ground, or a switch to AVDD.",
+    "C7, C8 and R1 take the recommended external-component values.",
+    "The third Hall sensor should read C.",
+    "Ground pins of the controller, regulator, buck regulator and Hall sensors are outside this circuit."
+   ]
+  },
+  {
+   "id": "brushed-solenoid",
+   "title": "Brushed-DC motor and solenoid drive, DRV8311H",
+   "page": 81,
+   "description": "The hardware variant runs a brushed DC motor across OUTA and OUTB as a full H-bridge, so it can turn either way, and drives a solenoid load from OUTC to VM with the third half-bridge. The controller supplies all six PWM inputs; MODE, SLEW and GAIN are each set by a tie to AVDD or AGND, a 47 kΩ resistor to AGND, or an open pin. Power, current sensing, CSAREF and nFAULT connect as in the BLDC circuits.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8311H"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Microcontroller",
+     "external": true
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "Voltage supervisor",
+     "external": true
+    },
+    {
+     "ref": "M1",
+     "type": "load",
+     "value": "Brushed DC motor"
+    },
+    {
+     "ref": "L1",
+     "type": "load",
+     "value": "Solenoid load"
+    },
+    {
+     "ref": "MODE",
+     "type": "terminal",
+     "value": "MODE setting"
+    },
+    {
+     "ref": "SLEW",
+     "type": "terminal",
+     "value": "SLEW setting"
+    },
+    {
+     "ref": "GAIN",
+     "type": "terminal",
+     "value": "GAIN setting"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "controller supply bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "charge pump, CP to VM"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VM bypass"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VM bulk, polarised"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VIN_AVDD bypass"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VIN_AVDD bulk, polarised"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "0.7 µF to 7 µF",
+     "note": "CAVDD; X5R or X7R, 6.3 V recommended"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "CSAREF bypass; X5R or X7R recommended"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "5.1 kΩ",
+     "note": "RPU1, nFAULT pullup"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "Buck regulator",
+     "external": true
+    },
+    {
+     "ref": "VM",
+     "type": "terminal",
+     "value": "VVM"
+    },
+    {
+     "ref": "LOAD",
+     "type": "terminal",
+     "value": "External load (AVDD)"
+    },
+    {
+     "ref": "SLEEP",
+     "type": "terminal",
+     "value": "Driver control (nSLEEP)"
+    }
+   ],
+   "notes": [
+    "A solenoid may also go from OUTx to ground; the high side then sources the current and the low side carries the recirculation.",
+    "C7, C8 and R1 take the recommended external-component values."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "AVDD regulator dissipation",
+   "expr": "P = (VVIN_AVDD - VAVDD) × IAVDD",
+   "where": {
+    "VVIN_AVDD": "regulator input voltage",
+    "VAVDD": "regulator output, 3.3 V",
+    "IAVDD": "load current on AVDD"
+   },
+   "note": "",
+   "page": 31
+  },
+  {
+   "name": "Current sense output",
+   "expr": "SOx = VREF / 2 ± GCSA × IOUTx",
+   "where": {
+    "VREF": "voltage on CSAREF",
+    "GCSA": "selected gain, 0.25, 0.5, 1 or 2 V/A",
+    "IOUTx": "current in the low-side FET of phase x"
+   },
+   "note": "Example: VREF = 3.0 V, GCSA = 0.5 V/A and SOx = 1.2 V give IOUTx = 0.6 A.",
+   "page": 38
+  },
+  {
+   "name": "Offset correction, three amplifiers, phase A",
+   "expr": "ia = 1.001152·ia_sensed − 0.003375·ib_sensed − 0.003103·ic_sensed",
+   "where": {
+    "ia_sensed, ib_sensed, ic_sensed": "currents computed from SOA, SOB, SOC"
+   },
+   "note": "For sensorless sinusoidal or FOC control using two or three amplifiers.",
+   "page": 40
+  },
+  {
+   "name": "Offset correction, three amplifiers, phase B",
+   "expr": "ib = 0.002369·ia_sensed + 1.000665·ib_sensed − 0.019126·ic_sensed",
+   "where": {},
+   "note": "",
+   "page": 40
+  },
+  {
+   "name": "Offset correction, three amplifiers, phase C",
+   "expr": "ic = 0.001234·ia_sensed + 0.001595·ib_sensed + 0.998166·ic_sensed",
+   "where": {},
+   "note": "",
+   "page": 40
+  },
+  {
+   "name": "Offset correction, phases A and B sensed",
+   "expr": "ia = 1.004346·ia_sensed − 0.000199·ib_sensed; ib = 0.022060·ia_sensed + 1.020405·ib_sensed; ic = −(ia + ib)",
+   "where": {},
+   "note": "",
+   "page": 40
+  },
+  {
+   "name": "Offset correction, phases B and C sensed",
+   "expr": "ib = 0.998309·ib_sensed − 0.021427·ic_sensed; ic = 0.000368·ib_sensed + 0.996967·ic_sensed; ia = −(ib + ic)",
+   "where": {},
+   "note": "",
+   "page": 40
+  },
+  {
+   "name": "Offset correction, phases C and A sensed",
+   "expr": "ia = 1.004547·ia_sensed + 0.000195·ic_sensed; ic = 0.000371·ia_sensed + 0.996975·ic_sensed; ib = −(ia + ic)",
+   "where": {},
+   "note": "",
+   "page": 40
+  },
+  {
+   "name": "PWM period, up/down counter",
+   "expr": "PWM_PRD_OUT = 0.5 × (FSYS / FPWM)",
+   "where": {
+    "FSYS": "internal system clock, about 20 MHz",
+    "FPWM": "wanted PWM frequency"
+   },
+   "note": "",
+   "page": 25
+  },
+  {
+   "name": "PWM period, up or down counter",
+   "expr": "PWM_PRD_OUT = FSYS / FPWM",
+   "where": {
+    "FSYS": "internal system clock, about 20 MHz",
+    "FPWM": "wanted PWM frequency"
+   },
+   "note": "",
+   "page": 26
+  },
+  {
+   "name": "Clock relation from PWM_SYNC period",
+   "expr": "FMCU × M = FSYS(DRV) × N",
+   "where": {
+    "FMCU": "controller timer clock",
+    "N": "controller timer count for one PWM_SYNC period",
+    "M": "PWM_SYNC_PRD value read back",
+    "FSYS(DRV)": "driver system clock"
+   },
+   "note": "PWM_SYNC_PRD is 12 bits, so the lowest PWM_SYNC frequency read without saturation is about FSYS / 4095, 4.885 kHz.",
+   "page": 27
+  },
+  {
+   "name": "Current sense filter cutoff",
+   "expr": "fc = 1 / (2πRC)",
+   "where": {
+    "R, C": "low-pass filter on SOx, near the controller ADC"
+   },
+   "note": "330 Ω with 22 pF is the suggested filter.",
+   "page": 77
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ (°C) = PLOSS (W) × RθJA (°C/W) + TA (°C)",
+   "where": {
+    "PLOSS": "total device loss",
+    "RθJA": "junction-to-ambient resistance, which depends on the board"
+   },
+   "note": "",
+   "page": 85
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Variants",
+   "page": 3,
+   "text": "DRV8311H is configured by three four-level pins and accepts 6x or 3x PWM. DRV8311S is configured over SPI and adds PWM generation mode, settable retry times, dead time, delay compensation and fault reporting registers; it has no nSLEEP pin. DRV8311P uses tSPI, has nSLEEP, PWM_SYNC and two address pins, and works only in PWM generation mode. The H and S parts share a pinout apart from the four configuration or SPI pins."
+  },
+  {
+   "topic": "Output stage",
+   "page": 21,
+   "text": "Three half-bridges of N-channel MOSFETs. A doubler charge pump makes the high-side gate voltage and allows 100 % duty; an internal regulator from VM supplies the low-side gate drive."
+  },
+  {
+   "topic": "6x PWM mode",
+   "page": 22,
+   "text": "Each phase has its own high and low inputs: INHx high alone turns the high side on, INLx high alone turns the low side on, and both low or both high leave the output Hi-Z. Selected by MODE tied to AGND or 47 kΩ to AGND (H), or PWM_MODE = 00b or 01b (S)."
+  },
+  {
+   "topic": "3x PWM mode",
+   "page": 23,
+   "text": "INHx sets the phase high or low and INLx low forces it Hi-Z. Where Hi-Z is never needed, the INLx pins can be tied high, for example to AVDD. Selected by MODE open or tied to AVDD (H), or PWM_MODE = 10b (S)."
+  },
+  {
+   "topic": "Changing the mode",
+   "page": 21,
+   "text": "The MODE pin of the H variant is latched at power-up, so change it only with nSLEEP low; on the S variant set all INHx and INLx low before writing PWM_MODE. Changes during tWAKE are to be avoided."
+  },
+  {
+   "topic": "PWM generation mode",
+   "page": 25,
+   "text": "The S and P variants can make the PWM themselves: a 12-bit counter set by PWM_PRD_OUT runs up/down, up, or down (PWMCNTR_MODE), and each phase's high side is on while its PWM_DUTY_OUTx exceeds the counter, provided PWM_EN is 1. A duty value above the period gives 100 %. Dead time from TDEAD_CTRL is inserted at both edges. PWM_STATE chooses per phase whether the high side, low side or both follow the PWM, which permits continuous or discontinuous switching. On the S variant, PWM_SYNC enters on INLB and the other INx pins are ignored. Trapezoidal, sinusoidal and FOC control all work in this mode."
+  },
+  {
+   "topic": "PWM synchronization",
+   "page": 27,
+   "text": "PWM_OSC_SYNC selects how the driver's roughly 20 MHz clock is tied to the controller: 1h measures the PWM_SYNC period into PWM_SYNC_PRD so the controller can correct the period; 2h restarts the counter on each PWM_SYNC rising edge, ignoring PWMG_PERIOD; 5h trims the oscillator to 20 MHz from a 20 kHz PWM_SYNC (1000 clocks per period ideally); 6h does both the trim and the restart, again at 20 kHz only; 7h trims the oscillator from SCLK, using the clock frequency in SPICLK_FREQ_SYNC and a count of cycles in SPISYNC_ACRCY, which sets the resulting accuracy."
+  },
+  {
+   "topic": "Hardware interface",
+   "page": 29,
+   "text": "On the H variant GAIN, SLEW and MODE each read one of four levels: tied to AGND, 47 kΩ ±5% to AGND, open, or tied to AVDD. Faults show on nFAULT only, without detailed diagnostics."
+  },
+  {
+   "topic": "AVDD regulator",
+   "page": 31,
+   "text": "A 3.3 V linear regulator, 3.3 V nominal at no load, powers the internal logic and up to 100 mA of outside circuits such as a small controller. Its input VIN_AVDD may equal VM or be a separate supply above or below it. Bypass AVDD with an X5R or X7R ceramic of up to 4.7 µF, 6.3 V, returned straight to the neighbouring AGND pin."
+  },
+  {
+   "topic": "Charge pump",
+   "page": 32,
+   "text": "Needs one capacitor from CP to VM and stops while nSLEEP is low."
+  },
+  {
+   "topic": "Slew rate",
+   "page": 33,
+   "text": "Gate drive current sets the output edge rate, measured between 20 % and 80 % of VM; four settings via the SLEW pin or SLEW_RATE bits. The edge rate governs radiated emission, diode recovery spikes and switching transients."
+  },
+  {
+   "topic": "Dead time",
+   "page": 34,
+   "text": "Shoot-through is prevented by watching each MOSFET's gate-source voltage and turning one side on only after the other has fallen below its turn-off level (handshake). TDEAD_CTRL can add 200 ns to 1.4 µs on the SPI variants. When the controller inserts its own dead time, the driver uses whichever is longer."
+  },
+  {
+   "topic": "Propagation delay",
+   "page": 35,
+   "text": "Measured from an input edge to the change at OUTx; it covers the input deglitch, a small digital delay and the analog driver, and grows as the slew setting slows. Delay and dead time are given as typical and maximum only: depending on the current direction during synchronous switching they can come out shorter than typical, and they can be longer when the internal turn-on is slowed to avoid dV/dt coupling."
+  },
+  {
+   "topic": "Delay compensation",
+   "page": 76,
+   "text": "With DLYCMP_EN = 1 the driver adds a variable delay so that edges with current into and out of OUTx both reach a target of tPD + tDEAD, reducing duty-cycle distortion."
+  },
+  {
+   "topic": "Logic pins",
+   "page": 36,
+   "text": "INHx, INLx, nSLEEP, SCLK and SDI have internal pulldowns; keep them low in sleep to avoid leakage through those resistors. nSCS has an internal pullup to AVDD. nFAULT is open drain and needs a pullup; SDO is push-pull with a Hi-Z state."
+  },
+  {
+   "topic": "Current sense amplifiers",
+   "page": 38,
+   "text": "Each low-side FET has a sense FET whose current is converted to a voltage on SOx, centred on VREF/2 where VREF is the CSAREF voltage, with gain 0.25, 0.5, 1 or 2 V/A (GAIN pin or CSA_GAIN). Output stays linear from 0.25 V to VREF − 0.25 V. No shunt resistor is needed."
+  },
+  {
+   "topic": "Current sense offset",
+   "page": 39,
+   "text": "A ground difference between the sense FET and power FET gives an offset that depends on current. It does not matter for trapezoidal or single-shunt-style control, but in sensorless sinusoidal or FOC control with two or three amplifiers it adds distortion unless the correction equations are applied in firmware."
+  },
+  {
+   "topic": "Current sense filtering",
+   "page": 77,
+   "text": "SOx is normally sampled by the controller's ADC. A low-pass RC near the ADC with a cutoff at least 10 times the PWM frequency for trapezoidal and 100 times for sinusoidal commutation removes noise; 330 Ω with 22 pF adds little capacitance and keeps the settling time."
+  },
+  {
+   "topic": "VM undervoltage (NPOR)",
+   "page": 42,
+   "text": "Below the VM UVLO threshold the FETs, charge pump and logic all stop; they resume when VM recovers. The NPOR status is latched until cleared by CLR_FLT or an nSLEEP reset pulse."
+  },
+  {
+   "topic": "Other undervoltage protection",
+   "page": 42,
+   "text": "VIN_AVDD, AVDD and CP undervoltage are always enabled; each turns the FETs off and pulls nFAULT low, and VIN_AVDD or AVDD undervoltage also stops SPI. Recovery is automatic once the supply returns and tRETRY passes (slow or fast per UVP_MODE on SPI parts, fast 5 ms on the H part). CSAREF undervoltage is off by default (CSAREFUV_EN enables it on SPI parts, always off on the H part); when on it disables the amplifiers. FAULT and UVP stay latched until cleared."
+  },
+  {
+   "topic": "Overcurrent protection",
+   "page": 43,
+   "text": "Current above IOCP for longer than the deglitch time is an OCP event; a blanking time after each PWM edge ignores ringing. The H variant uses 9 A or 5 A by MODE, 1 µs deglitch, 0.2 µs blanking and 5 ms automatic retry. SPI parts choose level, deglitch, blanking and mode: automatic retry with slow or fast time, latched shutdown cleared by CLR_FLT or nSLEEP pulse, report only on nFAULT, or disabled. FAULT and OCP flags stay set until cleared."
+  },
+  {
+   "topic": "Thermal warning",
+   "page": 45,
+   "text": "Above TOTW the OT and OTW flags set; nFAULT reports it only when OTW_EN = 1 (off on the H part). Operation continues."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 45,
+   "text": "Above the shutdown limit all FETs and the charge pump turn off and nFAULT goes low; operation restarts after the die cools and tRETRY passes (fixed fast 5 ms on the H part, slow or fast by OTSD_MODE on SPI parts). Cannot be disabled."
+  },
+  {
+   "topic": "Sleep and operating modes",
+   "page": 46,
+   "text": "nSLEEP low puts the device in sleep after tSLEEP: FETs, amplifiers, charge pump, AVDD regulator and SPI all off. nSLEEP high with VM above UVLO starts operation after tWAKE. nFAULT is held low while the regulators start or stop, for no longer than tWAKE or tSLEEP."
+  },
+  {
+   "topic": "Fault reset",
+   "page": 46,
+   "text": "Latched faults clear by the CLR_FLT bit or by a high-low-high pulse on nSLEEP whose low time falls within tRST; a longer low starts a full shutdown. The pulse does not disturb the regulators or settings."
+  },
+  {
+   "topic": "SPI format",
+   "page": 47,
+   "text": "SPI frames are 24 bits: R/W, a 6-bit address, header parity, then 16 data bits including a data parity bit. SDO returns 8 status bits then 16 data bits. Data is sampled on the falling SCLK edge and launched on the rising edge, MSB first; SCLK must be low at both nSCS edges, and frames are multiples of 16 clocks (minimum 16), otherwise a frame error is flagged."
+  },
+  {
+   "topic": "tSPI format",
+   "page": 47,
+   "text": "tSPI frames carry a 16-bit header: R/W, a 4-bit device ID (top two bits 00, lower two from AD1 and AD0), an 8-bit address, two zero bits and parity. Valid IDs are 0 to 3 plus 15, a general call that every device accepts for writes. Separate read and write address pointers auto-increment, so one transaction can write one set of registers while reading another after a header-only read-address frame. Multiple devices share nSCS, SCLK, SDI and SDO."
+  },
+  {
+   "topic": "Parity and errors",
+   "page": 48,
+   "text": "Even parity over each 16-bit block, enabled by SPI_PEN (off at reset, enabling it is recommended). A parity error is latched, shown on nFAULT and in SPI_PARITY, and blocks the write; a frame error sets FRM_ERR."
+  },
+  {
+   "topic": "Bulk capacitance",
+   "page": 82,
+   "text": "Local bulk capacitance on VM keeps the supply steady against motor current steps and returned energy; how much depends on peak current, supply capability and wiring inductance, allowed ripple, motor type and braking method. Rate bulk capacitors above the operating voltage."
+  },
+  {
+   "topic": "Layout",
+   "page": 83,
+   "text": "Place the bulk capacitor to keep the high-current loop short, with wide traces and many vias. Put the small ceramic capacitors right at AVDD, CP, CSAREF, VIN_AVDD and VM. Use wide traces for outputs. Keep PGND and AGND as separate regions joined by a net tie, with non-power circuitry and the thermal pad on AGND, or use one plane with the switching outputs kept away from analog and digital signals. Solder the pad to a top-layer ground plane with many vias to a large bottom plane, and add as much connected copper as possible for heat."
+  },
+  {
+   "topic": "Power dissipation",
+   "page": 85,
+   "text": "Losses are standby, LDO, FET conduction and switching, and dead-time diode conduction; conduction dominates. RDS(on) rises with temperature, and start-up and fault currents must be included. Thermal shutdown acting is a sign of too much dissipation, too little heat sinking or too high an ambient."
+  }
+ ],
+ "packages": [
+  {
+   "name": "WQFN-24 (RRW0024A)",
+   "page": 98,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "2.9",
+     "",
+     "3.1"
+    ],
+    [
+     "",
+     "body width",
+     "2.9",
+     "",
+     "3.1"
+    ],
+    [
+     "",
+     "overall height",
+     "0.7",
+     "",
+     "0.8"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "exposed pad (pin 25), square",
+     "1.85",
+     "",
+     "1.95"
+    ],
+    [
+     "",
+     "lead pitch (20X)",
+     "",
+     "0.4",
+     ""
+    ],
+    [
+     "",
+     "first to last lead centre, 7-lead sides (2X)",
+     "",
+     "2.4",
+     ""
+    ],
+    [
+     "",
+     "first to last lead centre, 5-lead sides (2X)",
+     "",
+     "1.6",
+     ""
+    ],
+    [
+     "",
+     "pin 8 lead centre to package centreline",
+     "",
+     "0.67",
+     ""
+    ],
+    [
+     "",
+     "lead width (24X)",
+     "0.15",
+     "",
+     "0.25"
+    ],
+    [
+     "",
+     "lead length (24X)",
+     "0.17",
+     "",
+     "0.37"
+    ],
+    [
+     "",
+     "lead terminal side extension",
+     "",
+     "(0.1)",
+     ""
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "",
+     "land pattern: pad (pin 25)",
+     "",
+     "(1.9)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: lead pad length × width",
+     "",
+     "(0.47) × (0.2)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: overall span",
+     "",
+     "(2.93)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: via diameter",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: via pitch",
+     "",
+     "(0.7)",
+     ""
+    ],
+    [
+     "",
+     "land pattern: lead pad corner radius",
+     "",
+     "(R0.05)",
+     ""
+    ],
+    [
+     "",
+     "solder mask: opening around non-mask-defined lead pads",
+     "",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "solder mask: metal under mask around mask-defined lead pads",
+     "0.05",
+     "",
+     ""
+    ],
+    [
+     "",
+     "stencil (0.1 mm): exposed pad as 4 openings of",
+     "",
+     "(0.75)",
+     ""
+    ],
+    [
+     "",
+     "stencil: gap between exposed-pad openings",
+     "",
+     "(0.47)",
+     ""
+    ],
+    [
+     "",
+     "stencil: printed solder coverage under pad",
+     "",
+     "78 %",
+     ""
+    ]
+   ]
+  }
+ ]
+}

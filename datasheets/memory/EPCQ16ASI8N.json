@@ -1,0 +1,4110 @@
+{
+ "sheet": 1,
+ "name": "EPCQ16ASI8N",
+ "kind": "memory",
+ "manufacturer": "Intel (Altera)",
+ "title": "EPCQ-A serial configuration flash: 4, 16, 32, 64 and 128 Mbit, AS x1 and AS x4, 2.7 V to 3.6 V",
+ "source": {
+  "document": "CF52014",
+  "revision": "2019.10.01",
+  "pages": 38
+ },
+ "summary": "The EPCQ-A family are non-volatile serial flash memories that hold an FPGA's configuration image and feed it to the FPGA over the active serial interface, one bit wide (AS x1) or four bits wide (AS x4). Five densities run from 4 Mbit to 128 Mbit; the three smaller ones come in an 8-pin SOIC and the two larger in a 16-pin SOIC. They run from 2.7 V to 3.6 V over -40 °C to 85 °C, clock at up to 100 MHz (50 MHz for the plain read), endure over 100,000 program-erase cycles and retain data for over 20 years. EPCQ16ASI8N is the 16 Mbit part in the 8-pin SOIC.",
+ "key_figures": [
+  [
+   "Density",
+   "4, 16, 32, 64 or 128 Mbit (EPCQ16A: 16,777,216 bits)"
+  ],
+  [
+   "Supply voltage VCC",
+   "2.7 V to 3.6 V"
+  ],
+  [
+   "Ambient temperature",
+   "-40 °C to 85 °C (industrial)"
+  ],
+  [
+   "DCLK fMAX",
+   "100 MHz; 50 MHz for read bytes (03h)"
+  ],
+  [
+   "Interface",
+   "AS x1 serial; AS x4 quad (not EPCQ4A)"
+  ],
+  [
+   "Organisation",
+   "64 KB sectors, 4 KB subsectors, 256-byte pages"
+  ],
+  [
+   "Standby current ICC0",
+   "50 µA max (60 µA EPCQ128A)"
+  ],
+  [
+   "Active current ICC1",
+   "5 mA max EPCQ4A; 15 mA EPCQ16A/32A/64A; 20 mA EPCQ128A"
+  ],
+  [
+   "Page write time tWB (EPCQ16A)",
+   "0.4 ms typ, 3 ms max"
+  ],
+  [
+   "Endurance",
+   "more than 100,000 program-erase cycles"
+  ],
+  [
+   "Data retention",
+   "more than 20 years"
+  ],
+  [
+   "Packages",
+   "8-pin SOIC (EPCQ4A, EPCQ16A, EPCQ32A); 16-pin SOIC (EPCQ64A, EPCQ128A)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 10,
+  "columns": [
+   "part number",
+   "device",
+   "memory size (bits)",
+   "package",
+   "AS x4",
+   "device ID",
+   "silicon ID"
+  ],
+  "rows": [
+   [
+    "EPCQ4ASI8N",
+    "EPCQ4A",
+    "4,194,304",
+    "8-pin SOIC",
+    "no",
+    "b'0001 0011",
+    "b'0001 0010"
+   ],
+   [
+    "EPCQ16ASI8N",
+    "EPCQ16A",
+    "16,777,216",
+    "8-pin SOIC",
+    "yes",
+    "b'0001 0101",
+    "b'0001 0100"
+   ],
+   [
+    "EPCQ32ASI8N",
+    "EPCQ32A",
+    "33,554,432",
+    "8-pin SOIC",
+    "yes",
+    "b'0001 0110",
+    ""
+   ],
+   [
+    "EPCQ64ASI16N",
+    "EPCQ64A",
+    "67,108,864",
+    "16-pin SOIC",
+    "yes",
+    "b'0001 0111",
+    "b'0001 0110"
+   ],
+   [
+    "EPCQ128ASI16N",
+    "EPCQ128A",
+    "134,217,728",
+    "16-pin SOIC",
+    "yes",
+    "b'0001 1000",
+    ""
+   ]
+  ],
+  "notes": [
+   "The trailing N in each ordering code marks a lead-free part.",
+   "The silicon ID operation (ABh) exists on EPCQ4A, EPCQ16A and EPCQ64A only."
+  ]
+ },
+ "pins": [
+  {
+   "package": "8-pin SOIC, AS x1 (EPCQ4A, EPCQ16A, EPCQ32A)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "nCS",
+     "type": "input",
+     "function": "Chip select, active low. High deselects the device and floats DATA[3:0]; low selects it and puts it in active mode. Each operation is framed by a falling and a rising edge; one falling edge is needed after power-up before the first operation."
+    },
+    {
+     "pin": "2",
+     "name": "DATA1",
+     "type": "output",
+     "function": "Serial data output (the DATA pin of EPCS devices). Carries read and configuration data out of the device, changing on DCLK falling edges."
+    },
+    {
+     "pin": "3",
+     "name": "VCC",
+     "type": "power in",
+     "function": "In AS x1 mode this pin (DATA2 or DATA3 in AS x4) connects to VCC."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "DATA0",
+     "type": "input",
+     "function": "Serial data input (the ASDI pin of EPCS devices). Takes in operation codes, addresses and write data, latched on DCLK rising edges."
+    },
+    {
+     "pin": "6",
+     "name": "DCLK",
+     "type": "input",
+     "function": "Serial clock, supplied by the FPGA. Incoming data is latched on DCLK rising edges; outgoing data changes after a falling edge and the FPGA takes it on the next falling edge."
+    },
+    {
+     "pin": "7",
+     "name": "VCC",
+     "type": "power in",
+     "function": "In AS x1 mode this pin (DATA2 or DATA3 in AS x4) connects to VCC."
+    },
+    {
+     "pin": "8",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply, 3.3 V."
+    }
+   ],
+   "notes": [
+    "EPCQ4A works in AS x1 only."
+   ]
+  },
+  {
+   "package": "8-pin SOIC, AS x4 (EPCQ16A, EPCQ32A)",
+   "page": 7,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "nCS",
+     "type": "input",
+     "function": "Chip select, active low. High deselects the device and floats DATA[3:0]; low selects it and puts it in active mode. Each operation is framed by a falling and a rising edge; one falling edge is needed after power-up before the first operation."
+    },
+    {
+     "pin": "2",
+     "name": "DATA1",
+     "type": "I/O",
+     "function": "Data I/O 1. Output for read and configuration data on DCLK falling edges; input during the four-bit write (32h), latched on rising edges."
+    },
+    {
+     "pin": "3",
+     "name": "DATA2",
+     "type": "I/O",
+     "function": "Data I/O 2. Output in AS x4 reads and configuration on DCLK falling edges; input during the quad fast write."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "DATA0",
+     "type": "I/O",
+     "function": "Data I/O 0. Input for operation codes, addresses and write data (latched on DCLK rising edges); output during dual and quad fast reads and configuration (shifted on falling edges)."
+    },
+    {
+     "pin": "6",
+     "name": "DCLK",
+     "type": "input",
+     "function": "Serial clock, supplied by the FPGA. Incoming data is latched on DCLK rising edges; outgoing data changes after a falling edge and the FPGA takes it on the next falling edge."
+    },
+    {
+     "pin": "7",
+     "name": "DATA3",
+     "type": "I/O",
+     "function": "Data I/O 3. Output in AS x4 reads and configuration on DCLK falling edges; input during the quad fast write."
+    },
+    {
+     "pin": "8",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply, 3.3 V."
+    }
+   ]
+  },
+  {
+   "package": "16-pin SOIC, AS x1 (EPCQ64A, EPCQ128A)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VCC",
+     "type": "power in",
+     "function": "In AS x1 mode this pin (DATA2 or DATA3 in AS x4) connects to VCC."
+    },
+    {
+     "pin": "2",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply, 3.3 V."
+    },
+    {
+     "pin": "3",
+     "name": "nRESET",
+     "type": "input",
+     "function": "Hardware reset, active low, with an internal pull-up. Held low for about 1 µs it ends any external or internal operation and returns the device to its power-on state. Tie to VCC or leave open when not used."
+    },
+    {
+     "pin": "4",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "5",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "6",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "7",
+     "name": "nCS",
+     "type": "input",
+     "function": "Chip select, active low. High deselects the device and floats DATA[3:0]; low selects it and puts it in active mode. Each operation is framed by a falling and a rising edge; one falling edge is needed after power-up before the first operation."
+    },
+    {
+     "pin": "8",
+     "name": "DATA1",
+     "type": "output",
+     "function": "Serial data output (the DATA pin of EPCS devices). Carries read and configuration data out of the device, changing on DCLK falling edges."
+    },
+    {
+     "pin": "9",
+     "name": "VCC",
+     "type": "power in",
+     "function": "In AS x1 mode this pin (DATA2 or DATA3 in AS x4) connects to VCC."
+    },
+    {
+     "pin": "10",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "11",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "12",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "13",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "14",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "15",
+     "name": "DATA0",
+     "type": "input",
+     "function": "Serial data input (the ASDI pin of EPCS devices). Takes in operation codes, addresses and write data, latched on DCLK rising edges."
+    },
+    {
+     "pin": "16",
+     "name": "DCLK",
+     "type": "input",
+     "function": "Serial clock, supplied by the FPGA. Incoming data is latched on DCLK rising edges; outgoing data changes after a falling edge and the FPGA takes it on the next falling edge."
+    }
+   ],
+   "notes": [
+    "N.C. pins stay unconnected.",
+    "nRESET has an internal pull-up; with the reset unused it goes to VCC or is left open."
+   ]
+  },
+  {
+   "package": "16-pin SOIC, AS x4 (EPCQ64A, EPCQ128A)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "DATA3",
+     "type": "I/O",
+     "function": "Data I/O 3. Output in AS x4 reads and configuration on DCLK falling edges; input during the quad fast write."
+    },
+    {
+     "pin": "2",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply, 3.3 V."
+    },
+    {
+     "pin": "3",
+     "name": "nRESET",
+     "type": "input",
+     "function": "Hardware reset, active low, with an internal pull-up. Held low for about 1 µs it ends any external or internal operation and returns the device to its power-on state. Tie to VCC or leave open when not used."
+    },
+    {
+     "pin": "4",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "5",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "6",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "7",
+     "name": "nCS",
+     "type": "input",
+     "function": "Chip select, active low. High deselects the device and floats DATA[3:0]; low selects it and puts it in active mode. Each operation is framed by a falling and a rising edge; one falling edge is needed after power-up before the first operation."
+    },
+    {
+     "pin": "8",
+     "name": "DATA1",
+     "type": "I/O",
+     "function": "Data I/O 1. Output for read and configuration data on DCLK falling edges; input during the four-bit write (32h), latched on rising edges."
+    },
+    {
+     "pin": "9",
+     "name": "DATA2",
+     "type": "I/O",
+     "function": "Data I/O 2. Output in AS x4 reads and configuration on DCLK falling edges; input during the quad fast write."
+    },
+    {
+     "pin": "10",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "11",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "12",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "13",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "14",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Not connected; leave unconnected."
+    },
+    {
+     "pin": "15",
+     "name": "DATA0",
+     "type": "I/O",
+     "function": "Data I/O 0. Input for operation codes, addresses and write data (latched on DCLK rising edges); output during dual and quad fast reads and configuration (shifted on falling edges)."
+    },
+    {
+     "pin": "16",
+     "name": "DCLK",
+     "type": "input",
+     "function": "Serial clock, supplied by the FPGA. Incoming data is latched on DCLK rising edges; outgoing data changes after a falling edge and the FPGA takes it on the next falling edge."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Supported devices",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "device",
+    "memory size (bits)",
+    "on-chip decompression",
+    "ISP",
+    "cascading",
+    "reprogrammable",
+    "recommended operating voltage (V)"
+   ],
+   "rows": [
+    [
+     "EPCQ4A",
+     "4,194,304",
+     "No",
+     "Yes",
+     "No",
+     "Yes",
+     "3.3"
+    ],
+    [
+     "EPCQ16A",
+     "16,777,216",
+     "No",
+     "Yes",
+     "No",
+     "Yes",
+     "3.3"
+    ],
+    [
+     "EPCQ32A",
+     "33,554,432",
+     "No",
+     "Yes",
+     "No",
+     "Yes",
+     "3.3"
+    ],
+    [
+     "EPCQ64A",
+     "67,108,864",
+     "No",
+     "Yes",
+     "No",
+     "Yes",
+     "3.3"
+    ],
+    [
+     "EPCQ128A",
+     "134,217,728",
+     "No",
+     "Yes",
+     "No",
+     "Yes",
+     "3.3"
+    ]
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "Supply voltage",
+     "With respect to GND",
+     "–0.6",
+     "4.6",
+     "V"
+    ],
+    [
+     "VIO",
+     "Input or output voltage",
+     "With respect to GND",
+     "–0.6",
+     "VCC+0.4",
+     "V"
+    ],
+    [
+     "TSTG",
+     "Storage temperature",
+     "No bias",
+     "–65",
+     "150",
+     "°C"
+    ],
+    [
+     "VIT",
+     "Transient voltage on any pin",
+     "< 20ns transient relative to GND",
+     "–2.0",
+     "VCC+2.0",
+     "V"
+    ],
+    [
+     "PD",
+     "Power dissipation",
+     "EPCQ4A",
+     "—",
+     "18",
+     "mW"
+    ],
+    [
+     "PD",
+     "Power dissipation",
+     "EPCQ16A, EPCQ32A, and EPCQ64A",
+     "—",
+     "54",
+     "mW"
+    ],
+    [
+     "PD",
+     "Power dissipation",
+     "EPCQ128A",
+     "—",
+     "72",
+     "mW"
+    ],
+    [
+     "IMAX",
+     "DC VCC or GND current",
+     "EPCQ4A",
+     "—",
+     "5",
+     "mA"
+    ],
+    [
+     "IMAX",
+     "DC VCC or GND current",
+     "EPCQ16A, EPCQ32A, and EPCQ64A",
+     "—",
+     "15",
+     "mA"
+    ],
+    [
+     "IMAX",
+     "DC VCC or GND current",
+     "EPCQ128A",
+     "—",
+     "20",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "Supply voltage",
+     "(2)",
+     "2.7",
+     "3.6",
+     "V"
+    ],
+    [
+     "TA",
+     "Ambient temperature, Operating",
+     "For industrial use",
+     "-40",
+     "85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(2) Reads may use any VCC within the range, but the read VCC is to stay within ±10% of the VCC used to program (erase or write) the device.",
+    "Junction temperature TJ is held to the same limits as TA."
+   ]
+  },
+  {
+   "title": "DC operating conditions",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIH",
+     "High-level input voltage",
+     "—",
+     "0.7 x VCC",
+     "VCC + 0.4",
+     "V"
+    ],
+    [
+     "VIL",
+     "Low-level input voltage",
+     "—",
+     "-0.5",
+     "0.3 x VCC",
+     "V"
+    ],
+    [
+     "VOH",
+     "High-level output voltage",
+     "IOH = -100 µA",
+     "VCC - 0.2",
+     "—",
+     "V"
+    ],
+    [
+     "VOL",
+     "Low-level output voltage for EPCQ4A",
+     "IOL = 100 µA",
+     "—",
+     "0.4",
+     "V"
+    ],
+    [
+     "VOL",
+     "Low-level output voltage for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "IOL = 100 µA",
+     "—",
+     "0.2",
+     "V"
+    ],
+    [
+     "II",
+     "Input leakage current",
+     "VI = VCC or GND",
+     "-2",
+     "2",
+     "µA"
+    ],
+    [
+     "IOZ",
+     "Tri-state output off-state current",
+     "VO = VCC or GND",
+     "-2",
+     "2",
+     "µA"
+    ],
+    [
+     "ILR",
+     "Input leakage",
+     "0 ≤ /Reset < VCC",
+     "—",
+     "12",
+     "µA"
+    ],
+    [
+     "ILR",
+     "Input leakage",
+     "/Reset = VCC",
+     "—",
+     "1",
+     "µA"
+    ],
+    [
+     "RPR",
+     "Pull-up resistance",
+     "—",
+     "300",
+     "1000",
+     "kΩ"
+    ]
+   ]
+  },
+  {
+   "title": "AC measurement conditions",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CL",
+     "Load Capacitance",
+     "—",
+     "30",
+     "pF"
+    ],
+    [
+     "TR, TF",
+     "Input Rise and Fall Times",
+     "—",
+     "5",
+     "ns"
+    ],
+    [
+     "VIN",
+     "Input Pulse Voltages",
+     "0.1 VCC to 0.9 VCC",
+     "0.1 VCC to 0.9 VCC",
+     "V"
+    ],
+    [
+     "IN",
+     "Input Timing Reference Voltages",
+     "0.3 VCC to 0.7 VCC",
+     "0.3 VCC to 0.7 VCC",
+     "V"
+    ],
+    [
+     "Out",
+     "Output Timing Reference Voltages",
+     "0.5 VCC to 0.5 VCC",
+     "0.5 VCC to 0.5 VCC",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Input pulses swing between 0.1 VCC and 0.9 VCC; output timing is taken at 0.5 VCC."
+   ]
+  },
+  {
+   "title": "ICC supply current",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "ICC0",
+     "VCC supply current for EPCQ4A, EPCQ16A, EPCQ32A, and EPCQ64A",
+     "Standby",
+     "10",
+     "50",
+     "µA"
+    ],
+    [
+     "ICC0",
+     "VCC supply current for EPCQ128A",
+     "Standby",
+     "10",
+     "60",
+     "µA"
+    ],
+    [
+     "ICC1",
+     "VCC supply current for EPCQ4A",
+     "During active power mode",
+     "1",
+     "5",
+     "mA"
+    ],
+    [
+     "ICC1",
+     "VCC supply current for EPCQ16A, EPCQ32A, and EPCQ64A",
+     "During active power mode",
+     "1",
+     "15",
+     "mA"
+    ],
+    [
+     "ICC1",
+     "VCC supply current for EPCQ128A",
+     "During active power mode",
+     "1",
+     "20",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Capacitance",
+   "page": 7,
+   "conditions": "TA = 25 °C, VCC = 3.0 V; sample-tested only",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CIN",
+     "Input pin capacitance",
+     "VIN = 0 V",
+     "—",
+     "6",
+     "pF"
+    ],
+    [
+     "COUT",
+     "Output pin capacitance",
+     "VOUT = 0 V",
+     "—",
+     "8",
+     "pF"
+    ]
+   ]
+  },
+  {
+   "title": "Pin numbers by mode and package",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "pin name",
+    "AS x1, 8-pin SOIC",
+    "AS x1, 16-pin SOIC",
+    "AS x4, 8-pin SOIC",
+    "AS x4, 16-pin SOIC",
+    "pin type"
+   ],
+   "rows": [
+    [
+     "DATA0",
+     "5",
+     "15",
+     "5",
+     "15",
+     "I/O"
+    ],
+    [
+     "DATA1",
+     "2",
+     "8",
+     "2",
+     "8",
+     "I/O"
+    ],
+    [
+     "DATA2",
+     "—",
+     "—",
+     "3",
+     "9",
+     "I/O"
+    ],
+    [
+     "DATA3",
+     "—",
+     "—",
+     "7",
+     "1",
+     "I/O"
+    ],
+    [
+     "nCS",
+     "1",
+     "7",
+     "1",
+     "7",
+     "Input"
+    ],
+    [
+     "DCLK",
+     "6",
+     "16",
+     "6",
+     "16",
+     "Input"
+    ],
+    [
+     "nRESET",
+     "—",
+     "3",
+     "—",
+     "3",
+     "Input"
+    ],
+    [
+     "VCC",
+     "8",
+     "2",
+     "8",
+     "2",
+     "Power"
+    ],
+    [
+     "GND",
+     "4",
+     "10",
+     "4",
+     "10",
+     "Ground"
+    ]
+   ],
+   "notes": [
+    "In AS x1 mode the DATA2 and DATA3 positions are wired to VCC."
+   ]
+  },
+  {
+   "title": "Memory array organisation",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "details",
+    "EPCQ4A",
+    "EPCQ16A",
+    "EPCQ32A",
+    "EPCQ64A",
+    "EPCQ128A"
+   ],
+   "rows": [
+    [
+     "Bytes",
+     "524,288 bytes [4 megabits (Mb)]",
+     "2,097,152 bytes [16 Mb]",
+     "4,194,304 bytes (32 Mb)",
+     "8,388,608 bytes (64 Mb)",
+     "16,777,216 bytes (128 Mb)"
+    ],
+    [
+     "Number of sectors",
+     "8",
+     "32",
+     "64",
+     "128",
+     "256"
+    ],
+    [
+     "Bytes per sector",
+     "65,536 bytes [512 kilobits (Kb)]",
+     "65,536 bytes [512 kilobits (Kb)]",
+     "65,536 bytes [512 kilobits (Kb)]",
+     "65,536 bytes [512 kilobits (Kb)]",
+     "65,536 bytes [512 kilobits (Kb)]"
+    ],
+    [
+     "Total numbers of subsectors (4)",
+     "128",
+     "512",
+     "1,024",
+     "2,048",
+     "4,096"
+    ],
+    [
+     "Bytes per subsector",
+     "4,096 bytes (32 Kb)",
+     "4,096 bytes (32 Kb)",
+     "4,096 bytes (32 Kb)",
+     "4,096 bytes (32 Kb)",
+     "4,096 bytes (32 Kb)"
+    ],
+    [
+     "Pages per sector",
+     "256",
+     "256",
+     "256",
+     "256",
+     "256"
+    ],
+    [
+     "Total number of pages",
+     "2,048",
+     "8,192",
+     "16,384",
+     "32,768",
+     "65,536"
+    ],
+    [
+     "Bytes per page",
+     "256 bytes",
+     "256 bytes",
+     "256 bytes",
+     "256 bytes",
+     "256 bytes"
+    ]
+   ],
+   "notes": [
+    "(4) Each sector holds 16 subsectors of 4 KB: 8 x 16 = 128 for EPCQ4A, 32 x 16 = 512 for EPCQ16A, 64 x 16 = 1,024 for EPCQ32A, 128 x 16 = 2,048 for EPCQ64A and 256 x 16 = 4,096 for EPCQ128A."
+   ]
+  },
+  {
+   "title": "Address range for EPCQ4A, sectors 7..0 and subsectors 127..0",
+   "page": 11,
+   "conditions": "Byte addresses in hexadecimal",
+   "columns": [
+    "sector",
+    "subsector",
+    "start",
+    "end"
+   ],
+   "rows": [
+    [
+     "7",
+     "127",
+     "7F000",
+     "7FFFF"
+    ],
+    [
+     "",
+     "126",
+     "7E000",
+     "7EFFF"
+    ],
+    [
+     "",
+     "..",
+     "..",
+     ".."
+    ],
+    [
+     "",
+     "114",
+     "72000",
+     "72FFF"
+    ],
+    [
+     "",
+     "113",
+     "71000",
+     "71FFF"
+    ],
+    [
+     "",
+     "112",
+     "70000",
+     "70FFF"
+    ],
+    [
+     "6",
+     "111",
+     "6F000",
+     "6FFFF"
+    ],
+    [
+     "",
+     "110",
+     "6E000",
+     "6EFFF"
+    ],
+    [
+     "",
+     "..",
+     "..",
+     ".."
+    ],
+    [
+     "",
+     "98",
+     "62000",
+     "62FFF"
+    ],
+    [
+     "",
+     "97",
+     "61000",
+     "61FFF"
+    ],
+    [
+     "",
+     "96",
+     "60000",
+     "60FFF"
+    ],
+    [
+     "1",
+     "31",
+     "1F000",
+     "1FFFF"
+    ],
+    [
+     "",
+     "30",
+     "1E000",
+     "1EFFF"
+    ],
+    [
+     "",
+     "..",
+     "..",
+     ".."
+    ],
+    [
+     "",
+     "18",
+     "12000",
+     "12FFF"
+    ],
+    [
+     "",
+     "17",
+     "11000",
+     "11FFF"
+    ],
+    [
+     "",
+     "16",
+     "10000",
+     "10FFF"
+    ],
+    [
+     "0",
+     "15",
+     "F000",
+     "FFFF"
+    ],
+    [
+     "",
+     "14",
+     "E000",
+     "EFFF"
+    ],
+    [
+     "",
+     "..",
+     "..",
+     ".."
+    ],
+    [
+     "",
+     "2",
+     "2000",
+     "2FFF"
+    ],
+    [
+     "",
+     "1",
+     "1000",
+     "1FFF"
+    ],
+    [
+     "",
+     "0",
+     "H'0000000",
+     "H'0000FFF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Address range for EPCQ16A, sectors 31..0 and subsectors 511..0",
+   "page": 12,
+   "conditions": "Byte addresses in hexadecimal",
+   "columns": [
+    "sector",
+    "subsector",
+    "start",
+    "end"
+   ],
+   "rows": [
+    [
+     "31",
+     "511",
+     "1FF000",
+     "1FFFFF"
+    ],
+    [
+     "",
+     "510",
+     "1FE000",
+     "1FEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "498",
+     "1F2000",
+     "1F2FFF"
+    ],
+    [
+     "",
+     "497",
+     "1F1000",
+     "1F1FFF"
+    ],
+    [
+     "",
+     "496",
+     "1F0000",
+     "1F0FFF"
+    ],
+    [
+     "30",
+     "495",
+     "1EF000",
+     "1EFFFF"
+    ],
+    [
+     "",
+     "494",
+     "1EE000",
+     "1EEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "482",
+     "1E2000",
+     "1E2FFF"
+    ],
+    [
+     "",
+     "481",
+     "1E1000",
+     "1E1FFF"
+    ],
+    [
+     "",
+     "480",
+     "1E0000",
+     "1E0FFF"
+    ],
+    [
+     "1",
+     "31",
+     "1F000",
+     "1FFFF"
+    ],
+    [
+     "",
+     "30",
+     "1E000",
+     "1EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "18",
+     "12000",
+     "12FFF"
+    ],
+    [
+     "",
+     "17",
+     "11000",
+     "11FFF"
+    ],
+    [
+     "",
+     "16",
+     "10000",
+     "10FFF"
+    ],
+    [
+     "0",
+     "15",
+     "F000",
+     "FFFF"
+    ],
+    [
+     "",
+     "14",
+     "E000",
+     "EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2",
+     "2000",
+     "2FFF"
+    ],
+    [
+     "",
+     "1",
+     "1000",
+     "1FFF"
+    ],
+    [
+     "",
+     "0",
+     "H'0000000",
+     "H'0000FFF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Address range for EPCQ32A, sectors 63..0 and subsectors 1023..0",
+   "page": 13,
+   "conditions": "Byte addresses in hexadecimal",
+   "columns": [
+    "sector",
+    "subsector",
+    "start",
+    "end"
+   ],
+   "rows": [
+    [
+     "63",
+     "1023",
+     "3FF000",
+     "3FFFFF"
+    ],
+    [
+     "",
+     "1022",
+     "3FE000",
+     "3FEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "1010",
+     "3F2000",
+     "3F2FFF"
+    ],
+    [
+     "",
+     "1009",
+     "3F1000",
+     "3F1FFF"
+    ],
+    [
+     "",
+     "1008",
+     "3F0000",
+     "3F0FFF"
+    ],
+    [
+     "62",
+     "1007",
+     "3EF000",
+     "3EFFFF"
+    ],
+    [
+     "",
+     "1006",
+     "3EE000",
+     "3EEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "994",
+     "3E2000",
+     "3E2FFF"
+    ],
+    [
+     "",
+     "993",
+     "3E1000",
+     "3E1FFF"
+    ],
+    [
+     "",
+     "992",
+     "3E0000",
+     "3E0FFF"
+    ],
+    [
+     "1",
+     "31",
+     "1F000",
+     "1FFFF"
+    ],
+    [
+     "",
+     "30",
+     "1E000",
+     "1EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "18",
+     "12000",
+     "12FFF"
+    ],
+    [
+     "",
+     "17",
+     "11000",
+     "11FFF"
+    ],
+    [
+     "",
+     "16",
+     "10000",
+     "10FFF"
+    ],
+    [
+     "0",
+     "15",
+     "F000",
+     "FFFF"
+    ],
+    [
+     "",
+     "14",
+     "E000",
+     "EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2",
+     "2000",
+     "2FFF"
+    ],
+    [
+     "",
+     "1",
+     "1000",
+     "1FFF"
+    ],
+    [
+     "",
+     "0",
+     "H'0000000",
+     "H'0000FFF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Address range for EPCQ64A, sectors 127..0 and subsectors 2047..0",
+   "page": 14,
+   "conditions": "Byte addresses in hexadecimal",
+   "columns": [
+    "sector",
+    "subsector",
+    "start",
+    "end"
+   ],
+   "rows": [
+    [
+     "127",
+     "2047",
+     "7FF000",
+     "7FFFFF"
+    ],
+    [
+     "",
+     "2046",
+     "7FE000",
+     "7FEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2034",
+     "7F2000",
+     "7F2FFF"
+    ],
+    [
+     "",
+     "2033",
+     "7F1000",
+     "7F1FFF"
+    ],
+    [
+     "",
+     "2032",
+     "7F0000",
+     "7F0FFF"
+    ],
+    [
+     "64",
+     "1039",
+     "40F000",
+     "40FFFF"
+    ],
+    [
+     "",
+     "1038",
+     "40E000",
+     "40EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "1026",
+     "402000",
+     "402FFF"
+    ],
+    [
+     "",
+     "1025",
+     "401000",
+     "401FFF"
+    ],
+    [
+     "",
+     "1024",
+     "400000",
+     "400FFF"
+    ],
+    [
+     "63",
+     "1023",
+     "3FF000",
+     "3FFFFF"
+    ],
+    [
+     "",
+     "1022",
+     "3FE000",
+     "3FEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "1010",
+     "3F2000",
+     "3F2FFF"
+    ],
+    [
+     "",
+     "1009",
+     "3F1000",
+     "3F1FFF"
+    ],
+    [
+     "",
+     "1008",
+     "3F0000",
+     "3F0FFF"
+    ],
+    [
+     "62",
+     "1007",
+     "3EF000",
+     "3EFFFF"
+    ],
+    [
+     "",
+     "1006",
+     "3EE000",
+     "3EEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "994",
+     "3E2000",
+     "3E2FFF"
+    ],
+    [
+     "",
+     "993",
+     "3E1000",
+     "3E1FFF"
+    ],
+    [
+     "",
+     "992",
+     "3E0000",
+     "3E0FFF"
+    ],
+    [
+     "1",
+     "31",
+     "1F000",
+     "1FFFF"
+    ],
+    [
+     "",
+     "30",
+     "1E000",
+     "1EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "18",
+     "12000",
+     "12FFF"
+    ],
+    [
+     "",
+     "17",
+     "11000",
+     "11FFF"
+    ],
+    [
+     "",
+     "16",
+     "10000",
+     "10FFF"
+    ],
+    [
+     "0",
+     "15",
+     "F000",
+     "FFFF"
+    ],
+    [
+     "",
+     "14",
+     "E000",
+     "EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2",
+     "2000",
+     "2FFF"
+    ],
+    [
+     "",
+     "1",
+     "1000",
+     "1FFF"
+    ],
+    [
+     "",
+     "0",
+     "H'0000000",
+     "H'0000FFF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Address range for EPCQ128A, sectors 255..0 and subsectors 4095..0",
+   "page": 15,
+   "conditions": "Byte addresses in hexadecimal",
+   "columns": [
+    "sector",
+    "subsector",
+    "start",
+    "end"
+   ],
+   "rows": [
+    [
+     "255",
+     "4095",
+     "FFF000",
+     "FFFFFF"
+    ],
+    [
+     "",
+     "4094",
+     "FFE000",
+     "FFEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "4082",
+     "FF2000",
+     "FF2FFF"
+    ],
+    [
+     "",
+     "4081",
+     "FF1000",
+     "FF1FFF"
+    ],
+    [
+     "",
+     "4080",
+     "FF0000",
+     "FF0FFF"
+    ],
+    [
+     "254",
+     "4079",
+     "FEF000",
+     "FEFFFF"
+    ],
+    [
+     "",
+     "4078",
+     "FEE000",
+     "FEEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "4066",
+     "FE2000",
+     "FE2FFF"
+    ],
+    [
+     "",
+     "4065",
+     "FE1000",
+     "FE1FFF"
+    ],
+    [
+     "",
+     "4064",
+     "FE0000",
+     "FE0FFF"
+    ],
+    [
+     "129",
+     "2079",
+     "81F000",
+     "81FFFF"
+    ],
+    [
+     "",
+     "2078",
+     "81E000",
+     "81EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2066",
+     "812000",
+     "812FFF"
+    ],
+    [
+     "",
+     "2065",
+     "811000",
+     "811FFF"
+    ],
+    [
+     "",
+     "2064",
+     "810000",
+     "810FFF"
+    ],
+    [
+     "128",
+     "2063",
+     "80F000",
+     "80FFFF"
+    ],
+    [
+     "",
+     "2062",
+     "80E000",
+     "80EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2050",
+     "802000",
+     "802FFF"
+    ],
+    [
+     "",
+     "2049",
+     "801000",
+     "801FFF"
+    ],
+    [
+     "",
+     "2048",
+     "800000",
+     "800FFF"
+    ],
+    [
+     "127",
+     "2047",
+     "7FF000",
+     "7FFFFF"
+    ],
+    [
+     "",
+     "2046",
+     "7FE000",
+     "7FEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2034",
+     "7F2000",
+     "7F2FFF"
+    ],
+    [
+     "",
+     "2033",
+     "7F1000",
+     "7F1FFF"
+    ],
+    [
+     "",
+     "2032",
+     "7F0000",
+     "7F0FFF"
+    ],
+    [
+     "64",
+     "1039",
+     "40F000",
+     "40FFFF"
+    ],
+    [
+     "",
+     "1038",
+     "40E000",
+     "40EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "1026",
+     "402000",
+     "402FFF"
+    ],
+    [
+     "",
+     "1025",
+     "401000",
+     "401FFF"
+    ],
+    [
+     "",
+     "1024",
+     "400000",
+     "400FFF"
+    ],
+    [
+     "63",
+     "1023",
+     "3FF000",
+     "3FFFFF"
+    ],
+    [
+     "",
+     "1022",
+     "3FE000",
+     "3FEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "1010",
+     "3F2000",
+     "3F2FFF"
+    ],
+    [
+     "",
+     "1009",
+     "3F1000",
+     "3F1FFF"
+    ],
+    [
+     "",
+     "1008",
+     "3F0000",
+     "3F0FFF"
+    ],
+    [
+     "62",
+     "1007",
+     "3EF000",
+     "3EFFFF"
+    ],
+    [
+     "",
+     "1006",
+     "3EE000",
+     "3EEFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "994",
+     "3E2000",
+     "3E2FFF"
+    ],
+    [
+     "",
+     "993",
+     "3E1000",
+     "3E1FFF"
+    ],
+    [
+     "",
+     "992",
+     "3E0000",
+     "3E0FFF"
+    ],
+    [
+     "1",
+     "31",
+     "1F000",
+     "1FFFF"
+    ],
+    [
+     "",
+     "30",
+     "1E000",
+     "1EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "18",
+     "12000",
+     "12FFF"
+    ],
+    [
+     "",
+     "17",
+     "11000",
+     "11FFF"
+    ],
+    [
+     "",
+     "16",
+     "10000",
+     "10FFF"
+    ],
+    [
+     "0",
+     "15",
+     "F000",
+     "FFFF"
+    ],
+    [
+     "",
+     "14",
+     "E000",
+     "EFFF"
+    ],
+    [
+     "",
+     ".",
+     ".",
+     "."
+    ],
+    [
+     "",
+     "2",
+     "2000",
+     "2FFF"
+    ],
+    [
+     "",
+     "1",
+     "1000",
+     "1FFF"
+    ],
+    [
+     "",
+     "0",
+     "H'0000000",
+     "H'0000FFF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Status register bits",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "R/W",
+    "default",
+    "name",
+    "value",
+    "description"
+   ],
+   "rows": [
+    [
+     "7",
+     "R/W",
+     "0(5)",
+     "Reserved",
+     "",
+     ""
+    ],
+    [
+     "6",
+     "R/W",
+     "0(5)",
+     "Reserved",
+     "",
+     ""
+    ],
+    [
+     "5",
+     "R/W",
+     "0",
+     "TB (Top/Bottom Bit)",
+     "1: protection counts up from the bottom of the array; 0: protection counts down from the top",
+     "Sets which end of the array the protected area is anchored to."
+    ],
+    [
+     "4",
+     "R/W",
+     "0",
+     "BP2(6)",
+     "See the block protection tables",
+     "Block protect bits: choose how much of the array is shielded from writes and erases."
+    ],
+    [
+     "3",
+     "R/W",
+     "0",
+     "BP1(6)",
+     "See the block protection tables",
+     "Block protect bits: choose how much of the array is shielded from writes and erases."
+    ],
+    [
+     "2",
+     "R/W",
+     "0",
+     "BP0(6)",
+     "See the block protection tables",
+     "Block protect bits: choose how much of the array is shielded from writes and erases."
+    ],
+    [
+     "1",
+     "R",
+     "0",
+     "WEL (Write Enable Latch Bit)",
+     "1: write bytes, write status register, erase bulk and erase sector are accepted; 0: they are refused",
+     "Gate for operations that change the memory or status register."
+    ],
+    [
+     "0",
+     "R",
+     "0",
+     "WIP (Write in Progress Bit)",
+     "1: a write status register, write bytes or erase cycle is running; 0: none is running",
+     "Busy flag."
+    ]
+   ],
+   "notes": [
+    "(5) Bits 7 and 6 are never to be programmed to 1.",
+    "(6) Erase bulk (and erase die) runs only with every block protect bit at 0. A block protect bit at 1 shields its area from write bytes and erase sector operations."
+   ]
+  },
+  {
+   "title": "Block protection bits, EPCQ4A",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "TB",
+    "BP2",
+    "BP1",
+    "BP0",
+    "protected area",
+    "unprotected area"
+   ],
+   "rows": [
+    [
+     "x",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "Sector 7",
+     "Sectors (0 to 6)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "Sectors (6 to 7)",
+     "Sectors (0 to 5)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "Sectors (4 to 7)",
+     "Sectors (0 to 3)"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "Sector 0",
+     "Sectors (1 to 7)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "0",
+     "Sectors (0 to 1)",
+     "Sectors (2 to 7)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "Sectors (0 to 3)",
+     "Sectors (4 to 7)"
+    ],
+    [
+     "x",
+     "1",
+     "x",
+     "x",
+     "All sectors",
+     "None"
+    ]
+   ]
+  },
+  {
+   "title": "Block protection bits, EPCQ16A",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "TB",
+    "BP2",
+    "BP1",
+    "BP0",
+    "protected area",
+    "unprotected area"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "Sector 31",
+     "Sectors (0 to 30)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "Sectors (30 to 31)",
+     "Sectors (0 to 29)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "Sectors (28 to 31)",
+     "Sectors (0 to 27)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "Sectors (24 to 31)",
+     "Sectors (0 to 23)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "Sectors (16 to 31)",
+     "Sectors (0 to 15)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "All sectors",
+     "None"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "Sector 0",
+     "Sectors (1 to 31)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "0",
+     "Sectors (0 to 1)",
+     "Sectors (2 to 31)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "Sectors (0 to 3)",
+     "Sectors (4 to 31)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "0",
+     "Sectors (0 to 7)",
+     "Sectors (8 to 31)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "1",
+     "Sectors (0 to 15)",
+     "Sectors (16 to 31)"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "0",
+     "All sectors",
+     "None"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ]
+   ]
+  },
+  {
+   "title": "Block protection bits, EPCQ32A",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "TB",
+    "BP2",
+    "BP1",
+    "BP0",
+    "protected area",
+    "unprotected area"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "Sector 63",
+     "Sectors (0 to 62)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "Sectors (62 to 63)",
+     "Sectors (0 to 61)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "Sectors (60 to 63)",
+     "Sectors (0 to 59)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "Sectors (56 to 63)",
+     "Sectors (0 to 55)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "Sectors (48 to 63)",
+     "Sectors (0 to 47)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "Sectors (32 to 63)",
+     "Sectors (0 to 31)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "Sector 0",
+     "Sectors (1 to 63)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "0",
+     "Sectors (0 to 1)",
+     "Sectors (2 to 63)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "Sectors (0 to 3)",
+     "Sectors (4 to 63)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "0",
+     "Sectors (0 to 7)",
+     "Sectors (8 to 63)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "1",
+     "Sectors (0 to 15)",
+     "Sectors (16 to 63)"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "0",
+     "Sectors (0 to 31)",
+     "Sectors (32 to 63)"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ]
+   ]
+  },
+  {
+   "title": "Block protection bits, EPCQ64A",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "TB",
+    "BP2",
+    "BP1",
+    "BP0",
+    "protected area",
+    "unprotected area"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "Sectors (126 to 127)",
+     "Sectors (0 to 125)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "Sectors (124 to 127)",
+     "Sectors (0 to 123)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "Sectors (120 to 127)",
+     "Sectors (0 to 119)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "Sectors (112 to 127)",
+     "Sectors (0 to 111)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "Sectors (96 to 127)",
+     "Sectors (0 to 95)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "Sectors (64 to 127)",
+     "Sectors (0 to 63)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "Sectors (0 to 1)",
+     "Sectors (2 to 127)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "0",
+     "Sectors (0 to 3)",
+     "Sectors (4 to 127)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "Sectors (0 to 7)",
+     "Sectors (8 to 127)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "0",
+     "Sectors (0 to 15)",
+     "Sectors (16 to 127)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "1",
+     "Sectors (0 to 31)",
+     "Sectors (32 to 127)"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "0",
+     "Sectors (0 to 63)",
+     "Sectors (64 to 127)"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ]
+   ]
+  },
+  {
+   "title": "Block protection bits, EPCQ128A",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "TB",
+    "BP2",
+    "BP1",
+    "BP0",
+    "protected area",
+    "unprotected area"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "Sectors (252 to 255)",
+     "Sectors (0 to 251)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "Sectors (248 to 255)",
+     "Sectors (0 to 247)"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "Sectors (240 to 255)",
+     "Sectors (0 to 239)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "Sectors (224 to 255)",
+     "Sectors (0 to 223)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "Sectors (192 to 255)",
+     "Sectors (0 to 191)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "Sectors (128 to 255)",
+     "Sectors (0 to 127)"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "None",
+     "All sectors"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "Sectors (0 to 3)",
+     "Sectors (4 to 255)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "0",
+     "Sectors (0 to 7)",
+     "Sectors (8 to 255)"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "Sectors (0 to 15)",
+     "Sectors (16 to 255)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "0",
+     "Sectors (0 to 31)",
+     "Sectors (32 to 255)"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "1",
+     "Sectors (0 to 63)",
+     "Sectors (64 to 255)"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "0",
+     "Sectors (0 to 127)",
+     "Sectors (128 to 255)"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "1",
+     "All sectors",
+     "None"
+    ]
+   ]
+  },
+  {
+   "title": "Summary of operation codes",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "operation",
+    "operation code (7)",
+    "address bytes",
+    "dummy clock cycles",
+    "data bytes",
+    "DCLK fMAX (MHz)"
+   ],
+   "rows": [
+    [
+     "Read status",
+     "05h",
+     "0",
+     "0",
+     "1 to infinite(8)",
+     "100"
+    ],
+    [
+     "Read bytes",
+     "03h",
+     "3",
+     "0",
+     "1 to infinite(8)",
+     "50"
+    ],
+    [
+     "Read device identification",
+     "9Fh",
+     "0",
+     "16",
+     "1",
+     "100"
+    ],
+    [
+     "Read silicon identification",
+     "ABh",
+     "0",
+     "24",
+     "1",
+     "100"
+    ],
+    [
+     "Fast read",
+     "0Bh",
+     "3",
+     "8",
+     "1 to infinite(8)",
+     "100"
+    ],
+    [
+     "Extended dual input fast read",
+     "BBh",
+     "3",
+     "4",
+     "1 to infinite(8)",
+     "100"
+    ],
+    [
+     "Extended quad input fast read (9)",
+     "EBh",
+     "3",
+     "6",
+     "1 to infinite(8)",
+     "100"
+    ],
+    [
+     "Write enable",
+     "06h",
+     "0",
+     "0",
+     "0",
+     "100"
+    ],
+    [
+     "Write disable",
+     "04h",
+     "0",
+     "0",
+     "0",
+     "100"
+    ],
+    [
+     "Write status",
+     "01h",
+     "0",
+     "0",
+     "1",
+     "100"
+    ],
+    [
+     "Write bytes",
+     "02h",
+     "3",
+     "0",
+     "1 to 256(10)",
+     "100"
+    ],
+    [
+     "Quad input fast write bytes(9)",
+     "32h",
+     "3",
+     "0",
+     "1 to 256(10)",
+     "100"
+    ],
+    [
+     "Erase bulk",
+     "C7h",
+     "0",
+     "0",
+     "0",
+     "100"
+    ],
+    [
+     "Erase sector",
+     "D8h",
+     "3",
+     "0",
+     "0",
+     "100"
+    ],
+    [
+     "Erase subsector",
+     "20h",
+     "3",
+     "0",
+     "0",
+     "100"
+    ],
+    [
+     "Read SFDP register(9)",
+     "5Ah",
+     "3",
+     "8",
+     "1 to 256",
+     "100"
+    ]
+   ],
+   "notes": [
+    "(7) Codes are sent MSB first.",
+    "(8) At least one byte comes out, and bytes keep coming until nCS goes high.",
+    "(9) EPCQ4A lacks this operation.",
+    "(10) At least one data byte is needed. Of more than 256 bytes sent, only the final 256 are written."
+   ]
+  },
+  {
+   "title": "Device identification (9Fh)",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "device",
+    "device ID (binary)"
+   ],
+   "rows": [
+    [
+     "EPCQ4A",
+     "b'0001 0011"
+    ],
+    [
+     "EPCQ16A",
+     "b'0001 0101"
+    ],
+    [
+     "EPCQ32A",
+     "b'0001 0110"
+    ],
+    [
+     "EPCQ64A",
+     "b'0001 0111"
+    ],
+    [
+     "EPCQ128A",
+     "b'0001 1000"
+    ]
+   ]
+  },
+  {
+   "title": "Silicon identification (ABh)",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "device",
+    "silicon ID (binary)"
+   ],
+   "rows": [
+    [
+     "EPCQ4A",
+     "b'0001 0010"
+    ],
+    [
+     "EPCQ16A",
+     "b'0001 0100"
+    ],
+    [
+     "EPCQ64A",
+     "b'0001 0110"
+    ]
+   ]
+  },
+  {
+   "title": "Write operation parameters",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "fWCLK",
+     "Write clock frequency (from the FPGA, download cable, or embedded processor) for write enable, write disable, read status, read device identification, write bytes, erase bulk, and erase sector operations",
+     "—",
+     "—",
+     "100",
+     "MHz"
+    ],
+    [
+     "tCH",
+     "DCLK high time for EPCQ4A",
+     "4",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tCH",
+     "DCLK high time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3.4",
+     "",
+     "",
+     ""
+    ],
+    [
+     "tCL",
+     "DCLK low time for EPCQ4A",
+     "4",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tCL",
+     "DCLK low time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3.4",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSSU",
+     "Chip select (nCS) active setup time for EPCQ4A",
+     "5",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSSU",
+     "Chip select (nCS) active setup time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSH",
+     "Chip select (nCS) not active hold time for EPCQ4A",
+     "5",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSH",
+     "Chip select (nCS) not active hold time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSSU2",
+     "Chip select (nCS) not active setup time for EPCQ4A",
+     "5",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSSU2",
+     "Chip select (nCS) not active setup time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSH2",
+     "Chip select (nCS) active hold time for EPCQ4A",
+     "5",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tNCSH2",
+     "Chip select (nCS) active hold time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tDSU",
+     "DATA[] in setup time before the rising edge on DCLK",
+     "2",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tDH",
+     "DATA[] hold time after the rising edge on DCLK for EPCQ4A",
+     "5",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tDH",
+     "DATA[] hold time after the rising edge on DCLK for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tCSH",
+     "Chip select (nCS) high time for EPCQ4A",
+     "100",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tCSH",
+     "Chip select (nCS) high time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "10 or 50(11)",
+     "—",
+     "—",
+     "ns"
+    ],
+    [
+     "tWB(12)(13)",
+     "Write bytes cycle time for EPCQ4A",
+     "—",
+     "0.4",
+     "0.8",
+     "ms"
+    ],
+    [
+     "tWB(12)(13)",
+     "Write bytes cycle time for EPCQ16A",
+     "—",
+     "0.4",
+     "3",
+     "ms"
+    ],
+    [
+     "tWB(12)(13)",
+     "Write bytes cycle time for EPCQ32A and EPCQ128A",
+     "—",
+     "0.7",
+     "3",
+     "ms"
+    ],
+    [
+     "tWB(12)(13)",
+     "Write bytes cycle time for EPCQ64A",
+     "—",
+     "0.8",
+     "3",
+     "ms"
+    ],
+    [
+     "tWS(12)",
+     "Write status cycle time",
+     "—",
+     "10",
+     "15",
+     "ms"
+    ],
+    [
+     "tEB(12)",
+     "Erase bulk cycle time for EPCQ4A",
+     "—",
+     "1",
+     "4",
+     "s"
+    ],
+    [
+     "tEB(12)",
+     "Erase bulk cycle time for EPCQ16A",
+     "—",
+     "5",
+     "25",
+     "s"
+    ],
+    [
+     "tEB(12)",
+     "Erase bulk cycle time for EPCQ32A",
+     "—",
+     "10",
+     "50",
+     "s"
+    ],
+    [
+     "tEB(12)",
+     "Erase bulk cycle time for EPCQ64A",
+     "—",
+     "20",
+     "100",
+     "s"
+    ],
+    [
+     "tEB(12)",
+     "Erase bulk cycle time for EPCQ128A",
+     "—",
+     "40",
+     "200",
+     "s"
+    ],
+    [
+     "tES(12)",
+     "Erase sector cycle time for EPCQ4A",
+     "—",
+     "150",
+     "1000",
+     "ms"
+    ],
+    [
+     "tES(12)",
+     "Erase sector cycle time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "—",
+     "150",
+     "2000",
+     "ms"
+    ],
+    [
+     "tESS(12)",
+     "Erase subsector cycle time for EPCQ4A",
+     "—",
+     "30",
+     "300",
+     "ms"
+    ],
+    [
+     "tESS(12)",
+     "Erase subsector cycle time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "—",
+     "45",
+     "400",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "(11) 10 ns between reads; 50 ns around a write, erase or program.",
+    "(12) A self-timed internal cycle.",
+    "(13) tWB is the time to program one full page."
+   ]
+  },
+  {
+   "title": "Read operation parameters",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "fRCLK",
+     "Read clock frequency (from the FPGA or embedded processor) for read bytes operations",
+     "—",
+     "50",
+     "MHz"
+    ],
+    [
+     "fRCLK",
+     "Fast read clock frequency (from the FPGA or embedded processor) for fast read bytes operation",
+     "—",
+     "100",
+     "MHz"
+    ],
+    [
+     "tCH",
+     "DCLK high time for EPCQ4A",
+     "4 or 6 (14)",
+     "—",
+     "ns"
+    ],
+    [
+     "tCH",
+     "DCLK high time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3.4 or 9(15)",
+     "—",
+     "ns"
+    ],
+    [
+     "tCL",
+     "DCLK low time for EPCQ4A",
+     "4 or 6(14)",
+     "—",
+     "ns"
+    ],
+    [
+     "tCL",
+     "DCLK low time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "3.4 or 9(15)",
+     "",
+     "ns"
+    ],
+    [
+     "tODIS",
+     "Output disable time after read",
+     "—",
+     "7",
+     "ns"
+    ],
+    [
+     "tCLQV",
+     "Clock low to output valid for EPCQ4A",
+     "—",
+     "8",
+     "ns"
+    ],
+    [
+     "tCLQV",
+     "Clock low to output valid for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "—",
+     "6",
+     "ns"
+    ],
+    [
+     "tCLQX",
+     "Output hold time for EPCQ4A",
+     "0",
+     "—",
+     "ns"
+    ],
+    [
+     "tCLQX",
+     "Output hold time for EPCQ16A, EPCQ32A, EPCQ64A, and EPCQ128A",
+     "1.5",
+     "—",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "(14) 4 ns in fast read, 6 ns in read bytes.",
+    "(15) 3.4 ns in fast read, 9 ns in read bytes."
+   ]
+  },
+  {
+   "title": "SFDP register contents",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "address",
+    "EPCQ16A",
+    "EPCQ32A",
+    "EPCQ64A",
+    "EPCQ128A"
+   ],
+   "rows": [
+    [
+     "00H",
+     "53h",
+     "53h",
+     "53h",
+     "53h"
+    ],
+    [
+     "01H",
+     "46h",
+     "46h",
+     "46h",
+     "46h"
+    ],
+    [
+     "02H",
+     "44h",
+     "44h",
+     "44h",
+     "44h"
+    ],
+    [
+     "03H",
+     "50h",
+     "50h",
+     "50h",
+     "50h"
+    ],
+    [
+     "04H",
+     "05h",
+     "05h",
+     "05h",
+     "05h"
+    ],
+    [
+     "05H",
+     "01h",
+     "01h",
+     "01h",
+     "01h"
+    ],
+    [
+     "06H",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "07H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "08H",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "09H",
+     "05h",
+     "05h",
+     "05h",
+     "05h"
+    ],
+    [
+     "0AH",
+     "01h",
+     "01h",
+     "01h",
+     "01h"
+    ],
+    [
+     "0BH",
+     "10h",
+     "10h",
+     "10h",
+     "10h"
+    ],
+    [
+     "0CH",
+     "80h",
+     "80h",
+     "80h",
+     "80h"
+    ],
+    [
+     "0DH",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "0EH",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "0FH",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "10H … 7FH",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "80H",
+     "E5h",
+     "E5h",
+     "E5h",
+     "E5h"
+    ],
+    [
+     "81H",
+     "20H",
+     "20H",
+     "20H",
+     "20H"
+    ],
+    [
+     "82H",
+     "F9h",
+     "F9h",
+     "F9h",
+     "F9h"
+    ],
+    [
+     "83H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "84H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "85H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "86H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "87H",
+     "00h",
+     "01h",
+     "03h",
+     "07h"
+    ],
+    [
+     "88H",
+     "44h",
+     "44h",
+     "44h",
+     "44h"
+    ],
+    [
+     "89H",
+     "EBh",
+     "EBh",
+     "EBh",
+     "EBh"
+    ],
+    [
+     "8AH",
+     "08H",
+     "08H",
+     "08H",
+     "08H"
+    ],
+    [
+     "8BH",
+     "6Bh",
+     "6Bh",
+     "6Bh",
+     "6Bh"
+    ],
+    [
+     "8CH",
+     "08h",
+     "08h",
+     "08h",
+     "08h"
+    ],
+    [
+     "8DH",
+     "3Bh",
+     "3Bh",
+     "3Bh",
+     "3Bh"
+    ],
+    [
+     "8EH",
+     "42h",
+     "42h",
+     "42h",
+     "42h"
+    ],
+    [
+     "8FH",
+     "BBh",
+     "BBh",
+     "BBh",
+     "BBh"
+    ],
+    [
+     "90H",
+     "FEh",
+     "FEh",
+     "FEh",
+     "FEh"
+    ],
+    [
+     "91H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "92H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "93H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "94H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "95H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "96H",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "97H",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "98H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "99H",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "9AH",
+     "40h",
+     "40h",
+     "40h",
+     "40h"
+    ],
+    [
+     "9BH",
+     "EBh",
+     "EBh",
+     "EBh",
+     "EBh"
+    ],
+    [
+     "9CH",
+     "0Ch",
+     "0Ch",
+     "0Ch",
+     "0Ch"
+    ],
+    [
+     "9DH",
+     "20h",
+     "20h",
+     "20h",
+     "20h"
+    ],
+    [
+     "9EH",
+     "0Fh",
+     "0Fh",
+     "0Fh",
+     "0Fh"
+    ],
+    [
+     "9FH",
+     "52h",
+     "52h",
+     "52h",
+     "52h"
+    ],
+    [
+     "A0H",
+     "10h",
+     "10h",
+     "10h",
+     "10h"
+    ],
+    [
+     "A1H",
+     "D8h",
+     "D8h",
+     "D8h",
+     "D8h"
+    ],
+    [
+     "A2H",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "A3H",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "A4H",
+     "36h",
+     "36h",
+     "36h",
+     "36h"
+    ],
+    [
+     "A5H",
+     "02h",
+     "02h",
+     "02h",
+     "02h"
+    ],
+    [
+     "A6H",
+     "A6h",
+     "A6h",
+     "A6h",
+     "A6h"
+    ],
+    [
+     "A7H",
+     "00h",
+     "00h",
+     "00h",
+     "00h"
+    ],
+    [
+     "A8H",
+     "82h",
+     "82h",
+     "82h",
+     "82h"
+    ],
+    [
+     "A9H",
+     "EAh",
+     "EAh",
+     "EAh",
+     "EAh"
+    ],
+    [
+     "AAH",
+     "14h",
+     "14h",
+     "14h",
+     "14h"
+    ],
+    [
+     "ABH",
+     "B3h",
+     "C2h",
+     "C4h",
+     "C9h"
+    ],
+    [
+     "ACH",
+     "E9h",
+     "E9h",
+     "E9h",
+     "E9h"
+    ],
+    [
+     "ADH",
+     "63h",
+     "63h",
+     "63h",
+     "63h"
+    ],
+    [
+     "AEH",
+     "76h",
+     "76h",
+     "76h",
+     "76h"
+    ],
+    [
+     "AFH",
+     "33h",
+     "33h",
+     "33h",
+     "33h"
+    ],
+    [
+     "B0H",
+     "7Ah",
+     "7Ah",
+     "7Ah",
+     "7Ah"
+    ],
+    [
+     "B1H",
+     "75h",
+     "75h",
+     "75h",
+     "75h"
+    ],
+    [
+     "B2H",
+     "7Ah",
+     "7Ah",
+     "7Ah",
+     "7Ah"
+    ],
+    [
+     "B3H",
+     "75h",
+     "75h",
+     "75h",
+     "75h"
+    ],
+    [
+     "B4H",
+     "F7h",
+     "F7h",
+     "F7h",
+     "F7h"
+    ],
+    [
+     "B5H",
+     "A2h",
+     "A2h",
+     "A2h",
+     "A2h"
+    ],
+    [
+     "B6H",
+     "D5h",
+     "D5h",
+     "D5h",
+     "D5h"
+    ],
+    [
+     "B7H",
+     "5Ch",
+     "5Ch",
+     "5Ch",
+     "5Ch"
+    ],
+    [
+     "B8H",
+     "19h",
+     "19h",
+     "19h",
+     "19h"
+    ],
+    [
+     "B9H",
+     "F7h",
+     "F7h",
+     "F7h",
+     "F7h"
+    ],
+    [
+     "BAH",
+     "4Dh",
+     "4Dh",
+     "4Dh",
+     "4Dh"
+    ],
+    [
+     "BBH",
+     "FFh",
+     "FFh",
+     "FFh",
+     "FFh"
+    ],
+    [
+     "BCH",
+     "E9h",
+     "E9h",
+     "E9h",
+     "E9h"
+    ],
+    [
+     "BDH",
+     "30h",
+     "30h",
+     "30h",
+     "30h"
+    ],
+    [
+     "BEH",
+     "F8h",
+     "F8h",
+     "F8h",
+     "F8h"
+    ],
+    [
+     "BFH",
+     "80h",
+     "80h",
+     "80h",
+     "80h"
+    ]
+   ],
+   "notes": [
+    "EPCQ4A has no SFDP read operation."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [],
+ "equations": [
+  {
+   "name": "Subsector count",
+   "expr": "subsectors = sectors × 16",
+   "where": {
+    "sectors": "64 KB sectors in the device (8, 32, 64, 128 or 256)"
+   },
+   "note": "Each subsector is 4 KB.",
+   "page": 11
+  },
+  {
+   "name": "Subsector address range",
+   "expr": "start = n × 1000h; end = n × 1000h + FFFh",
+   "where": {
+    "n": "subsector number, 0 to (subsectors - 1); subsector n lies in sector floor(n / 16)"
+   },
+   "note": "",
+   "page": 12
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Use",
+   "page": 4,
+   "text": "The device stores an FPGA configuration image and supplies it over the active serial interface, in AS x1 or AS x4 (EPCQ4A: AS x1 only). It can also be reprogrammed in-system from an external microprocessor with the SRunner driver, or through an Intel FPGA Download Cable II, Download Cable or Ethernet Cable. By default the array is erased, with every bit at 1. SFDP (JEDEC) is supported."
+  },
+  {
+   "topic": "Bus protocol",
+   "page": 17,
+   "text": "An operation starts with nCS falling. The 8-bit operation code goes in on DATA0, then any address or data bytes, each bit latched on a DCLK rising edge; all bytes travel MSB first. Read data comes out on DATA[3:0] and nCS may be raised at any bit of it. For a write or erase, nCS has to rise on a byte boundary (a whole multiple of 8 clocks) or the operation is discarded. While a write or erase cycle runs, every attempt to reach the array is refused and the cycle carries on."
+  },
+  {
+   "topic": "Read bytes (03h)",
+   "page": 22,
+   "text": "Opcode and a 24-bit address A[23..0] go in on DATA0; data then shifts out on DATA1 on falling DCLK edges, at up to 50 MHz. The address counts up after each byte and wraps from the top address to 000000h, so one command can read the whole array and keeps going until nCS rises. Raw Programming Data (.rpd) bytes come out LSB first. Ignored, without disturbing it, if issued during a write or erase cycle."
+  },
+  {
+   "topic": "Fast read (0Bh)",
+   "page": 23,
+   "text": "Like read bytes but followed by 8 dummy clocks after the address, and clocked at up to 100 MHz. The address auto-increments and wraps to 000000h; nCS high at any point in the output ends it. Ignored during an erase, program or write cycle."
+  },
+  {
+   "topic": "Extended dual and quad fast reads (BBh, EBh)",
+   "page": 24,
+   "text": "BBh carries address and data two bits per clock on DATA0 and DATA1, with 4 dummy clocks; EBh carries them four bits per clock on DATA0 to DATA3, with 6 dummy clocks. The pins turn from input to output after the dummy clocks. EBh is not available on EPCQ4A."
+  },
+  {
+   "topic": "Identification (9Fh, ABh)",
+   "page": 25,
+   "text": "9Fh is followed by two dummy bytes and returns the 8-bit device ID on DATA1. ABh (EPCQ4A, EPCQ16A and EPCQ64A only) is followed by three dummy bytes and returns the 8-bit silicon ID on DATA1, repeating it for as long as DCLK runs with nCS low. Both are ignored during a write or erase cycle."
+  },
+  {
+   "topic": "Write enable and disable (06h, 04h)",
+   "page": 26,
+   "text": "06h sets the write enable latch (WEL). Write bytes (02h), quad input fast write bytes (32h), write status (01h), erase bulk (C7h), erase sector (D8h) and erase subsector (20h) each need it set first. 04h clears it. WEL also returns to 0 on its own at power-up and when a write bytes, quad input fast write bytes, write status, erase bulk or erase sector operation completes."
+  },
+  {
+   "topic": "Write bytes (02h) and quad fast write (32h)",
+   "page": 27,
+   "text": "After write enable, send the opcode, a 24-bit address and 1 to 256 data bytes, holding nCS low throughout. Bytes that run past the end of the 256-byte page wrap to the start of the same page. Over 256 bytes, only the last 256 are kept; under 256, only the addressed bytes change. The self-timed program cycle (tWB) starts when nCS rises; WIP reads 1 until it ends. Bytes are to be erased before they are written. 32h is the same with data entering four bits per clock on DATA0 to DATA3 (not EPCQ4A)."
+  },
+  {
+   "topic": "Erase (C7h, D8h, 20h)",
+   "page": 28,
+   "text": "Erasing sets bits to 1 (FFh) and needs write enable first. C7h erases the whole array and takes no address; it runs only when all block protect bits are 0. D8h erases the 64 KB sector holding the given 24-bit address, 20h the 4 KB subsector. Each starts a self-timed cycle (tEB, tES, tESS) when nCS rises; WIP is 1 until it ends, and WEL is cleared before the end."
+  },
+  {
+   "topic": "Status register (05h, 01h)",
+   "page": 17,
+   "text": "05h reads the status register, repeatedly while clocks continue, at any time including during a write or erase. 01h, after write enable, writes TB and BP[2:0] (WEL and WIP are untouched); sectors covered by the block protect setting then behave as read-only. The self-timed write status cycle takes 10 ms typical, 15 ms at most (tWS); WIP is 1 during it."
+  },
+  {
+   "topic": "SFDP (5Ah)",
+   "page": 30,
+   "text": "Reads the 256-byte Serial Flash Discoverable Parameter table (JESD216A), which describes the device's configuration and operations. The 24-bit address has A[23..8] = 0 and A[7..0] as the starting byte; after 8 dummy clocks the data comes out MSB first from the falling edge of the 40th DCLK. Not available on EPCQ4A."
+  },
+  {
+   "topic": "Power modes",
+   "page": 31,
+   "text": "With nCS low the device is in active mode (ICC1); configuration of the FPGA happens in this mode. After nCS goes high it stays active until any internal write or erase cycle has finished, then drops to standby (ICC0)."
+  },
+  {
+   "topic": "Reset (16-pin SOIC)",
+   "page": 10,
+   "text": "On EPCQ64A and EPCQ128A, nRESET held low for about 1 µs aborts any operation and returns the device to its power-on state. It has an internal pull-up (RPR, 300 kΩ to 1000 kΩ)."
+  },
+  {
+   "topic": "Programming support",
+   "page": 34,
+   "text": "Intel Quartus Prime generates a Programmer Object File (.pof) for the chosen EPCQ-A density. The SRunner driver reads .rpd files and programs the device from an embedded processor in about the time Quartus takes. The FPGA reads .rpd data LSB first, so .rpd bytes are shifted out LSB first on reads and shifted in LSB first on writes. In ISP with a download cable, the cable drives the FPGA's nCONFIG low, overrides the 10 kΩ pull-down on the FPGA's nCE pin, programs the device over the AS pins, then releases them and pulses nCONFIG to start configuration. The FPGA can also program it over JTAG with the Serial Flash Loader (SFL)."
+  }
+ ],
+ "packages": []
+}

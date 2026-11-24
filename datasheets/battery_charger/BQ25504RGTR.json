@@ -1,0 +1,3092 @@
+{
+ "sheet": 1,
+ "name": "BQ25504RGTR",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "BQ25504: nano-power boost charger with storage-element management for energy harvesting",
+ "source": {
+  "document": "SLUSAH0G",
+  "revision": "Revision G, August 2023",
+  "pages": 38
+ },
+ "summary": "A hysteretic (PFM) boost charger for energy harvesters such as solar cells and thermoelectric generators, in a 3 × 3 mm 16-pin VQFN. It starts from an empty output with 600 mV in (typical) and, once running, keeps harvesting down to 130 mV, drawing 330 nA typical from VSTOR. It tracks the source's maximum power point by sampling its open-circuit voltage every 16 s and regulating VIN_DC to a resistor-set fraction of it. Resistor dividers set the storage element's overvoltage (charge stop) and undervoltage (disconnect) levels and a battery-good output with its own hysteresis; an on-chip sensor stops charging at 65 °C or 120 °C.",
+ "key_figures": [
+  [
+   "Input voltage, after cold start",
+   "130 mV to 3000 mV"
+  ],
+  [
+   "Cold-start voltage",
+   "600 mV typ, 700 mV max"
+  ],
+  [
+   "Cold-start input power",
+   "15 µW typ"
+  ],
+  [
+   "VSTOR quiescent current",
+   "330 nA typ, 750 nA max (charger off in UV)"
+  ],
+  [
+   "Input power, normal charging",
+   "0.01 mW to 300 mW"
+  ],
+  [
+   "Peak input current",
+   "200 mA typ, 300 mA max"
+  ],
+  [
+   "Overvoltage setting range",
+   "2.5 V to 5.25 V"
+  ],
+  [
+   "Threshold reference VBIAS",
+   "1.25 V typ (1.21 V to 1.27 V)"
+  ],
+  [
+   "MPPT sample period / settling",
+   "16 s / 256 ms typ"
+  ],
+  [
+   "Thermal shutdown",
+   "65 °C (OT_PROG low) or 120 °C (OT_PROG high) typ"
+  ],
+  [
+   "Package",
+   "VQFN-16 (RGT), 3.00 × 3.00 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 31,
+  "columns": [
+   "part number",
+   "status",
+   "material type",
+   "package",
+   "pins",
+   "packing",
+   "RoHS",
+   "lead finish",
+   "MSL / peak reflow",
+   "operating temperature (°C)",
+   "marking"
+  ],
+  "rows": [
+   [
+    "BQ25504RGTR",
+    "Active",
+    "Production",
+    "VQFN (RGT)",
+    "16",
+    "3000, large tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "B5504"
+   ],
+   [
+    "BQ25504RGTR.B",
+    "Active",
+    "Production",
+    "VQFN (RGT)",
+    "16",
+    "3000, large tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "B5504"
+   ],
+   [
+    "BQ25504RGTT",
+    "Active",
+    "Production",
+    "VQFN (RGT)",
+    "16",
+    "250, small tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "B5504"
+   ],
+   [
+    "BQ25504RGTT.B",
+    "Active",
+    "Production",
+    "VQFN (RGT)",
+    "16",
+    "250, small tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "B5504"
+   ]
+  ],
+  "notes": [
+   "The R suffix ships 3000 per reel, the T suffix 250."
+  ]
+ },
+ "pins": [
+  {
+   "package": "VQFN-16 (RGT)",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VSS",
+     "type": "input",
+     "function": "Main ground. Tie to the thermal pad."
+    },
+    {
+     "pin": "2",
+     "name": "VIN_DC",
+     "type": "input",
+     "function": "Harvester DC input. Needs 4.7 µF or more to VSS (pin 1), placed tight to the pins; the boost inductor's other end lands on this pin."
+    },
+    {
+     "pin": "3",
+     "name": "VOC_SAMP",
+     "type": "input",
+     "function": "MPPT sense node: the tap of a divider from VIN_DC to ground that picks the fraction of open-circuit voltage stored on VREF_SAMP. Tied to VSTOR, it turns MPPT sampling off."
+    },
+    {
+     "pin": "4",
+     "name": "VREF_SAMP",
+     "type": "input",
+     "function": "Holds the voltage VIN_DC is regulated to, on a 0.01 µF low-leakage capacitor to ground, refreshed by the MPPT sampler. With MPPT off, drive it from an external reference, or ground it to stop input regulation for a low-impedance supply."
+    },
+    {
+     "pin": "5",
+     "name": "OT_PROG",
+     "type": "input",
+     "function": "Digital select for the thermal limit: ground for the low threshold, VSTOR for 120 °C."
+    },
+    {
+     "pin": "6",
+     "name": "VBAT_OV",
+     "type": "input",
+     "function": "Tap of the divider from VRDIV to ground that sets the VSTOR = VBAT overvoltage level."
+    },
+    {
+     "pin": "7",
+     "name": "VRDIV",
+     "type": "output",
+     "function": "Bias output that supplies the threshold-setting resistor dividers."
+    },
+    {
+     "pin": "8",
+     "name": "VBAT_UV",
+     "type": "input",
+     "function": "Tap of the divider from VRDIV to ground that sets the undervoltage level; below it the PFET from VBAT to VSTOR turns off."
+    },
+    {
+     "pin": "9",
+     "name": "OK_HYST",
+     "type": "input",
+     "function": "Tap of the divider from VRDIV to ground that sets the VBAT_OK rising (hysteresis) level. Ground it when unused."
+    },
+    {
+     "pin": "10",
+     "name": "OK_PROG",
+     "type": "input",
+     "function": "Tap of the divider from VRDIV to ground that sets the VBAT_OK falling level. Ground it when unused."
+    },
+    {
+     "pin": "11",
+     "name": "VBAT_OK",
+     "type": "output",
+     "function": "Battery-good logic output, high level equal to VSTOR. Leave open when unused."
+    },
+    {
+     "pin": "12",
+     "name": "AVSS",
+     "type": "supply",
+     "function": "Signal (quiet) ground. Tie to the thermal pad."
+    },
+    {
+     "pin": "13",
+     "name": "VSS",
+     "type": "supply",
+     "function": "Main ground. Tie to the thermal pad."
+    },
+    {
+     "pin": "14",
+     "name": "VBAT",
+     "type": "I/O",
+     "function": "Storage element connection: a rechargeable element of at least 100 µF equivalent capacitance."
+    },
+    {
+     "pin": "15",
+     "name": "VSTOR",
+     "type": "output",
+     "function": "Boost charger output and the system load rail. Bypass to VSS (pin 1) with 4.7 µF or more in parallel with 0.1 µF, both close to the pins."
+    },
+    {
+     "pin": "16",
+     "name": "LBST",
+     "type": "input",
+     "function": "Boost switch node. A 22 µH inductor joins this pin to VIN_DC (pin 2)."
+    },
+    {
+     "pin": "PAD",
+     "name": "Thermal pad",
+     "type": "ground",
+     "function": "Exposed pad, soldered to the board; VSS and AVSS join it."
+    }
+   ],
+   "notes": [
+    "OT_PROG low threshold: 60 °C in the pin description, 65 °C typ in the electrical characteristics."
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 6,
+   "conditions": "Over operating free-air temperature range unless noted; voltages referred to VSS/ground",
+   "columns": [
+    "parameter",
+    "pins",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage",
+     "VIN_DC, VOC_SAMP, VREF_SAMP, VBAT_OV, VBAT_UV, VRDIV, OK_HYST, OK_PROG, VBAT_OK, VBAT, VSTOR, LBST",
+     "–0.3",
+     "5.5",
+     "V"
+    ],
+    [
+     "Peak input power, PIN_PK",
+     "",
+     "",
+     "400",
+     "mW"
+    ],
+    [
+     "Operating junction temperature range, TJ",
+     "",
+     "–40",
+     "125",
+     "°C"
+    ],
+    [
+     "Storage temperature range, Tstg",
+     "",
+     "–65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these limits can permanently damage the part; they are not operating conditions, and long exposure at them can reduce reliability."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "V(ESD) electrostatic discharge",
+     "Human body model (HBM), ANSI/ESDA/JEDEC JS-001, all pins",
+     "2",
+     "kV"
+    ],
+    [
+     "V(ESD) electrostatic discharge",
+     "Charged device model (CDM), JEDEC JESD22-C101, all pins",
+     "500",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEP155 regards 500 V HBM and JEP157 regards 250 V CDM as safe with a standard ESD control process."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN (DC)",
+     "DC input voltage into VIN_DC (1)",
+     "0.13",
+     "",
+     "3",
+     "V"
+    ],
+    [
+     "VBAT",
+     "Battery voltage range (2)",
+     "2.5",
+     "",
+     "5.25",
+     "V"
+    ],
+    [
+     "CHVR",
+     "Input capacitance",
+     "4.23",
+     "4.7",
+     "5.17",
+     "µF"
+    ],
+    [
+     "CSTOR",
+     "Storage capacitance",
+     "4.23",
+     "4.7",
+     "5.17",
+     "µF"
+    ],
+    [
+     "CBAT",
+     "Battery pin capacitance or equivalent battery capacity",
+     "100",
+     "",
+     "",
+     "µF"
+    ],
+    [
+     "CREF",
+     "Sampled reference storage capacitance",
+     "9",
+     "10",
+     "11",
+     "nF"
+    ],
+    [
+     "ROC1 + ROC2",
+     "Total resistance for setting MPPT reference",
+     "18",
+     "20",
+     "22",
+     "MΩ"
+    ],
+    [
+     "ROK1 + ROK2 + ROK3",
+     "Total resistance for setting reference voltage",
+     "9",
+     "10",
+     "11",
+     "MΩ"
+    ],
+    [
+     "RUV1 + RUV2",
+     "Total resistance for setting reference voltage",
+     "9",
+     "10",
+     "11",
+     "MΩ"
+    ],
+    [
+     "ROV1 + ROV2",
+     "Total resistance for setting reference voltage",
+     "9",
+     "10",
+     "11",
+     "MΩ"
+    ],
+    [
+     "LBST",
+     "Input inductance",
+     "19.8",
+     "22",
+     "24.2",
+     "µH"
+    ],
+    [
+     "TA",
+     "Operating free air ambient temperature",
+     "–40",
+     "",
+     "85",
+     "°C"
+    ],
+    [
+     "TJ",
+     "Operating junction temperature",
+     "–40",
+     "",
+     "105",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) Input power at most 300 mW, with cold start finished.",
+    "(2) The VBAT_OV setting has to be above VIN_DC."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 7,
+   "conditions": "RGT (QFN), 16 pins",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA",
+     "Junction-to-ambient thermal resistance",
+     "48.5",
+     "°C/W"
+    ],
+    [
+     "RθJC(top)",
+     "Junction-to-case (top) thermal resistance",
+     "63.9",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "22",
+     "°C/W"
+    ],
+    [
+     "ψJT",
+     "Junction-to-top characterization parameter",
+     "1.8",
+     "°C/W"
+    ],
+    [
+     "ψJB",
+     "Junction-to-board characterization parameter",
+     "22",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "6.5",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 7,
+   "conditions": "Over recommended temperature range; typical at TA = 25°C. Unless noted, VIN_DC = 1.2V, VBAT = VSTOR = 3V, LBST = 22 µH, CHVR = 4.7 µF, CSTOR = 4.7 µF",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Boost converter / charger stage",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "DC input voltage into VIN_DC",
+     "VIN(DC)",
+     "Cold-start completed",
+     "130",
+     "",
+     "3000",
+     "mV"
+    ],
+    [
+     "Peak current flowing from VIN into VIN_DC input",
+     "IIN(DC)",
+     "0.5V < VIN < 3 V; VSTOR = 4.2 V",
+     "",
+     "200",
+     "300",
+     "mA"
+    ],
+    [
+     "Input power range for normal charging",
+     "PIN",
+     "VBAT > VIN_DC; VIN_DC = 0.5 V",
+     "0.01",
+     "",
+     "300",
+     "mW"
+    ],
+    [
+     "Cold-start voltage (input voltage that starts charging of VSTOR)",
+     "VIN(CS)",
+     "VBAT < VBAT_UV; VSTOR = 0 V; 0°C < TA < 85°C",
+     "",
+     "600",
+     "700",
+     "mV"
+    ],
+    [
+     "Minimum cold-start input power to start normal charging",
+     "PIN(CS)",
+     "VBAT < VSTOR(CHGEN); VIN_DC clamped to VIN_CS by cold start circuit; VBAT = 100 µF ceramic",
+     "",
+     "15",
+     "",
+     "µW"
+    ],
+    [
+     "Voltage on VSTOR when cold start ends and normal charging begins",
+     "VSTOR_CHGEN",
+     "",
+     "1.6",
+     "1.77",
+     "1.95",
+     "V"
+    ],
+    [
+     "Resistance of switch between VBAT and VSTOR when on",
+     "RBAT(on)",
+     "VBAT = 4.2 V; VSTOR load = 50 mA",
+     "",
+     "",
+     "2",
+     "Ω"
+    ],
+    [
+     "Charger low side switch ON resistance",
+     "RDS(on)",
+     "VBAT = 2.1 V",
+     "",
+     "",
+     "2",
+     "Ω"
+    ],
+    [
+     "Charger low side switch ON resistance",
+     "RDS(on)",
+     "VBAT = 4.2 V",
+     "",
+     "",
+     "2",
+     "Ω"
+    ],
+    [
+     "Charger rectifier high side switch ON resistance",
+     "RDS(on)",
+     "VBAT = 2.1 V",
+     "",
+     "",
+     "5",
+     "Ω"
+    ],
+    [
+     "Charger rectifier high side switch ON resistance",
+     "RDS(on)",
+     "VBAT = 4.2 V",
+     "",
+     "",
+     "5",
+     "Ω"
+    ],
+    [
+     "Boost converter mode switching frequency",
+     "fSW_BST",
+     "",
+     "",
+     "",
+     "1",
+     "MHz"
+    ],
+    [
+     "Battery management",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Leakage on VBAT pin",
+     "IVBAT",
+     "VBAT = 2.1 V; VBAT_UV = 2.3 V, TJ = 25°C; VSTOR = 0 V",
+     "",
+     "1",
+     "5",
+     "nA"
+    ],
+    [
+     "Leakage on VBAT pin",
+     "IVBAT",
+     "VBAT = 2.1 V; VBAT_UV = 2.3 V, –40°C < TJ < 65°C, VSTOR = 0 V",
+     "",
+     "",
+     "80",
+     "nA"
+    ],
+    [
+     "VSTOR quiescent current, charger shutdown in UV condition",
+     "IVSTOR",
+     "VIN_DC = 0V; VBAT < VBAT_UV = 2.4V; VSTOR = 2.2V, no load on VBAT",
+     "",
+     "330",
+     "750",
+     "nA"
+    ],
+    [
+     "VSTOR quiescent current, charger shutdown in OV condition",
+     "IVSTOR",
+     "VIN_DC = 0V, VBAT > VBAT_OV, VSTOR = 4.25, no load on VBAT",
+     "",
+     "570",
+     "1400",
+     "nA"
+    ],
+    [
+     "Programmable voltage range for overvoltage threshold (battery voltage rising)",
+     "VBAT_OV",
+     "VSTOR increasing",
+     "2.5",
+     "",
+     "5.25",
+     "V"
+    ],
+    [
+     "Overvoltage hysteresis (battery voltage falling), internal",
+     "VBAT_OV_HYST",
+     "VSTOR decreasing",
+     "18",
+     "35",
+     "89",
+     "mV"
+    ],
+    [
+     "Programmable voltage range for undervoltage threshold (battery voltage falling)",
+     "VBAT_UV",
+     "VSTOR decreasing; VBAT_UV > VBias",
+     "2.2",
+     "",
+     "VBAT_OV",
+     "V"
+    ],
+    [
+     "Undervoltage threshold hysteresis, internal",
+     "VBAT_UV_HYST",
+     "VSTOR increasing",
+     "40",
+     "80",
+     "125",
+     "mV"
+    ],
+    [
+     "Programmable range for the battery-OK high-to-low threshold",
+     "VBAT_OK",
+     "VSTOR decreasing",
+     "VBAT_UV",
+     "",
+     "VBAT_OV",
+     "V"
+    ],
+    [
+     "Programmable range for the battery-OK low-to-high threshold",
+     "VBAT_OK_HYST",
+     "VSTOR increasing",
+     "50",
+     "",
+     "VBAT_OV-VBAT_UV",
+     "mV"
+    ],
+    [
+     "Overall accuracy for threshold values, UV, OV, VBAT_OK",
+     "VBAT_ACCURACY",
+     "Selected resistors are 0.1% tolerance",
+     "–5%",
+     "",
+     "5%",
+     ""
+    ],
+    [
+     "VBAT OK (high) threshold voltage",
+     "VBAT_OKH",
+     "Load = 10 µA",
+     "",
+     "",
+     "VSTOR-200mV",
+     "V"
+    ],
+    [
+     "VBAT OK (low) threshold voltage",
+     "VBAT_OKL",
+     "Load = 10 µA",
+     "",
+     "",
+     "100",
+     "mV"
+    ],
+    [
+     "Temperature at which the boost converter is disabled and the VBAT–VSTOR switch opens",
+     "TSD_PROTL",
+     "OT_Prog = LO",
+     "",
+     "65",
+     "",
+     "°C"
+    ],
+    [
+     "Temperature at which the boost converter is disabled and the VBAT–VSTOR switch opens",
+     "TSD_PROTH",
+     "OT_Prog = HI",
+     "",
+     "120",
+     "",
+     "°C"
+    ],
+    [
+     "Voltage for OT_PROG high setting",
+     "OT_Prog",
+     "",
+     "2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Voltage for OT_PROG low setting",
+     "OT_Prog",
+     "",
+     "",
+     "",
+     "0.3",
+     "V"
+    ],
+    [
+     "Bias and MPPT control stage",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Sampling period of VIN_DC open circuit voltage",
+     "VOC_sample",
+     "",
+     "",
+     "16",
+     "",
+     "s"
+    ],
+    [
+     "Sampling period of VIN_DC open circuit voltage",
+     "VOC_Settling",
+     "",
+     "",
+     "256",
+     "",
+     "ms"
+    ],
+    [
+     "Regulation of VIN_DC during charging",
+     "VIN_Reg",
+     "0.5 V < VIN < 3 V; IIN (DC) = 10 mA",
+     "–10%",
+     "",
+     "10%",
+     ""
+    ],
+    [
+     "DC input voltage into VIN_DC when charger is turned off",
+     "VIN_shutoff",
+     "",
+     "40",
+     "80",
+     "130",
+     "mV"
+    ],
+    [
+     "Threshold on VOC_SAMP to disable MPPT functionality",
+     "MPPT_Disable",
+     "",
+     "VSTOR-15 mV",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Voltage node used as reference for the programmable thresholds",
+     "VBIAS",
+     "VIN_DC ≥ 0.5V; VSTOR ≥ 1.8 V",
+     "1.21",
+     "1.25",
+     "1.27",
+     "V"
+    ]
+   ],
+   "notes": [
+    "VOC_Settling is the 256 ms settling period of the VIN_DC open-circuit voltage; its parameter name should read settling period, not sampling period."
+   ]
+  },
+  {
+   "title": "Recommended inductors",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "inductance (µH)",
+    "dimensions (mm)",
+    "part number",
+    "manufacturer"
+   ],
+   "rows": [
+    [
+     "22",
+     "4.0x4.0x1.7",
+     "LPS4018-223M",
+     "Coilcraft"
+    ],
+    [
+     "22",
+     "3.8x3.8x1.65",
+     "744031220",
+     "Wurth"
+    ],
+    [
+     "22",
+     "2.8x2.8x2.8",
+     "744025220",
+     "Wurth"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel",
+   "page": 32,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package",
+    "drawing",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ25504RGTR",
+     "VQFN",
+     "RGT",
+     "16",
+     "3000",
+     "330.0",
+     "12.4",
+     "3.3",
+     "3.3",
+     "1.1",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ25504RGTT",
+     "VQFN",
+     "RGT",
+     "16",
+     "250",
+     "180.0",
+     "12.4",
+     "3.3",
+     "3.3",
+     "1.1",
+     "8.0",
+     "12.0",
+     "Q2"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel box",
+   "page": 33,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package",
+    "drawing",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ25504RGTR",
+     "VQFN",
+     "RGT",
+     "16",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ25504RGTT",
+     "VQFN",
+     "RGT",
+     "16",
+     "250",
+     "210.0",
+     "185.0",
+     "35.0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Efficiency vs input voltage, IIN = 10 µA",
+   "page": 9,
+   "conditions": "VSTOR held at 1.8 V, 3.0 V or 5.5 V by a source meter; VBAT_OV = 5.5 V; measured between MPPT samples; VIN_DC source meter, ICOMP = 10 µA, 0 to 3.0 V",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       0.1,
+       0
+      ],
+      [
+       0.203,
+       37.2
+      ],
+      [
+       0.4,
+       58.5
+      ],
+      [
+       0.701,
+       73.2
+      ],
+      [
+       0.801,
+       75.3
+      ],
+      [
+       1.2,
+       79.5
+      ],
+      [
+       1.5,
+       79.2
+      ],
+      [
+       1.7,
+       83.6
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 3 V",
+     "points": [
+      [
+       0.065,
+       0
+      ],
+      [
+       0.204,
+       8.8
+      ],
+      [
+       0.3,
+       30.0
+      ],
+      [
+       0.4,
+       46.5
+      ],
+      [
+       0.5,
+       55.2
+      ],
+      [
+       0.7,
+       65.6
+      ],
+      [
+       0.8,
+       68.6
+      ],
+      [
+       0.9,
+       72.7
+      ],
+      [
+       1.0,
+       75.6
+      ],
+      [
+       1.2,
+       78.2
+      ],
+      [
+       1.5,
+       80.0
+      ],
+      [
+       1.8,
+       83.3
+      ],
+      [
+       2.4,
+       88.8
+      ],
+      [
+       2.9,
+       90.0
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 5.5 V",
+     "points": [
+      [
+       0.099,
+       0
+      ],
+      [
+       0.4,
+       0
+      ],
+      [
+       0.7,
+       31.4
+      ],
+      [
+       0.8,
+       37.1
+      ],
+      [
+       0.901,
+       45.2
+      ],
+      [
+       1.2,
+       59.6
+      ],
+      [
+       1.502,
+       63.0
+      ],
+      [
+       1.8,
+       68.1
+      ],
+      [
+       2.404,
+       73.9
+      ],
+      [
+       2.803,
+       78.5
+      ],
+      [
+       3.0,
+       80.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs input voltage, IIN = 100 µA",
+   "page": 9,
+   "conditions": "VSTOR held at 1.8 V, 3.0 V or 5.5 V by a source meter; VBAT_OV = 5.5 V; measured between MPPT samples; VIN_DC source meter, ICOMP = 100 µA, 0.1 V to 3.0 V",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 3.3 V",
+     "points": [
+      [
+       0.065,
+       12.5
+      ],
+      [
+       0.182,
+       55.2
+      ],
+      [
+       0.294,
+       68.4
+      ],
+      [
+       0.4,
+       73.7
+      ],
+      [
+       0.5,
+       76.8
+      ],
+      [
+       0.6,
+       79.5
+      ],
+      [
+       1.0,
+       85.5
+      ],
+      [
+       1.204,
+       85.6
+      ],
+      [
+       1.8,
+       88.1
+      ],
+      [
+       2.0,
+       88.4
+      ],
+      [
+       2.4,
+       89.9
+      ],
+      [
+       2.9,
+       90.7
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       0.074,
+       16.3
+      ],
+      [
+       0.192,
+       49.3
+      ],
+      [
+       0.296,
+       63.7
+      ],
+      [
+       0.399,
+       69.6
+      ],
+      [
+       0.499,
+       73.2
+      ],
+      [
+       0.601,
+       76.0
+      ],
+      [
+       0.801,
+       79.2
+      ],
+      [
+       1.0,
+       81.5
+      ],
+      [
+       1.2,
+       83.1
+      ],
+      [
+       1.692,
+       86.2
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 5.5 V",
+     "points": [
+      [
+       0.099,
+       0
+      ],
+      [
+       0.185,
+       42.7
+      ],
+      [
+       0.3,
+       60.0
+      ],
+      [
+       0.4,
+       66.0
+      ],
+      [
+       0.6,
+       72.9
+      ],
+      [
+       0.7,
+       75.0
+      ],
+      [
+       0.8,
+       78.0
+      ],
+      [
+       0.901,
+       79.9
+      ],
+      [
+       1.2,
+       81.7
+      ],
+      [
+       1.502,
+       84.2
+      ],
+      [
+       1.8,
+       84.5
+      ],
+      [
+       3.0,
+       88.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs input voltage, IIN = 10 mA",
+   "page": 9,
+   "conditions": "VSTOR held at 1.8 V, 3.0 V or 5.5 V by a source meter; VBAT_OV = 5.5 V; measured between MPPT samples; VIN_DC source meter, ICOMP = 10 mA, 0.1 V to 3.0 V",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 3 V",
+     "points": [
+      [
+       0.095,
+       39.57
+      ],
+      [
+       0.193,
+       67.31
+      ],
+      [
+       0.301,
+       76.74
+      ],
+      [
+       0.4,
+       80.92
+      ],
+      [
+       0.504,
+       83.55
+      ],
+      [
+       0.6,
+       85.32
+      ],
+      [
+       0.804,
+       87.64
+      ],
+      [
+       0.9,
+       87.94
+      ],
+      [
+       1.0,
+       87.06
+      ],
+      [
+       1.2,
+       87.06
+      ],
+      [
+       1.8,
+       89.98
+      ],
+      [
+       2.396,
+       91.51
+      ],
+      [
+       2.806,
+       94.36
+      ],
+      [
+       2.904,
+       94.52
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       0.1,
+       27.73
+      ],
+      [
+       0.188,
+       55.74
+      ],
+      [
+       0.301,
+       69.07
+      ],
+      [
+       0.4,
+       74.48
+      ],
+      [
+       0.5,
+       77.87
+      ],
+      [
+       0.603,
+       80.25
+      ],
+      [
+       0.8,
+       83.34
+      ],
+      [
+       1.0,
+       85.41
+      ],
+      [
+       1.198,
+       82.37
+      ],
+      [
+       1.5,
+       88.47
+      ],
+      [
+       1.708,
+       89.71
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 5.5 V",
+     "points": [
+      [
+       0.101,
+       45.14
+      ],
+      [
+       0.2,
+       67.29
+      ],
+      [
+       0.303,
+       75.57
+      ],
+      [
+       0.39,
+       79.62
+      ],
+      [
+       0.597,
+       84.18
+      ],
+      [
+       0.901,
+       87.19
+      ],
+      [
+       1.2,
+       87.27
+      ],
+      [
+       1.5,
+       89.46
+      ],
+      [
+       2.0,
+       91.49
+      ],
+      [
+       3.0,
+       93.31
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs input current, VIN = 2 V",
+   "page": 9,
+   "conditions": "VSTOR held at 1.8 V, 3.0 V or 5.5 V by a source meter; VBAT_OV = 5.5 V; measured between MPPT samples; VIN_DC source = 2.0 V, ICOMP 0.01 mA to 100 mA",
+   "x": {
+    "label": "Input current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 3 V",
+     "points": [
+      [
+       0.01,
+       64.08
+      ],
+      [
+       0.02,
+       79.73
+      ],
+      [
+       0.03,
+       83.46
+      ],
+      [
+       0.04,
+       85.69
+      ],
+      [
+       0.04999,
+       86.44
+      ],
+      [
+       0.07001,
+       86.65
+      ],
+      [
+       0.1,
+       88.23
+      ],
+      [
+       0.3,
+       91.17
+      ],
+      [
+       1.0,
+       92.31
+      ],
+      [
+       7.002,
+       92.69
+      ],
+      [
+       10.0,
+       90.56
+      ],
+      [
+       20.01,
+       90.43
+      ],
+      [
+       40.01,
+       88.02
+      ],
+      [
+       50.02,
+       85.19
+      ],
+      [
+       70.02,
+       84.41
+      ],
+      [
+       100.0,
+       82.58
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       0.01,
+       61.39
+      ],
+      [
+       0.02,
+       77.83
+      ],
+      [
+       0.03,
+       83.31
+      ],
+      [
+       0.04,
+       86.33
+      ],
+      [
+       0.07001,
+       85.35
+      ],
+      [
+       0.3,
+       90.62
+      ],
+      [
+       1.0,
+       91.46
+      ],
+      [
+       10.0,
+       91.99
+      ],
+      [
+       20.01,
+       89.58
+      ],
+      [
+       40.01,
+       81.3
+      ],
+      [
+       50.02,
+       83.63
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 5.5 V",
+     "points": [
+      [
+       0.01,
+       54.57
+      ],
+      [
+       0.02,
+       70.93
+      ],
+      [
+       0.03,
+       76.43
+      ],
+      [
+       0.04,
+       81.21
+      ],
+      [
+       0.04999,
+       81.89
+      ],
+      [
+       0.07001,
+       81.97
+      ],
+      [
+       0.1,
+       84.7
+      ],
+      [
+       0.3,
+       88.35
+      ],
+      [
+       0.7001,
+       89.82
+      ],
+      [
+       3.0,
+       91.3
+      ],
+      [
+       5.002,
+       90.81
+      ],
+      [
+       10.0,
+       91.38
+      ],
+      [
+       20.01,
+       91.38
+      ],
+      [
+       40.01,
+       87.71
+      ],
+      [
+       50.02,
+       88.39
+      ],
+      [
+       70.02,
+       87.77
+      ],
+      [
+       100.0,
+       86.69
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs input current, VIN = 1 V",
+   "page": 9,
+   "conditions": "VSTOR held at 1.8 V, 3.0 V or 5.5 V by a source meter; VBAT_OV = 5.5 V; measured between MPPT samples; VIN_DC source = 1.0 V, ICOMP 0.01 mA to 100 mA",
+   "x": {
+    "label": "Input current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 3 V",
+     "points": [
+      [
+       0.01,
+       59.41
+      ],
+      [
+       0.02,
+       72.77
+      ],
+      [
+       0.03,
+       78.22
+      ],
+      [
+       0.05,
+       83.17
+      ],
+      [
+       0.07002,
+       80.62
+      ],
+      [
+       0.1,
+       83.09
+      ],
+      [
+       0.3,
+       86.57
+      ],
+      [
+       0.4999,
+       87.67
+      ],
+      [
+       1.0,
+       88.48
+      ],
+      [
+       7.0,
+       89.11
+      ],
+      [
+       9.999,
+       87.29
+      ],
+      [
+       20.0,
+       86.16
+      ],
+      [
+       40.0,
+       83.27
+      ],
+      [
+       50.01,
+       77.49
+      ],
+      [
+       69.99,
+       76.1
+      ],
+      [
+       90.02,
+       76.12
+      ],
+      [
+       99.98,
+       75.2
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       0.01,
+       61.2
+      ],
+      [
+       0.02,
+       72.0
+      ],
+      [
+       0.04001,
+       79.2
+      ],
+      [
+       0.05,
+       80.28
+      ],
+      [
+       0.07002,
+       79.72
+      ],
+      [
+       0.1,
+       82.08
+      ],
+      [
+       0.3,
+       84.24
+      ],
+      [
+       0.4999,
+       84.65
+      ],
+      [
+       1.0,
+       85.12
+      ],
+      [
+       5.001,
+       85.2
+      ],
+      [
+       7.0,
+       85.66
+      ],
+      [
+       9.999,
+       85.45
+      ],
+      [
+       20.0,
+       80.42
+      ],
+      [
+       40.0,
+       76.0
+      ],
+      [
+       50.01,
+       69.52
+      ],
+      [
+       69.99,
+       67.13
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 5.5 V",
+     "points": [
+      [
+       0.01,
+       43.56
+      ],
+      [
+       0.03,
+       72.61
+      ],
+      [
+       0.04001,
+       76.24
+      ],
+      [
+       0.05,
+       76.39
+      ],
+      [
+       0.07002,
+       78.03
+      ],
+      [
+       0.1,
+       80.83
+      ],
+      [
+       0.3,
+       83.75
+      ],
+      [
+       0.4999,
+       84.79
+      ],
+      [
+       0.7001,
+       84.65
+      ],
+      [
+       1.0,
+       85.92
+      ],
+      [
+       7.0,
+       87.81
+      ],
+      [
+       20.0,
+       86.7
+      ],
+      [
+       40.0,
+       85.5
+      ],
+      [
+       50.01,
+       82.93
+      ],
+      [
+       69.99,
+       81.87
+      ],
+      [
+       99.98,
+       79.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs input current, VIN = 0.5 V",
+   "page": 9,
+   "conditions": "VSTOR held at 1.8 V, 3.0 V or 5.5 V by a source meter; VBAT_OV = 5.5 V; measured between MPPT samples; VIN_DC source = 0.5 V, ICOMP 0.01 mA to 100 mA",
+   "x": {
+    "label": "Input current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 3 V",
+     "points": [
+      [
+       0.01,
+       35.29
+      ],
+      [
+       0.02,
+       60.29
+      ],
+      [
+       0.04,
+       72.06
+      ],
+      [
+       0.04999,
+       74.12
+      ],
+      [
+       0.07001,
+       75.63
+      ],
+      [
+       0.1,
+       76.47
+      ],
+      [
+       0.3,
+       80.23
+      ],
+      [
+       0.4999,
+       80.86
+      ],
+      [
+       0.7001,
+       82.03
+      ],
+      [
+       10.0,
+       83.71
+      ],
+      [
+       20.01,
+       78.71
+      ],
+      [
+       40.01,
+       76.37
+      ],
+      [
+       50.02,
+       73.96
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       0.01,
+       35.36
+      ],
+      [
+       0.02,
+       60.12
+      ],
+      [
+       0.04999,
+       72.85
+      ],
+      [
+       0.07001,
+       71.74
+      ],
+      [
+       0.1,
+       73.56
+      ],
+      [
+       0.3,
+       76.94
+      ],
+      [
+       1.0,
+       77.75
+      ],
+      [
+       10.0,
+       78.44
+      ],
+      [
+       20.01,
+       70.47
+      ],
+      [
+       40.01,
+       66.01
+      ],
+      [
+       50.02,
+       61.19
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 5.5 V",
+     "points": [
+      [
+       0.01467,
+       20.0
+      ],
+      [
+       0.02,
+       36.16
+      ],
+      [
+       0.03,
+       54.05
+      ],
+      [
+       0.04,
+       58.07
+      ],
+      [
+       0.04999,
+       62.23
+      ],
+      [
+       0.07001,
+       65.42
+      ],
+      [
+       0.1,
+       69.9
+      ],
+      [
+       0.3,
+       77.09
+      ],
+      [
+       0.4999,
+       78.03
+      ],
+      [
+       0.7001,
+       79.67
+      ],
+      [
+       1.0,
+       80.33
+      ],
+      [
+       3.0,
+       80.87
+      ],
+      [
+       5.002,
+       81.9
+      ],
+      [
+       10.0,
+       82.42
+      ],
+      [
+       40.01,
+       79.63
+      ],
+      [
+       50.02,
+       77.18
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Efficiency vs input current, VIN = 0.2 V",
+   "page": 10,
+   "conditions": "VBAT_OV = 5.5 V; VIN_DC source = 0.2 V, ICOMP 0.01 mA to 100 mA; VSTOR held at 2.0 V, 3.0 V or 5.5 V by a source meter",
+   "x": {
+    "label": "Input current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 3 V",
+     "points": [
+      [
+       0.01597,
+       20.0
+      ],
+      [
+       0.03,
+       44.3
+      ],
+      [
+       0.04,
+       48.0
+      ],
+      [
+       0.04999,
+       52.3
+      ],
+      [
+       0.07001,
+       56.6
+      ],
+      [
+       0.1,
+       60.3
+      ],
+      [
+       0.3,
+       66.9
+      ],
+      [
+       0.4999,
+       68.2
+      ],
+      [
+       0.7001,
+       68.1
+      ],
+      [
+       3.0,
+       69.6
+      ],
+      [
+       5.002,
+       70.4
+      ],
+      [
+       7.001,
+       68.7
+      ],
+      [
+       10.0,
+       69.8
+      ],
+      [
+       20.01,
+       71.3
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       0.01573,
+       20.0
+      ],
+      [
+       0.02,
+       30.6
+      ],
+      [
+       0.03,
+       39.9
+      ],
+      [
+       0.04999,
+       47.7
+      ],
+      [
+       0.07001,
+       49.2
+      ],
+      [
+       0.1,
+       51.8
+      ],
+      [
+       0.3,
+       56.6
+      ],
+      [
+       3.0,
+       59.9
+      ],
+      [
+       7.001,
+       61.7
+      ],
+      [
+       10.0,
+       60.0
+      ],
+      [
+       20.01,
+       61.8
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 5.5 V",
+     "points": [
+      [
+       0.03983,
+       20.0
+      ],
+      [
+       0.04999,
+       29.3
+      ],
+      [
+       0.1,
+       48.2
+      ],
+      [
+       0.3,
+       60.7
+      ],
+      [
+       0.4999,
+       63.4
+      ],
+      [
+       0.7001,
+       64.6
+      ],
+      [
+       1.0,
+       65.2
+      ],
+      [
+       3.0,
+       70.0
+      ],
+      [
+       5.002,
+       66.7
+      ],
+      [
+       7.001,
+       67.4
+      ],
+      [
+       20.01,
+       71.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VSTOR quiescent current vs temperature",
+   "page": 10,
+   "conditions": "VIN_DC floating; VBAT from a source meter at 1.8 V, 3 V or 4 V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VSTOR current",
+    "unit": "nA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSTOR = 1.8 V",
+     "points": [
+      [
+       -40.0,
+       242
+      ],
+      [
+       27.0,
+       312
+      ],
+      [
+       95.0,
+       437
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 3 V",
+     "points": [
+      [
+       -40.0,
+       335
+      ],
+      [
+       27.0,
+       343
+      ],
+      [
+       95.0,
+       650
+      ]
+     ]
+    },
+    {
+     "label": "VSTOR = 4 V",
+     "points": [
+      [
+       -40.0,
+       420
+      ],
+      [
+       27.0,
+       482
+      ],
+      [
+       95.0,
+       910
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sample period vs temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Time",
+    "unit": "s",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Sample period",
+     "points": [
+      [
+       -40.0,
+       19.16
+      ],
+      [
+       4.7,
+       16.87
+      ],
+      [
+       27.0,
+       15.92
+      ],
+      [
+       49.5,
+       15.29
+      ],
+      [
+       95.0,
+       14.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Settling period vs temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Settling period",
+     "points": [
+      [
+       -40.0,
+       298.6
+      ],
+      [
+       4.7,
+       263.8
+      ],
+      [
+       27.0,
+       249.7
+      ],
+      [
+       49.5,
+       240.8
+      ],
+      [
+       95.0,
+       229.3
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "solar",
+   "title": "Solar harvester charging a storage element, MPP at 78 % of VOC",
+   "page": 20,
+   "description": "A one- or two-cell solar panel feeds VIN_DC through the 22 µH boost inductor; the boost charger fills a storage element of more than 100 µF on VBAT and powers the load from VSTOR. ROC2 over ROC1 (4.42 MΩ over 15.62 MΩ) give 78 % of the panel's open-circuit voltage at VOC_SAMP; CREF holds that sample as the input regulation target. From VRDIV, ROV2/ROV1 set charging to stop at 3.15 V, RUV2/RUV1 disconnect VBAT below 2.2 V, and the ROK chain switches VBAT_OK low at 2.44 V and high again at about 2.85 V. OT_PROG at ground sets the 65 °C thermal limit.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25504"
+    },
+    {
+     "ref": "PV1",
+     "type": "source",
+     "value": "solar cell",
+     "note": "1.0 V open-circuit (simulated)"
+    },
+    {
+     "ref": "LBST",
+     "type": "inductor",
+     "value": "22 µH"
+    },
+    {
+     "ref": "CHVR",
+     "type": "capacitor",
+     "value": "4.7 µF"
+    },
+    {
+     "ref": "CBYP",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "placed tight to VSTOR, pin 15, and VSS, pin 13"
+    },
+    {
+     "ref": "CSTOR",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "minimum; placed tight to VSTOR, pin 15, and VSS, pin 13"
+    },
+    {
+     "ref": "CREF",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "low leakage"
+    },
+    {
+     "ref": "BAT1",
+     "type": "other",
+     "value": "rechargeable storage element, over 100 µF equivalent"
+    },
+    {
+     "ref": "ROC1",
+     "type": "resistor",
+     "value": "15.62 MΩ"
+    },
+    {
+     "ref": "ROC2",
+     "type": "resistor",
+     "value": "4.42 MΩ"
+    },
+    {
+     "ref": "ROV1",
+     "type": "resistor",
+     "value": "5.90 MΩ"
+    },
+    {
+     "ref": "ROV2",
+     "type": "resistor",
+     "value": "4.02 MΩ"
+    },
+    {
+     "ref": "RUV1",
+     "type": "resistor",
+     "value": "5.60 MΩ"
+    },
+    {
+     "ref": "RUV2",
+     "type": "resistor",
+     "value": "4.42 MΩ"
+    },
+    {
+     "ref": "ROK1",
+     "type": "resistor",
+     "value": "4.42 MΩ"
+    },
+    {
+     "ref": "ROK2",
+     "type": "resistor",
+     "value": "4.22 MΩ"
+    },
+    {
+     "ref": "ROK3",
+     "type": "resistor",
+     "value": "1.43 MΩ"
+    },
+    {
+     "ref": "J_OK",
+     "type": "terminal",
+     "value": "VBAT_OK"
+    }
+   ],
+   "notes": [
+    "Targets: charge stop 3.15 V, disconnect 2.20 V, battery-good falling at 2.44 V and rising at 2.80 V, MPP at 78 % of VOC, charging stops above 65 °C junction, no large load transients, panel open-circuit voltage 1.0 V.",
+    "The chosen 1 % parts give a 3.15 V charge stop, 2.2 V disconnect, and battery-good at 2.44 V falling and 2.85 V rising.",
+    "CBYP is 0.01 µF in this design; 0.1 µF is the general VSTOR high-frequency bypass value."
+   ]
+  },
+  {
+   "id": "teg",
+   "title": "Thermoelectric generator harvester, MPP at 50 % of VOC",
+   "page": 23,
+   "description": "A thermoelectric generator, a voltage source with its own series resistance, feeds VIN_DC through the 22 µH inductor and charges a storage element on VBAT; the load runs from VSTOR. Equal 10 MΩ resistors on VOC_SAMP set the regulation point to half the open-circuit voltage. The dividers from VRDIV set VBAT_OV near 4.25 V, VBAT_UV near 3.2 V and the VBAT_OK window near 3.55/3.76 V. OT_PROG tied to VSTOR raises the thermal limit to 120 °C.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25504"
+    },
+    {
+     "ref": "TEG1",
+     "type": "source",
+     "value": "thermoelectric generator",
+     "note": "with internal series resistance; 1.0 V open-circuit (simulated)"
+    },
+    {
+     "ref": "LBST",
+     "type": "inductor",
+     "value": "22 µH"
+    },
+    {
+     "ref": "CHVR",
+     "type": "capacitor",
+     "value": "4.7 µF"
+    },
+    {
+     "ref": "CBYP",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "placed tight to VSTOR, pin 15, and VSS, pin 13"
+    },
+    {
+     "ref": "CSTOR",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "minimum; placed tight to VSTOR, pin 15, and VSS, pin 13"
+    },
+    {
+     "ref": "CREF",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "low leakage"
+    },
+    {
+     "ref": "BAT1",
+     "type": "other",
+     "value": "rechargeable storage element, over 100 µF equivalent"
+    },
+    {
+     "ref": "ROC1",
+     "type": "resistor",
+     "value": "10 MΩ"
+    },
+    {
+     "ref": "ROC2",
+     "type": "resistor",
+     "value": "10 MΩ"
+    },
+    {
+     "ref": "ROV1",
+     "type": "resistor",
+     "value": "4.42 MΩ"
+    },
+    {
+     "ref": "ROV2",
+     "type": "resistor",
+     "value": "5.62 MΩ"
+    },
+    {
+     "ref": "RUV1",
+     "type": "resistor",
+     "value": "3.83 MΩ"
+    },
+    {
+     "ref": "RUV2",
+     "type": "resistor",
+     "value": "6.12 MΩ"
+    },
+    {
+     "ref": "ROK1",
+     "type": "resistor",
+     "value": "3.32 MΩ"
+    },
+    {
+     "ref": "ROK2",
+     "type": "resistor",
+     "value": "6.12 MΩ"
+    },
+    {
+     "ref": "ROK3",
+     "type": "resistor",
+     "value": "542 kΩ"
+    },
+    {
+     "ref": "J_OK",
+     "type": "terminal",
+     "value": "VBAT_OK"
+    }
+   ],
+   "notes": [
+    "Targets: charge stop 4.25 V, disconnect 3.20 V, battery-good falling at 3.55 V and rising at 3.76 V, MPP at 50 % of VOC, charging stops above 120 °C junction, generator open-circuit voltage 1.0 V.",
+    "Alternative values ROV2 = 5.49 MΩ, RUV2 = 6.04 MΩ, ROK2 = 6.04 MΩ, ROK3 = 536 kΩ give VBAT_OV = 4.26 V, VBAT_UV = 3.22 V, and battery-good at 3.52 V falling, 3.73 V rising.",
+    "CBYP is 0.01 µF in this design; 0.1 µF is the general VSTOR high-frequency bypass value."
+   ]
+  },
+  {
+   "id": "mppt-off",
+   "title": "Low-Iq boost from a low-impedance source, MPPT off, 3.3 V",
+   "page": 25,
+   "description": "A 1.2 V cell boosted to a 100 µF low-ESR capacitor on VSTOR, which also serves as the storage element, so VBAT joins VSTOR and the undervoltage disconnect is unused (VBAT_UV tied to VSTOR). VOC_SAMP tied to VSTOR stops the open-circuit sampling and VREF_SAMP at ground turns off input regulation. ROV2/ROV1 from VRDIV stop charging at about 3.3 V; the ROK chain sets VBAT_OK at 2.80 V falling and 3.10 V rising. OT_PROG at ground gives the 65 °C limit. The large CSTOR rides through load transients.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25504"
+    },
+    {
+     "ref": "B1",
+     "type": "source",
+     "value": "1.2 V primary battery or other low-impedance source",
+     "note": "with series resistance"
+    },
+    {
+     "ref": "LBST",
+     "type": "inductor",
+     "value": "22 µH"
+    },
+    {
+     "ref": "CHVR",
+     "type": "capacitor",
+     "value": "4.7 µF"
+    },
+    {
+     "ref": "CBYP",
+     "type": "capacitor",
+     "value": "0.01 µF",
+     "note": "placed tight to VSTOR, pin 15, and VSS, pin 13"
+    },
+    {
+     "ref": "CSTOR",
+     "type": "capacitor",
+     "value": "100 µF",
+     "note": "low ESR; the storage element itself"
+    },
+    {
+     "ref": "ROV1",
+     "type": "resistor",
+     "value": "5.62 MΩ"
+    },
+    {
+     "ref": "ROV2",
+     "type": "resistor",
+     "value": "4.22 MΩ"
+    },
+    {
+     "ref": "ROK1",
+     "type": "resistor",
+     "value": "4.12 MΩ"
+    },
+    {
+     "ref": "ROK2",
+     "type": "resistor",
+     "value": "5.11 MΩ"
+    },
+    {
+     "ref": "ROK3",
+     "type": "resistor",
+     "value": "976 kΩ"
+    },
+    {
+     "ref": "J_OK",
+     "type": "terminal",
+     "value": "VBAT_OK"
+    }
+   ],
+   "notes": [
+    "Targets: charge stop 3.30 V, battery-good falling at 2.80 V and rising at 3.10 V, MPPT off, charging stops above 65 °C junction, load transients expected.",
+    "The chosen values give a 3.28 V charge stop and battery-good at 2.80 V falling, 3.10 V rising.",
+    "CBYP is 0.01 µF in this design; 0.1 µF is the general VSTOR high-frequency bypass value.",
+    "VBAT is tied to VSTOR."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "MPPT reference",
+   "expr": "VREF_SAMP = VIN_DC(OpenCircuit) × ROC1 / (ROC1 + ROC2)",
+   "where": {
+    "ROC1": "divider resistor from VOC_SAMP to GND",
+    "ROC2": "divider resistor from VIN_DC to VOC_SAMP",
+    "VIN_DC(OpenCircuit)": "harvester open-circuit voltage"
+   },
+   "note": "Solar cells typically peak at 70 % to 80 % of VOC, thermoelectric generators at 50 %.",
+   "page": 12
+  },
+  {
+   "name": "Undervoltage threshold (falling)",
+   "expr": "VBAT_UV = VBIAS × (1 + RUV2 / RUV1)",
+   "where": {
+    "VBIAS": "threshold reference, 1.25 V typ",
+    "RUV1": "lower resistor, VBAT_UV to GND",
+    "RUV2": "upper resistor, VRDIV to VBAT_UV"
+   },
+   "note": "RUV1 + RUV2 = 10 MΩ at most. The rising threshold adds VBAT_UV_HYST.",
+   "page": 13
+  },
+  {
+   "name": "Overvoltage threshold (rising)",
+   "expr": "VBAT_OV = 3/2 × VBIAS × (1 + ROV2 / ROV1)",
+   "where": {
+    "ROV1": "lower resistor, VBAT_OV to GND",
+    "ROV2": "upper resistor, VRDIV to VBAT_OV"
+   },
+   "note": "ROV1 + ROV2 = 10 MΩ at most. Charging resumes at VBAT_OV − VBAT_OV_HYST.",
+   "page": 13
+  },
+  {
+   "name": "VBAT_OK falling threshold",
+   "expr": "VBAT_OK_PROG = VBIAS × (1 + ROK2 / ROK1)",
+   "where": {
+    "ROK1": "resistor OK_PROG to GND",
+    "ROK2": "resistor OK_PROG to OK_HYST"
+   },
+   "note": "",
+   "page": 14
+  },
+  {
+   "name": "VBAT_OK rising threshold",
+   "expr": "VBAT_OK_HYST = VBIAS × (1 + (ROK2 + ROK3) / ROK1)",
+   "where": {
+    "ROK3": "resistor OK_HYST to VRDIV"
+   },
+   "note": "ROK1 + ROK2 + ROK3 ≈ 10 MΩ.",
+   "page": 14
+  },
+  {
+   "name": "Equivalent capacitance of a battery",
+   "expr": "CEQ = 2 × mAHrBAT(CHRGD) × 3600 s/Hr / VBAT(CHRGD)",
+   "where": {
+    "mAHrBAT(CHRGD)": "charged capacity",
+    "VBAT(CHRGD)": "charged voltage"
+   },
+   "note": "",
+   "page": 18
+  },
+  {
+   "name": "Battery resistance",
+   "expr": "RBAT = VBAT / IBAT(CONTINUOUS)",
+   "where": {
+    "IBAT(CONTINUOUS)": "continuous current rating of the battery"
+   },
+   "note": "RBAT (plus the internal PFET) times CEQ has to be shorter than tVB_HOT_PLUG, 50 ms typ.",
+   "page": 18
+  },
+  {
+   "name": "Charge time",
+   "expr": "PIN × ηEST × tCHRG = 1/2 × CEQ × (VBAT2² − VBAT1²)",
+   "where": {
+    "ηEST": "estimated efficiency from the curves",
+    "tCHRG": "time to charge from VBAT1 to VBAT2"
+   },
+   "note": "No load on VSTOR.",
+   "page": 18
+  },
+  {
+   "name": "CSTOR for a load transient",
+   "expr": "CSTOR ≥ 500 mA × 50 µs / (4.2 V − 1.8 V) = 10.5 µF",
+   "where": {},
+   "note": "Example: 4.2 V charge level, a 500 mA load step lasting 50 µs.",
+   "page": 19
+  },
+  {
+   "name": "Minimum input power to leave cold start",
+   "expr": "PIN > PIN(CS) = VIN(CS) × IIN(CS) > ((I-STR_ELM_LEAK@1.8V × 1.8V) + (1.8V)² / RSTOR(CS)) / 0.05",
+   "where": {
+    "I-STR_ELM_LEAK@1.8V": "storage element leakage at 1.8 V",
+    "RSTOR(CS)": "resistive load seen at VSTOR while cold start runs",
+    "0.05": "worst-case cold-start efficiency estimate"
+   },
+   "note": "",
+   "page": 27
+  },
+  {
+   "name": "Minimum input power in operation",
+   "expr": "PIN × ηEST > PLOAD = (VBAT_OV)² / RSTOR(AVG) + VBAT_OV × I-STR_ELM_LEAK@VBAT_OV",
+   "where": {
+    "RSTOR(AVG)": "average resistive load on VSTOR",
+    "ηEST": "efficiency from the curves at the input voltage, current and VBAT_OV"
+   },
+   "note": "",
+   "page": 27
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Modes",
+   "page": 15,
+   "text": "Three modes: cold start, main boost charger, and thermal shutdown. The cold-start block runs off VIN_DC; the main charger's control runs off VSTOR while its power stage takes energy from VIN_DC."
+  },
+  {
+   "topic": "Cold start",
+   "page": 15,
+   "text": "When VSTOR is below VSTOR_CHGEN and VIN_DC is at least VIN(CS) with at least PIN(CS) available, an unregulated hysteretic boost of low efficiency clamps VIN_DC to about 600 mV and charges VSTOR; no other function works in this mode. Because of the PFET body diode it also charges the element on VBAT to one diode drop below VSTOR_CHGEN. At VSTOR_CHGEN the part pulses VRDIV to reset the feedback, holds the charger off for 32 ms typ so VIN_DC rises to open circuit (the first MPPT reference), and samples feedback about 64 ms after the pulse. A large discharged supercapacitor with high leakage can make this take a long time. Closing the VBAT switch at VBAT_UV loads VSTOR and can pull it back down, so VSTOR may climb in steps while the part moves between cold start and the main charger. An external PFET between VSTOR and the load, driven by an inverted VBAT_OK, is advised."
+  },
+  {
+   "topic": "Hot-plugging a charged element",
+   "page": 16,
+   "text": "Discharge VSTOR to ground before attaching an element with no input source present; with VSTOR more than 100 mV above ground the VBAT switch stays off until a source arrives. With both pins under 100 mV, attaching a charged element turns the PFET on for tBAT_HOT_PLUG (45 ms) to bring VSTOR to VSTOR_CHGEN, then off, then runs the VRDIV pulse, 32 ms open-circuit wait and first sample. If VSTOR is still above VBAT_UV 64 ms after the pulse, the PFET closes again and charging begins."
+  },
+  {
+   "topic": "Main boost charger",
+   "page": 17,
+   "text": "Above VSTOR_CHGEN the charger uses PFM: it moves charge from input to VSTOR only while VIN_DC is above VREF_SAMP, so VIN_DC is held at the MPPT reference. Inductor peak current is dithered among up to three internal levels; the charger delivers at most 100 mA average input current with about 230 mA typical peak inductor current. It stops when VSTOR reaches VBAT_OV. The battery charges to VBAT_OV only when input power exceeds the VSTOR load."
+  },
+  {
+   "topic": "Maximum power point tracking",
+   "page": 12,
+   "text": "Every 16 s typ the charger stops for 256 ms typ and samples the share ROC1/(ROC1+ROC2) of the source's open-circuit voltage onto CREF at VREF_SAMP, then regulates VIN_DC to that value. Tying VOC_SAMP to VSTOR stops the sampling; VREF_SAMP can then take an external reference, or be grounded to drop input regulation for a battery or bench supply."
+  },
+  {
+   "topic": "Undervoltage disconnect",
+   "page": 13,
+   "text": "The load belongs on VSTOR and the storage element on VBAT. The internal PMOS joins them once VSTOR rises past VBAT_UV + VBAT_UV_HYST and opens when VSTOR falls below VBAT_UV. This is a last-line protection: loads are meant to be shed on VBAT_OK, set above VBAT_UV."
+  },
+  {
+   "topic": "Overvoltage stop",
+   "page": 13,
+   "text": "VBAT_OV is both the protection limit and the regulation level: at it the boost stops, and it restarts once the voltage falls by VBAT_OV_HYST, so with surplus input VBAT ripples between the two. If VIN_DC is above VSTOR and VSTOR is above VBAT_OV, the part shorts VIN_DC to ground through a low resistance; the source impedance must then be above 20 Ω."
+  },
+  {
+   "topic": "VBAT_OK output",
+   "page": 14,
+   "text": "VBAT_OK goes low as VSTOR falls through VBAT_OK_PROG and high as it rises through VBAT_OK_HYST. Its high level is VSTOR through about 20 kΩ inside, which limits current into an unpowered microcontroller; low is ground. VBAT_OK_PROG must be at or above the UV level. Ranked from the top, the levels are: the 5.5 V absolute maximum; VBAT_OV, then its falling level; the rising battery-good level VBAT_OK_HYST, then the falling one, VBAT_OK; the UV rising level, then VBAT_UV itself; and lowest VSTOR_CHGEN (1.8 V typ)."
+  },
+  {
+   "topic": "Duty-cycled biasing",
+   "page": 14,
+   "text": "To cut quiescent current, the threshold circuitry samples VSTOR and biases the resistor dividers from VRDIV only briefly, every 64 ms; the divider currents flow only during that window. Efficiency figures were therefore taken with input current averaged over at least 50 samples."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 17,
+   "text": "An on-chip sensor watches junction temperature. With OT_PROG low the limit is TSD_PROTL (65 °C typ), high it is TSD_PROTH (120 °C typ). Above it the charger stops, resuming after about 5 °C of cooling. The VBAT_UV disconnect still works during thermal shutdown. Ambient should stay within 85 °C for Li-ion cells."
+  },
+  {
+   "topic": "Storage element",
+   "page": 18,
+   "text": "Capacitors, supercapacitors or batteries of many chemistries work; 100 µF equivalent capacitance at least is needed to absorb the PFM current pulses. It must carry the load while the harvester is idle and be recharged while the system sleeps. Large transients or a high-impedance element may need CSTOR above 4.7 µF or extra capacitance across VBAT; a larger CSTOR lengthens the inefficient cold start, so extra capacitance across the element is the alternative."
+  },
+  {
+   "topic": "Inductor",
+   "page": 18,
+   "text": "22 µH ± 20 % nominal, peak current rating above 300 mA and low DCR; saturation current at least 25 % above expected peak if VSTOR load transients occur. Hysteretic control makes the loop inherently stable."
+  },
+  {
+   "topic": "Capacitors",
+   "page": 19,
+   "text": "Every capacitor should be low leakage, since leakage lowers efficiency. CREF holds the reference for about 16 s, so X7R or C0G is advised. CIN on VIN_DC is at least 4.7 µF, scaled up for capacitive sources. VSTOR needs 0.1 µF right at VSTOR–VSS plus 4.7 µF or more of low ESR in parallel."
+  },
+  {
+   "topic": "Layout",
+   "page": 28,
+   "text": "Short, wide traces for the power and power-ground paths. Placement priority: the VSTOR bypass and CSTOR between VSTOR (15) and VSS (1 or 13); then CIN between VIN_DC (2) and VSS (1); then the inductor near LBST (16) and VIN_DC, preferably routed with vias and bottom-layer traces instead of the capacitors. Keep the divider taps to VBAT_OV, VBAT_UV, OK_PROG and OK_HYST short; return resistor and CREF grounds by their own short traces to AVSS (12), apart from power ground. The PowerPad is not a power-ground return. Use divider totals above 1 MΩ for light-load efficiency; pour no ground near the setting resistors or CREF, and clean the board thoroughly (rinse until the water exceeds 50 MΩ); otherwise cut the divider totals to at least 5× below the measured contamination resistance."
+  }
+ ],
+ "packages": [
+  {
+   "name": "RGT0016C (VQFN-16, 3 × 3 mm, 0.5 mm pitch, 1 mm max height)",
+   "page": 35,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "D",
+     "body length",
+     "2.9",
+     "",
+     "3.1"
+    ],
+    [
+     "E",
+     "body width",
+     "2.9",
+     "",
+     "3.1"
+    ],
+    [
+     "A",
+     "overall height",
+     "0.8",
+     "",
+     "1.0"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "D2/E2",
+     "exposed thermal pad, square",
+     "1.61",
+     "1.68",
+     "1.75"
+    ],
+    [
+     "b",
+     "terminal width (16X)",
+     "0.18",
+     "",
+     "0.30"
+    ],
+    [
+     "L",
+     "terminal length (16X)",
+     "0.3",
+     "",
+     "0.5"
+    ],
+    [
+     "e",
+     "pitch (12X)",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "terminal row span (4X)",
+     "",
+     "1.5",
+     ""
+    ],
+    [
+     "",
+     "corner dimension (4X)",
+     "",
+     "(0.45)",
+     ""
+    ],
+    [
+     "",
+     "side wall metal thickness, option 1",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "",
+     "side wall metal thickness, option 2",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "",
+     "terminal position tolerance to C A B",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "terminal position tolerance to C",
+     "",
+     "",
+     "0.05"
+    ]
+   ],
+   "notes": [
+    "Values in parentheses are reference. The thermal pad is soldered to the board for heat and mechanical strength. The pad is 1.68 ± 0.07."
+   ]
+  },
+  {
+   "name": "RGT0016C land pattern and stencil",
+   "page": 36,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "terminal pad (16X)",
+     "(0.6) × (0.24)"
+    ],
+    [
+     "terminal pitch (12X)",
+     "(0.5)"
+    ],
+    [
+     "thermal pad",
+     "(1.68) square"
+    ],
+    [
+     "terminal pad centreline span",
+     "(2.8)"
+    ],
+    [
+     "thermal via diameter",
+     "(0.2) TYP"
+    ],
+    [
+     "via offset from pad centre",
+     "(0.58) TYP"
+    ],
+    [
+     "pad corner radius",
+     "(R0.05)"
+    ],
+    [
+     "solder mask opening, non-solder-mask-defined (preferred)",
+     "0.07 MAX all around"
+    ],
+    [
+     "solder mask defined pad, mask overlap",
+     "0.07 MIN all around"
+    ],
+    [
+     "stencil thickness",
+     "0.125"
+    ],
+    [
+     "thermal pad paste aperture",
+     "(1.55) square, 85 % coverage"
+    ]
+   ],
+   "notes": [
+    "Vias under the thermal pad are optional; when used, filled, plugged or tented vias are preferred under paste."
+   ]
+  }
+ ]
+}

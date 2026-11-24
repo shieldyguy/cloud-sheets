@@ -1,0 +1,2624 @@
+{
+ "sheet": 1,
+ "name": "DRV8872DDAR",
+ "kind": "motor_driver",
+ "manufacturer": "Texas Instruments",
+ "title": "DRV8872: 3.6 A peak brushed DC motor H-bridge, 6.5 V to 45 V, PWM inputs, current regulation and nFAULT output",
+ "source": {
+  "document": "SLVSCZ0C",
+  "revision": "Revision C, July 2016",
+  "pages": 27
+ },
+ "summary": "One full bridge of four N-channel MOSFETs for a brushed DC motor, one winding of a stepper or another load, running from a single 6.5 V to 45 V supply with a built-in charge pump for the high-side gates. Two logic inputs, IN1 and IN2, pick forward, reverse, brake or coast and may be pulse-width modulated; holding both low for about 1 ms puts it to sleep. A resistor from ISEN to ground sets a chopping current (0.35 V across it trips a 25 µs slow-decay off time), and undervoltage, overcurrent and overtemperature faults switch the bridge off, pull the open-drain nFAULT pin low and clear by themselves. Package: 8-pin HSOP PowerPAD (DDA), 4.90 mm × 6.00 mm body.",
+ "key_figures": [
+  [
+   "Supply VM",
+   "6.5 V to 45 V (50 V absolute maximum)"
+  ],
+  [
+   "Peak output current",
+   "3.6 A"
+  ],
+  [
+   "RMS output current",
+   "2 A at 25 °C on standard FR-4"
+  ],
+  [
+   "RDS(on)",
+   "565 mΩ typ high side + low side (307 mΩ + 258 mΩ at VM = 24 V, 1 A)"
+  ],
+  [
+   "Current regulation",
+   "VTRIP 0.35 V typ on ISEN, tOFF 25 µs"
+  ],
+  [
+   "PWM frequency",
+   "0 to 200 kHz"
+  ],
+  [
+   "Sleep current",
+   "10 µA max at VM = 12 V"
+  ],
+  [
+   "Logic thresholds",
+   "VIL 0.5 V max, VIH 1.5 V min"
+  ],
+  [
+   "Overcurrent trip",
+   "3.7 A min, 4.5 A typ; retry after 3 ms"
+  ],
+  [
+   "Thermal shutdown",
+   "150 °C min, 175 °C typ, 40 °C hysteresis"
+  ],
+  [
+   "RθJA",
+   "41.1 °C/W"
+  ],
+  [
+   "Package",
+   "HSOP-8 PowerPAD (DDA), 4.90 mm × 6.00 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 18,
+  "columns": [
+   "part number",
+   "status",
+   "material type",
+   "package",
+   "pins",
+   "package qty",
+   "carrier",
+   "RoHS",
+   "lead finish",
+   "MSL rating / peak reflow",
+   "op temp (°C)",
+   "part marking"
+  ],
+  "rows": [
+   [
+    "DRV8872DDAR",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "2500",
+    "LARGE T&R",
+    "Yes",
+    "NIPDAU | NIPDAUAG",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "8872"
+   ],
+   [
+    "DRV8872DDAR.A",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "2500",
+    "LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "8872"
+   ],
+   [
+    "DRV8872DDAR.B",
+    "Active",
+    "Production",
+    "SO PowerPAD (DDA)",
+    "8",
+    "2500",
+    "LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 125",
+    "8872"
+   ]
+  ],
+  "notes": [
+   "DRV8872DDAR lists NIPDAU or NIPDAUAG lead finish; DRV8872DDAR.A and DRV8872DDAR.B list NIPDAU. An automotive version, DRV8872-Q1, is qualified to Q100."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DDA (HSOP-8 PowerPAD)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "GND",
+     "type": "ground",
+     "function": "Logic ground; tie to the board's ground."
+    },
+    {
+     "pin": "2",
+     "name": "IN2",
+     "type": "logic input",
+     "function": "Bridge control input with an internal pulldown (100 kΩ typ). Together with IN1 it sets the output state in the H-bridge control table."
+    },
+    {
+     "pin": "3",
+     "name": "IN1",
+     "type": "logic input",
+     "function": "Bridge control input with an internal pulldown (100 kΩ typ). Together with IN2 it sets the output state in the H-bridge control table."
+    },
+    {
+     "pin": "4",
+     "name": "nFAULT",
+     "type": "open-drain output",
+     "function": "Fault flag: pulled low during undervoltage lockout, overcurrent or thermal shutdown. Needs a pullup resistor."
+    },
+    {
+     "pin": "5",
+     "name": "VM",
+     "type": "power",
+     "function": "Supply for the chip and the motor, 6.5 V to 45 V. Decouple to ground with 0.1 µF plus enough bulk capacitance, both rated for VM."
+    },
+    {
+     "pin": "6",
+     "name": "OUT1",
+     "type": "output",
+     "function": "Bridge output; goes straight to one side of the motor or other inductive load."
+    },
+    {
+     "pin": "7",
+     "name": "ISEN",
+     "type": "power",
+     "function": "Low-side return of the bridge, the high-current ground path. With current regulation, a low-value resistor of adequate power rating runs from ISEN to ground; without it, ISEN is tied straight to ground."
+    },
+    {
+     "pin": "8",
+     "name": "OUT2",
+     "type": "output",
+     "function": "Bridge output; goes straight to the other side of the motor or load."
+    },
+    {
+     "pin": "—",
+     "name": "PAD",
+     "type": "thermal pad",
+     "function": "Exposed thermal pad, tied to board ground. Large ground planes on several layers, stitched with many vias close to the pad, carry the heat away."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 3,
+   "conditions": "Over operating free-air temperature range unless noted.",
+   "columns": [
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Power supply voltage (VM)",
+     "-0.3",
+     "50",
+     "V"
+    ],
+    [
+     "Logic input voltage (IN1, IN2)",
+     "-0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Fault pin (nFAULT)",
+     "-0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Continuous phase node pin voltage (OUT1, OUT2)",
+     "-0.7",
+     "VM + 0.7",
+     "V"
+    ],
+    [
+     "Current sense input pin voltage (ISEN) (2)",
+     "-0.5",
+     "1",
+     "V"
+    ],
+    [
+     "Output current (100% duty cycle)",
+     "0",
+     "3.5",
+     "A"
+    ],
+    [
+     "Operating junction temperature, TJ",
+     "-40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "-65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Beyond these limits the device can be damaged for good. They are stress limits only; working at them is not implied, and long exposure to them can reduce reliability.",
+    "(2) ISEN tolerates ±1 V transients shorter than 25 ns."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "V(ESD)",
+     "Electrostatic discharge",
+     "Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001",
+     "±6000",
+     "V"
+    ],
+    [
+     "V(ESD)",
+     "Electrostatic discharge",
+     "Charged-device model (CDM), per JEDEC specification JESD22-C101",
+     "±750",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEP155 gives 500 V HBM, and JEP157 250 V CDM, as safe for manufacture under a standard ESD control process."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 4,
+   "conditions": "Over operating free-air temperature range unless noted.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VM",
+     "Power supply voltage",
+     "6.5",
+     "",
+     "45",
+     "V"
+    ],
+    [
+     "VI",
+     "Logic input voltage (IN1, IN2)",
+     "0",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "fPWM",
+     "Logic input PWM frequency (IN1, IN2)",
+     "0",
+     "",
+     "200 (1)",
+     "kHz"
+    ],
+    [
+     "Ipeak",
+     "Peak output current (2)",
+     "0",
+     "",
+     "3.6",
+     "A"
+    ],
+    [
+     "TA",
+     "Operating ambient temperature",
+     "-40",
+     "",
+     "125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "(1) An input pulse must last at least 800 ns to be seen for certain; typical parts need 400 ns. At 200 kHz the duty cycle that works is 16 % to 84 %.",
+    "(2) Within the limits of power dissipation and temperature."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "DDA (HSOP), 8 pins",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA",
+     "Junction-to-ambient thermal resistance",
+     "41.1",
+     "°C/W"
+    ],
+    [
+     "RθJC(top)",
+     "Junction-to-case (top) thermal resistance",
+     "53.1",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "23.1",
+     "°C/W"
+    ],
+    [
+     "ψJT",
+     "Junction-to-top characterization parameter",
+     "8.2",
+     "°C/W"
+    ],
+    [
+     "ψJB",
+     "Junction-to-board characterization parameter",
+     "23",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "2.7",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 5,
+   "conditions": "TA = 25°C, over recommended operating conditions unless noted.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VM",
+     "VM operating voltage",
+     "",
+     "6.5",
+     "",
+     "45",
+     "V"
+    ],
+    [
+     "IVM",
+     "VM operating supply current",
+     "VM = 12 V",
+     "",
+     "3",
+     "10",
+     "mA"
+    ],
+    [
+     "IVMSLEEP",
+     "VM sleep current",
+     "VM = 12 V",
+     "",
+     "",
+     "10",
+     "µA"
+    ],
+    [
+     "tON",
+     "Turn-on time (1)",
+     "VM > VUVLO with IN1 or IN2 high",
+     "",
+     "40",
+     "50",
+     "µs"
+    ],
+    [
+     "VIL",
+     "Input logic low voltage",
+     "",
+     "",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "VIH",
+     "Input logic high voltage",
+     "",
+     "1.5",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "VHYS",
+     "Input logic hysteresis",
+     "",
+     "",
+     "0.5",
+     "",
+     "V"
+    ],
+    [
+     "IIL",
+     "Input logic low current",
+     "VIN = 0 V",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "IIH",
+     "Input logic high current",
+     "VIN = 3.3 V",
+     "",
+     "33",
+     "100",
+     "µA"
+    ],
+    [
+     "RPD",
+     "Pulldown resistance",
+     "To GND",
+     "",
+     "100",
+     "",
+     "kΩ"
+    ],
+    [
+     "tPD",
+     "Propagation delay",
+     "INx to OUTx change",
+     "",
+     "0.7",
+     "1",
+     "µs"
+    ],
+    [
+     "tsleep",
+     "Time to sleep",
+     "Inputs low to sleep",
+     "",
+     "1",
+     "1.5",
+     "ms"
+    ],
+    [
+     "RDS(ON)",
+     "High-side FET on resistance",
+     "VM = 24 V, I = 1 A, fPWM = 25 kHz",
+     "",
+     "307",
+     "360",
+     "mΩ"
+    ],
+    [
+     "RDS(ON)",
+     "Low-side FET on resistance",
+     "VM = 24 V, I = 1 A, fPWM = 25 kHz",
+     "",
+     "258",
+     "320",
+     "mΩ"
+    ],
+    [
+     "tDEAD",
+     "Output dead time",
+     "",
+     "",
+     "220",
+     "",
+     "ns"
+    ],
+    [
+     "Vd",
+     "Body diode forward voltage",
+     "IOUT = 1 A",
+     "",
+     "0.8",
+     "1",
+     "V"
+    ],
+    [
+     "VTRIP",
+     "ISEN voltage for current chopping",
+     "",
+     "0.32",
+     "0.35",
+     "0.38",
+     "V"
+    ],
+    [
+     "tOFF",
+     "PWM off-time",
+     "",
+     "",
+     "25",
+     "",
+     "µs"
+    ],
+    [
+     "tBLANK",
+     "PWM blanking time",
+     "",
+     "",
+     "2",
+     "",
+     "µs"
+    ],
+    [
+     "VUVLO",
+     "VM undervoltage lockout",
+     "VM falls until UVLO triggers",
+     "",
+     "6.1",
+     "6.4",
+     "V"
+    ],
+    [
+     "VUVLO",
+     "VM undervoltage lockout",
+     "VM rises until operation recovers",
+     "",
+     "6.3",
+     "6.5",
+     "V"
+    ],
+    [
+     "VUV,HYS",
+     "VM undervoltage hysteresis",
+     "Rising to falling threshold",
+     "100",
+     "180",
+     "",
+     "mV"
+    ],
+    [
+     "IOCP",
+     "Overcurrent protection trip level",
+     "",
+     "3.7",
+     "4.5",
+     "6.4",
+     "A"
+    ],
+    [
+     "tOCP",
+     "Overcurrent deglitch time",
+     "",
+     "",
+     "1.5",
+     "",
+     "µs"
+    ],
+    [
+     "tRETRY",
+     "Overcurrent retry time",
+     "",
+     "",
+     "3",
+     "",
+     "ms"
+    ],
+    [
+     "TSD",
+     "Thermal shutdown temperature",
+     "",
+     "150",
+     "175",
+     "",
+     "°C"
+    ],
+    [
+     "THYS",
+     "Thermal shutdown hysteresis",
+     "",
+     "",
+     "40",
+     "",
+     "°C"
+    ],
+    [
+     "VOL",
+     "nFAULT output low voltage",
+     "IO = 5 mA",
+     "",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "IOH",
+     "nFAULT output high leakage current",
+     "VO = 3.3 V",
+     "",
+     "",
+     "1",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "(1) tON is the delay at first power-up and again on waking from sleep."
+   ]
+  },
+  {
+   "title": "H-bridge control",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "IN1",
+    "IN2",
+    "OUT1",
+    "OUT2",
+    "state"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "High-Z",
+     "High-Z",
+     "Coast: bridge off, outputs High-Z; sleep follows after 1 ms"
+    ],
+    [
+     "0",
+     "1",
+     "L",
+     "H",
+     "Reverse: current from OUT2 to OUT1"
+    ],
+    [
+     "1",
+     "0",
+     "H",
+     "L",
+     "Forward: current from OUT1 to OUT2"
+    ],
+    [
+     "1",
+     "1",
+     "L",
+     "L",
+     "Brake: both low-side FETs on, slow decay"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Protection functions",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "fault",
+    "condition",
+    "H-bridge",
+    "nFAULT",
+    "recovery"
+   ],
+   "rows": [
+    [
+     "VM undervoltage lockout (UVLO)",
+     "VM < VUVLO",
+     "Disabled",
+     "Low",
+     "VM > VUVLO"
+    ],
+    [
+     "Overcurrent (OCP)",
+     "IOUT > IOCP",
+     "Disabled",
+     "Low",
+     "tRETRY"
+    ],
+    [
+     "Thermal shutdown (TSD)",
+     "TJ > 150°C",
+     "Disabled",
+     "Low",
+     "TJ < TSD - THYS"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Design parameters",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "design parameter",
+    "reference",
+    "example value"
+   ],
+   "rows": [
+    [
+     "Motor voltage",
+     "VM",
+     "24 V"
+    ],
+    [
+     "Motor RMS current",
+     "IRMS",
+     "0.8 A"
+    ],
+    [
+     "Motor startup current",
+     "ISTART",
+     "2 A"
+    ],
+    [
+     "Motor current trip point",
+     "ITRIP",
+     "2.2 A"
+    ],
+    [
+     "Sense resistance",
+     "RISEN",
+     "0.16 Ω"
+    ],
+    [
+     "PWM frequency",
+     "fPWM",
+     "5 kHz"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Stencil openings for the thermal pad, DDA0008B",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "stencil thickness (mm)",
+    "solder stencil opening (mm)"
+   ],
+   "rows": [
+    [
+     "0.1",
+     "3.03 X 3.80"
+    ],
+    [
+     "0.125",
+     "2.71 X 3.40"
+    ],
+    [
+     "0.150",
+     "2.47 X 3.10"
+    ],
+    [
+     "0.175",
+     "2.29 X 2.87"
+    ]
+   ],
+   "notes": [
+    "Each opening gives 100 % paste coverage of the exposed pad by area."
+   ]
+  },
+  {
+   "title": "Stencil openings for the thermal pad, DDA (R-PDSO-G8)",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "stencil thickness",
+    "X (mm)",
+    "Y (mm)"
+   ],
+   "rows": [
+    [
+     "0.1mm",
+     "3.3",
+     "2.6"
+    ],
+    [
+     "0.127mm",
+     "3.1",
+     "2.4"
+    ],
+    [
+     "0.152mm",
+     "2.9",
+     "2.2"
+    ],
+    [
+     "0.178mm",
+     "2.8",
+     "2.1"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "RDS(on) vs temperature",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Normalized RDS(on) / RDS(on)_25°C",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RDS(on)",
+     "points": [
+      [
+       -39.5,
+       0.7339
+      ],
+      [
+       11.3,
+       0.9397
+      ],
+      [
+       37.6,
+       1.0602
+      ],
+      [
+       62.7,
+       1.1878
+      ],
+      [
+       90.0,
+       1.3356
+      ],
+      [
+       127.9,
+       1.5635
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VTRIP vs temperature",
+   "page": 6,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTRIP",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTRIP",
+     "points": [
+      [
+       -39.6,
+       0.3488
+      ],
+      [
+       25.0,
+       0.35
+      ],
+      [
+       79.8,
+       0.3507
+      ],
+      [
+       99.7,
+       0.3515
+      ],
+      [
+       127.9,
+       0.3536
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IVMSLEEP vs VM at 25°C",
+   "page": 6,
+   "conditions": "TA = 25 °C",
+   "x": {
+    "label": "VM",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IVMSLEEP",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IVMSLEEP",
+     "points": [
+      [
+       6.5,
+       2.32
+      ],
+      [
+       8.49,
+       5.0
+      ],
+      [
+       10.5,
+       6.83
+      ],
+      [
+       12.5,
+       7.08
+      ],
+      [
+       16.5,
+       7.44
+      ],
+      [
+       24.5,
+       7.88
+      ],
+      [
+       32.5,
+       8.16
+      ],
+      [
+       44.88,
+       8.39
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current ramp with a 2-Ω, 1 mH, RL load and VM = 12 V",
+   "page": 12,
+   "conditions": "VM = 12 V, 2 Ω + 1 mH load",
+   "x": {
+    "label": "Time from trigger",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OUT1 current",
+     "points": [
+      [
+       -19.3,
+       20
+      ],
+      [
+       -18.9,
+       25
+      ],
+      [
+       0.7,
+       22
+      ],
+      [
+       17.8,
+       183
+      ],
+      [
+       21.2,
+       207
+      ],
+      [
+       21.3,
+       215
+      ],
+      [
+       22.8,
+       221
+      ],
+      [
+       30.6,
+       296
+      ],
+      [
+       31.6,
+       298
+      ],
+      [
+       34.7,
+       326
+      ],
+      [
+       51.5,
+       311
+      ],
+      [
+       52.8,
+       304
+      ],
+      [
+       80.3,
+       285
+      ],
+      [
+       80.6,
+       278
+      ]
+     ]
+    },
+    {
+     "label": "IN2",
+     "points": [
+      [
+       -19.3,
+       3.52
+      ],
+      [
+       -0.5,
+       3.52
+      ],
+      [
+       0.1,
+       0.34
+      ],
+      [
+       33.8,
+       0.37
+      ],
+      [
+       34.4,
+       3.52
+      ],
+      [
+       80.6,
+       3.52
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Current ramp with a 2-Ω, 1 mH, RL load and VM = 24 V",
+   "page": 12,
+   "conditions": "VM = 24 V, 2 Ω + 1 mH load",
+   "x": {
+    "label": "Time from trigger",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OUT1 current",
+     "points": [
+      [
+       -19.3,
+       41
+      ],
+      [
+       -12.4,
+       41
+      ],
+      [
+       -12.3,
+       53
+      ],
+      [
+       1.2,
+       53
+      ],
+      [
+       11.4,
+       253
+      ],
+      [
+       23.7,
+       464
+      ],
+      [
+       24.9,
+       494
+      ],
+      [
+       34.7,
+       653
+      ],
+      [
+       80.6,
+       569
+      ]
+     ]
+    },
+    {
+     "label": "IN2",
+     "points": [
+      [
+       -19.3,
+       3.52
+      ],
+      [
+       -0.4,
+       3.49
+      ],
+      [
+       0.2,
+       0.34
+      ],
+      [
+       33.8,
+       0.34
+      ],
+      [
+       34.3,
+       3.52
+      ],
+      [
+       80.6,
+       3.52
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Current ramp with a 2-Ω, 1 mH, RL load and VM = 45 V",
+   "page": 13,
+   "conditions": "VM = 45 V, 2 Ω + 1 mH load",
+   "x": {
+    "label": "Time from trigger",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OUT1 current",
+     "points": [
+      [
+       -12.3,
+       93
+      ],
+      [
+       0.7,
+       89
+      ],
+      [
+       0.8,
+       101
+      ],
+      [
+       1.4,
+       105
+      ],
+      [
+       13.1,
+       522
+      ],
+      [
+       30.6,
+       1101
+      ],
+      [
+       34.8,
+       1219
+      ],
+      [
+       44.3,
+       1184
+      ],
+      [
+       44.8,
+       1177
+      ],
+      [
+       63.0,
+       1120
+      ],
+      [
+       63.3,
+       1112
+      ],
+      [
+       64.1,
+       1116
+      ],
+      [
+       67.7,
+       1106
+      ],
+      [
+       73.1,
+       1084
+      ],
+      [
+       78.7,
+       1072
+      ],
+      [
+       79.3,
+       1064
+      ],
+      [
+       80.6,
+       1069
+      ]
+     ]
+    },
+    {
+     "label": "IN2",
+     "points": [
+      [
+       -19.3,
+       3.49
+      ],
+      [
+       -0.4,
+       3.52
+      ],
+      [
+       0.2,
+       0.34
+      ],
+      [
+       30.4,
+       0.34
+      ],
+      [
+       30.6,
+       0.68
+      ],
+      [
+       31.0,
+       0.37
+      ],
+      [
+       32.7,
+       0.34
+      ],
+      [
+       33.9,
+       0.37
+      ],
+      [
+       34.2,
+       3.52
+      ],
+      [
+       80.6,
+       3.52
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "tPD",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Time from trigger",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OUT1",
+     "points": [
+      [
+       -600,
+       8.83
+      ],
+      [
+       -250,
+       8.92
+      ],
+      [
+       -146,
+       8.73
+      ],
+      [
+       -82,
+       8.92
+      ],
+      [
+       496,
+       8.92
+      ],
+      [
+       518,
+       8.61
+      ],
+      [
+       542,
+       6.91
+      ],
+      [
+       556,
+       2.87
+      ],
+      [
+       570,
+       0.65
+      ],
+      [
+       576,
+       0.4
+      ],
+      [
+       582,
+       0.46
+      ],
+      [
+       588,
+       -0.4
+      ],
+      [
+       598,
+       1.51
+      ],
+      [
+       618,
+       -0.4
+      ],
+      [
+       628,
+       -0.59
+      ],
+      [
+       646,
+       -0.19
+      ],
+      [
+       662,
+       -0.96
+      ],
+      [
+       758,
+       -0.71
+      ],
+      [
+       798,
+       -0.8
+      ],
+      [
+       810,
+       -0.65
+      ],
+      [
+       1388,
+       -0.65
+      ],
+      [
+       1398,
+       -0.52
+      ]
+     ]
+    },
+    {
+     "label": "IN2",
+     "points": [
+      [
+       -600,
+       0.272
+      ],
+      [
+       -18,
+       0.278
+      ],
+      [
+       -6,
+       0.704
+      ],
+      [
+       18,
+       3.0
+      ],
+      [
+       34,
+       3.407
+      ],
+      [
+       56,
+       3.364
+      ],
+      [
+       82,
+       3.389
+      ],
+      [
+       86,
+       3.364
+      ],
+      [
+       1398,
+       3.333
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current regulation with RSENSE = 0.26 Ω",
+   "page": 13,
+   "conditions": "RSENSE = 0.26 Ω",
+   "x": {
+    "label": "Time from trigger",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IOUT1",
+     "points": [
+      [
+       -537,
+       472
+      ],
+      [
+       -470,
+       827
+      ],
+      [
+       -463,
+       836
+      ],
+      [
+       -434,
+       1012
+      ],
+      [
+       -427,
+       1028
+      ],
+      [
+       -409,
+       827
+      ],
+      [
+       -401,
+       784
+      ],
+      [
+       -377,
+       944
+      ],
+      [
+       -359,
+       1025
+      ],
+      [
+       -332,
+       747
+      ],
+      [
+       -291,
+       401
+      ],
+      [
+       -268,
+       225
+      ],
+      [
+       -257,
+       179
+      ],
+      [
+       -219,
+       500
+      ],
+      [
+       -139,
+       1012
+      ],
+      [
+       -132,
+       1028
+      ],
+      [
+       -109,
+       787
+      ],
+      [
+       -67,
+       1019
+      ],
+      [
+       -62,
+       1012
+      ],
+      [
+       -40,
+       784
+      ],
+      [
+       3,
+       994
+      ],
+      [
+       68,
+       321
+      ],
+      [
+       99,
+       80
+      ],
+      [
+       176,
+       611
+      ],
+      [
+       247,
+       1012
+      ],
+      [
+       253,
+       1025
+      ],
+      [
+       274,
+       802
+      ],
+      [
+       278,
+       802
+      ],
+      [
+       311,
+       1025
+      ],
+      [
+       333,
+       802
+      ],
+      [
+       358,
+       932
+      ],
+      [
+       387,
+       633
+      ],
+      [
+       452,
+       111
+      ],
+      [
+       456,
+       111
+      ],
+      [
+       462,
+       160
+      ]
+     ]
+    },
+    {
+     "label": "IN1",
+     "points": [
+      [
+       -537,
+       3.98
+      ],
+      [
+       462,
+       3.98
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "IN2",
+     "points": [
+      [
+       -537,
+       0.09
+      ],
+      [
+       -358,
+       0.22
+      ],
+      [
+       -351,
+       3.92
+      ],
+      [
+       -261,
+       3.92
+      ],
+      [
+       -258,
+       0.22
+      ],
+      [
+       -245,
+       0.12
+      ],
+      [
+       -199,
+       0.28
+      ],
+      [
+       -192,
+       0.12
+      ],
+      [
+       -69,
+       0.12
+      ],
+      [
+       -41,
+       0.19
+      ],
+      [
+       -38,
+       0.34
+      ],
+      [
+       0,
+       0.22
+      ],
+      [
+       4,
+       3.92
+      ],
+      [
+       94,
+       3.83
+      ],
+      [
+       98,
+       0.28
+      ],
+      [
+       105,
+       0.12
+      ],
+      [
+       356,
+       0.22
+      ],
+      [
+       358,
+       3.92
+      ],
+      [
+       448,
+       3.92
+      ],
+      [
+       453,
+       0.22
+      ],
+      [
+       462,
+       0.09
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "OCP with 24 V and outputs shorted together",
+   "page": 13,
+   "conditions": "VM = 24 V, OUT1 shorted to OUT2",
+   "x": {
+    "label": "Time from trigger",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "nFAULT voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IOUT1",
+     "points": [
+      [
+       -4.04,
+       0.06
+      ],
+      [
+       -2.24,
+       0.1
+      ],
+      [
+       -1.65,
+       0.04
+      ],
+      [
+       -0.75,
+       0.1
+      ],
+      [
+       -0.6,
+       0.05
+      ],
+      [
+       0.04,
+       0.06
+      ],
+      [
+       0.15,
+       0.12
+      ],
+      [
+       0.64,
+       6.96
+      ],
+      [
+       0.74,
+       7.73
+      ],
+      [
+       0.86,
+       7.89
+      ],
+      [
+       1.05,
+       7.63
+      ],
+      [
+       1.92,
+       7.44
+      ],
+      [
+       2.06,
+       7.28
+      ],
+      [
+       2.39,
+       -0.64
+      ],
+      [
+       2.43,
+       -0.64
+      ],
+      [
+       2.54,
+       -0.32
+      ],
+      [
+       2.58,
+       0.2
+      ],
+      [
+       2.62,
+       0.25
+      ],
+      [
+       2.68,
+       0.25
+      ],
+      [
+       2.73,
+       -0.12
+      ],
+      [
+       2.82,
+       0.12
+      ],
+      [
+       2.88,
+       0.06
+      ],
+      [
+       2.92,
+       0.12
+      ],
+      [
+       3.29,
+       0.06
+      ],
+      [
+       3.31,
+       0
+      ],
+      [
+       3.43,
+       0
+      ],
+      [
+       3.45,
+       -0.07
+      ],
+      [
+       3.68,
+       -0.16
+      ],
+      [
+       3.85,
+       -0.12
+      ],
+      [
+       3.92,
+       -0.2
+      ],
+      [
+       4.14,
+       -0.14
+      ],
+      [
+       4.34,
+       -0.2
+      ],
+      [
+       4.36,
+       -0.14
+      ],
+      [
+       5.0,
+       -0.04
+      ],
+      [
+       5.58,
+       -0.07
+      ],
+      [
+       5.95,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "nFAULT",
+     "points": [
+      [
+       -4.04,
+       0.16
+      ],
+      [
+       -0.04,
+       0.12
+      ],
+      [
+       0.02,
+       2.62
+      ],
+      [
+       0.19,
+       2.78
+      ],
+      [
+       0.37,
+       3.14
+      ],
+      [
+       0.56,
+       3.3
+      ],
+      [
+       0.59,
+       3.4
+      ],
+      [
+       0.82,
+       3.56
+      ],
+      [
+       1.04,
+       3.56
+      ],
+      [
+       1.06,
+       3.62
+      ],
+      [
+       1.17,
+       3.56
+      ],
+      [
+       1.31,
+       3.65
+      ],
+      [
+       1.93,
+       3.62
+      ],
+      [
+       1.97,
+       0.68
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical connections: brushed DC motor",
+   "page": 11,
+   "description": "A brushed DC motor sits across OUT1 and OUT2 and is run from a 6.5 V to 45 V supply on VM, decoupled to ground by a 0.1 µF capacitor and a 47 µF bulk capacitor. A controller powered from 3.3 V drives IN1 and IN2 and reads nFAULT through its own pullup. A 0.2 Ω resistor from ISEN to ground sets the chopping current. GND and the thermal pad go to ground.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "DRV8872"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Controller",
+     "external": true,
+     "note": "holds the pullup (PU) on its nFAULT input"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "0.2 Ω",
+     "note": "current sense resistor on ISEN"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "47 µF"
+    },
+    {
+     "ref": "M1",
+     "type": "load",
+     "value": "Brushed DC motor"
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "6.5 to 45 V power supply"
+    },
+    {
+     "ref": "VCC",
+     "type": "terminal",
+     "value": "3.3 V"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Regulated current",
+   "expr": "ITRIP = VTRIP / RISEN = 0.35 V / RISEN",
+   "where": {
+    "ITRIP": "output current at which chopping starts, A",
+    "VTRIP": "ISEN trip voltage, 0.35 V typ",
+    "RISEN": "sense resistor from ISEN to ground, Ω"
+   },
+   "note": "With RISEN = 0.16 Ω the current is held at 2.2 A whatever the load torque.",
+   "page": 9
+  },
+  {
+   "name": "Bridge conduction loss",
+   "expr": "PD = I² × (RDS(on)Source + RDS(on)Sink)",
+   "where": {
+    "PD": "conduction loss of the sourcing and sinking FET pair, W",
+    "I": "output current, A",
+    "RDS(on)Source": "on resistance of the high-side (sourcing) FET",
+    "RDS(on)Sink": "on resistance of the low-side (sinking) FET"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Sense resistor dissipation",
+   "expr": "PR = IRMS² × R",
+   "where": {
+    "PR": "power in the sense resistor, W",
+    "IRMS": "RMS motor current, A",
+    "R": "sense resistance, Ω"
+   },
+   "note": "3 A peak, 1.5 A RMS through 0.2 Ω gives 1.5 A² × 0.2 Ω = 0.45 W.",
+   "page": 12
+  },
+  {
+   "name": "Device dissipation",
+   "expr": "Power ≈ IRMS² × (High-side RDS(ON) + Low-side RDS(ON))",
+   "where": {
+    "IRMS": "RMS motor current, A",
+    "High-side RDS(ON)": "high-side FET on resistance at the operating temperature",
+    "Low-side RDS(ON)": "low-side FET on resistance at the operating temperature"
+   },
+   "note": "At 58 °C ambient the two resistances add to about 0.72 Ω; 0.8 A RMS then gives 0.8 A² × 0.72 Ω = 0.46 W.",
+   "page": 16
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ = TA + (PD × RθJA)",
+   "where": {
+    "TJ": "junction temperature, °C",
+    "TA": "ambient temperature, °C",
+    "PD": "device dissipation, W",
+    "RθJA": "effective junction-to-ambient thermal resistance, °C/W"
+   },
+   "note": "58 °C + (0.46 W × 48 °C/W) = 80 °C, with an effective RθJA of 48 °C/W on the example board.",
+   "page": 16
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 7,
+   "text": "Four N-channel FETs form the bridge, 565 mΩ typ for one high-side plus one low-side switch. VM is the only supply: it powers the logic and biases the motor, and an internal charge pump lifts it to drive the high-side gates fully on. Speed can be set by PWM on the inputs at 0 to 100 kHz."
+  },
+  {
+   "topic": "Bridge control and PWM",
+   "page": 8,
+   "text": "Steady levels on IN1 and IN2 give 100 % duty drive; PWM on them varies speed. Alternating between drive and brake usually gives the best results: for forward at half speed, IN1 stays 1 while IN2 toggles between 0 (drive) and 1 (brake). Coast (both inputs 0) gives fast decay instead. IN1 and IN2 may be driven before VM is present."
+  },
+  {
+   "topic": "Sleep",
+   "page": 8,
+   "text": "Both inputs low for tSLEEP (1 ms typ) puts the chip to sleep, outputs High-Z, drawing IVMSLEEP. Powering up with both inputs low enters sleep at once. Once IN1 or IN2 has been high for 5 µs or more, the bridge works tON (50 µs) later."
+  },
+  {
+   "topic": "Current regulation",
+   "page": 9,
+   "text": "When the voltage on ISEN reaches VTRIP the chip turns both low-side FETs on for tOFF (25 µs typ), a slow-decay period, then returns to the state set by the inputs. A blanking time tBLANK follows each turn-on. How long the drive phase lasts before the next trip depends on VM, the motor's back-EMF and its inductance."
+  },
+  {
+   "topic": "Dead time",
+   "page": 9,
+   "text": "Each output transition from high to low or low to high has tDEAD inserted with the output High-Z to stop shoot-through. During it, current flowing out of the pin holds it one body-diode drop below ground; current flowing in holds it one diode drop above VM."
+  },
+  {
+   "topic": "Protection",
+   "page": 10,
+   "text": "Any fault turns off every bridge FET and drives nFAULT low; nFAULT goes high-impedance again once the fault is gone. Undervoltage: VM below VUVLO; running resumes when VM climbs back over the threshold. Overcurrent: current above IOCP for longer than tOCP stops the bridge for tRETRY, after which it follows the inputs again, repeating while the overload lasts. Thermal: the die over its limit stops the bridge until it has cooled by the hysteresis."
+  },
+  {
+   "topic": "Modes of use",
+   "page": 10,
+   "text": "PWM with regulation: ITRIP set above running current, high enough for the wanted spin-up time and low enough to cap current; one input carries PWM, the other is static, with brake and slow decay in the off-time. PWM without regulation: ISEN goes straight to the ground plane, allowing up to 3.6 A for some hundreds of milliseconds depending on the board and ambient; above 3.6 A OCP or TSD may act and the bridge rests about 3 ms (tRETRY) before running again. Static inputs with regulation: 100 % duty, ITRIP limiting current, speed and torque. VM control: motor speed changed by varying VM."
+  },
+  {
+   "topic": "Motor voltage",
+   "page": 11,
+   "text": "VM follows the motor's rating and the wanted speed. For the same duty cycle a higher VM turns a brushed motor faster and makes winding current change faster."
+  },
+  {
+   "topic": "Drive current",
+   "page": 12,
+   "text": "The chip has been measured carrying 2 A RMS at 25 °C on standard FR-4 boards. The RMS limit moves with board design, ambient temperature and PWM frequency; switching at 200 kHz rather than 20 kHz typically adds 20 % to the heat lost."
+  },
+  {
+   "topic": "Sense resistor",
+   "page": 12,
+   "text": "The ISEN resistor should be a surface-mount, low-inductance part with enough power rating, close to the chip. Allow for its power derating at high ambient and for heat from nearby parts, and check its actual temperature in the finished product. Several ordinary resistors in parallel from the sense node to ground can share the current and heat in place of one power resistor."
+  },
+  {
+   "topic": "Bulk capacitance",
+   "page": 14,
+   "text": "The local bulk capacitor needed depends on the motor system's peak current, the supply's own capacitance and current capability, wiring inductance to the supply, the ripple allowed, the motor type and the braking method. Wire inductance limits how fast the supply can follow load steps, so too little bulk capacitance lets VM move; enough keeps it steady. The value is confirmed by testing the system. The capacitor's voltage rating should exceed the operating voltage with margin for energy the motor returns to the supply."
+  },
+  {
+   "topic": "Layout",
+   "page": 15,
+   "text": "Put the bulk capacitor so the high-current loop through the chip is short, with wide copper and many vias between layers. Small capacitors are ceramic and sit at the pins. The outputs get wide traces. Solder the thermal pad to the top-layer ground plane and stitch it with many vias down to a broad ground plane on the bottom; big planes and many vias carry off the I² × RDS(on) heat."
+  },
+  {
+   "topic": "Thermal",
+   "page": 15,
+   "text": "Above roughly 175 °C die temperature the chip shuts down until it has cooled past the hysteresis. Reaching TSD points to too much dissipation, too little heatsinking or too hot an ambient. Dissipation is mostly I² × RDS(on) in the output FETs; start-up current is far above running current and its size and duration count too. RDS(on) rises with temperature, so dissipation grows as the chip warms. The PowerPAD must be thermally joined to board copper: by vias to an internal ground plane, or on a board without planes by copper on either side, with thermal vias when the copper is on the far side. More copper area lets more power be dissipated."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DDA0008B (8-pin HSOP PowerPAD)",
+   "page": 24,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.7"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "body length (1)",
+     "4.8",
+     "",
+     "5.0"
+    ],
+    [
+     "",
+     "body width (2)",
+     "3.8",
+     "",
+     "4.0"
+    ],
+    [
+     "",
+     "width over leads",
+     "5.8",
+     "",
+     "6.2"
+    ],
+    [
+     "",
+     "lead pitch, 6 places",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "",
+     "pin 1 to pin 4 span, 2 places",
+     "",
+     "3.81",
+     ""
+    ],
+    [
+     "",
+     "lead width, 8 places",
+     "0.31",
+     "",
+     "0.51"
+    ],
+    [
+     "",
+     "lead thickness",
+     "0.10",
+     "",
+     "0.25"
+    ],
+    [
+     "",
+     "foot length",
+     "0.40",
+     "",
+     "1.27"
+    ],
+    [
+     "",
+     "gauge plane",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "body draft angle, 4 places",
+     "(0°)",
+     "",
+     "(10°)"
+    ],
+    [
+     "",
+     "exposed thermal pad length",
+     "2.8",
+     "",
+     "3.4"
+    ],
+    [
+     "",
+     "exposed thermal pad width",
+     "2.11",
+     "",
+     "2.71"
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "",
+     "lead position tolerance",
+     "",
+     "",
+     "0.25"
+    ]
+   ],
+   "notes": [
+    "(1) Mold flash, protrusions and gate burrs are excluded; each may add up to 0.15 mm per side.",
+    "(2) Interlead flash is excluded; it may add up to 0.25 mm per side.",
+    "Outline to JEDEC MS-012."
+   ]
+  },
+  {
+   "name": "DDA0008B land pattern",
+   "page": 25,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "signal pad length × width, 8 places",
+     "",
+     "(1.55) × (0.6)",
+     ""
+    ],
+    [
+     "",
+     "signal pad pitch, 6 places",
+     "",
+     "(1.27)",
+     ""
+    ],
+    [
+     "",
+     "pad corner radius",
+     "",
+     "(R0.05)",
+     ""
+    ],
+    [
+     "",
+     "pad row centre-to-centre span",
+     "",
+     "(5.4)",
+     ""
+    ],
+    [
+     "",
+     "thermal pad solder mask opening",
+     "",
+     "(2.71) × (3.4)",
+     ""
+    ],
+    [
+     "",
+     "thermal pad metal",
+     "",
+     "(2.95) × (4.9)",
+     ""
+    ],
+    [
+     "",
+     "thermal via diameter",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "",
+     "thermal via pitch",
+     "",
+     "(1.3)",
+     ""
+    ],
+    [
+     "",
+     "solder mask clearance round a non-solder-mask-defined pad",
+     "",
+     "",
+     "0.07"
+    ],
+    [
+     "",
+     "solder mask overlap on a solder-mask-defined pad",
+     "0.07",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "The thermal pad metal may change size for creepage. Vias are optional; vias under paste are best filled, plugged or tented."
+   ]
+  },
+  {
+   "name": "DDA (R-PDSO-G8) PowerPAD plastic small outline",
+   "page": 21,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.70"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "body length (1)",
+     "4.80",
+     "",
+     "5.00"
+    ],
+    [
+     "",
+     "body width (1)",
+     "3.80",
+     "",
+     "4.00"
+    ],
+    [
+     "",
+     "width over leads",
+     "5.80",
+     "",
+     "6.20"
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "",
+     "lead width",
+     "0.31",
+     "",
+     "0.51"
+    ],
+    [
+     "",
+     "lead thickness",
+     "",
+     "0.20",
+     ""
+    ],
+    [
+     "",
+     "foot length",
+     "0.40",
+     "",
+     "1.27"
+    ],
+    [
+     "",
+     "gage plane",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.10"
+    ],
+    [
+     "",
+     "lead position tolerance",
+     "",
+     "",
+     "0.25"
+    ],
+    [
+     "",
+     "exposed thermal pad, along the pin rows",
+     "2.65",
+     "",
+     "3.10"
+    ],
+    [
+     "",
+     "exposed thermal pad, across the pin rows",
+     "1.65",
+     "",
+     "2.40"
+    ]
+   ],
+   "notes": [
+    "(1) Mold flash and protrusions are excluded; they do not exceed 0.15 mm.",
+    "Outline to JEDEC MS-012 variation BA."
+   ]
+  },
+  {
+   "name": "DDA (R-PDSO-G8) land pattern",
+   "page": 23,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "signal pad width × length",
+     "",
+     "0.5 × 2.2",
+     ""
+    ],
+    [
+     "",
+     "signal pad pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "",
+     "signal pad row centre-to-centre span",
+     "",
+     "5.75",
+     ""
+    ],
+    [
+     "",
+     "solder mask clearance round a non-solder-mask-defined signal pad",
+     "",
+     "0.07",
+     ""
+    ],
+    [
+     "",
+     "thermal pad copper",
+     "",
+     "4.90 × 2.95",
+     ""
+    ],
+    [
+     "",
+     "thermal pad solder mask opening",
+     "",
+     "3.10 × 2.40",
+     ""
+    ],
+    [
+     "",
+     "thermal vias, 6 places, diameter",
+     "",
+     "0.33",
+     ""
+    ],
+    [
+     "",
+     "thermal via pitch",
+     "",
+     "1.30",
+     ""
+    ],
+    [
+     "",
+     "stencil signal aperture width × length, 0.127 mm stencil",
+     "",
+     "0.45 × 2.15",
+     ""
+    ],
+    [
+     "",
+     "stencil thermal aperture, 0.127 mm stencil",
+     "",
+     "3.10 × 2.40",
+     ""
+    ]
+   ],
+   "notes": [
+    "Via pattern and copper pad size may change with layout constraints. The stencil example assumes a 50 % volumetric metal load solder paste."
+   ]
+  }
+ ]
+}

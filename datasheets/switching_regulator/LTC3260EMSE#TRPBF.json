@@ -1,0 +1,4732 @@
+{
+ "sheet": 1,
+ "name": "LTC3260EMSE#TRPBF",
+ "kind": "switching_regulator",
+ "manufacturer": "Analog Devices (Linear Technology)",
+ "title": "LTC3260: low noise dual supply inverting charge pump, 4.5V to 32V input",
+ "source": {
+  "revision": "3260fa (Rev A)",
+  "pages": 18
+ },
+ "summary": "The LTC3260 makes a positive and a negative low-noise rail from one 4.5V to 32V supply. An inverting charge pump delivers up to 100mA at about –VIN, and two adjustable LDOs, a negative one fed from the pump and a positive one fed from VIN, each supply up to 50mA. The pump runs either at constant frequency, set between 50kHz and 500kHz by one resistor, for low noise, or in Burst Mode operation near –0.94 • VIN, where the part draws 100µA with both LDOs on. Short-circuit limiting and thermal shutdown are built in; packages are a 14-lead 4mm × 3mm DFN and a 16-lead MSOP, both with an exposed ground pad.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "4.5V to 32V"
+  ],
+  [
+   "Charge pump output",
+   "–VIN (constant frequency) or –0.94 • VIN (Burst Mode operation), up to 100mA"
+  ],
+  [
+   "LDO outputs",
+   "LDO+ 1.2V to 32V, LDO– –32V to –1.2V, 50mA each"
+  ],
+  [
+   "Quiescent current",
+   "100µA typ in Burst Mode operation with both LDOs on; 2µA typ in shutdown"
+  ],
+  [
+   "Oscillator",
+   "50kHz to 500kHz by RT; 500kHz typ with RT = GND"
+  ],
+  [
+   "LDO output noise",
+   "100µVRMS typ with 10nF bypass"
+  ],
+  [
+   "Charge pump output impedance",
+   "32Ω typ (MODE = 0V, RT = GND)"
+  ],
+  [
+   "Packages",
+   "14-lead 4mm × 3mm DFN (DE), 16-lead MSOP (MSE); θJA 43°C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "tape and reel",
+   "part marking",
+   "package",
+   "temperature range"
+  ],
+  "rows": [
+   [
+    "LTC3260EDE#PBF",
+    "LTC3260EDE#TRPBF",
+    "3260",
+    "14-Lead (4mm × 3mm) Plastic DFN",
+    "–40°C to 125°C"
+   ],
+   [
+    "LTC3260IDE#PBF",
+    "LTC3260IDE#TRPBF",
+    "3260",
+    "14-Lead (4mm × 3mm) Plastic DFN",
+    "–40°C to 125°C"
+   ],
+   [
+    "LTC3260EMSE#PBF",
+    "LTC3260EMSE#TRPBF",
+    "3260",
+    "16-Lead Plastic MSOP",
+    "–40°C to 125°C"
+   ],
+   [
+    "LTC3260IMSE#PBF",
+    "LTC3260IMSE#TRPBF",
+    "3260",
+    "16-Lead Plastic MSOP",
+    "–40°C to 125°C"
+   ],
+   [
+    "LTC3260HMSE#PBF",
+    "LTC3260HMSE#TRPBF",
+    "3260",
+    "16-Lead Plastic MSOP",
+    "–40°C to 150°C"
+   ],
+   [
+    "LTC3260MPMSE#PBF",
+    "LTC3260MPMSE#TRPBF",
+    "3260",
+    "16-Lead Plastic MSOP",
+    "–55°C to 150°C"
+   ]
+  ],
+  "notes": [
+   "All finishes are lead free. The temperature grade (E, I, H, MP) is shown on a label on the shipping container, not in the marking.",
+   "Temperature range is the operating junction range; the grades differ in how far their limits are guaranteed (Note 2)."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DE, 14-lead 4mm × 3mm plastic DFN",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "EN+",
+     "type": "input",
+     "function": "Logic enable for the positive LDO regulator; high turns LDO+ on. An internal pull-down current of 0.7µA typ holds it low when undriven."
+    },
+    {
+     "pin": "2",
+     "name": "RT",
+     "type": "input",
+     "function": "Oscillator programming. With EN– high the pin is held at 1.2V; the pump's switching rate is programmed by a resistor between this pin and ground, and a grounded RT fixes it at 500kHz."
+    },
+    {
+     "pin": "3",
+     "name": "BYP–",
+     "type": "analog",
+     "function": "Bypass for the –1.2V reference of the negative LDO. A capacitor to GND (10nF typ) lowers LDO– output noise; with no capacitor the pin is left open."
+    },
+    {
+     "pin": "4",
+     "name": "ADJ–",
+     "type": "analog",
+     "function": "Feedback input of the negative LDO; in regulation it sits at –1.2V. The LDO– to GND divider taps into it."
+    },
+    {
+     "pin": "5",
+     "name": "LDO–",
+     "type": "power out",
+     "function": "Output of the negative low-dropout regulator, up to 50mA. Needs a low-ESR capacitor of at least 2µF to GND for stability."
+    },
+    {
+     "pin": "6",
+     "name": "VOUT",
+     "type": "power out",
+     "function": "Charge pump output. Driven to –VIN in constant frequency mode (MODE low); held near –0.94 • VIN by a hysteretic burst comparator in Burst Mode operation (MODE high). It also supplies the negative LDO."
+    },
+    {
+     "pin": "7",
+     "name": "C–",
+     "type": "power",
+     "function": "Negative terminal of the flying capacitor."
+    },
+    {
+     "pin": "8",
+     "name": "C+",
+     "type": "power",
+     "function": "Positive terminal of the flying capacitor."
+    },
+    {
+     "pin": "9",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input, 4.5V to 32V, feeding both the charge pump and the positive LDO. Bypass it with a ceramic capacitor of low impedance."
+    },
+    {
+     "pin": "10",
+     "name": "LDO+",
+     "type": "power out",
+     "function": "Output of the positive low-dropout regulator, up to 50mA. Needs a low-ESR capacitor of at least 2µF to GND for stability."
+    },
+    {
+     "pin": "11",
+     "name": "EN–",
+     "type": "input",
+     "function": "Logic enable for the inverting charge pump and the negative LDO together; high turns both on. Internal pull-down current 1.4µA typ."
+    },
+    {
+     "pin": "12",
+     "name": "MODE",
+     "type": "input",
+     "function": "Selects the charge pump mode. High: Burst Mode operation, VOUT regulated near –0.94 • VIN with hysteretic control. Low: open-loop inverter at constant frequency. In both modes RT sets the frequency; in Burst Mode it is the rate of the charge cycles in each burst before the part sleeps. Internal pull-down 0.7µA typ."
+    },
+    {
+     "pin": "13",
+     "name": "ADJ+",
+     "type": "analog",
+     "function": "Feedback input of the positive LDO; in regulation it sits at 1.2V. The LDO+ to GND divider taps into it."
+    },
+    {
+     "pin": "14",
+     "name": "BYP+",
+     "type": "analog",
+     "function": "Bypass for the 1.2V reference of the positive LDO. A capacitor to GND (10nF typ) lowers LDO+ output noise; with no capacitor the pin is left open."
+    },
+    {
+     "pin": "15 (exposed pad)",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, on the exposed pad. The pad must be soldered to the board's ground plane, both for correct operation and for the rated thermal resistance."
+    }
+   ]
+  },
+  {
+   "package": "MSE, 16-lead plastic MSOP with exposed pad",
+   "page": 2,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "EN+",
+     "type": "input",
+     "function": "Logic enable for the positive LDO regulator; high turns LDO+ on. An internal pull-down current of 0.7µA typ holds it low when undriven."
+    },
+    {
+     "pin": "2",
+     "name": "RT",
+     "type": "input",
+     "function": "Oscillator programming. With EN– high the pin is held at 1.2V; the pump's switching rate is programmed by a resistor between this pin and ground, and a grounded RT fixes it at 500kHz."
+    },
+    {
+     "pin": "3",
+     "name": "BYP–",
+     "type": "analog",
+     "function": "Bypass for the –1.2V reference of the negative LDO. A capacitor to GND (10nF typ) lowers LDO– output noise; with no capacitor the pin is left open."
+    },
+    {
+     "pin": "4",
+     "name": "ADJ–",
+     "type": "analog",
+     "function": "Feedback input of the negative LDO; in regulation it sits at –1.2V. The LDO– to GND divider taps into it."
+    },
+    {
+     "pin": "5",
+     "name": "LDO–",
+     "type": "power out",
+     "function": "Output of the negative low-dropout regulator, up to 50mA. Needs a low-ESR capacitor of at least 2µF to GND for stability."
+    },
+    {
+     "pin": "6",
+     "name": "VOUT",
+     "type": "power out",
+     "function": "Charge pump output. Driven to –VIN in constant frequency mode (MODE low); held near –0.94 • VIN by a hysteretic burst comparator in Burst Mode operation (MODE high). It also supplies the negative LDO."
+    },
+    {
+     "pin": "7",
+     "name": "C–",
+     "type": "power",
+     "function": "Negative terminal of the flying capacitor."
+    },
+    {
+     "pin": "8",
+     "name": "NC",
+     "type": "nc",
+     "function": "No internal connection to the die. May be left open, grounded, or joined to a neighbouring pin."
+    },
+    {
+     "pin": "9",
+     "name": "NC",
+     "type": "nc",
+     "function": "No internal connection to the die. May be left open, grounded, or joined to a neighbouring pin."
+    },
+    {
+     "pin": "10",
+     "name": "C+",
+     "type": "power",
+     "function": "Positive terminal of the flying capacitor."
+    },
+    {
+     "pin": "11",
+     "name": "VIN",
+     "type": "power in",
+     "function": "Supply input, 4.5V to 32V, feeding both the charge pump and the positive LDO. Bypass it with a ceramic capacitor of low impedance."
+    },
+    {
+     "pin": "12",
+     "name": "LDO+",
+     "type": "power out",
+     "function": "Output of the positive low-dropout regulator, up to 50mA. Needs a low-ESR capacitor of at least 2µF to GND for stability."
+    },
+    {
+     "pin": "13",
+     "name": "EN–",
+     "type": "input",
+     "function": "Logic enable for the inverting charge pump and the negative LDO together; high turns both on. Internal pull-down current 1.4µA typ."
+    },
+    {
+     "pin": "14",
+     "name": "MODE",
+     "type": "input",
+     "function": "Selects the charge pump mode. High: Burst Mode operation, VOUT regulated near –0.94 • VIN with hysteretic control. Low: open-loop inverter at constant frequency. In both modes RT sets the frequency; in Burst Mode it is the rate of the charge cycles in each burst before the part sleeps. Internal pull-down 0.7µA typ."
+    },
+    {
+     "pin": "15",
+     "name": "ADJ+",
+     "type": "analog",
+     "function": "Feedback input of the positive LDO; in regulation it sits at 1.2V. The LDO+ to GND divider taps into it."
+    },
+    {
+     "pin": "16",
+     "name": "BYP+",
+     "type": "analog",
+     "function": "Bypass for the 1.2V reference of the positive LDO. A capacitor to GND (10nF typ) lowers LDO+ output noise; with no capacitor the pin is left open."
+    },
+    {
+     "pin": "17 (exposed pad)",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground, on the exposed pad. The pad must be soldered to the board's ground plane, both for correct operation and for the rated thermal resistance."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "Notes 1, 3",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VIN, EN+, EN–, MODE",
+     "–0.3V to 36V"
+    ],
+    [
+     "LDO+",
+     "–16V to 36V"
+    ],
+    [
+     "VOUT, LDO–",
+     "–36V to 0.3V"
+    ],
+    [
+     "RT, ADJ+",
+     "–0.3V to 6V"
+    ],
+    [
+     "BYP+",
+     "–0.3V to 2.5V"
+    ],
+    [
+     "ADJ–",
+     "–6V to 0.3V"
+    ],
+    [
+     "BYP–",
+     "–2.5V to 0.3V"
+    ],
+    [
+     "VOUT, LDO+, LDO– short-circuit duration",
+     "Indefinite"
+    ],
+    [
+     "Operating junction temperature range (Note 2)",
+     "–55°C to 150°C"
+    ],
+    [
+     "Storage temperature range",
+     "–65°C to 150°C"
+    ],
+    [
+     "Lead temperature (soldering, 10 sec), MSE only",
+     "300°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: stress above these ratings can damage the part permanently, and long exposure at any one of them can shorten its life and reduce its reliability.",
+    "Note 3: the overtemperature protection is meant to carry the part through brief overloads. While it is active the junction is above 150°C; running continuously above the maximum operating junction temperature can degrade the part or make it fail."
+   ]
+  },
+  {
+   "title": "Thermal data",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "package",
+    "TJMAX",
+    "θJA"
+   ],
+   "rows": [
+    [
+     "DE, 14-lead (4mm × 3mm) plastic DFN",
+     "150°C",
+     "43°C/W"
+    ],
+    [
+     "MSE, 16-lead plastic MSOP",
+     "150°C",
+     "43°C/W"
+    ]
+   ],
+   "notes": [
+    "On both packages the exposed pad (pin 15 on the DFN, pin 17 on the MSOP) is GND and has to be soldered to the board."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: charge pump",
+   "page": 3,
+   "conditions": "Limits marked ● apply over the full operating junction temperature range; all other figures are at TA = 25°C (Note 2). VIN = EN+ = EN– = 12V, MODE = 0V, RT = 200kΩ.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "Input Voltage Range",
+     "",
+     "●",
+     "4.5",
+     "",
+     "32",
+     "V"
+    ],
+    [
+     "VUVLO",
+     "VIN Undervoltage Lockout Threshold",
+     "VIN Rising",
+     "●",
+     "",
+     "3.8",
+     "4",
+     "V"
+    ],
+    [
+     "VUVLO",
+     "VIN Undervoltage Lockout Threshold",
+     "VIN Falling",
+     "●",
+     "3.4",
+     "3.6",
+     "",
+     "V"
+    ],
+    [
+     "IVIN",
+     "VIN Quiescent Current",
+     "Shutdown, EN+ = EN– = 0V",
+     "",
+     "",
+     "2",
+     "5",
+     "µA"
+    ],
+    [
+     "IVIN",
+     "VIN Quiescent Current",
+     "EN– = 0V, ILDO+ = 0mA",
+     "",
+     "",
+     "30",
+     "50",
+     "µA"
+    ],
+    [
+     "IVIN",
+     "VIN Quiescent Current",
+     "MODE = VIN, EN+ = 0V, IVOUT = ILDO– = 0mA",
+     "",
+     "",
+     "80",
+     "160",
+     "µA"
+    ],
+    [
+     "IVIN",
+     "VIN Quiescent Current",
+     "MODE = VIN, IVOUT = ILDO+ = ILDO– = 0mA",
+     "",
+     "",
+     "100",
+     "200",
+     "µA"
+    ],
+    [
+     "IVIN",
+     "VIN Quiescent Current",
+     "MODE = 0V, IVOUT = 0mA",
+     "",
+     "",
+     "3.5",
+     "5.5",
+     "mA"
+    ],
+    [
+     "VRT",
+     "RT Regulation Voltage",
+     "",
+     "",
+     "",
+     "1.200",
+     "",
+     "V"
+    ],
+    [
+     "VOUT",
+     "VOUT Regulation Voltage",
+     "MODE = 12V",
+     "",
+     "",
+     "–0.94 • VIN",
+     "",
+     "V"
+    ],
+    [
+     "VOUT",
+     "VOUT Regulation Voltage",
+     "MODE = 0V",
+     "",
+     "",
+     "–VIN",
+     "",
+     "V"
+    ],
+    [
+     "fOSC",
+     "Oscillator Frequency",
+     "RT = GND",
+     "",
+     "450",
+     "500",
+     "550",
+     "kHz"
+    ],
+    [
+     "ROUT",
+     "Charge Pump Output Impedance",
+     "MODE = 0V, RT = GND",
+     "",
+     "",
+     "32",
+     "",
+     "Ω"
+    ],
+    [
+     "ISHORT_CKT",
+     "Max IVOUT Short-Circuit Current",
+     "VOUT = GND",
+     "●",
+     "100",
+     "160",
+     "250",
+     "mA"
+    ],
+    [
+     "VMODE(H)",
+     "MODE Threshold Rising",
+     "",
+     "●",
+     "",
+     "1.1",
+     "2.0",
+     "V"
+    ],
+    [
+     "VMODE(L)",
+     "MODE Threshold Falling",
+     "",
+     "●",
+     "0.4",
+     "1.0",
+     "",
+     "V"
+    ],
+    [
+     "IMODE",
+     "MODE Pin Internal Pull-Down Current",
+     "VIN = MODE = 32V",
+     "",
+     "",
+     "0.7",
+     "",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "Note 2: the part is tested with pulsed loads so that TJ ≈ TA. The LTC3260E meets its limits from 0°C to 85°C junction temperature; across –40°C to 125°C its performance rests on design, characterization and statistical process control correlation. The LTC3260I is guaranteed from –40°C to 125°C, the LTC3260H from –40°C to 150°C, and the LTC3260MP is tested and guaranteed from –55°C to 150°C junction temperature. The highest ambient temperature at which the limits hold depends on the operating point, the board layout, the package thermal resistance and other surroundings.",
+    "Junction temperature follows TJ = TA + (PD • θJA), with TJ and TA in °C, PD in watts and θJA = 43°C/W."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: 50mA positive regulator",
+   "page": 3,
+   "conditions": "Limits marked ● apply over the full operating junction temperature range; all other figures are at TA = 25°C (Note 2). VIN = EN+ = EN– = 12V, MODE = 0V, RT = 200kΩ.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "",
+     "LDO+ Output Voltage Range",
+     "",
+     "●",
+     "1.2",
+     "",
+     "32",
+     "V"
+    ],
+    [
+     "VADJ+",
+     "ADJ+ Reference Voltage",
+     "",
+     "●",
+     "1.176",
+     "1.200",
+     "1.224",
+     "V"
+    ],
+    [
+     "IADJ+",
+     "ADJ+ Input Current",
+     "VADJ+ = 1.2V",
+     "",
+     "–50",
+     "",
+     "50",
+     "nA"
+    ],
+    [
+     "ILDO+(SC)",
+     "LDO+ Short-Circuit Current",
+     "",
+     "●",
+     "50",
+     "100",
+     "",
+     "mA"
+    ],
+    [
+     "",
+     "Line Regulation",
+     "",
+     "",
+     "",
+     "0.04",
+     "",
+     "mV/V"
+    ],
+    [
+     "",
+     "Load Regulation",
+     "",
+     "",
+     "",
+     "0.03",
+     "",
+     "mV/mA"
+    ],
+    [
+     "VDROPOUT+",
+     "LDO+ Dropout Voltage",
+     "ILDO+ = 50mA",
+     "",
+     "",
+     "400",
+     "800",
+     "mV"
+    ],
+    [
+     "",
+     "Output Voltage Noise",
+     "CBYP+ = 10nF",
+     "",
+     "",
+     "100",
+     "",
+     "µVRMS"
+    ],
+    [
+     "VEN+(H)",
+     "EN+ Threshold Rising",
+     "",
+     "●",
+     "",
+     "1.1",
+     "2.0",
+     "V"
+    ],
+    [
+     "VEN+(L)",
+     "EN+ Threshold Falling",
+     "",
+     "●",
+     "0.4",
+     "1.0",
+     "",
+     "V"
+    ],
+    [
+     "IEN+",
+     "EN+ Pin Internal Pull-Down Current",
+     "VIN = EN+ = 32V",
+     "",
+     "",
+     "0.7",
+     "",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: 50mA negative regulator",
+   "page": 3,
+   "conditions": "Limits marked ● apply over the full operating junction temperature range; all other figures are at TA = 25°C (Note 2). VIN = EN+ = EN– = 12V, MODE = 0V, RT = 200kΩ.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "",
+     "LDO– Output Voltage Range",
+     "",
+     "●",
+     "–32",
+     "",
+     "–1.2",
+     "V"
+    ],
+    [
+     "VADJ–",
+     "ADJ– Reference Voltage",
+     "",
+     "●",
+     "–1.224",
+     "–1.200",
+     "–1.176",
+     "V"
+    ],
+    [
+     "IADJ–",
+     "ADJ– Input Current",
+     "VADJ– = –1.2V",
+     "",
+     "–50",
+     "",
+     "50",
+     "nA"
+    ],
+    [
+     "ILDO–(SC)",
+     "LDO– Short-Circuit Current",
+     "",
+     "●",
+     "50",
+     "100",
+     "",
+     "mA"
+    ],
+    [
+     "",
+     "Line Regulation",
+     "",
+     "",
+     "",
+     "0.002",
+     "",
+     "mV/V"
+    ],
+    [
+     "",
+     "Load Regulation",
+     "",
+     "",
+     "",
+     "0.02",
+     "",
+     "mV/mA"
+    ],
+    [
+     "VDROPOUT–",
+     "LDO– Dropout Voltage",
+     "ILDO– = 50mA",
+     "",
+     "",
+     "200",
+     "500",
+     "mV"
+    ],
+    [
+     "",
+     "Output Voltage Noise",
+     "CBYP– = 10nF",
+     "",
+     "",
+     "100",
+     "",
+     "µVRMS"
+    ],
+    [
+     "VEN(H)",
+     "EN– Threshold Rising",
+     "",
+     "●",
+     "",
+     "1.1",
+     "2.0",
+     "V"
+    ],
+    [
+     "VEN(L)",
+     "EN– Threshold Falling",
+     "",
+     "●",
+     "0.4",
+     "1.0",
+     "",
+     "V"
+    ],
+    [
+     "IEN–",
+     "EN– Pin Internal Pull-Down Current",
+     "VIN = EN– = 32V",
+     "",
+     "",
+     "1.4",
+     "",
+     "µA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Ceramic capacitor manufacturers",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "manufacturer",
+    "website"
+   ],
+   "rows": [
+    [
+     "AVX",
+     "www.avxcorp.com"
+    ],
+    [
+     "Kemet",
+     "www.kemet.com"
+    ],
+    [
+     "Murata",
+     "www.murata.com"
+    ],
+    [
+     "Taiyo Yuden",
+     "www.t-yuden.com"
+    ],
+    [
+     "Vishay",
+     "www.vishay.com"
+    ],
+    [
+     "TDK",
+     "www.component.tdk.com"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Related parts",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "part number",
+    "description",
+    "comments"
+   ],
+   "rows": [
+    [
+     "LTC1144",
+     "Switched-Capacitor Wide Input Range Voltage Converter with Shutdown",
+     "Wide Input Voltage Range: 2V to 18V, ISD < 8µA, SO8 Package"
+    ],
+    [
+     "LTC1514/LTC1515",
+     "Step-Up/Step-Down Switched-Capacitor DC/DC Converters",
+     "VIN: 2V to 10V, VOUT: 3.3V to 5V, IQ = 60µA, SO8 Package"
+    ],
+    [
+     "LT1611",
+     "150mA Output, 1.4MHz Micropower Inverting Switching Regulator",
+     "VIN: 0.9V to 10V, VOUT = ±34V, ThinSOT Package"
+    ],
+    [
+     "LT1614",
+     "250mA Output, 600kHz Micropower Inverting Switching Regulator",
+     "VIN: 0.9V to 6V, VOUT = ±30V, IQ = 1mA, MS8, SO8 Packages"
+    ],
+    [
+     "LTC1911",
+     "250mA, 1.5MHz Inductorless Step-Down DC/DC Converter",
+     "VIN: 2.7V to 5.5V, VOUT = 1.5V/1.8V, IQ = 180µA, MS8 Package"
+    ],
+    [
+     "LTC3250/LTC3250-1.2/LTC3250-1.5",
+     "Inductorless Step-Down DC/DC Converters",
+     "VIN: 3.1V to 5.5V, VOUT = 1.2V, 1.5V, IQ = 35µA, ThinSOT Package"
+    ],
+    [
+     "LTC3251",
+     "500mA Spread Spectrum Inductorless Step-Down DC/DC Converter",
+     "VIN: 2.7V to 5.5V, VOUT: 0.9V to 1.6V, 1.2V, 1.5V, IQ = 9µA, MS10E Package"
+    ],
+    [
+     "LTC3252",
+     "Dual 250mA, Spread Spectrum Inductorless Step-Down DC/DC Converter",
+     "VIN: 2.7V to 5.5V, VOUT: 0.9V to 1.6V, IQ = 50µA, DFN12 Package"
+    ],
+    [
+     "LT1054/LT1054L",
+     "Switched-Capacitor Voltage Converters with Regulator",
+     "VIN: 3.5V to 15V/7V, IOUT = 100mA/125mA, N8, SO8, SO16 Packages"
+    ],
+    [
+     "LTC3261",
+     "High Voltage, Low Quiescent Current Inverting Charge Pump",
+     "VIN: 4.5V to 32V, VOUT = –VIN, IOUT = 100mA, MSOP-12 Package"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Oscillator frequency against supply voltage",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Oscillator frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RT = GND",
+     "points": [
+      [
+       4.11,
+       486.3
+      ],
+      [
+       5.39,
+       491.7
+      ],
+      [
+       10.31,
+       494.3
+      ],
+      [
+       33.17,
+       497.2
+      ]
+     ]
+    },
+    {
+     "label": "RT = 200kΩ",
+     "points": [
+      [
+       4.11,
+       197.3
+      ],
+      [
+       5.05,
+       200.1
+      ],
+      [
+       8.41,
+       195.1
+      ],
+      [
+       33.17,
+       195.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Oscillator frequency against RT",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "RT",
+    "unit": "kΩ",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Oscillator frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fOSC",
+     "points": [
+      [
+       4.976,
+       500.1
+      ],
+      [
+       18.5,
+       501.5
+      ],
+      [
+       18.94,
+       432.4
+      ],
+      [
+       45.45,
+       368.8
+      ],
+      [
+       99.46,
+       281.2
+      ],
+      [
+       231.1,
+       177.9
+      ],
+      [
+       414.2,
+       118.5
+      ],
+      [
+       898.2,
+       62.0
+      ],
+      [
+       1497,
+       40.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Shutdown current against temperature",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Shutdown current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 32V",
+     "points": [
+      [
+       -50.4,
+       4.51
+      ],
+      [
+       -0.3,
+       5.3
+      ],
+      [
+       71.7,
+       6.0
+      ],
+      [
+       93.6,
+       6.6
+      ],
+      [
+       112.4,
+       7.99
+      ],
+      [
+       118.7,
+       8.92
+      ],
+      [
+       121.8,
+       9.67
+      ],
+      [
+       128.0,
+       12.0
+      ],
+      [
+       134.3,
+       15.45
+      ],
+      [
+       149.9,
+       25.62
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12V",
+     "points": [
+      [
+       -50.4,
+       1.8
+      ],
+      [
+       90.5,
+       2.81
+      ],
+      [
+       115.5,
+       3.25
+      ],
+      [
+       121.8,
+       3.66
+      ],
+      [
+       128.0,
+       4.52
+      ],
+      [
+       134.3,
+       5.86
+      ],
+      [
+       149.9,
+       9.83
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 5V",
+     "points": [
+      [
+       -50.4,
+       1.2
+      ],
+      [
+       24.7,
+       1.55
+      ],
+      [
+       115.5,
+       2.29
+      ],
+      [
+       121.8,
+       2.56
+      ],
+      [
+       128.0,
+       3.18
+      ],
+      [
+       134.3,
+       4.17
+      ],
+      [
+       149.9,
+       7.14
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent current against temperature",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Quiescent current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Burst Mode operation, both LDOs on",
+     "points": [
+      [
+       -50.4,
+       74.7
+      ],
+      [
+       2.6,
+       92.0
+      ],
+      [
+       24.7,
+       96.7
+      ],
+      [
+       66.7,
+       107.7
+      ],
+      [
+       93.7,
+       111.5
+      ],
+      [
+       100.6,
+       113.2
+      ],
+      [
+       149.9,
+       136.0
+      ]
+     ]
+    },
+    {
+     "label": "Burst Mode operation, negative LDO on",
+     "points": [
+      [
+       -50.4,
+       60.3
+      ],
+      [
+       -28.3,
+       66.0
+      ],
+      [
+       -0.8,
+       71.5
+      ],
+      [
+       33.8,
+       80.3
+      ],
+      [
+       74.1,
+       88.4
+      ],
+      [
+       119.2,
+       98.5
+      ],
+      [
+       129.6,
+       102.0
+      ],
+      [
+       149.9,
+       112.0
+      ]
+     ]
+    },
+    {
+     "label": "Positive LDO on",
+     "points": [
+      [
+       -50.4,
+       23.2
+      ],
+      [
+       105.4,
+       38.3
+      ],
+      [
+       124.6,
+       42.4
+      ],
+      [
+       149.9,
+       52.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent current against supply voltage (constant frequency mode)",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Quiescent current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fOSC = 500kHz",
+     "points": [
+      [
+       4.03,
+       2.48
+      ],
+      [
+       5.02,
+       3.62
+      ],
+      [
+       6.25,
+       4.57
+      ],
+      [
+       9.01,
+       6.31
+      ],
+      [
+       10.82,
+       7.2
+      ],
+      [
+       16.41,
+       8.99
+      ],
+      [
+       32.01,
+       13.36
+      ]
+     ]
+    },
+    {
+     "label": "fOSC = 200kHz",
+     "points": [
+      [
+       4.03,
+       1.21
+      ],
+      [
+       4.8,
+       1.64
+      ],
+      [
+       5.65,
+       1.94
+      ],
+      [
+       8.99,
+       2.81
+      ],
+      [
+       10.84,
+       3.2
+      ],
+      [
+       16.83,
+       3.99
+      ],
+      [
+       32.01,
+       5.69
+      ]
+     ]
+    },
+    {
+     "label": "fOSC = 50kHz",
+     "points": [
+      [
+       4.03,
+       0.49
+      ],
+      [
+       6.66,
+       0.76
+      ],
+      [
+       11.4,
+       1.04
+      ],
+      [
+       32.01,
+       1.65
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent current against temperature (constant frequency mode)",
+   "page": 4,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Quiescent current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fOSC = 500kHz",
+     "points": [
+      [
+       -50.8,
+       8.695
+      ],
+      [
+       -3.7,
+       8.109
+      ],
+      [
+       37.2,
+       7.448
+      ],
+      [
+       150.2,
+       6.117
+      ]
+     ]
+    },
+    {
+     "label": "fOSC = 200kHz",
+     "points": [
+      [
+       -50.8,
+       4.059
+      ],
+      [
+       34.0,
+       3.321
+      ],
+      [
+       78.0,
+       3.108
+      ],
+      [
+       150.2,
+       2.849
+      ]
+     ]
+    },
+    {
+     "label": "fOSC = 50kHz",
+     "points": [
+      [
+       -50.8,
+       1.222
+      ],
+      [
+       27.8,
+       1.072
+      ],
+      [
+       150.2,
+       0.95
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Effective open-loop resistance against temperature",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; fOSC = 500kHz",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Effective open-loop resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 32V",
+     "points": [
+      [
+       -50.0,
+       27.91
+      ],
+      [
+       -21.0,
+       30.97
+      ],
+      [
+       -2.0,
+       33.29
+      ],
+      [
+       71.0,
+       44.44
+      ],
+      [
+       125.0,
+       51.76
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 25V",
+     "points": [
+      [
+       -50.0,
+       26.53
+      ],
+      [
+       -20.9,
+       29.68
+      ],
+      [
+       21.8,
+       35.14
+      ],
+      [
+       90.7,
+       45.57
+      ],
+      [
+       125.0,
+       49.84
+      ],
+      [
+       150.0,
+       53.69
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 12V",
+     "points": [
+      [
+       -50.0,
+       24.28
+      ],
+      [
+       -10.9,
+       28.5
+      ],
+      [
+       13.0,
+       31.47
+      ],
+      [
+       150.0,
+       50.49
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VOUT short-circuit current against supply voltage",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT short-circuit current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RT = GND",
+     "points": [
+      [
+       3.98,
+       83.3
+      ],
+      [
+       4.53,
+       115.9
+      ],
+      [
+       4.98,
+       131.4
+      ],
+      [
+       5.61,
+       139.2
+      ],
+      [
+       7.32,
+       146.3
+      ],
+      [
+       11.44,
+       157.8
+      ],
+      [
+       14.51,
+       172.4
+      ],
+      [
+       16.71,
+       177.6
+      ],
+      [
+       20.61,
+       182.6
+      ],
+      [
+       26.99,
+       186.4
+      ],
+      [
+       29.98,
+       188.9
+      ],
+      [
+       31.99,
+       191.9
+      ],
+      [
+       32.99,
+       191.9
+      ]
+     ]
+    },
+    {
+     "label": "RT = 200kΩ",
+     "points": [
+      [
+       3.98,
+       37.4
+      ],
+      [
+       4.66,
+       50.2
+      ],
+      [
+       5.39,
+       55.3
+      ],
+      [
+       10.76,
+       62.8
+      ],
+      [
+       14.51,
+       70.3
+      ],
+      [
+       21.23,
+       76.4
+      ],
+      [
+       32.99,
+       81.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Voltage loss (VIN – |VOUT|) against output current (constant frequency mode)",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V",
+   "x": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Voltage loss",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fOSC = 500kHz",
+     "points": [
+      [
+       0.1973,
+       0.077
+      ],
+      [
+       1.45,
+       0.103
+      ],
+      [
+       3.963,
+       0.162
+      ],
+      [
+       8.336,
+       0.255
+      ],
+      [
+       13.75,
+       0.366
+      ],
+      [
+       16.33,
+       0.423
+      ],
+      [
+       21.91,
+       0.572
+      ],
+      [
+       31.18,
+       0.79
+      ],
+      [
+       39.62,
+       0.974
+      ],
+      [
+       49.3,
+       1.194
+      ],
+      [
+       64.99,
+       1.619
+      ],
+      [
+       98.6,
+       2.436
+      ]
+     ]
+    },
+    {
+     "label": "fOSC = 200kHz",
+     "points": [
+      [
+       0.09865,
+       0.075
+      ],
+      [
+       0.5541,
+       0.103
+      ],
+      [
+       1.56,
+       0.145
+      ],
+      [
+       3.963,
+       0.264
+      ],
+      [
+       5.435,
+       0.335
+      ],
+      [
+       7.679,
+       0.45
+      ],
+      [
+       12.64,
+       0.69
+      ],
+      [
+       15.02,
+       0.792
+      ],
+      [
+       19.72,
+       1.06
+      ],
+      [
+       27.36,
+       1.585
+      ],
+      [
+       49.3,
+       2.68
+      ]
+     ]
+    },
+    {
+     "label": "fOSC = 50kHz",
+     "points": [
+      [
+       0.09865,
+       0.096
+      ],
+      [
+       0.1749,
+       0.107
+      ],
+      [
+       0.6885,
+       0.227
+      ],
+      [
+       1.346,
+       0.326
+      ],
+      [
+       1.808,
+       0.427
+      ],
+      [
+       3.119,
+       0.717
+      ],
+      [
+       3.963,
+       0.88
+      ],
+      [
+       4.931,
+       1.073
+      ],
+      [
+       6.5,
+       1.437
+      ],
+      [
+       9.861,
+       2.132
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Effective open-loop resistance against supply voltage",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Effective open-loop resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "fOSC = 200kHz",
+     "points": [
+      [
+       4.48,
+       84.88
+      ],
+      [
+       6.27,
+       68.99
+      ],
+      [
+       7.1,
+       65.87
+      ],
+      [
+       7.94,
+       64.65
+      ],
+      [
+       8.48,
+       64.41
+      ],
+      [
+       14.5,
+       65.8
+      ],
+      [
+       22.41,
+       68.51
+      ],
+      [
+       26.71,
+       70.32
+      ],
+      [
+       32.01,
+       73.32
+      ]
+     ]
+    },
+    {
+     "label": "fOSC = 500kHz",
+     "points": [
+      [
+       4.48,
+       39.15
+      ],
+      [
+       6.27,
+       35.44
+      ],
+      [
+       6.99,
+       34.91
+      ],
+      [
+       7.99,
+       34.91
+      ],
+      [
+       24.36,
+       41.29
+      ],
+      [
+       32.01,
+       44.92
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ADJ+ pin voltage against temperature",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ADJ+ pin voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VADJ+",
+     "points": [
+      [
+       -50.4,
+       1.19515
+      ],
+      [
+       -22.2,
+       1.19744
+      ],
+      [
+       21.6,
+       1.19993
+      ],
+      [
+       115.5,
+       1.20385
+      ],
+      [
+       128.0,
+       1.20375
+      ],
+      [
+       149.9,
+       1.2017
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO+ dropout voltage against temperature",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V, ILDO+ = 50mA",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "LDO+ dropout voltage",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDROPOUT+",
+     "points": [
+      [
+       -50.4,
+       242.6
+      ],
+      [
+       -2.3,
+       321.7
+      ],
+      [
+       44.2,
+       411.9
+      ],
+      [
+       99.9,
+       527.4
+      ],
+      [
+       149.9,
+       642.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO+ supply rejection",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 6.5V, VLDO+ = 5V, ILDO+ = 50mA, VRIPPLE = 50mVRMS, CLDO+ = 10µF",
+   "x": {
+    "label": "Frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "LDO+ supply rejection",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "LDO+ supply rejection",
+     "points": [
+      [
+       0.1007,
+       55.57
+      ],
+      [
+       1.99,
+       55.57
+      ],
+      [
+       3.552,
+       56.01
+      ],
+      [
+       4.975,
+       55.57
+      ],
+      [
+       6.557,
+       53.75
+      ],
+      [
+       9.948,
+       49.55
+      ],
+      [
+       21.23,
+       42.92
+      ],
+      [
+       36.07,
+       37.4
+      ],
+      [
+       41.61,
+       36.6
+      ],
+      [
+       49.72,
+       37.51
+      ],
+      [
+       99.44,
+       43.53
+      ],
+      [
+       130.6,
+       44.59
+      ],
+      [
+       261.7,
+       46.1
+      ],
+      [
+       311.1,
+       46.9
+      ],
+      [
+       397.7,
+       49.55
+      ],
+      [
+       509.6,
+       54.2
+      ],
+      [
+       994.0,
+       53.99
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO+ GND pin current against ILOAD",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V",
+   "x": {
+    "label": "ILOAD",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "GND pin current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "GND pin current",
+     "points": [
+      [
+       0.1001,
+       0.0299
+      ],
+      [
+       0.7776,
+       0.0312
+      ],
+      [
+       1.995,
+       0.0335
+      ],
+      [
+       3.558,
+       0.034
+      ],
+      [
+       4.982,
+       0.0361
+      ],
+      [
+       6.017,
+       0.0397
+      ],
+      [
+       9.956,
+       0.0542
+      ],
+      [
+       15.16,
+       0.0606
+      ],
+      [
+       18.14,
+       0.0649
+      ],
+      [
+       19.9,
+       0.0682
+      ],
+      [
+       27.59,
+       0.0849
+      ],
+      [
+       49.69,
+       0.1199
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO+ load regulation",
+   "page": 5,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V, unity gain",
+   "x": {
+    "label": "ILDO+",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "VLDO+",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VLDO+",
+     "points": [
+      [
+       0.1005,
+       1.200186
+      ],
+      [
+       0.9971,
+       1.2
+      ],
+      [
+       5.015,
+       1.199789
+      ],
+      [
+       9.193,
+       1.199689
+      ],
+      [
+       13.93,
+       1.199629
+      ],
+      [
+       49.85,
+       1.19948
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ADJ– pin voltage against temperature",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ADJ– pin voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VADJ–",
+     "points": [
+      [
+       -50.4,
+       -1.19529
+      ],
+      [
+       -25.4,
+       -1.19721
+      ],
+      [
+       -0.3,
+       -1.19831
+      ],
+      [
+       24.7,
+       -1.19991
+      ],
+      [
+       71.7,
+       -1.20173
+      ],
+      [
+       118.6,
+       -1.20421
+      ],
+      [
+       131.2,
+       -1.20421
+      ],
+      [
+       149.9,
+       -1.20321
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO– dropout voltage against temperature",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VOUT = –12V, ILDO– = 50mA",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "LDO– dropout voltage",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDROPOUT–",
+     "points": [
+      [
+       -50.4,
+       126.9
+      ],
+      [
+       -2.2,
+       164.3
+      ],
+      [
+       53.2,
+       219.7
+      ],
+      [
+       98.4,
+       270.6
+      ],
+      [
+       149.9,
+       337.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO– power supply rejection",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VOUT = –6.5V, VLDO– = –5V, ILDO– = –50mA, VRIPPLE = 50mVRMS, CLDO– = 10µF",
+   "x": {
+    "label": "Frequency",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "LDO– supply rejection",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "LDO– supply rejection",
+     "points": [
+      [
+       0.09958,
+       51.49
+      ],
+      [
+       4.975,
+       51.49
+      ],
+      [
+       7.748,
+       51.74
+      ],
+      [
+       9.948,
+       51.49
+      ],
+      [
+       19.89,
+       47.97
+      ],
+      [
+       45.86,
+       45.75
+      ],
+      [
+       55.19,
+       44.87
+      ],
+      [
+       60.92,
+       42.96
+      ],
+      [
+       75.23,
+       33.71
+      ],
+      [
+       79.55,
+       32.65
+      ],
+      [
+       94.49,
+       36.85
+      ],
+      [
+       123.4,
+       39.33
+      ],
+      [
+       198.8,
+       41.95
+      ],
+      [
+       250.4,
+       42.47
+      ],
+      [
+       414.0,
+       43.0
+      ],
+      [
+       497.0,
+       43.53
+      ],
+      [
+       546.3,
+       44.46
+      ],
+      [
+       596.4,
+       47.97
+      ],
+      [
+       713.9,
+       50.46
+      ],
+      [
+       820.1,
+       51.66
+      ],
+      [
+       993.8,
+       51.49
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO– load regulation",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VOUT = –12V, unity gain",
+   "x": {
+    "label": "ILDO–",
+    "unit": "mA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "VLDO–",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VLDO–",
+     "points": [
+      [
+       0.1008,
+       -1.200081
+      ],
+      [
+       0.1986,
+       -1.200072
+      ],
+      [
+       0.4147,
+       -1.20005
+      ],
+      [
+       0.9733,
+       -1.200001
+      ],
+      [
+       2.1,
+       -1.199967
+      ],
+      [
+       4.92,
+       -1.199896
+      ],
+      [
+       10.83,
+       -1.19981
+      ],
+      [
+       49.88,
+       -1.199667
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO rejection of VOUT ripple",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 15V, VLDO+ = 12V, VLDO– = –12V, fOSC = 500kHz, ILDO+ = 50mA, ILDO– = –50mA; each trace 10mV/div AC-coupled, 1µs/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "AC-coupled voltage",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VLDO+",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       10,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "VLDO–",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       10,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       0.01,
+       0.18
+      ],
+      [
+       0.2,
+       -0.37
+      ],
+      [
+       0.35,
+       -0.37
+      ],
+      [
+       0.5,
+       0.18
+      ],
+      [
+       0.98,
+       3.89
+      ],
+      [
+       1.28,
+       5.38
+      ],
+      [
+       1.39,
+       5.38
+      ],
+      [
+       1.61,
+       4.07
+      ],
+      [
+       2.02,
+       0
+      ],
+      [
+       2.2,
+       -0.37
+      ],
+      [
+       2.57,
+       1.1
+      ],
+      [
+       3.16,
+       5.38
+      ],
+      [
+       3.3,
+       5.57
+      ],
+      [
+       3.34,
+       5.01
+      ],
+      [
+       3.55,
+       3.89
+      ],
+      [
+       3.95,
+       0
+      ],
+      [
+       4.21,
+       -0.37
+      ],
+      [
+       4.43,
+       0.73
+      ],
+      [
+       5.02,
+       5.19
+      ],
+      [
+       5.2,
+       5.57
+      ],
+      [
+       5.39,
+       4.63
+      ],
+      [
+       5.87,
+       0.18
+      ],
+      [
+       5.94,
+       -0.18
+      ],
+      [
+       6.17,
+       -0.18
+      ],
+      [
+       6.28,
+       0.18
+      ],
+      [
+       6.91,
+       4.63
+      ],
+      [
+       7.09,
+       5.57
+      ],
+      [
+       7.17,
+       5.57
+      ],
+      [
+       7.43,
+       3.89
+      ],
+      [
+       7.8,
+       0.18
+      ],
+      [
+       8.02,
+       -0.18
+      ],
+      [
+       8.31,
+       0.92
+      ],
+      [
+       8.94,
+       5.38
+      ],
+      [
+       9.09,
+       5.57
+      ],
+      [
+       9.34,
+       4.07
+      ],
+      [
+       9.78,
+       -0.18
+      ],
+      [
+       10.0,
+       0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO+ load transient",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V, VLDO+ = 5V; VLDO+ 10mV/div AC-coupled, 40µs/div; load stepped between 2mA and 20mA",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VLDO+ change",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "ILDO+",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VLDO+",
+     "points": [
+      [
+       0.0,
+       0
+      ],
+      [
+       39.2,
+       0.14
+      ],
+      [
+       43.3,
+       -6.11
+      ],
+      [
+       45.8,
+       -7.51
+      ],
+      [
+       48.8,
+       -6.39
+      ],
+      [
+       53.9,
+       -2.05
+      ],
+      [
+       57.2,
+       -0.84
+      ],
+      [
+       59.4,
+       -0.84
+      ],
+      [
+       65.6,
+       -2.33
+      ],
+      [
+       70.0,
+       -2.89
+      ],
+      [
+       81.8,
+       -2.15
+      ],
+      [
+       92.8,
+       -2.43
+      ],
+      [
+       107.6,
+       -2.24
+      ],
+      [
+       146.6,
+       -2.38
+      ],
+      [
+       150.7,
+       2.57
+      ],
+      [
+       154.4,
+       4.48
+      ],
+      [
+       156.9,
+       4.24
+      ],
+      [
+       173.9,
+       0.23
+      ],
+      [
+       179.4,
+       -0.42
+      ],
+      [
+       184.2,
+       -0.42
+      ],
+      [
+       194.9,
+       0.28
+      ],
+      [
+       204.5,
+       0.28
+      ],
+      [
+       209.6,
+       0
+      ],
+      [
+       254.2,
+       0.14
+      ],
+      [
+       259.0,
+       -6.3
+      ],
+      [
+       261.2,
+       -7.51
+      ],
+      [
+       263.1,
+       -7.18
+      ],
+      [
+       269.7,
+       -1.96
+      ],
+      [
+       273.0,
+       -0.84
+      ],
+      [
+       275.2,
+       -0.89
+      ],
+      [
+       281.1,
+       -2.43
+      ],
+      [
+       284.4,
+       -2.85
+      ],
+      [
+       289.6,
+       -2.85
+      ],
+      [
+       295.9,
+       -2.29
+      ],
+      [
+       320.5,
+       -2.52
+      ],
+      [
+       321.6,
+       -2.33
+      ],
+      [
+       340.4,
+       -2.19
+      ],
+      [
+       362.6,
+       -2.29
+      ],
+      [
+       365.9,
+       2.05
+      ],
+      [
+       369.6,
+       4.57
+      ],
+      [
+       371.4,
+       4.57
+      ],
+      [
+       392.9,
+       -0.42
+      ],
+      [
+       398.8,
+       -0.51
+      ],
+      [
+       400.7,
+       -0.28
+      ]
+     ]
+    },
+    {
+     "label": "ILDO+",
+     "axis": "y2",
+     "points": [
+      [
+       0.0,
+       2.3
+      ],
+      [
+       38.8,
+       2.56
+      ],
+      [
+       40.7,
+       20.35
+      ],
+      [
+       51.7,
+       20.61
+      ],
+      [
+       147.0,
+       20.44
+      ],
+      [
+       147.7,
+       3.58
+      ],
+      [
+       148.1,
+       2.64
+      ],
+      [
+       152.1,
+       2.3
+      ],
+      [
+       254.2,
+       2.47
+      ],
+      [
+       255.7,
+       18.82
+      ],
+      [
+       257.2,
+       20.53
+      ],
+      [
+       362.6,
+       20.44
+      ],
+      [
+       364.0,
+       2.47
+      ],
+      [
+       388.1,
+       2.38
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "LDO– load transient",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V, VLDO– = –5V, circuit of Figure 3; VLDO– 10mV/div AC-coupled, 40µs/div; load stepped between –2mA and –20mA",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VLDO– change",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "ILDO–",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VLDO–",
+     "points": [
+      [
+       -0.6,
+       -0.04
+      ],
+      [
+       39.4,
+       -0.04
+      ],
+      [
+       43.8,
+       -3.21
+      ],
+      [
+       64.4,
+       1.32
+      ],
+      [
+       67.3,
+       1.27
+      ],
+      [
+       72.9,
+       -0.26
+      ],
+      [
+       75.1,
+       -0.4
+      ],
+      [
+       85.4,
+       0.18
+      ],
+      [
+       94.2,
+       -0.09
+      ],
+      [
+       104.1,
+       0.09
+      ],
+      [
+       143.5,
+       -0.09
+      ],
+      [
+       145.7,
+       0.26
+      ],
+      [
+       149.0,
+       3.43
+      ],
+      [
+       153.4,
+       -0.26
+      ],
+      [
+       158.6,
+       0.31
+      ],
+      [
+       162.3,
+       -0.09
+      ],
+      [
+       251.7,
+       -0.09
+      ],
+      [
+       253.9,
+       -2.68
+      ],
+      [
+       256.5,
+       -3.21
+      ],
+      [
+       277.1,
+       1.41
+      ],
+      [
+       279.7,
+       1.23
+      ],
+      [
+       284.8,
+       -0.22
+      ],
+      [
+       287.0,
+       -0.31
+      ],
+      [
+       296.2,
+       0.09
+      ],
+      [
+       305.1,
+       -0.09
+      ],
+      [
+       352.8,
+       0
+      ],
+      [
+       356.5,
+       -0.04
+      ],
+      [
+       357.6,
+       -0.31
+      ],
+      [
+       360.2,
+       3.56
+      ],
+      [
+       365.3,
+       -0.26
+      ],
+      [
+       369.4,
+       0.35
+      ],
+      [
+       375.0,
+       -0.04
+      ],
+      [
+       400.1,
+       -0.04
+      ]
+     ]
+    },
+    {
+     "label": "ILDO–",
+     "axis": "y2",
+     "points": [
+      [
+       0,
+       -20
+      ],
+      [
+       39.6,
+       -20
+      ],
+      [
+       40.0,
+       -2
+      ],
+      [
+       146.0,
+       -2
+      ],
+      [
+       146.4,
+       -20
+      ],
+      [
+       251.0,
+       -20
+      ],
+      [
+       251.4,
+       -2
+      ],
+      [
+       358.5,
+       -2
+      ],
+      [
+       358.9,
+       -20
+      ],
+      [
+       400,
+       -20
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VOUT transient (Burst Mode operation, MODE = H)",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V, fOSC = 500kHz; VOUT 500mV/div AC-coupled, 2ms/div; IOUT stepped between –5mA and –50mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT change",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "IOUT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       -0.03,
+       -23
+      ],
+      [
+       0.32,
+       295
+      ],
+      [
+       0.41,
+       567
+      ],
+      [
+       0.83,
+       978
+      ],
+      [
+       1.19,
+       1094
+      ],
+      [
+       1.74,
+       1140
+      ],
+      [
+       2.26,
+       1122
+      ],
+      [
+       2.29,
+       1146
+      ],
+      [
+       3.12,
+       1140
+      ],
+      [
+       3.34,
+       6
+      ],
+      [
+       3.84,
+       469
+      ],
+      [
+       3.99,
+       -52
+      ],
+      [
+       4.58,
+       463
+      ],
+      [
+       4.75,
+       -58
+      ],
+      [
+       5.3,
+       469
+      ],
+      [
+       5.46,
+       -64
+      ],
+      [
+       5.85,
+       324
+      ],
+      [
+       5.92,
+       579
+      ],
+      [
+       6.33,
+       978
+      ],
+      [
+       6.51,
+       1047
+      ],
+      [
+       6.88,
+       1111
+      ],
+      [
+       7.75,
+       1146
+      ],
+      [
+       7.84,
+       1128
+      ],
+      [
+       7.97,
+       1146
+      ],
+      [
+       8.02,
+       1122
+      ],
+      [
+       8.11,
+       1146
+      ],
+      [
+       8.21,
+       1128
+      ],
+      [
+       8.57,
+       1140
+      ],
+      [
+       8.63,
+       1117
+      ],
+      [
+       8.79,
+       35
+      ],
+      [
+       8.89,
+       12
+      ],
+      [
+       9.37,
+       480
+      ],
+      [
+       9.49,
+       -58
+      ],
+      [
+       10.06,
+       446
+      ],
+      [
+       10.17,
+       -35
+      ],
+      [
+       10.25,
+       -64
+      ],
+      [
+       10.75,
+       457
+      ],
+      [
+       10.97,
+       -52
+      ],
+      [
+       11.35,
+       347
+      ],
+      [
+       11.39,
+       579
+      ],
+      [
+       11.83,
+       984
+      ],
+      [
+       12.01,
+       1059
+      ],
+      [
+       12.32,
+       1105
+      ],
+      [
+       13.23,
+       1128
+      ],
+      [
+       13.27,
+       1146
+      ],
+      [
+       13.34,
+       1128
+      ],
+      [
+       13.43,
+       1146
+      ],
+      [
+       13.52,
+       1128
+      ],
+      [
+       14.01,
+       1146
+      ],
+      [
+       14.09,
+       1128
+      ],
+      [
+       14.31,
+       12
+      ],
+      [
+       14.82,
+       469
+      ],
+      [
+       15.0,
+       -69
+      ],
+      [
+       15.54,
+       469
+      ],
+      [
+       15.73,
+       -75
+      ],
+      [
+       16.26,
+       457
+      ],
+      [
+       16.45,
+       -69
+      ],
+      [
+       16.83,
+       341
+      ],
+      [
+       16.89,
+       573
+      ],
+      [
+       17.29,
+       972
+      ],
+      [
+       17.64,
+       1082
+      ],
+      [
+       18.32,
+       1134
+      ],
+      [
+       19.47,
+       1146
+      ],
+      [
+       19.6,
+       1117
+      ],
+      [
+       19.82,
+       17
+      ],
+      [
+       20.01,
+       162
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "axis": "y2",
+     "points": [
+      [
+       0,
+       -5
+      ],
+      [
+       0.35,
+       -5
+      ],
+      [
+       0.4,
+       -50
+      ],
+      [
+       3.1,
+       -50
+      ],
+      [
+       3.15,
+       -5
+      ],
+      [
+       5.9,
+       -5
+      ],
+      [
+       5.95,
+       -50
+      ],
+      [
+       8.63,
+       -50
+      ],
+      [
+       8.68,
+       -5
+      ],
+      [
+       11.4,
+       -5
+      ],
+      [
+       11.45,
+       -50
+      ],
+      [
+       14.12,
+       -50
+      ],
+      [
+       14.17,
+       -5
+      ],
+      [
+       16.9,
+       -5
+      ],
+      [
+       16.95,
+       -50
+      ],
+      [
+       19.6,
+       -50
+      ],
+      [
+       19.65,
+       -5
+      ],
+      [
+       20,
+       -5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VOUT transient (MODE = low to high)",
+   "page": 6,
+   "conditions": "TA = 25°C, CFLY = 1µF, CIN = COUT = CLDO+ = CLDO– = 10µF; VIN = 12V, fOSC = 500kHz, IOUT = –5mA; VOUT 500mV/div AC-coupled, 2ms/div",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT change",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       -0.04,
+       0
+      ],
+      [
+       0.19,
+       0
+      ],
+      [
+       0.27,
+       -46
+      ],
+      [
+       0.42,
+       -269
+      ],
+      [
+       0.73,
+       -497
+      ],
+      [
+       1.11,
+       -587
+      ],
+      [
+       1.65,
+       -614
+      ],
+      [
+       4.06,
+       -623
+      ],
+      [
+       5.64,
+       0
+      ],
+      [
+       5.79,
+       0
+      ],
+      [
+       5.94,
+       -111
+      ],
+      [
+       6.09,
+       -111
+      ],
+      [
+       6.38,
+       9
+      ],
+      [
+       6.52,
+       9
+      ],
+      [
+       6.67,
+       -111
+      ],
+      [
+       6.81,
+       -111
+      ],
+      [
+       7.03,
+       -19
+      ],
+      [
+       7.24,
+       -19
+      ],
+      [
+       7.39,
+       -111
+      ],
+      [
+       7.53,
+       -111
+      ],
+      [
+       7.75,
+       -9
+      ],
+      [
+       7.97,
+       9
+      ],
+      [
+       8.19,
+       -325
+      ],
+      [
+       8.41,
+       -479
+      ],
+      [
+       8.7,
+       -569
+      ],
+      [
+       9.07,
+       -605
+      ],
+      [
+       9.89,
+       -623
+      ],
+      [
+       11.76,
+       -623
+      ],
+      [
+       12.06,
+       -533
+      ],
+      [
+       13.38,
+       19
+      ],
+      [
+       13.52,
+       19
+      ],
+      [
+       13.67,
+       -93
+      ],
+      [
+       13.82,
+       -93
+      ],
+      [
+       14.11,
+       19
+      ],
+      [
+       14.26,
+       19
+      ],
+      [
+       14.33,
+       -121
+      ],
+      [
+       14.48,
+       -121
+      ],
+      [
+       14.85,
+       28
+      ],
+      [
+       15.0,
+       28
+      ],
+      [
+       15.22,
+       -56
+      ],
+      [
+       15.37,
+       -56
+      ],
+      [
+       15.52,
+       0
+      ],
+      [
+       15.66,
+       0
+      ],
+      [
+       16.11,
+       -461
+      ],
+      [
+       16.55,
+       -587
+      ],
+      [
+       16.77,
+       -605
+      ],
+      [
+       17.29,
+       -623
+      ],
+      [
+       19.34,
+       -623
+      ],
+      [
+       19.56,
+       -596
+      ],
+      [
+       20.0,
+       -443
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Maximum power dissipation against ambient temperature",
+   "page": 13,
+   "conditions": "θJA = 43°C/W",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Maximum power dissipation",
+    "unit": "W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TJ = 150°C",
+     "points": [
+      [
+       -49.6,
+       4.658
+      ],
+      [
+       150.4,
+       0.005
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "pm12-from-15v",
+   "title": "±12V outputs from a single 15V input",
+   "page": 1,
+   "description": "A 15V supply becomes +12V and –12V low-noise rails. EN+ and EN– are tied to the input so both regulators run whenever power is present, and MODE is grounded so the charge pump runs at constant frequency, set to 200kHz by the 200k resistor on RT. The pump, with a 1µF flying capacitor, makes about –15V on VOUT; the positive LDO runs from the input and the negative LDO from VOUT. Each output is set by a 909k over 100k divider into its ADJ pin, and 10nF on each BYP pin quiets the references.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC3260"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "flying capacitor"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "909k"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "909k"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "200k"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "15V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "12V"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "–12V"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "–15V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "pm24-from-28v",
+   "title": "Low power ±24V supply from a single-ended 28V input",
+   "page": 13,
+   "description": "A 28V input gives +24V and –24V at low quiescent current. MODE is tied high to the input with both enables, so the charge pump runs in Burst Mode operation; RT is grounded for the 500kHz rate. 1.91M over 100k dividers set the two LDO outputs. The reference bypass pins are left open, and all supply, pump and output capacitors are 4.7µF except the 1µF flying capacitor.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC3260"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "4.7µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "flying capacitor"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7µF"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "4.7µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1.91M"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1.91M"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "28V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "24V"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "–24V"
+    }
+   ],
+   "notes": [
+    "Pin numbers follow the 14-lead DFN."
+   ]
+  },
+  {
+   "id": "divide-invert",
+   "title": "High voltage input to bipolar output with a dividing/inverting charge pump",
+   "page": 13,
+   "description": "From 13.5V to 32V in, the part makes +5V and –5V. Two pump capacitors (C2, C3) and three MBR0540 Schottky diodes around C+ and C– turn the inverter into a divide-by-two inverter, so VOUT sits near minus half the input. Because VOUT is always below –½VIN the pump stays in constant frequency operation whatever MODE is set to; in this circuit MODE, RT and GND all go to ground. 316k over 100k dividers set the outputs and 0.01µF capacitors bypass both references.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC3260"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "50V"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "50V"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "50V"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.01µF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "0.01µF"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "4.7µF"
+    },
+    {
+     "ref": "C8",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "25V"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBR0540"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "MBR0540"
+    },
+    {
+     "ref": "D3",
+     "type": "schottky",
+     "value": "MBR0540"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "316k"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "316k"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "13.5V to 32V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "5V"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "–5V"
+    }
+   ],
+   "notes": [
+    "Pin numbers are those of the 16-lead MSOP.",
+    "VOUT ≈ –((VIN – VF – |IOUT| • ROL) / 2 – VF), VF being the Schottky forward drop."
+   ]
+  },
+  {
+   "id": "tracking-28v",
+   "title": "28V dual tracking bipolar supply with outputs from ±5V to ±25V",
+   "page": 14,
+   "description": "One chain of resistors runs from LDO+ to LDO– with no tap to ground: R1 from LDO+ to ADJ+, R2 and the 500k variable resistor R3 from ADJ+ to ADJ–, and R4 from ADJ– to LDO–. Turning R3 moves both outputs together, from ±5V to ±25V, so the negative rail tracks the positive one. MODE and RT are grounded for 500kHz constant frequency operation from a 28V input, and 0.01µF capacitors bypass both references.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC3260"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "50V"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "50V"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "35V"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "0.01µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "0.01µF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "35V"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "4.7µF",
+     "note": "50V"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "732k"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "73.2k"
+    },
+    {
+     "ref": "R3",
+     "type": "other",
+     "value": "500k",
+     "note": "variable resistor; wiper tied to its lower end"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "732k"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "28V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "OUT"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "–OUT"
+    }
+   ],
+   "notes": [
+    "Pin numbers are those of the 16-lead MSOP."
+   ]
+  },
+  {
+   "id": "pm12-200khz",
+   "title": "Low noise ±12V supply from a single-ended 15V input (frequency = 200kHz)",
+   "page": 18,
+   "description": "The same ±12V from 15V arrangement, with the charge pump at 200kHz constant frequency (R5 = 200k on RT, MODE grounded). Both enables follow the input. 909k over 100k dividers set each LDO to 12V in magnitude, 10nF capacitors bypass the references, and 10µF capacitors sit on the input, VOUT and both outputs.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC3260"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1µF",
+     "note": "flying capacitor"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "909k"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100k"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "909k"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "200k"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "15V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "12V"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "–12V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ldo-plus",
+   "title": "Positive LDO application circuit",
+   "page": 10,
+   "description": "The positive LDO alone: LDO+ drives the output, R1 and R2 divide it down into ADJ+, COUT holds the output steady, and an optional CBYP+ from BYP+ to ground bypasses the 1.2V reference. EN+ switches the regulator on and off; it is powered from VIN.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC3260"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "COUT",
+     "note": "at least 2µF, low ESR ceramic"
+    },
+    {
+     "ref": "CBYP",
+     "type": "capacitor",
+     "value": "CBYP+",
+     "note": "optional, 10nF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "EN+"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "LDO OUTPUT"
+    }
+   ],
+   "notes": [
+    "Only the pins of the positive regulator take part."
+   ]
+  },
+  {
+   "id": "ldo-minus",
+   "title": "Negative LDO application circuit",
+   "page": 10,
+   "description": "The negative LDO alone, fed inside the part from the charge pump output VOUT. R1 from LDO– to ADJ– and R2 from ADJ– to ground set the output; COUT holds it steady, CBYP– bypasses the –1.2V reference, and CADJ– across R1 speeds the transient response. EN– enables the pump and this regulator together.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC3260"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "COUT",
+     "type": "capacitor",
+     "value": "COUT",
+     "note": "at least 2µF, low ESR ceramic"
+    },
+    {
+     "ref": "CBYP",
+     "type": "capacitor",
+     "value": "CBYP–",
+     "note": "optional, 10nF"
+    },
+    {
+     "ref": "CADJ",
+     "type": "capacitor",
+     "value": "CADJ–",
+     "note": "optional, 10pF recommended, 2pF to 22pF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "EN–"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "LDO OUTPUT"
+    }
+   ],
+   "notes": [
+    "Only the pins of the negative regulator take part; VOUT has no outside connection in this circuit."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Positive LDO output voltage",
+   "expr": "VLDO+ = 1.2V • (R1 / R2 + 1)",
+   "where": {
+    "R1": "resistor from LDO+ to ADJ+",
+    "R2": "resistor from ADJ+ to GND",
+    "1.2V": "ADJ+ reference"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Negative LDO output voltage",
+   "expr": "VLDO– = –1.2V • (R1 / R2 + 1)",
+   "where": {
+    "R1": "resistor from LDO– to ADJ–",
+    "R2": "resistor from ADJ– to GND",
+    "–1.2V": "ADJ– reference"
+   },
+   "note": "",
+   "page": 10
+  },
+  {
+   "name": "Charge pump output ripple, peak to peak",
+   "expr": "VRIPPLE(P-P) ≈ (IOUT / COUT) • (1 / fOSC – tON)",
+   "where": {
+    "IOUT": "load current on VOUT",
+    "COUT": "output capacitor on VOUT",
+    "fOSC": "oscillator frequency",
+    "tON": "oscillator on-time, 1µs typ"
+   },
+   "note": "Constant frequency mode.",
+   "page": 11
+  },
+  {
+   "name": "Power in the positive LDO",
+   "expr": "PLDO+ = (VIN – VLDO+) • ILDO+",
+   "where": {
+    "ILDO+": "positive LDO load current"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Power in the negative LDO",
+   "expr": "PLDO– = (|VOUT| – |VLDO–|) • ILDO–",
+   "where": {
+    "ILDO–": "negative LDO load current"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Power in the inverting charge pump",
+   "expr": "PCP = (VIN – |VOUT|) • (IOUT + ILDO–)",
+   "where": {
+    "IOUT": "any extra current drawn straight from VOUT",
+    "ILDO–": "negative LDO current, which the pump also supplies"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Total power dissipation",
+   "expr": "PD = PLDO+ + PLDO– + PCP",
+   "where": {},
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Junction temperature",
+   "expr": "TJ = TA + (PD • θJA)",
+   "where": {
+    "TJ": "junction temperature, °C",
+    "TA": "ambient temperature, °C",
+    "PD": "power dissipation, W",
+    "θJA": "package thermal resistance, 43°C/W"
+   },
+   "note": "",
+   "page": 4
+  },
+  {
+   "name": "Dividing/inverting charge pump output",
+   "expr": "VOUT ≈ –((VIN – VF – |IOUT| • ROL) / 2 – VF)",
+   "where": {
+    "VF": "Schottky diode forward voltage",
+    "IOUT": "current drawn from VOUT",
+    "ROL": "effective open-loop output resistance"
+   },
+   "note": "For the three-diode, two-capacitor pump circuit.",
+   "page": 13
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 8,
+   "text": "One positive input of 4.5V to 32V makes a bipolar pair of quiet rails: an inverting charge pump produces a negative supply on VOUT, a negative LDO runs from VOUT, and an independent positive LDO runs from VIN."
+  },
+  {
+   "topic": "Shutdown",
+   "page": 8,
+   "text": "With both EN+ and EN– low everything but the internal bias is off, and the part takes 2µA typ from VIN."
+  },
+  {
+   "topic": "Constant frequency mode",
+   "page": 8,
+   "text": "MODE low selects it; EN– turns on the pump and oscillator. In the first half of each clock, S1 and S2 close and the flying capacitor between C+ and C– charges to VIN. In the second half S1 and S2 open and S3 and S4 close: C+ goes to ground and charge flows out of C– into VOUT. In steady state VOUT settles at –VIN minus the drop caused by the load on VOUT and on the negative LDO."
+  },
+  {
+   "topic": "Setting the frequency",
+   "page": 9,
+   "text": "A resistor on RT sets the charge transfer rate from 50kHz to 500kHz; RT grounded gives 500kHz. At lower frequency the pump's ROL is higher and it can supply less average current."
+  },
+  {
+   "topic": "Burst Mode operation",
+   "page": 9,
+   "text": "MODE high selects it. The pump charges VOUT to –0.94 • VIN typ, then stops the oscillator and sleeps, drawing about 100µA with both LDOs on. When VOUT has drooped by the comparator hysteresis the part wakes and pumps until VOUT passes –0.94 • VIN again. Supply current is lower but output ripple is higher, which suits light loads. RT sets the rate of the charge cycles; grounding RT is recommended, as it gives the lowest ROL, the fastest charge to the burst threshold and the longest sleep."
+  },
+  {
+   "topic": "Soft-start",
+   "page": 9,
+   "text": "Internal circuitry ramps up the current available to the output capacitor slowly to limit start-up current. A commanded shutdown or a thermal shutdown resets it. The pump's soft-start also limits inrush for the negative LDO, whose input VOUT is at GND until EN– goes high. The positive LDO has its own soft-start that brings its target voltage up from 0 to full scale over 75µs, easing inrush on VIN."
+  },
+  {
+   "topic": "Short-circuit and thermal protection",
+   "page": 9,
+   "text": "In a short the output current is limited to about 160mA. Above roughly 175°C junction temperature, thermal shutdown stops current delivery to the output; it resumes when the junction cools to roughly 165°C. The protection is for brief overloads: the junction is then outside its operating range, and continuous operation above the maximum operating junction temperature can harm reliability."
+  },
+  {
+   "topic": "Positive LDO",
+   "page": 9,
+   "text": "Takes power from VIN and supplies up to 50mA. A divider from LDO+ through ADJ+ to GND sets the output. The output needs a low-ESR ceramic capacitor that keeps at least 2µF over temperature and bias. EN+ turns it on and off. An optional 10nF from BYP+ to ground bypasses the internal 1.2V reference and lowers noise; unused, BYP+ stays open."
+  },
+  {
+   "topic": "Negative LDO",
+   "page": 10,
+   "text": "Takes power from VOUT and supplies up to 50mA. A divider from LDO– through ADJ– to GND sets the output, which needs a low-ESR ceramic capacitor keeping at least 2µF over temperature and bias. EN– turns it on with the charge pump. An optional 10nF from BYP– to ground bypasses the –1.2V reference and lowers noise; unused, BYP– stays open. A capacitor CADJ– across the upper divider resistor, 10pF recommended and 2pF to 22pF worth trying, improves transient response."
+  },
+  {
+   "topic": "Negative LDO headroom in Burst Mode operation",
+   "page": 10,
+   "text": "With the pump in Burst Mode operation the hysteresis on VOUT is typically 2% of VIN. Set LDO– far enough above VOUT that the regulator stays out of dropout in normal operation."
+  },
+  {
+   "topic": "Effective open-loop output resistance",
+   "page": 11,
+   "text": "ROL measures how strong the charge pump is. It depends on the oscillator frequency, the flying capacitor value, the non-overlap time, the internal switch resistances and the ESR of the external capacitors. At 500kHz it rises with temperature, typically from 24Ω to 28Ω at –50°C to about 50Ω to 54Ω at 150°C."
+  },
+  {
+   "topic": "Input and output capacitors",
+   "page": 11,
+   "text": "The capacitors decide loop stability, output ripple, pump strength and minimum turn-on time. Low-ESR ceramics are recommended on the charge pump and LDO outputs, each keeping at least 2µF over temperature and bias. Tantalum or aluminium parts may be added in parallel for more capacitance but not used alone, because of their ESR. In constant frequency mode COUT sets the output ripple for a given load; a larger COUT lowers ripple but lengthens the minimum turn-on time. CIN sets the ripple on VIN and how much is needed depends on the source impedance; VIN should see 2µF or more of low-ESR capacitance, with a ceramic as the main bypass and tantalum or aluminium in parallel if wanted."
+  },
+  {
+   "topic": "Flying capacitor",
+   "page": 11,
+   "text": "For the full rated pump output current use a ceramic flying capacitor of 1µF or more. Very light loads can use less: 0.2µF may do for up to 20mA. A smaller flying capacitor raises ROL and so lowers the maximum load current."
+  },
+  {
+   "topic": "Ceramic capacitor materials",
+   "page": 11,
+   "text": "X5R and X7R dielectrics hold most of their capacitance from –40°C to 85°C; Z5U and Y5V lose a great deal over that span and can lose 60% or more at rated voltage. Compare parts by the capacitance actually achieved in a given case size, and confirm from the capacitor's own data that the capacitance holds at the working temperature and voltage."
+  },
+  {
+   "topic": "Layout",
+   "page": 12,
+   "text": "Switching frequency and transient currents are high, so use a true ground plane and short connections to every external capacitor. C+ and C– carry large fast currents; keep them away from ADJ+, ADJ–, BYP+ and BYP–."
+  },
+  {
+   "topic": "Thermal management and derating",
+   "page": 12,
+   "text": "At high input voltage and full load the dissipation can be large; above about 175°C junction the output is shut off. A good thermal path to the ground plane, with the exposed pad tied to ground copper on two board layers under the part, lowers the thermal resistance considerably. The maximum dissipation falls linearly with ambient temperature, from about 4.65W at –50°C to zero at 150°C. The 43°C/W θJA it assumes is reached on a four-layer board with 2oz copper, the exposed pad joined to the ground plane by six vias. Continuous operation should stay at TJ ≤ 150°C; beyond that performance and life can suffer. Thermal shutdown disables all outputs at about 175°C typ and re-enables them at about 165°C."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DE, 14-lead plastic DFN (4mm × 3mm), LTC DWG 05-08-1708 Rev B",
+   "page": 15,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "body length (2 sides)",
+     "4.00 ±0.10"
+    ],
+    [
+     "body width (2 sides)",
+     "3.00 ±0.10"
+    ],
+    [
+     "height",
+     "0.75 ±0.05"
+    ],
+    [
+     "standoff",
+     "0.00 – 0.05"
+    ],
+    [
+     "lead frame thickness",
+     "0.200 REF"
+    ],
+    [
+     "exposed pad length",
+     "3.30 ±0.10"
+    ],
+    [
+     "exposed pad width",
+     "1.70 ±0.10"
+    ],
+    [
+     "lead width",
+     "0.25 ±0.05"
+    ],
+    [
+     "lead pitch",
+     "0.50 BSC"
+    ],
+    [
+     "lead length",
+     "0.40 ±0.10"
+    ],
+    [
+     "span of lead row (centre of pin 1 to pin 7)",
+     "3.00 REF"
+    ],
+    [
+     "lead end radius",
+     "R = 0.115 TYP"
+    ],
+    [
+     "exposed pad corner radius",
+     "R = 0.05 TYP"
+    ],
+    [
+     "pin 1 notch on exposed pad",
+     "R = 0.20 OR 0.35 × 45° CHAMFER"
+    ],
+    [
+     "land pattern: overall length across pads",
+     "3.60 ±0.05"
+    ],
+    [
+     "land pattern: lead pad length",
+     "0.70 ±0.05"
+    ],
+    [
+     "land pattern: exposed pad land length",
+     "3.30 ±0.05"
+    ],
+    [
+     "land pattern: exposed pad land width",
+     "1.70 ±0.05"
+    ],
+    [
+     "land pattern: inner edge to inner edge of lead pads",
+     "2.20 ±0.05"
+    ],
+    [
+     "land pattern: lead pad width",
+     "0.25 ±0.05"
+    ],
+    [
+     "land pattern: lead pad pitch",
+     "0.50 BSC"
+    ],
+    [
+     "land pattern: span of lead pads",
+     "3.00 REF"
+    ]
+   ],
+   "notes": [
+    "Proposed as a variation (WGED-3) of JEDEC outline MO-229.",
+    "Exposed pad dimensions exclude mold flash, which is at most 0.15mm on any side.",
+    "The exposed pad is solder plated.",
+    "The pin 1 location is marked on the top of the package.",
+    "Solder mask covers every area that is not soldered."
+   ]
+  },
+  {
+   "name": "MSE, 16-lead plastic MSOP with exposed die pad, LTC DWG 05-08-1667 Rev E",
+   "page": 16,
+   "unit": "mm (inch)",
+   "columns": [
+    "dimension",
+    "value"
+   ],
+   "rows": [
+    [
+     "body length (Note 3)",
+     "4.039 ±0.102 (.159 ±.004)"
+    ],
+    [
+     "body width (Note 4)",
+     "3.00 ±0.102 (.118 ±.004)"
+    ],
+    [
+     "overall width across leads",
+     "4.90 ±0.152 (.193 ±.006)"
+    ],
+    [
+     "height",
+     "1.10 (.043) MAX"
+    ],
+    [
+     "body thickness",
+     "0.86 (.034) REF"
+    ],
+    [
+     "standoff",
+     "0.1016 ±0.0508 (.004 ±.002)"
+    ],
+    [
+     "lead width",
+     "0.17 – 0.27 (.007 – .011) TYP"
+    ],
+    [
+     "lead thickness",
+     "0.18 (.007)"
+    ],
+    [
+     "lead pitch",
+     "0.50 (.0197) BSC"
+    ],
+    [
+     "foot length",
+     "0.53 ±0.152 (.021 ±.006)"
+    ],
+    [
+     "gauge plane height",
+     "0.254 (.010)"
+    ],
+    [
+     "foot angle",
+     "0° – 6° TYP"
+    ],
+    [
+     "end lead to body edge",
+     "0.280 ±0.076 (.011 ±.003) REF"
+    ],
+    [
+     "exposed pad length",
+     "2.845 ±0.102 (.112 ±.004)"
+    ],
+    [
+     "exposed pad width",
+     "1.651 ±0.102 (.065 ±.004)"
+    ],
+    [
+     "corner tail (detail B)",
+     "0.35 REF, 0.12 REF"
+    ],
+    [
+     "land pattern: overall length across pads",
+     "5.23 (.206) MIN"
+    ],
+    [
+     "land pattern: lead pad length",
+     "0.889 ±0.127 (.035 ±.005)"
+    ],
+    [
+     "land pattern: inner edge to inner edge of lead pads",
+     "3.20 – 3.45 (.126 – .136)"
+    ],
+    [
+     "land pattern: exposed pad land length",
+     "2.845 ±0.102 (.112 ±.004)"
+    ],
+    [
+     "land pattern: exposed pad land width",
+     "1.651 ±0.102 (.065 ±.004)"
+    ],
+    [
+     "land pattern: lead pad width",
+     "0.305 ±0.038 (.0120 ±.0015) TYP"
+    ],
+    [
+     "land pattern: lead pad pitch",
+     "0.50 (.0197) BSC"
+    ]
+   ],
+   "notes": [
+    "Note 3: the body length excludes mold flash, protrusions and gate burrs, at most 0.152mm (.006\") per side.",
+    "Note 4: the body width excludes interlead flash and protrusions, at most 0.152mm (.006\") per side.",
+    "Lead coplanarity (bottoms of the formed leads) is 0.102mm (.004\") max.",
+    "The exposed pad dimensions include mold flash; flash on the pad is at most 0.254mm (.010\") per side.",
+    "The corner tail of detail B belongs to the lead frame and is for reference, not measurement."
+   ]
+  }
+ ]
+}

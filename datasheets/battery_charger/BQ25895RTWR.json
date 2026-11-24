@@ -1,0 +1,9792 @@
+{
+ "sheet": 1,
+ "name": "BQ25895RTWR",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "I2C-controlled single-cell 5 A switch-mode charger with power path, USB detection and 3.1 A boost",
+ "source": {
+  "document": "SLUSC88C",
+  "revision": "March 2015, revised October 2022",
+  "pages": 65
+ },
+ "summary": "A single-cell Li-ion and Li-polymer charger built around a 1.5 MHz synchronous buck converter that charges at up to 5 A from a 3.9 V to 14 V input. It has a narrow-VDC power path with an 11 mΩ battery FET, USB BC1.2 and MaxCharge adapter detection on D+/D–, an input current optimizer, and a 4.55 V to 5.55 V boost mode that can source 3.1 A from the battery out of PMID. Every setting is reachable over I2C, a 7-bit ADC reports the input, battery and system voltages, TS and charge current, and the part also charges on its own from register defaults.",
+ "key_figures": [
+  [
+   "Input",
+   "3.9 V to 14 V operating, 22 V absolute max on VBUS; VBUS OVP 14 V to 14.6 V"
+  ],
+  [
+   "Charge current",
+   "0 to 5056 mA in 64 mA steps (5 A recommended max)"
+  ],
+  [
+   "Charge voltage",
+   "3.840 V to 4.608 V in 16 mV steps, ±0.5%"
+  ],
+  [
+   "Input current limit",
+   "100 mA to 3.25 A in 50 mA steps; ILIM pin limit KILIM / RILIM"
+  ],
+  [
+   "Boost output",
+   "4.55 V to 5.55 V in 64 mV steps, 3.1 A, 500 kHz or 1.5 MHz"
+  ],
+  [
+   "Switching frequency",
+   "1.32 MHz to 1.68 MHz"
+  ],
+  [
+   "BATFET",
+   "11 mΩ typ; 6 A continuous, 9 A peak discharge"
+  ],
+  [
+   "Ship-mode battery current",
+   "12 µA typ, 23 µA max"
+  ],
+  [
+   "Interface",
+   "I2C at address 6AH, up to 400 kHz"
+  ],
+  [
+   "Package",
+   "24-pin WQFN (RTW), 4 mm × 4 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 57,
+  "columns": [
+   "orderable part number",
+   "status",
+   "material type",
+   "package | pins",
+   "package qty | carrier",
+   "RoHS",
+   "lead finish/ball material",
+   "MSL rating/peak reflow",
+   "op temp (°C)",
+   "part marking"
+  ],
+  "rows": [
+   [
+    "BQ25895RTWR",
+    "Active",
+    "Production",
+    "WQFN (RTW) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "BQ25895"
+   ],
+   [
+    "BQ25895RTWR.A",
+    "Active",
+    "Production",
+    "WQFN (RTW) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "BQ25895"
+   ],
+   [
+    "BQ25895RTWRG4",
+    "Active",
+    "Production",
+    "WQFN (RTW) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "BQ25895"
+   ],
+   [
+    "BQ25895RTWRG4.A",
+    "Active",
+    "Production",
+    "WQFN (RTW) | 24",
+    "3000 | LARGE T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "BQ25895"
+   ],
+   [
+    "BQ25895RTWT",
+    "Active",
+    "Production",
+    "WQFN (RTW) | 24",
+    "250 | SMALL T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "BQ25895"
+   ],
+   [
+    "BQ25895RTWT.A",
+    "Active",
+    "Production",
+    "WQFN (RTW) | 24",
+    "250 | SMALL T&R",
+    "Yes",
+    "NIPDAU",
+    "Level-2-260C-1 YEAR",
+    "-40 to 85",
+    "BQ25895"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "RTW (WQFN-24)",
+   "page": 4,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VBUS",
+     "type": "power",
+     "function": "Charger input. The internal reverse-blocking N-FET (RBFET) runs from VBUS (its source) to PMID. Bypassed to PGND right at the IC by 1 µF ceramic."
+    },
+    {
+     "pin": "2",
+     "name": "D+",
+     "type": "analog in/out",
+     "function": "USB data line, positive. Used for USB host and charging-port detection: BC1.2 data contact detection, primary and secondary detection, and the MaxCharge adjustable high-voltage adapter handshake."
+    },
+    {
+     "pin": "3",
+     "name": "D-",
+     "type": "analog in/out",
+     "function": "USB data line, negative. Same detection role as D+."
+    },
+    {
+     "pin": "4",
+     "name": "STAT",
+     "type": "digital out",
+     "function": "Open-drain charge status, pulled up through 10 kΩ. Low while charging; high when charging is done or turned off; toggles at 1 Hz on a fault. STAT_DIS turns it off."
+    },
+    {
+     "pin": "5",
+     "name": "SCL",
+     "type": "digital in",
+     "function": "I2C clock; 10 kΩ pull-up to the logic rail."
+    },
+    {
+     "pin": "6",
+     "name": "SDA",
+     "type": "digital in/out",
+     "function": "I2C data; 10 kΩ pull-up to the logic rail."
+    },
+    {
+     "pin": "7",
+     "name": "INT",
+     "type": "digital out",
+     "function": "Open-drain interrupt, 10 kΩ pull-up to a logic rail. Sends an active-low 256 µs pulse to report status changes and faults."
+    },
+    {
+     "pin": "8",
+     "name": "OTG",
+     "type": "digital in",
+     "function": "Boost enable. Boost mode runs when OTG is high, OTG_CONFIG = 1 and no source is present on VBUS."
+    },
+    {
+     "pin": "9",
+     "name": "CE",
+     "type": "digital in",
+     "function": "Charge enable, active low. Charging runs with CHG_CONFIG = 1 and CE low. Must be driven or tied high or low, never left open."
+    },
+    {
+     "pin": "10",
+     "name": "ILIM",
+     "type": "analog in",
+     "function": "Input current limit set by a resistor to ground: the pin is regulated at 0.8 V and IINMAX = KILIM / RILIM. The lower of this limit (with EN_ILIM high) and IINLIM applies. The pin cannot set a limit under 500 mA. Below 0.8 V the pin voltage is proportional to input current: IIN = KILIM × VILIM / (RILIM × 0.8). EN_ILIM = 0 turns the pin off."
+    },
+    {
+     "pin": "11",
+     "name": "TS",
+     "type": "analog in",
+     "function": "Battery temperature input. An NTC thermistor plus a divider from REGN to TS to GND set the temperature window; charging pauses when TS leaves the window. The thermistor named is a 103AT-2."
+    },
+    {
+     "pin": "12",
+     "name": "QON",
+     "type": "digital in",
+     "function": "BATFET enable and reset input with an internal pull-up. In ship mode, low for tSHIPMODE turns the BATFET on. With no VBUS, low for tQON_RST turns the BATFET off for tBATFET_RST and back on, a full system power reset."
+    },
+    {
+     "pin": "13, 14",
+     "name": "BAT",
+     "type": "power",
+     "function": "Battery positive terminal. The internal BATFET runs from BAT to SYS. 10 µF close to the pin."
+    },
+    {
+     "pin": "15, 16",
+     "name": "SYS",
+     "type": "power",
+     "function": "System output. The internal BATFET runs from BAT to SYS. When the battery is below the minimum system voltage the converter holds SYS at that minimum. 20 µF close to the pin."
+    },
+    {
+     "pin": "17, 18",
+     "name": "PGND",
+     "type": "power",
+     "function": "Power ground of the converter; the source of the low-side N-FET. Tied straight to the ground side of the input and output capacitors, with one connection to analog ground close to the PGND pins."
+    },
+    {
+     "pin": "19, 20",
+     "name": "SW",
+     "type": "power",
+     "function": "Switch node to the inductor: source of the high-side N-FET and drain of the low-side N-FET. A 0.047 µF bootstrap capacitor runs from SW to BTST."
+    },
+    {
+     "pin": "21",
+     "name": "BTST",
+     "type": "power",
+     "function": "High-side gate driver supply; the anode of the internal bootstrap diode. 0.047 µF bootstrap capacitor from SW to BTST."
+    },
+    {
+     "pin": "22",
+     "name": "REGN",
+     "type": "power",
+     "function": "Low-side driver supply from the internal LDO; the cathode of the bootstrap diode. 4.7 µF, 10 V ceramic to analog ground close to the IC. Also biases the TS divider."
+    },
+    {
+     "pin": "23",
+     "name": "PMID",
+     "type": "digital out",
+     "function": "Boost output, at the drains of the RBFET and the HSFET. Without OTG, at least 8.2 µF to PGND; with OTG, at least 40 µF for up to 2.4 A out and 60 µF for up to 3.1 A."
+    },
+    {
+     "pin": "24",
+     "name": "DSEL",
+     "type": "digital out",
+     "function": "Open-drain D+/D– multiplexer select, floating with a 10 kΩ pull-up. Pulled low while input source detection runs and the IC needs D+ and D–; stays low when MaxCharge is found; floats high for every other source type."
+    },
+    {
+     "pin": "PAD",
+     "name": "PowerPAD",
+     "type": "power",
+     "function": "Exposed pad for heat. Always soldered, with vias in the pad joining PGND and the ground plane."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 6,
+   "conditions": "Over operating free-air temperature range, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "pin or condition",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage range (with respect to GND)",
+     "VBUS (converter not switching)",
+     "–2",
+     "22",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "PMID (converter not switching)",
+     "–0.3",
+     "22",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "STAT",
+     "–0.3",
+     "20",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "DSEL",
+     "–0.3",
+     "20",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "BTST",
+     "–0.3",
+     "20",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "SW",
+     "–2",
+     "16",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "SW (peak for 10 ns duration)",
+     "–3",
+     "16",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "BAT, SYS (converter not switching)",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "SDA, SCL, INT, OTG, REGN, TS, CE, QON",
+     "–0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "D+, D–",
+     "–0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "BTST TO SW",
+     "–0.3",
+     "7",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "PGND to GND",
+     "–0.3",
+     "0.3",
+     "V"
+    ],
+    [
+     "Voltage range (with respect to GND)",
+     "ILIM",
+     "–0.3",
+     "5",
+     "V"
+    ],
+    [
+     "Output sink current",
+     "INT, STAT",
+     "",
+     "6",
+     "mA"
+    ],
+    [
+     "Output sink current",
+     "DSEL",
+     "",
+     "6",
+     "mA"
+    ],
+    [
+     "Junction temperature",
+     "",
+     "–40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature range, Tstg",
+     "",
+     "–65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these limits can damage the part permanently; running at them for long periods can shorten its life, and no operation is implied beyond the recommended conditions. Voltages are referred to the ground terminal."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VESD",
+     "Electrostatic discharge",
+     "Human body model (HBM), per ANSI/ESDA/JEDEC JS-001",
+     "±2000",
+     "V"
+    ],
+    [
+     "VESD",
+     "Electrostatic discharge",
+     "Charged device model (CDM), per JEDEC specification JESD22-C101",
+     "±250",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEP155 names 500 V HBM, and JEP157 names 250 V CDM, as safe for manufacture under a standard ESD control process."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 6,
+   "conditions": "Over operating free-air temperature range, unless noted otherwise",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "Input voltage",
+     "3.9",
+     "",
+     "14",
+     "V"
+    ],
+    [
+     "IIN",
+     "Input current (VBUS)",
+     "",
+     "",
+     "3.25",
+     "A"
+    ],
+    [
+     "ISYS",
+     "Output current (SW)",
+     "",
+     "",
+     "5",
+     "A"
+    ],
+    [
+     "VBAT",
+     "Battery voltage",
+     "",
+     "",
+     "4.608",
+     "V"
+    ],
+    [
+     "IBAT",
+     "Fast charging current",
+     "",
+     "",
+     "5",
+     "A"
+    ],
+    [
+     "IBAT",
+     "Discharging current with internal MOSFET",
+     "",
+     "",
+     "Up to 6 (continuos)",
+     "A"
+    ],
+    [
+     "IBAT",
+     "Discharging current with internal MOSFET",
+     "",
+     "",
+     "9 (peak) (Up to 1 sec duration)",
+     "A"
+    ],
+    [
+     "TA",
+     "Operating free-air temperature range",
+     "–40",
+     "",
+     "85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "The 14 V input maximum holds only while switching spikes stay inside the absolute maximum ratings of BTST and SW; a tight layout keeps the spikes down."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "RTW (WQFN) 24 pins",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA",
+     "Junction-to-ambient thermal resistance",
+     "31.8",
+     "°C/W"
+    ],
+    [
+     "RθJC((op)",
+     "Junction-to-case (top) thermal resistance",
+     "27.9",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "8.7",
+     "°C/W"
+    ],
+    [
+     "ψJT",
+     "Junction-to-top characterization parameter",
+     "0.3",
+     "°C/W"
+    ],
+    [
+     "ψJB",
+     "Junction-to-board characterization parameter",
+     "8.7",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "2.0",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "The second symbol reads RθJC((op); it is RθJC(top)."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: quiescent currents",
+   "page": 7,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Battery discharge current (BAT, SW, SYS) in buck mode",
+     "IBAT",
+     "VBAT = 4.2 V, V(VBUS) < V(UVLO), leakage between BAT and VBUS",
+     "",
+     "",
+     "5",
+     "µA"
+    ],
+    [
+     "Battery discharge current (BAT, SW, SYS) in buck mode",
+     "IBAT",
+     "High-Z mode, no VBUS, BATFET disabled (REG09[5]=1), battery monitor disabled, TJ < 85°C",
+     "",
+     "12",
+     "23",
+     "µA"
+    ],
+    [
+     "Battery discharge current (BAT, SW, SYS) in buck mode",
+     "IBAT",
+     "High-Z mode, no VBUS, BATFET enabled (REG09[5]=0), battery monitor disabled, TJ < 85°C",
+     "",
+     "32",
+     "60",
+     "µA"
+    ],
+    [
+     "Input supply current (VBUS) in buck mode when High-Z mode is enabled",
+     "I(VBUS_HIZ)",
+     "V(VBUS) = 5 V, High-Z mode, no battery, battery monitor disabled",
+     "",
+     "15",
+     "35",
+     "µA"
+    ],
+    [
+     "Input supply current (VBUS) in buck mode when High-Z mode is enabled",
+     "I(VBUS_HIZ)",
+     "V(VBUS) = 12 V, High-Z mode, no battery, battery monitor disabled",
+     "",
+     "25",
+     "50",
+     "µA"
+    ],
+    [
+     "Input supply current (VBUS) in buck mode",
+     "I(VBUS)",
+     "VBUS > V(UVLO), VBUS > VBAT, converter not switching",
+     "",
+     "1.5",
+     "3",
+     "mA"
+    ],
+    [
+     "Input supply current (VBUS) in buck mode",
+     "I(VBUS)",
+     "VBUS > V(UVLO), VBUS > VBAT, converter switching, VBAT = 3.2 V, ISYS = 0A",
+     "",
+     "3",
+     "",
+     "mA"
+    ],
+    [
+     "Input supply current (VBUS) in buck mode",
+     "I(VBUS)",
+     "VBUS > V(UVLO), VBUS > VBAT, converter switching, VBAT = 3.8 V, ISYS = 0 A",
+     "",
+     "3",
+     "",
+     "mA"
+    ],
+    [
+     "Battery discharge current in boost mode",
+     "I(BOOST)",
+     "VBAT = 4.2 V, boost mode, I(VBUS) = 0 A, converter switching",
+     "",
+     "5",
+     "",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: VBUS/BAT power up",
+   "page": 7,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VBUS operating range",
+     "V(VBUS_OP)",
+     "",
+     "3.9",
+     "",
+     "14",
+     "V"
+    ],
+    [
+     "VBUS for active I2C, no battery",
+     "V(VBUS_UVLOZ)",
+     "",
+     "3.6",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Sleep mode falling threshold",
+     "V(SLEEP)",
+     "",
+     "25",
+     "65",
+     "120",
+     "mV"
+    ],
+    [
+     "Sleep mode rising threshold",
+     "V(SLEEPZ)",
+     "",
+     "130",
+     "250",
+     "370",
+     "mV"
+    ],
+    [
+     "VBUS over-voltage rising threshold",
+     "V(ACOV)",
+     "",
+     "14",
+     "",
+     "14.6",
+     "V"
+    ],
+    [
+     "VBUS over-voltage falling threshold",
+     "V(ACOV)",
+     "",
+     "13.5",
+     "",
+     "14",
+     "V"
+    ],
+    [
+     "Battery for active I2C, no VBUS",
+     "VBAT(UVLOZ)",
+     "",
+     "2.3",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Battery depletion falling threshold",
+     "VBAT(DPL)",
+     "",
+     "2.15",
+     "",
+     "2.5",
+     "V"
+    ],
+    [
+     "Battery depletion rising threshold",
+     "VBAT(DPLZ)",
+     "",
+     "2.35",
+     "",
+     "2.7",
+     "V"
+    ],
+    [
+     "Bad adapter detection threshold",
+     "V(VBUSMIN)",
+     "",
+     "",
+     "3.8",
+     "",
+     "V"
+    ],
+    [
+     "Bad adapter detection current source",
+     "I(BADSRC)",
+     "",
+     "",
+     "30",
+     "",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: power-path management",
+   "page": 7,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Typical system regulation voltage",
+     "VSYS",
+     "I(SYS) = 0 A, VBAT > VSYS(MIN), BATFET Disabled (REG09[5]=1)",
+     "",
+     "VBAT+ 50 mV",
+     "",
+     "V"
+    ],
+    [
+     "Typical system regulation voltage",
+     "VSYS",
+     "I(SYS) = 0 A, VBAT < VSYS(MIN), BATFET Disabled (REG09[5]=1)",
+     "",
+     "VSYS(MIN) + 150 mV",
+     "",
+     "V"
+    ],
+    [
+     "Minimum DC system voltage output",
+     "VSYS(MIN)",
+     "VBAT < VSYS(MIN), SYS_MIN = 3.5 V (REG03[3:1]=101), ISYS = 0 A",
+     "3.50",
+     "3.65",
+     "",
+     "V"
+    ],
+    [
+     "Maximum DC system voltage output",
+     "VSYS(MAX)",
+     "VBAT = 4.35 V, SYS_MIN = 3.5V (REG03[3:1]=101), ISYS = 0 A",
+     "",
+     "4.40",
+     "4.42",
+     "V"
+    ],
+    [
+     "Top reverse blocking MOSFET (RBFET) on-resistance between VBUS and PMID",
+     "RON(RBFET)",
+     "TJ = –40°C to +85°C",
+     "",
+     "27",
+     "38",
+     "mΩ"
+    ],
+    [
+     "Top reverse blocking MOSFET (RBFET) on-resistance between VBUS and PMID",
+     "RON(RBFET)",
+     "TJ = –40°C to +125°C",
+     "",
+     "27",
+     "44",
+     "mΩ"
+    ],
+    [
+     "Top switching MOSFET (HSFET) on-resistance between PMID and SW",
+     "RON(HSFET)",
+     "TJ = –40°C to +85°C",
+     "",
+     "27",
+     "39",
+     "mΩ"
+    ],
+    [
+     "Top switching MOSFET (HSFET) on-resistance between PMID and SW",
+     "RON(HSFET)",
+     "TJ = –40°C to +125°C",
+     "",
+     "27",
+     "47",
+     "mΩ"
+    ],
+    [
+     "Bottom switching MOSFET (LSFET) on-resistance between SW and GND",
+     "RON(LSFET)",
+     "TJ = –40°C to +85°C",
+     "",
+     "16",
+     "24",
+     "mΩ"
+    ],
+    [
+     "Bottom switching MOSFET (LSFET) on-resistance between SW and GND",
+     "RON(LSFET)",
+     "TJ = –40°C to +125°C",
+     "",
+     "16",
+     "28",
+     "mΩ"
+    ],
+    [
+     "BATFET forward voltage in supplement mode",
+     "V(FWD)",
+     "BAT discharge current 10 mA",
+     "",
+     "30",
+     "",
+     "mV"
+    ],
+    [
+     "Battery good comparator rising threshold",
+     "VBAT(GD)",
+     "VBAT rising",
+     "3.4",
+     "3.55",
+     "3.7",
+     "V"
+    ],
+    [
+     "Battery good comparator falling threshold",
+     "VBAT(GD_HYST)",
+     "VBAT falling",
+     "",
+     "100",
+     "",
+     "mV"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: battery charger",
+   "page": 8,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Typical charge voltage range",
+     "VBAT(REG_RANGE)",
+     "",
+     "3.840",
+     "",
+     "4.608",
+     "V"
+    ],
+    [
+     "Typical charge voltage step",
+     "VBAT(REG_STEP)",
+     "",
+     "",
+     "16",
+     "",
+     "mV"
+    ],
+    [
+     "Charge voltage resolution accuracy",
+     "VBAT(REG)",
+     "VBAT = 4.208 V (REG06[7:2]=010111) or VBAT = 4.352 V (REG06[7:2]=100000), TJ = –40°C to +85°C",
+     "-0.5%",
+     "",
+     "0.5%",
+     ""
+    ],
+    [
+     "Typical fast charge current regulation range",
+     "I(CHG_REG__RANGE)",
+     "",
+     "0",
+     "",
+     "5056",
+     "mA"
+    ],
+    [
+     "Typical fast charge current regulation step",
+     "I(CHG_REG_STEP)",
+     "",
+     "",
+     "64",
+     "",
+     "mA"
+    ],
+    [
+     "Fast charge current regulation accuracy",
+     "I(CHG_REG_ACC)",
+     "VBAT = 3.1 V or 3.8 V, ICHG = 128 mA, TJ = –40°C to +85°C",
+     "-20%",
+     "",
+     "20%",
+     ""
+    ],
+    [
+     "Fast charge current regulation accuracy",
+     "I(CHG_REG_ACC)",
+     "VBAT = 3.1 V or 3.8 V, ICHG = 256 mA, TJ = –40°C to +85°C",
+     "-10%",
+     "",
+     "10%",
+     ""
+    ],
+    [
+     "Fast charge current regulation accuracy",
+     "I(CHG_REG_ACC)",
+     "VBAT = 3.1 V or 3.8 V, ICHG = 1792 mA, TJ = –40°C to +85°C",
+     "-5%",
+     "",
+     "5%",
+     ""
+    ],
+    [
+     "Battery LOWV falling threshold",
+     "VBAT(LOWV)",
+     "Fast charge to precharge, BATLOWV (REG06[1]) = 1",
+     "2.6",
+     "2.8",
+     "2.9",
+     "V"
+    ],
+    [
+     "Battery LOWV rising threshold",
+     "VBAT(LOWV)",
+     "Precharge to fast charge, BATLOWV (REG06[1]) = 1 (Typical 200-mV hysteresis)",
+     "2.8",
+     "3",
+     "3.1",
+     "V"
+    ],
+    [
+     "Precharge current range",
+     "I(PRECHG_RANGE)",
+     "",
+     "64",
+     "",
+     "1024",
+     "mA"
+    ],
+    [
+     "Typical precharge current step",
+     "I(PRECHG_STEP)",
+     "",
+     "",
+     "64",
+     "",
+     "mA"
+    ],
+    [
+     "Precharge current accuracy",
+     "I(PRECHG_ACC)",
+     "VBAT = 2.6 V, IPRECHG = 256 mA",
+     "–10%",
+     "",
+     "+10%",
+     ""
+    ],
+    [
+     "Termination current range",
+     "I(TERM_RANGE)",
+     "",
+     "64",
+     "",
+     "1024",
+     "mA"
+    ],
+    [
+     "Typical termination current step",
+     "I(TERM_STEP)",
+     "",
+     "",
+     "64",
+     "",
+     "mA"
+    ],
+    [
+     "Termination current accuracy",
+     "I(TERM_ACC)",
+     "ITERM = 256 mA, ICHG <= 1344 mA, TJ = –20°C to +85°C",
+     "–12%",
+     "",
+     "12%",
+     ""
+    ],
+    [
+     "Termination current accuracy",
+     "I(TERM_ACC)",
+     "ITERM = 256 mA, ICHG > 1344 mA, TJ = –20°C to +85°C",
+     "–20%",
+     "",
+     "20%",
+     ""
+    ],
+    [
+     "Battery short voltage",
+     "V(SHORT)",
+     "VBAT falling",
+     "",
+     "2",
+     "",
+     "V"
+    ],
+    [
+     "Battery short voltage hysteresis",
+     "V(SHORT_HYST)",
+     "VBAT rising",
+     "",
+     "200",
+     "",
+     "mV"
+    ],
+    [
+     "Battery short current",
+     "I(SHORT)",
+     "VBAT < 2.2 V",
+     "",
+     "100",
+     "",
+     "mA"
+    ],
+    [
+     "Recharge threshold below VBATREG",
+     "V(RECHG)",
+     "VBAT falling, VRECHG (REG06[0]=0) = 0",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Recharge threshold below VBATREG",
+     "V(RECHG)",
+     "VBAT falling, VRECHG (REG06[0]=0) = 1",
+     "",
+     "200",
+     "",
+     "mV"
+    ],
+    [
+     "Battery discharge load current",
+     "IBAT(LOAD)",
+     "VBAT = 4.2 V",
+     "15",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "System discharge load current",
+     "ISYS(LOAD)",
+     "VSYS = 4.2 V",
+     "30",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "SYS-BAT MOSFET (BATFET) on-resistance",
+     "RON(BATFET)",
+     "TJ = 25°C",
+     "",
+     "11",
+     "13",
+     "mΩ"
+    ],
+    [
+     "SYS-BAT MOSFET (BATFET) on-resistance",
+     "RON(BATFET)",
+     "TJ = –40°C to +125°C",
+     "",
+     "11",
+     "19",
+     "mΩ"
+    ]
+   ],
+   "notes": [
+    "The second V(RECHG) row is the setting REG06[0] = 1."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: input voltage / current regulation",
+   "page": 8,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Typical Input voltage regulation range",
+     "VIN(DPM_RANGE)",
+     "",
+     "3.9",
+     "",
+     "15.3",
+     "V"
+    ],
+    [
+     "Typical Input voltage regulation step",
+     "VIN(DPM_STEP)",
+     "",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Input voltage regulation accuracy",
+     "VIN(DPM_ACC)",
+     "VINDPM = 4.4 V, 9 V",
+     "3%",
+     "",
+     "3%",
+     ""
+    ],
+    [
+     "Typical Input current regulation range",
+     "IIN(DPM_RANGE)",
+     "",
+     "100",
+     "",
+     "3250",
+     "mA"
+    ],
+    [
+     "Typical Input current regulation step",
+     "IIN(DPM_STEP)",
+     "",
+     "",
+     "50",
+     "",
+     "mA"
+    ],
+    [
+     "Input current 100-mA regulation accuracy, VBAT = 5 V, current pulled from SW",
+     "IIN(DPM100_ACC)",
+     "IINLIM (REG00[5:0]) = 100 mA",
+     "85",
+     "90",
+     "100",
+     "mA"
+    ],
+    [
+     "Input current regulation accuracy, VBAT = 5 V, current pulled from SW",
+     "IIN(DPM_ACC)",
+     "USB150, IINLIM (REG00[5:0]) = 150 mA",
+     "125",
+     "135",
+     "150",
+     "mA"
+    ],
+    [
+     "Input current regulation accuracy, VBAT = 5 V, current pulled from SW",
+     "IIN(DPM_ACC)",
+     "USB500, IINLIM (REG00[5:0]) = 500 mA",
+     "440",
+     "470",
+     "500",
+     "mA"
+    ],
+    [
+     "Input current regulation accuracy, VBAT = 5 V, current pulled from SW",
+     "IIN(DPM_ACC)",
+     "USB900, IINLIM (REG00[5:0]) = 900 mA",
+     "750",
+     "825",
+     "900",
+     "mA"
+    ],
+    [
+     "Input current regulation accuracy, VBAT = 5 V, current pulled from SW",
+     "IIN(DPM_ACC)",
+     "Adapter 1.5 A, IINLIM (REG00[5:0]) = 1500 mA",
+     "1300",
+     "1400",
+     "1500",
+     "mA"
+    ],
+    [
+     "Input current regulation during system start up",
+     "IIN(START)",
+     "VSYS = 2.2 V, IINLIM (REG00[5:0]) >= 200 mA",
+     "",
+     "",
+     "200",
+     "mA"
+    ],
+    [
+     "IINMAX = KILIM/RILIM",
+     "KILIM",
+     "Input current regulation by ILIM pin = 1.5 A",
+     "320",
+     "355",
+     "390",
+     "A x Ω"
+    ]
+   ],
+   "notes": [
+    "The minimum of the input voltage regulation accuracy reads 3%; it is –3%."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: D+/D– detection",
+   "page": 9,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "D+/D– voltage source (0.6 V)",
+     "V(0P6_VSRC)",
+     "",
+     "0.5",
+     "0.6",
+     "0.7",
+     "V"
+    ],
+    [
+     "D+/D– voltage source (3.45 V)",
+     "V(3p45_VSRC)",
+     "",
+     "3.3",
+     "3.45",
+     "3.6",
+     "V"
+    ],
+    [
+     "D+ connection check current source",
+     "I(10UA_ISRC)",
+     "",
+     "7",
+     "10",
+     "14",
+     "µA"
+    ],
+    [
+     "D+/D– current sink (100 µA)",
+     "I(100UA_ISINK)",
+     "",
+     "50",
+     "100",
+     "150",
+     "µA"
+    ],
+    [
+     "D+/D– Leakage current",
+     "I(DPDM_LKG)",
+     "D–, switch open",
+     "–1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "D+/D– Leakage current",
+     "I(DPDM_LKG)",
+     "D+, switch open",
+     "–1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "D+/D– current sink (1.6 mA)",
+     "I(1P6MA_ISINK)",
+     "",
+     "1.45",
+     "1.60",
+     "1.75",
+     "µA"
+    ],
+    [
+     "D+/D– low comparator threshold",
+     "V(0P4_VTH)",
+     "",
+     "250",
+     "",
+     "400",
+     "mV"
+    ],
+    [
+     "D+ low comparator threshold",
+     "V(0P8_VTH)",
+     "",
+     "",
+     "",
+     "0.8",
+     "V"
+    ],
+    [
+     "D+/D– comparator threshold for non-standard adapter detection (divider 1, 3, or 4)",
+     "V(2P7_VTH)",
+     "",
+     "2.55",
+     "",
+     "2.85",
+     "V"
+    ],
+    [
+     "D+/D– comparator threshold for non-standard adapter detection (divider 1, 3)",
+     "V(2P0_VTH)",
+     "",
+     "1.85",
+     "",
+     "2.15",
+     "V"
+    ],
+    [
+     "D+/D– comparator threshold for non-standard adapter detection (divider 2)",
+     "V(1P2_VTH)",
+     "",
+     "1.05",
+     "",
+     "1.35",
+     "V"
+    ],
+    [
+     "D– pulldown for connection check",
+     "R(D–_DWN)",
+     "",
+     "14.25",
+     "",
+     "24.8",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "The unit of the 1.6 mA current sink reads µA; its values are milliamps."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: BAT overvoltage/current protection",
+   "page": 9,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Battery over-voltage threshold",
+     "VBAT(OVP)",
+     "VBAT rising, as percentage of VBAT(REG)",
+     "",
+     "104%",
+     "",
+     ""
+    ],
+    [
+     "Battery over-voltage hysteresis",
+     "VBAT(OVP_HYST)",
+     "VBAT falling, as percentage of VBAT(REG)",
+     "",
+     "2%",
+     "",
+     ""
+    ],
+    [
+     "System over-current threshold",
+     "IBAT(FET_OCP)",
+     "",
+     "9",
+     "",
+     "",
+     "A"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: thermal regulation and thermal shutdown",
+   "page": 9,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Junction temperature regulation accuracy",
+     "TREG",
+     "REG08[1:0] = 11",
+     "",
+     "120",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown rising temperature",
+     "TSHUT",
+     "Temperature rising",
+     "",
+     "160",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis",
+     "TSHUT(HYS)",
+     "Temperature falling",
+     "",
+     "30",
+     "",
+     "°C"
+    ],
+    [
+     "Cold temperature threshold, TS pin voltage rising threshold",
+     "V(LTF)",
+     "As percentage to V(REGN)",
+     "72.75%",
+     "73.25%",
+     "73.75%",
+     ""
+    ],
+    [
+     "Cold temperature hysteresis, TS pin voltage falling",
+     "V(LTF_HYS)",
+     "As percentage to V(REGN)",
+     "",
+     "0.4%",
+     "",
+     ""
+    ],
+    [
+     "Hot temperature TS pin voltage rising threshold",
+     "V(HTF)",
+     "As percentage to V(REGN)",
+     "47.75%",
+     "48.25%",
+     "48.75%",
+     ""
+    ],
+    [
+     "Cut-off temperature TS pin voltage falling threshold",
+     "V(TCO)",
+     "As percentage to V(REGN)",
+     "44.25%",
+     "44.75%",
+     "45.25%",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: cold/hot thermistor comparator (boost mode)",
+   "page": 9,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Cold temperature threshold 1, TS pin voltage rising threshold",
+     "V(BCOLD1)",
+     "As percentage to VREGN, REG01[5] = 1 (Approximately –20°C w/ 103AT)",
+     "79.5%",
+     "80%",
+     "80.5%",
+     ""
+    ],
+    [
+     "Cold temperature threshold 1, TS pin voltage falling threshold",
+     "V(BCOLD1_HYS)",
+     "As percentage to VREGN, REG01[5] = 1",
+     "",
+     "1%",
+     "",
+     ""
+    ],
+    [
+     "Hot temperature threshold 2, TS pin voltage falling threshold",
+     "V(BHOT2)",
+     "As percentage to VREGN, REG01[7:6] = 10 (Approx. 65°C w/ 103AT)",
+     "30.75%",
+     "31.25%",
+     "31.75%",
+     ""
+    ],
+    [
+     "Hot temperature threshold 2, TS pin voltage rising threshold",
+     "V(BHOT2_HYS)",
+     "As percentage to VREGN, REG01[7:6] = 10",
+     "",
+     "3%",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: PWM",
+   "page": 9,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "PWM switching frequency, and digital clock",
+     "FSW",
+     "Oscillator frequency",
+     "1.32",
+     "",
+     "1.68",
+     "MHz"
+    ],
+    [
+     "Maximum PWM duty cycle",
+     "DMAX",
+     "",
+     "",
+     "97%",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: boost mode operation",
+   "page": 9,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Typical boost mode regulation voltage range",
+     "V(OTG_REG_RANGE)",
+     "",
+     "4.55",
+     "",
+     "5.55",
+     "V"
+    ],
+    [
+     "Typical boost mode regulation voltage step",
+     "V(OTG_REG_STEP)",
+     "",
+     "",
+     "64",
+     "",
+     "mV"
+    ],
+    [
+     "Boost mode regulation voltage accuracy",
+     "V(OTG_REG_ACC)",
+     "I(PMID) = 0 A, BOOSTV = 5.126V (REG0A[7:4] = 1001)",
+     "–3%",
+     "",
+     "3%",
+     ""
+    ],
+    [
+     "Battery voltage exiting boost mode",
+     "V(OTG_BAT)",
+     "BAT falling",
+     "2.6",
+     "",
+     "2.9",
+     "V"
+    ],
+    [
+     "Boost mode output current range",
+     "I(OTG)",
+     "",
+     "3.1",
+     "",
+     "",
+     "A"
+    ],
+    [
+     "Boost mode over-voltage threshold",
+     "V(OTG_OVP)",
+     "Rising threshold",
+     "5.8",
+     "6",
+     "",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: REGN LDO",
+   "page": 10,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "REGN LDO output voltage",
+     "V(REGN)",
+     "V(VBUS) = 9 V, I(REGN) = 40 mA",
+     "5.6",
+     "6",
+     "6.4",
+     "V"
+    ],
+    [
+     "REGN LDO output voltage",
+     "V(REGN)",
+     "V(VBUS) = 5 V, I(REGN) = 20 mA",
+     "4.7",
+     "4.8",
+     "",
+     "V"
+    ],
+    [
+     "REGN LDO current limit",
+     "I(REGN)",
+     "V(VBUS) = 9 V, V(REGN) = 3.8 V",
+     "50",
+     "",
+     "",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: analog-to-digital converter (ADC)",
+   "page": 10,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Resolution",
+     "RES",
+     "Rising threshold",
+     "",
+     "7",
+     "",
+     "bits"
+    ],
+    [
+     "Typical battery voltage range",
+     "VBAT(RANGE)",
+     "V(VBUS) > VBAT + V(SLEEP) or OTG mode is enabled",
+     "2.304",
+     "",
+     "4.848",
+     "V"
+    ],
+    [
+     "Typical battery voltage range",
+     "VBAT(RANGE)",
+     "V(VBUS) < VBAT + V(SLEEP) and OTG mode is disabled",
+     "VSYS_MIN",
+     "",
+     "4.848",
+     "V"
+    ],
+    [
+     "Typical battery voltage resolution",
+     "V(BAT_RES)",
+     "",
+     "",
+     "20",
+     "",
+     "mV"
+    ],
+    [
+     "Typical system voltage range",
+     "V(SYS_RANGE)",
+     "V(VBUS) > VBAT + V(SLEEP) or OTG mode is enabled",
+     "2.304",
+     "",
+     "4.848",
+     "V"
+    ],
+    [
+     "Typical system voltage range",
+     "V(SYS_RANGE)",
+     "V(VBUS) < VBAT + V(SLEEP) and OTG mode is disabled",
+     "VSYS_MIN",
+     "",
+     "4.848",
+     "V"
+    ],
+    [
+     "Typical system voltage resolution",
+     "V(SYS_RES)",
+     "",
+     "",
+     "20",
+     "",
+     "mV"
+    ],
+    [
+     "Typical VVBUS voltage range",
+     "V(VBUS_RANGE)",
+     "V(VBUS) > VBAT + V(SLEEP) or OTG mode is enabled",
+     "2.6",
+     "",
+     "15.3",
+     "V"
+    ],
+    [
+     "Typical VVBUS voltage resolution",
+     "V(VBUS_RES)",
+     "",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Typical battery charge current range",
+     "IBAT(RANGE)",
+     "V(VBUS) > VBAT + V(SLEEP) and VBAT > VBAT(SHORT)",
+     "0",
+     "",
+     "6.4",
+     "A"
+    ],
+    [
+     "Typical battery charge current resolution",
+     "IBAT(RES)",
+     "",
+     "",
+     "50",
+     "",
+     "mA"
+    ],
+    [
+     "Typical TS voltage range",
+     "V(TS_RANGE)",
+     "",
+     "21%",
+     "",
+     "80%",
+     ""
+    ],
+    [
+     "Typical TS voltage resolution",
+     "V(TS_RES)",
+     "",
+     "",
+     "0.47%",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: logic I/O pin (OTG, CE, PSEL, QON)",
+   "page": 10,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input high threshold level",
+     "VIH",
+     "",
+     "1.3",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input low threshold level",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "High Level Leakage Current",
+     "IIN(BIAS)",
+     "Pull-up rail 1.8 V",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Internal /QON pull-up",
+     "V(QON)",
+     "Battery only mode",
+     "",
+     "BAT",
+     "",
+     "V"
+    ],
+    [
+     "Internal /QON pull-up",
+     "V(QON)",
+     "V(VBUS) = 9 V",
+     "",
+     "5.8",
+     "",
+     "V"
+    ],
+    [
+     "Internal /QON pull-up",
+     "V(QON)",
+     "V(VBUS) = 5 V",
+     "",
+     "4.3",
+     "",
+     "V"
+    ],
+    [
+     "Internal /QON pull-up resistance",
+     "R(QON)",
+     "",
+     "",
+     "200",
+     "",
+     "kΩ"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: logic I/O pin (INT, STAT, PG, DSEL)",
+   "page": 10,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output low threshold level",
+     "VOL",
+     "Sink current = 5 mA, sink current",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "High level leakage current",
+     "IOUT_BIAS",
+     "Pull-up rail 1.8 V",
+     "",
+     "",
+     "1",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: I2C interface (SCL, SDA)",
+   "page": 10,
+   "conditions": "VVBUS_UVLOZ < VVBUS < VACOV and VVBUS > VBAT + VSLEEP, TJ = –40°C to +125°C, typical values at TJ = 25°C, unless noted otherwise",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input high threshold level, SCL and SDA",
+     "VIH",
+     "Pull-up rail 1.8 V",
+     "1.3",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input low threshold level",
+     "VIL",
+     "Pull-up rail 1.8 V",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Output low threshold level",
+     "VOL",
+     "Sink current = 5 mA, sink current",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "High level leakage current",
+     "IBIAS",
+     "Pull-up rail 1.8 V",
+     "",
+     "",
+     "1",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Timing requirements",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Bad Adapter detection duration",
+     "tBADSRC",
+     "",
+     "",
+     "30",
+     "",
+     "msec"
+    ],
+    [
+     "Charging timer with USB100 in default mode",
+     "tSDP_DEFAULT",
+     "",
+     "",
+     "",
+     "2",
+     "mins"
+    ],
+    [
+     "Battery over-voltage deglitch time to disable charge",
+     "tBATOVP",
+     "",
+     "",
+     "1",
+     "",
+     "µs"
+    ],
+    [
+     "Recharge deglitch time",
+     "tRECHG",
+     "",
+     "",
+     "20",
+     "",
+     "ms"
+    ],
+    [
+     "Current pulse control stop pulse",
+     "tPUMPX_STOP",
+     "",
+     "430",
+     "",
+     "570",
+     "ms"
+    ],
+    [
+     "Current pulse control long on pulse",
+     "tPUMPX_ON1",
+     "",
+     "240",
+     "",
+     "360",
+     "ms"
+    ],
+    [
+     "Current pulse control short on pulse",
+     "tPUMPX_ON2",
+     "",
+     "70",
+     "",
+     "130",
+     "ms"
+    ],
+    [
+     "Current pulse control off pulse",
+     "tPUMPX_OFF",
+     "",
+     "70",
+     "",
+     "130",
+     "ms"
+    ],
+    [
+     "Current pulse control stop start delay",
+     "tPUMPX_DLY",
+     "",
+     "80",
+     "",
+     "225",
+     "ms"
+    ],
+    [
+     "Conversion time",
+     "tCONV",
+     "CONV_RATE (REG02[6]) = 0",
+     "",
+     "8",
+     "1000",
+     "ms"
+    ],
+    [
+     "QON low time to turn on BATFET and exit ship mode",
+     "tSHIPMODE",
+     "TJ = –10°C to +60°C",
+     "1.25",
+     "",
+     "2.25",
+     "s"
+    ],
+    [
+     "QON low time to enable full system reset",
+     "tQON_RST",
+     "TJ = –10°C to +60°C",
+     "12",
+     "",
+     "18",
+     "s"
+    ],
+    [
+     "BATFET off time during full system reset",
+     "tBATFET_RST",
+     "TJ = –10°C to +60°C",
+     "350",
+     "",
+     "550",
+     "ms"
+    ],
+    [
+     "Enter ship mode delay",
+     "tSM_DLY",
+     "TJ = –10°C to +60°C",
+     "10",
+     "",
+     "15",
+     "s"
+    ],
+    [
+     "SCL clock frequency",
+     "fSCL",
+     "",
+     "",
+     "",
+     "400",
+     "kHz"
+    ],
+    [
+     "Digital low power clock",
+     "fLPDIG",
+     "REGN LDO disabled",
+     "18",
+     "30",
+     "45",
+     "kHz"
+    ],
+    [
+     "Digital clock",
+     "fDIG",
+     "REGN LDO enabled",
+     "1320",
+     "1500",
+     "1680",
+     "kHz"
+    ],
+    [
+     "Watchdog reset time",
+     "tWDT",
+     "WATCHDOG (REG07[5:4]) = 11, REGN LDO disabled",
+     "100",
+     "160",
+     "",
+     "s"
+    ],
+    [
+     "Watchdog reset time",
+     "tWDT",
+     "WATCHDOG (REG07[5:4]) = 11, REGN LDO enabled",
+     "136",
+     "160",
+     "",
+     "s"
+    ]
+   ]
+  },
+  {
+   "title": "Table 8-1. Non-standard adapter detection",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "non-standard adapter",
+    "D+ threshold",
+    "D– threshold",
+    "input current limit"
+   ],
+   "rows": [
+    [
+     "Divider 1",
+     "VD+ within V2P7_VTH",
+     "VD– within V2P0_VTH",
+     "2.1A"
+    ],
+    [
+     "Divider 2",
+     "VD+ within V1P2_VTH",
+     "VD– within V1P2_VTH",
+     "2A"
+    ],
+    [
+     "Divider 3",
+     "VD+ within V2P0_VTH",
+     "VD– within V2P7_VTH",
+     "1A"
+    ],
+    [
+     "Divider 4",
+     "VD+ within V2P7_VTH",
+     "VD– within V2P7_VTH",
+     "2.4A"
+    ]
+   ]
+  },
+  {
+   "title": "Table 8-2. Adjustable high voltage adapter D+/D– output configurations",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "adjustable high voltage handshake",
+    "D+",
+    "D–",
+    "output"
+   ],
+   "rows": [
+    [
+     "MaxCharge (12V)",
+     "I1P6MA_ISINK",
+     "V3p45_VSRC",
+     "12 V"
+    ],
+    [
+     "MaxCharge (9V)",
+     "V3p45_VSRC",
+     "I1P6MA_ISINK",
+     "9V"
+    ]
+   ]
+  },
+  {
+   "title": "Table 8-3. Input source detection result",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "D+/D– detection",
+    "input current limit (IINLIM)",
+    "SDP_STAT",
+    "VBUS_STAT"
+   ],
+   "rows": [
+    [
+     "USB SDP (USB500)",
+     "500 mA",
+     "1",
+     "001"
+    ],
+    [
+     "USB CDP",
+     "1.5 A",
+     "1",
+     "010"
+    ],
+    [
+     "USB DCP",
+     "3.25 A",
+     "1",
+     "011"
+    ],
+    [
+     "Divider 3",
+     "1A",
+     "1",
+     "110"
+    ],
+    [
+     "Divider 1",
+     "2.1 A",
+     "1",
+     "110"
+    ],
+    [
+     "Divider 4",
+     "2.4 A",
+     "1",
+     "110"
+    ],
+    [
+     "Divider 2",
+     "2A",
+     "1",
+     "110"
+    ],
+    [
+     "MaxCharge",
+     "1.5 A",
+     "1",
+     "100"
+    ],
+    [
+     "Unknown Adapter",
+     "500 mA",
+     "1",
+     "101"
+    ]
+   ]
+  },
+  {
+   "title": "Table 8-4. Charging parameter default setting",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "default mode",
+    "BQ25895"
+   ],
+   "rows": [
+    [
+     "Charging Voltage",
+     "4.208 V"
+    ],
+    [
+     "Charging Current",
+     "2.048 A"
+    ],
+    [
+     "Pre-charge Current",
+     "128 mA"
+    ],
+    [
+     "Termination Current",
+     "256 mA"
+    ],
+    [
+     "Temperature Profile",
+     "Cold/Hot"
+    ],
+    [
+     "Safety Timer",
+     "12 hour"
+    ]
+   ]
+  },
+  {
+   "title": "Table 8-5. Charging current setting",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "VBAT",
+    "charging current",
+    "reg default setting",
+    "CHRG_STAT"
+   ],
+   "rows": [
+    [
+     "<2V",
+     "IBATSHORT",
+     "–",
+     "01"
+    ],
+    [
+     "2V–3V",
+     "IPRECHG",
+     "128 mA",
+     "01"
+    ],
+    [
+     ">3V",
+     "ICHG",
+     "2048 mA",
+     "10"
+    ]
+   ]
+  },
+  {
+   "title": "Table 8-6. Battery monitor modes of operation",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "register",
+    "charge mode",
+    "boost mode",
+    "disable charge mode",
+    "battery only mode"
+   ],
+   "rows": [
+    [
+     "Battery Voltage (VBAT)",
+     "REG0E",
+     "Yes",
+     "Yes",
+     "Yes",
+     "Yes"
+    ],
+    [
+     "System Voltage (VSYS)",
+     "REG0F",
+     "Yes",
+     "Yes",
+     "Yes",
+     "Yes"
+    ],
+    [
+     "Temperature (TS) Voltage (VTS)",
+     "REG10",
+     "Yes",
+     "Yes",
+     "Yes",
+     "Yes"
+    ],
+    [
+     "VBUS Voltage (VVBUS)",
+     "REG11",
+     "Yes",
+     "Yes",
+     "Yes",
+     "NA"
+    ],
+    [
+     "Charge Current (IBAT)",
+     "REG12",
+     "Yes",
+     "NA",
+     "NA",
+     "NA"
+    ]
+   ]
+  },
+  {
+   "title": "Table 8-7. STAT pin state",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "charging state",
+    "STAT indicator"
+   ],
+   "rows": [
+    [
+     "Charging in progress (including recharge)",
+     "LOW"
+    ],
+    [
+     "Charging complete",
+     "HIGH"
+    ],
+    [
+     "Sleep mode, charge disable",
+     "HIGH"
+    ],
+    [
+     "Charge suspend (input overvoltage, TS fault, timer fault, input or system overvoltage); boost mode suspend (TS fault)",
+     "blinking at 1 Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG00 (00h)",
+   "page": 32,
+   "conditions": "I2C address 6AH; value after reset 00001000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "EN_HIZ",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "High-impedance mode: 0 off (default), 1 on"
+    ],
+    [
+     "6",
+     "EN_ILIM",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "ILIM pin current limit: 0 off, 1 on (default)"
+    ],
+    [
+     "5",
+     "IINLIM[5]",
+     "R/W",
+     "REG_RST",
+     "1600mA",
+     "Input current limit, offset 100 mA, range 100 mA (000000) to 3.25 A (111111)"
+    ],
+    [
+     "4",
+     "IINLIM[4]",
+     "R/W",
+     "REG_RST",
+     "800mA",
+     ""
+    ],
+    [
+     "3",
+     "IINLIM[3]",
+     "R/W",
+     "REG_RST",
+     "400mA",
+     "Default 001000 (500 mA)"
+    ],
+    [
+     "2",
+     "IINLIM[2]",
+     "R/W",
+     "REG_RST",
+     "200mA",
+     ""
+    ],
+    [
+     "1",
+     "IINLIM[1]",
+     "R/W",
+     "REG_RST",
+     "100mA",
+     ""
+    ],
+    [
+     "0",
+     "IINLIM[0]",
+     "R/W",
+     "REG_RST",
+     "50mA",
+     ""
+    ]
+   ],
+   "notes": [
+    "The limit in force is the lower of IINLIM and the ILIM pin. Input source detection rewrites IINLIM: SDP with OTG high (USB500) 500 mA, SDP with OTG low (USB100) 500 mA, CDP 1.5 A, DCP 3.25 A, MaxCharge DCP 1.5 A, unknown adapter 500 mA, non-standard adapter 1 A, 2 A, 2.1 A or 2.4 A.",
+    "The default code reads 0001000 with seven digits; the field is six bits, 001000."
+   ]
+  },
+  {
+   "title": "Register REG01 (01h)",
+   "page": 33,
+   "conditions": "I2C address 6AH; value after reset 00000101",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "BHOT[1]",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Boost-mode hot threshold: 00 VBHOT1 34.75% (default), 01 VBHOT0 37.75% typ, 10 VBHOT2 31.25% typ, 11 boost thermal protection off"
+    ],
+    [
+     "6",
+     "BHOT[0]",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     ""
+    ],
+    [
+     "5",
+     "BCOLD",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Boost-mode cold threshold: 0 VBCOLD0 77% typ (default), 1 VBCOLD1 80% typ"
+    ],
+    [
+     "4",
+     "VINDPM_OS[4]",
+     "R/W",
+     "REG_RST",
+     "1600mV",
+     "Input voltage limit offset, range 0 mV to 3100 mV, default 500 mV (00101)"
+    ],
+    [
+     "3",
+     "VINDPM_OS[3]",
+     "R/W",
+     "REG_RST",
+     "800mV",
+     ""
+    ],
+    [
+     "2",
+     "VINDPM_OS[2]",
+     "R/W",
+     "REG_RST",
+     "400mV",
+     "VINDPM clamped between 3.9 V and 15.3 V"
+    ],
+    [
+     "1",
+     "VINDPM_OS[1]",
+     "R/W",
+     "REG_RST",
+     "200mV",
+     ""
+    ],
+    [
+     "0",
+     "VINDPM_OS[0]",
+     "R/W",
+     "REG_RST",
+     "100mV",
+     ""
+    ]
+   ],
+   "notes": [
+    "The relative VINDPM threshold uses VINDPM_OS when the unloaded VBUS is 6 V or less, and twice VINDPM_OS when it is above 6 V."
+   ]
+  },
+  {
+   "title": "Register REG02 (02h)",
+   "page": 34,
+   "conditions": "I2C address 6AH; value after reset 00111101",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "CONV_START",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "ADC conversion: 0 idle (default), 1 start. Read-only while CONV_RATE = 1; reads 1 during a conversion and during input source detection"
+    ],
+    [
+     "6",
+     "CONV_RATE",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "ADC rate: 0 one shot (default), 1 continuous every 1 s"
+    ],
+    [
+     "5",
+     "BOOST_FREQ",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Boost frequency: 0 1.5 MHz, 1 500 kHz (default); writes ignored while OTG_CONFIG is set"
+    ],
+    [
+     "4",
+     "ICO_EN",
+     "R/W",
+     "REG_RST",
+     "",
+     "Input current optimizer: 0 off, 1 on (default)"
+    ],
+    [
+     "3",
+     "HVDCP_EN",
+     "R/W",
+     "REG_RST",
+     "",
+     "High-voltage DCP handshake: 0 off, 1 on (default)"
+    ],
+    [
+     "2",
+     "MAXC_EN",
+     "R/W",
+     "REG_RST",
+     "",
+     "MaxCharge handshake: 0 off, 1 on (default)"
+    ],
+    [
+     "1",
+     "FORCE_DPDM",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Force D+/D– detection: 0 idle (default), 1 run"
+    ],
+    [
+     "0",
+     "AUTO_DPDM_EN",
+     "R/W",
+     "REG_RST",
+     "",
+     "Run D+/D– detection when VBUS is plugged in: 0 off, 1 on (default)"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG03 (03h)",
+   "page": 35,
+   "conditions": "I2C address 6AH; value after reset 00111010",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "BAT_LOADEN",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Battery load (IBATLOAD): 0 off (default), 1 on"
+    ],
+    [
+     "6",
+     "WD_RST",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Watchdog timer reset: 0 normal (default), 1 reset; returns to 0 after the reset"
+    ],
+    [
+     "5",
+     "OTG_CONFIG",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Boost (OTG) mode: 0 off, 1 on (default)"
+    ],
+    [
+     "4",
+     "CHG_CONFIG",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Charging: 0 off, 1 on (default)"
+    ],
+    [
+     "3",
+     "SYS_MIN[2]",
+     "R/W",
+     "REG_RST",
+     "0.4V",
+     "Minimum system voltage, offset 3.0 V, range 3.0 V to 3.7 V, default 3.5 V (101)"
+    ],
+    [
+     "2",
+     "SYS_MIN[1]",
+     "R/W",
+     "REG_RST",
+     "0.2V",
+     ""
+    ],
+    [
+     "1",
+     "SYS_MIN[0]",
+     "R/W",
+     "REG_RST",
+     "0.1V",
+     ""
+    ],
+    [
+     "0",
+     "Reserved",
+     "R/W",
+     "REG_RST, watchdog",
+     "",
+     "Reserved, default 0"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG04 (04h)",
+   "page": 36,
+   "conditions": "I2C address 6AH; value after reset 00100000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "EN_PUMPX",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Current pulse control (PUMPX_UP, PUMPX_DN): 0 off (default), 1 on"
+    ],
+    [
+     "6",
+     "ICHG[6]",
+     "R/W",
+     "software, watchdog",
+     "4096mA",
+     "Fast charge current limit, offset 0 mA, range 0 mA (0000000) to 5056 mA (1001111), default 2048 mA (0100000)"
+    ],
+    [
+     "5",
+     "ICHG[5]",
+     "R/W",
+     "software, watchdog",
+     "2048mA",
+     ""
+    ],
+    [
+     "4",
+     "ICHG[4]",
+     "R/W",
+     "software, watchdog",
+     "1024mA",
+     "Code 0 (0 mA) turns charging off"
+    ],
+    [
+     "3",
+     "ICHG[3]",
+     "R/W",
+     "software, watchdog",
+     "512mA",
+     "Codes above 1001111 are held at 1001111 (5056 mA)"
+    ],
+    [
+     "2",
+     "ICHG[2]",
+     "R/W",
+     "software, watchdog",
+     "256mA",
+     ""
+    ],
+    [
+     "1",
+     "ICHG[1]",
+     "R/W",
+     "software, watchdog",
+     "128mA",
+     ""
+    ],
+    [
+     "0",
+     "ICHG[0]",
+     "R/W",
+     "software, watchdog",
+     "64mA",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG05 (05h)",
+   "page": 37,
+   "conditions": "I2C address 6AH; value after reset 00010011",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "IPRECHG[3]",
+     "R/W",
+     "software, watchdog",
+     "512mA",
+     "Precharge current limit, offset 64 mA, range 64 mA to 1024 mA, default 128 mA (0001)"
+    ],
+    [
+     "6",
+     "IPRECHG[2]",
+     "R/W",
+     "software, watchdog",
+     "256mA",
+     ""
+    ],
+    [
+     "5",
+     "IPRECHG[1]",
+     "R/W",
+     "software, watchdog",
+     "128mA",
+     ""
+    ],
+    [
+     "4",
+     "IPRECHG[0]",
+     "R/W",
+     "software, watchdog",
+     "64mA",
+     ""
+    ],
+    [
+     "3",
+     "ITERM[3]",
+     "R/W",
+     "software, watchdog",
+     "512mA",
+     "Termination current limit, offset 64 mA, range 64 mA to 1024 mA, default 256 mA (0011)"
+    ],
+    [
+     "2",
+     "ITERM[2]",
+     "R/W",
+     "software, watchdog",
+     "256mA",
+     ""
+    ],
+    [
+     "1",
+     "ITERM[1]",
+     "R/W",
+     "software, watchdog",
+     "128mA",
+     ""
+    ],
+    [
+     "0",
+     "ITERM[0]",
+     "R/W",
+     "software, watchdog",
+     "64mA",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG06 (06h)",
+   "page": 38,
+   "conditions": "I2C address 6AH; value after reset 01011110",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "VREG[5]",
+     "R/W",
+     "software, watchdog",
+     "512mV",
+     "Charge voltage limit, offset 3.840 V, range 3.840 V to 4.608 V (110000), default 4.208 V (010111)"
+    ],
+    [
+     "6",
+     "VREG[4]",
+     "R/W",
+     "software, watchdog",
+     "256mV",
+     ""
+    ],
+    [
+     "5",
+     "VREG[3]",
+     "R/W",
+     "software, watchdog",
+     "128mV",
+     "Codes above 110000 are held at 110000 (4.608 V)"
+    ],
+    [
+     "4",
+     "VREG[2]",
+     "R/W",
+     "software, watchdog",
+     "64mV",
+     ""
+    ],
+    [
+     "3",
+     "VREG[1]",
+     "R/W",
+     "software, watchdog",
+     "32mV",
+     ""
+    ],
+    [
+     "2",
+     "VREG[0]",
+     "R/W",
+     "software, watchdog",
+     "16mV",
+     ""
+    ],
+    [
+     "1",
+     "BATLOWV",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Precharge to fast charge threshold: 0 2.8 V, 1 3.0 V (default)"
+    ],
+    [
+     "0",
+     "VRECHG",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Recharge threshold below VREG: 0 100 mV (default), 1 200 mV"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG07 (07h)",
+   "page": 39,
+   "conditions": "I2C address 6AH; value after reset 10011101",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "EN_TERM",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Charge termination: 0 off, 1 on (default)"
+    ],
+    [
+     "6",
+     "STAT_DIS",
+     "R/W",
+     "software, watchdog",
+     "",
+     "STAT pin: 0 active (default), 1 disabled"
+    ],
+    [
+     "5",
+     "WATCHDOG[1]",
+     "R/W",
+     "software, watchdog",
+     "",
+     "I2C watchdog timer: 00 off, 01 40 s (default), 10 80 s, 11 160 s"
+    ],
+    [
+     "4",
+     "WATCHDOG[0]",
+     "R/W",
+     "software, watchdog",
+     "",
+     ""
+    ],
+    [
+     "3",
+     "EN_TIMER",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Charge safety timer: 0 off, 1 on (default)"
+    ],
+    [
+     "2",
+     "CHG_TIMER[1]",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Fast charge timer: 00 5 h, 01 8 h, 10 12 h (default), 11 20 h"
+    ],
+    [
+     "1",
+     "CHG_TIMER[0]",
+     "R/W",
+     "software, watchdog",
+     "",
+     ""
+    ],
+    [
+     "0",
+     "Reserved",
+     "R/W",
+     "",
+     "",
+     "Reserved, default 1"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG08 (08h)",
+   "page": 40,
+   "conditions": "I2C address 6AH; value after reset 00000011",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "BAT_COMP[2]",
+     "R/W",
+     "software, watchdog",
+     "80mΩ",
+     "IR compensation resistance, range 0 to 140 mΩ, default 0 Ω (000, compensation off)"
+    ],
+    [
+     "6",
+     "BAT_COMP[1]",
+     "R/W",
+     "software, watchdog",
+     "40mΩ",
+     ""
+    ],
+    [
+     "5",
+     "BAT_COMP[0]",
+     "R/W",
+     "software, watchdog",
+     "20mΩ",
+     ""
+    ],
+    [
+     "4",
+     "VCLAMP[2]",
+     "R/W",
+     "software, watchdog",
+     "128mV",
+     "IR compensation voltage clamp above VREG, offset 0 mV, range 0 to 224 mV, default 0 mV (000)"
+    ],
+    [
+     "3",
+     "VCLAMP[1]",
+     "R/W",
+     "software, watchdog",
+     "64mV",
+     ""
+    ],
+    [
+     "2",
+     "VCLAMP[0]",
+     "R/W",
+     "software, watchdog",
+     "32mV",
+     ""
+    ],
+    [
+     "1",
+     "TREG[1]",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Thermal regulation threshold: 00 60°C, 01 80°C, 10 100°C, 11 120°C (default)"
+    ],
+    [
+     "0",
+     "TREG[0]",
+     "R/W",
+     "software, watchdog",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG09 (09h)",
+   "page": 41,
+   "conditions": "I2C address 6AH; value after reset 01000100",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "FORCE_ICO",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Force the input current optimizer: 0 no (default), 1 start; can only be set, returns to 0 once ICO starts"
+    ],
+    [
+     "6",
+     "TMR2X_EN",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Safety timer at half rate during input DPM or thermal regulation: 0 no, 1 yes (default)"
+    ],
+    [
+     "5",
+     "BATFET_DIS",
+     "R/W",
+     "software",
+     "",
+     "BATFET: 0 allowed on (default), 1 forced off (ship mode)"
+    ],
+    [
+     "4",
+     "Reserved",
+     "R/W",
+     "",
+     "",
+     "Reserved, default 0"
+    ],
+    [
+     "3",
+     "BATFET_DLY",
+     "R/W",
+     "software",
+     "",
+     "BATFET turn-off on BATFET_DIS: 0 at once (default), 1 after tSM_DLY"
+    ],
+    [
+     "2",
+     "BATFET_RST_EN",
+     "R/W",
+     "software",
+     "",
+     "BATFET full system reset: 0 off, 1 on (default)"
+    ],
+    [
+     "1",
+     "PUMPX_UP",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Current pulse voltage-up request: 0 off (default), 1 on; settable only with EN_PUMPX set, clears when the sequence ends"
+    ],
+    [
+     "0",
+     "PUMPX_DN",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Current pulse voltage-down request: 0 off (default), 1 on; settable only with EN_PUMPX set, clears when the sequence ends"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG0A (0Ah)",
+   "page": 42,
+   "conditions": "I2C address 6AH; value after reset 10010011",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "BOOSTV[3]",
+     "R/W",
+     "software, watchdog",
+     "512mV",
+     "Boost regulation voltage, offset 4.55 V, range 4.55 V to 5.51 V, default 5.126 V (1001)"
+    ],
+    [
+     "6",
+     "BOOSTV[2]",
+     "R/W",
+     "software, watchdog",
+     "256mV",
+     ""
+    ],
+    [
+     "5",
+     "BOOSTV[1]",
+     "R/W",
+     "software",
+     "128mV",
+     ""
+    ],
+    [
+     "4",
+     "BOOSTV[0]",
+     "R/W",
+     "software, watchdog",
+     "64mV",
+     ""
+    ],
+    [
+     "3",
+     "Reserved",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Reserved, default 0"
+    ],
+    [
+     "2",
+     "Reserved",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Reserved, default 0"
+    ],
+    [
+     "1",
+     "Reserved",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Reserved, default 1"
+    ],
+    [
+     "0",
+     "Reserved",
+     "R/W",
+     "software, watchdog",
+     "",
+     "Reserved, default 1"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG0B (0Bh)",
+   "page": 43,
+   "conditions": "I2C address 6AH; value after reset xxxxxxxx",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "VBUS_STAT[2]",
+     "R",
+     "N/A",
+     "",
+     "Input type: 000 none, 001 USB host SDP, 010 USB CDP (1.5 A), 011 USB DCP (3.25 A), 100 adjustable high-voltage DCP (MaxCharge) (1.5 A), 101 unknown adapter (500 mA), 110 non-standard adapter (1 A/2 A/2.1 A/2.4 A), 111 OTG"
+    ],
+    [
+     "6",
+     "VBUS_STAT[1]",
+     "R",
+     "N/A",
+     "",
+     "The software current limit sits in IINLIM"
+    ],
+    [
+     "5",
+     "VBUS_STAT[0]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ],
+    [
+     "4",
+     "CHRG_STAT[1]",
+     "R",
+     "N/A",
+     "",
+     "Charge state: 00 not charging, 01 precharge (< VBATLOWV), 10 fast charging, 11 termination done"
+    ],
+    [
+     "3",
+     "CHRG_STAT[0]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ],
+    [
+     "2",
+     "PG_STAT",
+     "R",
+     "N/A",
+     "",
+     "Power good: 0 no, 1 yes"
+    ],
+    [
+     "1",
+     "SDP_STAT",
+     "R",
+     "N/A",
+     "",
+     "USB input: 0 USB100, 1 USB500; reads 1 whenever VBUS_STAT is not 001"
+    ],
+    [
+     "0",
+     "VSYS_STAT",
+     "R",
+     "N/A",
+     "",
+     "0 not in VSYSMIN regulation (BAT > VSYSMIN), 1 in VSYSMIN regulation (BAT < VSYSMIN)"
+    ]
+   ]
+  },
+  {
+   "title": "Register REG0C (0Ch)",
+   "page": 44,
+   "conditions": "I2C address 6AH; value after reset xxxxxxxx",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "WATCHDOG_FAULT",
+     "R",
+     "N/A",
+     "",
+     "0 normal, 1 watchdog timer expired"
+    ],
+    [
+     "6",
+     "BOOST_FAULT",
+     "R",
+     "N/A",
+     "",
+     "0 normal, 1 VBUS overloaded in OTG, VBUS OVP, or battery too low in boost mode"
+    ],
+    [
+     "5",
+     "CHRG_FAULT[1]",
+     "R",
+     "N/A",
+     "",
+     "Charge fault: 00 normal, 01 input fault (VBUS > VACOV, or VBAT < VBUS < VVBUSMIN (3.8 V typ)), 10 thermal shutdown, 11 safety timer expired"
+    ],
+    [
+     "4",
+     "CHRG_FAULT[0]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ],
+    [
+     "3",
+     "BAT_FAULT",
+     "R",
+     "N/A",
+     "",
+     "0 normal, 1 BATOVP (VBAT > VBATOVP)"
+    ],
+    [
+     "2",
+     "NTC_FAULT[2]",
+     "R",
+     "N/A",
+     "",
+     "NTC fault. Buck mode: 000 normal, 001 TS cold, 010 TS hot. Boost mode: 000 normal, 101 TS cold, 110 TS hot"
+    ],
+    [
+     "1",
+     "NTC_FAULT[1]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ],
+    [
+     "0",
+     "NTC_FAULT[0]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG0D (0Dh)",
+   "page": 45,
+   "conditions": "I2C address 6AH; value after reset 00010010",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "FORCE_VINDPM",
+     "R/W",
+     "software",
+     "",
+     "VINDPM method: 0 relative threshold (default), 1 absolute threshold"
+    ],
+    [
+     "6",
+     "VINDPM[6]",
+     "R/W",
+     "software",
+     "6400mV",
+     "Absolute VINDPM threshold, offset 2.6 V, range 3.9 V (0001101) to 15.3 V (1111111), default 4.4 V (0010010)"
+    ],
+    [
+     "5",
+     "VINDPM[5]",
+     "R/W",
+     "software",
+     "3200mV",
+     "Codes below 0001101 are held at 3.9 V"
+    ],
+    [
+     "4",
+     "VINDPM[4]",
+     "R/W",
+     "software",
+     "1600mV",
+     "Read-only with FORCE_VINDPM = 0, when the relative algorithm writes it; read/write with FORCE_VINDPM = 1"
+    ],
+    [
+     "3",
+     "VINDPM[3]",
+     "R/W",
+     "software",
+     "800mV",
+     ""
+    ],
+    [
+     "2",
+     "VINDPM[2]",
+     "R/W",
+     "software",
+     "400mV",
+     ""
+    ],
+    [
+     "1",
+     "VINDPM[1]",
+     "R/W",
+     "software",
+     "200mV",
+     ""
+    ],
+    [
+     "0",
+     "VINDPM[0]",
+     "R/W",
+     "software",
+     "100mV",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG0E (0Eh)",
+   "page": 45,
+   "conditions": "I2C address 6AH; value after reset 00000000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "THERM_STAT",
+     "R",
+     "N/A",
+     "",
+     "0 normal, 1 in thermal regulation"
+    ],
+    [
+     "6",
+     "BATV[6]",
+     "R",
+     "N/A",
+     "1280mV",
+     "ADC reading of battery voltage, offset 2.304 V, range 2.304 V (0000000) to 4.848 V (1111111), default 2.304 V"
+    ],
+    [
+     "5",
+     "BATV[5]",
+     "R",
+     "N/A",
+     "640mV",
+     ""
+    ],
+    [
+     "4",
+     "BATV[4]",
+     "R",
+     "N/A",
+     "320mV",
+     ""
+    ],
+    [
+     "3",
+     "BATV[3]",
+     "R",
+     "N/A",
+     "160mV",
+     ""
+    ],
+    [
+     "2",
+     "BATV[2]",
+     "R",
+     "N/A",
+     "80mV",
+     ""
+    ],
+    [
+     "1",
+     "BATV[1]",
+     "R",
+     "N/A",
+     "40mV",
+     ""
+    ],
+    [
+     "0",
+     "BATV[0]",
+     "R",
+     "N/A",
+     "20mV",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG0F (0Fh)",
+   "page": 46,
+   "conditions": "I2C address 6AH; value after reset 00000000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "Reserved",
+     "R",
+     "N/A",
+     "",
+     "Reads 0"
+    ],
+    [
+     "6",
+     "SYSV[6]",
+     "R",
+     "N/A",
+     "1280mV",
+     "ADC reading of system voltage, offset 2.304 V, range 2.304 V (0000000) to 4.848 V (1111111), default 2.304 V"
+    ],
+    [
+     "5",
+     "SYSV[5]",
+     "R",
+     "N/A",
+     "640mV",
+     ""
+    ],
+    [
+     "4",
+     "SYSV[4]",
+     "R",
+     "N/A",
+     "320mV",
+     ""
+    ],
+    [
+     "3",
+     "SYSV[3]",
+     "R",
+     "N/A",
+     "160mV",
+     ""
+    ],
+    [
+     "2",
+     "SYSV[2]",
+     "R",
+     "N/A",
+     "80mV",
+     ""
+    ],
+    [
+     "1",
+     "SYSV[1]",
+     "R",
+     "N/A",
+     "40mV",
+     ""
+    ],
+    [
+     "0",
+     "SYSV[0]",
+     "R",
+     "N/A",
+     "20mV",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG10 (10h)",
+   "page": 46,
+   "conditions": "I2C address 6AH; value after reset 00000000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "Reserved",
+     "R",
+     "N/A",
+     "",
+     "Reads 0"
+    ],
+    [
+     "6",
+     "TSPCT[6]",
+     "R",
+     "N/A",
+     "29.76%",
+     "ADC reading of TS voltage as a percentage of REGN, offset 21%, range 21% (0000000) to 80% (1111111), default 21%"
+    ],
+    [
+     "5",
+     "TSPCT[5]",
+     "R",
+     "N/A",
+     "14.88%",
+     ""
+    ],
+    [
+     "4",
+     "TSPCT[4]",
+     "R",
+     "N/A",
+     "7.44%",
+     ""
+    ],
+    [
+     "3",
+     "TSPCT[3]",
+     "R",
+     "N/A",
+     "3.72%",
+     ""
+    ],
+    [
+     "2",
+     "TSPCT[2]",
+     "R",
+     "N/A",
+     "1.86%",
+     ""
+    ],
+    [
+     "1",
+     "TSPCT[1]",
+     "R",
+     "N/A",
+     "0.93%",
+     ""
+    ],
+    [
+     "0",
+     "TSPCT[0]",
+     "R",
+     "N/A",
+     "0.465%",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG11 (11h)",
+   "page": 47,
+   "conditions": "I2C address 6AH; value after reset 00000000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "VBUS_GD",
+     "R",
+     "N/A",
+     "",
+     "0 no VBUS attached, 1 VBUS attached"
+    ],
+    [
+     "6",
+     "VBUSV[6]",
+     "R",
+     "N/A",
+     "6400mV",
+     "ADC reading of VBUS voltage, offset 2.6 V, range 2.6 V (0000000) to 15.3 V (1111111), default 2.6 V"
+    ],
+    [
+     "5",
+     "VBUSV[5]",
+     "R",
+     "N/A",
+     "3200mV",
+     ""
+    ],
+    [
+     "4",
+     "VBUSV[4]",
+     "R",
+     "N/A",
+     "1600mV",
+     ""
+    ],
+    [
+     "3",
+     "VBUSV[3]",
+     "R",
+     "N/A",
+     "800mV",
+     ""
+    ],
+    [
+     "2",
+     "VBUSV[2]",
+     "R",
+     "N/A",
+     "400mV",
+     ""
+    ],
+    [
+     "1",
+     "VBUSV[1]",
+     "R",
+     "N/A",
+     "200mV",
+     ""
+    ],
+    [
+     "0",
+     "VBUSV[0]",
+     "R",
+     "N/A",
+     "100mV",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG12 (12h)",
+   "page": 47,
+   "conditions": "I2C address 6AH; value after reset 00000000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "Unused",
+     "R",
+     "N/A",
+     "",
+     "Reads 0"
+    ],
+    [
+     "6",
+     "ICHGR[6]",
+     "R",
+     "N/A",
+     "3200mA",
+     "ADC reading of charge current when VBAT > VBATSHORT, offset 0 mA, range 0 mA (0000000) to 6350 mA (1111111), default 0 mA"
+    ],
+    [
+     "5",
+     "ICHGR[5]",
+     "R",
+     "N/A",
+     "1600mA",
+     "Reads 0000000 while VBAT < VBATSHORT"
+    ],
+    [
+     "4",
+     "ICHGR[4]",
+     "R",
+     "N/A",
+     "800mA",
+     ""
+    ],
+    [
+     "3",
+     "ICHGR[3]",
+     "R",
+     "N/A",
+     "400mA",
+     ""
+    ],
+    [
+     "2",
+     "ICHGR[2]",
+     "R",
+     "N/A",
+     "200mA",
+     ""
+    ],
+    [
+     "1",
+     "ICHGR[1]",
+     "R",
+     "N/A",
+     "100mA",
+     ""
+    ],
+    [
+     "0",
+     "ICHGR[0]",
+     "R",
+     "N/A",
+     "50mA",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Register REG13 (13h)",
+   "page": 48,
+   "conditions": "I2C address 6AH; value after reset 00000000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "VDPM_STAT",
+     "R",
+     "N/A",
+     "",
+     "0 not in VINDPM, 1 in VINDPM"
+    ],
+    [
+     "6",
+     "IDPM_STAT",
+     "R",
+     "N/A",
+     "",
+     "0 not in IINDPM, 1 in IINDPM"
+    ],
+    [
+     "5",
+     "IDPM_LIM[5]",
+     "R",
+     "N/A",
+     "1600mA",
+     "Input current limit in force while ICO is on, offset 100 mA, range 100 mA (0000000) to 3.25mA (1111111)"
+    ],
+    [
+     "4",
+     "IDPM_LIM[4]",
+     "R",
+     "N/A",
+     "800mA",
+     ""
+    ],
+    [
+     "3",
+     "IDPM_LIM[3]",
+     "R",
+     "N/A",
+     "400mA",
+     ""
+    ],
+    [
+     "2",
+     "IDPM_LIM[2]",
+     "R",
+     "N/A",
+     "200mA",
+     ""
+    ],
+    [
+     "1",
+     "IDPM_LIM[1]",
+     "R",
+     "N/A",
+     "100mA",
+     ""
+    ],
+    [
+     "0",
+     "IDPM_LIM[0]",
+     "R",
+     "N/A",
+     "50mA",
+     ""
+    ]
+   ],
+   "notes": [
+    "The top of the IDPM_LIM range reads 3.25mA; it is 3.25 A, and the six-bit field's codes are 000000 to 111111."
+   ]
+  },
+  {
+   "title": "Register REG14 (14h)",
+   "page": 48,
+   "conditions": "I2C address 6AH; value after reset 00000000",
+   "columns": [
+    "bit",
+    "field",
+    "type",
+    "reset by",
+    "weight",
+    "setting"
+   ],
+   "rows": [
+    [
+     "7",
+     "REG_RST",
+     "R/W",
+     "N/A",
+     "",
+     "Register reset: 0 keep settings (default), 1 reset all registers to default and reset the safety timer; returns to 0 when done"
+    ],
+    [
+     "6",
+     "ICO_OPTIMIZED",
+     "R",
+     "N/A",
+     "",
+     "ICO state: 0 optimizing, 1 maximum input current found"
+    ],
+    [
+     "5",
+     "PN[2]",
+     "R",
+     "N/A",
+     "",
+     "Device configuration: 111 BQ25895"
+    ],
+    [
+     "4",
+     "PN[1]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ],
+    [
+     "3",
+     "PN[0]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ],
+    [
+     "2",
+     "TS_PROFILE",
+     "R",
+     "N/A",
+     "",
+     "Temperature profile: 0 cold/hot (default)"
+    ],
+    [
+     "1",
+     "DEV_REV[1]",
+     "R",
+     "N/A",
+     "",
+     "Device revision: 01"
+    ],
+    [
+     "0",
+     "DEV_REV[0]",
+     "R",
+     "N/A",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Table 9-1. Design parameters",
+   "page": 49,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value"
+   ],
+   "rows": [
+    [
+     "Input voltage range",
+     "3.9 V to 14 V"
+    ],
+    [
+     "Input current limit",
+     "1.5 A"
+    ],
+    [
+     "Fast charge current",
+     "5000 mA"
+    ],
+    [
+     "Output voltage",
+     "4.352 V"
+    ],
+    [
+     "VREF system pullup voltage",
+     "1.8 V - 3.3 V"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel information",
+   "page": 59,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ25895RTWR",
+     "WQFN",
+     "RTW",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ25895RTWRG4",
+     "WQFN",
+     "RTW",
+     "24",
+     "3000",
+     "330.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ],
+    [
+     "BQ25895RTWT",
+     "WQFN",
+     "RTW",
+     "24",
+     "250",
+     "180.0",
+     "12.4",
+     "4.25",
+     "4.25",
+     "1.15",
+     "8.0",
+     "12.0",
+     "Q2"
+    ]
+   ],
+   "notes": [
+    "A0, B0 and K0 are the pocket's width, length and depth; W is the tape width and P1 the pocket pitch."
+   ]
+  },
+  {
+   "title": "Tape and reel box dimensions",
+   "page": 60,
+   "conditions": "All dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ25895RTWR",
+     "WQFN",
+     "RTW",
+     "24",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ25895RTWRG4",
+     "WQFN",
+     "RTW",
+     "24",
+     "3000",
+     "346.0",
+     "346.0",
+     "33.0"
+    ],
+    [
+     "BQ25895RTWT",
+     "WQFN",
+     "RTW",
+     "24",
+     "250",
+     "210.0",
+     "185.0",
+     "35.0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Charge efficiency vs charge current",
+   "page": 12,
+   "conditions": "VBAT = 3.8 V, DCR = 10 mΩ",
+   "x": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS = 5 V",
+     "points": [
+      [
+       0.778,
+       93.02
+      ],
+      [
+       0.908,
+       93.03
+      ],
+      [
+       0.973,
+       92.95
+      ],
+      [
+       1.037,
+       93.01
+      ],
+      [
+       1.166,
+       92.74
+      ],
+      [
+       1.231,
+       92.75
+      ],
+      [
+       1.361,
+       92.59
+      ],
+      [
+       1.458,
+       93.56
+      ],
+      [
+       1.525,
+       93.55
+      ],
+      [
+       1.591,
+       93.41
+      ],
+      [
+       1.658,
+       93.41
+      ],
+      [
+       1.724,
+       93.25
+      ],
+      [
+       1.923,
+       93.01
+      ],
+      [
+       2.055,
+       92.78
+      ],
+      [
+       2.187,
+       92.64
+      ],
+      [
+       2.581,
+       92.0
+      ],
+      [
+       2.711,
+       91.74
+      ],
+      [
+       2.777,
+       91.69
+      ],
+      [
+       2.971,
+       91.25
+      ]
+     ]
+    },
+    {
+     "label": "VBUS = 9 V",
+     "points": [
+      [
+       0.776,
+       89.67
+      ],
+      [
+       0.906,
+       90.15
+      ],
+      [
+       1.1,
+       90.63
+      ],
+      [
+       1.229,
+       90.74
+      ],
+      [
+       1.359,
+       90.74
+      ],
+      [
+       1.455,
+       91.96
+      ],
+      [
+       1.587,
+       91.98
+      ],
+      [
+       1.653,
+       92.06
+      ],
+      [
+       1.72,
+       91.99
+      ],
+      [
+       1.851,
+       92.04
+      ],
+      [
+       2.182,
+       91.84
+      ],
+      [
+       2.247,
+       91.86
+      ],
+      [
+       2.312,
+       91.7
+      ],
+      [
+       2.378,
+       91.78
+      ],
+      [
+       2.443,
+       91.74
+      ],
+      [
+       2.509,
+       91.61
+      ],
+      [
+       2.574,
+       91.65
+      ],
+      [
+       2.64,
+       91.52
+      ],
+      [
+       2.705,
+       91.52
+      ],
+      [
+       2.966,
+       91.21
+      ],
+      [
+       3.032,
+       91.23
+      ],
+      [
+       3.097,
+       91.1
+      ],
+      [
+       3.229,
+       91.03
+      ],
+      [
+       3.359,
+       90.84
+      ],
+      [
+       3.424,
+       90.84
+      ],
+      [
+       3.488,
+       90.64
+      ],
+      [
+       3.618,
+       90.57
+      ],
+      [
+       3.875,
+       90.2
+      ],
+      [
+       3.94,
+       90.17
+      ],
+      [
+       4.068,
+       89.98
+      ],
+      [
+       4.132,
+       89.97
+      ],
+      [
+       4.258,
+       89.69
+      ],
+      [
+       4.322,
+       89.72
+      ],
+      [
+       4.512,
+       89.39
+      ],
+      [
+       4.574,
+       89.37
+      ],
+      [
+       4.763,
+       89.05
+      ],
+      [
+       4.826,
+       89.03
+      ],
+      [
+       4.887,
+       88.91
+      ],
+      [
+       4.949,
+       88.96
+      ],
+      [
+       4.986,
+       88.84
+      ]
+     ]
+    },
+    {
+     "label": "VBUS = 12 V",
+     "points": [
+      [
+       0.775,
+       87.35
+      ],
+      [
+       1.034,
+       88.37
+      ],
+      [
+       1.163,
+       88.69
+      ],
+      [
+       1.357,
+       89.04
+      ],
+      [
+       1.449,
+       90.18
+      ],
+      [
+       1.714,
+       90.42
+      ],
+      [
+       1.845,
+       90.39
+      ],
+      [
+       2.042,
+       90.46
+      ],
+      [
+       2.305,
+       90.47
+      ],
+      [
+       2.369,
+       90.38
+      ],
+      [
+       2.434,
+       90.39
+      ],
+      [
+       2.5,
+       90.3
+      ],
+      [
+       2.565,
+       90.3
+      ],
+      [
+       2.761,
+       90.15
+      ],
+      [
+       2.827,
+       90.16
+      ],
+      [
+       2.892,
+       90.07
+      ],
+      [
+       3.021,
+       90.05
+      ],
+      [
+       3.086,
+       89.95
+      ],
+      [
+       3.152,
+       89.96
+      ],
+      [
+       3.478,
+       89.63
+      ],
+      [
+       3.736,
+       89.45
+      ],
+      [
+       3.865,
+       89.27
+      ],
+      [
+       3.928,
+       89.28
+      ],
+      [
+       4.12,
+       89.0
+      ],
+      [
+       4.184,
+       89.02
+      ],
+      [
+       4.247,
+       88.89
+      ],
+      [
+       4.374,
+       88.79
+      ],
+      [
+       4.437,
+       88.64
+      ],
+      [
+       4.563,
+       88.6
+      ],
+      [
+       4.625,
+       88.46
+      ],
+      [
+       4.986,
+       88.03
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System light load efficiency vs system light load current",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "System load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS = 5 V",
+     "points": [
+      [
+       0.125,
+       85.41
+      ],
+      [
+       0.221,
+       88.19
+      ],
+      [
+       0.319,
+       90.31
+      ],
+      [
+       0.432,
+       91.52
+      ],
+      [
+       0.53,
+       92.83
+      ],
+      [
+       0.626,
+       93.15
+      ],
+      [
+       0.726,
+       93.76
+      ],
+      [
+       0.821,
+       93.73
+      ],
+      [
+       1.032,
+       93.9
+      ],
+      [
+       1.132,
+       94.27
+      ],
+      [
+       1.328,
+       94.18
+      ],
+      [
+       1.418,
+       93.73
+      ],
+      [
+       1.516,
+       93.73
+      ]
+     ]
+    },
+    {
+     "label": "VBUS = 9 V",
+     "points": [
+      [
+       0.125,
+       79.62
+      ],
+      [
+       0.223,
+       82.87
+      ],
+      [
+       0.316,
+       83.64
+      ],
+      [
+       0.435,
+       87.36
+      ],
+      [
+       0.536,
+       89.05
+      ],
+      [
+       0.626,
+       88.39
+      ],
+      [
+       0.733,
+       90.28
+      ],
+      [
+       0.82,
+       90.23
+      ],
+      [
+       1.035,
+       91.58
+      ],
+      [
+       1.127,
+       91.44
+      ],
+      [
+       1.231,
+       92.08
+      ],
+      [
+       1.323,
+       91.88
+      ],
+      [
+       1.421,
+       92.08
+      ],
+      [
+       1.523,
+       92.47
+      ]
+     ]
+    },
+    {
+     "label": "VBUS = 12 V",
+     "points": [
+      [
+       0.124,
+       75.59
+      ],
+      [
+       0.319,
+       82.87
+      ],
+      [
+       0.432,
+       83.14
+      ],
+      [
+       0.529,
+       85.27
+      ],
+      [
+       0.628,
+       86.25
+      ],
+      [
+       0.723,
+       86.22
+      ],
+      [
+       0.819,
+       86.78
+      ],
+      [
+       0.92,
+       88.6
+      ],
+      [
+       1.032,
+       89.02
+      ],
+      [
+       1.132,
+       89.74
+      ],
+      [
+       1.228,
+       89.88
+      ],
+      [
+       1.32,
+       89.74
+      ],
+      [
+       1.421,
+       90.21
+      ],
+      [
+       1.52,
+       90.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Boost mode efficiency vs PMID load current",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "PMID load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 3.2 V",
+     "points": [
+      [
+       0.031,
+       84.65
+      ],
+      [
+       0.129,
+       90.58
+      ],
+      [
+       0.226,
+       92.94
+      ],
+      [
+       0.323,
+       91.33
+      ],
+      [
+       0.436,
+       91.39
+      ],
+      [
+       0.535,
+       95.13
+      ],
+      [
+       0.631,
+       95.15
+      ],
+      [
+       1.133,
+       94.12
+      ],
+      [
+       1.231,
+       93.82
+      ],
+      [
+       1.328,
+       93.36
+      ],
+      [
+       1.425,
+       93.06
+      ],
+      [
+       1.523,
+       92.89
+      ],
+      [
+       1.636,
+       92.3
+      ],
+      [
+       1.733,
+       92.21
+      ],
+      [
+       1.831,
+       91.55
+      ],
+      [
+       2.123,
+       90.58
+      ],
+      [
+       2.334,
+       89.59
+      ],
+      [
+       2.528,
+       88.82
+      ],
+      [
+       2.724,
+       87.89
+      ],
+      [
+       2.838,
+       87.18
+      ],
+      [
+       2.992,
+       86.49
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 3.8 V",
+     "points": [
+      [
+       0.031,
+       85.61
+      ],
+      [
+       0.129,
+       91.69
+      ],
+      [
+       0.226,
+       92.52
+      ],
+      [
+       0.323,
+       92.17
+      ],
+      [
+       0.436,
+       91.55
+      ],
+      [
+       0.535,
+       92.6
+      ],
+      [
+       0.631,
+       96.17
+      ],
+      [
+       1.037,
+       95.72
+      ],
+      [
+       1.133,
+       95.48
+      ],
+      [
+       1.231,
+       95.05
+      ],
+      [
+       1.328,
+       95.03
+      ],
+      [
+       1.425,
+       94.85
+      ],
+      [
+       1.636,
+       94.29
+      ],
+      [
+       1.733,
+       94.13
+      ],
+      [
+       1.831,
+       93.82
+      ],
+      [
+       1.928,
+       93.66
+      ],
+      [
+       2.236,
+       92.64
+      ],
+      [
+       2.626,
+       91.64
+      ],
+      [
+       2.838,
+       90.91
+      ],
+      [
+       2.935,
+       90.8
+      ],
+      [
+       2.992,
+       90.61
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge current accuracy vs charge current I2C setting",
+   "page": 12,
+   "conditions": "VBUS = 9 V",
+   "x": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Error",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT = 3.1 V",
+     "points": [
+      [
+       0.511,
+       -0.71
+      ],
+      [
+       0.699,
+       -0.65
+      ],
+      [
+       0.827,
+       -0.52
+      ],
+      [
+       1.34,
+       -0.34
+      ],
+      [
+       1.411,
+       0.21
+      ],
+      [
+       1.669,
+       0.32
+      ],
+      [
+       2.185,
+       0.43
+      ],
+      [
+       3.019,
+       0.37
+      ],
+      [
+       3.215,
+       0.46
+      ],
+      [
+       3.535,
+       0.43
+      ],
+      [
+       4.988,
+       0.49
+      ]
+     ]
+    },
+    {
+     "label": "VBAT = 3.8 V",
+     "points": [
+      [
+       0.511,
+       1.05
+      ],
+      [
+       1.34,
+       1.13
+      ],
+      [
+       1.411,
+       3.28
+      ],
+      [
+       1.669,
+       3.34
+      ],
+      [
+       2.12,
+       3.28
+      ],
+      [
+       2.955,
+       2.96
+      ],
+      [
+       3.215,
+       2.95
+      ],
+      [
+       3.664,
+       2.72
+      ],
+      [
+       4.309,
+       2.29
+      ],
+      [
+       4.988,
+       1.66
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SYS voltage regulation vs system load current, VBAT = 2.9 V",
+   "page": 12,
+   "conditions": "VBAT = 2.9 V, VBUS = 5 V, SYSMIN = 3.5 V",
+   "x": {
+    "label": "System load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SYS voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS = 5 V",
+     "points": [
+      [
+       0.028,
+       3.6686
+      ],
+      [
+       0.321,
+       3.6277
+      ],
+      [
+       0.529,
+       3.5963
+      ],
+      [
+       0.629,
+       3.6554
+      ],
+      [
+       2.992,
+       3.6611
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SYS voltage regulation vs system load current, VBAT = 4.2 V",
+   "page": 12,
+   "conditions": "VBAT = 4.2 V",
+   "x": {
+    "label": "System load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SYS voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS = 5 V",
+     "points": [
+      [
+       0.029,
+       4.2687
+      ],
+      [
+       0.32,
+       4.2209
+      ],
+      [
+       0.432,
+       4.1978
+      ],
+      [
+       0.532,
+       4.1639
+      ],
+      [
+       0.626,
+       4.2536
+      ],
+      [
+       2.621,
+       4.2513
+      ],
+      [
+       2.992,
+       4.2474
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "BAT voltage vs temperature",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "BAT voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS = 5 V",
+     "points": [
+      [
+       -40.0,
+       4.3472
+      ],
+      [
+       0,
+       4.3514
+      ],
+      [
+       25.0,
+       4.3525
+      ],
+      [
+       85.0,
+       4.3504
+      ],
+      [
+       125.0,
+       4.3457
+      ]
+     ]
+    },
+    {
+     "label": "VBUS = 12 V",
+     "points": [
+      [
+       -40.0,
+       4.203
+      ],
+      [
+       0,
+       4.2071
+      ],
+      [
+       25.0,
+       4.208
+      ],
+      [
+       85.0,
+       4.2055
+      ],
+      [
+       125.0,
+       4.1995
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Input current limit vs temperature",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Input current limit",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IINLIM = 500 mA",
+     "points": [
+      [
+       -40.0,
+       457
+      ],
+      [
+       125.0,
+       453
+      ]
+     ]
+    },
+    {
+     "label": "IINLIM = 900 mA",
+     "points": [
+      [
+       -40.0,
+       827
+      ],
+      [
+       25.0,
+       830
+      ],
+      [
+       125.0,
+       820
+      ]
+     ]
+    },
+    {
+     "label": "IINLIM = 1.5 A",
+     "points": [
+      [
+       -40.0,
+       1425
+      ],
+      [
+       25.0,
+       1430
+      ],
+      [
+       125.0,
+       1413
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "V(SYS) vs V(BAT)",
+   "page": 19,
+   "conditions": "",
+   "x": {
+    "label": "BAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "System voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Minimum system voltage",
+     "points": [
+      [
+       2.704,
+       3.65
+      ],
+      [
+       4.296,
+       3.65
+      ]
+     ]
+    },
+    {
+     "label": "SYS, charge disabled",
+     "points": [
+      [
+       2.704,
+       3.65
+      ],
+      [
+       3.5,
+       3.65
+      ],
+      [
+       3.55,
+       3.6
+      ],
+      [
+       4.296,
+       4.346
+      ]
+     ]
+    },
+    {
+     "label": "SYS, charge enabled",
+     "points": [
+      [
+       2.704,
+       3.65
+      ],
+      [
+       3.55,
+       3.65
+      ],
+      [
+       3.6,
+       3.655
+      ],
+      [
+       4.296,
+       4.351
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "BATFET V-I curve",
+   "page": 20,
+   "conditions": "",
+   "x": {
+    "label": "V(BAT_SYS)",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "BATFET",
+     "points": [
+      [
+       1.88,
+       0.019
+      ],
+      [
+       10.0,
+       0.1
+      ],
+      [
+       20.0,
+       0.3
+      ],
+      [
+       21.99,
+       0.46
+      ],
+      [
+       25.01,
+       0.8
+      ],
+      [
+       25.01,
+       2.2
+      ],
+      [
+       29.99,
+       2.728
+      ],
+      [
+       54.8,
+       4.982
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power up from USB100",
+   "page": 51,
+   "conditions": "VBAT = 3.2 V, IILIM = 500 mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS",
+     "points": [
+      [
+       -410,
+       -0.1
+      ],
+      [
+       -354,
+       -0.2
+      ],
+      [
+       -322,
+       0
+      ],
+      [
+       -315,
+       -0.2
+      ],
+      [
+       -285,
+       -0.2
+      ],
+      [
+       -281,
+       0
+      ],
+      [
+       -217,
+       0
+      ],
+      [
+       -113,
+       -0.2
+      ],
+      [
+       -101,
+       4.1
+      ],
+      [
+       -94,
+       4.8
+      ],
+      [
+       -89,
+       4.9
+      ],
+      [
+       589,
+       4.9
+      ]
+     ]
+    },
+    {
+     "label": "REGN",
+     "points": [
+      [
+       -410,
+       -0.3
+      ],
+      [
+       -323,
+       -0.1
+      ],
+      [
+       -298,
+       -0.1
+      ],
+      [
+       -290,
+       -0.3
+      ],
+      [
+       -258,
+       -0.1
+      ],
+      [
+       -233,
+       -0.1
+      ],
+      [
+       -229,
+       -0.3
+      ],
+      [
+       158,
+       -0.3
+      ],
+      [
+       163,
+       -0.1
+      ],
+      [
+       166,
+       4.6
+      ],
+      [
+       589,
+       4.6
+      ]
+     ]
+    },
+    {
+     "label": "VSYS",
+     "points": [
+      [
+       -410,
+       3.12
+      ],
+      [
+       206,
+       3.12
+      ],
+      [
+       211,
+       3.48
+      ],
+      [
+       217,
+       3.52
+      ],
+      [
+       589,
+       3.5
+      ]
+     ]
+    },
+    {
+     "label": "IIN",
+     "points": [
+      [
+       -410,
+       -0.008
+      ],
+      [
+       -114,
+       -0.012
+      ],
+      [
+       -101,
+       -0.004
+      ],
+      [
+       -95,
+       -0.012
+      ],
+      [
+       157,
+       -0.012
+      ],
+      [
+       165,
+       -0.008
+      ],
+      [
+       171,
+       0.02
+      ],
+      [
+       194,
+       0.02
+      ],
+      [
+       197,
+       0.004
+      ],
+      [
+       201,
+       0.016
+      ],
+      [
+       209,
+       0.008
+      ],
+      [
+       229,
+       0.46
+      ],
+      [
+       401,
+       0.464
+      ],
+      [
+       405,
+       0.456
+      ],
+      [
+       409,
+       0.464
+      ],
+      [
+       417,
+       0.46
+      ],
+      [
+       422,
+       0.468
+      ],
+      [
+       427,
+       0.46
+      ],
+      [
+       506,
+       0.464
+      ],
+      [
+       527,
+       0.456
+      ],
+      [
+       534,
+       0.464
+      ],
+      [
+       569,
+       0.464
+      ],
+      [
+       575,
+       0.456
+      ],
+      [
+       589,
+       0.462
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Power up with charge disabled, VBUS and REGN",
+   "page": 51,
+   "conditions": "VBAT = 3.2 V",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS",
+     "points": [
+      [
+       0,
+       -0.05
+      ],
+      [
+       341,
+       0.05
+      ],
+      [
+       491,
+       -0.15
+      ],
+      [
+       517,
+       0
+      ],
+      [
+       533,
+       4.4
+      ],
+      [
+       544,
+       4.8
+      ],
+      [
+       592,
+       5.0
+      ],
+      [
+       619,
+       4.85
+      ],
+      [
+       1760,
+       4.85
+      ],
+      [
+       1771,
+       5.0
+      ],
+      [
+       1819,
+       4.85
+      ],
+      [
+       1973,
+       5.0
+      ],
+      [
+       2235,
+       4.85
+      ],
+      [
+       3419,
+       4.85
+      ],
+      [
+       3488,
+       5.0
+      ],
+      [
+       3541,
+       4.85
+      ],
+      [
+       3856,
+       4.85
+      ],
+      [
+       3867,
+       5.05
+      ],
+      [
+       3909,
+       4.85
+      ],
+      [
+       4000,
+       4.9
+      ]
+     ]
+    },
+    {
+     "label": "REGN",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       757,
+       -0.1
+      ],
+      [
+       773,
+       0
+      ],
+      [
+       795,
+       4.5
+      ],
+      [
+       832,
+       5.05
+      ],
+      [
+       907,
+       4.9
+      ],
+      [
+       1189,
+       4.9
+      ],
+      [
+       1237,
+       5.05
+      ],
+      [
+       2331,
+       4.9
+      ],
+      [
+       2341,
+       5.1
+      ],
+      [
+       2427,
+       4.9
+      ],
+      [
+       3157,
+       4.9
+      ],
+      [
+       3227,
+       5.05
+      ],
+      [
+       3253,
+       4.9
+      ],
+      [
+       4000,
+       4.95
+      ]
+     ]
+    },
+    {
+     "label": "VSYS",
+     "points": [
+      [
+       0,
+       3.24
+      ],
+      [
+       3307,
+       3.2
+      ],
+      [
+       3355,
+       3.24
+      ],
+      [
+       3365,
+       3.7
+      ],
+      [
+       3387,
+       3.72
+      ],
+      [
+       3808,
+       3.68
+      ],
+      [
+       3872,
+       3.76
+      ],
+      [
+       3915,
+       3.68
+      ],
+      [
+       3920,
+       3.74
+      ],
+      [
+       4000,
+       3.74
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power up with charge disabled, /PG",
+   "page": 51,
+   "conditions": "VBAT = 3.2 V",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS",
+     "points": [
+      [
+       -124.5,
+       -0.1
+      ],
+      [
+       -95.2,
+       -0.1
+      ],
+      [
+       -91.5,
+       2.3
+      ],
+      [
+       -85.6,
+       4.1
+      ],
+      [
+       -78.1,
+       4.8
+      ],
+      [
+       -68.0,
+       5.0
+      ],
+      [
+       143.2,
+       5.0
+      ],
+      [
+       144.3,
+       4.8
+      ],
+      [
+       145.3,
+       5.0
+      ],
+      [
+       274.9,
+       5.0
+      ]
+     ]
+    },
+    {
+     "label": "REGN",
+     "points": [
+      [
+       -124.5,
+       -0.3
+      ],
+      [
+       -12.5,
+       -0.3
+      ],
+      [
+       -7.2,
+       -0.1
+      ],
+      [
+       -4.0,
+       -0.25
+      ],
+      [
+       -1.3,
+       -0.1
+      ],
+      [
+       14.1,
+       -0.1
+      ],
+      [
+       22.7,
+       -0.3
+      ],
+      [
+       50.9,
+       -0.1
+      ],
+      [
+       65.9,
+       -0.1
+      ],
+      [
+       67.5,
+       -0.3
+      ],
+      [
+       101.6,
+       -0.3
+      ],
+      [
+       112.3,
+       -0.1
+      ],
+      [
+       129.9,
+       -0.3
+      ],
+      [
+       149.1,
+       -0.1
+      ],
+      [
+       165.1,
+       -0.3
+      ],
+      [
+       178.4,
+       -0.25
+      ],
+      [
+       180.5,
+       -0.1
+      ],
+      [
+       187.5,
+       -0.2
+      ],
+      [
+       189.1,
+       4.9
+      ],
+      [
+       191.7,
+       4.6
+      ],
+      [
+       210.9,
+       4.7
+      ],
+      [
+       213.1,
+       4.5
+      ],
+      [
+       220.5,
+       4.8
+      ],
+      [
+       222.7,
+       4.6
+      ],
+      [
+       228.0,
+       4.6
+      ],
+      [
+       233.9,
+       4.9
+      ],
+      [
+       250.9,
+       4.7
+      ],
+      [
+       255.7,
+       4.7
+      ],
+      [
+       257.9,
+       4.9
+      ],
+      [
+       274.9,
+       4.8
+      ]
+     ]
+    },
+    {
+     "label": "VSYS",
+     "points": [
+      [
+       -124.5,
+       3.1
+      ],
+      [
+       -123.5,
+       3.16
+      ],
+      [
+       -38.7,
+       3.16
+      ],
+      [
+       -37.6,
+       3.08
+      ],
+      [
+       -34.9,
+       3.16
+      ],
+      [
+       229.1,
+       3.12
+      ],
+      [
+       231.2,
+       3.16
+      ],
+      [
+       232.8,
+       3.72
+      ],
+      [
+       274.9,
+       3.7
+      ]
+     ]
+    },
+    {
+     "label": "/PG",
+     "points": [
+      [
+       -124.5,
+       1.58
+      ],
+      [
+       -70.7,
+       1.64
+      ],
+      [
+       229.1,
+       1.6
+      ],
+      [
+       230.1,
+       0
+      ],
+      [
+       274.9,
+       0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power up with charge enabled",
+   "page": 51,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS",
+     "points": [
+      [
+       -422,
+       -0.1
+      ],
+      [
+       -97,
+       -0.1
+      ],
+      [
+       -81,
+       4.5
+      ],
+      [
+       -77,
+       4.8
+      ],
+      [
+       -62,
+       5.0
+      ],
+      [
+       13,
+       5.0
+      ],
+      [
+       14,
+       4.8
+      ],
+      [
+       17,
+       5.0
+      ],
+      [
+       69,
+       4.9
+      ],
+      [
+       83,
+       5.05
+      ],
+      [
+       102,
+       4.9
+      ],
+      [
+       229,
+       5.0
+      ],
+      [
+       250,
+       4.8
+      ],
+      [
+       317,
+       4.9
+      ],
+      [
+       327,
+       4.7
+      ],
+      [
+       415,
+       4.9
+      ],
+      [
+       447,
+       4.7
+      ],
+      [
+       577,
+       4.7
+      ]
+     ]
+    },
+    {
+     "label": "REGN",
+     "points": [
+      [
+       -422,
+       -0.2
+      ],
+      [
+       194,
+       -0.2
+      ],
+      [
+       197,
+       4.65
+      ],
+      [
+       226,
+       4.6
+      ],
+      [
+       245,
+       4.9
+      ],
+      [
+       253,
+       4.5
+      ],
+      [
+       299,
+       4.5
+      ],
+      [
+       306,
+       4.7
+      ],
+      [
+       313,
+       4.5
+      ],
+      [
+       577,
+       4.5
+      ]
+     ]
+    },
+    {
+     "label": "VSYS",
+     "points": [
+      [
+       -422,
+       3.14
+      ],
+      [
+       234,
+       3.12
+      ],
+      [
+       239,
+       3.16
+      ],
+      [
+       243,
+       3.76
+      ],
+      [
+       250,
+       3.68
+      ],
+      [
+       251,
+       3.52
+      ],
+      [
+       289,
+       3.56
+      ],
+      [
+       298,
+       3.48
+      ],
+      [
+       301,
+       3.56
+      ],
+      [
+       310,
+       3.48
+      ],
+      [
+       321,
+       3.56
+      ],
+      [
+       363,
+       3.56
+      ],
+      [
+       366,
+       3.48
+      ],
+      [
+       386,
+       3.48
+      ],
+      [
+       390,
+       3.56
+      ],
+      [
+       401,
+       3.48
+      ],
+      [
+       415,
+       3.48
+      ],
+      [
+       421,
+       3.56
+      ],
+      [
+       437,
+       3.48
+      ],
+      [
+       447,
+       3.56
+      ],
+      [
+       577,
+       3.52
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -422,
+       -0.04
+      ],
+      [
+       249,
+       -0.04
+      ],
+      [
+       257,
+       0.96
+      ],
+      [
+       266,
+       1.52
+      ],
+      [
+       281,
+       1.84
+      ],
+      [
+       298,
+       1.84
+      ],
+      [
+       307,
+       1.92
+      ],
+      [
+       469,
+       1.88
+      ],
+      [
+       470,
+       1.96
+      ],
+      [
+       475,
+       1.88
+      ],
+      [
+       531,
+       1.88
+      ],
+      [
+       537,
+       1.96
+      ],
+      [
+       543,
+       1.88
+      ],
+      [
+       577,
+       1.88
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Charge enable",
+   "page": 51,
+   "conditions": "VBUS = 5 V",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "STAT",
+     "points": [
+      [
+       -1459,
+       2.2
+      ],
+      [
+       -381,
+       2.2
+      ],
+      [
+       -360,
+       0.2
+      ],
+      [
+       -328,
+       0.24
+      ],
+      [
+       -301,
+       0.12
+      ],
+      [
+       -232,
+       0.04
+      ],
+      [
+       -157,
+       0.08
+      ],
+      [
+       -40,
+       0
+      ],
+      [
+       -35,
+       -0.08
+      ],
+      [
+       3,
+       0.2
+      ],
+      [
+       35,
+       -0.04
+      ],
+      [
+       67,
+       0.08
+      ],
+      [
+       83,
+       0
+      ],
+      [
+       179,
+       0.04
+      ],
+      [
+       200,
+       0.16
+      ],
+      [
+       232,
+       0
+      ],
+      [
+       280,
+       0
+      ],
+      [
+       333,
+       0.08
+      ],
+      [
+       349,
+       0.2
+      ],
+      [
+       371,
+       0.04
+      ],
+      [
+       467,
+       0.08
+      ],
+      [
+       477,
+       -0.08
+      ],
+      [
+       493,
+       0.04
+      ],
+      [
+       611,
+       0.08
+      ],
+      [
+       637,
+       0
+      ],
+      [
+       648,
+       0.08
+      ],
+      [
+       739,
+       0.12
+      ],
+      [
+       744,
+       0.2
+      ],
+      [
+       781,
+       0
+      ],
+      [
+       803,
+       0.08
+      ],
+      [
+       845,
+       0
+      ],
+      [
+       877,
+       0.08
+      ],
+      [
+       904,
+       0
+      ],
+      [
+       1021,
+       0.08
+      ],
+      [
+       1037,
+       -0.04
+      ],
+      [
+       1043,
+       0.04
+      ],
+      [
+       1085,
+       0.08
+      ],
+      [
+       1171,
+       0.08
+      ],
+      [
+       1219,
+       0
+      ],
+      [
+       1299,
+       0.12
+      ],
+      [
+       1325,
+       -0.08
+      ],
+      [
+       1341,
+       -0.08
+      ],
+      [
+       1352,
+       0.08
+      ],
+      [
+       1421,
+       0
+      ],
+      [
+       1427,
+       0.16
+      ],
+      [
+       1437,
+       0.04
+      ],
+      [
+       1549,
+       0.04
+      ],
+      [
+       1571,
+       0.16
+      ],
+      [
+       1597,
+       -0.08
+      ],
+      [
+       1613,
+       -0.08
+      ],
+      [
+       1619,
+       0.04
+      ],
+      [
+       1693,
+       0.08
+      ],
+      [
+       1699,
+       0.16
+      ],
+      [
+       1752,
+       0
+      ],
+      [
+       1779,
+       0
+      ],
+      [
+       1789,
+       0.08
+      ],
+      [
+       1837,
+       0.08
+      ],
+      [
+       1864,
+       0
+      ],
+      [
+       1885,
+       0.08
+      ],
+      [
+       1901,
+       -0.08
+      ],
+      [
+       1955,
+       0.08
+      ],
+      [
+       2109,
+       0.08
+      ],
+      [
+       2125,
+       0
+      ],
+      [
+       2141,
+       0.08
+      ],
+      [
+       2179,
+       0.04
+      ],
+      [
+       2227,
+       0.12
+      ],
+      [
+       2259,
+       0
+      ],
+      [
+       2280,
+       0.08
+      ],
+      [
+       2376,
+       0.04
+      ],
+      [
+       2387,
+       0.2
+      ],
+      [
+       2413,
+       0.2
+      ],
+      [
+       2424,
+       0.08
+      ],
+      [
+       2536,
+       0.04
+      ]
+     ]
+    },
+    {
+     "label": "/CE",
+     "points": [
+      [
+       -1459,
+       4.8
+      ],
+      [
+       -1304,
+       4.7
+      ],
+      [
+       -1235,
+       4.9
+      ],
+      [
+       -963,
+       4.9
+      ],
+      [
+       -824,
+       4.7
+      ],
+      [
+       -797,
+       4.9
+      ],
+      [
+       -579,
+       4.9
+      ],
+      [
+       -419,
+       4.7
+      ],
+      [
+       -413,
+       4.9
+      ],
+      [
+       -387,
+       4.9
+      ],
+      [
+       -365,
+       0.4
+      ],
+      [
+       -253,
+       0.05
+      ],
+      [
+       2536,
+       0.05
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -1459,
+       -0.04
+      ],
+      [
+       -765,
+       0
+      ],
+      [
+       -744,
+       -0.08
+      ],
+      [
+       -691,
+       0
+      ],
+      [
+       -429,
+       0
+      ],
+      [
+       -408,
+       -0.08
+      ],
+      [
+       -355,
+       0
+      ],
+      [
+       -157,
+       0
+      ],
+      [
+       -93,
+       1.64
+      ],
+      [
+       -72,
+       1.84
+      ],
+      [
+       -29,
+       1.96
+      ],
+      [
+       8,
+       1.96
+      ],
+      [
+       40,
+       1.84
+      ],
+      [
+       237,
+       1.72
+      ],
+      [
+       1416,
+       1.72
+      ],
+      [
+       1427,
+       1.8
+      ],
+      [
+       1459,
+       1.72
+      ],
+      [
+       2536,
+       1.76
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Charge disable",
+   "page": 51,
+   "conditions": "VBUS = 12 V",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "STAT",
+     "points": [
+      [
+       -18.11,
+       0.34
+      ],
+      [
+       -16.77,
+       0.34
+      ],
+      [
+       -16.08,
+       -0.12
+      ],
+      [
+       -2.64,
+       -0.12
+      ],
+      [
+       -2.59,
+       -0.04
+      ],
+      [
+       -2.43,
+       -0.12
+      ],
+      [
+       1.52,
+       -0.12
+      ],
+      [
+       1.57,
+       -0.06
+      ],
+      [
+       2.27,
+       -0.08
+      ],
+      [
+       2.53,
+       1.72
+      ],
+      [
+       3.23,
+       2.0
+      ],
+      [
+       4.13,
+       2.2
+      ],
+      [
+       5.2,
+       2.2
+      ],
+      [
+       6.32,
+       2.32
+      ],
+      [
+       8.29,
+       2.28
+      ],
+      [
+       9.47,
+       2.36
+      ],
+      [
+       14.64,
+       2.36
+      ],
+      [
+       14.91,
+       2.28
+      ],
+      [
+       15.92,
+       2.36
+      ],
+      [
+       18.11,
+       2.28
+      ],
+      [
+       20.67,
+       2.36
+      ],
+      [
+       21.84,
+       2.32
+      ]
+     ]
+    },
+    {
+     "label": "/CE",
+     "points": [
+      [
+       -18.11,
+       -0.05
+      ],
+      [
+       -16.19,
+       -0.05
+      ],
+      [
+       -16.08,
+       -0.35
+      ],
+      [
+       -15.92,
+       -0.35
+      ],
+      [
+       -15.87,
+       -0.05
+      ],
+      [
+       -15.49,
+       -0.05
+      ],
+      [
+       -15.44,
+       -0.35
+      ],
+      [
+       -15.28,
+       -0.05
+      ],
+      [
+       -12.56,
+       -0.05
+      ],
+      [
+       -12.4,
+       -0.35
+      ],
+      [
+       -11.65,
+       -0.35
+      ],
+      [
+       -11.55,
+       -0.05
+      ],
+      [
+       -11.23,
+       -0.05
+      ],
+      [
+       -11.17,
+       -0.35
+      ],
+      [
+       -10.91,
+       -0.35
+      ],
+      [
+       -10.75,
+       -0.05
+      ],
+      [
+       -10.0,
+       -0.05
+      ],
+      [
+       -9.95,
+       -0.35
+      ],
+      [
+       -9.41,
+       -0.35
+      ],
+      [
+       -9.31,
+       -0.05
+      ],
+      [
+       -9.09,
+       -0.05
+      ],
+      [
+       -9.04,
+       -0.35
+      ],
+      [
+       -8.93,
+       -0.05
+      ],
+      [
+       -8.51,
+       -0.05
+      ],
+      [
+       -8.45,
+       -0.35
+      ],
+      [
+       -7.97,
+       -0.35
+      ],
+      [
+       -7.81,
+       -0.05
+      ],
+      [
+       -6.16,
+       -0.05
+      ],
+      [
+       -6.05,
+       -0.35
+      ],
+      [
+       -6.0,
+       -0.1
+      ],
+      [
+       -5.95,
+       -0.35
+      ],
+      [
+       -5.09,
+       -0.35
+      ],
+      [
+       -5.04,
+       -0.05
+      ],
+      [
+       -4.45,
+       -0.05
+      ],
+      [
+       -4.13,
+       -0.35
+      ],
+      [
+       -3.97,
+       -0.05
+      ],
+      [
+       -3.39,
+       -0.05
+      ],
+      [
+       -3.33,
+       -0.35
+      ],
+      [
+       -2.69,
+       -0.35
+      ],
+      [
+       -2.21,
+       -0.05
+      ],
+      [
+       -2.05,
+       4.6
+      ],
+      [
+       -1.52,
+       4.9
+      ],
+      [
+       7.65,
+       4.7
+      ],
+      [
+       21.84,
+       4.8
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -18.11,
+       1.8
+      ],
+      [
+       -8.56,
+       1.8
+      ],
+      [
+       -7.76,
+       1.72
+      ],
+      [
+       -6.21,
+       1.8
+      ],
+      [
+       3.01,
+       1.8
+      ],
+      [
+       4.4,
+       1.6
+      ],
+      [
+       4.93,
+       1.6
+      ],
+      [
+       5.04,
+       1.52
+      ],
+      [
+       5.73,
+       1.48
+      ],
+      [
+       7.92,
+       1.08
+      ],
+      [
+       8.56,
+       1.04
+      ],
+      [
+       8.77,
+       0.92
+      ],
+      [
+       10.0,
+       0.76
+      ],
+      [
+       10.11,
+       0.8
+      ],
+      [
+       11.28,
+       0.56
+      ],
+      [
+       11.81,
+       0.56
+      ],
+      [
+       13.31,
+       0.32
+      ],
+      [
+       15.92,
+       0.08
+      ],
+      [
+       16.93,
+       0.08
+      ],
+      [
+       17.31,
+       0
+      ],
+      [
+       21.84,
+       -0.08
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Input current DPM response without battery",
+   "page": 52,
+   "conditions": "VBUS = 5 V, IIN = 3 A, charge disable",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSYS",
+     "points": [
+      [
+       -8.97,
+       3.52
+      ],
+      [
+       -8.92,
+       3.514
+      ],
+      [
+       -5.48,
+       3.514
+      ],
+      [
+       -5.35,
+       3.522
+      ],
+      [
+       -5.32,
+       3.51
+      ],
+      [
+       -3.53,
+       3.514
+      ],
+      [
+       -3.19,
+       3.506
+      ],
+      [
+       -2.17,
+       3.514
+      ],
+      [
+       -2.09,
+       3.508
+      ],
+      [
+       -1.37,
+       3.51
+      ],
+      [
+       -1.13,
+       3.49
+      ],
+      [
+       -0.87,
+       3.514
+      ],
+      [
+       -0.49,
+       3.518
+      ],
+      [
+       -0.01,
+       3.51
+      ],
+      [
+       0.65,
+       3.518
+      ],
+      [
+       0.95,
+       3.51
+      ],
+      [
+       1.05,
+       3.52
+      ],
+      [
+       2.41,
+       3.514
+      ],
+      [
+       2.44,
+       3.522
+      ],
+      [
+       2.57,
+       3.514
+      ],
+      [
+       2.92,
+       3.514
+      ],
+      [
+       3.05,
+       3.526
+      ],
+      [
+       3.13,
+       3.506
+      ],
+      [
+       3.67,
+       3.506
+      ],
+      [
+       3.75,
+       3.514
+      ],
+      [
+       6.6,
+       3.514
+      ],
+      [
+       7.19,
+       3.51
+      ],
+      [
+       7.21,
+       3.494
+      ],
+      [
+       7.29,
+       3.494
+      ],
+      [
+       7.45,
+       3.514
+      ],
+      [
+       7.67,
+       3.518
+      ],
+      [
+       10.23,
+       3.518
+      ],
+      [
+       10.36,
+       3.51
+      ],
+      [
+       10.95,
+       3.514
+      ],
+      [
+       11.0,
+       3.524
+      ]
+     ]
+    },
+    {
+     "label": "IIN",
+     "points": [
+      [
+       -8.97,
+       1.78
+      ],
+      [
+       -8.89,
+       1.84
+      ],
+      [
+       -7.13,
+       1.88
+      ],
+      [
+       -6.36,
+       1.8
+      ],
+      [
+       -5.56,
+       1.84
+      ],
+      [
+       -5.37,
+       0.16
+      ],
+      [
+       -1.21,
+       0.16
+      ],
+      [
+       -1.16,
+       1.72
+      ],
+      [
+       -1.05,
+       1.84
+      ],
+      [
+       0.95,
+       1.84
+      ],
+      [
+       0.97,
+       1.78
+      ],
+      [
+       1.11,
+       1.84
+      ],
+      [
+       2.97,
+       1.84
+      ],
+      [
+       3.05,
+       0.16
+      ],
+      [
+       7.19,
+       0.16
+      ],
+      [
+       7.29,
+       1.84
+      ],
+      [
+       10.95,
+       1.84
+      ],
+      [
+       11.0,
+       1.78
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "ISYS",
+     "points": [
+      [
+       -8.97,
+       2.04
+      ],
+      [
+       -5.43,
+       2.04
+      ],
+      [
+       -5.37,
+       0.04
+      ],
+      [
+       -1.21,
+       0
+      ],
+      [
+       -1.16,
+       2.04
+      ],
+      [
+       0.87,
+       2.04
+      ],
+      [
+       0.92,
+       2.12
+      ],
+      [
+       1.19,
+       2.04
+      ],
+      [
+       2.76,
+       2.08
+      ],
+      [
+       2.97,
+       2.04
+      ],
+      [
+       3.05,
+       0
+      ],
+      [
+       6.07,
+       0.04
+      ],
+      [
+       6.2,
+       -0.04
+      ],
+      [
+       7.19,
+       0.02
+      ],
+      [
+       7.27,
+       2.08
+      ],
+      [
+       11.0,
+       2.08
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "PWM switching waveform",
+   "page": 52,
+   "conditions": "VBUS = 12 V, VBAT = 3.8 V, ICHG = 3 A",
+   "x": {
+    "label": "Time",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IL",
+     "points": [
+      [
+       -2005,
+       3.78
+      ],
+      [
+       -1611,
+       2.1
+      ],
+      [
+       -1365,
+       3.98
+      ],
+      [
+       -933,
+       2.1
+      ],
+      [
+       -683,
+       3.98
+      ],
+      [
+       -261,
+       2.1
+      ],
+      [
+       -245,
+       2.1
+      ],
+      [
+       -192,
+       2.5
+      ],
+      [
+       -16,
+       3.98
+      ],
+      [
+       16,
+       3.98
+      ],
+      [
+       32,
+       3.78
+      ],
+      [
+       416,
+       2.1
+      ],
+      [
+       437,
+       2.14
+      ],
+      [
+       667,
+       3.98
+      ],
+      [
+       1093,
+       2.1
+      ],
+      [
+       1344,
+       3.98
+      ],
+      [
+       1765,
+       2.14
+      ],
+      [
+       1792,
+       2.14
+      ],
+      [
+       1989,
+       3.68
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PFM switching waveform",
+   "page": 52,
+   "conditions": "VBUS = 9 V, ISYS = 10 mA, charge disable, no battery",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSYS",
+     "points": [
+      [
+       -20.05,
+       3.569
+      ],
+      [
+       -18.67,
+       3.563
+      ],
+      [
+       -16.53,
+       3.561
+      ],
+      [
+       -16.37,
+       3.557
+      ],
+      [
+       -13.87,
+       3.549
+      ],
+      [
+       -13.49,
+       3.601
+      ],
+      [
+       -13.17,
+       3.603
+      ],
+      [
+       -13.12,
+       3.597
+      ],
+      [
+       -12.8,
+       3.599
+      ],
+      [
+       -12.75,
+       3.595
+      ],
+      [
+       -12.59,
+       3.597
+      ],
+      [
+       -11.52,
+       3.589
+      ],
+      [
+       -9.71,
+       3.583
+      ],
+      [
+       -8.69,
+       3.575
+      ],
+      [
+       -7.52,
+       3.575
+      ],
+      [
+       -6.45,
+       3.567
+      ],
+      [
+       -0.27,
+       3.551
+      ],
+      [
+       0.16,
+       3.607
+      ],
+      [
+       0.43,
+       3.601
+      ],
+      [
+       1.39,
+       3.593
+      ],
+      [
+       2.4,
+       3.587
+      ],
+      [
+       2.67,
+       3.589
+      ],
+      [
+       3.25,
+       3.583
+      ],
+      [
+       3.95,
+       3.583
+      ],
+      [
+       5.07,
+       3.575
+      ],
+      [
+       7.25,
+       3.567
+      ],
+      [
+       8.37,
+       3.567
+      ],
+      [
+       8.69,
+       3.563
+      ],
+      [
+       13.01,
+       3.553
+      ],
+      [
+       13.17,
+       3.547
+      ],
+      [
+       13.71,
+       3.603
+      ],
+      [
+       14.19,
+       3.599
+      ],
+      [
+       14.24,
+       3.595
+      ],
+      [
+       14.29,
+       3.599
+      ],
+      [
+       14.35,
+       3.595
+      ],
+      [
+       14.51,
+       3.599
+      ],
+      [
+       14.56,
+       3.595
+      ],
+      [
+       14.72,
+       3.597
+      ],
+      [
+       15.95,
+       3.587
+      ],
+      [
+       16.59,
+       3.587
+      ],
+      [
+       16.69,
+       3.583
+      ],
+      [
+       17.39,
+       3.583
+      ],
+      [
+       17.55,
+       3.579
+      ],
+      [
+       18.29,
+       3.579
+      ],
+      [
+       19.04,
+       3.573
+      ],
+      [
+       19.89,
+       3.573
+      ]
+     ]
+    },
+    {
+     "label": "IL",
+     "points": [
+      [
+       -20.05,
+       0
+      ],
+      [
+       -14.03,
+       0.02
+      ],
+      [
+       -13.71,
+       1.34
+      ],
+      [
+       -13.17,
+       -0.02
+      ],
+      [
+       -12.85,
+       0.04
+      ],
+      [
+       -11.15,
+       0.04
+      ],
+      [
+       -10.93,
+       0
+      ],
+      [
+       -10.56,
+       0.04
+      ],
+      [
+       -7.52,
+       0.04
+      ],
+      [
+       -7.09,
+       0
+      ],
+      [
+       -0.43,
+       0.02
+      ],
+      [
+       -0.16,
+       1.22
+      ],
+      [
+       0,
+       1.22
+      ],
+      [
+       0.43,
+       -0.04
+      ],
+      [
+       0.53,
+       0.03
+      ],
+      [
+       0.64,
+       -0.04
+      ],
+      [
+       0.69,
+       0.03
+      ],
+      [
+       0.8,
+       -0.04
+      ],
+      [
+       1.07,
+       0.02
+      ],
+      [
+       1.39,
+       0
+      ],
+      [
+       1.44,
+       0.03
+      ],
+      [
+       1.92,
+       0.04
+      ],
+      [
+       3.47,
+       0
+      ],
+      [
+       7.25,
+       0.04
+      ],
+      [
+       10.35,
+       0
+      ],
+      [
+       13.12,
+       0.02
+      ],
+      [
+       13.44,
+       1.31
+      ],
+      [
+       13.87,
+       0.02
+      ],
+      [
+       19.89,
+       0.02
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Boost mode switching waveform",
+   "page": 52,
+   "conditions": "VBAT = 3.8 V, ILOAD = 1 A",
+   "x": {
+    "label": "Time",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SW",
+     "points": [
+      [
+       -2005,
+       1.95
+      ],
+      [
+       -1941,
+       2.72
+      ],
+      [
+       -1931,
+       3.5
+      ],
+      [
+       -1904,
+       3.7
+      ],
+      [
+       -1899,
+       4.9
+      ],
+      [
+       -1483,
+       4.9
+      ],
+      [
+       -1456,
+       5.2
+      ],
+      [
+       -1403,
+       0
+      ],
+      [
+       -1344,
+       -0.2
+      ],
+      [
+       -1248,
+       -0.2
+      ],
+      [
+       -1237,
+       2.65
+      ],
+      [
+       -1211,
+       2.9
+      ],
+      [
+       -1195,
+       4.9
+      ],
+      [
+       -784,
+       4.9
+      ],
+      [
+       -763,
+       5.1
+      ],
+      [
+       -704,
+       0
+      ],
+      [
+       -549,
+       -0.2
+      ],
+      [
+       -533,
+       2.7
+      ],
+      [
+       -507,
+       3.1
+      ],
+      [
+       -491,
+       4.9
+      ],
+      [
+       -91,
+       4.9
+      ],
+      [
+       -59,
+       5.2
+      ],
+      [
+       -11,
+       0.15
+      ],
+      [
+       21,
+       -0.1
+      ],
+      [
+       155,
+       -0.2
+      ],
+      [
+       165,
+       2.7
+      ],
+      [
+       192,
+       3.1
+      ],
+      [
+       203,
+       4.9
+      ],
+      [
+       613,
+       4.9
+      ],
+      [
+       640,
+       5.1
+      ],
+      [
+       693,
+       0.1
+      ],
+      [
+       704,
+       -0.1
+      ],
+      [
+       843,
+       -0.2
+      ],
+      [
+       901,
+       5.0
+      ],
+      [
+       955,
+       4.8
+      ],
+      [
+       1312,
+       4.9
+      ],
+      [
+       1339,
+       5.2
+      ],
+      [
+       1397,
+       0
+      ],
+      [
+       1515,
+       0
+      ],
+      [
+       1547,
+       -0.2
+      ],
+      [
+       1563,
+       2.7
+      ],
+      [
+       1589,
+       2.9
+      ],
+      [
+       1605,
+       4.9
+      ],
+      [
+       1989,
+       4.9
+      ]
+     ]
+    },
+    {
+     "label": "IL",
+     "points": [
+      [
+       -2005,
+       -1.53
+      ],
+      [
+       -1936,
+       -1.8
+      ],
+      [
+       -1893,
+       -1.86
+      ],
+      [
+       -1605,
+       -1.38
+      ],
+      [
+       -1563,
+       -1.36
+      ],
+      [
+       -1419,
+       -1.14
+      ],
+      [
+       -1243,
+       -1.78
+      ],
+      [
+       -1211,
+       -1.86
+      ],
+      [
+       -1189,
+       -1.86
+      ],
+      [
+       -1120,
+       -1.72
+      ],
+      [
+       -1083,
+       -1.7
+      ],
+      [
+       -1035,
+       -1.58
+      ],
+      [
+       -720,
+       -1.14
+      ],
+      [
+       -539,
+       -1.8
+      ],
+      [
+       -517,
+       -1.86
+      ],
+      [
+       -491,
+       -1.86
+      ],
+      [
+       -192,
+       -1.36
+      ],
+      [
+       -160,
+       -1.36
+      ],
+      [
+       -155,
+       -1.32
+      ],
+      [
+       -101,
+       -1.28
+      ],
+      [
+       -11,
+       -1.13
+      ],
+      [
+       16,
+       -1.3
+      ],
+      [
+       144,
+       -1.74
+      ],
+      [
+       181,
+       -1.86
+      ],
+      [
+       208,
+       -1.86
+      ],
+      [
+       288,
+       -1.7
+      ],
+      [
+       331,
+       -1.68
+      ],
+      [
+       352,
+       -1.6
+      ],
+      [
+       416,
+       -1.5
+      ],
+      [
+       507,
+       -1.4
+      ],
+      [
+       512,
+       -1.36
+      ],
+      [
+       597,
+       -1.28
+      ],
+      [
+       656,
+       -1.16
+      ],
+      [
+       688,
+       -1.16
+      ],
+      [
+       869,
+       -1.83
+      ],
+      [
+       917,
+       -1.86
+      ],
+      [
+       971,
+       -1.74
+      ],
+      [
+       1040,
+       -1.66
+      ],
+      [
+       1061,
+       -1.58
+      ],
+      [
+       1168,
+       -1.46
+      ],
+      [
+       1200,
+       -1.36
+      ],
+      [
+       1237,
+       -1.36
+      ],
+      [
+       1312,
+       -1.22
+      ],
+      [
+       1381,
+       -1.16
+      ],
+      [
+       1445,
+       -1.34
+      ],
+      [
+       1547,
+       -1.76
+      ],
+      [
+       1605,
+       -1.88
+      ],
+      [
+       1611,
+       -1.82
+      ],
+      [
+       1723,
+       -1.7
+      ],
+      [
+       1765,
+       -1.58
+      ],
+      [
+       1867,
+       -1.46
+      ],
+      [
+       1909,
+       -1.36
+      ],
+      [
+       1936,
+       -1.36
+      ],
+      [
+       1973,
+       -1.28
+      ],
+      [
+       1989,
+       -1.31
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Boost mode load transient",
+   "page": 52,
+   "conditions": "VBAT = 3.8 V, ILOAD = 0 A - 1 A",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBUS",
+     "points": [
+      [
+       -18.0,
+       5.03
+      ],
+      [
+       -11.92,
+       5.026
+      ],
+      [
+       -11.6,
+       5.008
+      ],
+      [
+       -10.43,
+       5.004
+      ],
+      [
+       -10.37,
+       4.98
+      ],
+      [
+       -10.11,
+       4.984
+      ],
+      [
+       -10.0,
+       4.972
+      ],
+      [
+       -9.57,
+       4.976
+      ],
+      [
+       -9.41,
+       4.968
+      ],
+      [
+       -9.15,
+       4.976
+      ],
+      [
+       -8.51,
+       4.972
+      ],
+      [
+       -8.45,
+       4.98
+      ],
+      [
+       -7.92,
+       4.972
+      ],
+      [
+       -6.48,
+       4.972
+      ],
+      [
+       -6.21,
+       4.98
+      ],
+      [
+       -6.05,
+       4.972
+      ],
+      [
+       -4.72,
+       4.972
+      ],
+      [
+       -4.56,
+       4.98
+      ],
+      [
+       -4.13,
+       4.972
+      ],
+      [
+       -3.97,
+       4.98
+      ],
+      [
+       -3.49,
+       4.968
+      ],
+      [
+       -3.23,
+       4.976
+      ],
+      [
+       -2.48,
+       4.972
+      ],
+      [
+       -2.16,
+       5.06
+      ],
+      [
+       -2.05,
+       5.012
+      ],
+      [
+       -1.41,
+       5.012
+      ],
+      [
+       -1.25,
+       5.004
+      ],
+      [
+       -1.04,
+       5.012
+      ],
+      [
+       5.79,
+       5.012
+      ],
+      [
+       5.95,
+       4.996
+      ],
+      [
+       6.16,
+       4.996
+      ],
+      [
+       6.64,
+       4.972
+      ],
+      [
+       7.55,
+       4.972
+      ],
+      [
+       7.6,
+       4.98
+      ],
+      [
+       8.67,
+       4.98
+      ],
+      [
+       8.77,
+       4.972
+      ],
+      [
+       9.41,
+       4.98
+      ],
+      [
+       11.28,
+       4.972
+      ],
+      [
+       11.39,
+       4.98
+      ],
+      [
+       11.44,
+       4.972
+      ],
+      [
+       12.29,
+       4.968
+      ],
+      [
+       12.45,
+       4.976
+      ],
+      [
+       13.09,
+       4.976
+      ],
+      [
+       13.15,
+       4.968
+      ],
+      [
+       13.68,
+       4.976
+      ],
+      [
+       14.05,
+       4.968
+      ],
+      [
+       14.43,
+       5.08
+      ],
+      [
+       14.59,
+       5.012
+      ],
+      [
+       15.01,
+       5.004
+      ],
+      [
+       15.55,
+       5.012
+      ],
+      [
+       21.95,
+       5.012
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -18.0,
+       0.18
+      ],
+      [
+       -16.24,
+       0.18
+      ],
+      [
+       -16.13,
+       0.1
+      ],
+      [
+       -15.17,
+       0.08
+      ],
+      [
+       -10.69,
+       0.1
+      ],
+      [
+       -10.53,
+       1.5
+      ],
+      [
+       -10.27,
+       1.68
+      ],
+      [
+       -9.73,
+       1.72
+      ],
+      [
+       -4.56,
+       1.72
+      ],
+      [
+       -2.43,
+       1.7
+      ],
+      [
+       -2.16,
+       0.04
+      ],
+      [
+       -2.0,
+       0.1
+      ],
+      [
+       1.36,
+       0.08
+      ],
+      [
+       1.79,
+       0.13
+      ],
+      [
+       1.84,
+       0.1
+      ],
+      [
+       2.21,
+       0.13
+      ],
+      [
+       2.43,
+       0.08
+      ],
+      [
+       5.89,
+       0.1
+      ],
+      [
+       6.32,
+       1.68
+      ],
+      [
+       8.45,
+       1.72
+      ],
+      [
+       12.83,
+       1.72
+      ],
+      [
+       14.21,
+       1.68
+      ],
+      [
+       14.48,
+       0.08
+      ],
+      [
+       21.95,
+       0.1
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "IBUS",
+     "points": [
+      [
+       -10.69,
+       0.275
+      ],
+      [
+       -10.48,
+       0.96
+      ],
+      [
+       -10.21,
+       1.06
+      ],
+      [
+       -2.59,
+       1.06
+      ],
+      [
+       -2.21,
+       0.19
+      ],
+      [
+       -1.95,
+       0.03
+      ],
+      [
+       3.87,
+       0.02
+      ],
+      [
+       5.36,
+       0.04
+      ],
+      [
+       5.84,
+       0.02
+      ],
+      [
+       6.11,
+       0.93
+      ],
+      [
+       6.32,
+       1.05
+      ],
+      [
+       9.09,
+       1.07
+      ],
+      [
+       11.01,
+       1.05
+      ],
+      [
+       14.16,
+       1.06
+      ],
+      [
+       14.37,
+       0.22
+      ],
+      [
+       14.59,
+       0.04
+      ],
+      [
+       14.91,
+       0.025
+      ],
+      [
+       15.23,
+       0.04
+      ],
+      [
+       15.44,
+       0.02
+      ],
+      [
+       21.95,
+       0.025
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "D+/D– interface and 2.4 A boost output",
+   "page": 49,
+   "description": "One USB input feeds VBUS, with D+ and D– wired straight to the connector so the charger can identify the port and run the high-voltage adapter handshake. The buck stage drives SYS through a 2.2 µH inductor into two 10 µF capacitors, and the battery on BAT is charged at up to 5 A. A 260 Ω resistor on ILIM sets the hardware input limit to about 1.5 A. PMID carries 40 µF and is the 5 V boost output for a phone, rated to 2.4 A. The host talks over I2C, reads INT and drives OTG and /CE; SDA, SCL and INT are pulled up to the host rail. A divider from REGN with a 10 kΩ pack NTC on TS gives the temperature window, STAT drives an LED fed from SYS, and an optional button on QON gives ship-mode exit and system reset. DSEL is unused.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25895"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "USB",
+     "note": "input, 3.9 V to 14 V at 3 A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Host",
+     "external": true,
+     "note": "I2C host with INT input and OTG, /CE outputs"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "VBUS"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "40 µF",
+     "note": "PMID"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "47 nF",
+     "note": "bootstrap, SW to BTST"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "REGN"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "SYS"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "SYS"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "BAT"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "2.2 µH"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "260 Ω",
+     "note": "ILIM"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "STAT LED"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SDA pull-up"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SCL pull-up"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "INT pull-up"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "charge status"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "push button",
+     "note": "optional, QON to ground"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "1-cell Li-ion",
+     "note": "charged at 5 A"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "PMID",
+     "note": "5 V OTG output to a phone"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "SYS",
+     "note": "system rail 3.5 V to 4.5 V"
+    },
+    {
+     "ref": "T3",
+     "type": "terminal",
+     "value": "VREF",
+     "note": "host pull-up rail, 1.8 V to 3.3 V"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "5.23 kΩ",
+     "note": "TS divider, REGN to TS"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "30.1 kΩ",
+     "note": "TS divider, TS to ground"
+    },
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "NTC thermistor in the battery pack"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "otg-3a1-no-ntc",
+   "title": "D+/D– interface, 3.1 A boost output, no thermistor",
+   "page": 53,
+   "description": "The typical circuit raised to a 3.1 A boost output: PMID gets 60 µF, and a NSR10F20NXT5G Schottky diode runs from SW (anode) to PMID (cathode). There is no pack thermistor; two equal 10 kΩ resistors from REGN to TS to ground hold TS mid-window. Every other part and connection matches the typical circuit.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25895"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "USB",
+     "note": "input, 3.9 V to 14 V at 3 A"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Host",
+     "external": true,
+     "note": "I2C host with INT input and OTG, /CE outputs"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "VBUS"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "60 µF",
+     "note": "PMID"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "47 nF",
+     "note": "bootstrap, SW to BTST"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "4.7 µF",
+     "note": "REGN"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "SYS"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "SYS"
+    },
+    {
+     "ref": "C7",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "BAT"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "2.2 µH"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "260 Ω",
+     "note": "ILIM"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2.2 kΩ",
+     "note": "STAT LED"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SDA pull-up"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SCL pull-up"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "INT pull-up"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "charge status"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "push button",
+     "note": "optional, QON to ground"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "1-cell Li-ion",
+     "note": "charged at 5 A"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "PMID",
+     "note": "5 V OTG output to a phone, up to 3.1 A"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "SYS",
+     "note": "system rail 3.5 V to 4.5 V"
+    },
+    {
+     "ref": "T3",
+     "type": "terminal",
+     "value": "VREF",
+     "note": "host pull-up rail, 1.8 V to 3.3 V"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "TS divider, REGN to TS"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "TS divider, TS to ground"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "NSR10F20NXT5G",
+     "note": "SW to PMID"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ts-network",
+   "title": "TS resistor network",
+   "page": 23,
+   "description": "The divider that sets the battery temperature window: RT1 from REGN to TS, RT2 from TS to ground, and the pack's 103AT NTC thermistor in parallel with RT2. The values are those worked out for a 0°C to 45°C window (Equation 2).",
+   "parts": [
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "5.21 kΩ"
+    },
+    {
+     "ref": "RT2",
+     "type": "resistor",
+     "value": "29.87 kΩ"
+    },
+    {
+     "ref": "RTH",
+     "type": "resistor",
+     "value": "103AT",
+     "note": "10 kΩ NTC thermistor in the battery pack"
+    },
+    {
+     "ref": "T1",
+     "type": "terminal",
+     "value": "REGN"
+    },
+    {
+     "ref": "T2",
+     "type": "terminal",
+     "value": "TS"
+    },
+    {
+     "ref": "T3",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Charge voltage with resistance compensation",
+   "expr": "VREG_ACTUAL = VREG + min(ICHRG_ACTUAL × BATCOMP, VCLAMP)",
+   "where": {
+    "VREG": "charge voltage setting, REG06[7:2]",
+    "ICHRG_ACTUAL": "charge current flowing",
+    "BATCOMP": "compensation resistance, BAT_COMP in REG08",
+    "VCLAMP": "largest allowed rise above VREG, VCLAMP in REG08"
+   },
+   "note": "",
+   "page": 22
+  },
+  {
+   "name": "TS divider, lower resistor",
+   "expr": "RT2 = VREGN × RTHCOLD × RTHHOT × (1/VT1 − 1/VT5) / (RTHHOT × (VREGN/VT5 − 1) − RTHCOLD × (VREGN/VT1 − 1))",
+   "where": {
+    "VREGN": "REGN voltage",
+    "RTHCOLD": "thermistor resistance at the cold limit",
+    "RTHHOT": "thermistor resistance at the hot limit",
+    "VT1": "TS voltage at the cold limit (V(LTF))",
+    "VT5": "TS voltage at the hot limit (V(HTF))"
+   },
+   "note": "For 0°C to 45°C with a 103AT: RTHCOLD = 27.28 kΩ, RTHHOT = 4.91 kΩ, giving RT1 = 5.21 kΩ and RT2 = 29.87 kΩ.",
+   "page": 23
+  },
+  {
+   "name": "TS divider, upper resistor",
+   "expr": "RT1 = (VREGN/VT1 − 1) / (1/RT2 + 1/RTHCOLD)",
+   "where": {
+    "VREGN": "REGN voltage",
+    "VT1": "TS voltage at the cold limit",
+    "RT2": "lower divider resistor",
+    "RTHCOLD": "thermistor resistance at the cold limit"
+   },
+   "note": "",
+   "page": 23
+  },
+  {
+   "name": "ILIM input current limit",
+   "expr": "IINMAX = KILIM / RILIM",
+   "where": {
+    "KILIM": "355 A×Ω typ, 320 to 390",
+    "RILIM": "resistor from ILIM to ground"
+   },
+   "note": "With 260 Ω (KILIM 390 max) the limit is 1.5 A; a register setting of 111111 (3.25 A) then gives way to 1.5 A.",
+   "page": 26
+  },
+  {
+   "name": "Input current from the ILIM voltage",
+   "expr": "IIN = KILIM × VILIM / (RILIM × 0.8 V)",
+   "where": {
+    "VILIM": "voltage on ILIM, below 0.8 V",
+    "KILIM": "ILIM scale factor",
+    "RILIM": "resistor from ILIM to ground"
+   },
+   "note": "With 260 Ω and 0.4 V on ILIM the input current is 0.615 A to 0.75 A over the KILIM spread.",
+   "page": 26
+  },
+  {
+   "name": "Inductor saturation current",
+   "expr": "IBAT ≥ ICHG + (1/2) IRIPPLE",
+   "where": {
+    "IBAT": "inductor saturation current",
+    "ICHG": "charge current",
+    "IRIPPLE": "peak-to-peak inductor ripple"
+   },
+   "note": "",
+   "page": 50
+  },
+  {
+   "name": "Inductor ripple current",
+   "expr": "IRIPPLE = VBUS × D × (1 − D) / (fs × L)",
+   "where": {
+    "VBUS": "input voltage",
+    "D": "duty cycle, VBAT / VVBUS",
+    "fs": "switching frequency",
+    "L": "inductance"
+   },
+   "note": "Ripple is largest near D = 0.5; a design usually aims for 20% to 40% of the maximum charge current.",
+   "page": 50
+  },
+  {
+   "name": "Input capacitor RMS current",
+   "expr": "IPMID = ICHG × √(D × (1 − D))",
+   "where": {
+    "ICHG": "charge current",
+    "D": "duty cycle"
+   },
+   "note": "Worst case, half the charge current, at D = 0.5.",
+   "page": 50
+  },
+  {
+   "name": "Output capacitor RMS current",
+   "expr": "ICSYS = IRIPPLE / (2 × √3) ≈ 0.29 × IRIPPLE",
+   "where": {
+    "IRIPPLE": "peak-to-peak inductor ripple"
+   },
+   "note": "",
+   "page": 50
+  },
+  {
+   "name": "Output voltage ripple",
+   "expr": "ΔVO = VSYS / (8 × L × CSYS × fs²) × (1 − VSYS / VBUS)",
+   "where": {
+    "VSYS": "system voltage",
+    "L": "inductance",
+    "CSYS": "SYS capacitance",
+    "fs": "switching frequency",
+    "VBUS": "input voltage"
+   },
+   "note": "",
+   "page": 50
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Integrated switches",
+   "page": 14,
+   "text": "Four N-channel FETs are inside: Q1 the reverse-blocking FET from VBUS to PMID, Q2 the high-side switch from PMID to SW, Q3 the low-side switch from SW to PGND, and Q4 the BATFET from SYS to BAT. The bootstrap diode for the high-side driver is inside too."
+  },
+  {
+   "topic": "Power-on reset",
+   "page": 15,
+   "text": "Bias comes from whichever of VBUS and BAT is higher. Once VBUS passes VVBUS_UVLOZ or BAT passes VBAT_UVLOZ, the sleep and battery-depletion comparators and the BATFET driver wake, every register returns to its default, and the I2C port answers."
+  },
+  {
+   "topic": "Start-up from the battery alone",
+   "page": 15,
+   "text": "With no input and the battery above VBAT_DPLZ, the BATFET connects the battery to SYS while REGN stays off to keep quiescent current low. Discharge current through the BATFET is watched; above IBATFET_OCP the BATFET opens at once and BATFET_DIS is set, and it stays off until an input arrives or one of the BATFET-enable events occurs."
+  },
+  {
+   "topic": "Start-up from an input",
+   "page": 15,
+   "text": "On plug-in the steps run in order: REGN LDO up, poor-source check, D+/D– source detection (when AUTO_DPDM_EN is set) to load IINLIM, VINDPM threshold set, then the converter starts. REGN comes up when VBUS is above VVBUS_UVLOZ, above VBAT + VSLEEPZ in buck mode (or below VBAT + VSLEEP in boost mode), and 220 ms have passed; otherwise the part sits in high impedance with REGN off, drawing under IVBUS_HIZ, while the battery runs the system."
+  },
+  {
+   "topic": "Poor source qualification",
+   "page": 15,
+   "text": "Before the buck starts, VBUS must be below VACOV and must stay above VVBUSMIN while IBADSRC (30 mA typ) is drawn. A source that passes sets VBUS_GD and pulses INT; one that fails is retried every 2 s."
+  },
+  {
+   "topic": "Input source type detection",
+   "page": 16,
+   "text": "Detection follows USB BC1.2 to tell SDP, CDP and DCP apart, then non-standard adapters by their D+/D– divider voltages once the 500 ms data-contact timer runs out. When a DCP is found and MAXC_EN or HVDCP_EN is set, the MaxCharge handshake asks the adapter to raise its output from 5 V to 9 V or 12 V. At the end INT pulses, IINLIM is loaded, PG_STAT is set and SDP_STAT updated. The host may overwrite IINLIM afterwards; the lower of IINLIM and the ILIM pin always applies, ICO or not. With AUTO_DPDM_EN clear, detection is skipped and IINLIM, VBUS_STAT and SDP_STAT keep their old values. In host mode, setting FORCE_DPDM reruns detection; the bit clears itself when done."
+  },
+  {
+   "topic": "Input voltage limit (VINDPM)",
+   "page": 18,
+   "text": "The input voltage limit spans 3.9 V to 14 V. With FORCE_VINDPM = 1 the host writes an absolute threshold to VINDPM. With FORCE_VINDPM = 0 (default) the part computes the threshold itself from VINDPM_OS and VINDPM is read-only. INT pulses once the threshold is set."
+  },
+  {
+   "topic": "Converter start-up and control",
+   "page": 18,
+   "text": "After the input limit is set the converter starts; the BATFET opens if charging is off, otherwise stays on. While SYS is below 2.2 V the input limit is held to the lower of 200 mA and IINLIM; above 2.2 V it is the lower of the ILIM pin and IINLIM (ICO_EN = 0) or IDPM_LIM (ICO_EN = 1). The buck runs at a fixed 1.5 MHz with type III compensation suited to ceramic output capacitors, and its ramp scales with PMID to keep loop gain constant over input voltage. At light load, when the battery is below the minimum system voltage or charging is off, it changes to PFM, with duty set by the SYS to VBUS ratio."
+  },
+  {
+   "topic": "Input current optimizer (ICO)",
+   "page": 18,
+   "text": "ICO finds the highest input current the source can give without its voltage falling to VINDPM. It is on by default (ICO_EN = 1) and runs after a DCP or MaxCharge source is detected; FORCE_ICO runs it for any source. The limit in use is reported in IDPM_LIM while ICO is on, and is IINLIM when it is off; either way the ILIM pin caps it unless EN_ILIM = 0."
+  },
+  {
+   "topic": "Boost mode",
+   "page": 19,
+   "text": "Boost delivers battery power out through PMID, up to 3.1 A. It starts when BAT is above BATLOWV, VBUS is below BAT + VSLEEP, OTG is high with OTG_CONFIG = 1, TS is inside the boost temperature window set by BHOT and BCOLD, and 30 ms have passed. The switching frequency is 500 kHz or 1.5 MHz by BOOST_FREQ; writes to BOOST_FREQ are ignored while OTG_CONFIG is set. VBUS_STAT reads 111 in boost; the output defaults to 5 V, set by BOOSTV, and holds while BAT stays above VOTG_BAT."
+  },
+  {
+   "topic": "Narrow VDC power path",
+   "page": 19,
+   "text": "The BATFET separates SYS from the battery. SYS is held at or above the SYS_MIN setting (3.5 V default) even with a flat battery: below that, the BATFET runs linear; above it, the BATFET is fully on and SYS sits one BATFET drop above BAT. VSYS_STAT is high during minimum-system regulation."
+  },
+  {
+   "topic": "Dynamic power management",
+   "page": 19,
+   "text": "When the source is overloaded, either its current reaches IINLIM or IDPM_LIM or its voltage falls to VINDPM, charge current is cut until the input is back inside both limits. If charge current has reached zero and the source is still overloaded, SYS falls; once it drops below the battery, supplement mode starts and the battery helps carry the load. VDPM_STAT and IDPM_STAT show which limit is active."
+  },
+  {
+   "topic": "Supplement mode",
+   "page": 20,
+   "text": "When SYS falls below BAT the BATFET turns on, its gate regulated so that VDS stays at 30 mV at low current, which avoids chattering in and out of the mode. As discharge current rises the gate drive rises until the BATFET is fully on, after which VDS grows linearly with current. The BATFET turns off to leave supplement mode when the battery falls below the depletion threshold."
+  },
+  {
+   "topic": "Autonomous charge cycle",
+   "page": 21,
+   "text": "With CHG_CONFIG = 1 and CE low, the part runs a full charge cycle on its own using the defaults of Table 8-4; the host may change any of them over I2C. A cycle starts when the converter is running, charging is enabled with ICHG not 0 mA, TS shows no fault, the safety timer has not expired and BATFET_DIS = 0. The charge ends when current falls below the termination level with the battery above the recharge threshold, outside DPM and thermal regulation. A battery that then drops below the recharge threshold (VRECHG) starts a new cycle; toggling CE or CHG_CONFIG also starts one. CHRG_STAT reads 00 not charging, 01 precharge, 10 fast charge (CC or CV phase), 11 done, and INT pulses at the end of a cycle."
+  },
+  {
+   "topic": "Charge profile",
+   "page": 21,
+   "text": "Below 2 V the battery gets IBATSHORT (100 mA); from 2 V to 3 V the precharge current (128 mA default, 64 mA to 1024 mA); above 3 V the fast-charge current (2048 mA default, up to 5056 mA) followed by constant voltage at VREG (3.84 V to 4.608 V). In DPM or thermal regulation the current can fall short of the setting; termination is then suspended and the safety timer runs at half speed."
+  },
+  {
+   "topic": "Termination",
+   "page": 22,
+   "text": "At termination the BATFET turns off while the converter keeps powering SYS; the BATFET can still turn on for supplement mode. CHRG_STAT goes to 11 and INT pulses. Termination waits while input current, input voltage or thermal regulation is active, and EN_TERM = 0, written before termination, turns it off."
+  },
+  {
+   "topic": "Resistance compensation (IRCOMP)",
+   "page": 22,
+   "text": "Resistance between the charger and the cell (traces, connector, FETs, sense resistor) moves charging from constant current into constant voltage too soon. IRCOMP raises the regulation voltage by charge current times BAT_COMP, up to VCLAMP, lengthening the constant-current phase. The host sets VCLAMP and BAT_COMP for safe operation."
+  },
+  {
+   "topic": "Thermistor window, charging",
+   "page": 22,
+   "text": "TS is compared with fractions of REGN. A cycle may start only with TS between VLTF and VHTF; once running, charging continues while TS stays between VLTF and VTCO, otherwise it pauses until TS is back between VLTF and VHTF. A TS fault is reported in REG0C[2:0], pulses INT, and STAT flags it while charging is paused."
+  },
+  {
+   "topic": "Thermistor window, boost",
+   "page": 23,
+   "text": "In boost mode the battery must stay between VBCOLDx and VBHOTx (cold –10°C or –20°C; hot 55°C, 60°C or 65°C) unless BHOT = 11 turns the check off. Outside the window boost and the BATFET turn off and BATFET_DIS is set to cut PMID leakage; once back in range, clearing BATFET_DIS or a low-to-high edge on QON restores them."
+  },
+  {
+   "topic": "Safety timer",
+   "page": 24,
+   "text": "Below VBATLOWV the timer is 4 hours; the fast-charge timer is set by CHG_TIMER. On expiry CHRG_FAULT reads 11 and INT pulses. EN_TIMER turns the timer off. During input voltage, input current or thermal regulation it counts at half rate (a 5 hour setting lasts 10 hours if the whole charge is in input current regulation) unless TMR2X_EN = 0."
+  },
+  {
+   "topic": "Battery monitor (ADC)",
+   "page": 24,
+   "text": "The ADC reports VBUS, battery voltage, system voltage, TS as a fraction of REGN, and charge current in REG0E to REG12. In one-shot mode (CONV_RATE = 0, default) setting CONV_START starts a conversion; the bit clears when the result is ready, within tCONV (1 s max). In continuous mode (CONV_RATE = 1) a result comes every second until CONV_RATE is cleared. The ADC turns REGN on, which raises quiescent current. On battery alone it runs only with VBAT above the SYS_MIN setting."
+  },
+  {
+   "topic": "Interrupt (INT)",
+   "page": 25,
+   "text": "INT gives a 256 µs low pulse when a source is identified, a good source is found (VBUS above the battery, below VACOV and above VVBUSMIN with IBADSRC drawn), the input is removed, charging completes, or any REG0C fault occurs. A fault is latched in REG0C until read, and no new fault pulse is sent until then; reading REG0C twice gives first the latched and then the present state."
+  },
+  {
+   "topic": "Ship mode and BATFET enable",
+   "page": 25,
+   "text": "Setting BATFET_DIS turns the BATFET off, at once or after tSM_DLY when BATFET_DLY = 1, leaving SYS unpowered and battery drain minimal. The BATFET returns on adapter plug-in, on clearing BATFET_DIS, on REG_RST, or on a high-to-low edge on QON held for tSHIPMODE."
+  },
+  {
+   "topic": "Full system reset",
+   "page": 26,
+   "text": "With no input and BATFET_DIS = 0, holding QON low for tQON_RST opens the BATFET for tBATFET_RST and closes it again, a power-on reset of everything on SYS without the host. BATFET_RST_EN = 0 turns this off."
+  },
+  {
+   "topic": "Current pulse control",
+   "page": 26,
+   "text": "For adapters that change voltage on VBUS current pulses, set EN_PUMPX, then one of PUMPX_UP or PUMPX_DN, never both. The input limit then toggles between IINLIM or IDPM_LIM and the 100 mA level; the bit stays set during the sequence and clears at its end. Clearing EN_PUMPX aborts the sequence and restores the limit at once; with EN_PUMPX low, writes to PUMPX_UP and PUMPX_DN do nothing."
+  },
+  {
+   "topic": "ILIM pin",
+   "page": 26,
+   "text": "ILIM is held at 0.8 V; above that, input current regulation takes over. An open ILIM floats above 0.8 V and limits input current to zero; a shorted ILIM leaves the register in charge. EN_ILIM = 0 turns off both limiting and monitoring on the pin."
+  },
+  {
+   "topic": "Thermal regulation and shutdown",
+   "page": 26,
+   "text": "In buck mode charge current is reduced to hold the junction at the TREG setting, 60°C to 120°C; termination is then suspended, the safety timer runs at half rate and THERM_STAT is high. Above TSHUT the converter and BATFET turn off, CHRG_FAULT reads 10 and INT pulses; they return below TSHUT_HYS. In boost mode, above TSHUT the BATFET turns off to stop discharge, and the host restores it with one of the BATFET-enable events once the temperature is below TSHUT_HYS."
+  },
+  {
+   "topic": "Input overvoltage",
+   "page": 27,
+   "text": "Buck operation is for VBUS within VVBUS_OP. Above VACOV switching stops at once, CHRG_FAULT reads 01 and INT pulses."
+  },
+  {
+   "topic": "System overvoltage",
+   "page": 27,
+   "text": "On a load transient that drives SYS too high, the converter stops at once to clamp the overshoot."
+  },
+  {
+   "topic": "Boost overvoltage",
+   "page": 27,
+   "text": "If PMID rises past VOTG_OVP, switching stops and boost pauses (OTG_CONFIG stays set) until the fault clears; BOOST_FAULT is set and INT pulses."
+  },
+  {
+   "topic": "Battery protection",
+   "page": 27,
+   "text": "Battery overvoltage is 4% above the regulation voltage; charging stops at once, BAT_FAULT is set and INT pulses. Below VBAT_DPL the BATFET opens to prevent over-discharge, and only an input on VBUS brings it back; the battery is then charged at IBATSHORT (100 mA typ) below VSHORT, or at IPRECHG between VSHORT and VBATLOWV. A shorted or badly overloaded system (above the BATFET overcurrent limit) latches the BATFET off until a BATFET-enable event."
+  },
+  {
+   "topic": "I2C interface",
+   "page": 28,
+   "text": "Target address 6AH (1101010 plus R/W). Registers REG00 to REG14; a read past REG14 returns FFh, and an undefined register address is answered with NACK. Standard (100 kbit/s) and fast (400 kbit/s) modes. SDA and SCL are open drain and need pull-ups. The target may stretch the clock. Multi-byte reads and writes work across REG00 to REG14 except REG0C, which takes single reads only and holds faults until read; NTC_FAULT is the exception and always shows the present TS state."
+  },
+  {
+   "topic": "Host mode and default mode",
+   "page": 31,
+   "text": "After power-on reset the part is in default mode with the watchdog expired and all registers at defaults; it charges on its own with a 12 hour fast-charge timer, then stops charging while the buck keeps powering SYS. WATCHDOG_FAULT is high in default mode and low in host mode. Any I2C write enters host mode; the host must set WD_RST before the watchdog expires or set WATCHDOG = 00 to stay there. On expiry the part returns to default mode and resets every register to default; six settings survive: BATFET_DIS, BATFET_DLY, BATFET_RST_EN, IINLIM, VINDPM_OS and VINDPM."
+  },
+  {
+   "topic": "Inductor and capacitors",
+   "page": 50,
+   "text": "Input capacitor: low-ESR X7R or X5R ceramic, as close as possible to the high-side drain and low-side source, rated 25 V or more for inputs up to 14 V; 8.2 µF suits 3 A to 5 A charging. Output: for loop stability 1 µH and at least 20 µF, ceramic X7R or X5R rated 6 V or more. A larger output LC lowers ripple."
+  },
+  {
+   "topic": "Power supply",
+   "page": 54,
+   "text": "SYS is powered from a 3.9 V to 14 V source on VBUS rated at least 100 mA, or from a single Li-ion cell above VBATUVLO on BAT. For full output power to SYS the source needs at least 3 A."
+  },
+  {
+   "topic": "Layout",
+   "page": 55,
+   "text": "In order of priority: the input capacitor tight to PMID and GND with the shortest copper or a ground plane; the inductor right at SW, with that trace only as wide as the charge current needs, small in area, on one layer, and far from other copper; the output capacitor near the inductor and IC, grounded by short copper to the IC ground; analog and power ground routed apart and joined once, at the power pad under the IC or through a 0 Ω resistor; ground pour kept off power pins; decoupling capacitors at their pins with short traces; the exposed pad soldered to ground with thermal vias under the IC into the ground planes; vias sized and counted for the current they carry."
+  }
+ ],
+ "packages": [
+  {
+   "name": "RTW (S-PWQFN-N24), 24-pin WQFN 4 mm × 4 mm",
+   "page": 62,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "3.85",
+     "",
+     "4.15"
+    ],
+    [
+     "",
+     "body width",
+     "3.85",
+     "",
+     "4.15"
+    ],
+    [
+     "",
+     "overall height",
+     "0.70",
+     "",
+     "0.80"
+    ],
+    [
+     "",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "",
+     "reference dimension at the terminals",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "",
+     "terminal pitch",
+     "",
+     "0.50",
+     ""
+    ],
+    [
+     "",
+     "terminal length (24X)",
+     "0.30",
+     "",
+     "0.50"
+    ],
+    [
+     "",
+     "terminal width (24X)",
+     "0.18",
+     "",
+     "0.30"
+    ],
+    [
+     "",
+     "exposed thermal pad, square",
+     "",
+     "2.70±0.10",
+     ""
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "",
+     "terminal position tolerance to C A B",
+     "",
+     "",
+     "0.10"
+    ],
+    [
+     "",
+     "terminal position tolerance to C",
+     "",
+     "",
+     "0.05"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-220. Dimensions to ASME Y14.5M-1994. The thermal pad is soldered to the board for heat and strength.",
+    "Example land pattern: pads 0.28 × 0.85 on 0.5 pitch, 4.8 across the outer pad ends and 3.1 across the inner, R0.14 pad ends, non-solder-mask-defined with 0.07 mask clearance all round and 0.08 between neighbouring openings; thermal land carrying nine Ø0.3 vias on 0.9 pitch in a 2.7 square.",
+    "Example stencil, 0.125 thick: terminal openings 0.23 × 0.8, R0.115, 4.75 across outer ends and 3.15 across inner; four 1.1 square openings on the thermal pad with 0.3 gaps, 66% paste coverage."
+   ]
+  }
+ ]
+}

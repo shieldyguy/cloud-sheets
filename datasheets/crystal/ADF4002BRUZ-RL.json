@@ -1,0 +1,4326 @@
+{
+ "sheet": 1,
+ "name": "ADF4002BRUZ-RL",
+ "kind": "crystal",
+ "manufacturer": "Analog Devices",
+ "title": "ADF4002 phase detector / frequency synthesizer, 400 MHz RF input, 104 MHz PFD",
+ "source": {
+  "revision": "Rev. D",
+  "pages": 22
+ },
+ "summary": "An integer-N PLL building block: a 14-bit reference counter, a 13-bit N counter fed by an RF input up to 400 MHz, a phase frequency detector up to 104 MHz and a programmable charge pump. With an external loop filter and VCO it closes a complete PLL; with R and N set to 1 it serves as a standalone PFD and charge pump. It runs from 2.7 V to 3.3 V, with a separate charge pump supply up to 5.5 V for a wider tuning range, and is set over a 3-wire serial interface. Uses are clock generation and conditioning and IF local oscillators.",
+ "key_figures": [
+  [
+   "RF input",
+   "5 MHz to 400 MHz, -10 dBm to 0 dBm"
+  ],
+  [
+   "Reference input",
+   "20 MHz to 300 MHz, 0.8 V p-p min"
+  ],
+  [
+   "PFD frequency",
+   "104 MHz max"
+  ],
+  [
+   "Normalized phase noise floor",
+   "-222 dBc/Hz typ"
+  ],
+  [
+   "Normalized 1/f noise",
+   "-119 dBc/Hz typ (10 kHz offset, 1 GHz)"
+  ],
+  [
+   "Charge pump current",
+   "5 mA typ high, 625 µA low, RSET = 5.1 kΩ"
+  ],
+  [
+   "Supply",
+   "AVDD = DVDD 2.7 V to 3.3 V; VP AVDD to 5.5 V"
+  ],
+  [
+   "Supply current",
+   "IDD 5.0 mA typ, 6.0 mA max; power-down 1 µA typ"
+  ],
+  [
+   "Serial clock",
+   "20 MHz max"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +85 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 21,
+  "columns": [
+   "model",
+   "temperature range",
+   "package description",
+   "package option"
+  ],
+  "rows": [
+   [
+    "ADF4002BRUZ",
+    "−40°C to +85°C",
+    "16-Lead TSSOP",
+    "RU-16"
+   ],
+   [
+    "ADF4002BRUZ-RL",
+    "−40°C to +85°C",
+    "16-Lead TSSOP",
+    "RU-16"
+   ],
+   [
+    "ADF4002BRUZ-RL7",
+    "−40°C to +85°C",
+    "16-Lead TSSOP",
+    "RU-16"
+   ],
+   [
+    "ADF4002BCPZ",
+    "−40°C to +85°C",
+    "20-Lead LFCSP",
+    "CP-20-6"
+   ],
+   [
+    "ADF4002BCPZ-RL",
+    "−40°C to +85°C",
+    "20-Lead LFCSP",
+    "CP-20-6"
+   ],
+   [
+    "ADF4002BCPZ-RL7",
+    "−40°C to +85°C",
+    "20-Lead LFCSP",
+    "CP-20-6"
+   ],
+   [
+    "EV-ADF4002SD1Z",
+    "",
+    "Evaluation Board",
+    ""
+   ],
+   [
+    "EV-ADF411XSD1Z",
+    "",
+    "Evaluation Board",
+    ""
+   ]
+  ],
+  "notes": [
+   "Z marks a RoHS-compliant part."
+  ]
+ },
+ "pins": [
+  {
+   "package": "16-lead TSSOP (RU-16)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "RSET",
+     "type": "analog",
+     "function": "A resistor from this pin to CPGND sets the largest charge pump current, ICP MAX = 25.5 / RSET; 5.1 kΩ gives 5 mA. The pin sits at about 0.66 V."
+    },
+    {
+     "pin": "2",
+     "name": "CP",
+     "type": "analog output",
+     "function": "Charge pump output. When enabled it sources or sinks ±ICP into the external loop filter, whose output tunes the external VCO."
+    },
+    {
+     "pin": "3",
+     "name": "CPGND",
+     "type": "ground",
+     "function": "Ground return of the charge pump."
+    },
+    {
+     "pin": "4",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground; return of the RF input."
+    },
+    {
+     "pin": "5",
+     "name": "RFINB",
+     "type": "RF input",
+     "function": "Complementary RF input. Needs a small bypass capacitor to ground, typically 100 pF (Figure 11)."
+    },
+    {
+     "pin": "6",
+     "name": "RFINA",
+     "type": "RF input",
+     "function": "RF input, small signal, AC-coupled from the external VCO."
+    },
+    {
+     "pin": "7",
+     "name": "AVDD",
+     "type": "power in",
+     "function": "Analog supply, 2.7 V to 3.3 V, equal to DVDD. Decouple it to analog ground right at the pin."
+    },
+    {
+     "pin": "8",
+     "name": "REFIN",
+     "type": "input",
+     "function": "Reference input: CMOS, nominal threshold VDD/2, about 100 kΩ DC input resistance (Figure 10). It takes a TTL or CMOS oscillator output directly, or an AC-coupled signal."
+    },
+    {
+     "pin": "9",
+     "name": "DGND",
+     "type": "ground",
+     "function": "Digital ground."
+    },
+    {
+     "pin": "10",
+     "name": "CE",
+     "type": "digital input",
+     "function": "Chip enable. Low powers the device down and three-states CP. High powers it up, subject to power-down bit F2."
+    },
+    {
+     "pin": "11",
+     "name": "CLK",
+     "type": "digital input",
+     "function": "Serial clock, high-impedance CMOS input. Each rising edge shifts a data bit into the 24-bit shift register."
+    },
+    {
+     "pin": "12",
+     "name": "DATA",
+     "type": "digital input",
+     "function": "Serial data, high-impedance CMOS input. Words go in MSB first; the two LSBs are the control bits."
+    },
+    {
+     "pin": "13",
+     "name": "LE",
+     "type": "digital input",
+     "function": "Load enable, CMOS input. On its rising edge the shift register contents move into the latch the control bits select (one of four)."
+    },
+    {
+     "pin": "14",
+     "name": "MUXOUT",
+     "type": "digital output",
+     "function": "Multiplexer output: lock detect, the divided RF or the divided reference, chosen by M3 to M1."
+    },
+    {
+     "pin": "15",
+     "name": "DVDD",
+     "type": "power in",
+     "function": "Digital supply, 2.7 V to 3.3 V, equal to AVDD. Decouple it to digital ground right at the pin."
+    },
+    {
+     "pin": "16",
+     "name": "VP",
+     "type": "power in",
+     "function": "Charge pump supply, at least VDD. With VDD at 3 V it may be raised to 5.5 V, so the charge pump can tune a VCO over up to 5 V."
+    }
+   ]
+  },
+  {
+   "package": "20-lead LFCSP 4 mm × 4 mm (CP-20-6)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CPGND",
+     "type": "ground",
+     "function": "Ground return of the charge pump."
+    },
+    {
+     "pin": "2",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground; return of the RF input."
+    },
+    {
+     "pin": "3",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground; return of the RF input."
+    },
+    {
+     "pin": "4",
+     "name": "RFINB",
+     "type": "RF input",
+     "function": "Complementary RF input. Needs a small bypass capacitor to ground, typically 100 pF (Figure 11)."
+    },
+    {
+     "pin": "5",
+     "name": "RFINA",
+     "type": "RF input",
+     "function": "RF input, small signal, AC-coupled from the external VCO."
+    },
+    {
+     "pin": "6",
+     "name": "AVDD",
+     "type": "power in",
+     "function": "Analog supply, 2.7 V to 3.3 V, equal to DVDD. Decouple it to analog ground right at the pin."
+    },
+    {
+     "pin": "7",
+     "name": "AVDD",
+     "type": "power in",
+     "function": "Analog supply, 2.7 V to 3.3 V, equal to DVDD. Decouple it to analog ground right at the pin."
+    },
+    {
+     "pin": "8",
+     "name": "REFIN",
+     "type": "input",
+     "function": "Reference input: CMOS, nominal threshold VDD/2, about 100 kΩ DC input resistance (Figure 10). It takes a TTL or CMOS oscillator output directly, or an AC-coupled signal."
+    },
+    {
+     "pin": "9",
+     "name": "DGND",
+     "type": "ground",
+     "function": "Digital ground."
+    },
+    {
+     "pin": "10",
+     "name": "DGND",
+     "type": "ground",
+     "function": "Digital ground."
+    },
+    {
+     "pin": "11",
+     "name": "CE",
+     "type": "digital input",
+     "function": "Chip enable. Low powers the device down and three-states CP. High powers it up, subject to power-down bit F2."
+    },
+    {
+     "pin": "12",
+     "name": "CLK",
+     "type": "digital input",
+     "function": "Serial clock, high-impedance CMOS input. Each rising edge shifts a data bit into the 24-bit shift register."
+    },
+    {
+     "pin": "13",
+     "name": "DATA",
+     "type": "digital input",
+     "function": "Serial data, high-impedance CMOS input. Words go in MSB first; the two LSBs are the control bits."
+    },
+    {
+     "pin": "14",
+     "name": "LE",
+     "type": "digital input",
+     "function": "Load enable, CMOS input. On its rising edge the shift register contents move into the latch the control bits select (one of four)."
+    },
+    {
+     "pin": "15",
+     "name": "MUXOUT",
+     "type": "digital output",
+     "function": "Multiplexer output: lock detect, the divided RF or the divided reference, chosen by M3 to M1."
+    },
+    {
+     "pin": "16",
+     "name": "DVDD",
+     "type": "power in",
+     "function": "Digital supply, 2.7 V to 3.3 V, equal to AVDD. Decouple it to digital ground right at the pin."
+    },
+    {
+     "pin": "17",
+     "name": "DVDD",
+     "type": "power in",
+     "function": "Digital supply, 2.7 V to 3.3 V, equal to AVDD. Decouple it to digital ground right at the pin."
+    },
+    {
+     "pin": "18",
+     "name": "VP",
+     "type": "power in",
+     "function": "Charge pump supply, at least VDD. With VDD at 3 V it may be raised to 5.5 V, so the charge pump can tune a VCO over up to 5 V."
+    },
+    {
+     "pin": "19",
+     "name": "RSET",
+     "type": "analog",
+     "function": "A resistor from this pin to CPGND sets the largest charge pump current, ICP MAX = 25.5 / RSET; 5.1 kΩ gives 5 mA. The pin sits at about 0.66 V."
+    },
+    {
+     "pin": "20",
+     "name": "CP",
+     "type": "analog output",
+     "function": "Charge pump output. When enabled it sources or sinks ±ICP into the external loop filter, whose output tunes the external VCO."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "ground",
+     "function": "Exposed pad; connect it to AGND."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Table 1. Specifications (B version)",
+   "page": 5,
+   "conditions": "AVDD = DVDD = 3 V ± 10%, AVDD ≤ VP ≤ 5.5 V, AGND = DGND = CPGND = 0 V, RSET = 5.1 kΩ, dBm referred to 50 Ω, TA = TMAX to TMIN, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "test conditions/comments"
+   ],
+   "rows": [
+    [
+     "RF characteristics",
+     "",
+     "",
+     "",
+     "",
+     "See Figure 11 for input circuit"
+    ],
+    [
+     "RF input sensitivity",
+     "-10",
+     "",
+     "0",
+     "dBm",
+     ""
+    ],
+    [
+     "RF input frequency (RFIN)",
+     "5",
+     "",
+     "400",
+     "MHz",
+     "For RFIN < 5 MHz, ensure slew rate (SR) > 4 V/µs"
+    ],
+    [
+     "REFIN characteristics",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "REFIN input frequency",
+     "20",
+     "",
+     "300",
+     "MHz",
+     "For REFIN < 20 MHz, ensure SR > 50 V/µs"
+    ],
+    [
+     "REFIN input sensitivity (2)",
+     "0.8",
+     "",
+     "VDD",
+     "V p-p",
+     "Biased at AVDD/2 (3)"
+    ],
+    [
+     "REFIN input capacitance",
+     "",
+     "",
+     "10",
+     "pF",
+     ""
+    ],
+    [
+     "REFIN input current",
+     "",
+     "",
+     "±100",
+     "µA",
+     ""
+    ],
+    [
+     "Phase detector",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Phase detector frequency (4)",
+     "",
+     "",
+     "104",
+     "MHz",
+     "ABP = 0, 0 (2.9 ns antibacklash pulse width)"
+    ],
+    [
+     "Charge pump",
+     "",
+     "",
+     "",
+     "",
+     "Programmable, see Figure 18"
+    ],
+    [
+     "ICP sink/source, high value",
+     "",
+     "5",
+     "",
+     "mA",
+     "With RSET = 5.1 kΩ"
+    ],
+    [
+     "ICP sink/source, low value",
+     "",
+     "625",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "ICP sink/source, absolute accuracy",
+     "",
+     "2.5",
+     "",
+     "%",
+     "With RSET = 5.1 kΩ"
+    ],
+    [
+     "ICP sink/source, RSET range",
+     "3.0",
+     "",
+     "11",
+     "kΩ",
+     "See Figure 18"
+    ],
+    [
+     "ICP three-state leakage",
+     "",
+     "1",
+     "",
+     "nA",
+     "TA = 25°C"
+    ],
+    [
+     "ICP vs. VCP",
+     "",
+     "1.5",
+     "",
+     "%",
+     "0.5 V ≤ VCP ≤ VP − 0.5 V"
+    ],
+    [
+     "Sink and source current matching",
+     "",
+     "2",
+     "",
+     "%",
+     "0.5 V ≤ VCP ≤ VP − 0.5 V"
+    ],
+    [
+     "ICP vs. temperature",
+     "",
+     "2",
+     "",
+     "%",
+     "VCP = VP/2"
+    ],
+    [
+     "Logic inputs",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VIH, input high voltage",
+     "1.4",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "VIL, input low voltage",
+     "",
+     "",
+     "0.6",
+     "V",
+     ""
+    ],
+    [
+     "IINH, IINL, input current",
+     "",
+     "",
+     "±1",
+     "µA",
+     ""
+    ],
+    [
+     "CIN, input capacitance",
+     "",
+     "",
+     "10",
+     "pF",
+     ""
+    ],
+    [
+     "Logic outputs",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VOH, output high voltage",
+     "1.4",
+     "",
+     "",
+     "V",
+     "Open-drain output chosen, 1 kΩ pull-up resistor to 1.8 V"
+    ],
+    [
+     "VOH, output high voltage",
+     "VDD − 0.4",
+     "",
+     "",
+     "V",
+     "CMOS output chosen"
+    ],
+    [
+     "IOH",
+     "",
+     "",
+     "100",
+     "µA",
+     ""
+    ],
+    [
+     "VOL, output low voltage",
+     "",
+     "",
+     "0.4",
+     "V",
+     "IOL = 500 µA"
+    ],
+    [
+     "Power supplies",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "AVDD",
+     "2.7",
+     "",
+     "3.3",
+     "V",
+     ""
+    ],
+    [
+     "DVDD",
+     "AVDD",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VP",
+     "AVDD",
+     "",
+     "5.5",
+     "V",
+     "AVDD ≤ VP ≤ 5.5 V"
+    ],
+    [
+     "IDD (5) (AIDD + DIDD)",
+     "",
+     "5.0",
+     "6.0",
+     "mA",
+     ""
+    ],
+    [
+     "IP",
+     "",
+     "",
+     "0.4",
+     "mA",
+     "TA = 25°C"
+    ],
+    [
+     "Power-down mode",
+     "",
+     "1",
+     "",
+     "µA",
+     "AIDD + DIDD"
+    ],
+    [
+     "Noise characteristics",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Normalized phase noise floor (PNSYNTH) (6)",
+     "",
+     "-222",
+     "",
+     "dBc/Hz",
+     "PLL loop bandwidth = 500 kHz, measured at 100 kHz offset"
+    ],
+    [
+     "Normalized 1/f noise (PN1_f) (7)",
+     "",
+     "-119",
+     "",
+     "dBc/Hz",
+     "10 kHz offset; normalized to 1 GHz"
+    ]
+   ],
+   "notes": [
+    "1. The B version covers -40°C to +85°C operating temperature.",
+    "2. Measured with AVDD = DVDD = 3 V.",
+    "3. With the input AC-coupled, it settles at the AVDD/2 bias.",
+    "4. Set by design and checked on samples.",
+    "5. At TA = 25°C, AVDD = DVDD = 3 V and RFIN = 350 MHz. For other frequencies at 25°C and 3.0 V, IDD in mA is about 2.35 + 0.0046 × REFIN + 0.0062 × RF, both frequencies in MHz.",
+    "6. PNSYNTH is the in-band phase noise measured at the VCO output less 10 logFPFD and 20 logN: PNSYNTH = PNTOT − 10 logFPFD − 20 logN.",
+    "7. Total PLL phase noise is the flicker (1/f) part plus the normalized floor. The flicker part at RF frequency fRF and offset f is PN = PN1_f + 20 log(fRF/1 GHz) + 10 log(10 kHz/f). Phase noise figures were taken on the EV-ADF4002SD1Z with an Agilent E5500 phase noise system; ADIsimPLL models both the floor and the flicker term."
+   ]
+  },
+  {
+   "title": "Table 2. Timing characteristics",
+   "page": 6,
+   "conditions": "AVDD = DVDD = 3 V ± 10%, AVDD ≤ VP ≤ 5.5 V, AGND = DGND = CPGND = 0 V, RSET = 5.1 kΩ, dBm referred to 50 Ω, TA = TMAX to TMIN, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "limit (B version)",
+    "unit",
+    "test conditions/comments"
+   ],
+   "rows": [
+    [
+     "t1",
+     "10",
+     "ns min",
+     "DATA to CLK setup time"
+    ],
+    [
+     "t2",
+     "10",
+     "ns min",
+     "DATA to CLK hold time"
+    ],
+    [
+     "t3",
+     "25",
+     "ns min",
+     "CLK high duration"
+    ],
+    [
+     "t4",
+     "25",
+     "ns min",
+     "CLK low duration"
+    ],
+    [
+     "t5",
+     "10",
+     "ns min",
+     "CLK to LE setup time"
+    ],
+    [
+     "t6",
+     "20",
+     "ns min",
+     "LE pulse width"
+    ]
+   ],
+   "notes": [
+    "Set by design; not tested in production. B version: -40°C to +85°C.",
+    "Data is shifted in MSB first, DB23 to DB0; DB1 and DB0 are control bits C2 and C1. t1 and t2 are taken at each CLK rising edge; LE rises t5 after the last CLK edge and stays high at least t6."
+   ]
+  },
+  {
+   "title": "Table 3. Absolute maximum ratings",
+   "page": 7,
+   "conditions": "TA = 25°C, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "AVDD to GND (1)",
+     "−0.3 V to +3.6 V"
+    ],
+    [
+     "AVDD to DVDD",
+     "−0.3 V to +0.3 V"
+    ],
+    [
+     "VP to GND",
+     "−0.3 V to +5.8 V"
+    ],
+    [
+     "VP to AVDD",
+     "−0.3 V to +5.8 V"
+    ],
+    [
+     "Digital I/O voltage to GND",
+     "−0.3 V to VDD + 0.3 V"
+    ],
+    [
+     "Analog I/O voltage to GND",
+     "−0.3 V to VP + 0.3 V"
+    ],
+    [
+     "REFIN, RFINA, RFINB to GND",
+     "−0.3 V to VDD + 0.3 V"
+    ],
+    [
+     "RFINA to RFINB",
+     "±600 mV"
+    ],
+    [
+     "Operating temperature range, industrial (B version)",
+     "−40°C to +85°C"
+    ],
+    [
+     "Storage temperature range",
+     "−65°C to +125°C"
+    ],
+    [
+     "Maximum junction temperature",
+     "150°C"
+    ],
+    [
+     "Reflow soldering, peak temperature (60 sec)",
+     "260°C"
+    ],
+    [
+     "Reflow soldering, time at peak temperature",
+     "40 sec"
+    ],
+    [
+     "Transistor count, CMOS",
+     "6425"
+    ],
+    [
+     "Transistor count, bipolar",
+     "303"
+    ]
+   ],
+   "notes": [
+    "1. GND = AGND = DGND = 0 V.",
+    "The device is ESD sensitive, with an ESD rating below 2 kV."
+   ]
+  },
+  {
+   "title": "Table 4. Thermal impedance",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "package type",
+    "θJA",
+    "unit"
+   ],
+   "rows": [
+    [
+     "TSSOP",
+     "150.4",
+     "°C/W"
+    ],
+    [
+     "LFCSP",
+     "122",
+     "°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Table 6. C2, C1 truth table",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "C2",
+    "C1",
+    "data latch"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "R counter"
+    ],
+    [
+     "0",
+     "1",
+     "N counter"
+    ],
+    [
+     "1",
+     "0",
+     "Function latch"
+    ],
+    [
+     "1",
+     "1",
+     "Initialization latch"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 15. Latch summary",
+   "page": 12,
+   "conditions": "X = don't care",
+   "columns": [
+    "bit",
+    "reference counter latch",
+    "N counter latch",
+    "function latch",
+    "initialization latch"
+   ],
+   "rows": [
+    [
+     "DB23",
+     "X",
+     "X",
+     "X",
+     "X"
+    ],
+    [
+     "DB22",
+     "0",
+     "X",
+     "X",
+     "X"
+    ],
+    [
+     "DB21",
+     "0",
+     "G1 (CP gain)",
+     "PD2 (power-down 2)",
+     "PD2 (power-down 2)"
+    ],
+    [
+     "DB20",
+     "LDP (lock detect precision)",
+     "B13",
+     "CPI6",
+     "CPI6"
+    ],
+    [
+     "DB19",
+     "T2 (test mode)",
+     "B12",
+     "CPI5",
+     "CPI5"
+    ],
+    [
+     "DB18",
+     "T1 (test mode)",
+     "B11",
+     "CPI4",
+     "CPI4"
+    ],
+    [
+     "DB17",
+     "ABP2 (antibacklash width)",
+     "B10",
+     "CPI3",
+     "CPI3"
+    ],
+    [
+     "DB16",
+     "ABP1 (antibacklash width)",
+     "B9",
+     "CPI2",
+     "CPI2"
+    ],
+    [
+     "DB15",
+     "R14",
+     "B8",
+     "CPI1",
+     "CPI1"
+    ],
+    [
+     "DB14",
+     "R13",
+     "B7",
+     "TC4",
+     "TC4"
+    ],
+    [
+     "DB13",
+     "R12",
+     "B6",
+     "TC3",
+     "TC3"
+    ],
+    [
+     "DB12",
+     "R11",
+     "B5",
+     "TC2",
+     "TC2"
+    ],
+    [
+     "DB11",
+     "R10",
+     "B4",
+     "TC1",
+     "TC1"
+    ],
+    [
+     "DB10",
+     "R9",
+     "B3",
+     "F5 (fastlock mode)",
+     "F5 (fastlock mode)"
+    ],
+    [
+     "DB9",
+     "R8",
+     "B2",
+     "F4 (fastlock enable)",
+     "F4 (fastlock enable)"
+    ],
+    [
+     "DB8",
+     "R7",
+     "B1",
+     "F3 (CP three-state)",
+     "F3 (CP three-state)"
+    ],
+    [
+     "DB7",
+     "R6",
+     "X",
+     "F2 (PD polarity)",
+     "F2 (PD polarity)"
+    ],
+    [
+     "DB6",
+     "R5",
+     "X",
+     "M3 (MUXOUT control)",
+     "M3 (MUXOUT control)"
+    ],
+    [
+     "DB5",
+     "R4",
+     "X",
+     "M2 (MUXOUT control)",
+     "M2 (MUXOUT control)"
+    ],
+    [
+     "DB4",
+     "R3",
+     "X",
+     "M1 (MUXOUT control)",
+     "M1 (MUXOUT control)"
+    ],
+    [
+     "DB3",
+     "R2",
+     "X",
+     "PD1 (power-down 1)",
+     "PD1 (power-down 1)"
+    ],
+    [
+     "DB2",
+     "R1",
+     "X",
+     "F1 (counter reset)",
+     "F1 (counter reset)"
+    ],
+    [
+     "DB1",
+     "C2 (0)",
+     "C2 (0)",
+     "C2 (1)",
+     "C2 (1)"
+    ],
+    [
+     "DB0",
+     "C1 (0)",
+     "C1 (1)",
+     "C1 (0)",
+     "C1 (1)"
+    ]
+   ],
+   "notes": [
+    "R14 to R1 form the 14-bit reference counter and B13 to B1 the 13-bit N counter.",
+    "DB23 to DB21 of the reference counter latch are reserved; DB21 and DB22 are written 0 for normal operation. DB23, DB22 and DB7 to DB2 of the N counter latch, and DB23 and DB22 of the function and initialization latches, are not used by the device."
+   ]
+  },
+  {
+   "title": "Figure 16. Reference counter divide ratio",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "R14",
+    "R13",
+    "R12",
+    "..........",
+    "R3",
+    "R2",
+    "R1",
+    "divide ratio"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "0",
+     "0",
+     "1",
+     "1"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "0",
+     "1",
+     "0",
+     "2"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "0",
+     "1",
+     "1",
+     "3"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "1",
+     "0",
+     "0",
+     "4"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "0",
+     "0",
+     "16380"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "0",
+     "1",
+     "16381"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "1",
+     "0",
+     "16382"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "1",
+     "1",
+     "16383"
+    ]
+   ],
+   "notes": [
+    "Every ratio from 1 to 16,383 is allowed; the rows between 4 and 16380 follow the binary count."
+   ]
+  },
+  {
+   "title": "Figure 16. Antibacklash pulse width",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "ABP2",
+    "ABP1",
+    "antibacklash pulse width"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "2.9ns"
+    ],
+    [
+     "0",
+     "1",
+     "NOT ALLOWED"
+    ],
+    [
+     "1",
+     "0",
+     "6.0ns"
+    ],
+    [
+     "1",
+     "1",
+     "2.9ns"
+    ]
+   ],
+   "notes": [
+    "Test mode bits T2, T1 are 00 for normal operation."
+   ]
+  },
+  {
+   "title": "Figure 16. Lock detect precision",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "LDP",
+    "operation"
+   ],
+   "rows": [
+    [
+     "0",
+     "Lock detect sets after three consecutive cycles with phase delay below 15 ns"
+    ],
+    [
+     "1",
+     "Lock detect sets after five consecutive cycles with phase delay below 15 ns"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 17. N counter divide ratio",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "N13",
+    "N12",
+    "N11",
+    "..........",
+    "N3",
+    "N2",
+    "N1",
+    "N counter divide ratio"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "0",
+     "0",
+     "0",
+     "NOT ALLOWED"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "0",
+     "0",
+     "1",
+     "1"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "0",
+     "1",
+     "0",
+     "2"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "..........",
+     "0",
+     "1",
+     "1",
+     "3"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "0",
+     "0",
+     "8188"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "0",
+     "1",
+     "8189"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "1",
+     "0",
+     "8190"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "..........",
+     "1",
+     "1",
+     "1",
+     "8191"
+    ]
+   ],
+   "notes": [
+    "N13 to N1 are the bits B13 to B1 of the latch summary. Ratios from 1 to 8191 are allowed; 0 is not."
+   ]
+  },
+  {
+   "title": "Figure 17. CP gain operation",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "F4 (function latch) fastlock enable",
+    "CP gain",
+    "operation"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Charge pump current setting 1 used permanently"
+    ],
+    [
+     "0",
+     "1",
+     "Charge pump current setting 2 used permanently"
+    ],
+    [
+     "1",
+     "0",
+     "Charge pump current setting 1 used"
+    ],
+    [
+     "1",
+     "1",
+     "Charge pump current switched to setting 2; how long it stays there depends on the fastlock mode"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 18. Function latch: phase detector polarity, counter operation, charge pump output",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "value",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "F2 (phase detector polarity)",
+     "0",
+     "NEGATIVE"
+    ],
+    [
+     "F2 (phase detector polarity)",
+     "1",
+     "POSITIVE"
+    ],
+    [
+     "F1 (counter operation)",
+     "0",
+     "NORMAL"
+    ],
+    [
+     "F1 (counter operation)",
+     "1",
+     "R COUNTER AND N COUNTER HELD IN RESET"
+    ],
+    [
+     "F3 (charge pump output)",
+     "0",
+     "NORMAL"
+    ],
+    [
+     "F3 (charge pump output)",
+     "1",
+     "THREE-STATE"
+    ]
+   ],
+   "notes": [
+    "The initialization latch (Figure 19) uses the same bit tables."
+   ]
+  },
+  {
+   "title": "Figure 18. Fastlock mode",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "F4",
+    "F5",
+    "fastlock mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "X",
+     "FASTLOCK DISABLED"
+    ],
+    [
+     "1",
+     "0",
+     "FASTLOCK MODE 1"
+    ],
+    [
+     "1",
+     "1",
+     "FASTLOCK MODE 2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 18. Timer counter timeout",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "TC4",
+    "TC3",
+    "TC2",
+    "TC1",
+    "timeout (PFD cycles)"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "3"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "1",
+     "7"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "0",
+     "11"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "1",
+     "15"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "19"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "23"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "27"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "31"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "0",
+     "35"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "1",
+     "39"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "0",
+     "43"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "1",
+     "47"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "0",
+     "51"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "1",
+     "55"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "0",
+     "59"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "1",
+     "63"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 18. MUXOUT control",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "M3",
+    "M2",
+    "M1",
+    "output"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "THREE-STATE OUTPUT"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "DIGITAL LOCK DETECT (ACTIVE HIGH)"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "N DIVIDER OUTPUT"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "DVDD"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "R DIVIDER OUTPUT"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "N-CHANNEL OPEN-DRAIN LOCK DETECT"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "SERIAL DATA OUTPUT"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "DGND"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Figure 18. Charge pump current",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "CPI6 / CPI3",
+    "CPI5 / CPI2",
+    "CP14 / CPI1",
+    "ICP (mA), RSET = 3kΩ",
+    "ICP (mA), RSET = 5.1kΩ",
+    "ICP (mA), RSET = 11kΩ"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "0",
+     "1.088",
+     "0.625",
+     "0.294"
+    ],
+    [
+     "0",
+     "0",
+     "1",
+     "2.176",
+     "1.250",
+     "0.588"
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "3.264",
+     "1.875",
+     "0.882"
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "4.352",
+     "2.500",
+     "1.176"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "5.440",
+     "3.125",
+     "1.470"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "6.528",
+     "3.750",
+     "1.764"
+    ],
+    [
+     "1",
+     "1",
+     "0",
+     "7.616",
+     "4.375",
+     "2.058"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "8.704",
+     "5.000",
+     "2.352"
+    ]
+   ],
+   "notes": [
+    "The third column heading reads CP14; it is CPI4.",
+    "CPI3 to CPI1 set current setting 1; CPI6 to CPI4 set current setting 2."
+   ]
+  },
+  {
+   "title": "Figure 18. Power-down mode",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "CE pin",
+    "PD2",
+    "PD1",
+    "mode"
+   ],
+   "rows": [
+    [
+     "0",
+     "X",
+     "X",
+     "ASYNCHRONOUS POWER-DOWN"
+    ],
+    [
+     "1",
+     "X",
+     "0",
+     "NORMAL OPERATION"
+    ],
+    [
+     "1",
+     "0",
+     "1",
+     "ASYNCHRONOUS POWER-DOWN"
+    ],
+    [
+     "1",
+     "1",
+     "1",
+     "SYNCHRONOUS POWER-DOWN"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Figure 5. RF input sensitivity",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Frequency",
+    "unit": "MHz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Power",
+    "unit": "dBm",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       5.2,
+       -20.0
+      ],
+      [
+       14.3,
+       -30.1
+      ],
+      [
+       19.3,
+       -32.0
+      ],
+      [
+       21.0,
+       -32.1
+      ],
+      [
+       25.2,
+       -32.0
+      ],
+      [
+       36.0,
+       -35.8
+      ],
+      [
+       39.3,
+       -36.1
+      ],
+      [
+       45.2,
+       -30.1
+      ],
+      [
+       51.0,
+       -36.1
+      ],
+      [
+       55.2,
+       -35.0
+      ],
+      [
+       60.2,
+       -30.1
+      ],
+      [
+       70.2,
+       -37.0
+      ],
+      [
+       75.2,
+       -35.0
+      ],
+      [
+       79.3,
+       -35.0
+      ],
+      [
+       80.2,
+       -34.8
+      ],
+      [
+       84.3,
+       -33.0
+      ],
+      [
+       88.5,
+       -34.9
+      ],
+      [
+       91.0,
+       -35.0
+      ],
+      [
+       96.0,
+       -33.8
+      ],
+      [
+       100.2,
+       -31.0
+      ],
+      [
+       104.4,
+       -31.0
+      ],
+      [
+       108.5,
+       -32.9
+      ],
+      [
+       111.0,
+       -33.0
+      ],
+      [
+       119.4,
+       -30.1
+      ],
+      [
+       124.4,
+       -33.0
+      ],
+      [
+       129.4,
+       -31.0
+      ],
+      [
+       140.2,
+       -33.0
+      ],
+      [
+       144.4,
+       -31.0
+      ],
+      [
+       149.4,
+       -32.0
+      ],
+      [
+       153.5,
+       -30.1
+      ],
+      [
+       156.0,
+       -30.1
+      ],
+      [
+       161.0,
+       -32.0
+      ],
+      [
+       171.9,
+       -29.9
+      ],
+      [
+       180.2,
+       -31.0
+      ],
+      [
+       185.2,
+       -31.0
+      ],
+      [
+       189.4,
+       -33.0
+      ],
+      [
+       196.9,
+       -30.4
+      ],
+      [
+       200.2,
+       -30.1
+      ],
+      [
+       205.2,
+       -30.1
+      ],
+      [
+       214.4,
+       -27.0
+      ],
+      [
+       223.6,
+       -27.1
+      ],
+      [
+       229.4,
+       -25.8
+      ],
+      [
+       234.4,
+       -30.1
+      ],
+      [
+       241.9,
+       -29.9
+      ],
+      [
+       245.2,
+       -30.1
+      ],
+      [
+       250.2,
+       -32.0
+      ],
+      [
+       255.2,
+       -30.1
+      ],
+      [
+       259.4,
+       -30.1
+      ],
+      [
+       264.4,
+       -27.0
+      ],
+      [
+       268.6,
+       -29.7
+      ],
+      [
+       271.1,
+       -30.1
+      ],
+      [
+       274.4,
+       -30.1
+      ],
+      [
+       280.2,
+       -27.6
+      ],
+      [
+       284.4,
+       -27.0
+      ],
+      [
+       295.2,
+       -27.0
+      ],
+      [
+       300.2,
+       -29.0
+      ],
+      [
+       304.4,
+       -27.0
+      ],
+      [
+       311.9,
+       -27.1
+      ],
+      [
+       315.2,
+       -27.0
+      ],
+      [
+       321.1,
+       -24.9
+      ],
+      [
+       335.3,
+       -25.0
+      ],
+      [
+       344.4,
+       -27.0
+      ],
+      [
+       348.6,
+       -26.0
+      ],
+      [
+       350.3,
+       -26.0
+      ],
+      [
+       353.6,
+       -27.9
+      ],
+      [
+       356.1,
+       -28.0
+      ],
+      [
+       360.3,
+       -27.0
+      ],
+      [
+       365.3,
+       -29.0
+      ],
+      [
+       374.4,
+       -27.0
+      ],
+      [
+       380.3,
+       -27.0
+      ],
+      [
+       385.3,
+       -28.0
+      ],
+      [
+       390.3,
+       -26.9
+      ],
+      [
+       396.9,
+       -27.1
+      ],
+      [
+       400.3,
+       -27.0
+      ],
+      [
+       404.4,
+       -26.0
+      ],
+      [
+       412.8,
+       -27.1
+      ],
+      [
+       418.6,
+       -26.0
+      ],
+      [
+       421.1,
+       -26.0
+      ],
+      [
+       425.3,
+       -28.0
+      ],
+      [
+       431.1,
+       -26.9
+      ],
+      [
+       438.6,
+       -26.9
+      ],
+      [
+       445.3,
+       -29.0
+      ],
+      [
+       450.3,
+       -25.0
+      ],
+      [
+       453.6,
+       -25.2
+      ],
+      [
+       456.1,
+       -26.0
+      ],
+      [
+       463.6,
+       -26.0
+      ],
+      [
+       471.1,
+       -24.9
+      ],
+      [
+       478.6,
+       -25.1
+      ],
+      [
+       484.5,
+       -24.0
+      ],
+      [
+       500.3,
+       -24.0
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       5.2,
+       -9.0
+      ],
+      [
+       9.3,
+       -9.7
+      ],
+      [
+       12.7,
+       -11.9
+      ],
+      [
+       19.3,
+       -21.0
+      ],
+      [
+       34.3,
+       -27.0
+      ],
+      [
+       38.5,
+       -26.9
+      ],
+      [
+       41.0,
+       -27.4
+      ],
+      [
+       46.8,
+       -31.7
+      ],
+      [
+       51.0,
+       -32.0
+      ],
+      [
+       56.0,
+       -31.0
+      ],
+      [
+       58.5,
+       -32.0
+      ],
+      [
+       60.2,
+       -31.9
+      ],
+      [
+       64.3,
+       -30.1
+      ],
+      [
+       70.2,
+       -33.0
+      ],
+      [
+       74.3,
+       -32.0
+      ],
+      [
+       76.0,
+       -32.2
+      ],
+      [
+       79.3,
+       -35.0
+      ],
+      [
+       83.5,
+       -32.2
+      ],
+      [
+       86.0,
+       -32.0
+      ],
+      [
+       88.5,
+       -33.8
+      ],
+      [
+       95.2,
+       -35.0
+      ],
+      [
+       100.2,
+       -35.0
+      ],
+      [
+       105.2,
+       -32.9
+      ],
+      [
+       111.0,
+       -33.2
+      ],
+      [
+       113.5,
+       -34.0
+      ],
+      [
+       116.0,
+       -34.0
+      ],
+      [
+       120.2,
+       -33.0
+      ],
+      [
+       124.4,
+       -35.0
+      ],
+      [
+       129.4,
+       -33.0
+      ],
+      [
+       136.0,
+       -35.1
+      ],
+      [
+       140.2,
+       -35.0
+      ],
+      [
+       144.4,
+       -34.0
+      ],
+      [
+       148.5,
+       -35.0
+      ],
+      [
+       153.5,
+       -34.0
+      ],
+      [
+       160.2,
+       -35.0
+      ],
+      [
+       164.4,
+       -34.9
+      ],
+      [
+       169.4,
+       -36.9
+      ],
+      [
+       173.5,
+       -34.2
+      ],
+      [
+       176.0,
+       -34.0
+      ],
+      [
+       180.2,
+       -35.0
+      ],
+      [
+       189.4,
+       -31.0
+      ],
+      [
+       194.4,
+       -33.0
+      ],
+      [
+       201.9,
+       -31.9
+      ],
+      [
+       205.2,
+       -32.0
+      ],
+      [
+       210.2,
+       -33.0
+      ],
+      [
+       213.5,
+       -33.1
+      ],
+      [
+       219.4,
+       -31.0
+      ],
+      [
+       229.4,
+       -31.1
+      ],
+      [
+       235.2,
+       -29.9
+      ],
+      [
+       249.4,
+       -30.1
+      ],
+      [
+       260.2,
+       -27.9
+      ],
+      [
+       263.6,
+       -27.9
+      ],
+      [
+       266.1,
+       -28.2
+      ],
+      [
+       268.6,
+       -30.8
+      ],
+      [
+       271.1,
+       -31.1
+      ],
+      [
+       274.4,
+       -31.1
+      ],
+      [
+       276.1,
+       -30.8
+      ],
+      [
+       279.4,
+       -29.0
+      ],
+      [
+       283.6,
+       -30.1
+      ],
+      [
+       286.1,
+       -30.1
+      ],
+      [
+       288.6,
+       -29.0
+      ],
+      [
+       291.1,
+       -29.1
+      ],
+      [
+       295.2,
+       -31.0
+      ],
+      [
+       299.4,
+       -28.3
+      ],
+      [
+       301.1,
+       -27.9
+      ],
+      [
+       303.6,
+       -27.9
+      ],
+      [
+       308.6,
+       -32.6
+      ],
+      [
+       311.1,
+       -33.0
+      ],
+      [
+       313.6,
+       -30.4
+      ],
+      [
+       317.7,
+       -29.3
+      ],
+      [
+       321.1,
+       -29.0
+      ],
+      [
+       324.4,
+       -30.1
+      ],
+      [
+       331.9,
+       -27.4
+      ],
+      [
+       336.1,
+       -26.9
+      ],
+      [
+       343.6,
+       -27.1
+      ],
+      [
+       348.6,
+       -26.0
+      ],
+      [
+       353.6,
+       -27.0
+      ],
+      [
+       356.1,
+       -27.0
+      ],
+      [
+       358.6,
+       -26.2
+      ],
+      [
+       360.3,
+       -26.0
+      ],
+      [
+       365.3,
+       -26.0
+      ],
+      [
+       369.4,
+       -25.0
+      ],
+      [
+       374.4,
+       -26.0
+      ],
+      [
+       376.9,
+       -26.0
+      ],
+      [
+       380.3,
+       -26.0
+      ],
+      [
+       385.3,
+       -25.0
+      ],
+      [
+       388.6,
+       -24.9
+      ],
+      [
+       395.3,
+       -27.1
+      ],
+      [
+       398.6,
+       -27.0
+      ],
+      [
+       413.6,
+       -27.1
+      ],
+      [
+       421.1,
+       -25.6
+      ],
+      [
+       429.4,
+       -22.0
+      ],
+      [
+       433.6,
+       -24.7
+      ],
+      [
+       435.3,
+       -25.1
+      ],
+      [
+       438.6,
+       -25.1
+      ],
+      [
+       443.6,
+       -24.2
+      ],
+      [
+       445.3,
+       -24.0
+      ],
+      [
+       450.3,
+       -24.0
+      ],
+      [
+       455.3,
+       -23.1
+      ],
+      [
+       462.0,
+       -24.1
+      ],
+      [
+       467.0,
+       -23.7
+      ],
+      [
+       476.1,
+       -19.9
+      ],
+      [
+       480.3,
+       -21.2
+      ],
+      [
+       495.3,
+       -21.0
+      ],
+      [
+       500.3,
+       -23.1
+      ]
+     ]
+    },
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       5.2,
+       -15.0
+      ],
+      [
+       18.5,
+       -29.9
+      ],
+      [
+       21.0,
+       -30.1
+      ],
+      [
+       25.2,
+       -27.0
+      ],
+      [
+       30.2,
+       -30.1
+      ],
+      [
+       55.2,
+       -30.1
+      ],
+      [
+       58.5,
+       -29.9
+      ],
+      [
+       64.3,
+       -32.0
+      ],
+      [
+       70.2,
+       -32.0
+      ],
+      [
+       75.2,
+       -35.0
+      ],
+      [
+       79.3,
+       -32.0
+      ],
+      [
+       84.3,
+       -32.0
+      ],
+      [
+       86.0,
+       -31.8
+      ],
+      [
+       88.5,
+       -30.1
+      ],
+      [
+       91.0,
+       -30.1
+      ],
+      [
+       95.2,
+       -31.0
+      ],
+      [
+       98.5,
+       -31.1
+      ],
+      [
+       104.4,
+       -29.9
+      ],
+      [
+       108.5,
+       -34.6
+      ],
+      [
+       109.4,
+       -35.0
+      ],
+      [
+       113.5,
+       -35.1
+      ],
+      [
+       116.0,
+       -34.8
+      ],
+      [
+       121.0,
+       -31.7
+      ],
+      [
+       129.4,
+       -30.1
+      ],
+      [
+       135.2,
+       -30.1
+      ],
+      [
+       137.7,
+       -29.6
+      ],
+      [
+       143.5,
+       -28.0
+      ],
+      [
+       149.4,
+       -30.1
+      ],
+      [
+       153.5,
+       -28.1
+      ],
+      [
+       156.0,
+       -28.1
+      ],
+      [
+       161.0,
+       -30.1
+      ],
+      [
+       174.4,
+       -27.0
+      ],
+      [
+       180.2,
+       -27.0
+      ],
+      [
+       185.2,
+       -28.0
+      ],
+      [
+       190.2,
+       -26.9
+      ],
+      [
+       198.5,
+       -26.9
+      ],
+      [
+       205.2,
+       -28.0
+      ],
+      [
+       208.5,
+       -28.1
+      ],
+      [
+       215.2,
+       -26.9
+      ],
+      [
+       229.4,
+       -27.1
+      ],
+      [
+       235.2,
+       -25.8
+      ],
+      [
+       249.4,
+       -26.0
+      ],
+      [
+       256.1,
+       -24.9
+      ],
+      [
+       299.4,
+       -25.1
+      ],
+      [
+       305.2,
+       -23.9
+      ],
+      [
+       328.6,
+       -24.1
+      ],
+      [
+       333.6,
+       -23.1
+      ],
+      [
+       336.1,
+       -23.1
+      ],
+      [
+       340.2,
+       -24.0
+      ],
+      [
+       345.3,
+       -22.9
+      ],
+      [
+       360.3,
+       -23.1
+      ],
+      [
+       364.4,
+       -22.0
+      ],
+      [
+       370.3,
+       -23.1
+      ],
+      [
+       376.1,
+       -21.9
+      ],
+      [
+       385.3,
+       -22.0
+      ],
+      [
+       396.9,
+       -19.4
+      ],
+      [
+       401.9,
+       -18.8
+      ],
+      [
+       408.6,
+       -19.4
+      ],
+      [
+       415.3,
+       -21.0
+      ],
+      [
+       421.1,
+       -19.9
+      ],
+      [
+       449.4,
+       -20.1
+      ],
+      [
+       456.1,
+       -18.8
+      ],
+      [
+       463.6,
+       -19.0
+      ],
+      [
+       471.1,
+       -17.9
+      ],
+      [
+       478.6,
+       -17.9
+      ],
+      [
+       484.5,
+       -19.0
+      ],
+      [
+       488.6,
+       -17.1
+      ],
+      [
+       491.1,
+       -16.9
+      ],
+      [
+       495.3,
+       -18.0
+      ],
+      [
+       500.3,
+       -16.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 6. RF input sensitivity, low frequency",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "Frequency",
+    "unit": "MHz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Power",
+    "unit": "dBm",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       1.0,
+       -1.0
+      ],
+      [
+       1.5,
+       -7.0
+      ],
+      [
+       2.0,
+       -10.0
+      ],
+      [
+       2.5,
+       -12.0
+      ],
+      [
+       3.0,
+       -16.0
+      ],
+      [
+       3.5,
+       -18.0
+      ],
+      [
+       4.0,
+       -14.0
+      ],
+      [
+       4.5,
+       -18.0
+      ],
+      [
+       5.5,
+       -18.0
+      ],
+      [
+       6.0,
+       -17.0
+      ],
+      [
+       7.5,
+       -20.0
+      ],
+      [
+       10.0,
+       -20.0
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       1.0,
+       -3.0
+      ],
+      [
+       2.0,
+       -11.0
+      ],
+      [
+       2.5,
+       -12.0
+      ],
+      [
+       3.0,
+       -12.0
+      ],
+      [
+       3.5,
+       -13.0
+      ],
+      [
+       4.0,
+       -16.0
+      ],
+      [
+       4.5,
+       -18.0
+      ],
+      [
+       5.0,
+       -19.0
+      ],
+      [
+       5.5,
+       -19.0
+      ],
+      [
+       6.0,
+       -18.0
+      ],
+      [
+       6.5,
+       -18.0
+      ],
+      [
+       7.0,
+       -20.0
+      ],
+      [
+       10.0,
+       -20.0
+      ]
+     ]
+    },
+    {
+     "label": "+85 °C",
+     "points": [
+      [
+       1.0,
+       -2.0
+      ],
+      [
+       1.5,
+       -9.0
+      ],
+      [
+       2.0,
+       -12.0
+      ],
+      [
+       2.5,
+       -14.0
+      ],
+      [
+       3.5,
+       -14.0
+      ],
+      [
+       4.0,
+       -18.0
+      ],
+      [
+       4.5,
+       -17.0
+      ],
+      [
+       5.0,
+       -19.0
+      ],
+      [
+       5.5,
+       -19.0
+      ],
+      [
+       6.0,
+       -20.0
+      ],
+      [
+       6.5,
+       -19.0
+      ],
+      [
+       7.0,
+       -20.0
+      ],
+      [
+       10.0,
+       -20.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 7. Integrated phase noise (400 MHz, 1 MHz, 50 kHz)",
+   "page": 9,
+   "conditions": "rms noise = 0.07 degrees",
+   "x": {
+    "label": "Frequency offset",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Phase noise",
+    "unit": "dBc/Hz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Phase noise",
+     "points": [
+      [
+       1000.0,
+       -105.3
+      ],
+      [
+       1240.0,
+       -106.9
+      ],
+      [
+       1430.0,
+       -107.5
+      ],
+      [
+       1650.0,
+       -108.4
+      ],
+      [
+       1910.0,
+       -109.3
+      ],
+      [
+       2210.0,
+       -109.3
+      ],
+      [
+       2550.0,
+       -110.6
+      ],
+      [
+       2940.0,
+       -110.6
+      ],
+      [
+       3400.0,
+       -110.1
+      ],
+      [
+       3920.0,
+       -111.1
+      ],
+      [
+       4530.0,
+       -110.3
+      ],
+      [
+       5230.0,
+       -111.2
+      ],
+      [
+       6040.0,
+       -110.3
+      ],
+      [
+       6980.0,
+       -110.6
+      ],
+      [
+       8060.0,
+       -109.8
+      ],
+      [
+       9310.0,
+       -109.7
+      ],
+      [
+       10700.0,
+       -109.3
+      ],
+      [
+       12400.0,
+       -108.9
+      ],
+      [
+       14300.0,
+       -108.9
+      ],
+      [
+       16500.0,
+       -107.9
+      ],
+      [
+       19100.0,
+       -107.5
+      ],
+      [
+       22100.0,
+       -106.5
+      ],
+      [
+       25500.0,
+       -105.9
+      ],
+      [
+       29400.0,
+       -105.1
+      ],
+      [
+       34000.0,
+       -104.7
+      ],
+      [
+       39200.0,
+       -104.7
+      ],
+      [
+       45300.0,
+       -107.5
+      ],
+      [
+       52300.0,
+       -110.6
+      ],
+      [
+       60400.0,
+       -113.4
+      ],
+      [
+       69800.0,
+       -115.9
+      ],
+      [
+       80600.0,
+       -118.9
+      ],
+      [
+       93100.0,
+       -120.9
+      ],
+      [
+       107000.0,
+       -122.8
+      ],
+      [
+       124000.0,
+       -126.4
+      ],
+      [
+       143000.0,
+       -128.3
+      ],
+      [
+       165000.0,
+       -131.2
+      ],
+      [
+       191000.0,
+       -133.4
+      ],
+      [
+       221000.0,
+       -136.4
+      ],
+      [
+       255000.0,
+       -138.6
+      ],
+      [
+       294000.0,
+       -140.4
+      ],
+      [
+       340000.0,
+       -142.2
+      ],
+      [
+       392000.0,
+       -143.8
+      ],
+      [
+       453000.0,
+       -145.5
+      ],
+      [
+       523000.0,
+       -146.6
+      ],
+      [
+       604000.0,
+       -147.8
+      ],
+      [
+       698000.0,
+       -148.8
+      ],
+      [
+       806000.0,
+       -149.7
+      ],
+      [
+       931000.0,
+       -150.2
+      ],
+      [
+       1070000.0,
+       -151.1
+      ],
+      [
+       1240000.0,
+       -151.9
+      ],
+      [
+       1430000.0,
+       -152.4
+      ],
+      [
+       1650000.0,
+       -152.4
+      ],
+      [
+       1910000.0,
+       -152.4
+      ],
+      [
+       2210000.0,
+       -152.8
+      ],
+      [
+       2550000.0,
+       -152.9
+      ],
+      [
+       2940000.0,
+       -153.0
+      ],
+      [
+       3400000.0,
+       -153.0
+      ],
+      [
+       3920000.0,
+       -153.0
+      ],
+      [
+       4530000.0,
+       -152.8
+      ],
+      [
+       5230000.0,
+       -153.0
+      ],
+      [
+       6040000.0,
+       -152.8
+      ],
+      [
+       6980000.0,
+       -153.0
+      ],
+      [
+       8060000.0,
+       -153.8
+      ],
+      [
+       10000000.0,
+       -153.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Figure 8. Phase noise (referred to CP output) vs. PFD frequency",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "PFD frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Phase noise",
+    "unit": "dBc/Hz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Phase noise",
+     "points": [
+      [
+       100000,
+       -172.81
+      ],
+      [
+       10000000,
+       -154.77
+      ],
+      [
+       13590000,
+       -153.67
+      ],
+      [
+       34580000,
+       -149.77
+      ],
+      [
+       47010000,
+       -148.67
+      ],
+      [
+       197000000,
+       -143.05
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "Misprint: the top four y-axis gridlines are −150, −145, −140 and −135 dBc/Hz, 5 dB apart like the rest."
+   ]
+  },
+  {
+   "title": "Figure 9. Reference spurs (400 MHz, 1 MHz, 7 kHz)",
+   "page": 9,
+   "conditions": "Centre 399.995 MHz, span 2.2 MHz, REF -4 dBm, 10 dB/div, ATTN 10 dB, RBW 20 kHz, VBW 20 kHz, sweep 21 ms (601 points); marker 1 at 1.000 MHz offset reads -94.5 dBc",
+   "x": {
+    "label": "Frequency",
+    "unit": "MHz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Level",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Spectrum",
+     "points": [
+      [
+       398.906,
+       -99.1
+      ],
+      [
+       398.928,
+       -99.1
+      ],
+      [
+       398.95,
+       -99.2
+      ],
+      [
+       398.972,
+       -98.8
+      ],
+      [
+       398.994,
+       -95.0
+      ],
+      [
+       399.016,
+       -96.8
+      ],
+      [
+       399.038,
+       -99.1
+      ],
+      [
+       399.06,
+       -99.2
+      ],
+      [
+       399.082,
+       -99.1
+      ],
+      [
+       399.104,
+       -99.0
+      ],
+      [
+       399.126,
+       -99.7
+      ],
+      [
+       399.148,
+       -99.1
+      ],
+      [
+       399.17,
+       -98.5
+      ],
+      [
+       399.192,
+       -99.1
+      ],
+      [
+       399.214,
+       -99.0
+      ],
+      [
+       399.236,
+       -99.3
+      ],
+      [
+       399.258,
+       -98.9
+      ],
+      [
+       399.28,
+       -98.7
+      ],
+      [
+       399.302,
+       -98.5
+      ],
+      [
+       399.324,
+       -98.5
+      ],
+      [
+       399.346,
+       -98.5
+      ],
+      [
+       399.368,
+       -98.3
+      ],
+      [
+       399.39,
+       -98.3
+      ],
+      [
+       399.412,
+       -98.3
+      ],
+      [
+       399.434,
+       -98.2
+      ],
+      [
+       399.456,
+       -97.7
+      ],
+      [
+       399.478,
+       -97.9
+      ],
+      [
+       399.5,
+       -97.6
+      ],
+      [
+       399.522,
+       -97.6
+      ],
+      [
+       399.544,
+       -97.4
+      ],
+      [
+       399.566,
+       -97.1
+      ],
+      [
+       399.588,
+       -96.8
+      ],
+      [
+       399.61,
+       -96.5
+      ],
+      [
+       399.632,
+       -95.9
+      ],
+      [
+       399.654,
+       -95.8
+      ],
+      [
+       399.676,
+       -95.1
+      ],
+      [
+       399.698,
+       -94.4
+      ],
+      [
+       399.72,
+       -94.2
+      ],
+      [
+       399.742,
+       -93.4
+      ],
+      [
+       399.764,
+       -92.0
+      ],
+      [
+       399.786,
+       -91.2
+      ],
+      [
+       399.808,
+       -89.1
+      ],
+      [
+       399.83,
+       -87.9
+      ],
+      [
+       399.852,
+       -85.9
+      ],
+      [
+       399.874,
+       -82.0
+      ],
+      [
+       399.896,
+       -78.5
+      ],
+      [
+       399.918,
+       -71.0
+      ],
+      [
+       399.94,
+       -62.2
+      ],
+      [
+       399.962,
+       -20.3
+      ],
+      [
+       399.984,
+       -10.9
+      ],
+      [
+       400.006,
+       -6.9
+      ],
+      [
+       400.028,
+       -14.2
+      ],
+      [
+       400.05,
+       -51.7
+      ],
+      [
+       400.072,
+       -71.3
+      ],
+      [
+       400.094,
+       -76.0
+      ],
+      [
+       400.116,
+       -81.1
+      ],
+      [
+       400.138,
+       -84.4
+      ],
+      [
+       400.16,
+       -87.0
+      ],
+      [
+       400.182,
+       -88.7
+      ],
+      [
+       400.204,
+       -90.8
+      ],
+      [
+       400.226,
+       -91.6
+      ],
+      [
+       400.248,
+       -92.5
+      ],
+      [
+       400.27,
+       -93.5
+      ],
+      [
+       400.292,
+       -94.8
+      ],
+      [
+       400.314,
+       -95.4
+      ],
+      [
+       400.336,
+       -95.4
+      ],
+      [
+       400.358,
+       -95.9
+      ],
+      [
+       400.38,
+       -96.8
+      ],
+      [
+       400.402,
+       -96.7
+      ],
+      [
+       400.424,
+       -96.7
+      ],
+      [
+       400.446,
+       -97.1
+      ],
+      [
+       400.468,
+       -97.4
+      ],
+      [
+       400.49,
+       -97.6
+      ],
+      [
+       400.512,
+       -97.6
+      ],
+      [
+       400.534,
+       -98.1
+      ],
+      [
+       400.556,
+       -97.9
+      ],
+      [
+       400.578,
+       -98.5
+      ],
+      [
+       400.6,
+       -98.2
+      ],
+      [
+       400.622,
+       -99.1
+      ],
+      [
+       400.644,
+       -98.5
+      ],
+      [
+       400.666,
+       -98.3
+      ],
+      [
+       400.688,
+       -98.5
+      ],
+      [
+       400.71,
+       -98.9
+      ],
+      [
+       400.732,
+       -98.8
+      ],
+      [
+       400.754,
+       -99.0
+      ],
+      [
+       400.776,
+       -99.1
+      ],
+      [
+       400.798,
+       -98.8
+      ],
+      [
+       400.82,
+       -99.3
+      ],
+      [
+       400.842,
+       -99.1
+      ],
+      [
+       400.864,
+       -99.1
+      ],
+      [
+       400.886,
+       -99.7
+      ],
+      [
+       400.908,
+       -99.2
+      ],
+      [
+       400.93,
+       -99.2
+      ],
+      [
+       400.952,
+       -99.1
+      ],
+      [
+       400.974,
+       -99.1
+      ],
+      [
+       400.996,
+       -99.7
+      ],
+      [
+       401.018,
+       -99.1
+      ],
+      [
+       401.04,
+       -99.1
+      ],
+      [
+       401.062,
+       -99.3
+      ],
+      [
+       401.084,
+       -99.7
+      ],
+      [
+       401.106,
+       -99.8
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "pfd",
+   "title": "Figure 21. ADF4002 as a PFD",
+   "page": 19,
+   "description": "With R and N both set to 1 the ADF4002 works as a bare phase detector and charge pump. The reference at REFIN equals the PFD frequency. CP drives a loop filter whose output tunes a VCO or VCXO supplied from VP. The oscillator output goes through 100 pF and an 18 Ω resistive three-way splitter: one arm, through a second 100 pF, is RFOUT; the other feeds an external prescaler that divides the oscillator down to the PFD frequency and returns it to RFINA through 100 pF, terminated in 51 Ω. RFINB is bypassed by 100 pF; RSET is 10 kΩ.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADF4002",
+     "note": "TSSOP pin numbers"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "Loop filter"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "VCO or VCXO",
+     "external": true
+    },
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "External prescaler",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 pF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "51 Ω"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 pF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "100 pF"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "18 Ω"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "18 Ω"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "18 Ω"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "100 pF"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VP"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "REFIN"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "CE"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "RFOUT"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "VCC (prescaler supply)"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "CLK"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "DATA"
+    },
+    {
+     "ref": "J9",
+     "type": "terminal",
+     "value": "LE"
+    },
+    {
+     "ref": "J10",
+     "type": "terminal",
+     "value": "MUXOUT"
+    }
+   ],
+   "notes": [
+    "CLK, DATA, LE and MUXOUT go to the serial interface; supply decoupling is not specified.",
+    "The loop filter is a block with no component values given."
+   ]
+  },
+  {
+   "id": "encode-clock",
+   "title": "Figure 20. ADF4002 as encode clock",
+   "page": 19,
+   "description": "A clean 77.76 MHz encode clock for an AD9215-80 12-bit ADC (up to 80 MHz encode). A 19.44 MHz TCXO is the reference; R = 1 and N = 4, the smallest multiplication, keep the ADF4002's noise contribution low. CP (pin 2) drives a loop filter that tunes a narrow-band 77.76 MHz VCXO, whose output returns to the RF input and clocks the ADC. The loop bandwidth is placed where the VCXO noise and the ADF4002 in-band noise cross. A 500 kHz, 1.8 V p-p generator through a filter is the ADC test signal; a PC sets the ADF4002 over SPI and reads the ADC FIFO board over USB. Measured rms jitter is under 1.2 ps, against the 6 ps rms the converter's 59 dB SNR allows.",
+   "parts": [
+    {
+     "ref": "Y1",
+     "type": "other",
+     "value": "TCXO 19.44 MHz"
+    },
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADF4002",
+     "note": "R = 1, N = 4"
+    },
+    {
+     "ref": "FL1",
+     "type": "other",
+     "value": "Loop filter"
+    },
+    {
+     "ref": "Y2",
+     "type": "other",
+     "value": "VCXO 77.76 MHz"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "AD9215-80",
+     "external": true
+    },
+    {
+     "ref": "G1",
+     "type": "source",
+     "value": "Signal generator, 500 kHz, 1.8 V p-p"
+    },
+    {
+     "ref": "FL2",
+     "type": "other",
+     "value": "Filter"
+    },
+    {
+     "ref": "U3",
+     "type": "other",
+     "value": "ADC FIFO evaluation board"
+    },
+    {
+     "ref": "U4",
+     "type": "other",
+     "value": "PC"
+    }
+   ],
+   "notes": [
+    "The SPI bus from the PC carries CLK, DATA and LE. Supplies, grounds, decoupling and the RFINB bypass are not specified.",
+    "The loop filter was designed with ADIsimPLL version 3.0."
+   ]
+  },
+  {
+   "id": "aduc812-interface",
+   "title": "Figure 22. ADuC812 to ADF4002 interface",
+   "page": 20,
+   "description": "An ADuC812 (8051 core) in SPI master mode with CPHA = 0 programs the ADF4002: SCLOCK to CLK, MOSI to DATA, and port pins for LE, CE and reading MUXOUT set to lock detect. LE is taken low, three bytes make each 24-bit word, and LE is taken high after the third. At the ADuC812's 4 MHz SPI clock the output frequency can change at up to 166 kHz. Any 8051-based controller can be wired the same way.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADF4002"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "ADuC812",
+     "external": true
+    }
+   ],
+   "notes": [
+    "P_LE, P_CE and P_LD are I/O port lines of the ADuC812."
+   ]
+  },
+  {
+   "id": "adsp2181-interface",
+   "title": "Figure 23. ADSP-2181 to ADF4002 interface",
+   "page": 20,
+   "description": "An ADSP-2181 DSP drives the serial port into the ADF4002: SCLK to CLK, DT to DATA, TFS to LE, with I/O flags for CE and for reading MUXOUT as lock detect. Autobuffered transmit with alternate framing sends a whole block of words before an interrupt; the word length is eight bits, each 24-bit latch takes three stored bytes, and a write to the transmit register starts the transfer.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADF4002"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "ADSP-2181",
+     "external": true
+    }
+   ],
+   "notes": [
+    "FLAG_CE and FLAG_LD are I/O flag lines of the ADSP-2181."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Maximum charge pump current",
+   "expr": "ICP MAX = 25.5 / RSET",
+   "where": {
+    "ICP MAX": "largest charge pump current, mA",
+    "RSET": "resistor from RSET to CPGND, kΩ"
+   },
+   "note": "RSET = 5.1 kΩ gives 5 mA.",
+   "page": 8
+  },
+  {
+   "name": "VCO frequency",
+   "expr": "fVCO = N × fREFIN / R",
+   "where": {
+    "fVCO": "output frequency of the external VCO",
+    "N": "N counter divide ratio, 1 to 8191",
+    "R": "reference counter divide ratio, 1 to 16383",
+    "fREFIN": "reference oscillator frequency"
+   },
+   "note": "Output frequencies are spaced by fREFIN / R.",
+   "page": 10
+  },
+  {
+   "name": "Supply current",
+   "expr": "IDD = 2.35 + 0.0046 × REFIN + 0.0062 × RF",
+   "where": {
+    "IDD": "AIDD + DIDD, mA",
+    "REFIN": "reference frequency, MHz",
+    "RF": "RF input frequency, MHz"
+   },
+   "note": "At 25°C and 3.0 V.",
+   "page": 6
+  },
+  {
+   "name": "Normalized phase noise floor",
+   "expr": "PNSYNTH = PNTOT − 10 logFPFD − 20 logN",
+   "where": {
+    "PNSYNTH": "normalized floor, -222 dBc/Hz typ",
+    "PNTOT": "total in-band phase noise measured at the VCO, dBc/Hz",
+    "FPFD": "PFD frequency, Hz",
+    "N": "N divider value"
+   },
+   "note": "",
+   "page": 6
+  },
+  {
+   "name": "Flicker noise",
+   "expr": "PN = PN1_f + 20 log(fRF / 1 GHz) + 10 log(10 kHz / f)",
+   "where": {
+    "PN": "1/f phase noise contribution, dBc/Hz",
+    "PN1_f": "normalized 1/f noise, -119 dBc/Hz typ",
+    "f": "offset frequency",
+    "fRF": "RF frequency"
+   },
+   "note": "",
+   "page": 6
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Reference input",
+   "page": 10,
+   "text": "REFIN feeds a buffer through switches SW1 and SW2, normally closed, with a 100 kΩ bias resistor; SW3 is normally open. At power-down SW3 closes and SW1 and SW2 open, so the pin presents no load while the part is off (Figure 10)."
+  },
+  {
+   "topic": "RF input",
+   "page": 10,
+   "text": "RFINA and RFINB enter a differential stage, each biased at 1.6 V from a bias generator through a 500 Ω resistor (Figure 11). A two-stage limiting amplifier follows it and makes the CML clock that the N counter needs."
+  },
+  {
+   "topic": "N and R counters",
+   "page": 10,
+   "text": "The 13-bit N counter (CMOS) divides the RF input by 1 to 8191 in the feedback path. The 14-bit R counter divides the reference by 1 to 16,383 to make the PFD reference. Output frequencies can be placed at steps of fREFIN / R."
+  },
+  {
+   "topic": "Phase frequency detector and charge pump",
+   "page": 10,
+   "text": "The PFD compares the R and N counter outputs and drives the charge pump up or down in proportion to their phase and frequency difference (Figure 13). A programmable delay sets an antibacklash pulse that removes the dead zone and lowers phase noise and reference spurs; ABP2 and ABP1 choose 2.9 ns or 6.0 ns. The shortest antibacklash width is not recommended. The PFD runs up to 104 MHz. With R and N at 1 the part is a standalone PFD and charge pump, for clock cleaning or a low-noise LO."
+  },
+  {
+   "topic": "MUXOUT and lock detect",
+   "page": 11,
+   "text": "M3 to M1 in the function latch choose what MUXOUT shows: three-state, digital lock detect, N or R divider output, DVDD, open-drain analog lock detect, serial data out, or DGND. Digital lock detect is active high. With LDP = 0 it sets after three PD cycles in a row with phase error under 15 ns, with LDP = 1 after five; it clears when any later cycle has error over 25 ns. Above 10 MHz PFD frequency analog lock detect is the more accurate, its pulses being narrower. Analog lock detect is an N-channel open drain that wants a pull-up of about 10 kΩ; in lock it sits high with short low-going pulses."
+  },
+  {
+   "topic": "Input shift register and latches",
+   "page": 11,
+   "text": "Data enters a 24-bit shift register MSB first, one bit per rising CLK edge. When LE rises, the word moves into one of four latches chosen by its two LSBs, C2 and C1 (DB1, DB0): 00 R counter, 01 N counter, 10 function latch, 11 initialization latch."
+  },
+  {
+   "topic": "Interfacing",
+   "page": 19,
+   "text": "CLK, DATA and LE form an SPI-compatible write-only port. The serial clock may run at up to 20 MHz, so a 24-bit word can be written every 1.2 µs, an update rate of 833 kHz."
+  },
+  {
+   "topic": "Counter reset",
+   "page": 17,
+   "text": "F1 (DB2) at 1 holds the R and N counters in reset; it is 0 in normal operation. After power-up F1 must be written 0, and the N counter then counts in close alignment with the R counter, within one prescaler cycle."
+  },
+  {
+   "topic": "Power-down",
+   "page": 17,
+   "text": "CE low disables the part at once whatever PD2 and PD1 hold. With CE high, PD1 = 1 and PD2 = 0 power the part down as soon as PD1 is latched (asynchronous); PD1 = 1 and PD2 = 1 wait for the next charge pump event so the frequency does not jump (synchronous). In any power-down the DC current paths are cut, the R, N and timeout counters go to their load state, the charge pump goes three-state, digital lock detect resets, RFIN is debiased and the reference buffer is switched off. The input register still loads and latches data. Supply current in power-down is 1 µA typ."
+  },
+  {
+   "topic": "Fastlock",
+   "page": 17,
+   "text": "Two charge pump currents can be programmed: current setting 1 (CPI3 to CPI1) for a settled loop and current setting 2 (CPI6 to CPI4) while the frequency is changing. F4 (DB9) enables fastlock and F5 (DB10) picks the mode. In mode 1 writing CP gain = 1 in the N counter latch switches to setting 2, and writing CP gain = 0 switches back. In mode 2 the switch back is timed: after the TC4 to TC1 timeout (3 to 63 PFD cycles) the CP gain bit clears itself and setting 1 returns. The timer counter works only in mode 2. A typical choice is 2.5 mA for setting 1 and 5 mA for setting 2; a new N written with CP gain = 1 then locks on the higher current for the programmed time."
+  },
+  {
+   "topic": "PD polarity and CP three-state",
+   "page": 18,
+   "text": "F2 sets the phase detector polarity, negative at 0 and positive at 1. F3 at 1 puts the CP output in three-state; at 0 CP is active."
+  },
+  {
+   "topic": "Initialization latch",
+   "page": 18,
+   "text": "Written with C2, C1 = 1, 1, it loads the same bits as the function latch and also sends an internal reset pulse to the R, N and timeout counters and three-states the charge pump, so the N counter is at its load point when N data arrives and counting starts in close phase alignment. The reset pulse leaves the prescaler band gap and the reference buffer running. If the latch selects synchronous power-down, the pulse also triggers it. The first N counter load after initialization repeats the reset pulse; later N loads do not."
+  },
+  {
+   "topic": "Programming after power-up: initialization latch method",
+   "page": 18,
+   "text": "1. Apply VDD. 2. Write the initialization latch (11) with F1 = 0. 3. Write the function latch (10) with F1 = 0. 4. Write the R counter latch (00). 5. Write the N counter latch (01). Four writes are needed after first power before the output becomes active."
+  },
+  {
+   "topic": "Programming after power-up: CE pin method",
+   "page": 18,
+   "text": "1. Apply VDD. 2. Take CE low; the part powers down at once. 3. Write the function latch (10). 4. Write the R counter latch (00). 5. Write the N counter latch (01). 6. Take CE high; the R and N counters start in close alignment. Allow up to 1 µs after CE rises for the prescaler band gap and the oscillator input buffer bias to settle. Once programmed after VDD is applied, the part keeps its registers through CE power-down cycles, so CE can be used to wake it to check channel activity without reprogramming."
+  },
+  {
+   "topic": "Programming after power-up: counter reset method",
+   "page": 18,
+   "text": "1. Apply VDD. 2. Write the function latch (10) with F1 = 1, holding the counters in reset. 3. Write the R counter latch (00). 4. Write the N counter latch (01). 5. Write the function latch (10) with F1 = 0. This gives the same alignment as the initialization method with direct control of the reset; while F1 = 1 the counters wait at their load point with CP in three-state, and no synchronous power-down follows."
+  },
+  {
+   "topic": "Loop filter bandwidth for low jitter",
+   "page": 19,
+   "text": "For lowest rms jitter of a VCXO-based clock, a bandwidth that is too narrow lets VCXO noise dominate close to the carrier and one that is too wide lets the ADF4002 noise dominate where the VCXO is quieter; the optimum is where the two noise curves cross."
+  },
+  {
+   "topic": "LFCSP PCB layout",
+   "page": 20,
+   "text": "Make each PCB pad 0.1 mm longer and 0.05 mm wider than the package land, with the land centred on it. The PCB thermal pad is at least as large as the exposed pad, with at least 0.25 mm clearance to the inner edges of the signal pads. Thermal vias, if used, sit on a 1.2 mm grid in the thermal pad, 0.3 mm to 0.33 mm in diameter, barrels plated with 1 oz copper to plug them. Connect the thermal pad to AGND."
+  }
+ ],
+ "packages": [
+  {
+   "name": "16-lead TSSOP (RU-16)",
+   "page": 21,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "D",
+     "body length",
+     "4.90",
+     "5.00",
+     "5.10"
+    ],
+    [
+     "E1",
+     "body width",
+     "4.30",
+     "4.40",
+     "4.50"
+    ],
+    [
+     "E",
+     "width across leads",
+     "",
+     "6.40 BSC",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.20"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.19",
+     "",
+     "0.30"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.09",
+     "",
+     "0.20"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.45",
+     "0.60",
+     "0.75"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.10"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-153-AB."
+   ]
+  },
+  {
+   "name": "20-lead LFCSP 4 mm × 4 mm, 0.75 mm high (CP-20-6)",
+   "page": 21,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "D, E",
+     "body size, square",
+     "3.90",
+     "4.00",
+     "4.10"
+    ],
+    [
+     "A",
+     "overall height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "A1",
+     "standoff",
+     "",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "A3",
+     "lead frame thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.18",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "e",
+     "terminal pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.55",
+     "0.60",
+     "0.65"
+    ],
+    [
+     "D2, E2",
+     "exposed pad, square",
+     "2.00",
+     "2.10",
+     "2.30"
+    ],
+    [
+     "K",
+     "terminal to exposed pad",
+     "0.20",
+     "",
+     ""
+    ],
+    [
+     "",
+     "coplanarity",
+     "",
+     "",
+     "0.08"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-220-WGGD-1. A pin 1 indicator is marked on the top and bottom faces."
+   ]
+  }
+ ]
+}

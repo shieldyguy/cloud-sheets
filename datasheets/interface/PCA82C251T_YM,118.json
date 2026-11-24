@@ -1,0 +1,1468 @@
+{
+ "sheet": 1,
+ "name": "PCA82C251T_YM,118",
+ "kind": "interface",
+ "manufacturer": "NXP Semiconductors",
+ "title": "CAN transceiver for 24 V systems",
+ "source": {
+  "revision": "Rev. 04, 25 August 2011",
+  "pages": 17
+ },
+ "summary": "A single-channel high-speed CAN transceiver that links a CAN protocol controller to a two-wire differential bus, built for ISO 11898-24 V truck and bus networks up to 1 MBd. Its bus pins withstand −36 V to +36 V and survive shorts to a 24 V battery or to ground; the driver is current limited, and the limit drops when the junction runs hot. One pin, Rs, picks high-speed, slope-controlled or low-current standby operation.",
+ "key_figures": [
+  [
+   "Supply",
+   "4.5 V to 5.5 V"
+  ],
+  [
+   "Data rate",
+   "1 MBd min (maximum transmission speed)"
+  ],
+  [
+   "Bus pin voltage",
+   "−36 V to +36 V"
+  ],
+  [
+   "Differential bus output",
+   "1.5 V to 3.0 V dominant (RL = 60 Ω)"
+  ],
+  [
+   "Propagation delay",
+   "50 ns max, TXD to bus active, high-speed mode"
+  ],
+  [
+   "Standby current",
+   "275 µA max"
+  ],
+  [
+   "Supply current, dominant",
+   "85 mA max at VCC = 5.5 V"
+  ],
+  [
+   "Nodes per bus",
+   "110 or more"
+  ],
+  [
+   "Ambient temperature",
+   "−40 °C to +125 °C"
+  ],
+  [
+   "Package",
+   "SO8 (SOT96-1)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "type number",
+   "package",
+   "description",
+   "version"
+  ],
+  "rows": [
+   [
+    "PCA82C251T",
+    "SO8",
+    "plastic small outline package; 8 leads; body width 3.9 mm",
+    "SOT96-1"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "SO8",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "TXD",
+     "type": "digital in",
+     "function": "Data from the CAN controller. LOW drives the bus dominant; HIGH or left open leaves it recessive."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; every voltage is measured from this pin."
+    },
+    {
+     "pin": "3",
+     "name": "VCC",
+     "type": "power in",
+     "function": "5 V supply, 4.5 V to 5.5 V."
+    },
+    {
+     "pin": "4",
+     "name": "RXD",
+     "type": "digital out",
+     "function": "Received bus data to the CAN controller: LOW while the bus is dominant, HIGH while recessive."
+    },
+    {
+     "pin": "5",
+     "name": "Vref",
+     "type": "analog out",
+     "function": "Reference voltage near VCC/2 (0.45VCC to 0.55VCC with Rs at 1 V)."
+    },
+    {
+     "pin": "6",
+     "name": "CANL",
+     "type": "bus i/o",
+     "function": "Low line of the differential CAN bus."
+    },
+    {
+     "pin": "7",
+     "name": "CANH",
+     "type": "bus i/o",
+     "function": "High line of the differential CAN bus."
+    },
+    {
+     "pin": "8",
+     "name": "Rs",
+     "type": "analog in",
+     "function": "Mode and slope input. Tied to ground: high-speed. A resistor to ground: slope control, edge rate set by the current drawn out of the pin. Pulled HIGH above 0.75VCC: standby."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Quick reference data",
+   "page": 1,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "supply voltage",
+     "",
+     "4.5",
+     "5.5",
+     "V"
+    ],
+    [
+     "ICC",
+     "supply current",
+     "Standby mode",
+     "-",
+     "275",
+     "µA"
+    ],
+    [
+     "1/tbit",
+     "maximum transmission speed",
+     "non-return-to-zero",
+     "1",
+     "-",
+     "MBd"
+    ],
+    [
+     "VCAN",
+     "CANH, CANL input/output voltage",
+     "",
+     "−36",
+     "+36",
+     "V"
+    ],
+    [
+     "Vdiff",
+     "differential bus voltage",
+     "",
+     "1.5",
+     "3.0",
+     "V"
+    ],
+    [
+     "tPD",
+     "propagation delay",
+     "High-speed mode",
+     "-",
+     "50",
+     "ns"
+    ],
+    [
+     "Tamb",
+     "ambient temperature",
+     "",
+     "−40",
+     "+125",
+     "°C"
+    ]
+   ]
+  },
+  {
+   "title": "Truth table",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "supply",
+    "TXD",
+    "CANH",
+    "CANL",
+    "bus state",
+    "RXD"
+   ],
+   "rows": [
+    [
+     "4.5 V to 5.5 V",
+     "0",
+     "HIGH",
+     "LOW",
+     "dominant",
+     "0"
+    ],
+    [
+     "4.5 V to 5.5 V",
+     "1 (or floating)",
+     "floating",
+     "floating",
+     "recessive",
+     "1[1]"
+    ],
+    [
+     "4.5 V < VCC < 5.5 V",
+     "X[2]",
+     "floating if VRs > 0.75VCC",
+     "floating if VRs > 0.75VCC",
+     "floating",
+     "X[1]"
+    ],
+    [
+     "0 V < VCC < 4.5 V",
+     "floating",
+     "floating",
+     "floating",
+     "floating",
+     "X[2]"
+    ]
+   ],
+   "notes": [
+    "[1] RXD reads 0 whenever some other node on the bus is sending a dominant bit.",
+    "[2] X: either level."
+   ]
+  },
+  {
+   "title": "Pin Rs summary",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "condition forced at pin Rs",
+    "mode",
+    "resulting voltage or current at pin Rs"
+   ],
+   "rows": [
+    [
+     "VRs > 0.75VCC",
+     "Standby",
+     "−IRs < 10 µA"
+    ],
+    [
+     "10 µA < −IRs < 200 µA",
+     "Slope control",
+     "0.4VCC < VRs < 0.6VCC"
+    ],
+    [
+     "VRs < 0.3VCC",
+     "High-speed",
+     "−IRs < 500 µA"
+    ]
+   ]
+  },
+  {
+   "title": "Limiting values",
+   "page": 4,
+   "conditions": "Absolute Maximum Rating System (IEC 60134); voltages referenced to pin 2; positive input current.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "note",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "supply voltage",
+     "",
+     "",
+     "−0.3",
+     "+7.0",
+     "V"
+    ],
+    [
+     "Vn",
+     "DC voltage at pins 1, 4, 5 and 8",
+     "",
+     "",
+     "−0.3",
+     "VCC + 0.3",
+     "V"
+    ],
+    [
+     "V6",
+     "DC voltage at pin 6 (CANL)",
+     "0 V < VCC < 5.5 V; TXD HIGH or floating",
+     "",
+     "−36",
+     "+36",
+     "V"
+    ],
+    [
+     "V6",
+     "DC voltage at pin 6 (CANL)",
+     "0 V < VCC < 5.5 V; no time limit",
+     "[1]",
+     "−36",
+     "+36",
+     "V"
+    ],
+    [
+     "V6",
+     "DC voltage at pin 6 (CANL)",
+     "0 V < VCC < 5.5 V; no time limit",
+     "[2]",
+     "−36",
+     "+36",
+     "V"
+    ],
+    [
+     "V7",
+     "DC voltage at pins 7 (CANH)",
+     "0 V < VCC < 5.5 V; no time limit",
+     "",
+     "−36",
+     "+36",
+     "V"
+    ],
+    [
+     "Vtrt",
+     "transient voltage at pins 6 and 7",
+     "see transient test circuit",
+     "",
+     "−200",
+     "+200",
+     "V"
+    ],
+    [
+     "Tstg",
+     "storage temperature",
+     "",
+     "",
+     "−55",
+     "+150",
+     "°C"
+    ],
+    [
+     "Tamb",
+     "ambient temperature",
+     "",
+     "",
+     "−40",
+     "+125",
+     "°C"
+    ],
+    [
+     "Tvj",
+     "virtual junction temperature",
+     "",
+     "[3]",
+     "−40",
+     "+150",
+     "°C"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "",
+     "[4]",
+     "−2500",
+     "+2500",
+     "V"
+    ],
+    [
+     "VESD",
+     "electrostatic discharge voltage",
+     "",
+     "[5]",
+     "−250",
+     "+250",
+     "V"
+    ]
+   ],
+   "notes": [
+    "[1] With TXD LOW. Above +30 V the short-circuit protection covers edges no faster than 5 V/µs.",
+    "[2] The short is applied with TXD HIGH, and TXD is then switched LOW.",
+    "[3] Per IEC 60747-1. Tvj = Tamb + Pd × Rth(vj-a), with Rth(j-a) a fixed figure; the Tvj limit bounds which pairs of dissipation Pd and ambient Tamb are allowed.",
+    "[4] Class A, human body model: 100 pF through 1500 Ω, V = ±2000 V.",
+    "[5] Class B, machine model: 200 pF through 25 Ω, V = ±200 V."
+   ]
+  },
+  {
+   "title": "Thermal characteristics",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "typ",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Rth(j-a)",
+     "thermal resistance from junction to ambient",
+     "in free air",
+     "160",
+     "K/W"
+    ]
+   ]
+  },
+  {
+   "title": "Characteristics: supply",
+   "page": 5,
+   "conditions": "VCC = 4.5 V to 5.5 V; Tamb = −40 °C to +125 °C; RL = 60 Ω; I8 > −10 µA; unless otherwise specified; all voltages referenced to ground (pin 2); positive input current; all parameters are guaranteed over the ambient temperature range by design, but only 100 % tested at +25 °C.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "I3",
+     "supply current",
+     "dominant; V1 = 1 V; VCC = 5.1 V",
+     "-",
+     "-",
+     "78",
+     "mA"
+    ],
+    [
+     "I3",
+     "supply current",
+     "dominant; V1 = 1 V; VCC = 5.25 V",
+     "-",
+     "-",
+     "80",
+     "mA"
+    ],
+    [
+     "I3",
+     "supply current",
+     "dominant; V1 = 1 V; VCC = 5.5 V",
+     "-",
+     "-",
+     "85",
+     "mA"
+    ],
+    [
+     "I3",
+     "supply current",
+     "recessive; V1 = 4 V; R8 = 47 kΩ",
+     "-",
+     "-",
+     "10",
+     "mA"
+    ],
+    [
+     "I3",
+     "supply current",
+     "Standby; I1 = I4 = I5 = 0 mA; 0 V < V6 < VCC; 0 V < V7 < VCC; V8 = VCC; Tamb < 90 °C",
+     "-",
+     "-",
+     "275",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Characteristics: DC bus transmitter",
+   "page": 5,
+   "conditions": "VCC = 4.5 V to 5.5 V; Tamb = −40 °C to +125 °C; RL = 60 Ω; I8 > −10 µA; unless otherwise specified; all voltages referenced to ground (pin 2); positive input current; all parameters are guaranteed over the ambient temperature range by design, but only 100 % tested at +25 °C.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIH",
+     "HIGH-level input voltage",
+     "output recessive",
+     "0.7VCC",
+     "-",
+     "VCC + 0.3",
+     "V"
+    ],
+    [
+     "VIL",
+     "LOW-level input voltage",
+     "output dominant",
+     "−0.3",
+     "-",
+     "0.3VCC",
+     "V"
+    ],
+    [
+     "IIH",
+     "HIGH-level input current",
+     "V1 = 4 V",
+     "−200",
+     "-",
+     "+30",
+     "µA"
+    ],
+    [
+     "IIL",
+     "LOW-level input current",
+     "V1 = 1 V",
+     "−100",
+     "-",
+     "−600",
+     "µA"
+    ],
+    [
+     "V6,7",
+     "recessive bus voltage",
+     "V1 = 4 V; no load",
+     "2.0",
+     "-",
+     "3.0",
+     "V"
+    ],
+    [
+     "ILO",
+     "off-state output leakage current",
+     "−2 V < (V6, V7) < 7 V",
+     "−2",
+     "-",
+     "+2",
+     "mA"
+    ],
+    [
+     "ILO",
+     "off-state output leakage current",
+     "−5 V < (V6, V7) < 36 V",
+     "−10",
+     "-",
+     "+10",
+     "mA"
+    ],
+    [
+     "V7",
+     "CANH output voltage",
+     "V1 = 1 V; VCC = 4.75 V to 5.5 V",
+     "3.0",
+     "-",
+     "4.5",
+     "V"
+    ],
+    [
+     "V7",
+     "CANH output voltage",
+     "V1 = 1 V; VCC = 4.5 V to 4.75 V",
+     "2.75",
+     "",
+     "4.5",
+     ""
+    ],
+    [
+     "V6",
+     "CANL output voltage",
+     "V1 = 1 V",
+     "0.5",
+     "-",
+     "2.0",
+     "V"
+    ],
+    [
+     "ΔV6, 7",
+     "difference between output voltage at pins 6 and 7",
+     "V1 = 1 V",
+     "1.5",
+     "-",
+     "3.0",
+     "V"
+    ],
+    [
+     "ΔV6, 7",
+     "difference between output voltage at pins 6 and 7",
+     "V1 = 1 V; RL = 45 Ω",
+     "1.5",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "ΔV6, 7",
+     "difference between output voltage at pins 6 and 7",
+     "V1 = 4 V; no load",
+     "−500",
+     "-",
+     "+50",
+     "mV"
+    ],
+    [
+     "Isc7",
+     "short-circuit CANH current",
+     "V7 = −5 V",
+     "-",
+     "-",
+     "−200",
+     "mA"
+    ],
+    [
+     "Isc7",
+     "short-circuit CANH current",
+     "V7 = −36 V",
+     "-",
+     "−100",
+     "-",
+     "mA"
+    ],
+    [
+     "Isc6",
+     "short-circuit CANL current",
+     "V6 = 36 V",
+     "-",
+     "-",
+     "200",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "The CANH output voltage limits for VCC = 4.5 V to 4.75 V are in volts."
+   ]
+  },
+  {
+   "title": "Characteristics: DC bus receiver",
+   "page": 5,
+   "conditions": "VCC = 4.5 V to 5.5 V; Tamb = −40 °C to +125 °C; RL = 60 Ω; I8 > −10 µA; unless otherwise specified; all voltages referenced to ground (pin 2); positive input current; all parameters are guaranteed over the ambient temperature range by design, but only 100 % tested at +25 °C. Receiver rows: V1 = 4 V; pins 6 and 7 externally driven; −2 V < (V6, V7) < 7 V; unless otherwise specified.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vdiff(r)",
+     "differential input voltage (recessive)",
+     "[2]",
+     "−1.0",
+     "-",
+     "+0.5",
+     "V"
+    ],
+    [
+     "Vdiff(r)",
+     "differential input voltage (recessive)",
+     "−7 V < (V6, V7) < 12 V [2]",
+     "−1.0",
+     "-",
+     "+0.4",
+     "V"
+    ],
+    [
+     "Vdiff(d)",
+     "differential input voltage (dominant)",
+     "",
+     "0.9",
+     "-",
+     "5.0",
+     "V"
+    ],
+    [
+     "Vdiff(d)",
+     "differential input voltage (dominant)",
+     "−7 V < (V6, V7) < 12 V; not Standby mode",
+     "1.0",
+     "-",
+     "5.0",
+     "V"
+    ],
+    [
+     "Vdiff(d)",
+     "differential input voltage (dominant)",
+     "Standby mode",
+     "0.97",
+     "-",
+     "5.0",
+     "V"
+    ],
+    [
+     "Vdiff(d)",
+     "differential input voltage (dominant)",
+     "Standby mode; VCC = 4.5 V to 5.10 V",
+     "0.91",
+     "-",
+     "5.0",
+     "V"
+    ],
+    [
+     "Vdiff(hys)",
+     "differential input hysteresis",
+     "see receiver hysteresis",
+     "-",
+     "150",
+     "-",
+     "mV"
+    ],
+    [
+     "VOH",
+     "HIGH-level output voltage",
+     "pin 4; I4 = −100 µA",
+     "0.8VCC",
+     "-",
+     "VCC",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage",
+     "pin 4; I4 = 1 mA",
+     "0",
+     "-",
+     "0.2VCC",
+     "V"
+    ],
+    [
+     "VOL",
+     "LOW-level output voltage",
+     "I4 = 10 mA",
+     "0",
+     "-",
+     "1.5",
+     "V"
+    ],
+    [
+     "Ri",
+     "input resistance",
+     "CANH, CANL",
+     "5",
+     "-",
+     "25",
+     "kΩ"
+    ],
+    [
+     "Rdiff",
+     "differential input resistance",
+     "",
+     "20",
+     "-",
+     "100",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "[2] Applies to the receiver in all three modes (high-speed, slope-controlled, standby)."
+   ]
+  },
+  {
+   "title": "Characteristics: reference output",
+   "page": 6,
+   "conditions": "VCC = 4.5 V to 5.5 V; Tamb = −40 °C to +125 °C; RL = 60 Ω; I8 > −10 µA; unless otherwise specified; all voltages referenced to ground (pin 2); positive input current; all parameters are guaranteed over the ambient temperature range by design, but only 100 % tested at +25 °C.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vref",
+     "reference output voltage",
+     "V8 = 1 V; |I5| < 50 µA",
+     "0.45VCC",
+     "-",
+     "0.55VCC",
+     "V"
+    ],
+    [
+     "Vref",
+     "reference output voltage",
+     "V8 = 4 V; |I5| < 5 µA",
+     "0.4VCC",
+     "-",
+     "0.6VCC",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Characteristics: timing",
+   "page": 6,
+   "conditions": "VCC = 4.5 V to 5.5 V; Tamb = −40 °C to +125 °C; RL = 60 Ω; I8 > −10 µA; unless otherwise specified; all voltages referenced to ground (pin 2); positive input current; all parameters are guaranteed over the ambient temperature range by design, but only 100 % tested at +25 °C. Timing rows: CL = 100 pF; dynamic test circuit.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tbit",
+     "minimum bit time",
+     "Rext = 0 Ω",
+     "-",
+     "-",
+     "1",
+     "µs"
+    ],
+    [
+     "tonTXD",
+     "delay TXD to bus active",
+     "Rext = 0 Ω",
+     "-",
+     "-",
+     "50",
+     "ns"
+    ],
+    [
+     "toffTXD",
+     "delay TXD to bus inactive",
+     "Rext = 0 Ω",
+     "-",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "tonRXD",
+     "delay TXD to receiver active",
+     "Rext = 0 Ω",
+     "-",
+     "55",
+     "120",
+     "ns"
+    ],
+    [
+     "toffRXD",
+     "delay TXD to receiver inactive",
+     "Rext = 0 Ω; Tamb < +85 °C; VCC = 4.5 V to 5.1 V",
+     "-",
+     "80",
+     "150",
+     "ns"
+    ],
+    [
+     "toffRXD",
+     "delay TXD to receiver inactive",
+     "Rext = 0 Ω; VCC = 4.5 V to 5.1 V",
+     "-",
+     "80",
+     "170",
+     "ns"
+    ],
+    [
+     "toffRXD",
+     "delay TXD to receiver inactive",
+     "Rext = 0 Ω; Tamb < +85 °C",
+     "-",
+     "90",
+     "170",
+     "ns"
+    ],
+    [
+     "toffRXD",
+     "delay TXD to receiver inactive",
+     "Rext = 0 kΩ",
+     "-",
+     "90",
+     "190",
+     "ns"
+    ],
+    [
+     "toffRXD",
+     "delay TXD to receiver inactive",
+     "Rext = 47 kΩ",
+     "-",
+     "290",
+     "400",
+     "ns"
+    ],
+    [
+     "tonRXD",
+     "delay TXD to receiver active",
+     "Rext = 47 kΩ",
+     "-",
+     "440",
+     "550",
+     "ns"
+    ],
+    [
+     "|SR|",
+     "CANH, CANL slew rate",
+     "Rext = 47 kΩ",
+     "-",
+     "7",
+     "-",
+     "V/µs"
+    ],
+    [
+     "tWAKE",
+     "wake-up time from Standby (via pin 8)",
+     "see wake-up timing",
+     "-",
+     "-",
+     "20",
+     "µs"
+    ],
+    [
+     "tdRXDL",
+     "bus dominant to RXD LOW",
+     "V8 = 4 V; see standby detection timing",
+     "-",
+     "-",
+     "3",
+     "µs"
+    ]
+   ]
+  },
+  {
+   "title": "Characteristics: standby/slope control (pin 8)",
+   "page": 6,
+   "conditions": "VCC = 4.5 V to 5.5 V; Tamb = −40 °C to +125 °C; RL = 60 Ω; I8 > −10 µA; unless otherwise specified; all voltages referenced to ground (pin 2); positive input current; all parameters are guaranteed over the ambient temperature range by design, but only 100 % tested at +25 °C.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Vstb",
+     "input voltage for Standby mode",
+     "",
+     "0.75VCC",
+     "-",
+     "-",
+     "V"
+    ],
+    [
+     "Islope",
+     "Slope control mode current",
+     "",
+     "−10",
+     "-",
+     "−200",
+     "µA"
+    ],
+    [
+     "Vslope",
+     "Slope control mode voltage",
+     "",
+     "0.4VCC",
+     "-",
+     "0.6VCC",
+     "V"
+    ]
+   ]
+  },
+  {
+   "title": "Reflow peak temperature, SnPb eutectic process (J-STD-020C)",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "volume < 350 mm³ (°C)",
+    "volume ≥ 350 mm³ (°C)"
+   ],
+   "rows": [
+    [
+     "< 2.5",
+     "235",
+     "220"
+    ],
+    [
+     "≥ 2.5",
+     "220",
+     "220"
+    ]
+   ]
+  },
+  {
+   "title": "Reflow peak temperature, lead-free process (J-STD-020C)",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "package thickness (mm)",
+    "volume < 350 mm³ (°C)",
+    "volume 350 to 2000 mm³ (°C)",
+    "volume > 2000 mm³ (°C)"
+   ],
+   "rows": [
+    [
+     "< 1.6",
+     "260",
+     "260",
+     "260"
+    ],
+    [
+     "1.6 to 2.5",
+     "260",
+     "250",
+     "245"
+    ],
+    [
+     "> 2.5",
+     "250",
+     "245",
+     "245"
+    ]
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "CAN node with a P8xC592 controller",
+   "page": 9,
+   "description": "The transceiver between a P8xC592 microcontroller's CAN port and the bus. CTX0 drives TXD, RXD returns to CRX0, and Vref goes to the controller's CRX1 input. Port pin PX,Y reaches Rs through Rext; a HIGH on Rs selects standby. VCC is a +5 V rail with 100 nF to ground. CANH and CANL run to the bus line, which carries two 120 Ω resistors across it.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCA82C251"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "P8xC592",
+     "external": true,
+     "note": "CAN controller"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "Rext",
+     "note": "slope resistor; 0 Ω without slope control"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VCC"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "120 Ω",
+     "note": "bus termination, one end"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "120 Ω",
+     "note": "bus termination, other end"
+    },
+    {
+     "ref": "J_5V",
+     "type": "terminal",
+     "value": "+5 V"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "ground"
+    },
+    {
+     "ref": "J_CANH",
+     "type": "terminal",
+     "value": "CANH bus line"
+    },
+    {
+     "ref": "J_CANL",
+     "type": "terminal",
+     "value": "CANL bus line"
+    }
+   ],
+   "notes": [
+    "The P8xC592 output control register is set to 1AH: push-pull outputs, dominant = LOW.",
+    "With no slope control wanted, Rext = 0."
+   ]
+  },
+  {
+   "id": "dynamic-test",
+   "title": "Dynamic characteristics test circuit",
+   "page": 7,
+   "fixture": true,
+   "description": "The circuit the timing figures are measured in. VCC is +5 V with 100 nF to ground. The bus is loaded by 60 Ω in parallel with 100 pF between CANH and CANL, RXD carries 30 pF to ground, and Rext runs from Rs to ground. TXD is the driven input; Vref and RXD are the observed outputs.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCA82C251"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VCC"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "60 Ω",
+     "note": "bus load"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 pF",
+     "note": "bus load"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "30 pF",
+     "note": "RXD load"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "Rext"
+    },
+    {
+     "ref": "J_5V",
+     "type": "terminal",
+     "value": "+5 V"
+    },
+    {
+     "ref": "J_TXD",
+     "type": "terminal",
+     "value": "TXD"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "Vref"
+    },
+    {
+     "ref": "J_RXD",
+     "type": "terminal",
+     "value": "RXD"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "ground"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "transient-test",
+   "title": "Automotive transient test circuit",
+   "page": 8,
+   "fixture": true,
+   "description": "The circuit the bus-pin transient rating is tested in. VCC is +5 V with 100 nF to ground and Rs goes to ground through 47 kΩ. CANH and CANL are loaded by 60 Ω between them, and each line is coupled through its own 500 pF capacitor to one Schaffner generator output. The generator applies the ISO 7637 part 1 pulses 1, 2, 3a and 3b.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "PCA82C251"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VCC"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "60 Ω",
+     "note": "bus load"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "500 pF",
+     "note": "CANH coupling"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "500 pF",
+     "note": "CANL coupling"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "47 kΩ",
+     "note": "Rs to ground"
+    },
+    {
+     "ref": "G1",
+     "type": "source",
+     "value": "Schaffner generator",
+     "note": "ISO 7637 part 1 pulses 1, 2, 3a, 3b"
+    },
+    {
+     "ref": "J_5V",
+     "type": "terminal",
+     "value": "+5 V"
+    },
+    {
+     "ref": "J_TXD",
+     "type": "terminal",
+     "value": "TXD"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "Vref"
+    },
+    {
+     "ref": "J_RXD",
+     "type": "terminal",
+     "value": "RXD"
+    },
+    {
+     "ref": "J_GND",
+     "type": "terminal",
+     "value": "ground"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Virtual junction temperature",
+   "expr": "Tvj = Tamb + Pd × Rth(vj-a)",
+   "where": {
+    "Tvj": "virtual junction temperature, limited to +150 °C",
+    "Tamb": "ambient temperature",
+    "Pd": "power dissipated in the device",
+    "Rth(vj-a)": "thermal resistance, virtual junction to ambient; Rth(j-a) is 160 K/W typ in free air"
+   },
+   "note": "",
+   "page": 4
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Role",
+   "page": 3,
+   "text": "The part turns the CAN controller's logic-level TXD into a differential drive on CANH and CANL, and turns the bus's differential level back into logic on RXD. It is aimed at trucks and buses running ISO 11898-24 V at up to 1 MBd, and a bus can hold at least 110 nodes."
+  },
+  {
+   "topic": "Bus states",
+   "page": 4,
+   "text": "TXD LOW drives CANH HIGH and CANL LOW: a dominant bit, RXD 0. TXD HIGH or open lets both lines float: recessive, RXD 1 unless another node is driving dominant. In standby (VRs > 0.75VCC) and whenever VCC is below 4.5 V the bus lines float, so an unpowered node leaves the bus undisturbed."
+  },
+  {
+   "topic": "Short-circuit protection",
+   "page": 3,
+   "text": "A current limit on the transmitter output stage keeps it intact through a short of either bus line to the positive or negative battery; dissipation is higher for as long as the short lasts. Short-circuit CANH current is 200 mA max (magnitude) at V7 = −5 V, and CANL 200 mA max at V6 = 36 V."
+  },
+  {
+   "topic": "Thermal protection",
+   "page": 3,
+   "text": "Near 160 °C junction temperature both transmitter outputs fall back to a lower current limit. The transmitter dissipates most of the chip's power, so the die cools; the receiver and the rest of the IC stay in operation. Bus-line shorts are the case this covers."
+  },
+  {
+   "topic": "Transients",
+   "page": 3,
+   "text": "CANH and CANL are protected against the electrical transients of a vehicle supply; the rating is −200 V to +200 V, tested with ISO 7637 part 1 pulses 1, 2, 3a and 3b."
+  },
+  {
+   "topic": "Mode selection on Rs",
+   "page": 3,
+   "text": "Pin 8 sets one of three modes. High-speed: Rs below 0.3VCC, normally tied to ground; the driver switches as fast as it can with no edge shaping, and a shielded cable is advised against RFI. Slope control: a resistor from Rs to ground draws 10 µA to 200 µA, the pin sits at 0.4VCC to 0.6VCC, and the edge rate follows that current, which allows unshielded twisted or parallel wire; with 47 kΩ the slew rate is 7 V/µs typ. Standby: Rs above 0.75VCC."
+  },
+  {
+   "topic": "Standby",
+   "page": 3,
+   "text": "In standby the driver is off and the receiver runs at reduced current (275 µA max supply). A dominant level on the bus (differential voltage above 0.9 V) still pulls RXD LOW within 3 µs; the controller answers by bringing Rs low to return to normal operation, which takes up to 20 µs. The standby receiver is slow, so at higher bit rates the first message is lost."
+  },
+  {
+   "topic": "Receiver thresholds",
+   "page": 7,
+   "text": "RXD goes LOW once the differential input passes 0.9 V and returns HIGH once it falls below 0.5 V, with 150 mV typ hysteresis between the two switching points. Timing is measured from TXD's edge to Vdiff reaching 0.9 V (bus active) or 0.5 V (bus inactive), and to RXD crossing 0.3VCC or 0.7VCC."
+  },
+  {
+   "topic": "Reference output",
+   "page": 6,
+   "text": "Vref sits at mid-supply: 0.45VCC to 0.55VCC with Rs at 1 V and up to 50 µA load, widening to 0.4VCC to 0.6VCC with Rs at 4 V and up to 5 µA."
+  },
+  {
+   "topic": "Soldering",
+   "page": 12,
+   "text": "The highest reflow peak temperature follows J-STD-020C, set by the package's thickness and its volume. The moisture sensitivity precautions marked on the packing apply."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SO8 (SOT96-1)",
+   "page": 10,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.75"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "",
+     "0.25"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "1.25",
+     "",
+     "1.45"
+    ],
+    [
+     "A3",
+     "",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "bp",
+     "lead width",
+     "0.36",
+     "",
+     "0.49"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.19",
+     "",
+     "0.25"
+    ],
+    [
+     "D",
+     "body length, without protrusions of up to 0.15 mm per side",
+     "4.8",
+     "",
+     "5.0"
+    ],
+    [
+     "E",
+     "body width, without protrusions of up to 0.25 mm per side",
+     "3.8",
+     "",
+     "4.0"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "1.27",
+     ""
+    ],
+    [
+     "HE",
+     "width across leads",
+     "5.8",
+     "",
+     "6.2"
+    ],
+    [
+     "L",
+     "lead length",
+     "",
+     "1.05",
+     ""
+    ],
+    [
+     "Lp",
+     "foot length",
+     "0.4",
+     "",
+     "1.0"
+    ],
+    [
+     "Q",
+     "",
+     "0.6",
+     "",
+     "0.7"
+    ],
+    [
+     "v",
+     "lead position tolerance to datum A",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "w",
+     "lead position tolerance",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "y",
+     "coplanarity",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "Z",
+     "end lead to body edge",
+     "0.3",
+     "",
+     "0.7"
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "",
+     "8°"
+    ]
+   ]
+  }
+ ]
+}

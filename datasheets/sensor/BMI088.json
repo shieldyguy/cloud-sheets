@@ -1,0 +1,3454 @@
+{
+ "sheet": 1,
+ "name": "BMI088",
+ "kind": "sensor",
+ "manufacturer": "Bosch Sensortec",
+ "title": "BMI088: 6-axis IMU, 16-bit triaxial accelerometer (±3 to ±24 g) and triaxial gyroscope (±125 to ±2000 °/s), SPI and I²C, LGA-16",
+ "source": {
+  "document": "BST-BMI088-DS000-19",
+  "revision": "1.9, January 2024",
+  "pages": 62
+ },
+ "summary": "A six-degree-of-freedom inertial unit in a 3.0 × 4.5 × 0.95 mm LGA: a three-axis 16-bit accelerometer with ranges of ±3, ±6, ±12 and ±24 g and a three-axis 16-bit gyroscope with ranges of ±125 to ±2000 °/s, plus an 11-bit temperature reading. It is aimed at drones and robots, where board and frame resonances above a few hundred hertz have to be rejected. The two sensors are separate devices behind one set of pins, each with its own register map, chip select or I²C address, interrupt pins and FIFO (1024 bytes for the accelerometer, 100 frames for the gyroscope). The core runs from 2.4 to 3.6 V on VDD and the interface from 1.2 to 3.6 V on VDDIO; it leaves the factory calibrated.",
+ "key_figures": [
+  [
+   "Accelerometer range",
+   "±3, ±6, ±12, ±24 g"
+  ],
+  [
+   "Accelerometer noise density",
+   "160 µg/√Hz (X, Y), 190 µg/√Hz (Z) typ"
+  ],
+  [
+   "Accelerometer ODR",
+   "12.5 to 1600 Hz"
+  ],
+  [
+   "Gyroscope range",
+   "±125, ±250, ±500, ±1000, ±2000 °/s"
+  ],
+  [
+   "Gyroscope noise",
+   "0.014 °/s/√Hz; 0.1 °/s rms at 47 Hz bandwidth"
+  ],
+  [
+   "Gyroscope ODR",
+   "100 to 2000 Hz"
+  ],
+  [
+   "Supply VDD",
+   "2.4 to 3.6 V"
+  ],
+  [
+   "Supply VDDIO",
+   "1.2 to 3.6 V"
+  ],
+  [
+   "Current, normal mode",
+   "accelerometer 150 µA typ; gyroscope 5 mA typ"
+  ],
+  [
+   "Interfaces",
+   "SPI up to 10 MHz; I²C up to 400 kHz"
+  ],
+  [
+   "Operating temperature",
+   "-40 to +85 °C"
+  ],
+  [
+   "Package",
+   "LGA-16, 3.0 × 4.5 × 0.95 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "technical reference code",
+   "package",
+   "marking product number",
+   "packing"
+  ],
+  "rows": [
+   [
+    "BMI088",
+    "0 273 141 365",
+    "LGA-16, 3.0 mm × 4.5 mm × 0.95 mm",
+    "365",
+    "reel of 5,000 pcs"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "LGA-16",
+   "page": 52,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "INT2",
+     "type": "digital I/O",
+     "function": "Accelerometer interrupt pin 2. Same use in SPI and I²C. Leave open when unused."
+    },
+    {
+     "pin": "2",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Connected to GND in SPI and in I²C mode."
+    },
+    {
+     "pin": "3",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply for the analog and digital core, 2.4 to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "GNDA",
+     "type": "ground",
+     "function": "Ground of the analog domain."
+    },
+    {
+     "pin": "5",
+     "name": "CSB2",
+     "type": "digital in",
+     "function": "Gyroscope chip select in SPI mode. Left floating (do not connect) in I²C mode."
+    },
+    {
+     "pin": "6",
+     "name": "GNDIO",
+     "type": "ground",
+     "function": "Ground of the I/O domain."
+    },
+    {
+     "pin": "7",
+     "name": "PS",
+     "type": "digital in",
+     "function": "Protocol select for the gyroscope: GND gives SPI, VDDIO gives I²C."
+    },
+    {
+     "pin": "8",
+     "name": "SCL/SCK",
+     "type": "digital in",
+     "function": "Serial clock: SCK in SPI mode, SCL in I²C mode."
+    },
+    {
+     "pin": "9",
+     "name": "SDA/SDI",
+     "type": "digital I/O",
+     "function": "Serial data: SDA (bidirectional) in I²C mode, SDI input in 4-wire SPI, bidirectional data in 3-wire SPI."
+    },
+    {
+     "pin": "10",
+     "name": "SDO2",
+     "type": "digital out",
+     "function": "Gyroscope data output in SPI mode. In I²C mode it sets the low bit of the gyroscope address (to GND for the default address)."
+    },
+    {
+     "pin": "11",
+     "name": "VDDIO",
+     "type": "power in",
+     "function": "Supply for the digital interface, 1.2 to 3.6 V."
+    },
+    {
+     "pin": "12",
+     "name": "INT3",
+     "type": "digital I/O",
+     "function": "Gyroscope interrupt pin 1 (INT3). Leave open when unused."
+    },
+    {
+     "pin": "13",
+     "name": "INT4",
+     "type": "digital I/O",
+     "function": "Gyroscope interrupt pin 2 (INT4). Leave open when unused."
+    },
+    {
+     "pin": "14",
+     "name": "CSB1",
+     "type": "digital in",
+     "function": "Accelerometer chip select in SPI mode; a rising edge on it switches the accelerometer to SPI. In I²C mode tie to VDDIO or leave floating. Internal pull-up of 75 to 125 kΩ to VDDIO."
+    },
+    {
+     "pin": "15",
+     "name": "SDO1",
+     "type": "digital out",
+     "function": "Accelerometer data output in SPI mode. In I²C mode it sets the low bit of the accelerometer address (to GND for the default address)."
+    },
+    {
+     "pin": "16",
+     "name": "INT1",
+     "type": "digital I/O",
+     "function": "Accelerometer interrupt pin 1. Leave open when unused."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Electrical parameter specification",
+   "page": 7,
+   "conditions": "Over lifetime and the full performance temperature and voltage ranges unless stated; min and max are ±3σ.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply Voltage Internal Domains",
+     "VDD",
+     "",
+     "2.4",
+     "3.6",
+     "V"
+    ],
+    [
+     "Supply Voltage I/O Domain",
+     "VDDIO",
+     "",
+     "1.2",
+     "3.6",
+     "V"
+    ],
+    [
+     "Voltage Input Low Level",
+     "VIL,a",
+     "SPI & I²C",
+     "",
+     "0.3VDDIO",
+     "-"
+    ],
+    [
+     "Voltage Input High Level",
+     "VIH,a",
+     "SPI & I²C",
+     "0.7VDDIO",
+     "",
+     "-"
+    ],
+    [
+     "Voltage Output Low Level",
+     "VOL,a",
+     "IOL<= 2mA, SPI",
+     "",
+     "0.23VDDIO",
+     "-"
+    ],
+    [
+     "Voltage Output High Level",
+     "VOH",
+     "IOH <= 2mA, SPI",
+     "0.8VDDIO",
+     "",
+     "-"
+    ],
+    [
+     "Operating Temperature",
+     "TA",
+     "",
+     "-40",
+     "+85",
+     "°C"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical parameter specification accelerometer",
+   "page": 8,
+   "conditions": "Over lifetime and the full performance temperature and voltage ranges unless stated; min and max are ±3σ.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Total Supply Current in Normal mode",
+     "IDD",
+     "VDD = VDDIO =3.0V, 25°C, gFS4g",
+     "",
+     "150",
+     "",
+     "µA"
+    ],
+    [
+     "Total Supply Current in Suspend Mode",
+     "IDDsum",
+     "VDD = VDDIO =3.0V, 25°C",
+     "",
+     "3",
+     "",
+     "µA"
+    ],
+    [
+     "Power-up time",
+     "ts_up",
+     "Time to first valid sample from suspend mode",
+     "",
+     "",
+     "1",
+     "ms"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical parameter specification gyroscope",
+   "page": 8,
+   "conditions": "Over lifetime and the full performance temperature and voltage ranges unless stated; min and max are ±3σ.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply Current in Normal Mode",
+     "IDD",
+     "VDD = VDDIO = 3.0V, 25°C, ODR =1kHz",
+     "",
+     "5",
+     "",
+     "mA"
+    ],
+    [
+     "Supply Current in Suspend Mode",
+     "IDDsum",
+     "VDD = VDDIO = 3.0V, 25°C",
+     "",
+     "25",
+     "",
+     "µA"
+    ],
+    [
+     "Supply Current in Deep Suspend Mode",
+     "IDDdsum",
+     "VDD = VDDIO = 3.0V, 25°C",
+     "",
+     "<5",
+     "",
+     "µA"
+    ],
+    [
+     "Start-up time",
+     "tsu",
+     "to ±1º/s of final value; from power-off",
+     "",
+     "30",
+     "",
+     "ms"
+    ],
+    [
+     "Wake-up time",
+     "twusm",
+     "From suspend- and deep suspend-modes",
+     "",
+     "30",
+     "",
+     "ms"
+    ],
+    [
+     "Wake-up time",
+     "twufpm",
+     "From fast power-up mode",
+     "",
+     "10",
+     "",
+     "ms"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer specifications",
+   "page": 9,
+   "conditions": "Over lifetime and the full performance temperature and voltage ranges unless stated; min and max are ±3σ.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Acceleration Range",
+     "gFS3g",
+     "Selectable via serial digital interface",
+     "",
+     "±3",
+     "",
+     "g"
+    ],
+    [
+     "Acceleration Range",
+     "gFS6g",
+     "Selectable via serial digital interface",
+     "",
+     "±6",
+     "",
+     "g"
+    ],
+    [
+     "Acceleration Range",
+     "gFS12g",
+     "Selectable via serial digital interface",
+     "",
+     "±12",
+     "",
+     "g"
+    ],
+    [
+     "Acceleration Range",
+     "gFS24g",
+     "Selectable via serial digital interface",
+     "",
+     "±24",
+     "",
+     "g"
+    ],
+    [
+     "Sensitivity",
+     "S3g",
+     "gFS3g, TA=25°C",
+     "",
+     "10920",
+     "",
+     "LSB/g"
+    ],
+    [
+     "Sensitivity",
+     "S6g",
+     "gFS6g, TA=25°C",
+     "",
+     "5460",
+     "",
+     "LSB/g"
+    ],
+    [
+     "Sensitivity",
+     "S12g",
+     "gFS12g, TA=25°C",
+     "",
+     "2730",
+     "",
+     "LSB/g"
+    ],
+    [
+     "Sensitivity",
+     "S24g",
+     "gFS24g, TA=25°C",
+     "",
+     "1365",
+     "",
+     "LSB/g"
+    ],
+    [
+     "Sensitivity Temperature Drift",
+     "TCS",
+     "",
+     "",
+     "0.002",
+     "",
+     "%/K"
+    ],
+    [
+     "Zero-g Offset",
+     "Off",
+     "Nominal VDD and VDDIO, 25°C, gFS6g",
+     "",
+     "20",
+     "",
+     "mg"
+    ],
+    [
+     "Zero-g Offset Temperature Drift",
+     "TCO",
+     "",
+     "",
+     "<0.2",
+     "",
+     "mg/K"
+    ],
+    [
+     "Output Data Rate",
+     "ODR",
+     "",
+     "12.5",
+     "",
+     "1600",
+     "Hz"
+    ],
+    [
+     "Bandwidth range",
+     "BW",
+     "3dB cut-off frequency of the accelerometer depends on ODR and OSR",
+     "5",
+     "",
+     "280 (245 for Z axis)",
+     "Hz"
+    ],
+    [
+     "Nonlinearity",
+     "NL",
+     "best fit straight line, gFS3g",
+     "",
+     "0.5",
+     "",
+     "%FS"
+    ],
+    [
+     "Output Noise Density",
+     "nrms",
+     "gFS3g, TA=25°C, Nominal VDD supplies, Normal mode",
+     "",
+     "190 (Z-axis); 160 (X- & Y-axis)",
+     "",
+     "µg/√Hz"
+    ],
+    [
+     "Cross Axis Sensitivity",
+     "S",
+     "relative contribution between any two of the three axes",
+     "",
+     "0.5",
+     "",
+     "%"
+    ],
+    [
+     "Alignment Error",
+     "EA",
+     "relative to package outline",
+     "",
+     "0.5",
+     "",
+     "°"
+    ]
+   ]
+  },
+  {
+   "title": "Gyroscope specifications",
+   "page": 10,
+   "conditions": "Over lifetime and the full performance temperature and voltage ranges unless stated; min and max are ±3σ.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Range",
+     "RFS125",
+     "Selectable via serial digital interface",
+     "",
+     "125",
+     "",
+     "°/s"
+    ],
+    [
+     "Range",
+     "RFS250",
+     "Selectable via serial digital interface",
+     "",
+     "250",
+     "",
+     "°/s"
+    ],
+    [
+     "Range",
+     "RFS500",
+     "Selectable via serial digital interface",
+     "",
+     "500",
+     "",
+     "°/s"
+    ],
+    [
+     "Range",
+     "RFS1000",
+     "Selectable via serial digital interface",
+     "",
+     "1000",
+     "",
+     "°/s"
+    ],
+    [
+     "Range",
+     "RFS2000",
+     "Selectable via serial digital interface",
+     "",
+     "2000",
+     "",
+     "°/s"
+    ],
+    [
+     "Sensitivity",
+     "",
+     "Ta=25°C, RFS125",
+     "",
+     "262.144",
+     "",
+     "LSB/°/s"
+    ],
+    [
+     "Sensitivity",
+     "",
+     "Ta=25°C, RFS250",
+     "",
+     "131.072",
+     "",
+     "LSB/°/s"
+    ],
+    [
+     "Sensitivity",
+     "",
+     "Ta=25°C, RFS500",
+     "",
+     "65.536",
+     "",
+     "LSB/°/s"
+    ],
+    [
+     "Sensitivity",
+     "",
+     "Ta=25°C, RFS1000",
+     "",
+     "32.768",
+     "",
+     "LSB/°/s"
+    ],
+    [
+     "Sensitivity",
+     "",
+     "Ta=25°C, RFS2000",
+     "",
+     "16.384",
+     "",
+     "LSB/°/s"
+    ],
+    [
+     "Sensitivity tolerance",
+     "",
+     "Ta=25°C, RFS2000",
+     "",
+     "±1",
+     "",
+     "%"
+    ],
+    [
+     "Sensitivity Change over Temperature",
+     "TCS",
+     "Nominal VDD supplies, -40°C ≤ TA ≤ +85°C, RFS2000",
+     "",
+     "±0.03",
+     "",
+     "%/K"
+    ],
+    [
+     "Sensitivity Supply Volt. Drift",
+     "SVDD",
+     "TA=25°C, VDDmin ≤ VDD ≤ VDDmax",
+     "",
+     "<0.4",
+     "",
+     "%/V"
+    ],
+    [
+     "Nonlinearity",
+     "NL",
+     "best fit straight line, RFS1000, RFS2000",
+     "",
+     "±0.05",
+     "",
+     "%FS"
+    ],
+    [
+     "g-Sensitivity",
+     "",
+     "Sensitivity to acceleration stimuli in all three axis (frequency <20kHz)",
+     "",
+     "",
+     "0.1",
+     "°/s/g"
+    ],
+    [
+     "Zero-rate Offset",
+     "Off Ωx Ωy and Ωz",
+     "Nominal VDD supplies, TA=25°C, slow and fast offset cancellation off",
+     "",
+     "±1",
+     "",
+     "°/s"
+    ],
+    [
+     "Zero-rate Offset Change over Temperature",
+     "TCO",
+     "Nominal VDD supplies, -40°C ≤ TA ≤ +85°C, RFS2000",
+     "",
+     "±0.015",
+     "",
+     "°/s per K"
+    ],
+    [
+     "Zero-rate Offset Supply Volt. Drift",
+     "OffΩ VDD",
+     "TA=25°C, VDDmin ≤ VDD ≤ VDDmax",
+     "",
+     "<0.1",
+     "",
+     "°/s /V"
+    ],
+    [
+     "Output Noise",
+     "nrms",
+     "rms, BW=47Hz (@ 0.014°/s/√Hz)",
+     "",
+     "0.1",
+     "",
+     "°/s"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "523, 230, 116, 64, 47, 32, 23, 12",
+     "",
+     "Hz"
+    ],
+    [
+     "Data rate (set of x,y,z rate)",
+     "",
+     "",
+     "",
+     "2000, 1000, 400, 200, 100",
+     "",
+     "Hz"
+    ],
+    [
+     "Data rate tolerance (set of x,y,z rate)",
+     "",
+     "",
+     "",
+     "±0.3",
+     "",
+     "%"
+    ],
+    [
+     "Cross Axis Sensitivity",
+     "",
+     "Sensitivity to stimuli in non-sense-direction",
+     "",
+     "±1",
+     "",
+     "%"
+    ]
+   ],
+   "notes": [
+    "GYRO_BANDWIDTH setting 0x00 lists a filter bandwidth of 532 Hz."
+   ]
+  },
+  {
+   "title": "Temperature sensor specifications",
+   "page": 11,
+   "conditions": "Over lifetime and the full performance temperature and voltage ranges unless stated; min and max are ±3σ.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Temperature Sensor Measurement Range",
+     "TS",
+     "",
+     "-104",
+     "",
+     "150",
+     "°C"
+    ],
+    [
+     "Temperature Sensor Slope",
+     "dTS",
+     "",
+     "",
+     "0.125",
+     "",
+     "K/LSB"
+    ],
+    [
+     "Temperature Sensor Offset error",
+     "OTS",
+     "at 25°C",
+     "",
+     "±1",
+     "",
+     "K"
+    ]
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage at Supply Pin",
+     "VDD Pin",
+     "-0.3",
+     "4",
+     "V"
+    ],
+    [
+     "Voltage at Supply Pin",
+     "VDDIO Pin",
+     "-0.3",
+     "4",
+     "V"
+    ],
+    [
+     "Voltage at any Logic Pin",
+     "Non-Supply Pin",
+     "-0.3",
+     "VDDIO+0.3",
+     "V"
+    ],
+    [
+     "Passive Storage Temp. Range",
+     "≤ 65% rel. H.",
+     "-50",
+     "+150",
+     "°C"
+    ],
+    [
+     "Mechanical Shock",
+     "Duration ≤ 200µs",
+     "",
+     "10,000",
+     "g"
+    ],
+    [
+     "Mechanical Shock",
+     "Duration ≤ 1.0ms",
+     "",
+     "2,000",
+     "g"
+    ],
+    [
+     "Mechanical Shock",
+     "Free fall onto hard surfaces",
+     "",
+     "1.8",
+     "m"
+    ],
+    [
+     "ESD",
+     "HBM, at any Pin",
+     "",
+     "2",
+     "kV"
+    ],
+    [
+     "ESD",
+     "CDM",
+     "",
+     "500",
+     "V"
+    ],
+    [
+     "ESD",
+     "MM",
+     "",
+     "200",
+     "V"
+    ]
+   ],
+   "notes": [
+    "These are damage limits. Outside the electrical specification, reliable and correct operation is not assured."
+   ]
+  },
+  {
+   "title": "Accelerometer 3 dB cut-off frequency by ODR and OSR setting (ACC_CONF)",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "accelerometer ODR [Hz]",
+    "Normal (acc_bwp = 0xA)",
+    "OSR2 (acc_bwp = 0x9)",
+    "OSR4 (acc_bwp = 0x8)"
+   ],
+   "rows": [
+    [
+     "12.5",
+     "5 Hz",
+     "2 Hz",
+     "1 Hz"
+    ],
+    [
+     "25",
+     "10 Hz",
+     "5 Hz",
+     "3 Hz"
+    ],
+    [
+     "50",
+     "20 Hz",
+     "9 Hz",
+     "5 Hz"
+    ],
+    [
+     "100",
+     "40 Hz",
+     "19 Hz",
+     "10 Hz"
+    ],
+    [
+     "200",
+     "80 Hz",
+     "38 Hz",
+     "20 Hz"
+    ],
+    [
+     "400",
+     "145 Hz",
+     "75 Hz",
+     "40 Hz"
+    ],
+    [
+     "800",
+     "230 Hz (200 Hz for z channel)",
+     "140 Hz",
+     "80 Hz"
+    ],
+    [
+     "1600",
+     "280 Hz (245 Hz for z channel)",
+     "234 Hz (215 Hz for z channel)",
+     "145 Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer self-test: minimum difference between positive and negative self-test signal",
+   "page": 17,
+   "conditions": "±24 g range, ODR 1.6 kHz, normal mode",
+   "columns": [
+    "x-axis signal",
+    "y-axis signal",
+    "z-axis signal"
+   ],
+   "rows": [
+    [
+     "≥1000 mg",
+     "≥1000 mg",
+     "≥500 mg"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer FIFO frame types",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "frame",
+    "header bits 7..0",
+    "length",
+    "payload"
+   ],
+   "rows": [
+    [
+     "Acceleration data",
+     "1 0 0 0 0 1 [INT2 tag] [INT1 tag]",
+     "7 bytes (1 header + 6 payload)",
+     "X, Y, Z data in register order 0x12 to 0x17"
+    ],
+    [
+     "Skip frame",
+     "0 1 0 0 0 0 reserved reserved",
+     "2 bytes (1 header + 1 payload)",
+     "number of skipped frames; 0xFF when more than 0xFF"
+    ],
+    [
+     "Sensortime frame",
+     "0 1 0 0 0 1 reserved reserved",
+     "4 bytes (1 header + 3 payload)",
+     "sensor time (registers 0x18 to 0x1A) when the last byte of the last frame is read"
+    ],
+    [
+     "FIFO input config frame",
+     "0 1 0 0 1 0 reserved reserved",
+     "2 bytes (1 header + 1 payload)",
+     "bit 1: ACC_RANGE change takes effect; bit 0: ACC_CONF or FIFO_DOWNS change takes effect"
+    ],
+    [
+     "Sample drop frame",
+     "0 1 0 1 0 0 reserved reserved",
+     "2 bytes (1 header + 1 payload)",
+     "one byte, no meaning"
+    ]
+   ]
+  },
+  {
+   "title": "Register map: accelerometer",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "address",
+    "name",
+    "reset value",
+    "contents (bit 7 to bit 0)"
+   ],
+   "rows": [
+    [
+     "0x7E",
+     "ACC_SOFTRESET",
+     "0x00",
+     "softreset_cmd (0xb6)"
+    ],
+    [
+     "0x7D",
+     "ACC_PWR_CTRL",
+     "0x00",
+     "acc_enable"
+    ],
+    [
+     "0x7C",
+     "ACC_PWR_CONF",
+     "0x03",
+     "pwr_save_mode"
+    ],
+    [
+     "0x7B - 0x6E",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x6D",
+     "ACC_SELF_TEST",
+     "0x00",
+     "acc_self_test"
+    ],
+    [
+     "0x6B - 0x59",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x58",
+     "INT_MAP_DATA",
+     "0x00",
+     "-, int2_drdy, int2_fwm, int2_ffull, -, int1_drdy, Int1_fwm, Int1_ffull"
+    ],
+    [
+     "0x57 - 0x55",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x54",
+     "INT2_IO_CTRL",
+     "0x00",
+     "- (bits 7:5), int2_in, int2_out, int2_od, int2_lvl, -"
+    ],
+    [
+     "0x53",
+     "INT1_IO_CTRL",
+     "0x00",
+     "- (bits 7:5), int1_in, int1_out, int1_od, int1_lvl, -"
+    ],
+    [
+     "0x52 - 0x4A",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x49",
+     "FIFO_CONFIG_1",
+     "0x10",
+     "-, acc_en, -, 1, int1_en, int2_en, - (bits 1:0)"
+    ],
+    [
+     "0x48",
+     "FIFO_CONFIG_0",
+     "0x02",
+     "- (bits 7:2), 1, mode"
+    ],
+    [
+     "0x47",
+     "FIFO_WTM_1",
+     "0x02",
+     "- (bits 7:5), fifo_water_mark[12:8]"
+    ],
+    [
+     "0x46",
+     "FIFO_WTM_0",
+     "0x00",
+     "fifo_water_mark[7:0]"
+    ],
+    [
+     "0x45",
+     "FIFO_DOWNS",
+     "0x80",
+     "1, fifo_downs (bits 6:4), - (bits 3:0)"
+    ],
+    [
+     "0x44 - 0x42",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x41",
+     "ACC_RANGE",
+     "0x01",
+     "- (bits 7:2), acc_range (bits 1:0)"
+    ],
+    [
+     "0x40",
+     "ACC_CONF",
+     "0xA8",
+     "acc_bwp (bits 7:4), acc_odr (bits 3:0)"
+    ],
+    [
+     "0x3F - 0x27",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x26",
+     "FIFO_DATA",
+     "0x00",
+     "fifo_data"
+    ],
+    [
+     "0x25",
+     "FIFO_LENGTH_1",
+     "0x00",
+     "- (bits 7:6), fifo_byte_counter[13:8]"
+    ],
+    [
+     "0x24",
+     "FIFO_LENGTH_0",
+     "0x00",
+     "fifo_byte_counter[7:0]"
+    ],
+    [
+     "0x23",
+     "TEMP_LSB",
+     "0x00",
+     "temperature[2:0] (bits 7:5), - (bits 4:0)"
+    ],
+    [
+     "0x22",
+     "TEMP_MSB",
+     "0x00",
+     "temperature[10:3]"
+    ],
+    [
+     "0x21 - 0x1E",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x1D",
+     "ACC_INT_STAT_1",
+     "0x00",
+     "acc_drdy (bit 7), - (bits 6:0)"
+    ],
+    [
+     "0x1C - 0x1B",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x1A",
+     "SENSORTIME_2",
+     "0x00",
+     "sensor_time[23:16]"
+    ],
+    [
+     "0x19",
+     "SENSORTIME_1",
+     "0x00",
+     "sensor_time[15:8]"
+    ],
+    [
+     "0x18",
+     "SENSORTIME_0",
+     "0x00",
+     "sensor_time[7:0]"
+    ],
+    [
+     "0x17",
+     "ACC_Z_MSB",
+     "0x00",
+     "acc_z[15:8]"
+    ],
+    [
+     "0x16",
+     "ACC_Z_LSB",
+     "0x00",
+     "acc_z[7:0]"
+    ],
+    [
+     "0x15",
+     "ACC_Y_MSB",
+     "0x00",
+     "acc_y[15:8]"
+    ],
+    [
+     "0x14",
+     "ACC_Y_LSB",
+     "0x00",
+     "acc_y[7:0]"
+    ],
+    [
+     "0x13",
+     "ACC_X_MSB",
+     "0x00",
+     "acc_x[15:8]"
+    ],
+    [
+     "0x12",
+     "ACC_X_LSB",
+     "0x00",
+     "acc_x[7:0]"
+    ],
+    [
+     "0x11 - 0x04",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x03",
+     "ACC_STATUS",
+     "0x10",
+     "drdy_acc (bit 7), - (bits 6:0)"
+    ],
+    [
+     "0x02",
+     "ACC_ERR_REG",
+     "0x00",
+     "- (bits 7:5), error_code (bits 4:2), -, fatal_err"
+    ],
+    [
+     "0x01",
+     "-",
+     "-",
+     "-"
+    ],
+    [
+     "0x00",
+     "ACC_CHIP_ID",
+     "0x1E",
+     "acc_chip_id"
+    ]
+   ],
+   "notes": [
+    "Registers 0x53, 0x54 and 0x58 also go by INT1_IO_CONF, INT2_IO_CONF and INT1_INT2_MAP_DATA.",
+    "Bits marked - carry no function; on a register that mixes them with functional bits, change only the functional bits by read-modify-write."
+   ]
+  },
+  {
+   "title": "Accelerometer register fields and codes",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "register",
+    "field (bits)",
+    "access",
+    "reset",
+    "code",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "0x00 ACC_CHIP_ID",
+     "[7:0]",
+     "RO",
+     "0x1E",
+     "0x1E",
+     "accelerometer identifier"
+    ],
+    [
+     "0x02 ACC_ERR_REG",
+     "error_code [4:2]",
+     "RO",
+     "0x00",
+     "0x00",
+     "no error"
+    ],
+    [
+     "0x02 ACC_ERR_REG",
+     "error_code [4:2]",
+     "RO",
+     "0x00",
+     "0x01",
+     "invalid setting in ACC_CONF"
+    ],
+    [
+     "0x02 ACC_ERR_REG",
+     "fatal_err [0]",
+     "RO",
+     "0x0",
+     "1",
+     "chip not operational (boot or power system); cleared only by power-on reset or soft reset"
+    ],
+    [
+     "0x03 ACC_STATUS",
+     "acc_drdy [7]",
+     "RO",
+     "0x0",
+     "1",
+     "new accelerometer data; clears when an acceleration data register is read"
+    ],
+    [
+     "0x1D ACC_INT_STAT_1",
+     "acc_drdy [7]",
+     "RO",
+     "0x00",
+     "1",
+     "data-ready interrupt; clears when this register is read"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_bwp [7:4]",
+     "RW",
+     "0x0A",
+     "0x08",
+     "OSR4 (4-fold oversampling)"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_bwp [7:4]",
+     "RW",
+     "0x0A",
+     "0x09",
+     "OSR2 (2-fold oversampling)"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_bwp [7:4]",
+     "RW",
+     "0x0A",
+     "0x0A",
+     "Normal"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_bwp [7:4]",
+     "RW",
+     "0x0A",
+     "others",
+     "reserved"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x00 – 0x04",
+     "reserved"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x05",
+     "12.5 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x06",
+     "25 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x07",
+     "50 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x08",
+     "100 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x09",
+     "200 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x0A",
+     "400 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x0B",
+     "800 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x0C",
+     "1600 Hz"
+    ],
+    [
+     "0x40 ACC_CONF",
+     "acc_odr [3:0]",
+     "RW",
+     "0x08",
+     "0x0D – 0X0F",
+     "reserved"
+    ],
+    [
+     "0x41 ACC_RANGE",
+     "acc_range [1:0]",
+     "RW",
+     "0x01",
+     "0x00",
+     "±3g"
+    ],
+    [
+     "0x41 ACC_RANGE",
+     "acc_range [1:0]",
+     "RW",
+     "0x01",
+     "0x01",
+     "±6g"
+    ],
+    [
+     "0x41 ACC_RANGE",
+     "acc_range [1:0]",
+     "RW",
+     "0x01",
+     "0x02",
+     "±12g"
+    ],
+    [
+     "0x41 ACC_RANGE",
+     "acc_range [1:0]",
+     "RW",
+     "0x01",
+     "0x03",
+     "±24g"
+    ],
+    [
+     "0x45 FIFO_DOWNS",
+     "Reserved [7]",
+     "RW",
+     "0x01",
+     "1",
+     "must be written as 1"
+    ],
+    [
+     "0x45 FIFO_DOWNS",
+     "fifo_downs [6:4]",
+     "RO",
+     "0x00",
+     "k",
+     "FIFO sample rate is ODR divided by 2^k"
+    ],
+    [
+     "0x46 – 0x47 FIFO_WTM",
+     "fifo_water_mark [12:0]",
+     "",
+     "",
+     "n",
+     "watermark interrupt when the fill level is n bytes or more"
+    ],
+    [
+     "0x48 FIFO_CONFIG_0",
+     "Reserved [1]",
+     "RW",
+     "0x01",
+     "1",
+     "must be written as 1"
+    ],
+    [
+     "0x48 FIFO_CONFIG_0",
+     "mode [0]",
+     "RW",
+     "0x00",
+     "0x00",
+     "STREAM mode"
+    ],
+    [
+     "0x48 FIFO_CONFIG_0",
+     "mode [0]",
+     "RW",
+     "0x00",
+     "0x01",
+     "FIFO mode"
+    ],
+    [
+     "0x49 FIFO_CONFIG_1",
+     "Acc_en [6]",
+     "RW",
+     "0x00",
+     "1",
+     "accelerometer data go into the FIFO"
+    ],
+    [
+     "0x49 FIFO_CONFIG_1",
+     "Reserved [5]",
+     "RW",
+     "0x00",
+     "",
+     ""
+    ],
+    [
+     "0x49 FIFO_CONFIG_1",
+     "Reserved [4]",
+     "RW",
+     "0x01",
+     "1",
+     "must be written as 1"
+    ],
+    [
+     "0x49 FIFO_CONFIG_1",
+     "Int1_en [3]",
+     "RW",
+     "0x00",
+     "1",
+     "events on INT1 (configured as input) are recorded"
+    ],
+    [
+     "0x49 FIFO_CONFIG_1",
+     "Int2_en [2]",
+     "RW",
+     "0x00",
+     "1",
+     "events on INT2 (configured as input) are recorded"
+    ],
+    [
+     "0x53 INT1_IO_CONF",
+     "int1_in [4]",
+     "RW",
+     "0x00",
+     "1",
+     "INT1 is an input"
+    ],
+    [
+     "0x53 INT1_IO_CONF",
+     "int1_out [3]",
+     "RW",
+     "0x00",
+     "1",
+     "INT1 is an output"
+    ],
+    [
+     "0x53 INT1_IO_CONF",
+     "int1_od [2]",
+     "RW",
+     "0x00",
+     "0x00 / 0x01",
+     "push-pull / open-drain"
+    ],
+    [
+     "0x53 INT1_IO_CONF",
+     "int1_lvl [1]",
+     "RW",
+     "0x00",
+     "0x00 / 0x01",
+     "active low / active high"
+    ],
+    [
+     "0x54 INT2_IO_CONF",
+     "int2_io [4]",
+     "RW",
+     "0x00",
+     "1",
+     "INT2 is an input"
+    ],
+    [
+     "0x54 INT2_IO_CONF",
+     "int2_out [3]",
+     "RW",
+     "0x00",
+     "1",
+     "INT2 is an output"
+    ],
+    [
+     "0x54 INT2_IO_CONF",
+     "int2_od [2]",
+     "RW",
+     "0x00",
+     "0x00 / 0x01",
+     "push-pull / open-drain"
+    ],
+    [
+     "0x54 INT2_IO_CONF",
+     "int2_lvl [1]",
+     "RW",
+     "0x00",
+     "0x00 / 0x01",
+     "active low / active high"
+    ],
+    [
+     "0x58 INT1_INT2_MAP_DATA",
+     "Int2_drdy [6]",
+     "RW",
+     "0x00",
+     "1",
+     "data ready to INT2"
+    ],
+    [
+     "0x58 INT1_INT2_MAP_DATA",
+     "int2_fwm [5]",
+     "RW",
+     "0x00",
+     "1",
+     "FIFO watermark to INT2"
+    ],
+    [
+     "0x58 INT1_INT2_MAP_DATA",
+     "int2_ffull [4]",
+     "RW",
+     "0x00",
+     "1",
+     "FIFO full to INT2"
+    ],
+    [
+     "0x58 INT1_INT2_MAP_DATA",
+     "Int1_drdy [2]",
+     "RW",
+     "0x00",
+     "1",
+     "data ready to INT1"
+    ],
+    [
+     "0x58 INT1_INT2_MAP_DATA",
+     "int1_fwm [1]",
+     "RW",
+     "0x00",
+     "1",
+     "FIFO watermark to INT1"
+    ],
+    [
+     "0x58 INT1_INT2_MAP_DATA",
+     "int1_ffull [0]",
+     "RW",
+     "0x00",
+     "1",
+     "FIFO full to INT1"
+    ],
+    [
+     "0x6D ACC_SELF_TEST",
+     "[7:0]",
+     "RW",
+     "0x00",
+     "0x00",
+     "self-test off"
+    ],
+    [
+     "0x6D ACC_SELF_TEST",
+     "[7:0]",
+     "RW",
+     "0x00",
+     "0x0D",
+     "positive self-test signal"
+    ],
+    [
+     "0x6D ACC_SELF_TEST",
+     "[7:0]",
+     "RW",
+     "0x00",
+     "0x09",
+     "negative self-test signal"
+    ],
+    [
+     "0x7C ACC_PWR_CONF",
+     "acc_pwr_save [7:0]",
+     "RW",
+     "0x03",
+     "0x03",
+     "Suspend mode"
+    ],
+    [
+     "0x7C ACC_PWR_CONF",
+     "acc_pwr_save [7:0]",
+     "RW",
+     "0x03",
+     "0x00",
+     "Active mode"
+    ],
+    [
+     "0x7D ACC_PWR_CTRL",
+     "acc_enable [7:0]",
+     "RW",
+     "0x00",
+     "0x00",
+     "Accelerometer off"
+    ],
+    [
+     "0x7D ACC_PWR_CTRL",
+     "acc_enable [7:0]",
+     "RW",
+     "0x00",
+     "0x04",
+     "Accelerometer on"
+    ],
+    [
+     "0x7E ACC_SOFTRESET",
+     "[7:0]",
+     "W",
+     "N/A",
+     "0xB6",
+     "soft reset; registers return to reset values after 1 ms"
+    ],
+    [
+     "0x7E ACC_SOFTRESET",
+     "[7:0]",
+     "W",
+     "N/A",
+     "0xB0",
+     "FIFO reset"
+    ]
+   ],
+   "notes": [
+    "The reserved field of register 0x58 between bit 4 and bit 2 should read [3], not [5:3]."
+   ]
+  },
+  {
+   "title": "Temperature register values",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "TEMP_MSB",
+    "TEMP_LSB",
+    "Temp_int11",
+    "Temperature"
+   ],
+   "rows": [
+    [
+     "0x3E",
+     "0x00",
+     "496",
+     "85 °C"
+    ],
+    [
+     "0x00",
+     "0x60",
+     "3",
+     "23.375 °C"
+    ],
+    [
+     "0x00",
+     "0x40",
+     "2",
+     "23.250 °C"
+    ],
+    [
+     "0x00",
+     "0x20",
+     "1",
+     "23.125 °C"
+    ],
+    [
+     "0x00",
+     "0x00",
+     "0",
+     "23.0°C"
+    ],
+    [
+     "0xC1",
+     "0x00",
+     "-504",
+     "-40 °C"
+    ],
+    [
+     "0x80",
+     "",
+     "",
+     "Invalid"
+    ]
+   ]
+  },
+  {
+   "title": "Register map: gyroscope",
+   "page": 36,
+   "conditions": "",
+   "columns": [
+    "address",
+    "name",
+    "reset value",
+    "contents (bit 7 to bit 0)"
+   ],
+   "rows": [
+    [
+     "0x3F",
+     "FIFO_DATA",
+     "N/A",
+     "fifo_data_output_register"
+    ],
+    [
+     "0x3E",
+     "FIFO_CONFIG_1",
+     "0x00",
+     "fifo_mode (bit 7), - (bits 6:0)"
+    ],
+    [
+     "0x3D",
+     "FIFO_CONFIG_0",
+     "0x00",
+     "-, fifo_water_mark_level_trigger_retain (bits 6:0)"
+    ],
+    [
+     "0x3C",
+     "GYRO_SELF_TEST",
+     "N/A",
+     "- (bits 7:5), rate_ok, -, bist_fail, bist_rdy, trig_bist"
+    ],
+    [
+     "0x3B - 0x35",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x34",
+     "FIFO_EXT_INT_S",
+     "0x00",
+     "- (bits 7:6), ext_fifo_s_en, ext_fifo_s_sel, - (bits 3:0)"
+    ],
+    [
+     "0x33 - 0x1F",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x1E",
+     "FIFO_WM_EN",
+     "0x00",
+     "fifo_watermark_enable"
+    ],
+    [
+     "0x1D - 0x19",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x18",
+     "INT3_INT4_IO_MAP",
+     "0x00",
+     "Int4_data, -, Int4_fifo, - (bits 4:3), Int3_fifo, -, Int3_data"
+    ],
+    [
+     "0x17",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x16",
+     "INT3_INT4_IO_CONF",
+     "0x0F",
+     "- (bits 7:4), Int4_od, Int4_lvl, Int3_od, Int3_lvl"
+    ],
+    [
+     "0x15",
+     "GYRO_INT_CTRL",
+     "0x00",
+     "data_en, fifo_en, - (bits 5:0)"
+    ],
+    [
+     "0x14",
+     "GYRO_SOFTRESET",
+     "N/A",
+     "softreset"
+    ],
+    [
+     "0x13 - 0x12",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x11",
+     "GYRO_LPM1",
+     "0x00",
+     "gyro_pm"
+    ],
+    [
+     "0x10",
+     "GYRO_BANDWIDTH",
+     "0x80",
+     "gyro_bw"
+    ],
+    [
+     "0x0F",
+     "GYRO_RANGE",
+     "0x00",
+     "gyro_range"
+    ],
+    [
+     "0x0E",
+     "FIFO_STATUS",
+     "N/A",
+     "fifo_overrun (bit 7), fifo_frame_counter (bits 6:0)"
+    ],
+    [
+     "0x0D - 0x0B",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x0A",
+     "GYRO_INT_STAT_1",
+     "N/A",
+     "gyro_drdy (bit 7), - (bits 6:5), fifo_int (bit 4), - (bits 3:0)"
+    ],
+    [
+     "0x09 - 0x08",
+     "reserved",
+     "",
+     ""
+    ],
+    [
+     "0x07",
+     "RATE_Z_MSB",
+     "N/A",
+     "rate_z[15:8]"
+    ],
+    [
+     "0x06",
+     "RATE_Z_LSB",
+     "N/A",
+     "rate_z[7:0]"
+    ],
+    [
+     "0x05",
+     "RATE_Y_MSB",
+     "N/A",
+     "rate_y[15:8]"
+    ],
+    [
+     "0x04",
+     "RATE_Y_LSB",
+     "N/A",
+     "rate_y[7:0]"
+    ],
+    [
+     "0x03",
+     "RATE_X_MSB",
+     "N/A",
+     "rate_x[15:8]"
+    ],
+    [
+     "0x02",
+     "RATE_X_LSB",
+     "N/A",
+     "rate_x[7:0]"
+    ],
+    [
+     "0x01",
+     "Reserved",
+     "N/A",
+     "-"
+    ],
+    [
+     "0x00",
+     "GYRO_CHIP_ID",
+     "0x0F",
+     "gyro_chip_id"
+    ]
+   ],
+   "notes": [
+    "The register descriptions give reset 0x08 for FIFO_CONFIG_1 (0x3E) and FIFO_WM_EN (0x1E); the register map gives 0x00."
+   ]
+  },
+  {
+   "title": "GYRO_RANGE (0x0F) settings",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "gyro_range",
+    "full scale [°/s]",
+    "resolution"
+   ],
+   "rows": [
+    [
+     "0x00",
+     "±2000",
+     "16.384 LSB/°/s, 61.0 m°/s / LSB"
+    ],
+    [
+     "0x01",
+     "±1000",
+     "32.768 LSB/°/s, 30.5 m°/s / LSB"
+    ],
+    [
+     "0x02",
+     "±500",
+     "65.536 LSB/°/s, 15.3 m°/s / LSB"
+    ],
+    [
+     "0x03",
+     "±250",
+     "131.072 LSB/°/s, 7.6 m°/s / LSB"
+    ],
+    [
+     "0x04",
+     "±125",
+     "262.144 LSB/°/s, 3.8m°/s / LSB"
+    ]
+   ]
+  },
+  {
+   "title": "GYRO_BANDWIDTH (0x10) settings",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "gyro_bw",
+    "ODR [Hz]",
+    "filter bandwidth [Hz]"
+   ],
+   "rows": [
+    [
+     "0x00",
+     "2000",
+     "532"
+    ],
+    [
+     "0x01",
+     "2000",
+     "230"
+    ],
+    [
+     "0x02",
+     "1000",
+     "116"
+    ],
+    [
+     "0x03",
+     "400",
+     "47"
+    ],
+    [
+     "0x04",
+     "200",
+     "23"
+    ],
+    [
+     "0x05",
+     "100",
+     "12"
+    ],
+    [
+     "0x06",
+     "200",
+     "64"
+    ],
+    [
+     "0x07",
+     "100",
+     "32"
+    ]
+   ],
+   "notes": [
+    "Bit 7 is read-only, always reads 1 and has no function."
+   ]
+  },
+  {
+   "title": "Gyroscope register fields and codes",
+   "page": 37,
+   "conditions": "",
+   "columns": [
+    "register",
+    "field (bits)",
+    "access",
+    "reset",
+    "code",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "0x00 GYRO_CHIP_ID",
+     "[7:0]",
+     "RO",
+     "0x0F",
+     "0x0F",
+     "gyroscope identifier"
+    ],
+    [
+     "0x0A GYRO_INT_STAT_1",
+     "gyro_drdy [7]",
+     "RO",
+     "N/A",
+     "1",
+     "data-ready interrupt; clears itself after 280-400 µs"
+    ],
+    [
+     "0x0A GYRO_INT_STAT_1",
+     "fifo_int [4]",
+     "RO",
+     "N/A",
+     "1",
+     "FIFO interrupt"
+    ],
+    [
+     "0x0E FIFO_STATUS",
+     "Fifo_overrun [7]",
+     "RO",
+     "N/A",
+     "1",
+     "FIFO overrun; cleared only by writing FIFO_CONFIG_1"
+    ],
+    [
+     "0x0E FIFO_STATUS",
+     "Fifo_frame_counter [6:0]",
+     "RO",
+     "N/A",
+     "n",
+     "frames in the FIFO; 0x00 is empty"
+    ],
+    [
+     "0x11 GYRO_LPM1",
+     "gyro_pm [7:0]",
+     "RW",
+     "0x00",
+     "0x00",
+     "normal"
+    ],
+    [
+     "0x11 GYRO_LPM1",
+     "gyro_pm [7:0]",
+     "RW",
+     "0x00",
+     "0x80",
+     "suspend"
+    ],
+    [
+     "0x11 GYRO_LPM1",
+     "gyro_pm [7:0]",
+     "RW",
+     "0x00",
+     "0x20",
+     "deep suspend"
+    ],
+    [
+     "0x14 GYRO_SOFTRESET",
+     "[7:0]",
+     "W",
+     "N/A",
+     "0xB6",
+     "soft reset; registers return to reset values after 30 ms; other values ignored"
+    ],
+    [
+     "0x15 GYRO_INT_CTRL",
+     "[7]",
+     "RW",
+     "0x0",
+     "1",
+     "new-data interrupt enabled"
+    ],
+    [
+     "0x15 GYRO_INT_CTRL",
+     "[6]",
+     "RW",
+     "0x0",
+     "1",
+     "FIFO interrupt enabled"
+    ],
+    [
+     "0x16 INT3_INT4_IO_CONF",
+     "Int4_od [3]",
+     "RW",
+     "'1'",
+     "'0' / '1'",
+     "push-pull / open-drain"
+    ],
+    [
+     "0x16 INT3_INT4_IO_CONF",
+     "Int4_lvl [2]",
+     "RW",
+     "'1'",
+     "'0' / '1'",
+     "active low / active high"
+    ],
+    [
+     "0x16 INT3_INT4_IO_CONF",
+     "Int3_od [1]",
+     "RW",
+     "'1'",
+     "'0' / '1'",
+     "push-pull / open-drain"
+    ],
+    [
+     "0x16 INT3_INT4_IO_CONF",
+     "Int3_lvl [0]",
+     "RW",
+     "'1'",
+     "'0' / '1'",
+     "active low / active high"
+    ],
+    [
+     "0x18 INT3_INT4_IO_MAP",
+     "[7]",
+     "RW",
+     "0x0",
+     "1",
+     "data ready to INT4"
+    ],
+    [
+     "0x18 INT3_INT4_IO_MAP",
+     "[5]",
+     "RW",
+     "0x0",
+     "1",
+     "FIFO interrupt to INT4"
+    ],
+    [
+     "0x18 INT3_INT4_IO_MAP",
+     "[2]",
+     "RW",
+     "0x0",
+     "1",
+     "FIFO interrupt to INT3"
+    ],
+    [
+     "0x18 INT3_INT4_IO_MAP",
+     "[0]",
+     "RW",
+     "0x0",
+     "1",
+     "data ready to INT3"
+    ],
+    [
+     "0x1E FIFO_WM_ENABLE",
+     "[7:0]",
+     "RW",
+     "0x08",
+     "0x08",
+     "FIFO watermark interrupt disabled"
+    ],
+    [
+     "0x1E FIFO_WM_ENABLE",
+     "[7:0]",
+     "RW",
+     "0x08",
+     "0x88",
+     "FIFO watermark interrupt enabled"
+    ],
+    [
+     "0x34 FIFO_EXT_INT_S",
+     "[5]",
+     "RW",
+     "0x00",
+     "1",
+     "external FIFO synchronisation on"
+    ],
+    [
+     "0x34 FIFO_EXT_INT_S",
+     "ext_fifo_s_sel [4]",
+     "RW",
+     "0x00",
+     "0x0 / 0x1",
+     "source pin INT3 / INT4"
+    ],
+    [
+     "0x3C GYRO_SELF_TEST",
+     "rate_ok [4]",
+     "R",
+     "'0'",
+     "1",
+     "sensor working"
+    ],
+    [
+     "0x3C GYRO_SELF_TEST",
+     "bist_fail [2]",
+     "R",
+     "'0'",
+     "0 / 1",
+     "with bist_rdy = 1: self-test passed / failed"
+    ],
+    [
+     "0x3C GYRO_SELF_TEST",
+     "bist_rdy [1]",
+     "R",
+     "'0'",
+     "1",
+     "self-test finished"
+    ],
+    [
+     "0x3C GYRO_SELF_TEST",
+     "trig_bist [0]",
+     "W",
+     "N/A",
+     "1",
+     "start self-test (write 0x01)"
+    ],
+    [
+     "0x3D FIFO_CONFIG_0",
+     "[6:0]",
+     "RW",
+     "0x00",
+     "n",
+     "watermark level in frames; writing clears the FIFO"
+    ],
+    [
+     "0x3E FIFO_CONFIG_1",
+     "fifo_mode [7:0]",
+     "RW",
+     "0x08",
+     "0x40",
+     "FIFO: collection stops when full (100 frames)"
+    ],
+    [
+     "0x3E FIFO_CONFIG_1",
+     "fifo_mode [7:0]",
+     "RW",
+     "0x08",
+     "0x80",
+     "STREAM: sampling goes on when full (99 frames), oldest discarded"
+    ],
+    [
+     "0x3E FIFO_CONFIG_1",
+     "fifo_mode [7:0]",
+     "RW",
+     "0x08",
+     "else",
+     "reserved"
+    ],
+    [
+     "0x3F FIFO_DATA",
+     "[7:0]",
+     "",
+     "N/A",
+     "",
+     "FIFO readout; each frame is X LSB, X MSB, Y LSB, Y MSB, Z LSB, Z MSB (6 bytes)"
+    ]
+   ]
+  },
+  {
+   "title": "Mapping of the interface pins",
+   "page": 44,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "name",
+    "use with SPI",
+    "use with I²C",
+    "description"
+   ],
+   "rows": [
+    [
+     "15",
+     "SDO1",
+     "SDO1",
+     "address",
+     "SPI: accelerometer data out; I²C: low bit of the accelerometer address"
+    ],
+    [
+     "10",
+     "SDO2",
+     "SDO2",
+     "address",
+     "SPI: gyroscope data out; I²C: low bit of the gyroscope address"
+    ],
+    [
+     "9",
+     "SDA / SDI",
+     "SDI",
+     "SDA",
+     "SPI: data in for both sensors; I²C: serial data"
+    ],
+    [
+     "14",
+     "CSB1",
+     "CSB1",
+     "unused",
+     "SPI: accelerometer chip select"
+    ],
+    [
+     "5",
+     "CSB2",
+     "CSB2",
+     "unused",
+     "SPI: gyroscope chip select"
+    ],
+    [
+     "8",
+     "SCL / SCK",
+     "SCK",
+     "SCL",
+     "serial clock"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical specification of the interface pins",
+   "page": 45,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Pull-up Resistance, CSB pin",
+     "Rup",
+     "Internal Pull-up Resistance to VDDIO",
+     "75",
+     "100",
+     "125",
+     "kΩ"
+    ],
+    [
+     "Input Capacitance",
+     "Cin",
+     "",
+     "",
+     "5",
+     "10",
+     "pF"
+    ],
+    [
+     "I²C Bus Load Capacitance (max. drive capability)",
+     "CI2C_Load",
+     "",
+     "",
+     "",
+     "400",
+     "pF"
+    ]
+   ]
+  },
+  {
+   "title": "SPI timing",
+   "page": 46,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Clock Frequency",
+     "fSPI",
+     "Max. Load on SDI or SDO = 25pF",
+     "",
+     "10",
+     "MHz"
+    ],
+    [
+     "SCK Low Pulse",
+     "tSCKL",
+     "",
+     "45",
+     "",
+     "ns"
+    ],
+    [
+     "SCK High Pulse",
+     "tSCKH",
+     "",
+     "45",
+     "",
+     "ns"
+    ],
+    [
+     "SDI Setup Time",
+     "tSDI_setup",
+     "",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "SDI Hold Time",
+     "tSDI_hold",
+     "",
+     "20",
+     "",
+     "ns"
+    ],
+    [
+     "SDO Output Delay",
+     "tSDO_OD",
+     "Load = 25pF",
+     "",
+     "30",
+     "ns"
+    ],
+    [
+     "SDO Output Delay",
+     "tSDO_OD",
+     "Load = 250pF, VDDIO > 2.4V",
+     "",
+     "40",
+     "ns"
+    ],
+    [
+     "CSB Setup Time",
+     "tCSB_setup",
+     "",
+     "40",
+     "",
+     "ns"
+    ],
+    [
+     "CSB Hold Time",
+     "tCSB_hold",
+     "",
+     "40",
+     "",
+     "ns"
+    ],
+    [
+     "Idle time between write accesses",
+     "tIDLE_wacc",
+     "normal mode",
+     "2",
+     "",
+     "µs"
+    ]
+   ]
+  },
+  {
+   "title": "I²C addresses",
+   "page": 48,
+   "conditions": "7-bit addresses",
+   "columns": [
+    "sensor",
+    "address pin",
+    "pin level",
+    "address"
+   ],
+   "rows": [
+    [
+     "Accelerometer",
+     "SDO1",
+     "GND",
+     "0011000b (0x18)"
+    ],
+    [
+     "Accelerometer",
+     "SDO1",
+     "VDDIO",
+     "0011001b (0x19)"
+    ],
+    [
+     "Gyroscope",
+     "SDO2",
+     "GND",
+     "1101000b (0x68)"
+    ],
+    [
+     "Gyroscope",
+     "SDO2",
+     "VDDIO",
+     "1101001b (0x69)"
+    ]
+   ]
+  },
+  {
+   "title": "I²C timings",
+   "page": 49,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Clock Frequency",
+     "fSCL",
+     "",
+     "400",
+     "kHz"
+    ],
+    [
+     "SCL Low Period",
+     "tLOW",
+     "1.3",
+     "",
+     "µs"
+    ],
+    [
+     "SCL High Period",
+     "tHIGH",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "SDA Setup Time",
+     "tSUDAT",
+     "0.1",
+     "",
+     "µs"
+    ],
+    [
+     "SDA Hold Time",
+     "tHDDAT",
+     "0.0",
+     "",
+     "µs"
+    ],
+    [
+     "Setup Time for a repeated Start Condition",
+     "tSUSTA",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Hold Time for a Start Condition",
+     "tHDSTA",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Setup Time for a Stop Condition",
+     "tSUSTO",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Time before a new Transmission can start",
+     "tBUF",
+     "1.3",
+     "",
+     "µs"
+    ],
+    [
+     "Idle time between write accesses, normal mode",
+     "tIDLE_wacc_nm",
+     "2",
+     "",
+     "µs"
+    ],
+    [
+     "Idle time between write accesses, suspend mode",
+     "tIDLE_wacc_sum",
+     "450",
+     "",
+     "µs"
+    ]
+   ]
+  },
+  {
+   "title": "Accelerometer output by orientation at rest",
+   "page": 56,
+   "conditions": "Gravity pointing down; gyroscope outputs 0 °/s in every case",
+   "columns": [
+    "output",
+    "on edge, long side vertical, pin-1 mark at bottom left",
+    "on edge, long side horizontal, pin-1 mark at top left",
+    "on edge, long side vertical, pin-1 mark at top right",
+    "on edge, long side horizontal, pin-1 mark at bottom right",
+    "flat, top face up",
+    "flat, top face down"
+   ],
+   "rows": [
+    [
+     "Output Signal X",
+     "0g",
+     "+1g",
+     "0g",
+     "-1g",
+     "0g",
+     "0g"
+    ],
+    [
+     "Output Signal Y",
+     "-1g",
+     "0g",
+     "+1g",
+     "0g",
+     "0g",
+     "0g"
+    ],
+    [
+     "Output Signal Z",
+     "0g",
+     "0g",
+     "0g",
+     "0g",
+     "+1g",
+     "-1g"
+    ]
+   ]
+  },
+  {
+   "title": "Marking of mass production parts",
+   "page": 57,
+   "conditions": "Three lines: 365 / LYYWW / CCC, with a pin-1 dot",
+   "columns": [
+    "name",
+    "symbol",
+    "remark"
+   ],
+   "rows": [
+    [
+     "Product number",
+     "365",
+     "3 numeric digits, fixed, identify the product type"
+    ],
+    [
+     "Sub-con ID",
+     "L",
+     "1 alphanumeric digit, variable, identifies the subcontractor"
+    ],
+    [
+     "Date-Code",
+     "YYWW",
+     "4 numeric digits: YY year, WW working week"
+    ],
+    [
+     "Lot counter",
+     "CCC",
+     "3 alphanumeric digits, variable, mass-production trace code"
+    ],
+    [
+     "Pin 1 identifier",
+     "•",
+     "--"
+    ]
+   ]
+  },
+  {
+   "title": "Marking of engineering samples",
+   "page": 57,
+   "conditions": "Three lines: 088N / PYYWW / CC, with a pin-1 dot",
+   "columns": [
+    "name",
+    "symbol",
+    "remark"
+   ],
+   "rows": [
+    [
+     "Eng. sample ID",
+     "N",
+     "1 alphanumeric digit, fixed: \"+\", \"e\" or \"E\""
+    ],
+    [
+     "Sample ID",
+     "PYYWW",
+     "P assembly house; YYWW year (last 2 digits) and work week"
+    ],
+    [
+     "Counter ID",
+     "CC",
+     "C-samples and lot number (e.g. C5: C-samples, 5th lot)"
+    ],
+    [
+     "Pin 1 identifier",
+     "•",
+     "--"
+    ]
+   ]
+  },
+  {
+   "title": "PCB land and stencil guidelines",
+   "page": 57,
+   "conditions": "",
+   "columns": [
+    "item",
+    "value"
+   ],
+   "rows": [
+    [
+     "PCB land width",
+     "LGA solder pin width"
+    ],
+    [
+     "PCB land length",
+     "LGA solder pin length + 0.1 mm on each side"
+    ],
+    [
+     "Solder mask opening width",
+     "PCB land width + 0.05 mm on each side"
+    ],
+    [
+     "Solder mask opening length",
+     "PCB land length + 0.05 mm on each side"
+    ],
+    [
+     "Stencil opening, signal pads",
+     "70% to 90% of the PCB pad area"
+    ],
+    [
+     "Stencil to PCB alignment",
+     "within 0.025mm"
+    ],
+    [
+     "Stencil thickness",
+     "80 – 150 μm"
+    ],
+    [
+     "Moisture sensitivity level",
+     "JEDEC Level 1"
+    ],
+    [
+     "Reflow peak temperature",
+     "up to 260°C"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel",
+   "page": 58,
+   "conditions": "Dimensions in mm",
+   "columns": [
+    "item",
+    "value"
+   ],
+   "rows": [
+    [
+     "Parts per reel",
+     "5,000pcs"
+    ],
+    [
+     "Box per reel, L x W x H",
+     "35cm x 35cm x 5cm"
+    ],
+    [
+     "Tape width",
+     "12.0 +0.3/-0.1"
+    ],
+    [
+     "Pocket pitch",
+     "8.00"
+    ],
+    [
+     "Sprocket hole pitch",
+     "4.00"
+    ],
+    [
+     "Sprocket hole diameter",
+     "Ø 1.5 +0.1/-0.0"
+    ],
+    [
+     "Pocket hole diameter",
+     "Ø 1.50 MIN"
+    ],
+    [
+     "Sprocket hole to pocket centre, along the tape",
+     "2.00 ±.05"
+    ],
+    [
+     "Sprocket hole row to tape edge",
+     "1.75 ±.10"
+    ],
+    [
+     "Sprocket hole row to pocket centre line",
+     "5.50 ±.05"
+    ],
+    [
+     "Tape thickness",
+     "0.30 ±.05"
+    ],
+    [
+     "Pocket corner radius",
+     "R 0.20 MAX."
+    ],
+    [
+     "A0",
+     "4.85"
+    ],
+    [
+     "B0",
+     "3.35"
+    ],
+    [
+     "K0",
+     "1.20"
+    ]
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "spi",
+   "title": "SPI connection",
+   "page": 53,
+   "description": "The part on a 4-wire SPI bus. PS and the NC pin go to ground, which puts the gyroscope on SPI; the accelerometer follows after the first rising edge on its chip select CSB1. Both data outputs, SDO1 and SDO2, join the one MISO line, and the host picks a sensor with CSB_ACCEL or CSB_GYRO. VDD and VDDIO each have a 100 nF capacitor to ground, and the two grounds are joined. The four interrupt lines go to the host.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BMI088"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "MOSI",
+     "type": "terminal",
+     "value": "MOSI"
+    },
+    {
+     "ref": "MISO",
+     "type": "terminal",
+     "value": "MISO"
+    },
+    {
+     "ref": "CSB_ACCEL",
+     "type": "terminal",
+     "value": "CSB_ACCEL"
+    },
+    {
+     "ref": "CSB_GYRO",
+     "type": "terminal",
+     "value": "CSB_GYRO"
+    },
+    {
+     "ref": "INT1_ACCEL",
+     "type": "terminal",
+     "value": "INT1_ACCEL"
+    },
+    {
+     "ref": "INT2_ACCEL",
+     "type": "terminal",
+     "value": "INT2_ACCEL"
+    },
+    {
+     "ref": "INT3_GYRO",
+     "type": "terminal",
+     "value": "INT3_GYRO"
+    },
+    {
+     "ref": "INT4_GYRO",
+     "type": "terminal",
+     "value": "INT4_GYRO"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "i2c",
+   "title": "I²C connection",
+   "page": 53,
+   "description": "The part on an I²C bus. PS and CSB1 go to VDDIO, putting both sensors on I²C, and CSB2 is left floating. SDO1 and SDO2 become the address inputs A0_ACCEL and A0_GYRO: low gives 0x18 and 0x68, high gives 0x19 and 0x69. The NC pin goes to ground; VDD and VDDIO each have a 100 nF capacitor to ground. SCL and SDA are pulled up to VDDIO by external resistors. The four interrupt lines go to the host.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BMI088"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF"
+    },
+    {
+     "ref": "SCL",
+     "type": "terminal",
+     "value": "SCL"
+    },
+    {
+     "ref": "SDA",
+     "type": "terminal",
+     "value": "SDA"
+    },
+    {
+     "ref": "A0_ACCEL",
+     "type": "terminal",
+     "value": "A0_ACCEL"
+    },
+    {
+     "ref": "A0_GYRO",
+     "type": "terminal",
+     "value": "A0_GYRO"
+    },
+    {
+     "ref": "INT1_ACCEL",
+     "type": "terminal",
+     "value": "INT1_ACCEL"
+    },
+    {
+     "ref": "INT2_ACCEL",
+     "type": "terminal",
+     "value": "INT2_ACCEL"
+    },
+    {
+     "ref": "INT3_GYRO",
+     "type": "terminal",
+     "value": "INT3_GYRO"
+    },
+    {
+     "ref": "INT4_GYRO",
+     "type": "terminal",
+     "value": "INT4_GYRO"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Accelerometer raw value",
+   "expr": "Accel_int16 = ACC_MSB × 256 + ACC_LSB",
+   "where": {
+    "ACC_MSB, ACC_LSB": "the axis's high and low data bytes (0x13/0x12 for X, 0x15/0x14 for Y, 0x17/0x16 for Z)",
+    "Accel_int16": "signed 16-bit two's-complement result"
+   },
+   "note": "",
+   "page": 27
+  },
+  {
+   "name": "Acceleration in mg",
+   "expr": "Accel_mg = Accel_int16 / 32768 × 1000 × 2^(acc_range + 1) × 1.5",
+   "where": {
+    "acc_range": "content of ACC_RANGE (0x41), 0 to 3",
+    "Accel_int16": "raw signed axis value"
+   },
+   "note": "",
+   "page": 27
+  },
+  {
+   "name": "Angular rate",
+   "expr": "Rate = Rate_int16 / S",
+   "where": {
+    "Rate_int16": "RATE_MSB × 256 + RATE_LSB, signed 16-bit",
+    "S": "sensitivity of the GYRO_RANGE setting, 16.384 LSB/°/s at ±2000 °/s to 262.144 LSB/°/s at ±125 °/s"
+   },
+   "note": "At the default ±2000 °/s range, +32767 reads +2000 °/s and -32767 reads -2000 °/s.",
+   "page": 37
+  },
+  {
+   "name": "Temperature",
+   "expr": "Temp_uint11 = TEMP_MSB × 8 + TEMP_LSB / 32; Temp_int11 = Temp_uint11 - 2048 if Temp_uint11 > 1023, else Temp_uint11; T = Temp_int11 × 0.125 °C + 23 °C",
+   "where": {
+    "TEMP_MSB, TEMP_LSB": "registers 0x22 and 0x23",
+    "T": "temperature in °C"
+   },
+   "note": "The value refreshes every 1.28 s.",
+   "page": 28
+  },
+  {
+   "name": "Accelerometer FIFO sample rate",
+   "expr": "f_FIFO = ODR / 2^fifo_downs",
+   "where": {
+    "fifo_downs": "bits 6:4 of FIFO_DOWNS (0x45), 0 to 7",
+    "ODR": "accelerometer output data rate"
+   },
+   "note": "fifo_downs = 5 divides the rate by 32.",
+   "page": 30
+  },
+  {
+   "name": "Sensor time",
+   "expr": "t = sensor_time × 39.0625 µs",
+   "where": {
+    "sensor_time": "24-bit counter in SENSORTIME_2..0 (0x1A..0x18)"
+   },
+   "note": "The middle byte steps every 10 ms, the top byte every 2.56 s, and the whole counter wraps after 655.36 s.",
+   "page": 27
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Two sensors in one package",
+   "page": 13,
+   "text": "The accelerometer and the gyroscope behave as two separate slaves sharing SCK/SCL and SDI/SDA. Each has its own register map, reached by its own chip select (CSB1 for the accelerometer, CSB2 for the gyroscope) or its own I²C address, and its own data output, interrupt pins and FIFO. They can be used one at a time or together, with their data synchronised."
+  },
+  {
+   "topic": "Choosing the interface",
+   "page": 13,
+   "text": "The bus is fixed by hardware. The gyroscope reads the PS pin: ground means SPI, VDDIO means I²C. The accelerometer always wakes in I²C mode and changes to SPI on the first rising edge it sees on CSB1, staying there until the next power-on reset; a throwaway SPI read (of ACC_CHIP_ID, for example, whose result is not valid) is enough to make that edge. Setting the two sensors to different interfaces is not advised, since they share pins."
+  },
+  {
+   "topic": "Power-up sequence",
+   "page": 13,
+   "text": "After power-on reset the gyroscope is already in normal mode and the accelerometer is in suspend. To start the accelerometer: apply power, wait 1 ms, write 4 to ACC_PWR_CTRL (0x7D), then wait 450 µs."
+  },
+  {
+   "topic": "Supplies",
+   "page": 14,
+   "text": "VDD feeds the internal blocks and VDDIO mostly the interface. Either may sit anywhere in its own range regardless of the other, and either can be switched off while the other stays on. While VDDIO is off, CSB, SDI, SCK and PS have to stay close to GNDIO. A power-on reset clears the logic and all registers, so every non-default setting has to be written again; it also resets the interface choice."
+  },
+  {
+   "topic": "Accelerometer power modes",
+   "page": 14,
+   "text": "ACC_PWR_CTRL turns both the accelerometer and its temperature sensor on or off: 0x04 for normal mode, 0x00 for suspend. The part sits in suspend after any reset and needs up to 1 ms to boot after a power-on or soft reset, so it must be switched on before it gives acceleration data. ACC_PWR_CONF (0x7C) holds 0x03 for suspend and 0x00 for active."
+  },
+  {
+   "topic": "Gyroscope power modes",
+   "page": 15,
+   "text": "Normal mode samples continuously and is the state after power-up. Suspend (0x80 to GYRO_LPM1) powers down the analog section and stops sampling but keeps the last rate data and every configuration register readable. Deep suspend (0x20 to GYRO_LPM1) keeps only the interface alive and loses the configuration, so settings must be rewritten afterwards. Writing 0x00 or a soft reset returns to normal; moving directly between suspend and deep suspend is not allowed. Any reset or mode change takes up to 30 ms, during which the gyroscope should not be accessed. Consecutive writes need a pause between them."
+  },
+  {
+   "topic": "Reading data",
+   "page": 15,
+   "text": "Sensor data are 16-bit two's complement (11-bit for temperature), each split into a low and a high byte. Read the low byte first: that latches the matching high byte so the two belong to one sample. A burst read increments the address after each byte and holds all data registers of that sensor for as long as it lasts, so one burst gives X, Y and Z from the same sample."
+  },
+  {
+   "topic": "Accelerometer filter and ODR",
+   "page": 16,
+   "text": "The digital low-pass filter's corner follows the output data rate and the oversampling setting chosen in ACC_CONF: normal, 2-fold (OSR2) or 4-fold (OSR4). ODR runs from 12.5 to 1600 Hz; the corner frequencies are in the cut-off table."
+  },
+  {
+   "topic": "Gyroscope filter and ODR",
+   "page": 39,
+   "text": "GYRO_BANDWIDTH picks one of eight pairs of output data rate (100 to 2000 Hz) and filter bandwidth (12 to 532 Hz)."
+  },
+  {
+   "topic": "Accelerometer self-test",
+   "page": 17,
+   "text": "Electrostatic force deflects the proof mass, which exercises the whole signal chain and shows as a fixed offset added to whatever acceleration is present, so the test is run with the part held still. Sequence: write 0x03 to ACC_RANGE (±24 g); write 0xA7 to ACC_CONF (1.6 kHz, normal mode, continuous filter); wait over 2 ms; write 0x0D to ACC_SELF_TEST for positive polarity; wait over 50 ms and read all three axes; write 0x09 for negative polarity; wait over 50 ms and read again; write 0x00 to end the test; compare the positive-minus-negative difference with the minimum table; wait over 50 ms before normal use. A reset afterwards is advised because the test disturbs the interrupt logic; without one, disable the interrupts, change their settings, wait at least 50 ms and enable them again."
+  },
+  {
+   "topic": "Gyroscope self-test",
+   "page": 17,
+   "text": "This test does not move the MEMS structure. Write 1 to trig_bist in GYRO_SELF_TEST; when bist_rdy goes to 1 the result is in bist_fail (0 pass, 1 fail). Bit 4, rate_ok, reports a check that runs continuously in the background and reads 1 when the sensor is working."
+  },
+  {
+   "topic": "Data-ready interrupts",
+   "page": 18,
+   "text": "The accelerometer flags new data in bit 7 of ACC_INT_STAT_1 and can route it to INT1 and/or INT2 through INT1_INT2_MAP_DATA; the pins' drive and polarity are set in INT1_IO_CONF and INT2_IO_CONF. The gyroscope's new-data interrupt fires after each new Z-axis sample, must first be enabled with 0x80 in GYRO_INT_CTRL, clears itself after 280 to 400 µs, and is routed to INT3 and/or INT4 through INT3_INT4_IO_MAP, with pin behaviour set in INT3_INT4_IO_CONF."
+  },
+  {
+   "topic": "Soft reset",
+   "page": 18,
+   "text": "Writing 0xB6 to ACC_SOFTRESET or GYRO_SOFTRESET acts much like a power cycle of that sensor: after a delay (1 ms for the accelerometer, 30 ms for the gyroscope) every setting returns to its default. It works from any mode but must not be sent while NVM is being written. On I²C the accelerometer takes the reset at the SCL rising edge of the ACK bit and carries it out 0.5 to 1 µs later when advanced power save is off; SDA is released at once, whatever SCL is doing. A host that needs a proper ACK for the reset write must first enable advanced power save and disable the sensor and the auxiliary interface."
+  },
+  {
+   "topic": "FIFO modes and interrupts",
+   "page": 19,
+   "text": "Both sensors have a FIFO with two modes: FIFO (stop when full) and STREAM (overwrite the oldest data when full). Each can raise a watermark interrupt at a set fill level and a full interrupt."
+  },
+  {
+   "topic": "Accelerometer FIFO",
+   "page": 19,
+   "text": "1024 bytes, holding frames that each start with a header byte. Enable it with bit 6 of FIFO_CONFIG_1 (0x49); bit 0 of FIFO_CONFIG_0 (0x48) picks STREAM (0, default) or FIFO (1). It fills at the ODR, or slower by 2^k with k from 0 to 7 in FIFO_DOWNS. INT1 or INT2 set as inputs can be recorded as tag bits in each data frame header. A skip frame reports overflowed frames, a sensortime frame appears when the FIFO runs empty during a burst read, an input-config frame marks a range or filter change, and a drop frame stands in for a sample lost to reconfiguration. A partly read frame is sent again whole next time unless an overflow intervenes; reading past the end returns 0x8000. The full interrupt comes when only room for two more frames remains; the watermark interrupt when the byte count reaches FIFO_WTM. Both are routed by INT1_INT2_MAP_DATA and held off while FIFO_DATA is being read; a latched one clears once the status is read and the level is below the threshold. FIFO_LENGTH gives the 14-bit byte count; 0xB0 to ACC_SOFTRESET resets the FIFO. FIFO_DATA must be read as a burst; its address does not increment."
+  },
+  {
+   "topic": "Gyroscope FIFO",
+   "page": 22,
+   "text": "Up to 100 frames, each holding X, Y and Z rate (6 bytes), enabled by choosing a mode in FIFO_CONFIG_1 (0x3E) and filled at the ODR. Read it by burst from FIFO_DATA (0x3F); a frame cut short is lost and the next read starts at a frame boundary. FIFO_STATUS gives the frame count and an overrun flag that clears only on a write to the FIFO configuration. Full interrupt: at 100 frames in FIFO mode, 99 in STREAM mode. Watermark interrupt: at the level in FIFO_CONFIG_0 (0x3D), and writing that register empties the FIFO. At 400 kHz I²C every filter setting can be used; at 200 kHz, rates of 1 kHz and below; at 100 kHz, 400 Hz and below."
+  },
+  {
+   "topic": "Gyroscope external FIFO synchronisation",
+   "page": 22,
+   "text": "One of INT3 or INT4 (not both) can be made an input that tags FIFO data, for example for image and video stabilisation. Bit 5 of FIFO_EXT_INT_S (0x34) turns the mode on and bit 4 picks the pin. The Z-axis LSB then serves as the tag: while the pin is high each new FIFO word carries a 1, and after it falls one more word may still be tagged before the bit returns to 0. The other 15 Z bits keep their meaning, and the tag's time resolution equals the ODR."
+  },
+  {
+   "topic": "Register access",
+   "page": 24,
+   "text": "Registers are 8 bits wide in an 8-bit address space, one map per sensor. Reserved registers are to be ignored. After a write, wait at least 2 µs in normal mode or 1000 µs in suspend mode before the next one; the I²C timing gives tIDLE_wacc_sum as 450 µs minimum."
+  },
+  {
+   "topic": "SPI",
+   "page": 45,
+   "text": "Modes 00 and 11 are both accepted; the part chooses by the level of SCK when CSB falls. Each transfer is 16 bits: bit 0 is read (1) or write (0), bits 1 to 7 the register address, and bits 8 to 15 the data. The part shifts data out as SCK falls and the host samples them as SCK rises. Holding CSB low continues a burst read with the address incrementing. The accelerometer differs on reads: it first sends one byte of no meaning, so a single register takes a 2-byte read and the six acceleration bytes take a 7-byte read from 0x12 with the first byte thrown away. The gyroscope sends no such byte."
+  },
+  {
+   "topic": "I²C",
+   "page": 48,
+   "text": "Standard and fast mode with 7-bit addressing; SCL and SDA need pull-ups to VDDIO. A write is START, address with R/W = 0, register address, data byte, STOP, each byte acknowledged by the part. A read writes the register address, then a repeated START and the address with R/W = 1; the master acknowledges each byte and ends with a NACK and STOP. The address increments through a multi-byte read, and each new read starts from the last address written (0x00 by default). A START followed at once by a STOP, with no SCL clock between, is not recognised."
+  },
+  {
+   "topic": "Sensing axes",
+   "page": 56,
+   "text": "Acceleration or rotation along the marked axes gives positive output. At rest, an axis reads +1 g when gravity points opposite to it: lying flat with the top face up the part reads 0 g on X and Y and +1 g on Z, and the gyroscope reads 0 °/s on all axes."
+  },
+  {
+   "topic": "Layout",
+   "page": 55,
+   "text": "Keep the top copper layer under the part free of vias, traces and other metal. Land pattern tolerances are those of the package drawing."
+  },
+  {
+   "topic": "Handling",
+   "page": 58,
+   "text": "The MEMS element survives shocks of several thousand g, but a hammer blow on or near the part, or a drop onto a hard surface, can go beyond that. ESD protection of 2 kV HBM is built in; normal CMOS precautions still apply. Every terminal must stay within the supply range for correct operation, and no unused input may float; unused INT pins are left unconnected. The part is RoHS compliant and halogen free."
+  }
+ ],
+ "packages": [
+  {
+   "name": "LGA-16 outline",
+   "page": 54,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "body length",
+     "",
+     "4.50",
+     ""
+    ],
+    [
+     "",
+     "body width",
+     "",
+     "3.00",
+     ""
+    ],
+    [
+     "",
+     "overall height",
+     "0.90",
+     "0.95",
+     "1.00"
+    ],
+    [
+     "",
+     "side view, body face to inner line (0.82 ±0.030)",
+     "0.79",
+     "0.82",
+     "0.85"
+    ],
+    [
+     "",
+     "pitch of pads along a row",
+     "",
+     "0.50",
+     ""
+    ],
+    [
+     "",
+     "row pad size (along the row × across)",
+     "",
+     "0.250 × 0.475",
+     ""
+    ],
+    [
+     "",
+     "end pad size (pins 8 and 16, along the length × across)",
+     "",
+     "0.475 × 0.250",
+     ""
+    ],
+    [
+     "",
+     "first to last pad centre in a row (pins 1 to 7)",
+     "",
+     "3.00",
+     ""
+    ],
+    [
+     "",
+     "pin 9 pad centre to body centre line, along the length",
+     "",
+     "1.50",
+     ""
+    ],
+    [
+     "",
+     "centre to centre of the two end pads (pins 8 and 16)",
+     "",
+     "3.83",
+     ""
+    ],
+    [
+     "",
+     "centre to centre of the two pad rows",
+     "",
+     "2.33",
+     ""
+    ],
+    [
+     "",
+     "row centre to body centre line",
+     "",
+     "1.16",
+     ""
+    ],
+    [
+     "",
+     "outer pad edge to body edge (0.10 ±0.05)",
+     "0.05",
+     "0.10",
+     "0.15"
+    ],
+    [
+     "",
+     "pin-1 mark",
+     "",
+     "(0.075X0.300)",
+     ""
+    ],
+    [
+     "",
+     "profile of surface to A and B (4X)",
+     "",
+     "",
+     "0.075"
+    ],
+    [
+     "",
+     "parallelism to C",
+     "",
+     "",
+     "0.10"
+    ],
+    [
+     "",
+     "coplanarity to C",
+     "",
+     "",
+     "0.08"
+    ]
+   ],
+   "notes": [
+    "Tolerance is ±0.05 mm on any decimal without its own."
+   ]
+  },
+  {
+   "name": "LGA-16 recommended land pattern",
+   "page": 55,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "land length",
+     "",
+     "0.675",
+     ""
+    ],
+    [
+     "",
+     "land width",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "land pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "body outline, long side",
+     "",
+     "4.5",
+     ""
+    ],
+    [
+     "",
+     "body outline, short side",
+     "",
+     "3.0",
+     ""
+    ],
+    [
+     "",
+     "inner end of a row land to the long centre line",
+     "",
+     "0.925",
+     ""
+    ],
+    [
+     "",
+     "inner end of an end land (pin 8 or 16) to the short centre line",
+     "",
+     "1.675",
+     ""
+    ]
+   ],
+   "notes": [
+    "Tolerances are those of the package outline."
+   ]
+  }
+ ]
+}

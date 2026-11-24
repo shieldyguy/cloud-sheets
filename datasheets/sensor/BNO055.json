@@ -1,0 +1,5825 @@
+{
+ "sheet": 1,
+ "name": "BNO055",
+ "kind": "sensor",
+ "manufacturer": "Bosch Sensortec",
+ "title": "Intelligent 9-axis absolute orientation sensor",
+ "source": {
+  "revision": "Revision 1.8, October 2021 (BST-BNO055-DS000-18)",
+  "pages": 117
+ },
+ "summary": "The BNO055 combines a three-axis accelerometer, a three-axis gyroscope, a three-axis magnetometer and a Cortex-M0+ microcontroller running sensor fusion in one 28-pin LGA. It outputs raw sensor data or fused orientation as quaternions and Euler angles, plus linear acceleration, gravity and heading, over I2C, HID-I2C or UART. Sensors run from 2.4 V to 3.6 V and the interface from 1.7 V to 3.6 V, from -40 °C to +85 °C.",
+ "key_figures": [
+  [
+   "VDD",
+   "2.4 V to 3.6 V"
+  ],
+  [
+   "VDDIO",
+   "1.7 V to 3.6 V"
+  ],
+  [
+   "Supply current, NDOF 100 Hz",
+   "12.3 mA max"
+  ],
+  [
+   "Suspend current",
+   "0.04 mA max"
+  ],
+  [
+   "Accelerometer range",
+   "±2/±4/±8/±16 g, 14 bit"
+  ],
+  [
+   "Gyroscope range",
+   "±125 to ±2000 °/s, 16 bit"
+  ],
+  [
+   "Magnetometer range",
+   "±1300 µT (x, y), ±2500 µT (z) typ"
+  ],
+  [
+   "Heading accuracy",
+   "±2.5 deg max"
+  ],
+  [
+   "Fusion output rate",
+   "100 Hz (IMU, NDOF)"
+  ],
+  [
+   "Interfaces",
+   "I2C 400 kHz, HID-I2C, UART 115200 bps"
+  ],
+  [
+   "Package",
+   "LGA-28, 3.8 × 5.2 × 1.13 mm"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +85 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "sales part number",
+   "package",
+   "marking"
+  ],
+  "rows": [
+   [
+    "BNO055",
+    "0 273 141 209",
+    "LGA-28, 3.8 × 5.2 mm",
+    "701"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "LGA-28",
+   "page": 106,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "PIN1",
+     "type": "none",
+     "function": "Do not connect (DNC) in every interface mode."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground of the sensor supply domain."
+    },
+    {
+     "pin": "3",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply for the internal sensors, 2.4 V to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "nBOOT_LOAD_PIN",
+     "type": "digital input",
+     "function": "Boot loader select, active low. Held low through reset or power-on, the part starts in boot loader mode; otherwise it starts the application. A 10 kΩ pull-up to VDDIO holds it high in the I2C, UART and HID-I2C connections."
+    },
+    {
+     "pin": "5",
+     "name": "PS1",
+     "type": "digital input",
+     "function": "Protocol select bit 1. GNDIO for I2C and HID-I2C, VDDIO for UART. Must not float."
+    },
+    {
+     "pin": "6",
+     "name": "PS0",
+     "type": "digital input",
+     "function": "Protocol select bit 0. GNDIO for I2C and UART, VDDIO for HID-I2C. Must not float."
+    },
+    {
+     "pin": "7",
+     "name": "SWDIO",
+     "type": "digital I/O",
+     "function": "Serial-wire debug data line of the internal microcontroller."
+    },
+    {
+     "pin": "8",
+     "name": "SWCLK",
+     "type": "digital input",
+     "function": "Serial-wire debug clock of the internal microcontroller."
+    },
+    {
+     "pin": "9",
+     "name": "CAP",
+     "type": "analog",
+     "function": "Connection for an external capacitor; 1 µF to ground in the I2C, UART and HID-I2C connections."
+    },
+    {
+     "pin": "10",
+     "name": "BL_IND",
+     "type": "digital output",
+     "function": "Boot loader indicator output. DNC in every interface mode of the pin function list."
+    },
+    {
+     "pin": "11",
+     "name": "nRESET",
+     "type": "digital input",
+     "function": "Reset, active low. A low level of at least 20 ns triggers a power-on reset."
+    },
+    {
+     "pin": "12",
+     "name": "PIN12",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "13",
+     "name": "PIN13",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "14",
+     "name": "INT",
+     "type": "digital output",
+     "function": "Interrupt output to the host; goes high on an interrupt and stays high until the host clears it."
+    },
+    {
+     "pin": "15",
+     "name": "PIN15",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "16",
+     "name": "PIN16",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "17",
+     "name": "COM3",
+     "type": "digital input",
+     "function": "Interface pin 3. In I2C mode selects the slave address (high: 0x29, low: 0x28); has an internal 20 to 60 kΩ pull-up to VDDIO. Tied to GNDIO for UART and HID-I2C."
+    },
+    {
+     "pin": "18",
+     "name": "COM2",
+     "type": "digital I/O",
+     "function": "Interface pin 2. Tied to GNDIO in all interface modes."
+    },
+    {
+     "pin": "19",
+     "name": "COM1",
+     "type": "digital I/O",
+     "function": "Interface pin 1: SCL in I2C and HID-I2C modes, RX in UART mode."
+    },
+    {
+     "pin": "20",
+     "name": "COM0",
+     "type": "digital I/O",
+     "function": "Interface pin 0: SDA in I2C and HID-I2C modes, TX in UART mode."
+    },
+    {
+     "pin": "21",
+     "name": "PIN21",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "22",
+     "name": "PIN22",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "23",
+     "name": "PIN23",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "24",
+     "name": "PIN24",
+     "type": "none",
+     "function": "Do not connect."
+    },
+    {
+     "pin": "25",
+     "name": "GNDIO",
+     "type": "ground",
+     "function": "Ground of the microcontroller and I/O domain."
+    },
+    {
+     "pin": "26",
+     "name": "XOUT32",
+     "type": "digital output",
+     "function": "Output of the optional 32.768 kHz crystal oscillator; may be left open when the internal clock is used."
+    },
+    {
+     "pin": "27",
+     "name": "XIN32",
+     "type": "digital input",
+     "function": "Input of the optional 32.768 kHz crystal oscillator; may be left open when the internal clock is used."
+    },
+    {
+     "pin": "28",
+     "name": "VDDIO",
+     "type": "power in",
+     "function": "Supply for the microcontroller and the digital interfaces, 1.7 V to 3.6 V."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Operating conditions",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage (only sensors)",
+     "VDD",
+     "--",
+     "2.4",
+     "--",
+     "3.6",
+     "V"
+    ],
+    [
+     "Supply voltage (µC and I/O domain)",
+     "VDDIO",
+     "--",
+     "1.7",
+     "--",
+     "3.6",
+     "V"
+    ],
+    [
+     "Voltage input low level (UART, I2C)",
+     "VDDIO_VIL",
+     "VDDIO = 1.7-2.7V",
+     "--",
+     "--",
+     "0.25 VDDIO",
+     "V"
+    ],
+    [
+     "Voltage input low level (UART, I2C)",
+     "VDDIO_VIL",
+     "VDDIO = 2.7-3.6V",
+     "--",
+     "--",
+     "0.3 VDDIO",
+     "V"
+    ],
+    [
+     "Voltage input high level (UART, I2C)",
+     "VDDIO_VIH",
+     "VDDIO = 1.7-2.7V",
+     "0.7 VDDIO",
+     "--",
+     "--",
+     "V"
+    ],
+    [
+     "Voltage input high level (UART, I2C)",
+     "VDDIO_VIH",
+     "VDDIO = 2.7-3.6V",
+     "0.55 VDDIO",
+     "--",
+     "--",
+     "V"
+    ],
+    [
+     "Voltage output low level (UART, I2C)",
+     "VDDIO_VOL",
+     "VDDIO > 3V, IOL = 20mA",
+     "--",
+     "0.1 VDDIO",
+     "0.2 VDDIO",
+     "V"
+    ],
+    [
+     "Voltage output high level (UART, I2C)",
+     "VDDIO_VOH",
+     "VDDIO > 3V, IOH = 10mA",
+     "0.8 VDDIO",
+     "0.9 VDDIO",
+     "--",
+     "V"
+    ],
+    [
+     "POR voltage threshold on VDDIO-IN rising",
+     "VDDIO_POT+",
+     "VDDIO falls at 1V/ms or slower",
+     "--",
+     "1.45",
+     "--",
+     "V"
+    ],
+    [
+     "POR voltage threshold on VDDIO-IN falling",
+     "VDDIO_POT-",
+     "VDDIO falls at 1V/ms or slower",
+     "--",
+     "0.99",
+     "--",
+     "V"
+    ],
+    [
+     "Operating temperature",
+     "TA",
+     "--",
+     "-40",
+     "--",
+     "+85",
+     "°C"
+    ],
+    [
+     "Total supply current, normal mode at TA (9DOF @100Hz output data rate)",
+     "IDD + IDDIO",
+     "VDD = 3V, VDDIO = 2.5V",
+     "--",
+     "--",
+     "12.3",
+     "mA"
+    ],
+    [
+     "Total supply current, low power mode at TA",
+     "IDD_LPM",
+     "VDD = 3V, VDDIO = 2.5V",
+     "0.33",
+     "2.72#",
+     "",
+     "mA"
+    ],
+    [
+     "Total supply current, suspend mode at TA",
+     "IDD_SuM",
+     "VDD = 3V, VDDIO = 2.5V",
+     "--",
+     "--",
+     "0.04*",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "Unless stated otherwise, values hold over lifetime and the full temperature and voltage ranges; min and max are ±3 sigma.",
+    "#: duty cycle of 80 % in suspend mode and 20 % in normal mode at 9DOF and 100 Hz output data rate.",
+    "*: with I2C as the interface."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: system",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Start-up time",
+     "TSup",
+     "From off to configuration mode",
+     "",
+     "400",
+     "",
+     "ms"
+    ],
+    [
+     "POR time",
+     "TPOR",
+     "From reset to config mode",
+     "",
+     "650",
+     "",
+     "ms"
+    ],
+    [
+     "Data rate",
+     "DR",
+     "see fusion output data rates",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Data rate tolerance, 9DOF @100Hz output data rate (internal oscillator)",
+     "DRtol",
+     "",
+     "",
+     "±1",
+     "",
+     "%"
+    ]
+   ],
+   "notes": [
+    "Unless stated otherwise, values hold over lifetime and the full temperature and voltage ranges; min and max are ±3 sigma."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: accelerometer",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Acceleration range",
+     "gFS2g",
+     "Selectable via serial digital interface",
+     "",
+     "±2",
+     "",
+     "g"
+    ],
+    [
+     "Acceleration range",
+     "gFS4g",
+     "Selectable via serial digital interface",
+     "",
+     "±4",
+     "",
+     "g"
+    ],
+    [
+     "Acceleration range",
+     "gFS8g",
+     "Selectable via serial digital interface",
+     "",
+     "±8",
+     "",
+     "g"
+    ],
+    [
+     "Acceleration range",
+     "gFS16g",
+     "Selectable via serial digital interface",
+     "",
+     "±16",
+     "",
+     "g"
+    ],
+    [
+     "Sensitivity",
+     "S",
+     "All gFSXg values, TA=25°C; accelerometer only mode",
+     "",
+     "1",
+     "",
+     "LSB/mg"
+    ],
+    [
+     "Sensitivity tolerance",
+     "Stol",
+     "Ta=25°C, gFS2g",
+     "",
+     "±1",
+     "±4",
+     "%"
+    ],
+    [
+     "Sensitivity temperature drift",
+     "TCS",
+     "gFS2g, nominal VDD supplies, temp operating conditions",
+     "",
+     "±0.03",
+     "",
+     "%/K"
+    ],
+    [
+     "Sensitivity supply volt. drift",
+     "SVDD",
+     "gFS2g, TA=25°C, VDD_min ≤ VDD ≤ VDD_max",
+     "",
+     "0.065",
+     "0.2",
+     "%/V"
+    ],
+    [
+     "Zero-g offset (x,y,z)",
+     "Offxyz",
+     "gFS2g, TA=25°C, nominal VDD supplies, over life-time",
+     "-150",
+     "±80",
+     "+150",
+     "mg"
+    ],
+    [
+     "Zero-g offset temperature drift",
+     "TCO",
+     "gFS2g, nominal VDD supplies",
+     "",
+     "±1",
+     "+/-3.5",
+     "mg/K"
+    ],
+    [
+     "Zero-g offset supply volt. drift",
+     "OffVDD",
+     "gFS2g, TA=25°C, VDD_min ≤ VDD ≤ VDD_max",
+     "",
+     "1.5",
+     "2.5",
+     "mg/V"
+    ],
+    [
+     "Bandwidth",
+     "bw8",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "8",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth",
+     "bw16",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "16",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth",
+     "bw31",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "31",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth",
+     "bw63",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "63",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth",
+     "bw125",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "125",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth",
+     "bw250",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "250",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth",
+     "bw500",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "500",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth",
+     "bw1000",
+     "2nd order filter, bandwidth programmable",
+     "",
+     "1,000",
+     "",
+     "Hz"
+    ],
+    [
+     "Nonlinearity",
+     "NL",
+     "best fit straight line, gFS2g",
+     "",
+     "0.5",
+     "2",
+     "%FS"
+    ],
+    [
+     "Output noise density",
+     "nrms",
+     "gFS2g, TA=25°C, nominal VDD supplies, normal mode",
+     "",
+     "150",
+     "190",
+     "µg/√Hz"
+    ],
+    [
+     "Cross axis sensitivity",
+     "CAS",
+     "relative contribution between any two of the three axes",
+     "",
+     "1",
+     "2",
+     "%"
+    ],
+    [
+     "Alignment error",
+     "EA",
+     "relative to package outline",
+     "",
+     "0.5",
+     "2",
+     "°"
+    ]
+   ],
+   "notes": [
+    "Unless stated otherwise, values hold over lifetime and the full temperature and voltage ranges; min and max are ±3 sigma.",
+    "Output signal rows are measured in accelerometer only mode."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: gyroscope",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Rate range",
+     "RFS125",
+     "Selectable via serial digital interface",
+     "",
+     "125",
+     "",
+     "°/s"
+    ],
+    [
+     "Rate range",
+     "RFS250",
+     "Selectable via serial digital interface",
+     "",
+     "250",
+     "",
+     "°/s"
+    ],
+    [
+     "Rate range",
+     "RFS500",
+     "Selectable via serial digital interface",
+     "",
+     "500",
+     "",
+     "°/s"
+    ],
+    [
+     "Rate range",
+     "RFS1000",
+     "Selectable via serial digital interface",
+     "",
+     "1,000",
+     "",
+     "°/s"
+    ],
+    [
+     "Rate range",
+     "RFS2000",
+     "Selectable via serial digital interface",
+     "",
+     "2,000",
+     "",
+     "°/s"
+    ],
+    [
+     "Sensitivity via register map",
+     "S",
+     "Ta=25°C",
+     "",
+     "16.0",
+     "",
+     "LSB/°/s"
+    ],
+    [
+     "Sensitivity via register map",
+     "S",
+     "Ta=25°C",
+     "",
+     "900",
+     "",
+     "rad/s"
+    ],
+    [
+     "Sensitivity tolerance",
+     "Stol",
+     "Ta=25°C, RFS2000",
+     "--",
+     "±1",
+     "±3",
+     "%"
+    ],
+    [
+     "Sensitivity change over temperature",
+     "TCS",
+     "Nominal VDD supplies, -40°C ≤ TA ≤ +85°C, RFS2000",
+     "",
+     "±0.03",
+     "±0.07",
+     "%/K"
+    ],
+    [
+     "Sensitivity supply volt. drift",
+     "SVDD",
+     "TA=25°C, VDD_min ≤ VDD ≤ VDD_max",
+     "",
+     "<0.4",
+     "",
+     "%/V"
+    ],
+    [
+     "Nonlinearity",
+     "NL",
+     "best fit straight line, RFS1000, RFS2000",
+     "",
+     "±0.05",
+     "±0.2",
+     "%FS"
+    ],
+    [
+     "Zero-rate offset",
+     "Off Ωx Ωy and Ωz",
+     "Nominal VDD supplies, TA=25°C, slow and fast offset cancellation off",
+     "-3",
+     "±1",
+     "+3",
+     "°/s"
+    ],
+    [
+     "Zero-Ω offset change over temperature",
+     "TCO",
+     "Nominal VDD supplies, -40°C ≤ TA ≤ +85°C, RFS2000",
+     "",
+     "±0.015",
+     "±0.03",
+     "°/s per K"
+    ],
+    [
+     "Zero-Ω offset supply volt. drift",
+     "OffΩVDD",
+     "TA=25°C, VDD_min ≤ VDD ≤ VDD_max",
+     "",
+     "0.1",
+     "",
+     "°/s /V"
+    ],
+    [
+     "Output noise",
+     "nrms",
+     "rms, BW=47Hz (@ 0.014°/s/√Hz)",
+     "",
+     "0.1",
+     "0.3",
+     "°/s"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "523",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "230",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "116",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "64",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "47",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "32",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "23",
+     "",
+     "Hz"
+    ],
+    [
+     "Bandwidth BW",
+     "f-3dB",
+     "",
+     "",
+     "12",
+     "",
+     "Hz"
+    ],
+    [
+     "Cross axis sensitivity",
+     "CAS",
+     "Sensitivity to stimuli in non-sense-direction",
+     "",
+     "±1",
+     "±3",
+     "%"
+    ]
+   ],
+   "notes": [
+    "Unless stated otherwise, values hold over lifetime and the full temperature and voltage ranges; min and max are ±3 sigma.",
+    "Output signal rows are measured in gyroscope only mode.",
+    "Misprint: the unit of the 900 figure should read LSB/(rad/s)."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: magnetometer",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Magnetic field range (1)",
+     "Brg,xy",
+     "TA=25°C",
+     "±1200",
+     "±1300",
+     "",
+     "µT"
+    ],
+    [
+     "Magnetic field range (1)",
+     "Brg,z",
+     "TA=25°C",
+     "±2000",
+     "±2500",
+     "",
+     "µT"
+    ],
+    [
+     "Magnetometer heading accuracy (2)",
+     "As heading",
+     "30µT horizontal geomagnetic field component, TA=25°C",
+     "",
+     "",
+     "±2.5",
+     "deg"
+    ],
+    [
+     "Device resolution",
+     "Dres,m",
+     "TA=25°C",
+     "",
+     "0.3",
+     "",
+     "µT"
+    ],
+    [
+     "Gain error (3)",
+     "Gerr,m",
+     "After API compensation, TA=25°C, nominal VDD supplies",
+     "",
+     "±5",
+     "±8",
+     "%"
+    ],
+    [
+     "Sensitivity temperature drift",
+     "TCSm",
+     "After API compensation, -40°C ≤ TA ≤ +85°C, nominal VDD supplies",
+     "",
+     "±0.01",
+     "±0.03",
+     "%/K"
+    ],
+    [
+     "Zero-B offset",
+     "OFFm",
+     "TA=25°C",
+     "",
+     "±40",
+     "",
+     "µT"
+    ],
+    [
+     "Zero-B offset (4)",
+     "OFFm,cal",
+     "After calibration in fusion mode, -40°C ≤ TA ≤ +85°C",
+     "",
+     "±2",
+     "",
+     "µT"
+    ],
+    [
+     "Zero-B offset temperature drift",
+     "TCOm",
+     "-40°C ≤ TA ≤ +85°C",
+     "",
+     "±0.23",
+     "±0.37",
+     "µT/K"
+    ],
+    [
+     "Full-scale nonlinearity",
+     "NLm, FS",
+     "best fit straight line",
+     "",
+     "",
+     "1",
+     "%FS"
+    ],
+    [
+     "Output noise",
+     "nrms,lp,m,xy",
+     "Low power preset, x, y-axis, TA=25°C, nominal VDD supplies",
+     "",
+     "1.0",
+     "",
+     "µT"
+    ],
+    [
+     "Output noise",
+     "nrms,lp,m,z",
+     "Low power preset, z-axis, TA=25°C, nominal VDD supplies",
+     "",
+     "1.4",
+     "",
+     "µT"
+    ],
+    [
+     "Output noise",
+     "nrms,rg,m",
+     "Regular preset, TA=25°C, nominal VDD supplies",
+     "",
+     "0.6",
+     "",
+     "µT"
+    ],
+    [
+     "Output noise",
+     "nrms,eh,m",
+     "Enhanced regular preset, TA=25°C, nominal VDD supplies",
+     "",
+     "0.5",
+     "",
+     "µT"
+    ],
+    [
+     "Output noise",
+     "nrms,ha,m",
+     "High accuracy preset, TA=25°C, nominal VDD supplies",
+     "",
+     "0.3",
+     "",
+     "µT"
+    ],
+    [
+     "Power supply rejection rate",
+     "PSRRm",
+     "TA=25°C, nominal VDD supplies",
+     "",
+     "±0.5",
+     "",
+     "µT/V"
+    ]
+   ],
+   "notes": [
+    "Unless stated otherwise, values hold over lifetime and the full temperature and voltage ranges; min and max are ±3 sigma.",
+    "Range and heading accuracy rows are measured in magnetometer only mode.",
+    "(1) The full linear range, with the sensor offsets taken into account.",
+    "(2) Heading accuracy rests on both hardware and software; it assumes complete calibration and perfect tilt compensation.",
+    "(3) Gain error is the field read after API compensation divided by the applied field, minus 1.",
+    "(4) A typical figure, reached once calibration in a fusion mode has seen movements through many device orientations, as in normal use."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage at supply pin",
+     "VDD pin",
+     "",
+     "-0.3",
+     "4.2",
+     "V"
+    ],
+    [
+     "Voltage at supply pin",
+     "VDDIO pin",
+     "",
+     "-0.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Voltage at any logic pin",
+     "Vnon-supply pin",
+     "",
+     "-0.3",
+     "VDDIO+0.3",
+     "V"
+    ],
+    [
+     "Passive storage temp. range",
+     "Trps",
+     "≤ 65% rel. H.",
+     "-50",
+     "+150",
+     "°C"
+    ],
+    [
+     "Mechanical shock",
+     "MechShock200µs",
+     "Duration ≤ 200µs",
+     "",
+     "10,000",
+     "g"
+    ],
+    [
+     "Mechanical shock",
+     "MechShock1ms",
+     "Duration ≤ 1.0ms",
+     "",
+     "2,000",
+     "g"
+    ],
+    [
+     "Mechanical shock",
+     "MechShockfreefall",
+     "Free fall onto hard surfaces",
+     "",
+     "1.8",
+     "m"
+    ],
+    [
+     "ESD",
+     "ESDHBM",
+     "HBM, at any pin",
+     "",
+     "2",
+     "kV"
+    ],
+    [
+     "ESD",
+     "ESDCDM",
+     "CDM",
+     "",
+     "500",
+     "V"
+    ],
+    [
+     "ESD",
+     "ESDMM",
+     "MM",
+     "",
+     "200",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Beyond these limits the device can be damaged; going past the electrical limits can harm reliability or cause faulty operation."
+   ]
+  },
+  {
+   "title": "Power mode selection",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "power mode",
+    "PWR_MODE value"
+   ],
+   "rows": [
+    [
+     "Normal mode",
+     "xxxxxx00b"
+    ],
+    [
+     "Low power mode",
+     "xxxxxx01b"
+    ],
+    [
+     "Suspend mode",
+     "xxxxxx10b"
+    ],
+    [
+     "Invalid",
+     "xxxxxx11b"
+    ]
+   ],
+   "notes": [
+    "Normal mode is the start-up default."
+   ]
+  },
+  {
+   "title": "Low power mode interrupts",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "phase",
+    "parameter",
+    "value",
+    "register field",
+    "restriction"
+   ],
+   "rows": [
+    [
+     "Entering sleep: no-motion interrupt",
+     "Detection type",
+     "No motion",
+     "[ACC_NM_SET]: xxxxxxx1b",
+     "n/a"
+    ],
+    [
+     "Entering sleep: no-motion interrupt",
+     "Detection type",
+     "Detection axis",
+     "[ACC_INT_Settings]: bit4-bit2",
+     "Shares common bit with any-motion interrupt axis selection"
+    ],
+    [
+     "Entering sleep: no-motion interrupt",
+     "Params",
+     "Duration",
+     "[ACC_NM_SET]: bit6-bit1",
+     "n/a"
+    ],
+    [
+     "Entering sleep: no-motion interrupt",
+     "Params",
+     "Threshold",
+     "[ACC_NM_THRE]: bit7-bit0",
+     "n/a"
+    ],
+    [
+     "Waking up: any-motion interrupt",
+     "Detection type",
+     "Detection axis",
+     "[ACC_INT_Settings]: bit4-bit2",
+     ""
+    ],
+    [
+     "Waking up: any-motion interrupt",
+     "Params",
+     "Duration",
+     "[ACC_INT_Settings]: bit1-bit0",
+     ""
+    ],
+    [
+     "Waking up: any-motion interrupt",
+     "Params",
+     "Threshold",
+     "[ACC_AM_THRES]: bit7-bit0",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Operating modes overview",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "group",
+    "operating mode",
+    "accel",
+    "mag",
+    "gyro",
+    "relative orientation",
+    "absolute orientation"
+   ],
+   "rows": [
+    [
+     "",
+     "CONFIGMODE",
+     "-",
+     "-",
+     "-",
+     "-",
+     "-"
+    ],
+    [
+     "Non-fusion",
+     "ACCONLY",
+     "X",
+     "-",
+     "-",
+     "-",
+     "-"
+    ],
+    [
+     "Non-fusion",
+     "MAGONLY",
+     "-",
+     "X",
+     "-",
+     "-",
+     "-"
+    ],
+    [
+     "Non-fusion",
+     "GYROONLY",
+     "-",
+     "-",
+     "X",
+     "-",
+     "-"
+    ],
+    [
+     "Non-fusion",
+     "ACCMAG",
+     "X",
+     "X",
+     "-",
+     "-",
+     "-"
+    ],
+    [
+     "Non-fusion",
+     "ACCGYRO",
+     "X",
+     "-",
+     "X",
+     "-",
+     "-"
+    ],
+    [
+     "Non-fusion",
+     "MAGGYRO",
+     "-",
+     "X",
+     "X",
+     "-",
+     "-"
+    ],
+    [
+     "Non-fusion",
+     "AMG",
+     "X",
+     "X",
+     "X",
+     "-",
+     "-"
+    ],
+    [
+     "Fusion",
+     "IMU",
+     "X",
+     "-",
+     "X",
+     "X",
+     "-"
+    ],
+    [
+     "Fusion",
+     "COMPASS",
+     "X",
+     "X",
+     "-",
+     "-",
+     "X"
+    ],
+    [
+     "Fusion",
+     "M4G",
+     "X",
+     "X",
+     "",
+     "X",
+     "-"
+    ],
+    [
+     "Fusion",
+     "NDOF_FMC_OFF",
+     "X",
+     "X",
+     "X",
+     "-",
+     "X"
+    ],
+    [
+     "Fusion",
+     "NDOF",
+     "X",
+     "X",
+     "X",
+     "-",
+     "X"
+    ]
+   ],
+   "notes": [
+    "CONFIGMODE is the mode after power-on."
+   ]
+  },
+  {
+   "title": "Default sensor settings",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "sensor",
+    "range",
+    "bandwidth"
+   ],
+   "rows": [
+    [
+     "Accelerometer",
+     "4G",
+     "62.5 Hz"
+    ],
+    [
+     "Magnetometer",
+     "NA",
+     "10 Hz"
+    ],
+    [
+     "Gyroscope",
+     "2000 dps",
+     "32 Hz"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Operating mode selection",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "group",
+    "mode",
+    "OPR_MODE value"
+   ],
+   "rows": [
+    [
+     "Config mode",
+     "CONFIGMODE",
+     "xxxx0000b"
+    ],
+    [
+     "Non-fusion mode",
+     "ACCONLY",
+     "xxxx0001b"
+    ],
+    [
+     "Non-fusion mode",
+     "MAGONLY",
+     "xxxx0010b"
+    ],
+    [
+     "Non-fusion mode",
+     "GYROONLY",
+     "xxxx0011b"
+    ],
+    [
+     "Non-fusion mode",
+     "ACCMAG",
+     "xxxx0100b"
+    ],
+    [
+     "Non-fusion mode",
+     "ACCGYRO",
+     "xxxx0101b"
+    ],
+    [
+     "Non-fusion mode",
+     "MAGGYRO",
+     "xxxx0110b"
+    ],
+    [
+     "Non-fusion mode",
+     "AMG",
+     "xxxx0111b"
+    ],
+    [
+     "Fusion mode",
+     "IMU",
+     "xxxx1000b"
+    ],
+    [
+     "Fusion mode",
+     "COMPASS",
+     "xxxx1001b"
+    ],
+    [
+     "Fusion mode",
+     "M4G",
+     "xxxx1010b"
+    ],
+    [
+     "Fusion mode",
+     "NDOF_FMC_OFF",
+     "xxxx1011b"
+    ],
+    [
+     "Fusion mode",
+     "NDOF",
+     "xxxx1100b"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Operating mode switching time",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "from",
+    "to",
+    "switching time"
+   ],
+   "rows": [
+    [
+     "CONFIGMODE",
+     "Any operation mode",
+     "7ms"
+    ],
+    [
+     "Any operation mode",
+     "CONFIGMODE",
+     "19ms"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Axis remap codes",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "field value",
+    "axis"
+   ],
+   "rows": [
+    [
+     "00",
+     "X-axis"
+    ],
+    [
+     "01",
+     "Y-axis"
+    ],
+    [
+     "10",
+     "Z-axis"
+    ],
+    [
+     "11",
+     "Invalid"
+    ]
+   ],
+   "notes": [
+    "AXIS_MAP_CONFIG bits 5:4 set the remapped Z axis, bits 3:2 the remapped Y axis, bits 1:0 the remapped X axis. Default 0x24 (X=X, Y=Y, Z=Z).",
+    "AXIS_MAP_SIGN bit 2 is the remapped X sign, bit 1 Y, bit 0 Z; 0 is positive, 1 negative. Default 0x00.",
+    "Mapping one axis to two or more outputs is invalid: the register keeps its earlier setting."
+   ]
+  },
+  {
+   "title": "Axis remap settings for mounting placements",
+   "page": 27,
+   "conditions": "",
+   "columns": [
+    "placement",
+    "AXIS_REMAP_CONFIG",
+    "AXIS_REMAP_SIGN"
+   ],
+   "rows": [
+    [
+     "P0",
+     "0x21",
+     "0x04"
+    ],
+    [
+     "P1 (default)",
+     "0x24",
+     "0x00"
+    ],
+    [
+     "P2",
+     "0x24",
+     "0x06"
+    ],
+    [
+     "P3",
+     "0x21",
+     "0x02"
+    ],
+    [
+     "P4",
+     "0x24",
+     "0x03"
+    ],
+    [
+     "P5",
+     "0x21",
+     "0x01"
+    ],
+    [
+     "P6",
+     "0x21",
+     "0x07"
+    ],
+    [
+     "P7",
+     "0x24",
+     "0x05"
+    ]
+   ],
+   "notes": [
+    "P0 to P3 are top-view placements, P4 to P7 bottom-view placements."
+   ]
+  },
+  {
+   "title": "Default sensor configuration at power-on",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "sensor",
+    "parameter",
+    "value"
+   ],
+   "rows": [
+    [
+     "Accelerometer",
+     "Power mode",
+     "NORMAL"
+    ],
+    [
+     "Accelerometer",
+     "Range",
+     "+/- 4g"
+    ],
+    [
+     "Accelerometer",
+     "Bandwidth",
+     "62.5Hz"
+    ],
+    [
+     "Accelerometer",
+     "Resolution",
+     "14 bits"
+    ],
+    [
+     "Gyroscope",
+     "Power mode",
+     "NORMAL"
+    ],
+    [
+     "Gyroscope",
+     "Range",
+     "2000 °/s"
+    ],
+    [
+     "Gyroscope",
+     "Bandwidth",
+     "32Hz"
+    ],
+    [
+     "Gyroscope",
+     "Resolution",
+     "16 bits"
+    ],
+    [
+     "Magnetometer",
+     "Power mode",
+     "FORCED"
+    ],
+    [
+     "Magnetometer",
+     "ODR",
+     "20Hz"
+    ],
+    [
+     "Magnetometer",
+     "XY repetition",
+     "15"
+    ],
+    [
+     "Magnetometer",
+     "Z repetition",
+     "16"
+    ],
+    [
+     "Magnetometer",
+     "Resolution x/y/z",
+     "13/13/15 bits"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Accelerometer configurations",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value",
+    "ACC_Config value",
+    "restriction"
+   ],
+   "rows": [
+    [
+     "G range",
+     "2G",
+     "xxxxxx00b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "G range",
+     "4G",
+     "xxxxxx01b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "G range",
+     "8G",
+     "xxxxxx10b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "G range",
+     "16G",
+     "xxxxxx11b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "7.81Hz",
+     "xxx000xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "15.63Hz",
+     "xxx001xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "31.25Hz",
+     "xxx010xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "62.5Hz",
+     "xxx011xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "125Hz",
+     "xxx100xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "250Hz",
+     "xxx101xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "500Hz",
+     "xxx110xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "1000Hz",
+     "xxx111xxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Normal",
+     "000xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Suspend",
+     "001xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Low Power 1",
+     "010xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Standby",
+     "011xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Low Power 2",
+     "100xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Deep Suspend",
+     "101xxxxxb",
+     "Auto controlled in fusion mode"
+    ]
+   ],
+   "notes": [
+    "With the BNO055 in low power mode the accelerometer operation mode cannot be set by the user: leaving config mode for any operating mode rewrites it to Normal."
+   ]
+  },
+  {
+   "title": "Gyroscope configurations",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value",
+    "register value",
+    "restriction"
+   ],
+   "rows": [
+    [
+     "Range",
+     "2000 dps",
+     "[GYR_Config_0]: xxxxx000b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Range",
+     "1000 dps",
+     "[GYR_Config_0]: xxxxx001b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Range",
+     "500dps",
+     "[GYR_Config_0]: xxxxx010b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Range",
+     "250 dps",
+     "[GYR_Config_0]: xxxxx011b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Range",
+     "125 dps",
+     "[GYR_Config_0]: xxxxx100b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "523Hz",
+     "[GYR_Config_0]: xx000xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "230Hz",
+     "[GYR_Config_0]: xx001xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "116Hz",
+     "[GYR_Config_0]: xx010xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "47Hz",
+     "[GYR_Config_0]: xx011xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "23Hz",
+     "[GYR_Config_0]: xx100xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "12Hz",
+     "[GYR_Config_0]: xx101xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "64Hz",
+     "[GYR_Config_0]: xx110xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Bandwidth",
+     "32Hz",
+     "[GYR_Config_0]: xx111xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Normal",
+     "[GYR_Config_1]: xxxxx000b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Fast Power up",
+     "[GYR_Config_1]: xxxxx001b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Deep Suspend",
+     "[GYR_Config_1]: xxxxx010b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Suspend",
+     "[GYR_Config_1]: xxxxx011b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Advanced Powersave",
+     "[GYR_Config_1]: xxxxx100b",
+     "Auto controlled in fusion mode"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Magnetometer configurations",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value",
+    "MAG_Config value",
+    "restriction"
+   ],
+   "rows": [
+    [
+     "Data output rate",
+     "2Hz",
+     "xxxxx000b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Data output rate",
+     "6Hz",
+     "xxxxx001b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Data output rate",
+     "8Hz",
+     "xxxxx010b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Data output rate",
+     "10Hz",
+     "xxxxx011b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Data output rate",
+     "15Hz",
+     "xxxxx100b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Data output rate",
+     "20Hz",
+     "xxxxx101b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Data output rate",
+     "25Hz",
+     "xxxxx110b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Data output rate",
+     "30Hz",
+     "xxxxx111b",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Low Power",
+     "xxx00xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Regular",
+     "xxx01xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "Enhanced Regular",
+     "xxx10xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Operation mode",
+     "High Accuracy",
+     "xxx11xxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Power mode",
+     "Normal",
+     "x00xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Power mode",
+     "Sleep",
+     "x01xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Power mode",
+     "Suspend",
+     "x10xxxxxb",
+     "Auto controlled in fusion mode"
+    ],
+    [
+     "Power mode",
+     "Force Mode",
+     "x11xxxxxb",
+     "Auto controlled in fusion mode"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Unit selection",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "data",
+    "unit",
+    "UNIT_SEL value"
+   ],
+   "rows": [
+    [
+     "Acceleration",
+     "m/s²",
+     "xxxxxxx0b"
+    ],
+    [
+     "Acceleration",
+     "mg",
+     "xxxxxxx1b"
+    ],
+    [
+     "Linear acceleration, gravity vector",
+     "m/s²",
+     "xxxxxxx0b"
+    ],
+    [
+     "Magnetic field strength",
+     "Micro Tesla",
+     "NA"
+    ],
+    [
+     "Angular rate",
+     "Dps",
+     "xxxxxx0xb"
+    ],
+    [
+     "Angular rate",
+     "Rps",
+     "xxxxxx1xb"
+    ],
+    [
+     "Euler angles",
+     "Degrees",
+     "xxxxx0xxb"
+    ],
+    [
+     "Euler angles",
+     "Radians",
+     "xxxxx1xxb"
+    ],
+    [
+     "Quaternion",
+     "Quaternion units",
+     "NA"
+    ],
+    [
+     "Temperature",
+     "°C",
+     "xxx0xxxxb"
+    ],
+    [
+     "Temperature",
+     "°F",
+     "xxx1xxxxb"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Fusion data output format",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value",
+    "UNIT_SEL value"
+   ],
+   "rows": [
+    [
+     "Fusion data output format",
+     "Windows",
+     "0xxxxxxxb"
+    ],
+    [
+     "Fusion data output format",
+     "Android",
+     "1xxxxxxxb"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Rotation angle conventions",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "rotation angle",
+    "range (Android format)",
+    "range (Windows format)"
+   ],
+   "rows": [
+    [
+     "Pitch",
+     "+180° to -180° (turning clockwise decreases values)",
+     "-180° to +180° (turning clockwise increases values)"
+    ],
+    [
+     "Roll",
+     "-90° to +90° (increasing with increasing inclination)",
+     "-90° to +90° (increasing with increasing inclination)"
+    ],
+    [
+     "Heading / Yaw",
+     "0° to 360° (turning clockwise increases values)",
+     "0° to 360° (turning clockwise increases values)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Fusion output data rates",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "operating mode",
+    "accel input",
+    "mag input",
+    "gyro input",
+    "algo calling rate",
+    "accel output",
+    "mag output",
+    "gyro output",
+    "fusion data output"
+   ],
+   "rows": [
+    [
+     "IMU",
+     "100Hz",
+     "NA",
+     "100Hz",
+     "100Hz",
+     "100Hz",
+     "NA",
+     "100Hz",
+     "100Hz"
+    ],
+    [
+     "COMPASS",
+     "20Hz",
+     "20Hz",
+     "NA",
+     "20Hz",
+     "20Hz",
+     "20Hz",
+     "NA",
+     "20Hz"
+    ],
+    [
+     "M4G",
+     "50Hz",
+     "50Hz",
+     "NA",
+     "50Hz",
+     "50Hz",
+     "50Hz",
+     "NA",
+     "50Hz"
+    ],
+    [
+     "NDOF_FMC_OFF",
+     "100Hz",
+     "20Hz",
+     "100Hz",
+     "100Hz",
+     "100Hz",
+     "20Hz",
+     "100Hz",
+     "100Hz"
+    ],
+    [
+     "NDOF",
+     "100Hz",
+     "20Hz",
+     "100Hz",
+     "100Hz",
+     "100Hz",
+     "20Hz",
+     "100Hz",
+     "100Hz"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Calibration offset and radius registers",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "quantity",
+    "registers",
+    "default",
+    "range (LSB)",
+    "scale"
+   ],
+   "rows": [
+    [
+     "Accelerometer offset",
+     "ACC_OFFSET_X_LSB to ACC_OFFSET_Z_MSB (6 bytes)",
+     "0x00",
+     "+/- 500",
+     "1 m/s² = 100 LSB; 1 mg = 1 LSB"
+    ],
+    [
+     "Magnetometer offset",
+     "MAG_OFFSET_X_LSB to MAG_OFFSET_Z_MSB (6 bytes)",
+     "0x00",
+     "+/- 6400",
+     "1 µT = 16 LSB"
+    ],
+    [
+     "Gyroscope offset",
+     "GYR_OFFSET_X_LSB to GYR_OFFSET_Z_MSB (6 bytes)",
+     "0x00",
+     "+/- 2000",
+     "1 Dps = 16 LSB; 1 Rps = 900 LSB"
+    ],
+    [
+     "Accelerometer radius",
+     "ACC_RADIUS_LSB, ACC_RADIUS_MSB",
+     "0x00",
+     "+/- 2048",
+     ""
+    ],
+    [
+     "Magnetometer radius",
+     "MAG_RADIUS_LSB, MAG_RADIUS_MSB",
+     "0x00",
+     "144 to 1280",
+     ""
+    ]
+   ],
+   "notes": [
+    "A new value takes effect only when the last byte of its group is written (ACC_OFFSET_Z_MSB, MAG_OFFSET_Z_MSB, GYR_OFFSET_Z_MSB, ACC_RADIUS_MSB, MAG_RADIUS_MSB).",
+    "There is no gyroscope radius.",
+    "The MAG_RADIUS default is given both as 0x00 and as 0x01E0 (MSB 0x01, LSB 0xE0)."
+   ]
+  },
+  {
+   "title": "Output data registers",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "data",
+    "registers",
+    "data type",
+    "bytes",
+    "available in",
+    "scale"
+   ],
+   "rows": [
+    [
+     "Acceleration X/Y/Z",
+     "ACC_DATA_<axis>_LSB/MSB",
+     "signed",
+     "2 each",
+     "all modes with the accelerometer on",
+     "1 m/s² = 100 LSB; 1 mg = 1 LSB"
+    ],
+    [
+     "Magnetic field X/Y/Z",
+     "MAG_DATA_<axis>_LSB/MSB",
+     "signed",
+     "2 each",
+     "all modes with the magnetometer on",
+     "1 µT = 16 LSB"
+    ],
+    [
+     "Angular rate X/Y/Z",
+     "GYR_DATA_<axis>_LSB/MSB",
+     "signed",
+     "2 each",
+     "all modes with the gyroscope on",
+     "1 Dps = 16 LSB; 1 Rps = 900 LSB"
+    ],
+    [
+     "Euler heading/roll/pitch",
+     "EUL_<dof>_LSB/MSB",
+     "signed",
+     "2 each",
+     "fusion modes",
+     "1 degree = 16 LSB; 1 radian = 900 LSB"
+    ],
+    [
+     "Quaternion w/x/y/z",
+     "QUA_DATA_<dof>_LSB/MSB",
+     "signed",
+     "2 each",
+     "fusion modes",
+     "1 quaternion (unit less) = 2^14 LSB"
+    ],
+    [
+     "Linear acceleration X/Y/Z",
+     "LIA_DATA_<axis>_LSB/MSB",
+     "signed",
+     "2 each",
+     "fusion modes",
+     "1 m/s² = 100 LSB; 1 mg = 1 LSB"
+    ],
+    [
+     "Gravity vector X/Y/Z",
+     "GRV_DATA_<axis>_LSB/MSB",
+     "signed",
+     "2 each",
+     "fusion modes",
+     "1 m/s² = 100 LSB; 1 mg = 1 LSB"
+    ],
+    [
+     "Temperature",
+     "TEMP",
+     "signed",
+     "1",
+     "all modes",
+     "1°C = 1 LSB; 2 F = 1 LSB"
+    ]
+   ],
+   "notes": [
+    "In non-fusion modes the sensor registers hold uncompensated data; in fusion modes they hold offset-compensated data."
+   ]
+  },
+  {
+   "title": "Temperature source selection",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "source",
+    "TEMP_SOURCE value"
+   ],
+   "rows": [
+    [
+     "Accelerometer",
+     "xxxxxx00b"
+    ],
+    [
+     "Gyroscope",
+     "xxxxxx01b"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "No-motion time-out periods",
+   "page": 42,
+   "conditions": "",
+   "columns": [
+    "slo_no_mot_dur",
+    "delay time"
+   ],
+   "rows": [
+    [
+     "0",
+     "1s"
+    ],
+    [
+     "1",
+     "2s"
+    ],
+    [
+     "2",
+     "3s"
+    ],
+    [
+     "...",
+     "..."
+    ],
+    [
+     "14",
+     "15 s"
+    ],
+    [
+     "15",
+     "16 s"
+    ],
+    [
+     "16",
+     "40 s"
+    ],
+    [
+     "17",
+     "48 s"
+    ],
+    [
+     "18",
+     "56 s"
+    ],
+    [
+     "19",
+     "64 s"
+    ],
+    [
+     "20",
+     "72 s"
+    ],
+    [
+     "21",
+     "80 s"
+    ],
+    [
+     "32",
+     "88 s"
+    ],
+    [
+     "33",
+     "96 s"
+    ],
+    [
+     "34",
+     "104 s"
+    ],
+    [
+     "...",
+     "..."
+    ],
+    [
+     "62",
+     "328 s"
+    ],
+    [
+     "63",
+     "336 s"
+    ]
+   ],
+   "notes": [
+    "Values 22 to 31 have no specified delay.",
+    "The timer ticks once per second, so short delays carry large timing uncertainty."
+   ]
+  },
+  {
+   "title": "Interrupt settings",
+   "page": 43,
+   "conditions": "",
+   "columns": [
+    "interrupt",
+    "group",
+    "setting",
+    "register field"
+   ],
+   "rows": [
+    [
+     "Accelerometer slow/no motion",
+     "Detection type",
+     "No Motion",
+     "[ACC_NM_SET]: xxxxxxx1b"
+    ],
+    [
+     "Accelerometer slow/no motion",
+     "Detection type",
+     "Slow Motion",
+     "[ACC_NM_SET]: xxxxxxx0b"
+    ],
+    [
+     "Accelerometer slow/no motion",
+     "Interrupt parameters",
+     "Threshold",
+     "[ACC_NM_THRE]: bit7:bit0"
+    ],
+    [
+     "Accelerometer slow/no motion",
+     "Interrupt parameters",
+     "Duration",
+     "[ACC_NM_SET]: bit6:bit1"
+    ],
+    [
+     "Accelerometer slow/no motion",
+     "Axis selection",
+     "X-axis",
+     "[ACC_INT_Settings]: xxxxx1xxb"
+    ],
+    [
+     "Accelerometer slow/no motion",
+     "Axis selection",
+     "Y-axis",
+     "[ACC_INT_Settings]: xxxx1xxxb"
+    ],
+    [
+     "Accelerometer slow/no motion",
+     "Axis selection",
+     "Z-axis",
+     "[ACC_INT_Settings]: xxx1xxxxb"
+    ],
+    [
+     "Accelerometer any motion",
+     "Interrupt parameters",
+     "Threshold",
+     "[ACC_AM_THRES]: bit7:bit0"
+    ],
+    [
+     "Accelerometer any motion",
+     "Interrupt parameters",
+     "Duration",
+     "[ACC_INT_Settings]: bit1:bit0"
+    ],
+    [
+     "Accelerometer any motion",
+     "Axis selection",
+     "X-axis",
+     "[ACC_INT_Settings]: xxxxx1xxb"
+    ],
+    [
+     "Accelerometer any motion",
+     "Axis selection",
+     "Y-axis",
+     "[ACC_INT_Settings]: xxxx1xxxb"
+    ],
+    [
+     "Accelerometer any motion",
+     "Axis selection",
+     "Z-axis",
+     "[ACC_INT_Settings]: xxx1xxxxb"
+    ],
+    [
+     "Accelerometer high-g",
+     "Interrupt parameters",
+     "Threshold",
+     "[ACC_HG_THRES]: bit7 : bit0"
+    ],
+    [
+     "Accelerometer high-g",
+     "Interrupt parameters",
+     "Duration",
+     "[ACC_HG_DURATION]: bit7 : bit0"
+    ],
+    [
+     "Accelerometer high-g",
+     "Axis selection",
+     "X-axis",
+     "[ACC_INT_Settings]: xx1xxxxxb"
+    ],
+    [
+     "Accelerometer high-g",
+     "Axis selection",
+     "Y-axis",
+     "[ACC_INT_Settings]: x1xxxxxxb"
+    ],
+    [
+     "Accelerometer high-g",
+     "Axis selection",
+     "Z-axis",
+     "[ACC_INT_Settings]: 1xxxxxxxb"
+    ],
+    [
+     "Gyroscope high rate",
+     "Axis selection",
+     "X-axis",
+     "[GYR_INT_SETTING]: xxxx1xxxb"
+    ],
+    [
+     "Gyroscope high rate",
+     "Axis selection",
+     "Y-axis",
+     "[GYR_INT_SETTING]: xxx1xxxxb"
+    ],
+    [
+     "Gyroscope high rate",
+     "Axis selection",
+     "Z-axis",
+     "[GYR_INT_SETTING]: xx1xxxxxb"
+    ],
+    [
+     "Gyroscope high rate",
+     "High rate filter settings",
+     "Filtered",
+     "[GYR_INT_SETTING]: 0xxxxxxxb"
+    ],
+    [
+     "Gyroscope high rate",
+     "High rate filter settings",
+     "Unfiltered",
+     "[GYR_INT_SETTING]: 1xxxxxxxb"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings X-axis",
+     "Threshold",
+     "[GYR_HR_X_SET]: bit4 : bit0"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings X-axis",
+     "Duration",
+     "[GYR_DUR_X]: bit7 : bit0"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings X-axis",
+     "Hysteresis",
+     "[GYR_HR_X_SET]: bit6 : bit5"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings Y-axis",
+     "Threshold",
+     "[GYR_HR_Y_SET]: bit4 : bit0"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings Y-axis",
+     "Duration",
+     "[GYR_DUR_Y]: bit7 : bit0"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings Y-axis",
+     "Hysteresis",
+     "[GYR_HR_Y_SET]: bit6 : bit5"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings X-axis",
+     "Threshold",
+     "[GYR_HR_Z_SET]: bit4 : bit0"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings X-axis",
+     "Duration",
+     "[GYR_DUR_Z]: bit7 : bit0"
+    ],
+    [
+     "Gyroscope high rate",
+     "Interrupt settings X-axis",
+     "Hysteresis",
+     "[GYR_HR_Z_SET]: bit6 : bit5"
+    ],
+    [
+     "Gyroscope any motion",
+     "Axis selection",
+     "X-axis",
+     "[GYR_INT_SETING]: xxxxxxx1b"
+    ],
+    [
+     "Gyroscope any motion",
+     "Axis selection",
+     "Y-axis",
+     "[GYR_INT_SETING]: xxxxxx1xb"
+    ],
+    [
+     "Gyroscope any motion",
+     "Axis selection",
+     "Z-axis",
+     "[GYR_INT_SETING]: xxxxx1xxb"
+    ],
+    [
+     "Gyroscope any motion",
+     "Any motion filter settings",
+     "Filtered",
+     "[GYR_INT_SETING]: x0xxxxxxb"
+    ],
+    [
+     "Gyroscope any motion",
+     "Any motion filter settings",
+     "Unfiltered",
+     "[GYR_INT_SETING]: x1xxxxxxb"
+    ],
+    [
+     "Gyroscope any motion",
+     "Interrupt settings",
+     "Threshold",
+     "[GYR_AM_THRES]: bit6 : bit0"
+    ],
+    [
+     "Gyroscope any motion",
+     "Interrupt settings",
+     "Slope Samples",
+     "[GYR_AM_SET]: bit1 : bit0"
+    ],
+    [
+     "Gyroscope any motion",
+     "Interrupt settings",
+     "Awake Duration",
+     "[GYR_AM_SET]: bit3 : bit2"
+    ]
+   ],
+   "notes": [
+    "Misprint: the last three gyroscope high-rate rows, labelled X-axis, should read Z-axis."
+   ]
+  },
+  {
+   "title": "Interrupt threshold scaling",
+   "page": 92,
+   "conditions": "",
+   "columns": [
+    "threshold",
+    "2g / 2000°/s range",
+    "4g / 1000°/s range",
+    "8g / 500°/s range",
+    "16g range"
+   ],
+   "rows": [
+    [
+     "ACC_AM_THRES, 1 LSB",
+     "3.91 mg",
+     "7.81 mg",
+     "15.63 mg",
+     "31.25 mg"
+    ],
+    [
+     "ACC_NM_THRES, 1 LSB",
+     "3.91 mg",
+     "7.81 mg",
+     "15.63 mg",
+     "31.25 mg"
+    ],
+    [
+     "ACC_HG_THRES, 1 LSB",
+     "7.81 mg",
+     "15.63 mg",
+     "31.25 mg",
+     "62.5 mg"
+    ],
+    [
+     "HR_<axis>_Threshold, 1 LSB",
+     "62.5°/s",
+     "31.25°/s",
+     "15.625°/s",
+     ""
+    ],
+    [
+     "HR_<axis>_Threshold = 0",
+     "62.26°/s",
+     "31.13°/s",
+     "15.56°/s",
+     ""
+    ],
+    [
+     "HR_<axis>_Threshold maximum",
+     "1999.76°/s",
+     "999.87°/s",
+     "499.93°/s",
+     ""
+    ],
+    [
+     "HR_<axis>_THRES_HYST, 1 LSB",
+     "62.26°/s",
+     "31.13°/s",
+     "15.56°/s",
+     ""
+    ],
+    [
+     "GYR_AM_THRES, 1 LSB",
+     "1 °/s",
+     "0.5°/s",
+     "0.25°/s",
+     ""
+    ],
+    [
+     "GYR_AM_THRES maximum",
+     "125°/s",
+     "62.5°/s",
+     "31.25°/s",
+     ""
+    ]
+   ],
+   "notes": [
+    "Accelerometer rows use the g-range column headings, gyroscope rows the °/s headings.",
+    "Largest any-motion and no-motion threshold: 996 mg (2g), 1.99 g (4g), 3.98 g (8g), 7.97 g (16g).",
+    "HR_<axis>_THRES_HYST in the 2000°/s range: setting 0 is 62.26°/s and 1 LSB is 62.5°/s; 1 LSB is also given as 62.26°/s."
+   ]
+  },
+  {
+   "title": "Power-on self test",
+   "page": 50,
+   "conditions": "",
+   "columns": [
+    "component",
+    "test type"
+   ],
+   "rows": [
+    [
+     "Accelerometer",
+     "Verify chip ID"
+    ],
+    [
+     "Magnetometer",
+     "Verify chip ID"
+    ],
+    [
+     "Gyroscope",
+     "Verify chip ID"
+    ],
+    [
+     "Microcontroller",
+     "Memory built-in self test"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Built-in self-test",
+   "page": 50,
+   "conditions": "",
+   "columns": [
+    "component",
+    "test type"
+   ],
+   "rows": [
+    [
+     "Accelerometer",
+     "built in self-test"
+    ],
+    [
+     "Magnetometer",
+     "built in self-test"
+    ],
+    [
+     "Gyroscope",
+     "built in self-test"
+    ],
+    [
+     "Microcontroller",
+     "No test performed"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Soft-iron calibration matrix scaling",
+   "page": 52,
+   "conditions": "",
+   "columns": [
+    "user value",
+    "conversion factor",
+    "actual value"
+   ],
+   "rows": [
+    [
+     "-32768",
+     "1/2^14",
+     "-2.0000"
+    ],
+    [
+     "-16384",
+     "1/2^14",
+     "-1.0000"
+    ],
+    [
+     "0",
+     "1/2^14",
+     "0.0000"
+    ],
+    [
+     "16384",
+     "1/2^14",
+     "1.0000"
+    ],
+    [
+     "32767",
+     "1/2^14",
+     "1.9999"
+    ]
+   ],
+   "notes": [
+    "The matrix is [M0 M1 M2; M3 M4 M5; M6 M7 M8], each element a signed 16-bit value held as SIC_MATRIX_MSBn:SIC_MATRIX_LSBn."
+   ]
+  },
+  {
+   "title": "Register map page 0",
+   "page": 55,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "default",
+    "access",
+    "bit fields"
+   ],
+   "rows": [
+    [
+     "7F-6B",
+     "Reserved",
+     "N/A",
+     "reserved",
+     ""
+    ],
+    [
+     "6A",
+     "MAG_RADIUS_MSB",
+     "0x01",
+     "read/write",
+     "Magnetometer radius"
+    ],
+    [
+     "69",
+     "MAG_RADIUS_LSB",
+     "0xE0",
+     "read/write",
+     "Magnetometer radius"
+    ],
+    [
+     "68",
+     "ACC_RADIUS_MSB",
+     "0x00",
+     "read/write",
+     "Accelerometer radius"
+    ],
+    [
+     "67",
+     "ACC_RADIUS_LSB",
+     "0x00",
+     "read/write",
+     "Accelerometer radius"
+    ],
+    [
+     "66",
+     "GYR_OFFSET_Z_MSB",
+     "0x00",
+     "read/write",
+     "Gyroscope offset Z <15:8>"
+    ],
+    [
+     "65",
+     "GYR_OFFSET_Z_LSB",
+     "0x00",
+     "read/write",
+     "Gyroscope offset Z <7:0>"
+    ],
+    [
+     "64",
+     "GYR_OFFSET_Y_MSB",
+     "0x00",
+     "read/write",
+     "Gyroscope offset Y <15:8>"
+    ],
+    [
+     "63",
+     "GYR_OFFSET_Y_LSB",
+     "0x00",
+     "read/write",
+     "Gyroscope offset Y <7:0>"
+    ],
+    [
+     "62",
+     "GYR_OFFSET_X_MSB",
+     "0x00",
+     "read/write",
+     "Gyroscope offset X <15:8>"
+    ],
+    [
+     "61",
+     "GYR_OFFSET_X_LSB",
+     "0x00",
+     "read/write",
+     "Gyroscope offset X <7:0>"
+    ],
+    [
+     "60",
+     "MAG_OFFSET_Z_MSB",
+     "0x00",
+     "read/write",
+     "Magnetometer offset Z <15:8>"
+    ],
+    [
+     "5F",
+     "MAG_OFFSET_Z_LSB",
+     "0x00",
+     "read/write",
+     "Magnetometer offset Z <7:0>"
+    ],
+    [
+     "5E",
+     "MAG_OFFSET_Y_MSB",
+     "0x00",
+     "read/write",
+     "Magnetometer offset Y <15:8>"
+    ],
+    [
+     "5D",
+     "MAG_OFFSET_Y_LSB",
+     "0x00",
+     "read/write",
+     "Magnetometer offset Y <7:0>"
+    ],
+    [
+     "5C",
+     "MAG_OFFSET_X_MSB",
+     "0x00",
+     "read/write",
+     "Magnetometer offset X <15:8>"
+    ],
+    [
+     "5B",
+     "MAG_OFFSET_X_LSB",
+     "0x00",
+     "read/write",
+     "Magnetometer offset X <7:0>"
+    ],
+    [
+     "5A",
+     "ACC_OFFSET_Z_MSB",
+     "0x00",
+     "read/write",
+     "Accelerometer offset Z <15:8>"
+    ],
+    [
+     "59",
+     "ACC_OFFSET_Z_LSB",
+     "0x00",
+     "read/write",
+     "Accelerometer offset Z <7:0>"
+    ],
+    [
+     "58",
+     "ACC_OFFSET_Y_MSB",
+     "0x00",
+     "read/write",
+     "Accelerometer offset Y <15:8>"
+    ],
+    [
+     "57",
+     "ACC_OFFSET_Y_LSB",
+     "0x00",
+     "read/write",
+     "Accelerometer offset Y <7:0>"
+    ],
+    [
+     "56",
+     "ACC_OFFSET_X_MSB",
+     "0x00",
+     "read/write",
+     "Accelerometer offset X <15:8>"
+    ],
+    [
+     "55",
+     "ACC_OFFSET_X_LSB",
+     "0x00",
+     "read/write",
+     "Accelerometer offset X <7:0>"
+    ],
+    [
+     "54",
+     "SIC_MATRIX_MSB8",
+     "0x40",
+     "read/write",
+     "SIC_MATRIX_MSB8"
+    ],
+    [
+     "53",
+     "SIC_MATRIX_LSB8",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB8"
+    ],
+    [
+     "52",
+     "SIC_MATRIX_MSB7",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_MSB7"
+    ],
+    [
+     "51",
+     "SIC_MATRIX_LSB7",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB7"
+    ],
+    [
+     "50",
+     "SIC_MATRIX_MSB6",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_MSB6"
+    ],
+    [
+     "4F",
+     "SIC_MATRIX_LSB6",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB6"
+    ],
+    [
+     "4E",
+     "SIC_MATRIX_MSB5",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_MSB5"
+    ],
+    [
+     "4D",
+     "SIC_MATRIX_LSB5",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB5"
+    ],
+    [
+     "4C",
+     "SIC_MATRIX_MSB4",
+     "0x40",
+     "read/write",
+     "SIC_MATRIX_MSB4"
+    ],
+    [
+     "4B",
+     "SIC_MATRIX_LSB4",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB4"
+    ],
+    [
+     "4A",
+     "SIC_MATRIX_MSB3",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_MSB3"
+    ],
+    [
+     "49",
+     "SIC_MATRIX_LSB3",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB3"
+    ],
+    [
+     "48",
+     "SIC_MATRIX_MSB2",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_MSB2"
+    ],
+    [
+     "47",
+     "SIC_MATRIX_LSB2",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB2"
+    ],
+    [
+     "46",
+     "SIC_MATRIX_MSB1",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_MSB1"
+    ],
+    [
+     "45",
+     "SIC_MATRIX_LSB1",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB1"
+    ],
+    [
+     "44",
+     "SIC_MATRIX_MSB0",
+     "0x40",
+     "read/write",
+     "SIC_MATRIX_MSB0"
+    ],
+    [
+     "43",
+     "SIC_MATRIX_LSB0",
+     "0x00",
+     "read/write",
+     "SIC_MATRIX_LSB0"
+    ],
+    [
+     "42",
+     "AXIS_MAP_SIGN",
+     "0x00",
+     "read/write",
+     "bit2 remapped X axis sign; bit1 remapped Y axis sign; bit0 remapped Z axis sign"
+    ],
+    [
+     "41",
+     "AXIS_MAP_CONFIG",
+     "0x24",
+     "read/write",
+     "bits5:4 remapped Z axis value; bits3:2 remapped Y axis value; bits1:0 remapped X axis value"
+    ],
+    [
+     "40",
+     "TEMP_SOURCE",
+     "0x00",
+     "read/write",
+     "bits1:0 TEMP_Source"
+    ],
+    [
+     "3F",
+     "SYS_TRIGGER",
+     "0x00",
+     "read/write; RST_SYS write only",
+     "bit7 CLK_SEL; bit6 RST_INT; bit5 RST_SYS; bit0 Self_Test"
+    ],
+    [
+     "3E",
+     "PWR_MODE",
+     "0x00",
+     "read/write",
+     "bits1:0 power mode"
+    ],
+    [
+     "3D",
+     "OPR_MODE",
+     "0x10",
+     "read/write",
+     "bits3:0 operation mode"
+    ],
+    [
+     "3C",
+     "Reserved",
+     "",
+     "reserved",
+     ""
+    ],
+    [
+     "3B",
+     "UNIT_SEL",
+     "0x80",
+     "read/write",
+     "bit7 ORI_Android_Windows; bit4 TEMP_Unit; bit2 EUL_Unit; bit1 GYR_Unit; bit0 ACC_Unit"
+    ],
+    [
+     "3A",
+     "SYS_ERR",
+     "0x00",
+     "read only",
+     "System error code"
+    ],
+    [
+     "39",
+     "SYS_STATUS",
+     "0x00",
+     "read only",
+     "System status code"
+    ],
+    [
+     "38",
+     "SYS_CLK_STATUS",
+     "0x00",
+     "read only",
+     "bit0 ST_MAIN_CLK"
+    ],
+    [
+     "37",
+     "INT_STA",
+     "0x00",
+     "read only",
+     "bit7 ACC_NM; bit6 ACC_AM; bit5 ACC_HIGH_G; bit4 GYR_DRDY (6); bit3 GYR_HIGH_RATE; bit2 GYRO_AM; bit1 MAG_DRDY (6); bit0 ACC_BSX_DRDY (6)"
+    ],
+    [
+     "36",
+     "ST_RESULT",
+     "0x0F",
+     "read only",
+     "bit3 ST_MCU; bit2 ST_GYR; bit1 ST_MAG; bit0 ST_ACC"
+    ],
+    [
+     "35",
+     "CALIB_STAT",
+     "0x00",
+     "read only",
+     "bits7:6 SYS calib status; bits5:4 GYR calib status; bits3:2 ACC calib status; bits1:0 MAG calib status"
+    ],
+    [
+     "34",
+     "TEMP",
+     "0x00",
+     "read only",
+     "Temperature"
+    ],
+    [
+     "33",
+     "GRV_Data_Z_MSB",
+     "0x00",
+     "read only",
+     "Gravity vector data Z <15:8>"
+    ],
+    [
+     "32",
+     "GRV_Data_Z_LSB",
+     "0x00",
+     "read only",
+     "Gravity vector data Z <7:0>"
+    ],
+    [
+     "31",
+     "GRV_Data_Y_MSB",
+     "0x00",
+     "read only",
+     "Gravity vector data Y <15:8>"
+    ],
+    [
+     "30",
+     "GRV_Data_Y_LSB",
+     "0x00",
+     "read only",
+     "Gravity vector data Y <7:0>"
+    ],
+    [
+     "2F",
+     "GRV_Data_X_MSB",
+     "0x00",
+     "read only",
+     "Gravity vector data X <15:8>"
+    ],
+    [
+     "2E",
+     "GRV_Data_X_LSB",
+     "0x00",
+     "read only",
+     "Gravity vector data X <7:0>"
+    ],
+    [
+     "2D",
+     "LIA_Data_Z_MSB",
+     "0x00",
+     "read only",
+     "Linear acceleration data Z <15:8>"
+    ],
+    [
+     "2C",
+     "LIA_Data_Z_LSB",
+     "0x00",
+     "read only",
+     "Linear acceleration data Z <7:0>"
+    ],
+    [
+     "2B",
+     "LIA_Data_Y_MSB",
+     "0x00",
+     "read only",
+     "Linear acceleration data Y <15:8>"
+    ],
+    [
+     "2A",
+     "LIA_Data_Y_LSB",
+     "0x00",
+     "read only",
+     "Linear acceleration data Y <7:0>"
+    ],
+    [
+     "29",
+     "LIA_Data_X_MSB",
+     "0x00",
+     "read only",
+     "Linear acceleration data X <15:8>"
+    ],
+    [
+     "28",
+     "LIA_Data_X_LSB",
+     "0x00",
+     "read only",
+     "Linear acceleration data X <7:0>"
+    ],
+    [
+     "27",
+     "QUA_Data_z_MSB",
+     "0x00",
+     "read only",
+     "Quaternion data z <15:8>"
+    ],
+    [
+     "26",
+     "QUA_Data_z_LSB",
+     "0x00",
+     "read only",
+     "Quaternion data z <7:0>"
+    ],
+    [
+     "25",
+     "QUA_Data_y_MSB",
+     "0x00",
+     "read only",
+     "Quaternion data y <15:8>"
+    ],
+    [
+     "24",
+     "QUA_Data_y_LSB",
+     "0x00",
+     "read only",
+     "Quaternion data y <7:0>"
+    ],
+    [
+     "23",
+     "QUA_Data_x_MSB",
+     "0x00",
+     "read only",
+     "Quaternion data x <15:8>"
+    ],
+    [
+     "22",
+     "QUA_Data_x_LSB",
+     "0x00",
+     "read only",
+     "Quaternion data x <7:0>"
+    ],
+    [
+     "21",
+     "QUA_Data_w_MSB",
+     "0x00",
+     "read only",
+     "Quaternion data w <15:8>"
+    ],
+    [
+     "20",
+     "QUA_Data_w_LSB",
+     "0x00",
+     "read only",
+     "Quaternion data w <7:0>"
+    ],
+    [
+     "1F",
+     "EUL_Pitch_MSB",
+     "0x00",
+     "read only",
+     "Pitch data <15:8>"
+    ],
+    [
+     "1E",
+     "EUL_Pitch_LSB",
+     "0x00",
+     "read only",
+     "Pitch data <7:0>"
+    ],
+    [
+     "1D",
+     "EUL_Roll_MSB",
+     "0x00",
+     "read only",
+     "Roll data <15:8>"
+    ],
+    [
+     "1C",
+     "EUL_Roll_LSB",
+     "0x00",
+     "read only",
+     "Roll data <7:0>"
+    ],
+    [
+     "1B",
+     "EUL_Heading_MSB",
+     "0x00",
+     "read only",
+     "Heading data <15:8>"
+    ],
+    [
+     "1A",
+     "EUL_Heading_LSB",
+     "0x00",
+     "read only",
+     "Heading data <7:0>"
+    ],
+    [
+     "19",
+     "GYR_DATA_Z_MSB",
+     "0x00",
+     "read only",
+     "Gyroscope data Z <15:8>"
+    ],
+    [
+     "18",
+     "GYR_DATA_Z_LSB",
+     "0x00",
+     "read only",
+     "Gyroscope data Z <7:0>"
+    ],
+    [
+     "17",
+     "GYR_DATA_Y_MSB",
+     "0x00",
+     "read only",
+     "Gyroscope data Y <15:8>"
+    ],
+    [
+     "16",
+     "GYR_DATA_Y_LSB",
+     "0x00",
+     "read only",
+     "Gyroscope data Y <7:0>"
+    ],
+    [
+     "15",
+     "GYR_DATA_X_MSB",
+     "0x00",
+     "read only",
+     "Gyroscope data X <15:8>"
+    ],
+    [
+     "14",
+     "GYR_DATA_X_LSB",
+     "0x00",
+     "read only",
+     "Gyroscope data X <7:0>"
+    ],
+    [
+     "13",
+     "MAG_DATA_Z_MSB",
+     "0x00",
+     "read only",
+     "Magnetometer data Z <15:8>"
+    ],
+    [
+     "12",
+     "MAG_DATA_Z_LSB",
+     "0x00",
+     "read only",
+     "Magnetometer data Z <7:0>"
+    ],
+    [
+     "11",
+     "MAG_DATA_Y_MSB",
+     "0x00",
+     "read only",
+     "Magnetometer data Y <15:8>"
+    ],
+    [
+     "10",
+     "MAG_DATA_Y_LSB",
+     "0x00",
+     "read only",
+     "Magnetometer data Y <7:0>"
+    ],
+    [
+     "F",
+     "MAG_DATA_X_MSB",
+     "0x00",
+     "read only",
+     "Magnetometer data X <15:8>"
+    ],
+    [
+     "E",
+     "MAG_DATA_X_LSB",
+     "0x00",
+     "read only",
+     "Magnetometer data X <7:0>"
+    ],
+    [
+     "D",
+     "ACC_DATA_Z_MSB",
+     "0x00",
+     "read only",
+     "Acceleration data Z <15:8>"
+    ],
+    [
+     "C",
+     "ACC_DATA_Z_LSB",
+     "0x00",
+     "read only",
+     "Acceleration data Z <7:0>"
+    ],
+    [
+     "B",
+     "ACC_DATA_Y_MSB",
+     "0x00",
+     "read only",
+     "Acceleration data Y <15:8>"
+    ],
+    [
+     "A",
+     "ACC_DATA_Y_LSB",
+     "0x00",
+     "read only",
+     "Acceleration data Y <7:0>"
+    ],
+    [
+     "9",
+     "ACC_DATA_X_MSB",
+     "0x00",
+     "read only",
+     "Acceleration data X <15:8>"
+    ],
+    [
+     "8",
+     "ACC_DATA_X_LSB",
+     "0x00",
+     "read only",
+     "Acceleration data X <7:0>"
+    ],
+    [
+     "7",
+     "Page ID",
+     "0x00",
+     "read/write",
+     "Page ID"
+    ],
+    [
+     "6",
+     "BL_Rev_ID",
+     "0x15",
+     "read only",
+     "Bootloader version"
+    ],
+    [
+     "5",
+     "SW_REV_ID_MSB",
+     "0x03 (7)",
+     "read only",
+     "SW revision ID <15:8>"
+    ],
+    [
+     "4",
+     "SW_REV_ID_LSB",
+     "0x11 (8)",
+     "read only",
+     "SW revision ID <7:0>"
+    ],
+    [
+     "3",
+     "GYR_ID",
+     "0x0F",
+     "read only",
+     "Gyro chip ID"
+    ],
+    [
+     "2",
+     "MAG_ID",
+     "0x32",
+     "read only",
+     "Mag chip ID"
+    ],
+    [
+     "1",
+     "ACC_ID",
+     "0xFB",
+     "read only",
+     "Acc chip ID"
+    ],
+    [
+     "0",
+     "CHIP_ID",
+     "0xA0",
+     "read only",
+     "BNO055 chip ID"
+    ]
+   ],
+   "notes": [
+    "Registers are 8 bits wide. Reserved bits are ignored on write and read back undefined.",
+    "(6) Field present from software version 03.14.",
+    "(7), (8) The software version loaded at the factory is 3.11, so SW_REV_ID_MSB reads 0x03 and SW_REV_ID_LSB 0x11; these defaults follow the software version.",
+    "Misprint: the UNIT_SEL bit numbers 1, 2, 3 and 5 for ACC_Unit, GYR_Unit, EUL_Unit and TEMP_Unit should read 0, 1, 2 and 4."
+   ]
+  },
+  {
+   "title": "Register map page 1",
+   "page": 58,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "default",
+    "access",
+    "bit fields"
+   ],
+   "rows": [
+    [
+     "7F-60",
+     "Reserved",
+     "",
+     "reserved",
+     ""
+    ],
+    [
+     "5F-50",
+     "UNIQUE_ID",
+     "N/A",
+     "read only",
+     "BNO unique ID"
+    ],
+    [
+     "4F-20",
+     "Reserved",
+     "",
+     "reserved",
+     ""
+    ],
+    [
+     "1F",
+     "GYR_AM_SET",
+     "0x0A",
+     "read/write",
+     "bits3:2 awake duration; bits1:0 slope samples"
+    ],
+    [
+     "1E",
+     "GYR_AM_THRES",
+     "0x04",
+     "read/write",
+     "bits6:0 gyro any motion threshold"
+    ],
+    [
+     "1D",
+     "GYR_DUR_Z",
+     "0x19",
+     "read/write",
+     "HR_Z_Duration"
+    ],
+    [
+     "1C",
+     "GYR_HR_Z_SET",
+     "0x01",
+     "read/write",
+     "bits6:5 HR_Z_THRES_HYST; bits4:0 HR_Z_Threshold"
+    ],
+    [
+     "1B",
+     "GYR_DUR_Y",
+     "0x19",
+     "read/write",
+     "HR_Y_Duration"
+    ],
+    [
+     "1A",
+     "GYR_HR_Y_SET",
+     "0x01",
+     "read/write",
+     "bits6:5 HR_Y_THRES_HYST; bits4:0 HR_Y_Threshold"
+    ],
+    [
+     "19",
+     "GYR_DUR_X",
+     "0x19",
+     "read/write",
+     "HR_X_Duration"
+    ],
+    [
+     "18",
+     "GYR_HR_X_SET",
+     "0x01",
+     "read/write",
+     "bits6:5 HR_X_THRES_HYST; bits4:0 HR_X_Threshold"
+    ],
+    [
+     "17",
+     "GYR_INT_SETING",
+     "0x00",
+     "read/write",
+     "bit7 HR_FILT; bit6 AM_FILT; bit5 HR_Z_AXIS; bit4 HR_Y_AXIS; bit3 HR_X_AXIS; bit2 AM_Z_AXIS; bit1 AM_Y_AXIS; bit0 AM_X_AXIS"
+    ],
+    [
+     "16",
+     "ACC_NM_SET",
+     "0x0B",
+     "read/write",
+     "bits6:1 no/slow motion duration; bit0 SMNM"
+    ],
+    [
+     "15",
+     "ACC_NM_THRE",
+     "0x0A",
+     "read/write",
+     "Accelerometer no/slow motion threshold"
+    ],
+    [
+     "14",
+     "ACC_HG_THRES",
+     "0xC0",
+     "read/write",
+     "Accelerometer high-g threshold"
+    ],
+    [
+     "13",
+     "ACC_HG_DURATION",
+     "0x0F",
+     "read/write",
+     "Accelerometer high-g duration"
+    ],
+    [
+     "12",
+     "ACC_INT_Settings",
+     "0x03",
+     "read/write",
+     "bit7 HG_Z_AXIS; bit6 HG_Y_AXIS; bit5 HG_X_AXIS; bit4 AM/NM_Z_AXIS; bit3 AM/NM_Y_AXIS; bit2 AM/NM_X_AXIS; bits1:0 AM_DUR"
+    ],
+    [
+     "11",
+     "ACC_AM_THRES",
+     "0x14",
+     "read/write",
+     "Accelerometer any motion threshold"
+    ],
+    [
+     "10",
+     "INT_EN",
+     "0x00",
+     "read/write",
+     "bit7 ACC_NM; bit6 ACC_AM; bit5 ACC_HIGH_G; bit4 GYR_DRDY (6); bit3 GYR_HIGH_RATE; bit2 GYRO_AM; bit1 MAG_DRDY (6); bit0 ACC_BSX_DRDY (6)"
+    ],
+    [
+     "F",
+     "INT_MSK",
+     "0x00",
+     "read/write",
+     "bit7 ACC_NM; bit6 ACC_AM; bit5 ACC_HIGH_G; bit4 GYR_DRDY (6); bit3 GYR_HIGH_RATE; bit2 GYRO_AM; bit1 MAG_DRDY (6); bit0 ACC_BSX_DRDY (6)"
+    ],
+    [
+     "E",
+     "Reserved",
+     "0x00",
+     "reserved",
+     ""
+    ],
+    [
+     "D",
+     "GYR_Sleep_Config",
+     "0x00",
+     "read/write",
+     "bits5:3 AUTO_SLP_DURATION; bits2:0 SLP_DURATION"
+    ],
+    [
+     "C",
+     "ACC_Sleep_Config",
+     "0x00",
+     "read/write",
+     "bits4:1 SLP_DURATION; bit0 SLP_MODE"
+    ],
+    [
+     "B",
+     "GYR_Config_1",
+     "0x00",
+     "read/write",
+     "bits2:0 GYR_Power_Mode"
+    ],
+    [
+     "A",
+     "GYR_Config_0",
+     "0x38",
+     "read/write",
+     "bits5:3 GYR_Bandwidth; bits2:0 GYR_Range"
+    ],
+    [
+     "9",
+     "MAG_Config",
+     "0x0B",
+     "read/write",
+     "bits6:5 MAG_Power_mode; bits4:3 MAG_OPR_Mode; bits2:0 MAG_Data_output_rate"
+    ],
+    [
+     "8",
+     "ACC_Config",
+     "0x0D",
+     "read/write",
+     "bits7:5 ACC_PWR_Mode; bits4:2 ACC_BW; bits1:0 ACC_Range"
+    ],
+    [
+     "7",
+     "Page ID",
+     "0x00",
+     "read/write",
+     "Page ID"
+    ],
+    [
+     "6-0",
+     "Reserved",
+     "",
+     "reserved",
+     ""
+    ]
+   ],
+   "notes": [
+    "(6) Field present from software version 03.14.",
+    "Misprint: ACC_BW <4:3> and ACC_Range <2:0> should read <4:2> and <1:0>.",
+    "The register is also spelled GYR_INT_SETTING."
+   ]
+  },
+  {
+   "title": "Calibration status and self-test result fields",
+   "page": 73,
+   "conditions": "",
+   "columns": [
+    "field",
+    "bits",
+    "reading"
+   ],
+   "rows": [
+    [
+     "SYS calib status",
+     "CALIB_STAT <7:6>",
+     "3: fully calibrated; 0: not calibrated (fusion modes with absolute orientation)"
+    ],
+    [
+     "GYR calib status",
+     "CALIB_STAT <5:4>",
+     "3: fully calibrated; 0: not calibrated"
+    ],
+    [
+     "ACC calib status",
+     "CALIB_STAT <3:2>",
+     "3: fully calibrated; 0: not calibrated"
+    ],
+    [
+     "MAG calib status",
+     "CALIB_STAT <1:0>",
+     "3: fully calibrated; 0: not calibrated"
+    ],
+    [
+     "ST_MCU",
+     "ST_RESULT 3",
+     "1: test passed; 0: test failed"
+    ],
+    [
+     "ST_GYR",
+     "ST_RESULT 2",
+     "1: test passed; 0: test failed"
+    ],
+    [
+     "ST_MAG",
+     "ST_RESULT 1",
+     "1: test passed; 0: test failed"
+    ],
+    [
+     "ST_ACC",
+     "ST_RESULT 0",
+     "1: test passed; 0: test failed"
+    ],
+    [
+     "ST_MAIN_CLK",
+     "SYS_CLK_STATUS 0",
+     "0: clock source free to configure; 1: in configuration state"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "System status codes",
+   "page": 74,
+   "conditions": "",
+   "columns": [
+    "SYS_STATUS",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "0",
+     "System idle"
+    ],
+    [
+     "1",
+     "System error"
+    ],
+    [
+     "2",
+     "Initializing peripherals"
+    ],
+    [
+     "3",
+     "System initialization"
+    ],
+    [
+     "4",
+     "Executing selftest"
+    ],
+    [
+     "5",
+     "Sensor fusion algorithm running"
+    ],
+    [
+     "6",
+     "System running without fusion algorithm"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "System error codes",
+   "page": 75,
+   "conditions": "",
+   "columns": [
+    "SYS_ERR",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "0",
+     "No error"
+    ],
+    [
+     "1",
+     "Peripheral initialization error"
+    ],
+    [
+     "2",
+     "System initialization error"
+    ],
+    [
+     "3",
+     "Self test result failed"
+    ],
+    [
+     "4",
+     "Register map value out of range"
+    ],
+    [
+     "5",
+     "Register map address out of range"
+    ],
+    [
+     "6",
+     "Register map write error"
+    ],
+    [
+     "7",
+     "BNO low power mode not available for selected operation mode"
+    ],
+    [
+     "8",
+     "Accelerometer power mode not available"
+    ],
+    [
+     "9",
+     "Fusion algorithm configuration error"
+    ],
+    [
+     "A",
+     "Sensor configuration error"
+    ]
+   ],
+   "notes": [
+    "SYS_ERR is meaningful when SYS_STATUS reads 0x01."
+   ]
+  },
+  {
+   "title": "System trigger bits",
+   "page": 76,
+   "conditions": "",
+   "columns": [
+    "field",
+    "bit",
+    "action"
+   ],
+   "rows": [
+    [
+     "CLK_SEL",
+     "7",
+     "0: internal oscillator; 1: external oscillator (set only with an external crystal fitted)"
+    ],
+    [
+     "RST_INT",
+     "6",
+     "Set to clear all interrupt status bits and the INT output"
+    ],
+    [
+     "RST_SYS",
+     "5",
+     "Set to reset the system"
+    ],
+    [
+     "Self_Test",
+     "0",
+     "Set to start the self-test"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Accelerometer sleep phase duration",
+   "page": 89,
+   "conditions": "",
+   "columns": [
+    "SLP_DURATION",
+    "sleep phase duration"
+   ],
+   "rows": [
+    [
+     "0000b",
+     "0.5 ms"
+    ],
+    [
+     "0001b",
+     "0.5 ms"
+    ],
+    [
+     "0010b",
+     "0.5 ms"
+    ],
+    [
+     "0011b",
+     "0.5 ms"
+    ],
+    [
+     "0100b",
+     "0.5 ms"
+    ],
+    [
+     "0101b",
+     "0.5 ms"
+    ],
+    [
+     "0110b",
+     "1 ms"
+    ],
+    [
+     "0111b",
+     "2 ms"
+    ],
+    [
+     "1000b",
+     "4 ms"
+    ],
+    [
+     "1001b",
+     "6 ms"
+    ],
+    [
+     "1010b",
+     "10 ms"
+    ],
+    [
+     "1011b",
+     "25 ms"
+    ],
+    [
+     "1100b",
+     "50 ms"
+    ],
+    [
+     "1101b",
+     "100 ms"
+    ],
+    [
+     "1110b",
+     "500 ms"
+    ],
+    [
+     "1111b",
+     "1000 ms"
+    ]
+   ],
+   "notes": [
+    "SLP_DURATION and SLP_MODE (ACC_Sleep_Config) can be set only in a non-fusion mode. SLP_MODE 0 selects the event-driven time base, 1 the equidistant-sampling time base."
+   ]
+  },
+  {
+   "title": "Gyroscope advanced power save durations",
+   "page": 90,
+   "conditions": "",
+   "columns": [
+    "code",
+    "auto sleep duration",
+    "sleep duration"
+   ],
+   "rows": [
+    [
+     "000b",
+     "Not allowed",
+     "2 ms"
+    ],
+    [
+     "001b",
+     "4 ms",
+     "4 ms"
+    ],
+    [
+     "010b",
+     "5 ms",
+     "5 ms"
+    ],
+    [
+     "011b",
+     "8 ms",
+     "8 ms"
+    ],
+    [
+     "100b",
+     "10 ms",
+     "10 ms"
+    ],
+    [
+     "101b",
+     "15 ms",
+     "15 ms"
+    ],
+    [
+     "110b",
+     "20 ms",
+     "18 ms"
+    ],
+    [
+     "111b",
+     "40 ms",
+     "20 ms"
+    ]
+   ],
+   "notes": [
+    "In advanced power save mode the gyroscope duty-cycles; auto sleep duration sets how long it stays awake and sleep duration how long it sleeps. Both can be set only in a non-fusion mode."
+   ]
+  },
+  {
+   "title": "Minimum gyroscope auto sleep duration by bandwidth",
+   "page": 90,
+   "conditions": "",
+   "columns": [
+    "gyroscope bandwidth",
+    "minimum auto sleep duration"
+   ],
+   "rows": [
+    [
+     "32 Hz",
+     "20 ms"
+    ],
+    [
+     "64 Hz",
+     "10 ms"
+    ],
+    [
+     "12 Hz",
+     "20 ms"
+    ],
+    [
+     "23 Hz",
+     "10 ms"
+    ],
+    [
+     "47 Hz",
+     "5 ms"
+    ],
+    [
+     "116 Hz",
+     "4 ms"
+    ],
+    [
+     "230 Hz",
+     "4 ms"
+    ],
+    [
+     "Unfiltered (523 Hz)",
+     "4 ms"
+    ]
+   ],
+   "notes": [
+    "The sleep duration has no restriction."
+   ]
+  },
+  {
+   "title": "Gyroscope any-motion awake duration",
+   "page": 98,
+   "conditions": "",
+   "columns": [
+    "Awake Duration <1:0>",
+    "samples"
+   ],
+   "rows": [
+    [
+     "0",
+     "8"
+    ],
+    [
+     "1",
+     "16"
+    ],
+    [
+     "2",
+     "32"
+    ],
+    [
+     "3",
+     "64"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Protocol select pin mapping",
+   "page": 99,
+   "conditions": "",
+   "columns": [
+    "PS1",
+    "PS0",
+    "interface"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "Standard/Fast I2C interface"
+    ],
+    [
+     "0",
+     "1",
+     "HID over I2C"
+    ],
+    [
+     "1",
+     "0",
+     "UART interface"
+    ],
+    [
+     "1",
+     "1",
+     "Reserved"
+    ]
+   ],
+   "notes": [
+    "PS1 and PS0 must not be left floating."
+   ]
+  },
+  {
+   "title": "Mapping of digital interface pins",
+   "page": 99,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "I2C interfaces (PS1=0b0)",
+    "UART interface (PS1.PS0=0b10)"
+   ],
+   "rows": [
+    [
+     "COM0",
+     "SDA",
+     "Tx"
+    ],
+    [
+     "COM1",
+     "SCL",
+     "Rx"
+    ],
+    [
+     "COM2",
+     "GNDIO",
+     ""
+    ],
+    [
+     "COM3",
+     "I2C address select",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical specification of the interface pins",
+   "page": 99,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Pull-up resistance, COM3 pin",
+     "Rup",
+     "Internal pull-up resistance to VDDIO",
+     "20",
+     "40",
+     "60",
+     "kΩ"
+    ],
+    [
+     "Input capacitance",
+     "Cin",
+     "",
+     "",
+     "5",
+     "10",
+     "pF"
+    ],
+    [
+     "I²C bus load capacitance (max. drive capability)",
+     "CI2C_Load",
+     "",
+     "",
+     "",
+     "400",
+     "pF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "I2C address selection",
+   "page": 100,
+   "conditions": "",
+   "columns": [
+    "I2C configuration",
+    "COM3 state",
+    "I2C address"
+   ],
+   "rows": [
+    [
+     "Slave",
+     "HIGH",
+     "0x29"
+    ],
+    [
+     "Slave",
+     "LOW",
+     "0x28"
+    ],
+    [
+     "HID-I2C",
+     "X",
+     "0x40"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "I2C timings",
+   "page": 100,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Clock frequency",
+     "fSCL",
+     "",
+     "",
+     "400",
+     "kHz"
+    ],
+    [
+     "SCL low period",
+     "tLOW",
+     "",
+     "1.3",
+     "",
+     "µs"
+    ],
+    [
+     "SCL high period",
+     "tHIGH",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "SDA setup time",
+     "tSUDAT",
+     "",
+     "0.1",
+     "",
+     "µs"
+    ],
+    [
+     "SDA hold time",
+     "tHDDAT",
+     "",
+     "0.0",
+     "",
+     "µs"
+    ],
+    [
+     "Setup time for a repeated start condition",
+     "tSUSTA",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Hold time for a start condition",
+     "tHDSTA",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Setup time for a stop condition",
+     "tSUSTO",
+     "",
+     "0.6",
+     "",
+     "µs"
+    ],
+    [
+     "Time before a new transmission can start",
+     "tBUF",
+     "",
+     "1.3",
+     "",
+     "µs"
+    ],
+    [
+     "Idle time between write accesses, normal mode, standby mode, low-power mode 2",
+     "tIDLE_wacc_nm",
+     "",
+     "2",
+     "",
+     "µs"
+    ],
+    [
+     "Idle time between write accesses, suspend mode, low-power mode 1",
+     "tIDLE_wacc_sum",
+     "",
+     "450",
+     "",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "UART packets",
+   "page": 103,
+   "conditions": "",
+   "columns": [
+    "packet",
+    "byte 1",
+    "byte 2",
+    "byte 3",
+    "byte 4",
+    "following bytes"
+   ],
+   "rows": [
+    [
+     "Register write command",
+     "0xAA (start)",
+     "0x00 (write)",
+     "register address",
+     "length",
+     "data 1 ... data n"
+    ],
+    [
+     "Write acknowledge response",
+     "0xEE (header)",
+     "status",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Register read command",
+     "0xAA (start)",
+     "0x01 (read)",
+     "register address",
+     "length",
+     ""
+    ],
+    [
+     "Read success response",
+     "0xBB",
+     "length",
+     "data 1",
+     "...",
+     "data n"
+    ],
+    [
+     "Read failure or acknowledge response",
+     "0xEE (header)",
+     "status",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Misprint: in the read command the register address and length bytes, numbered Byte 2 and Byte 3, should read Byte 3 and Byte 4."
+   ]
+  },
+  {
+   "title": "UART response status codes",
+   "page": 103,
+   "conditions": "",
+   "columns": [
+    "status",
+    "name",
+    "in write acknowledge",
+    "in read failure response"
+   ],
+   "rows": [
+    [
+     "0x01",
+     "WRITE_SUCCESS",
+     "yes",
+     ""
+    ],
+    [
+     "0x02",
+     "READ_FAIL",
+     "",
+     "yes"
+    ],
+    [
+     "0x03",
+     "WRITE_FAIL",
+     "yes",
+     ""
+    ],
+    [
+     "0x04",
+     "REGMAP_INVALID_ADDRESS",
+     "yes",
+     "yes"
+    ],
+    [
+     "0x05",
+     "REGMAP_WRITE_DISABLED",
+     "yes",
+     "yes"
+    ],
+    [
+     "0x06",
+     "WRONG_START_BYTE",
+     "yes",
+     "yes"
+    ],
+    [
+     "0x07",
+     "BUS_OVER_RUN_ERROR",
+     "yes",
+     "yes"
+    ],
+    [
+     "0x08",
+     "MAX_LENGTH_ERROR",
+     "yes",
+     "yes"
+    ],
+    [
+     "0x09",
+     "MIN_LENGTH_ERROR",
+     "yes",
+     "yes"
+    ],
+    [
+     "0x0A",
+     "RECEIVE_CHARACTER_TIMEOUT",
+     "yes",
+     "yes"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Pin function by interface",
+   "page": 106,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "name",
+    "I2C",
+    "UART",
+    "HID-I2C"
+   ],
+   "rows": [
+    [
+     "1",
+     "PIN1",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "2",
+     "GND",
+     "GND",
+     "GND",
+     "GND"
+    ],
+    [
+     "3",
+     "VDD",
+     "VDD",
+     "VDD",
+     "VDD"
+    ],
+    [
+     "4",
+     "nBOOT_LOAD_PIN",
+     "nBOOT_LOAD_PIN",
+     "nBOOT_LOAD_PIN",
+     "nBOOT_LOAD_PIN"
+    ],
+    [
+     "5",
+     "PS1",
+     "GNDIO",
+     "VDDIO",
+     "GNDIO"
+    ],
+    [
+     "6",
+     "PS0",
+     "GNDIO",
+     "GNDIO",
+     "VDDIO"
+    ],
+    [
+     "7",
+     "SWDIO",
+     "SWDIO",
+     "SWDIO",
+     "SWDIO"
+    ],
+    [
+     "8",
+     "SWCLK",
+     "SWCLK",
+     "SWCLK",
+     "SWCLK"
+    ],
+    [
+     "9",
+     "CAP",
+     "CAP",
+     "CAP",
+     "CAP"
+    ],
+    [
+     "10",
+     "BL_IND",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "11",
+     "nRESET",
+     "nRESET",
+     "nRESET",
+     "nRESET"
+    ],
+    [
+     "12",
+     "PIN12",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "13",
+     "PIN13",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "14",
+     "INT",
+     "Interrupt",
+     "Interrupt",
+     "Interrupt"
+    ],
+    [
+     "15",
+     "PIN15",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "16",
+     "PIN16",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "17",
+     "COM3",
+     "I2C address select",
+     "GNDIO",
+     "GNDIO"
+    ],
+    [
+     "18",
+     "COM2",
+     "GNDIO",
+     "GNDIO",
+     "GNDIO"
+    ],
+    [
+     "19",
+     "COM1",
+     "SCL",
+     "Rx",
+     "SCL"
+    ],
+    [
+     "20",
+     "COM0",
+     "SDA",
+     "Tx",
+     "SDA"
+    ],
+    [
+     "21",
+     "PIN21",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "22",
+     "PIN22",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "23",
+     "PIN23",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "24",
+     "PIN24",
+     "DNC",
+     "DNC",
+     "DNC"
+    ],
+    [
+     "25",
+     "GNDIO",
+     "GNDIO",
+     "GNDIO",
+     "GNDIO"
+    ],
+    [
+     "26",
+     "XOUT32",
+     "OSC output",
+     "OSC output",
+     "OSC output"
+    ],
+    [
+     "27",
+     "XIN32",
+     "OSC input",
+     "OSC input",
+     "OSC input"
+    ],
+    [
+     "28",
+     "VDDIO",
+     "VDDIO",
+     "VDDIO",
+     "VDDIO"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Crystal oscillator source connections",
+   "page": 110,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "recommended connection",
+    "description"
+   ],
+   "rows": [
+    [
+     "XIN32",
+     "Load capacitor 22pF (9)(10)",
+     "Timer oscillator input"
+    ],
+    [
+     "XOUT32",
+     "Load capacitor 22pF (9)(10)",
+     "Timer oscillator output"
+    ]
+   ],
+   "notes": [
+    "(9) A typical example value.",
+    "(10) Every supply and ground pin pair has its own decoupling capacitor, placed near the part."
+   ]
+  },
+  {
+   "title": "Marking of mass production parts",
+   "page": 113,
+   "conditions": "",
+   "columns": [
+    "row",
+    "name",
+    "symbol",
+    "remark"
+   ],
+   "rows": [
+    [
+     "",
+     "Pin 1 identifier",
+     "•",
+     "---"
+    ],
+    [
+     "First row",
+     "Product number",
+     "701",
+     "3 numeric digits, internal identification for product type"
+    ],
+    [
+     "Second row",
+     "TTTT",
+     "T",
+     "Internal use"
+    ],
+    [
+     "Third row",
+     "CCC",
+     "C",
+     "Numerical counter"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "i2c",
+   "title": "I2C connection",
+   "page": 107,
+   "description": "The BNO055 wired as an I2C slave: PS1 and PS0 grounded select standard or fast I2C. COM0 and COM1 carry SDA and SCL, each pulled up to VDDIO by RPULL; COM3 is the address select line (high 0x29, low 0x28) and COM2 is grounded. VDD has 100 nF and VDDIO 120 nF to ground, CAP has 1 µF. nBOOT_LOAD_PIN is held high by 10 kΩ so the part starts its application; nRESET has an optional 10 kΩ pull-up. INT and BL_IND go to the host, SWDIO and SWCLK to an optional debugger, and XIN32/XOUT32 to an optional external oscillator.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BNO055"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDD to GND"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "120 nF",
+     "note": "VDDIO to GNDIO"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "on CAP"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "nBOOT_LOAD_PIN pull-up"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "optional nRESET pull-up"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "RPULL",
+     "note": "SDA pull-up, value not given"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "RPULL",
+     "note": "SCL pull-up, value not given"
+    },
+    {
+     "ref": "J_VDDIO",
+     "type": "terminal",
+     "value": "VDDIO",
+     "note": "VDDIO supply"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "VDD supply"
+    },
+    {
+     "ref": "J_NBOOT",
+     "type": "terminal",
+     "value": "NBOOT",
+     "note": "boot loader select"
+    },
+    {
+     "ref": "J_NRESET",
+     "type": "terminal",
+     "value": "NRESET",
+     "note": "reset"
+    },
+    {
+     "ref": "J_INT",
+     "type": "terminal",
+     "value": "INT",
+     "note": "interrupt output"
+    },
+    {
+     "ref": "J_BL_IND",
+     "type": "terminal",
+     "value": "BL_IND",
+     "note": "boot loader indicator"
+    },
+    {
+     "ref": "J_SWDIO",
+     "type": "terminal",
+     "value": "SWDIO",
+     "note": "optional debugger"
+    },
+    {
+     "ref": "J_SWCLK",
+     "type": "terminal",
+     "value": "SWCLK",
+     "note": "optional debugger"
+    },
+    {
+     "ref": "J_XIN",
+     "type": "terminal",
+     "value": "XIN",
+     "note": "optional oscillator input"
+    },
+    {
+     "ref": "J_XOUT",
+     "type": "terminal",
+     "value": "XOUT",
+     "note": "optional oscillator connection"
+    },
+    {
+     "ref": "J_SDA",
+     "type": "terminal",
+     "value": "SDA",
+     "note": "I2C data"
+    },
+    {
+     "ref": "J_SCL",
+     "type": "terminal",
+     "value": "SCL",
+     "note": "I2C clock"
+    },
+    {
+     "ref": "J_ADDR_SEL",
+     "type": "terminal",
+     "value": "ADDR_SEL",
+     "note": "I2C address select"
+    }
+   ],
+   "notes": [
+    "GND and GNDIO are one ground net."
+   ]
+  },
+  {
+   "id": "uart",
+   "title": "UART connection",
+   "page": 108,
+   "description": "The BNO055 wired for UART: PS1 tied to VDDIO and PS0 grounded select the UART interface. COM0 is TX and COM1 is RX, with no pull-ups; COM2 and COM3 are grounded. Supply decoupling (100 nF on VDD, 120 nF on VDDIO, 1 µF on CAP), the 10 kΩ nBOOT_LOAD_PIN pull-up, the optional 10 kΩ nRESET pull-up and the INT, BL_IND, debugger and oscillator lines match the I2C hook-up.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BNO055"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDD to GND"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "120 nF",
+     "note": "VDDIO to GNDIO"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "on CAP"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "nBOOT_LOAD_PIN pull-up"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "optional nRESET pull-up"
+    },
+    {
+     "ref": "J_VDDIO",
+     "type": "terminal",
+     "value": "VDDIO",
+     "note": "VDDIO supply"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "VDD supply"
+    },
+    {
+     "ref": "J_NBOOT",
+     "type": "terminal",
+     "value": "NBOOT",
+     "note": "boot loader select"
+    },
+    {
+     "ref": "J_NRESET",
+     "type": "terminal",
+     "value": "NRESET",
+     "note": "reset"
+    },
+    {
+     "ref": "J_INT",
+     "type": "terminal",
+     "value": "INT",
+     "note": "interrupt output"
+    },
+    {
+     "ref": "J_BL_IND",
+     "type": "terminal",
+     "value": "BL_IND",
+     "note": "boot loader indicator"
+    },
+    {
+     "ref": "J_SWDIO",
+     "type": "terminal",
+     "value": "SWDIO",
+     "note": "optional debugger"
+    },
+    {
+     "ref": "J_SWCLK",
+     "type": "terminal",
+     "value": "SWCLK",
+     "note": "optional debugger"
+    },
+    {
+     "ref": "J_XIN",
+     "type": "terminal",
+     "value": "XIN",
+     "note": "optional oscillator input"
+    },
+    {
+     "ref": "J_XOUT",
+     "type": "terminal",
+     "value": "XOUT",
+     "note": "optional oscillator connection"
+    },
+    {
+     "ref": "J_TX",
+     "type": "terminal",
+     "value": "TX",
+     "note": "UART transmit"
+    },
+    {
+     "ref": "J_RX",
+     "type": "terminal",
+     "value": "RX",
+     "note": "UART receive"
+    }
+   ],
+   "notes": [
+    "GND and GNDIO are one ground net."
+   ]
+  },
+  {
+   "id": "hid-i2c",
+   "title": "HID-I2C connection",
+   "page": 109,
+   "description": "The BNO055 wired for HID over I2C: PS0 tied to VDDIO and PS1 grounded select the HID-I2C protocol, slave address 0x40. COM0 and COM1 carry SDA and SCL with RPULL pull-ups to VDDIO; COM2 and COM3 are grounded. Decoupling, boot and reset pull-ups and the INT, BL_IND, debugger and oscillator lines match the I2C hook-up.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BNO055"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VDD to GND"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "120 nF",
+     "note": "VDDIO to GNDIO"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "on CAP"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "nBOOT_LOAD_PIN pull-up"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "optional nRESET pull-up"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "RPULL",
+     "note": "SDA pull-up, value not given"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "RPULL",
+     "note": "SCL pull-up, value not given"
+    },
+    {
+     "ref": "J_VDDIO",
+     "type": "terminal",
+     "value": "VDDIO",
+     "note": "VDDIO supply"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "VDD supply"
+    },
+    {
+     "ref": "J_NBOOT",
+     "type": "terminal",
+     "value": "NBOOT",
+     "note": "boot loader select"
+    },
+    {
+     "ref": "J_NRESET",
+     "type": "terminal",
+     "value": "NRESET",
+     "note": "reset"
+    },
+    {
+     "ref": "J_INT",
+     "type": "terminal",
+     "value": "INT",
+     "note": "interrupt output"
+    },
+    {
+     "ref": "J_BL_IND",
+     "type": "terminal",
+     "value": "BL_IND",
+     "note": "boot loader indicator"
+    },
+    {
+     "ref": "J_SWDIO",
+     "type": "terminal",
+     "value": "SWDIO",
+     "note": "optional debugger"
+    },
+    {
+     "ref": "J_SWCLK",
+     "type": "terminal",
+     "value": "SWCLK",
+     "note": "optional debugger"
+    },
+    {
+     "ref": "J_XIN",
+     "type": "terminal",
+     "value": "XIN",
+     "note": "optional oscillator input"
+    },
+    {
+     "ref": "J_XOUT",
+     "type": "terminal",
+     "value": "XOUT",
+     "note": "optional oscillator connection"
+    },
+    {
+     "ref": "J_SDA",
+     "type": "terminal",
+     "value": "SDA",
+     "note": "I2C data"
+    },
+    {
+     "ref": "J_SCL",
+     "type": "terminal",
+     "value": "SCL",
+     "note": "I2C clock"
+    }
+   ],
+   "notes": [
+    "GND and GNDIO are one ground net."
+   ]
+  },
+  {
+   "id": "crystal",
+   "title": "External 32 kHz crystal oscillator",
+   "page": 110,
+   "description": "A 32.768 kHz crystal between XIN32 and XOUT32, each pin loaded with 22 pF to ground. With CLK_SEL set the BNO055 runs from this crystal instead of its internal clock.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BNO055"
+    },
+    {
+     "ref": "Y1",
+     "type": "crystal",
+     "value": "32.768 kHz"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22 pF",
+     "note": "load capacitor, typical example"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 pF",
+     "note": "load capacitor, typical example"
+    }
+   ],
+   "notes": [
+    "Typical crystal voltage amplitude is around 500 to 700 mV."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Accelerometer slope sample spacing",
+   "expr": "Δt = 1 / (2 × bw)",
+   "where": {
+    "bw": "selected accelerometer bandwidth"
+   },
+   "note": "Time between the two acceleration samples whose difference is the slope for the any-motion and slow/no-motion interrupts.",
+   "page": 44
+  },
+  {
+   "name": "Accelerometer any-motion count",
+   "expr": "N = AM_DUR + 1",
+   "where": {
+    "N": "consecutive slope points above (or below) threshold needed to set (or clear) the interrupt",
+    "AM_DUR": "ACC_INT_Settings bits 1:0"
+   },
+   "note": "",
+   "page": 44
+  },
+  {
+   "name": "Slow-motion count",
+   "expr": "N = slo_no_mot_dur<1:0> + 1",
+   "where": {
+    "N": "consecutive slope points above (or below) threshold needed to set (or clear) the slow-motion interrupt"
+   },
+   "note": "",
+   "page": 42
+  },
+  {
+   "name": "No-motion delay",
+   "expr": "t = slo_no_mot_dur<3:0> + 1 (if <5:4> = 00); t = slo_no_mot_dur<3:0> × 4 + 20 (if <5:4> = 01); t = slo_no_mot_dur<4:0> × 8 + 88 (if <5> = 1)",
+   "where": {
+    "t": "no-motion delay in seconds",
+    "slo_no_mot_dur": "ACC_NM_SET bits 6:1"
+   },
+   "note": "",
+   "page": 94
+  },
+  {
+   "name": "High-g delay",
+   "expr": "delay = (ACC_HG_DURATION + 1) × 2 ms",
+   "where": {
+    "ACC_HG_DURATION": "register value, 0 to 255"
+   },
+   "note": "Range 2 ms to 512 ms.",
+   "page": 45
+  },
+  {
+   "name": "High-rate delay",
+   "expr": "delay = (GYR_DUR_<axis> + 1) × 2.5 ms",
+   "where": {
+    "GYR_DUR_<axis>": "register value, 0 to 255"
+   },
+   "note": "Range 2.5 ms to 640 ms.",
+   "page": 46
+  },
+  {
+   "name": "High-rate hysteresis",
+   "expr": "hysteresis = (255 + 256 × HR_<axis>_THRES_HYST) × 4 LSB",
+   "where": {
+    "HR_<axis>_THRES_HYST": "GYR_HR_<axis>_SET bits 6:5"
+   },
+   "note": "Scales with the gyroscope range.",
+   "page": 95
+  },
+  {
+   "name": "Gyroscope slope sample spacing",
+   "expr": "Δt = 1 / (4 × fs)",
+   "where": {
+    "fs": "gyroscope update rate, tied to the bandwidth; capped at 400 Hz for bandwidth settings 0, 1 and 2"
+   },
+   "note": "",
+   "page": 48
+  },
+  {
+   "name": "Gyroscope any-motion count",
+   "expr": "N = (Slope Samples + 1) × 4",
+   "where": {
+    "N": "consecutive slope samples needed to set or clear the interrupt",
+    "Slope Samples": "GYR_AM_SET bits 1:0"
+   },
+   "note": "",
+   "page": 48
+  },
+  {
+   "name": "Soft-iron matrix element",
+   "expr": "value = raw / 2^14",
+   "where": {
+    "raw": "signed 16-bit SIC_MATRIX_MSBn:LSBn"
+   },
+   "note": "Covers -2.0000 to 1.9999.",
+   "page": 52
+  },
+  {
+   "name": "Magnetometer gain error",
+   "expr": "Gerr = (field after API compensation / applied field) - 1",
+   "where": {},
+   "note": "",
+   "page": 16
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 4,
+   "text": "A system in package holding a 14-bit three-axis accelerometer, a 16-bit three-axis gyroscope (up to ±2000 °/s), a three-axis magnetometer and a 32-bit Cortex-M0+ processor that executes Bosch fusion firmware, all inside a 28-pin LGA of 3.8 mm × 5.2 mm × 1.1 mm. It talks over I2C or UART; the I2C port can run the HID-I2C protocol so the part acts as a Windows 8.0/8.1 sensor hub."
+  },
+  {
+   "topic": "Supplies and power-up order",
+   "page": 19,
+   "text": "VDD feeds the internal sensors; VDDIO feeds the microcontroller and the digital interfaces. VDD must reach its level before VDDIO is switched on, or together with it. Apart from that the two rails may sit at any levels relative to each other inside their ranges."
+  },
+  {
+   "topic": "Reset",
+   "page": 19,
+   "text": "A power-on reset loads the register defaults and starts the part in CONFIG mode. It runs at every power-up, on a low pulse of at least 20 ns on nRESET, or when RST_SYS in SYS_TRIGGER is set. Start-up from off to config mode takes 400 ms typical; a reset completes into config mode after 650 ms typical."
+  },
+  {
+   "topic": "Normal power mode",
+   "page": 20,
+   "text": "PWR_MODE selects normal, low power or suspend; normal is the start-up default. In normal mode every sensor the chosen operating mode needs stays on, and the register map and microcontroller peripherals run continuously. The invalid code 11b should not be written."
+  },
+  {
+   "topic": "Low power mode",
+   "page": 20,
+   "text": "After a set time without motion (5 s by default) the part drops to low power mode with only the accelerometer running; an any-motion event wakes it back to normal mode. Entry uses the no-motion interrupt settings, wake-up the any-motion settings, and INT can also signal the host. Defaults are tuned for this; a system reset through RST_SYS restores them. In this mode only the no-motion and any-motion interrupts work (not high-g or slow motion), and the mode needs an operating mode that uses the accelerometer."
+  },
+  {
+   "topic": "Suspend mode",
+   "page": 21,
+   "text": "All sensors and the microcontroller sleep and the register map stops updating. Writing PWR_MODE brings the part out."
+  },
+  {
+   "topic": "Operating modes",
+   "page": 21,
+   "text": "OPR_MODE picks which sensors run and which outputs are computed. Sensors the mode does not need are suspended. CONFIGMODE is the default after power-on. Switching from CONFIGMODE to another mode takes 7 ms; switching back takes 19 ms. In any mode the data registers follow the selected units and the axis remap."
+  },
+  {
+   "topic": "Config mode",
+   "page": 23,
+   "text": "Output data read zero and fusion stops. This is the only mode in which every writable register accepts changes, except the interrupt registers (INT_EN, INT_MSK) and OPR_MODE, which can be written in any mode. Another mode must be chosen to read sensor data."
+  },
+  {
+   "topic": "Non-fusion modes",
+   "page": 23,
+   "text": "ACCONLY, MAGONLY and GYROONLY run one sensor and suspend the others, so the part behaves like a single discrete sensor. ACCMAG, ACCGYRO and MAGGYRO run two sensors; AMG runs all three. Sensor settings made in config mode are kept."
+  },
+  {
+   "topic": "Fusion modes",
+   "page": 23,
+   "text": "Fusion modes compute orientation, as quaternions or as Euler angles (roll, pitch, yaw), and split measured acceleration into linear acceleration and the gravity vector. Absolute modes reference the earth's magnetic field and so find magnetic north; relative modes give a heading that depends on the starting position. In fusion modes the sensors use the defaults of the power-on configuration table and are set by the part itself. Background calibration of all sensors always runs and cannot be turned off."
+  },
+  {
+   "topic": "Fusion limits",
+   "page": 24,
+   "text": "Accelerometer data correct gyroscope drift; during motion they are set aside and pitch and roll come from the gyroscope, so long vibration or continuous movement can make pitch and roll drift. Distorted magnetometer data are dropped automatically, which can make heading drift as in IMU mode. The algorithm targets human motion: sustained large accelerations, such as hard cornering or long braking in a vehicle, can be mistaken for gravity, so such uses should be tested."
+  },
+  {
+   "topic": "IMU mode",
+   "page": 24,
+   "text": "Relative orientation from accelerometer and gyroscope; fast, with a high output rate (100 Hz)."
+  },
+  {
+   "topic": "COMPASS mode",
+   "page": 24,
+   "text": "Measures the earth's field to find geographic direction. Heading uses the horizontal field components, which needs the gravity direction, so gravity and field are used together. Accuracy depends on a stable surrounding field; because device fields are usually much larger than the earth's, this mode needs calibration."
+  },
+  {
+   "topic": "M4G mode",
+   "page": 24,
+   "text": "Like IMU, but rotation is sensed from the magnetometer's changing orientation in the field instead of the gyroscope. It draws less current than IMU and has no gyroscope drift, but accuracy depends on a stable surrounding field. No magnetometer calibration is needed or offered."
+  },
+  {
+   "topic": "NDOF and NDOF_FMC_OFF",
+   "page": 25,
+   "text": "NDOF fuses all three sensors into absolute orientation with a high output rate and good tolerance of magnetic distortion. Its fast magnetometer calibration gives quick calibration and better accuracy at slightly higher current than NDOF_FMC_OFF, which is the same mode with fast magnetometer calibration off."
+  },
+  {
+   "topic": "Axis remap",
+   "page": 26,
+   "text": "AXIS_MAP_CONFIG and AXIS_MAP_SIGN reassign and invert the output axes to suit how the part is mounted. The default axes follow the package: X and Y in the package plane, Z out of the top face, the same frame for accelerometer, gyroscope and magnetometer."
+  },
+  {
+   "topic": "Sensor configuration",
+   "page": 28,
+   "text": "ACC_Config, GYR_Config_0/1 and MAG_Config (register page 1) set range, bandwidth, rate and power mode in non-fusion modes. In fusion modes these settings are controlled by the part and the user's choices are restricted."
+  },
+  {
+   "topic": "Units and output format",
+   "page": 32,
+   "text": "UNIT_SEL picks m/s² or mg, dps or rps, degrees or radians, °C or °F, and Windows or Android orientation convention. Raw sensor registers hold uncompensated data in non-fusion modes and compensated data in fusion modes; Euler, quaternion, linear acceleration and gravity outputs exist only in fusion modes. Linear acceleration usually cannot be integrated into velocity or position: without other sensors the error outgrows the signal within a second."
+  },
+  {
+   "topic": "Data register shadowing",
+   "page": 39,
+   "text": "A burst (multi-byte) read is shadowed so the LSB and MSB of every axis come from the same sample. With single-byte reads the MSB can change between reading the LSB and the MSB."
+  },
+  {
+   "topic": "Calibration data",
+   "page": 33,
+   "text": "Offset and radius registers can be read once fully calibrated and stored by the host, then written back after a power-on reset to get correct orientation at once. Read them in CONFIG_MODE after full calibration. To restore: enter CONFIG_MODE, write the offsets and radii, then select a fusion mode. Wrong offsets can give unreliable orientation even at calibration level 3. Once the internal calibration runs again it overwrites the stored profile."
+  },
+  {
+   "topic": "Interrupt pin",
+   "page": 40,
+   "text": "INT is latched and goes high on a rising-edge event; it stays high until the host sets RST_INT in SYS_TRIGGER. INT_EN enables each interrupt, INT_MSK routes it to the pin (without the mask only INT_STA updates), and INT_STA records occurrences and clears when read."
+  },
+  {
+   "topic": "Data ready interrupt",
+   "page": 40,
+   "text": "Available from software 03.14. ACC_BSX_DRDY, MAG_DRDY and GYR_DRDY flag new accelerometer, magnetometer and gyroscope data at each sensor's rate in non-fusion modes. In fusion modes ACC_BSX_DRDY flags new fused data at the primary sensor rate. INT stays high until reset or read; if several interrupts arrive before that, INT pulses low and high again."
+  },
+  {
+   "topic": "Accelerometer slow/no-motion interrupt",
+   "page": 42,
+   "text": "SMNM selects slow-motion or no-motion. Slow motion fires when the slope on any enabled axis stays above ACC_NM_THRES for slo_no_mot_dur<1:0>+1 samples. No motion fires when the slope on all enabled axes stays below the threshold for the delay set by slo_no_mot_dur, in 1 s timer ticks. Axes are chosen with the AM/NM axis bits shared with any-motion."
+  },
+  {
+   "topic": "Accelerometer any-motion interrupt",
+   "page": 43,
+   "text": "The slope between successive samples is compared with ACC_AM_THRES; the interrupt sets when any enabled axis exceeds it for AM_DUR+1 points and clears when all enabled axes stay below for AM_DUR+1 points, unless latched."
+  },
+  {
+   "topic": "Accelerometer high-g interrupt",
+   "page": 45,
+   "text": "Fires when the magnitude on any enabled axis (HG_X/Y/Z_AXIS) exceeds ACC_HG_THRES for the ACC_HG_DURATION delay, and resets when all enabled axes stay below it for the same delay. Enabled by ACC_HIGH_G in INT_EN; status in INT_STA."
+  },
+  {
+   "topic": "Gyroscope high-rate interrupt",
+   "page": 46,
+   "text": "Fires when the rate magnitude on any enabled axis exceeds HR_<axis>_Threshold for the GYR_DUR_<axis> delay; resets when all enabled axes fall below the threshold minus the hysteresis. HR_FILT selects filtered or unfiltered data. Enabled by GYR_HIGH_RATE in INT_EN."
+  },
+  {
+   "topic": "Gyroscope any-motion interrupt",
+   "page": 48,
+   "text": "The slope between successive rate samples is compared with GYR_AM_THRES; the interrupt sets when any enabled axis exceeds it for (Slope Samples+1)×4 samples and clears after the same count below, unless latched. AM_FILT selects filtered or unfiltered data."
+  },
+  {
+   "topic": "Self-test",
+   "page": 50,
+   "text": "At start-up the part checks the chip IDs of its three sensors and runs a memory self-test of the microcontroller; results land in ST_RESULT (1 = pass). The host can start a built-in self-test of the three sensors from config mode by setting Self_Test in SYS_TRIGGER; other functions pause meanwhile. SYS_STATUS shows 'executing selftest' and changes only on failure. After about 400 ms SYS_ERR reads 0 on success or 3 on failure, and ST_RESULT then shows which sensor failed."
+  },
+  {
+   "topic": "Boot loader",
+   "page": 51,
+   "text": "The boot loader runs at every reset and power-up and checks nBOOT_LOAD_PIN: low enters boot loader mode, otherwise the application starts. The pin should be connected as in the connection diagrams."
+  },
+  {
+   "topic": "Accelerometer calibration",
+   "page": 51,
+   "text": "Hold the device still in six different positions for a few seconds each, moving slowly between them, with each of the x, y and z axes perpendicular at least once. CALIB_STAT shows progress. Steps are repeated after every power-on reset."
+  },
+  {
+   "topic": "Gyroscope calibration",
+   "page": 51,
+   "text": "Hold the device still in one position for a few seconds; CALIB_STAT shows progress."
+  },
+  {
+   "topic": "Magnetometer calibration",
+   "page": 52,
+   "text": "The steps correct hard-iron distortion. In COMPASS, M4G and NDOF_FMC_OFF, move the device randomly (for example tracing a figure 8 in the air) until CALIB_STAT reads fully calibrated. NDOF needs fewer movements, at slightly higher current."
+  },
+  {
+   "topic": "Soft-iron calibration",
+   "page": 52,
+   "text": "A 3×3 matrix multiplies the magnetometer data before fusion to correct soft-magnetic material near the sensor. It starts as the identity matrix. Generating it, ideally with Helmholtz coils or less precisely in the earth's field, is the customer's task."
+  },
+  {
+   "topic": "Register access",
+   "page": 54,
+   "text": "All communication is register reads and writes on 8-bit registers in two pages; PAGE_ID (0x07) reads and selects the active register page, with page 0 active after power-on. Writes to read-only registers are ignored; trigger bits are write-only and read 0. Fully reserved registers should be left alone and reserved bits masked off."
+  },
+  {
+   "topic": "Interface selection",
+   "page": 99,
+   "text": "PS1 and PS0 choose standard/fast I2C (00), HID over I2C (01) or UART (10); 11 is reserved and the pins must not float. COM0 to COM3 change role with the interface."
+  },
+  {
+   "topic": "I2C",
+   "page": 100,
+   "text": "Standard and fast mode up to 400 kHz, 7-bit addressing only, compatible with I2C specification UM10204 Rev. 03. The part stretches the clock. Address 0x29 with COM3 high (default, internal pull-up), 0x28 with COM3 low, 0x40 in HID-I2C. SDA and SCL need external pull-ups to VDDIO. A write is address, register, data; a read writes the register address, then a repeated start and read with auto-increment, ended by a NACK and stop. A read without a new address restarts at the last address written (0x00 by default). A START followed at once by a STOP is not recognised."
+  },
+  {
+   "topic": "UART",
+   "page": 103,
+   "text": "115200 bps, 8N1, up to 128 bytes per read or write. Commands start with 0xAA; a write is acknowledged with 0xEE and a status byte, a read returns 0xBB, a length and the data, or 0xEE and an error status. A command with a wrong start byte gets no reply. Successive characters must arrive within 30 ms."
+  },
+  {
+   "topic": "HID over I2C",
+   "page": 104,
+   "text": "A standard protocol for HID devices on I2C, so generic host drivers can use the sensor; the host reads a report descriptor from the part at start-up and exchanges reports and events defined there."
+  },
+  {
+   "topic": "Clock source",
+   "page": 110,
+   "text": "The part runs from an internal 32 kHz clock by default, which can deviate by up to +3 %. Setting CLK_SEL in SYS_TRIGGER (preferably in config mode) switches to an external 32.768 kHz crystal on XIN32/XOUT32, recommended for best performance. The part checks the crystal signal and falls back to the internal clock, clearing CLK_SEL, if it is bad. Configuring the crystal and starting takes at least about 600 ms. Poll ST_MAIN_CLK in SYS_CLK_STATUS until it clears, then read CLK_SEL: set means the crystal is running. With the internal clock XIN32 and XOUT32 can stay open."
+  },
+  {
+   "topic": "Soldering and handling",
+   "page": 113,
+   "text": "Moisture sensitivity level 1 per IPC/JEDEC J-STD-020E; lead-free reflow with peak temperature up to 260 °C. The MEMS structure tolerates shocks of several thousand g, which a hammer blow or a drop onto a hard surface can exceed. ESD protection reaches 2 kV HBM, but normal CMOS precautions apply. Terminal voltages must stay within the supply range and unused inputs must be tied to a defined level."
+  },
+  {
+   "topic": "Environmental",
+   "page": 114,
+   "text": "RoHS compliant (2011/65/EU with 2015/863/EU), halogen-free, MSL1. Shipped in a cardboard box. Second-source LGA packages may differ in chemical content and internal structure but have identical package parameters."
+  }
+ ],
+ "packages": [
+  {
+   "name": "LGA-28",
+   "page": 112,
+   "unit": "mm",
+   "columns": [
+    "what",
+    "nominal",
+    "tolerance"
+   ],
+   "rows": [
+    [
+     "body length",
+     "5.20",
+     "±0.1"
+    ],
+    [
+     "body width",
+     "3.80",
+     "±0.1"
+    ],
+    [
+     "overall height",
+     "MAX. 1.180",
+     ""
+    ],
+    [
+     "body height above the bottom layer",
+     "(1.000)",
+     ""
+    ],
+    [
+     "bottom layer thickness",
+     "0.130",
+     "±0.030"
+    ],
+    [
+     "pad row span, pad 20 to pad 1 centres",
+     "4.50",
+     "±0.1"
+    ],
+    [
+     "pad pitch, top and bottom rows",
+     "0.50",
+     "±0.1"
+    ],
+    [
+     "pad pitch, side columns",
+     "0.50",
+     "±0.1"
+    ],
+    [
+     "side column span, pad 19 to pad 16 centres",
+     "1.50",
+     "±0.1"
+    ],
+    [
+     "top-row pad centre to first side-pad centre",
+     "0.8125",
+     ""
+    ],
+    [
+     "top and bottom row pads, 20X",
+     "0.250 × 0.475",
+     "±0.05"
+    ],
+    [
+     "side pads, 8X",
+     "0.375 × 0.250",
+     "±0.05"
+    ],
+    [
+     "pad to body edge, 28X",
+     "(0.100)",
+     ""
+    ],
+    [
+     "corner reference dimension, 4X",
+     "(0.225)",
+     ""
+    ],
+    [
+     "side reference dimension, 4X",
+     "(0.450)",
+     ""
+    ],
+    [
+     "pin 1 ID mark",
+     "(0.250 × 0.100)",
+     ""
+    ],
+    [
+     "pin 1 ID offsets",
+     "(0.100), (0.250)",
+     ""
+    ],
+    [
+     "pad position tolerance",
+     "0.10 (M) to C, A, B",
+     ""
+    ],
+    [
+     "top surface profile",
+     "0.10 to C, B and C, A",
+     ""
+    ],
+    [
+     "top-to-bottom parallelism",
+     "0.10 to C",
+     ""
+    ]
+   ],
+   "notes": [
+    "Undeclared tolerances are ±0.1 mm.",
+    "Pad 1 sits at the top-right corner seen from the bottom; the top face carries a pin 1 corner mark."
+   ]
+  }
+ ]
+}

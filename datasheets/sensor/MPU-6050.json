@@ -1,0 +1,3031 @@
+{
+ "sheet": 1,
+ "name": "MPU-6050",
+ "kind": "sensor",
+ "manufacturer": "TDK InvenSense",
+ "title": "Six-axis MEMS gyroscope and accelerometer with motion processor",
+ "source": {
+  "revision": "PS-MPU-6000A-00 Revision 3.4, 08/19/2013",
+  "pages": 52
+ },
+ "summary": "A motion sensor in a 4 × 4 × 0.9 mm QFN-24: a three-axis gyroscope (±250 to ±2000 º/s) and a three-axis accelerometer (±2 to ±16 g), each axis on its own 16-bit ADC, with a temperature sensor, a 1024-byte FIFO and an on-chip Digital Motion Processor. An auxiliary I2C master reads an external compass or other sensors for nine-axis fusion. It runs from 2.375 V to 3.46 V and draws 3.9 mA with everything on. The MPU-6050 is I2C-only with a separate VLOGIC I/O supply; the MPU-6000 adds SPI and uses VDD for its I/O.",
+ "key_figures": [
+  [
+   "Gyroscope range",
+   "±250, ±500, ±1000, ±2000 º/s"
+  ],
+  [
+   "Gyroscope sensitivity",
+   "131 LSB/(º/s) at ±250 º/s"
+  ],
+  [
+   "Gyroscope noise",
+   "0.005 º/s/√Hz at 10 Hz"
+  ],
+  [
+   "Accelerometer range",
+   "±2, ±4, ±8, ±16 g"
+  ],
+  [
+   "Accelerometer sensitivity",
+   "16,384 LSB/g at ±2 g"
+  ],
+  [
+   "Accelerometer noise",
+   "400 µg/√Hz at 10 Hz"
+  ],
+  [
+   "Supply",
+   "VDD 2.375 V to 3.46 V; VLOGIC 1.71 V to VDD (MPU-6050)"
+  ],
+  [
+   "Supply current",
+   "3.9 mA typ, all sensors and DMP; 5 µA idle"
+  ],
+  [
+   "Interface",
+   "I2C 400 kHz; SPI 1 MHz / 20 MHz (MPU-6000)"
+  ],
+  [
+   "Shock",
+   "10,000 g for 0.2 ms, unpowered"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +85 °C specified; -40 °C to +105 °C absolute"
+  ]
+ ],
+ "part_numbers": {
+  "page": 8,
+  "columns": [
+   "part number",
+   "VDD",
+   "VLOGIC",
+   "serial interfaces",
+   "pin 8",
+   "pin 9",
+   "pin 23",
+   "pin 24",
+   "marking",
+   "package"
+  ],
+  "rows": [
+   [
+    "MPU-6000",
+    "2.375V-3.46V",
+    "n/a",
+    "I2C, SPI",
+    "/CS",
+    "AD0/SDO",
+    "SCL/SCLK",
+    "SDA/SDI",
+    "MPU6000",
+    "QFN-24, 4mm x 4mm x 0.9mm"
+   ],
+   [
+    "MPU-6050",
+    "2.375V-3.46V",
+    "1.71V to VDD",
+    "I2C",
+    "VLOGIC",
+    "AD0",
+    "SCL",
+    "SDA",
+    "MPU6050",
+    "QFN-24, 4mm x 4mm x 0.9mm"
+   ]
+  ],
+  "notes": [
+   "Both are supplied on 5,000-piece reels."
+  ]
+ },
+ "pins": [
+  {
+   "package": "QFN-24 (MPU-6050)",
+   "page": 21,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CLKIN",
+     "type": "digital in",
+     "function": "External reference clock in, optional; tie to GND when not used."
+    },
+    {
+     "pin": "2",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "3",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "4",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "5",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "6",
+     "name": "AUX_DA",
+     "type": "digital i/o",
+     "function": "Data line of the I2C master bus to external sensors."
+    },
+    {
+     "pin": "7",
+     "name": "AUX_CL",
+     "type": "digital out",
+     "function": "Clock line of the I2C master bus to external sensors."
+    },
+    {
+     "pin": "8",
+     "name": "VLOGIC",
+     "type": "power in",
+     "function": "Digital I/O supply; never above VDD."
+    },
+    {
+     "pin": "9",
+     "name": "AD0",
+     "type": "digital in",
+     "function": "Sets the least significant bit of the I2C slave address."
+    },
+    {
+     "pin": "10",
+     "name": "REGOUT",
+     "type": "analog",
+     "function": "Connection for the internal regulator's filter capacitor."
+    },
+    {
+     "pin": "11",
+     "name": "FSYNC",
+     "type": "digital in",
+     "function": "Frame synchronisation input; tie to GND when not used."
+    },
+    {
+     "pin": "12",
+     "name": "INT",
+     "type": "digital out",
+     "function": "Interrupt output, push-pull or open-drain."
+    },
+    {
+     "pin": "13",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply; on the MPU-6000 it is also the digital I/O supply."
+    },
+    {
+     "pin": "14",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "15",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "16",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "17",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "18",
+     "name": "GND",
+     "type": "ground",
+     "function": "Supply ground."
+    },
+    {
+     "pin": "19",
+     "name": "RESV",
+     "type": "reserved",
+     "function": "Reserved; leave unconnected."
+    },
+    {
+     "pin": "20",
+     "name": "CPOUT",
+     "type": "analog",
+     "function": "Connection for the charge pump capacitor."
+    },
+    {
+     "pin": "21",
+     "name": "RESV",
+     "type": "reserved",
+     "function": "Reserved; leave unconnected."
+    },
+    {
+     "pin": "22",
+     "name": "RESV",
+     "type": "reserved",
+     "function": "Reserved; leave unconnected. Shown as the clock block's CLKOUT in the block diagram."
+    },
+    {
+     "pin": "23",
+     "name": "SCL",
+     "type": "digital in",
+     "function": "I2C serial clock."
+    },
+    {
+     "pin": "24",
+     "name": "SDA",
+     "type": "digital i/o",
+     "function": "I2C serial data."
+    }
+   ]
+  },
+  {
+   "package": "QFN-24 (MPU-6000)",
+   "page": 21,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CLKIN",
+     "type": "digital in",
+     "function": "External reference clock in, optional; tie to GND when not used."
+    },
+    {
+     "pin": "2",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "3",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "4",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "5",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "6",
+     "name": "AUX_DA",
+     "type": "digital i/o",
+     "function": "Data line of the I2C master bus to external sensors."
+    },
+    {
+     "pin": "7",
+     "name": "AUX_CL",
+     "type": "digital out",
+     "function": "Clock line of the I2C master bus to external sensors."
+    },
+    {
+     "pin": "8",
+     "name": "/CS",
+     "type": "digital in",
+     "function": "SPI chip select; low selects SPI mode."
+    },
+    {
+     "pin": "9",
+     "name": "AD0/SDO",
+     "type": "digital i/o",
+     "function": "I2C slave address LSB (AD0), or SPI data out (SDO)."
+    },
+    {
+     "pin": "10",
+     "name": "REGOUT",
+     "type": "analog",
+     "function": "Connection for the internal regulator's filter capacitor."
+    },
+    {
+     "pin": "11",
+     "name": "FSYNC",
+     "type": "digital in",
+     "function": "Frame synchronisation input; tie to GND when not used."
+    },
+    {
+     "pin": "12",
+     "name": "INT",
+     "type": "digital out",
+     "function": "Interrupt output, push-pull or open-drain."
+    },
+    {
+     "pin": "13",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply; on the MPU-6000 it is also the digital I/O supply."
+    },
+    {
+     "pin": "14",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "15",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "16",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "17",
+     "name": "NC",
+     "type": "no connect",
+     "function": "No internal connection; a PCB trace may run on it."
+    },
+    {
+     "pin": "18",
+     "name": "GND",
+     "type": "ground",
+     "function": "Supply ground."
+    },
+    {
+     "pin": "19",
+     "name": "RESV",
+     "type": "reserved",
+     "function": "Reserved; leave unconnected."
+    },
+    {
+     "pin": "20",
+     "name": "CPOUT",
+     "type": "analog",
+     "function": "Connection for the charge pump capacitor."
+    },
+    {
+     "pin": "21",
+     "name": "RESV",
+     "type": "reserved",
+     "function": "Reserved; leave unconnected."
+    },
+    {
+     "pin": "22",
+     "name": "RESV",
+     "type": "reserved",
+     "function": "Reserved; leave unconnected. Shown as the clock block's CLKOUT in the block diagram."
+    },
+    {
+     "pin": "23",
+     "name": "SCL/SCLK",
+     "type": "digital in",
+     "function": "I2C serial clock (SCL), or SPI serial clock (SCLK)."
+    },
+    {
+     "pin": "24",
+     "name": "SDA/SDI",
+     "type": "digital i/o",
+     "function": "I2C serial data (SDA), or SPI data in (SDI)."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Gyroscope specifications",
+   "page": 12,
+   "conditions": "VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "Full-Scale Range",
+     "FS_SEL=0",
+     "",
+     "±250",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Full-Scale Range",
+     "FS_SEL=1",
+     "",
+     "±500",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Full-Scale Range",
+     "FS_SEL=2",
+     "",
+     "±1000",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Full-Scale Range",
+     "FS_SEL=3",
+     "",
+     "±2000",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Gyroscope ADC Word Length",
+     "",
+     "",
+     "16",
+     "",
+     "bits",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "FS_SEL=0",
+     "",
+     "131",
+     "",
+     "LSB/(º/s)",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "FS_SEL=1",
+     "",
+     "65.5",
+     "",
+     "LSB/(º/s)",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "FS_SEL=2",
+     "",
+     "32.8",
+     "",
+     "LSB/(º/s)",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "FS_SEL=3",
+     "",
+     "16.4",
+     "",
+     "LSB/(º/s)",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor Tolerance",
+     "25°C",
+     "-3",
+     "",
+     "+3",
+     "%",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor Variation Over Temperature",
+     "",
+     "",
+     "±2",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Nonlinearity",
+     "Best fit straight line; 25°C",
+     "",
+     "0.2",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Cross-Axis Sensitivity",
+     "",
+     "",
+     "±2",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Zero-rate output: Initial ZRO Tolerance",
+     "25°C",
+     "",
+     "±20",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Zero-rate output: ZRO Variation Over Temperature",
+     "-40°C to +85°C",
+     "",
+     "±20",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Power-Supply Sensitivity (1-10Hz)",
+     "Sine wave, 100mVpp; VDD=2.5V",
+     "",
+     "0.2",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Power-Supply Sensitivity (10 - 250Hz)",
+     "Sine wave, 100mVpp; VDD=2.5V",
+     "",
+     "0.2",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Power-Supply Sensitivity (250Hz - 100kHz)",
+     "Sine wave, 100mVpp; VDD=2.5V",
+     "",
+     "4",
+     "",
+     "º/s",
+     ""
+    ],
+    [
+     "Linear Acceleration Sensitivity",
+     "Static",
+     "",
+     "0.1",
+     "",
+     "º/s/g",
+     ""
+    ],
+    [
+     "Self-test response: Relative",
+     "Change from factory trim",
+     "-14",
+     "",
+     "14",
+     "%",
+     "1"
+    ],
+    [
+     "Noise: Total RMS Noise",
+     "FS_SEL=0; DLPFCFG=2 (100Hz)",
+     "",
+     "0.05",
+     "",
+     "º/s-rms",
+     ""
+    ],
+    [
+     "Noise: Low-frequency RMS noise",
+     "FS_SEL=0; Bandwidth 1Hz to10Hz",
+     "",
+     "0.033",
+     "",
+     "º/s-rms",
+     ""
+    ],
+    [
+     "Noise: Rate Noise Spectral Density",
+     "FS_SEL=0; At 10Hz",
+     "",
+     "0.005",
+     "",
+     "º/s/√Hz",
+     ""
+    ],
+    [
+     "Mechanical frequency: X-Axis",
+     "",
+     "30",
+     "33",
+     "36",
+     "kHz",
+     ""
+    ],
+    [
+     "Mechanical frequency: Y-Axis",
+     "",
+     "27",
+     "30",
+     "33",
+     "kHz",
+     ""
+    ],
+    [
+     "Mechanical frequency: Z-Axis",
+     "",
+     "24",
+     "27",
+     "30",
+     "kHz",
+     ""
+    ],
+    [
+     "Low pass filter response",
+     "Programmable Range",
+     "5",
+     "",
+     "256",
+     "Hz",
+     ""
+    ],
+    [
+     "Output data rate",
+     "Programmable",
+     "4",
+     "",
+     "8,000",
+     "Hz",
+     ""
+    ],
+    [
+     "Start-up time: ZRO Settling (from power-on)",
+     "DLPFCFG=0; to ±1º/s of Final",
+     "",
+     "30",
+     "",
+     "ms",
+     ""
+    ]
+   ],
+   "notes": [
+    "1: Self-test is described in full in the companion register map document."
+   ]
+  },
+  {
+   "title": "Accelerometer specifications",
+   "page": 13,
+   "conditions": "VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "Full-Scale Range",
+     "AFS_SEL=0",
+     "",
+     "±2",
+     "",
+     "g",
+     ""
+    ],
+    [
+     "Full-Scale Range",
+     "AFS_SEL=1",
+     "",
+     "±4",
+     "",
+     "g",
+     ""
+    ],
+    [
+     "Full-Scale Range",
+     "AFS_SEL=2",
+     "",
+     "±8",
+     "",
+     "g",
+     ""
+    ],
+    [
+     "Full-Scale Range",
+     "AFS_SEL=3",
+     "",
+     "±16",
+     "",
+     "g",
+     ""
+    ],
+    [
+     "ADC Word Length",
+     "Output in two's complement format",
+     "",
+     "16",
+     "",
+     "bits",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "AFS_SEL=0",
+     "",
+     "16,384",
+     "",
+     "LSB/g",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "AFS_SEL=1",
+     "",
+     "8,192",
+     "",
+     "LSB/g",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "AFS_SEL=2",
+     "",
+     "4,096",
+     "",
+     "LSB/g",
+     ""
+    ],
+    [
+     "Sensitivity Scale Factor",
+     "AFS_SEL=3",
+     "",
+     "2,048",
+     "",
+     "LSB/g",
+     ""
+    ],
+    [
+     "Initial Calibration Tolerance",
+     "",
+     "",
+     "±3",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Sensitivity Change vs. Temperature",
+     "AFS_SEL=0, -40°C to +85°C",
+     "",
+     "±0.02",
+     "",
+     "%/°C",
+     ""
+    ],
+    [
+     "Nonlinearity",
+     "Best Fit Straight Line",
+     "",
+     "0.5",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Cross-Axis Sensitivity",
+     "",
+     "",
+     "±2",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Zero-g output: Initial Calibration Tolerance",
+     "X and Y axes",
+     "",
+     "±50",
+     "",
+     "mg",
+     "1"
+    ],
+    [
+     "Zero-g output: Initial Calibration Tolerance",
+     "Z axis",
+     "",
+     "±80",
+     "",
+     "mg",
+     ""
+    ],
+    [
+     "Zero-G Level Change vs. Temperature",
+     "X and Y axes, 0°C to +70°C",
+     "",
+     "±35",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Zero-G Level Change vs. Temperature",
+     "Z axis, 0°C to +70°C",
+     "",
+     "±60",
+     "",
+     "mg",
+     ""
+    ],
+    [
+     "Self test response: Relative",
+     "Change from factory trim",
+     "-14",
+     "",
+     "14",
+     "%",
+     "2"
+    ],
+    [
+     "Noise: Power Spectral Density",
+     "@10Hz, AFS_SEL=0 & ODR=1kHz",
+     "",
+     "400",
+     "",
+     "µg/√Hz",
+     ""
+    ],
+    [
+     "Low pass filter response",
+     "Programmable Range",
+     "5",
+     "",
+     "260",
+     "Hz",
+     ""
+    ],
+    [
+     "Output data rate",
+     "Programmable Range",
+     "4",
+     "",
+     "1,000",
+     "Hz",
+     ""
+    ],
+    [
+     "Intelligence Function Increment",
+     "",
+     "",
+     "32",
+     "",
+     "mg/LSB",
+     ""
+    ]
+   ],
+   "notes": [
+    "1: Typical value, taken after MSL3 preconditioning.",
+    "2: Self-test is described in full in the companion register map document."
+   ]
+  },
+  {
+   "title": "Electrical and other common specifications",
+   "page": 14,
+   "conditions": "VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "Temperature sensor: Range",
+     "",
+     "",
+     "-40 to +85",
+     "",
+     "°C",
+     ""
+    ],
+    [
+     "Temperature sensor: Sensitivity",
+     "Untrimmed",
+     "",
+     "340",
+     "",
+     "LSB/ºC",
+     ""
+    ],
+    [
+     "Temperature sensor: Temperature Offset",
+     "35°C",
+     "",
+     "-521",
+     "",
+     "LSB",
+     ""
+    ],
+    [
+     "Temperature sensor: Linearity",
+     "Best fit straight line (-40°C to +85°C)",
+     "",
+     "±1",
+     "",
+     "°C",
+     ""
+    ],
+    [
+     "VDD Operating Voltages",
+     "",
+     "2.375",
+     "",
+     "3.46",
+     "V",
+     ""
+    ],
+    [
+     "VDD Normal Operating Current",
+     "Gyroscope + Accelerometer + DMP",
+     "",
+     "3.9",
+     "",
+     "mA",
+     ""
+    ],
+    [
+     "VDD Normal Operating Current",
+     "Gyroscope + Accelerometer (DMP disabled)",
+     "",
+     "3.8",
+     "",
+     "mA",
+     ""
+    ],
+    [
+     "VDD Normal Operating Current",
+     "Gyroscope + DMP (Accelerometer disabled)",
+     "",
+     "3.7",
+     "",
+     "mA",
+     ""
+    ],
+    [
+     "VDD Normal Operating Current",
+     "Gyroscope only (DMP & Accelerometer disabled)",
+     "",
+     "3.6",
+     "",
+     "mA",
+     ""
+    ],
+    [
+     "VDD Normal Operating Current",
+     "Accelerometer only (DMP & Gyroscope disabled)",
+     "",
+     "500",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "Accelerometer Low Power Mode Current",
+     "1.25 Hz update rate",
+     "",
+     "10",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "Accelerometer Low Power Mode Current",
+     "5 Hz update rate",
+     "",
+     "20",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "Accelerometer Low Power Mode Current",
+     "20 Hz update rate",
+     "",
+     "70",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "Accelerometer Low Power Mode Current",
+     "40 Hz update rate",
+     "",
+     "140",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "Full-Chip Idle Mode Supply Current",
+     "",
+     "",
+     "5",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "VDD Power Supply Ramp Rate",
+     "Monotonic ramp. Ramp rate is 10% to 90% of the final value",
+     "",
+     "",
+     "100",
+     "ms",
+     ""
+    ],
+    [
+     "VLOGIC Voltage Range",
+     "MPU-6050 only; VLOGIC must be ≤VDD at all times",
+     "1.71",
+     "",
+     "VDD",
+     "V",
+     ""
+    ],
+    [
+     "VLOGIC Power Supply Ramp Rate",
+     "MPU-6050 only; Monotonic ramp. Ramp rate is 10% to 90% of the final value",
+     "",
+     "",
+     "3",
+     "ms",
+     ""
+    ],
+    [
+     "VLOGIC Normal Operating Current",
+     "MPU-6050 only",
+     "",
+     "100",
+     "",
+     "µA",
+     ""
+    ],
+    [
+     "Specified Temperature Range",
+     "Performance parameters are not applicable beyond Specified Temperature Range",
+     "-40",
+     "",
+     "+85",
+     "°C",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Serial interface and digital I/O",
+   "page": 15,
+   "conditions": "VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "SPI Operating Frequency, All Registers Read/Write",
+     "MPU-6000 only, Low Speed Characterization",
+     "",
+     "100 ±10%",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "SPI Operating Frequency, All Registers Read/Write",
+     "MPU-6000 only, High Speed Characterization",
+     "",
+     "1 ±10%",
+     "",
+     "MHz",
+     ""
+    ],
+    [
+     "SPI Operating Frequency, Sensor and Interrupt Registers Read Only",
+     "MPU-6000 only",
+     "",
+     "20 ±10%",
+     "",
+     "MHz",
+     ""
+    ],
+    [
+     "I2C Operating Frequency",
+     "All registers, Fast-mode",
+     "",
+     "",
+     "400",
+     "kHz",
+     ""
+    ],
+    [
+     "I2C Operating Frequency",
+     "All registers, Standard-mode",
+     "",
+     "",
+     "100",
+     "kHz",
+     ""
+    ],
+    [
+     "I2C Address",
+     "AD0 = 0",
+     "",
+     "1101000",
+     "",
+     "",
+     ""
+    ],
+    [
+     "I2C Address",
+     "AD0 = 1",
+     "",
+     "1101001",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VIH, High Level Input Voltage",
+     "MPU-6000",
+     "0.7*VDD",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "VIH, High Level Input Voltage",
+     "MPU-6050",
+     "0.7*VLOGIC",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "VIL, Low Level Input Voltage",
+     "MPU-6000",
+     "",
+     "",
+     "0.3*VDD",
+     "V",
+     ""
+    ],
+    [
+     "VIL, Low Level Input Voltage",
+     "MPU-6050",
+     "",
+     "",
+     "0.3*VLOGIC",
+     "V",
+     ""
+    ],
+    [
+     "CI, Input Capacitance",
+     "",
+     "",
+     "< 5",
+     "",
+     "pF",
+     ""
+    ],
+    [
+     "VOH, High Level Output Voltage",
+     "RLOAD=1MΩ; MPU-6000",
+     "0.9*VDD",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "VOH, High Level Output Voltage",
+     "RLOAD=1MΩ; MPU-6050",
+     "0.9*VLOGIC",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "VOL1, LOW-Level Output Voltage",
+     "RLOAD=1MΩ; MPU-6000",
+     "",
+     "",
+     "0.1*VDD",
+     "V",
+     ""
+    ],
+    [
+     "VOL1, LOW-Level Output Voltage",
+     "RLOAD=1MΩ; MPU-6050",
+     "",
+     "",
+     "0.1*VLOGIC",
+     "V",
+     ""
+    ],
+    [
+     "VOL.INT1, INT Low-Level Output Voltage",
+     "OPEN=1, 0.3mA sink Current",
+     "",
+     "",
+     "0.1",
+     "V",
+     ""
+    ],
+    [
+     "Output Leakage Current",
+     "OPEN=1",
+     "",
+     "100",
+     "",
+     "nA",
+     ""
+    ],
+    [
+     "tINT, INT Pulse Width",
+     "LATCH_INT_EN=0",
+     "",
+     "50",
+     "",
+     "µs",
+     ""
+    ]
+   ],
+   "notes": [
+    "Digital inputs are SDI/SDA, AD0, SCLK/SCL, FSYNC, /CS and CLKIN; digital outputs are SDO and INT."
+   ]
+  },
+  {
+   "title": "I2C I/O levels",
+   "page": 16,
+   "conditions": "Typical operating circuit, VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C",
+   "columns": [
+    "parameter",
+    "conditions",
+    "typ",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Primary I2C: VIL, LOW-Level Input Voltage",
+     "MPU-6000",
+     "-0.5 to 0.3*VDD",
+     "V"
+    ],
+    [
+     "Primary I2C: VIH, HIGH-Level Input Voltage",
+     "MPU-6000",
+     "0.7*VDD to VDD + 0.5V",
+     "V"
+    ],
+    [
+     "Primary I2C: Vhys, Hysteresis",
+     "MPU-6000",
+     "0.1*VDD",
+     "V"
+    ],
+    [
+     "Primary I2C: VIL, LOW Level Input Voltage",
+     "MPU-6050",
+     "-0.5V to 0.3*VLOGIC",
+     "V"
+    ],
+    [
+     "Primary I2C: VIH, HIGH-Level Input Voltage",
+     "MPU-6050",
+     "0.7*VLOGIC to VLOGIC + 0.5V",
+     "V"
+    ],
+    [
+     "Primary I2C: Vhys, Hysteresis",
+     "MPU-6050",
+     "0.1*VLOGIC",
+     "V"
+    ],
+    [
+     "Primary I2C: VOL1, LOW-Level Output Voltage",
+     "3mA sink current",
+     "0 to 0.4",
+     "V"
+    ],
+    [
+     "Primary I2C: IOL, LOW-Level Output Current",
+     "VOL = 0.4V",
+     "3",
+     "mA"
+    ],
+    [
+     "Primary I2C: IOL, LOW-Level Output Current",
+     "VOL = 0.6V",
+     "5",
+     "mA"
+    ],
+    [
+     "Primary I2C: Output Leakage Current",
+     "",
+     "100",
+     "nA"
+    ],
+    [
+     "Primary I2C: tof, Output Fall Time from VIHmax to VILmax",
+     "Cb bus capacitance in pF",
+     "20+0.1Cb to 250",
+     "ns"
+    ],
+    [
+     "Primary I2C: CI, Capacitance for Each I/O pin",
+     "",
+     "< 10",
+     "pF"
+    ],
+    [
+     "Auxiliary I2C: VIL, LOW-Level Input Voltage",
+     "MPU-6050: AUX_VDDIO=0",
+     "-0.5V to 0.3*VLOGIC",
+     "V"
+    ],
+    [
+     "Auxiliary I2C: VIH, HIGH-Level Input Voltage",
+     "MPU-6050: AUX_VDDIO=0",
+     "0.7*VLOGIC to VLOGIC + 0.5V",
+     "V"
+    ],
+    [
+     "Auxiliary I2C: Vhys, Hysteresis",
+     "MPU-6050: AUX_VDDIO=0",
+     "0.1*VLOGIC",
+     "V"
+    ],
+    [
+     "Auxiliary I2C: VOL1, LOW-Level Output Voltage",
+     "MPU-6050: AUX_VDDIO=0; VLOGIC > 2V; 1mA sink current",
+     "0 to 0.4",
+     "V"
+    ],
+    [
+     "Auxiliary I2C: VOL3, LOW-Level Output Voltage",
+     "MPU-6050: AUX_VDDIO=0; VLOGIC < 2V; 1mA sink current",
+     "0 to 0.2*VLOGIC",
+     "V"
+    ],
+    [
+     "Auxiliary I2C: IOL, LOW-Level Output Current",
+     "MPU-6050: AUX_VDDIO=0; VOL = 0.4V",
+     "1",
+     "mA"
+    ],
+    [
+     "Auxiliary I2C: IOL, LOW-Level Output Current",
+     "MPU-6050: AUX_VDDIO=0; VOL = 0.6V",
+     "1",
+     "mA"
+    ],
+    [
+     "Auxiliary I2C: Output Leakage Current",
+     "MPU-6050: AUX_VDDIO=0",
+     "100",
+     "nA"
+    ],
+    [
+     "Auxiliary I2C: tof, Output Fall Time from VIHmax to VILmax",
+     "MPU-6050: AUX_VDDIO=0; Cb bus capacitance in pF",
+     "20+0.1Cb to 250",
+     "ns"
+    ],
+    [
+     "Auxiliary I2C: CI, Capacitance for Each I/O pin",
+     "MPU-6050: AUX_VDDIO=0",
+     "< 10",
+     "pF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Clock sources and sample rates",
+   "page": 17,
+   "conditions": "Typical operating circuit, VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "Internal clock: Gyroscope Sample Rate, Fast",
+     "CLK_SEL=0,1,2,3; DLPFCFG=0; SAMPLERATEDIV = 0",
+     "",
+     "8",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "Internal clock: Gyroscope Sample Rate, Slow",
+     "CLK_SEL=0,1,2,3; DLPFCFG=1,2,3,4,5, or 6; SAMPLERATEDIV = 0",
+     "",
+     "1",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "Internal clock: Accelerometer Sample Rate",
+     "CLK_SEL=0,1,2,3",
+     "",
+     "1",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "Internal clock: Clock Frequency Initial Tolerance",
+     "CLK_SEL=0, 25°C",
+     "-5",
+     "",
+     "+5",
+     "%",
+     ""
+    ],
+    [
+     "Internal clock: Clock Frequency Initial Tolerance",
+     "CLK_SEL=1,2,3; 25°C",
+     "-1",
+     "",
+     "+1",
+     "%",
+     ""
+    ],
+    [
+     "Internal clock: Frequency Variation over Temperature",
+     "CLK_SEL=0",
+     "",
+     "-15 to +10",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Internal clock: Frequency Variation over Temperature",
+     "CLK_SEL=1,2,3",
+     "",
+     "±1",
+     "",
+     "%",
+     ""
+    ],
+    [
+     "Internal clock: PLL Settling Time",
+     "CLK_SEL=1,2,3",
+     "",
+     "1",
+     "10",
+     "ms",
+     ""
+    ],
+    [
+     "External 32.768kHz clock: External Clock Frequency",
+     "CLK_SEL=4",
+     "",
+     "32.768",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "External 32.768kHz clock: External Clock Allowable Jitter",
+     "CLK_SEL=4; Cycle-to-cycle rms",
+     "",
+     "1 to 2",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "External 32.768kHz clock: Gyroscope Sample Rate, Fast",
+     "CLK_SEL=4; DLPFCFG=0; SAMPLERATEDIV = 0",
+     "",
+     "8.192",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "External 32.768kHz clock: Gyroscope Sample Rate, Slow",
+     "CLK_SEL=4; DLPFCFG=1,2,3,4,5, or 6; SAMPLERATEDIV = 0",
+     "",
+     "1.024",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "External 32.768kHz clock: Accelerometer Sample Rate",
+     "CLK_SEL=4",
+     "",
+     "1.024",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "External 32.768kHz clock: PLL Settling Time",
+     "CLK_SEL=4",
+     "",
+     "1",
+     "10",
+     "ms",
+     ""
+    ],
+    [
+     "External 19.2MHz clock: External Clock Frequency",
+     "CLK_SEL=5",
+     "",
+     "19.2",
+     "",
+     "MHz",
+     ""
+    ],
+    [
+     "External 19.2MHz clock: Gyroscope Sample Rate",
+     "CLK_SEL=5; Full programmable range",
+     "3.9",
+     "",
+     "8000",
+     "Hz",
+     ""
+    ],
+    [
+     "External 19.2MHz clock: Gyroscope Sample Rate, Fast Mode",
+     "CLK_SEL=5; DLPFCFG=0; SAMPLERATEDIV = 0",
+     "",
+     "8",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "External 19.2MHz clock: Gyroscope Sample Rate, Slow Mode",
+     "CLK_SEL=5; DLPFCFG=1,2,3,4,5, or 6; SAMPLERATEDIV = 0",
+     "",
+     "1",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "External 19.2MHz clock: Accelerometer Sample Rate",
+     "CLK_SEL=5",
+     "",
+     "1",
+     "",
+     "kHz",
+     ""
+    ],
+    [
+     "External 19.2MHz clock: PLL Settling Time",
+     "CLK_SEL=5",
+     "",
+     "1",
+     "10",
+     "ms",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "I2C timing",
+   "page": 18,
+   "conditions": "Typical operating circuit, VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C; I2C fast-mode",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "fSCL, SCL Clock Frequency",
+     "",
+     "",
+     "",
+     "400",
+     "kHz",
+     ""
+    ],
+    [
+     "tHD.STA, (Repeated) START Condition Hold Time",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "tLOW, SCL Low Period",
+     "",
+     "1.3",
+     "",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "tHIGH, SCL High Period",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "tSU.STA, Repeated START Condition Setup Time",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "tHD.DAT, SDA Data Hold Time",
+     "",
+     "0",
+     "",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "tSU.DAT, SDA Data Setup Time",
+     "",
+     "100",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tr, SDA and SCL Rise Time",
+     "Cb bus cap. from 10 to 400pF",
+     "20+0.1Cb",
+     "",
+     "300",
+     "ns",
+     ""
+    ],
+    [
+     "tf, SDA and SCL Fall Time",
+     "Cb bus cap. from 10 to 400pF",
+     "20+0.1Cb",
+     "",
+     "300",
+     "ns",
+     ""
+    ],
+    [
+     "tSU.STO, STOP Condition Setup Time",
+     "",
+     "0.6",
+     "",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "tBUF, Bus Free Time Between STOP and START Condition",
+     "",
+     "1.3",
+     "",
+     "",
+     "µs",
+     ""
+    ],
+    [
+     "Cb, Capacitive Load for each Bus Line",
+     "",
+     "",
+     "< 400",
+     "",
+     "pF",
+     ""
+    ],
+    [
+     "tVD.DAT, Data Valid Time",
+     "",
+     "",
+     "",
+     "0.9",
+     "µs",
+     ""
+    ],
+    [
+     "tVD.ACK, Data Valid Acknowledge Time",
+     "",
+     "",
+     "",
+     "0.9",
+     "µs",
+     ""
+    ]
+   ],
+   "notes": [
+    "The same timing holds on the primary and the auxiliary I2C bus."
+   ]
+  },
+  {
+   "title": "SPI timing (MPU-6000 only)",
+   "page": 19,
+   "conditions": "Typical operating circuit, VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "fSCLK, SCLK Clock Frequency",
+     "",
+     "",
+     "",
+     "1",
+     "MHz",
+     ""
+    ],
+    [
+     "tLOW, SCLK Low Period",
+     "",
+     "400",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tHIGH, SCLK High Period",
+     "",
+     "400",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tSU.CS, CS Setup Time",
+     "",
+     "8",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tHD.CS, CS Hold Time",
+     "",
+     "500",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tSU.SDI, SDI Setup Time",
+     "",
+     "11",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tHD.SDI, SDI Hold Time",
+     "",
+     "7",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tVD.SDO, SDO Valid Time",
+     "Cload = 20pF",
+     "",
+     "",
+     "100",
+     "ns",
+     ""
+    ],
+    [
+     "tHD.SDO, SDO Hold Time",
+     "Cload = 20pF",
+     "4",
+     "",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tDIS.SDO, SDO Output Disable Time",
+     "",
+     "",
+     "",
+     "10",
+     "ns",
+     ""
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "Supply Voltage, VDD",
+     "-0.5V to +6V"
+    ],
+    [
+     "VLOGIC Input Voltage Level (MPU-6050)",
+     "-0.5V to VDD + 0.5V"
+    ],
+    [
+     "REGOUT",
+     "-0.5V to 2V"
+    ],
+    [
+     "Input Voltage Level (CLKIN, AUX_DA, AD0, FSYNC, INT, SCL, SDA)",
+     "-0.5V to VDD + 0.5V"
+    ],
+    [
+     "CPOUT (2.5V ≤ VDD ≤ 3.6V )",
+     "-0.5V to 30V"
+    ],
+    [
+     "Acceleration (Any Axis, unpowered)",
+     "10,000g for 0.2ms"
+    ],
+    [
+     "Operating Temperature Range",
+     "-40°C to +105°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "-40°C to +125°C"
+    ],
+    [
+     "Electrostatic Discharge (ESD) Protection",
+     "2kV (HBM); 250V (MM)"
+    ],
+    [
+     "Latch-up",
+     "JEDEC Class II (2),125°C ±100mA"
+    ]
+   ],
+   "notes": [
+    "These are stress limits only: beyond them the part may be damaged for good, at them it is not specified to operate, and long periods at them may shorten its life."
+   ]
+  },
+  {
+   "title": "External components",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "component",
+    "label",
+    "specification",
+    "quantity"
+   ],
+   "rows": [
+    [
+     "Regulator Filter Capacitor (Pin 10)",
+     "C1",
+     "Ceramic, X7R, 0.1µF ±10%, 2V",
+     "1"
+    ],
+    [
+     "VDD Bypass Capacitor (Pin 13)",
+     "C2",
+     "Ceramic, X7R, 0.1µF ±10%, 4V",
+     "1"
+    ],
+    [
+     "Charge Pump Capacitor (Pin 20)",
+     "C3",
+     "Ceramic, X7R, 2.2nF ±10%, 50V",
+     "1"
+    ],
+    [
+     "VLOGIC Bypass Capacitor (Pin 8)",
+     "C4*",
+     "Ceramic, X7R, 10nF ±10%, 4V",
+     "1"
+    ]
+   ],
+   "notes": [
+    "*: C4 is fitted on the MPU-6050 only."
+   ]
+  },
+  {
+   "title": "Power-up sequencing",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "TVDDR",
+     "VDD rise time, 10% to 90% of final value",
+     "",
+     "",
+     "100",
+     "ms"
+    ],
+    [
+     "TVLGR",
+     "VLOGIC rise time, 10% to 90% of final value",
+     "",
+     "",
+     "3",
+     "ms"
+    ],
+    [
+     "TVLG-VDD",
+     "Delay from start of VDD ramp to start of VLOGIC rise",
+     "0",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "VLOGIC never exceeds VDD; both supplies ramp monotonically."
+   ]
+  },
+  {
+   "title": "Interrupt sources",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "interrupt name",
+    "module"
+   ],
+   "rows": [
+    [
+     "FIFO Overflow",
+     "FIFO"
+    ],
+    [
+     "Data Ready",
+     "Sensor Registers"
+    ],
+    [
+     "I2C Master errors: Lost Arbitration, NACKs",
+     "I2C Master"
+    ],
+    [
+     "I2C Slave 4",
+     "I2C Master"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "I/O logic levels against AUX_VDDIO (MPU-6050)",
+   "page": 38,
+   "conditions": "",
+   "columns": [
+    "AUX_VDDIO",
+    "microprocessor logic levels (SDA, SCL, AD0, CLKIN, INT)",
+    "auxiliary logic levels (AUX_DA, AUX_CL)"
+   ],
+   "rows": [
+    [
+     "0",
+     "VLOGIC",
+     "VLOGIC"
+    ]
+   ],
+   "notes": [
+    "AUX_VDDIO resets to 0 at power-on."
+   ]
+  },
+  {
+   "title": "Cross-axis sensitivity against orientation error",
+   "page": 44,
+   "conditions": "",
+   "columns": [
+    "orientation error (θ or Φ)",
+    "cross-axis sensitivity (sinθ or sinΦ)"
+   ],
+   "rows": [
+    [
+     "0º",
+     "0%"
+    ],
+    [
+     "0.5º",
+     "0.87%"
+    ],
+    [
+     "1º",
+     "1.75%"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Qualification reflow set points",
+   "page": 46,
+   "conditions": "Lead-free IR/convection",
+   "columns": [
+    "step",
+    "setting",
+    "temp (°C)",
+    "time (sec)",
+    "max. rate (°C/sec)"
+   ],
+   "rows": [
+    [
+     "A",
+     "Troom",
+     "25",
+     "",
+     ""
+    ],
+    [
+     "B",
+     "TSmin",
+     "150",
+     "",
+     ""
+    ],
+    [
+     "C",
+     "TSmax",
+     "200",
+     "60 < tBC < 120",
+     ""
+    ],
+    [
+     "D",
+     "TLiquidus",
+     "217",
+     "",
+     "r(TLiquidus-TPmax) < 3"
+    ],
+    [
+     "E",
+     "TPmin [255°C, 260°C]",
+     "255",
+     "",
+     "r(TLiquidus-TPmax) < 3"
+    ],
+    [
+     "F",
+     "TPmax [ 260°C, 265°C]",
+     "260",
+     "tAF < 480",
+     "r(TLiquidus-TPmax) < 3"
+    ],
+    [
+     "G",
+     "TPmin [255°C, 260°C]",
+     "255",
+     "10< tEG < 30",
+     "r(TPmax-TLiquidus) < 4"
+    ],
+    [
+     "H",
+     "TLiquidus",
+     "217",
+     "60 < tDH < 120",
+     ""
+    ],
+    [
+     "I",
+     "Troom",
+     "25",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "The classification temperature TPmax = 260°C is never to be exceeded.",
+    "Temperatures are taken on the top surface of the QFN package body."
+   ]
+  },
+  {
+   "title": "Storage",
+   "page": 46,
+   "conditions": "IPC/JEDEC J-STD-020D.1 MSL 3",
+   "columns": [
+    "condition",
+    "time",
+    "storage conditions"
+   ],
+   "rows": [
+    [
+     "Calculated shelf-life in moisture-sealed bag",
+     "12 months",
+     "<40°C and <90% RH"
+    ],
+    [
+     "After opening moisture-sealed bag",
+     "168 hours",
+     "ambient ≤30°C at 60%RH"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Reel dimensions",
+   "page": 47,
+   "conditions": "",
+   "columns": [
+    "package size",
+    "L (mm)",
+    "V (mm)",
+    "W (mm)",
+    "Z (mm)"
+   ],
+   "rows": [
+    [
+     "4x4",
+     "330",
+     "102",
+     "12.8",
+     "2.3"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Carrier tape dimensions",
+   "page": 47,
+   "conditions": "",
+   "columns": [
+    "dimension",
+    "value (mm)"
+   ],
+   "rows": [
+    [
+     "Ao, pocket size",
+     "4.35"
+    ],
+    [
+     "Bo, pocket size",
+     "4.35"
+    ],
+    [
+     "Ko, pocket depth",
+     "1.1"
+    ],
+    [
+     "Tape width",
+     "12.0 ±.3"
+    ],
+    [
+     "Tape thickness",
+     "0.30 ±.05"
+    ],
+    [
+     "Sprocket hole pitch",
+     "4.00"
+    ],
+    [
+     "Sprocket hole diameter",
+     "Ø1.5 +0.1/-0.0"
+    ],
+    [
+     "Sprocket hole centre to tape edge",
+     "1.75 ±.10"
+    ],
+    [
+     "Pocket pitch",
+     "8.00"
+    ],
+    [
+     "Pocket hole diameter",
+     "Ø1.50 MIN"
+    ],
+    [
+     "Pocket centre to sprocket hole, along the tape",
+     "2.00 ±.05"
+    ],
+    [
+     "Pocket centre to sprocket hole line, across the tape",
+     "5.50 ±.05"
+    ],
+    [
+     "Pocket corner detail, radius",
+     "R.25"
+    ],
+    [
+     "Pocket corner detail",
+     "0.25"
+    ],
+    [
+     "Tape cross-section, radius",
+     "R 0.3 MAX"
+    ]
+   ],
+   "notes": [
+    "Unlisted tolerances: one decimal place ±.2, two decimal places ±.10.",
+    "Cumulative tolerance over 10 sprocket hole pitches is ±0.2.",
+    "Camber meets EIA 481.",
+    "Pocket position is to the true position of the pocket, not of the pocket hole."
+   ]
+  },
+  {
+   "title": "Reel specifications",
+   "page": 48,
+   "conditions": "",
+   "columns": [
+    "item",
+    "value"
+   ],
+   "rows": [
+    [
+     "Quantity Per Reel",
+     "5,000"
+    ],
+    [
+     "Reels per Box",
+     "1"
+    ],
+    [
+     "Boxes Per Carton (max)",
+     "5"
+    ],
+    [
+     "Pcs/Carton (max)",
+     "25,000"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Qualification test plan",
+   "page": 51,
+   "conditions": "JESD47I",
+   "columns": [
+    "group",
+    "test",
+    "method/condition",
+    "lot quantity",
+    "sample / lot",
+    "acc / reject criteria"
+   ],
+   "rows": [
+    [
+     "Accelerated life",
+     "(HTOL/LFR) High Temperature Operating Life",
+     "JEDEC JESD22-A108D, Dynamic, 3.63V biased, Tj>125°C [read-points 168, 500, 1000 hours]",
+     "3",
+     "77",
+     "(0/1)"
+    ],
+    [
+     "Accelerated life",
+     "(HAST) Highly Accelerated Stress Test (1)",
+     "JEDEC JESD22-A118A Condition A, 130°C, 85%RH, 33.3 psia. unbiased, [read-point 96 hours]",
+     "3",
+     "77",
+     "(0/1)"
+    ],
+    [
+     "Accelerated life",
+     "(HTS) High Temperature Storage Life",
+     "JEDEC JESD22-A103D, Cond. A, 125°C Non-Bias Bake [read-points 168, 500, 1000 hours]",
+     "3",
+     "77",
+     "(0/1)"
+    ],
+    [
+     "Component level",
+     "(ESD-HBM) ESD-Human Body Model",
+     "JEDEC JS-001-2012, (2KV)",
+     "1",
+     "3",
+     "(0/1)"
+    ],
+    [
+     "Component level",
+     "(ESD-MM) ESD-Machine Model",
+     "JEDEC JESD22-A115C, (250V)",
+     "1",
+     "3",
+     "(0/1)"
+    ],
+    [
+     "Component level",
+     "(LU) Latch Up",
+     "JEDEC JESD-78D Class II (2), 125°C; ±100mA",
+     "1",
+     "6",
+     "(0/1)"
+    ],
+    [
+     "Component level",
+     "(MS) Mechanical Shock",
+     "JEDEC JESD22-B104C, Mil-Std-883, Method 2002.5, Cond. E, 10,000g's, 0.2ms, ±X, Y, Z – 6 directions, 5 times/direction",
+     "3",
+     "5",
+     "(0/1)"
+    ],
+    [
+     "Component level",
+     "(VIB) Vibration",
+     "JEDEC JESD22-B103B, Variable Frequency (random), Cond. B, 5-500Hz, X, Y, Z – 4 times/direction",
+     "3",
+     "5",
+     "(0/1)"
+    ],
+    [
+     "Component level",
+     "(TC) Temperature Cycling (1)",
+     "JEDEC JESD22-A104D Condition G [-40°C to +125°C], Soak Mode 2 [5'], 1000 cycles",
+     "3",
+     "77",
+     "(0/1)"
+    ],
+    [
+     "Board level",
+     "(BMS) Board Mechanical Shock",
+     "JEDEC JESD22-B104C,Mil-Std-883, Method 2002.5, Cond. E, 10000g's, 0.2ms, +-X, Y, Z – 6 directions, 5 times/direction",
+     "1",
+     "5",
+     "(0/1)"
+    ],
+    [
+     "Board level",
+     "(BTC) Board Temperature Cycling (1)",
+     "JEDEC JESD22-A104D Condition G [ -40°C to +125°C], Soak mode 2 [5'], 1000 cycles",
+     "1",
+     "40",
+     "(0/1)"
+    ]
+   ],
+   "notes": [
+    "(1): MSL3 preconditioning to JEDEC JESD22-A113F comes before the test."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical operating circuit, MPU-6050",
+   "page": 22,
+   "description": "Four capacitors complete the circuit. C1 filters the on-chip regulator at REGOUT, C3 holds the charge pump output at CPOUT, C2 decouples VDD and C4 decouples the separate I/O rail VLOGIC. SDA and SCL go to the host's I2C bus, AD0 picks one of two slave addresses, AUX_DA and AUX_CL lead out to the auxiliary sensor bus, and CLKIN, FSYNC and INT are the clock input, sync input and interrupt output. The NC and reserved pins stay open.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MPU-6050"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "ceramic X7R, ±10%, 2 V; regulator filter"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "ceramic X7R, ±10%, 4 V; VDD bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "2.2 nF",
+     "note": "ceramic X7R, ±10%, 50 V; charge pump"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 nF",
+     "note": "ceramic X7R, ±10%, 4 V; VLOGIC bypass"
+    },
+    {
+     "ref": "SDA",
+     "type": "terminal",
+     "value": "SDA"
+    },
+    {
+     "ref": "SCL",
+     "type": "terminal",
+     "value": "SCL"
+    },
+    {
+     "ref": "AD0",
+     "type": "terminal",
+     "value": "AD0"
+    },
+    {
+     "ref": "CLKIN",
+     "type": "terminal",
+     "value": "CLKIN"
+    },
+    {
+     "ref": "AUX_DA",
+     "type": "terminal",
+     "value": "AUX_DA"
+    },
+    {
+     "ref": "AUX_CL",
+     "type": "terminal",
+     "value": "AUX_CL"
+    },
+    {
+     "ref": "FSYNC",
+     "type": "terminal",
+     "value": "FSYNC"
+    },
+    {
+     "ref": "INT",
+     "type": "terminal",
+     "value": "INT"
+    },
+    {
+     "ref": "T_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "T_VLOGIC",
+     "type": "terminal",
+     "value": "VLOGIC"
+    },
+    {
+     "ref": "T_GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "typical-mpu6000",
+   "title": "Typical operating circuit, MPU-6000",
+   "page": 22,
+   "description": "The MPU-6000 version of the same circuit. With no VLOGIC pin there is no C4; pin 8 is the SPI chip select /CS, and pins 9, 23 and 24 carry either I2C (AD0, SCL, SDA) or SPI (SDO, SCLK, SDI). C1 filters REGOUT, C2 decouples VDD and C3 holds CPOUT.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MPU-6000"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "ceramic X7R, ±10%, 2 V; regulator filter"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "ceramic X7R, ±10%, 4 V; VDD bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "2.2 nF",
+     "note": "ceramic X7R, ±10%, 50 V; charge pump"
+    },
+    {
+     "ref": "SDA_SDI",
+     "type": "terminal",
+     "value": "SDA_SDI"
+    },
+    {
+     "ref": "SCL_SCLK",
+     "type": "terminal",
+     "value": "SCL_SCLK"
+    },
+    {
+     "ref": "AD0_SDO",
+     "type": "terminal",
+     "value": "AD0_SDO"
+    },
+    {
+     "ref": "CS_N",
+     "type": "terminal",
+     "value": "CS_N"
+    },
+    {
+     "ref": "CLKIN",
+     "type": "terminal",
+     "value": "CLKIN"
+    },
+    {
+     "ref": "AUX_DA",
+     "type": "terminal",
+     "value": "AUX_DA"
+    },
+    {
+     "ref": "AUX_CL",
+     "type": "terminal",
+     "value": "AUX_CL"
+    },
+    {
+     "ref": "FSYNC",
+     "type": "terminal",
+     "value": "FSYNC"
+    },
+    {
+     "ref": "INT",
+     "type": "terminal",
+     "value": "INT"
+    },
+    {
+     "ref": "T_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "T_GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Self-test response",
+   "expr": "STR = output with self-test enabled − output with self-test disabled",
+   "where": {
+    "STR": "self-test response of one axis, judged against the relative limits in the gyroscope and accelerometer tables"
+   },
+   "note": "An axis passes when STR falls within those limits and fails when it falls outside.",
+   "page": 27
+  },
+  {
+   "name": "Cross-axis sensitivity from mounting error",
+   "expr": "cross-axis sensitivity = sin θ (or sin Φ)",
+   "where": {
+    "θ, Φ": "orientation error of the package axes against the board axes"
+   },
+   "note": "Given as a percentage of the sensor's own sensitivity; 1º of misalignment gives 1.75 %.",
+   "page": 44
+  },
+  {
+   "name": "I2C slave address",
+   "expr": "address = b110100X, X = logic level on AD0",
+   "where": {
+    "X": "0 gives b1101000, 1 gives b1101001"
+   },
+   "note": "Two parts can share one bus, one with AD0 low and one with AD0 high.",
+   "page": 33
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 7,
+   "text": "One 4 × 4 × 0.9 mm QFN holds a three-axis MEMS gyroscope, a three-axis MEMS accelerometer, a temperature sensor and an on-chip Digital Motion Processor (DMP). Each of the six motion axes has its own 16-bit ADC, so the axes are sampled at the same instant. A second I2C port lets the chip read an external three-axis compass and so output nine-axis fused data; other non-inertial sensors such as pressure sensors can sit on that port too. The footprint matches the MPU-30X0 family."
+  },
+  {
+   "topic": "MPU-6000 against MPU-6050",
+   "page": 7,
+   "text": "The two parts are the same apart from the host interface. The MPU-6050 talks I2C only and has a VLOGIC pin that sets its I/O levels (1.71 V up to VDD; 1.8 V ±5 % or VDD in the specification tables). The MPU-6000 offers both I2C and SPI and runs its I/O from VDD, using pin 8 as the SPI chip select."
+  },
+  {
+   "topic": "Gyroscope",
+   "page": 25,
+   "text": "Three separate vibrating MEMS rate sensors detect rotation about X, Y and Z: Coriolis force on a driven structure shows up at a capacitive pickoff, and that pickoff signal is amplified, demodulated and low-pass filtered ahead of its ADC. Full scale is selectable at ±250, ±500, ±1000 or ±2000 º/s; the sample rate runs from 8000 down to 3.9 samples/s, with a selectable digital low-pass filter. Sensitivity is trimmed at the factory. The gyroscopes draw 3.6 mA and 5 µA in standby."
+  },
+  {
+   "topic": "Accelerometer",
+   "page": 25,
+   "text": "Each axis has its own proof mass whose displacement is sensed differentially by capacitors and converted by a dedicated sigma-delta ADC. Full scale is selectable at ±2, ±4, ±8 or ±16 g. Its scale factor is factory-trimmed and nominally does not change with supply voltage. Lying flat, the part reads 0 g on X and Y and +1 g on Z. The accelerometer alone draws 500 µA, and 10 µA to 140 µA in its low-power mode. It offers orientation and tap detection, user-programmable interrupts and a high-g interrupt."
+  },
+  {
+   "topic": "Digital Motion Processor",
+   "page": 25,
+   "text": "The DMP runs motion-processing algorithms on the gyroscope, accelerometer and external sensor data so the host does not have to. Its results are read from its registers or through the FIFO, and it can drive an interrupt pin. Such algorithms usually want around 200 Hz to keep latency low even when the application itself updates as slowly as 5 Hz; the DMP keeps that loop off the host. It also supports a low-power pedometer that counts steps while the host sleeps. All six axes plus the DMP draw 3.9 mA."
+  },
+  {
+   "topic": "Primary interface",
+   "page": 25,
+   "text": "The part is always a slave to the host. I2C reaches every register at up to 400 kHz (fast mode) or 100 kHz (standard mode). On the MPU-6000, SPI reaches every register at 1 MHz and the sensor and interrupt registers alone at 20 MHz. SPI and I2C share pins 9, 23 and 24. When the MPU-6000 is used on SPI, setting the I2C_IF_DIS bit soon after start-up keeps it from falling into I2C mode. The I/O level is VDD on the MPU-6000 and VLOGIC on the MPU-6050."
+  },
+  {
+   "topic": "I2C protocol",
+   "page": 33,
+   "text": "The bus is two open-drain lines, SDA and SCL, which need pull-ups. A transfer opens with START (SDA falls while SCL is high) and closes with STOP (SDA rises while SCL is high); a repeated START keeps the bus. Bytes are 8 bits, each answered by an acknowledge: the receiver holds SDA low through the ninth clock's high phase, and a not-acknowledge leaves it high. A slave may stretch SCL low while busy. To write, the host sends the address with W, then the register address, then one or more data bytes, the register address stepping on by one after each byte. To read, the host writes the register address, issues a repeated START with the address and R, takes one or more data bytes acknowledging all but the last, then NACK and STOP."
+  },
+  {
+   "topic": "SPI (MPU-6000)",
+   "page": 37,
+   "text": "Four-wire SPI with the part as slave: SCLK, SDI and SDO are shared between slaves and each slave has its own active-low /CS; deselected slaves hold SDO high-impedance. Data travels MSB first, is latched on the rising SCLK edge and changes on the falling edge, with SCLK up to 1 MHz for full register access. A transaction is at least 16 clocks: the first byte is the R/W bit (1 = read) followed by a 7-bit register address, then one or more data bytes. Single and burst transfers are both supported."
+  },
+  {
+   "topic": "Auxiliary I2C bus",
+   "page": 26,
+   "text": "AUX_DA and AUX_CL form a second I2C bus for an external magnetometer or other sensors. In master mode the chip reads those sensors itself so the DMP can fuse their data without the host; it can burst-read up to 24 bytes from up to four sensors, plus single-byte reads and writes to a fifth (slave 4). In pass-through mode its own master logic is switched out and analog switches join AUX_DA and AUX_CL to the primary SDA and SCL, so the host talks to the external sensors directly while still reaching the chip. Pass-through is used to configure the external sensors, or to let the chip stay in low power while just the external sensors are in use. The chip's master is limited and relies on the host to configure the auxiliary sensors first, after which the bypass is turned off. On the MPU-6000 in SPI mode the bypass is not reachable, so the external sensors are configured through slaves 0 to 4 instead; results from slaves 0 to 3 can go to the FIFO and the external sensor registers."
+  },
+  {
+   "topic": "Auxiliary bus logic levels",
+   "page": 38,
+   "text": "On the MPU-6000 the auxiliary bus runs at VDD. On the MPU-6050 AUX_VDDIO selects the level and must be 0, its reset value; then every logic pin, the auxiliary pair included, is referred to VLOGIC."
+  },
+  {
+   "topic": "Clocking",
+   "page": 30,
+   "text": "An on-chip PLL makes the internal clock from one of several sources: an internal relaxation oscillator, the MEMS oscillator of the X, Y or Z gyroscope (±1 % over temperature), or an external 32.768 kHz or 19.2 MHz square wave at CLKIN. The chip starts on its internal oscillator and stays there until told otherwise, so the gyroscopes can settle before one is chosen. The relaxation oscillator suits low-power modes with the gyroscopes off; a gyroscope source is more accurate when they run. Clock error goes straight into the DMP's distance and angle results."
+  },
+  {
+   "topic": "Sensor data registers and FIFO",
+   "page": 30,
+   "text": "Read-only registers hold the newest gyroscope, accelerometer, auxiliary sensor and temperature readings and may be read at any time; an interrupt can flag new data. A 1024-byte FIFO, set up by its configuration register, can collect any mix of gyroscope, accelerometer, temperature, auxiliary sensor and FSYNC data, with a counter giving how many valid bytes it holds. It supports burst reads, so the host can sleep between bursts."
+  },
+  {
+   "topic": "Interrupts",
+   "page": 30,
+   "text": "INT can be push-pull or open-drain, latched or pulsed (50 µs with LATCH_INT_EN = 0), with a choice of how it clears. Sources are enabled one by one and flagged in the interrupt status register: the clock generator locking to a new reference, new data ready, accelerometer events, FIFO overflow, I2C master errors (lost arbitration, NACK from an auxiliary sensor) and I2C slave 4."
+  },
+  {
+   "topic": "Temperature sensor",
+   "page": 31,
+   "text": "An on-chip sensor and ADC measure die temperature; the host gets the result from the sensor data registers or the FIFO. The temperature channel has its own programmable digital filter."
+  },
+  {
+   "topic": "Bias, LDO and charge pump",
+   "page": 31,
+   "text": "The bias and LDO block makes the internal supplies and references from an unregulated VDD of 2.375 V to 3.46 V and, on the MPU-6050, from VLOGIC; its output is decoupled at REGOUT. A charge pump makes the high voltage the MEMS oscillators need and is decoupled at CPOUT. The capacitors are C1 and C3 in the external components table."
+  },
+  {
+   "topic": "Power-up",
+   "page": 23,
+   "text": "VDD rises from 10 % to 90 % in no more than 100 ms and VLOGIC in no more than 3 ms, both monotonically. VLOGIC starts rising no earlier than VDD and never exceeds it."
+  },
+  {
+   "topic": "Self-test",
+   "page": 27,
+   "text": "Self-test registers 13 to 16 actuate each gyroscope and accelerometer axis electrically, exercising both its mechanics and electronics. The difference between the outputs with and without self-test is the self-test response, and it must lie within the relative limits of −14 % to 14 % from factory trim. The limits apply to Revision D parts with date code 1147 (YYWW) or later."
+  },
+  {
+   "topic": "Axes",
+   "page": 40,
+   "text": "In top view with pin 1 at the upper left and pins 1 to 6 down the left side, +X points right, +Y points towards pins 19 to 24, and +Z points out of the top face. Each axis also carries a positive sense of rotation about it."
+  },
+  {
+   "topic": "Exposed pad",
+   "page": 43,
+   "text": "The exposed die pad has no electrical connection and is not needed for heat. Leave it unsoldered: soldering it can shift performance through thermo-mechanical stress."
+  },
+  {
+   "topic": "Board stress",
+   "page": 43,
+   "text": "A gyroscope also senses stress from the PCB: a mismatch in thermal expansion between package and board shifts the offset and its drift over temperature. Keep the traces to the pads as symmetric as possible so the part self-aligns and the solder joints come out even. Use lead-free solder and RoHS-clean materials."
+  },
+  {
+   "topic": "Routing",
+   "page": 43,
+   "text": "No traces or vias run under the package where they would pass beneath the exposed pad. The gyroscopes are driven near X = 33 ±3 kHz, Y = 30 ±3 kHz and Z = 27 ±3 kHz, and active signals in unshielded layers directly above or below can couple into them at harmonics. A ground plane under the pad cuts board noise; if another board stacks over the part, a ground plane on it directly above the part shields it."
+  },
+  {
+   "topic": "Placement",
+   "page": 43,
+   "text": "Keep large insertion parts such as buttons, connectors and shield cans at least 6 mm from the part."
+  },
+  {
+   "topic": "Mounting and cross-axis sensitivity",
+   "page": 43,
+   "text": "If the package sits rotated against the board axes, each axis picks up a share of motion about the others equal to the sine of the error. The cross-axis figures in the gyroscope and accelerometer tables already include the die's own misalignment in the package."
+  },
+  {
+   "topic": "Handling",
+   "page": 44,
+   "text": "The part is qualified to 10,000 g shock, but a drop onto a hard floor, or snapping boards apart by hand, can exceed that. Ultrasonic cleaning can damage it through resonance. Handle it as ESD-sensitive: keep it in its moisture-sealed ESD bag until assembly and work at stations held under 200 V of static."
+  },
+  {
+   "topic": "Reflow",
+   "page": 45,
+   "text": "Qualified to IPC/JEDEC J-STD-020D.1 with three reflow passes after bake and moisture soak, peak classification temperature 260 +5/−0 °C for lead-free parts under 1.6 mm thick. Ramp-up stays under 3 °C/s and ramp-down under 4 °C/s; preheat 60 to 120 s; 60 to 120 s above liquidus; 10 to 30 s near peak; under 480 s from room to peak. For production a lower-peak lead-free solder (about 235 °C) and gentler ramps are preferred, never beyond the qualification profile."
+  },
+  {
+   "topic": "Storage",
+   "page": 46,
+   "text": "Moisture sensitivity level 3."
+  },
+  {
+   "topic": "Marking",
+   "page": 46,
+   "text": "The top carries INVENSENSE, the part number (MPU6000 or MPU6050), a lot traceability code, and a line with foundry code, package vendor code, year and work week (YYWW) and revision code."
+  },
+  {
+   "topic": "Packing",
+   "page": 48,
+   "text": "5,000 parts on a 330 mm reel, one reel per box, up to five boxes (25,000 parts) per carton. Reels ship in a vacuum-sealed moisture barrier bag with ESD, MSL3 and caution labels."
+  },
+  {
+   "topic": "Environmental",
+   "page": 52,
+   "text": "RoHS and Green compliant; the MEMS element is sealed hermetically by wafer-level bonding."
+  }
+ ],
+ "packages": [
+  {
+   "name": "QFN-24 4x4x0.9",
+   "page": 41,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.85",
+     "0.90",
+     "0.95"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.18",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "c",
+     "lead-frame thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "D",
+     "body width",
+     "3.90",
+     "4.00",
+     "4.10"
+    ],
+    [
+     "D2",
+     "exposed pad width",
+     "2.65",
+     "2.70",
+     "2.75"
+    ],
+    [
+     "E",
+     "body length",
+     "3.90",
+     "4.00",
+     "4.10"
+    ],
+    [
+     "E2",
+     "exposed pad length",
+     "2.55",
+     "2.60",
+     "2.65"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.50",
+     ""
+    ],
+    [
+     "f (e-b)",
+     "gap between leads",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "K",
+     "",
+     "0.25",
+     "0.30",
+     "0.35"
+    ],
+    [
+     "L",
+     "lead length",
+     "0.30",
+     "0.35",
+     "0.40"
+    ],
+    [
+     "L1",
+     "",
+     "0.35",
+     "0.40",
+     "0.45"
+    ],
+    [
+     "s",
+     "",
+     "0.05",
+     "",
+     "0.15"
+    ]
+   ],
+   "notes": [
+    "24 leads, NiPdAu lead-frame finish.",
+    "Pin 1 is a laser-marked feature on the top.",
+    "The exposed pad has a C0.3 chamfer at the pin 1 corner."
+   ]
+  },
+  {
+   "name": "QFN-24 4x4x0.9 land pattern",
+   "page": 42,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "e",
+     "Pad Pitch",
+     "",
+     "0.50",
+     ""
+    ],
+    [
+     "b",
+     "Pad Width",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "L",
+     "Pad Length",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "L1",
+     "Pad Length",
+     "",
+     "0.40",
+     ""
+    ],
+    [
+     "D",
+     "Package Width",
+     "",
+     "4.00",
+     ""
+    ],
+    [
+     "E",
+     "Package Length",
+     "",
+     "4.00",
+     ""
+    ],
+    [
+     "D2",
+     "Exposed Pad Width",
+     "",
+     "2.70",
+     ""
+    ],
+    [
+     "E2",
+     "Exposed Pad Length",
+     "",
+     "2.60",
+     ""
+    ],
+    [
+     "D3",
+     "I/O Pad Extent Width",
+     "",
+     "4.80",
+     ""
+    ],
+    [
+     "E3",
+     "I/O Pad Extent Length",
+     "",
+     "4.80",
+     ""
+    ],
+    [
+     "c",
+     "Land Width",
+     "",
+     "0.35",
+     ""
+    ],
+    [
+     "Tout",
+     "Outward Extension",
+     "",
+     "0.40",
+     ""
+    ],
+    [
+     "Tin",
+     "Inward Extension",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "L2",
+     "Land Length",
+     "",
+     "0.80",
+     ""
+    ],
+    [
+     "L3",
+     "Land Length",
+     "",
+     "0.85",
+     ""
+    ]
+   ],
+   "notes": [
+    "Mean dimensions for a JEDEC-type land extension, with the solder fillet rising on the outer edge of each lead."
+   ]
+  }
+ ]
+}

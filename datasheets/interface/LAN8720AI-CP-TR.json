@@ -1,0 +1,4374 @@
+{
+ "sheet": 1,
+ "name": "LAN8720AI-CP-TR",
+ "kind": "interface",
+ "manufacturer": "Microchip (SMSC)",
+ "title": "LAN8720A / LAN8720Ai: 10/100 Ethernet PHY with RMII, HP Auto-MDIX and variable-voltage I/O, 24-pin QFN 4 x 4 mm",
+ "source": {
+  "document": "SMSC LAN8720A/LAN8720Ai datasheet",
+  "revision": "Revision 1.4 (08-23-12)",
+  "pages": 79
+ },
+ "summary": "A single-port physical layer transceiver for 10BASE-T and 100BASE-TX Ethernet that talks to a MAC over the reduced pin count RMII bus and is managed over MDIO/MDC. It negotiates speed and duplex on its own, swaps its transmit and receive pairs for straight or crossed cables (HP Auto-MDIX), and needs no register writes to run: pin straps set the PHY address, the start-up mode, the internal 1.2 V regulator and the clocking mode. The analog side runs from 3.3 V, the digital I/O from 1.62 V to 3.6 V, and the 1.2 V core comes from an on-chip linear regulator or an outside supply. The RMII reference is either a 50 MHz clock fed in or a 50 MHz clock the part makes from a 25 MHz crystal. LAN8720A is the 0 to +85 °C grade, LAN8720Ai the -40 to +85 °C grade.",
+ "key_figures": [
+  [
+   "Standards",
+   "IEEE 802.3-2005 10BASE-T and 100BASE-TX with auto-negotiation; HP Auto-MDIX"
+  ],
+  [
+   "MAC interface",
+   "RMII (50 MHz REF_CLK, 2-bit data); SMI management (MDIO/MDC)"
+  ],
+  [
+   "Analog supply",
+   "VDD1A, VDD2A 3.0 V to 3.6 V"
+  ],
+  [
+   "I/O supply",
+   "VDDIO 1.62 V to 3.6 V"
+  ],
+  [
+   "Core supply",
+   "VDDCR 1.14 V to 1.26 V, internal regulator or external"
+  ],
+  [
+   "Supply current, 100BASE-TX",
+   "45 mA typ, 148 mW typ (REF_CLK In mode, device only)"
+  ],
+  [
+   "General power-down",
+   "2.3 mA typ (REF_CLK In mode)"
+  ],
+  [
+   "Clock",
+   "25 MHz crystal or oscillator (REF_CLK Out mode), or 50 MHz REF_CLK in"
+  ],
+  [
+   "ESD",
+   "HBM Class 3A; IEC 61000-4-2 ±8 kV contact, ±15 kV air"
+  ],
+  [
+   "Package",
+   "24-pin QFN, 4 x 4 x 0.85 mm, exposed pad, 0.5 mm pitch"
+  ],
+  [
+   "Temperature",
+   "0 to +85 °C (LAN8720A), -40 to +85 °C (LAN8720Ai)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "package",
+   "ambient temperature",
+   "packing"
+  ],
+  "rows": [
+   [
+    "LAN8720A-CP-TR",
+    "24-pin QFN, lead-free, RoHS compliant",
+    "0 to +85°C",
+    "tape and reel, 4,000"
+   ],
+   [
+    "LAN8720Ai-CP-TR",
+    "24-pin QFN, lead-free, RoHS compliant",
+    "-40 to +85°C",
+    "tape and reel, 4,000"
+   ]
+  ],
+  "notes": [
+   "Both grades meet the IEC 61249-2-21 halogen limits."
+  ]
+ },
+ "pins": [
+  {
+   "package": "24-QFN (4 x 4 mm)",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "VDD2A",
+     "type": "power in",
+     "function": "3.3 V analog supply for channel 2; also feeds the internal 1.2 V regulator."
+    },
+    {
+     "pin": "2",
+     "name": "LED2/nINTSEL",
+     "type": "output / strap input",
+     "function": "LED2 (O12) goes active at 100 Mbit/s and inactive at 10 Mbit/s or while the line is isolated. Latched at reset as nINTSEL (IS, internal pull-up): high or open selects REF_CLK In mode with nINT on pin 14; low selects REF_CLK Out mode with REFCLKO on pin 14. The strap level also sets the LED polarity. A pull-up goes to VDD2A."
+    },
+    {
+     "pin": "3",
+     "name": "LED1/REGOFF",
+     "type": "output / strap input",
+     "function": "LED1 (O12) is on while a link is up and blinks on activity. Latched at reset as REGOFF (IS, internal pull-down): open or low keeps the internal 1.2 V regulator on; pulled up to VDD2A it turns the regulator off and VDDCR must be supplied from outside. The strap level also sets the LED polarity."
+    },
+    {
+     "pin": "4",
+     "name": "XTAL2",
+     "type": "crystal output",
+     "function": "Crystal output (OCLK). Left open when a single-ended clock drives pin 5."
+    },
+    {
+     "pin": "5",
+     "name": "XTAL1/CLKIN",
+     "type": "crystal / clock input",
+     "function": "Crystal input, or single-ended clock input (ICLK): 25 MHz in REF_CLK Out mode, the 50 MHz REF_CLK in REF_CLK In mode."
+    },
+    {
+     "pin": "6",
+     "name": "VDDCR",
+     "type": "power",
+     "function": "1.2 V digital core supply. Fed by the internal regulator unless REGOFF disables it. Decouple to ground with 1 µF and 470 pF in parallel."
+    },
+    {
+     "pin": "7",
+     "name": "RXD1/MODE1",
+     "type": "output / strap input",
+     "function": "Receive data bit 1 to the MAC (VO8). Latched at reset as MODE1 (VIS, internal pull-up), one of the three bits that pick the start-up mode."
+    },
+    {
+     "pin": "8",
+     "name": "RXD0/MODE0",
+     "type": "output / strap input",
+     "function": "Receive data bit 0 to the MAC (VO8). Latched at reset as MODE0 (VIS, internal pull-up)."
+    },
+    {
+     "pin": "9",
+     "name": "VDDIO",
+     "type": "power in",
+     "function": "Supply for the digital I/O, 1.62 V to 3.6 V."
+    },
+    {
+     "pin": "10",
+     "name": "RXER/PHYAD0",
+     "type": "output / strap input",
+     "function": "Receive error to the MAC (VO8): high when the frame being passed on holds an error. Latched at reset as PHYAD0 (VIS, internal pull-down), bit 0 of the SMI address."
+    },
+    {
+     "pin": "11",
+     "name": "CRS_DV/MODE2",
+     "type": "output / strap input",
+     "function": "Carrier sense and receive data valid (VO8): high while the line is not idle. On a 10BASE-T packet RXD[1:0] stays low until the SFD byte (10101011) arrives. Transmit data is not echoed onto receive in 10BASE-T half duplex. Latched at reset as MODE2 (VIS, internal pull-up)."
+    },
+    {
+     "pin": "12",
+     "name": "MDIO",
+     "type": "bidirectional",
+     "function": "SMI management data in and out (VIS input, VOD8 open-drain output)."
+    },
+    {
+     "pin": "13",
+     "name": "MDC",
+     "type": "input",
+     "function": "SMI management clock (VIS)."
+    },
+    {
+     "pin": "14",
+     "name": "nINT/REFCLKO",
+     "type": "output",
+     "function": "With nINTSEL high: nINT, active-low open-drain interrupt (VOD8, internal pull-up); fit an outside pull-up to VDDIO. With nINTSEL low: REFCLKO, a 50 MHz RMII clock (VO8) made from the 25 MHz crystal or oscillator."
+    },
+    {
+     "pin": "15",
+     "name": "nRST",
+     "type": "input",
+     "function": "Active-low hardware reset (VIS, internal pull-up). A reset is required after power-up."
+    },
+    {
+     "pin": "16",
+     "name": "TXEN",
+     "type": "input",
+     "function": "Transmit enable from the MAC (VIS, internal pull-down): high while TXD[1:0] carries valid data."
+    },
+    {
+     "pin": "17",
+     "name": "TXD0",
+     "type": "input",
+     "function": "Transmit data bit 0 from the MAC (VIS)."
+    },
+    {
+     "pin": "18",
+     "name": "TXD1",
+     "type": "input",
+     "function": "Transmit data bit 1 from the MAC (VIS)."
+    },
+    {
+     "pin": "19",
+     "name": "VDD1A",
+     "type": "power in",
+     "function": "3.3 V analog supply for channel 1."
+    },
+    {
+     "pin": "20",
+     "name": "TXN",
+     "type": "analog I/O",
+     "function": "Channel 1 negative line (AIO): transmit pair in MDI, receive pair when Auto-MDIX swaps."
+    },
+    {
+     "pin": "21",
+     "name": "TXP",
+     "type": "analog I/O",
+     "function": "Channel 1 positive line (AIO)."
+    },
+    {
+     "pin": "22",
+     "name": "RXN",
+     "type": "analog I/O",
+     "function": "Channel 2 negative line (AIO): receive pair in MDI, transmit pair when swapped."
+    },
+    {
+     "pin": "23",
+     "name": "RXP",
+     "type": "analog I/O",
+     "function": "Channel 2 positive line (AIO)."
+    },
+    {
+     "pin": "24",
+     "name": "RBIAS",
+     "type": "analog input",
+     "function": "Bias set point: a 12.1 kΩ 1 % resistor to ground. Nominal pin voltage 1.2 V; the resistor dissipates about 1 mW."
+    },
+    {
+     "pin": "EP",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Exposed pad, ground. Connect it to the ground plane through an array of vias."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 63,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage (VDDIO, VDD1A, VDD2A)",
+     "",
+     "",
+     "-0.5",
+     "",
+     "+3.6",
+     "V"
+    ],
+    [
+     "Digital core supply voltage (VDDCR)",
+     "VDDCR",
+     "",
+     "-0.5",
+     "",
+     "+1.5",
+     "V"
+    ],
+    [
+     "Ethernet magnetics supply voltage",
+     "",
+     "",
+     "-0.5",
+     "",
+     "+3.6",
+     "V"
+    ],
+    [
+     "Positive voltage on signal pins, to ground",
+     "",
+     "not XTAL1/CLKIN, XTAL2, RBIAS",
+     "",
+     "",
+     "+6",
+     "V"
+    ],
+    [
+     "Negative voltage on signal pins, to ground",
+     "",
+     "not RBIAS",
+     "-0.5",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Positive voltage on XTAL1/CLKIN, to ground",
+     "",
+     "",
+     "",
+     "",
+     "+4.6",
+     "V"
+    ],
+    [
+     "Positive voltage on XTAL2, to ground",
+     "",
+     "",
+     "",
+     "",
+     "+2.5",
+     "V"
+    ],
+    [
+     "Ambient operating temperature in still air",
+     "TA",
+     "extended commercial (LAN8720A)",
+     "0",
+     "",
+     "+85",
+     "°C"
+    ],
+    [
+     "Ambient operating temperature in still air",
+     "TA",
+     "industrial (LAN8720Ai)",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ],
+    [
+     "Storage temperature",
+     "",
+     "",
+     "-55",
+     "",
+     "+150",
+     "°C"
+    ],
+    [
+     "Junction to ambient",
+     "θJA",
+     "",
+     "",
+     "59.8",
+     "",
+     "°C/W"
+    ],
+    [
+     "Junction to case",
+     "θJC",
+     "",
+     "",
+     "12.6",
+     "",
+     "°C/W"
+    ],
+    [
+     "Lead temperature range",
+     "",
+     "JEDEC J-STD-020",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "HBM ESD performance",
+     "",
+     "JEDEC JESD22-A114",
+     "",
+     "Class 3A",
+     "",
+     ""
+    ],
+    [
+     "IEC61000-4-2 contact discharge ESD performance",
+     "",
+     "third-party test",
+     "",
+     "+/-8",
+     "",
+     "kV"
+    ],
+    [
+     "IEC61000-4-2 air-gap discharge ESD performance",
+     "",
+     "third-party test",
+     "",
+     "+/-15",
+     "",
+     "kV"
+    ],
+    [
+     "Latch-up performance",
+     "",
+     "EIA/JESD 78",
+     "",
+     "+/-150",
+     "",
+     "mA"
+    ]
+   ],
+   "notes": [
+    "Spikes from a bench or system supply at AC switch-on or switch-off, or mains transients passed through to the DC rail, can push the supplies past these limits; a clamp is suggested where that can happen.",
+    "The digital signals are not 5 V tolerant.",
+    "The ambient operating range depends on the grade: 0 to +85 °C for LAN8720A, -40 to +85 °C for LAN8720Ai."
+   ]
+  },
+  {
+   "title": "Operating conditions",
+   "page": 64,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage (VDDIO)",
+     "VDDIO",
+     "",
+     "+1.62",
+     "",
+     "+3.6",
+     "V"
+    ],
+    [
+     "Analog port supply voltage (VDD1A, VDD2A)",
+     "",
+     "",
+     "+3.0",
+     "",
+     "+3.6",
+     "V"
+    ],
+    [
+     "Digital core supply voltage (VDDCR)",
+     "VDDCR",
+     "",
+     "+1.14",
+     "",
+     "+1.26",
+     "V"
+    ],
+    [
+     "Ethernet magnetics supply voltage",
+     "",
+     "",
+     "+2.25",
+     "",
+     "+3.6",
+     "V"
+    ],
+    [
+     "Ambient operating temperature in still air",
+     "TA",
+     "extended commercial (LAN8720A)",
+     "0",
+     "",
+     "+85",
+     "°C"
+    ],
+    [
+     "Ambient operating temperature in still air",
+     "TA",
+     "industrial (LAN8720Ai)",
+     "-40",
+     "",
+     "+85",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Once power-up is complete, VDDIO and the magnetics supply have to stay within +/-10 % of their level; a larger change can upset operation.",
+    "No input may be driven while the device is unpowered."
+   ]
+  },
+  {
+   "title": "Device-only current consumption and power dissipation, REF_CLK In mode",
+   "page": 64,
+   "conditions": "VDDIO, VDD1A, VDD2A = 3.3 V, VDDCR = 1.2 V unless noted",
+   "columns": [
+    "power pin group",
+    "value",
+    "VDDA3.3 power pins (mA)",
+    "VDDCR power pin (mA)",
+    "VDDIO power pin (mA)",
+    "total current (mA)",
+    "total power (mW)"
+   ],
+   "rows": [
+    [
+     "100BASE-TX with traffic",
+     "Max",
+     "28",
+     "21",
+     "0.6",
+     "49",
+     "159"
+    ],
+    [
+     "100BASE-TX with traffic",
+     "Typical",
+     "26",
+     "19",
+     "0.5",
+     "45",
+     "148"
+    ],
+    [
+     "100BASE-TX with traffic",
+     "Min",
+     "23",
+     "18",
+     "0.3",
+     "41",
+     "96"
+    ],
+    [
+     "10BASE-T with traffic",
+     "Max",
+     "9.7",
+     "13",
+     "0.6",
+     "24",
+     "77"
+    ],
+    [
+     "10BASE-T with traffic",
+     "Typical",
+     "8.9",
+     "12",
+     "0.5",
+     "22",
+     "70"
+    ],
+    [
+     "10BASE-T with traffic",
+     "Min",
+     "8.3",
+     "12",
+     "0.3",
+     "20",
+     "42"
+    ],
+    [
+     "Energy detect power down",
+     "Max",
+     "4.2",
+     "3.0",
+     "0.2",
+     "7.4",
+     "25"
+    ],
+    [
+     "Energy detect power down",
+     "Typical",
+     "4.1",
+     "1.9",
+     "0.2",
+     "6.2",
+     "21"
+    ],
+    [
+     "Energy detect power down",
+     "Min",
+     "3.9",
+     "1.9",
+     "0",
+     "5.8",
+     "16"
+    ],
+    [
+     "General power down",
+     "Max",
+     "0.4",
+     "2.8",
+     "0.2",
+     "3.4",
+     "11.2"
+    ],
+    [
+     "General power down",
+     "Typical",
+     "0.3",
+     "1.8",
+     "0.2",
+     "2.3",
+     "7.6"
+    ],
+    [
+     "General power down",
+     "Min",
+     "0.3",
+     "1.7",
+     "0",
+     "2",
+     "3.0"
+    ]
+   ],
+   "notes": [
+    "Each Min total power is worked out for VDDIO = 1.8 V with the internal regulator off (all flexPWR savings in use).",
+    "VDDCR current comes either through VDD2A by way of the internal regulator or from the outside 1.2 V supply when the regulator is off.",
+    "Magnetics and LED currents are not counted. The Ethernet magnetics typically draw 41 mA at 100BASE-TX and 100 mA at 10BASE-T, whether their rail is 2.5 V or 3.3 V."
+   ]
+  },
+  {
+   "title": "Device-only current consumption and power dissipation, REF_CLK Out mode",
+   "page": 65,
+   "conditions": "VDDIO, VDD1A, VDD2A = 3.3 V, VDDCR = 1.2 V unless noted",
+   "columns": [
+    "power pin group",
+    "value",
+    "VDDA3.3 power pins (mA)",
+    "VDDCR power pin (mA)",
+    "VDDIO power pin (mA)",
+    "total current (mA)",
+    "total power (mW)"
+   ],
+   "rows": [
+    [
+     "100BASE-T with traffic",
+     "Max",
+     "28",
+     "20",
+     "6.3",
+     "54",
+     "179"
+    ],
+    [
+     "100BASE-T with traffic",
+     "Typical",
+     "26",
+     "19",
+     "5.8",
+     "50",
+     "164"
+    ],
+    [
+     "100BASE-T with traffic",
+     "Min",
+     "22",
+     "15",
+     "2.9",
+     "39",
+     "93"
+    ],
+    [
+     "10BASE-T with traffic",
+     "Max",
+     "9.9",
+     "13",
+     "6.4",
+     "30",
+     "96"
+    ],
+    [
+     "10BASE-T with traffic",
+     "Typical",
+     "8.8",
+     "12",
+     "5.6",
+     "26",
+     "85"
+    ],
+    [
+     "10BASE-T with traffic",
+     "Min",
+     "7.1",
+     "10",
+     "3.0",
+     "20",
+     "41"
+    ],
+    [
+     "Energy detect power down",
+     "Max",
+     "4.5",
+     "2.7",
+     "0.3",
+     "7.5",
+     "25"
+    ],
+    [
+     "Energy detect power down",
+     "Typical",
+     "4.0",
+     "1.5",
+     "0.2",
+     "5.7",
+     "19"
+    ],
+    [
+     "Energy detect power down",
+     "Min",
+     "3.9",
+     "1.2",
+     "0",
+     "5.1",
+     "15"
+    ],
+    [
+     "General power down",
+     "Max",
+     "0.4",
+     "2.5",
+     "0.2",
+     "3.1",
+     "10.2"
+    ],
+    [
+     "General power down",
+     "Typical",
+     "0.4",
+     "1.3",
+     "0.2",
+     "1.9",
+     "6.3"
+    ],
+    [
+     "General power down",
+     "Min",
+     "0.4",
+     "1.0",
+     "0",
+     "1.4",
+     "2.5"
+    ]
+   ],
+   "notes": [
+    "Each Min total power is worked out for VDDIO = 1.8 V with the internal regulator off (all flexPWR savings in use).",
+    "VDDCR current comes either through VDD2A by way of the internal regulator or from the outside 1.2 V supply when the regulator is off.",
+    "Magnetics and LED currents are not counted. The Ethernet magnetics typically draw 41 mA at 100BASE-TX and 100 mA at 10BASE-T, whether their rail is 2.5 V or 3.3 V."
+   ]
+  },
+  {
+   "title": "Non-variable I/O buffer characteristics",
+   "page": 66,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "IS type input buffer",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Low input level",
+     "VILI",
+     "-0.3",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "High input level",
+     "VIHI",
+     "",
+     "",
+     "3.6",
+     "V",
+     ""
+    ],
+    [
+     "Negative-going threshold",
+     "VILT",
+     "1.01",
+     "1.19",
+     "1.39",
+     "V",
+     "Schmitt trigger"
+    ],
+    [
+     "Positive-going threshold",
+     "VIHT",
+     "1.39",
+     "1.59",
+     "1.79",
+     "V",
+     "Schmitt trigger"
+    ],
+    [
+     "Schmitt trigger hysteresis (VIHT - VILT)",
+     "VHYS",
+     "336",
+     "399",
+     "459",
+     "mV",
+     ""
+    ],
+    [
+     "Input leakage (VIN = VSS or VDDIO)",
+     "IIH",
+     "-10",
+     "",
+     "10",
+     "uA",
+     "Note 5.8"
+    ],
+    [
+     "Input capacitance",
+     "CIN",
+     "",
+     "",
+     "2",
+     "pF",
+     ""
+    ],
+    [
+     "O12 type buffers",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Low output level",
+     "VOL",
+     "",
+     "",
+     "0.4",
+     "V",
+     "IOL = 12mA"
+    ],
+    [
+     "High output level",
+     "VOH",
+     "VDD2A - 0.4",
+     "",
+     "",
+     "V",
+     "IOH = -12mA"
+    ],
+    [
+     "ICLK type buffer (XTAL1 input)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "Note 5.9"
+    ],
+    [
+     "Low input level",
+     "VILI",
+     "-0.3",
+     "",
+     "0.35",
+     "V",
+     ""
+    ],
+    [
+     "High input level",
+     "VIHI",
+     "1.4",
+     "",
+     "VDD2A + 0.4",
+     "V",
+     ""
+    ]
+   ],
+   "notes": [
+    "Note 5.8: the leakage limit covers every input and every bidirectional pin while tri-stated; an internal pull-up or pull-down adds about +/-50 µA on its pin.",
+    "Note 5.9: a 25 MHz single-ended oscillator may drive XTAL1/CLKIN in place of a crystal."
+   ]
+  },
+  {
+   "title": "Variable I/O buffer characteristics",
+   "page": 67,
+   "conditions": "typical columns at VDDIO = 1.8 V, 2.5 V and 3.3 V",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ 1.8V",
+    "typ 2.5V",
+    "typ 3.3V",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "VIS type input buffer",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Low input level",
+     "VILI",
+     "-0.3",
+     "",
+     "",
+     "",
+     "",
+     "V",
+     ""
+    ],
+    [
+     "High input level",
+     "VIHI",
+     "",
+     "",
+     "",
+     "",
+     "3.6",
+     "V",
+     ""
+    ],
+    [
+     "Neg-going threshold",
+     "VILT",
+     "0.64",
+     "0.83",
+     "1.15",
+     "1.41",
+     "1.76",
+     "V",
+     "Schmitt trigger"
+    ],
+    [
+     "Pos-going threshold",
+     "VIHT",
+     "0.81",
+     "0.99",
+     "1.29",
+     "1.65",
+     "1.90",
+     "V",
+     "Schmitt trigger"
+    ],
+    [
+     "Schmitt trigger hysteresis (VIHT - VILT)",
+     "VHYS",
+     "102",
+     "158",
+     "136",
+     "138",
+     "288",
+     "mV",
+     ""
+    ],
+    [
+     "Input leakage (VIN = VSS or VDDIO)",
+     "IIH",
+     "-10",
+     "",
+     "",
+     "",
+     "10",
+     "uA",
+     "Note 5.10"
+    ],
+    [
+     "Input capacitance",
+     "CIN",
+     "",
+     "",
+     "",
+     "",
+     "2",
+     "pF",
+     ""
+    ],
+    [
+     "VO8 type buffers",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Low output level",
+     "VOL",
+     "",
+     "",
+     "",
+     "",
+     "0.4",
+     "V",
+     "IOL = 8mA"
+    ],
+    [
+     "High output level",
+     "VOH",
+     "VDDIO - 0.4",
+     "",
+     "",
+     "",
+     "",
+     "V",
+     "IOH = -8mA"
+    ],
+    [
+     "VOD8 type buffer",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Low output level",
+     "VOL",
+     "",
+     "",
+     "",
+     "",
+     "0.4",
+     "V",
+     "IOL = 8mA"
+    ]
+   ],
+   "notes": [
+    "Note 5.10: the leakage limit covers every input and every bidirectional pin while tri-stated; an internal pull-up or pull-down adds about +/-50 µA on its pin."
+   ]
+  },
+  {
+   "title": "100BASE-TX transceiver characteristics",
+   "page": 67,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "Peak differential output voltage high",
+     "VPPH",
+     "950",
+     "-",
+     "1050",
+     "mVpk",
+     "Note 5.11"
+    ],
+    [
+     "Peak differential output voltage low",
+     "VPPL",
+     "-950",
+     "-",
+     "-1050",
+     "mVpk",
+     "Note 5.11"
+    ],
+    [
+     "Signal amplitude symmetry",
+     "VSS",
+     "98",
+     "-",
+     "102",
+     "%",
+     "Note 5.11"
+    ],
+    [
+     "Signal rise and fall time",
+     "TRF",
+     "3.0",
+     "-",
+     "5.0",
+     "nS",
+     "Note 5.11"
+    ],
+    [
+     "Rise and fall symmetry",
+     "TRFS",
+     "-",
+     "-",
+     "0.5",
+     "nS",
+     "Note 5.11"
+    ],
+    [
+     "Duty cycle distortion",
+     "DCD",
+     "35",
+     "50",
+     "65",
+     "%",
+     "Note 5.12"
+    ],
+    [
+     "Overshoot and undershoot",
+     "VOS",
+     "-",
+     "-",
+     "5",
+     "%",
+     ""
+    ],
+    [
+     "Jitter",
+     "",
+     "",
+     "",
+     "1.4",
+     "nS",
+     "Note 5.13"
+    ]
+   ],
+   "notes": [
+    "Note 5.11: taken on the line side of the transformer with the cable replaced by a 100 Ω (+/-1 %) resistor.",
+    "Note 5.12: offset from a 16 ns pulse width, measured at half the pulse peak.",
+    "Note 5.13: a differential measurement."
+   ]
+  },
+  {
+   "title": "10BASE-T transceiver characteristics",
+   "page": 68,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "notes"
+   ],
+   "rows": [
+    [
+     "Transmitter peak differential output voltage",
+     "VOUT",
+     "2.2",
+     "2.5",
+     "2.8",
+     "V",
+     "Note 5.14"
+    ],
+    [
+     "Receiver differential squelch threshold",
+     "VDS",
+     "300",
+     "420",
+     "585",
+     "mV",
+     ""
+    ]
+   ],
+   "notes": [
+    "Note 5.14: the limits hold into a 100 Ω resistive load."
+   ]
+  },
+  {
+   "title": "Power sequence timing values",
+   "page": 69,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "units"
+   ],
+   "rows": [
+    [
+     "tpon",
+     "Power supply turn on time",
+     "",
+     "",
+     "50",
+     "mS"
+    ],
+    [
+     "tpoff",
+     "Power supply turn off time",
+     "",
+     "",
+     "500",
+     "mS"
+    ]
+   ],
+   "notes": [
+    "VDDIO, VDD1A, VDD2A and the magnetics supply may rise in any order as long as all reach their working level within tpon, and may fall in any order as long as all reach 0 V within tpoff.",
+    "With the internal regulator off, VDDCR must come up in a set order against the 3.3 V supply: VDDIO at 80 % of its level first."
+   ]
+  },
+  {
+   "title": "Power-on nRST and configuration strap timing values",
+   "page": 70,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "units"
+   ],
+   "rows": [
+    [
+     "tpurstd",
+     "External power supplies at 80% to nRST deassertion",
+     "25",
+     "",
+     "",
+     "mS"
+    ],
+    [
+     "tpurstv",
+     "External power supplies at 80% to nRST valid",
+     "0",
+     "",
+     "",
+     "nS"
+    ],
+    [
+     "trstia",
+     "nRST input assertion time",
+     "100",
+     "",
+     "",
+     "μS"
+    ],
+    [
+     "tcss",
+     "Configuration strap pins setup to nRST deassertion",
+     "200",
+     "",
+     "",
+     "nS"
+    ],
+    [
+     "tcsh",
+     "Configuration strap pins hold after nRST deassertion",
+     "1",
+     "",
+     "",
+     "nS"
+    ],
+    [
+     "totaa",
+     "Output tri-state after nRST assertion",
+     "",
+     "",
+     "50",
+     "nS"
+    ],
+    [
+     "todad",
+     "Output drive after nRST deassertion",
+     "2",
+     "",
+     "800 (Note 5.15)",
+     "nS"
+    ]
+   ],
+   "notes": [
+    "Note 5.15: 20 cycles of a 25 MHz clock, or 40 cycles of a 50 MHz clock.",
+    "The rising edge of nRST has to be monotonic.",
+    "Strap pins are only pulled up or down by resistors; nothing may drive them as inputs."
+   ]
+  },
+  {
+   "title": "RMII timing values, REF_CLK Out mode",
+   "page": 71,
+   "conditions": "nINTSEL pulled low; 25 MHz crystal or oscillator on XTAL1/CLKIN and XTAL2",
+   "columns": [
+    "symbol",
+    "description",
+    "min",
+    "max",
+    "units",
+    "notes"
+   ],
+   "rows": [
+    [
+     "tclkp",
+     "REFCLKO period",
+     "20",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tclkh",
+     "REFCLKO high time",
+     "tclkp*0.4",
+     "tclkp*0.6",
+     "ns",
+     ""
+    ],
+    [
+     "tclkl",
+     "REFCLKO low time",
+     "tclkp*0.4",
+     "tclkp*0.6",
+     "ns",
+     ""
+    ],
+    [
+     "toval",
+     "RXD[1:0], RXER, CRS_DV output valid from rising edge of REFCLKO",
+     "",
+     "5.0",
+     "ns",
+     "Note 5.16"
+    ],
+    [
+     "tohold",
+     "RXD[1:0], RXER, CRS_DV output hold from rising edge of REFCLKO",
+     "1.4",
+     "",
+     "ns",
+     "Note 5.16"
+    ],
+    [
+     "tsu",
+     "TXD[1:0], TXEN setup time to rising edge of REFCLKO",
+     "7.0",
+     "",
+     "ns",
+     "Note 5.16"
+    ],
+    [
+     "tihold",
+     "TXD[1:0], TXEN input hold time after rising edge of REFCLKO",
+     "2.0",
+     "",
+     "ns",
+     "Note 5.16"
+    ]
+   ],
+   "notes": [
+    "Note 5.16: designed for a system load of 10 pF to 25 pF.",
+    "RMII timing follows the RMII Consortium RMII Specification R1.2.",
+    "These REFCLKO timings fall outside what RMII defines, so each MAC pairing needs its own timing analysis."
+   ]
+  },
+  {
+   "title": "RMII timing values, REF_CLK In mode",
+   "page": 72,
+   "conditions": "nINTSEL open or pulled high; 50 MHz clock on CLKIN",
+   "columns": [
+    "symbol",
+    "description",
+    "min",
+    "max",
+    "units",
+    "notes"
+   ],
+   "rows": [
+    [
+     "tclkp",
+     "CLKIN period",
+     "20",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tclkh",
+     "CLKIN high time",
+     "tclkp*0.35",
+     "tclkp*0.65",
+     "ns",
+     ""
+    ],
+    [
+     "tclkl",
+     "CLKIN low time",
+     "tclkp*0.35",
+     "tclkp*0.65",
+     "ns",
+     ""
+    ],
+    [
+     "toval",
+     "RXD[1:0], RXER, CRS_DV output valid from rising edge of CLKIN",
+     "",
+     "14.0",
+     "ns",
+     "Note 5.17"
+    ],
+    [
+     "tohold",
+     "RXD[1:0], RXER, CRS_DV output hold from rising edge of CLKIN",
+     "3.0",
+     "",
+     "ns",
+     "Note 5.17"
+    ],
+    [
+     "tsu",
+     "TXD[1:0], TXEN setup time to rising edge of CLKIN",
+     "4.0",
+     "",
+     "ns",
+     "Note 5.17"
+    ],
+    [
+     "tihold",
+     "TXD[1:0], TXEN input hold time after rising edge of CLKIN",
+     "1.5",
+     "",
+     "ns",
+     "Note 5.17"
+    ]
+   ],
+   "notes": [
+    "Note 5.17: designed for a system load of 10 pF to 25 pF.",
+    "RMII timing follows the RMII Consortium RMII Specification R1.2."
+   ]
+  },
+  {
+   "title": "RMII CLKIN (REF_CLK) timing values",
+   "page": 73,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "min",
+    "typ",
+    "max",
+    "units",
+    "notes"
+   ],
+   "rows": [
+    [
+     "CLKIN frequency",
+     "",
+     "50",
+     "",
+     "MHz",
+     ""
+    ],
+    [
+     "CLKIN frequency drift",
+     "",
+     "",
+     "± 50",
+     "ppm",
+     ""
+    ],
+    [
+     "CLKIN duty cycle",
+     "40",
+     "",
+     "60",
+     "%",
+     ""
+    ],
+    [
+     "CLKIN jitter",
+     "",
+     "",
+     "150",
+     "psec",
+     "p-p – not RMS"
+    ]
+   ]
+  },
+  {
+   "title": "SMI timing values",
+   "page": 73,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "description",
+    "min",
+    "max",
+    "units",
+    "notes"
+   ],
+   "rows": [
+    [
+     "tclkp",
+     "MDC period",
+     "400",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tclkh",
+     "MDC high time",
+     "160 (80%)",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tclkl",
+     "MDC low time",
+     "160 (80%)",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tval",
+     "MDIO (read from PHY) output valid from rising edge of MDC",
+     "",
+     "300",
+     "ns",
+     ""
+    ],
+    [
+     "tohold",
+     "MDIO (read from PHY) output hold from rising edge of MDC",
+     "0",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tsu",
+     "MDIO (write to PHY) setup time to rising edge of MDC",
+     "10",
+     "",
+     "ns",
+     ""
+    ],
+    [
+     "tihold",
+     "MDIO (write to PHY) input hold time after rising edge of MDC",
+     "10",
+     "",
+     "ns",
+     ""
+    ]
+   ],
+   "notes": [
+    "SMI timing follows IEEE 802.3."
+   ]
+  },
+  {
+   "title": "Output equivalent test load",
+   "page": 68,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "value"
+   ],
+   "rows": [
+    [
+     "Load on each output for timing",
+     "25 pF"
+    ]
+   ],
+   "notes": [
+    "Output timing assumes this load unless a row says otherwise."
+   ]
+  },
+  {
+   "title": "Crystal specifications",
+   "page": 74,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "nom",
+    "max",
+    "units",
+    "notes"
+   ],
+   "rows": [
+    [
+     "Crystal cut",
+     "",
+     "",
+     "AT, typ",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Crystal oscillation mode",
+     "",
+     "",
+     "Fundamental Mode",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Crystal calibration mode",
+     "",
+     "",
+     "Parallel Resonant Mode",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Frequency",
+     "Ffund",
+     "-",
+     "25.000",
+     "-",
+     "MHz",
+     ""
+    ],
+    [
+     "Frequency tolerance @ 25°C",
+     "Ftol",
+     "-",
+     "-",
+     "±50",
+     "PPM",
+     "Note 5.18"
+    ],
+    [
+     "Frequency stability over temp",
+     "Ftemp",
+     "-",
+     "-",
+     "±50",
+     "PPM",
+     "Note 5.18"
+    ],
+    [
+     "Frequency deviation over time",
+     "Fage",
+     "-",
+     "+/-3 to 5",
+     "-",
+     "PPM",
+     "Note 5.19"
+    ],
+    [
+     "Total allowable PPM budget",
+     "",
+     "-",
+     "-",
+     "±50",
+     "PPM",
+     "Note 5.20"
+    ],
+    [
+     "Shunt capacitance",
+     "CO",
+     "-",
+     "7 typ",
+     "-",
+     "pF",
+     ""
+    ],
+    [
+     "Load capacitance",
+     "CL",
+     "-",
+     "20 typ",
+     "-",
+     "pF",
+     ""
+    ],
+    [
+     "Drive level",
+     "PW",
+     "300",
+     "-",
+     "-",
+     "uW",
+     ""
+    ],
+    [
+     "Equivalent series resistance",
+     "R1",
+     "-",
+     "-",
+     "30",
+     "Ohm",
+     ""
+    ],
+    [
+     "Operating temperature range",
+     "",
+     "Note 5.21",
+     "-",
+     "+85",
+     "°C",
+     ""
+    ],
+    [
+     "XTAL1/CLKIN pin capacitance",
+     "",
+     "-",
+     "3 typ",
+     "-",
+     "pF",
+     "Note 5.22"
+    ],
+    [
+     "XTAL2 pin capacitance",
+     "",
+     "-",
+     "3 typ",
+     "-",
+     "pF",
+     "Note 5.22"
+    ]
+   ],
+   "notes": [
+    "Note 5.18: how tolerance and temperature stability split is up to the design; the IEEE budget of ±50 ppm means the two together come to roughly ±45 ppm, leaving room for aging.",
+    "Note 5.19: deviation over time is aging.",
+    "Note 5.20: IEEE 802.3u allows the transmit clock ±100 ppm in total.",
+    "Note 5.21: the low end is 0 °C for the commercial grade and -40 °C for the industrial grade.",
+    "Note 5.22: pad, bond wire and lead frame are counted, board capacitance is not. These pin values plus board capacitance set the two outside load capacitors, so that the crystal sees the load it is cut for and runs at 25.000 MHz.",
+    "A 25 MHz single-ended oscillator (±50 ppm) may replace the crystal: XTAL1/CLKIN takes a nominal 0 to 3.3 V clock and XTAL2 stays open."
+   ]
+  },
+  {
+   "title": "Buffer types",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "buffer type",
+    "description"
+   ],
+   "rows": [
+    [
+     "IS",
+     "Schmitt-triggered input"
+    ],
+    [
+     "O12",
+     "Output, 12 mA sink and 12 mA source"
+    ],
+    [
+     "VIS",
+     "Schmitt-triggered input on the variable I/O supply"
+    ],
+    [
+     "VO8",
+     "Output on the variable I/O supply, 8 mA sink and 8 mA source"
+    ],
+    [
+     "VOD8",
+     "Open-drain output on the variable I/O supply, 8 mA sink"
+    ],
+    [
+     "PU",
+     "Internal pull-up, 50 µA typical, on unless the pin says otherwise"
+    ],
+    [
+     "PD",
+     "Internal pull-down, 50 µA typical, on unless the pin says otherwise"
+    ],
+    [
+     "AI",
+     "Analog input"
+    ],
+    [
+     "AIO",
+     "Analog bidirectional"
+    ],
+    [
+     "ICLK",
+     "Crystal oscillator input"
+    ],
+    [
+     "OCLK",
+     "Crystal oscillator output"
+    ],
+    [
+     "P",
+     "Power pin"
+    ]
+   ],
+   "notes": [
+    "The internal pulls only keep open inputs from floating; a pin that has to pull a load up or down needs an outside resistor.",
+    "Sink and source currents depend on VDDIO.",
+    "The digital signals are not 5 V tolerant."
+   ]
+  },
+  {
+   "title": "4B/5B code table",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "code group",
+    "sym",
+    "receiver interpretation",
+    "transmitter interpretation"
+   ],
+   "rows": [
+    [
+     "11110",
+     "0",
+     "0000 DATA",
+     "0000 DATA"
+    ],
+    [
+     "01001",
+     "1",
+     "0001",
+     "0001"
+    ],
+    [
+     "10100",
+     "2",
+     "0010",
+     "0010"
+    ],
+    [
+     "10101",
+     "3",
+     "0011",
+     "0011"
+    ],
+    [
+     "01010",
+     "4",
+     "0100",
+     "0100"
+    ],
+    [
+     "01011",
+     "5",
+     "0101",
+     "0101"
+    ],
+    [
+     "01110",
+     "6",
+     "0110",
+     "0110"
+    ],
+    [
+     "01111",
+     "7",
+     "0111",
+     "0111"
+    ],
+    [
+     "10010",
+     "8",
+     "1000",
+     "1000"
+    ],
+    [
+     "10011",
+     "9",
+     "1001",
+     "1001"
+    ],
+    [
+     "10110",
+     "A",
+     "1010",
+     "1010"
+    ],
+    [
+     "10111",
+     "B",
+     "1011",
+     "1011"
+    ],
+    [
+     "11010",
+     "C",
+     "1100",
+     "1100"
+    ],
+    [
+     "11011",
+     "D",
+     "1101",
+     "1101"
+    ],
+    [
+     "11100",
+     "E",
+     "1110",
+     "1110"
+    ],
+    [
+     "11101",
+     "F",
+     "1111",
+     "1111"
+    ],
+    [
+     "11111",
+     "I",
+     "IDLE",
+     "sent after /T/R until TXEN"
+    ],
+    [
+     "11000",
+     "J",
+     "first nibble of SSD, read as 0101 after IDLE, otherwise RXER",
+     "sent on rising TXEN"
+    ],
+    [
+     "10001",
+     "K",
+     "second nibble of SSD, read as 0101 after J, otherwise RXER",
+     "sent on rising TXEN"
+    ],
+    [
+     "01101",
+     "T",
+     "first nibble of ESD; drops CRS if /R/ follows, otherwise raises RXER",
+     "sent on falling TXEN"
+    ],
+    [
+     "00111",
+     "R",
+     "second nibble of ESD; drops CRS after /T/, otherwise raises RXER",
+     "sent on falling TXEN"
+    ],
+    [
+     "00100",
+     "H",
+     "transmit error symbol",
+     "sent on rising TXER"
+    ],
+    [
+     "00110",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "11001",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "00000",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "00001",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "00010",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "00011",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "00101",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "01000",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "01100",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ],
+    [
+     "10000",
+     "V",
+     "INVALID, RXER if during RXDV",
+     "INVALID"
+    ]
+   ]
+  },
+  {
+   "title": "Interrupt management, primary interrupt system",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "mask",
+    "flag",
+    "interrupt source",
+    "source bit",
+    "source name",
+    "event to assert nINT",
+    "event to de-assert nINT"
+   ],
+   "rows": [
+    [
+     "30.7",
+     "29.7",
+     "ENERGYON",
+     "17.1",
+     "ENERGYON",
+     "Rising 17.1",
+     "Falling 17.1 or reading register 29"
+    ],
+    [
+     "30.6",
+     "29.6",
+     "Auto-Negotiation complete",
+     "1.5",
+     "Auto-Negotiate Complete",
+     "Rising 1.5",
+     "Falling 1.5 or reading register 29"
+    ],
+    [
+     "30.5",
+     "29.5",
+     "Remote Fault Detected",
+     "1.4",
+     "Remote Fault",
+     "Rising 1.4",
+     "Falling 1.4, or reading register 1 or reading register 29"
+    ],
+    [
+     "30.4",
+     "29.4",
+     "Link Down",
+     "1.2",
+     "Link Status",
+     "Falling 1.2",
+     "Reading register 1 or reading register 29"
+    ],
+    [
+     "30.3",
+     "29.3",
+     "Auto-Negotiation LP Acknowledge",
+     "5.14",
+     "Acknowledge",
+     "Rising 5.14",
+     "Falling 5.14 or read register 29"
+    ],
+    [
+     "30.2",
+     "29.2",
+     "Parallel Detection Fault",
+     "6.4",
+     "Parallel Detection Fault",
+     "Rising 6.4",
+     "Falling 6.4 or reading register 6, or reading register 29 or re-auto negotiate or link down"
+    ],
+    [
+     "30.1",
+     "29.1",
+     "Auto-Negotiation Page Received",
+     "6.1",
+     "Page Received",
+     "Rising 6.1",
+     "Falling of 6.1 or reading register 6, or reading register 29, re-auto negotiate, or link down"
+    ]
+   ],
+   "notes": [
+    "If the ENERGYON mask is set and nINT has already been released while ENERGYON is still high, unplugging the cable makes nINT assert for 256 ms about one second after ENERGYON falls. Clearing the ENERGYON mask inside its service routine avoids this.",
+    "ENERGYON starts at 1 when signal acquisition begins, so INT7 also reads 1 at power-up; with no signal on the line both clear within a few milliseconds."
+   ]
+  },
+  {
+   "title": "Interrupt management, alternative interrupt system",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "mask",
+    "flag",
+    "interrupt source",
+    "source bit",
+    "source name",
+    "event to assert nINT",
+    "condition to de-assert",
+    "bit to clear nINT"
+   ],
+   "rows": [
+    [
+     "30.7",
+     "29.7",
+     "ENERGYON",
+     "17.1",
+     "ENERGYON",
+     "Rising 17.1",
+     "17.1 low",
+     "29.7"
+    ],
+    [
+     "30.6",
+     "29.6",
+     "Auto-Negotiation complete",
+     "1.5",
+     "Auto-Negotiate Complete",
+     "Rising 1.5",
+     "1.5 low",
+     "29.6"
+    ],
+    [
+     "30.5",
+     "29.5",
+     "Remote Fault Detected",
+     "1.4",
+     "Remote Fault",
+     "Rising 1.4",
+     "1.4 low",
+     "29.5"
+    ],
+    [
+     "30.4",
+     "29.4",
+     "Link Down",
+     "1.2",
+     "Link Status",
+     "Falling 1.2",
+     "1.2 high",
+     "29.4"
+    ],
+    [
+     "30.3",
+     "29.3",
+     "Auto-Negotiation LP Acknowledge",
+     "5.14",
+     "Acknowledge",
+     "Rising 5.14",
+     "5.14 low",
+     "29.3"
+    ],
+    [
+     "30.2",
+     "29.2",
+     "Parallel Detection Fault",
+     "6.4",
+     "Parallel Detection Fault",
+     "Rising 6.4",
+     "6.4 low",
+     "29.2"
+    ],
+    [
+     "30.1",
+     "29.1",
+     "Auto-Negotiation Page Received",
+     "6.1",
+     "Page Received",
+     "Rising 6.1",
+     "6.1 low",
+     "29.1"
+    ]
+   ]
+  },
+  {
+   "title": "MODE[2:0] strap settings",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "MODE[2:0]",
+    "mode",
+    "register 0 bits [13,12,10,8]",
+    "register 4 bits [8,7,6,5]"
+   ],
+   "rows": [
+    [
+     "000",
+     "10BASE-T half duplex, auto-negotiation off",
+     "0000",
+     "N/A"
+    ],
+    [
+     "001",
+     "10BASE-T full duplex, auto-negotiation off",
+     "0001",
+     "N/A"
+    ],
+    [
+     "010",
+     "100BASE-TX half duplex, auto-negotiation off; CRS active on transmit and receive",
+     "1000",
+     "N/A"
+    ],
+    [
+     "011",
+     "100BASE-TX full duplex, auto-negotiation off; CRS active on receive",
+     "1001",
+     "N/A"
+    ],
+    [
+     "100",
+     "auto-negotiation on, advertising 100BASE-TX half duplex; CRS active on transmit and receive",
+     "1100",
+     "0100"
+    ],
+    [
+     "101",
+     "repeater mode: auto-negotiation on, advertising 100BASE-TX half duplex; CRS active on receive",
+     "1100",
+     "0100"
+    ],
+    [
+     "110",
+     "power-down mode: the part wakes powered down and cannot be used until register 18 bits 7:5 are set to another mode and a soft reset is issued",
+     "N/A",
+     "N/A"
+    ],
+    [
+     "111",
+     "all capable, auto-negotiation on",
+     "X10X",
+     "1111"
+    ]
+   ],
+   "notes": [
+    "MODE0 is pin 8 (RXD0/MODE0), MODE1 pin 7 (RXD1/MODE1), MODE2 pin 11 (CRS_DV/MODE2). All three have internal pull-ups."
+   ]
+  },
+  {
+   "title": "nINTSEL configuration",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "strap value",
+    "mode",
+    "REF_CLK"
+   ],
+   "rows": [
+    [
+     "nINTSEL = 0",
+     "REF_CLK Out Mode",
+     "nINT/REFCLKO outputs REF_CLK."
+    ],
+    [
+     "nINTSEL = 1",
+     "REF_CLK In Mode",
+     "nINT/REFCLKO is the active-low interrupt; REF_CLK comes from outside on XTAL1/CLKIN."
+    ]
+   ]
+  },
+  {
+   "title": "Register bit types",
+   "page": 47,
+   "conditions": "",
+   "columns": [
+    "notation",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "R",
+     "readable"
+    ],
+    [
+     "W",
+     "writable"
+    ],
+    [
+     "RO",
+     "read only; writes do nothing"
+    ],
+    [
+     "WO",
+     "write only; a read returns undefined data"
+    ],
+    [
+     "WC",
+     "write 1 to clear; writing 0 does nothing"
+    ],
+    [
+     "WAC",
+     "any write clears it"
+    ],
+    [
+     "RC",
+     "cleared by a read; writes do nothing"
+    ],
+    [
+     "LL",
+     "latch low, cleared when read"
+    ],
+    [
+     "LH",
+     "latch high, cleared when read"
+    ],
+    [
+     "SC",
+     "clears itself after being set; writing 0 does nothing; readable"
+    ],
+    [
+     "SS",
+     "sets itself after being cleared; writing 1 does nothing; readable"
+    ],
+    [
+     "RO/LH",
+     "read only, latch high: stays 1 until read, then follows the condition"
+    ],
+    [
+     "NASR",
+     "not changed by a software reset"
+    ],
+    [
+     "RESERVED",
+     "write zeros; read value not guaranteed"
+    ]
+   ]
+  },
+  {
+   "title": "SMI register map",
+   "page": 48,
+   "conditions": "",
+   "columns": [
+    "register index (decimal)",
+    "register name",
+    "group"
+   ],
+   "rows": [
+    [
+     "0",
+     "Basic Control Register",
+     "Basic"
+    ],
+    [
+     "1",
+     "Basic Status Register",
+     "Basic"
+    ],
+    [
+     "2",
+     "PHY Identifier 1",
+     "Extended"
+    ],
+    [
+     "3",
+     "PHY Identifier 2",
+     "Extended"
+    ],
+    [
+     "4",
+     "Auto-Negotiation Advertisement Register",
+     "Extended"
+    ],
+    [
+     "5",
+     "Auto-Negotiation Link Partner Ability Register",
+     "Extended"
+    ],
+    [
+     "6",
+     "Auto-Negotiation Expansion Register",
+     "Extended"
+    ],
+    [
+     "17",
+     "Mode Control/Status Register",
+     "Vendor-specific"
+    ],
+    [
+     "18",
+     "Special Modes",
+     "Vendor-specific"
+    ],
+    [
+     "26",
+     "Symbol Error Counter Register",
+     "Vendor-specific"
+    ],
+    [
+     "27",
+     "Control / Status Indication Register",
+     "Vendor-specific"
+    ],
+    [
+     "29",
+     "Interrupt Source Register",
+     "Vendor-specific"
+    ],
+    [
+     "30",
+     "Interrupt Mask Register",
+     "Vendor-specific"
+    ],
+    [
+     "31",
+     "PHY Special Control/Status Register",
+     "Vendor-specific"
+    ]
+   ],
+   "notes": [
+    "Registers 7 to 15 and any other unlisted index read FFFFh."
+   ]
+  },
+  {
+   "title": "Register 0: Basic Control Register",
+   "page": 49,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15",
+     "Soft Reset",
+     "1 = software reset; clears itself. Set no other bit in the same write. The mode then comes from the register bits, not the MODE pins.",
+     "R/W SC",
+     "0b"
+    ],
+    [
+     "14",
+     "Loopback",
+     "0 = normal; 1 = loopback",
+     "R/W",
+     "0b"
+    ],
+    [
+     "13",
+     "Speed Select",
+     "0 = 10 Mbit/s; 1 = 100 Mbit/s. Ignored while auto-negotiation is on (0.12 = 1).",
+     "R/W",
+     "MODE straps"
+    ],
+    [
+     "12",
+     "Auto-Negotiation Enable",
+     "0 = off; 1 = on (overrides 0.13 and 0.8)",
+     "R/W",
+     "MODE straps"
+    ],
+    [
+     "11",
+     "Power Down",
+     "0 = normal; 1 = general power-down. Clear Auto-Negotiation Enable first.",
+     "R/W",
+     "0b"
+    ],
+    [
+     "10",
+     "Isolate",
+     "0 = normal; 1 = PHY electrically isolated from the RMII",
+     "R/W",
+     "0b"
+    ],
+    [
+     "9",
+     "Restart Auto-Negotiate",
+     "0 = normal; 1 = restart auto-negotiation; clears itself",
+     "R/W SC",
+     "0b"
+    ],
+    [
+     "8",
+     "Duplex Mode",
+     "0 = half; 1 = full. Ignored while auto-negotiation is on.",
+     "R/W",
+     "MODE straps"
+    ],
+    [
+     "7:0",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ]
+   ]
+  },
+  {
+   "title": "Register 1: Basic Status Register",
+   "page": 50,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15",
+     "100BASE-T4",
+     "0 = not T4 able",
+     "RO",
+     "0b"
+    ],
+    [
+     "14",
+     "100BASE-TX Full Duplex",
+     "1 = able",
+     "RO",
+     "1b"
+    ],
+    [
+     "13",
+     "100BASE-TX Half Duplex",
+     "1 = able",
+     "RO",
+     "1b"
+    ],
+    [
+     "12",
+     "10BASE-T Full Duplex",
+     "1 = able",
+     "RO",
+     "1b"
+    ],
+    [
+     "11",
+     "10BASE-T Half Duplex",
+     "1 = able",
+     "RO",
+     "1b"
+    ],
+    [
+     "10",
+     "100BASE-T2 Full Duplex",
+     "0 = not able",
+     "RO",
+     "0b"
+    ],
+    [
+     "9",
+     "100BASE-T2 Half Duplex",
+     "0 = not able",
+     "RO",
+     "0b"
+    ],
+    [
+     "8",
+     "Extended Status",
+     "0 = no extended status in register 15",
+     "RO",
+     "0b"
+    ],
+    [
+     "7:6",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "5",
+     "Auto-Negotiate Complete",
+     "1 = auto-negotiation finished",
+     "RO",
+     "0b"
+    ],
+    [
+     "4",
+     "Remote Fault",
+     "1 = remote fault seen",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "3",
+     "Auto-Negotiate Ability",
+     "1 = can auto-negotiate",
+     "RO",
+     "1b"
+    ],
+    [
+     "2",
+     "Link Status",
+     "0 = link down; 1 = link up",
+     "RO/LL",
+     "0b"
+    ],
+    [
+     "1",
+     "Jabber Detect",
+     "1 = jabber seen",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "0",
+     "Extended Capabilities",
+     "1 = extended capability registers present",
+     "RO",
+     "1b"
+    ]
+   ]
+  },
+  {
+   "title": "Register 2: PHY Identifier 1",
+   "page": 51,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:0",
+     "PHY ID Number",
+     "bits 3 to 18 of the OUI",
+     "R/W",
+     "0007h"
+    ]
+   ]
+  },
+  {
+   "title": "Register 3: PHY Identifier 2",
+   "page": 52,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:10",
+     "PHY ID Number",
+     "bits 19 to 24 of the OUI",
+     "R/W",
+     "110000b"
+    ],
+    [
+     "9:4",
+     "Model Number",
+     "six-bit model number",
+     "R/W",
+     "001111b"
+    ],
+    [
+     "3:0",
+     "Revision Number",
+     "four-bit revision number; depends on silicon revision",
+     "R/W",
+     "Note 4.2"
+    ]
+   ]
+  },
+  {
+   "title": "Register 4: Auto-Negotiation Advertisement Register",
+   "page": 53,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:14",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "13",
+     "Remote Fault",
+     "1 = remote fault detected",
+     "R/W",
+     "0b"
+    ],
+    [
+     "12",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "11:10",
+     "Pause Operation",
+     "00 = no PAUSE; 01 = symmetric PAUSE; 10 = asymmetric PAUSE toward link partner; 11 = both symmetric and asymmetric toward local device. With both set, at most one ends up configured after negotiation.",
+     "R/W",
+     "00b"
+    ],
+    [
+     "9",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "8",
+     "100BASE-TX Full Duplex",
+     "1 = advertised",
+     "R/W",
+     "MODE straps"
+    ],
+    [
+     "7",
+     "100BASE-TX",
+     "1 = advertised",
+     "R/W",
+     "1b"
+    ],
+    [
+     "6",
+     "10BASE-T Full Duplex",
+     "1 = advertised",
+     "R/W",
+     "MODE straps"
+    ],
+    [
+     "5",
+     "10BASE-T",
+     "1 = advertised",
+     "R/W",
+     "MODE straps"
+    ],
+    [
+     "4:0",
+     "Selector Field",
+     "00001 = IEEE 802.3",
+     "R/W",
+     "00001b"
+    ]
+   ]
+  },
+  {
+   "title": "Register 5: Auto-Negotiation Link Partner Ability Register",
+   "page": 54,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15",
+     "Next Page",
+     "1 = partner next page capable (not supported by this part)",
+     "RO",
+     "0b"
+    ],
+    [
+     "14",
+     "Acknowledge",
+     "1 = link code word received from partner",
+     "RO",
+     "0b"
+    ],
+    [
+     "13",
+     "Remote Fault",
+     "1 = remote fault",
+     "RO",
+     "0b"
+    ],
+    [
+     "12:11",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "10",
+     "Pause Operation",
+     "1 = partner supports PAUSE",
+     "RO",
+     "0b"
+    ],
+    [
+     "9",
+     "100BASE-T4",
+     "1 = T4 able (not supported by this part)",
+     "RO",
+     "0b"
+    ],
+    [
+     "8",
+     "100BASE-TX Full Duplex",
+     "1 = partner able",
+     "RO",
+     "0b"
+    ],
+    [
+     "7",
+     "100BASE-TX",
+     "1 = partner able",
+     "RO",
+     "0b"
+    ],
+    [
+     "6",
+     "10BASE-T Full Duplex",
+     "1 = partner able",
+     "RO",
+     "0b"
+    ],
+    [
+     "5",
+     "10BASE-T",
+     "1 = partner able",
+     "RO",
+     "0b"
+    ],
+    [
+     "4:0",
+     "Selector Field",
+     "00001 = IEEE 802.3",
+     "RO",
+     "00001b"
+    ]
+   ]
+  },
+  {
+   "title": "Register 6: Auto-Negotiation Expansion Register",
+   "page": 55,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:5",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "4",
+     "Parallel Detection Fault",
+     "1 = fault found by parallel detection",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "3",
+     "Link Partner Next Page Able",
+     "1 = partner has next page",
+     "RO",
+     "0b"
+    ],
+    [
+     "2",
+     "Next Page Able",
+     "1 = local device has next page ability",
+     "RO",
+     "0b"
+    ],
+    [
+     "1",
+     "Page Received",
+     "1 = new page received",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "0",
+     "Link Partner Auto-Negotiation Able",
+     "1 = partner can auto-negotiate",
+     "RO",
+     "0b"
+    ]
+   ]
+  },
+  {
+   "title": "Register 17: Mode Control/Status Register",
+   "page": 56,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:14",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "13",
+     "EDPWRDOWN",
+     "1 = energy detect power-down on",
+     "R/W",
+     "0b"
+    ],
+    [
+     "12:10",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "9",
+     "FARLOOPBACK",
+     "1 = far loopback on: every received packet is sent straight back (100BASE-TX only); works with Isolate (0.10) set",
+     "R/W",
+     "0b"
+    ],
+    [
+     "8:7",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "6",
+     "ALTINT",
+     "0 = primary interrupt system; 1 = alternate interrupt system",
+     "R/W",
+     "0b"
+    ],
+    [
+     "5:2",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "1",
+     "ENERGYON",
+     "1 = energy on the line; falls to 0 after 256 ms with no valid energy. Set to 1 by hardware reset, unchanged by software reset.",
+     "RO",
+     "1b"
+    ],
+    [
+     "0",
+     "RESERVED",
+     "",
+     "R/W",
+     "0b"
+    ]
+   ]
+  },
+  {
+   "title": "Register 18: Special Modes Register",
+   "page": 57,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "14",
+     "RESERVED",
+     "write 1, ignore on read",
+     "R/W NASR",
+     "1b"
+    ],
+    [
+     "13:8",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "7:5",
+     "MODE",
+     "operating mode, coded as the MODE[2:0] straps",
+     "R/W NASR",
+     "MODE straps"
+    ],
+    [
+     "4:0",
+     "PHYAD",
+     "PHY address, used as SMI address and as scrambler seed",
+     "R/W NASR",
+     "PHYAD0 strap"
+    ]
+   ]
+  },
+  {
+   "title": "Register 26: Symbol Error Counter Register",
+   "page": 58,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:0",
+     "SYM_ERR_CNT",
+     "counts packets holding an invalid code symbol (IDLE included) in 100BASE-TX, once per packet; rolls over to 0 after 65,536 (2^16). Cleared by reset, not by reading; does not count in 10BASE-T.",
+     "RO",
+     "0000h"
+    ]
+   ]
+  },
+  {
+   "title": "Register 27: Special Control/Status Indications Register",
+   "page": 59,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15",
+     "AMDIXCTRL",
+     "0 = Auto-MDIX on; 1 = Auto-MDIX off, channel set by 27.13",
+     "R/W",
+     "0b"
+    ],
+    [
+     "14",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "13",
+     "CH_SELECT",
+     "0 = MDI (TX pair transmits, RX pair receives); 1 = MDIX (swapped)",
+     "R/W",
+     "0b"
+    ],
+    [
+     "12",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "11",
+     "SQEOFF",
+     "0 = SQE (heartbeat) test on; 1 = off",
+     "R/W NASR",
+     "0b"
+    ],
+    [
+     "10:5",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "4",
+     "XPOL",
+     "10BASE-T polarity: 0 = normal; 1 = reversed",
+     "RO",
+     "0b"
+    ],
+    [
+     "3:0",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ]
+   ]
+  },
+  {
+   "title": "Register 29: Interrupt Source Flag Register",
+   "page": 60,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:8",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "7",
+     "INT7",
+     "1 = ENERGYON",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "6",
+     "INT6",
+     "1 = auto-negotiation complete",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "5",
+     "INT5",
+     "1 = remote fault detected",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "4",
+     "INT4",
+     "1 = link down (link status negated)",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "3",
+     "INT3",
+     "1 = auto-negotiation LP acknowledge",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "2",
+     "INT2",
+     "1 = parallel detection fault",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "1",
+     "INT1",
+     "1 = auto-negotiation page received",
+     "RO/LH",
+     "0b"
+    ],
+    [
+     "0",
+     "RESERVED",
+     "",
+     "RO",
+     "0b"
+    ]
+   ]
+  },
+  {
+   "title": "Register 30: Interrupt Mask Register",
+   "page": 61,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:8",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "7:1",
+     "Mask Bits",
+     "per source, as in register 29: 0 = masked; 1 = enabled",
+     "R/W",
+     "0000000b"
+    ],
+    [
+     "0",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ]
+   ]
+  },
+  {
+   "title": "Register 31: PHY Special Control/Status Register",
+   "page": 62,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "field",
+    "description",
+    "type",
+    "default"
+   ],
+   "rows": [
+    [
+     "15:13",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ],
+    [
+     "12",
+     "Autodone",
+     "0 = auto-negotiation not done, off or inactive; 1 = done",
+     "RO",
+     "0b"
+    ],
+    [
+     "11:5",
+     "RESERVED",
+     "write 0000010b, ignore on read",
+     "R/W",
+     "0000010b"
+    ],
+    [
+     "4:2",
+     "Speed Indication",
+     "HCDSPEED: 001 = 10BASE-T half duplex; 101 = 10BASE-T full duplex; 010 = 100BASE-TX half duplex; 110 = 100BASE-TX full duplex",
+     "RO",
+     "XXX"
+    ],
+    [
+     "1:0",
+     "RESERVED",
+     "",
+     "RO",
+     "-"
+    ]
+   ]
+  },
+  {
+   "title": "Reel dimensions for 12 mm carrier tape",
+   "page": 77,
+   "conditions": "",
+   "columns": [
+    "part",
+    "feature",
+    "sym",
+    "size (mm)"
+   ],
+   "rows": [
+    [
+     "Flange",
+     "Diameter",
+     "D",
+     "330 (+0.25/-4.00)"
+    ],
+    [
+     "Flange",
+     "Space between flanges",
+     "W1",
+     "12.4 (+2.0/-0.0)"
+    ],
+    [
+     "Flange",
+     "Overall width",
+     "W2",
+     "18.4 (MAX)"
+    ],
+    [
+     "Flange",
+     "Min space W1 at flange edge",
+     "W3",
+     "12.3 (MIN)"
+    ],
+    [
+     "Hub",
+     "Outer diameter",
+     "D1",
+     "177.8 REF"
+    ],
+    [
+     "Hub",
+     "Key slit diameter",
+     "D2",
+     "20.2 (MIN)"
+    ],
+    [
+     "Hub",
+     "Arbor hole diameter",
+     "D3",
+     "13.0 (+0.5/-0.2)"
+    ],
+    [
+     "Hub",
+     "Key slit width",
+     "B",
+     "2.0 (±0.5)"
+    ]
+   ],
+   "notes": [
+    "W1 and W2 are measured at the hub.",
+    "A standard reel holds 4000 parts."
+   ]
+  },
+  {
+   "title": "Tape sections",
+   "page": 77,
+   "conditions": "",
+   "columns": [
+    "section",
+    "sym",
+    "size"
+   ],
+   "rows": [
+    [
+     "Trailer",
+     "T",
+     "20 pockets (MIN)"
+    ],
+    [
+     "Component",
+     "C",
+     "4000 components"
+    ],
+    [
+     "Leader",
+     "L",
+     "50 pockets (MIN)"
+    ]
+   ]
+  }
+ ],
+ "packages": [
+  {
+   "name": "24-QFN 4 x 4 mm",
+   "page": 75,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nominal",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "Overall package height",
+     "0.70",
+     "0.85",
+     "1.00"
+    ],
+    [
+     "A1",
+     "Standoff",
+     "0",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "A2",
+     "Mold cap thickness",
+     "-",
+     "-",
+     "0.90"
+    ],
+    [
+     "D/E",
+     "X/Y body size",
+     "3.90",
+     "4.00",
+     "4.10"
+    ],
+    [
+     "D1/E1",
+     "X/Y mold cap size",
+     "3.55",
+     "3.75",
+     "3.95"
+    ],
+    [
+     "D2/E2",
+     "X/Y exposed pad size",
+     "2.40",
+     "2.50",
+     "2.60"
+    ],
+    [
+     "L",
+     "Terminal length",
+     "0.30",
+     "0.40",
+     "0.50"
+    ],
+    [
+     "b",
+     "Terminal width",
+     "0.18",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "k",
+     "Terminal to exposed pad clearance",
+     "0.25",
+     "-",
+     "-"
+    ],
+    [
+     "e",
+     "Terminal pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ]
+   ],
+   "notes": [
+    "Dimension b is taken on the plated terminal, between 0.15 mm and 0.30 mm back from its tip.",
+    "The pin 1 mark may take any form but stays inside the corner zone of D1/2 x E1/2 (top) or D2/2 x E2/2 (bottom).",
+    "Corner chamfer 4X 45° x 0.6 max, optional. Position tolerances: terminals 0.10 to datums C, A, B and 0.05 to C; exposed pad 0.10 to C, A, B; top flatness 0.10 to C."
+   ]
+  },
+  {
+   "name": "24-QFN 4 x 4 mm land pattern",
+   "page": 76,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "GD/GE",
+     "span between inner ends of opposite pad rows",
+     "3.05",
+     "-",
+     "3.10"
+    ],
+    [
+     "D2'/E2'",
+     "centre pad size",
+     "-",
+     "2.50",
+     "2.50"
+    ],
+    [
+     "Pad: X",
+     "terminal pad width",
+     "-",
+     "0.28",
+     "0.28"
+    ],
+    [
+     "Pad: Y",
+     "terminal pad length",
+     "-",
+     "0.69",
+     "0.69"
+    ],
+    [
+     "e",
+     "pad pitch",
+     "",
+     "0.50",
+     ""
+    ]
+   ],
+   "notes": [
+    "The pattern may be changed to suit the user's process.",
+    "The soldered copper of the centre pad may be one solid area or split into segments, with at least 0.2 mm between segments.",
+    "Thermal and electrical performance is best with an array of solid vias in the centre land."
+   ]
+  },
+  {
+   "name": "Carrier tape, QFN 4 x 4 mm body",
+   "page": 76,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "Tape width",
+     "12.0±0.3"
+    ],
+    [
+     "Cover tape width",
+     "9.2±0.1"
+    ],
+    [
+     "Pocket pitch",
+     "8.0"
+    ],
+    [
+     "Sprocket hole pitch",
+     "4.0"
+    ],
+    [
+     "Sprocket hole diameter",
+     "Ø1.5+0.1/-0.0"
+    ],
+    [
+     "Sprocket hole centre to tape edge",
+     "1.75"
+    ],
+    [
+     "Sprocket hole row to pocket centre line",
+     "5.5±0.05"
+    ],
+    [
+     "Pocket centre to nearest sprocket hole, along tape",
+     "2.0±0.05"
+    ],
+    [
+     "Pocket size",
+     "4.35x4.35 +0.1/-0.0"
+    ],
+    [
+     "Pocket depth",
+     "1.10"
+    ],
+    [
+     "Pocket hole diameter",
+     "Ø1.5 MIN"
+    ],
+    [
+     "Carrier tape thickness",
+     "0.30±0.05"
+    ]
+   ],
+   "notes": [
+    "Pin 1 sits at the corner nearest the sprocket holes, on the side away from the feed direction."
+   ]
+  }
+ ],
+ "operation": [
+  {
+   "topic": "What it does",
+   "page": 7,
+   "text": "One 10/100 Ethernet port between an RMII MAC and the line magnetics. It carries IEEE 802.3-2005 compliant registers plus vendor registers, yet none has to be written: the straps choose the start-up setup and registers refine it. Its digital pins tolerate 3.6 V. A single 3.3 V supply is enough when the internal 3.3 V to 1.2 V linear regulator is used; that regulator can be turned off so an efficient outside regulator powers the core instead."
+  },
+  {
+   "topic": "RMII bus",
+   "page": 27,
+   "text": "Two transmit bits (TXD[1:0]) with TXEN, two receive bits (RXD[1:0]) with CRS_DV and an optional RXER, all timed by one 50 MHz REF_CLK, at 10 or 100 Mbit/s, with LVCMOS levels. MDIO/MDC management is the same as on MII. The transmit path uses REF_CLK directly with no buffering; the receive path recovers the line clock and an elasticity buffer absorbs the difference to REF_CLK. The PHY latches TXD on the rising REF_CLK edge and launches RXD on the falling edge so the MAC can sample on the rising one. TXD[1:0] must be 00 while TXEN is low; other values are reserved and ignored."
+  },
+  {
+   "topic": "CRS_DV",
+   "page": 27,
+   "text": "CRS_DV rises asynchronously as soon as carrier is found: squelch passed in 10BASE-T, or two non-adjacent zeros within 10 bits in 100BASE-X. RXD[1:0] reads 00 until decoding is valid. When carrier ends while bits are still queued, CRS_DV toggles on nibble boundaries, 25 MHz at 100 Mbit/s and 2.5 MHz at 10 Mbit/s, so the MAC can separate carrier from data valid. On a false carrier it stays high for as long as the activity lasts. In full duplex or repeater mode carrier sense follows receive activity only; otherwise it follows transmit or receive."
+  },
+  {
+   "topic": "Clocking: REF_CLK In mode",
+   "page": 34,
+   "text": "With nINTSEL high or open, an outside 50 MHz source drives XTAL1/CLKIN and the MAC together, XTAL2 is left open, and pin 14 is the nINT interrupt. This is the standard RMII arrangement."
+  },
+  {
+   "topic": "Clocking: REF_CLK Out mode",
+   "page": 34,
+   "text": "With nINTSEL pulled low the part builds the 50 MHz REF_CLK from a 25 MHz fundamental crystal (cheaper than a 50 MHz third-overtone crystal) or from a 25 MHz clock on XTAL1/CLKIN, and sends it to the MAC on REFCLKO. The input must then be 25 MHz, not 50 MHz. The interrupt output is lost because REFCLKO shares its pin. The MAC has to accept an outside REF_CLK. This mode lies outside the RMII specification and its timing does not comply with it, so the MAC-to-PHY timing has to be analysed for each design."
+  },
+  {
+   "topic": "Configuration straps",
+   "page": 31,
+   "text": "PHYAD0, MODE[2:0], REGOFF and nINTSEL share pins with outputs and are latched at power-on reset and on nRST. Each has an internal pull so it reads a defined level when open; where the pin also drives a load, an outside resistor must back up or override the internal one so the level is right before latching, within the tcss/tcsh times. Pull-ups go to VDDIO, except REGOFF and nINTSEL, which go to VDD2A (as do LED pull-ups). A soft reset leaves the straps unused and keeps the register values."
+  },
+  {
+   "topic": "PHY address",
+   "page": 31,
+   "text": "PHYAD0 (on RXER) sets the SMI address to 0 or 1 when a hardware reset finishes; it defaults to 0. Higher addresses are written into the PHYAD bits of register 18 once the PHY answers at its strapped address. The address also seeds the scrambler, so several PHYs on one board scramble differently and spread their emissions."
+  },
+  {
+   "topic": "Start-up mode",
+   "page": 31,
+   "text": "MODE[2:0] loads the speed, duplex and auto-negotiation bits of registers 0 and 4 when nRST is released; the register values then govern. Software may rewrite those registers at any time."
+  },
+  {
+   "topic": "REGOFF: core regulator",
+   "page": 32,
+   "text": "With REGOFF open or low (internal pull-down) the regulator starts from VDD2A once it samples REGOFF below VIL, and nothing has to feed VDDCR. With a pull-up from REGOFF to VDD2A the part samples it above VIH after VDDIO and VDD2A are in range, keeps the regulator off, and VDDCR must come from outside. In that case VDDIO has to reach 80 % of its level before VDDCR is applied: 1.44 V for 1.8 V, 2.0 V for 2.5 V, 2.64 V for 3.3 V. An outside switching regulator lowers system power against the internal linear one."
+  },
+  {
+   "topic": "LEDs and polarity",
+   "page": 37,
+   "text": "LED1 lights on a valid link and blinks while CRS is active; LED2 lights at 100 Mbit/s and goes dark at 10 Mbit/s or during isolation. Each LED output takes the polarity opposite to its strap: an outside pull-up to VDD2A on LED1/REGOFF (regulator off) makes LED1 active low, the internal pull-down makes it active high; LED2/nINTSEL left high (nINT mode) is active low, and an outside pull-down (REFCLKO mode) makes it active high. LED pull-ups must go to VDD2A, never VDDIO. Typical values are about 270 Ω in series with the LED and 10 kΩ for a strap resistor."
+  },
+  {
+   "topic": "Variable-voltage I/O",
+   "page": 38,
+   "text": "The digital pins run from a VDDIO of 1.62 V to 3.6 V. VDDIO must hold within ±10 %, and changing it once power-on reset is over may upset operation. No input may be pulled high while the part is still unpowered."
+  },
+  {
+   "topic": "Power sequencing and reset",
+   "page": 69,
+   "text": "The 3.3 V supplies, VDDIO and the magnetics supply may come up in any order within 50 ms and go down in any order within 500 ms. A hardware reset is required after power-up: nRST may be asserted any time but must stay low at least 100 µs and not be released until 25 ms after all supplies pass 80 %. The clock on XTAL1/CLKIN must be running during a hardware reset. Outputs float within 50 ns of nRST going low and drive again 2 ns to 800 ns after it rises."
+  },
+  {
+   "topic": "Resets",
+   "page": 39,
+   "text": "Setting bit 0.15 resets every register bit except those marked NASR; the bit clears itself and the reset finishes within 0.5 s, as IEEE 802.3u clause 22 requires. The power-down modes do not reset registers. For the first 16 µs after any reset the RMII runs at 2.5 MHz, then moves to 25 MHz if auto-negotiation is on."
+  },
+  {
+   "topic": "Power-down modes",
+   "page": 38,
+   "text": "General power-down (bit 0.11) stops everything except the management interface until the bit is cleared, after which the PHY powers up and resets itself. Energy detect power-down (bit 17.13) keeps only management, squelch and the ENERGYON logic alive while the line is quiet; when link pulses or packets arrive ENERGYON goes high, the PHY wakes into its previous state and can raise nINT. The first one or two packets may be lost on wake-up."
+  },
+  {
+   "topic": "Isolate",
+   "page": 39,
+   "text": "Bit 0.10 disconnects the data path from the RMII: TXD, TXEN and TXER are ignored but management still works, so several PHYs can share one RMII bus. The part starts not isolated."
+  },
+  {
+   "topic": "Auto-negotiation",
+   "page": 23,
+   "text": "IEEE 802.3 clause 28 negotiation with Fast Link Pulse bursts of up to 33 pulses (17 clock, 16 data). It starts on hardware, software or power-down reset, on link loss, or on setting bit 0.9. Priority order: 100 full, 100 half, 10 full, 10 half. Advertised abilities come from the MODE straps and can be changed in register 4 bits 8 to 5, which take effect only after a restart. A restart from software drops the link for the break_link_timer, about 1200 ms. Next Page is not supported. With auto-negotiation off, bits 0.13 and 0.8 force speed and duplex."
+  },
+  {
+   "topic": "Parallel detection",
+   "page": 24,
+   "text": "Against a partner that does not negotiate, the PHY picks the speed from MLT-3 symbols or 10 Mbit/s link pulses and assumes half duplex; bit 6.0 then reads 0 and register 5 shows the partner's speed. A fault in this process sets bit 6.4."
+  },
+  {
+   "topic": "HP Auto-MDIX",
+   "page": 26,
+   "text": "The PHY senses which pair the partner transmits on and swaps TXP/TXN with RXP/RXN, so straight and crossover cables both work, on CAT-3 for 10BASE-T or CAT-5 for 100BASE-TX. Because the pairs swap, the magnetics and termination of both pairs have to be laid out alike. Bit 27.15 turns the feature off, and 27.13 then picks MDI or MDIX by hand."
+  },
+  {
+   "topic": "100BASE-TX transmit",
+   "page": 17,
+   "text": "Dibits from the RMII are gathered into nibbles, coded 4B/5B, scrambled (seeded from PHYAD) and serialised, turned into a 125 MHz NRZI stream and then into three-level MLT-3, which the driver puts on TXP/TXN through a 1:1 transformer into the 100 Ω cable. The 10 and 100 Mbit/s signals share the same magnetics. Termination and impedance matching are outside parts. A PLL locked to the reference makes the 125 MHz clock."
+  },
+  {
+   "topic": "100BASE-TX receive",
+   "page": 20,
+   "text": "Signal from a 1:1 transformer is sampled at 125 Msample/s by a 6-bit (64-level) ADC whose gain the DSP adjusts. The equalizer handles good CAT-5 from 1 m to 150 m, baseline wander is corrected (the FDDI TP-PMD killer packet is received without errors) and a multi-phase 125 MHz clock picks the best sampling point. The descrambler locks on IDLE symbols and must see IDLE within a 4000-byte (40 µs) window, which allows a 1514-byte frame; otherwise it resynchronises. /J/K/ starts a frame and becomes 0101 0101 of the preamble; /T/R/ or two IDLEs end it. A bad code group inside a frame raises RXER with arbitrary data; a bad start delimiter raises RXER with 1110 on the data lines."
+  },
+  {
+   "topic": "10BASE-T",
+   "page": 21,
+   "text": "Nibbles are Manchester coded with a 20 MHz clock from the 10M PLL and sent through the magnetics; with no data, normal link pulses keep the link. In half duplex the transmitted data is looped onto the receive path for older MACs, and SQE (heartbeat) is supported. The receiver filters, then a squelch rejects differential signals below 300 mV and accepts them above 585 mV. Reversed polarity on the pair is found and corrected and shown in bit 27.4. Jabber (TXEN held too long) stops transmission within 45 ms and resets when TXEN falls; bit 1.1 reports it."
+  },
+  {
+   "topic": "Link integrity",
+   "page": 40,
+   "text": "Link status follows the IEEE 802.3u link monitor and drives bit 1.2 and LED1. Once the DSP reports a valid MLT-3 signal the logic waits at least 330 µs before Link-Ready, then goes Link-Up when auto-negotiation allows (at once if it is off). Losing the signal drops the link at once. In 10BASE-T the link comes from the 10BASE-T receiver."
+  },
+  {
+   "topic": "Loopback",
+   "page": 40,
+   "text": "Near-end loopback (bit 0.14) sends transmit data back to the receive pins through the PCS and PMA into the PMD, with the line drivers off whatever TXEN does. Far loopback (bit 17.9) returns what the link partner sends back to it over the MDI while the MAC side is isolated. Connector loopback works at 10 and 100 Mbit/s with an RJ45 plug that ties pin 1 to 3 and pin 2 to 6."
+  },
+  {
+   "topic": "SMI management",
+   "page": 28,
+   "text": "Registers 0 to 6 (IEEE clause 22) and vendor registers 16 to 31 are reachable; others read FFFFh. MDC comes from the management controller and has no upper limit on period; edges must be at least 160 ns apart and a full cycle at least 400 ns, slow enough for a microcontroller port. MDIO is sampled on the rising MDC edge. A frame is 32 ones of preamble, start 01, opcode 10 for read or 01 for write, a 5-bit PHY address, a 5-bit register address, a turnaround and 16 data bits, most significant first."
+  },
+  {
+   "topic": "Interrupts",
+   "page": 29,
+   "text": "nINT (open drain, active low, needs a pull-up to VDDIO) asserts for each source enabled in register 30. In the default primary mode it releases when the source condition ends or the flag register 29 is read. In the alternate mode (bit 17.6) it releases only when the mask bit is cleared, or when the source has ended and a 1 is written to the flag bit. The interrupt is not available in REF_CLK Out mode."
+  },
+  {
+   "topic": "Bias resistor and decoupling",
+   "page": 14,
+   "text": "RBIAS takes a 12.1 kΩ 1 % resistor to ground. VDDCR takes 1 µF and 470 pF in parallel to ground. The exposed pad is the ground and needs a via array into the ground plane."
+  },
+  {
+   "topic": "Twisted-pair interface",
+   "page": 45,
+   "text": "Each of TXP, TXN, RXP, RXN has a 49.9 Ω resistor to the supply that also feeds the chip-side centre taps of the magnetics, which are bypassed to ground. On the cable side each centre tap goes through 75 Ω to a common node returned to chassis ground by 1000 pF rated 3 kV. With one 3.3 V supply the termination rail is the 3.3 V rail through a ferrite bead, and VDD1A and VDD2A are taken after the bead. With two supplies the analog pins stay on 3.3 V while the terminations and centre taps run from a separate 2.5 V to 3.3 V rail."
+  }
+ ],
+ "circuits": [
+  {
+   "id": "power-internal-regulator",
+   "title": "Power supply, 1.2 V from the internal regulator",
+   "page": 43,
+   "description": "Supply hookup with the core regulator running. One 3.3 V supply feeds both analog pins, each with its own bypass capacitor; VDD2A also powers the regulator, whose output on VDDCR is decoupled by 1 µF and 470 pF. A separate 1.8 V to 3.3 V rail feeds VDDIO with CF and a bypass capacitor. RBIAS has its 12.1 kΩ to ground. LED1/REGOFF drives an LED to ground through about 270 Ω; with REGOFF low the regulator is on and LED1 is active high.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LAN8720A/LAN8720Ai"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 uF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 pF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "CF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD2A"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD1A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "12.1k"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "~270 Ohm"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDDIO supply 1.8 - 3.3V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "power supply 3.3V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "power-external-core",
+   "title": "Power supply, 1.2 V from an outside source",
+   "page": 44,
+   "description": "Supply hookup with the core regulator turned off. A 10 kΩ pull-up from LED1/REGOFF to the 3.3 V rail straps REGOFF high, so an outside 1.2 V supply feeds VDDCR, decoupled by 1 µF and 470 pF. The LED now runs from 3.3 V through about 270 Ω into LED1, which is active low. The analog pins, VDDIO and RBIAS are wired as with the internal regulator.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LAN8720A/LAN8720Ai"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 uF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "470 pF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "CF"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS"
+    },
+    {
+     "ref": "C5",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD2A"
+    },
+    {
+     "ref": "C6",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD1A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "12.1k"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "~270 Ohm"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "10k",
+     "note": "REGOFF strap pull-up"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VDDIO supply 1.8 - 3.3V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "power supply 3.3V"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "VDDCR supply 1.2V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "twisted-pair-single-supply",
+   "title": "Twisted-pair interface, single supply",
+   "page": 45,
+   "description": "Line side from one 3.3 V supply. The supply passes a ferrite bead; after the bead it feeds VDD1A and VDD2A (each bypassed), four 49.9 Ω resistors, one from each of TXP, TXN, RXP and RXN, and the chip-side centre taps of both transformers, bypassed to ground. On the cable side the transformers go to RJ45 pins 1-2 and 3-6; each cable-side centre tap passes through 75 Ω to a node that 1000 pF, 3 kV returns to chassis ground. RJ45 pins 4, 5, 7 and 8 are left unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LAN8720A/LAN8720Ai"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD2A"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD1A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on the centre-tap rail"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "magnetics, channel 1 transformer",
+     "note": "1:1 with centre taps; pins P1, PCT, P2 chip side, S1, SCT, S2 cable side"
+    },
+    {
+     "ref": "T2",
+     "type": "other",
+     "value": "magnetics, channel 2 transformer",
+     "note": "1:1 with centre taps; pins P1, PCT, P2 chip side, S1, SCT, S2 cable side"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "75"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "75"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1000 pF",
+     "note": "3 kV"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "RJ45"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "power supply 3.3V"
+    },
+    {
+     "ref": "FB1",
+     "type": "inductor",
+     "value": "ferrite bead"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "twisted-pair-dual-supply",
+   "title": "Twisted-pair interface, dual supplies",
+   "page": 46,
+   "description": "Line side with two supplies. VDD1A and VDD2A run from 3.3 V with a bypass capacitor each. A second rail of 2.5 V to 3.3 V feeds four 49.9 Ω resistors, one from each of TXP, TXN, RXP and RXN, and the chip-side centre taps of both transformers, bypassed to ground. On the cable side the transformers go to RJ45 pins 1-2 and 3-6; each cable-side centre tap passes through 75 Ω to a node that 1000 pF, 3 kV returns to chassis ground. RJ45 pins 4, 5, 7 and 8 are left unconnected.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LAN8720A/LAN8720Ai"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD2A"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on VDD1A"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "49.9 Ohm"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "",
+     "note": "CBYPASS on the centre-tap rail"
+    },
+    {
+     "ref": "T1",
+     "type": "other",
+     "value": "magnetics, channel 1 transformer",
+     "note": "1:1 with centre taps; pins P1, PCT, P2 chip side, S1, SCT, S2 cable side"
+    },
+    {
+     "ref": "T2",
+     "type": "other",
+     "value": "magnetics, channel 2 transformer",
+     "note": "1:1 with centre taps; pins P1, PCT, P2 chip side, S1, SCT, S2 cable side"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "75"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "75"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "1000 pF",
+     "note": "3 kV"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "RJ45"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "power supply 3.3V"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "power supply 2.5V - 3.3V"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led1-regoff-high",
+   "title": "LED1 with REGOFF strapped high (regulator off)",
+   "page": 37,
+   "description": "A 10 kΩ from VDD2A pulls LED1/REGOFF high, turning the internal regulator off. The LED runs from VDD2A through about 270 Ω into the pin, which then drives active low.",
+   "parts": [
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "~270 ohms"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10K"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "LED1/REGOFF"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VDD2A"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led1-regoff-low",
+   "title": "LED1 with REGOFF low (regulator on)",
+   "page": 37,
+   "description": "The internal pull-down holds LED1/REGOFF low, so the regulator stays on. The pin drives the LED active high to ground through about 270 Ω.",
+   "parts": [
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "~270 ohms"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "LED1/REGOFF"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led2-nintsel-high",
+   "title": "LED2 with nINTSEL high (nINT mode)",
+   "page": 38,
+   "description": "The internal pull-up on LED2/nINTSEL leaves the strap high, keeping pin 14 as nINT. The LED runs from VDD2A through about 270 Ω into the pin, which drives active low.",
+   "parts": [
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "~270 ohms"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "LED2/nINTSEL"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VDD2A"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "led2-nintsel-low",
+   "title": "LED2 with nINTSEL low (REFCLKO mode)",
+   "page": 38,
+   "description": "A 10 kΩ from LED2/nINTSEL to ground straps nINTSEL low, selecting REFCLKO on pin 14. The pin drives the LED active high to ground through about 270 Ω.",
+   "parts": [
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "~270 ohms"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10K"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "LED2/nINTSEL"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "refclk-in-50mhz",
+   "title": "REF_CLK In mode: outside 50 MHz clock",
+   "page": 34,
+   "description": "System hookup in REF_CLK In mode. A 50 MHz reference drives the MAC's REF_CLK and the PHY's XTAL1/CLKIN together, and every RMII signal is timed by it; XTAL2 stays open. The RMII lines, MDIO, MDC and nINT run straight between MAC and PHY; the four line pins go to the magnetics and RJ45, and LED1, LED2 and nRST go to the rest of the system.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LAN8720A/LAN8720Ai"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Ethernet MAC (RMII)",
+     "external": true
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "50MHz reference clock",
+     "note": "output pin OUT"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "TXP to magnetics"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "TXN to magnetics"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "RXP to magnetics"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "RXN to magnetics"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "LED1 to interface"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "LED2 to interface"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "nRST from interface"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "refclk-out-25mhz-crystal",
+   "title": "REF_CLK Out mode: 25 MHz crystal",
+   "page": 35,
+   "description": "System hookup in REF_CLK Out mode. A 25 MHz crystal sits across XTAL1/CLKIN and XTAL2, and the PHY sends the 50 MHz REF_CLK it derives from REFCLKO to the MAC, which must accept an outside 50 MHz clock. nINT is not available. The other RMII and management lines, the line pins, LEDs and nRST are wired as in REF_CLK In mode.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LAN8720A/LAN8720Ai"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Ethernet MAC (RMII)",
+     "external": true
+    },
+    {
+     "ref": "Y1",
+     "type": "crystal",
+     "value": "25MHz"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "TXP to magnetics"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "TXN to magnetics"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "RXP to magnetics"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "RXN to magnetics"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "LED1 to interface"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "LED2 to interface"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "nRST from interface"
+    }
+   ],
+   "notes": [
+    "The crystal table gives the XTAL1/CLKIN and XTAL2 pin capacitances used to size the two load capacitors."
+   ]
+  },
+  {
+   "id": "refclk-out-25mhz-clock",
+   "title": "REF_CLK Out mode: outside 25 MHz clock",
+   "page": 36,
+   "description": "System hookup in REF_CLK Out mode from a 25 MHz clock already on the board. The clock drives XTAL1/CLKIN, XTAL2 stays open, and REFCLKO gives the MAC its 50 MHz REF_CLK. The input has to be 25 MHz; a 50 MHz clock does not work in this hookup. nINT is not available.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LAN8720A/LAN8720Ai"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Ethernet MAC (RMII)",
+     "external": true
+    },
+    {
+     "ref": "X1",
+     "type": "other",
+     "value": "25MHz clock",
+     "note": "output pin OUT"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "TXP to magnetics"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "TXN to magnetics"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "RXP to magnetics"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "RXN to magnetics"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "LED1 to interface"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "LED2 to interface"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "nRST from interface"
+    }
+   ],
+   "notes": []
+  }
+ ]
+}

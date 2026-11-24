@@ -1,0 +1,2004 @@
+{
+ "sheet": 1,
+ "name": "MAX22201ATC+T",
+ "kind": "motor_driver",
+ "manufacturer": "Analog Devices",
+ "title": "MAX22201/MAX22202/MAX22207: 36 V, 3.5 A brushed DC motor H-bridge with integrated current sense",
+ "source": {
+  "document": "19-100898",
+  "revision": "Rev 2, 1/22",
+  "pages": 20
+ },
+ "summary": "One full H-bridge rated to 36 V for a single brushed DC motor, one phase of a stepper, or a latching valve or solenoid. The bridge FETs total 0.3 Ω typ (high side plus low side); peak current is bounded by the 3.5 A minimum overcurrent threshold and continuous current is 2 A rms on a JEDEC four-layer board at 25 °C. Current is measured losslessly in the low-side FETs: a resistor on ILIM sets a peak current the chip regulates with a fixed off time, and ISEN sources 1/5000 of the output current. MAX22201 has IN1/IN2 inputs and a resistor-set off time, MAX22202 has PHASE/ENBL/MODE inputs, and MAX22207 has IN1/IN2 inputs and a CDROUT flag; all come in a 12-pin 3 mm x 3 mm TDFN.",
+ "key_figures": [
+  [
+   "Supply voltage VM",
+   "3 V to 36 V"
+  ],
+  [
+   "Total on-resistance, high side + low side",
+   "0.3 Ω typ at TA = +25 °C"
+  ],
+  [
+   "Peak current",
+   "3.5 A (OCP threshold 3.5 A min, 5 A typ)"
+  ],
+  [
+   "RMS current",
+   "2 A, JEDEC four-layer board, 25 °C ambient"
+  ],
+  [
+   "Current regulation constant KILIM",
+   "50 kV typ (ITRIP = KILIM / RILIM)"
+  ],
+  [
+   "Current monitor scaling KISEN",
+   "5000 A/A typ, ±3 % from 0.8 A to 2 A"
+  ],
+  [
+   "Sleep current",
+   "3.5 µA typ, 6.5 µA max at VM = 24 V"
+  ],
+  [
+   "PWM input frequency",
+   "100 kHz max"
+  ],
+  [
+   "Thermal shutdown",
+   "165 °C typ, 30 °C hysteresis"
+  ],
+  [
+   "Package",
+   "TDFN12, 3 mm x 3 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 19,
+  "columns": [
+   "part number",
+   "control inputs",
+   "variant feature",
+   "temp range",
+   "pin-package",
+   "packing"
+  ],
+  "rows": [
+   [
+    "MAX22201ATC+",
+    "IN1, IN2 (PWM)",
+    "off time set by resistor on ROFF",
+    "-40°C to +125°C",
+    "12-TDFN",
+    ""
+   ],
+   [
+    "MAX22201ATC+T",
+    "IN1, IN2 (PWM)",
+    "off time set by resistor on ROFF",
+    "-40°C to +125°C",
+    "12-TDFN",
+    "tape and reel"
+   ],
+   [
+    "MAX22202ATC+",
+    "PHASE, ENBL, MODE",
+    "MODE selects slow or fast decay",
+    "-40°C to +125°C",
+    "12-TDFN",
+    ""
+   ],
+   [
+    "MAX22202ATC+T",
+    "PHASE, ENBL, MODE",
+    "MODE selects slow or fast decay",
+    "-40°C to +125°C",
+    "12-TDFN",
+    "tape and reel"
+   ],
+   [
+    "MAX22207ATC+",
+    "IN1, IN2 (PWM)",
+    "CDROUT open-drain regulation flag",
+    "-40°C to +125°C",
+    "12-TDFN",
+    ""
+   ],
+   [
+    "MAX22207ATC+T",
+    "IN1, IN2 (PWM)",
+    "CDROUT open-drain regulation flag",
+    "-40°C to +125°C",
+    "12-TDFN",
+    "tape and reel"
+   ]
+  ],
+  "notes": [
+   "The + suffix marks a lead(Pb)-free, RoHS-compliant part; T marks tape and reel.",
+   "MAX22202 and MAX22207 have a fixed 20 µs typ off time."
+  ]
+ },
+ "pins": [
+  {
+   "package": "TDFN12-EP 3 mm x 3 mm, MAX22201",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "ILIM",
+     "type": "analog input",
+     "function": "Current-limit setting: a resistor from ILIM to GND sets the regulated peak current ITRIP."
+    },
+    {
+     "pin": "2",
+     "name": "ROFF",
+     "type": "analog input",
+     "function": "Off-time setting: open gives the internal 20 µs; a resistor to GND sets tOFF by Equation 2."
+    },
+    {
+     "pin": "3",
+     "name": "GNDP",
+     "type": "ground",
+     "function": "Power ground; goes to the ground plane."
+    },
+    {
+     "pin": "4",
+     "name": "IN1",
+     "type": "logic input",
+     "function": "PWM input 1 (CMOS)."
+    },
+    {
+     "pin": "5",
+     "name": "IN2",
+     "type": "logic input",
+     "function": "PWM input 2 (CMOS)."
+    },
+    {
+     "pin": "6",
+     "name": "ISEN",
+     "type": "analog output",
+     "function": "Current monitor: sources a copy of the low-side FET current scaled down by KISEN."
+    },
+    {
+     "pin": "7",
+     "name": "V18",
+     "type": "output",
+     "function": "Internal 1.8 V LDO output; needs 1 µF to GND."
+    },
+    {
+     "pin": "8",
+     "name": "GNDA",
+     "type": "ground",
+     "function": "Ground; goes to the ground plane."
+    },
+    {
+     "pin": "9",
+     "name": "OUT2",
+     "type": "output",
+     "function": "Bridge output 2."
+    },
+    {
+     "pin": "10",
+     "name": "VM",
+     "type": "power in",
+     "function": "Motor supply. Decouple to GND with 1 µF placed right at the pin, plus a 47 µF electrolytic for bulk."
+    },
+    {
+     "pin": "11",
+     "name": "OUT1",
+     "type": "output",
+     "function": "Bridge output 1."
+    },
+    {
+     "pin": "12",
+     "name": "FAULT",
+     "type": "open-drain output",
+     "function": "Fault flag, active low; pulled low on overcurrent, overtemperature or undervoltage."
+    }
+   ]
+  },
+  {
+   "package": "TDFN12-EP 3 mm x 3 mm, MAX22202",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "ILIM",
+     "type": "analog input",
+     "function": "Current-limit setting: a resistor from ILIM to GND sets the regulated peak current ITRIP."
+    },
+    {
+     "pin": "2",
+     "name": "MODE",
+     "type": "logic input",
+     "function": "Decay select while ENBL is low: high gives brake (slow decay), low gives synchronous fast decay."
+    },
+    {
+     "pin": "3",
+     "name": "GNDP",
+     "type": "ground",
+     "function": "Power ground; goes to the ground plane."
+    },
+    {
+     "pin": "4",
+     "name": "PHASE",
+     "type": "logic input",
+     "function": "Direction input."
+    },
+    {
+     "pin": "5",
+     "name": "ENBL",
+     "type": "logic input",
+     "function": "Enable input: high drives the bridge in the PHASE direction."
+    },
+    {
+     "pin": "6",
+     "name": "ISEN",
+     "type": "analog output",
+     "function": "Current monitor: sources a copy of the low-side FET current scaled down by KISEN."
+    },
+    {
+     "pin": "7",
+     "name": "V18",
+     "type": "output",
+     "function": "Internal 1.8 V LDO output; needs 1 µF to GND."
+    },
+    {
+     "pin": "8",
+     "name": "GNDA",
+     "type": "ground",
+     "function": "Ground; goes to the ground plane."
+    },
+    {
+     "pin": "9",
+     "name": "OUT2",
+     "type": "output",
+     "function": "Bridge output 2."
+    },
+    {
+     "pin": "10",
+     "name": "VM",
+     "type": "power in",
+     "function": "Motor supply. Decouple to GND with 1 µF placed right at the pin, plus a 47 µF electrolytic for bulk."
+    },
+    {
+     "pin": "11",
+     "name": "OUT1",
+     "type": "output",
+     "function": "Bridge output 1."
+    },
+    {
+     "pin": "12",
+     "name": "FAULT",
+     "type": "open-drain output",
+     "function": "Fault flag, active low; pulled low on overcurrent, overtemperature or undervoltage."
+    }
+   ]
+  },
+  {
+   "package": "TDFN12-EP 3 mm x 3 mm, MAX22207",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "ILIM",
+     "type": "analog input",
+     "function": "Current-limit setting: a resistor from ILIM to GND sets the regulated peak current ITRIP."
+    },
+    {
+     "pin": "2",
+     "name": "CDROUT",
+     "type": "open-drain output",
+     "function": "Current-regulation flag: goes low while the internal regulator has forced slow decay because the current passed ITRIP. Needs an external pull-up."
+    },
+    {
+     "pin": "3",
+     "name": "GNDP",
+     "type": "ground",
+     "function": "Power ground; goes to the ground plane."
+    },
+    {
+     "pin": "4",
+     "name": "IN1",
+     "type": "logic input",
+     "function": "PWM input 1 (CMOS)."
+    },
+    {
+     "pin": "5",
+     "name": "IN2",
+     "type": "logic input",
+     "function": "PWM input 2 (CMOS)."
+    },
+    {
+     "pin": "6",
+     "name": "ISEN",
+     "type": "analog output",
+     "function": "Current monitor: sources a copy of the low-side FET current scaled down by KISEN."
+    },
+    {
+     "pin": "7",
+     "name": "V18",
+     "type": "output",
+     "function": "Internal 1.8 V LDO output; needs 1 µF to GND."
+    },
+    {
+     "pin": "8",
+     "name": "GNDA",
+     "type": "ground",
+     "function": "Ground; goes to the ground plane."
+    },
+    {
+     "pin": "9",
+     "name": "OUT2",
+     "type": "output",
+     "function": "Bridge output 2."
+    },
+    {
+     "pin": "10",
+     "name": "VM",
+     "type": "power in",
+     "function": "Motor supply. Decouple to GND with 1 µF placed right at the pin, plus a 47 µF electrolytic for bulk."
+    },
+    {
+     "pin": "11",
+     "name": "OUT1",
+     "type": "output",
+     "function": "Bridge output 1."
+    },
+    {
+     "pin": "12",
+     "name": "FAULT",
+     "type": "open-drain output",
+     "function": "Fault flag, active low; pulled low on overcurrent, overtemperature or undervoltage."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VM to GND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+40",
+     "V"
+    ],
+    [
+     "V18 to GND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+2.2",
+     "V"
+    ],
+    [
+     "OUT_ to GND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "VM + 0.3",
+     "V"
+    ],
+    [
+     "FAULT to GND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+6",
+     "V"
+    ],
+    [
+     "ILIM to GND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+2.2",
+     "V"
+    ],
+    [
+     "ISEN to GND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+2.2",
+     "V"
+    ],
+    [
+     "CDROUT to GND",
+     "",
+     "MAX22207 only",
+     "-0.3",
+     "",
+     "+6",
+     "V"
+    ],
+    [
+     "ROFF to GND",
+     "",
+     "MAX22201 only",
+     "-0.3",
+     "",
+     "+2.2",
+     "V"
+    ],
+    [
+     "IN1, IN2 to GND",
+     "",
+     "MAX22201 only",
+     "-0.3",
+     "",
+     "+6",
+     "V"
+    ],
+    [
+     "ENBL, PHASE to GND",
+     "",
+     "MAX22202 only",
+     "-0.3",
+     "",
+     "+6",
+     "V"
+    ],
+    [
+     "MODE to GND",
+     "",
+     "MAX22202 only",
+     "-0.3",
+     "",
+     "+6",
+     "V"
+    ],
+    [
+     "GNDP to GND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+0.3",
+     "V"
+    ],
+    [
+     "Continuous power dissipation, TDFN (multilayer board)",
+     "",
+     "TA = +70°C, derate 24.4mW/°C above +70°C",
+     "",
+     "",
+     "1951.20",
+     "mW"
+    ],
+    [
+     "Junction temperature",
+     "",
+     "Note 1",
+     "",
+     "",
+     "+150",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "",
+     "",
+     "-40",
+     "",
+     "+150",
+     "°C"
+    ],
+    [
+     "Soldering temperature",
+     "",
+     "reflow",
+     "",
+     "",
+     "+260",
+     "°C"
+    ],
+    [
+     "Operating temperature range",
+     "",
+     "",
+     "-40",
+     "",
+     "+125",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: running the junction above its maximum operating temperature can degrade reliability and in time damage the part; the built-in thermal shutdown does not secure reliability under extreme conditions."
+   ]
+  },
+  {
+   "title": "Package information, TDFN12 3x3mm",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "item",
+    "value"
+   ],
+   "rows": [
+    [
+     "Package code",
+     "TD1233+1C"
+    ],
+    [
+     "Outline number",
+     "21-0664"
+    ],
+    [
+     "Land pattern number",
+     "90-0397"
+    ],
+    [
+     "Junction-to-ambient θJA, single-layer board",
+     "63°C/W"
+    ],
+    [
+     "Junction-to-case θJC, single-layer board",
+     "8.5°C/W"
+    ],
+    [
+     "Junction-to-ambient θJA, four-layer board",
+     "41°C/W"
+    ],
+    [
+     "Junction-to-case θJC, four-layer board",
+     "8.5°C/W"
+    ]
+   ],
+   "notes": [
+    "Thermal resistances follow the JEDEC JESD51-7 method on a four-layer board.",
+    "A +, # or - in a package code tells RoHS status and nothing else."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 3,
+   "conditions": "VM = +3V to +36V, TA = -40°C to +125°C; limits 100% tested at TA = +25°C, limits over the operating temperature range guaranteed by design and characterization; GBD = guaranteed by design, not production tested; typical values at VM = +24V and TA = +25°C unless otherwise noted; 25kΩ connected to ILIM",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "POWER SUPPLY",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Supply-Voltage Range",
+     "VM",
+     "",
+     "3",
+     "",
+     "36",
+     "V"
+    ],
+    [
+     "Disable Current Consumption",
+     "IVM",
+     "VM = +24V, in Sleep Mode",
+     "",
+     "3.5",
+     "6.5",
+     "μA"
+    ],
+    [
+     "Quiescent-Current Consumption",
+     "IVM",
+     "VM = +24V, not in Sleep Mode",
+     "",
+     "",
+     "4",
+     "mA"
+    ],
+    [
+     "VM Undervoltage Lockout Threshold",
+     "UVLO",
+     "",
+     "2.67",
+     "",
+     "3",
+     "V"
+    ],
+    [
+     "VM Undervoltage Lockout Threshold Hysteresis",
+     "UVLO_HYST",
+     "",
+     "",
+     "110",
+     "",
+     "mV"
+    ],
+    [
+     "LOGIC INPUTS/OUTPUTS",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input-Voltage Level High",
+     "VIH",
+     "",
+     "2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input-Voltage Level Low",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.8",
+     "V"
+    ],
+    [
+     "Pulldown Resistor",
+     "RPD",
+     "",
+     "",
+     "100",
+     "",
+     "kΩ"
+    ],
+    [
+     "Input Hysteresis",
+     "VHYS",
+     "",
+     "",
+     "360",
+     "",
+     "mV"
+    ],
+    [
+     "Open-Drain Output Pins Voltage Level Low",
+     "VOL",
+     "Pullup current = 1mA",
+     "",
+     "0.03",
+     "0.1",
+     "V"
+    ],
+    [
+     "DRIVER OUTPUT SPECIFICATIONS",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Output On-Resistance Low Side",
+     "RON(LS)",
+     "ILOAD = 200mA",
+     "",
+     "0.15",
+     "0.25",
+     "Ω"
+    ],
+    [
+     "Output On-Resistance High Side",
+     "RON(HS)",
+     "ILOAD = 200mA",
+     "",
+     "0.15",
+     "0.25",
+     "Ω"
+    ],
+    [
+     "Output Leakage",
+     "ILEAK",
+     "Driver off",
+     "-5",
+     "",
+     "+5",
+     "μA"
+    ],
+    [
+     "OUT1, OUT2 Slew Rate",
+     "SR",
+     "GBD",
+     "",
+     "200",
+     "",
+     "V/μs"
+    ],
+    [
+     "CURRENT REGULATION",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "RILIM Resistor Range",
+     "RILIM",
+     "Resistor connected between ILIM and GND",
+     "18",
+     "",
+     "250",
+     "kΩ"
+    ],
+    [
+     "Current-Drive Regulation Constant",
+     "KILIM",
+     "See Equation 1",
+     "",
+     "50",
+     "",
+     "kV"
+    ],
+    [
+     "ILIM Pin Voltage",
+     "VILIM",
+     "Voltage at pin ILIM. RILIM = 25kΩ",
+     "",
+     "1.0",
+     "",
+     "V"
+    ],
+    [
+     "Current Drive Regulation Accuracy",
+     "DKLIM1",
+     "TA = +25ºC, VM = +6V to +24V; IOUT greater than 0.8A",
+     "-5",
+     "",
+     "+5",
+     "%"
+    ],
+    [
+     "Current Drive Regulation Accuracy",
+     "DKLIM2",
+     "TA = +25ºC, VM = +6V to +24V; IOUT from 0.2A to 0.8A",
+     "-15",
+     "",
+     "+15",
+     "%"
+    ],
+    [
+     "CURRENT REGULATION / tOFF SETTING (ROFF) MAX22201 ONLY",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "tOFF Time when the ROFF Pin is Unconnected",
+     "tOFF",
+     "ROFF pin unconnected",
+     "17",
+     "20",
+     "23",
+     "μs"
+    ],
+    [
+     "tOFF Programming Range",
+     "tOFFR",
+     "Resistor connected from ROFF to GND from 30.1kΩ to 240kΩ",
+     "",
+     "10 to 80",
+     "",
+     "μs"
+    ],
+    [
+     "CURRENT SENSE MONITOR",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "VISEN Voltage Range",
+     "VISEN",
+     "Voltage range at the ISEN pin",
+     "0",
+     "",
+     "1.2",
+     "V"
+    ],
+    [
+     "Current Monitor Scaling Factor",
+     "KISEN",
+     "See Equation 3",
+     "",
+     "5000",
+     "",
+     "A/A"
+    ],
+    [
+     "Current Monitor Accuracy",
+     "DKISEN1",
+     "TA = +25°C, VM = +6V to +24V; IOUT = 0.8A to 2A",
+     "-3",
+     "",
+     "+3",
+     "%"
+    ],
+    [
+     "Current Monitor Accuracy",
+     "DKISEN2",
+     "TA = +25°C, VM = +6V to +24V; IOUT = 0.2A to 0.8A",
+     "-5",
+     "",
+     "+5",
+     "%"
+    ],
+    [
+     "Current Sense Output -3dB Small Signal Bandwidth",
+     "BW",
+     "GBD",
+     "",
+     "1",
+     "",
+     "MHz"
+    ],
+    [
+     "PROTECTION CIRCUITS",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Overcurrent-Protection Threshold",
+     "OCP",
+     "",
+     "3.5",
+     "5",
+     "",
+     "A"
+    ],
+    [
+     "Overcurrent-Protection Blanking Time",
+     "tOCP",
+     "",
+     "1.24",
+     "2",
+     "",
+     "μs"
+    ],
+    [
+     "Auto-Retry OCP Time",
+     "tRETRY",
+     "",
+     "",
+     "2",
+     "",
+     "ms"
+    ],
+    [
+     "Thermal Protection Shutdown Threshold Temperature",
+     "TSD",
+     "",
+     "",
+     "165",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal Protection Shutdown Hysteresis",
+     "THYS",
+     "",
+     "",
+     "30",
+     "",
+     "°C"
+    ],
+    [
+     "FUNCTIONAL TIMINGS",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "PWM Frequency",
+     "fSW",
+     "PWM input frequency, GBD",
+     "",
+     "",
+     "100",
+     "kHz"
+    ],
+    [
+     "Minimum tON Time",
+     "tONMIN",
+     "",
+     "2",
+     "2.5",
+     "",
+     "μs"
+    ],
+    [
+     "Dead Time",
+     "tDEAD",
+     "Dead zone to prevent current shoot through from VM",
+     "",
+     "150",
+     "",
+     "ns"
+    ],
+    [
+     "Time to Sleep (MAX22201, MAX22207)",
+     "tSLEEP",
+     "From IN1 and IN2 low to device disabled",
+     "1.5",
+     "2.2",
+     "3.5",
+     "ms"
+    ],
+    [
+     "Turn-On Time (MAX22201, MAX22207)",
+     "tON",
+     "VM > VUVLO with IN1, IN2 High (Brake)",
+     "",
+     "300",
+     "400",
+     "μs"
+    ],
+    [
+     "Time to Sleep (MAX22202)",
+     "tSLEEP",
+     "From MODE low to device disabled",
+     "1.5",
+     "2.2",
+     "3.5",
+     "ms"
+    ],
+    [
+     "Turn-On Time (MAX22202)",
+     "tON",
+     "VM > VUVLO with MODE high",
+     "",
+     "300",
+     "400",
+     "μs"
+    ],
+    [
+     "LDO (V18)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "V18 Output-Voltage Range",
+     "V18",
+     "No external load",
+     "1.728",
+     "1.8",
+     "1.872",
+     "V"
+    ],
+    [
+     "V18 Current Limit",
+     "IV18(LIM)",
+     "",
+     "20",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "V18 UVLO Rising",
+     "UVLOV18R",
+     "V18 rising",
+     "1.61",
+     "1.65",
+     "1.69",
+     "V"
+    ],
+    [
+     "V18 UVLO Hysteresis",
+     "UVLOV18H",
+     "",
+     "",
+     "70",
+     "",
+     "mV"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Table 1. Full bridge IN1 and IN2 truth table (MAX22201, MAX22207)",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "IN1",
+    "IN2",
+    "OUT1",
+    "OUT2",
+    "state"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "High-Z",
+     "High-Z",
+     "Coast, bridge off at high impedance; sleep follows after 2.2ms typ"
+    ],
+    [
+     "0",
+     "1",
+     "L",
+     "H",
+     "Reverse, current flows OUT2 to OUT1"
+    ],
+    [
+     "1",
+     "0",
+     "H",
+     "L",
+     "Forward, current flows OUT1 to OUT2"
+    ],
+    [
+     "1",
+     "1",
+     "L",
+     "L",
+     "Brake (slow decay)"
+    ]
+   ],
+   "notes": [
+    "Once the current passes ITRIP with current regulation enabled, the internal regulator takes control of the bridge whatever the inputs command."
+   ]
+  },
+  {
+   "title": "Table 2. Full bridge PHASE, ENBL and MODE truth table (MAX22202)",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "PHASE",
+    "ENBL",
+    "MODE",
+    "OUT1",
+    "OUT2",
+    "state"
+   ],
+   "rows": [
+    [
+     "1",
+     "1",
+     "X",
+     "H",
+     "L",
+     "Forward, current flows OUT1 to OUT2"
+    ],
+    [
+     "0",
+     "1",
+     "X",
+     "L",
+     "H",
+     "Reverse, current flows OUT2 to OUT1"
+    ],
+    [
+     "X",
+     "0",
+     "1",
+     "L",
+     "L",
+     "Brake (slow decay)"
+    ],
+    [
+     "1",
+     "0",
+     "0",
+     "L",
+     "H",
+     "Synchronous fast decay (*); sleep if it follows a brake longer than tSLEEP"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "H",
+     "L",
+     "Synchronous fast decay (*); sleep if it follows a brake longer than tSLEEP"
+    ]
+   ],
+   "notes": [
+    "(*) As the current nears 0 A during synchronous fast decay the outputs go to high impedance, so the current does not reverse.",
+    "Once the current passes ITRIP with current regulation enabled, the internal regulator takes control of the bridge whatever the inputs command."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Shutdown supply current vs. supply voltage",
+   "page": 6,
+   "conditions": "VM = +3V to +36V, TA = 25°C unless otherwise noted",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = -40 °C",
+     "points": [
+      [
+       3.0,
+       1.68
+      ],
+      [
+       5.0,
+       1.84
+      ],
+      [
+       23.12,
+       2.62
+      ],
+      [
+       27.87,
+       2.93
+      ],
+      [
+       29.0,
+       2.85
+      ],
+      [
+       30.25,
+       3.06
+      ],
+      [
+       36.0,
+       3.51
+      ]
+     ]
+    },
+    {
+     "label": "TA = +25 °C",
+     "points": [
+      [
+       3.0,
+       2.1
+      ],
+      [
+       5.12,
+       2.31
+      ],
+      [
+       14.75,
+       2.86
+      ],
+      [
+       20.0,
+       3.28
+      ],
+      [
+       26.0,
+       3.99
+      ],
+      [
+       29.0,
+       4.1
+      ],
+      [
+       30.75,
+       4.27
+      ],
+      [
+       33.12,
+       4.63
+      ],
+      [
+       35.0,
+       5.1
+      ],
+      [
+       36.0,
+       5.5
+      ]
+     ]
+    },
+    {
+     "label": "TA = +125 °C",
+     "points": [
+      [
+       3.0,
+       3.76
+      ],
+      [
+       4.0,
+       4.31
+      ],
+      [
+       4.87,
+       4.64
+      ],
+      [
+       6.0,
+       4.81
+      ],
+      [
+       7.0,
+       5.11
+      ],
+      [
+       8.0,
+       5.12
+      ],
+      [
+       9.12,
+       5.55
+      ],
+      [
+       11.0,
+       5.74
+      ],
+      [
+       12.87,
+       6.2
+      ],
+      [
+       15.87,
+       7.2
+      ],
+      [
+       17.5,
+       7.56
+      ],
+      [
+       19.5,
+       8.21
+      ],
+      [
+       22.12,
+       8.72
+      ],
+      [
+       24.0,
+       9.47
+      ],
+      [
+       25.0,
+       9.63
+      ],
+      [
+       27.87,
+       10.94
+      ],
+      [
+       28.87,
+       11.04
+      ],
+      [
+       29.37,
+       11.19
+      ],
+      [
+       31.62,
+       12.53
+      ],
+      [
+       32.12,
+       12.71
+      ],
+      [
+       33.0,
+       12.86
+      ],
+      [
+       34.0,
+       13.56
+      ],
+      [
+       35.0,
+       13.89
+      ],
+      [
+       36.0,
+       14.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Quiescent supply current vs. supply voltage",
+   "page": 6,
+   "conditions": "VM = +3V to +36V, TA = 25°C unless otherwise noted",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = -40 °C",
+     "points": [
+      [
+       3.0,
+       3.21
+      ],
+      [
+       8.0,
+       3.16
+      ],
+      [
+       9.0,
+       3.159
+      ],
+      [
+       13.87,
+       3.141
+      ],
+      [
+       21.0,
+       3.129
+      ],
+      [
+       36.0,
+       3.121
+      ]
+     ]
+    },
+    {
+     "label": "TA = +25 °C",
+     "points": [
+      [
+       3.0,
+       3.35
+      ],
+      [
+       4.0,
+       3.34
+      ],
+      [
+       5.12,
+       3.318
+      ],
+      [
+       6.75,
+       3.302
+      ],
+      [
+       8.0,
+       3.3
+      ],
+      [
+       9.0,
+       3.29
+      ],
+      [
+       10.0,
+       3.29
+      ],
+      [
+       11.12,
+       3.28
+      ],
+      [
+       12.87,
+       3.28
+      ],
+      [
+       15.0,
+       3.27
+      ],
+      [
+       21.25,
+       3.261
+      ],
+      [
+       27.0,
+       3.255
+      ],
+      [
+       36.0,
+       3.253
+      ]
+     ]
+    },
+    {
+     "label": "TA = +125 °C",
+     "points": [
+      [
+       3.0,
+       3.646
+      ],
+      [
+       4.5,
+       3.616
+      ],
+      [
+       6.75,
+       3.592
+      ],
+      [
+       10.0,
+       3.576
+      ],
+      [
+       13.75,
+       3.567
+      ],
+      [
+       22.12,
+       3.564
+      ],
+      [
+       28.87,
+       3.571
+      ],
+      [
+       36.0,
+       3.583
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "On resistance vs. temperature",
+   "page": 6,
+   "conditions": "VM = +3V to +36V, TA = 25°C unless otherwise noted",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "On resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "",
+     "points": [
+      [
+       -6.0,
+       0.1341
+      ],
+      [
+       0,
+       0.1392
+      ],
+      [
+       17.5,
+       0.1483
+      ],
+      [
+       30.0,
+       0.1519
+      ],
+      [
+       36.3,
+       0.1548
+      ],
+      [
+       48.8,
+       0.1638
+      ],
+      [
+       53.8,
+       0.1663
+      ],
+      [
+       88.8,
+       0.1778
+      ],
+      [
+       108.5,
+       0.179
+      ],
+      [
+       125.0,
+       0.1841
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current vs. no load switching frequency",
+   "page": 6,
+   "conditions": "VM = +3V to +36V, TA = 25°C unless otherwise noted",
+   "x": {
+    "label": "Switching frequency",
+    "unit": "Hz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "",
+     "points": [
+      [
+       999,
+       3.281
+      ],
+      [
+       99994,
+       3.929
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RILIM resistance vs. ITRIP threshold",
+   "page": 6,
+   "conditions": "VM = +3V to +36V, TA = 25°C unless otherwise noted",
+   "x": {
+    "label": "RILIM",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ITRIP threshold",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "",
+     "points": [
+      [
+       15.0,
+       3.24
+      ],
+      [
+       24.0,
+       2.184
+      ],
+      [
+       30.0,
+       1.66
+      ],
+      [
+       32.3,
+       1.531
+      ],
+      [
+       37.5,
+       1.326
+      ],
+      [
+       51.6,
+       0.972
+      ],
+      [
+       54.6,
+       0.918
+      ],
+      [
+       68.8,
+       0.731
+      ],
+      [
+       89.9,
+       0.564
+      ],
+      [
+       106.2,
+       0.472
+      ],
+      [
+       140.0,
+       0.367
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "The x-axis unit reads Ω; the values are kΩ (Equation 1 gives 3.33 A at 15 kΩ)."
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "max22201-typical",
+   "title": "Typical application circuit, MAX22201",
+   "page": 17,
+   "description": "A controller drives the motor through IN1 and IN2 and watches FAULT, which is pulled up to the logic rail. RILIM on ILIM sets the peak current the chip holds the motor to; RROFF on ROFF sets the off time of that regulation. An optional RISEN on ISEN gives the controller's ADC a voltage proportional to motor current. VM has 100 nF and a bulk capacitor, and V18 has 1 µF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX22201"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "V18 LDO capacitor"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VM decoupling"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "CBULK",
+     "note": "VM bulk; 47 µF electrolytic"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RILIM",
+     "note": "sets ITRIP by Equation 1; 18 kΩ to 250 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "RISEN",
+     "note": "optional; turns the ISEN current into a voltage for the ADC, Equation 4"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "FAULT pull-up"
+    },
+    {
+     "ref": "M1",
+     "type": "load",
+     "value": "brushed DC motor"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VM"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "logic supply"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "RROFF",
+     "note": "sets tOFF by Equation 2; 30.1 kΩ to 240 kΩ for 10 µs to 80 µs"
+    }
+   ],
+   "notes": [
+    "GNDP and GNDA both connect to the ground plane."
+   ]
+  },
+  {
+   "id": "max22202-typical",
+   "title": "Typical application circuit, MAX22202",
+   "page": 18,
+   "description": "A controller sets direction on PHASE, switches the bridge on ENBL and picks slow or fast decay on MODE, and reads FAULT through a pull-up to the logic rail. RILIM on ILIM sets the regulated peak current; the off time is the fixed internal one. An optional RISEN on ISEN feeds a current-proportional voltage to the controller's ADC. VM has 100 nF and a bulk capacitor, and V18 has 1 µF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX22202"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "V18 LDO capacitor"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VM decoupling"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "CBULK",
+     "note": "VM bulk; 47 µF electrolytic"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RILIM",
+     "note": "sets ITRIP by Equation 1; 18 kΩ to 250 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "RISEN",
+     "note": "optional; turns the ISEN current into a voltage for the ADC, Equation 4"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "FAULT pull-up"
+    },
+    {
+     "ref": "M1",
+     "type": "load",
+     "value": "brushed DC motor"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VM"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "logic supply"
+    }
+   ],
+   "notes": [
+    "GNDP and GNDA both connect to the ground plane."
+   ]
+  },
+  {
+   "id": "max22207-typical",
+   "title": "Typical application circuit, MAX22207",
+   "page": 19,
+   "description": "A controller drives the motor through IN1 and IN2. Two open-drain flags come back to it, each pulled up to the logic rail: FAULT, and CDROUT, which goes low while the internal current regulation is in control. RILIM on ILIM sets the regulated peak current and the off time is the fixed internal one. An optional RISEN on ISEN gives the controller's ADC a voltage proportional to motor current. VM has 100 nF and a bulk capacitor, and V18 has 1 µF.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX22207"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCU",
+     "external": true
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "V18 LDO capacitor"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "VM decoupling"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "CBULK",
+     "note": "VM bulk; 47 µF electrolytic"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "RILIM",
+     "note": "sets ITRIP by Equation 1; 18 kΩ to 250 kΩ"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "RISEN",
+     "note": "optional; turns the ISEN current into a voltage for the ADC, Equation 4"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "FAULT pull-up"
+    },
+    {
+     "ref": "M1",
+     "type": "load",
+     "value": "brushed DC motor"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VM"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "logic supply"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "",
+     "note": "CDROUT pull-up"
+    }
+   ],
+   "notes": [
+    "GNDP and GNDA both connect to the ground plane."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Equation 1: current limiter",
+   "expr": "ITRIP(A) = KILIM(kV) / RILIM(kΩ)",
+   "where": {
+    "ITRIP": "regulated peak output current, A",
+    "KILIM": "current-drive regulation constant, 50 kV typ",
+    "RILIM": "resistor from ILIM to GND, kΩ"
+   },
+   "note": "RILIM = 25 kΩ gives a 2 A peak limit.",
+   "page": 12
+  },
+  {
+   "name": "Equation 2: tOFF configuration (MAX22201)",
+   "expr": "tOFF(µs) = RROFF(kΩ) × COFF(nF)",
+   "where": {
+    "tOFF": "regulation off time, µs",
+    "RROFF": "resistor from ROFF to GND, kΩ",
+    "COFF": "internal constant, 0.333 nF"
+   },
+   "note": "tOFF spans 10 µs to 80 µs typ.",
+   "page": 13
+  },
+  {
+   "name": "Equation 3: ISEN output current",
+   "expr": "IISEN(A) = IOUT(A) / KISEN",
+   "where": {
+    "IISEN": "current sourced from ISEN, A",
+    "IOUT": "output current, A",
+    "KISEN": "current monitor scaling factor, 5 kA/A typ"
+   },
+   "note": "An output current of 2 A gives 400 µA from ISEN.",
+   "page": 13
+  },
+  {
+   "name": "Equation 4: RISEN setting",
+   "expr": "RISEN(Ω) = KISEN × VFS(V) / IMAX(A)",
+   "where": {
+    "RISEN": "resistor from ISEN to GND, Ω",
+    "KISEN": "current monitor scaling factor, 5000 A/A typ",
+    "VFS": "ADC full-scale voltage, V",
+    "IMAX": "largest operating output current, A"
+   },
+   "note": "A 1 V full-scale ADC and a 2 A maximum give RISEN = 2.5 kΩ.",
+   "page": 13
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Current ratings",
+   "page": 10,
+   "text": "The 3.5 A peak is the overcurrent threshold and holds only for short transients. The 2 A rms continuous figure is a thermal limit, quoted for a JEDEC four-layer board at 25 °C ambient; in a real design it depends on ground copper, heat sinking and airflow."
+  },
+  {
+   "topic": "Versions",
+   "page": 10,
+   "text": "MAX22201 and MAX22207 take two PWM inputs, IN1 and IN2, giving four states: forward, reverse, coast, and brake (slow decay). MAX22201 adds a resistor-set off time on ROFF. MAX22207 adds CDROUT, an open-drain output asserted while the internal current regulation has control. MAX22202 takes ENBL and PHASE, with MODE choosing slow or fast decay. Every version has overcurrent, thermal and undervoltage protection and an active-low open-drain FAULT output."
+  },
+  {
+   "topic": "Sleep, MAX22201 and MAX22207",
+   "page": 10,
+   "text": "With IN1 and IN2 both low for longer than tSLEEP, the chip goes into sleep: outputs at high impedance, supply current ISLEEP of 6.5 µA max. Powering up with both inputs low puts it straight into sleep. Driving IN1 and IN2 both high for 400 µs or more wakes it."
+  },
+  {
+   "topic": "Sleep, MAX22202",
+   "page": 10,
+   "text": "Holding MODE high (brake) for longer than tSLEEP and then taking MODE low puts the MAX22202 to sleep, outputs at high impedance, with ISLEEP of 10 µA max. After power-up with MODE = 0 it sleeps at once. A MODE-high pulse of 400 µs or more (the tON maximum) wakes it."
+  },
+  {
+   "topic": "Use cases",
+   "page": 11,
+   "text": "1) PWM with regulation: ITRIP is set above the normal running current so it only clips start-up inrush, and the controller does speed or position control by PWM, normally braking (slow decay) in the off phase. 2) PWM without regulation: a 14 kΩ on ILIM disables the regulator, leaving the full 3.5 A available for short periods; uncontrolled current can then hit OCP or thermal shutdown. 3) Regulation only: the inputs just enable the bridge and set direction, and torque is set by ITRIP through RILIM, which may be changed on the fly. 4) PWM with ISEN feedback: as 1 or 2, with a resistor on ISEN giving the controller's ADC the motor current."
+  },
+  {
+   "topic": "Decay modes",
+   "page": 11,
+   "text": "In brake (slow decay) both low-side FETs are on and short the winding, so current falls slowly; this is the usual off phase for brushed motors because ripple is lower and efficiency higher. Fast decay comes either from reversing the bridge (synchronous) or from turning it off so the current flows through the FET body diodes (asynchronous). On the MAX22202 the PWM can go on PHASE or on ENBL; with ENBL, MODE decides between fast decay and brake."
+  },
+  {
+   "topic": "Integrated current sensing",
+   "page": 12,
+   "text": "Current is measured with sense-FETs in each of the two low-side FETs, so no sense resistor is needed and the measurement costs no power. It is measured while the bridge drives forward or reverse and during brake; during fast decay it is not measured and ISEN gives zero."
+  },
+  {
+   "topic": "Current drive regulation",
+   "page": 12,
+   "text": "When the output current passes ITRIP (set by RILIM, Equation 1) the chip forces slow decay, both low-side FETs on, for the fixed off time tOFF: 20 µs typ on MAX22202 and MAX22207, set by ROFF on MAX22201. The loop controls the peak current, so the average depends on the ripple. If the inputs stay steady, slow decay lasts the whole tOFF; a PWM edge during tOFF resets the timer and hands the bridge back to the inputs. At the end of tOFF the inputs take over if the current is below ITRIP, otherwise another tOFF follows. While limiting, the output duty cycle and frequency depend on supply voltage, motor inductance, tOFF and motor speed. The function caps inrush at start-up and in stall, easing supply and bypass needs."
+  },
+  {
+   "topic": "Current monitor output",
+   "page": 13,
+   "text": "ISEN sources IOUT / KISEN whenever a low-side FET carries the output current, which covers the on phase and brake. A resistor RISEN from ISEN to GND makes a voltage for an ADC, chosen by Equation 4 so the peak fits full scale; RISEN is also the output impedance of the monitor. An ADC with high input impedance connects directly; a low-impedance ADC may need a buffer. The ISEN voltage range is 0 V to 1.2 V."
+  },
+  {
+   "topic": "CDROUT (MAX22207)",
+   "page": 15,
+   "text": "CDROUT is open drain and needs a pull-up to the controller's logic supply. It stays high while the motor current is under ITRIP in forward or reverse, and goes low when the regulator forces slow decay. A slow decay commanded on IN1 and IN2 does not pull it low. Any PWM edge restarts the off timer, so the real brake interval can end before tOFF or run past it."
+  },
+  {
+   "topic": "Overcurrent protection",
+   "page": 16,
+   "text": "Shorts to supply, to ground and across the outputs are caught when the current reaches the OCP threshold (3.5 A min): FAULT asserts and the bridge turns off for tRETRY, 2 ms, then comes back according to the inputs. A persisting short repeats the cycle. Long operation in this auto-retry state may harm reliability and is to be avoided."
+  },
+  {
+   "topic": "Thermal shutdown",
+   "page": 16,
+   "text": "Above about 165 °C die temperature FAULT asserts and the bridge goes to high impedance; it is enabled again once the junction cools below 135 °C."
+  },
+  {
+   "topic": "Undervoltage lockout",
+   "page": 16,
+   "text": "VM UVLO is 3 V max. Under UVLO FAULT asserts and the outputs go to high impedance; when the supply returns to its operating range the chip resumes and FAULT releases."
+  },
+  {
+   "topic": "ESD",
+   "page": 16,
+   "text": "OUT1 and OUT2 are rated 8 kV HBM, and 10 kV HBM once the part is soldered to a board carrying 1 µF or more of VM bypass."
+  }
+ ]
+}

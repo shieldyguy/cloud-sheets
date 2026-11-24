@@ -1,0 +1,13327 @@
+{
+ "sheet": 1,
+ "name": "MCP41010-I_SN",
+ "kind": "potentiometer",
+ "manufacturer": "Microchip Technology",
+ "title": "MCP41XXX/42XXX: single and dual 256-position digital potentiometers, 10 kΩ, 50 kΩ or 100 kΩ, SPI",
+ "source": {
+  "document": "DS11195C",
+  "revision": "2003",
+  "pages": 32
+ },
+ "summary": "A family of 8-bit (256-tap) linear digital potentiometers set over SPI, in 10 kΩ, 50 kΩ and 100 kΩ end-to-end values. The MCP41XXX has one potentiometer in an 8-pin package; the MCP42XXX has two in a 14-pin package and adds a serial output for daisy chains plus hardware reset and shutdown pins. The parts run from one 2.7 V to 5.5 V supply, draw under 1 µA when idle, start at mid-scale (80h), and a shutdown opens terminal A and ties the wiper to B. MCP41010-I/SN is the single 10 kΩ part, -40 °C to +85 °C, in the 8-lead 150 mil SOIC.",
+ "key_figures": [
+  [
+   "Resolution",
+   "256 taps (8 bits) per potentiometer"
+  ],
+  [
+   "End-to-end resistance",
+   "10, 50 or 100 kΩ; 10 kΩ part 8 min, 12 max kΩ"
+  ],
+  [
+   "INL, DNL",
+   "±1 LSB max (rheostat and divider)"
+  ],
+  [
+   "Wiper resistance",
+   "52 Ω typ (10 kΩ), 125 Ω typ (50, 100 kΩ) at VDD = 5.5 V, 1 mA"
+  ],
+  [
+   "Wiper current",
+   "±1 mA max"
+  ],
+  [
+   "Rheostat tempco",
+   "800 ppm/°C typ; divider tempco 1 ppm/°C typ at code 80h"
+  ],
+  [
+   "Supply",
+   "2.7 V to 5.5 V; 340 µA typ active at 10 MHz, 0.01 µA typ (1 µA max) static"
+  ],
+  [
+   "SPI clock",
+   "10 MHz max at VDD = 5 V; modes 0,0 and 1,1"
+  ],
+  [
+   "-3 dB bandwidth",
+   "1 MHz typ (10 kΩ, code 80h, 30 pF)"
+  ],
+  [
+   "Temperature",
+   "-40 °C to +85 °C (I), -40 °C to +125 °C (E)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 29,
+  "columns": [
+   "part number",
+   "potentiometers",
+   "resistance",
+   "packages",
+   "temperature range",
+   "tape and reel"
+  ],
+  "rows": [
+   [
+    "MCP41010",
+    "1",
+    "10 kΩ",
+    "P (8-lead PDIP), SN (8-lead SOIC)",
+    "I, E",
+    "MCP41010T"
+   ],
+   [
+    "MCP41050",
+    "1",
+    "50 kΩ",
+    "P (8-lead PDIP), SN (8-lead SOIC)",
+    "I, E",
+    "MCP41050T"
+   ],
+   [
+    "MCP41100",
+    "1",
+    "100 kΩ",
+    "P (8-lead PDIP), SN (8-lead SOIC)",
+    "I, E",
+    "MCP41100T"
+   ],
+   [
+    "MCP42010",
+    "2",
+    "10 kΩ",
+    "P (14-lead PDIP), SL (14-lead SOIC), ST (14-lead TSSOP)",
+    "I, E",
+    "MCP42010T"
+   ],
+   [
+    "MCP42050",
+    "2",
+    "50 kΩ",
+    "P (14-lead PDIP), SL (14-lead SOIC), ST (14-lead TSSOP)",
+    "I, E",
+    "MCP42050T"
+   ],
+   [
+    "MCP42100",
+    "2",
+    "100 kΩ",
+    "P (14-lead PDIP), SL (14-lead SOIC), ST (14-lead TSSOP)",
+    "I, E",
+    "MCP42100T"
+   ]
+  ],
+  "notes": [
+   "Order code: device, optional T for tape and reel, then -temperature/package, e.g. MCP41010-I/SN, MCP41010T-I/SN, MCP42100-E/ST.",
+   "Temperature: I = -40 °C to +85 °C, E = -40 °C to +125 °C.",
+   "Packages: P = plastic DIP, 300 mil body (8 or 14 lead); SN = plastic SOIC, 150 mil body, 8 lead; SL = plastic SOIC, 150 mil body, 14 lead; ST = TSSOP, 4.4 mm body, 14 lead.",
+   "Marking: part number, year code (last two digits), week code (week of January 1 is 01) and an alphanumeric traceability code; e.g. an 8-lead SOIC MCP41050 reads MCP41050 / I/SN0313 / 256."
+  ]
+ },
+ "pins": [
+  {
+   "package": "MCP41XXX, 8-lead PDIP and SOIC",
+   "page": 12,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CS",
+     "type": "digital input",
+     "function": "Chip select, active low, Schmitt trigger. Pulling it low starts a transfer; its rising edge runs the command held in the shift register."
+    },
+    {
+     "pin": "2",
+     "name": "SCK",
+     "type": "digital input",
+     "function": "Serial clock, Schmitt trigger. SI is sampled on rising edges. Gated by CS: toggling it with CS high costs no current."
+    },
+    {
+     "pin": "3",
+     "name": "SI",
+     "type": "digital input",
+     "function": "Serial data in, Schmitt trigger; it carries the command and data bytes into the shift register. Gated by CS."
+    },
+    {
+     "pin": "4",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "PA0",
+     "type": "analog",
+     "function": "Terminal A of potentiometer 0. Opened during shutdown."
+    },
+    {
+     "pin": "6",
+     "name": "PW0",
+     "type": "analog",
+     "function": "Wiper of potentiometer 0."
+    },
+    {
+     "pin": "7",
+     "name": "PB0",
+     "type": "analog",
+     "function": "Terminal B of potentiometer 0. Code 00h puts the wiper at this end."
+    },
+    {
+     "pin": "8",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply, 2.7 V to 5.5 V; bypass with 0.1 µF close to the pin."
+    }
+   ]
+  },
+  {
+   "package": "MCP42XXX, 14-lead PDIP, SOIC and TSSOP",
+   "page": 12,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CS",
+     "type": "digital input",
+     "function": "Chip select, active low, Schmitt trigger. Its rising edge runs the loaded command."
+    },
+    {
+     "pin": "2",
+     "name": "SCK",
+     "type": "digital input",
+     "function": "Serial clock, Schmitt trigger. Data enter SI on rising edges and leave SO on falling edges. Gated by CS."
+    },
+    {
+     "pin": "3",
+     "name": "SI",
+     "type": "digital input",
+     "function": "Serial data in, Schmitt trigger. Gated by CS."
+    },
+    {
+     "pin": "4",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "PB1",
+     "type": "analog",
+     "function": "Terminal B of potentiometer 1."
+    },
+    {
+     "pin": "6",
+     "name": "PW1",
+     "type": "analog",
+     "function": "Wiper of potentiometer 1."
+    },
+    {
+     "pin": "7",
+     "name": "PA1",
+     "type": "analog",
+     "function": "Terminal A of potentiometer 1."
+    },
+    {
+     "pin": "8",
+     "name": "PA0",
+     "type": "analog",
+     "function": "Terminal A of potentiometer 0."
+    },
+    {
+     "pin": "9",
+     "name": "PW0",
+     "type": "analog",
+     "function": "Wiper of potentiometer 0."
+    },
+    {
+     "pin": "10",
+     "name": "PB0",
+     "type": "analog",
+     "function": "Terminal B of potentiometer 0."
+    },
+    {
+     "pin": "11",
+     "name": "RS",
+     "type": "digital input",
+     "function": "Reset, active low, Schmitt trigger with an active pull-up. Held low for 150 ns or more it sets every potentiometer to 80h. Keep it high while CS is low; do not let it float."
+    },
+    {
+     "pin": "12",
+     "name": "SHDN",
+     "type": "digital input",
+     "function": "Shutdown, active low, Schmitt trigger with an active pull-up. Low opens terminal A and joins W to B on every potentiometer; register contents are kept. Keep it high while CS is low; do not let it float."
+    },
+    {
+     "pin": "13",
+     "name": "SO",
+     "type": "digital output",
+     "function": "Serial data out from the end of the 16-bit shift register, for daisy chains; changes on SCK falling edges. Push-pull, never high-impedance: it drives low whenever CS is high."
+    },
+    {
+     "pin": "14",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Supply, 2.7 V to 5.5 V; bypass with 0.1 µF close to the pin."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "DC characteristics: 10 kΩ version",
+   "page": 2,
+   "conditions": "VDD = +2.7 V to 5.5 V, TA = -40 °C to +85 °C unless noted (TSSOP devices specified at +25 °C and +85 °C only). Typical values at VDD = 5 V, VSS = 0 V, VB = 0 V, TA = +25 °C.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Rheostat mode",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Nominal Resistance",
+     "R",
+     "8",
+     "10",
+     "12",
+     "kΩ",
+     "TA = +25 °C (Note 1)"
+    ],
+    [
+     "Rheostat Differential Non-Linearity",
+     "R-DNL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 2"
+    ],
+    [
+     "Rheostat Integral Non-Linearity",
+     "R-INL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 2"
+    ],
+    [
+     "Rheostat Tempco",
+     "∆RAB/∆T",
+     "—",
+     "800",
+     "—",
+     "ppm/°C",
+     ""
+    ],
+    [
+     "Wiper Resistance",
+     "RW",
+     "—",
+     "52",
+     "100",
+     "Ω",
+     "VDD = 5.5 V, IW = 1 mA, code 00h"
+    ],
+    [
+     "Wiper Resistance",
+     "RW",
+     "—",
+     "73",
+     "125",
+     "Ω",
+     "VDD = 2.7 V, IW = 1 mA, code 00h"
+    ],
+    [
+     "Wiper Current",
+     "IW",
+     "-1",
+     "—",
+     "+1",
+     "mA",
+     ""
+    ],
+    [
+     "Nominal Resistance Match",
+     "∆R/R",
+     "—",
+     "0.2",
+     "1",
+     "%",
+     "MCP42010 only, P0 to P1; TA = +25 °C"
+    ],
+    [
+     "Potentiometer divider",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Resolution",
+     "N",
+     "8",
+     "—",
+     "—",
+     "Bits",
+     ""
+    ],
+    [
+     "Monotonicity",
+     "N",
+     "8",
+     "—",
+     "—",
+     "Bits",
+     ""
+    ],
+    [
+     "Differential Non-Linearity",
+     "DNL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 3"
+    ],
+    [
+     "Integral Non-Linearity",
+     "INL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 3"
+    ],
+    [
+     "Voltage Divider Tempco",
+     "∆VW/∆T",
+     "—",
+     "1",
+     "—",
+     "ppm/°C",
+     "Code 80h"
+    ],
+    [
+     "Full-Scale Error",
+     "VWFSE",
+     "-2",
+     "-0.7",
+     "0",
+     "LSB",
+     "Code FFh, VDD = 5 V; divider test circuit"
+    ],
+    [
+     "Full-Scale Error",
+     "VWFSE",
+     "-2",
+     "-0.7",
+     "0",
+     "LSB",
+     "Code FFh, VDD = 3 V; divider test circuit"
+    ],
+    [
+     "Zero-Scale Error",
+     "VWZSE",
+     "0",
+     "+0.7",
+     "+2",
+     "LSB",
+     "Code 00h, VDD = 5 V; divider test circuit"
+    ],
+    [
+     "Zero-Scale Error",
+     "VWZSE",
+     "0",
+     "+0.7",
+     "+2",
+     "LSB",
+     "Code 00h, VDD = 3 V; divider test circuit"
+    ],
+    [
+     "Resistor terminals",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Voltage Range",
+     "VA,B,W",
+     "0",
+     "—",
+     "VDD",
+     "",
+     "Note 4"
+    ],
+    [
+     "Capacitance (CA or CB)",
+     "",
+     "—",
+     "15",
+     "—",
+     "pF",
+     "f = 1 MHz, Code = 80h; capacitance test circuit"
+    ],
+    [
+     "Capacitance",
+     "CW",
+     "—",
+     "5.6",
+     "—",
+     "pF",
+     "f = 1 MHz, Code = 80h; capacitance test circuit"
+    ],
+    [
+     "Dynamic characteristics (all at VDD = 5 V)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Bandwidth -3dB",
+     "BW",
+     "—",
+     "1",
+     "—",
+     "MHz",
+     "VB = 0 V, measured at code 80h, output load = 30 pF"
+    ],
+    [
+     "Settling Time",
+     "tS",
+     "—",
+     "2",
+     "—",
+     "µS",
+     "VA = VDD, VB = 0 V, ±1% error band, transition from code 00h to code 80h, output load = 30 pF"
+    ],
+    [
+     "Resistor Noise Voltage",
+     "eNWB",
+     "—",
+     "9",
+     "—",
+     "nV/√Hz",
+     "VA = open, code 80h, f = 1 kHz"
+    ],
+    [
+     "Crosstalk",
+     "CT",
+     "—",
+     "-95",
+     "—",
+     "dB",
+     "VA = VDD, VB = 0 V (Note 5)"
+    ],
+    [
+     "Digital inputs/outputs (CS, SCK, SI, SO); RS and SHDN pin behaviour in the reset and shutdown pin current curve",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Schmitt Trigger High-Level Input Voltage",
+     "VIH",
+     "0.7VDD",
+     "—",
+     "—",
+     "V",
+     ""
+    ],
+    [
+     "Schmitt Trigger Low-Level Input Voltage",
+     "VIL",
+     "—",
+     "—",
+     "0.3VDD",
+     "V",
+     ""
+    ],
+    [
+     "Hysteresis of Schmitt Trigger Inputs",
+     "VHYS",
+     "—",
+     "0.05VDD",
+     "—",
+     "",
+     ""
+    ],
+    [
+     "Low-Level Output Voltage",
+     "VOL",
+     "—",
+     "—",
+     "0.40",
+     "V",
+     "IOL = 2.1 mA, VDD = 5 V"
+    ],
+    [
+     "High-Level Output Voltage",
+     "VOH",
+     "VDD - 0.5",
+     "—",
+     "—",
+     "V",
+     "IOH = -400 µA, VDD = 5 V"
+    ],
+    [
+     "Input Leakage Current",
+     "ILI",
+     "-1",
+     "—",
+     "+1",
+     "µA",
+     "CS = VDD, VIN = VSS or VDD, includes VA SHDN = 0"
+    ],
+    [
+     "Pin Capacitance (all inputs/outputs)",
+     "CIN, COUT",
+     "—",
+     "10",
+     "—",
+     "pF",
+     "VDD = 5.0 V, TA = +25 °C, fc = 1 MHz"
+    ],
+    [
+     "Power requirements",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Operating Voltage Range",
+     "VDD",
+     "2.7",
+     "—",
+     "5.5",
+     "V",
+     ""
+    ],
+    [
+     "Supply Current, Active",
+     "IDDA",
+     "—",
+     "340",
+     "500",
+     "µA",
+     "VDD = 5.5 V, CS = VSS, fSCK = 10 MHz, SO = open, code FFh (Note 6)"
+    ],
+    [
+     "Supply Current, Static",
+     "IDDS",
+     "—",
+     "0.01",
+     "1",
+     "µA",
+     "CS, SHDN, RS = VDD = 5.5 V, SO = open (Note 6)"
+    ],
+    [
+     "Power Supply Sensitivity",
+     "PSS",
+     "—",
+     "0.0015",
+     "0.0035",
+     "%/%",
+     "VDD = 4.5 V - 5.5 V, VA = 4.5 V, code 80h"
+    ],
+    [
+     "Power Supply Sensitivity",
+     "PSS",
+     "—",
+     "0.0015",
+     "0.0035",
+     "%/%",
+     "VDD = 2.7 V - 3.3 V, VA = 2.7 V, code 80h"
+    ]
+   ],
+   "notes": [
+    "Note 1: measured with VAB = VDD and the wiper left open.",
+    "Note 2: R-INL is the departure from the ideal straight line drawn between the highest- and lowest-resistance wiper positions; R-DNL is the departure of each step between neighbouring taps from the ideal step. For the 10 kΩ version the test current IW is 50 µA at VDD = 3 V and 400 µA at VDD = 5 V (rheostat non-linearity test circuit).",
+    "Note 3: DNL and INL are taken at the wiper with the part wired as a voltage divider, VA = VDD and VB = 0 V (divider non-linearity test circuit). The ±1 LSB DNL limits hold under monotonic operating conditions.",
+    "Note 4: terminals A, B and W may sit at any polarity relative to one another. Full-scale and zero-scale errors use the divider non-linearity test circuit.",
+    "Note 5: taken at one wiper while the neighbouring wiper swings across its full scale.",
+    "Note 6: the supply current does not depend on the current flowing through the resistor network.",
+    "Misprint: the settling-time unit µS should read µs."
+   ]
+  },
+  {
+   "title": "DC characteristics: 50 kΩ version",
+   "page": 3,
+   "conditions": "VDD = +2.7 V to 5.5 V, TA = -40 °C to +85 °C unless noted (TSSOP devices specified at +25 °C and +85 °C only). Typical values at VDD = 5 V, VSS = 0 V, VB = 0 V, TA = +25 °C.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Rheostat mode",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Nominal Resistance",
+     "R",
+     "35",
+     "50",
+     "65",
+     "kΩ",
+     "TA = +25 °C (Note 1)"
+    ],
+    [
+     "Rheostat Differential Non-Linearity",
+     "R-DNL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 2"
+    ],
+    [
+     "Rheostat Integral Non-Linearity",
+     "R-INL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 2"
+    ],
+    [
+     "Rheostat Tempco",
+     "∆RAB/∆T",
+     "—",
+     "800",
+     "—",
+     "ppm/°C",
+     ""
+    ],
+    [
+     "Wiper Resistance",
+     "RW",
+     "—",
+     "125",
+     "175",
+     "Ω",
+     "VDD = 5.5 V, IW = 1 mA, code 00h"
+    ],
+    [
+     "Wiper Resistance",
+     "RW",
+     "—",
+     "175",
+     "250",
+     "Ω",
+     "VDD = 2.7 V, IW = 1 mA, code 00h"
+    ],
+    [
+     "Wiper Current",
+     "IW",
+     "-1",
+     "—",
+     "+1",
+     "mA",
+     ""
+    ],
+    [
+     "Nominal Resistance Match",
+     "∆R/R",
+     "—",
+     "0.2",
+     "1",
+     "%",
+     "MCP42050 only, P0 to P1; TA = +25 °C"
+    ],
+    [
+     "Potentiometer divider",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Resolution",
+     "N",
+     "8",
+     "—",
+     "—",
+     "Bits",
+     ""
+    ],
+    [
+     "Monotonicity",
+     "N",
+     "8",
+     "—",
+     "—",
+     "Bits",
+     ""
+    ],
+    [
+     "Differential Non-Linearity",
+     "DNL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 3"
+    ],
+    [
+     "Integral Non-Linearity",
+     "INL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 3"
+    ],
+    [
+     "Voltage Divider Tempco",
+     "∆VW/∆T",
+     "—",
+     "1",
+     "—",
+     "ppm/°C",
+     "Code 80h"
+    ],
+    [
+     "Full-Scale Error",
+     "VWFSE",
+     "-1",
+     "-0.25",
+     "0",
+     "LSB",
+     "Code FFh, VDD = 5 V; divider test circuit"
+    ],
+    [
+     "Full-Scale Error",
+     "VWFSE",
+     "-1",
+     "-0.35",
+     "0",
+     "LSB",
+     "Code FFh, VDD = 3 V; divider test circuit"
+    ],
+    [
+     "Zero-Scale Error",
+     "VWZSE",
+     "0",
+     "+0.25",
+     "+1",
+     "LSB",
+     "Code 00h, VDD = 5 V; divider test circuit"
+    ],
+    [
+     "Zero-Scale Error",
+     "VWZSE",
+     "0",
+     "+0.35",
+     "+1",
+     "LSB",
+     "Code 00h, VDD = 3 V; divider test circuit"
+    ],
+    [
+     "Resistor terminals",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Voltage Range",
+     "VA,B,W",
+     "0",
+     "—",
+     "VDD",
+     "",
+     "Note 4"
+    ],
+    [
+     "Capacitance (CA or CB)",
+     "",
+     "—",
+     "11",
+     "—",
+     "pF",
+     "f = 1 MHz, Code = 80h; capacitance test circuit"
+    ],
+    [
+     "Capacitance",
+     "CW",
+     "—",
+     "5.6",
+     "—",
+     "pF",
+     "f = 1 MHz, Code = 80h; capacitance test circuit"
+    ],
+    [
+     "Dynamic characteristics (all at VDD = 5 V)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Bandwidth -3dB",
+     "BW",
+     "—",
+     "280",
+     "—",
+     "MHz",
+     "VB = 0 V, measured at code 80h, output load = 30 pF"
+    ],
+    [
+     "Settling Time",
+     "tS",
+     "—",
+     "8",
+     "—",
+     "µS",
+     "VA = VDD, VB = 0 V, ±1% error band, transition from code 00h to code 80h, output load = 30 pF"
+    ],
+    [
+     "Resistor Noise Voltage",
+     "eNWB",
+     "—",
+     "20",
+     "—",
+     "nV/√Hz",
+     "VA = open, code 80h, f = 1 kHz"
+    ],
+    [
+     "Crosstalk",
+     "CT",
+     "—",
+     "-95",
+     "—",
+     "dB",
+     "VA = VDD, VB = 0 V (Note 5)"
+    ],
+    [
+     "Digital inputs/outputs (CS, SCK, SI, SO); RS and SHDN pin behaviour in the reset and shutdown pin current curve",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Schmitt Trigger High-Level Input Voltage",
+     "VIH",
+     "0.7VDD",
+     "—",
+     "—",
+     "V",
+     ""
+    ],
+    [
+     "Schmitt Trigger Low-Level Input Voltage",
+     "VIL",
+     "—",
+     "—",
+     "0.3VDD",
+     "V",
+     ""
+    ],
+    [
+     "Hysteresis of Schmitt Trigger Inputs",
+     "VHYS",
+     "—",
+     "0.05VDD",
+     "—",
+     "",
+     ""
+    ],
+    [
+     "Low-Level Output Voltage",
+     "VOL",
+     "—",
+     "—",
+     "0.40",
+     "V",
+     "IOL = 2.1 mA, VDD = 5 V"
+    ],
+    [
+     "High-Level Output Voltage",
+     "VOH",
+     "VDD - 0.5",
+     "—",
+     "—",
+     "V",
+     "IOH = -400 µA, VDD = 5 V"
+    ],
+    [
+     "Input Leakage Current",
+     "ILI",
+     "-1",
+     "—",
+     "+1",
+     "µA",
+     "CS = VDD, VIN = VSS or VDD, includes VA SHDN = 0"
+    ],
+    [
+     "Pin Capacitance (all inputs/outputs)",
+     "CIN, COUT",
+     "—",
+     "10",
+     "—",
+     "pF",
+     "VDD = 5.0 V, TA = +25 °C, fc = 1 MHz"
+    ],
+    [
+     "Power requirements",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Operating Voltage Range",
+     "VDD",
+     "2.7",
+     "—",
+     "5.5",
+     "V",
+     ""
+    ],
+    [
+     "Supply Current, Active",
+     "IDDA",
+     "—",
+     "340",
+     "500",
+     "µA",
+     "VDD = 5.5 V, CS = VSS, fSCK = 10 MHz, SO = open, code FFh (Note 6)"
+    ],
+    [
+     "Supply Current, Static",
+     "IDDS",
+     "—",
+     "0.01",
+     "1",
+     "µA",
+     "CS, SHDN, RS = VDD = 5.5 V, SO = open (Note 6)"
+    ],
+    [
+     "Power Supply Sensitivity",
+     "PSS",
+     "—",
+     "0.0015",
+     "0.0035",
+     "%/%",
+     "VDD = 4.5 V - 5.5 V, VA = 4.5 V, code 80h"
+    ],
+    [
+     "Power Supply Sensitivity",
+     "PSS",
+     "—",
+     "0.0015",
+     "0.0035",
+     "%/%",
+     "VDD = 2.7 V - 3.3 V, VA = 2.7 V, code 80h"
+    ]
+   ],
+   "notes": [
+    "Note 1: measured with VAB = VDD and the wiper left open.",
+    "Note 2: R-INL is the departure from the ideal straight line drawn between the highest- and lowest-resistance wiper positions; R-DNL is the departure of each step between neighbouring taps from the ideal step. For the 50 kΩ version IW = VDD/R at +3 V or +5 V (rheostat non-linearity test circuit).",
+    "Note 3: DNL and INL are taken at the wiper with the part wired as a voltage divider, VA = VDD and VB = 0 V (divider non-linearity test circuit). The ±1 LSB DNL limits hold under monotonic operating conditions.",
+    "Note 4: terminals A, B and W may sit at any polarity relative to one another. Full-scale and zero-scale errors use the divider non-linearity test circuit.",
+    "Note 5: taken at one wiper while the neighbouring wiper swings across its full scale.",
+    "Note 6: the supply current does not depend on the current flowing through the resistor network.",
+    "Misprint: the settling-time unit µS should read µs.",
+    "Misprint: the bandwidth unit MHz should read kHz; the -3 dB bandwidth curve gives the 50 kΩ part at 279 kHz."
+   ]
+  },
+  {
+   "title": "DC characteristics: 100 kΩ version",
+   "page": 4,
+   "conditions": "VDD = +2.7 V to 5.5 V, TA = -40 °C to +85 °C unless noted (TSSOP devices specified at +25 °C and +85 °C only). Typical values at VDD = 5 V, VSS = 0 V, VB = 0 V, TA = +25 °C.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Rheostat mode",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Nominal Resistance",
+     "R",
+     "70",
+     "100",
+     "130",
+     "kΩ",
+     "TA = +25 °C (Note 1)"
+    ],
+    [
+     "Rheostat Differential Non-Linearity",
+     "R-DNL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 2"
+    ],
+    [
+     "Rheostat Integral Non-Linearity",
+     "R-INL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 2"
+    ],
+    [
+     "Rheostat Tempco",
+     "∆RAB/∆T",
+     "—",
+     "800",
+     "—",
+     "ppm/°C",
+     ""
+    ],
+    [
+     "Wiper Resistance",
+     "RW",
+     "—",
+     "125",
+     "175",
+     "Ω",
+     "VDD = 5.5 V, IW = 1 mA, code 00h"
+    ],
+    [
+     "Wiper Resistance",
+     "RW",
+     "—",
+     "175",
+     "250",
+     "Ω",
+     "VDD = 2.7 V, IW = 1 mA, code 00h"
+    ],
+    [
+     "Wiper Current",
+     "IW",
+     "-1",
+     "—",
+     "+1",
+     "mA",
+     ""
+    ],
+    [
+     "Nominal Resistance Match",
+     "∆R/R",
+     "—",
+     "0.2",
+     "1",
+     "%",
+     "MCP42010 only, P0 to P1; TA = +25 °C"
+    ],
+    [
+     "Potentiometer divider",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Resolution",
+     "N",
+     "8",
+     "—",
+     "—",
+     "Bits",
+     ""
+    ],
+    [
+     "Monotonicity",
+     "N",
+     "8",
+     "—",
+     "—",
+     "Bits",
+     ""
+    ],
+    [
+     "Differential Non-Linearity",
+     "DNL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 3"
+    ],
+    [
+     "Integral Non-Linearity",
+     "INL",
+     "-1",
+     "±1/4",
+     "+1",
+     "LSB",
+     "Note 3"
+    ],
+    [
+     "Voltage Divider Tempco",
+     "∆VW/∆T",
+     "—",
+     "1",
+     "—",
+     "ppm/°C",
+     "Code 80h"
+    ],
+    [
+     "Full-Scale Error",
+     "VWFSE",
+     "-1",
+     "-0.25",
+     "0",
+     "LSB",
+     "Code FFh, VDD = 5 V; divider test circuit"
+    ],
+    [
+     "Full-Scale Error",
+     "VWFSE",
+     "-1",
+     "-0.35",
+     "0",
+     "LSB",
+     "Code FFh, VDD = 3 V; divider test circuit"
+    ],
+    [
+     "Zero-Scale Error",
+     "VWZSE",
+     "0",
+     "+0.25",
+     "+1",
+     "LSB",
+     "Code 00h, VDD = 5 V; divider test circuit"
+    ],
+    [
+     "Zero-Scale Error",
+     "VWZSE",
+     "0",
+     "+0.35",
+     "+1",
+     "LSB",
+     "Code 00h, VDD = 3 V; divider test circuit"
+    ],
+    [
+     "Resistor terminals",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Voltage Range",
+     "VA,B,W",
+     "0",
+     "—",
+     "VDD",
+     "",
+     "Note 4"
+    ],
+    [
+     "Capacitance (CA or CB)",
+     "",
+     "—",
+     "11",
+     "—",
+     "pF",
+     "f = 1 MHz, Code = 80h; capacitance test circuit"
+    ],
+    [
+     "Capacitance",
+     "CW",
+     "—",
+     "5.6",
+     "—",
+     "pF",
+     "f = 1 MHz, Code = 80h; capacitance test circuit"
+    ],
+    [
+     "Dynamic characteristics (all at VDD = 5 V)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Bandwidth -3dB",
+     "BW",
+     "—",
+     "145",
+     "—",
+     "MHz",
+     "VB = 0 V, measured at code 80h, output load = 30 pF"
+    ],
+    [
+     "Settling Time",
+     "tS",
+     "—",
+     "18",
+     "—",
+     "µS",
+     "VA = VDD, VB = 0 V, ±1% error band, transition from code 00h to code 80h, output load = 30 pF"
+    ],
+    [
+     "Resistor Noise Voltage",
+     "eNWB",
+     "—",
+     "29",
+     "—",
+     "nV/√Hz",
+     "VA = open, code 80h, f = 1 kHz"
+    ],
+    [
+     "Crosstalk",
+     "CT",
+     "—",
+     "-95",
+     "—",
+     "dB",
+     "VA = VDD, VB = 0 V (Note 5)"
+    ],
+    [
+     "Digital inputs/outputs (CS, SCK, SI, SO); RS and SHDN pin behaviour in the reset and shutdown pin current curve",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Schmitt Trigger High-Level Input Voltage",
+     "VIH",
+     "0.7VDD",
+     "—",
+     "—",
+     "V",
+     ""
+    ],
+    [
+     "Schmitt Trigger Low-Level Input Voltage",
+     "VIL",
+     "—",
+     "—",
+     "0.3VDD",
+     "V",
+     ""
+    ],
+    [
+     "Hysteresis of Schmitt Trigger Inputs",
+     "VHYS",
+     "—",
+     "0.05VDD",
+     "—",
+     "",
+     ""
+    ],
+    [
+     "Low-Level Output Voltage",
+     "VOL",
+     "—",
+     "—",
+     "0.40",
+     "V",
+     "IOL = 2.1 mA, VDD = 5 V"
+    ],
+    [
+     "High-Level Output Voltage",
+     "VOH",
+     "VDD - 0.5",
+     "—",
+     "—",
+     "V",
+     "IOH = -400 µA, VDD = 5 V"
+    ],
+    [
+     "Input Leakage Current",
+     "ILI",
+     "-1",
+     "—",
+     "+1",
+     "µA",
+     "CS = VDD, VIN = VSS or VDD, includes VA SHDN = 0"
+    ],
+    [
+     "Pin Capacitance (all inputs/outputs)",
+     "CIN, COUT",
+     "—",
+     "10",
+     "—",
+     "pF",
+     "VDD = 5.0 V, TA = +25 °C, fc = 1 MHz"
+    ],
+    [
+     "Power requirements",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Operating Voltage Range",
+     "VDD",
+     "2.7",
+     "—",
+     "5.5",
+     "V",
+     ""
+    ],
+    [
+     "Supply Current, Active",
+     "IDDA",
+     "—",
+     "340",
+     "500",
+     "µA",
+     "VDD = 5.5 V, CS = VSS, fSCK = 10 MHz, SO = open, code FFh (Note 6)"
+    ],
+    [
+     "Supply Current, Static",
+     "IDDS",
+     "—",
+     "0.01",
+     "1",
+     "µA",
+     "CS, SHDN, RS = VDD = 5.5 V, SO = open (Note 6)"
+    ],
+    [
+     "Power Supply Sensitivity",
+     "PSS",
+     "—",
+     "0.0015",
+     "0.0035",
+     "%/%",
+     "VDD = 4.5 V - 5.5 V, VA = 4.5 V, code 80h"
+    ],
+    [
+     "Power Supply Sensitivity",
+     "PSS",
+     "—",
+     "0.0015",
+     "0.0035",
+     "%/%",
+     "VDD = 2.7 V - 3.3 V, VA = 2.7 V, code 80h"
+    ]
+   ],
+   "notes": [
+    "Note 1: measured with VAB = VDD and the wiper left open.",
+    "Note 2: R-INL is the departure from the ideal straight line drawn between the highest- and lowest-resistance wiper positions; R-DNL is the departure of each step between neighbouring taps from the ideal step. For the 10 kΩ version the test current IW is 50 µA at VDD = 3 V and 400 µA at VDD = 5 V (rheostat non-linearity test circuit).",
+    "Note 3: DNL and INL are taken at the wiper with the part wired as a voltage divider, VA = VDD and VB = 0 V (divider non-linearity test circuit). The ±1 LSB DNL limits hold under monotonic operating conditions.",
+    "Note 4: terminals A, B and W may sit at any polarity relative to one another. Full-scale and zero-scale errors use the divider non-linearity test circuit.",
+    "Note 5: taken at one wiper while the neighbouring wiper swings across its full scale.",
+    "Note 6: the supply current does not depend on the current flowing through the resistor network.",
+    "Misprint: the settling-time unit µS should read µs.",
+    "Misprint: the bandwidth unit MHz should read kHz; the -3 dB bandwidth curve gives the 100 kΩ part at 145 kHz.",
+    "The resistance-match row reads MCP42010; for this resistance it applies to the MCP42100.",
+    "Note 2 of this resistance reads the 10 kΩ test currents."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VDD",
+     "7.0V"
+    ],
+    [
+     "All inputs and outputs w.r.t. VSS",
+     "-0.6V to VDD +1.0V"
+    ],
+    [
+     "Storage temperature",
+     "-60°C to +150°C"
+    ],
+    [
+     "Ambient temp. with power applied",
+     "-60°C to +125°C"
+    ],
+    [
+     "ESD protection on all pins",
+     "≥ 2 kV"
+    ]
+   ],
+   "notes": [
+    "Ratings are stress limits only; working at or past them is not implied, and long exposure to them may shorten the life of the part."
+   ]
+  },
+  {
+   "title": "AC timing characteristics",
+   "page": 5,
+   "conditions": "VDD = +2.7 V to 5.5 V, TA = -40 °C to +85 °C unless noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit",
+    "conditions"
+   ],
+   "rows": [
+    [
+     "Clock Frequency",
+     "FCLK",
+     "—",
+     "—",
+     "10",
+     "MHz",
+     "VDD = 5 V (Note 1)"
+    ],
+    [
+     "Clock High Time",
+     "tHI",
+     "40",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "Clock Low Time",
+     "tLO",
+     "40",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "CS Fall to First Rising CLK Edge",
+     "tCSSR",
+     "40",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "Data Input Setup Time",
+     "tSU",
+     "40",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "Data Input Hold Time",
+     "tHD",
+     "10",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "SCK Fall to SO Valid Propagation Delay",
+     "tDO",
+     "",
+     "—",
+     "80",
+     "ns",
+     "CL = 30 pF (Note 2)"
+    ],
+    [
+     "SCK Rise to CS Rise Hold Time",
+     "tCHS",
+     "30",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "SCK Rise to CS Fall Delay",
+     "tCS0",
+     "10",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "CS Rise to CLK Rise Hold",
+     "tCS1",
+     "100",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "CS High Time",
+     "tCSH",
+     "40",
+     "—",
+     "—",
+     "ns",
+     ""
+    ],
+    [
+     "Reset Pulse Width",
+     "tRS",
+     "150",
+     "—",
+     "—",
+     "ns",
+     "Note 2"
+    ],
+    [
+     "RS Rising to CS Falling Delay Time",
+     "tRSCS",
+     "150",
+     "—",
+     "—",
+     "ns",
+     "Note 2"
+    ],
+    [
+     "CS rising to RS or SHDN falling delay time",
+     "tSE",
+     "40",
+     "—",
+     "—",
+     "ns",
+     "Note 3"
+    ],
+    [
+     "CS low time",
+     "tCSL",
+     "100",
+     "—",
+     "—",
+     "ns",
+     "Note 3"
+    ],
+    [
+     "Shutdown Pulse Width",
+     "tSH",
+     "150",
+     "—",
+     "—",
+     "ns",
+     "Note 3"
+    ]
+   ],
+   "notes": [
+    "Note 1: in a daisy chain the clock is limited by tDO plus tSU; taking 5 ns SCK edges, a 40 ns tHI, an 80 ns tDO and a 40 ns tSU gives roughly 5.8 MHz.",
+    "Note 2: MCP42XXX only.",
+    "Note 3: MCP42XXX only, and only when the hardware pins take the part out of software shutdown."
+   ]
+  },
+  {
+   "title": "Command byte format",
+   "page": 18,
+   "conditions": "Command byte bits, MSB first: X X C1 C0 X X P1 P0. P1 is don't care on the MCP41XXX.",
+   "columns": [
+    "C1",
+    "C0",
+    "P1",
+    "P0",
+    "command",
+    "effect"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "X",
+     "X",
+     "None",
+     "Nothing is executed (NOP)."
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "0",
+     "Write Data",
+     "Neither potentiometer is written."
+    ],
+    [
+     "0",
+     "1",
+     "0",
+     "1",
+     "Write Data",
+     "The data byte goes to potentiometer 0."
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "0",
+     "Write Data",
+     "The data byte goes to potentiometer 1."
+    ],
+    [
+     "0",
+     "1",
+     "1",
+     "1",
+     "Write Data",
+     "The data byte goes to both potentiometers."
+    ],
+    [
+     "1",
+     "0",
+     "per bit",
+     "per bit",
+     "Shutdown",
+     "Each potentiometer whose select bit is 1 shuts down; the data bits are don't care."
+    ],
+    [
+     "1",
+     "1",
+     "X",
+     "X",
+     "None",
+     "Nothing is executed (NOP)."
+    ]
+   ]
+  },
+  {
+   "title": "Truth table for logic inputs",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "SCK",
+    "CS",
+    "RS",
+    "SHDN",
+    "action"
+   ],
+   "rows": [
+    [
+     "X",
+     "↓",
+     "H",
+     "H",
+     "Communication starts; the part leaves standby."
+    ],
+    [
+     "L",
+     "L",
+     "H",
+     "H",
+     "No action; the part waits for clocks or for CS to rise and run the command."
+    ],
+    [
+     "↑",
+     "L",
+     "H",
+     "X",
+     "One bit shifts into the shift register; loading works with SHDN low."
+    ],
+    [
+     "↓",
+     "L",
+     "H",
+     "X",
+     "One bit shifts out on SO; SO works with SHDN low."
+    ],
+    [
+     "X",
+     "↑",
+     "H",
+     "H",
+     "The command bits either load the data latches from the shift register or run shutdown, and only if a multiple of 16 clocks arrived while CS was low. SO goes low."
+    ],
+    [
+     "X",
+     "H",
+     "H",
+     "H",
+     "Static operation."
+    ],
+    [
+     "X",
+     "H",
+     "↓",
+     "H",
+     "Every data register is set and latched to code 80h."
+    ],
+    [
+     "X",
+     "H",
+     "↓",
+     "L",
+     "Every data register is set and latched to code 80h; the part stays in hardware shutdown."
+    ],
+    [
+     "X",
+     "H",
+     "H",
+     "↓",
+     "Every potentiometer enters hardware shutdown: A open, W shorted to B."
+    ],
+    [
+     "X",
+     "H",
+     "H",
+     "↑",
+     "Every potentiometer leaves hardware shutdown with its latch contents back; software shutdown also ends if a low pulse on CS came before this edge."
+    ]
+   ],
+   "notes": [
+    "↓ is a falling edge and ↑ a rising edge."
+   ]
+  },
+  {
+   "title": "Example resistance calculation, 10 kΩ potentiometer",
+   "page": 16,
+   "conditions": "RAB = 10 kΩ, RW = 52 Ω, code C0h = 192 decimal; typical values",
+   "columns": [
+    "quantity",
+    "value"
+   ],
+   "rows": [
+    [
+     "RWA(C0h)",
+     "2552 Ω"
+    ],
+    [
+     "RWB(C0h)",
+     "7552 Ω"
+    ]
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Wiper to terminal A resistance",
+   "expr": "RWA(Dn) = RAB × (256 - Dn) / 256 + RW",
+   "where": {
+    "RAB": "end-to-end resistance (10, 50 or 100 kΩ)",
+    "Dn": "8-bit code in data register n, 0 to 255",
+    "RW": "wiper resistance"
+   },
+   "note": "In feedback amplifiers whose input is high-impedance, RW may be dropped.",
+   "page": 16
+  },
+  {
+   "name": "Wiper to terminal B resistance",
+   "expr": "RWB(Dn) = RAB × Dn / 256 + RW",
+   "where": {
+    "RAB": "end-to-end resistance",
+    "Dn": "code, 0 to 255",
+    "RW": "wiper resistance"
+   },
+   "note": "Example, 10 kΩ at C0h (192): RWA = 2552 Ω, RWB = 7552 Ω with RW = 52 Ω.",
+   "page": 16
+  },
+  {
+   "name": "Rheostat step",
+   "expr": "LSB = RAB / 256",
+   "where": {
+    "RAB": "end-to-end resistance"
+   },
+   "note": "For 10 kΩ one step is 39.0625 Ω; the rheostat reads RW at code 00h and 9985.94 Ω at FFh. The wiper never reaches terminal A.",
+   "page": 14
+  },
+  {
+   "name": "Inverting amplifier",
+   "expr": "VOUT = -VIN × (RB / RA) + VREF × (1 + RB / RA)",
+   "where": {
+    "RA": "RAB × (256 - Dn) / 256",
+    "RB": "RAB × Dn / 256",
+    "VREF": "voltage at the op-amp's non-inverting input"
+   },
+   "note": "Gain is -1 V/V at mid-scale; useful gains are 0.1 to 10 V/V.",
+   "page": 15
+  },
+  {
+   "name": "Non-inverting amplifier",
+   "expr": "VOUT = VIN × (1 + RB / RA)",
+   "where": {
+    "RA": "RAB × (256 - Dn) / 256",
+    "RB": "RAB × Dn / 256"
+   },
+   "note": "",
+   "page": 15
+  },
+  {
+   "name": "Differential amplifier",
+   "expr": "VOUT = (VA - VB) × RB / RA",
+   "where": {
+    "VA": "signal at the + side potentiometer's A terminal",
+    "VB": "signal at the - side potentiometer's A terminal",
+    "RA": "RAB × (256 - Dn) / 256",
+    "RB": "RAB × Dn / 256"
+   },
+   "note": "Both potentiometers equal in value and set to the same code.",
+   "page": 16
+  },
+  {
+   "name": "Power supply rejection and sensitivity",
+   "expr": "PSRR (dB) = 20 log(∆VDD / ∆VMEAS); PSS (%/%) = ∆VDD / ∆VMEAS",
+   "where": {
+    "∆VDD": "change of the supply, VDD ± 10 %",
+    "∆VMEAS": "resulting change at the wiper"
+   },
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Divider LSB",
+   "expr": "1 LSB = V+ / 256",
+   "where": {
+    "V+": "voltage across A and B, VDD in the non-linearity test"
+   },
+   "note": "",
+   "page": 11
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Structure",
+   "page": 13,
+   "text": "Each potentiometer is a resistor string with 256 tap positions and an 8-bit data register choosing the wiper's tap. The SPI port fills a 16-bit shift register whose data byte is moved into the data registers. Resistance from the wiper to either end changes linearly with the code; 00h sits at B."
+  },
+  {
+   "topic": "Power-up",
+   "page": 21,
+   "text": "A power-on reset sets every data register to mid-scale, 80h. Powering up with SHDN low gives shutdown mode with the registers at 80h."
+  },
+  {
+   "topic": "SPI transfer",
+   "page": 17,
+   "text": "CS goes low, then a command byte and a data byte (16 clocks) are shifted in MSB first. Data enter on rising SCK edges and leave SO on falling edges. The command runs when CS rises. The part counts rising edges while CS is low; anything other than a multiple of 16 aborts the command. After a command the shift register refills with zeros."
+  },
+  {
+   "topic": "SPI modes",
+   "page": 22,
+   "text": "Mode 0,0 (clock idles low) and mode 1,1 (clock idles high) both work; in each, input is sampled on the rising edge and SO changes after the falling edge."
+  },
+  {
+   "topic": "Commands",
+   "page": 17,
+   "text": "C1 C0 = 01 writes the data byte to the potentiometers whose select bits P1, P0 are 1. C1 C0 = 10 shuts down the selected potentiometers; its data byte must still be sent but is ignored. 00 and 11 are no-operation, useful in a chain."
+  },
+  {
+   "topic": "Software shutdown",
+   "page": 17,
+   "text": "A shut-down potentiometer has terminal A open and B joined to W. It stays so until a valid write to it, taking effect on the CS rising edge if SHDN is high (with SHDN low the register still updates but the part stays shut down), or until power is cycled. On the MCP42XXX a CS low pulse followed by an RS low pulse of 150 ns or more (SHDN high, CS high) or by a rising edge on SHDN after at least 100 ns low (CS high) also ends it; sharing one SHDN or RS line, the CS pulse picks which device wakes."
+  },
+  {
+   "topic": "Hardware shutdown (MCP42XXX)",
+   "page": 21,
+   "text": "SHDN low shuts down every potentiometer regardless of software state, leaving the registers unchanged. Registers can still be written and RS still resets them while SHDN is low; new values apply when SHDN rises. SHDN must not fall while CS is low: that state is invalid and leaves the outcome undefined."
+  },
+  {
+   "topic": "Hardware reset (MCP42XXX)",
+   "page": 21,
+   "text": "An RS pulse of 150 ns or longer, taken while CS is high, sets every data latch to 80h, whatever SCK, SI and SHDN are doing. With SHDN low the registers reset but the outputs stay shut down until SHDN rises. Pulling RS down during a CS-low transfer is not allowed and gives undefined results. RS and SHDN have active pull-ups drawing next to nothing at either logic level, and must not float."
+  },
+  {
+   "topic": "Daisy chain (MCP42XXX)",
+   "page": 19,
+   "text": "SO of one device feeds SI of the next; all share CS and SCK. SO carries the shift register's output; because each register is cleared to zeros after a command, the first 16 bits a device passes on are zeros, i.e. a NOP to the next one. Only the devices up to the farthest one needing a command must be clocked: 16 clocks per device, all executing together when CS rises. An MCP41XXX, having no SO, can only be the last device. The SO delay limits the chain clock to about 5.8 MHz."
+  },
+  {
+   "topic": "Rheostat mode",
+   "page": 14,
+   "text": "Used as a two-terminal variable resistor, the unused end is tied to the wiper; A and B may be swapped. At code 00h only the wiper resistance remains, so the current must stay at or below 1 mA. Resistance has a positive tempco; codes 00h to 0Fh vary most with temperature because of the wiper, the rest follow the 800 ppm/°C typ of RAB. Dual parts match A-to-B resistance within 1 % between channels; part to part it may differ by up to 30 %."
+  },
+  {
+   "topic": "Potentiometer (divider) mode",
+   "page": 14,
+   "text": "With all three terminals on separate nodes the wiper gives a voltage proportional to the one across A and B; A and B may be swapped. Tempco is set by resistor ratio, typically 1 ppm/°C at 80h. At low codes the wiper's tempco dominates; above them about 70 % of codes typically stay under 5 ppm/°C and 30 % under 1 ppm/°C."
+  },
+  {
+   "topic": "Signal range",
+   "page": 15,
+   "text": "For linear behaviour the analog signals on the potentiometer and the op-amp's inputs and output must lie between VSS and VDD. An inverting single-supply stage needs a reference or virtual ground at the non-inverting input."
+  },
+  {
+   "topic": "Gain setting",
+   "page": 15,
+   "text": "In the inverting and differential amplifiers gain rises as the wiper moves toward A and falls toward B, roughly logarithmically around code 128; near either end each step changes gain by large amounts because RA and RB are badly mismatched. Gains of 0.1 to 10 V/V are recommended. The differential amplifier needs both potentiometers at one code and gains from the channel matching of a dual part and the low divider tempco."
+  },
+  {
+   "topic": "Offset trim",
+   "page": 16,
+   "text": "A divider-mode potentiometer between two fixed resistors and a buffer gives an output linear in code; R1 and R2 set the step size and the end voltages, and can be chosen to avoid the low codes where wiper resistance hurts tempco most."
+  },
+  {
+   "topic": "Layout",
+   "page": 13,
+   "text": "Bypass VDD with 0.1 µF as near the pin as possible. Keep digital and analog traces apart, with no traces under the part or its bypass capacitor, and route clock and other fast lines well away from analog ones. An analog ground plane keeps all parts at one ground potential."
+  }
+ ],
+ "packages": [
+  {
+   "name": "8-lead PDIP (P), 300 mil",
+   "page": 24,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max",
+    "min (in)",
+    "nom (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "n",
+     "number of pins",
+     "",
+     "8",
+     "",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "p",
+     "pitch",
+     "",
+     "2.54",
+     "",
+     "",
+     ".100",
+     ""
+    ],
+    [
+     "A",
+     "top to seating plane",
+     "3.56",
+     "3.94",
+     "4.32",
+     ".140",
+     ".155",
+     ".170"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "2.92",
+     "3.30",
+     "3.68",
+     ".115",
+     ".130",
+     ".145"
+    ],
+    [
+     "A1",
+     "base to seating plane",
+     "0.38",
+     "",
+     "",
+     ".015",
+     "",
+     ""
+    ],
+    [
+     "E",
+     "shoulder to shoulder width",
+     "7.62",
+     "7.94",
+     "8.26",
+     ".300",
+     ".313",
+     ".325"
+    ],
+    [
+     "E1",
+     "molded package width",
+     "6.10",
+     "6.35",
+     "6.60",
+     ".240",
+     ".250",
+     ".260"
+    ],
+    [
+     "D",
+     "overall length",
+     "9.14",
+     "9.46",
+     "9.78",
+     ".360",
+     ".373",
+     ".385"
+    ],
+    [
+     "L",
+     "tip to seating plane",
+     "3.18",
+     "3.30",
+     "3.43",
+     ".125",
+     ".130",
+     ".135"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.20",
+     "0.29",
+     "0.38",
+     ".008",
+     ".012",
+     ".015"
+    ],
+    [
+     "B1",
+     "upper lead width",
+     "1.14",
+     "1.46",
+     "1.78",
+     ".045",
+     ".058",
+     ".070"
+    ],
+    [
+     "B",
+     "lower lead width",
+     "0.36",
+     "0.46",
+     "0.56",
+     ".014",
+     ".018",
+     ".022"
+    ],
+    [
+     "eB",
+     "overall row spacing",
+     "7.87",
+     "9.40",
+     "10.92",
+     ".310",
+     ".370",
+     ".430"
+    ],
+    [
+     "α",
+     "mold draft angle top (°)",
+     "5",
+     "10",
+     "15",
+     "5",
+     "10",
+     "15"
+    ],
+    [
+     "β",
+     "mold draft angle bottom (°)",
+     "5",
+     "10",
+     "15",
+     "5",
+     "10",
+     "15"
+    ]
+   ],
+   "notes": [
+    "Inches are the controlling unit.",
+    "eB is a significant characteristic.",
+    "D and E1 exclude mold flash or protrusions, at most 0.254 mm (.010\") per side.",
+    "JEDEC MS-001; drawing C04-018."
+   ]
+  },
+  {
+   "name": "8-lead SOIC (SN), 150 mil",
+   "page": 25,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max",
+    "min (in)",
+    "nom (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "n",
+     "number of pins",
+     "",
+     "8",
+     "",
+     "",
+     "8",
+     ""
+    ],
+    [
+     "p",
+     "pitch",
+     "",
+     "1.27",
+     "",
+     "",
+     ".050",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "1.35",
+     "1.55",
+     "1.75",
+     ".053",
+     ".061",
+     ".069"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "1.32",
+     "1.42",
+     "1.55",
+     ".052",
+     ".056",
+     ".061"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "0.18",
+     "0.25",
+     ".004",
+     ".007",
+     ".010"
+    ],
+    [
+     "E",
+     "overall width",
+     "5.79",
+     "6.02",
+     "6.20",
+     ".228",
+     ".237",
+     ".244"
+    ],
+    [
+     "E1",
+     "molded package width",
+     "3.71",
+     "3.91",
+     "3.99",
+     ".146",
+     ".154",
+     ".157"
+    ],
+    [
+     "D",
+     "overall length",
+     "4.80",
+     "4.90",
+     "5.00",
+     ".189",
+     ".193",
+     ".197"
+    ],
+    [
+     "h",
+     "chamfer distance",
+     "0.25",
+     "0.38",
+     "0.51",
+     ".010",
+     ".015",
+     ".020"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.48",
+     "0.62",
+     "0.76",
+     ".019",
+     ".025",
+     ".030"
+    ],
+    [
+     "φ",
+     "foot angle (°)",
+     "0",
+     "4",
+     "8",
+     "0",
+     "4",
+     "8"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.20",
+     "0.23",
+     "0.25",
+     ".008",
+     ".009",
+     ".010"
+    ],
+    [
+     "B",
+     "lead width",
+     "0.33",
+     "0.42",
+     "0.51",
+     ".013",
+     ".017",
+     ".020"
+    ],
+    [
+     "α",
+     "mold draft angle top (°)",
+     "0",
+     "12",
+     "15",
+     "0",
+     "12",
+     "15"
+    ],
+    [
+     "β",
+     "mold draft angle bottom (°)",
+     "0",
+     "12",
+     "15",
+     "0",
+     "12",
+     "15"
+    ]
+   ],
+   "notes": [
+    "Inches are the controlling unit.",
+    "A1 is a significant characteristic.",
+    "D and E1 exclude mold flash or protrusions, at most 0.254 mm (.010\") per side.",
+    "JEDEC MS-012; drawing C04-057."
+   ]
+  },
+  {
+   "name": "14-lead PDIP (P), 300 mil",
+   "page": 26,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max",
+    "min (in)",
+    "nom (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "n",
+     "number of pins",
+     "",
+     "14",
+     "",
+     "",
+     "14",
+     ""
+    ],
+    [
+     "p",
+     "pitch",
+     "",
+     "2.54",
+     "",
+     "",
+     ".100",
+     ""
+    ],
+    [
+     "A",
+     "top to seating plane",
+     "3.56",
+     "3.94",
+     "4.32",
+     ".140",
+     ".155",
+     ".170"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "2.92",
+     "3.30",
+     "3.68",
+     ".115",
+     ".130",
+     ".145"
+    ],
+    [
+     "A1",
+     "base to seating plane",
+     "0.38",
+     "",
+     "",
+     ".015",
+     "",
+     ""
+    ],
+    [
+     "E",
+     "shoulder to shoulder width",
+     "7.62",
+     "7.94",
+     "8.26",
+     ".300",
+     ".313",
+     ".325"
+    ],
+    [
+     "E1",
+     "molded package width",
+     "6.10",
+     "6.35",
+     "6.60",
+     ".240",
+     ".250",
+     ".260"
+    ],
+    [
+     "D",
+     "overall length",
+     "18.80",
+     "19.05",
+     "19.30",
+     ".740",
+     ".750",
+     ".760"
+    ],
+    [
+     "L",
+     "tip to seating plane",
+     "3.18",
+     "3.30",
+     "3.43",
+     ".125",
+     ".130",
+     ".135"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.20",
+     "0.29",
+     "0.38",
+     ".008",
+     ".012",
+     ".015"
+    ],
+    [
+     "B1",
+     "upper lead width",
+     "1.14",
+     "1.46",
+     "1.78",
+     ".045",
+     ".058",
+     ".070"
+    ],
+    [
+     "B",
+     "lower lead width",
+     "0.36",
+     "0.46",
+     "0.56",
+     ".014",
+     ".018",
+     ".022"
+    ],
+    [
+     "eB",
+     "overall row spacing",
+     "7.87",
+     "9.40",
+     "10.92",
+     ".310",
+     ".370",
+     ".430"
+    ],
+    [
+     "α",
+     "mold draft angle top (°)",
+     "5",
+     "10",
+     "15",
+     "5",
+     "10",
+     "15"
+    ],
+    [
+     "β",
+     "mold draft angle bottom (°)",
+     "5",
+     "10",
+     "15",
+     "5",
+     "10",
+     "15"
+    ]
+   ],
+   "notes": [
+    "Inches are the controlling unit.",
+    "eB is a significant characteristic.",
+    "D and E1 exclude mold flash or protrusions, at most 0.254 mm (.010\") per side.",
+    "JEDEC MS-001; drawing C04-005."
+   ]
+  },
+  {
+   "name": "14-lead SOIC (SL), 150 mil",
+   "page": 27,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max",
+    "min (in)",
+    "nom (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "n",
+     "number of pins",
+     "",
+     "14",
+     "",
+     "",
+     "14",
+     ""
+    ],
+    [
+     "p",
+     "pitch",
+     "",
+     "1.27",
+     "",
+     "",
+     ".050",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "1.35",
+     "1.55",
+     "1.75",
+     ".053",
+     ".061",
+     ".069"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "1.32",
+     "1.42",
+     "1.55",
+     ".052",
+     ".056",
+     ".061"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "0.18",
+     "0.25",
+     ".004",
+     ".007",
+     ".010"
+    ],
+    [
+     "E",
+     "overall width",
+     "5.79",
+     "5.99",
+     "6.20",
+     ".228",
+     ".236",
+     ".244"
+    ],
+    [
+     "E1",
+     "molded package width",
+     "3.81",
+     "3.90",
+     "3.99",
+     ".150",
+     ".154",
+     ".157"
+    ],
+    [
+     "D",
+     "overall length",
+     "8.56",
+     "8.69",
+     "8.81",
+     ".337",
+     ".342",
+     ".347"
+    ],
+    [
+     "h",
+     "chamfer distance",
+     "0.25",
+     "0.38",
+     "0.51",
+     ".010",
+     ".015",
+     ".020"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.41",
+     "0.84",
+     "1.27",
+     ".016",
+     ".033",
+     ".050"
+    ],
+    [
+     "φ",
+     "foot angle (°)",
+     "0",
+     "4",
+     "8",
+     "0",
+     "4",
+     "8"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.20",
+     "0.23",
+     "0.25",
+     ".008",
+     ".009",
+     ".010"
+    ],
+    [
+     "B",
+     "lead width",
+     "0.36",
+     "0.42",
+     "0.51",
+     ".014",
+     ".017",
+     ".020"
+    ],
+    [
+     "α",
+     "mold draft angle top (°)",
+     "0",
+     "12",
+     "15",
+     "0",
+     "12",
+     "15"
+    ],
+    [
+     "β",
+     "mold draft angle bottom (°)",
+     "0",
+     "12",
+     "15",
+     "0",
+     "12",
+     "15"
+    ]
+   ],
+   "notes": [
+    "Inches are the controlling unit.",
+    "A1 is a significant characteristic.",
+    "D and E1 exclude mold flash or protrusions, at most 0.254 mm (.010\") per side.",
+    "JEDEC MS-012; drawing C04-065."
+   ]
+  },
+  {
+   "name": "14-lead TSSOP (ST), 4.4 mm",
+   "page": 28,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max",
+    "min (in)",
+    "nom (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "n",
+     "number of pins",
+     "",
+     "14",
+     "",
+     "",
+     "14",
+     ""
+    ],
+    [
+     "p",
+     "pitch",
+     "",
+     "0.65",
+     "",
+     "",
+     ".026",
+     ""
+    ],
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "1.10",
+     "",
+     "",
+     ".043"
+    ],
+    [
+     "A2",
+     "molded package thickness",
+     "0.85",
+     "0.90",
+     "0.95",
+     ".033",
+     ".035",
+     ".037"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "0.10",
+     "0.15",
+     ".002",
+     ".004",
+     ".006"
+    ],
+    [
+     "E",
+     "overall width",
+     "6.25",
+     "6.38",
+     "6.50",
+     ".246",
+     ".251",
+     ".256"
+    ],
+    [
+     "E1",
+     "molded package width",
+     "4.30",
+     "4.40",
+     "4.50",
+     ".169",
+     ".173",
+     ".177"
+    ],
+    [
+     "D",
+     "molded package length",
+     "4.90",
+     "5.00",
+     "5.10",
+     ".193",
+     ".197",
+     ".201"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.50",
+     "0.60",
+     "0.70",
+     ".020",
+     ".024",
+     ".028"
+    ],
+    [
+     "φ",
+     "foot angle (°)",
+     "0",
+     "4",
+     "8",
+     "0",
+     "4",
+     "8"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.09",
+     "0.15",
+     "0.20",
+     ".004",
+     ".006",
+     ".008"
+    ],
+    [
+     "B",
+     "lead width",
+     "0.19",
+     "0.25",
+     "0.30",
+     ".007",
+     ".010",
+     ".012"
+    ],
+    [
+     "α",
+     "mold draft angle top (°)",
+     "0",
+     "5",
+     "10",
+     "0",
+     "5",
+     "10"
+    ],
+    [
+     "β",
+     "mold draft angle bottom (°)",
+     "0",
+     "5",
+     "10",
+     "0",
+     "5",
+     "10"
+    ]
+   ],
+   "notes": [
+    "Millimetres are the controlling unit.",
+    "A1 is a significant characteristic.",
+    "D and E1 exclude mold flash or protrusions, at most 0.127 mm (.005\") per side.",
+    "JEDEC MO-153; drawing C04-087."
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "spi-bypass",
+   "title": "Connection to a microcontroller with bypassing",
+   "page": 13,
+   "description": "A microcontroller drives the potentiometer's CS, SCK and SI. Each chip has its own 0.1 µF capacitor from VDD to ground, placed at its supply pin. The three potentiometer terminals go on to the circuit being adjusted.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP41010"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "microcontroller",
+     "external": true
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_A",
+     "type": "terminal",
+     "value": "terminal A to application"
+    },
+    {
+     "ref": "J_W",
+     "type": "terminal",
+     "value": "wiper to application"
+    },
+    {
+     "ref": "J_B",
+     "type": "terminal",
+     "value": "terminal B to application"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "rheostat",
+   "title": "Rheostat (two-terminal) connection",
+   "page": 14,
+   "description": "Joining terminal A to the wiper makes the part one variable resistor between two nodes, set by the code: least at 00h, most at FFh.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP41010"
+    },
+    {
+     "ref": "J_1",
+     "type": "terminal",
+     "value": "node 1"
+    },
+    {
+     "ref": "J_2",
+     "type": "terminal",
+     "value": "node 2"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS"
+    },
+    {
+     "ref": "J_SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "J_SI",
+     "type": "terminal",
+     "value": "SI"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "divider",
+   "title": "Potentiometer (voltage divider) connection",
+   "page": 14,
+   "description": "Terminal A takes the input voltage V1 and terminal B is grounded; the wiper output V2 is a fraction of V1 set by the code.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP41010"
+    },
+    {
+     "ref": "J_V1",
+     "type": "terminal",
+     "value": "V1"
+    },
+    {
+     "ref": "J_V2",
+     "type": "terminal",
+     "value": "V2"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS"
+    },
+    {
+     "ref": "J_SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "J_SI",
+     "type": "terminal",
+     "value": "SI"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "inverting-amp",
+   "title": "Programmable inverting gain amplifier, single supply",
+   "page": 15,
+   "description": "The input reaches the op-amp's inverting input through the A-to-wiper half of the potentiometer, and the wiper-to-B half returns the output to it, so the code sets the gain RB/RA. The non-inverting input sits at a reference voltage. The op-amp's input current is negligible, so wiper resistance does not enter the gain.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP41010"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP606",
+     "external": true
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "VREF"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS"
+    },
+    {
+     "ref": "J_SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "J_SI",
+     "type": "terminal",
+     "value": "SI"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "noninverting-amp",
+   "title": "Programmable non-inverting gain amplifier, single supply",
+   "page": 15,
+   "description": "The op-amp takes the input on its non-inverting input. The potentiometer is its feedback divider: B to the output, A to ground, wiper to the inverting input, giving a gain of 1 + RB/RA set by the code.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP41010"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP606",
+     "external": true
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS"
+    },
+    {
+     "ref": "J_SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "J_SI",
+     "type": "terminal",
+     "value": "SI"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "differential-amp",
+   "title": "Programmable differential amplifier, single supply",
+   "page": 16,
+   "description": "The two halves of an MCP42010 work as a difference amplifier around an MCP601. SIG- (VB) enters potentiometer 0 at A, whose wiper drives the inverting input and whose B end is the output feedback. SIG+ (VA) enters potentiometer 1 at A, whose B end is at VREF and whose wiper drives the non-inverting input. Set to one common code, they give an output of (VA - VB) × RB/RA.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP42010"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP601",
+     "external": true
+    },
+    {
+     "ref": "J_VB",
+     "type": "terminal",
+     "value": "VB (SIG-)"
+    },
+    {
+     "ref": "J_VA",
+     "type": "terminal",
+     "value": "VA (SIG+)"
+    },
+    {
+     "ref": "J_VREF",
+     "type": "terminal",
+     "value": "VREF"
+    },
+    {
+     "ref": "J_VOUT",
+     "type": "terminal",
+     "value": "VOUT"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS"
+    },
+    {
+     "ref": "J_SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "J_SI",
+     "type": "terminal",
+     "value": "SI"
+    },
+    {
+     "ref": "J_RS",
+     "type": "terminal",
+     "value": "RS"
+    },
+    {
+     "ref": "J_SHDN",
+     "type": "terminal",
+     "value": "SHDN"
+    }
+   ],
+   "notes": [
+    "The two potentiometers must be of equal value.",
+    "Misprint: the op-amp polarity marks are reversed against the -IN and +IN labels; the upper input is -IN, the lower +IN."
+   ]
+  },
+  {
+   "id": "offset-trim",
+   "title": "Programmable offset trim (voltage reference)",
+   "page": 16,
+   "description": "R1 from VDD to A and R2 from B to VSS put the potentiometer's span inside a chosen window; the wiper, filtered by 0.1 µF to ground, is buffered by an MCP606 follower. The output steps linearly with code, and R1, R2 set the step size and the end voltages.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP41010"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP606",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "R1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "R2"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF"
+    },
+    {
+     "ref": "J_VDD",
+     "type": "terminal",
+     "value": "VDD"
+    },
+    {
+     "ref": "J_OUT",
+     "type": "terminal",
+     "value": "OUT"
+    },
+    {
+     "ref": "J_CS",
+     "type": "terminal",
+     "value": "CS"
+    },
+    {
+     "ref": "J_SCK",
+     "type": "terminal",
+     "value": "SCK"
+    },
+    {
+     "ref": "J_SI",
+     "type": "terminal",
+     "value": "SI"
+    }
+   ],
+   "notes": [
+    "R1 and R2 have no given values; they are chosen for the output range and resolution."
+   ]
+  },
+  {
+   "id": "daisy-chain",
+   "title": "Three devices in a daisy chain",
+   "page": 20,
+   "description": "One chip select and one clock from the microcontroller reach all three devices. The microcontroller's SO feeds device 1's SI, device 1's SO feeds device 2, and device 2's SO feeds device 3. Device 3, the last, may be a single MCP41XXX since its SO is not used. 48 clocks load all three, and they act together when CS rises.",
+   "parts": [
+    {
+     "ref": "U4",
+     "type": "ic",
+     "value": "microcontroller",
+     "external": true
+    },
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MCP42XXX"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MCP42XXX"
+    },
+    {
+     "ref": "U3",
+     "type": "ic",
+     "value": "MCP41XXX or MCP42XXX"
+    }
+   ],
+   "notes": [
+    "Example load: device 1 XX10XX11 11001100, device 2 XX01XX10 11110000, device 3 XX10XX00 10101010, sent device 3 first."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Normalized wiper to end terminal resistance vs. code",
+   "page": 7,
+   "conditions": "VDD = +3 V to +5 V",
+   "x": {
+    "label": "Code (decimal)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Normalized resistance",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RWB",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       256,
+       1
+      ]
+     ]
+    },
+    {
+     "label": "RWA",
+     "points": [
+      [
+       0,
+       1
+      ],
+      [
+       256,
+       0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Potentiometer INL error vs. code",
+   "page": 7,
+   "conditions": "TA = -40 °C to +85 °C; test circuit: potentiometer divider non-linearity",
+   "x": {
+    "label": "Code (decimal)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Potentiometer INL error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "INL",
+     "points": [
+      [
+       3.0,
+       0
+      ],
+      [
+       15.1,
+       0.013
+      ],
+      [
+       18.7,
+       0.026
+      ],
+      [
+       20.0,
+       0.009
+      ],
+      [
+       21.0,
+       0.009
+      ],
+      [
+       31.5,
+       0.027
+      ],
+      [
+       34.8,
+       0.039
+      ],
+      [
+       36.2,
+       0.008
+      ],
+      [
+       47.0,
+       0.027
+      ],
+      [
+       50.7,
+       0.04
+      ],
+      [
+       52.3,
+       0.01
+      ],
+      [
+       64.0,
+       0.034
+      ],
+      [
+       66.7,
+       0.044
+      ],
+      [
+       68.5,
+       0.018
+      ],
+      [
+       83.0,
+       0.054
+      ],
+      [
+       84.1,
+       0.012
+      ],
+      [
+       98.8,
+       0.049
+      ],
+      [
+       100.3,
+       0.008
+      ],
+      [
+       103.9,
+       0.023
+      ],
+      [
+       114.8,
+       0.048
+      ],
+      [
+       116.1,
+       -0.004
+      ],
+      [
+       119.4,
+       0.01
+      ],
+      [
+       130.9,
+       0.037
+      ],
+      [
+       132.0,
+       -0.016
+      ],
+      [
+       136.0,
+       0
+      ],
+      [
+       146.7,
+       0.026
+      ],
+      [
+       148.1,
+       -0.016
+      ],
+      [
+       151.5,
+       -0.001
+      ],
+      [
+       162.8,
+       0.029
+      ],
+      [
+       164.2,
+       -0.008
+      ],
+      [
+       168.5,
+       0.012
+      ],
+      [
+       178.9,
+       0.039
+      ],
+      [
+       180.0,
+       -0.016
+      ],
+      [
+       183.5,
+       0.002
+      ],
+      [
+       194.8,
+       0.034
+      ],
+      [
+       196.0,
+       -0.021
+      ],
+      [
+       199.5,
+       -0.003
+      ],
+      [
+       210.5,
+       0.029
+      ],
+      [
+       212.2,
+       -0.018
+      ],
+      [
+       216.0,
+       0.004
+      ],
+      [
+       226.9,
+       0.034
+      ],
+      [
+       228.0,
+       -0.036
+      ],
+      [
+       232.4,
+       -0.012
+      ],
+      [
+       242.9,
+       0.018
+      ],
+      [
+       244.0,
+       -0.055
+      ],
+      [
+       249.0,
+       -0.027
+      ],
+      [
+       256.0,
+       -0.006
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Potentiometer mode tempco vs. code",
+   "page": 7,
+   "conditions": "TA = -40 °C to +85 °C, VA = 3 V",
+   "x": {
+    "label": "Code (decimal)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Potentiometer mode tempco",
+    "unit": "ppm/°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tempco",
+     "points": [
+      [
+       5.2,
+       70.02
+      ],
+      [
+       9.0,
+       41.44
+      ],
+      [
+       16.0,
+       21.91
+      ],
+      [
+       21.2,
+       16.27
+      ],
+      [
+       27.4,
+       12.53
+      ],
+      [
+       30.8,
+       11.41
+      ],
+      [
+       32.5,
+       9.32
+      ],
+      [
+       44.4,
+       6.69
+      ],
+      [
+       46.8,
+       6.6
+      ],
+      [
+       48.3,
+       5.43
+      ],
+      [
+       62.5,
+       4.26
+      ],
+      [
+       64.4,
+       3.34
+      ],
+      [
+       78.8,
+       2.76
+      ],
+      [
+       80.2,
+       2.08
+      ],
+      [
+       94.7,
+       1.83
+      ],
+      [
+       96.0,
+       1.15
+      ],
+      [
+       111.0,
+       1.01
+      ],
+      [
+       112.2,
+       0.47
+      ],
+      [
+       126.7,
+       0.47
+      ],
+      [
+       128.2,
+       0.04
+      ],
+      [
+       142.8,
+       0.08
+      ],
+      [
+       144.3,
+       -0.35
+      ],
+      [
+       158.7,
+       -0.3
+      ],
+      [
+       160.3,
+       -0.64
+      ],
+      [
+       190.8,
+       -0.74
+      ],
+      [
+       192.3,
+       -1.13
+      ],
+      [
+       206.8,
+       -0.98
+      ],
+      [
+       208.3,
+       -1.37
+      ],
+      [
+       255.0,
+       -1.57
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Nominal resistance 10 kΩ vs. temperature",
+   "page": 7,
+   "conditions": "MCP41010, MCP42010",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Nominal resistance",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RAB",
+     "points": [
+      [
+       -40,
+       10.18
+      ],
+      [
+       25,
+       10.69
+      ],
+      [
+       85,
+       11.17
+      ],
+      [
+       125,
+       11.58
+      ]
+     ]
+    },
+    {
+     "label": "RWB, code 80h",
+     "points": [
+      [
+       -40,
+       5.07
+      ],
+      [
+       25,
+       5.35
+      ],
+      [
+       85,
+       5.58
+      ],
+      [
+       125,
+       5.58
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Nominal resistance 50 kΩ vs. temperature",
+   "page": 7,
+   "conditions": "MCP41050, MCP42050",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Nominal resistance",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RAB",
+     "points": [
+      [
+       -40,
+       55.03
+      ],
+      [
+       25,
+       57.54
+      ],
+      [
+       85,
+       59.96
+      ],
+      [
+       125,
+       61.6
+      ]
+     ]
+    },
+    {
+     "label": "RWB, code 80h",
+     "points": [
+      [
+       -40,
+       27.52
+      ],
+      [
+       25,
+       28.77
+      ],
+      [
+       85,
+       29.98
+      ],
+      [
+       125,
+       30.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Nominal resistance 100 kΩ vs. temperature",
+   "page": 7,
+   "conditions": "MCP41100, MCP42100",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Nominal resistance",
+    "unit": "kΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RAB",
+     "points": [
+      [
+       -40,
+       103.7
+      ],
+      [
+       25,
+       109.1
+      ],
+      [
+       85,
+       113.9
+      ],
+      [
+       125,
+       117.4
+      ]
+     ]
+    },
+    {
+     "label": "RWB, code 80h",
+     "points": [
+      [
+       -40,
+       51.8
+      ],
+      [
+       25,
+       54.5
+      ],
+      [
+       85,
+       57.0
+      ],
+      [
+       125,
+       58.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Rheostat INL error vs. code",
+   "page": 8,
+   "conditions": "test circuit: wiper resistance",
+   "x": {
+    "label": "Code (decimal)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Rheostat INL error",
+    "unit": "LSB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = +85 °C",
+     "points": [
+      [
+       3.0,
+       -0.0001
+      ],
+      [
+       15.0,
+       0.0023
+      ],
+      [
+       18.9,
+       0.0114
+      ],
+      [
+       20.4,
+       -0.0067
+      ],
+      [
+       31.0,
+       0.0005
+      ],
+      [
+       34.7,
+       0.0108
+      ],
+      [
+       36.5,
+       -0.0194
+      ],
+      [
+       48.0,
+       -0.0104
+      ],
+      [
+       50.9,
+       -0.0007
+      ],
+      [
+       52.2,
+       -0.0285
+      ],
+      [
+       63.1,
+       -0.0188
+      ],
+      [
+       66.6,
+       -0.0086
+      ],
+      [
+       68.5,
+       -0.0261
+      ],
+      [
+       72.0,
+       -0.0176
+      ],
+      [
+       79.5,
+       -0.0122
+      ],
+      [
+       82.7,
+       -0.0001
+      ],
+      [
+       84.8,
+       -0.0357
+      ],
+      [
+       94.7,
+       -0.0206
+      ],
+      [
+       98.8,
+       -0.0055
+      ],
+      [
+       100.4,
+       -0.0339
+      ],
+      [
+       111.5,
+       -0.0092
+      ],
+      [
+       114.9,
+       0.0059
+      ],
+      [
+       116.2,
+       -0.0327
+      ],
+      [
+       119.9,
+       -0.0224
+      ],
+      [
+       130.9,
+       -0.0291
+      ],
+      [
+       132.5,
+       -0.0749
+      ],
+      [
+       135.8,
+       -0.0749
+      ],
+      [
+       144.0,
+       -0.0906
+      ],
+      [
+       146.9,
+       -0.0858
+      ],
+      [
+       148.0,
+       -0.1105
+      ],
+      [
+       149.2,
+       -0.1148
+      ],
+      [
+       158.8,
+       -0.1226
+      ],
+      [
+       161.1,
+       -0.1226
+      ],
+      [
+       162.9,
+       -0.1166
+      ],
+      [
+       164.5,
+       -0.1401
+      ],
+      [
+       170.5,
+       -0.1341
+      ],
+      [
+       176.0,
+       -0.1365
+      ],
+      [
+       178.9,
+       -0.1292
+      ],
+      [
+       180.4,
+       -0.1558
+      ],
+      [
+       191.8,
+       -0.1443
+      ],
+      [
+       194.9,
+       -0.1311
+      ],
+      [
+       196.5,
+       -0.1443
+      ],
+      [
+       210.8,
+       -0.1009
+      ],
+      [
+       212.2,
+       -0.1021
+      ],
+      [
+       221.5,
+       -0.0478
+      ],
+      [
+       226.6,
+       0.0005
+      ],
+      [
+       228.1,
+       -0.0067
+      ],
+      [
+       234.3,
+       0.0458
+      ],
+      [
+       242.0,
+       0.0826
+      ],
+      [
+       244.0,
+       0.0862
+      ],
+      [
+       246.3,
+       0.0789
+      ],
+      [
+       256.0,
+       0.0132
+      ]
+     ]
+    },
+    {
+     "label": "TA = +25 °C",
+     "points": [
+      [
+       3.0,
+       -0.0001
+      ],
+      [
+       14.4,
+       -0.0043
+      ],
+      [
+       19.0,
+       -0.0001
+      ],
+      [
+       20.7,
+       -0.0128
+      ],
+      [
+       32.1,
+       -0.0146
+      ],
+      [
+       34.9,
+       -0.0092
+      ],
+      [
+       36.2,
+       -0.0315
+      ],
+      [
+       47.0,
+       -0.0345
+      ],
+      [
+       50.9,
+       -0.0285
+      ],
+      [
+       52.5,
+       -0.0496
+      ],
+      [
+       63.4,
+       -0.0508
+      ],
+      [
+       67.0,
+       -0.0454
+      ],
+      [
+       69.3,
+       -0.0568
+      ],
+      [
+       79.5,
+       -0.055
+      ],
+      [
+       82.8,
+       -0.0478
+      ],
+      [
+       84.2,
+       -0.0767
+      ],
+      [
+       94.9,
+       -0.0719
+      ],
+      [
+       98.9,
+       -0.0641
+      ],
+      [
+       100.4,
+       -0.0876
+      ],
+      [
+       110.5,
+       -0.0816
+      ],
+      [
+       114.9,
+       -0.0701
+      ],
+      [
+       116.2,
+       -0.1027
+      ],
+      [
+       128.0,
+       -0.087
+      ],
+      [
+       130.8,
+       -0.0792
+      ],
+      [
+       132.0,
+       -0.1136
+      ],
+      [
+       138.4,
+       -0.119
+      ],
+      [
+       144.7,
+       -0.1335
+      ],
+      [
+       146.8,
+       -0.1311
+      ],
+      [
+       148.5,
+       -0.1528
+      ],
+      [
+       160.0,
+       -0.1667
+      ],
+      [
+       162.9,
+       -0.1655
+      ],
+      [
+       165.0,
+       -0.1799
+      ],
+      [
+       174.4,
+       -0.1878
+      ],
+      [
+       178.8,
+       -0.1836
+      ],
+      [
+       180.4,
+       -0.2059
+      ],
+      [
+       183.8,
+       -0.2023
+      ],
+      [
+       191.5,
+       -0.2107
+      ],
+      [
+       195.0,
+       -0.2041
+      ],
+      [
+       196.8,
+       -0.2143
+      ],
+      [
+       209.0,
+       -0.1986
+      ],
+      [
+       223.1,
+       -0.1516
+      ],
+      [
+       227.0,
+       -0.1256
+      ],
+      [
+       228.1,
+       -0.1377
+      ],
+      [
+       246.0,
+       0.0132
+      ],
+      [
+       248.4,
+       0.0258
+      ],
+      [
+       251.0,
+       0.0289
+      ],
+      [
+       256.0,
+       0.0138
+      ]
+     ]
+    },
+    {
+     "label": "TA = -40 °C",
+     "points": [
+      [
+       3.0,
+       -0.0001
+      ],
+      [
+       16.0,
+       -0.011
+      ],
+      [
+       19.3,
+       -0.0092
+      ],
+      [
+       32.1,
+       -0.0236
+      ],
+      [
+       34.9,
+       -0.0212
+      ],
+      [
+       36.2,
+       -0.0351
+      ],
+      [
+       47.0,
+       -0.0442
+      ],
+      [
+       50.9,
+       -0.0423
+      ],
+      [
+       52.2,
+       -0.0544
+      ],
+      [
+       57.1,
+       -0.0592
+      ],
+      [
+       78.5,
+       -0.0695
+      ],
+      [
+       82.8,
+       -0.0665
+      ],
+      [
+       84.1,
+       -0.087
+      ],
+      [
+       98.9,
+       -0.09
+      ],
+      [
+       100.3,
+       -0.1051
+      ],
+      [
+       104.5,
+       -0.1015
+      ],
+      [
+       111.5,
+       -0.1057
+      ],
+      [
+       114.8,
+       -0.1009
+      ],
+      [
+       116.5,
+       -0.1268
+      ],
+      [
+       127.0,
+       -0.1274
+      ],
+      [
+       130.9,
+       -0.1202
+      ],
+      [
+       132.2,
+       -0.1449
+      ],
+      [
+       139.0,
+       -0.1407
+      ],
+      [
+       145.2,
+       -0.1467
+      ],
+      [
+       147.0,
+       -0.1425
+      ],
+      [
+       152.7,
+       -0.1642
+      ],
+      [
+       154.3,
+       -0.1642
+      ],
+      [
+       159.8,
+       -0.1799
+      ],
+      [
+       164.0,
+       -0.1811
+      ],
+      [
+       176.8,
+       -0.2065
+      ],
+      [
+       178.9,
+       -0.2041
+      ],
+      [
+       180.4,
+       -0.2198
+      ],
+      [
+       187.0,
+       -0.2155
+      ],
+      [
+       192.1,
+       -0.2246
+      ],
+      [
+       195.2,
+       -0.221
+      ],
+      [
+       201.0,
+       -0.2294
+      ],
+      [
+       210.8,
+       -0.2252
+      ],
+      [
+       212.2,
+       -0.2155
+      ],
+      [
+       223.4,
+       -0.2011
+      ],
+      [
+       226.9,
+       -0.1884
+      ],
+      [
+       228.5,
+       -0.1998
+      ],
+      [
+       235.0,
+       -0.1793
+      ],
+      [
+       239.5,
+       -0.1528
+      ],
+      [
+       247.8,
+       -0.0743
+      ],
+      [
+       256.0,
+       -0.014
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Rheostat mode tempco vs. code",
+   "page": 8,
+   "conditions": "TA = -40 °C to +85 °C, VA = no connect, RWB measured",
+   "x": {
+    "label": "Code (decimal)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Rheostat mode tempco",
+    "unit": "ppm/°C",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "tempco",
+     "points": [
+      [
+       4.0,
+       2900
+      ],
+      [
+       5.1,
+       1917
+      ],
+      [
+       7.3,
+       1373
+      ],
+      [
+       11.5,
+       1093
+      ],
+      [
+       14.5,
+       1012
+      ],
+      [
+       20.9,
+       921
+      ],
+      [
+       38.0,
+       848
+      ],
+      [
+       68.0,
+       812
+      ],
+      [
+       148.0,
+       785
+      ],
+      [
+       256.0,
+       778
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Static current vs. temperature",
+   "page": 8,
+   "conditions": "VDD = 5.5 V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Static current",
+    "unit": "nA",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "static current",
+     "points": [
+      [
+       -40.0,
+       56.6
+      ],
+      [
+       9.1,
+       32.44
+      ],
+      [
+       32.8,
+       25.72
+      ],
+      [
+       56.5,
+       19.03
+      ],
+      [
+       67.9,
+       17.42
+      ],
+      [
+       78.5,
+       17.92
+      ],
+      [
+       83.4,
+       19.3
+      ],
+      [
+       88.0,
+       21.77
+      ],
+      [
+       96.4,
+       31.99
+      ],
+      [
+       105.1,
+       59.29
+      ],
+      [
+       117.8,
+       179.7
+      ],
+      [
+       125.0,
+       313.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Active supply current vs. temperature",
+   "page": 8,
+   "conditions": "FCLK = 3 MHz, code FFh",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Active supply current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD = 5 V",
+     "points": [
+      [
+       -40,
+       252.7
+      ],
+      [
+       25,
+       254.3
+      ],
+      [
+       85,
+       256.2
+      ],
+      [
+       125,
+       257.0
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 3 V",
+     "points": [
+      [
+       -40,
+       41.0
+      ],
+      [
+       35,
+       41.5
+      ],
+      [
+       85,
+       42.3
+      ],
+      [
+       125,
+       43.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Active supply current vs. clock frequency",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Clock frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Active supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "A: VDD = 5.5 V, code AAh",
+     "points": [
+      [
+       1000,
+       0
+      ],
+      [
+       48780,
+       1
+      ],
+      [
+       100100,
+       13
+      ],
+      [
+       183000,
+       31
+      ],
+      [
+       396800,
+       62
+      ],
+      [
+       698200,
+       96
+      ],
+      [
+       1082000,
+       137
+      ],
+      [
+       1644000,
+       198
+      ],
+      [
+       2019000,
+       243
+      ],
+      [
+       2522000,
+       312
+      ],
+      [
+       2993000,
+       389
+      ],
+      [
+       4173000,
+       604
+      ],
+      [
+       6729000,
+       1000
+      ]
+     ]
+    },
+    {
+     "label": "B: VDD = 3.3 V, code AAh",
+     "points": [
+      [
+       1000,
+       0
+      ],
+      [
+       75100,
+       2
+      ],
+      [
+       183000,
+       15
+      ],
+      [
+       459700,
+       35
+      ],
+      [
+       1000000,
+       65
+      ],
+      [
+       1519000,
+       90
+      ],
+      [
+       1957000,
+       114
+      ],
+      [
+       2479000,
+       153
+      ],
+      [
+       2993000,
+       199
+      ],
+      [
+       4333000,
+       324
+      ],
+      [
+       9993000,
+       680
+      ]
+     ]
+    },
+    {
+     "label": "C: VDD = 5.5 V, code FFh",
+     "points": [
+      [
+       1000,
+       0
+      ],
+      [
+       75100,
+       1
+      ],
+      [
+       341300,
+       12
+      ],
+      [
+       1000000,
+       28
+      ],
+      [
+       1964000,
+       47
+      ],
+      [
+       2993000,
+       83
+      ],
+      [
+       4672000,
+       147
+      ],
+      [
+       9993000,
+       280
+      ]
+     ]
+    },
+    {
+     "label": "D: VDD = 3.3 V, code FFh",
+     "points": [
+      [
+       1000,
+       0
+      ],
+      [
+       75100,
+       1
+      ],
+      [
+       1000000,
+       14
+      ],
+      [
+       1847000,
+       23
+      ],
+      [
+       2993000,
+       42
+      ],
+      [
+       4672000,
+       74
+      ],
+      [
+       9993000,
+       140
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reset and shutdown pins current vs. voltage",
+   "page": 8,
+   "conditions": "VDD = 5.5 V",
+   "x": {
+    "label": "RS and SHDN pin voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "RS and SHDN sink current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RS, SHDN",
+     "points": [
+      [
+       0.001,
+       0.002
+      ],
+      [
+       2.648,
+       0.016
+      ],
+      [
+       2.705,
+       -5.614
+      ],
+      [
+       3.1,
+       -5.198
+      ],
+      [
+       3.451,
+       -4.737
+      ],
+      [
+       3.827,
+       -4.13
+      ],
+      [
+       4.127,
+       -3.562
+      ],
+      [
+       4.826,
+       -1.947
+      ],
+      [
+       5.5,
+       0.002
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "10 kΩ device wiper resistance histogram",
+   "page": 9,
+   "conditions": "MCP41010, MCP42010; code 00h; sample size 400",
+   "x": {
+    "label": "Wiper resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Number of occurrences",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "occurrences",
+     "points": [
+      [
+       50,
+       1
+      ],
+      [
+       51,
+       36
+      ],
+      [
+       52,
+       133
+      ],
+      [
+       53,
+       163
+      ],
+      [
+       54,
+       55
+      ],
+      [
+       55,
+       10
+      ],
+      [
+       56,
+       2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "50 kΩ, 100 kΩ device wiper resistance histogram",
+   "page": 9,
+   "conditions": "MCP41050, MCP41100, MCP42050, MCP42100; code 00h; sample size 796",
+   "x": {
+    "label": "Wiper resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Number of occurrences",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "occurrences",
+     "points": [
+      [
+       118,
+       1
+      ],
+      [
+       119,
+       27
+      ],
+      [
+       120,
+       61
+      ],
+      [
+       121,
+       59
+      ],
+      [
+       122,
+       95
+      ],
+      [
+       123,
+       125
+      ],
+      [
+       124,
+       117
+      ],
+      [
+       125,
+       95
+      ],
+      [
+       126,
+       78
+      ],
+      [
+       127,
+       49
+      ],
+      [
+       128,
+       54
+      ],
+      [
+       129,
+       15
+      ],
+      [
+       130,
+       12
+      ],
+      [
+       131,
+       2
+      ],
+      [
+       132,
+       3
+      ],
+      [
+       133,
+       3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "One position settling time",
+   "page": 9,
+   "conditions": "CL = 17 pF; code 7Fh to 80h; 100 ns/div, VOUT 50 mV/div, CS 5 V/div",
+   "x": {
+    "label": "Time",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT change",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "CS",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       3.6,
+       -1.4
+      ],
+      [
+       7.3,
+       -1.4
+      ],
+      [
+       10.9,
+       2.1
+      ],
+      [
+       14.5,
+       1.4
+      ],
+      [
+       18.2,
+       0.0
+      ],
+      [
+       21.8,
+       -1.4
+      ],
+      [
+       29.1,
+       0.0
+      ],
+      [
+       32.7,
+       1.4
+      ],
+      [
+       36.4,
+       -1.4
+      ],
+      [
+       40.0,
+       -1.4
+      ],
+      [
+       43.6,
+       -0.7
+      ],
+      [
+       47.3,
+       0.0
+      ],
+      [
+       50.9,
+       1.4
+      ],
+      [
+       54.5,
+       2.9
+      ],
+      [
+       58.2,
+       -1.4
+      ],
+      [
+       61.8,
+       0.7
+      ],
+      [
+       65.5,
+       1.4
+      ],
+      [
+       69.1,
+       1.4
+      ],
+      [
+       72.7,
+       0.0
+      ],
+      [
+       76.4,
+       -2.9
+      ],
+      [
+       80.0,
+       -1.4
+      ],
+      [
+       83.6,
+       0.7
+      ],
+      [
+       87.3,
+       2.9
+      ],
+      [
+       90.9,
+       -2.1
+      ],
+      [
+       94.5,
+       1.4
+      ],
+      [
+       98.2,
+       -1.4
+      ],
+      [
+       101.8,
+       -1.4
+      ],
+      [
+       105.5,
+       0.7
+      ],
+      [
+       109.1,
+       2.9
+      ],
+      [
+       112.7,
+       1.4
+      ],
+      [
+       116.4,
+       -1.4
+      ],
+      [
+       120.0,
+       -2.1
+      ],
+      [
+       123.6,
+       1.4
+      ],
+      [
+       127.3,
+       1.4
+      ],
+      [
+       130.9,
+       0.0
+      ],
+      [
+       134.5,
+       -3.6
+      ],
+      [
+       138.2,
+       0.0
+      ],
+      [
+       141.8,
+       -1.4
+      ],
+      [
+       145.5,
+       3.6
+      ],
+      [
+       149.1,
+       0.0
+      ],
+      [
+       152.7,
+       2.9
+      ],
+      [
+       156.4,
+       -1.4
+      ],
+      [
+       160.0,
+       -1.4
+      ],
+      [
+       163.6,
+       1.4
+      ],
+      [
+       167.3,
+       1.4
+      ],
+      [
+       170.9,
+       0.7
+      ],
+      [
+       174.5,
+       0.7
+      ],
+      [
+       178.2,
+       1.4
+      ],
+      [
+       181.8,
+       0.7
+      ],
+      [
+       185.5,
+       1.4
+      ],
+      [
+       189.1,
+       -0.7
+      ],
+      [
+       192.7,
+       -1.4
+      ],
+      [
+       196.4,
+       1.4
+      ],
+      [
+       200.0,
+       0.7
+      ],
+      [
+       203.6,
+       -2.9
+      ],
+      [
+       207.3,
+       0.0
+      ],
+      [
+       210.9,
+       0.0
+      ],
+      [
+       214.5,
+       0.0
+      ],
+      [
+       218.2,
+       -1.4
+      ],
+      [
+       221.8,
+       1.4
+      ],
+      [
+       225.5,
+       -1.4
+      ],
+      [
+       229.1,
+       -1.4
+      ],
+      [
+       232.7,
+       0.0
+      ],
+      [
+       236.4,
+       0.0
+      ],
+      [
+       240.0,
+       0.0
+      ],
+      [
+       243.6,
+       0.7
+      ],
+      [
+       247.3,
+       -0.7
+      ],
+      [
+       250.9,
+       0.7
+      ],
+      [
+       254.5,
+       3.6
+      ],
+      [
+       258.2,
+       -0.7
+      ],
+      [
+       261.8,
+       1.4
+      ],
+      [
+       265.5,
+       0.0
+      ],
+      [
+       269.1,
+       2.1
+      ],
+      [
+       272.7,
+       0.0
+      ],
+      [
+       276.4,
+       -1.4
+      ],
+      [
+       280.0,
+       -1.4
+      ],
+      [
+       283.6,
+       2.9
+      ],
+      [
+       287.3,
+       1.4
+      ],
+      [
+       290.9,
+       0.0
+      ],
+      [
+       294.5,
+       -0.7
+      ],
+      [
+       298.2,
+       -4.3
+      ],
+      [
+       301.8,
+       -2.1
+      ],
+      [
+       305.5,
+       0.7
+      ],
+      [
+       309.1,
+       0.0
+      ],
+      [
+       312.7,
+       -1.4
+      ],
+      [
+       316.4,
+       0.0
+      ],
+      [
+       320.0,
+       3.6
+      ],
+      [
+       323.6,
+       3.6
+      ],
+      [
+       327.3,
+       -0.7
+      ],
+      [
+       330.9,
+       0.0
+      ],
+      [
+       334.5,
+       0.7
+      ],
+      [
+       338.2,
+       3.6
+      ],
+      [
+       341.8,
+       1.4
+      ],
+      [
+       345.5,
+       2.9
+      ],
+      [
+       349.1,
+       -1.4
+      ],
+      [
+       352.7,
+       -3.6
+      ],
+      [
+       356.4,
+       0.0
+      ],
+      [
+       360.0,
+       -0.7
+      ],
+      [
+       363.6,
+       -0.7
+      ],
+      [
+       367.3,
+       1.4
+      ],
+      [
+       370.9,
+       1.4
+      ],
+      [
+       374.5,
+       0.0
+      ],
+      [
+       378.2,
+       0.7
+      ],
+      [
+       381.8,
+       0.0
+      ],
+      [
+       385.5,
+       0.7
+      ],
+      [
+       389.1,
+       0.7
+      ],
+      [
+       392.7,
+       0.0
+      ],
+      [
+       396.4,
+       -24.3
+      ],
+      [
+       400.0,
+       -47.9
+      ],
+      [
+       403.6,
+       17.9
+      ],
+      [
+       407.3,
+       -14.3
+      ],
+      [
+       410.9,
+       -32.1
+      ],
+      [
+       414.5,
+       -23.6
+      ],
+      [
+       418.2,
+       7.1
+      ],
+      [
+       421.8,
+       25.0
+      ],
+      [
+       425.5,
+       55.7
+      ],
+      [
+       429.1,
+       48.6
+      ],
+      [
+       432.7,
+       36.4
+      ],
+      [
+       436.4,
+       31.4
+      ],
+      [
+       440.0,
+       27.9
+      ],
+      [
+       443.6,
+       17.1
+      ],
+      [
+       447.3,
+       14.3
+      ],
+      [
+       450.9,
+       12.9
+      ],
+      [
+       454.5,
+       29.3
+      ],
+      [
+       458.2,
+       34.3
+      ],
+      [
+       461.8,
+       22.9
+      ],
+      [
+       465.5,
+       21.4
+      ],
+      [
+       469.1,
+       15.7
+      ],
+      [
+       472.7,
+       9.3
+      ],
+      [
+       476.4,
+       8.6
+      ],
+      [
+       480.0,
+       2.9
+      ],
+      [
+       483.6,
+       2.9
+      ],
+      [
+       487.3,
+       5.7
+      ],
+      [
+       490.9,
+       5.7
+      ],
+      [
+       494.5,
+       6.4
+      ],
+      [
+       498.2,
+       3.6
+      ],
+      [
+       501.8,
+       2.9
+      ],
+      [
+       505.5,
+       5.0
+      ],
+      [
+       509.1,
+       8.6
+      ],
+      [
+       512.7,
+       15.7
+      ],
+      [
+       516.4,
+       22.9
+      ],
+      [
+       520.0,
+       25.0
+      ],
+      [
+       523.6,
+       22.9
+      ],
+      [
+       527.3,
+       21.4
+      ],
+      [
+       530.9,
+       17.1
+      ],
+      [
+       534.5,
+       10.0
+      ],
+      [
+       538.2,
+       5.7
+      ],
+      [
+       541.8,
+       5.0
+      ],
+      [
+       545.5,
+       10.0
+      ],
+      [
+       549.1,
+       10.0
+      ],
+      [
+       552.7,
+       12.9
+      ],
+      [
+       556.4,
+       15.7
+      ],
+      [
+       560.0,
+       15.0
+      ],
+      [
+       563.6,
+       10.0
+      ],
+      [
+       567.3,
+       7.1
+      ],
+      [
+       570.9,
+       5.0
+      ],
+      [
+       574.5,
+       1.4
+      ],
+      [
+       578.2,
+       3.6
+      ],
+      [
+       581.8,
+       6.4
+      ],
+      [
+       585.5,
+       10.0
+      ],
+      [
+       589.1,
+       14.3
+      ],
+      [
+       592.7,
+       15.7
+      ],
+      [
+       596.4,
+       10.0
+      ],
+      [
+       600.0,
+       16.4
+      ],
+      [
+       603.6,
+       9.3
+      ],
+      [
+       607.3,
+       11.4
+      ],
+      [
+       610.9,
+       9.3
+      ],
+      [
+       614.5,
+       8.6
+      ],
+      [
+       618.2,
+       8.6
+      ],
+      [
+       621.8,
+       9.3
+      ],
+      [
+       625.5,
+       7.9
+      ],
+      [
+       629.1,
+       7.1
+      ],
+      [
+       632.7,
+       5.7
+      ],
+      [
+       636.4,
+       8.6
+      ],
+      [
+       640.0,
+       7.9
+      ],
+      [
+       643.6,
+       1.4
+      ],
+      [
+       647.3,
+       3.6
+      ],
+      [
+       650.9,
+       13.6
+      ],
+      [
+       654.5,
+       12.1
+      ],
+      [
+       658.2,
+       12.1
+      ],
+      [
+       661.8,
+       9.3
+      ],
+      [
+       665.5,
+       2.9
+      ],
+      [
+       669.1,
+       6.4
+      ],
+      [
+       672.7,
+       5.0
+      ],
+      [
+       676.4,
+       5.0
+      ],
+      [
+       680.0,
+       7.9
+      ],
+      [
+       683.6,
+       9.3
+      ],
+      [
+       687.3,
+       10.0
+      ],
+      [
+       690.9,
+       10.7
+      ],
+      [
+       694.5,
+       10.7
+      ],
+      [
+       698.2,
+       11.4
+      ],
+      [
+       701.8,
+       7.9
+      ],
+      [
+       705.5,
+       5.7
+      ],
+      [
+       709.1,
+       7.1
+      ],
+      [
+       712.7,
+       5.0
+      ],
+      [
+       716.4,
+       10.7
+      ],
+      [
+       720.0,
+       7.1
+      ],
+      [
+       723.6,
+       7.1
+      ],
+      [
+       727.3,
+       7.1
+      ],
+      [
+       730.9,
+       10.0
+      ],
+      [
+       734.5,
+       9.3
+      ],
+      [
+       738.2,
+       8.6
+      ],
+      [
+       741.8,
+       4.3
+      ],
+      [
+       745.5,
+       5.7
+      ],
+      [
+       749.1,
+       5.7
+      ],
+      [
+       752.7,
+       6.4
+      ],
+      [
+       756.4,
+       5.7
+      ],
+      [
+       760.0,
+       7.9
+      ],
+      [
+       763.6,
+       7.9
+      ],
+      [
+       767.3,
+       5.7
+      ],
+      [
+       770.9,
+       6.4
+      ],
+      [
+       774.5,
+       10.0
+      ],
+      [
+       778.2,
+       9.3
+      ],
+      [
+       781.8,
+       5.0
+      ],
+      [
+       785.5,
+       10.0
+      ],
+      [
+       789.1,
+       8.6
+      ],
+      [
+       792.7,
+       8.6
+      ],
+      [
+       796.4,
+       8.6
+      ],
+      [
+       800.0,
+       5.7
+      ],
+      [
+       803.6,
+       7.9
+      ],
+      [
+       807.3,
+       5.7
+      ],
+      [
+       810.9,
+       5.7
+      ],
+      [
+       814.5,
+       6.4
+      ],
+      [
+       818.2,
+       6.4
+      ],
+      [
+       821.8,
+       7.9
+      ],
+      [
+       825.5,
+       7.1
+      ],
+      [
+       829.1,
+       7.1
+      ],
+      [
+       832.7,
+       7.1
+      ],
+      [
+       836.4,
+       5.7
+      ],
+      [
+       840.0,
+       5.7
+      ],
+      [
+       843.6,
+       5.0
+      ],
+      [
+       847.3,
+       12.9
+      ],
+      [
+       850.9,
+       6.4
+      ],
+      [
+       854.5,
+       7.1
+      ],
+      [
+       858.2,
+       7.1
+      ],
+      [
+       861.8,
+       8.6
+      ],
+      [
+       865.5,
+       7.9
+      ],
+      [
+       869.1,
+       7.9
+      ],
+      [
+       872.7,
+       7.1
+      ]
+     ]
+    },
+    {
+     "label": "CS",
+     "points": [
+      [
+       3.6,
+       -0.071
+      ],
+      [
+       10.9,
+       0.0
+      ],
+      [
+       18.2,
+       0.0
+      ],
+      [
+       25.5,
+       0.0
+      ],
+      [
+       32.7,
+       0.071
+      ],
+      [
+       40.0,
+       -0.143
+      ],
+      [
+       47.3,
+       0.0
+      ],
+      [
+       54.5,
+       0.0
+      ],
+      [
+       61.8,
+       0.0
+      ],
+      [
+       69.1,
+       -0.071
+      ],
+      [
+       76.4,
+       0.0
+      ],
+      [
+       83.6,
+       -0.071
+      ],
+      [
+       90.9,
+       0.0
+      ],
+      [
+       98.2,
+       0.0
+      ],
+      [
+       105.5,
+       -0.143
+      ],
+      [
+       112.7,
+       -0.214
+      ],
+      [
+       120.0,
+       -0.071
+      ],
+      [
+       127.3,
+       0.0
+      ],
+      [
+       134.5,
+       0.0
+      ],
+      [
+       141.8,
+       0.0
+      ],
+      [
+       149.1,
+       0.0
+      ],
+      [
+       156.4,
+       0.143
+      ],
+      [
+       163.6,
+       0.0
+      ],
+      [
+       170.9,
+       0.0
+      ],
+      [
+       178.2,
+       -0.143
+      ],
+      [
+       185.5,
+       -0.071
+      ],
+      [
+       192.7,
+       0.0
+      ],
+      [
+       200.0,
+       0.0
+      ],
+      [
+       207.3,
+       0.0
+      ],
+      [
+       214.5,
+       0.0
+      ],
+      [
+       221.8,
+       0.143
+      ],
+      [
+       229.1,
+       -0.071
+      ],
+      [
+       236.4,
+       0.0
+      ],
+      [
+       243.6,
+       -0.071
+      ],
+      [
+       250.9,
+       0.0
+      ],
+      [
+       258.2,
+       -0.143
+      ],
+      [
+       265.5,
+       0.0
+      ],
+      [
+       272.7,
+       0.0
+      ],
+      [
+       280.0,
+       0.0
+      ],
+      [
+       294.5,
+       0.0
+      ],
+      [
+       301.8,
+       0.0
+      ],
+      [
+       309.1,
+       0.0
+      ],
+      [
+       316.4,
+       -0.071
+      ],
+      [
+       323.6,
+       0.071
+      ],
+      [
+       330.9,
+       0.0
+      ],
+      [
+       338.2,
+       0.0
+      ],
+      [
+       345.5,
+       0.0
+      ],
+      [
+       352.7,
+       0.071
+      ],
+      [
+       360.0,
+       -0.071
+      ],
+      [
+       367.3,
+       0.143
+      ],
+      [
+       374.5,
+       0.143
+      ],
+      [
+       381.8,
+       0.071
+      ],
+      [
+       389.1,
+       0.071
+      ],
+      [
+       396.4,
+       0.571
+      ],
+      [
+       403.6,
+       2.357
+      ],
+      [
+       410.9,
+       3.857
+      ],
+      [
+       418.2,
+       4.857
+      ],
+      [
+       425.5,
+       5.071
+      ],
+      [
+       432.7,
+       4.714
+      ],
+      [
+       440.0,
+       4.429
+      ],
+      [
+       447.3,
+       4.571
+      ],
+      [
+       454.5,
+       4.857
+      ],
+      [
+       461.8,
+       4.857
+      ],
+      [
+       469.1,
+       4.714
+      ],
+      [
+       476.4,
+       4.429
+      ],
+      [
+       483.6,
+       4.5
+      ],
+      [
+       490.9,
+       4.643
+      ],
+      [
+       498.2,
+       4.571
+      ],
+      [
+       505.5,
+       4.571
+      ],
+      [
+       512.7,
+       4.571
+      ],
+      [
+       520.0,
+       4.714
+      ],
+      [
+       527.3,
+       4.714
+      ],
+      [
+       534.5,
+       4.714
+      ],
+      [
+       541.8,
+       4.429
+      ],
+      [
+       549.1,
+       4.571
+      ],
+      [
+       556.4,
+       4.643
+      ],
+      [
+       563.6,
+       4.714
+      ],
+      [
+       570.9,
+       4.571
+      ],
+      [
+       578.2,
+       4.571
+      ],
+      [
+       585.5,
+       4.571
+      ],
+      [
+       592.7,
+       4.714
+      ],
+      [
+       600.0,
+       4.786
+      ],
+      [
+       607.3,
+       4.714
+      ],
+      [
+       614.5,
+       4.571
+      ],
+      [
+       621.8,
+       4.5
+      ],
+      [
+       629.1,
+       4.571
+      ],
+      [
+       636.4,
+       4.786
+      ],
+      [
+       643.6,
+       4.571
+      ],
+      [
+       650.9,
+       4.643
+      ],
+      [
+       658.2,
+       4.571
+      ],
+      [
+       665.5,
+       4.571
+      ],
+      [
+       672.7,
+       4.571
+      ],
+      [
+       680.0,
+       4.571
+      ],
+      [
+       687.3,
+       4.714
+      ],
+      [
+       694.5,
+       4.643
+      ],
+      [
+       701.8,
+       4.571
+      ],
+      [
+       709.1,
+       4.714
+      ],
+      [
+       716.4,
+       4.643
+      ],
+      [
+       723.6,
+       4.571
+      ],
+      [
+       730.9,
+       4.643
+      ],
+      [
+       738.2,
+       4.429
+      ],
+      [
+       745.5,
+       4.643
+      ],
+      [
+       752.7,
+       4.571
+      ],
+      [
+       760.0,
+       4.786
+      ],
+      [
+       767.3,
+       4.714
+      ],
+      [
+       774.5,
+       4.714
+      ],
+      [
+       781.8,
+       4.714
+      ],
+      [
+       789.1,
+       4.571
+      ],
+      [
+       796.4,
+       4.714
+      ],
+      [
+       803.6,
+       4.786
+      ],
+      [
+       810.9,
+       4.714
+      ],
+      [
+       818.2,
+       4.857
+      ],
+      [
+       825.5,
+       4.571
+      ],
+      [
+       832.7,
+       4.714
+      ],
+      [
+       840.0,
+       4.643
+      ],
+      [
+       847.3,
+       4.571
+      ],
+      [
+       854.5,
+       4.571
+      ],
+      [
+       861.8,
+       4.857
+      ],
+      [
+       869.1,
+       4.714
+      ],
+      [
+       872.7,
+       4.714
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Full-scale settling time",
+   "page": 9,
+   "conditions": "CL = 27 pF; code 00h to FFh and back; 5 µs/div, VOUT 2 V/div, CS 5 V/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "CS",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       0.182,
+       5.114
+      ],
+      [
+       0.364,
+       5.086
+      ],
+      [
+       0.545,
+       5.086
+      ],
+      [
+       0.727,
+       5.086
+      ],
+      [
+       0.909,
+       5.086
+      ],
+      [
+       1.091,
+       5.086
+      ],
+      [
+       1.455,
+       5.086
+      ],
+      [
+       1.636,
+       5.086
+      ],
+      [
+       1.818,
+       5.086
+      ],
+      [
+       2.0,
+       5.086
+      ],
+      [
+       2.182,
+       5.086
+      ],
+      [
+       2.364,
+       5.086
+      ],
+      [
+       2.545,
+       5.086
+      ],
+      [
+       2.727,
+       5.086
+      ],
+      [
+       2.909,
+       5.086
+      ],
+      [
+       3.091,
+       5.086
+      ],
+      [
+       3.273,
+       5.086
+      ],
+      [
+       3.455,
+       5.086
+      ],
+      [
+       3.636,
+       5.086
+      ],
+      [
+       3.818,
+       5.143
+      ],
+      [
+       4.0,
+       5.086
+      ],
+      [
+       4.182,
+       5.057
+      ],
+      [
+       4.364,
+       5.143
+      ],
+      [
+       4.545,
+       5.057
+      ],
+      [
+       4.727,
+       5.086
+      ],
+      [
+       4.909,
+       5.143
+      ],
+      [
+       5.091,
+       5.086
+      ],
+      [
+       5.273,
+       5.086
+      ],
+      [
+       5.455,
+       2.171
+      ],
+      [
+       5.636,
+       0.029
+      ],
+      [
+       5.818,
+       0.0
+      ],
+      [
+       6.0,
+       0.0
+      ],
+      [
+       6.182,
+       0.029
+      ],
+      [
+       6.364,
+       0.0
+      ],
+      [
+       6.545,
+       0.029
+      ],
+      [
+       6.727,
+       0.057
+      ],
+      [
+       6.909,
+       0.0
+      ],
+      [
+       7.091,
+       0.0
+      ],
+      [
+       7.273,
+       0.057
+      ],
+      [
+       7.455,
+       0.0
+      ],
+      [
+       7.636,
+       0.0
+      ],
+      [
+       7.818,
+       -0.029
+      ],
+      [
+       8.0,
+       0.0
+      ],
+      [
+       8.182,
+       0.0
+      ],
+      [
+       8.364,
+       0.0
+      ],
+      [
+       8.545,
+       -0.029
+      ],
+      [
+       8.727,
+       -0.029
+      ],
+      [
+       8.909,
+       0.0
+      ],
+      [
+       9.091,
+       0.0
+      ],
+      [
+       9.273,
+       -0.057
+      ],
+      [
+       9.455,
+       0.0
+      ],
+      [
+       9.636,
+       0.0
+      ],
+      [
+       9.818,
+       0.0
+      ],
+      [
+       10.0,
+       0.0
+      ],
+      [
+       10.182,
+       0.0
+      ],
+      [
+       10.364,
+       0.0
+      ],
+      [
+       10.545,
+       -0.029
+      ],
+      [
+       10.727,
+       0.0
+      ],
+      [
+       10.909,
+       0.0
+      ],
+      [
+       11.091,
+       -0.029
+      ],
+      [
+       11.273,
+       0.0
+      ],
+      [
+       11.455,
+       0.0
+      ],
+      [
+       11.636,
+       0.0
+      ],
+      [
+       11.818,
+       0.0
+      ],
+      [
+       12.0,
+       0.0
+      ],
+      [
+       12.182,
+       0.0
+      ],
+      [
+       12.364,
+       0.0
+      ],
+      [
+       12.545,
+       0.029
+      ],
+      [
+       12.727,
+       0.0
+      ],
+      [
+       12.909,
+       0.0
+      ],
+      [
+       13.091,
+       0.0
+      ],
+      [
+       13.273,
+       0.0
+      ],
+      [
+       13.455,
+       0.057
+      ],
+      [
+       13.636,
+       0.0
+      ],
+      [
+       13.818,
+       0.0
+      ],
+      [
+       14.0,
+       0.0
+      ],
+      [
+       14.182,
+       0.0
+      ],
+      [
+       14.364,
+       0.0
+      ],
+      [
+       14.545,
+       0.0
+      ],
+      [
+       14.727,
+       0.0
+      ],
+      [
+       14.909,
+       -0.057
+      ],
+      [
+       15.091,
+       4.086
+      ],
+      [
+       15.273,
+       5.029
+      ],
+      [
+       15.455,
+       5.057
+      ],
+      [
+       15.636,
+       5.086
+      ],
+      [
+       15.818,
+       5.086
+      ],
+      [
+       16.0,
+       5.086
+      ],
+      [
+       16.182,
+       5.029
+      ],
+      [
+       16.364,
+       5.086
+      ],
+      [
+       16.545,
+       5.086
+      ],
+      [
+       16.727,
+       5.086
+      ],
+      [
+       16.909,
+       5.086
+      ],
+      [
+       17.091,
+       5.114
+      ],
+      [
+       17.273,
+       5.086
+      ],
+      [
+       17.455,
+       5.086
+      ],
+      [
+       17.636,
+       5.057
+      ],
+      [
+       17.818,
+       5.114
+      ],
+      [
+       18.0,
+       5.086
+      ],
+      [
+       18.182,
+       5.086
+      ],
+      [
+       18.364,
+       5.114
+      ],
+      [
+       18.545,
+       5.086
+      ],
+      [
+       18.727,
+       5.086
+      ],
+      [
+       18.909,
+       5.057
+      ],
+      [
+       19.091,
+       5.143
+      ],
+      [
+       19.273,
+       5.086
+      ],
+      [
+       19.455,
+       5.086
+      ],
+      [
+       19.636,
+       5.086
+      ],
+      [
+       19.818,
+       5.086
+      ],
+      [
+       20.0,
+       5.086
+      ],
+      [
+       20.182,
+       5.086
+      ],
+      [
+       20.364,
+       5.086
+      ],
+      [
+       20.545,
+       5.114
+      ],
+      [
+       20.727,
+       5.086
+      ],
+      [
+       20.909,
+       5.086
+      ],
+      [
+       21.091,
+       5.086
+      ],
+      [
+       21.273,
+       5.086
+      ],
+      [
+       21.455,
+       5.086
+      ],
+      [
+       21.636,
+       5.086
+      ],
+      [
+       21.818,
+       5.086
+      ],
+      [
+       22.0,
+       5.086
+      ],
+      [
+       22.182,
+       5.114
+      ],
+      [
+       22.364,
+       5.114
+      ],
+      [
+       22.545,
+       5.086
+      ],
+      [
+       22.727,
+       5.086
+      ],
+      [
+       22.909,
+       5.086
+      ],
+      [
+       23.091,
+       5.086
+      ],
+      [
+       23.273,
+       5.057
+      ],
+      [
+       23.455,
+       5.086
+      ],
+      [
+       23.636,
+       5.086
+      ],
+      [
+       23.818,
+       5.086
+      ],
+      [
+       24.0,
+       5.086
+      ],
+      [
+       24.182,
+       5.086
+      ],
+      [
+       24.364,
+       5.086
+      ],
+      [
+       24.545,
+       5.114
+      ],
+      [
+       24.727,
+       5.086
+      ],
+      [
+       24.909,
+       0.029
+      ],
+      [
+       25.091,
+       0.057
+      ],
+      [
+       25.273,
+       0.0
+      ],
+      [
+       25.455,
+       0.029
+      ],
+      [
+       25.636,
+       0.057
+      ],
+      [
+       25.818,
+       0.0
+      ],
+      [
+       26.0,
+       0.0
+      ],
+      [
+       26.182,
+       -0.057
+      ],
+      [
+       26.364,
+       0.0
+      ],
+      [
+       26.545,
+       0.0
+      ],
+      [
+       26.727,
+       -0.029
+      ],
+      [
+       26.909,
+       0.0
+      ],
+      [
+       27.091,
+       0.0
+      ],
+      [
+       27.273,
+       0.0
+      ],
+      [
+       27.455,
+       0.0
+      ],
+      [
+       27.636,
+       0.0
+      ],
+      [
+       27.818,
+       0.0
+      ],
+      [
+       28.0,
+       0.0
+      ],
+      [
+       28.182,
+       0.0
+      ],
+      [
+       28.364,
+       0.0
+      ],
+      [
+       28.545,
+       0.0
+      ],
+      [
+       28.727,
+       0.029
+      ],
+      [
+       28.909,
+       0.0
+      ],
+      [
+       29.091,
+       0.0
+      ],
+      [
+       29.273,
+       0.0
+      ],
+      [
+       29.455,
+       0.0
+      ],
+      [
+       29.636,
+       0.0
+      ],
+      [
+       29.818,
+       0.0
+      ],
+      [
+       30.0,
+       -0.029
+      ],
+      [
+       30.182,
+       0.029
+      ],
+      [
+       30.364,
+       0.0
+      ],
+      [
+       30.545,
+       0.0
+      ],
+      [
+       30.727,
+       0.0
+      ],
+      [
+       30.909,
+       0.0
+      ],
+      [
+       31.091,
+       0.0
+      ],
+      [
+       31.273,
+       0.0
+      ],
+      [
+       31.455,
+       0.0
+      ],
+      [
+       31.636,
+       -0.057
+      ],
+      [
+       31.818,
+       -0.029
+      ],
+      [
+       32.0,
+       0.0
+      ],
+      [
+       32.182,
+       -0.057
+      ],
+      [
+       32.364,
+       0.0
+      ],
+      [
+       32.545,
+       0.0
+      ],
+      [
+       32.727,
+       0.0
+      ],
+      [
+       32.909,
+       0.0
+      ],
+      [
+       33.091,
+       0.0
+      ],
+      [
+       33.273,
+       0.0
+      ],
+      [
+       33.455,
+       0.0
+      ],
+      [
+       33.636,
+       -0.057
+      ],
+      [
+       33.818,
+       0.0
+      ],
+      [
+       34.0,
+       0.0
+      ],
+      [
+       34.182,
+       0.0
+      ],
+      [
+       34.364,
+       0.4
+      ],
+      [
+       34.545,
+       5.0
+      ],
+      [
+       34.727,
+       5.029
+      ],
+      [
+       34.909,
+       5.086
+      ],
+      [
+       35.091,
+       5.029
+      ],
+      [
+       35.273,
+       5.086
+      ],
+      [
+       35.455,
+       5.086
+      ],
+      [
+       35.636,
+       5.086
+      ],
+      [
+       35.818,
+       5.086
+      ],
+      [
+       36.0,
+       5.086
+      ],
+      [
+       36.182,
+       5.086
+      ],
+      [
+       36.364,
+       5.086
+      ],
+      [
+       36.545,
+       5.086
+      ],
+      [
+       36.727,
+       5.086
+      ],
+      [
+       36.909,
+       5.086
+      ],
+      [
+       37.091,
+       5.143
+      ],
+      [
+       37.273,
+       5.086
+      ],
+      [
+       37.455,
+       5.086
+      ],
+      [
+       37.636,
+       5.086
+      ],
+      [
+       37.818,
+       5.086
+      ],
+      [
+       38.0,
+       5.086
+      ],
+      [
+       38.182,
+       5.086
+      ],
+      [
+       38.364,
+       5.143
+      ],
+      [
+       38.545,
+       5.086
+      ],
+      [
+       38.727,
+       5.143
+      ],
+      [
+       38.909,
+       5.086
+      ],
+      [
+       39.091,
+       5.086
+      ],
+      [
+       39.273,
+       5.086
+      ],
+      [
+       39.455,
+       5.086
+      ],
+      [
+       39.636,
+       5.086
+      ],
+      [
+       39.818,
+       5.143
+      ],
+      [
+       40.0,
+       5.086
+      ],
+      [
+       40.182,
+       5.086
+      ],
+      [
+       40.364,
+       5.086
+      ],
+      [
+       40.545,
+       5.086
+      ],
+      [
+       40.727,
+       5.086
+      ],
+      [
+       40.909,
+       5.086
+      ],
+      [
+       41.091,
+       5.086
+      ],
+      [
+       41.273,
+       5.143
+      ],
+      [
+       41.455,
+       5.086
+      ],
+      [
+       41.636,
+       5.086
+      ],
+      [
+       41.818,
+       5.143
+      ],
+      [
+       42.0,
+       5.086
+      ],
+      [
+       42.182,
+       5.143
+      ],
+      [
+       42.364,
+       5.086
+      ],
+      [
+       42.545,
+       5.086
+      ],
+      [
+       42.727,
+       5.086
+      ],
+      [
+       42.909,
+       5.086
+      ],
+      [
+       43.091,
+       5.086
+      ],
+      [
+       43.273,
+       5.086
+      ],
+      [
+       43.455,
+       5.114
+      ],
+      [
+       43.636,
+       5.057
+      ],
+      [
+       43.818,
+       5.086
+      ],
+      [
+       44.0,
+       5.086
+      ],
+      [
+       44.182,
+       2.914
+      ],
+      [
+       44.364,
+       0.057
+      ],
+      [
+       44.545,
+       0.086
+      ],
+      [
+       44.727,
+       0.057
+      ],
+      [
+       44.909,
+       0.029
+      ],
+      [
+       45.091,
+       0.0
+      ],
+      [
+       45.273,
+       0.0
+      ],
+      [
+       45.455,
+       0.029
+      ],
+      [
+       45.636,
+       0.0
+      ],
+      [
+       45.727,
+       0.0
+      ]
+     ]
+    },
+    {
+     "label": "CS",
+     "points": [
+      [
+       0.182,
+       0.071
+      ],
+      [
+       0.364,
+       -0.071
+      ],
+      [
+       0.545,
+       0.071
+      ],
+      [
+       0.727,
+       0.071
+      ],
+      [
+       0.909,
+       0.0
+      ],
+      [
+       1.091,
+       0.0
+      ],
+      [
+       1.273,
+       0.0
+      ],
+      [
+       1.455,
+       0.0
+      ],
+      [
+       1.636,
+       0.0
+      ],
+      [
+       1.818,
+       0.071
+      ],
+      [
+       2.0,
+       0.143
+      ],
+      [
+       2.182,
+       0.143
+      ],
+      [
+       2.364,
+       -0.143
+      ],
+      [
+       2.545,
+       0.0
+      ],
+      [
+       2.727,
+       0.071
+      ],
+      [
+       2.909,
+       0.0
+      ],
+      [
+       3.091,
+       -0.143
+      ],
+      [
+       3.273,
+       0.143
+      ],
+      [
+       3.455,
+       0.0
+      ],
+      [
+       3.636,
+       0.143
+      ],
+      [
+       3.818,
+       0.0
+      ],
+      [
+       4.0,
+       0.143
+      ],
+      [
+       4.182,
+       -0.071
+      ],
+      [
+       4.364,
+       0.0
+      ],
+      [
+       4.545,
+       -0.143
+      ],
+      [
+       4.727,
+       0.071
+      ],
+      [
+       4.909,
+       0.0
+      ],
+      [
+       5.091,
+       0.071
+      ],
+      [
+       5.273,
+       0.0
+      ],
+      [
+       5.455,
+       3.714
+      ],
+      [
+       5.636,
+       4.571
+      ],
+      [
+       5.818,
+       4.643
+      ],
+      [
+       6.0,
+       2.298
+      ],
+      [
+       6.182,
+       0.071
+      ],
+      [
+       6.364,
+       0.286
+      ],
+      [
+       6.545,
+       0.0
+      ],
+      [
+       6.727,
+       0.0
+      ],
+      [
+       6.909,
+       0.071
+      ],
+      [
+       7.091,
+       0.143
+      ],
+      [
+       7.273,
+       0.0
+      ],
+      [
+       7.455,
+       0.143
+      ],
+      [
+       7.636,
+       0.143
+      ],
+      [
+       7.818,
+       0.143
+      ],
+      [
+       8.0,
+       0.143
+      ],
+      [
+       8.182,
+       0.143
+      ],
+      [
+       8.364,
+       0.0
+      ],
+      [
+       8.545,
+       0.0
+      ],
+      [
+       8.727,
+       0.143
+      ],
+      [
+       8.909,
+       0.0
+      ],
+      [
+       9.091,
+       0.143
+      ],
+      [
+       9.273,
+       0.143
+      ],
+      [
+       9.455,
+       0.0
+      ],
+      [
+       9.636,
+       0.143
+      ],
+      [
+       9.818,
+       0.214
+      ],
+      [
+       10.0,
+       0.286
+      ],
+      [
+       10.182,
+       0.143
+      ],
+      [
+       10.364,
+       0.214
+      ],
+      [
+       10.545,
+       0.143
+      ],
+      [
+       10.727,
+       0.143
+      ],
+      [
+       10.909,
+       0.143
+      ],
+      [
+       11.091,
+       0.071
+      ],
+      [
+       11.273,
+       0.0
+      ],
+      [
+       11.455,
+       0.071
+      ],
+      [
+       11.636,
+       0.143
+      ],
+      [
+       11.818,
+       0.071
+      ],
+      [
+       12.0,
+       0.071
+      ],
+      [
+       12.182,
+       0.071
+      ],
+      [
+       12.364,
+       0.143
+      ],
+      [
+       12.545,
+       0.071
+      ],
+      [
+       12.727,
+       0.0
+      ],
+      [
+       12.909,
+       0.0
+      ],
+      [
+       13.091,
+       0.0
+      ],
+      [
+       13.273,
+       0.0
+      ],
+      [
+       13.455,
+       0.0
+      ],
+      [
+       13.636,
+       -0.071
+      ],
+      [
+       13.818,
+       0.071
+      ],
+      [
+       14.0,
+       0.0
+      ],
+      [
+       14.727,
+       0.0
+      ],
+      [
+       14.909,
+       0.071
+      ],
+      [
+       15.091,
+       4.786
+      ],
+      [
+       15.273,
+       4.714
+      ],
+      [
+       15.455,
+       4.643
+      ],
+      [
+       15.636,
+       4.643
+      ],
+      [
+       15.818,
+       2.078
+      ],
+      [
+       16.0,
+       0.286
+      ],
+      [
+       16.182,
+       0.0
+      ],
+      [
+       16.364,
+       0.143
+      ],
+      [
+       16.545,
+       0.143
+      ],
+      [
+       16.727,
+       -0.071
+      ],
+      [
+       16.909,
+       0.143
+      ],
+      [
+       17.091,
+       0.143
+      ],
+      [
+       17.273,
+       0.143
+      ],
+      [
+       17.455,
+       0.071
+      ],
+      [
+       17.636,
+       0.143
+      ],
+      [
+       17.818,
+       0.071
+      ],
+      [
+       18.0,
+       0.143
+      ],
+      [
+       18.182,
+       0.0
+      ],
+      [
+       18.364,
+       0.071
+      ],
+      [
+       18.545,
+       0.143
+      ],
+      [
+       18.727,
+       0.143
+      ],
+      [
+       18.909,
+       0.0
+      ],
+      [
+       19.091,
+       0.143
+      ],
+      [
+       19.273,
+       0.0
+      ],
+      [
+       19.455,
+       0.143
+      ],
+      [
+       19.636,
+       0.0
+      ],
+      [
+       19.818,
+       0.071
+      ],
+      [
+       20.0,
+       0.143
+      ],
+      [
+       20.182,
+       0.143
+      ],
+      [
+       20.364,
+       0.143
+      ],
+      [
+       20.545,
+       0.071
+      ],
+      [
+       20.727,
+       0.143
+      ],
+      [
+       20.909,
+       0.071
+      ],
+      [
+       21.091,
+       -0.071
+      ],
+      [
+       21.273,
+       0.0
+      ],
+      [
+       21.455,
+       0.0
+      ],
+      [
+       21.636,
+       0.143
+      ],
+      [
+       21.818,
+       0.143
+      ],
+      [
+       22.0,
+       0.0
+      ],
+      [
+       22.182,
+       0.0
+      ],
+      [
+       22.364,
+       0.143
+      ],
+      [
+       22.545,
+       0.071
+      ],
+      [
+       22.727,
+       0.0
+      ],
+      [
+       22.909,
+       0.143
+      ],
+      [
+       23.091,
+       0.143
+      ],
+      [
+       23.273,
+       0.0
+      ],
+      [
+       23.455,
+       0.143
+      ],
+      [
+       23.636,
+       -0.143
+      ],
+      [
+       23.818,
+       0.143
+      ],
+      [
+       24.0,
+       0.0
+      ],
+      [
+       24.182,
+       0.071
+      ],
+      [
+       24.364,
+       0.143
+      ],
+      [
+       24.545,
+       0.071
+      ],
+      [
+       24.727,
+       0.0
+      ],
+      [
+       24.909,
+       4.643
+      ],
+      [
+       25.091,
+       4.571
+      ],
+      [
+       25.273,
+       4.857
+      ],
+      [
+       25.455,
+       0.786
+      ],
+      [
+       25.636,
+       0.071
+      ],
+      [
+       25.818,
+       0.0
+      ],
+      [
+       26.0,
+       0.071
+      ],
+      [
+       26.182,
+       0.071
+      ],
+      [
+       26.364,
+       0.143
+      ],
+      [
+       26.545,
+       0.143
+      ],
+      [
+       26.727,
+       0.143
+      ],
+      [
+       26.909,
+       0.143
+      ],
+      [
+       27.091,
+       0.0
+      ],
+      [
+       27.273,
+       0.0
+      ],
+      [
+       27.455,
+       0.143
+      ],
+      [
+       27.636,
+       0.214
+      ],
+      [
+       27.818,
+       0.071
+      ],
+      [
+       28.0,
+       0.071
+      ],
+      [
+       28.182,
+       0.214
+      ],
+      [
+       28.364,
+       0.143
+      ],
+      [
+       28.545,
+       0.143
+      ],
+      [
+       28.727,
+       0.143
+      ],
+      [
+       28.909,
+       0.143
+      ],
+      [
+       29.091,
+       0.143
+      ],
+      [
+       29.273,
+       0.286
+      ],
+      [
+       29.455,
+       0.071
+      ],
+      [
+       29.636,
+       0.143
+      ],
+      [
+       29.818,
+       0.143
+      ],
+      [
+       30.0,
+       0.071
+      ],
+      [
+       30.182,
+       0.0
+      ],
+      [
+       30.364,
+       0.0
+      ],
+      [
+       30.545,
+       0.143
+      ],
+      [
+       30.727,
+       0.0
+      ],
+      [
+       30.909,
+       0.143
+      ],
+      [
+       31.091,
+       0.143
+      ],
+      [
+       31.273,
+       0.143
+      ],
+      [
+       31.455,
+       0.143
+      ],
+      [
+       31.636,
+       0.0
+      ],
+      [
+       31.818,
+       0.143
+      ],
+      [
+       32.0,
+       0.143
+      ],
+      [
+       32.182,
+       0.0
+      ],
+      [
+       32.364,
+       0.143
+      ],
+      [
+       32.545,
+       0.0
+      ],
+      [
+       32.727,
+       0.0
+      ],
+      [
+       32.909,
+       0.071
+      ],
+      [
+       33.091,
+       0.286
+      ],
+      [
+       33.273,
+       0.0
+      ],
+      [
+       33.455,
+       0.143
+      ],
+      [
+       33.636,
+       0.071
+      ],
+      [
+       33.818,
+       0.0
+      ],
+      [
+       34.0,
+       0.0
+      ],
+      [
+       34.182,
+       0.071
+      ],
+      [
+       34.364,
+       1.25
+      ],
+      [
+       34.545,
+       4.571
+      ],
+      [
+       34.727,
+       4.714
+      ],
+      [
+       34.909,
+       4.714
+      ],
+      [
+       35.091,
+       4.571
+      ],
+      [
+       35.273,
+       0.071
+      ],
+      [
+       35.455,
+       0.143
+      ],
+      [
+       35.636,
+       0.071
+      ],
+      [
+       35.818,
+       0.0
+      ],
+      [
+       36.0,
+       0.0
+      ],
+      [
+       36.182,
+       0.143
+      ],
+      [
+       36.364,
+       0.143
+      ],
+      [
+       36.545,
+       0.143
+      ],
+      [
+       36.727,
+       0.143
+      ],
+      [
+       36.909,
+       0.071
+      ],
+      [
+       37.091,
+       0.143
+      ],
+      [
+       37.273,
+       0.0
+      ],
+      [
+       37.455,
+       0.214
+      ],
+      [
+       37.636,
+       0.143
+      ],
+      [
+       37.818,
+       0.143
+      ],
+      [
+       38.0,
+       0.143
+      ],
+      [
+       38.182,
+       0.143
+      ],
+      [
+       38.364,
+       0.286
+      ],
+      [
+       38.545,
+       0.071
+      ],
+      [
+       38.727,
+       0.0
+      ],
+      [
+       38.909,
+       0.0
+      ],
+      [
+       39.091,
+       0.071
+      ],
+      [
+       39.273,
+       0.0
+      ],
+      [
+       39.455,
+       0.143
+      ],
+      [
+       39.636,
+       0.0
+      ],
+      [
+       39.818,
+       0.0
+      ],
+      [
+       40.0,
+       0.0
+      ],
+      [
+       40.182,
+       0.071
+      ],
+      [
+       40.364,
+       0.0
+      ],
+      [
+       40.545,
+       0.0
+      ],
+      [
+       40.727,
+       0.0
+      ],
+      [
+       40.909,
+       0.0
+      ],
+      [
+       41.091,
+       0.143
+      ],
+      [
+       41.273,
+       0.0
+      ],
+      [
+       41.455,
+       0.0
+      ],
+      [
+       41.636,
+       0.0
+      ],
+      [
+       41.818,
+       0.0
+      ],
+      [
+       42.0,
+       0.143
+      ],
+      [
+       42.182,
+       -0.071
+      ],
+      [
+       42.364,
+       -0.143
+      ],
+      [
+       42.545,
+       0.0
+      ],
+      [
+       42.727,
+       0.0
+      ],
+      [
+       42.909,
+       0.143
+      ],
+      [
+       43.091,
+       0.143
+      ],
+      [
+       43.273,
+       0.143
+      ],
+      [
+       43.455,
+       0.143
+      ],
+      [
+       43.636,
+       0.0
+      ],
+      [
+       43.818,
+       0.143
+      ],
+      [
+       44.0,
+       0.143
+      ],
+      [
+       44.182,
+       2.518
+      ],
+      [
+       44.364,
+       4.571
+      ],
+      [
+       44.545,
+       4.714
+      ],
+      [
+       44.727,
+       4.714
+      ],
+      [
+       44.909,
+       0.071
+      ],
+      [
+       45.091,
+       0.286
+      ],
+      [
+       45.273,
+       0.071
+      ],
+      [
+       45.455,
+       0.071
+      ],
+      [
+       45.636,
+       0.0
+      ],
+      [
+       45.727,
+       0.0
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Digital feedthrough vs. time",
+   "page": 9,
+   "conditions": "CL = 27 pF; code 80h; 100 ns/div, VOUT 50 mV/div, CS 5 V/div",
+   "x": {
+    "label": "Time",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT change",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "CS",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       3.6,
+       2.9
+      ],
+      [
+       7.3,
+       2.9
+      ],
+      [
+       10.9,
+       4.3
+      ],
+      [
+       14.5,
+       3.6
+      ],
+      [
+       18.2,
+       0.7
+      ],
+      [
+       21.8,
+       2.1
+      ],
+      [
+       29.1,
+       0.7
+      ],
+      [
+       32.7,
+       2.1
+      ],
+      [
+       36.4,
+       0.0
+      ],
+      [
+       40.0,
+       0.7
+      ],
+      [
+       43.6,
+       0.0
+      ],
+      [
+       47.3,
+       2.1
+      ],
+      [
+       50.9,
+       2.1
+      ],
+      [
+       54.5,
+       0.0
+      ],
+      [
+       58.2,
+       0.7
+      ],
+      [
+       61.8,
+       0.7
+      ],
+      [
+       65.5,
+       1.4
+      ],
+      [
+       69.1,
+       2.9
+      ],
+      [
+       72.7,
+       0.7
+      ],
+      [
+       76.4,
+       2.1
+      ],
+      [
+       80.0,
+       0.7
+      ],
+      [
+       83.6,
+       0.0
+      ],
+      [
+       87.3,
+       2.1
+      ],
+      [
+       90.9,
+       0.7
+      ],
+      [
+       94.5,
+       0.0
+      ],
+      [
+       98.2,
+       -0.7
+      ],
+      [
+       101.8,
+       4.3
+      ],
+      [
+       105.5,
+       0.7
+      ],
+      [
+       109.1,
+       -0.7
+      ],
+      [
+       112.7,
+       2.1
+      ],
+      [
+       116.4,
+       1.4
+      ],
+      [
+       120.0,
+       -0.7
+      ],
+      [
+       123.6,
+       0.7
+      ],
+      [
+       127.3,
+       -2.1
+      ],
+      [
+       130.9,
+       0.7
+      ],
+      [
+       134.5,
+       2.1
+      ],
+      [
+       138.2,
+       0.0
+      ],
+      [
+       141.8,
+       -0.7
+      ],
+      [
+       145.5,
+       6.4
+      ],
+      [
+       149.1,
+       -1.4
+      ],
+      [
+       152.7,
+       0.7
+      ],
+      [
+       156.4,
+       2.9
+      ],
+      [
+       160.0,
+       -0.7
+      ],
+      [
+       163.6,
+       -0.7
+      ],
+      [
+       167.3,
+       5.0
+      ],
+      [
+       170.9,
+       -0.7
+      ],
+      [
+       174.5,
+       1.4
+      ],
+      [
+       178.2,
+       0.0
+      ],
+      [
+       181.8,
+       -2.1
+      ],
+      [
+       185.5,
+       2.9
+      ],
+      [
+       189.1,
+       -0.7
+      ],
+      [
+       192.7,
+       -2.1
+      ],
+      [
+       196.4,
+       1.4
+      ],
+      [
+       200.0,
+       2.9
+      ],
+      [
+       203.6,
+       0.0
+      ],
+      [
+       207.3,
+       1.4
+      ],
+      [
+       210.9,
+       -0.7
+      ],
+      [
+       214.5,
+       -0.7
+      ],
+      [
+       218.2,
+       2.9
+      ],
+      [
+       221.8,
+       4.3
+      ],
+      [
+       225.5,
+       0.7
+      ],
+      [
+       229.1,
+       2.1
+      ],
+      [
+       232.7,
+       2.1
+      ],
+      [
+       236.4,
+       0.7
+      ],
+      [
+       240.0,
+       -3.6
+      ],
+      [
+       243.6,
+       -1.4
+      ],
+      [
+       247.3,
+       -0.7
+      ],
+      [
+       250.9,
+       -0.7
+      ],
+      [
+       254.5,
+       -0.7
+      ],
+      [
+       258.2,
+       -0.7
+      ],
+      [
+       261.8,
+       -0.7
+      ],
+      [
+       265.5,
+       0.7
+      ],
+      [
+       269.1,
+       -2.9
+      ],
+      [
+       272.7,
+       -0.7
+      ],
+      [
+       276.4,
+       0.7
+      ],
+      [
+       280.0,
+       0.7
+      ],
+      [
+       283.6,
+       -0.7
+      ],
+      [
+       287.3,
+       -0.7
+      ],
+      [
+       290.9,
+       -0.7
+      ],
+      [
+       294.5,
+       -0.7
+      ],
+      [
+       298.2,
+       -2.1
+      ],
+      [
+       301.8,
+       -0.7
+      ],
+      [
+       305.5,
+       -0.7
+      ],
+      [
+       309.1,
+       -2.1
+      ],
+      [
+       312.7,
+       -0.7
+      ],
+      [
+       316.4,
+       -0.7
+      ],
+      [
+       320.0,
+       -2.1
+      ],
+      [
+       323.6,
+       -0.7
+      ],
+      [
+       327.3,
+       -2.1
+      ],
+      [
+       330.9,
+       -2.9
+      ],
+      [
+       334.5,
+       -1.4
+      ],
+      [
+       338.2,
+       0.0
+      ],
+      [
+       341.8,
+       -2.1
+      ],
+      [
+       345.5,
+       -0.7
+      ],
+      [
+       349.1,
+       -1.4
+      ],
+      [
+       352.7,
+       -2.1
+      ],
+      [
+       356.4,
+       -2.1
+      ],
+      [
+       360.0,
+       -0.7
+      ],
+      [
+       363.6,
+       -2.1
+      ],
+      [
+       367.3,
+       -3.6
+      ],
+      [
+       370.9,
+       -3.6
+      ],
+      [
+       374.5,
+       -0.7
+      ],
+      [
+       378.2,
+       0.0
+      ],
+      [
+       381.8,
+       -2.1
+      ],
+      [
+       385.5,
+       -5.0
+      ],
+      [
+       389.1,
+       -3.6
+      ],
+      [
+       392.7,
+       2.9
+      ],
+      [
+       396.4,
+       -46.4
+      ],
+      [
+       400.0,
+       -23.6
+      ],
+      [
+       403.6,
+       -25.7
+      ],
+      [
+       407.3,
+       -42.9
+      ],
+      [
+       410.9,
+       -54.3
+      ],
+      [
+       414.5,
+       2.1
+      ],
+      [
+       418.2,
+       -0.7
+      ],
+      [
+       421.8,
+       50.7
+      ],
+      [
+       425.5,
+       55.7
+      ],
+      [
+       429.1,
+       43.6
+      ],
+      [
+       432.7,
+       35.7
+      ],
+      [
+       436.4,
+       13.6
+      ],
+      [
+       440.0,
+       -0.7
+      ],
+      [
+       443.6,
+       -5.0
+      ],
+      [
+       447.3,
+       2.1
+      ],
+      [
+       450.9,
+       19.3
+      ],
+      [
+       454.5,
+       27.9
+      ],
+      [
+       458.2,
+       27.9
+      ],
+      [
+       461.8,
+       20.7
+      ],
+      [
+       465.5,
+       15.7
+      ],
+      [
+       469.1,
+       3.6
+      ],
+      [
+       472.7,
+       -2.1
+      ],
+      [
+       476.4,
+       -13.6
+      ],
+      [
+       480.0,
+       -10.7
+      ],
+      [
+       483.6,
+       -5.0
+      ],
+      [
+       487.3,
+       -3.6
+      ],
+      [
+       490.9,
+       0.0
+      ],
+      [
+       494.5,
+       1.4
+      ],
+      [
+       498.2,
+       -1.4
+      ],
+      [
+       501.8,
+       -2.1
+      ],
+      [
+       505.5,
+       -5.0
+      ],
+      [
+       509.1,
+       -1.4
+      ],
+      [
+       512.7,
+       5.0
+      ],
+      [
+       516.4,
+       9.3
+      ],
+      [
+       520.0,
+       17.9
+      ],
+      [
+       523.6,
+       17.1
+      ],
+      [
+       527.3,
+       11.4
+      ],
+      [
+       530.9,
+       7.1
+      ],
+      [
+       534.5,
+       0.7
+      ],
+      [
+       538.2,
+       -4.3
+      ],
+      [
+       541.8,
+       -2.1
+      ],
+      [
+       545.5,
+       -2.1
+      ],
+      [
+       549.1,
+       9.3
+      ],
+      [
+       552.7,
+       7.9
+      ],
+      [
+       556.4,
+       8.6
+      ],
+      [
+       560.0,
+       10.7
+      ],
+      [
+       563.6,
+       5.7
+      ],
+      [
+       567.3,
+       -2.9
+      ],
+      [
+       570.9,
+       -2.9
+      ],
+      [
+       574.5,
+       -9.3
+      ],
+      [
+       578.2,
+       -8.6
+      ],
+      [
+       581.8,
+       -2.1
+      ],
+      [
+       585.5,
+       0.0
+      ],
+      [
+       589.1,
+       4.3
+      ],
+      [
+       592.7,
+       7.9
+      ],
+      [
+       596.4,
+       7.9
+      ],
+      [
+       600.0,
+       6.4
+      ],
+      [
+       603.6,
+       1.4
+      ],
+      [
+       607.3,
+       0.0
+      ],
+      [
+       610.9,
+       -2.1
+      ],
+      [
+       614.5,
+       -2.1
+      ],
+      [
+       618.2,
+       -0.7
+      ],
+      [
+       621.8,
+       0.7
+      ],
+      [
+       625.5,
+       3.6
+      ],
+      [
+       629.1,
+       4.3
+      ],
+      [
+       632.7,
+       5.0
+      ],
+      [
+       636.4,
+       2.9
+      ],
+      [
+       640.0,
+       3.6
+      ],
+      [
+       643.6,
+       5.0
+      ],
+      [
+       647.3,
+       -1.4
+      ],
+      [
+       650.9,
+       0.0
+      ],
+      [
+       654.5,
+       1.4
+      ],
+      [
+       658.2,
+       7.9
+      ],
+      [
+       661.8,
+       1.4
+      ],
+      [
+       665.5,
+       -5.7
+      ],
+      [
+       669.1,
+       0.0
+      ],
+      [
+       672.7,
+       -2.1
+      ],
+      [
+       676.4,
+       -5.0
+      ],
+      [
+       680.0,
+       0.7
+      ],
+      [
+       683.6,
+       1.4
+      ],
+      [
+       687.3,
+       -1.4
+      ],
+      [
+       690.9,
+       7.9
+      ],
+      [
+       694.5,
+       2.1
+      ],
+      [
+       698.2,
+       1.4
+      ],
+      [
+       701.8,
+       0.7
+      ],
+      [
+       705.5,
+       0.7
+      ],
+      [
+       709.1,
+       -0.7
+      ],
+      [
+       712.7,
+       -0.7
+      ],
+      [
+       716.4,
+       2.9
+      ],
+      [
+       720.0,
+       0.7
+      ],
+      [
+       723.6,
+       2.9
+      ],
+      [
+       727.3,
+       5.0
+      ],
+      [
+       730.9,
+       2.1
+      ],
+      [
+       734.5,
+       0.0
+      ],
+      [
+       738.2,
+       -1.4
+      ],
+      [
+       741.8,
+       0.7
+      ],
+      [
+       745.5,
+       -2.1
+      ],
+      [
+       749.1,
+       -4.3
+      ],
+      [
+       752.7,
+       -2.1
+      ],
+      [
+       756.4,
+       -2.9
+      ],
+      [
+       760.0,
+       -1.4
+      ],
+      [
+       763.6,
+       -0.7
+      ],
+      [
+       767.3,
+       -0.7
+      ],
+      [
+       770.9,
+       1.4
+      ],
+      [
+       774.5,
+       2.1
+      ],
+      [
+       778.2,
+       0.7
+      ],
+      [
+       781.8,
+       5.0
+      ],
+      [
+       785.5,
+       -0.7
+      ],
+      [
+       789.1,
+       0.0
+      ],
+      [
+       792.7,
+       3.6
+      ],
+      [
+       796.4,
+       0.7
+      ],
+      [
+       800.0,
+       2.1
+      ],
+      [
+       803.6,
+       0.7
+      ],
+      [
+       807.3,
+       -0.7
+      ],
+      [
+       810.9,
+       -0.7
+      ],
+      [
+       814.5,
+       -0.7
+      ],
+      [
+       818.2,
+       1.4
+      ],
+      [
+       821.8,
+       -2.1
+      ],
+      [
+       825.5,
+       -1.4
+      ],
+      [
+       829.1,
+       -0.7
+      ],
+      [
+       832.7,
+       -2.1
+      ],
+      [
+       836.4,
+       -0.7
+      ],
+      [
+       840.0,
+       -0.7
+      ],
+      [
+       843.6,
+       -2.1
+      ],
+      [
+       847.3,
+       1.4
+      ],
+      [
+       850.9,
+       0.7
+      ],
+      [
+       854.5,
+       2.1
+      ],
+      [
+       858.2,
+       3.6
+      ],
+      [
+       861.8,
+       0.7
+      ],
+      [
+       865.5,
+       2.9
+      ],
+      [
+       869.1,
+       2.9
+      ],
+      [
+       872.7,
+       -0.7
+      ],
+      [
+       876.4,
+       -0.7
+      ],
+      [
+       880.0,
+       0.0
+      ],
+      [
+       883.6,
+       0.0
+      ],
+      [
+       887.3,
+       3.6
+      ],
+      [
+       890.9,
+       -1.4
+      ],
+      [
+       894.5,
+       0.7
+      ],
+      [
+       898.2,
+       0.7
+      ],
+      [
+       901.8,
+       0.7
+      ],
+      [
+       905.5,
+       -1.4
+      ],
+      [
+       909.1,
+       4.3
+      ],
+      [
+       912.7,
+       -2.1
+      ],
+      [
+       916.4,
+       0.0
+      ],
+      [
+       920.0,
+       0.0
+      ],
+      [
+       923.6,
+       -2.1
+      ],
+      [
+       925.5,
+       -1.4
+      ]
+     ]
+    },
+    {
+     "label": "CS",
+     "points": [
+      [
+       3.6,
+       -0.143
+      ],
+      [
+       10.9,
+       -0.071
+      ],
+      [
+       18.2,
+       0.0
+      ],
+      [
+       25.5,
+       0.0
+      ],
+      [
+       32.7,
+       0.143
+      ],
+      [
+       40.0,
+       -0.071
+      ],
+      [
+       47.3,
+       0.0
+      ],
+      [
+       54.5,
+       0.0
+      ],
+      [
+       61.8,
+       -0.071
+      ],
+      [
+       69.1,
+       0.0
+      ],
+      [
+       76.4,
+       0.0
+      ],
+      [
+       83.6,
+       -0.143
+      ],
+      [
+       90.9,
+       -0.143
+      ],
+      [
+       98.2,
+       -0.143
+      ],
+      [
+       105.5,
+       0.0
+      ],
+      [
+       112.7,
+       -0.143
+      ],
+      [
+       120.0,
+       0.0
+      ],
+      [
+       127.3,
+       -0.143
+      ],
+      [
+       134.5,
+       -0.071
+      ],
+      [
+       141.8,
+       -0.214
+      ],
+      [
+       149.1,
+       0.0
+      ],
+      [
+       156.4,
+       0.0
+      ],
+      [
+       163.6,
+       -0.143
+      ],
+      [
+       170.9,
+       -0.071
+      ],
+      [
+       178.2,
+       -0.143
+      ],
+      [
+       185.5,
+       0.0
+      ],
+      [
+       192.7,
+       0.143
+      ],
+      [
+       200.0,
+       -0.143
+      ],
+      [
+       207.3,
+       -0.143
+      ],
+      [
+       214.5,
+       0.0
+      ],
+      [
+       221.8,
+       -0.143
+      ],
+      [
+       229.1,
+       0.0
+      ],
+      [
+       236.4,
+       0.0
+      ],
+      [
+       243.6,
+       0.0
+      ],
+      [
+       250.9,
+       0.143
+      ],
+      [
+       258.2,
+       0.0
+      ],
+      [
+       265.5,
+       0.0
+      ],
+      [
+       272.7,
+       0.0
+      ],
+      [
+       280.0,
+       -0.214
+      ],
+      [
+       294.5,
+       0.0
+      ],
+      [
+       301.8,
+       0.0
+      ],
+      [
+       309.1,
+       0.0
+      ],
+      [
+       316.4,
+       -0.071
+      ],
+      [
+       323.6,
+       -0.143
+      ],
+      [
+       330.9,
+       0.071
+      ],
+      [
+       338.2,
+       -0.071
+      ],
+      [
+       345.5,
+       0.0
+      ],
+      [
+       352.7,
+       0.0
+      ],
+      [
+       360.0,
+       -0.071
+      ],
+      [
+       367.3,
+       0.0
+      ],
+      [
+       374.5,
+       0.0
+      ],
+      [
+       381.8,
+       -0.071
+      ],
+      [
+       389.1,
+       -0.143
+      ],
+      [
+       396.4,
+       0.643
+      ],
+      [
+       403.6,
+       2.5
+      ],
+      [
+       410.9,
+       4.071
+      ],
+      [
+       418.2,
+       5.0
+      ],
+      [
+       425.5,
+       4.786
+      ],
+      [
+       432.7,
+       4.429
+      ],
+      [
+       440.0,
+       4.357
+      ],
+      [
+       447.3,
+       4.786
+      ],
+      [
+       454.5,
+       4.929
+      ],
+      [
+       461.8,
+       4.429
+      ],
+      [
+       469.1,
+       4.357
+      ],
+      [
+       476.4,
+       4.571
+      ],
+      [
+       483.6,
+       4.571
+      ],
+      [
+       490.9,
+       4.571
+      ],
+      [
+       498.2,
+       4.429
+      ],
+      [
+       505.5,
+       4.429
+      ],
+      [
+       512.7,
+       4.571
+      ],
+      [
+       520.0,
+       4.714
+      ],
+      [
+       527.3,
+       4.714
+      ],
+      [
+       534.5,
+       4.571
+      ],
+      [
+       541.8,
+       4.429
+      ],
+      [
+       549.1,
+       4.786
+      ],
+      [
+       556.4,
+       4.714
+      ],
+      [
+       563.6,
+       4.571
+      ],
+      [
+       570.9,
+       4.429
+      ],
+      [
+       578.2,
+       4.643
+      ],
+      [
+       585.5,
+       4.571
+      ],
+      [
+       592.7,
+       4.857
+      ],
+      [
+       600.0,
+       4.571
+      ],
+      [
+       607.3,
+       4.429
+      ],
+      [
+       614.5,
+       4.571
+      ],
+      [
+       621.8,
+       4.429
+      ],
+      [
+       629.1,
+       4.786
+      ],
+      [
+       636.4,
+       4.714
+      ],
+      [
+       643.6,
+       4.571
+      ],
+      [
+       650.9,
+       4.5
+      ],
+      [
+       658.2,
+       4.5
+      ],
+      [
+       665.5,
+       4.429
+      ],
+      [
+       672.7,
+       4.429
+      ],
+      [
+       680.0,
+       4.714
+      ],
+      [
+       687.3,
+       4.571
+      ],
+      [
+       694.5,
+       4.714
+      ],
+      [
+       701.8,
+       4.571
+      ],
+      [
+       709.1,
+       4.714
+      ],
+      [
+       716.4,
+       4.714
+      ],
+      [
+       723.6,
+       4.714
+      ],
+      [
+       730.9,
+       4.786
+      ],
+      [
+       738.2,
+       4.714
+      ],
+      [
+       745.5,
+       4.643
+      ],
+      [
+       752.7,
+       4.714
+      ],
+      [
+       760.0,
+       4.714
+      ],
+      [
+       767.3,
+       4.714
+      ],
+      [
+       774.5,
+       4.714
+      ],
+      [
+       781.8,
+       4.571
+      ],
+      [
+       789.1,
+       4.714
+      ],
+      [
+       796.4,
+       4.786
+      ],
+      [
+       803.6,
+       4.714
+      ],
+      [
+       810.9,
+       4.643
+      ],
+      [
+       818.2,
+       4.571
+      ],
+      [
+       825.5,
+       4.571
+      ],
+      [
+       832.7,
+       4.714
+      ],
+      [
+       840.0,
+       4.714
+      ],
+      [
+       847.3,
+       4.786
+      ],
+      [
+       854.5,
+       4.643
+      ],
+      [
+       861.8,
+       4.571
+      ],
+      [
+       869.1,
+       4.714
+      ],
+      [
+       876.4,
+       4.571
+      ],
+      [
+       883.6,
+       4.714
+      ],
+      [
+       890.9,
+       4.857
+      ],
+      [
+       898.2,
+       4.857
+      ],
+      [
+       905.5,
+       4.857
+      ],
+      [
+       912.7,
+       4.714
+      ],
+      [
+       920.0,
+       4.714
+      ],
+      [
+       925.5,
+       4.714
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Gain vs. frequency for 10 kΩ potentiometer",
+   "page": 9,
+   "conditions": "MCP41010, MCP42010; CL = 30 pF; gain vs. frequency test circuit",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Gain",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Code = FFh",
+     "points": [
+      [
+       99.84,
+       0.22
+      ],
+      [
+       685800,
+       -0.03
+      ],
+      [
+       1103000,
+       -0.43
+      ],
+      [
+       1628000,
+       -1.22
+      ],
+      [
+       2251000,
+       -2.38
+      ],
+      [
+       2962000,
+       -4.18
+      ]
+     ]
+    },
+    {
+     "label": "Code = 80h",
+     "points": [
+      [
+       99.84,
+       -5.88
+      ],
+      [
+       36330,
+       -5.88
+      ],
+      [
+       253400,
+       -6.31
+      ],
+      [
+       476200,
+       -6.78
+      ],
+      [
+       873400,
+       -8.15
+      ],
+      [
+       1337000,
+       -10.21
+      ],
+      [
+       2214000,
+       -14.18
+      ],
+      [
+       2962000,
+       -17.97
+      ]
+     ]
+    },
+    {
+     "label": "Code = 40h",
+     "points": [
+      [
+       99.84,
+       -11.91
+      ],
+      [
+       37540,
+       -11.91
+      ],
+      [
+       470400,
+       -12.74
+      ],
+      [
+       845200,
+       -13.75
+      ],
+      [
+       1327000,
+       -15.48
+      ],
+      [
+       2251000,
+       -19.13
+      ],
+      [
+       2962000,
+       -22.92
+      ]
+     ]
+    },
+    {
+     "label": "Code = 20h",
+     "points": [
+      [
+       99.84,
+       -17.83
+      ],
+      [
+       47610,
+       -17.75
+      ],
+      [
+       48200,
+       -18.04
+      ],
+      [
+       150600,
+       -18.15
+      ],
+      [
+       156900,
+       -18.55
+      ],
+      [
+       159500,
+       -18.15
+      ],
+      [
+       476200,
+       -18.62
+      ],
+      [
+       906200,
+       -19.49
+      ],
+      [
+       1440000,
+       -20.97
+      ],
+      [
+       2099000,
+       -23.31
+      ],
+      [
+       2269000,
+       -23.46
+      ],
+      [
+       2962000,
+       -27.03
+      ]
+     ]
+    },
+    {
+     "label": "Code = 10h",
+     "points": [
+      [
+       99.84,
+       -23.64
+      ],
+      [
+       39750,
+       -23.64
+      ],
+      [
+       47410,
+       -23.85
+      ],
+      [
+       48200,
+       -23.64
+      ],
+      [
+       149300,
+       -24.0
+      ],
+      [
+       151800,
+       -24.47
+      ],
+      [
+       166800,
+       -23.96
+      ],
+      [
+       311000,
+       -24.11
+      ],
+      [
+       313500,
+       -24.36
+      ],
+      [
+       464700,
+       -24.4
+      ],
+      [
+       474300,
+       -24.68
+      ],
+      [
+       482100,
+       -24.43
+      ],
+      [
+       534100,
+       -24.5
+      ],
+      [
+       1042000,
+       -25.44
+      ],
+      [
+       1440000,
+       -26.45
+      ],
+      [
+       2074000,
+       -28.37
+      ],
+      [
+       2196000,
+       -28.22
+      ],
+      [
+       2962000,
+       -32.01
+      ]
+     ]
+    },
+    {
+     "label": "Code = 08h",
+     "points": [
+      [
+       99.84,
+       -29.05
+      ],
+      [
+       90590,
+       -29.02
+      ],
+      [
+       470400,
+       -29.41
+      ],
+      [
+       811300,
+       -29.85
+      ],
+      [
+       1506000,
+       -30.86
+      ],
+      [
+       2214000,
+       -31.94
+      ],
+      [
+       2962000,
+       -34.1
+      ]
+     ]
+    },
+    {
+     "label": "Code = 04h",
+     "points": [
+      [
+       99.84,
+       -34.25
+      ],
+      [
+       44950,
+       -34.21
+      ],
+      [
+       63420,
+       -34.43
+      ],
+      [
+       64210,
+       -34.21
+      ],
+      [
+       91710,
+       -34.5
+      ],
+      [
+       92840,
+       -34.28
+      ],
+      [
+       148700,
+       -34.39
+      ],
+      [
+       151800,
+       -34.14
+      ],
+      [
+       156900,
+       -34.65
+      ],
+      [
+       159500,
+       -34.18
+      ],
+      [
+       160800,
+       -34.43
+      ],
+      [
+       317400,
+       -34.39
+      ],
+      [
+       468500,
+       -34.83
+      ],
+      [
+       476200,
+       -34.39
+      ],
+      [
+       482100,
+       -34.68
+      ],
+      [
+       1279000,
+       -35.69
+      ],
+      [
+       2151000,
+       -36.92
+      ],
+      [
+       2962000,
+       -39.48
+      ]
+     ]
+    },
+    {
+     "label": "Code = 02h",
+     "points": [
+      [
+       99.84,
+       -38.83
+      ],
+      [
+       46450,
+       -38.8
+      ],
+      [
+       47410,
+       -39.08
+      ],
+      [
+       48200,
+       -38.76
+      ],
+      [
+       49190,
+       -39.01
+      ],
+      [
+       52740,
+       -38.76
+      ],
+      [
+       62390,
+       -38.9
+      ],
+      [
+       63420,
+       -38.47
+      ],
+      [
+       65270,
+       -38.9
+      ],
+      [
+       90590,
+       -38.76
+      ],
+      [
+       91710,
+       -39.19
+      ],
+      [
+       92840,
+       -38.83
+      ],
+      [
+       100400,
+       -38.8
+      ],
+      [
+       146900,
+       -38.98
+      ],
+      [
+       148700,
+       -38.54
+      ],
+      [
+       150000,
+       -38.98
+      ],
+      [
+       151800,
+       -38.15
+      ],
+      [
+       155600,
+       -39.27
+      ],
+      [
+       157500,
+       -38.94
+      ],
+      [
+       165500,
+       -39.19
+      ],
+      [
+       168900,
+       -38.94
+      ],
+      [
+       303400,
+       -39.08
+      ],
+      [
+       308400,
+       -38.87
+      ],
+      [
+       325300,
+       -39.12
+      ],
+      [
+       459000,
+       -39.12
+      ],
+      [
+       464700,
+       -39.91
+      ],
+      [
+       500200,
+       -39.23
+      ],
+      [
+       1371000,
+       -40.42
+      ],
+      [
+       2151000,
+       -41.39
+      ],
+      [
+       2962000,
+       -44.32
+      ]
+     ]
+    },
+    {
+     "label": "Code = 01h",
+     "points": [
+      [
+       99.84,
+       -42.59
+      ],
+      [
+       29960,
+       -42.59
+      ],
+      [
+       32120,
+       -42.8
+      ],
+      [
+       33330,
+       -42.51
+      ],
+      [
+       37080,
+       -42.87
+      ],
+      [
+       37230,
+       -42.51
+      ],
+      [
+       39270,
+       -42.77
+      ],
+      [
+       39750,
+       -42.26
+      ],
+      [
+       39920,
+       -42.77
+      ],
+      [
+       44950,
+       -42.66
+      ],
+      [
+       47410,
+       -43.16
+      ],
+      [
+       48200,
+       -42.33
+      ],
+      [
+       49800,
+       -42.91
+      ],
+      [
+       50420,
+       -41.97
+      ],
+      [
+       52740,
+       -42.95
+      ],
+      [
+       53180,
+       -42.66
+      ],
+      [
+       57250,
+       -42.62
+      ],
+      [
+       59640,
+       -42.98
+      ],
+      [
+       61880,
+       -42.66
+      ],
+      [
+       63160,
+       -43.27
+      ],
+      [
+       66890,
+       -42.73
+      ],
+      [
+       88750,
+       -42.8
+      ],
+      [
+       90220,
+       -43.16
+      ],
+      [
+       102900,
+       -42.62
+      ],
+      [
+       117800,
+       -43.24
+      ],
+      [
+       119200,
+       -42.66
+      ],
+      [
+       125200,
+       -43.24
+      ],
+      [
+       131000,
+       -42.91
+      ],
+      [
+       143300,
+       -42.95
+      ],
+      [
+       148700,
+       -44.64
+      ],
+      [
+       150000,
+       -40.89
+      ],
+      [
+       151800,
+       -44.82
+      ],
+      [
+       157500,
+       -42.33
+      ],
+      [
+       159500,
+       -43.38
+      ],
+      [
+       162800,
+       -42.95
+      ],
+      [
+       165500,
+       -43.24
+      ],
+      [
+       171000,
+       -42.91
+      ],
+      [
+       178800,
+       -43.02
+      ],
+      [
+       180300,
+       -42.66
+      ],
+      [
+       183300,
+       -43.52
+      ],
+      [
+       187100,
+       -42.59
+      ],
+      [
+       189400,
+       -43.56
+      ],
+      [
+       194100,
+       -42.8
+      ],
+      [
+       198100,
+       -43.27
+      ],
+      [
+       212400,
+       -42.91
+      ],
+      [
+       303400,
+       -43.13
+      ],
+      [
+       305900,
+       -43.63
+      ],
+      [
+       309700,
+       -43.02
+      ],
+      [
+       313500,
+       -43.24
+      ],
+      [
+       457100,
+       -43.24
+      ],
+      [
+       466600,
+       -43.81
+      ],
+      [
+       476200,
+       -41.97
+      ],
+      [
+       482100,
+       -43.38
+      ],
+      [
+       788300,
+       -43.7
+      ],
+      [
+       1662000,
+       -44.97
+      ],
+      [
+       2151000,
+       -44.32
+      ],
+      [
+       2433000,
+       -47.96
+      ],
+      [
+       2962000,
+       -48.54
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gain vs. frequency for 50 kΩ potentiometer",
+   "page": 10,
+   "conditions": "MCP41050, MCP42050; CL = 30 pF; gain vs. frequency test circuit",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Gain",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Code = FFh",
+     "points": [
+      [
+       100.1,
+       0.07
+      ],
+      [
+       230500,
+       -0.07
+      ],
+      [
+       907400,
+       0.29
+      ],
+      [
+       1091000,
+       -0.58
+      ],
+      [
+       1632000,
+       -5.31
+      ],
+      [
+       1693000,
+       -5.16
+      ],
+      [
+       1707000,
+       -5.52
+      ],
+      [
+       1771000,
+       -5.16
+      ],
+      [
+       1793000,
+       -5.45
+      ],
+      [
+       1884000,
+       -5.09
+      ],
+      [
+       2994000,
+       -11.7
+      ]
+     ]
+    },
+    {
+     "label": "Code = 80h",
+     "points": [
+      [
+       100.1,
+       -6.07
+      ],
+      [
+       44670,
+       -6.14
+      ],
+      [
+       119600,
+       -6.79
+      ],
+      [
+       230500,
+       -8.23
+      ],
+      [
+       348900,
+       -10.04
+      ],
+      [
+       573100,
+       -13.25
+      ],
+      [
+       867400,
+       -16.86
+      ],
+      [
+       1239000,
+       -20.94
+      ],
+      [
+       1749000,
+       -26.17
+      ],
+      [
+       2201000,
+       -30.94
+      ],
+      [
+       2994000,
+       -40.79
+      ]
+     ]
+    },
+    {
+     "label": "Code = 40h",
+     "points": [
+      [
+       100.1,
+       -12.09
+      ],
+      [
+       71590,
+       -12.27
+      ],
+      [
+       178700,
+       -13.07
+      ],
+      [
+       303400,
+       -14.51
+      ],
+      [
+       444400,
+       -16.46
+      ],
+      [
+       607000,
+       -18.84
+      ],
+      [
+       867400,
+       -22.89
+      ],
+      [
+       1091000,
+       -26.68
+      ],
+      [
+       1534000,
+       -36.21
+      ],
+      [
+       1930000,
+       -52.45
+      ],
+      [
+       2284000,
+       -41.73
+      ],
+      [
+       2552000,
+       -38.81
+      ],
+      [
+       2994000,
+       -36.86
+      ]
+     ]
+    },
+    {
+     "label": "Code = 20h",
+     "points": [
+      [
+       100.1,
+       -18.09
+      ],
+      [
+       74900,
+       -18.19
+      ],
+      [
+       212400,
+       -18.84
+      ],
+      [
+       378700,
+       -20.32
+      ],
+      [
+       534500,
+       -22.24
+      ],
+      [
+       712300,
+       -24.98
+      ],
+      [
+       896300,
+       -28.41
+      ],
+      [
+       1087000,
+       -32.85
+      ],
+      [
+       1334000,
+       -42.27
+      ],
+      [
+       1503000,
+       -56.82
+      ],
+      [
+       1672000,
+       -44.73
+      ],
+      [
+       1923000,
+       -38.3
+      ],
+      [
+       2275000,
+       -35.31
+      ],
+      [
+       2562000,
+       -34.3
+      ],
+      [
+       2994000,
+       -33.83
+      ]
+     ]
+    },
+    {
+     "label": "Code = 10h",
+     "points": [
+      [
+       100.1,
+       -24.12
+      ],
+      [
+       50310,
+       -24.19
+      ],
+      [
+       200500,
+       -24.73
+      ],
+      [
+       286500,
+       -25.23
+      ],
+      [
+       401100,
+       -26.14
+      ],
+      [
+       528000,
+       -27.47
+      ],
+      [
+       703600,
+       -30.0
+      ],
+      [
+       867400,
+       -33.14
+      ],
+      [
+       1005000,
+       -36.79
+      ],
+      [
+       1209000,
+       -46.28
+      ],
+      [
+       1310000,
+       -60.29
+      ],
+      [
+       1473000,
+       -46.06
+      ],
+      [
+       1672000,
+       -40.04
+      ],
+      [
+       2104000,
+       -35.02
+      ],
+      [
+       2552000,
+       -33.75
+      ],
+      [
+       2994000,
+       -33.68
+      ]
+     ]
+    },
+    {
+     "label": "Code = 08h",
+     "points": [
+      [
+       100.1,
+       -29.64
+      ],
+      [
+       48090,
+       -29.71
+      ],
+      [
+       48680,
+       -29.49
+      ],
+      [
+       90830,
+       -29.67
+      ],
+      [
+       92710,
+       -29.39
+      ],
+      [
+       93860,
+       -29.67
+      ],
+      [
+       150400,
+       -29.96
+      ],
+      [
+       151700,
+       -29.64
+      ],
+      [
+       153600,
+       -30.22
+      ],
+      [
+       162000,
+       -29.64
+      ],
+      [
+       163300,
+       -29.96
+      ],
+      [
+       313600,
+       -30.43
+      ],
+      [
+       468800,
+       -31.95
+      ],
+      [
+       476500,
+       -31.66
+      ],
+      [
+       607000,
+       -33.25
+      ],
+      [
+       763800,
+       -35.49
+      ],
+      [
+       1001000,
+       -40.5
+      ],
+      [
+       1224000,
+       -49.49
+      ],
+      [
+       1335000,
+       -60.29
+      ],
+      [
+       1383000,
+       -60.29
+      ],
+      [
+       1560000,
+       -47.0
+      ],
+      [
+       1735000,
+       -42.53
+      ],
+      [
+       2284000,
+       -36.64
+      ],
+      [
+       2994000,
+       -34.62
+      ]
+     ]
+    },
+    {
+     "label": "Code = 04h",
+     "points": [
+      [
+       100.1,
+       -35.23
+      ],
+      [
+       32170,
+       -35.27
+      ],
+      [
+       33380,
+       -35.05
+      ],
+      [
+       33650,
+       -35.27
+      ],
+      [
+       39980,
+       -35.09
+      ],
+      [
+       42520,
+       -35.31
+      ],
+      [
+       48090,
+       -35.02
+      ],
+      [
+       48880,
+       -35.56
+      ],
+      [
+       50310,
+       -35.13
+      ],
+      [
+       85760,
+       -35.2
+      ],
+      [
+       87540,
+       -35.41
+      ],
+      [
+       92330,
+       -35.05
+      ],
+      [
+       101500,
+       -35.41
+      ],
+      [
+       149800,
+       -35.49
+      ],
+      [
+       156100,
+       -35.27
+      ],
+      [
+       161300,
+       -35.92
+      ],
+      [
+       170900,
+       -35.49
+      ],
+      [
+       317400,
+       -36.06
+      ],
+      [
+       321400,
+       -36.43
+      ],
+      [
+       464900,
+       -37.4
+      ],
+      [
+       474600,
+       -38.16
+      ],
+      [
+       482400,
+       -37.36
+      ],
+      [
+       573100,
+       -38.55
+      ],
+      [
+       709400,
+       -40.47
+      ],
+      [
+       867400,
+       -43.39
+      ],
+      [
+       1056000,
+       -48.63
+      ],
+      [
+       1231000,
+       -60.29
+      ],
+      [
+       1353000,
+       -60.29
+      ],
+      [
+       1491000,
+       -51.33
+      ],
+      [
+       1786000,
+       -44.62
+      ],
+      [
+       2229000,
+       -40.22
+      ],
+      [
+       2994000,
+       -37.54
+      ]
+     ]
+    },
+    {
+     "label": "Code = 02h",
+     "points": [
+      [
+       100.1,
+       -41.12
+      ],
+      [
+       36830,
+       -41.19
+      ],
+      [
+       39170,
+       -40.94
+      ],
+      [
+       47500,
+       -41.12
+      ],
+      [
+       48090,
+       -41.37
+      ],
+      [
+       50310,
+       -40.97
+      ],
+      [
+       50930,
+       -41.26
+      ],
+      [
+       109200,
+       -41.37
+      ],
+      [
+       120500,
+       -41.7
+      ],
+      [
+       122000,
+       -41.33
+      ],
+      [
+       148600,
+       -41.37
+      ],
+      [
+       150400,
+       -41.95
+      ],
+      [
+       151700,
+       -41.33
+      ],
+      [
+       153600,
+       -41.84
+      ],
+      [
+       156100,
+       -41.48
+      ],
+      [
+       183200,
+       -41.77
+      ],
+      [
+       191700,
+       -41.37
+      ],
+      [
+       194000,
+       -41.8
+      ],
+      [
+       280700,
+       -42.16
+      ],
+      [
+       397800,
+       -43.07
+      ],
+      [
+       463000,
+       -43.75
+      ],
+      [
+       474600,
+       -44.37
+      ],
+      [
+       480400,
+       -43.93
+      ],
+      [
+       496500,
+       -44.11
+      ],
+      [
+       627300,
+       -45.99
+      ],
+      [
+       763800,
+       -48.66
+      ],
+      [
+       867400,
+       -51.48
+      ],
+      [
+       1062000,
+       -60.29
+      ],
+      [
+       1182000,
+       -60.29
+      ],
+      [
+       1345000,
+       -53.28
+      ],
+      [
+       1585000,
+       -48.3
+      ],
+      [
+       1853000,
+       -46.57
+      ],
+      [
+       1962000,
+       -44.11
+      ],
+      [
+       2219000,
+       -42.27
+      ],
+      [
+       2994000,
+       -40.18
+      ]
+     ]
+    },
+    {
+     "label": "Code = 01h",
+     "points": [
+      [
+       100.1,
+       -45.49
+      ],
+      [
+       32170,
+       -45.56
+      ],
+      [
+       32570,
+       -45.16
+      ],
+      [
+       33240,
+       -45.52
+      ],
+      [
+       36080,
+       -45.56
+      ],
+      [
+       37440,
+       -45.23
+      ],
+      [
+       39980,
+       -45.74
+      ],
+      [
+       43940,
+       -45.23
+      ],
+      [
+       48090,
+       -45.85
+      ],
+      [
+       51140,
+       -44.98
+      ],
+      [
+       52200,
+       -45.49
+      ],
+      [
+       62270,
+       -45.41
+      ],
+      [
+       64090,
+       -45.81
+      ],
+      [
+       64880,
+       -45.31
+      ],
+      [
+       89720,
+       -45.49
+      ],
+      [
+       91580,
+       -46.35
+      ],
+      [
+       92710,
+       -44.22
+      ],
+      [
+       94240,
+       -45.56
+      ],
+      [
+       101500,
+       -45.77
+      ],
+      [
+       104000,
+       -45.31
+      ],
+      [
+       107500,
+       -45.63
+      ],
+      [
+       148600,
+       -45.7
+      ],
+      [
+       153600,
+       -46.35
+      ],
+      [
+       158000,
+       -44.33
+      ],
+      [
+       161300,
+       -46.17
+      ],
+      [
+       168800,
+       -45.31
+      ],
+      [
+       172300,
+       -45.77
+      ],
+      [
+       307200,
+       -46.46
+      ],
+      [
+       311000,
+       -46.89
+      ],
+      [
+       330700,
+       -46.57
+      ],
+      [
+       464900,
+       -47.87
+      ],
+      [
+       470700,
+       -46.35
+      ],
+      [
+       480400,
+       -49.49
+      ],
+      [
+       488400,
+       -48.05
+      ],
+      [
+       607000,
+       -49.6
+      ],
+      [
+       640300,
+       -50.72
+      ],
+      [
+       650900,
+       -50.29
+      ],
+      [
+       763800,
+       -52.38
+      ],
+      [
+       907400,
+       -56.24
+      ],
+      [
+       1009000,
+       -60.29
+      ],
+      [
+       1345000,
+       -60.29
+      ],
+      [
+       1491000,
+       -55.7
+      ],
+      [
+       1830000,
+       -50.47
+      ],
+      [
+       2390000,
+       -46.57
+      ],
+      [
+       2994000,
+       -44.58
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gain vs. frequency for 100 kΩ potentiometer",
+   "page": 10,
+   "conditions": "MCP41100, MCP42100; CL = 30 pF; gain vs. frequency test circuit",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Gain",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Code = FFh",
+     "points": [
+      [
+       100.0,
+       0.29
+      ],
+      [
+       300600,
+       0.14
+      ],
+      [
+       981200,
+       -0.36
+      ]
+     ]
+    },
+    {
+     "label": "Code = 80h",
+     "points": [
+      [
+       100.0,
+       -5.99
+      ],
+      [
+       60160,
+       -6.5
+      ],
+      [
+       139600,
+       -8.84
+      ],
+      [
+       300600,
+       -13.53
+      ],
+      [
+       592400,
+       -20.06
+      ],
+      [
+       981200,
+       -27.31
+      ]
+     ]
+    },
+    {
+     "label": "Code = 40h",
+     "points": [
+      [
+       100.0,
+       -11.98
+      ],
+      [
+       61550,
+       -12.38
+      ],
+      [
+       159700,
+       -14.65
+      ],
+      [
+       300600,
+       -18.76
+      ],
+      [
+       469400,
+       -24.25
+      ],
+      [
+       481900,
+       -25.29
+      ],
+      [
+       538700,
+       -26.34
+      ],
+      [
+       767400,
+       -36.08
+      ],
+      [
+       928000,
+       -50.26
+      ]
+     ]
+    },
+    {
+     "label": "Code = 20h",
+     "points": [
+      [
+       100.0,
+       -17.9
+      ],
+      [
+       49910,
+       -18.0
+      ],
+      [
+       150600,
+       -19.56
+      ],
+      [
+       154600,
+       -19.59
+      ],
+      [
+       164000,
+       -19.84
+      ],
+      [
+       238200,
+       -21.58
+      ],
+      [
+       378100,
+       -25.87
+      ],
+      [
+       538700,
+       -32.83
+      ],
+      [
+       673100,
+       -43.55
+      ],
+      [
+       806000,
+       -45.03
+      ],
+      [
+       928000,
+       -37.67
+      ],
+      [
+       958900,
+       -36.62
+      ],
+      [
+       981200,
+       -35.97
+      ]
+     ]
+    },
+    {
+     "label": "Code = 10h",
+     "points": [
+      [
+       100.0,
+       -23.92
+      ],
+      [
+       47360,
+       -23.99
+      ],
+      [
+       48620,
+       -24.17
+      ],
+      [
+       64230,
+       -24.03
+      ],
+      [
+       150600,
+       -25.18
+      ],
+      [
+       159200,
+       -24.43
+      ],
+      [
+       168900,
+       -25.47
+      ],
+      [
+       186900,
+       -25.8
+      ],
+      [
+       248600,
+       -27.17
+      ],
+      [
+       393300,
+       -31.64
+      ],
+      [
+       471000,
+       -36.33
+      ],
+      [
+       493100,
+       -36.33
+      ],
+      [
+       649300,
+       -59.17
+      ],
+      [
+       668700,
+       -60.0
+      ],
+      [
+       735400,
+       -45.14
+      ],
+      [
+       937200,
+       -35.75
+      ],
+      [
+       971600,
+       -35.07
+      ]
+     ]
+    },
+    {
+     "label": "Code = 08h",
+     "points": [
+      [
+       100.0,
+       -29.69
+      ],
+      [
+       76160,
+       -29.91
+      ],
+      [
+       153600,
+       -30.78
+      ],
+      [
+       160800,
+       -30.88
+      ],
+      [
+       232800,
+       -32.0
+      ],
+      [
+       314700,
+       -33.73
+      ],
+      [
+       471000,
+       -40.37
+      ],
+      [
+       514500,
+       -42.86
+      ],
+      [
+       640800,
+       -57.91
+      ],
+      [
+       874900,
+       -39.36
+      ],
+      [
+       958900,
+       -37.27
+      ],
+      [
+       981200,
+       -36.84
+      ]
+     ]
+    },
+    {
+     "label": "Code = 04h",
+     "points": [
+      [
+       100.0,
+       -35.57
+      ],
+      [
+       47980,
+       -35.65
+      ],
+      [
+       50730,
+       -35.79
+      ],
+      [
+       63390,
+       -35.68
+      ],
+      [
+       147600,
+       -36.44
+      ],
+      [
+       152100,
+       -36.22
+      ],
+      [
+       157100,
+       -36.55
+      ],
+      [
+       300600,
+       -39.47
+      ],
+      [
+       464800,
+       -46.11
+      ],
+      [
+       481900,
+       -48.92
+      ],
+      [
+       493100,
+       -47.88
+      ],
+      [
+       590200,
+       -60.0
+      ],
+      [
+       640800,
+       -58.56
+      ],
+      [
+       937200,
+       -41.42
+      ],
+      [
+       981200,
+       -40.52
+      ]
+     ]
+    },
+    {
+     "label": "Code = 02h",
+     "points": [
+      [
+       100.0,
+       -41.24
+      ],
+      [
+       39290,
+       -41.17
+      ],
+      [
+       40470,
+       -41.27
+      ],
+      [
+       44350,
+       -41.42
+      ],
+      [
+       46590,
+       -41.38
+      ],
+      [
+       49740,
+       -41.6
+      ],
+      [
+       53810,
+       -41.46
+      ],
+      [
+       64230,
+       -40.81
+      ],
+      [
+       78960,
+       -41.46
+      ],
+      [
+       92710,
+       -42.14
+      ],
+      [
+       138700,
+       -42.03
+      ],
+      [
+       155100,
+       -41.27
+      ],
+      [
+       160800,
+       -41.31
+      ],
+      [
+       171100,
+       -42.32
+      ],
+      [
+       300600,
+       -45.24
+      ],
+      [
+       464800,
+       -52.31
+      ],
+      [
+       474000,
+       -53.4
+      ],
+      [
+       486600,
+       -53.9
+      ],
+      [
+       542200,
+       -60.0
+      ],
+      [
+       655700,
+       -59.06
+      ],
+      [
+       928000,
+       -46.04
+      ],
+      [
+       971600,
+       -45.21
+      ],
+      [
+       1001000,
+       -44.68
+      ]
+     ]
+    },
+    {
+     "label": "Code = 01h",
+     "points": [
+      [
+       100.0,
+       -47.23
+      ],
+      [
+       30630,
+       -46.83
+      ],
+      [
+       32380,
+       -46.72
+      ],
+      [
+       34580,
+       -46.94
+      ],
+      [
+       36680,
+       -47.19
+      ],
+      [
+       40330,
+       -47.19
+      ],
+      [
+       41400,
+       -47.16
+      ],
+      [
+       45680,
+       -46.83
+      ],
+      [
+       47510,
+       -46.04
+      ],
+      [
+       48620,
+       -44.81
+      ],
+      [
+       51070,
+       -45.93
+      ],
+      [
+       53290,
+       -46.61
+      ],
+      [
+       54520,
+       -46.94
+      ],
+      [
+       59180,
+       -47.34
+      ],
+      [
+       61350,
+       -47.3
+      ],
+      [
+       65940,
+       -47.19
+      ],
+      [
+       74440,
+       -47.52
+      ],
+      [
+       83480,
+       -47.7
+      ],
+      [
+       86550,
+       -47.88
+      ],
+      [
+       91800,
+       -48.42
+      ],
+      [
+       94240,
+       -47.62
+      ],
+      [
+       119300,
+       -48.56
+      ],
+      [
+       123700,
+       -48.02
+      ],
+      [
+       127800,
+       -47.99
+      ],
+      [
+       145200,
+       -48.06
+      ],
+      [
+       151600,
+       -46.9
+      ],
+      [
+       160800,
+       -47.05
+      ],
+      [
+       166700,
+       -47.88
+      ],
+      [
+       171100,
+       -48.71
+      ],
+      [
+       189400,
+       -49.18
+      ],
+      [
+       195700,
+       -49.46
+      ],
+      [
+       202900,
+       -49.68
+      ],
+      [
+       232800,
+       -50.19
+      ],
+      [
+       247000,
+       -50.37
+      ],
+      [
+       307600,
+       -52.68
+      ],
+      [
+       314700,
+       -52.89
+      ],
+      [
+       322000,
+       -53.58
+      ],
+      [
+       367100,
+       -55.09
+      ],
+      [
+       428300,
+       -58.99
+      ],
+      [
+       448400,
+       -59.64
+      ],
+      [
+       478700,
+       -60.0
+      ],
+      [
+       483500,
+       -60.0
+      ],
+      [
+       620200,
+       -58.95
+      ],
+      [
+       649300,
+       -57.26
+      ],
+      [
+       928000,
+       -48.67
+      ],
+      [
+       971600,
+       -47.91
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "-3 dB bandwidths",
+   "page": 10,
+   "conditions": "CL = 30 pF, code 80h; gain vs. frequency test circuit; -3 dB points 1.06 MHz (10 kΩ), 279 kHz (50 kΩ), 145 kHz (100 kΩ)",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Gain",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "10 kΩ",
+     "points": [
+      [
+       998.9,
+       -5.89
+      ],
+      [
+       30000,
+       -5.89
+      ],
+      [
+       290100,
+       -6.41
+      ],
+      [
+       300000,
+       -6.43
+      ],
+      [
+       476700,
+       -6.79
+      ],
+      [
+       658600,
+       -7.37
+      ],
+      [
+       928300,
+       -8.39
+      ],
+      [
+       1375000,
+       -10.4
+      ],
+      [
+       2230000,
+       -14.24
+      ],
+      [
+       2440000,
+       -15.38
+      ],
+      [
+       3000000,
+       -17.99
+      ]
+     ]
+    },
+    {
+     "label": "50 kΩ",
+     "points": [
+      [
+       998.9,
+       -6.07
+      ],
+      [
+       30000,
+       -6.07
+      ],
+      [
+       70400,
+       -6.35
+      ],
+      [
+       123600,
+       -6.87
+      ],
+      [
+       177800,
+       -7.51
+      ],
+      [
+       252300,
+       -8.6
+      ],
+      [
+       300000,
+       -9.32
+      ],
+      [
+       437100,
+       -11.36
+      ],
+      [
+       658600,
+       -14.38
+      ],
+      [
+       950200,
+       -17.83
+      ],
+      [
+       1344000,
+       -22.03
+      ],
+      [
+       1932000,
+       -28.04
+      ],
+      [
+       2617000,
+       -35.69
+      ]
+     ]
+    },
+    {
+     "label": "100 kΩ",
+     "points": [
+      [
+       998.9,
+       -5.99
+      ],
+      [
+       30000,
+       -5.99
+      ],
+      [
+       51130,
+       -6.31
+      ],
+      [
+       76260,
+       -6.93
+      ],
+      [
+       102900,
+       -7.71
+      ],
+      [
+       154000,
+       -9.26
+      ],
+      [
+       221500,
+       -11.3
+      ],
+      [
+       300000,
+       -13.52
+      ],
+      [
+       539200,
+       -18.99
+      ],
+      [
+       828800,
+       -24.42
+      ],
+      [
+       1157000,
+       -30.69
+      ],
+      [
+       1375000,
+       -35.53
+      ],
+      [
+       1393000,
+       -35.99
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power supply rejection ratio vs. frequency",
+   "page": 10,
+   "conditions": "VDD = 4.5 V to 5.5 V, code 80h, CL = 27 pF, VA = 4 V; power supply sensitivity test circuit",
+   "x": {
+    "label": "Frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "PSRR",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "10 kΩ potentiometer",
+     "points": [
+      [
+       1000.0,
+       34.0
+      ],
+      [
+       10000,
+       27.96
+      ],
+      [
+       59120,
+       24.71
+      ],
+      [
+       112900,
+       22.93
+      ],
+      [
+       179400,
+       21.0
+      ],
+      [
+       274100,
+       18.79
+      ],
+      [
+       555500,
+       14.83
+      ],
+      [
+       766400,
+       12.43
+      ],
+      [
+       1000000,
+       11.65
+      ],
+      [
+       1824000,
+       10.94
+      ],
+      [
+       10000000,
+       9.89
+      ]
+     ]
+    },
+    {
+     "label": "50 kΩ potentiometer",
+     "points": [
+      [
+       1000.0,
+       34.0
+      ],
+      [
+       4871,
+       29.81
+      ],
+      [
+       8654,
+       28.1
+      ],
+      [
+       10000,
+       27.61
+      ],
+      [
+       33060,
+       23.11
+      ],
+      [
+       463700,
+       12.18
+      ],
+      [
+       639700,
+       11.34
+      ],
+      [
+       1000000,
+       11.31
+      ],
+      [
+       10000000,
+       12.74
+      ]
+     ]
+    },
+    {
+     "label": "100 kΩ potentiometer",
+     "points": [
+      [
+       1000.0,
+       34.0
+      ],
+      [
+       4871,
+       29.23
+      ],
+      [
+       10000,
+       26.61
+      ],
+      [
+       15580,
+       24.63
+      ],
+      [
+       63340,
+       17.21
+      ],
+      [
+       119800,
+       14.47
+      ],
+      [
+       222900,
+       12.76
+      ],
+      [
+       523600,
+       11.29
+      ],
+      [
+       685400,
+       11.16
+      ],
+      [
+       1000000,
+       11.4
+      ],
+      [
+       10000000,
+       12.92
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "10 kΩ wiper resistance vs. voltage",
+   "page": 10,
+   "conditions": "MCP41010, MCP42010; IW = 1 mA, code 00h; wiper resistance test circuit",
+   "x": {
+    "label": "Terminal B voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Wiper resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD = 2.7 V",
+     "points": [
+      [
+       0,
+       71.1
+      ],
+      [
+       0.2,
+       76.2
+      ],
+      [
+       0.4,
+       83.1
+      ],
+      [
+       0.549,
+       89.6
+      ],
+      [
+       0.7,
+       98.6
+      ],
+      [
+       0.749,
+       102.0
+      ],
+      [
+       0.825,
+       108.5
+      ],
+      [
+       0.875,
+       114.1
+      ],
+      [
+       0.951,
+       123.6
+      ],
+      [
+       0.975,
+       127.0
+      ],
+      [
+       1.038,
+       138.2
+      ],
+      [
+       1.087,
+       150.2
+      ],
+      [
+       1.149,
+       169.2
+      ],
+      [
+       1.173,
+       178.6
+      ],
+      [
+       1.192,
+       190.3
+      ],
+      [
+       1.204,
+       204.5
+      ],
+      [
+       1.222,
+       246.6
+      ],
+      [
+       1.273,
+       409.7
+      ],
+      [
+       1.292,
+       460.9
+      ],
+      [
+       1.324,
+       525.4
+      ],
+      [
+       1.368,
+       593.9
+      ],
+      [
+       1.396,
+       619.7
+      ],
+      [
+       1.407,
+       624.4
+      ],
+      [
+       1.415,
+       625.7
+      ],
+      [
+       1.426,
+       624.8
+      ],
+      [
+       1.432,
+       623.6
+      ],
+      [
+       1.451,
+       614.5
+      ],
+      [
+       1.492,
+       584.0
+      ],
+      [
+       1.537,
+       556.4
+      ],
+      [
+       1.6,
+       509.1
+      ],
+      [
+       1.749,
+       383.5
+      ],
+      [
+       1.8,
+       346.9
+      ],
+      [
+       1.837,
+       322.4
+      ],
+      [
+       1.9,
+       286.6
+      ],
+      [
+       1.975,
+       251.4
+      ],
+      [
+       2.011,
+       236.7
+      ],
+      [
+       2.049,
+       223.8
+      ],
+      [
+       2.124,
+       201.4
+      ],
+      [
+       2.199,
+       182.9
+      ],
+      [
+       2.248,
+       172.6
+      ],
+      [
+       2.324,
+       159.7
+      ],
+      [
+       2.399,
+       148.5
+      ],
+      [
+       2.499,
+       136.0
+      ],
+      [
+       2.599,
+       126.1
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 5 V",
+     "points": [
+      [
+       0,
+       52.6
+      ],
+      [
+       0.5,
+       55.6
+      ],
+      [
+       0.9,
+       58.6
+      ],
+      [
+       1.2,
+       61.6
+      ],
+      [
+       1.649,
+       67.2
+      ],
+      [
+       1.999,
+       73.2
+      ],
+      [
+       2.099,
+       74.1
+      ],
+      [
+       2.35,
+       72.4
+      ],
+      [
+       2.799,
+       72.8
+      ],
+      [
+       2.999,
+       74.9
+      ],
+      [
+       3.25,
+       80.1
+      ],
+      [
+       3.401,
+       85.3
+      ],
+      [
+       3.525,
+       92.6
+      ],
+      [
+       3.599,
+       96.0
+      ],
+      [
+       3.674,
+       96.5
+      ],
+      [
+       3.75,
+       95.2
+      ],
+      [
+       3.799,
+       93.4
+      ],
+      [
+       4.099,
+       84.8
+      ],
+      [
+       4.4,
+       78.4
+      ],
+      [
+       4.9,
+       70.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "50 kΩ and 100 kΩ wiper resistance vs. voltage",
+   "page": 10,
+   "conditions": "code 00h; wiper resistance test circuit",
+   "x": {
+    "label": "Terminal B voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Wiper resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD = 2.7 V",
+     "points": [
+      [
+       0,
+       176.5
+      ],
+      [
+       0.074,
+       183.1
+      ],
+      [
+       0.099,
+       184.5
+      ],
+      [
+       0.136,
+       184.8
+      ],
+      [
+       0.149,
+       184.2
+      ],
+      [
+       0.187,
+       184.0
+      ],
+      [
+       0.2,
+       184.5
+      ],
+      [
+       0.238,
+       187.3
+      ],
+      [
+       0.376,
+       202.5
+      ],
+      [
+       0.451,
+       212.2
+      ],
+      [
+       0.525,
+       223.8
+      ],
+      [
+       0.562,
+       230.4
+      ],
+      [
+       0.6,
+       238.2
+      ],
+      [
+       0.649,
+       249.5
+      ],
+      [
+       0.689,
+       260.0
+      ],
+      [
+       0.738,
+       277.4
+      ],
+      [
+       0.8,
+       303.7
+      ],
+      [
+       0.911,
+       359.6
+      ],
+      [
+       0.992,
+       394.4
+      ],
+      [
+       1.011,
+       400.0
+      ],
+      [
+       1.038,
+       406.1
+      ],
+      [
+       1.074,
+       412.7
+      ],
+      [
+       1.106,
+       415.5
+      ],
+      [
+       1.124,
+       415.7
+      ],
+      [
+       1.149,
+       414.9
+      ],
+      [
+       1.189,
+       411.6
+      ],
+      [
+       1.211,
+       408.8
+      ],
+      [
+       1.249,
+       403.0
+      ],
+      [
+       1.375,
+       380.3
+      ],
+      [
+       1.451,
+       365.7
+      ],
+      [
+       1.524,
+       350.2
+      ],
+      [
+       1.6,
+       333.3
+      ],
+      [
+       1.749,
+       297.4
+      ],
+      [
+       1.824,
+       280.8
+      ],
+      [
+       1.9,
+       265.8
+      ],
+      [
+       2.049,
+       240.9
+      ],
+      [
+       2.15,
+       227.1
+      ],
+      [
+       2.249,
+       215.2
+      ],
+      [
+       2.299,
+       209.7
+      ],
+      [
+       2.399,
+       199.7
+      ],
+      [
+       2.499,
+       190.9
+      ],
+      [
+       2.599,
+       182.8
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 5 V",
+     "points": [
+      [
+       0,
+       123.7
+      ],
+      [
+       0.2,
+       126.7
+      ],
+      [
+       0.6,
+       134.2
+      ],
+      [
+       0.9,
+       140.8
+      ],
+      [
+       1.1,
+       146.1
+      ],
+      [
+       1.149,
+       147.7
+      ],
+      [
+       1.273,
+       149.9
+      ],
+      [
+       1.324,
+       149.9
+      ],
+      [
+       1.426,
+       148.6
+      ],
+      [
+       1.6,
+       144.1
+      ],
+      [
+       1.749,
+       140.8
+      ],
+      [
+       2.049,
+       137.2
+      ],
+      [
+       2.1,
+       136.7
+      ],
+      [
+       2.299,
+       135.8
+      ],
+      [
+       2.548,
+       135.8
+      ],
+      [
+       2.748,
+       137.2
+      ],
+      [
+       2.95,
+       139.7
+      ],
+      [
+       3.099,
+       143.0
+      ],
+      [
+       3.199,
+       145.8
+      ],
+      [
+       3.325,
+       150.5
+      ],
+      [
+       3.401,
+       153.8
+      ],
+      [
+       3.45,
+       155.5
+      ],
+      [
+       3.499,
+       156.6
+      ],
+      [
+       3.55,
+       156.6
+      ],
+      [
+       3.599,
+       155.7
+      ],
+      [
+       3.85,
+       148.0
+      ],
+      [
+       4.099,
+       141.1
+      ],
+      [
+       4.201,
+       138.6
+      ],
+      [
+       4.598,
+       129.7
+      ],
+      [
+       4.9,
+       123.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gain vs. code for inverting and differential amplifier circuits",
+   "page": 15,
+   "conditions": "",
+   "x": {
+    "label": "Decimal code (0-255)",
+    "unit": "",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Absolute gain",
+    "unit": "V/V",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "|gain|",
+     "points": [
+      [
+       23.3,
+       0.1
+      ],
+      [
+       31.0,
+       0.1379
+      ],
+      [
+       40.0,
+       0.1853
+      ],
+      [
+       61.6,
+       0.3167
+      ],
+      [
+       89.0,
+       0.5334
+      ],
+      [
+       162.1,
+       1.724
+      ],
+      [
+       190.0,
+       2.878
+      ],
+      [
+       213.9,
+       5.092
+      ],
+      [
+       223.0,
+       6.764
+      ],
+      [
+       232.7,
+       10.0
+      ]
+     ]
+    }
+   ]
+  }
+ ]
+}

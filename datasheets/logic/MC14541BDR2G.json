@@ -1,0 +1,1892 @@
+{
+ "sheet": 1,
+ "name": "MC14541BDR2G",
+ "kind": "logic",
+ "manufacturer": "onsemi",
+ "title": "MC14541B programmable timer: 16-stage counter with RC oscillator and power-on reset",
+ "source": {
+  "document": "MC14541B/D",
+  "revision": "Rev. 16, October 2025",
+  "pages": 12
+ },
+ "summary": "A timer built from an on-chip RC oscillator, a 16-stage binary counter, an automatic power-on reset and output logic. Two select pins pick which of four stages (2^8, 2^10, 2^13 or 2^16) drives the output; a mode pin makes it either a continuous divide-by-2^n or a one-shot that changes state once, and a polarity pin sets the output level after reset. The oscillator runs from two resistors and a capacitor, or pin 3 takes an external clock. It works from 3.0 V to 18 V with auto reset off and 8.5 V to 18 V with it on. MC14541BDR2G is the SOIC-14 part on tape and reel.",
+ "key_figures": [
+  [
+   "Supply voltage, auto reset disabled (pin 5 = VDD)",
+   "3.0 to 18 Vdc"
+  ],
+  [
+   "Supply voltage, auto reset enabled (pin 5 = VSS)",
+   "8.5 to 18 Vdc"
+  ],
+  [
+   "Selectable outputs",
+   "2^8, 2^10, 2^13 or 2^16"
+  ],
+  [
+   "Oscillator frequency",
+   "f = 1 / (2.3 Rtc Ctc), 1 kHz to 100 kHz, RS ≈ 2 Rtc, RS ≥ 10 kΩ"
+  ],
+  [
+   "Oscillator accuracy",
+   "±2% over temperature, ±20% supply, ±3% over processing, below 10 kHz"
+  ],
+  [
+   "Quiescent current, auto reset disabled",
+   "5.0 µA max at 5 V, 25 °C"
+  ],
+  [
+   "Output drive at 5 V, 25 °C",
+   "IOH −3.38 mA min at 2.5 V; IOL 1.56 mA min at 0.4 V"
+  ],
+  [
+   "Ambient temperature",
+   "−55 to +125 °C"
+  ],
+  [
+   "Packages",
+   "SOIC-14, TSSOP-14, SOEIAJ-14 (discontinued)"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "package",
+   "case",
+   "marking",
+   "packing",
+   "grade",
+   "status"
+  ],
+  "rows": [
+   [
+    "MC14541BDG",
+    "SOIC-14 (Pb-Free)",
+    "751A",
+    "14541BG / AWLYWW",
+    "55 units / rail",
+    "standard",
+    "active"
+   ],
+   [
+    "MC14541BDR2G",
+    "SOIC-14 (Pb-Free)",
+    "751A",
+    "14541BG / AWLYWW",
+    "2500 / tape & reel",
+    "standard",
+    "active"
+   ],
+   [
+    "NLV14541BDR2G",
+    "SOIC-14 (Pb-Free)",
+    "751A",
+    "14541BG / AWLYWW",
+    "2500 / tape & reel",
+    "NLV: AEC-Q100, PPAP capable",
+    "active"
+   ],
+   [
+    "MC14541BDTR2G",
+    "TSSOP-14 (Pb-Free)",
+    "948G",
+    "14 / 541B / ALYW▪",
+    "2500 / tape & reel",
+    "standard",
+    "active"
+   ],
+   [
+    "NLV14541BDTR2G",
+    "TSSOP-14 (Pb-Free)",
+    "948G",
+    "14 / 541B / ALYW▪",
+    "2500 / tape & reel",
+    "NLV: AEC-Q100, PPAP capable",
+    "active"
+   ],
+   [
+    "NLV14541BDG",
+    "SOIC-14 (Pb-Free)",
+    "751A",
+    "14541BG / AWLYWW",
+    "55 units / rail",
+    "NLV: AEC-Q100, PPAP capable",
+    "discontinued"
+   ],
+   [
+    "MC14541BFELG",
+    "SOEIAJ-14 (Pb-Free)",
+    "965",
+    "MC14541B / ALYWG",
+    "2000 / tape & reel",
+    "standard",
+    "discontinued"
+   ]
+  ],
+  "notes": [
+   "Package suffixes: D is SOIC-14, DT is TSSOP-14, F is SOEIAJ-14.",
+   "The NLV prefix marks parts built with a unique site and controlled changes for automotive use, AEC-Q100 qualified and PPAP capable.",
+   "Discontinued parts are not for new designs.",
+   "Marking codes: A assembly location, WL or L wafer lot, YY or Y year, WW or W work week, G or the dot the Pb-free mark; the dot may sit in either place.",
+   "All parts are Pb-free and RoHS compliant."
+  ]
+ },
+ "pins": [
+  {
+   "package": "SOIC-14, SOEIAJ-14, TSSOP-14",
+   "page": 1,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "Rtc",
+     "type": "analog out",
+     "function": "Oscillator node for the timing resistor Rtc. With an external clock on pin 3 it is an output and is left open."
+    },
+    {
+     "pin": "2",
+     "name": "Ctc",
+     "type": "analog out",
+     "function": "Oscillator node for the timing capacitor Ctc. With an external clock on pin 3 it is an output and is left open."
+    },
+    {
+     "pin": "3",
+     "name": "RS",
+     "type": "input",
+     "function": "Oscillator input, taking the series resistor RS of the RC network; an external clock is applied to this pin instead when the oscillator is bypassed."
+    },
+    {
+     "pin": "4",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected inside."
+    },
+    {
+     "pin": "5",
+     "name": "AR",
+     "type": "input",
+     "function": "Auto reset. Low (VSS): the power-on reset clears the counter when supply comes up; needs VDD from 8.5 V. High (VDD): power-on reset off, lowest supply current, VDD from 3.0 V."
+    },
+    {
+     "pin": "6",
+     "name": "MR",
+     "type": "input",
+     "function": "Master reset, active high. Clears every counter stage at once whatever the count, and holds the oscillator stopped while high. Low for normal timing."
+    },
+    {
+     "pin": "7",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Negative supply, the reference for all voltages."
+    },
+    {
+     "pin": "8",
+     "name": "Q",
+     "type": "output",
+     "function": "Timer output: the selected counter stage after the Q/Q select and mode logic."
+    },
+    {
+     "pin": "9",
+     "name": "Q/Q SEL",
+     "type": "input",
+     "function": "Output polarity. Low: Q is low after a reset. High: Q is high after a reset."
+    },
+    {
+     "pin": "10",
+     "name": "MODE",
+     "type": "input",
+     "function": "High: recycle mode, the selected stage is passed continuously to Q (frequency divider). Low: single-cycle mode, Q changes once and then holds."
+    },
+    {
+     "pin": "11",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not connected inside."
+    },
+    {
+     "pin": "12",
+     "name": "A",
+     "type": "input",
+     "function": "Stage select, bit A. High: B high gives 2^16, B low gives 2^8 (the ninth stage is then clocked straight from the oscillator)."
+    },
+    {
+     "pin": "13",
+     "name": "B",
+     "type": "input",
+     "function": "Stage select, bit B. With A low: B low gives 2^13, B high gives 2^10."
+    },
+    {
+     "pin": "14",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Positive supply."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Maximum ratings",
+   "page": 2,
+   "conditions": "Voltages referenced to VSS",
+   "columns": [
+    "symbol",
+    "parameter",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VDD",
+     "DC supply voltage range",
+     "−0.5 to +18.0",
+     "V"
+    ],
+    [
+     "Vin, Vout",
+     "Input or output voltage range (DC or transient)",
+     "−0.5 to VDD + 0.5",
+     "V"
+    ],
+    [
+     "Iin",
+     "Input current (DC or transient)",
+     "±10 (per pin)",
+     "mA"
+    ],
+    [
+     "Iout",
+     "Output current (DC or transient)",
+     "±45 (per pin)",
+     "mA"
+    ],
+    [
+     "PD",
+     "Power dissipation, per package",
+     "500",
+     "mW"
+    ],
+    [
+     "TA",
+     "Ambient temperature range",
+     "−55 to +125",
+     "°C"
+    ],
+    [
+     "Tstg",
+     "Storage temperature range",
+     "−65 to +150",
+     "°C"
+    ],
+    [
+     "TL",
+     "Lead temperature (8-second soldering)",
+     "260",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "PD derates by −7.0 mW/°C between 65 °C and 125 °C for the D/DW packages."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 3,
+   "conditions": "Voltages referenced to VSS",
+   "columns": [
+    "characteristic",
+    "symbol",
+    "conditions",
+    "VDD (Vdc)",
+    "−55 °C min",
+    "−55 °C max",
+    "25 °C min",
+    "25 °C typ",
+    "25 °C max",
+    "125 °C min",
+    "125 °C max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output voltage, “0” level",
+     "VOL",
+     "Vin = VDD or 0",
+     "5.0",
+     "–",
+     "0.05",
+     "–",
+     "0",
+     "0.05",
+     "–",
+     "0.05",
+     "Vdc"
+    ],
+    [
+     "Output voltage, “0” level",
+     "VOL",
+     "Vin = VDD or 0",
+     "10",
+     "–",
+     "0.05",
+     "–",
+     "0",
+     "0.05",
+     "–",
+     "0.05",
+     "Vdc"
+    ],
+    [
+     "Output voltage, “0” level",
+     "VOL",
+     "Vin = VDD or 0",
+     "15",
+     "–",
+     "0.05",
+     "–",
+     "0",
+     "0.05",
+     "–",
+     "0.05",
+     "Vdc"
+    ],
+    [
+     "Output voltage, “1” level",
+     "VOH",
+     "Vin = 0 or VDD",
+     "5.0",
+     "4.95",
+     "–",
+     "4.95",
+     "5.0",
+     "–",
+     "4.95",
+     "–",
+     "Vdc"
+    ],
+    [
+     "Output voltage, “1” level",
+     "VOH",
+     "Vin = 0 or VDD",
+     "10",
+     "9.95",
+     "–",
+     "9.95",
+     "10",
+     "–",
+     "9.95",
+     "–",
+     "Vdc"
+    ],
+    [
+     "Output voltage, “1” level",
+     "VOH",
+     "Vin = 0 or VDD",
+     "15",
+     "14.95",
+     "–",
+     "14.95",
+     "15",
+     "–",
+     "14.95",
+     "–",
+     "Vdc"
+    ],
+    [
+     "Input voltage, “0” level",
+     "VIL",
+     "VO = 4.5 or 0.5 Vdc",
+     "5.0",
+     "–",
+     "1.5",
+     "–",
+     "2.25",
+     "1.5",
+     "–",
+     "1.5",
+     "Vdc"
+    ],
+    [
+     "Input voltage, “0” level",
+     "VIL",
+     "VO = 9.0 or 1.0 Vdc",
+     "10",
+     "–",
+     "3.0",
+     "–",
+     "4.50",
+     "3.0",
+     "–",
+     "3.0",
+     "Vdc"
+    ],
+    [
+     "Input voltage, “0” level",
+     "VIL",
+     "VO = 13.5 or 1.5 Vdc",
+     "15",
+     "–",
+     "4.0",
+     "–",
+     "6.75",
+     "4.0",
+     "–",
+     "4.0",
+     "Vdc"
+    ],
+    [
+     "Input voltage, “1” level",
+     "VIH",
+     "VO = 0.5 or 4.5 Vdc",
+     "5.0",
+     "3.5",
+     "–",
+     "3.5",
+     "2.75",
+     "–",
+     "3.5",
+     "–",
+     "Vdc"
+    ],
+    [
+     "Input voltage, “1” level",
+     "VIH",
+     "VO = 1.0 or 9.0 Vdc",
+     "10",
+     "7.0",
+     "–",
+     "7.0",
+     "5.50",
+     "–",
+     "7.0",
+     "–",
+     "Vdc"
+    ],
+    [
+     "Input voltage, “1” level",
+     "VIH",
+     "VO = 1.5 or 13.5 Vdc",
+     "15",
+     "11",
+     "–",
+     "11",
+     "8.25",
+     "–",
+     "11",
+     "–",
+     "Vdc"
+    ],
+    [
+     "Output drive current, source",
+     "IOH",
+     "VOH = 2.5 Vdc",
+     "5.0",
+     "−4.19",
+     "–",
+     "−3.38",
+     "−6.75",
+     "–",
+     "−2.37",
+     "–",
+     "mAdc"
+    ],
+    [
+     "Output drive current, source",
+     "IOH",
+     "VOH = 9.5 Vdc",
+     "10",
+     "−7.96",
+     "–",
+     "−6.42",
+     "−12.83",
+     "–",
+     "−4.49",
+     "–",
+     "mAdc"
+    ],
+    [
+     "Output drive current, source",
+     "IOH",
+     "VOH = 13.5 Vdc",
+     "15",
+     "−16.3",
+     "–",
+     "−13.2",
+     "−26.33",
+     "–",
+     "−9.24",
+     "–",
+     "mAdc"
+    ],
+    [
+     "Output drive current, sink",
+     "IOL",
+     "VOL = 0.4 Vdc",
+     "5.0",
+     "1.93",
+     "–",
+     "1.56",
+     "3.12",
+     "–",
+     "1.09",
+     "–",
+     "mAdc"
+    ],
+    [
+     "Output drive current, sink",
+     "IOL",
+     "VOL = 0.5 Vdc",
+     "10",
+     "4.96",
+     "–",
+     "4.0",
+     "8.0",
+     "–",
+     "2.8",
+     "–",
+     "mAdc"
+    ],
+    [
+     "Output drive current, sink",
+     "IOL",
+     "VOL = 1.5 Vdc",
+     "15",
+     "19.3",
+     "–",
+     "15.6",
+     "31.2",
+     "–",
+     "10.9",
+     "–",
+     "mAdc"
+    ],
+    [
+     "Input current",
+     "Iin",
+     "",
+     "15",
+     "–",
+     "±0.1",
+     "–",
+     "±0.00001",
+     "±0.1",
+     "–",
+     "±1.0",
+     "µAdc"
+    ],
+    [
+     "Input capacitance",
+     "Cin",
+     "Vin = 0",
+     "–",
+     "–",
+     "–",
+     "–",
+     "5.0",
+     "7.5",
+     "–",
+     "–",
+     "pF"
+    ],
+    [
+     "Quiescent current, auto reset disabled",
+     "IDD",
+     "pin 5 high",
+     "5.0",
+     "–",
+     "5.0",
+     "–",
+     "0.005",
+     "5.0",
+     "–",
+     "150",
+     "µAdc"
+    ],
+    [
+     "Quiescent current, auto reset disabled",
+     "IDD",
+     "pin 5 high",
+     "10",
+     "–",
+     "10",
+     "–",
+     "0.010",
+     "10",
+     "–",
+     "300",
+     "µAdc"
+    ],
+    [
+     "Quiescent current, auto reset disabled",
+     "IDD",
+     "pin 5 high",
+     "15",
+     "–",
+     "20",
+     "–",
+     "0.015",
+     "20",
+     "–",
+     "600",
+     "µAdc"
+    ],
+    [
+     "Auto reset quiescent current",
+     "IDDR",
+     "pin 5 low",
+     "10",
+     "–",
+     "250",
+     "–",
+     "30",
+     "250",
+     "–",
+     "1500",
+     "µAdc"
+    ],
+    [
+     "Auto reset quiescent current",
+     "IDDR",
+     "pin 5 low",
+     "15",
+     "–",
+     "500",
+     "–",
+     "82",
+     "500",
+     "–",
+     "2000",
+     "µAdc"
+    ],
+    [
+     "Supply current (dynamic plus quiescent)",
+     "ID",
+     "",
+     "5.0",
+     "",
+     "",
+     "",
+     "ID = (0.4 µA/kHz) f + IDD",
+     "",
+     "",
+     "",
+     "µAdc"
+    ],
+    [
+     "Supply current (dynamic plus quiescent)",
+     "ID",
+     "",
+     "10",
+     "",
+     "",
+     "",
+     "ID = (0.8 µA/kHz) f + IDD",
+     "",
+     "",
+     "",
+     "µAdc"
+    ],
+    [
+     "Supply current (dynamic plus quiescent)",
+     "ID",
+     "",
+     "15",
+     "",
+     "",
+     "",
+     "ID = (1.2 µA/kHz) f + IDD",
+     "",
+     "",
+     "",
+     "µAdc"
+    ]
+   ],
+   "notes": [
+    "Typical values show what the part can do and are not design limits.",
+    "The ID formulas are typical values at 25 °C only.",
+    "With the on-chip oscillator running, total supply current is IT = ID + 2 Ctc VDD f × 10^−3, with ID in µA, Ctc in pF, VDD in V and f in kHz.",
+    "At power-up with auto reset enabled the part draws typically 50 µA at VDD = 10 Vdc."
+   ]
+  },
+  {
+   "title": "Switching characteristics",
+   "page": 4,
+   "conditions": "CL = 50 pF, TA = 25 °C",
+   "columns": [
+    "characteristic",
+    "symbol",
+    "conditions",
+    "VDD",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output rise and fall time",
+     "tTLH, tTHL",
+     "tTLH, tTHL = (1.5 ns/pF) CL + 25 ns",
+     "5.0",
+     "–",
+     "100",
+     "200",
+     "ns"
+    ],
+    [
+     "Output rise and fall time",
+     "tTLH, tTHL",
+     "tTLH, tTHL = (0.75 ns/pF) CL + 12.5 ns",
+     "10",
+     "–",
+     "50",
+     "100",
+     "ns"
+    ],
+    [
+     "Output rise and fall time",
+     "tTLH, tTHL",
+     "tTLH, tTHL = (0.55 ns/pF) CL + 9.5 ns",
+     "15",
+     "–",
+     "40",
+     "80",
+     "ns"
+    ],
+    [
+     "Propagation delay, clock to Q (2^8 output)",
+     "tPLH, tPHL",
+     "tPLH, tPHL = (1.7 ns/pF) CL + 3415 ns",
+     "5.0",
+     "–",
+     "3.5",
+     "10.5",
+     "µs"
+    ],
+    [
+     "Propagation delay, clock to Q (2^8 output)",
+     "tPLH, tPHL",
+     "tPLH, tPHL = (0.66 ns/pF) CL + 1217 ns",
+     "10",
+     "–",
+     "1.25",
+     "3.8",
+     "µs"
+    ],
+    [
+     "Propagation delay, clock to Q (2^8 output)",
+     "tPLH, tPHL",
+     "tPLH, tPHL = (0.5 ns/pF) CL + 875 ns",
+     "15",
+     "–",
+     "0.9",
+     "2.9",
+     "µs"
+    ],
+    [
+     "Propagation delay, clock to Q (2^16 output)",
+     "tPHL, tPLH",
+     "tPHL, tPLH = (1.7 ns/pF) CL + 5915 ns",
+     "5.0",
+     "–",
+     "6.0",
+     "18",
+     "µs"
+    ],
+    [
+     "Propagation delay, clock to Q (2^16 output)",
+     "tPHL, tPLH",
+     "tPHL, tPLH = (0.66 ns/pF) CL + 3467 ns",
+     "10",
+     "–",
+     "3.5",
+     "10",
+     "µs"
+    ],
+    [
+     "Propagation delay, clock to Q (2^16 output)",
+     "tPHL, tPLH",
+     "tPHL, tPLH = (0.5 ns/pF) CL + 2475 ns",
+     "15",
+     "–",
+     "2.5",
+     "7.5",
+     "µs"
+    ],
+    [
+     "Clock pulse width",
+     "tWH(cl)",
+     "",
+     "5.0",
+     "900",
+     "300",
+     "–",
+     "ns"
+    ],
+    [
+     "Clock pulse width",
+     "tWH(cl)",
+     "",
+     "10",
+     "300",
+     "100",
+     "–",
+     "ns"
+    ],
+    [
+     "Clock pulse width",
+     "tWH(cl)",
+     "",
+     "15",
+     "225",
+     "85",
+     "–",
+     "ns"
+    ],
+    [
+     "Clock pulse frequency (50% duty cycle)",
+     "fcl",
+     "",
+     "5.0",
+     "–",
+     "1.5",
+     "0.75",
+     "MHz"
+    ],
+    [
+     "Clock pulse frequency (50% duty cycle)",
+     "fcl",
+     "",
+     "10",
+     "–",
+     "4.0",
+     "2.0",
+     "MHz"
+    ],
+    [
+     "Clock pulse frequency (50% duty cycle)",
+     "fcl",
+     "",
+     "15",
+     "–",
+     "6.0",
+     "3.0",
+     "MHz"
+    ],
+    [
+     "MR pulse width",
+     "tWH(R)",
+     "",
+     "5.0",
+     "900",
+     "300",
+     "–",
+     "ns"
+    ],
+    [
+     "MR pulse width",
+     "tWH(R)",
+     "",
+     "10",
+     "300",
+     "100",
+     "–",
+     "ns"
+    ],
+    [
+     "MR pulse width",
+     "tWH(R)",
+     "",
+     "15",
+     "225",
+     "85",
+     "–",
+     "ns"
+    ],
+    [
+     "Master reset removal time",
+     "trem",
+     "",
+     "5.0",
+     "420",
+     "210",
+     "–",
+     "ns"
+    ],
+    [
+     "Master reset removal time",
+     "trem",
+     "",
+     "10",
+     "200",
+     "100",
+     "–",
+     "ns"
+    ],
+    [
+     "Master reset removal time",
+     "trem",
+     "",
+     "15",
+     "200",
+     "100",
+     "–",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "The formulas in the conditions column give typical values at 25 °C only.",
+    "Typical values show what the part can do and are not design limits."
+   ]
+  },
+  {
+   "title": "Frequency selection",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "A",
+    "B",
+    "number of counter stages n",
+    "count 2^n"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "13",
+     "8192"
+    ],
+    [
+     "0",
+     "1",
+     "10",
+     "1024"
+    ],
+    [
+     "1",
+     "0",
+     "8",
+     "256"
+    ],
+    [
+     "1",
+     "1",
+     "16",
+     "65536"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Truth table",
+   "page": 5,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "number",
+    "state 0",
+    "state 1"
+   ],
+   "rows": [
+    [
+     "Auto reset",
+     "5",
+     "Auto reset operating",
+     "Auto reset disabled"
+    ],
+    [
+     "Master reset",
+     "6",
+     "Timer operational",
+     "Master reset on"
+    ],
+    [
+     "Q/Q",
+     "9",
+     "Output initially low after reset",
+     "Output initially high after reset"
+    ],
+    [
+     "Mode",
+     "10",
+     "Single cycle mode",
+     "Recycle mode"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "RC oscillator stability: frequency deviation against ambient temperature",
+   "page": 6,
+   "conditions": "RTC = 56 kΩ, C = 1000 pF; RS = 0: f = 10.15 kHz at VDD = 10 V, TA = 25 °C; RS = 120 kΩ: f = 7.8 kHz at VDD = 10 V, TA = 25 °C",
+   "x": {
+    "label": "Ambient temperature TA",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency deviation",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VDD = 15 V, RS = 0",
+     "points": [
+      [
+       -54.3,
+       6.36
+      ],
+      [
+       -17.8,
+       5.6
+      ],
+      [
+       28.1,
+       3.72
+      ],
+      [
+       65.9,
+       1.68
+      ],
+      [
+       124.5,
+       -1.84
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 10 V, RS = 0",
+     "points": [
+      [
+       -54.5,
+       2.8
+      ],
+      [
+       -38.0,
+       2.12
+      ],
+      [
+       -5.5,
+       0.88
+      ],
+      [
+       31.2,
+       -0.4
+      ],
+      [
+       87.8,
+       -2.16
+      ],
+      [
+       124.5,
+       -3.12
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 5.0 V, RS = 0",
+     "points": [
+      [
+       -54.3,
+       -10.36
+      ],
+      [
+       -29.7,
+       -10.4
+      ],
+      [
+       14.0,
+       -10.92
+      ],
+      [
+       90.5,
+       -12.52
+      ],
+      [
+       123.9,
+       -13.48
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 15 V, RS = 120 kΩ",
+     "points": [
+      [
+       -54.3,
+       1.76
+      ],
+      [
+       -31.8,
+       1.76
+      ],
+      [
+       -10.8,
+       1.48
+      ],
+      [
+       36.7,
+       1.2
+      ],
+      [
+       86.2,
+       0.68
+      ],
+      [
+       116.1,
+       0.48
+      ],
+      [
+       124.7,
+       0.32
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 10 V, RS = 120 kΩ",
+     "points": [
+      [
+       -54.0,
+       0.8
+      ],
+      [
+       42.1,
+       -0.16
+      ],
+      [
+       81.0,
+       -0.76
+      ],
+      [
+       124.7,
+       -1.24
+      ]
+     ]
+    },
+    {
+     "label": "VDD = 5.0 V, RS = 120 kΩ",
+     "points": [
+      [
+       -54.5,
+       -4.64
+      ],
+      [
+       -24.0,
+       -4.68
+      ],
+      [
+       36.7,
+       -5.44
+      ],
+      [
+       74.3,
+       -6.2
+      ],
+      [
+       90.5,
+       -6.4
+      ],
+      [
+       124.3,
+       -7.16
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RC oscillator frequency as a function of RTC",
+   "page": 6,
+   "conditions": "VDD = 10 V, C = 1000 pF, RS ≈ 2RTC",
+   "x": {
+    "label": "RTC, resistance",
+    "unit": "kΩ",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Oscillator frequency f",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "f against RTC",
+     "points": [
+      [
+       3.11,
+       91.49
+      ],
+      [
+       11.06,
+       33.62
+      ],
+      [
+       47.27,
+       9.182
+      ],
+      [
+       313.1,
+       1.424
+      ],
+      [
+       941.1,
+       0.451
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RC oscillator frequency as a function of C",
+   "page": 6,
+   "conditions": "VDD = 10 V, RTC = 56 kΩ, RS = 120 kΩ",
+   "x": {
+    "label": "C, capacitance",
+    "unit": "µF",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Oscillator frequency f",
+    "unit": "kHz",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "f against C",
+     "points": [
+      [
+       0.0001053,
+       57.14
+      ],
+      [
+       0.0856,
+       0.1031
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "power-test",
+   "title": "Power dissipation test circuit",
+   "page": 4,
+   "fixture": true,
+   "description": "A pulse generator clocks pin 3 directly. AR, Q/Q SEL, MODE, A and B are all tied to VDD and MR to VSS. Q drives a load capacitor to ground. Rtc and Ctc are left open. The clock is a square wave with 20 ns edges (10% to 90%) and its duty cycle is taken at the 50% points.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MC14541B"
+    },
+    {
+     "ref": "G1",
+     "type": "source",
+     "value": "pulse generator"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "",
+     "note": "load capacitance"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "",
+     "note": "supply"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "switching-test",
+   "title": "Switching time test circuit",
+   "page": 4,
+   "fixture": true,
+   "description": "As the power test circuit, a generator clocking pin 3 with AR, Q/Q SEL, MODE and A high and MR at VSS, but B goes through a switch to either VDD or VSS. Q drives CL to ground. Rise and fall times are taken between 10% and 90%, delays from the 50% point of the clock edge to the 50% point of Q; input edges are 20 ns.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MC14541B"
+    },
+    {
+     "ref": "G1",
+     "type": "source",
+     "value": "pulse generator"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": "",
+     "note": "connects B to VDD or to VSS"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "50 pF",
+     "note": "load capacitance; switching characteristics are specified at CL = 50 pF"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "",
+     "note": "supply"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "rc-oscillator",
+   "title": "Oscillator circuit using RC configuration",
+   "page": 5,
+   "description": "The timing network on pins 1 to 3. The three external parts meet at one node: Rtc from pin 1, Ctc from pin 2 and RS from pin 3. The network sets the oscillator frequency. RS is about twice Rtc and at least 10 kΩ; f = 1 / (2.3 Rtc Ctc) between 1 kHz and 100 kHz.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MC14541B"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "Rtc, sets f with C1"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "RS, about 2 × Rtc, 10 kΩ or more"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "Ctc, sets f with R1"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "digital-timer",
+   "title": "Digital timer application",
+   "page": 6,
+   "description": "A retriggerable one-shot. The RC network on pins 1 to 3 runs the oscillator; AR and MODE are at ground, so power-on reset is active and the timer is in single-cycle mode, and Q/Q SEL is at VDD so Q is high after a reset. A positive pulse of width tMR on MR clears the counters and the latch; Q goes high and stays high until the stage chosen by A and B has counted, then goes low until the next pulse. The output pulse lasts t + tMR. Its accuracy is that of the clock; for better accuracy an external clock can drive pin 3, with pins 1 and 2 left as outputs. After first power-up Q is high for one pulse-width before the timer is ready.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MC14541B"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "Rtc"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "RS"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "",
+     "note": "Ctc"
+    },
+    {
+     "ref": "VDD",
+     "type": "terminal",
+     "value": "",
+     "note": "supply"
+    },
+    {
+     "ref": "SEL_A",
+     "type": "terminal",
+     "value": "",
+     "note": "stage select A"
+    },
+    {
+     "ref": "SEL_B",
+     "type": "terminal",
+     "value": "",
+     "note": "stage select B"
+    },
+    {
+     "ref": "IN",
+     "type": "terminal",
+     "value": "",
+     "note": "trigger input, positive pulse of width tMR"
+    },
+    {
+     "ref": "OUT",
+     "type": "terminal",
+     "value": "",
+     "note": "output pulse of width t + tMR"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Oscillator frequency",
+   "expr": "f = 1 / (2.3 Rtc Ctc)",
+   "where": {
+    "f": "oscillator frequency",
+    "Rtc": "timing resistor on pin 1",
+    "Ctc": "timing capacitor on pin 2"
+   },
+   "note": "Holds for 1 kHz ≤ f ≤ 100 kHz with RS ≈ 2 Rtc and RS ≥ 10 kΩ.",
+   "page": 6
+  },
+  {
+   "name": "Stage frequency",
+   "expr": "fn = fosc / 2^n",
+   "where": {
+    "fosc": "oscillator frequency",
+    "n": "counter stage, 8, 10, 13 or 16 at the output"
+   },
+   "note": "",
+   "page": 1
+  },
+  {
+   "name": "Supply current, dynamic plus quiescent",
+   "expr": "ID = k × f + IDD",
+   "where": {
+    "k": "0.4 µA/kHz at 5.0 V, 0.8 µA/kHz at 10 V, 1.2 µA/kHz at 15 V",
+    "f": "clock frequency in kHz",
+    "IDD": "quiescent current"
+   },
+   "note": "Typical, 25 °C.",
+   "page": 3
+  },
+  {
+   "name": "Total supply current with the on-chip oscillator",
+   "expr": "IT = ID + 2 Ctc VDD f × 10^−3",
+   "where": {
+    "IT": "total supply current, µA",
+    "ID": "supply current from the line above, µA",
+    "Ctc": "timing capacitor, pF",
+    "VDD": "supply, V",
+    "f": "frequency, kHz"
+   },
+   "note": "Typical, 25 °C.",
+   "page": 3
+  },
+  {
+   "name": "Output rise and fall time",
+   "expr": "tTLH, tTHL = (1.5 ns/pF) CL + 25 ns at 5 V; (0.75 ns/pF) CL + 12.5 ns at 10 V; (0.55 ns/pF) CL + 9.5 ns at 15 V",
+   "where": {
+    "CL": "load capacitance, pF"
+   },
+   "note": "Typical, 25 °C.",
+   "page": 4
+  },
+  {
+   "name": "Clock to Q delay, 2^8 output",
+   "expr": "tPLH, tPHL = (1.7 ns/pF) CL + 3415 ns at 5 V; (0.66 ns/pF) CL + 1217 ns at 10 V; (0.5 ns/pF) CL + 875 ns at 15 V",
+   "where": {
+    "CL": "load capacitance, pF"
+   },
+   "note": "Typical, 25 °C.",
+   "page": 4
+  },
+  {
+   "name": "Clock to Q delay, 2^16 output",
+   "expr": "tPHL, tPLH = (1.7 ns/pF) CL + 5915 ns at 5 V; (0.66 ns/pF) CL + 3467 ns at 10 V; (0.5 ns/pF) CL + 2475 ns at 15 V",
+   "where": {
+    "CL": "load capacitance, pF"
+   },
+   "note": "Typical, 25 °C.",
+   "page": 4
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Reset",
+   "page": 6,
+   "text": "Two resets clear all sixteen stages together, whatever the count. With AR (pin 5) low the power-on reset acts when supply is applied; with power up, a high on MR (pin 6) does the same. MR works independently of the automatic reset. While either reset is active the oscillator is stopped, so the part draws no switching power. AR high turns the power-on reset off and gives the lowest supply current."
+  },
+  {
+   "topic": "Supply range and auto reset",
+   "page": 1,
+   "text": "With auto reset disabled (pin 5 at VDD) the part runs from 3.0 V to 18 V; with it enabled (pin 5 at VSS) from 8.5 V to 18 V."
+  },
+  {
+   "topic": "Start of timing",
+   "page": 1,
+   "text": "Once the reset is released the oscillator starts at the frequency the RC network sets, and the counter divides it, stage n running at fosc / 2^n. The counter advances on rising clock edges, and a clock conditioning stage accepts very slow clock edges."
+  },
+  {
+   "topic": "Oscillator",
+   "page": 1,
+   "text": "The built-in RC oscillator needs one capacitor and two resistors. Below 10 kHz its accuracy is ±2% over temperature, ±20% over supply and ±3% over processing. An available clock can replace it: apply it to pin 3 and pins 1 and 2 become outputs."
+  },
+  {
+   "topic": "Stage selection",
+   "page": 6,
+   "text": "A and B choose one of the stages 2^8, 2^10, 2^13 and 2^16 for the output. A high routes the 2^16 tap to the output for either state of B; with B low, though, the ninth stage takes its clock straight from the oscillator, so the output is in effect 2^8."
+  },
+  {
+   "topic": "Output polarity",
+   "page": 6,
+   "text": "In reset, Q is low when Q/Q SEL is low and high when Q/Q SEL is high."
+  },
+  {
+   "topic": "Recycle and single-cycle modes",
+   "page": 6,
+   "text": "MODE high passes the selected count to Q continuously, a 2^n divider. MODE low gives a single cycle: after reset the internal RS flip-flop clears and counting starts; after 2^(n−1) counts it sets and Q changes state, and it then stays put through the next 2^(n−1) counts and beyond. A master reset pulse or a change of the MODE level starts another cycle."
+  }
+ ],
+ "packages": [
+  {
+   "name": "SOIC-14 NB (case 751A-03)",
+   "page": 9,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "1.35",
+     "1.75"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "0.25"
+    ],
+    [
+     "A3",
+     "lead thickness",
+     "0.19",
+     "0.25"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.35",
+     "0.49"
+    ],
+    [
+     "D",
+     "body length",
+     "8.55",
+     "8.75"
+    ],
+    [
+     "E",
+     "body width",
+     "3.80",
+     "4.00"
+    ],
+    [
+     "e",
+     "pitch",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "H",
+     "width across leads",
+     "5.80",
+     "6.20"
+    ],
+    [
+     "h",
+     "corner chamfer",
+     "0.25",
+     "0.50"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "1.25"
+    ],
+    [
+     "M",
+     "foot angle",
+     "0°",
+     "7°"
+    ]
+   ],
+   "notes": [
+    "D and E exclude mold protrusion, at most 0.15 per side.",
+    "b excludes dambar protrusion, at most 0.13 in total beyond b at maximum material.",
+    "Tolerances: lead position 0.25 at maximum material to datum B, and to datums C, A and B for the 13 b dimensions; 0.10 for the leads to seating plane C.",
+    "Soldering footprint: pads 1.18 long and 0.58 wide on a 1.27 pitch, the two rows 6.50 apart outside edge to outside edge."
+   ]
+  },
+  {
+   "name": "TSSOP-14 5.00 x 4.40 x 0.95, 0.65P (case 948G)",
+   "page": 11,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "---",
+     "---",
+     "1.20"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "0.10",
+     "0.15"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "0.85",
+     "0.95",
+     "1.05"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.19",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "b1",
+     "lead width, base metal",
+     "0.19",
+     "0.22",
+     "0.25"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.09",
+     "0.15",
+     "0.20"
+    ],
+    [
+     "c1",
+     "lead thickness, base metal",
+     "0.09",
+     "0.12",
+     "0.16"
+    ],
+    [
+     "D",
+     "body length",
+     "",
+     "5.00 BSC",
+     ""
+    ],
+    [
+     "E",
+     "width across leads",
+     "",
+     "6.40 BSC",
+     ""
+    ],
+    [
+     "E1",
+     "body width",
+     "",
+     "4.40 BSC",
+     ""
+    ],
+    [
+     "e",
+     "pitch",
+     "",
+     "0.65 BSC",
+     ""
+    ],
+    [
+     "L",
+     "foot length",
+     "0.50",
+     "0.63",
+     "0.75"
+    ],
+    [
+     "L1",
+     "lead length",
+     "",
+     "1.00 REF",
+     ""
+    ],
+    [
+     "L2",
+     "gauge plane",
+     "",
+     "0.25 BSC",
+     ""
+    ],
+    [
+     "θ",
+     "foot angle",
+     "0°",
+     "4°",
+     "8°"
+    ],
+    [
+     "aaa",
+     "tolerance",
+     "",
+     "0.10",
+     ""
+    ],
+    [
+     "bbb",
+     "tolerance",
+     "",
+     "0.15",
+     ""
+    ],
+    [
+     "ccc",
+     "parallelism to datum C",
+     "",
+     "0.08",
+     ""
+    ],
+    [
+     "ddd",
+     "lead position",
+     "",
+     "0.10",
+     ""
+    ],
+    [
+     "eee",
+     "parallelism to datum C",
+     "",
+     "0.10",
+     ""
+    ]
+   ],
+   "notes": [
+    "D excludes mold flash, protrusions and gate burrs, at most 0.15 per side.",
+    "E1 excludes interlead flash or protrusion, at most 0.25 per side.",
+    "b excludes dambar protrusion, at most 0.08 in total beyond b at maximum material.",
+    "Recommended footprint: pads 1.26 long and 0.36 wide on a 0.65 pitch, the rows 7.06 apart outside edge to outside edge."
+   ]
+  },
+  {
+   "name": "SOEIAJ-14 (case 965-01)",
+   "page": 8,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "---",
+     "2.05"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.05",
+     "0.20"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.35",
+     "0.50"
+    ],
+    [
+     "c",
+     "lead thickness",
+     "0.10",
+     "0.20"
+    ],
+    [
+     "D",
+     "body length",
+     "9.90",
+     "10.50"
+    ],
+    [
+     "E",
+     "body width",
+     "5.10",
+     "5.45"
+    ],
+    [
+     "e",
+     "pitch",
+     "1.27 BSC",
+     ""
+    ],
+    [
+     "HE",
+     "width across leads",
+     "7.40",
+     "8.20"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.50",
+     "0.85"
+    ],
+    [
+     "LE",
+     "lead length",
+     "1.10",
+     "1.50"
+    ],
+    [
+     "M",
+     "foot angle",
+     "0°",
+     "10°"
+    ],
+    [
+     "Q1",
+     "",
+     "0.70",
+     "0.90"
+    ],
+    [
+     "Z",
+     "end lead to body edge",
+     "---",
+     "1.42"
+    ]
+   ],
+   "notes": [
+    "D and E exclude mold flash and protrusions, measured at the parting line; flash at most 0.15 (0.006) per side.",
+    "b excludes dambar protrusion, at most 0.08 (0.003) in total beyond b at maximum material; at least 0.46 (0.018) between a protrusion and the next lead.",
+    "Tolerances: lead position 0.13 (0.005) at maximum material; 0.10 (0.004) for the leads to the seating plane."
+   ]
+  }
+ ]
+}

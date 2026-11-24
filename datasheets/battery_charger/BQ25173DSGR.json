@@ -1,0 +1,5121 @@
+{
+ "sheet": 1,
+ "name": "BQ25173DSGR",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "BQ25173: 800 mA linear charger for 1- to 4-cell supercapacitors",
+ "source": {
+  "document": "SLUSDY6",
+  "revision": "November 2021",
+  "pages": 32
+ },
+ "summary": "A linear charger for stacks of one to four supercapacitor cells, in a 2 × 2 mm WSON-8. Two resistors set the target voltage through FB (0.8 V reference, ±1 %) and one sets the charge current, 10 mA to 800 mA (±10 %). It charges from 0 V at constant current, then holds the set voltage with no termination, and throttles current to hold the die at 125 °C. IN works from 3.0 V to 18 V and survives 40 V; open-drain STAT and /PG outputs, an active-low enable, input overvoltage, output overcurrent and ISET short protection are built in.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "3.0 V to 18 V operating, 40 V absolute maximum"
+  ],
+  [
+   "Output voltage",
+   "0 V to 10.5 V, set by FB divider"
+  ],
+  [
+   "Charge current",
+   "10 mA to 800 mA, ICHG = KISET / RISET, KISET = 300 AΩ typ"
+  ],
+  [
+   "Regulation accuracy",
+   "VFB_REF = 0.8 V, ±1 %"
+  ],
+  [
+   "Charge current accuracy",
+   "±10 %"
+  ],
+  [
+   "Input overvoltage",
+   "18.4 V typ rising"
+  ],
+  [
+   "Output current limit",
+   "1 A typ"
+  ],
+  [
+   "Pass FET on-resistance",
+   "845 mΩ typ at 400 mA"
+  ],
+  [
+   "OUT leakage, charge disabled",
+   "0.350 µA typ at 4.2 V"
+  ],
+  [
+   "Thermal regulation / shutdown",
+   "125 °C / 150 °C"
+  ],
+  [
+   "Package",
+   "WSON-8 (DSG), 2.0 × 2.0 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 24,
+  "columns": [
+   "part number",
+   "status",
+   "material type",
+   "package",
+   "pins",
+   "packing",
+   "RoHS",
+   "lead finish",
+   "MSL / peak reflow",
+   "operating temperature (°C)",
+   "marking"
+  ],
+  "rows": [
+   [
+    "BQ25173DSGR",
+    "Active",
+    "Production",
+    "WSON (DSG)",
+    "8",
+    "3000, large tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 125",
+    "B173"
+   ],
+   [
+    "BQ25173DSGR.A",
+    "Active",
+    "Production",
+    "WSON (DSG)",
+    "8",
+    "3000, large tape and reel",
+    "Yes",
+    "NIPDAU",
+    "Level-1-260C-UNLIM",
+    "-40 to 125",
+    "B173"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "DSG (WSON-8)",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "IN",
+     "type": "power",
+     "function": "Supply input from the external DC source. Decouple to GND with 1 µF or more, close to the IC."
+    },
+    {
+     "pin": "2",
+     "name": "ISET",
+     "type": "input",
+     "function": "A resistor from this pin to GND sets the fast-charge current, ICHG = KISET / RISET; 30 kΩ gives 10 mA and 375 Ω gives 800 mA."
+    },
+    {
+     "pin": "3",
+     "name": "/CE",
+     "type": "input",
+     "function": "Charge enable, active low. Low allows charging; high holds the IC in shutdown with charging off. An internal pulldown (RPD_CE) enables the part when the pin floats."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "5",
+     "name": "STAT",
+     "type": "output",
+     "function": "Open-drain charge status. Pull up with 10 kΩ. Low once VOUT reaches 98 % of VREG; high while charging is under way; blinks at 1 Hz on a fault."
+    },
+    {
+     "pin": "6",
+     "name": "/PG",
+     "type": "output",
+     "function": "Open-drain power-good. Pull up with 10 kΩ. Goes low once the input is good: VIN exceeds both VIN_LOWV and VOUT + VSLEEPZ, and stays under VIN_OV."
+    },
+    {
+     "pin": "7",
+     "name": "FB",
+     "type": "input",
+     "function": "Feedback for the regulation voltage VREG, from a divider of 1 MΩ or less between OUT and GND. For VREG ≤ 5 V the divider's lower end may return to /PG so the divider draws nothing from OUT once input power is gone."
+    },
+    {
+     "pin": "8",
+     "name": "OUT",
+     "type": "power",
+     "function": "Output to the supercapacitor; a system load may sit in parallel with it. Decouple to GND with 1 µF or more, close to the IC."
+    },
+    {
+     "pin": "PAD",
+     "name": "Thermal Pad",
+     "type": "power",
+     "function": "Exposed pad under the package for heat removal. Solder it to the board, with vias down to a solid GND plane."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 4,
+   "conditions": "over operating free-air temperature range (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "pins",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage",
+     "IN",
+     "–0.3",
+     "40",
+     "V"
+    ],
+    [
+     "Voltage",
+     "OUT",
+     "–0.3",
+     "13",
+     "V"
+    ],
+    [
+     "Voltage",
+     "CE, FB, ISET, STAT, PG",
+     "–0.3",
+     "5.5",
+     "V"
+    ],
+    [
+     "Output Sink Current",
+     "PG, STAT",
+     "",
+     "5",
+     "mA"
+    ],
+    [
+     "Junction temperature, TJ",
+     "",
+     "–40",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "",
+     "–65",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress past these limits can damage the device permanently. Working at the limits themselves is not implied; long exposure outside the recommended operating range, even within these limits, can degrade reliability and shorten life."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 4,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "model",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Human body model (HBM), per ANSI/ESDA/JEDEC JS-001",
+     "±2500",
+     "V"
+    ],
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Charged device model (CDM), per ANSI/ESDA/JEDEC JS-002",
+     "±1500",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEP155 gives 500 V HBM, and JEP157 gives 250 V CDM, as levels a standard ESD-controlled manufacturing process handles safely."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 4,
+   "conditions": "over operating free-air temperature range (unless otherwise noted)",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "Input voltage",
+     "3.0",
+     "",
+     "18",
+     "V"
+    ],
+    [
+     "VOUT",
+     "Output voltage",
+     "0",
+     "",
+     "10.5",
+     "V"
+    ],
+    [
+     "IOUT",
+     "Output current",
+     "",
+     "",
+     "0.8",
+     "A"
+    ],
+    [
+     "TJ",
+     "Junction temperature",
+     "–40",
+     "",
+     "125",
+     "°C"
+    ],
+    [
+     "CIN",
+     "IN capacitor",
+     "1",
+     "",
+     "",
+     "µF"
+    ],
+    [
+     "COUT",
+     "OUT capacitor",
+     "1",
+     "",
+     "",
+     "µF"
+    ],
+    [
+     "RISET",
+     "ISET resistor",
+     "0.375",
+     "",
+     "30",
+     "kΩ"
+    ]
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 5,
+   "conditions": "BQ25173, DSG (WSON), 8 pins",
+   "columns": [
+    "symbol",
+    "thermal metric",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RθJA",
+     "Junction-to-ambient thermal resistance (JEDEC)",
+     "75.2",
+     "°C/W"
+    ],
+    [
+     "RθJC(top)",
+     "Junction-to-case (top) thermal resistance",
+     "93.4",
+     "°C/W"
+    ],
+    [
+     "RθJB",
+     "Junction-to-board thermal resistance",
+     "41.8",
+     "°C/W"
+    ],
+    [
+     "ΨJT",
+     "Junction-to-top characterization parameter",
+     "3.8",
+     "°C/W"
+    ],
+    [
+     "ΨJB",
+     "Junction-to-board characterization parameter",
+     "41.7",
+     "°C/W"
+    ],
+    [
+     "RθJC(bot)",
+     "Junction-to-case (bottom) thermal resistance",
+     "17.0",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 6,
+   "conditions": "3.0V < VIN < 18V and VIN > VOUT + VSLEEP, TJ = -40°C to +125°C, and TJ = 25°C for typical values (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "QUIESCENT CURRENTS",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Quiescent output current (OUT)",
+     "IQ_OUT",
+     "OUT= 4.2V, IN floating or IN = 0V - 5V, Charge Disabled (CE high), TJ = 25 °C",
+     "",
+     "0.350",
+     "0.6",
+     "µA"
+    ],
+    [
+     "Quiescent output current (OUT)",
+     "IQ_OUT",
+     "OUT= 4.2V, IN floating or IN = 0V - 5V, Charge Disabled (CE high), TJ < 105 °C",
+     "",
+     "0.350",
+     "0.8",
+     "µA"
+    ],
+    [
+     "Quiescent output current (OUT)",
+     "IQ_OUT",
+     "OUT = 8.4V, IN floating or IN = 0V - 14V, Charge Disabled (CE high), TJ = 25 °C",
+     "",
+     "0.8",
+     "1.2",
+     "µA"
+    ],
+    [
+     "Quiescent output current (OUT)",
+     "IQ_OUT",
+     "OUT = 8.4V, IN floating or IN = 0V - 14V, Charge Disabled (CE high), TJ < 105 °C",
+     "",
+     "0.8",
+     "1.5",
+     "µA"
+    ],
+    [
+     "Shutdown input current (IN) with charge disabled",
+     "ISD_IN",
+     "IN = 5V, Charge Disabled (CE high), no capacitor",
+     "",
+     "2",
+     "4",
+     "µA"
+    ],
+    [
+     "Shutdown input current (IN) with charge disabled",
+     "ISD_IN",
+     "IN = 14V, Charge Disabled (CE high), no capacitor",
+     "",
+     "3.5",
+     "6",
+     "µA"
+    ],
+    [
+     "Quiescent input current (IN)",
+     "IQ_IN",
+     "IN = 5V, OUT = 3.8V, Charge Enabled (CE low), ICHG = 0A",
+     "",
+     "0.45",
+     "0.6",
+     "mA"
+    ],
+    [
+     "Quiescent input current (IN)",
+     "IQ_IN",
+     "IN = 14V, OUT = 7.6V, Charge Enabled (CE low), ICHG = 0A",
+     "",
+     "0.45",
+     "0.6",
+     "mA"
+    ],
+    [
+     "INPUT",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "IN operating range",
+     "VIN_OP",
+     "",
+     "3.0",
+     "",
+     "18",
+     "V"
+    ],
+    [
+     "IN voltage to start charging",
+     "VIN_LOWV",
+     "IN rising",
+     "3.05",
+     "3.09",
+     "3.15",
+     "V"
+    ],
+    [
+     "IN voltage to stop charging",
+     "VIN_LOWV",
+     "IN falling",
+     "2.80",
+     "2.95",
+     "3.10",
+     "V"
+    ],
+    [
+     "Exit sleep mode threshold",
+     "VSLEEPZ",
+     "IN rising, VIN - VOUT, OUT = 4V",
+     "95",
+     "135",
+     "175",
+     "mV"
+    ],
+    [
+     "Sleep mode threshold hysteresis",
+     "VSLEEP",
+     "IN falling, VIN - VOUT, OUT = 4V",
+     "",
+     "80",
+     "",
+     "mV"
+    ],
+    [
+     "VIN overvoltage rising threshold",
+     "VIN_OV",
+     "IN rising",
+     "18.1",
+     "18.4",
+     "18.7",
+     "V"
+    ],
+    [
+     "VIN overvoltage falling threshold",
+     "VIN_OVZ",
+     "IN falling",
+     "",
+     "18.2",
+     "",
+     "V"
+    ],
+    [
+     "CONFIGURATION PINS SHORT/OPEN PROTECTION",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Highest resistor value considered short",
+     "RISET_SHORT",
+     "RISET below this at startup, charger does not initiate charge, power cycle or CE toggle to reset",
+     "",
+     "",
+     "350",
+     "Ω"
+    ],
+    [
+     "CHARGER",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Feedback reference voltage",
+     "VFB_REF",
+     "",
+     "",
+     "0.8",
+     "",
+     "V"
+    ],
+    [
+     "Feedback reference voltage accuracy",
+     "VFB_REF_ACC",
+     "Tj = -40℃ to 125℃",
+     "-1",
+     "",
+     "1",
+     "%"
+    ],
+    [
+     "Typical charge current regulation range",
+     "ICHG_RANGE",
+     "VOUT > VBAT_LOWV",
+     "10",
+     "",
+     "800",
+     "mA"
+    ],
+    [
+     "Charge current setting factor, ICHG = KISET / RISET",
+     "KISET",
+     "10mA < ICHG < 800mA",
+     "270",
+     "300",
+     "330",
+     "AΩ"
+    ],
+    [
+     "Charge current accuracy",
+     "ICHG_ACC",
+     "RISET = 375Ω, OUT = 3.8V or 7.6V",
+     "720",
+     "800",
+     "880",
+     "mA"
+    ],
+    [
+     "Charge current accuracy",
+     "ICHG_ACC",
+     "RISET = 600Ω, OUT = 3.8V or 7.6V",
+     "450",
+     "500",
+     "550",
+     "mA"
+    ],
+    [
+     "Charge current accuracy",
+     "ICHG_ACC",
+     "RISET = 3.0kΩ, OUT = 3.8V or 7.6V",
+     "90",
+     "100",
+     "110",
+     "mA"
+    ],
+    [
+     "Charge current accuracy",
+     "ICHG_ACC",
+     "RISET = 30kΩ, OUT = 3.8V or 7.6V",
+     "9",
+     "10",
+     "11",
+     "mA"
+    ],
+    [
+     "Supercapacitor charged threshold",
+     "VCHG",
+     "OUT rising, as percentage of FB regulation target",
+     "",
+     "98",
+     "",
+     "%"
+    ],
+    [
+     "Charging path FET on-resistance",
+     "RON",
+     "IOUT = 400mA, TJ = 25°C",
+     "",
+     "845",
+     "1000",
+     "mΩ"
+    ],
+    [
+     "Charging path FET on-resistance",
+     "RON",
+     "IOUT = 400mA, TJ = -40 - 125°C",
+     "",
+     "845",
+     "1450",
+     "mΩ"
+    ],
+    [
+     "CHARGER PROTECTION",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Output current limit threshold",
+     "IOUT_OCP",
+     "IOUT rising",
+     "0.9",
+     "1",
+     "1.1",
+     "A"
+    ],
+    [
+     "TEMPERATURE REGULATION AND TEMPERATURE SHUTDOWN",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Typical junction temperature regulation",
+     "TREG",
+     "",
+     "",
+     "125",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown rising threshold",
+     "TSHUT",
+     "Temperature increasing",
+     "",
+     "150",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown falling threshold",
+     "TSHUT",
+     "Temperature decreasing",
+     "",
+     "135",
+     "",
+     "°C"
+    ],
+    [
+     "LOGIC INPUT PIN (/CE)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Input high threshold level",
+     "VIH",
+     "",
+     "1.3",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Input low threshold level",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "CE pin internal pulldown resistor",
+     "RPD_CE",
+     "",
+     "3.3",
+     "",
+     "",
+     "MΩ"
+    ],
+    [
+     "LOGIC OUTPUT PIN (STAT, PG)",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "Output low threshold level",
+     "VOL",
+     "Sink current = 5mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "High-level leakage current",
+     "IOUT_BIAS",
+     "Pull up rail 3.3V",
+     "",
+     "",
+     "1",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "Timing requirements",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "nom",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tOUT_OCP_DGL",
+     "Deglitch time for IOUT_OCP, IOUT rising",
+     "",
+     "100",
+     "",
+     "µs"
+    ]
+   ]
+  },
+  {
+   "title": "STAT pin state",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "charging state",
+    "STAT pin state"
+   ],
+   "rows": [
+    [
+     "VFB < 98% of VFB_REF",
+     "High"
+    ],
+    [
+     "VFB > 98% of VFB_REF",
+     "Low"
+    ],
+    [
+     "Fault (VIN OVP, OUT OCP, or ISET pin short)",
+     "Blink at 1 Hz"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel",
+   "page": 26,
+   "conditions": "all dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ25173DSGR",
+     "WSON",
+     "DSG",
+     "8",
+     "3000",
+     "178.0",
+     "8.4",
+     "2.3",
+     "2.3",
+     "1.15",
+     "4.0",
+     "8.0",
+     "Q2"
+    ]
+   ],
+   "notes": [
+    "A0, B0 and K0 are the pocket's width, length and depth that hold the part; W is the carrier tape width and P1 the spacing from one pocket centre to the next."
+   ]
+  },
+  {
+   "title": "Tape and reel box",
+   "page": 27,
+   "conditions": "all dimensions nominal",
+   "columns": [
+    "device",
+    "package type",
+    "package drawing",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ25173DSGR",
+     "WSON",
+     "DSG",
+     "8",
+     "3000",
+     "208.0",
+     "191.0",
+     "35.0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Line regulation, VOUT = 4.2 V",
+   "page": 8,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, IOUT = 10 mA, VOUT = 4.2 V",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VREG accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       4.5,
+       -0.198
+      ],
+      [
+       17.96,
+       -0.192
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       4.5,
+       -0.14
+      ],
+      [
+       17.96,
+       -0.138
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       4.5,
+       -0.134
+      ],
+      [
+       17.96,
+       -0.133
+      ]
+     ]
+    },
+    {
+     "label": "85 °C",
+     "points": [
+      [
+       4.5,
+       -0.165
+      ],
+      [
+       17.96,
+       -0.165
+      ]
+     ]
+    },
+    {
+     "label": "105 °C",
+     "points": [
+      [
+       4.5,
+       -0.181
+      ],
+      [
+       17.96,
+       -0.183
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Line regulation, VOUT = 8.4 V",
+   "page": 8,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, IOUT = 10 mA, VOUT = 8.4 V",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VREG accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       8.5,
+       -0.136
+      ],
+      [
+       17.97,
+       -0.131
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       8.5,
+       -0.097
+      ],
+      [
+       17.97,
+       -0.096
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       8.5,
+       -0.101
+      ],
+      [
+       17.97,
+       -0.102
+      ]
+     ]
+    },
+    {
+     "label": "85 °C",
+     "points": [
+      [
+       8.5,
+       -0.161
+      ],
+      [
+       17.97,
+       -0.165
+      ]
+     ]
+    },
+    {
+     "label": "105 °C",
+     "points": [
+      [
+       8.5,
+       -0.192
+      ],
+      [
+       17.97,
+       -0.191
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Load regulation",
+   "page": 8,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, VIN = 5 V, VOUT = 4.2 V",
+   "x": {
+    "label": "IOUT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VREG accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       1.2,
+       -0.001
+      ],
+      [
+       99.7,
+       -0.301
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       1.2,
+       0.037
+      ],
+      [
+       99.7,
+       -0.295
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       1.2,
+       0.03
+      ],
+      [
+       99.7,
+       -0.319
+      ]
+     ]
+    },
+    {
+     "label": "85 °C",
+     "points": [
+      [
+       1.2,
+       -0.015
+      ],
+      [
+       99.7,
+       -0.409
+      ]
+     ]
+    },
+    {
+     "label": "105 °C",
+     "points": [
+      [
+       1.2,
+       -0.039
+      ],
+      [
+       99.7,
+       -0.445
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ICHG accuracy against VOUT",
+   "page": 8,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, VIN = 5 V, TA = 25 °C",
+   "x": {
+    "label": "VOUT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICHG accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "100mA",
+     "points": [
+      [
+       3.103,
+       -1.74
+      ],
+      [
+       4.097,
+       -1.65
+      ]
+     ]
+    },
+    {
+     "label": "200mA",
+     "points": [
+      [
+       3.103,
+       0.88
+      ],
+      [
+       4.097,
+       1.06
+      ]
+     ]
+    },
+    {
+     "label": "400mA",
+     "points": [
+      [
+       3.103,
+       0.2
+      ],
+      [
+       4.097,
+       0.61
+      ]
+     ]
+    },
+    {
+     "label": "600mA",
+     "points": [
+      [
+       3.103,
+       -0.38
+      ],
+      [
+       4.097,
+       0.3
+      ]
+     ]
+    },
+    {
+     "label": "800mA",
+     "points": [
+      [
+       3.103,
+       -1.46
+      ],
+      [
+       4.097,
+       -0.51
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ICHG accuracy against temperature",
+   "page": 8,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, VIN = 5 V and 12 V, VOUT = 3.8 V and 7.6 V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICHG accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "3.8V, 10mA",
+     "points": [
+      [
+       -39.5,
+       -2.06
+      ],
+      [
+       -29.2,
+       -1.99
+      ],
+      [
+       -20.2,
+       -1.88
+      ],
+      [
+       -10.9,
+       -1.81
+      ],
+      [
+       0.0,
+       -1.71
+      ],
+      [
+       9.2,
+       -1.78
+      ],
+      [
+       18.6,
+       -1.88
+      ],
+      [
+       28.3,
+       -1.99
+      ],
+      [
+       38.9,
+       -2.08
+      ],
+      [
+       49.4,
+       -2.2
+      ],
+      [
+       59.1,
+       -2.31
+      ],
+      [
+       70.5,
+       -2.42
+      ],
+      [
+       84.6,
+       -2.56
+      ],
+      [
+       90.0,
+       -2.7
+      ],
+      [
+       96.7,
+       -2.88
+      ],
+      [
+       101.1,
+       -3.02
+      ],
+      [
+       105.1,
+       -3.11
+      ]
+     ]
+    },
+    {
+     "label": "3.8V, 50mA",
+     "points": [
+      [
+       -39.5,
+       -1.6
+      ],
+      [
+       -10.1,
+       -1.26
+      ],
+      [
+       -9.7,
+       -1.12
+      ],
+      [
+       0.1,
+       -1.12
+      ],
+      [
+       4.6,
+       -0.98
+      ],
+      [
+       84.6,
+       -1.31
+      ],
+      [
+       99.9,
+       -1.62
+      ],
+      [
+       102.1,
+       -1.51
+      ],
+      [
+       105.1,
+       -1.58
+      ]
+     ]
+    },
+    {
+     "label": "3.8V, 200mA",
+     "points": [
+      [
+       -39.5,
+       1.05
+      ],
+      [
+       -26.6,
+       1.01
+      ],
+      [
+       -24.6,
+       1.15
+      ],
+      [
+       6.2,
+       1.14
+      ],
+      [
+       65.7,
+       0.78
+      ]
+     ]
+    },
+    {
+     "label": "3.8V, 500mA",
+     "points": [
+      [
+       -39.5,
+       0.64
+      ],
+      [
+       -0.1,
+       0.64
+      ],
+      [
+       65.7,
+       0.11
+      ]
+     ]
+    },
+    {
+     "label": "7.6V, 10mA",
+     "points": [
+      [
+       -39.5,
+       -1.1
+      ],
+      [
+       16.8,
+       -1.26
+      ],
+      [
+       25.3,
+       -1.15
+      ],
+      [
+       84.6,
+       -2.2
+      ],
+      [
+       105.1,
+       -2.9
+      ]
+     ]
+    },
+    {
+     "label": "7.6V, 50mA",
+     "points": [
+      [
+       -39.5,
+       -0.66
+      ],
+      [
+       -33.5,
+       -0.55
+      ],
+      [
+       24.9,
+       -0.5
+      ],
+      [
+       84.6,
+       -1.17
+      ],
+      [
+       105.1,
+       -1.65
+      ]
+     ]
+    },
+    {
+     "label": "7.6V, 200mA",
+     "points": [
+      [
+       -39.5,
+       1.17
+      ],
+      [
+       24.9,
+       0.78
+      ],
+      [
+       65.7,
+       0.23
+      ]
+     ]
+    },
+    {
+     "label": "7.6V, 500mA",
+     "points": [
+      [
+       -39.5,
+       -0.57
+      ],
+      [
+       25.3,
+       -1.23
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dropout voltage against output current",
+   "page": 8,
+   "conditions": "CIN = 1 µF, COUT = 1 µF",
+   "x": {
+    "label": "IOUT",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VIN - VOUT",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       0.2509,
+       163.0
+      ],
+      [
+       0.4591,
+       300.3
+      ],
+      [
+       0.649,
+       431.4
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       0.2509,
+       189.3
+      ],
+      [
+       0.4425,
+       337.0
+      ],
+      [
+       0.649,
+       505.8
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       0.2509,
+       209.0
+      ],
+      [
+       0.4365,
+       367.1
+      ],
+      [
+       0.649,
+       561.0
+      ]
+     ]
+    },
+    {
+     "label": "85 °C",
+     "points": [
+      [
+       0.2509,
+       265.9
+      ],
+      [
+       0.4525,
+       487.2
+      ],
+      [
+       0.5524,
+       604.1
+      ],
+      [
+       0.649,
+       722.1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Input shutdown current against input voltage",
+   "page": 9,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, /CE high, VOUT = 0 V",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ISD_IN",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       3.0,
+       0.87
+      ],
+      [
+       4.0,
+       1.298
+      ],
+      [
+       5.0,
+       1.915
+      ],
+      [
+       6.0,
+       2.274
+      ],
+      [
+       17.96,
+       3.795
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       3.0,
+       0.943
+      ],
+      [
+       4.0,
+       1.386
+      ],
+      [
+       5.0,
+       2.061
+      ],
+      [
+       6.0,
+       2.416
+      ],
+      [
+       17.96,
+       3.978
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       3.0,
+       0.983
+      ],
+      [
+       4.0,
+       1.437
+      ],
+      [
+       5.0,
+       2.127
+      ],
+      [
+       6.0,
+       2.491
+      ],
+      [
+       17.96,
+       4.077
+      ]
+     ]
+    },
+    {
+     "label": "105 °C",
+     "points": [
+      [
+       3.0,
+       1.137
+      ],
+      [
+       4.0,
+       1.615
+      ],
+      [
+       5.0,
+       2.355
+      ],
+      [
+       6.0,
+       2.771
+      ],
+      [
+       17.96,
+       4.533
+      ]
+     ]
+    },
+    {
+     "label": "125 °C",
+     "points": [
+      [
+       3.0,
+       1.319
+      ],
+      [
+       4.0,
+       1.841
+      ],
+      [
+       5.0,
+       2.639
+      ],
+      [
+       6.0,
+       3.105
+      ],
+      [
+       11.0,
+       4.057
+      ],
+      [
+       17.96,
+       5.312
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Input quiescent current against input voltage",
+   "page": 9,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, /CE low, ICHG = 0 A",
+   "x": {
+    "label": "VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IQ_IN",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       3.04,
+       0.3872
+      ],
+      [
+       5.5,
+       0.46
+      ],
+      [
+       6.0,
+       0.437
+      ],
+      [
+       17.96,
+       0.4441
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       3.04,
+       0.3982
+      ],
+      [
+       5.5,
+       0.472
+      ],
+      [
+       6.0,
+       0.45
+      ],
+      [
+       17.96,
+       0.4589
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       3.04,
+       0.4045
+      ],
+      [
+       5.5,
+       0.479
+      ],
+      [
+       6.0,
+       0.46
+      ],
+      [
+       17.96,
+       0.4672
+      ]
+     ]
+    },
+    {
+     "label": "85 °C",
+     "points": [
+      [
+       3.04,
+       0.4204
+      ],
+      [
+       5.0,
+       0.4831
+      ],
+      [
+       6.0,
+       0.5081
+      ],
+      [
+       6.5,
+       0.4811
+      ],
+      [
+       7.0,
+       0.48
+      ],
+      [
+       17.96,
+       0.4891
+      ]
+     ]
+    },
+    {
+     "label": "105 °C",
+     "points": [
+      [
+       3.04,
+       0.4265
+      ],
+      [
+       5.0,
+       0.4881
+      ],
+      [
+       6.0,
+       0.5139
+      ],
+      [
+       6.5,
+       0.4881
+      ],
+      [
+       17.96,
+       0.497
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output quiescent current against output voltage",
+   "page": 9,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, VIN = 0 V",
+   "x": {
+    "label": "VOUT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IQ_OUT",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       1.257,
+       0.007
+      ],
+      [
+       2.0,
+       0.021
+      ],
+      [
+       3.0,
+       0.129
+      ],
+      [
+       5.001,
+       0.405
+      ],
+      [
+       5.999,
+       0.518
+      ],
+      [
+       9.975,
+       0.883
+      ]
+     ]
+    },
+    {
+     "label": "0 °C",
+     "points": [
+      [
+       1.06,
+       0.007
+      ],
+      [
+       2.0,
+       0.047
+      ],
+      [
+       3.0,
+       0.155
+      ],
+      [
+       5.001,
+       0.437
+      ],
+      [
+       5.999,
+       0.554
+      ],
+      [
+       9.975,
+       0.928
+      ]
+     ]
+    },
+    {
+     "label": "25 °C",
+     "points": [
+      [
+       1.078,
+       0.007
+      ],
+      [
+       2.0,
+       0.048
+      ],
+      [
+       3.0,
+       0.168
+      ],
+      [
+       5.001,
+       0.452
+      ],
+      [
+       5.999,
+       0.574
+      ],
+      [
+       9.975,
+       0.952
+      ]
+     ]
+    },
+    {
+     "label": "105 °C",
+     "points": [
+      [
+       1.022,
+       0.037
+      ],
+      [
+       2.0,
+       0.137
+      ],
+      [
+       4.0,
+       0.417
+      ],
+      [
+       5.999,
+       0.718
+      ],
+      [
+       8.0,
+       0.953
+      ],
+      [
+       9.975,
+       1.171
+      ]
+     ]
+    },
+    {
+     "label": "125 °C",
+     "points": [
+      [
+       1.022,
+       0.025
+      ],
+      [
+       2.0,
+       0.157
+      ],
+      [
+       5.999,
+       0.938
+      ],
+      [
+       9.975,
+       1.537
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power up with supercapacitor",
+   "page": 17,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, ICHG = 400 mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IN",
+     "points": [
+      [
+       -4.5,
+       0.19
+      ],
+      [
+       -0.7,
+       0.19
+      ],
+      [
+       0.1,
+       4.86
+      ],
+      [
+       3.5,
+       4.95
+      ],
+      [
+       7.6,
+       4.76
+      ],
+      [
+       8.9,
+       4.95
+      ],
+      [
+       28.6,
+       4.95
+      ],
+      [
+       31.6,
+       4.76
+      ],
+      [
+       36.3,
+       4.95
+      ],
+      [
+       39.4,
+       4.76
+      ],
+      [
+       40.6,
+       5.0
+      ],
+      [
+       40.7,
+       4.86
+      ],
+      [
+       62.6,
+       4.95
+      ],
+      [
+       63.6,
+       4.86
+      ],
+      [
+       64.0,
+       4.48
+      ],
+      [
+       88.8,
+       4.57
+      ],
+      [
+       89.4,
+       4.33
+      ],
+      [
+       89.8,
+       4.57
+      ]
+     ]
+    },
+    {
+     "label": "OUT",
+     "points": [
+      [
+       -4.5,
+       1.9
+      ],
+      [
+       35.8,
+       1.87
+      ],
+      [
+       38.3,
+       1.92
+      ],
+      [
+       39.1,
+       1.87
+      ],
+      [
+       39.5,
+       1.96
+      ],
+      [
+       39.6,
+       1.9
+      ],
+      [
+       40.6,
+       1.96
+      ],
+      [
+       40.7,
+       1.9
+      ],
+      [
+       43.4,
+       1.87
+      ],
+      [
+       61.0,
+       1.87
+      ],
+      [
+       64.0,
+       1.94
+      ],
+      [
+       89.8,
+       1.94
+      ]
+     ]
+    },
+    {
+     "label": "/PG",
+     "points": [
+      [
+       -4.5,
+       2.63
+      ],
+      [
+       1.5,
+       2.63
+      ],
+      [
+       2.3,
+       0.11
+      ],
+      [
+       39.4,
+       0.11
+      ],
+      [
+       39.5,
+       0.17
+      ],
+      [
+       40.4,
+       0.11
+      ],
+      [
+       40.6,
+       0.17
+      ],
+      [
+       42.0,
+       0.08
+      ],
+      [
+       47.7,
+       0.15
+      ],
+      [
+       89.8,
+       0.15
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       -4.5,
+       0.01
+      ],
+      [
+       62.5,
+       0
+      ],
+      [
+       63.7,
+       0.019
+      ],
+      [
+       64.1,
+       0.362
+      ],
+      [
+       89.8,
+       0.352
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Power down with supercapacitor",
+   "page": 17,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, ICHG = 400 mA",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IN",
+     "points": [
+      [
+       -891,
+       4.48
+      ],
+      [
+       -51,
+       4.57
+      ],
+      [
+       -24,
+       4.48
+      ],
+      [
+       3,
+       1.52
+      ],
+      [
+       48,
+       0.29
+      ],
+      [
+       130,
+       0.1
+      ],
+      [
+       979,
+       0.1
+      ],
+      [
+       987,
+       0.24
+      ],
+      [
+       995,
+       0.1
+      ]
+     ]
+    },
+    {
+     "label": "OUT",
+     "points": [
+      [
+       -891,
+       1.9
+      ],
+      [
+       -27,
+       1.94
+      ],
+      [
+       -13,
+       1.87
+      ],
+      [
+       -11,
+       1.92
+      ],
+      [
+       -8,
+       1.87
+      ],
+      [
+       11,
+       1.92
+      ],
+      [
+       13,
+       1.87
+      ],
+      [
+       234,
+       1.92
+      ],
+      [
+       298,
+       1.87
+      ],
+      [
+       319,
+       1.94
+      ],
+      [
+       375,
+       1.87
+      ],
+      [
+       396,
+       1.94
+      ],
+      [
+       439,
+       1.87
+      ],
+      [
+       441,
+       1.92
+      ],
+      [
+       479,
+       1.94
+      ],
+      [
+       481,
+       1.87
+      ],
+      [
+       524,
+       1.94
+      ],
+      [
+       540,
+       1.87
+      ],
+      [
+       545,
+       1.94
+      ],
+      [
+       601,
+       1.87
+      ],
+      [
+       673,
+       1.92
+      ],
+      [
+       697,
+       1.87
+      ],
+      [
+       957,
+       1.87
+      ],
+      [
+       995,
+       1.94
+      ]
+     ]
+    },
+    {
+     "label": "/PG",
+     "points": [
+      [
+       -891,
+       0.11
+      ],
+      [
+       -40,
+       0.15
+      ],
+      [
+       -11,
+       0.08
+      ],
+      [
+       -3,
+       2.46
+      ],
+      [
+       19,
+       2.63
+      ],
+      [
+       77,
+       2.7
+      ],
+      [
+       960,
+       2.7
+      ],
+      [
+       995,
+       2.61
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       -891,
+       0.352
+      ],
+      [
+       -24,
+       0.352
+      ],
+      [
+       -11,
+       0.048
+      ],
+      [
+       -8,
+       0.014
+      ],
+      [
+       3,
+       0.01
+      ],
+      [
+       995,
+       0.01
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Charge disable",
+   "page": 17,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, /CE pulled high, ICHG = 250 mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       -5.0,
+       4.89
+      ],
+      [
+       89.9,
+       4.89
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -5.0,
+       0.249
+      ],
+      [
+       0,
+       0.249
+      ],
+      [
+       0.5,
+       -0.054
+      ],
+      [
+       1.0,
+       0.006
+      ],
+      [
+       1.5,
+       -0.02
+      ],
+      [
+       2.3,
+       0
+      ],
+      [
+       3.0,
+       -0.02
+      ],
+      [
+       4.3,
+       -0.006
+      ],
+      [
+       4.9,
+       -0.02
+      ],
+      [
+       7.4,
+       -0.006
+      ],
+      [
+       10.2,
+       -0.02
+      ],
+      [
+       10.9,
+       -0.003
+      ],
+      [
+       13.7,
+       -0.02
+      ],
+      [
+       15.6,
+       -0.006
+      ],
+      [
+       16.3,
+       -0.02
+      ],
+      [
+       17.8,
+       -0.006
+      ],
+      [
+       19.7,
+       -0.02
+      ],
+      [
+       21.6,
+       -0.006
+      ],
+      [
+       25.2,
+       -0.02
+      ],
+      [
+       28.0,
+       -0.02
+      ],
+      [
+       28.4,
+       -0.006
+      ],
+      [
+       32.0,
+       -0.02
+      ],
+      [
+       37.7,
+       -0.006
+      ],
+      [
+       39.1,
+       -0.02
+      ],
+      [
+       41.3,
+       -0.006
+      ],
+      [
+       41.9,
+       -0.02
+      ],
+      [
+       42.5,
+       -0.006
+      ],
+      [
+       46.1,
+       -0.02
+      ],
+      [
+       47.1,
+       -0.006
+      ],
+      [
+       50.5,
+       -0.02
+      ],
+      [
+       51.4,
+       -0.006
+      ],
+      [
+       51.9,
+       -0.02
+      ],
+      [
+       52.3,
+       -0.006
+      ],
+      [
+       52.7,
+       -0.02
+      ],
+      [
+       55.3,
+       -0.006
+      ],
+      [
+       55.9,
+       -0.02
+      ],
+      [
+       59.0,
+       -0.02
+      ],
+      [
+       59.5,
+       -0.006
+      ],
+      [
+       60.1,
+       -0.02
+      ],
+      [
+       63.3,
+       -0.006
+      ],
+      [
+       64.2,
+       -0.02
+      ],
+      [
+       72.9,
+       -0.006
+      ],
+      [
+       75.8,
+       -0.02
+      ],
+      [
+       76.5,
+       -0.006
+      ],
+      [
+       77.1,
+       -0.02
+      ],
+      [
+       89.9,
+       -0.017
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "/CE",
+     "points": [
+      [
+       -5.0,
+       0.06
+      ],
+      [
+       -0.8,
+       0.06
+      ],
+      [
+       0.4,
+       3.39
+      ],
+      [
+       10.3,
+       3.34
+      ],
+      [
+       89.9,
+       3.35
+      ]
+     ]
+    },
+    {
+     "label": "VBAT change",
+     "points": [
+      [
+       -5.0,
+       0
+      ],
+      [
+       -0.5,
+       -0.006
+      ],
+      [
+       0.1,
+       -0.097
+      ],
+      [
+       0.5,
+       -0.069
+      ],
+      [
+       2.7,
+       -0.086
+      ],
+      [
+       4.8,
+       -0.069
+      ],
+      [
+       8.9,
+       -0.086
+      ],
+      [
+       9.9,
+       -0.069
+      ],
+      [
+       10.4,
+       -0.083
+      ],
+      [
+       89.9,
+       -0.077
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge enable",
+   "page": 17,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, /CE pulled low, ICHG = 400 mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       -5.0,
+       4.91
+      ],
+      [
+       89.9,
+       4.89
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -5.0,
+       -0.017
+      ],
+      [
+       6.5,
+       -0.006
+      ],
+      [
+       10.4,
+       -0.02
+      ],
+      [
+       11.9,
+       -0.006
+      ],
+      [
+       15.2,
+       -0.02
+      ],
+      [
+       16.2,
+       -0.006
+      ],
+      [
+       16.6,
+       -0.02
+      ],
+      [
+       29.9,
+       -0.02
+      ],
+      [
+       30.8,
+       -0.006
+      ],
+      [
+       32.3,
+       -0.02
+      ],
+      [
+       33.7,
+       -0.006
+      ],
+      [
+       40.2,
+       -0.02
+      ],
+      [
+       40.3,
+       -0.006
+      ],
+      [
+       44.1,
+       -0.02
+      ],
+      [
+       45.4,
+       -0.006
+      ],
+      [
+       45.9,
+       -0.02
+      ],
+      [
+       51.4,
+       -0.02
+      ],
+      [
+       52.6,
+       -0.006
+      ],
+      [
+       63.4,
+       -0.02
+      ],
+      [
+       64.0,
+       -0.006
+      ],
+      [
+       70.1,
+       -0.02
+      ],
+      [
+       70.4,
+       -0.006
+      ],
+      [
+       73.5,
+       -0.006
+      ],
+      [
+       74.2,
+       -0.02
+      ],
+      [
+       75.7,
+       -0.006
+      ],
+      [
+       78.2,
+       -0.02
+      ],
+      [
+       78.7,
+       -0.006
+      ],
+      [
+       79.2,
+       0.257
+      ],
+      [
+       79.4,
+       0.24
+      ],
+      [
+       89.9,
+       0.249
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "/CE",
+     "points": [
+      [
+       -0.5,
+       3.34
+      ],
+      [
+       0,
+       0.24
+      ],
+      [
+       0.2,
+       0.07
+      ],
+      [
+       0.7,
+       0.05
+      ],
+      [
+       89.9,
+       0.03
+      ]
+     ]
+    },
+    {
+     "label": "VBAT change",
+     "points": [
+      [
+       -3.9,
+       -0.011
+      ],
+      [
+       -3.4,
+       0
+      ],
+      [
+       -3.4,
+       0.086
+      ],
+      [
+       -3.0,
+       0.086
+      ],
+      [
+       -2.8,
+       0.046
+      ],
+      [
+       -1.4,
+       0.051
+      ],
+      [
+       -1.0,
+       0.086
+      ],
+      [
+       -0.7,
+       0.049
+      ],
+      [
+       10.5,
+       0.04
+      ],
+      [
+       75.3,
+       0.043
+      ],
+      [
+       78.7,
+       0.049
+      ],
+      [
+       79.0,
+       0.097
+      ],
+      [
+       79.7,
+       0.08
+      ],
+      [
+       89.9,
+       0.086
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IN overvoltage response",
+   "page": 17,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, VIN = 5 V to 20 V, ICHG = 400 mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IN",
+     "points": [
+      [
+       -799,
+       4.7
+      ],
+      [
+       -788,
+       5.0
+      ],
+      [
+       -378,
+       5.2
+      ],
+      [
+       -53,
+       5.0
+      ],
+      [
+       -5,
+       20.2
+      ],
+      [
+       3190,
+       20.2
+      ]
+     ]
+    },
+    {
+     "label": "OUT",
+     "points": [
+      [
+       -799,
+       2.08
+      ],
+      [
+       3190,
+       2.08
+      ]
+     ]
+    },
+    {
+     "label": "/STAT",
+     "points": [
+      [
+       -799,
+       2.88
+      ],
+      [
+       447,
+       2.88
+      ],
+      [
+       495,
+       0.08
+      ],
+      [
+       943,
+       0.08
+      ],
+      [
+       991,
+       2.88
+      ],
+      [
+       1486,
+       2.88
+      ],
+      [
+       1529,
+       0.08
+      ],
+      [
+       1981,
+       0.08
+      ],
+      [
+       2029,
+       2.88
+      ],
+      [
+       2487,
+       2.88
+      ],
+      [
+       2530,
+       0.08
+      ],
+      [
+       2983,
+       0.08
+      ],
+      [
+       3031,
+       2.88
+      ],
+      [
+       3190,
+       2.88
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       -799,
+       0.34
+      ],
+      [
+       -788,
+       0.36
+      ],
+      [
+       -27,
+       0.36
+      ],
+      [
+       0,
+       0
+      ],
+      [
+       3190,
+       0
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "IN transient response",
+   "page": 17,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, VIN = 4 V to 6 V, VOUT = 3.5 V, ICHG = 250 mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       -15.2,
+       3.9
+      ],
+      [
+       -0.5,
+       3.9
+      ],
+      [
+       -0.1,
+       5.76
+      ],
+      [
+       0.3,
+       5.89
+      ],
+      [
+       49.8,
+       5.89
+      ],
+      [
+       50.5,
+       3.9
+      ],
+      [
+       79.8,
+       3.91
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -15.2,
+       0.297
+      ],
+      [
+       48.7,
+       0.294
+      ],
+      [
+       49.9,
+       0.289
+      ],
+      [
+       50.0,
+       0.211
+      ],
+      [
+       50.3,
+       0.314
+      ],
+      [
+       50.6,
+       0.297
+      ],
+      [
+       79.8,
+       0.297
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "VBAT change",
+     "points": [
+      [
+       -15.2,
+       0
+      ],
+      [
+       29.6,
+       -0.0034
+      ],
+      [
+       31.4,
+       -0.0034
+      ],
+      [
+       47.1,
+       -0.0011
+      ],
+      [
+       49.8,
+       -0.0034
+      ],
+      [
+       50.0,
+       -0.0131
+      ],
+      [
+       50.2,
+       0.0051
+      ],
+      [
+       50.4,
+       -0.0011
+      ],
+      [
+       79.8,
+       -0.0011
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "OUT transient response",
+   "page": 18,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, VOUT = 4.2 V, ISYS = 0 mA to 500 mA to 0 mA, ICHG = 250 mA",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       -3.02,
+       4.86
+      ],
+      [
+       15.98,
+       4.86
+      ]
+     ]
+    },
+    {
+     "label": "VOUT change",
+     "points": [
+      [
+       -3.02,
+       0
+      ],
+      [
+       -2.73,
+       0.0014
+      ],
+      [
+       -2.5,
+       -0.0109
+      ],
+      [
+       -2.26,
+       -0.0051
+      ],
+      [
+       -2.18,
+       -0.0097
+      ],
+      [
+       -0.88,
+       -0.0097
+      ],
+      [
+       -0.87,
+       -0.0006
+      ],
+      [
+       -0.14,
+       -0.0006
+      ],
+      [
+       -0.06,
+       -0.0377
+      ],
+      [
+       0.17,
+       -0.008
+      ],
+      [
+       0.37,
+       -0.016
+      ],
+      [
+       0.47,
+       -0.0126
+      ],
+      [
+       9.5,
+       -0.0137
+      ],
+      [
+       9.91,
+       -0.0114
+      ],
+      [
+       9.98,
+       0.0154
+      ],
+      [
+       10.12,
+       -0.0194
+      ],
+      [
+       10.27,
+       -0.0109
+      ],
+      [
+       10.29,
+       0.0057
+      ],
+      [
+       10.46,
+       -0.0006
+      ],
+      [
+       10.47,
+       -0.012
+      ],
+      [
+       10.72,
+       -0.0074
+      ],
+      [
+       10.78,
+       -0.0103
+      ],
+      [
+       15.98,
+       -0.008
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       -3.02,
+       0.226
+      ],
+      [
+       -0.14,
+       0.22
+      ],
+      [
+       0,
+       0.423
+      ],
+      [
+       0.09,
+       0.449
+      ],
+      [
+       0.21,
+       0.357
+      ],
+      [
+       0.35,
+       0.357
+      ],
+      [
+       0.44,
+       0.383
+      ],
+      [
+       0.66,
+       0.363
+      ],
+      [
+       0.84,
+       0.38
+      ],
+      [
+       1.13,
+       0.38
+      ],
+      [
+       1.14,
+       0.366
+      ],
+      [
+       1.57,
+       0.366
+      ],
+      [
+       1.63,
+       0.38
+      ],
+      [
+       1.66,
+       0.366
+      ],
+      [
+       2.35,
+       0.38
+      ],
+      [
+       2.41,
+       0.366
+      ],
+      [
+       2.74,
+       0.38
+      ],
+      [
+       2.91,
+       0.366
+      ],
+      [
+       3.52,
+       0.366
+      ],
+      [
+       3.57,
+       0.38
+      ],
+      [
+       3.84,
+       0.366
+      ],
+      [
+       3.93,
+       0.38
+      ],
+      [
+       4.05,
+       0.363
+      ],
+      [
+       4.13,
+       0.38
+      ],
+      [
+       4.19,
+       0.366
+      ],
+      [
+       4.59,
+       0.38
+      ],
+      [
+       4.71,
+       0.366
+      ],
+      [
+       4.77,
+       0.38
+      ],
+      [
+       4.8,
+       0.366
+      ],
+      [
+       4.92,
+       0.377
+      ],
+      [
+       5.29,
+       0.357
+      ],
+      [
+       5.49,
+       0.38
+      ],
+      [
+       5.73,
+       0.366
+      ],
+      [
+       5.87,
+       0.38
+      ],
+      [
+       5.98,
+       0.363
+      ],
+      [
+       6.13,
+       0.38
+      ],
+      [
+       6.49,
+       0.363
+      ],
+      [
+       6.62,
+       0.38
+      ],
+      [
+       6.78,
+       0.366
+      ],
+      [
+       7.21,
+       0.366
+      ],
+      [
+       7.26,
+       0.38
+      ],
+      [
+       7.38,
+       0.366
+      ],
+      [
+       7.44,
+       0.38
+      ],
+      [
+       7.61,
+       0.357
+      ],
+      [
+       7.87,
+       0.366
+      ],
+      [
+       7.88,
+       0.38
+      ],
+      [
+       8.26,
+       0.38
+      ],
+      [
+       8.29,
+       0.366
+      ],
+      [
+       8.41,
+       0.38
+      ],
+      [
+       8.6,
+       0.363
+      ],
+      [
+       9.82,
+       0.38
+      ],
+      [
+       10.05,
+       0.12
+      ],
+      [
+       10.27,
+       0.271
+      ],
+      [
+       10.41,
+       0.214
+      ],
+      [
+       10.53,
+       0.234
+      ],
+      [
+       10.82,
+       0.22
+      ],
+      [
+       15.98,
+       0.226
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "OUT short-circuit response",
+   "page": 18,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, VOUT = 4.0 V to 0 V, ICHG = 250 mA",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       -1207,
+       4.83
+      ],
+      [
+       -274,
+       4.83
+      ],
+      [
+       -171,
+       4.66
+      ],
+      [
+       -140,
+       4.83
+      ],
+      [
+       37,
+       4.66
+      ],
+      [
+       79,
+       4.83
+      ],
+      [
+       762,
+       4.83
+      ],
+      [
+       799,
+       4.66
+      ],
+      [
+       823,
+       4.83
+      ],
+      [
+       6390,
+       4.83
+      ]
+     ]
+    },
+    {
+     "label": "VOUT",
+     "points": [
+      [
+       -1207,
+       3.82
+      ],
+      [
+       -232,
+       3.82
+      ],
+      [
+       30,
+       0.54
+      ],
+      [
+       79,
+       0.15
+      ],
+      [
+       134,
+       0.1
+      ],
+      [
+       6390,
+       0.1
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       -1207,
+       0.1446
+      ],
+      [
+       -250,
+       0.144
+      ],
+      [
+       -213,
+       0.1554
+      ],
+      [
+       -183,
+       0.1514
+      ],
+      [
+       24,
+       0.1554
+      ],
+      [
+       61,
+       0.1549
+      ],
+      [
+       79,
+       0.1474
+      ],
+      [
+       220,
+       0.1429
+      ],
+      [
+       311,
+       0.1457
+      ],
+      [
+       506,
+       0.1411
+      ],
+      [
+       884,
+       0.1434
+      ],
+      [
+       902,
+       0.0097
+      ],
+      [
+       6390,
+       0.0091
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "ISET short-circuit response",
+   "page": 18,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, ISET resistor 1.2 kΩ to 0 Ω",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       -50,
+       5.6
+      ],
+      [
+       207,
+       5.37
+      ],
+      [
+       230,
+       5.43
+      ],
+      [
+       262,
+       6.29
+      ],
+      [
+       264,
+       5.43
+      ],
+      [
+       268,
+       5.77
+      ],
+      [
+       278,
+       5.77
+      ],
+      [
+       279,
+       5.49
+      ],
+      [
+       285,
+       5.77
+      ],
+      [
+       296,
+       5.49
+      ],
+      [
+       336,
+       5.77
+      ],
+      [
+       345,
+       5.43
+      ],
+      [
+       382,
+       5.77
+      ],
+      [
+       437,
+       5.43
+      ],
+      [
+       482,
+       5.77
+      ],
+      [
+       513,
+       5.43
+      ],
+      [
+       565,
+       5.77
+      ],
+      [
+       579,
+       5.43
+      ],
+      [
+       597,
+       5.77
+      ],
+      [
+       612,
+       5.49
+      ],
+      [
+       638,
+       5.77
+      ],
+      [
+       666,
+       5.43
+      ],
+      [
+       703,
+       5.71
+      ],
+      [
+       707,
+       5.43
+      ],
+      [
+       870,
+       5.43
+      ],
+      [
+       883,
+       5.77
+      ],
+      [
+       899,
+       5.37
+      ]
+     ]
+    },
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       -50,
+       0.24
+      ],
+      [
+       21,
+       0.24
+      ],
+      [
+       69,
+       0.354
+      ],
+      [
+       100,
+       0.494
+      ],
+      [
+       153,
+       0.866
+      ],
+      [
+       186,
+       1.046
+      ],
+      [
+       217,
+       1.169
+      ],
+      [
+       248,
+       1.246
+      ],
+      [
+       258,
+       1.251
+      ],
+      [
+       293,
+       0.726
+      ],
+      [
+       321,
+       0.429
+      ],
+      [
+       360,
+       0.191
+      ],
+      [
+       401,
+       0.069
+      ],
+      [
+       461,
+       0.026
+      ],
+      [
+       547,
+       0.023
+      ],
+      [
+       549,
+       -0.023
+      ],
+      [
+       559,
+       -0.026
+      ],
+      [
+       741,
+       -0.026
+      ],
+      [
+       787,
+       -0.063
+      ],
+      [
+       828,
+       -0.037
+      ],
+      [
+       899,
+       -0.026
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "ISET",
+     "points": [
+      [
+       -50,
+       1.126
+      ],
+      [
+       -2,
+       1.137
+      ],
+      [
+       0,
+       0.126
+      ],
+      [
+       6,
+       0.029
+      ],
+      [
+       899,
+       0.029
+      ]
+     ]
+    },
+    {
+     "label": "VBAT change",
+     "points": [
+      [
+       -50,
+       0
+      ],
+      [
+       -28,
+       0
+      ],
+      [
+       -25,
+       -0.011
+      ],
+      [
+       -3,
+       -0.025
+      ],
+      [
+       51,
+       0.007
+      ],
+      [
+       63,
+       0.023
+      ],
+      [
+       88,
+       0.039
+      ],
+      [
+       90,
+       0.048
+      ],
+      [
+       107,
+       0.051
+      ],
+      [
+       139,
+       0.08
+      ],
+      [
+       194,
+       0.096
+      ],
+      [
+       198,
+       0.103
+      ],
+      [
+       218,
+       0.103
+      ],
+      [
+       226,
+       0.112
+      ],
+      [
+       256,
+       0.112
+      ],
+      [
+       260,
+       0.025
+      ],
+      [
+       268,
+       0.007
+      ],
+      [
+       290,
+       -0.016
+      ],
+      [
+       291,
+       -0.025
+      ],
+      [
+       298,
+       -0.025
+      ],
+      [
+       311,
+       -0.041
+      ],
+      [
+       370,
+       -0.069
+      ],
+      [
+       691,
+       -0.073
+      ],
+      [
+       793,
+       -0.057
+      ],
+      [
+       899,
+       -0.053
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ISET change response",
+   "page": 18,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, ICHG = 50 mA to 500 mA",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN",
+     "points": [
+      [
+       -192,
+       4.91
+      ],
+      [
+       -21,
+       4.91
+      ],
+      [
+       165,
+       4.66
+      ],
+      [
+       3607,
+       4.69
+      ]
+     ]
+    },
+    {
+     "label": "VOUT change",
+     "points": [
+      [
+       -171,
+       -0.025
+      ],
+      [
+       -128,
+       0.014
+      ],
+      [
+       -122,
+       0
+      ],
+      [
+       -67,
+       -0.014
+      ],
+      [
+       -30,
+       0.007
+      ],
+      [
+       0,
+       -0.003
+      ],
+      [
+       107,
+       0.011
+      ],
+      [
+       143,
+       0.003
+      ],
+      [
+       585,
+       0.003
+      ],
+      [
+       686,
+       0.011
+      ],
+      [
+       704,
+       0.003
+      ],
+      [
+       759,
+       0.011
+      ],
+      [
+       811,
+       0.011
+      ],
+      [
+       817,
+       0.006
+      ],
+      [
+       832,
+       0.011
+      ],
+      [
+       924,
+       0.011
+      ],
+      [
+       951,
+       0.006
+      ],
+      [
+       991,
+       0.011
+      ],
+      [
+       1247,
+       0.007
+      ],
+      [
+       2692,
+       0.011
+      ],
+      [
+       2698,
+       0.018
+      ],
+      [
+       2756,
+       0.011
+      ],
+      [
+       2909,
+       0.018
+      ],
+      [
+       2942,
+       0.011
+      ],
+      [
+       2957,
+       0.018
+      ],
+      [
+       2994,
+       0.011
+      ],
+      [
+       3079,
+       0.018
+      ],
+      [
+       3607,
+       0.017
+      ]
+     ]
+    },
+    {
+     "label": "ISET",
+     "points": [
+      [
+       -192,
+       1.069
+      ],
+      [
+       -37,
+       1.069
+      ],
+      [
+       -21,
+       0.194
+      ],
+      [
+       40,
+       0.52
+      ],
+      [
+       58,
+       1.011
+      ],
+      [
+       110,
+       1.343
+      ],
+      [
+       122,
+       1.091
+      ],
+      [
+       244,
+       1.12
+      ],
+      [
+       3607,
+       1.097
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       -192,
+       0.037
+      ],
+      [
+       -24,
+       0.046
+      ],
+      [
+       46,
+       0.257
+      ],
+      [
+       58,
+       0.437
+      ],
+      [
+       107,
+       0.663
+      ],
+      [
+       125,
+       0.517
+      ],
+      [
+       137,
+       0.554
+      ],
+      [
+       146,
+       0.54
+      ],
+      [
+       293,
+       0.537
+      ],
+      [
+       1595,
+       0.546
+      ],
+      [
+       1613,
+       0.531
+      ],
+      [
+       3607,
+       0.54
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Charge complete",
+   "page": 18,
+   "conditions": "CIN = 1 µF, COUT = 1 µF, CSC = 25 F, VIN = 5 V, VREG = 2.5 V, ICHG = 400 mA",
+   "x": {
+    "label": "Time",
+    "unit": "s",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IN",
+     "points": [
+      [
+       -0.45,
+       0.1
+      ],
+      [
+       -0.01,
+       0.19
+      ],
+      [
+       0.01,
+       4.86
+      ],
+      [
+       0.07,
+       4.67
+      ],
+      [
+       4.6,
+       4.67
+      ],
+      [
+       4.81,
+       4.86
+      ],
+      [
+       8.95,
+       4.86
+      ],
+      [
+       8.98,
+       5.0
+      ]
+     ]
+    },
+    {
+     "label": "OUT",
+     "points": [
+      [
+       -0.45,
+       2.314
+      ],
+      [
+       0.01,
+       2.314
+      ],
+      [
+       0.15,
+       2.343
+      ],
+      [
+       0.6,
+       2.352
+      ],
+      [
+       1.09,
+       2.343
+      ],
+      [
+       1.28,
+       2.362
+      ],
+      [
+       3.58,
+       2.381
+      ],
+      [
+       3.74,
+       2.4
+      ],
+      [
+       3.95,
+       2.4
+      ],
+      [
+       3.98,
+       2.386
+      ],
+      [
+       4.11,
+       2.4
+      ],
+      [
+       8.83,
+       2.4
+      ],
+      [
+       8.98,
+       2.386
+      ]
+     ]
+    },
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       0.04,
+       0.173
+      ],
+      [
+       0.07,
+       0.352
+      ],
+      [
+       4.44,
+       0.352
+      ],
+      [
+       4.75,
+       0.229
+      ],
+      [
+       5.0,
+       0.164
+      ],
+      [
+       5.49,
+       0.088
+      ],
+      [
+       5.61,
+       0.084
+      ],
+      [
+       5.85,
+       0.061
+      ],
+      [
+       5.86,
+       0.053
+      ],
+      [
+       6.49,
+       0.027
+      ],
+      [
+       6.74,
+       0.027
+      ],
+      [
+       6.97,
+       0.015
+      ],
+      [
+       8.16,
+       0.011
+      ],
+      [
+       8.26,
+       0.004
+      ],
+      [
+       8.36,
+       0.011
+      ],
+      [
+       8.9,
+       0.004
+      ],
+      [
+       8.94,
+       0.013
+      ],
+      [
+       8.98,
+       0.006
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "/STAT",
+     "points": [
+      [
+       1.36,
+       1.39
+      ],
+      [
+       1.38,
+       0.1
+      ],
+      [
+       8.98,
+       0.08
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "one-cell",
+   "title": "1s supercapacitor charger, 2.4 V, 800 mA",
+   "page": 16,
+   "description": "A single supercapacitor cell is charged to 2.4 V at up to 800 mA from a 5 V to 18 V supply. R1 (375 Ω) on ISET sets 800 mA. R2 and R3 (604 kΩ over 301 kΩ) divide OUT down to FB, giving 0.8 V × 905/301 ≈ 2.4 V; the lower resistor returns to /PG instead of GND, so the divider stops drawing from the cell once input power is removed. STAT and /PG each light an LED from VREF through 10 kΩ. A host drives /CE with an open-drain output. C1 and C2 (1 µF) decouple IN and OUT.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25173"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "375 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "604 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "301 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "STAT indicator"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "power-good indicator"
+    },
+    {
+     "ref": "SC1",
+     "type": "other",
+     "value": "1s supercapacitor, 2.4 V",
+     "note": "one cell with a resistor across it"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VREF1",
+     "type": "terminal",
+     "value": "VREF"
+    },
+    {
+     "ref": "J_VREF2",
+     "type": "terminal",
+     "value": "VREF"
+    },
+    {
+     "ref": "J_HOST",
+     "type": "terminal",
+     "value": "HOST"
+    }
+   ],
+   "notes": [
+    "Design targets: 5 V to 18 V supply, ICHG = 800 mA, VREG = 2.4 V, /CE driven open-drain, /PG used as the divider's ground return."
+   ]
+  },
+  {
+   "id": "four-cell",
+   "title": "4s supercapacitor charger, 8.8 V, 500 mA",
+   "page": 19,
+   "description": "A stack of four series supercapacitor cells, each with a balancing resistor across it, is charged to 8.8 V (2.2 V a cell) at 500 mA from a 9 V to 18 V supply. R1 (600 Ω) on ISET sets 500 mA. R2 and R3 (806 kΩ over 80.6 kΩ) set 0.8 V × 886.6/80.6 ≈ 8.8 V; with VREG above 5 V the divider returns to GND, not /PG. STAT and /PG each light an LED from VREF through 10 kΩ. A host pulls /CE high to stop charging. C1 and C2 (1 µF) decouple IN and OUT.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ25173"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "600 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "806 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "80.6 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10 kΩ"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "STAT indicator"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "power-good indicator"
+    },
+    {
+     "ref": "SC1",
+     "type": "other",
+     "value": "4s supercapacitor, 2.2 V per cell",
+     "note": "four cells in series, a balancing resistor across each"
+    },
+    {
+     "ref": "J_VIN",
+     "type": "terminal",
+     "value": "VIN"
+    },
+    {
+     "ref": "J_VREF1",
+     "type": "terminal",
+     "value": "VREF"
+    },
+    {
+     "ref": "J_VREF2",
+     "type": "terminal",
+     "value": "VREF"
+    },
+    {
+     "ref": "J_HOST",
+     "type": "terminal",
+     "value": "HOST"
+    }
+   ],
+   "notes": [
+    "Design targets: 9 V to 18 V supply, ICHG = 500 mA, VREG = 8.8 V, /CE pulled high to disable charging."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Fast-charge current",
+   "expr": "ICHG = KISET / RISET",
+   "page": 12,
+   "where": {
+    "ICHG": "fast-charge current wanted",
+    "KISET": "charge current setting factor, 300 AΩ typ (270 to 330)",
+    "RISET": "resistor from ISET to GND"
+   },
+   "note": "A 1 % or tighter RISET keeps the current error down. Worked value: 300 AΩ / 0.8 A = 375 Ω."
+  },
+  {
+   "name": "Regulation voltage",
+   "expr": "VREG = VFB_REF × (RFBT + RFBB) / RFBB",
+   "page": 12,
+   "where": {
+    "VFB_REF": "feedback reference, 0.8 V",
+    "RFBT": "divider resistor from OUT to FB",
+    "RFBB": "divider resistor from FB to GND (or to /PG)"
+   },
+   "note": "RFBT + RFBB stays at or below 1 MΩ."
+  },
+  {
+   "name": "Junction-to-ambient thermal resistance",
+   "expr": "θJA = (TJ – T) / P",
+   "page": 20,
+   "where": {
+    "TJ": "die junction temperature",
+    "T": "ambient temperature",
+    "P": "power the device dissipates"
+   },
+   "note": "θJA depends on whether the part is on a board, the copper's size, makeup, thickness and shape, the part's orientation, the air volume and flow round it, and nearby surfaces."
+  },
+  {
+   "name": "Charging dissipation",
+   "expr": "P = [V(IN) – V(OUT)] × I(OUT)",
+   "page": 21,
+   "where": {
+    "V(IN)": "input voltage",
+    "V(OUT)": "output (supercapacitor) voltage",
+    "I(OUT)": "output current"
+   },
+   "note": "Dissipation peaks at the start of a charge, when the supercapacitor voltage is lowest."
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Architecture",
+   "page": 10,
+   "text": "One pass path runs from IN to OUT, made of two back-to-back FETs, and charges the supercapacitor directly. Any system load connects at OUT beside the supercapacitor and takes its share of the charge current. Current sensing and the power stage are on chip; only the ISET resistor and the FB divider set the charge."
+  },
+  {
+   "topic": "Charge profile",
+   "page": 12,
+   "text": "Charging starts from as low as 0 V at the ISET current (constant current) and switches to holding VREG (constant voltage) as OUT arrives there; the current then falls toward zero. Unlike a Li-ion charger there is no termination current: the part keeps regulating at VREG. Dissipation is highest early in fast charge, when OUT is low; if TJ reaches TREG the current is cut back to hold the temperature, so at low ISET settings thermal regulation never engages."
+  },
+  {
+   "topic": "Power-up and ISET detection",
+   "page": 12,
+   "text": "With a valid VIN and /CE low the part brings up its bias, then checks ISET before starting the linear stage. An ISET resistance below RISET_SHORT is a short: the charger stays in fault until VIN or /CE is cycled. An open ISET is accepted and the charger starts with zero charge current. ISET is watched throughout charging, so changing RISET changes ICHG at once."
+  },
+  {
+   "topic": "Low charge currents",
+   "page": 12,
+   "text": "Below 50 mA an added RC network on ISET is advised for a steadier current. At low currents part of the sense FET is switched off to improve resolution."
+  },
+  {
+   "topic": "Power good (/PG)",
+   "page": 13,
+   "text": "/PG pulls low when VIN is above VIN_LOWV, above VOUT + VSLEEPZ (not asleep) and below VIN_OV. Because /PG floats when input power is gone, returning the FB divider's lower resistor to /PG stops the divider draining the supercapacitor; this suits VREG ≤ 5 V (1 or 2 cells) only, since /PG is rated to 5.5 V."
+  },
+  {
+   "topic": "Charge status (STAT)",
+   "page": 13,
+   "text": "STAT is open drain and can drive an LED. It stays high while VFB is under 98 % of VFB_REF, goes low above that, and blinks at 1 Hz on a fault: input overvoltage, output overcurrent or a shorted ISET."
+  },
+  {
+   "topic": "Input overvoltage",
+   "page": 13,
+   "text": "IN above VIN_OV puts the part in standby; charging restarts by itself once IN returns to the normal range."
+  },
+  {
+   "topic": "Output overcurrent",
+   "page": 14,
+   "text": "OUT current normally sits at the ISET value, but a shorted ISET could let it climb. If it exceeds IOUT_OCP for longer than tOUT_OCP_DGL the part switches off and latches; cycling VIN or /CE restarts it."
+  },
+  {
+   "topic": "Thermal regulation and shutdown",
+   "page": 14,
+   "text": "Above TREG the charge current is reduced to hold the junction at TREG, so the delivered current is then below the ISET setting. Above TSHUT the linear stage turns off, and it restarts once the die cools below the TSHUT falling threshold. Normal operation at nominal input and ambient is best kept out of thermal regulation, which is meant for hot or high-input cases, though the part works correctly with it engaged all the time."
+  },
+  {
+   "topic": "Modes",
+   "page": 14,
+   "text": "Shutdown (UVLO): VIN below VIN_LOWV; internal circuits off and pins high impedance. Sleep: VIN_LOWV < VIN < VOUT + VSLEEPZ; the part waits for VIN to clear VOUT + VSLEEPZ. Active: /CE low, with VIN clear of VIN_LOWV as well as of VOUT + VSLEEPZ; the part charges and draws IQ_IN. Standby: valid input with a recoverable fault; partly biased while it watches for the fault to clear. Fault: VIN OVP recovers by itself; OUT OCP and a shorted ISET need a /CE or input toggle."
+  },
+  {
+   "topic": "Power supply",
+   "page": 20,
+   "text": "The supply runs from 3.0 V to 18 V (IN survives 40 V) and should deliver at least the highest programmed charge current. A supply more than a few inches from IN and GND calls for a larger input capacitor."
+  },
+  {
+   "topic": "Layout",
+   "page": 20,
+   "text": "Put the IN and OUT capacitors as close to the part as possible with short traces to IN, OUT and GND. Keep small-signal ground returns apart from the supercapacitor's high-current paths and join them at a single point. Size the IN and OUT traces for the full charge current so they drop little voltage."
+  },
+  {
+   "topic": "Automotive version",
+   "page": 24,
+   "text": "A Q100-qualified version, BQ25173-Q1, exists."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DSG0008A (WSON-8, 2 × 2 mm, 0.5 mm pitch)",
+   "page": 29,
+   "unit": "mm",
+   "columns": [
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "body size, X",
+     "1.9",
+     "",
+     "2.1"
+    ],
+    [
+     "body size, Y",
+     "1.9",
+     "",
+     "2.1"
+    ],
+    [
+     "overall height",
+     "0.7",
+     "",
+     "0.8"
+    ],
+    [
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "terminal width (8X)",
+     "0.18",
+     "",
+     "0.32"
+    ],
+    [
+     "terminal length (8X)",
+     "0.2",
+     "",
+     "0.4"
+    ],
+    [
+     "terminal pitch (6X)",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "pin 1 to pin 4 centre span (2X)",
+     "",
+     "1.5",
+     ""
+    ],
+    [
+     "exposed pad size across the terminal columns",
+     "0.8",
+     "0.9",
+     "1.0"
+    ],
+    [
+     "exposed pad size along the terminal columns",
+     "1.5",
+     "1.6",
+     "1.7"
+    ],
+    [
+     "pin 1 ID chamfer on the exposed pad",
+     "",
+     "(45° X 0.25)",
+     ""
+    ],
+    [
+     "side wall metal thickness (dim A), option 1",
+     "",
+     "0.1",
+     ""
+    ],
+    [
+     "side wall metal thickness (dim A), option 2",
+     "",
+     "0.2",
+     ""
+    ],
+    [
+     "coplanarity",
+     "",
+     "",
+     "0.08"
+    ],
+    [
+     "terminal position tolerance to datums C A B",
+     "",
+     "",
+     "0.1"
+    ],
+    [
+     "terminal position tolerance to datum C",
+     "",
+     "",
+     "0.05"
+    ]
+   ],
+   "notes": [
+    "Dimensions in parentheses are for reference. The exposed pad (pin 9) is soldered to the board for thermal and mechanical performance. An alternative terminal shape, 0.18 to 0.32 by 0.2 to 0.4, may be supplied."
+   ]
+  },
+  {
+   "name": "DSG0008A land pattern",
+   "page": 30,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "terminal pad size (8X)",
+     "(0.5) × (0.25)"
+    ],
+    [
+     "terminal pitch (6X)",
+     "(0.5)"
+    ],
+    [
+     "exposed pad size",
+     "(0.9) × (1.6)"
+    ],
+    [
+     "terminal column centre-to-centre span",
+     "(1.9)"
+    ],
+    [
+     "thermal via diameter",
+     "(0.2) typ"
+    ],
+    [
+     "thermal via offset from pad centre (2X)",
+     "(0.55)"
+    ],
+    [
+     "pad corner radius",
+     "(R0.05) typ"
+    ],
+    [
+     "solder mask clearance, non-solder-mask-defined (preferred)",
+     "0.07 max all around"
+    ],
+    [
+     "solder mask overlap, solder-mask-defined",
+     "0.07 min all around"
+    ]
+   ],
+   "notes": [
+    "Vias in the thermal pad are optional; when used, filled, plugged or tented vias under paste are advised."
+   ]
+  },
+  {
+   "name": "DSG0008A stencil",
+   "page": 31,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "stencil thickness",
+     "0.125"
+    ],
+    [
+     "terminal aperture (8X)",
+     "(0.5) × (0.25)"
+    ],
+    [
+     "terminal column centre-to-centre span",
+     "(1.9)"
+    ],
+    [
+     "exposed pad apertures (2X)",
+     "(0.9) × (0.7)"
+    ],
+    [
+     "exposed pad aperture centre offset from pad centre",
+     "(0.45)"
+    ],
+    [
+     "exposed pad solder coverage",
+     "87% by area"
+    ],
+    [
+     "aperture corner radius",
+     "(R0.05) typ"
+    ]
+   ],
+   "notes": [
+    "Laser-cut apertures with trapezoidal walls and rounded corners can release paste better."
+   ]
+  }
+ ]
+}

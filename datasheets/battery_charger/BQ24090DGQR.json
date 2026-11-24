@@ -1,0 +1,3024 @@
+{
+ "sheet": 1,
+ "name": "BQ24090DGQR",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "1 A single-input linear charger for one Li-ion or Li-polymer cell",
+ "source": {
+  "revision": "SLUS968H, April 2021",
+  "pages": 43
+ },
+ "summary": "The BQ2409x family are linear chargers for a single Li-ion or Li-polymer cell, fed from a USB port or a DC adaptor and delivering up to 1 A from one output that serves both the battery and any system load. Charging runs through precharge, constant current and constant voltage, with the fast-charge current set by a resistor on ISET and the precharge and termination levels by a resistor on PRE-TERM; ISET2 picks a 100 mA or 500 mA USB limit or the ISET value. Protection covers 6.6 V input overvoltage, input voltage DPM, thermal regulation at 125 °C, thermal shutdown, OUT and ISET shorts, a 10-hour safety timer and battery temperature through an NTC on TS. The five versions differ in regulation voltage (4.20 V or 4.35 V), NTC value (10 kΩ or 100 kΩ) and whether the JEITA temperature steps apply; all come in a 10-pin 3 × 3 mm HVSSOP with an exposed pad.",
+ "key_figures": [
+  [
+   "Charge current",
+   "10 to 1000 mA, set by RISET"
+  ],
+  [
+   "Regulation voltage",
+   "4.20 V (BQ24090/1/2/3), 4.35 V (BQ24095)"
+  ],
+  [
+   "Regulation accuracy",
+   "1 %"
+  ],
+  [
+   "Charge current accuracy",
+   "10 %"
+  ],
+  [
+   "Input operating range",
+   "4.45 to 6.45 V; 12 V maximum on IN"
+  ],
+  [
+   "Input overvoltage threshold",
+   "6.65 V typ"
+  ],
+  [
+   "USB input limits",
+   "100 mA / 500 mA, selected on ISET2"
+  ],
+  [
+   "Safety timer",
+   "10 h fast charge, 30 min precharge"
+  ],
+  [
+   "Dropout",
+   "325 mV typ at 0.5 A"
+  ],
+  [
+   "Package",
+   "HVSSOP-10 (DGQ), 3 × 3 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 5,
+  "columns": [
+   "part number",
+   "VO(REG)",
+   "VOVP",
+   "JEITA",
+   "TS/CE",
+   "PG",
+   "package"
+  ],
+  "rows": [
+   [
+    "BQ24090",
+    "4.20 V",
+    "6.6 V",
+    "No",
+    "10 kΩ NTC",
+    "Yes",
+    "10 pin 3 x 3 mm²"
+   ],
+   [
+    "BQ24091",
+    "4.20 V",
+    "6.6 V",
+    "No",
+    "100 kΩ NTC",
+    "Yes",
+    "10 pin 3 x 3 mm²"
+   ],
+   [
+    "BQ24092",
+    "4.20 V",
+    "6.6 V",
+    "Yes",
+    "10 kΩ NTC",
+    "Yes",
+    "10 pin 3 x 3 mm²"
+   ],
+   [
+    "BQ24093",
+    "4.20 V",
+    "6.6 V",
+    "Yes",
+    "100 kΩ NTC",
+    "Yes",
+    "10 pin 3 x 3 mm²"
+   ],
+   [
+    "BQ24095",
+    "4.35 V",
+    "6.6 V",
+    "No",
+    "10 kΩ NTC",
+    "Yes",
+    "10 pin 3 x 3 mm²"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "HVSSOP-10 (DGQ)",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "IN",
+     "type": "power in",
+     "function": "Supply input from the adaptor or USB port. Decouple to VSS with 1 μF to 10 μF."
+    },
+    {
+     "pin": "2",
+     "name": "ISET",
+     "type": "input",
+     "function": "A resistor to VSS sets the fast-charge current: 10.8 kΩ for 50 mA down to 540 Ω for 1000 mA. Its voltage also tracks the charge current."
+    },
+    {
+     "pin": "3",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground. Keep it connected to ground at all times."
+    },
+    {
+     "pin": "4",
+     "name": "PRE-TERM",
+     "type": "input",
+     "function": "A resistor to VSS (1 kΩ to 10 kΩ) sets termination at 5 % to 50 % of the ISET current, and precharge at twice the termination level. 2 kΩ gives IPGM/10 termination and IPGM/5 precharge. Open gives 10 % and 20 %."
+    },
+    {
+     "pin": "5",
+     "name": "PG",
+     "type": "open-drain output",
+     "function": "Pulled low when the input is above UVLO and above the OUT voltage; open otherwise."
+    },
+    {
+     "pin": "6",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Internal use. Leave unconnected and run no trace through it."
+    },
+    {
+     "pin": "7",
+     "name": "ISET2",
+     "type": "input",
+     "function": "Three-state input current limit select: high gives 500 mA maximum, low gives the ISET value, open gives 100 mA maximum."
+    },
+    {
+     "pin": "8",
+     "name": "CHG",
+     "type": "open-drain output",
+     "function": "Pulled low while charging; open when not charging or once charge is complete."
+    },
+    {
+     "pin": "9",
+     "name": "TS",
+     "type": "input",
+     "function": "Battery-pack NTC input: 10 kΩ at 25 °C for BQ24090/2/5, 100 kΩ for BQ24091/3. Open or pulled high, the part enters TTDM, with TS monitoring, timers and termination off. Pulled low, the IC is disabled. Without NTC sensing, fit a fixed 10 kΩ or 100 kΩ to VSS. 250 kΩ to ground keeps the part out of TTDM when a pack with its thermistor is removed."
+    },
+    {
+     "pin": "10",
+     "name": "OUT",
+     "type": "power out",
+     "function": "Battery connection; a system load may share it if its average draw still lets the cell charge within the 10-hour timer. Decouple with 1 μF to 10 μF."
+    },
+    {
+     "pin": "PAD",
+     "name": "Thermal pad",
+     "type": "thermal",
+     "function": "Internally tied to VSS. Connect it to the VSS potential on the board, but do not use it as the main ground; VSS must be grounded."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 6,
+   "conditions": "over operating free-air temperature (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage",
+     "",
+     "IN (with respect to VSS)",
+     "-0.3",
+     "",
+     "12",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "",
+     "OUT (with respect to VSS)",
+     "-0.3",
+     "",
+     "7",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "",
+     "PRE-TERM, ISET, ISET2, TS, CHG, PG, ASI, ASO (with respect to VSS)",
+     "-0.3",
+     "",
+     "7",
+     "V"
+    ],
+    [
+     "Input current",
+     "",
+     "IN",
+     "",
+     "",
+     "1.25",
+     "A"
+    ],
+    [
+     "Output current (continuous)",
+     "",
+     "OUT",
+     "",
+     "",
+     "1.25",
+     "A"
+    ],
+    [
+     "Output sink current",
+     "",
+     "CHG",
+     "",
+     "",
+     "15",
+     "mA"
+    ],
+    [
+     "Junction temperature",
+     "TJ",
+     "",
+     "-40",
+     "",
+     "150",
+     "°C"
+    ],
+    [
+     "Storage temperature",
+     "Tstg",
+     "",
+     "-65",
+     "",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these ratings can damage the part permanently; they are not operating conditions, and long exposure at them can reduce reliability.",
+    "Voltages are referred to the network ground terminal unless stated otherwise."
+   ]
+  },
+  {
+   "title": "ESD ratings",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Human-body model (HBM), ANSI/ESDA/JEDEC JS-001",
+     "±3000",
+     "V"
+    ],
+    [
+     "Electrostatic discharge",
+     "V(ESD)",
+     "Charged-device model (CDM), JEDEC JESD22-C101",
+     "±1500",
+     "V"
+    ]
+   ],
+   "notes": [
+    "JEP155 gives 500 V HBM and JEP157 gives 250 V CDM as the levels a standard ESD control process handles safely."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "IN voltage range",
+     "VIN",
+     "",
+     "3.5",
+     "",
+     "12",
+     "V"
+    ],
+    [
+     "IN operating voltage range",
+     "VIN",
+     "Restricted by VDPM and VOVP",
+     "4.45",
+     "",
+     "6.45",
+     "V"
+    ],
+    [
+     "Input current, IN pin",
+     "IIN",
+     "",
+     "",
+     "",
+     "1.0",
+     "A"
+    ],
+    [
+     "Current, OUT pin",
+     "IOUT",
+     "",
+     "",
+     "",
+     "1.0",
+     "A"
+    ],
+    [
+     "Junction temperature",
+     "TJ",
+     "",
+     "0",
+     "",
+     "125",
+     "°C"
+    ],
+    [
+     "Precharge and termination programming resistor",
+     "RPRE-TERM",
+     "",
+     "1",
+     "",
+     "10",
+     "kΩ"
+    ],
+    [
+     "Fast-charge current programming resistor",
+     "RISET",
+     "",
+     "0.540",
+     "",
+     "49.9",
+     "kΩ"
+    ],
+    [
+     "10-kΩ NTC thermistor range without entering BAT_EN or TTDM",
+     "RTS",
+     "",
+     "1.66",
+     "",
+     "258",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "Below 4.5 V on VIN, or in dropout, performance can be reduced."
+   ]
+  },
+  {
+   "title": "Thermal information",
+   "page": 7,
+   "conditions": "BQ2409x, DGQ, 10 pins",
+   "columns": [
+    "metric",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Junction-to-ambient thermal resistance",
+     "RθJA",
+     "71.2",
+     "°C/W"
+    ],
+    [
+     "Junction-to-case (top) thermal resistance",
+     "RθJC(top)",
+     "53.9",
+     "°C/W"
+    ],
+    [
+     "Junction-to-board thermal resistance",
+     "RθJB",
+     "45.2",
+     "°C/W"
+    ],
+    [
+     "Junction-to-top characterization parameter",
+     "ψJT",
+     "3.5",
+     "°C/W"
+    ],
+    [
+     "Junction-to-board characterization parameter",
+     "ψJB",
+     "44.9",
+     "°C/W"
+    ],
+    [
+     "Junction-to-case (bottom) thermal resistance",
+     "RθJC(bot)",
+     "19.2",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "The metrics are defined in TI application report SPRA953."
+   ]
+  },
+  {
+   "title": "Dissipation ratings",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "package",
+    "RθJA",
+    "RθJC",
+    "power rating, TA ≤ 25°C",
+    "derating factor, TA > 25°C"
+   ],
+   "rows": [
+    [
+     "5 x 3 mm MSOP",
+     "52°C/W",
+     "48°C/W",
+     "1.92 W",
+     "19.2 mW/°C"
+    ]
+   ],
+   "notes": [
+    "Measured on a JEDEC high-K board with the exposed pad soldered to a copper pad tied to the ground plane through a 2 × 3 array of vias."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 7,
+   "conditions": "over junction temperature range 0°C ≤ TJ ≤ 125°C and recommended supply voltage (unless otherwise noted)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Undervoltage lockout exit",
+     "UVLO",
+     "VIN: 0 V → 4 V",
+     "3.15",
+     "3.3",
+     "3.45",
+     "V"
+    ],
+    [
+     "Hysteresis on VUVLO_RISE falling",
+     "VHYS_UVLO",
+     "VIN: 4 V → 0 V, VUVLO_FALL = VUVLO_RISE – VHYS-UVLO",
+     "175",
+     "227",
+     "280",
+     "mV"
+    ],
+    [
+     "Input power good detection threshold, VOUT + VIN-DT",
+     "VIN-DT",
+     "Input power good if VIN > VOUT + VIN-DT; VOUT = 3.6 V, VIN: 3.5 V → 4 V",
+     "30",
+     "80",
+     "145",
+     "mV"
+    ],
+    [
+     "Hysteresis on VIN-DT falling",
+     "VHYS-INDT",
+     "VOUT = 3.6 V, VIN: 4 V → 3.5 V",
+     "",
+     "31",
+     "",
+     "mV"
+    ],
+    [
+     "Deglitch time on exiting sleep",
+     "tDGL(PG_PWR)",
+     "From VIN: 0 V → 5 V (1-μs rise) to PG = low, VOUT = 3.6 V",
+     "",
+     "45",
+     "",
+     "μs"
+    ],
+    [
+     "Deglitch time on VHYS-INDT power down (entering sleep)",
+     "tDGL(PG_NO-PWR)",
+     "From VIN: 5 V → 3.2 V (1-μs fall) to PG = OC, VOUT = 3.6 V",
+     "",
+     "29",
+     "",
+     "ms"
+    ],
+    [
+     "Input overvoltage protection threshold",
+     "VOVP",
+     "VIN: 5 V → 7 V",
+     "6.5",
+     "6.65",
+     "6.8",
+     "V"
+    ],
+    [
+     "Input overvoltage blanking time",
+     "tDGL(OVP-SET)",
+     "VIN: 5 V → 7 V",
+     "",
+     "113",
+     "",
+     "μs"
+    ],
+    [
+     "Hysteresis on OVP",
+     "VHYS-OVP",
+     "VIN: 7 V → 5 V",
+     "",
+     "95",
+     "",
+     "mV"
+    ],
+    [
+     "Deglitch time exiting OVP",
+     "tDGL(OVP-REC)",
+     "From VIN: 7 V → 5 V (1-μs fall) to PG = LO",
+     "",
+     "30",
+     "",
+     "μs"
+    ],
+    [
+     "USB/adaptor low input voltage protection (restricts IOUT at VIN-DPM)",
+     "VIN-DPM",
+     "USB mode; input source current limited to 50 mA; VOUT = 3.5 V; RISET = 825 Ω",
+     "4.34",
+     "4.4",
+     "4.46",
+     "V"
+    ],
+    [
+     "USB/adaptor low input voltage protection (restricts IOUT at VIN-DPM)",
+     "VIN-DPM",
+     "Adaptor mode; input source current limited to 50 mA; VOUT = 3.5 V; RISET = 825 Ω",
+     "4.24",
+     "4.3",
+     "4.36",
+     "V"
+    ],
+    [
+     "USB input current limit, 100 mA",
+     "IIN-USB-CL",
+     "ISET2 = Float; RISET = 825 Ω",
+     "85",
+     "92",
+     "100",
+     "mA"
+    ],
+    [
+     "USB input current limit, 500 mA",
+     "IIN-USB-CL",
+     "ISET2 = High; RISET = 825 Ω",
+     "430",
+     "462",
+     "500",
+     "mA"
+    ],
+    [
+     "Highest ISET resistance treated as a short (monitored for IOUT > 90 mA)",
+     "RISET_SHORT",
+     "RISET: 600 Ω → 250 Ω, IOUT latches off, cycle power to reset",
+     "280",
+     "",
+     "500",
+     "Ω"
+    ],
+    [
+     "Deglitch, ISET short to IOUT disable",
+     "tDGL_SHORT",
+     "Clear fault by cycling IN or TS/BAT_EN",
+     "",
+     "1",
+     "",
+     "ms"
+    ],
+    [
+     "Maximum OUT current limit regulation (clamp)",
+     "IOUT_CL",
+     "VIN = 5 V, VOUT = 3.6 V, VISET2 = Low, RISET: 600 Ω → 250 Ω, IOUT latches off after tDGL-SHORT",
+     "1.05",
+     "",
+     "1.4",
+     "A"
+    ],
+    [
+     "OUT pin short-circuit detection threshold / precharge threshold",
+     "VOUT(SC)",
+     "VOUT: 3 V → 0.5 V, no deglitch",
+     "0.75",
+     "0.8",
+     "0.85",
+     "V"
+    ],
+    [
+     "OUT pin short hysteresis",
+     "VOUT(SC-HYS)",
+     "Recovery ≥ VOUT(SC) + VOUT(SC-HYS); rising, no deglitch",
+     "",
+     "77",
+     "",
+     "mV"
+    ],
+    [
+     "Source current to OUT pin during short-circuit detection",
+     "IOUT(SC)",
+     "",
+     "10",
+     "15",
+     "20",
+     "mA"
+    ],
+    [
+     "Battery current into OUT pin",
+     "IOUT(PDWN)",
+     "VIN = 0 V",
+     "",
+     "",
+     "1",
+     "μA"
+    ],
+    [
+     "OUT pin current, charging terminated",
+     "IOUT(DONE)",
+     "VIN = 6 V, VOUT > VOUT(REG)",
+     "",
+     "",
+     "6",
+     "μA"
+    ],
+    [
+     "Standby current into IN pin",
+     "IIN(STDBY)",
+     "TS = LO, VIN ≤ 6 V",
+     "",
+     "",
+     "125",
+     "μA"
+    ],
+    [
+     "Active supply current, IN pin",
+     "ICC",
+     "TS = open, VIN = 6 V, TTDM – no load on OUT pin, VOUT > VOUT(REG), IC enabled",
+     "",
+     "0.8",
+     "1.0",
+     "mA"
+    ],
+    [
+     "Battery regulation voltage (BQ24090/1/2/3)",
+     "VOUT(REG)",
+     "VIN = 5.5 V, IOUT = 25 mA, (VTS-45°C ≤ VTS ≤ VTS-0°C)",
+     "4.16",
+     "4.2",
+     "4.23",
+     "V"
+    ],
+    [
+     "Battery regulation voltage (BQ24095)",
+     "VOUT(REG)",
+     "VIN = 5.5 V, IOUT = 25 mA",
+     "4.30",
+     "4.35",
+     "4.40",
+     "V"
+    ],
+    [
+     "Battery hot regulation voltage, BQ24092/3",
+     "VO_HT(REG)",
+     "VIN = 5.5 V, IOUT = 25 mA, VTS-60°C ≤ VTS ≤ VTS-45°C",
+     "4.02",
+     "4.06",
+     "4.1",
+     "V"
+    ],
+    [
+     "Programmed output fast-charge current range",
+     "IOUT(RANGE)",
+     "VOUT(REG) > VOUT > VLOWV; VIN = 5 V, ISET2 = Lo, RISET = 540 to 10.8 kΩ",
+     "10",
+     "",
+     "1000",
+     "mA"
+    ],
+    [
+     "Dropout, VIN – VOUT",
+     "VDO(IN-OUT)",
+     "VIN lowered until IOUT = 0.5 A, VOUT = 4.15 V, RISET = 540, ISET2 = Lo (adaptor mode); TJ ≤ 100°C",
+     "",
+     "325",
+     "520",
+     "mV"
+    ],
+    [
+     "Output fast-charge formula",
+     "IOUT",
+     "VOUT(REG) > VOUT > VLOWV; VIN = 5 V, ISET2 = Lo",
+     "",
+     "KISET/RISET",
+     "",
+     "A"
+    ],
+    [
+     "Fast-charge current factor, BQ24090/91/92/93",
+     "KISET",
+     "RISET = KISET/IOUT; 50 < IOUT < 1000 mA",
+     "510",
+     "540",
+     "565",
+     "AΩ"
+    ],
+    [
+     "Fast-charge current factor, BQ24090/91/92/93",
+     "KISET",
+     "RISET = KISET/IOUT; 25 < IOUT < 50 mA",
+     "480",
+     "527",
+     "580",
+     "AΩ"
+    ],
+    [
+     "Fast-charge current factor, BQ24090/91/92/93",
+     "KISET",
+     "RISET = KISET/IOUT; 10 < IOUT < 25 mA",
+     "350",
+     "520",
+     "680",
+     "AΩ"
+    ],
+    [
+     "Fast-charge current factor, BQ24095",
+     "KISET",
+     "RISET = KISET/IOUT; 50 < IOUT < 1000 mA",
+     "510",
+     "560",
+     "585",
+     "AΩ"
+    ],
+    [
+     "Fast-charge current factor, BQ24095",
+     "KISET",
+     "RISET = KISET/IOUT; 25 < IOUT < 50 mA",
+     "480",
+     "557",
+     "596",
+     "AΩ"
+    ],
+    [
+     "Fast-charge current factor, BQ24095",
+     "KISET",
+     "RISET = KISET/IOUT; 10 < IOUT < 25 mA",
+     "350",
+     "555",
+     "680",
+     "AΩ"
+    ],
+    [
+     "Pre-charge to fast-charge transition threshold",
+     "VLOWV",
+     "",
+     "2.4",
+     "2.5",
+     "2.6",
+     "V"
+    ],
+    [
+     "Deglitch, pre-charge to fast-charge transition",
+     "tDGL1(LOWV)",
+     "",
+     "",
+     "70",
+     "",
+     "μs"
+    ],
+    [
+     "Deglitch, fast-charge to pre-charge transition",
+     "tDGL2(LOWV)",
+     "",
+     "",
+     "32",
+     "",
+     "ms"
+    ],
+    [
+     "Pre-charge current, default setting",
+     "%PRECHG",
+     "VOUT < VLOWV; RISET = 1080 Ω; RPRE-TERM = High Z",
+     "18",
+     "20",
+     "22",
+     "%IOUT-CC"
+    ],
+    [
+     "Pre-charge current formula",
+     "%PRECHG",
+     "RPRE-TERM = KPRE-CHG (Ω/%) × %PRE-CHG (%)",
+     "",
+     "RPRE-TERM/KPRE-CHG",
+     "",
+     ""
+    ],
+    [
+     "% pre-charge factor",
+     "KPRE-CHG",
+     "VOUT < VLOWV, VIN = 5 V, RPRE-TERM = 2 k to 10 kΩ; RISET = 1080 Ω, RPRE-TERM = KPRE-CHG × %IFAST-CHG, %IFAST-CHG 20 to 100%",
+     "90",
+     "100",
+     "110",
+     "Ω/%"
+    ],
+    [
+     "% pre-charge factor",
+     "KPRE-CHG",
+     "VOUT < VLOWV, VIN = 5 V, RPRE-TERM = 1 k to 2 kΩ; RISET = 1080 Ω, RPRE-TERM = KPRE-CHG × %IFAST-CHG, %IFAST-CHG 10% to 20%",
+     "84",
+     "100",
+     "117",
+     "Ω/%"
+    ],
+    [
+     "Termination threshold current, default setting",
+     "%TERM",
+     "VOUT > VRCH; RISET = 1 k; RPRE-TERM = High Z",
+     "9",
+     "10",
+     "11",
+     "%IOUT-CC"
+    ],
+    [
+     "Termination current threshold formula",
+     "%TERM",
+     "RPRE-TERM = KTERM (Ω/%) × %TERM (%)",
+     "",
+     "RPRE-TERM/KTERM",
+     "",
+     ""
+    ],
+    [
+     "% term factor",
+     "KTERM",
+     "VOUT > VRCH, VIN = 5 V, RPRE-TERM = 2 k to 10 kΩ; RISET = 750 Ω, KTERM × %IFAST-CHG, %IFAST-CHG 10 to 50%",
+     "182",
+     "200",
+     "216",
+     "Ω/%"
+    ],
+    [
+     "% term factor",
+     "KTERM",
+     "VOUT > VRCH, VIN = 5 V, RPRE-TERM = 1 k to 2 kΩ; RISET = 750 Ω, KTERM × %Iset, %Iset 5 to 10%",
+     "174",
+     "199",
+     "224",
+     "Ω/%"
+    ],
+    [
+     "PRE-TERM programming current (ITerm-Start is the initial PRE-TERM current)",
+     "IPRE-TERM",
+     "RPRE-TERM = 2 k, VOUT = 4.15 V",
+     "71",
+     "75",
+     "81",
+     "μA"
+    ],
+    [
+     "Termination current formula",
+     "%TERM",
+     "",
+     "",
+     "RTERM/KTERM",
+     "",
+     ""
+    ],
+    [
+     "Deglitch time, termination detected",
+     "tDGL(TERM)",
+     "",
+     "",
+     "29",
+     "",
+     "ms"
+    ],
+    [
+     "Raised PRE-TERM current during tTerm-Start at start of charge",
+     "ITerm-Start",
+     "",
+     "80",
+     "85",
+     "92",
+     "μA"
+    ],
+    [
+     "Time the raised termination threshold stays active",
+     "tTerm-Start",
+     "",
+     "",
+     "1.25",
+     "",
+     "min"
+    ],
+    [
+     "Recharge detection threshold – normal temp",
+     "VRCH",
+     "VIN = 5 V, VTS = 0.5 V, VOUT: 4.25 V → VRCH",
+     "VO(REG)-0.120",
+     "VO(REG)-0.095",
+     "VO(REG)-0.070",
+     "V"
+    ],
+    [
+     "Recharge detection threshold – hot temp",
+     "VRCH",
+     "VIN = 5 V, VTS = 0.2 V, VOUT: 4.15 V → VRCH",
+     "VO(REG)-0.130",
+     "VO(REG)-0.105",
+     "VO(REG)-0.080",
+     "V"
+    ],
+    [
+     "Deglitch time, recharge threshold detected",
+     "tDGL1(RCH)",
+     "VIN = 5 V, VTS = 0.5 V, VOUT: 4.25 V → 3.5 V in 1 μs; tDGL(RCH) is time to ISET ramp",
+     "",
+     "29",
+     "",
+     "ms"
+    ],
+    [
+     "Deglitch time, recharge threshold detected in OUT-detect mode",
+     "tDGL2(RCH)",
+     "VIN = 5 V, VTS = 0.5 V, VOUT = 3.5 V inserted; tDGL(RCH) is time to ISET ramp",
+     "",
+     "3.6",
+     "",
+     "ms"
+    ],
+    [
+     "VOUT reduced regulation during battery detect",
+     "VREG-BD",
+     "VIN = 5 V, VTS = 0.5 V, battery absent",
+     "VO(REG)-0.450",
+     "VO(REG)-0.400",
+     "VO(REG)-0.350",
+     "V"
+    ],
+    [
+     "Sink current during VREG-BD",
+     "IBD-SINK",
+     "VIN = 5 V, VTS = 0.5 V, battery absent",
+     "6",
+     "",
+     "10",
+     "mA"
+    ],
+    [
+     "Regulation time at VREG or VREG-BD",
+     "tDGL(HI/LOW REG)",
+     "",
+     "",
+     "25",
+     "",
+     "ms"
+    ],
+    [
+     "High battery detection threshold",
+     "VBD-HI",
+     "VIN = 5 V, VTS = 0.5 V, battery absent",
+     "VO(REG)-0.150",
+     "VO(REG)-0.100",
+     "VO(REG)-0.050",
+     "V"
+    ],
+    [
+     "Low battery detection threshold",
+     "VBD-LO",
+     "VIN = 5 V, VTS = 0.5 V, battery absent",
+     "VREG-BD+0.50",
+     "VREG-BD+0.1",
+     "VREG-BD+0.15",
+     "V"
+    ],
+    [
+     "Pre-charge safety timer value",
+     "tPRECHG",
+     "Restarts on entering pre-charge; always enabled in pre-charge",
+     "1700",
+     "1940",
+     "2250",
+     "s"
+    ],
+    [
+     "Charge safety timer value",
+     "tMAXCH",
+     "Clears fault or resets at UVLO, TS/BAT_EN disable, OUT short, exiting LOWV and refresh",
+     "34000",
+     "38800",
+     "45000",
+     "s"
+    ],
+    [
+     "NTC bias current, BQ24090/2/5",
+     "INTC-10k",
+     "VTS = 0.3 V",
+     "48",
+     "50",
+     "52",
+     "μA"
+    ],
+    [
+     "NTC bias current, BQ24091/3",
+     "INTC-100k",
+     "VTS = 0.3 V",
+     "4.8",
+     "5.0",
+     "5.2",
+     "μA"
+    ],
+    [
+     "10k NTC bias current with charging disabled, BQ24090/2/5",
+     "INTC-DIS-10k",
+     "VTS = 0 V",
+     "27",
+     "30",
+     "34",
+     "μA"
+    ],
+    [
+     "100k NTC bias current with charging disabled, BQ24091/3",
+     "INTC-DIS-100k",
+     "VTS = 0 V",
+     "4.4",
+     "5.0",
+     "5.8",
+     "μA"
+    ],
+    [
+     "Reduced NTC current before TTDM (cold thermistor), BQ24090/2/5",
+     "INTC-FLDBK-10k",
+     "VTS: set to 1.525 V",
+     "4",
+     "5",
+     "6.5",
+     "μA"
+    ],
+    [
+     "Reduced NTC current before TTDM (cold thermistor), BQ24091/3",
+     "INTC-FLDBK-100k",
+     "VTS: set to 1.525 V",
+     "1.1",
+     "1.5",
+     "1.9",
+     "μA"
+    ],
+    [
+     "Termination and timer disable mode threshold – enter",
+     "VTTDM(TS)",
+     "VTS: 0.5 V → 1.7 V; timer held in reset",
+     "1550",
+     "1600",
+     "1650",
+     "mV"
+    ],
+    [
+     "Hysteresis exiting TTDM",
+     "VHYS-TTDM(TS)",
+     "VTS: 1.7 V → 0.5 V; timer enabled",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "TS maximum voltage clamp",
+     "VCLAMP(TS)",
+     "VTS = Open (float)",
+     "1800",
+     "1950",
+     "2000",
+     "mV"
+    ],
+    [
+     "Deglitch exit TTDM between states",
+     "tDGL(TTDM)",
+     "",
+     "",
+     "57",
+     "",
+     "ms"
+    ],
+    [
+     "Deglitch enter TTDM between states",
+     "tDGL(TTDM)",
+     "",
+     "",
+     "8",
+     "",
+     "μs"
+    ],
+    [
+     "TS voltage at which INTC is reduced to keep the thermistor out of TTDM",
+     "VTS_I-FLDBK",
+     "INTC adjustment (90 to 10%; 45 to 6.6 μS) occurs near this threshold. VTS: 1.425 V → 1.525 V",
+     "",
+     "1475",
+     "",
+     "mV"
+    ],
+    [
+     "Optional capacitance – ESD",
+     "CTS",
+     "",
+     "",
+     "0.22",
+     "",
+     "μF"
+    ],
+    [
+     "Low temperature CHG pending",
+     "VTS-0°C",
+     "Low temp charging to pending; VTS: 1.0 V → 1.5 V",
+     "1205",
+     "1230",
+     "1255",
+     "mV"
+    ],
+    [
+     "Hysteresis at 0°C",
+     "VHYS-0°C",
+     "Charge pending to low temp charging; VTS: 1.5 V → 1 V",
+     "",
+     "86",
+     "",
+     "mV"
+    ],
+    [
+     "Low temperature, half charge, BQ24092/3",
+     "VTS-10°C",
+     "Normal charging to low temp charging; VTS: 0.5 V → 1 V",
+     "765",
+     "790",
+     "815",
+     "mV"
+    ],
+    [
+     "Hysteresis at 10°C, BQ24092/3",
+     "VHYS-10°C",
+     "Low temp charging to normal CHG; VTS: 1.0 V → 0.5 V",
+     "",
+     "35",
+     "",
+     "mV"
+    ],
+    [
+     "High temperature at 4.1 V",
+     "VTS-45°C",
+     "Normal charging to high temp CHG; VTS: 0.5 V → 0.2 V",
+     "263",
+     "278",
+     "293",
+     "mV"
+    ],
+    [
+     "Hysteresis at 45°C",
+     "VHYS-45°C",
+     "High temp charging to normal CHG; VTS: 0.2 V → 0.5 V",
+     "",
+     "10.7",
+     "",
+     "mV"
+    ],
+    [
+     "High temperature disable, BQ24092/3",
+     "VTS-60°C",
+     "High temp charge to pending; VTS: 0.2 V → 0.1 V",
+     "170",
+     "178",
+     "186",
+     "mV"
+    ],
+    [
+     "Hysteresis at 60°C, BQ24092/3",
+     "VHYS-60°C",
+     "Charge pending to high temp CHG; VTS: 0.1 V → 0.2 V",
+     "",
+     "11.5",
+     "",
+     "mV"
+    ],
+    [
+     "Deglitch for TS 10°C threshold, BQ24092/3",
+     "tDGL(TS_10C)",
+     "Normal to cold operation; VTS: 0.6 V → 1 V",
+     "",
+     "50",
+     "",
+     "ms"
+    ],
+    [
+     "Deglitch for TS 10°C threshold, BQ24092/3",
+     "tDGL(TS_10C)",
+     "Cold to normal operation; VTS: 1 V → 0.6 V",
+     "",
+     "12",
+     "",
+     "ms"
+    ],
+    [
+     "Deglitch for TS thresholds: 0/45/60°C",
+     "tDGL(TS)",
+     "Battery charging",
+     "",
+     "30",
+     "",
+     "ms"
+    ],
+    [
+     "Charge enable threshold (10k NTC)",
+     "VTS-EN-10k",
+     "VTS: 0 V → 0.175 V",
+     "80",
+     "88",
+     "96",
+     "mV"
+    ],
+    [
+     "Hysteresis below VTS-EN-10k to disable (10k NTC)",
+     "VTS-DIS_HYS-10k",
+     "VTS: 0.125 V → 0 V",
+     "",
+     "12",
+     "",
+     "mV"
+    ],
+    [
+     "Charge enable threshold, BQ24090/2",
+     "VTS-EN-100k",
+     "VTS: 0 V → 0.175 V",
+     "140",
+     "150",
+     "160",
+     "mV"
+    ],
+    [
+     "Hysteresis below VTS-EN-100k to disable, BQ24091/3",
+     "VTS-DIS_HYS-100k",
+     "VTS: 0.125 V → 0 V",
+     "",
+     "50",
+     "",
+     "mV"
+    ],
+    [
+     "Temperature regulation limit",
+     "TJ(REG)",
+     "",
+     "",
+     "125",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown temperature",
+     "TJ(OFF)",
+     "",
+     "",
+     "155",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis",
+     "TJ(OFF-HYS)",
+     "",
+     "",
+     "20",
+     "",
+     "°C"
+    ],
+    [
+     "Logic LOW input voltage, ISET2",
+     "VIL",
+     "Sink 8 μA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Logic HIGH input voltage, ISET2",
+     "VIH",
+     "Source 8 μA",
+     "1.4",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Sink current required for LO, ISET2",
+     "IIL",
+     "VISET2 = 0.4 V",
+     "2",
+     "",
+     "9",
+     "μA"
+    ],
+    [
+     "Source current required for HI, ISET2",
+     "IIH",
+     "VISET2 = 1.4 V",
+     "1.1",
+     "",
+     "9.5",
+     "μA"
+    ],
+    [
+     "ISET2 float voltage",
+     "VFLT",
+     "",
+     "575",
+     "900",
+     "1225",
+     "mV"
+    ],
+    [
+     "Output LOW voltage, CHG and PG",
+     "VOL",
+     "ISINK = 5 mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Leakage current into IC, CHG and PG",
+     "ILEAK",
+     "VCHG = 5 V, VPG = 5 V",
+     "",
+     "",
+     "1",
+     "μA"
+    ]
+   ],
+   "notes": [
+    "VBD-LO: the minimum reads VREG-BD +0.50; beside a typical of +0.1 and a maximum of +0.15 it should read +0.05.",
+    "VTS-EN-100k: the parameter names BQ24090/2; the 100k thresholds belong to BQ24091/3."
+   ]
+  },
+  {
+   "title": "CHG output states",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "charging state",
+    "CHG FET/LED"
+   ],
+   "rows": [
+    [
+     "1st charge",
+     "ON"
+    ],
+    [
+     "Refresh charge",
+     "OFF"
+    ],
+    [
+     "OVP",
+     "OFF"
+    ],
+    [
+     "SLEEP",
+     "OFF"
+    ],
+    [
+     "TEMP FAULT",
+     "ON for 1st charge"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "PG output states",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "VIN power-good state",
+    "PG FET/LED"
+   ],
+   "rows": [
+    [
+     "UVLO",
+     "OFF"
+    ],
+    [
+     "SLEEP mode",
+     "OFF"
+    ],
+    [
+     "OVP mode",
+     "OFF"
+    ],
+    [
+     "Normal input (VOUT + VDT < VIN < VOVP)",
+     "ON"
+    ]
+   ],
+   "notes": [
+    "PG does not depend on whether the chip is disabled."
+   ]
+  },
+  {
+   "title": "Ordering information",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "orderable part number",
+    "status",
+    "material type",
+    "package | pins",
+    "package qty | carrier",
+    "RoHS",
+    "lead finish",
+    "MSL rating / peak reflow",
+    "op temp (°C)",
+    "part marking"
+   ],
+   "rows": [
+    [
+     "BQ24090DGQR",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "2500 | LARGE T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "0 to 125",
+     "24090"
+    ],
+    [
+     "BQ24090DGQT",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "0 to 125",
+     "24090"
+    ],
+    [
+     "BQ24091DGQR",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "2500 | LARGE T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "-40 to 150",
+     "24091"
+    ],
+    [
+     "BQ24091DGQT",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "-40 to 150",
+     "24091"
+    ],
+    [
+     "BQ24092DGQR",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "2500 | LARGE T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "-40 to 150",
+     "24092"
+    ],
+    [
+     "BQ24092DGQT",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "-40 to 150",
+     "24092"
+    ],
+    [
+     "BQ24093DGQR",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "2500 | LARGE T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "-40 to 150",
+     "24093"
+    ],
+    [
+     "BQ24093DGQT",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "-40 to 150",
+     "24093"
+    ],
+    [
+     "BQ24095DGQR",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "2500 | LARGE T&R",
+     "Yes",
+     "NIPDAU | NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "0 to 125",
+     "24095"
+    ],
+    [
+     "BQ24095DGQT",
+     "Active",
+     "Production",
+     "HVSSOP (DGQ) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU | NIPDAUAG",
+     "Level-1-260C-UNLIM",
+     "0 to 125",
+     "24095"
+    ]
+   ],
+   "notes": [
+    "Each orderable number is also listed with .A and .B suffixes carrying the same data; the BQ24095 .A and .B entries list NIPDAU finish alone."
+   ]
+  },
+  {
+   "title": "Tape and reel",
+   "page": 36,
+   "conditions": "all dimensions nominal",
+   "columns": [
+    "device",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ24090DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24090DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24090DGQT",
+     "250",
+     "180.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24090DGQT",
+     "250",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24091DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24091DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24091DGQT",
+     "250",
+     "180.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24091DGQT",
+     "250",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24092DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24092DGQT",
+     "250",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24092DGQT",
+     "250",
+     "180.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24093DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24093DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24093DGQT",
+     "250",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24093DGQT",
+     "250",
+     "180.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24095DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.3",
+     "1.3",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24095DGQR",
+     "2500",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ],
+    [
+     "BQ24095DGQT",
+     "250",
+     "330.0",
+     "12.4",
+     "5.3",
+     "3.4",
+     "1.4",
+     "8.0",
+     "12.0",
+     "Q1"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Tape and reel box dimensions",
+   "page": 38,
+   "conditions": "all dimensions nominal",
+   "columns": [
+    "device",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ24090DGQR",
+     "2500",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24090DGQR",
+     "2500",
+     "346.0",
+     "346.0",
+     "35.0"
+    ],
+    [
+     "BQ24090DGQT",
+     "250",
+     "200.0",
+     "183.0",
+     "25.0"
+    ],
+    [
+     "BQ24090DGQT",
+     "250",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24091DGQR",
+     "2500",
+     "346.0",
+     "346.0",
+     "35.0"
+    ],
+    [
+     "BQ24091DGQR",
+     "2500",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24091DGQT",
+     "250",
+     "203.0",
+     "203.0",
+     "35.0"
+    ],
+    [
+     "BQ24091DGQT",
+     "250",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24092DGQR",
+     "2500",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24092DGQT",
+     "250",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24092DGQT",
+     "250",
+     "200.0",
+     "183.0",
+     "25.0"
+    ],
+    [
+     "BQ24093DGQR",
+     "2500",
+     "346.0",
+     "346.0",
+     "35.0"
+    ],
+    [
+     "BQ24093DGQR",
+     "2500",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24093DGQT",
+     "250",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24093DGQT",
+     "250",
+     "200.0",
+     "183.0",
+     "25.0"
+    ],
+    [
+     "BQ24095DGQR",
+     "2500",
+     "346.0",
+     "346.0",
+     "35.0"
+    ],
+    [
+     "BQ24095DGQR",
+     "2500",
+     "364.0",
+     "364.0",
+     "27.0"
+    ],
+    [
+     "BQ24095DGQT",
+     "250",
+     "364.0",
+     "364.0",
+     "27.0"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Stencil openings for the exposed pad",
+   "page": 42,
+   "conditions": "",
+   "columns": [
+    "stencil thickness (mm)",
+    "pad opening (mm)"
+   ],
+   "rows": [
+    [
+     "0.1",
+     "2.05 X 2.11"
+    ],
+    [
+     "0.125",
+     "1.83 X 1.89"
+    ],
+    [
+     "0.150",
+     "1.67 X 1.73"
+    ],
+    [
+     "0.175",
+     "1.55 X 1.60"
+    ]
+   ],
+   "notes": [
+    "The paste covers 100 % of the pad area at 0.125 mm thickness."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "KISET for low and high currents",
+   "page": 13,
+   "conditions": "VIN = 5 V, VBAT = 3.6 V",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "KISET",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Low to high currents",
+     "points": [
+      [
+       0.0489,
+       530.97
+      ],
+      [
+       0.175,
+       530.99
+      ],
+      [
+       0.2014,
+       543.24
+      ],
+      [
+       0.7546,
+       543.24
+      ]
+     ]
+    },
+    {
+     "label": "High to low currents",
+     "points": [
+      [
+       0.7546,
+       543.24
+      ],
+      [
+       0.2426,
+       543.26
+      ],
+      [
+       0.1073,
+       543.42
+      ],
+      [
+       0.0982,
+       540.84
+      ],
+      [
+       0.0896,
+       535.22
+      ],
+      [
+       0.0784,
+       531.02
+      ],
+      [
+       0.0489,
+       530.97
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Load regulation over temperature",
+   "page": 13,
+   "conditions": "VIN = 5 V",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage VOUT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vreg @ 0°C",
+     "points": [
+      [
+       0.1002,
+       4.197624
+      ],
+      [
+       0.1694,
+       4.196987
+      ],
+      [
+       0.2536,
+       4.196295
+      ],
+      [
+       0.364,
+       4.195525
+      ],
+      [
+       0.5456,
+       4.194463
+      ],
+      [
+       0.8609,
+       4.192866
+      ]
+     ]
+    },
+    {
+     "label": "Vreg @ 25°C",
+     "points": [
+      [
+       0.1002,
+       4.199234
+      ],
+      [
+       0.2106,
+       4.198184
+      ],
+      [
+       0.3035,
+       4.19745
+      ],
+      [
+       0.8609,
+       4.193705
+      ]
+     ]
+    },
+    {
+     "label": "Vreg @ 85°C",
+     "points": [
+      [
+       0.1002,
+       4.198954
+      ],
+      [
+       0.2106,
+       4.197694
+      ],
+      [
+       0.3059,
+       4.196921
+      ],
+      [
+       0.5051,
+       4.195595
+      ],
+      [
+       0.8609,
+       4.193426
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Load regulation – BQ24095",
+   "page": 14,
+   "conditions": "VIN = 5 V",
+   "x": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output voltage VO",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vreg @ 0°C",
+     "points": [
+      [
+       0.0247,
+       4.34779
+      ],
+      [
+       0.0998,
+       4.34718
+      ],
+      [
+       0.1349,
+       4.34672
+      ],
+      [
+       0.2858,
+       4.34427
+      ],
+      [
+       0.3429,
+       4.34351
+      ],
+      [
+       0.3993,
+       4.34297
+      ],
+      [
+       0.4525,
+       4.34279
+      ],
+      [
+       0.5,
+       4.34308
+      ],
+      [
+       0.5423,
+       4.34389
+      ],
+      [
+       0.582,
+       4.34515
+      ],
+      [
+       0.6198,
+       4.34674
+      ],
+      [
+       0.7633,
+       4.35444
+      ],
+      [
+       0.8001,
+       4.3562
+      ]
+     ]
+    },
+    {
+     "label": "Vreg @ 25°C",
+     "points": [
+      [
+       0.0247,
+       4.34945
+      ],
+      [
+       0.0998,
+       4.34862
+      ],
+      [
+       0.1349,
+       4.3481
+      ],
+      [
+       0.2858,
+       4.34546
+      ],
+      [
+       0.3429,
+       4.34463
+      ],
+      [
+       0.3993,
+       4.34405
+      ],
+      [
+       0.4525,
+       4.34382
+      ],
+      [
+       0.5,
+       4.3441
+      ],
+      [
+       0.5423,
+       4.34492
+      ],
+      [
+       0.582,
+       4.3462
+      ],
+      [
+       0.6198,
+       4.34783
+      ],
+      [
+       0.7633,
+       4.35577
+      ],
+      [
+       0.8001,
+       4.35758
+      ]
+     ]
+    },
+    {
+     "label": "Vreg @ 85°C",
+     "points": [
+      [
+       0.0247,
+       4.35079
+      ],
+      [
+       0.0998,
+       4.34979
+      ],
+      [
+       0.1349,
+       4.34914
+      ],
+      [
+       0.2858,
+       4.34584
+      ],
+      [
+       0.3429,
+       4.34478
+      ],
+      [
+       0.3993,
+       4.344
+      ],
+      [
+       0.4525,
+       4.34365
+      ],
+      [
+       0.5,
+       4.34388
+      ],
+      [
+       0.5423,
+       4.34475
+      ],
+      [
+       0.582,
+       4.34614
+      ],
+      [
+       0.6198,
+       4.34795
+      ],
+      [
+       0.7633,
+       4.3568
+      ],
+      [
+       0.8001,
+       4.35881
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Operation over TS bias voltage",
+   "page": 22,
+   "conditions": "",
+   "x": {
+    "label": "TS voltage VTS",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VREG (V) and OUT current normalized to the programmed current",
+    "unit": "",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VREG",
+     "points": [
+      [
+       0.177,
+       4.093
+      ],
+      [
+       0.276,
+       4.093
+      ],
+      [
+       0.276,
+       4.207
+      ],
+      [
+       1.8,
+       4.207
+      ]
+     ]
+    },
+    {
+     "label": "IOUT, normalized",
+     "points": [
+      [
+       0,
+       -0.001
+      ],
+      [
+       0.177,
+       -0.001
+      ],
+      [
+       0.177,
+       0.994
+      ],
+      [
+       0.825,
+       0.994
+      ],
+      [
+       0.825,
+       0.505
+      ],
+      [
+       1.247,
+       0.505
+      ],
+      [
+       1.251,
+       -0.001
+      ],
+      [
+       1.599,
+       -0.001
+      ],
+      [
+       1.599,
+       0.994
+      ],
+      [
+       1.8,
+       0.994
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Programmed and clamped OUT current against RISET",
+   "page": 23,
+   "conditions": "",
+   "x": {
+    "label": "RISET",
+    "unit": "Ω",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Output current IO",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IOUT programmed",
+     "points": [
+      [
+       324.6,
+       1.66
+      ],
+      [
+       398.9,
+       1.349
+      ],
+      [
+       497.0,
+       1.082
+      ],
+      [
+       503.8,
+       1.067
+      ],
+      [
+       517.1,
+       1.052
+      ],
+      [
+       695.8,
+       0.77
+      ],
+      [
+       1039,
+       0.518
+      ],
+      [
+       1400,
+       0.384
+      ],
+      [
+       1791,
+       0.295
+      ],
+      [
+       2409,
+       0.221
+      ],
+      [
+       3416,
+       0.154
+      ],
+      [
+       4203,
+       0.125
+      ],
+      [
+       5101,
+       0.11
+      ],
+      [
+       5885,
+       0.088
+      ],
+      [
+       10000,
+       0.051
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 27,
+   "description": "The charger runs from either a DC adaptor or a USB port on IN, with 1 µF across IN. 1 kΩ on ISET gives 540 mA fast charge; 2 kΩ on PRE-TERM gives termination at 10 % (about 54 mA) and precharge at 20 % (about 108 mA). OUT feeds the battery pack, the system load and the host supply, with 1 µF across it. The pack's 10 kΩ NTC sits on TS, which the host can also see as its TTDM line; the host drives ISET2 to pick 100 mA, 500 mA or the ISET current. Each of CHG and PG lights an LED fed from OUT through 1.5 kΩ.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "BQ24090"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "Adaptor",
+     "note": "DC adaptor; used instead of the USB port"
+    },
+    {
+     "ref": "J2",
+     "type": "connector",
+     "value": "USB port",
+     "note": "used instead of the adaptor"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1 kΩ",
+     "note": "ISET, 540 mA fast charge"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2 kΩ",
+     "note": "PRE-TERM, 10 % termination, 20 % precharge"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1.5 kΩ"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "PG indicator"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1.5 kΩ"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "LED",
+     "note": "CHG indicator"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "Li-ion cell",
+     "note": "in the battery pack"
+    },
+    {
+     "ref": "RT1",
+     "type": "other",
+     "value": "10 kΩ NTC (103AT)",
+     "note": "in the battery pack"
+    },
+    {
+     "ref": "SYS",
+     "type": "terminal",
+     "value": "System load"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "Host",
+     "external": true
+    }
+   ],
+   "notes": [
+    "The adaptor and the USB port are alternatives on IN."
+   ]
+  },
+  {
+   "id": "iset2-push-pull",
+   "title": "Driving ISET2 with a push-pull stage",
+   "page": 24,
+   "description": "A P-channel and an N-channel FET, each gated separately by the drive logic, form a three-state driver on ISET2: the P-channel pulls it to VCC for high, the N-channel to ground for low, and with both off the pin floats.",
+   "parts": [
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": ""
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": ""
+    },
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "Drive logic",
+     "external": true
+    },
+    {
+     "ref": "VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "ISET2",
+     "type": "terminal",
+     "value": "To ISET2"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "iset2-divider",
+   "title": "Driving ISET2 with a divider and two pull-downs",
+   "page": 24,
+   "description": "R1 from VCC and R2 to ground through Q2 make a divider that holds ISET2 at 0.9 V, the float level, when Q2 is on and Q1 off. Q1 on pulls ISET2 low; with both FETs off R1 pulls it high.",
+   "parts": [
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "with R2, divider set to 0.9 V"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": ""
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": ""
+    },
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "Drive logic",
+     "external": true
+    },
+    {
+     "ref": "VCC",
+     "type": "terminal",
+     "value": "VCC"
+    },
+    {
+     "ref": "ISET2",
+     "type": "terminal",
+     "value": "To ISET2"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": "GND"
+    }
+   ],
+   "notes": [
+    "Q1 is drawn with a P-channel symbol; as the pull-down from ISET2 to ground it should read N-channel."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Fast-charge current",
+   "expr": "RISET = KISET / IOUT",
+   "where": {
+    "RISET": "resistor from ISET to VSS",
+    "IOUT": "fast-charge current wanted",
+    "KISET": "current factor, 540 AΩ typ (560 AΩ BQ24095) for 50 to 1000 mA"
+   },
+   "note": "Example: 540 AΩ / 0.54 A = 1.0 kΩ.",
+   "page": 22
+  },
+  {
+   "name": "Precharge and termination",
+   "expr": "RPRE-TERM = %Term × KTERM = %Pre-CHG × KPRE-CHG",
+   "where": {
+    "%Term": "termination current as a percent of fast-charge current",
+    "%Pre-CHG": "precharge current as a percent of fast-charge current",
+    "KTERM": "termination factor, 200 Ω/% typ",
+    "KPRE-CHG": "precharge factor, 100 Ω/% typ"
+   },
+   "note": "Example: 200 Ω/% × 10 % = 2 kΩ, which gives 20 % precharge.",
+   "page": 23
+  },
+  {
+   "name": "Junction-to-ambient thermal resistance",
+   "expr": "θJA = (TJ – T) / P",
+   "where": {
+    "TJ": "junction temperature",
+    "T": "ambient temperature",
+    "P": "power dissipated in the device"
+   },
+   "note": "",
+   "page": 32
+  },
+  {
+   "name": "Power dissipation",
+   "expr": "P = [V(IN) – V(OUT)] × I(OUT) + [V(OUT) – V(BAT)] × I(BAT)",
+   "where": {
+    "V(IN)": "input voltage",
+    "V(OUT)": "OUT pin voltage",
+    "I(OUT)": "current out of OUT",
+    "V(BAT)": "battery voltage",
+    "I(BAT)": "battery current"
+   },
+   "note": "Dissipation peaks early in fast charge; 3.4 V is a reasonable lowest battery voltage to use, since the pack typically reaches about 3.4 V within two minutes.",
+   "page": 32
+  },
+  {
+   "name": "Battery run-down by leakage",
+   "expr": "t = capacity / ILEAK",
+   "where": {
+    "capacity": "battery capacity in amp-hours",
+    "ILEAK": "leakage current drawn from the battery"
+   },
+   "note": "A 0.75 Ah cell and 10 μA give 75,000 hours, about 8.8 years.",
+   "page": 32
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Charge cycle",
+   "page": 15,
+   "text": "On power-up the part checks ISET and OUT for shorts. A cell below VLOWV (2.5 V) gets precharge at a PRE-TERM-set fraction (10 % to 100 %) of the fast-charge current; above it the ISET current flows until the cell reaches the regulation voltage, which is then held while the current falls to the termination level. Termination is always half the precharge level and can be disabled."
+  },
+  {
+   "topic": "Thermal regulation",
+   "page": 15,
+   "text": "At 125 °C junction temperature the charge current is cut back as far as needed to stop further rise, and the safety timer runs at half speed. Thermal shutdown is at 155 °C."
+  },
+  {
+   "topic": "UVLO and sleep",
+   "page": 18,
+   "text": "Below UVLO the part is off and all pins are high impedance. Between UVLO and VOUT + VIN-DT the part sleeps: no charge current, the timer pauses without resetting, and PG and CHG are open. Rising out of sleep, PG goes low, the timer resumes, charging restarts and CHG returns to its earlier state."
+  },
+  {
+   "topic": "Power-up",
+   "page": 18,
+   "text": "Once the input is good the part resets its logic and timers, signals power good, begins a qualification charge at 100 mA, reads ISET2 to set the input limit, starts the safety timer and enables CHG."
+  },
+  {
+   "topic": "New charge cycle",
+   "page": 18,
+   "text": "A new cycle begins on a good input arriving, a TS disable and re-enable, leaving TTDM, inserting a battery or OUT falling below VRCH. CHG goes low only on the first cycle, so a recharge or leaving TTDM leaves an open CHG open."
+  },
+  {
+   "topic": "Input overvoltage",
+   "page": 20,
+   "text": "An input above VOVP turns the pass FET off after the blanking time; the timer pauses and CHG and PG go open. When the input returns, PG goes low, the timer and charging resume, and CHG goes low after a 25 ms deglitch."
+  },
+  {
+   "topic": "Status outputs",
+   "page": 21,
+   "text": "CHG pulls low during the first charge only and opens when the current tapers to the PRE-TERM termination level; it is open in sleep and OVP. Cycling power, pulling TS low and releasing it, or entering precharge resets CHG. Each output can drive a host pull-up or an LED with series resistor; if the pull-up source can exceed 7 V, clamp it with a 6.2 V zener. LEDs fed from OUT dim as the battery voltage falls."
+  },
+  {
+   "topic": "Input DPM",
+   "page": 21,
+   "text": "If the source sags to VIN-DPM (4.4 V USB, 4.3 V adaptor), the pass FET reduces current until the input stops falling, so a current-limited source is not dragged down."
+  },
+  {
+   "topic": "OUT",
+   "page": 21,
+   "text": "OUT is a current-limited source that can charge the battery, supply the system, or both, and is short-protected. A system load above the programmed current discharges OUT unless a charged battery or enough capacitance makes up the difference."
+  },
+  {
+   "topic": "ISET",
+   "page": 22,
+   "text": "RISET programs 50 mA to 1000 mA and the pin voltage can serve as a current monitor. For finer resolution at low currents, a section of the sense FET is switched off; the change from low to high range has hysteresis, with the downward change near 0.15 A. A resistance below about 340 Ω is detected as a short when the output current is at least 80 mA; the part then latches off until power is cycled. Separately, OUT current is clamped internally between 1.1 A and 1.35 A."
+  },
+  {
+   "topic": "PRE-TERM",
+   "page": 23,
+   "text": "One resistor sets termination between 5 % and 50 % of the ISET current and precharge at twice that. With the pin open, termination is 10 % and precharge 20 %."
+  },
+  {
+   "topic": "ISET2",
+   "page": 23,
+   "text": "Low selects the ISET current, which is also the ceiling for every setting; open selects a 100 mA limit and high a 500 mA limit. A three-state driver or a divider holding 0.9 V can drive the pin."
+  },
+  {
+   "topic": "TS and JEITA",
+   "page": 24,
+   "text": "BQ24090/1/5 charge only between 0 °C and 45 °C. BQ24092/3 follow JEITA: normal between 10 °C and 45 °C, half current between 0 °C and 10 °C, regulation dropped to 4.06 V between 45 °C and 60 °C, and no charge above 60 °C or below 0 °C. BQ24090/2/5 bias a 10 kΩ NTC (β = 3370, e.g. SEMITEC 103AT-2 or Mitsubishi TH05-3H103F) with 50 μA; BQ24091/3 bias a 100 kΩ NTC with 5 μA. Without an NTC, a fixed 10 kΩ or 100 kΩ to VSS allows normal charging, and a host can pull TS low to stop charge. Near –10 °C the bias current folds back so a cold thermistor (–10 °C to –50 °C) does not push TS into TTDM; pulled low, TS draws about 30 μA. Other thermistor values cannot be used."
+  },
+  {
+   "topic": "TTDM",
+   "page": 24,
+   "text": "Floating TS (pack removed) or raising it to the TTDM threshold holds the safety timer in reset and turns off termination, while precharge, constant current and constant voltage still apply and the current may taper to zero. A battery detect runs on entering and leaving TTDM; leaving with a battery present starts a new cycle with CHG on. 237 kΩ from TS to VSS keeps the part out of TTDM, at about 0.1 °C error hot and 3 °C cold."
+  },
+  {
+   "topic": "Timers",
+   "page": 25,
+   "text": "Precharge is limited to 30 minutes and fast charge to 10 hours. The clock runs at half speed in thermal regulation, input DPM or USB current limit. On timeout charging stops and CHG opens. Disabling the IC, cycling power or passing through TTDM resets the timer."
+  },
+  {
+   "topic": "Termination and battery detect",
+   "page": 25,
+   "text": "Once OUT is above VRCH and the current falls to the termination level, CHG opens and a battery detect runs: a full battery stops charging; a removed pack with thermistor sends TS high into TTDM; a removed battery with TS still in range keeps the detect running until one is inserted. The detect waits 25 ms; if OUT is below VREG – 100 mV a battery is present. Otherwise it regulates OUT to VREG – 400 mV with a sink current on, waits 25 ms, and a battery is present if OUT stays above VREG – 300 mV; otherwise it is absent and no charge is signalled. Detect is off in TTDM or a TS fault, and also runs at power-up if the battery is above VRCH."
+  },
+  {
+   "topic": "Refresh",
+   "page": 25,
+   "text": "After termination, OUT falling to VRCH (100 mV below regulation) starts a new charge, with CHG left open."
+  },
+  {
+   "topic": "Charging a full battery",
+   "page": 25,
+   "text": "For the first minute of a cycle the termination level is raised by about 14 %, so a full battery reinserted terminates within a minute. A cell rested for hours can take several minutes to taper."
+  },
+  {
+   "topic": "Capacitors",
+   "page": 28,
+   "text": "Ceramic decoupling on IN and OUT is enough for most designs; the 1 μF values of the typical circuit are the starting point, moved toward the minimum for DC loads or higher for large pulsed loads. Rate the input capacitor for the highest adaptor voltage expected; ceramics are tested at twice their rating, so 16 V may cover a 30 V transient."
+  },
+  {
+   "topic": "Supply",
+   "page": 30,
+   "text": "The input supply should be regulated, between 3.5 V and 12 V, and able to deliver at least the programmed charge current. Add a larger input capacitor if the supply is more than a few inches from IN and GND."
+  },
+  {
+   "topic": "Layout",
+   "page": 31,
+   "text": "Put the IN and OUT capacitors close to the part with short traces to IN, OUT and the pad ground. Keep low-current ground separate from the battery current paths, joined at a single point. Size the IN and OUT traces for full charge current. Solder the thermal pad to ground with several 10 mil vias in and near it to a bottom ground plane that traces do not cut. Thinner boards run cooler; the EVM is 0.031 in thick with 2 oz copper on both sides."
+  },
+  {
+   "topic": "Thermal",
+   "page": 31,
+   "text": "The pad should connect directly to VSS. The design should not sit in thermal regulation under nominal input and ambient; the loop is meant for hot environments or high input voltage, though the part still works with it always active."
+  },
+  {
+   "topic": "Package",
+   "page": 40,
+   "text": "DGQ0010D: PowerPAD HVSSOP, 10 pins at 0.5 mm pitch, 1.1 mm maximum height, JEDEC MO-187 variation BA-T. Mold flash, protrusions or gate burrs may add up to 0.15 mm per side to the body length; interlead flash up to 0.25 mm per side to the body width. The recommended land pattern uses 1.45 × 0.3 mm pads, a 4.4 mm pad span, a 1.83 × 1.89 mm exposed-pad mask opening and 0.2 mm vias at 1.3 mm pitch; the metal pad is up to 2.2 × 3.1 mm."
+  }
+ ],
+ "packages": [
+  {
+   "name": "HVSSOP-10 (DGQ0010D)",
+   "page": 40,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "",
+     "overall width across leads",
+     "4.75",
+     "",
+     "5.05"
+    ],
+    [
+     "",
+     "body length (pin 1 to 5 direction)",
+     "2.9",
+     "",
+     "3.1"
+    ],
+    [
+     "",
+     "body width",
+     "2.9",
+     "",
+     "3.1"
+    ],
+    [
+     "",
+     "overall height",
+     "",
+     "",
+     "1.1"
+    ],
+    [
+     "",
+     "lead pitch",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "pin 1 to pin 5 centre span",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "",
+     "lead width",
+     "0.17",
+     "",
+     "0.27"
+    ],
+    [
+     "",
+     "lead thickness",
+     "0.13",
+     "",
+     "0.23"
+    ],
+    [
+     "",
+     "standoff",
+     "0.05",
+     "",
+     "0.15"
+    ],
+    [
+     "",
+     "foot length",
+     "0.4",
+     "",
+     "0.7"
+    ],
+    [
+     "",
+     "gage plane",
+     "",
+     "0.25",
+     ""
+    ],
+    [
+     "",
+     "lead angle",
+     "0°",
+     "",
+     "8°"
+    ],
+    [
+     "",
+     "exposed pad length (along the pin rows)",
+     "1.69",
+     "",
+     "1.89"
+    ],
+    [
+     "",
+     "exposed pad width (across the pin rows)",
+     "1.63",
+     "",
+     "1.83"
+    ],
+    [
+     "",
+     "seating plane coplanarity",
+     "",
+     "",
+     "0.1"
+    ]
+   ]
+  }
+ ]
+}

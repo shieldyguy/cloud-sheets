@@ -1,0 +1,2836 @@
+{
+ "sheet": 1,
+ "name": "MAX7221CWG+T",
+ "kind": "led_driver",
+ "manufacturer": "Analog Devices (Maxim Integrated)",
+ "title": "MAX7219/MAX7221: 8-digit common-cathode LED display drivers with serial interface",
+ "source": {
+  "document": "19-4452",
+  "revision": "Rev 4; 7/03",
+  "pages": 17
+ },
+ "summary": "Serial-input drivers for common-cathode LED displays: up to eight 7-segment digits with decimal points, a bar graph, or 64 single LEDs. Each chip holds a code-B decoder, multiplexed scan logic, eight 8-bit digit registers in SRAM and the segment and digit drivers; one resistor sets the peak current of all segments, and a 16-step PWM register trims brightness. A 150 µA shutdown keeps register data, the display starts blank at power-up, and a 10 MHz three-wire port can be chained through DOUT. The MAX7221 adds slew-limited segment drivers and a chip-select port that is fully SPI compatible; MAX7219EWG is the MAX7219 in 24-pin wide SO for -40°C to +85°C.",
+ "key_figures": [
+  [
+   "Supply voltage",
+   "4.0 V to 5.5 V"
+  ],
+  [
+   "Display",
+   "8 digits × 8 segments (64 LEDs), common cathode"
+  ],
+  [
+   "Peak segment current",
+   "-40 mA typ (-30 to -45 mA) with RSET = 9.53 kΩ"
+  ],
+  [
+   "Digit sink current",
+   "320 mA min at VOUT = 0.65 V"
+  ],
+  [
+   "Serial clock",
+   "10 MHz (tCP 100 ns min)"
+  ],
+  [
+   "Shutdown current",
+   "150 µA max"
+  ],
+  [
+   "Scan rate",
+   "800 Hz typ, 8 digits"
+  ],
+  [
+   "Brightness control",
+   "RSET plus 16-step PWM (31/32 to 1/32 MAX7219, 15/16 to 1/16 MAX7221)"
+  ],
+  [
+   "Temperature",
+   "0°C to +70°C (C) or -40°C to +85°C (E)"
+  ],
+  [
+   "Packages",
+   "24-pin narrow plastic DIP, wide SO, narrow CERDIP; dice"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part",
+   "device",
+   "temp range",
+   "pin-package"
+  ],
+  "rows": [
+   [
+    "MAX7219CNG",
+    "MAX7219",
+    "0°C to +70°C",
+    "24 Narrow Plastic DIP"
+   ],
+   [
+    "MAX7219CWG",
+    "MAX7219",
+    "0°C to +70°C",
+    "24 Wide SO"
+   ],
+   [
+    "MAX7219C/D",
+    "MAX7219",
+    "0°C to +70°C",
+    "Dice*"
+   ],
+   [
+    "MAX7219ENG",
+    "MAX7219",
+    "-40°C to +85°C",
+    "24 Narrow Plastic DIP"
+   ],
+   [
+    "MAX7219EWG",
+    "MAX7219",
+    "-40°C to +85°C",
+    "24 Wide SO"
+   ],
+   [
+    "MAX7219ERG",
+    "MAX7219",
+    "-40°C to +85°C",
+    "24 Narrow CERDIP"
+   ],
+   [
+    "MAX7221CNG",
+    "MAX7221",
+    "0°C to +70°C",
+    "24 Narrow Plastic DIP"
+   ],
+   [
+    "MAX7221CWG",
+    "MAX7221",
+    "0°C to +70°C",
+    "24 Wide SO"
+   ],
+   [
+    "MAX7221C/D",
+    "MAX7221",
+    "0°C to +70°C",
+    "Dice*"
+   ],
+   [
+    "MAX7221ENG",
+    "MAX7221",
+    "-40°C to +85°C",
+    "24 Narrow Plastic DIP"
+   ],
+   [
+    "MAX7221EWG",
+    "MAX7221",
+    "-40°C to +85°C",
+    "24 Wide SO"
+   ],
+   [
+    "MAX7221ERG",
+    "MAX7221",
+    "-40°C to +85°C",
+    "24 Narrow CERDIP"
+   ]
+  ],
+  "notes": [
+   "Dice (C/D) are specified only at TA = +25°C.",
+   "MAX7219 and MAX7221 differ in two ways only: the MAX7221 limits the slew rate of its segment drivers to cut EMI, and its CS input makes the serial port fully SPI compatible (SPI, QSPI, MICROWIRE). Off-state drivers of the MAX7219 are pulled to a rail; those of the MAX7221 float."
+  ]
+ },
+ "pins": [
+  {
+   "package": "24-pin narrow plastic DIP, wide SO, narrow CERDIP",
+   "page": 1,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "DIN",
+     "type": "digital in",
+     "function": "Serial data input. A bit enters the 16-bit shift register on each rising edge of CLK."
+    },
+    {
+     "pin": "2",
+     "name": "DIG 0",
+     "type": "output",
+     "function": "Digit 0 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "3",
+     "name": "DIG 4",
+     "type": "output",
+     "function": "Digit 4 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground. Pins 4 and 9 must both be connected."
+    },
+    {
+     "pin": "5",
+     "name": "DIG 6",
+     "type": "output",
+     "function": "Digit 6 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "6",
+     "name": "DIG 2",
+     "type": "output",
+     "function": "Digit 2 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "7",
+     "name": "DIG 3",
+     "type": "output",
+     "function": "Digit 3 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "8",
+     "name": "DIG 7",
+     "type": "output",
+     "function": "Digit 7 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "9",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground. Pins 4 and 9 must both be connected."
+    },
+    {
+     "pin": "10",
+     "name": "DIG 5",
+     "type": "output",
+     "function": "Digit 5 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "11",
+     "name": "DIG 1",
+     "type": "output",
+     "function": "Digit 1 driver; sinks the current of one digit's common cathode."
+    },
+    {
+     "pin": "12",
+     "name": "LOAD/CS",
+     "type": "digital in",
+     "function": "LOAD on the MAX7219, CS on the MAX7221. A rising edge latches the 16 bits last shifted in. On the MAX7221 data shifts in only while CS is low."
+    },
+    {
+     "pin": "13",
+     "name": "CLK",
+     "type": "digital in",
+     "function": "Serial clock, up to 10 MHz. Rising edges shift data in; falling edges move data out on DOUT. The MAX7221 ignores CLK while CS is high."
+    },
+    {
+     "pin": "14",
+     "name": "SEG A",
+     "type": "output",
+     "function": "Segment A driver; sources current into the display anodes."
+    },
+    {
+     "pin": "15",
+     "name": "SEG F",
+     "type": "output",
+     "function": "Segment F driver; sources current into the display anodes."
+    },
+    {
+     "pin": "16",
+     "name": "SEG B",
+     "type": "output",
+     "function": "Segment B driver; sources current into the display anodes."
+    },
+    {
+     "pin": "17",
+     "name": "SEG G",
+     "type": "output",
+     "function": "Segment G driver; sources current into the display anodes."
+    },
+    {
+     "pin": "18",
+     "name": "ISET",
+     "type": "analog",
+     "function": "Peak segment current set point: a resistor RSET from this pin to the positive supply fixes the peak current of every segment."
+    },
+    {
+     "pin": "19",
+     "name": "V+",
+     "type": "power in",
+     "function": "Positive supply, +5 V."
+    },
+    {
+     "pin": "20",
+     "name": "SEG C",
+     "type": "output",
+     "function": "Segment C driver; sources current into the display anodes."
+    },
+    {
+     "pin": "21",
+     "name": "SEG E",
+     "type": "output",
+     "function": "Segment E driver; sources current into the display anodes."
+    },
+    {
+     "pin": "22",
+     "name": "SEG DP",
+     "type": "output",
+     "function": "Decimal point driver; sources current into the display anodes."
+    },
+    {
+     "pin": "23",
+     "name": "SEG D",
+     "type": "output",
+     "function": "Segment D driver; sources current into the display anodes."
+    },
+    {
+     "pin": "24",
+     "name": "DOUT",
+     "type": "digital out",
+     "function": "Serial data output for chaining devices: each bit leaves 16.5 clock cycles after entering DIN. The output is always driven, never high-impedance."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "Voltages with respect to GND.",
+   "columns": [
+    "parameter",
+    "conditions",
+    "rating"
+   ],
+   "rows": [
+    [
+     "V+",
+     "",
+     "-0.3V to 6V"
+    ],
+    [
+     "DIN, CLK, LOAD, CS",
+     "",
+     "-0.3V to 6V"
+    ],
+    [
+     "All other pins",
+     "",
+     "-0.3V to (V+ + 0.3V)"
+    ],
+    [
+     "DIG 0–DIG 7 sink current",
+     "",
+     "500mA"
+    ],
+    [
+     "SEG A–G, DP source current",
+     "",
+     "100mA"
+    ],
+    [
+     "Continuous power dissipation, Narrow Plastic DIP",
+     "TA = +85°C; derate 13.3mW/°C above +70°C",
+     "1066mW"
+    ],
+    [
+     "Continuous power dissipation, Wide SO",
+     "TA = +85°C; derate 11.8mW/°C above +70°C",
+     "941mW"
+    ],
+    [
+     "Continuous power dissipation, Narrow CERDIP",
+     "TA = +85°C; derate 12.5mW/°C above +70°C",
+     "1000mW"
+    ],
+    [
+     "Operating temperature range (TMIN to TMAX)",
+     "MAX7219C_G/MAX7221C_G",
+     "0°C to +70°C"
+    ],
+    [
+     "Operating temperature range (TMIN to TMAX)",
+     "MAX7219E_G/MAX7221E_G",
+     "-40°C to +85°C"
+    ],
+    [
+     "Storage temperature range",
+     "",
+     "-65°C to +160°C"
+    ],
+    [
+     "Lead temperature",
+     "soldering, 10s",
+     "+300°C"
+    ]
+   ],
+   "notes": [
+    "These are stress limits only; operation at or beyond them is not implied, lasting stress beyond them can destroy the part, and long exposure at them can reduce reliability."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 2,
+   "conditions": "V+ = 5V ±10%, RSET = 9.53kΩ ±1%, TA = TMIN to TMAX, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Operating Supply Voltage",
+     "V+",
+     "",
+     "4.0",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Shutdown Supply Current",
+     "I+",
+     "All digital inputs at V+ or GND, TA = +25°C",
+     "",
+     "",
+     "150",
+     "µA"
+    ],
+    [
+     "Operating Supply Current",
+     "I+",
+     "RSET = open circuit",
+     "",
+     "",
+     "8",
+     "mA"
+    ],
+    [
+     "Operating Supply Current",
+     "I+",
+     "All segments and decimal point on, ISEG_ = -40mA",
+     "",
+     "330",
+     "",
+     "mA"
+    ],
+    [
+     "Display Scan Rate",
+     "fOSC",
+     "8 digits scanned",
+     "500",
+     "800",
+     "1300",
+     "Hz"
+    ],
+    [
+     "Digit Drive Sink Current",
+     "IDIGIT",
+     "V+ = 5V, VOUT = 0.65V",
+     "320",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "Segment Drive Source Current",
+     "ISEG",
+     "TA = +25°C, V+ = 5V, VOUT = (V+ - 1V)",
+     "-30",
+     "-40",
+     "-45",
+     "mA"
+    ],
+    [
+     "Segment Current Slew Rate (MAX7221 only)",
+     "ΔISEG/Δt",
+     "TA = +25°C, V+ = 5V, VOUT = (V+ - 1V)",
+     "10",
+     "20",
+     "50",
+     "mA/µs"
+    ],
+    [
+     "Segment Drive Current Matching",
+     "ΔISEG",
+     "",
+     "",
+     "3.0",
+     "",
+     "%"
+    ],
+    [
+     "Digit Drive Leakage (MAX7221 only)",
+     "IDIGIT",
+     "Digit off, VDIGIT = V+",
+     "",
+     "",
+     "-10",
+     "µA"
+    ],
+    [
+     "Segment Drive Leakage (MAX7221 only)",
+     "ISEG",
+     "Segment off, VSEG = 0V",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Digit Drive Source Current (MAX7219 only)",
+     "IDIGIT",
+     "Digit off, VDIGIT = (V+ - 0.3V)",
+     "-2",
+     "",
+     "",
+     "mA"
+    ],
+    [
+     "Segment Drive Sink Current (MAX7219 only)",
+     "ISEG",
+     "Segment off, VSEG = 0.3V",
+     "5",
+     "",
+     "",
+     "mA"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Electrical characteristics: logic inputs",
+   "page": 3,
+   "conditions": "V+ = 5V ±10%, RSET = 9.53kΩ ±1%, TA = TMIN to TMAX, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Current DIN, CLK, LOAD, CS",
+     "IIH, IIL",
+     "VIN = 0V or V+",
+     "-1",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Logic High Input Voltage",
+     "VIH",
+     "",
+     "3.5",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Logic Low Input Voltage",
+     "VIL",
+     "",
+     "",
+     "",
+     "0.8",
+     "V"
+    ],
+    [
+     "Output High Voltage",
+     "VOH",
+     "DOUT, ISOURCE = -1mA",
+     "V+ - 1",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Output Low Voltage",
+     "VOL",
+     "DOUT, ISINK = 1.6mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Hysteresis Voltage",
+     "ΔVI",
+     "DIN, CLK, LOAD, CS",
+     "",
+     "1",
+     "",
+     "V"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Timing characteristics",
+   "page": 3,
+   "conditions": "V+ = 5V ±10%, RSET = 9.53kΩ ±1%, TA = TMIN to TMAX, unless otherwise noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CLK Clock Period",
+     "tCP",
+     "",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CLK Pulse Width High",
+     "tCH",
+     "",
+     "50",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CLK Pulse Width Low",
+     "tCL",
+     "",
+     "50",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CS Fall to SCLK Rise Setup Time (MAX7221 only)",
+     "tCSS",
+     "",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CLK Rise to CS or LOAD Rise Hold Time",
+     "tCSH",
+     "",
+     "0",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "DIN Setup Time",
+     "tDS",
+     "",
+     "25",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "DIN Hold Time",
+     "tDH",
+     "",
+     "0",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Output Data Propagation Delay",
+     "tDO",
+     "CLOAD = 50pF",
+     "",
+     "",
+     "25",
+     "ns"
+    ],
+    [
+     "Load-Rising Edge to Next Clock Rising Edge (MAX7219 only)",
+     "tLDCK",
+     "",
+     "50",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Minimum CS or LOAD Pulse High",
+     "tCSW",
+     "",
+     "50",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Data-to-Segment Delay",
+     "tDSPD",
+     "",
+     "",
+     "",
+     "2.25",
+     "ms"
+    ]
+   ],
+   "notes": [
+    "Timing: DIN is sampled on CLK rising edges with setup tDS and hold tDH, D15 first and D0 last; DOUT changes tDO after CLK falling edges; LOAD/CS rises at least tCSH after the last rising CLK edge, stays high at least tCSW, and on the MAX7219 the next rising CLK edge follows at least tLDCK later."
+   ]
+  },
+  {
+   "title": "Serial-data format (16 bits)",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "bits",
+    "contents"
+   ],
+   "rows": [
+    [
+     "D15–D12",
+     "X (don't care)"
+    ],
+    [
+     "D11–D8",
+     "ADDRESS (D11 is MSB)"
+    ],
+    [
+     "D7–D0",
+     "DATA (D7 is MSB, D0 is LSB)"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Register address map",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "register",
+    "D15–D12",
+    "D11",
+    "D10",
+    "D9",
+    "D8",
+    "hex code"
+   ],
+   "rows": [
+    [
+     "No-Op",
+     "X",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0xX0"
+    ],
+    [
+     "Digit 0",
+     "X",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0xX1"
+    ],
+    [
+     "Digit 1",
+     "X",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0xX2"
+    ],
+    [
+     "Digit 2",
+     "X",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0xX3"
+    ],
+    [
+     "Digit 3",
+     "X",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0xX4"
+    ],
+    [
+     "Digit 4",
+     "X",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0xX5"
+    ],
+    [
+     "Digit 5",
+     "X",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0xX6"
+    ],
+    [
+     "Digit 6",
+     "X",
+     "0",
+     "1",
+     "1",
+     "1",
+     "0xX7"
+    ],
+    [
+     "Digit 7",
+     "X",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0xX8"
+    ],
+    [
+     "Decode Mode",
+     "X",
+     "1",
+     "0",
+     "0",
+     "1",
+     "0xX9"
+    ],
+    [
+     "Intensity",
+     "X",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0xXA"
+    ],
+    [
+     "Scan Limit",
+     "X",
+     "1",
+     "0",
+     "1",
+     "1",
+     "0xXB"
+    ],
+    [
+     "Shutdown",
+     "X",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0xXC"
+    ],
+    [
+     "Display Test",
+     "X",
+     "1",
+     "1",
+     "1",
+     "1",
+     "0xXF"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Shutdown register format (address 0xXC)",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "address code (hex)",
+    "D7",
+    "D6",
+    "D5",
+    "D4",
+    "D3",
+    "D2",
+    "D1",
+    "D0"
+   ],
+   "rows": [
+    [
+     "Shutdown Mode",
+     "0xXC",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0"
+    ],
+    [
+     "Normal Operation",
+     "0xXC",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Decode-mode register examples (address 0xX9)",
+   "page": 7,
+   "conditions": "",
+   "columns": [
+    "decode mode",
+    "D7",
+    "D6",
+    "D5",
+    "D4",
+    "D3",
+    "D2",
+    "D1",
+    "D0",
+    "hex code"
+   ],
+   "rows": [
+    [
+     "No decode for digits 7–0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0x00"
+    ],
+    [
+     "Code B decode for digit 0; no decode for digits 7–1",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0x01"
+    ],
+    [
+     "Code B decode for digits 3–0; no decode for digits 7–4",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "1",
+     "1",
+     "0x0F"
+    ],
+    [
+     "Code B decode for digits 7–0",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "0xFF"
+    ]
+   ],
+   "notes": [
+    "Each bit of the decode-mode register belongs to one digit: 1 selects code B decoding, 0 passes the data straight to the segments."
+   ]
+  },
+  {
+   "title": "Code B font",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "7-segment character",
+    "D7*",
+    "D6–D4",
+    "D3",
+    "D2",
+    "D1",
+    "D0",
+    "DP*",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "rows": [
+    [
+     "0",
+     "",
+     "X",
+     "0",
+     "0",
+     "0",
+     "0",
+     "",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "0"
+    ],
+    [
+     "1",
+     "",
+     "X",
+     "0",
+     "0",
+     "0",
+     "1",
+     "",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "2",
+     "",
+     "X",
+     "0",
+     "0",
+     "1",
+     "0",
+     "",
+     "1",
+     "1",
+     "0",
+     "1",
+     "1",
+     "0",
+     "1"
+    ],
+    [
+     "3",
+     "",
+     "X",
+     "0",
+     "0",
+     "1",
+     "1",
+     "",
+     "1",
+     "1",
+     "1",
+     "1",
+     "0",
+     "0",
+     "1"
+    ],
+    [
+     "4",
+     "",
+     "X",
+     "0",
+     "1",
+     "0",
+     "0",
+     "",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1"
+    ],
+    [
+     "5",
+     "",
+     "X",
+     "0",
+     "1",
+     "0",
+     "1",
+     "",
+     "1",
+     "0",
+     "1",
+     "1",
+     "0",
+     "1",
+     "1"
+    ],
+    [
+     "6",
+     "",
+     "X",
+     "0",
+     "1",
+     "1",
+     "0",
+     "",
+     "1",
+     "0",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1"
+    ],
+    [
+     "7",
+     "",
+     "X",
+     "0",
+     "1",
+     "1",
+     "1",
+     "",
+     "1",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "8",
+     "",
+     "X",
+     "1",
+     "0",
+     "0",
+     "0",
+     "",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1",
+     "1"
+    ],
+    [
+     "9",
+     "",
+     "X",
+     "1",
+     "0",
+     "0",
+     "1",
+     "",
+     "1",
+     "1",
+     "1",
+     "1",
+     "0",
+     "1",
+     "1"
+    ],
+    [
+     "—",
+     "",
+     "X",
+     "1",
+     "0",
+     "1",
+     "0",
+     "",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1"
+    ],
+    [
+     "E",
+     "",
+     "X",
+     "1",
+     "0",
+     "1",
+     "1",
+     "",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "1",
+     "1"
+    ],
+    [
+     "H",
+     "",
+     "X",
+     "1",
+     "1",
+     "0",
+     "0",
+     "",
+     "0",
+     "1",
+     "1",
+     "0",
+     "1",
+     "1",
+     "1"
+    ],
+    [
+     "L",
+     "",
+     "X",
+     "1",
+     "1",
+     "0",
+     "1",
+     "",
+     "0",
+     "0",
+     "0",
+     "1",
+     "1",
+     "1",
+     "0"
+    ],
+    [
+     "P",
+     "",
+     "X",
+     "1",
+     "1",
+     "1",
+     "0",
+     "",
+     "1",
+     "1",
+     "0",
+     "0",
+     "1",
+     "1",
+     "1"
+    ],
+    [
+     "blank",
+     "",
+     "X",
+     "1",
+     "1",
+     "1",
+     "1",
+     "",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   ],
+   "notes": [
+    "* The decimal point is lit by D7 = 1, independent of the character code. In the segment columns 1 means the segment is on."
+   ]
+  },
+  {
+   "title": "No-decode mode: data bits and segment lines",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "register data bit",
+    "D7",
+    "D6",
+    "D5",
+    "D4",
+    "D3",
+    "D2",
+    "D1",
+    "D0"
+   ],
+   "rows": [
+    [
+     "Corresponding segment line",
+     "DP",
+     "A",
+     "B",
+     "C",
+     "D",
+     "E",
+     "F",
+     "G"
+    ]
+   ],
+   "notes": [
+    "Segment letters follow the standard 7-segment layout: A top, B upper right, C lower right, D bottom, E lower left, F upper left, G middle, DP the decimal point."
+   ]
+  },
+  {
+   "title": "Intensity register format (address 0xXA)",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "duty cycle MAX7219",
+    "duty cycle MAX7221",
+    "D7",
+    "D6",
+    "D5",
+    "D4",
+    "D3",
+    "D2",
+    "D1",
+    "D0",
+    "hex code"
+   ],
+   "rows": [
+    [
+     "1/32 (min on)",
+     "1/16 (min on)",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0xX0"
+    ],
+    [
+     "3/32",
+     "2/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0xX1"
+    ],
+    [
+     "5/32",
+     "3/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "0",
+     "1",
+     "0",
+     "0xX2"
+    ],
+    [
+     "7/32",
+     "4/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "0",
+     "1",
+     "1",
+     "0xX3"
+    ],
+    [
+     "9/32",
+     "5/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "1",
+     "0",
+     "0",
+     "0xX4"
+    ],
+    [
+     "11/32",
+     "6/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "1",
+     "0",
+     "1",
+     "0xX5"
+    ],
+    [
+     "13/32",
+     "7/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "1",
+     "1",
+     "0",
+     "0xX6"
+    ],
+    [
+     "15/32",
+     "8/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "1",
+     "1",
+     "1",
+     "0xX7"
+    ],
+    [
+     "17/32",
+     "9/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "0",
+     "0",
+     "0",
+     "0xX8"
+    ],
+    [
+     "19/32",
+     "10/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "0",
+     "0",
+     "1",
+     "0xX9"
+    ],
+    [
+     "21/32",
+     "11/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "0",
+     "1",
+     "0",
+     "0xXA"
+    ],
+    [
+     "23/32",
+     "12/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "0",
+     "1",
+     "1",
+     "0xXB"
+    ],
+    [
+     "25/32",
+     "13/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "1",
+     "0",
+     "0",
+     "0xXC"
+    ],
+    [
+     "27/32",
+     "14/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "1",
+     "0",
+     "1",
+     "0xXD"
+    ],
+    [
+     "29/32",
+     "15/16",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "1",
+     "1",
+     "0",
+     "0xXE"
+    ],
+    [
+     "31/32",
+     "15/16 (max on)",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "1",
+     "1",
+     "1",
+     "0xXF"
+    ]
+   ],
+   "notes": [
+    "On the MAX7221 both codes 0xXE and 0xXF give 15/16."
+   ]
+  },
+  {
+   "title": "Scan-limit register format (address 0xXB)",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "scan limit",
+    "D7",
+    "D6",
+    "D5",
+    "D4",
+    "D3",
+    "D2",
+    "D1",
+    "D0",
+    "hex code"
+   ],
+   "rows": [
+    [
+     "Display digit 0 only*",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "0",
+     "0",
+     "0xX0"
+    ],
+    [
+     "Display digits 0 & 1*",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "0",
+     "1",
+     "0xX1"
+    ],
+    [
+     "Display digits 0 1 2*",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "1",
+     "0",
+     "0xX2"
+    ],
+    [
+     "Display digits 0 1 2 3",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0",
+     "1",
+     "1",
+     "0xX3"
+    ],
+    [
+     "Display digits 0 1 2 3 4",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "0",
+     "0",
+     "0xX4"
+    ],
+    [
+     "Display digits 0 1 2 3 4 5",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "0",
+     "1",
+     "0xX5"
+    ],
+    [
+     "Display digits 0 1 2 3 4 5 6",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "1",
+     "0",
+     "0xX6"
+    ],
+    [
+     "Display digits 0 1 2 3 4 5 6 7",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1",
+     "1",
+     "1",
+     "0xX7"
+    ]
+   ],
+   "notes": [
+    "* With three digits or fewer scanned, the segment current must be limited (Maximum segment current for 1-, 2- or 3-digit displays)."
+   ]
+  },
+  {
+   "title": "Maximum segment current for 1-, 2- or 3-digit displays",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "number of digits displayed",
+    "maximum segment current (mA)"
+   ],
+   "rows": [
+    [
+     "1",
+     "10"
+    ],
+    [
+     "2",
+     "20"
+    ],
+    [
+     "3",
+     "30"
+    ]
+   ],
+   "notes": [
+    "Applies when the chip's own digit drivers sink the current."
+   ]
+  },
+  {
+   "title": "Display-test register format (address 0xXF)",
+   "page": 10,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "D7",
+    "D6",
+    "D5",
+    "D4",
+    "D3",
+    "D2",
+    "D1",
+    "D0"
+   ],
+   "rows": [
+    [
+     "Normal Operation",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "0"
+    ],
+    [
+     "Display Test Mode",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "X",
+     "1"
+    ]
+   ],
+   "notes": [
+    "Display-test mode, with every LED lit, lasts until the register is written back to normal operation."
+   ]
+  },
+  {
+   "title": "RSET vs. segment current and LED forward voltage",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "ISEG (mA)",
+    "VLED = 1.5 V",
+    "VLED = 2.0 V",
+    "VLED = 2.5 V",
+    "VLED = 3.0 V",
+    "VLED = 3.5 V"
+   ],
+   "rows": [
+    [
+     "40",
+     "12.2",
+     "11.8",
+     "11.0",
+     "10.6",
+     "9.69"
+    ],
+    [
+     "30",
+     "17.8",
+     "17.1",
+     "15.8",
+     "15.0",
+     "14.0"
+    ],
+    [
+     "20",
+     "29.8",
+     "28.0",
+     "25.9",
+     "24.5",
+     "22.6"
+    ],
+    [
+     "10",
+     "66.7",
+     "63.7",
+     "59.3",
+     "55.4",
+     "51.2"
+    ]
+   ],
+   "notes": [
+    "Each entry is the RSET value, in kΩ, for that segment current and LED forward voltage."
+   ]
+  },
+  {
+   "title": "Package thermal resistance",
+   "page": 11,
+   "conditions": "",
+   "columns": [
+    "package",
+    "thermal resistance (θJA)"
+   ],
+   "rows": [
+    [
+     "24 Narrow DIP",
+     "+75°C/W"
+    ],
+    [
+     "24 Wide SO",
+     "+85°C/W"
+    ],
+    [
+     "24 CERDIP",
+     "+80°C/W"
+    ],
+    [
+     "Maximum Junction Temperature (TJ)",
+     "+150°C"
+    ],
+    [
+     "Maximum Ambient Temperature (TA)",
+     "+85°C"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Scan frequency vs. positive supply voltage",
+   "page": 4,
+   "conditions": "V+ = +5V, TA = +25°C, unless otherwise noted.",
+   "x": {
+    "label": "Positive supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Scan frequency",
+    "unit": "Hz",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "",
+     "points": [
+      [
+       4.002,
+       800.2
+      ],
+      [
+       4.229,
+       798.1
+      ],
+      [
+       4.442,
+       797.3
+      ],
+      [
+       5.397,
+       797.5
+      ],
+      [
+       5.649,
+       799.8
+      ],
+      [
+       5.997,
+       804.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Segment driver output current vs. output voltage",
+   "page": 4,
+   "conditions": "V+ = +5V, TA = +25°C, unless otherwise noted.",
+   "x": {
+    "label": "Output voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RSET = 10kΩ",
+     "points": [
+      [
+       0.089,
+       65.49
+      ],
+      [
+       0.131,
+       60.6
+      ],
+      [
+       0.205,
+       57.59
+      ],
+      [
+       0.356,
+       55.08
+      ],
+      [
+       0.553,
+       53.43
+      ],
+      [
+       1.057,
+       50.73
+      ],
+      [
+       2.3,
+       46.53
+      ],
+      [
+       3.062,
+       43.38
+      ],
+      [
+       3.931,
+       38.9
+      ],
+      [
+       4.131,
+       37.49
+      ],
+      [
+       4.245,
+       36.28
+      ],
+      [
+       4.433,
+       32.16
+      ],
+      [
+       4.531,
+       29.23
+      ],
+      [
+       4.724,
+       21.5
+      ],
+      [
+       4.89,
+       11.06
+      ],
+      [
+       4.956,
+       4.74
+      ]
+     ]
+    },
+    {
+     "label": "RSET = 20kΩ",
+     "points": [
+      [
+       0.045,
+       36.43
+      ],
+      [
+       0.081,
+       34.14
+      ],
+      [
+       0.157,
+       32.29
+      ],
+      [
+       0.304,
+       30.74
+      ],
+      [
+       0.412,
+       30.22
+      ],
+      [
+       3.238,
+       23.59
+      ],
+      [
+       3.76,
+       22.1
+      ],
+      [
+       4.13,
+       20.55
+      ],
+      [
+       4.389,
+       18.57
+      ],
+      [
+       4.625,
+       16.13
+      ],
+      [
+       4.69,
+       15.09
+      ],
+      [
+       4.814,
+       11.57
+      ],
+      [
+       4.945,
+       4.89
+      ]
+     ]
+    },
+    {
+     "label": "RSET = 40kΩ",
+     "points": [
+      [
+       0.034,
+       21.05
+      ],
+      [
+       0.06,
+       18.81
+      ],
+      [
+       0.167,
+       17.79
+      ],
+      [
+       3.307,
+       12.81
+      ],
+      [
+       4.616,
+       9.5
+      ],
+      [
+       4.712,
+       9.09
+      ],
+      [
+       4.809,
+       7.96
+      ],
+      [
+       4.934,
+       4.27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX7219 segment output current",
+   "page": 4,
+   "conditions": "V+ = +5V, TA = +25°C; maximum intensity = 31/32; 10mA/div, 5µs/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Segment output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "",
+     "points": [
+      [
+       0,
+       40.4
+      ],
+      [
+       9.4,
+       40.4
+      ],
+      [
+       9.6,
+       0
+      ],
+      [
+       14.4,
+       0
+      ],
+      [
+       14.5,
+       2.0
+      ],
+      [
+       14.7,
+       26.0
+      ],
+      [
+       14.9,
+       40.4
+      ],
+      [
+       50,
+       40.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX7221 segment output current",
+   "page": 4,
+   "conditions": "V+ = +5V, TA = +25°C; maximum intensity = 15/16; 10mA/div, 5µs/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Segment output current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "",
+     "points": [
+      [
+       0,
+       38.8
+      ],
+      [
+       8.3,
+       38.4
+      ],
+      [
+       8.7,
+       37.1
+      ],
+      [
+       9.3,
+       30.0
+      ],
+      [
+       9.8,
+       20.0
+      ],
+      [
+       10.3,
+       9.2
+      ],
+      [
+       10.5,
+       5.4
+      ],
+      [
+       10.7,
+       2.4
+      ],
+      [
+       10.9,
+       1.1
+      ],
+      [
+       11.2,
+       0
+      ],
+      [
+       19.9,
+       0
+      ],
+      [
+       20.3,
+       2.8
+      ],
+      [
+       20.7,
+       11.6
+      ],
+      [
+       21.1,
+       20.5
+      ],
+      [
+       21.5,
+       28.8
+      ],
+      [
+       21.9,
+       34.8
+      ],
+      [
+       22.3,
+       37.7
+      ],
+      [
+       22.7,
+       38.4
+      ],
+      [
+       23.1,
+       38.6
+      ],
+      [
+       50,
+       38.6
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application circuit",
+   "page": 1,
+   "description": "One MAX7219 or MAX7221 runs an eight-digit common-cathode 7-segment display from a microprocessor over three wires: data into DIN, a port line on LOAD (CS), and the clock on CLK. A single 9.53 kΩ resistor from +5 V to ISET sets the peak segment current; the eight digit lines go to the digit cathodes and the eight segment lines (A–G and DP) to the segment anodes.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX7219"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "µP",
+     "external": true
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "9.53kΩ",
+     "note": "RSET"
+    },
+    {
+     "ref": "DS1",
+     "type": "other",
+     "value": "8-digit common-cathode 7-segment LED display"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "+5V"
+    }
+   ],
+   "notes": [
+    "The same circuit serves the MAX7221, with CS in place of LOAD."
+   ]
+  },
+  {
+   "id": "external-drivers",
+   "title": "Driving 2.3 in displays with external digit transistors",
+   "page": 12,
+   "description": "Two large AND2307SLC digits are driven with the chip's own segment outputs but with IRF540 MOSFETs in place of its digit drivers. DIG 0 and DIG 1 serve only as logic signals into a MAX394 analog switch, which swings each MOSFET gate between +5 V (through its NC input) and -5 V (through NO); each MOSFET pulls one display's cathode to -5 V and a 4.7 kΩ resistor pulls it up to +5 V when off. Because the segments of these displays drop about 8 V and the decimal point about 4.2 V, a 5.6 V zener sits in series with the decimal-point line. With external transistors sinking the digit current, 45 mA peak segment current is allowed even with only two digits scanned. RSET is 30 kΩ, with 0.1 µF bypass on V+.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX7219"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MAX394",
+     "external": true,
+     "note": "analog switch; pin 16 to +5 V, pin 5 to -5 V"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "IRF540"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "IRF540"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "1N5524B",
+     "note": "5.6V ±5%"
+    },
+    {
+     "ref": "DS1",
+     "type": "other",
+     "value": "AND2307SLC",
+     "note": "2.3 in single-digit common-cathode display"
+    },
+    {
+     "ref": "DS2",
+     "type": "other",
+     "value": "AND2307SLC",
+     "note": "2.3 in single-digit common-cathode display"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "30kΩ",
+     "note": "RSET"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "4.7kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "4.7kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "4.7kΩ",
+     "note": "pull-up, needed with the MAX7221 only"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "4.7kΩ",
+     "note": "pull-up, needed with the MAX7221 only"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "DATA IN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "LOAD (CS)"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "CLOCK"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "5V"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "-5V"
+    }
+   ],
+   "notes": [
+    "ISFT at pin 18 is a misprint for ISET.",
+    "R4 and R5 are needed only with the MAX7221, whose digit outputs float when off."
+   ]
+  },
+  {
+   "id": "cascade-16-digit",
+   "title": "Two cascaded drivers for 16 seven-segment digits",
+   "page": 13,
+   "description": "Two drivers share one three-wire port to run sixteen digits on two eight-digit displays. DOUT of the first feeds DIN of the second; LOAD (CS) and CLK of both are tied to common LOAD DATA and CLOCK lines. Each chip has its own 9.53 kΩ RSET from +5 V to ISET and a 0.1 µF capacitor from V+ to ground. Through the no-op register one chip can be written while the other is left unchanged.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX7219"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "9.53kΩ",
+     "note": "RSET"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "DS1",
+     "type": "other",
+     "value": "8-digit common-cathode 7-segment LED display"
+    },
+    {
+     "ref": "U2",
+     "type": "ic",
+     "value": "MAX7219"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "9.53kΩ",
+     "note": "RSET"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "DS2",
+     "type": "other",
+     "value": "8-digit common-cathode 7-segment LED display"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "DATA IN"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "LOAD DATA"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "CLOCK"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "5V"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Segment current from RSET",
+   "expr": "ISEG ≈ 100 × IISET",
+   "where": {
+    "ISEG": "peak current of each segment driver",
+    "IISET": "current flowing into ISET through RSET from V+"
+   },
+   "note": "9.53 kΩ, the smallest RSET allowed, typically gives 40 mA.",
+   "page": 8
+  },
+  {
+   "name": "Scan rate with fewer digits",
+   "expr": "scan rate = 8 × fOSC / N",
+   "where": {
+    "fOSC": "display scan rate with 8 digits, 800 Hz typical",
+    "N": "number of digits scanned"
+   },
+   "note": "",
+   "page": 9
+  },
+  {
+   "name": "Power dissipation",
+   "expr": "PD = (V+ × 8mA) + (V+ - VLED)(DUTY × ISEG × N)",
+   "where": {
+    "V+": "supply voltage",
+    "DUTY": "duty cycle set by the intensity register",
+    "N": "number of segments driven, 8 at worst",
+    "VLED": "LED forward voltage",
+    "ISEG": "segment current set by RSET"
+   },
+   "note": "With ISEG = 40mA, N = 8, DUTY = 31/32, VLED = 1.8V at 40mA and V+ = 5.25V, PD = 1.11W.",
+   "page": 11
+  },
+  {
+   "name": "Maximum ambient temperature",
+   "expr": "TJ(MAX) = TA + PD × θJA",
+   "where": {
+    "TJ(MAX)": "maximum junction temperature, +150°C",
+    "TA": "ambient temperature",
+    "θJA": "package thermal resistance, junction to ambient"
+   },
+   "note": "For PD = 1.11W: CERDIP (80°C/W) allows TA up to +61.2°C, PDIP +66.7°C, SO +55.6°C.",
+   "page": 11
+  }
+ ],
+ "operation": [
+  {
+   "topic": "MAX7219 and MAX7221",
+   "page": 6,
+   "text": "The two devices match in every respect but two. The MAX7221's segment outputs have a controlled current slew rate for lower EMI, and its CS input gates the clock, giving a port fully compatible with SPI. When off, MAX7219 digit outputs go to V+ and segment outputs to GND; on the MAX7221 both go high-impedance. For 3 V supplies or blinking segments the MAX6951 is offered instead."
+  },
+  {
+   "topic": "Serial interface",
+   "page": 6,
+   "text": "Data arrives as 16-bit words, most significant bit (D15) first. D15–D12 are ignored, D11–D8 hold the register address and D7–D0 the data. On the MAX7219 every rising CLK edge shifts DIN in, whatever LOAD is doing; on the MAX7221 CS must be low for data to move in or out. The word in the shift register is copied to the addressed register when LOAD/CS goes high, which has to arrive on or after the 16th rising clock edge and before the 17th, otherwise the data is lost. Bits leave on DOUT on falling CLK edges, 16.5 clocks after they entered DIN."
+  },
+  {
+   "topic": "Digit and control registers",
+   "page": 6,
+   "text": "Fourteen registers are addressable: eight digit registers, held in an on-chip 8x8 dual-port SRAM, plus no-op, decode mode, intensity, scan limit, shutdown and display test. Each digit can be rewritten on its own. The SRAM keeps its contents as long as V+ stays above about 2 V (typical)."
+  },
+  {
+   "topic": "Shutdown",
+   "page": 6,
+   "text": "In shutdown the scan oscillator stops and the display goes dark: on the MAX7219 the segment outputs are pulled to ground and the digit outputs to V+, on the MAX7221 both float. Digit and control register contents are kept, and registers can still be written. Leaving shutdown typically takes under 250 µs. Display test overrides shutdown. Entering and leaving shutdown repeatedly flashes the display. Supply current in shutdown is lowest with the logic inputs held at GND or V+."
+  },
+  {
+   "topic": "Power-up",
+   "page": 7,
+   "text": "At power-up every control register is reset, the display is blank and the part sits in shutdown. Unless it is programmed first, it then scans a single digit, does not decode, and has intensity at its minimum."
+  },
+  {
+   "topic": "Decode mode",
+   "page": 7,
+   "text": "One bit per digit chooses code B decoding (1) or raw segment data (0). With code B, only D3–D0 of the digit register are read and D4–D6 are ignored, giving the characters 0–9, E, H, L, P, minus and blank; D7 drives the decimal point directly, 1 for on. Without decoding, each data bit drives one segment line: D7 is DP, D6 is A, and so on down to D0 for G."
+  },
+  {
+   "topic": "Brightness",
+   "page": 8,
+   "text": "Brightness is set two ways. Analog: RSET between V+ and ISET fixes the peak segment current at nominally 100 times the ISET current; it may be a fixed or a variable resistor, and must be at least 9.53 kΩ, which typically gives 40 mA. Digital: the low four bits of the intensity register drive an internal pulse-width modulator that divides the average segment current in 16 steps, ranging from 31/32 down to 1/32 of the peak on the MAX7219 and from 15/16 down to 1/16 on the MAX7221. Between digits the display is blanked for at least 1/32 of a cycle."
+  },
+  {
+   "topic": "Scan limit",
+   "page": 9,
+   "text": "The scan-limit register selects how many digits (1 to 8) are multiplexed. With all eight the scan rate is typically 800 Hz; with fewer it rises to 8 fOSC/N. Brightness depends on the number of digits scanned, so the scan limit is not meant for blanking digits such as leading zeros. With three or fewer digits each digit driver dissipates too much unless the segment current is reduced through RSET: 10, 20 and 30 mA maximum for 1, 2 and 3 digits when the internal digit drivers carry the current."
+  },
+  {
+   "topic": "Display test",
+   "page": 10,
+   "text": "Display-test mode lights every LED by overriding all control and digit registers, shutdown included, without changing them. It scans all 8 digits at 31/32 duty (15/16 on the MAX7221) and remains until the display-test register is written back to normal."
+  },
+  {
+   "topic": "Cascading and the no-op register",
+   "page": 10,
+   "text": "Several drivers chain by joining every LOAD/CS line and wiring each DOUT, a CMOS logic output, to the next DIN. To write one chip in a chain of four, send its 16-bit word followed by three no-op words; when LOAD/CS rises every chip latches, the three others receive a no-op and the target its data. If the digit count is not a multiple of 8, give both drivers the same scan limit so the displays match in brightness: for 12 digits, 6 per display (1/6 duty per digit each); for 11 digits, both set to 6 with one digit driver left unconnected. Splitting 6 and 5 would make the 5-digit display brighter (1/5 against 1/6)."
+  },
+  {
+   "topic": "Supply bypassing and wiring",
+   "page": 10,
+   "text": "Peak digit currents cause supply ripple; a 10 µF electrolytic and a 0.1 µF ceramic capacitor are placed from V+ to GND, right at the chip. The driver sits close to the display with short connections to limit wiring inductance and EMI. Both GND pins are connected to ground."
+  },
+  {
+   "topic": "Choosing RSET and external drivers",
+   "page": 10,
+   "text": "Segment current is roughly 100 times the ISET current; the RSET table gives values for 10 to 40 mA and LED forward voltages from 1.5 V to 3.5 V. The highest recommended segment current is 40 mA. Above that, external digit drivers take the current and the chip acts as the controller. When external current sources drive the segments, RSET = 47 kΩ saves power. When the internal digit drivers sink the current and fewer than four digits are scanned, the 1-, 2- and 3-digit current limits apply. The power-dissipation ratings set the allowed combination of ambient temperature, segment current and LED forward voltage."
+  },
+  {
+   "topic": "Die",
+   "page": 14,
+   "text": "Die size 0.093 in (2.36 mm) by 0.080 in (2.03 mm); 5267 transistors; substrate connected to GND."
+  }
+ ],
+ "packages": [
+  {
+   "name": "24-pin wide SO (0.300 in SOIC, 21-0042 B)",
+   "page": 15,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min (mm)",
+    "max (mm)",
+    "min (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "2.35",
+     "2.65",
+     "0.093",
+     "0.104"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.10",
+     "0.30",
+     "0.004",
+     "0.012"
+    ],
+    [
+     "B",
+     "lead width",
+     "0.35",
+     "0.49",
+     "0.014",
+     "0.019"
+    ],
+    [
+     "C",
+     "lead thickness",
+     "0.23",
+     "0.32",
+     "0.009",
+     "0.013"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "1.27",
+     "",
+     "0.050",
+     ""
+    ],
+    [
+     "E",
+     "body width",
+     "7.40",
+     "7.60",
+     "0.291",
+     "0.299"
+    ],
+    [
+     "H",
+     "width across leads",
+     "10.00",
+     "10.65",
+     "0.394",
+     "0.419"
+    ],
+    [
+     "L",
+     "foot length",
+     "0.40",
+     "1.27",
+     "0.016",
+     "0.050"
+    ],
+    [
+     "D (N = 16, MS013 AA)",
+     "body length",
+     "10.10",
+     "10.50",
+     "0.398",
+     "0.413"
+    ],
+    [
+     "D (N = 18, MS013 AB)",
+     "body length",
+     "11.35",
+     "11.75",
+     "0.447",
+     "0.463"
+    ],
+    [
+     "D (N = 20, MS013 AC)",
+     "body length",
+     "12.60",
+     "13.00",
+     "0.496",
+     "0.512"
+    ],
+    [
+     "D (N = 24, MS013 AD)",
+     "body length",
+     "15.20",
+     "15.60",
+     "0.598",
+     "0.614"
+    ],
+    [
+     "D (N = 28, MS013 AE)",
+     "body length",
+     "17.70",
+     "18.10",
+     "0.697",
+     "0.713"
+    ]
+   ],
+   "notes": [
+    "e is 1.27 mm (0.050 in). D and E exclude mold flash; flash or protrusions are 0.15 mm (0.006 in) at most.",
+    "Leads coplanar within 0.10 mm (0.004 in). Foot angle 0° to 8°. Millimetres control. JEDEC MS013. The 24-pin part uses the N = 24 row."
+   ]
+  },
+  {
+   "name": "24-pin narrow plastic DIP (0.300 in PDIP, 21-0043 D)",
+   "page": 16,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min (mm)",
+    "max (mm)",
+    "min (in)",
+    "max (in)"
+   ],
+   "rows": [
+    [
+     "A",
+     "seating plane to top of body",
+     "---",
+     "4.572",
+     "---",
+     "0.180"
+    ],
+    [
+     "A1",
+     "seating plane to bottom of body",
+     "0.38",
+     "---",
+     "0.015",
+     "---"
+    ],
+    [
+     "A2",
+     "body thickness",
+     "3.18",
+     "4.45",
+     "0.125",
+     "0.175"
+    ],
+    [
+     "A3",
+     "",
+     "1.40",
+     "2.03",
+     "0.055",
+     "0.080"
+    ],
+    [
+     "B",
+     "lead width, lower part",
+     "0.381",
+     "0.56",
+     "0.015",
+     "0.022"
+    ],
+    [
+     "B1",
+     "lead width, shoulder",
+     "1.14",
+     "1.65",
+     "0.045",
+     "0.065"
+    ],
+    [
+     "C",
+     "lead thickness",
+     "0.2",
+     "0.355",
+     "0.008",
+     "0.014"
+    ],
+    [
+     "D1",
+     "body end to first lead",
+     "0.13",
+     "2.03",
+     "0.005",
+     "0.080"
+    ],
+    [
+     "E",
+     "width across lead shoulders",
+     "7.62",
+     "8.26",
+     "0.300",
+     "0.325"
+    ],
+    [
+     "E1",
+     "body width",
+     "6.10",
+     "7.87",
+     "0.240",
+     "0.310"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "2.54 BSC.",
+     "",
+     "0.100 BSC.",
+     ""
+    ],
+    [
+     "eA",
+     "row spacing",
+     "7.62 BSC.",
+     "",
+     "0.300 BSC.",
+     ""
+    ],
+    [
+     "eB",
+     "spread at lead tips",
+     "10.16 BSC.",
+     "",
+     "0.400 BSC.",
+     ""
+    ],
+    [
+     "L",
+     "seating plane to lead tip",
+     "2.921",
+     "3.81",
+     "0.115",
+     "0.150"
+    ],
+    [
+     "D (N = 8, MS001 AB)",
+     "body length",
+     "8.84",
+     "9.91",
+     "0.348",
+     "0.390"
+    ],
+    [
+     "D (N = 14, MS001 AC)",
+     "body length",
+     "18.67",
+     "19.43",
+     "0.735",
+     "0.765"
+    ],
+    [
+     "D (N = 16, MS001 AA)",
+     "body length",
+     "18.92",
+     "19.43",
+     "0.745",
+     "0.765"
+    ],
+    [
+     "D (N = 18, MS001 AD)",
+     "body length",
+     "22.48",
+     "23.24",
+     "0.885",
+     "0.915"
+    ],
+    [
+     "D (N = 20, MS001 AE)",
+     "body length",
+     "25.78",
+     "26.54",
+     "1.015",
+     "1.045"
+    ],
+    [
+     "D (N = 24, MS001 AF)",
+     "body length",
+     "28.96",
+     "32.13",
+     "1.14",
+     "1.265"
+    ],
+    [
+     "D (N = 28, *5)",
+     "body length",
+     "34.54",
+     "35.05",
+     "1.360",
+     "1.380"
+    ]
+   ],
+   "notes": [
+    "D and E exclude mold flash; flash or protrusions are 0.15 mm (0.006 in) at most. Millimetres control.",
+    "Lead splay 0° to 15°. Meets JEDEC MS001 per the variation column; the 28-pin size is similar to JEDEC MO-058AB. The 24-pin part uses the N = 24 row."
+   ]
+  }
+ ]
+}

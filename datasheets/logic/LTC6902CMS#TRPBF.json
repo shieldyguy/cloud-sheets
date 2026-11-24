@@ -1,0 +1,5361 @@
+{
+ "sheet": 1,
+ "name": "LTC6902CMS#TRPBF",
+ "kind": "logic",
+ "manufacturer": "Analog Devices (Linear Technology)",
+ "title": "LTC6902: resistor-set multiphase oscillator, 2, 3 or 4 phases, with spread spectrum frequency modulation, 5 kHz to 20 MHz, MSOP-10",
+ "source": {
+  "document": "6902f",
+  "revision": "LT/TP 0103",
+  "pages": 16
+ },
+ "summary": "A clock oscillator whose frequency is fixed by one resistor from V+ to SET and whose four CMOS outputs give two, three or four phases of the same clock. A master oscillator running from 100 kHz to 20 MHz feeds a divider of 1, 10 or 100 chosen by the three-level DIV pin, then a phase circuit chosen by the three-level PH pin, so the output covers 5 kHz to 20 MHz. A second resistor, from V+ to MOD, adds pseudorandom downward frequency modulation to spread the clock's energy; grounding MOD turns it off. It runs from 2.7 V to 5.5 V and comes in a 10-lead MSOP, as the LTC6902C and the LTC6902I.",
+ "key_figures": [
+  [
+   "Output frequency",
+   "5 kHz to 20 MHz (10 MHz max for 2.7 V ≤ V+ ≤ 4 V)"
+  ],
+  [
+   "Outputs",
+   "2, 3 or 4 phases, 100 Ω CMOS drivers"
+  ],
+  [
+   "Frequency accuracy",
+   "±0.5 % typ, ±1.5 % max at 25 °C, 5 kHz to 10 MHz"
+  ],
+  [
+   "Accuracy over temperature",
+   "±2.0 % max (LTC6902C), ±2.5 % max (LTC6902I), 5 kHz to 10 MHz"
+  ],
+  [
+   "Temperature drift",
+   "±0.004 %/°C typ"
+  ],
+  [
+   "Supply drift",
+   "0.04 %/V typ, 0.12 %/V max"
+  ],
+  [
+   "Spreading",
+   "40 % typ with RSET = 20k, RMOD = 10k; 10 % typ with RMOD = 40k"
+  ],
+  [
+   "Supply",
+   "2.7 V to 5.5 V"
+  ],
+  [
+   "Supply current",
+   "0.35 mA typ at 5 kHz, 2.35 mA typ at 10 MHz (V+ = 5 V)"
+  ],
+  [
+   "Start-up",
+   "about RSET × 3.7 µs/kΩ + 10 µs to within 1 %"
+  ],
+  [
+   "Package",
+   "MSOP-10, θJA 250 °C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "grade",
+   "operating temperature",
+   "specified temperature",
+   "package",
+   "marking"
+  ],
+  "rows": [
+   [
+    "LTC6902CMS",
+    "C",
+    "–40°C to 85°C",
+    "–40°C to 85°C (tested 0°C to 70°C, Note 10)",
+    "MS10, 10-lead plastic MSOP",
+    "LTK2"
+   ],
+   [
+    "LTC6902IMS",
+    "I",
+    "–40°C to 85°C",
+    "–40°C to 85°C",
+    "MS10, 10-lead plastic MSOP",
+    "LTK3"
+   ]
+  ],
+  "notes": [
+   "Both grades are guaranteed functional from –40°C to 85°C. The C grade is guaranteed to its specifications from 0°C to 70°C and is designed and characterized, though neither tested nor QA sampled, for –40°C to 85°C; the I grade is guaranteed to its specifications from –40°C to 85°C."
+  ]
+ },
+ "pins": [
+  {
+   "package": "MS10",
+   "page": 6,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "V+",
+     "type": "power in",
+     "function": "Supply, 2.7 V to 5.5 V. Keep it free of noise and ripple; decouple with 0.1 µF to a ground plane, right at the pin."
+    },
+    {
+     "pin": "2",
+     "name": "DIV",
+     "type": "input (three-level)",
+     "function": "Selects N, the divide ratio after the master oscillator: GND gives ÷1 (highest range), open gives ÷10, V+ gives ÷100 (lowest range). The pin sits at mid-supply when open, so pulling it to either rail takes about 2 µA. When left open, decouple it with 1 nF to GND or surround it with a ground guard against coupling from nearby traces."
+    },
+    {
+     "pin": "3",
+     "name": "PH",
+     "type": "input (three-level)",
+     "function": "Selects the phase mode and M: GND gives 2-phase (M = 1, highest range), open gives 3-phase (M = 3), V+ gives 4-phase (M = 4, lowest range). The pin sits at mid-supply when open, so pulling it to either rail takes about 2 µA. When left open, decouple it with 1 nF to GND or surround it with a ground guard."
+    },
+    {
+     "pin": "4",
+     "name": "OUT1",
+     "type": "output",
+     "function": "Clock output, phase 1. Drives 5 kΩ and/or 10 pF; heavier loads can cost accuracy through supply bounce at high frequency."
+    },
+    {
+     "pin": "5",
+     "name": "OUT2",
+     "type": "output",
+     "function": "Clock output, phase 2. Same load rating as OUT1."
+    },
+    {
+     "pin": "6",
+     "name": "OUT3",
+     "type": "output",
+     "function": "Clock output, phase 3. Same load rating as OUT1."
+    },
+    {
+     "pin": "7",
+     "name": "OUT4",
+     "type": "output",
+     "function": "Clock output, phase 4; held low in 3-phase mode. Same load rating as OUT1."
+    },
+    {
+     "pin": "8",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground; tie to a ground plane."
+    },
+    {
+     "pin": "9",
+     "name": "MOD",
+     "type": "analog input",
+     "function": "Spreading resistor RMOD, from this pin to V+, sets the depth of frequency modulation, always downward from the RSET frequency. Tie to GND to disable modulation and power down its circuits; an open pin also gives 0 % in theory but picks up noise that disturbs accuracy. RMOD should be a precision metal-film part between 10k and 2M, with under 10 pF on the pin; its voltage moves."
+    },
+    {
+     "pin": "10",
+     "name": "SET",
+     "type": "analog input",
+     "function": "Frequency-setting resistor RSET goes from this pin to V+. The pin is held about 1.13 V below V+. RSET should be a precision metal-film part between 10k and 2M, and keep the pin's capacitance under 10 pF."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "Note 1",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage (V+) to GND",
+     "",
+     "–0.3",
+     "6",
+     "V"
+    ],
+    [
+     "Voltage on any pin",
+     "referred to GND",
+     "–0.3",
+     "V+ + 0.3",
+     "V"
+    ],
+    [
+     "Operating temperature range (Note 9)",
+     "LTC6902C",
+     "–40",
+     "85",
+     "°C"
+    ],
+    [
+     "Operating temperature range (Note 9)",
+     "LTC6902I",
+     "–40",
+     "85",
+     "°C"
+    ],
+    [
+     "Specified temperature range (Note 10)",
+     "LTC6902C",
+     "–40",
+     "85",
+     "°C"
+    ],
+    [
+     "Specified temperature range (Note 10)",
+     "LTC6902I",
+     "–40",
+     "85",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "",
+     "–65",
+     "150",
+     "°C"
+    ],
+    [
+     "Lead temperature",
+     "soldering, 10 sec",
+     "",
+     "300",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: Beyond these values the part's life may be shortened.",
+    "Note 9: LTC6902CMS and LTC6902IMS work over –40°C to 85°C.",
+    "Note 10: LTC6902CMS meets its specifications from 0°C to 70°C and is designed and characterized for –40°C to 85°C without testing or QA sampling there; LTC6902IMS meets its specifications from –40°C to 85°C."
+   ]
+  },
+  {
+   "title": "Package thermal data",
+   "page": 2,
+   "conditions": "MS10",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Maximum junction temperature",
+     "TJMAX",
+     "150",
+     "°C"
+    ],
+    [
+     "Junction-to-ambient thermal resistance",
+     "θJA",
+     "250",
+     "°C/W"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 2,
+   "conditions": "● = over the full operating temperature range, otherwise TA = 25°C. V+ = 2.7V to 5.5V, RL = 5k, CL = 5pF, Pin 3 (PH) = 0V (2-phase, M = 1), Pin 9 (MOD) = 0V unless otherwise specified. RSET is a resistor from SET to V+; RMOD is a resistor from MOD to V+.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 5V, 5kHz ≤ fOUT ≤ 10MHz",
+     "",
+     "",
+     "±0.5",
+     "±1.5",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 5V, 1kHz ≤ fOUT ≤ 5kHz",
+     "",
+     "",
+     "±2.0",
+     "",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 5V, 10MHz ≤ fOUT ≤ 20MHz",
+     "●",
+     "",
+     "±3.0",
+     "±4.0",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 5V, 5kHz ≤ fOUT ≤ 10MHz, LTC6902C",
+     "●",
+     "",
+     "",
+     "±2.0",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 5V, 5kHz < fOUT ≤ 10MHz, LTC6902I",
+     "●",
+     "",
+     "",
+     "±2.5",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 2.7V, 5kHz ≤ fOUT ≤ 10MHz",
+     "",
+     "",
+     "±0.5",
+     "±1.5",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 2.7V, 1kHz ≤ fOUT ≤ 5kHz",
+     "",
+     "",
+     "±2.0",
+     "",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 2.7V, 5kHz ≤ fOUT ≤ 10MHz, LTC6902C",
+     "●",
+     "",
+     "",
+     "±2.0",
+     "%"
+    ],
+    [
+     "Frequency accuracy (Notes 2, 3)",
+     "∆fOUT",
+     "V+ = 2.7V, 5kHz ≤ fOUT ≤ 10MHz, LTC6902I",
+     "●",
+     "",
+     "",
+     "±2.5",
+     "%"
+    ],
+    [
+     "Frequency setting resistor range",
+     "RSET",
+     "|∆fOUT| < 1.5%, V+ = 5V",
+     "●",
+     "20",
+     "",
+     "400",
+     "kΩ"
+    ],
+    [
+     "Frequency setting resistor range",
+     "RSET",
+     "|∆fOUT| < 1.5%, V+ = 2.7V",
+     "●",
+     "20",
+     "",
+     "400",
+     "kΩ"
+    ],
+    [
+     "Frequency drift over temperature (Note 3)",
+     "∆fOUT/∆T",
+     "RSET = 63.2k",
+     "●",
+     "",
+     "±0.004",
+     "",
+     "%/°C"
+    ],
+    [
+     "Frequency drift over supply (Note 3)",
+     "∆fOUT/∆V",
+     "V+ = 2.7V to 5V, RSET = 63.2k",
+     "●",
+     "",
+     "0.04",
+     "0.12",
+     "%/V"
+    ],
+    [
+     "Timing jitter (Note 4)",
+     "",
+     "20k ≤ RSET ≤ 400k, Pin 2 = V+ (N = 100)",
+     "",
+     "",
+     "0.1",
+     "",
+     "%"
+    ],
+    [
+     "Timing jitter (Note 4)",
+     "",
+     "20k ≤ RSET ≤ 400k, Pin 2 = Open (N = 10)",
+     "",
+     "",
+     "0.2",
+     "",
+     "%"
+    ],
+    [
+     "Timing jitter (Note 4)",
+     "",
+     "20k ≤ RSET ≤ 400k, Pin 2 = 0V (N = 1)",
+     "",
+     "",
+     "0.6",
+     "",
+     "%"
+    ],
+    [
+     "Long-term stability of output frequency",
+     "",
+     "",
+     "",
+     "",
+     "300",
+     "",
+     "ppm/√kHr"
+    ],
+    [
+     "Duty cycle (Note 5)",
+     "",
+     "Pin 2 = V+ or Open (N = 100 or 10), Pin 3 = 0V (2-Phase, M = 1)",
+     "●",
+     "49.0",
+     "50.0",
+     "51.0",
+     "%"
+    ],
+    [
+     "Duty cycle (Note 5)",
+     "",
+     "Pin 2 = V+ or Open (N = 100 or 10), Pin 3 = Open (3-Phase, M = 3)",
+     "●",
+     "32.3",
+     "33.3",
+     "34.3",
+     "%"
+    ],
+    [
+     "Duty cycle (Note 5)",
+     "",
+     "Pin 2 = V+ or Open (N = 100 or 10), Pin 3 = V+ (4-Phase, M = 4)",
+     "●",
+     "49.0",
+     "50.0",
+     "51.0",
+     "%"
+    ],
+    [
+     "Duty cycle (Note 5)",
+     "",
+     "Pin 2 = 0V (N = 1), Pin 3 = 0V (2-Phase, M = 1)",
+     "●",
+     "45.0",
+     "50.0",
+     "55.0",
+     "%"
+    ],
+    [
+     "Duty cycle (Note 5)",
+     "",
+     "Pin 2 = 0V (N = 1), Pin 3 = Open (3-Phase, M = 3)",
+     "●",
+     "32.3",
+     "33.3",
+     "34.3",
+     "%"
+    ],
+    [
+     "Duty cycle (Note 5)",
+     "",
+     "Pin 2 = 0V (N = 1), Pin 3 = V+ (4-Phase, M = 4)",
+     "●",
+     "49.0",
+     "50.0",
+     "51.0",
+     "%"
+    ],
+    [
+     "Operating supply range",
+     "V+",
+     "",
+     "●",
+     "2.7",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 400k, RL = ∞, Pin 2 = V+ (N = 100), fOUT = 5kHz, V+ = 5V",
+     "●",
+     "",
+     "0.35",
+     "0.55",
+     "mA"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 400k, RL = ∞, Pin 2 = V+ (N = 100), fOUT = 5kHz, V+ = 2.7V",
+     "●",
+     "",
+     "0.32",
+     "0.50",
+     "mA"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 20k, RL = ∞, Pin 2 = 0V (N = 1), fOUT = 10MHz, V+ = 5V",
+     "●",
+     "",
+     "2.35",
+     "3.50",
+     "mA"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 20k, RL = ∞, Pin 2 = 0V (N = 1), fOUT = 10MHz, V+ = 2.7V",
+     "●",
+     "",
+     "1.40",
+     "1.80",
+     "mA"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 400k, RL = ∞, Pin 2 = V+ (N = 100), RMOD = 800k, V+ = 5V",
+     "●",
+     "",
+     "0.45",
+     "0.63",
+     "mA"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 400k, RL = ∞, Pin 2 = V+ (N = 100), RMOD = 800k, V+ = 2.7V",
+     "●",
+     "",
+     "0.34",
+     "0.50",
+     "mA"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 20k, RL = ∞, Pin 2 = 0V (N = 1), RMOD = 40k, V+ = 5V",
+     "●",
+     "",
+     "2.50",
+     "3.60",
+     "mA"
+    ],
+    [
+     "Power supply current",
+     "IS",
+     "RSET = 20k, RL = ∞, Pin 2 = 0V (N = 1), RMOD = 40k, V+ = 2.7V",
+     "●",
+     "",
+     "1.40",
+     "1.90",
+     "mA"
+    ],
+    [
+     "High level DIV input voltage",
+     "VIH_DIV",
+     "",
+     "●",
+     "V+ – 0.4",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Low level DIV input voltage",
+     "VIL_DIV",
+     "",
+     "●",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "DIV input current (Note 6)",
+     "IDIV",
+     "Pin 2 = V+, V+ = 5V",
+     "●",
+     "",
+     "2",
+     "4",
+     "µA"
+    ],
+    [
+     "DIV input current (Note 6)",
+     "IDIV",
+     "Pin 2 = 0V, V+ = 5V",
+     "●",
+     "–4",
+     "–2",
+     "",
+     "µA"
+    ],
+    [
+     "High level PH input voltage",
+     "VIH_PH",
+     "",
+     "●",
+     "V+ – 0.4",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Low level PH input voltage",
+     "VIL_PH",
+     "",
+     "●",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "PH input current (Note 6)",
+     "IPH",
+     "Pin 3 = V+, V+ = 5V",
+     "●",
+     "",
+     "2",
+     "4",
+     "µA"
+    ],
+    [
+     "PH input current (Note 6)",
+     "IPH",
+     "Pin 3 = 0V, V+ = 5V",
+     "●",
+     "–4",
+     "–2",
+     "",
+     "µA"
+    ],
+    [
+     "High level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOH",
+     "V+ = 5V, IOH = –1mA",
+     "●",
+     "4.75",
+     "4.90",
+     "",
+     "V"
+    ],
+    [
+     "High level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOH",
+     "V+ = 5V, IOH = –4mA",
+     "●",
+     "4.40",
+     "4.70",
+     "",
+     "V"
+    ],
+    [
+     "High level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOH",
+     "V+ = 2.7V, IOH = –1mA",
+     "●",
+     "2.35",
+     "2.6",
+     "",
+     "V"
+    ],
+    [
+     "High level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOH",
+     "V+ = 2.7V, IOH = –4mA",
+     "●",
+     "1.85",
+     "2.2",
+     "",
+     "V"
+    ],
+    [
+     "Low level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOL",
+     "V+ = 5V, IOL = 1mA",
+     "●",
+     "",
+     "0.05",
+     "0.15",
+     "V"
+    ],
+    [
+     "Low level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOL",
+     "V+ = 5V, IOL = 4mA",
+     "●",
+     "",
+     "0.20",
+     "0.40",
+     "V"
+    ],
+    [
+     "Low level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOL",
+     "V+ = 2.7V, IOL = 1mA",
+     "●",
+     "",
+     "0.1",
+     "0.3",
+     "V"
+    ],
+    [
+     "Low level output voltage (Note 6) (OUT1, OUT2, OUT3, OUT4)",
+     "VOL",
+     "V+ = 2.7V, IOL = 4mA",
+     "●",
+     "",
+     "0.4",
+     "0.7",
+     "V"
+    ],
+    [
+     "Output rise time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tr",
+     "V+ = 5V, Pin 2 = V+ or Open (N = 100 or N = 10)",
+     "",
+     "",
+     "14",
+     "",
+     "ns"
+    ],
+    [
+     "Output rise time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tr",
+     "V+ = 5V, Pin 2 = 0V (N = 1)",
+     "",
+     "",
+     "7",
+     "",
+     "ns"
+    ],
+    [
+     "Output rise time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tr",
+     "V+ = 2.7V, Pin 2 = V+ or Open (N = 100 or N = 10)",
+     "",
+     "",
+     "19",
+     "",
+     "ns"
+    ],
+    [
+     "Output rise time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tr",
+     "V+ = 2.7V, Pin 2 = 0V (N = 1)",
+     "",
+     "",
+     "11",
+     "",
+     "ns"
+    ],
+    [
+     "Output fall time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tf",
+     "V+ = 5V, Pin 2 = V+ or Open (N = 100 or N = 10)",
+     "",
+     "",
+     "13",
+     "",
+     "ns"
+    ],
+    [
+     "Output fall time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tf",
+     "V+ = 5V, Pin 2 = 0V (N = 1)",
+     "",
+     "",
+     "6",
+     "",
+     "ns"
+    ],
+    [
+     "Output fall time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tf",
+     "V+ = 2.7V, Pin 2 = V+ or Open (N = 100 or N = 10)",
+     "",
+     "",
+     "19",
+     "",
+     "ns"
+    ],
+    [
+     "Output fall time (Note 7) (OUT1, OUT2, OUT3, OUT4)",
+     "tf",
+     "V+ = 2.7V, Pin 2 = 0V (N = 1)",
+     "",
+     "",
+     "10",
+     "",
+     "ns"
+    ],
+    [
+     "Spread spectrum frequency modulation spreading percentage (downspread from maximum frequency), Percent = 100 • (fMAX – fMIN)/fMAX (Note 8)",
+     "",
+     "V+ = 5V, N = 10, RSET = 20k, RMOD = 10k",
+     "●",
+     "35",
+     "40",
+     "45.0",
+     "%"
+    ],
+    [
+     "Spread spectrum frequency modulation spreading percentage (downspread from maximum frequency), Percent = 100 • (fMAX – fMIN)/fMAX (Note 8)",
+     "",
+     "V+ = 5V, N = 10, RSET = 20k, RMOD = 40k",
+     "●",
+     "7.5",
+     "10",
+     "12.5",
+     "%"
+    ],
+    [
+     "Spread spectrum frequency modulation spreading percentage (downspread from maximum frequency), Percent = 100 • (fMAX – fMIN)/fMAX (Note 8)",
+     "",
+     "V+ = 2.7V, N = 10, RSET = 20k, RMOD = 10k",
+     "●",
+     "35",
+     "40",
+     "45.0",
+     "%"
+    ],
+    [
+     "Spread spectrum frequency modulation spreading percentage (downspread from maximum frequency), Percent = 100 • (fMAX – fMIN)/fMAX (Note 8)",
+     "",
+     "V+ = 2.7V, N = 10, RSET = 20k, RMOD = 40k",
+     "●",
+     "7.5",
+     "10",
+     "12.5",
+     "%"
+    ]
+   ],
+   "notes": [
+    "Note 2: Near 100kHz and 1MHz the same frequency can come from two RSET values; for those frequencies the error figure assumes 20k < RSET ≤ 400k for 5kHz ≤ fOUT ≤ 10MHz.",
+    "Note 3: Accuracy is the departure from the fOUT equation.",
+    "Note 4: Jitter is the peak-to-peak spread of the period divided by the mean period; set by characterization, not fully tested.",
+    "Note 5: Guaranteed by the 5V test.",
+    "Note 6: Current flowing out of a pin is negative.",
+    "Note 7: Rise and fall times run from 10% to 90% of the supply with the output unloaded; set by characterization.",
+    "Note 8: fMAX is the top of the frequency excursion and equals the fOUT set by RSET; fMIN is the bottom."
+   ]
+  },
+  {
+   "title": "Table 1. Recommended frequency range vs programmable divider setting for SSFM applications or for low jitter constant frequency applications",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "divider setting",
+    "DIV (pin 2)",
+    "frequency range (fOUT • M)"
+   ],
+   "rows": [
+    [
+     "N = 1",
+     "GND",
+     "2MHz to 20MHz"
+    ],
+    [
+     "N = 10",
+     "Open",
+     "200kHz to 2MHz"
+    ],
+    [
+     "N = 100",
+     "V+",
+     "< 200kHz"
+    ]
+   ],
+   "notes": [
+    "The ranges are for a 5V supply, where 20MHz is the highest output. With 2.7V ≤ V+ ≤ 4V the highest rated output is 10MHz and every figure in the table halves."
+   ]
+  },
+  {
+   "title": "Table 2. Recommended frequency range vs programmable divider setting for best frequency accuracy, constant frequency applications (SSFM disabled)",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "divider setting",
+    "DIV (pin 2)",
+    "frequency range (fOUT • M)"
+   ],
+   "rows": [
+    [
+     "N = 1",
+     "GND",
+     "> 500kHz*"
+    ],
+    [
+     "N = 10",
+     "Open",
+     "50kHz to 500kHz"
+    ],
+    [
+     "N = 100",
+     "V+",
+     "< 50kHz"
+    ]
+   ],
+   "notes": [
+    "* fOUT • M reaches 20MHz at most with a 5V supply and 10MHz at most with 2.7V ≤ V+ ≤ 4V."
+   ]
+  },
+  {
+   "title": "Table 3. Four possible ways to obtain a 500kHz, 2-phase clock",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "RSET",
+    "N",
+    "multiphase mode",
+    "M",
+    "fMASTER",
+    "outputs"
+   ],
+   "rows": [
+    [
+     "400k",
+     "1",
+     "2",
+     "1",
+     "500kHz",
+     "OUT1, OUT2"
+    ],
+    [
+     "100k",
+     "1",
+     "4",
+     "4",
+     "2MHz",
+     "OUT1, OUT3"
+    ],
+    [
+     "40k",
+     "10",
+     "2",
+     "1",
+     "5MHz",
+     "OUT1, OUT2"
+    ],
+    [
+     "10k",
+     "10",
+     "4",
+     "4",
+     "20MHz",
+     "OUT1, OUT3"
+    ]
+   ],
+   "notes": [
+    "For SSFM the last row is the one with the best EMC (master at 20MHz); for constant frequency the first row (master at 500kHz)."
+   ]
+  },
+  {
+   "title": "Multiphase modes",
+   "page": 9,
+   "conditions": "",
+   "columns": [
+    "PH (pin 3)",
+    "mode",
+    "M",
+    "duty cycle",
+    "OUT1",
+    "OUT2",
+    "OUT3",
+    "OUT4"
+   ],
+   "rows": [
+    [
+     "GND (below 0.5V)",
+     "2-phase",
+     "1",
+     "50%",
+     "0°",
+     "180° (OUT1 inverted)",
+     "copy of OUT1",
+     "copy of OUT2"
+    ],
+    [
+     "Open or mid-supply",
+     "3-phase",
+     "3",
+     "33%",
+     "0°",
+     "lags OUT1 by 120°",
+     "lags OUT2 by 120°",
+     "logic low"
+    ],
+    [
+     "V+ (within 0.4V of V+)",
+     "4-phase",
+     "4",
+     "50%",
+     "0°",
+     "lags OUT1 by 90°",
+     "lags OUT2 by 90°",
+     "lags OUT3 by 90°"
+    ]
+   ],
+   "notes": [
+    "In 2-phase mode OUT2 comes from a delay-matched inverting stage, so its edges are typically within 100ps of OUT1's. 3-phase outputs come from a shift register and 4-phase outputs from flip-flops."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Output frequency spectrum with and without SSFM",
+   "page": 1,
+   "conditions": "",
+   "x": {
+    "label": "Frequency",
+    "unit": "kHz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Relative amplitude",
+    "unit": "dBm",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output spectrum with 20% spreading",
+     "points": [
+      [
+       377.5,
+       -55.5
+      ],
+      [
+       380.2,
+       -53.0
+      ],
+      [
+       383.0,
+       -51.5
+      ],
+      [
+       385.7,
+       -47.7
+      ],
+      [
+       388.4,
+       -46.6
+      ],
+      [
+       391.1,
+       -44.2
+      ],
+      [
+       393.9,
+       -40.5
+      ],
+      [
+       396.6,
+       -36.7
+      ],
+      [
+       400.0,
+       -20.9
+      ],
+      [
+       403.4,
+       -21.4
+      ],
+      [
+       406.1,
+       -22.4
+      ],
+      [
+       408.9,
+       -22.2
+      ],
+      [
+       411.6,
+       -22.4
+      ],
+      [
+       414.3,
+       -20.9
+      ],
+      [
+       417.0,
+       -22.4
+      ],
+      [
+       419.8,
+       -22.0
+      ],
+      [
+       422.5,
+       -21.9
+      ],
+      [
+       426.1,
+       -22.0
+      ],
+      [
+       429.3,
+       -22.0
+      ],
+      [
+       432.0,
+       -22.0
+      ],
+      [
+       434.8,
+       -22.0
+      ],
+      [
+       437.5,
+       -21.4
+      ],
+      [
+       440.2,
+       -20.9
+      ],
+      [
+       443.0,
+       -23.2
+      ],
+      [
+       445.7,
+       -21.4
+      ],
+      [
+       448.6,
+       -22.3
+      ],
+      [
+       452.5,
+       -22.8
+      ],
+      [
+       455.2,
+       -24.1
+      ],
+      [
+       458.0,
+       -21.4
+      ],
+      [
+       460.7,
+       -21.7
+      ],
+      [
+       463.4,
+       -21.9
+      ],
+      [
+       466.1,
+       -21.9
+      ],
+      [
+       468.9,
+       -22.5
+      ],
+      [
+       471.6,
+       -22.6
+      ],
+      [
+       474.8,
+       -23.1
+      ],
+      [
+       478.4,
+       -23.4
+      ],
+      [
+       481.1,
+       -22.1
+      ],
+      [
+       483.9,
+       -22.7
+      ],
+      [
+       486.6,
+       -21.5
+      ],
+      [
+       489.3,
+       -22.6
+      ],
+      [
+       492.0,
+       -23.9
+      ],
+      [
+       494.8,
+       -22.1
+      ],
+      [
+       496.6,
+       -23.8
+      ],
+      [
+       513.0,
+       -48.1
+      ],
+      [
+       515.7,
+       -51.1
+      ],
+      [
+       518.4,
+       -52.8
+      ],
+      [
+       521.1,
+       -56.1
+      ],
+      [
+       523.9,
+       -56.5
+      ],
+      [
+       528.0,
+       -59.3
+      ],
+      [
+       530.7,
+       -62.0
+      ],
+      [
+       533.4,
+       -62.9
+      ],
+      [
+       536.1,
+       -64.4
+      ],
+      [
+       538.9,
+       -65.6
+      ],
+      [
+       541.6,
+       -66.6
+      ],
+      [
+       544.3,
+       -68.3
+      ],
+      [
+       547.0,
+       -69.2
+      ],
+      [
+       550.7,
+       -70.0
+      ],
+      [
+       553.9,
+       -70.6
+      ],
+      [
+       556.6,
+       -72.2
+      ],
+      [
+       559.3,
+       -73.3
+      ],
+      [
+       562.0,
+       -72.4
+      ],
+      [
+       564.8,
+       -73.6
+      ],
+      [
+       567.5,
+       -75.0
+      ],
+      [
+       570.2,
+       -75.0
+      ],
+      [
+       573.0,
+       -77.1
+      ],
+      [
+       577.2,
+       -78.2
+      ],
+      [
+       580.2,
+       -78.2
+      ],
+      [
+       583.0,
+       -77.6
+      ],
+      [
+       585.7,
+       -78.6
+      ],
+      [
+       588.4,
+       -80.6
+      ],
+      [
+       591.1,
+       -79.7
+      ],
+      [
+       593.9,
+       -80.6
+      ],
+      [
+       596.6,
+       -80.3
+      ],
+      [
+       599.8,
+       -80.3
+      ],
+      [
+       603.4,
+       -82.9
+      ],
+      [
+       606.1,
+       -83.3
+      ],
+      [
+       608.9,
+       -81.6
+      ],
+      [
+       611.6,
+       -83.2
+      ],
+      [
+       614.3,
+       -85.3
+      ],
+      [
+       617.0,
+       -83.9
+      ],
+      [
+       619.8,
+       -82.8
+      ],
+      [
+       622.5,
+       -82.7
+      ]
+     ]
+    },
+    {
+     "label": "Output spectrum with SSFM disabled",
+     "points": [
+      [
+       377.5,
+       -86.1
+      ],
+      [
+       380.2,
+       -85.8
+      ],
+      [
+       383.0,
+       -85.2
+      ],
+      [
+       385.7,
+       -86.6
+      ],
+      [
+       388.4,
+       -85.3
+      ],
+      [
+       391.1,
+       -85.4
+      ],
+      [
+       393.9,
+       -85.1
+      ],
+      [
+       396.6,
+       -86.5
+      ],
+      [
+       400.0,
+       -86.1
+      ],
+      [
+       403.4,
+       -86.5
+      ],
+      [
+       406.1,
+       -85.0
+      ],
+      [
+       408.9,
+       -85.5
+      ],
+      [
+       411.6,
+       -85.7
+      ],
+      [
+       414.3,
+       -85.4
+      ],
+      [
+       417.0,
+       -85.5
+      ],
+      [
+       419.8,
+       -84.8
+      ],
+      [
+       422.5,
+       -84.8
+      ],
+      [
+       426.1,
+       -85.0
+      ],
+      [
+       429.3,
+       -84.9
+      ],
+      [
+       432.0,
+       -84.1
+      ],
+      [
+       434.8,
+       -83.7
+      ],
+      [
+       437.5,
+       -83.1
+      ],
+      [
+       440.2,
+       -83.7
+      ],
+      [
+       443.0,
+       -82.0
+      ],
+      [
+       445.7,
+       -81.9
+      ],
+      [
+       448.6,
+       -82.4
+      ],
+      [
+       452.5,
+       -81.4
+      ],
+      [
+       455.2,
+       -81.6
+      ],
+      [
+       458.0,
+       -80.4
+      ],
+      [
+       460.7,
+       -80.9
+      ],
+      [
+       463.4,
+       -79.1
+      ],
+      [
+       466.1,
+       -79.1
+      ],
+      [
+       468.9,
+       -79.0
+      ],
+      [
+       471.6,
+       -78.0
+      ],
+      [
+       474.8,
+       -76.0
+      ],
+      [
+       478.4,
+       -75.0
+      ],
+      [
+       481.1,
+       -73.5
+      ],
+      [
+       483.9,
+       -73.5
+      ],
+      [
+       486.6,
+       -72.4
+      ],
+      [
+       489.3,
+       -69.7
+      ],
+      [
+       492.0,
+       -67.3
+      ],
+      [
+       494.8,
+       -66.6
+      ],
+      [
+       496.6,
+       -63.3
+      ],
+      [
+       499.3,
+       0.0
+      ],
+      [
+       502.0,
+       0.0
+      ],
+      [
+       504.8,
+       -66.0
+      ],
+      [
+       507.5,
+       -67.7
+      ],
+      [
+       510.2,
+       -71.6
+      ],
+      [
+       513.0,
+       -71.5
+      ],
+      [
+       515.7,
+       -72.7
+      ],
+      [
+       518.4,
+       -74.1
+      ],
+      [
+       521.1,
+       -75.8
+      ],
+      [
+       523.9,
+       -76.4
+      ],
+      [
+       528.0,
+       -76.6
+      ],
+      [
+       530.7,
+       -78.3
+      ],
+      [
+       533.4,
+       -77.1
+      ],
+      [
+       536.1,
+       -79.2
+      ],
+      [
+       538.9,
+       -78.4
+      ],
+      [
+       541.6,
+       -80.3
+      ],
+      [
+       544.3,
+       -80.8
+      ],
+      [
+       547.0,
+       -81.6
+      ],
+      [
+       550.7,
+       -82.5
+      ],
+      [
+       553.9,
+       -83.7
+      ],
+      [
+       556.6,
+       -83.0
+      ],
+      [
+       559.3,
+       -82.8
+      ],
+      [
+       562.0,
+       -82.9
+      ],
+      [
+       564.8,
+       -83.7
+      ],
+      [
+       567.5,
+       -83.7
+      ],
+      [
+       570.2,
+       -84.0
+      ],
+      [
+       573.0,
+       -83.8
+      ],
+      [
+       577.2,
+       -84.7
+      ],
+      [
+       580.2,
+       -84.7
+      ],
+      [
+       583.0,
+       -84.7
+      ],
+      [
+       585.7,
+       -85.6
+      ],
+      [
+       588.4,
+       -84.5
+      ],
+      [
+       591.1,
+       -84.9
+      ],
+      [
+       593.9,
+       -85.2
+      ],
+      [
+       596.6,
+       -86.1
+      ],
+      [
+       599.8,
+       -86.3
+      ],
+      [
+       603.4,
+       -84.2
+      ],
+      [
+       606.1,
+       -87.3
+      ],
+      [
+       608.9,
+       -85.2
+      ],
+      [
+       611.6,
+       -85.3
+      ],
+      [
+       614.3,
+       -85.7
+      ],
+      [
+       617.0,
+       -86.4
+      ],
+      [
+       619.8,
+       -85.9
+      ],
+      [
+       622.5,
+       -86.8
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Frequency variation vs RSET",
+   "page": 4,
+   "conditions": "TA = 25°C; guaranteed limits apply over 20kΩ ≤ RSET ≤ 400kΩ",
+   "x": {
+    "label": "RSET",
+    "unit": "Ω",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Variation",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Typical high",
+     "points": [
+      [
+       10240,
+       -0.9824
+      ],
+      [
+       19342,
+       0.6423
+      ],
+      [
+       23523,
+       0.789
+      ],
+      [
+       41419,
+       0.7949
+      ],
+      [
+       1171309,
+       0.6782
+      ],
+      [
+       1923647,
+       0.7207
+      ]
+     ]
+    },
+    {
+     "label": "Typical low",
+     "points": [
+      [
+       10240,
+       -2.503
+      ],
+      [
+       19153,
+       -0.6524
+      ],
+      [
+       23470,
+       -0.4336
+      ],
+      [
+       30820,
+       -0.3925
+      ],
+      [
+       459189,
+       -0.4963
+      ],
+      [
+       1077542,
+       -0.7042
+      ],
+      [
+       1923647,
+       -0.9824
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Frequency variation over temperature",
+   "page": 4,
+   "conditions": "RSET = 63.4k; ÷1 or ÷10 or ÷100",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Variation",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Typical high",
+     "points": [
+      [
+       -39.67,
+       0.3925
+      ],
+      [
+       -15.92,
+       0.2321
+      ],
+      [
+       24.49,
+       -0.003968
+      ],
+      [
+       47.53,
+       0.2793
+      ],
+      [
+       85.37,
+       0.3563
+      ]
+     ]
+    },
+    {
+     "label": "Typical low",
+     "points": [
+      [
+       -39.67,
+       -0.6426
+      ],
+      [
+       0.0282,
+       -0.1765
+      ],
+      [
+       24.49,
+       -0.003968
+      ],
+      [
+       85.37,
+       -0.3599
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Peak-to-peak jitter vs output frequency (M = 1, 2-phase mode)",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Output frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Jitter",
+    "unit": "%P-P",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "÷1, VA = 5V",
+     "points": [
+      [
+       93906,
+       0.8094
+      ],
+      [
+       603535,
+       0.49
+      ],
+      [
+       1000591,
+       0.4271
+      ],
+      [
+       2059753,
+       0.3639
+      ],
+      [
+       3120620,
+       0.3554
+      ],
+      [
+       5359629,
+       0.38
+      ],
+      [
+       8931781,
+       0.437
+      ],
+      [
+       11265571,
+       0.533
+      ],
+      [
+       14750959,
+       0.8095
+      ],
+      [
+       16631347,
+       0.9977
+      ]
+     ]
+    },
+    {
+     "label": "÷1, VA = 3V",
+     "points": [
+      [
+       95292,
+       0.6868
+      ],
+      [
+       328007,
+       0.4766
+      ],
+      [
+       776769,
+       0.3624
+      ],
+      [
+       1244037,
+       0.318
+      ],
+      [
+       2081609,
+       0.2732
+      ],
+      [
+       2948277,
+       0.2717
+      ],
+      [
+       3790606,
+       0.3051
+      ],
+      [
+       9997638,
+       0.5478
+      ]
+     ]
+    },
+    {
+     "label": "÷10",
+     "points": [
+      [
+       9717,
+       0.2217
+      ],
+      [
+       55772,
+       0.181
+      ],
+      [
+       160835,
+       0.1433
+      ],
+      [
+       402229,
+       0.1041
+      ],
+      [
+       881181,
+       0.08898
+      ],
+      [
+       1384482,
+       0.09411
+      ],
+      [
+       1990071,
+       0.1155
+      ]
+     ]
+    },
+    {
+     "label": "÷100",
+     "points": [
+      [
+       990.9,
+       0.09658
+      ],
+      [
+       8519,
+       0.08136
+      ],
+      [
+       142703,
+       0.05271
+      ],
+      [
+       197133,
+       0.05487
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current vs output frequency [SSFM disabled, 2-phase mode (M = 1)]",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Output frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "Supply current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "÷1, 5V",
+     "points": [
+      [
+       99016,
+       0.3521
+      ],
+      [
+       491449,
+       0.4423
+      ],
+      [
+       818891,
+       0.5167
+      ],
+      [
+       1700534,
+       0.73
+      ],
+      [
+       2777294,
+       0.9708
+      ],
+      [
+       4754757,
+       1.391
+      ],
+      [
+       6734953,
+       2.252
+      ],
+      [
+       10652821,
+       3.501
+      ]
+     ]
+    },
+    {
+     "label": "÷1, 3V",
+     "points": [
+      [
+       99633,
+       0.3145
+      ],
+      [
+       660996,
+       0.3909
+      ],
+      [
+       1401218,
+       0.5048
+      ],
+      [
+       2637667,
+       0.6739
+      ],
+      [
+       4086390,
+       0.8644
+      ],
+      [
+       6230993,
+       1.213
+      ],
+      [
+       9820986,
+       1.666
+      ]
+     ]
+    },
+    {
+     "label": "÷10, 5V",
+     "points": [
+      [
+       10066,
+       0.3344
+      ],
+      [
+       58888,
+       0.3754
+      ],
+      [
+       179267,
+       0.4572
+      ],
+      [
+       347710,
+       0.5821
+      ],
+      [
+       745018,
+       0.8123
+      ],
+      [
+       1049674,
+       1.0
+      ],
+      [
+       1972600,
+       1.681
+      ]
+     ]
+    },
+    {
+     "label": "÷10, 3V",
+     "points": [
+      [
+       10066,
+       0.3078
+      ],
+      [
+       128210,
+       0.3652
+      ],
+      [
+       323197,
+       0.4445
+      ],
+      [
+       544571,
+       0.5629
+      ],
+      [
+       986157,
+       0.7502
+      ]
+     ]
+    },
+    {
+     "label": "÷100, 5V",
+     "points": [
+      [
+       1014,
+       0.3289
+      ],
+      [
+       6814,
+       0.361
+      ],
+      [
+       21395,
+       0.4374
+      ],
+      [
+       38520,
+       0.528
+      ],
+      [
+       72107,
+       0.7006
+      ],
+      [
+       119697,
+       0.9314
+      ],
+      [
+       199924,
+       1.307
+      ]
+     ]
+    },
+    {
+     "label": "÷100, 3V",
+     "points": [
+      [
+       1014,
+       0.299
+      ],
+      [
+       8028,
+       0.3303
+      ],
+      [
+       25906,
+       0.3986
+      ],
+      [
+       47860,
+       0.4769
+      ],
+      [
+       100888,
+       0.6606
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output resistance vs supply voltage",
+   "page": 4,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output sourcing current",
+     "points": [
+      [
+       2.689,
+       134
+      ],
+      [
+       3.223,
+       109.8
+      ],
+      [
+       3.55,
+       97.95
+      ],
+      [
+       3.865,
+       89.38
+      ],
+      [
+       4.197,
+       83.1
+      ],
+      [
+       4.66,
+       77.2
+      ],
+      [
+       5.987,
+       64.02
+      ]
+     ]
+    },
+    {
+     "label": "Output sinking current",
+     "points": [
+      [
+       2.689,
+       103.1
+      ],
+      [
+       3.14,
+       86.28
+      ],
+      [
+       3.517,
+       75.33
+      ],
+      [
+       3.918,
+       66.78
+      ],
+      [
+       4.377,
+       59.88
+      ],
+      [
+       5.028,
+       52.95
+      ],
+      [
+       5.987,
+       45.07
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output operating at 20MHz, VS = 5V",
+   "page": 5,
+   "conditions": "V+ = 5V, RSET = 10k, CL = 10pF",
+   "x": {
+    "label": "Time",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output",
+     "points": [
+      [
+       0.7,
+       -0.02
+      ],
+      [
+       8.5,
+       -0.07
+      ],
+      [
+       9.1,
+       -0.0
+      ],
+      [
+       9.2,
+       0.03
+      ],
+      [
+       9.4,
+       0.09
+      ],
+      [
+       9.4,
+       0.13
+      ],
+      [
+       9.7,
+       0.2
+      ],
+      [
+       9.7,
+       0.24
+      ],
+      [
+       9.9,
+       0.29
+      ],
+      [
+       9.9,
+       0.38
+      ],
+      [
+       10.1,
+       0.46
+      ],
+      [
+       10.1,
+       0.49
+      ],
+      [
+       10.1,
+       0.53
+      ],
+      [
+       10.3,
+       0.66
+      ],
+      [
+       10.3,
+       0.71
+      ],
+      [
+       10.3,
+       0.77
+      ],
+      [
+       10.6,
+       0.82
+      ],
+      [
+       10.6,
+       0.99
+      ],
+      [
+       10.9,
+       1.04
+      ],
+      [
+       10.9,
+       1.12
+      ],
+      [
+       10.9,
+       1.21
+      ],
+      [
+       10.9,
+       1.28
+      ],
+      [
+       11.2,
+       1.3
+      ],
+      [
+       11.2,
+       1.54
+      ],
+      [
+       11.2,
+       1.63
+      ],
+      [
+       11.4,
+       1.7
+      ],
+      [
+       11.4,
+       1.74
+      ],
+      [
+       11.4,
+       1.81
+      ],
+      [
+       11.4,
+       1.91
+      ],
+      [
+       11.5,
+       1.94
+      ],
+      [
+       11.5,
+       2.09
+      ],
+      [
+       11.5,
+       2.14
+      ],
+      [
+       11.7,
+       2.2
+      ],
+      [
+       11.7,
+       2.26
+      ],
+      [
+       11.7,
+       2.29
+      ],
+      [
+       12.0,
+       2.31
+      ],
+      [
+       12.0,
+       2.37
+      ],
+      [
+       12.0,
+       2.4
+      ],
+      [
+       12.3,
+       3.39
+      ],
+      [
+       12.5,
+       3.39
+      ],
+      [
+       12.8,
+       3.47
+      ],
+      [
+       12.8,
+       3.72
+      ],
+      [
+       13.0,
+       3.76
+      ],
+      [
+       13.0,
+       3.87
+      ],
+      [
+       13.0,
+       3.91
+      ],
+      [
+       13.0,
+       4.0
+      ],
+      [
+       13.0,
+       4.03
+      ],
+      [
+       13.1,
+       4.07
+      ],
+      [
+       13.1,
+       4.14
+      ],
+      [
+       13.1,
+       4.18
+      ],
+      [
+       13.1,
+       4.22
+      ],
+      [
+       13.2,
+       4.27
+      ],
+      [
+       13.2,
+       4.33
+      ],
+      [
+       13.3,
+       4.37
+      ],
+      [
+       13.5,
+       4.42
+      ],
+      [
+       13.5,
+       4.49
+      ],
+      [
+       13.5,
+       4.57
+      ],
+      [
+       13.7,
+       4.64
+      ],
+      [
+       13.7,
+       4.75
+      ],
+      [
+       13.9,
+       4.79
+      ],
+      [
+       13.9,
+       4.84
+      ],
+      [
+       14.2,
+       4.9
+      ],
+      [
+       14.4,
+       4.9
+      ],
+      [
+       14.4,
+       4.93
+      ],
+      [
+       14.6,
+       4.97
+      ],
+      [
+       14.6,
+       5.01
+      ],
+      [
+       14.8,
+       5.04
+      ],
+      [
+       15.9,
+       5.11
+      ],
+      [
+       18.4,
+       5.0
+      ],
+      [
+       22.1,
+       4.98
+      ],
+      [
+       25.3,
+       4.98
+      ],
+      [
+       28.8,
+       5.0
+      ],
+      [
+       30.9,
+       5.12
+      ],
+      [
+       32.9,
+       5.09
+      ],
+      [
+       33.5,
+       5.01
+      ],
+      [
+       33.5,
+       4.95
+      ],
+      [
+       33.8,
+       4.92
+      ],
+      [
+       33.8,
+       4.84
+      ],
+      [
+       34.1,
+       4.77
+      ],
+      [
+       34.1,
+       4.73
+      ],
+      [
+       34.4,
+       4.68
+      ],
+      [
+       34.4,
+       4.57
+      ],
+      [
+       34.7,
+       4.53
+      ],
+      [
+       34.7,
+       4.38
+      ],
+      [
+       34.9,
+       4.33
+      ],
+      [
+       34.9,
+       4.14
+      ],
+      [
+       35.1,
+       4.11
+      ],
+      [
+       35.1,
+       3.92
+      ],
+      [
+       35.4,
+       3.89
+      ],
+      [
+       35.4,
+       3.76
+      ],
+      [
+       35.4,
+       3.7
+      ],
+      [
+       35.8,
+       3.65
+      ],
+      [
+       35.8,
+       3.54
+      ],
+      [
+       35.8,
+       3.41
+      ],
+      [
+       36.0,
+       3.37
+      ],
+      [
+       36.0,
+       3.32
+      ],
+      [
+       36.0,
+       3.12
+      ],
+      [
+       36.0,
+       3.04
+      ],
+      [
+       36.3,
+       3.01
+      ],
+      [
+       36.3,
+       2.79
+      ],
+      [
+       36.5,
+       2.73
+      ],
+      [
+       36.5,
+       2.55
+      ],
+      [
+       36.7,
+       2.48
+      ],
+      [
+       36.7,
+       2.31
+      ],
+      [
+       36.7,
+       2.16
+      ],
+      [
+       37.2,
+       2.09
+      ],
+      [
+       37.2,
+       2.05
+      ],
+      [
+       37.2,
+       1.98
+      ],
+      [
+       37.2,
+       1.94
+      ],
+      [
+       37.2,
+       1.78
+      ],
+      [
+       37.4,
+       1.72
+      ],
+      [
+       37.4,
+       1.52
+      ],
+      [
+       37.4,
+       1.47
+      ],
+      [
+       37.7,
+       1.41
+      ],
+      [
+       37.7,
+       1.23
+      ],
+      [
+       37.9,
+       1.15
+      ],
+      [
+       37.9,
+       1.12
+      ],
+      [
+       37.9,
+       0.92
+      ],
+      [
+       37.9,
+       0.9
+      ],
+      [
+       38.1,
+       0.86
+      ],
+      [
+       38.1,
+       0.6
+      ],
+      [
+       38.4,
+       0.55
+      ],
+      [
+       38.4,
+       0.38
+      ],
+      [
+       38.7,
+       0.31
+      ],
+      [
+       38.7,
+       0.24
+      ],
+      [
+       39.0,
+       0.16
+      ],
+      [
+       39.0,
+       0.03
+      ],
+      [
+       39.3,
+       -0.02
+      ],
+      [
+       39.3,
+       -0.09
+      ],
+      [
+       39.5,
+       -0.15
+      ],
+      [
+       39.5,
+       -0.19
+      ],
+      [
+       40.5,
+       -0.34
+      ],
+      [
+       42.4,
+       -0.11
+      ],
+      [
+       43.8,
+       -0.03
+      ],
+      [
+       47.7,
+       -0.02
+      ],
+      [
+       50.0,
+       0.02
+      ],
+      [
+       52.3,
+       -0.05
+      ],
+      [
+       58.8,
+       -0.07
+      ],
+      [
+       59.7,
+       0.08
+      ],
+      [
+       62.0,
+       2.29
+      ],
+      [
+       62.4,
+       2.35
+      ],
+      [
+       62.4,
+       2.38
+      ],
+      [
+       62.4,
+       2.68
+      ],
+      [
+       62.6,
+       2.71
+      ],
+      [
+       62.6,
+       2.75
+      ],
+      [
+       62.6,
+       2.88
+      ],
+      [
+       62.6,
+       3.03
+      ],
+      [
+       62.6,
+       3.06
+      ],
+      [
+       62.6,
+       3.28
+      ],
+      [
+       62.6,
+       3.32
+      ],
+      [
+       62.8,
+       3.34
+      ],
+      [
+       62.8,
+       3.37
+      ],
+      [
+       62.8,
+       3.39
+      ],
+      [
+       62.9,
+       3.43
+      ],
+      [
+       62.9,
+       3.47
+      ],
+      [
+       62.9,
+       3.52
+      ],
+      [
+       63.1,
+       3.61
+      ],
+      [
+       63.1,
+       3.67
+      ],
+      [
+       63.1,
+       3.7
+      ],
+      [
+       63.1,
+       3.76
+      ],
+      [
+       63.1,
+       3.87
+      ],
+      [
+       63.4,
+       3.94
+      ],
+      [
+       63.4,
+       4.09
+      ],
+      [
+       63.6,
+       4.16
+      ],
+      [
+       63.6,
+       4.27
+      ],
+      [
+       63.8,
+       4.33
+      ],
+      [
+       63.8,
+       4.48
+      ],
+      [
+       63.8,
+       4.51
+      ],
+      [
+       64.1,
+       4.55
+      ],
+      [
+       64.1,
+       4.66
+      ],
+      [
+       64.3,
+       4.71
+      ],
+      [
+       64.3,
+       4.79
+      ],
+      [
+       65.7,
+       5.09
+      ],
+      [
+       66.8,
+       5.08
+      ],
+      [
+       69.1,
+       5.0
+      ],
+      [
+       72.1,
+       4.99
+      ],
+      [
+       75.8,
+       4.98
+      ],
+      [
+       79.3,
+       5.02
+      ],
+      [
+       81.3,
+       5.13
+      ],
+      [
+       83.0,
+       5.12
+      ],
+      [
+       83.8,
+       5.01
+      ],
+      [
+       84.0,
+       4.93
+      ],
+      [
+       84.0,
+       4.9
+      ],
+      [
+       84.3,
+       4.82
+      ],
+      [
+       84.3,
+       4.79
+      ],
+      [
+       84.7,
+       4.73
+      ],
+      [
+       84.7,
+       4.66
+      ],
+      [
+       84.9,
+       4.6
+      ],
+      [
+       84.9,
+       4.55
+      ],
+      [
+       84.9,
+       4.48
+      ],
+      [
+       85.2,
+       4.42
+      ],
+      [
+       85.2,
+       4.24
+      ],
+      [
+       85.4,
+       4.18
+      ],
+      [
+       85.4,
+       4.03
+      ],
+      [
+       85.6,
+       3.98
+      ],
+      [
+       85.6,
+       3.85
+      ],
+      [
+       85.8,
+       3.78
+      ],
+      [
+       85.8,
+       3.74
+      ],
+      [
+       85.8,
+       3.59
+      ],
+      [
+       86.0,
+       3.56
+      ],
+      [
+       86.1,
+       3.5
+      ],
+      [
+       86.1,
+       3.45
+      ],
+      [
+       86.1,
+       3.37
+      ],
+      [
+       86.1,
+       3.28
+      ],
+      [
+       86.2,
+       3.25
+      ],
+      [
+       86.2,
+       3.17
+      ],
+      [
+       86.4,
+       3.14
+      ],
+      [
+       86.4,
+       3.1
+      ],
+      [
+       86.4,
+       3.03
+      ],
+      [
+       86.4,
+       2.99
+      ],
+      [
+       86.4,
+       2.95
+      ],
+      [
+       86.4,
+       2.92
+      ],
+      [
+       86.8,
+       2.86
+      ],
+      [
+       86.8,
+       2.75
+      ],
+      [
+       86.8,
+       2.71
+      ],
+      [
+       86.8,
+       2.66
+      ],
+      [
+       86.8,
+       2.53
+      ],
+      [
+       86.8,
+       2.38
+      ],
+      [
+       87.0,
+       2.35
+      ],
+      [
+       87.0,
+       2.31
+      ],
+      [
+       87.2,
+       2.27
+      ],
+      [
+       87.2,
+       2.13
+      ],
+      [
+       87.2,
+       1.92
+      ],
+      [
+       87.5,
+       1.87
+      ],
+      [
+       87.5,
+       1.63
+      ],
+      [
+       87.7,
+       1.58
+      ],
+      [
+       87.7,
+       1.39
+      ],
+      [
+       87.7,
+       1.36
+      ],
+      [
+       87.9,
+       1.32
+      ],
+      [
+       87.9,
+       1.3
+      ],
+      [
+       88.0,
+       1.26
+      ],
+      [
+       88.0,
+       1.17
+      ],
+      [
+       88.0,
+       1.12
+      ],
+      [
+       88.0,
+       1.06
+      ],
+      [
+       88.4,
+       0.99
+      ],
+      [
+       88.4,
+       0.7
+      ],
+      [
+       88.6,
+       0.66
+      ],
+      [
+       88.6,
+       0.48
+      ],
+      [
+       88.8,
+       0.44
+      ],
+      [
+       88.8,
+       0.29
+      ],
+      [
+       89.1,
+       0.26
+      ],
+      [
+       89.1,
+       0.13
+      ],
+      [
+       89.3,
+       0.07
+      ],
+      [
+       89.3,
+       -0.06
+      ],
+      [
+       89.5,
+       -0.09
+      ],
+      [
+       89.5,
+       -0.15
+      ],
+      [
+       89.8,
+       -0.19
+      ],
+      [
+       90.0,
+       -0.26
+      ],
+      [
+       90.8,
+       -0.34
+      ],
+      [
+       92.9,
+       -0.08
+      ],
+      [
+       94.5,
+       -0.03
+      ],
+      [
+       97.9,
+       -0.01
+      ],
+      [
+       100.2,
+       0.01
+      ],
+      [
+       102.5,
+       -0.04
+      ],
+      [
+       109.0,
+       -0.06
+      ],
+      [
+       109.6,
+       0.03
+      ],
+      [
+       109.8,
+       0.09
+      ],
+      [
+       109.8,
+       0.13
+      ],
+      [
+       110.0,
+       0.16
+      ],
+      [
+       110.0,
+       0.27
+      ],
+      [
+       110.3,
+       0.31
+      ],
+      [
+       110.3,
+       0.46
+      ],
+      [
+       110.3,
+       0.49
+      ],
+      [
+       110.5,
+       0.53
+      ],
+      [
+       110.5,
+       0.62
+      ],
+      [
+       110.8,
+       0.68
+      ],
+      [
+       110.8,
+       0.82
+      ],
+      [
+       111.2,
+       0.88
+      ],
+      [
+       111.2,
+       1.1
+      ],
+      [
+       111.4,
+       1.15
+      ],
+      [
+       111.4,
+       1.43
+      ],
+      [
+       111.7,
+       1.48
+      ],
+      [
+       111.7,
+       1.69
+      ],
+      [
+       111.9,
+       1.74
+      ],
+      [
+       111.9,
+       1.94
+      ],
+      [
+       112.1,
+       2.0
+      ],
+      [
+       112.1,
+       2.07
+      ],
+      [
+       112.1,
+       2.11
+      ],
+      [
+       112.1,
+       2.16
+      ],
+      [
+       112.1,
+       2.26
+      ],
+      [
+       112.1,
+       2.29
+      ],
+      [
+       112.3,
+       2.33
+      ],
+      [
+       112.3,
+       2.37
+      ],
+      [
+       112.3,
+       2.4
+      ],
+      [
+       112.3,
+       2.64
+      ],
+      [
+       112.3,
+       2.68
+      ],
+      [
+       112.5,
+       2.73
+      ],
+      [
+       112.6,
+       2.79
+      ],
+      [
+       112.6,
+       2.82
+      ],
+      [
+       112.6,
+       2.9
+      ],
+      [
+       112.6,
+       2.93
+      ],
+      [
+       112.7,
+       3.01
+      ],
+      [
+       112.7,
+       3.19
+      ],
+      [
+       113.0,
+       3.25
+      ],
+      [
+       113.0,
+       3.52
+      ],
+      [
+       113.3,
+       3.56
+      ],
+      [
+       113.3,
+       3.83
+      ],
+      [
+       113.5,
+       3.87
+      ],
+      [
+       113.5,
+       4.09
+      ],
+      [
+       113.7,
+       4.13
+      ],
+      [
+       113.7,
+       4.26
+      ],
+      [
+       114.0,
+       4.29
+      ],
+      [
+       114.0,
+       4.46
+      ],
+      [
+       114.0,
+       4.51
+      ],
+      [
+       114.2,
+       4.55
+      ],
+      [
+       114.2,
+       4.66
+      ],
+      [
+       114.4,
+       4.7
+      ],
+      [
+       114.4,
+       4.79
+      ],
+      [
+       114.7,
+       4.82
+      ],
+      [
+       114.7,
+       4.86
+      ],
+      [
+       114.9,
+       4.9
+      ],
+      [
+       114.9,
+       4.93
+      ],
+      [
+       115.1,
+       4.97
+      ],
+      [
+       115.1,
+       5.01
+      ],
+      [
+       116.2,
+       5.11
+      ],
+      [
+       118.9,
+       5.0
+      ],
+      [
+       122.8,
+       4.97
+      ],
+      [
+       124.5,
+       4.96
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output operating at 10MHz, VS = 3V",
+   "page": 5,
+   "conditions": "V+ = 3V, RSET = 20k, CL = 10pF",
+   "x": {
+    "label": "Time",
+    "unit": "ns",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Output",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Output",
+     "points": [
+      [
+       1.3,
+       0.05
+      ],
+      [
+       18.7,
+       0.03
+      ],
+      [
+       19.4,
+       0.1
+      ],
+      [
+       19.9,
+       0.15
+      ],
+      [
+       19.9,
+       0.19
+      ],
+      [
+       20.4,
+       0.23
+      ],
+      [
+       20.4,
+       0.28
+      ],
+      [
+       20.8,
+       0.34
+      ],
+      [
+       20.8,
+       0.39
+      ],
+      [
+       21.3,
+       0.45
+      ],
+      [
+       21.3,
+       0.56
+      ],
+      [
+       22.0,
+       0.63
+      ],
+      [
+       22.0,
+       0.67
+      ],
+      [
+       22.0,
+       0.72
+      ],
+      [
+       22.4,
+       0.8
+      ],
+      [
+       22.4,
+       0.85
+      ],
+      [
+       22.4,
+       0.89
+      ],
+      [
+       22.9,
+       0.94
+      ],
+      [
+       22.9,
+       1.0
+      ],
+      [
+       22.9,
+       1.11
+      ],
+      [
+       23.6,
+       1.18
+      ],
+      [
+       23.6,
+       1.22
+      ],
+      [
+       23.6,
+       1.29
+      ],
+      [
+       23.8,
+       1.33
+      ],
+      [
+       24.7,
+       1.48
+      ],
+      [
+       24.7,
+       1.55
+      ],
+      [
+       24.7,
+       1.7
+      ],
+      [
+       24.7,
+       1.75
+      ],
+      [
+       24.7,
+       1.79
+      ],
+      [
+       24.7,
+       1.82
+      ],
+      [
+       24.7,
+       1.95
+      ],
+      [
+       24.7,
+       2.01
+      ],
+      [
+       24.7,
+       2.04
+      ],
+      [
+       25.4,
+       2.08
+      ],
+      [
+       25.9,
+       2.15
+      ],
+      [
+       25.9,
+       2.3
+      ],
+      [
+       26.3,
+       2.34
+      ],
+      [
+       26.3,
+       2.45
+      ],
+      [
+       26.8,
+       2.5
+      ],
+      [
+       26.8,
+       2.58
+      ],
+      [
+       27.2,
+       2.63
+      ],
+      [
+       27.2,
+       2.69
+      ],
+      [
+       27.7,
+       2.72
+      ],
+      [
+       27.7,
+       2.8
+      ],
+      [
+       28.2,
+       2.83
+      ],
+      [
+       31.1,
+       3.03
+      ],
+      [
+       61.5,
+       3.08
+      ],
+      [
+       66.1,
+       3.15
+      ],
+      [
+       68.8,
+       3.11
+      ],
+      [
+       70.0,
+       3.02
+      ],
+      [
+       70.4,
+       2.94
+      ],
+      [
+       70.4,
+       2.91
+      ],
+      [
+       70.9,
+       2.87
+      ],
+      [
+       70.9,
+       2.8
+      ],
+      [
+       71.3,
+       2.74
+      ],
+      [
+       71.3,
+       2.67
+      ],
+      [
+       71.8,
+       2.63
+      ],
+      [
+       71.8,
+       2.52
+      ],
+      [
+       72.3,
+       2.47
+      ],
+      [
+       72.3,
+       2.39
+      ],
+      [
+       72.3,
+       2.36
+      ],
+      [
+       72.7,
+       2.3
+      ],
+      [
+       72.7,
+       2.17
+      ],
+      [
+       73.2,
+       2.12
+      ],
+      [
+       73.2,
+       1.99
+      ],
+      [
+       73.6,
+       1.93
+      ],
+      [
+       73.6,
+       1.79
+      ],
+      [
+       74.3,
+       1.75
+      ],
+      [
+       74.3,
+       1.71
+      ],
+      [
+       74.3,
+       1.66
+      ],
+      [
+       74.3,
+       1.59
+      ],
+      [
+       74.3,
+       1.57
+      ],
+      [
+       74.6,
+       1.53
+      ],
+      [
+       74.6,
+       1.37
+      ],
+      [
+       75.0,
+       1.31
+      ],
+      [
+       75.2,
+       1.26
+      ],
+      [
+       75.2,
+       1.2
+      ],
+      [
+       75.7,
+       1.09
+      ],
+      [
+       75.7,
+       0.91
+      ],
+      [
+       76.4,
+       0.83
+      ],
+      [
+       76.4,
+       0.8
+      ],
+      [
+       76.4,
+       0.72
+      ],
+      [
+       76.9,
+       0.65
+      ],
+      [
+       76.9,
+       0.52
+      ],
+      [
+       77.3,
+       0.48
+      ],
+      [
+       77.3,
+       0.39
+      ],
+      [
+       77.8,
+       0.36
+      ],
+      [
+       77.8,
+       0.28
+      ],
+      [
+       78.2,
+       0.23
+      ],
+      [
+       79.8,
+       0.09
+      ],
+      [
+       104.7,
+       0.05
+      ],
+      [
+       118.4,
+       0.02
+      ],
+      [
+       119.6,
+       0.1
+      ],
+      [
+       119.6,
+       0.15
+      ],
+      [
+       120.0,
+       0.19
+      ],
+      [
+       120.0,
+       0.25
+      ],
+      [
+       120.7,
+       0.28
+      ],
+      [
+       120.7,
+       0.32
+      ],
+      [
+       120.7,
+       0.36
+      ],
+      [
+       120.7,
+       0.31
+      ],
+      [
+       121.4,
+       0.41
+      ],
+      [
+       121.4,
+       0.52
+      ],
+      [
+       122.1,
+       0.56
+      ],
+      [
+       122.1,
+       0.59
+      ],
+      [
+       122.1,
+       0.67
+      ],
+      [
+       123.5,
+       0.72
+      ],
+      [
+       123.5,
+       0.74
+      ],
+      [
+       124.6,
+       0.78
+      ],
+      [
+       124.6,
+       0.83
+      ],
+      [
+       124.6,
+       0.87
+      ],
+      [
+       124.6,
+       0.94
+      ],
+      [
+       124.6,
+       0.98
+      ],
+      [
+       124.6,
+       1.02
+      ],
+      [
+       124.6,
+       1.07
+      ],
+      [
+       124.6,
+       1.2
+      ],
+      [
+       124.6,
+       1.42
+      ],
+      [
+       124.6,
+       1.46
+      ],
+      [
+       124.6,
+       1.55
+      ],
+      [
+       124.6,
+       1.6
+      ],
+      [
+       124.6,
+       1.64
+      ],
+      [
+       124.6,
+       1.84
+      ],
+      [
+       125.1,
+       1.88
+      ],
+      [
+       125.1,
+       1.95
+      ],
+      [
+       125.1,
+       2.03
+      ],
+      [
+       125.1,
+       2.04
+      ],
+      [
+       125.5,
+       2.12
+      ],
+      [
+       125.5,
+       2.15
+      ],
+      [
+       125.5,
+       2.17
+      ],
+      [
+       126.0,
+       2.25
+      ],
+      [
+       126.0,
+       2.32
+      ],
+      [
+       126.0,
+       2.37
+      ],
+      [
+       126.5,
+       2.41
+      ],
+      [
+       126.5,
+       2.52
+      ],
+      [
+       127.2,
+       2.58
+      ],
+      [
+       127.2,
+       2.61
+      ],
+      [
+       127.2,
+       2.65
+      ],
+      [
+       127.4,
+       2.69
+      ],
+      [
+       127.4,
+       2.72
+      ],
+      [
+       127.8,
+       2.76
+      ],
+      [
+       128.3,
+       2.78
+      ],
+      [
+       128.3,
+       2.83
+      ],
+      [
+       128.5,
+       2.87
+      ],
+      [
+       131.8,
+       3.03
+      ],
+      [
+       161.6,
+       3.08
+      ],
+      [
+       166.2,
+       3.15
+      ],
+      [
+       168.5,
+       3.11
+      ],
+      [
+       170.1,
+       3.0
+      ],
+      [
+       170.1,
+       2.94
+      ],
+      [
+       170.6,
+       2.91
+      ],
+      [
+       170.6,
+       2.85
+      ],
+      [
+       171.0,
+       2.81
+      ],
+      [
+       171.0,
+       2.74
+      ],
+      [
+       171.5,
+       2.69
+      ],
+      [
+       171.5,
+       2.58
+      ],
+      [
+       171.9,
+       2.52
+      ],
+      [
+       171.9,
+       2.43
+      ],
+      [
+       171.9,
+       2.37
+      ],
+      [
+       172.4,
+       2.34
+      ],
+      [
+       172.4,
+       2.28
+      ],
+      [
+       172.9,
+       2.23
+      ],
+      [
+       172.9,
+       2.19
+      ],
+      [
+       172.9,
+       2.14
+      ],
+      [
+       173.1,
+       2.1
+      ],
+      [
+       173.8,
+       2.01
+      ],
+      [
+       173.8,
+       1.97
+      ],
+      [
+       173.8,
+       1.92
+      ],
+      [
+       173.8,
+       1.86
+      ],
+      [
+       174.2,
+       1.81
+      ],
+      [
+       174.2,
+       1.66
+      ],
+      [
+       174.7,
+       1.62
+      ],
+      [
+       174.7,
+       1.59
+      ],
+      [
+       174.7,
+       1.53
+      ],
+      [
+       174.7,
+       1.46
+      ],
+      [
+       175.2,
+       1.4
+      ],
+      [
+       175.2,
+       1.24
+      ],
+      [
+       175.6,
+       1.18
+      ],
+      [
+       175.6,
+       1.0
+      ],
+      [
+       176.1,
+       0.96
+      ],
+      [
+       176.1,
+       0.8
+      ],
+      [
+       176.5,
+       0.74
+      ],
+      [
+       176.5,
+       0.61
+      ],
+      [
+       177.0,
+       0.58
+      ],
+      [
+       177.0,
+       0.47
+      ],
+      [
+       177.9,
+       0.39
+      ],
+      [
+       177.9,
+       0.36
+      ],
+      [
+       177.9,
+       0.32
+      ],
+      [
+       178.2,
+       0.26
+      ],
+      [
+       180.0,
+       0.09
+      ],
+      [
+       214.4,
+       0.02
+      ],
+      [
+       219.0,
+       0.03
+      ],
+      [
+       219.7,
+       0.08
+      ],
+      [
+       220.2,
+       0.15
+      ],
+      [
+       220.6,
+       0.23
+      ],
+      [
+       220.6,
+       0.3
+      ],
+      [
+       221.3,
+       0.36
+      ],
+      [
+       221.3,
+       0.39
+      ],
+      [
+       221.3,
+       0.41
+      ],
+      [
+       222.0,
+       0.48
+      ],
+      [
+       222.0,
+       0.54
+      ],
+      [
+       222.5,
+       0.63
+      ],
+      [
+       222.5,
+       0.7
+      ],
+      [
+       222.5,
+       0.76
+      ],
+      [
+       222.9,
+       0.8
+      ],
+      [
+       222.9,
+       0.83
+      ],
+      [
+       222.9,
+       0.89
+      ],
+      [
+       222.9,
+       0.92
+      ],
+      [
+       223.4,
+       0.98
+      ],
+      [
+       223.4,
+       1.13
+      ],
+      [
+       223.6,
+       1.14
+      ],
+      [
+       223.6,
+       1.2
+      ],
+      [
+       223.9,
+       1.24
+      ],
+      [
+       223.9,
+       1.33
+      ],
+      [
+       224.3,
+       1.38
+      ],
+      [
+       224.3,
+       1.51
+      ],
+      [
+       224.3,
+       1.53
+      ],
+      [
+       224.8,
+       1.6
+      ],
+      [
+       224.8,
+       1.71
+      ],
+      [
+       225.2,
+       1.77
+      ],
+      [
+       225.2,
+       1.92
+      ],
+      [
+       225.7,
+       1.97
+      ],
+      [
+       225.7,
+       2.1
+      ],
+      [
+       226.4,
+       2.17
+      ],
+      [
+       226.4,
+       2.23
+      ],
+      [
+       226.4,
+       2.26
+      ],
+      [
+       226.6,
+       2.36
+      ],
+      [
+       226.6,
+       2.47
+      ],
+      [
+       227.3,
+       2.52
+      ],
+      [
+       227.3,
+       2.56
+      ],
+      [
+       227.3,
+       2.61
+      ],
+      [
+       228.2,
+       2.76
+      ],
+      [
+       228.2,
+       2.78
+      ],
+      [
+       228.9,
+       2.81
+      ],
+      [
+       228.9,
+       2.85
+      ],
+      [
+       231.4,
+       3.02
+      ],
+      [
+       248.9,
+       3.07
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "V+ – VSET variation with IRES",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "IRES",
+    "unit": "µA",
+    "scale": "log"
+   },
+   "y": {
+    "label": "VRES = V+ – VSET",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "V+ = 5V",
+     "points": [
+      [
+       0.7048,
+       1.284
+      ],
+      [
+       3.046,
+       1.23
+      ],
+      [
+       13.56,
+       1.161
+      ],
+      [
+       44.71,
+       1.093
+      ],
+      [
+       85.14,
+       1.036
+      ],
+      [
+       147.4,
+       0.9658
+      ]
+     ]
+    },
+    {
+     "label": "V+ = 3V",
+     "points": [
+      [
+       0.7048,
+       1.224
+      ],
+      [
+       3.692,
+       1.163
+      ],
+      [
+       16.58,
+       1.094
+      ],
+      [
+       40.97,
+       1.039
+      ],
+      [
+       90.89,
+       0.9661
+      ],
+      [
+       150.9,
+       0.9014
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "RSET vs desired output frequency",
+   "page": 9,
+   "conditions": "PH = GND, 2-phase, M = 1",
+   "x": {
+    "label": "Desired output frequency",
+    "unit": "Hz",
+    "scale": "log"
+   },
+   "y": {
+    "label": "RSET",
+    "unit": "kΩ",
+    "scale": "log"
+   },
+   "series": [
+    {
+     "label": "÷100",
+     "points": [
+      [
+       1002,
+       1976
+      ],
+      [
+       197756,
+       9.765
+      ]
+     ]
+    },
+    {
+     "label": "÷10",
+     "points": [
+      [
+       10412,
+       1976
+      ],
+      [
+       1924253,
+       9.936
+      ]
+     ]
+    },
+    {
+     "label": "÷1",
+     "points": [
+      [
+       100582,
+       1976
+      ],
+      [
+       19847043,
+       9.878
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply sensitivity",
+   "page": 15,
+   "conditions": "RSET = 63.2k, PIN 4 = FLOATING (÷10)",
+   "x": {
+    "label": "Supply voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency deviation",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "25°C",
+     "points": [
+      [
+       2.696,
+       -0.03798
+      ],
+      [
+       3.09,
+       -0.03976
+      ],
+      [
+       3.273,
+       -0.03761
+      ],
+      [
+       3.8,
+       -0.01207
+      ],
+      [
+       4.544,
+       0.03152
+      ],
+      [
+       5.498,
+       0.09166
+      ]
+     ]
+    },
+    {
+     "label": "–40°C",
+     "points": [
+      [
+       2.696,
+       -0.04303
+      ],
+      [
+       3.048,
+       -0.04206
+      ],
+      [
+       3.248,
+       -0.03858
+      ],
+      [
+       4.818,
+       0.04022
+      ],
+      [
+       5.498,
+       0.07852
+      ]
+     ]
+    },
+    {
+     "label": "85°C",
+     "points": [
+      [
+       2.696,
+       -0.04682
+      ],
+      [
+       2.956,
+       -0.04575
+      ],
+      [
+       3.172,
+       -0.04149
+      ],
+      [
+       3.365,
+       -0.03317
+      ],
+      [
+       4.175,
+       0.007055
+      ],
+      [
+       5.498,
+       0.06563
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "Pin 4 stands for the DIV pin, which is pin 2."
+   ]
+  },
+  {
+   "title": "Start-up time",
+   "page": 15,
+   "conditions": "TA = 25°C, V+ = 5V",
+   "x": {
+    "label": "Time after power applied",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Frequency error",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RSET = 20k",
+     "points": [
+      [
+       18.18,
+       45.12
+      ],
+      [
+       30.13,
+       23.53
+      ],
+      [
+       54.17,
+       5.565
+      ],
+      [
+       75.07,
+       1.438
+      ],
+      [
+       97.84,
+       0.1965
+      ],
+      [
+       990.3,
+       0.1559
+      ]
+     ]
+    },
+    {
+     "label": "RSET = 63.2k",
+     "points": [
+      [
+       10.0,
+       45.69
+      ],
+      [
+       31.48,
+       48.92
+      ],
+      [
+       101.4,
+       8.576
+      ],
+      [
+       125.6,
+       4.899
+      ],
+      [
+       165.7,
+       2.273
+      ],
+      [
+       233.4,
+       0.4987
+      ],
+      [
+       400.1,
+       0.1559
+      ],
+      [
+       995.3,
+       0.1559
+      ]
+     ]
+    },
+    {
+     "label": "RSET = 400k",
+     "points": [
+      [
+       18.18,
+       45.12
+      ],
+      [
+       25.55,
+       64.87
+      ],
+      [
+       31.57,
+       65.18
+      ],
+      [
+       78.68,
+       55.62
+      ],
+      [
+       193.2,
+       29.85
+      ],
+      [
+       240.5,
+       23.72
+      ],
+      [
+       308.1,
+       18.29
+      ],
+      [
+       393.4,
+       13.6
+      ],
+      [
+       494,
+       9.688
+      ],
+      [
+       647.3,
+       5.739
+      ],
+      [
+       816.8,
+       3.311
+      ],
+      [
+       996.6,
+       2.483
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "500kHz, 4-phase clock with 20% frequency spreading",
+   "page": 1,
+   "description": "The oscillator on a 5 V supply giving four 500 kHz clocks a quarter period apart. PH tied to V+ picks 4-phase mode (M = 4); DIV left open picks ÷10; RSET = 10k sets fOUT = 10 MHz/(10 × 4) × 20k/10k = 500 kHz. RMOD = 10k, equal to RSET, gives 20 × 10k/10k = 20 % downward spreading. The 0.1 µF capacitor decouples V+.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC6902"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "RSET",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "RMOD",
+     "type": "resistor",
+     "value": "10k"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "5V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "OUT1"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "OUT2"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "OUT3"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "OUT4"
+    }
+   ],
+   "notes": [
+    "DIV is open (N = 10)."
+   ]
+  },
+  {
+   "id": "design",
+   "title": "Typical application with design equation",
+   "page": 5,
+   "description": "The general hookup that the design equations describe: RSET from V+ to SET sets the frequency, RMOD from V+ to MOD sets the spreading, DIV and PH are each tied to GND, left open or tied to V+ to pick N and M, and 0.1 µF decouples V+. fOUT = 10 MHz/(N × M) × 20 kΩ/RSET for 5 kHz ≤ fOUT ≤ 20 MHz; spreading = 20 × RSET/RMOD percent.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LTC6902"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "RSET",
+     "type": "resistor",
+     "value": "RSET",
+     "note": "from the fOUT equation"
+    },
+    {
+     "ref": "RMOD",
+     "type": "resistor",
+     "value": "RMOD",
+     "note": "from the spreading equation"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "V+"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "DIV"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "PH"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "OUT1"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "OUT2"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "OUT3"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "OUT4"
+    }
+   ],
+   "notes": [
+    "For a fixed frequency RMOD is left out and MOD goes to GND."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Output frequency",
+   "expr": "fOUT = (10MHz / (N • M)) • (20kΩ / RSET)",
+   "where": {
+    "fOUT": "output frequency; with SSFM on, the top of the modulated range (fMAX); 5kHz ≤ fOUT ≤ 20MHz",
+    "N": "divider: 1 with DIV at 0V, 10 with DIV open, 100 with DIV at V+",
+    "M": "phase divider: 1 for 2-phase (PH at 0V), 3 for 3-phase (PH open), 4 for 4-phase (PH at V+)",
+    "RSET": "resistor from SET to V+, 10k to 2M"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Frequency-setting resistor",
+   "expr": "RSET = 20kΩ • 10MHz / (N • M • fOUT)",
+   "where": {
+    "RSET": "10k minimum, 2M maximum"
+   },
+   "note": "RSET's own tolerance adds directly to the frequency error.",
+   "page": 12
+  },
+  {
+   "name": "Spreading from the resistor ratio",
+   "expr": "Spreading Percentage = 20 • RSET / RMOD",
+   "where": {
+    "RMOD": "resistor from MOD to V+"
+   },
+   "note": "Independent of N and M.",
+   "page": 5
+  },
+  {
+   "name": "Modulation resistor",
+   "expr": "RMOD = 20 • RSET / Spreading Percentage",
+   "where": {},
+   "note": "RMOD covers the same range as RSET, 10k to 400k. Tested and specified at 10% and 40%; about 5% and 80% are the workable ends.",
+   "page": 13
+  },
+  {
+   "name": "Spreading percentage",
+   "expr": "Spreading Percentage = 100 • (fMAX – fMIN) / fMAX",
+   "where": {
+    "fMAX": "highest frequency of the excursion, equal to fOUT from RSET",
+    "fMIN": "lowest frequency of the excursion"
+   },
+   "note": "",
+   "page": 6
+  },
+  {
+   "name": "Master oscillator frequency",
+   "expr": "fMASTER = 10MHz • 20kΩ • IMASTER / (V+ – VSET)",
+   "where": {
+    "IMASTER": "ISET less the modulation current IMOD",
+    "V+ – VSET": "about 1.1V across RSET"
+   },
+   "note": "",
+   "page": 7
+  },
+  {
+   "name": "Modulation step and repeat times",
+   "expr": "τSTEP = 3200 / fMASTER; τREPEAT = 3200 • 512 / fMASTER",
+   "where": {
+    "τSTEP": "time between steps of the 128-level modulating signal",
+    "τREPEAT": "period of the pseudorandom sequence"
+   },
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Start-up time",
+   "expr": "tSTART ≅ RSET • (3.7µs/kΩ) + 10µs",
+   "where": {
+    "tSTART": "time from power-up to settling within 1% of the final frequency"
+   },
+   "note": "Independent of the DIV setting; RSET = 100k settles within 1% of 200kHz (N = 10) in about 380µs.",
+   "page": 15
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Master oscillator",
+   "page": 8,
+   "text": "The master oscillator's frequency follows the current into it divided by the voltage across RSET (V+ – VSET). A PMOS stage holds SET about 1.1 V under V+ (±8 % at a given current and supply; it falls as IRES rises). Because RSET ties that voltage to ISET, accuracy does not depend on the exact SET voltage. RSET of 10k to 2M gives a master frequency of 100 kHz to 20 MHz; accuracy can suffer above 10 MHz with a supply under 4 V."
+  },
+  {
+   "topic": "Divider and phase circuit",
+   "page": 8,
+   "text": "The master output is divided by 1, 10 or 100 (DIV at GND or below 0.5 V, open or mid-supply, at V+ or within 0.4 V of it), then by the phase circuit, which divides further by M = 1, 3 or 4 and drives the four output buffers. The overlapping divider ranges mean frequencies near 100 kHz and 1 MHz can be reached with two RSET values."
+  },
+  {
+   "topic": "Output drivers",
+   "page": 10,
+   "text": "The CMOS outputs have an on-resistance typically under 100 Ω and behave much like HCMOS logic outputs. In ÷1 mode edges are typically 7 ns at 5 V and 11 ns at 3 V, enough for a clean 10 MHz square wave (20 MHz at 5 V). In ÷10 and ÷100 a slew-rate limit stretches edges to typically 14 ns at 5 V and 19 ns at 3 V, lowering EMI and supply bounce."
+  },
+  {
+   "topic": "Spread spectrum frequency modulation",
+   "page": 10,
+   "text": "With SSFM on, a modulation current IMOD is taken from ISET, so the master frequency only ever drops below the RSET value (downspread). V+ – VMOD comes from a multiplying DAC referenced to VSET: it is one fifth of (V+ – VSET) times the DAC code, between 0 V and 20 % of V+ – VSET. With RSET = RMOD, IMOD swings 0 to 0.2 ISET and the frequency between fMAX and 0.8 fMAX. The code comes from a 9-bit linear feedback shift register (sequence of 512); its low seven bits drive the DAC, giving 128 steps. The register is clocked by the master oscillator divided by 3200, and a servo loop of about 25 kHz bandwidth smooths the steps."
+  },
+  {
+   "topic": "Disabling SSFM",
+   "page": 10,
+   "text": "Tie MOD to GND: this stops modulation and shuts down the modulation circuitry. Leaving MOD open gives 0 % in theory, but the open pin picks up noise that disturbs the output frequency."
+  },
+  {
+   "topic": "Choosing N and RSET",
+   "page": 11,
+   "text": "The master covers 200:1 and the divider steps 10:1, so most frequencies have at least two solutions. For SSFM, use the highest divider so the master, which clocks the pseudorandom generator, runs fastest; faster modulation gives more EMC improvement. For fixed frequency, the highest divider gives the lowest jitter (division reduces master jitter), while the lowest divider gives the best accuracy and lowest power because the master runs slower. M can also be used to move the master up or down: a single clock can take whichever mode gives the wanted M, and two phases can come from OUT1 and OUT3 (or OUT2 and OUT4) in 4-phase mode."
+  },
+  {
+   "topic": "Design example",
+   "page": 6,
+   "text": "4-phase, 250 kHz clock with 40 % spreading: PH to V+ (M = 4), DIV open (N = 10), RSET = 20k sets fOUT = fMAX = 250 kHz, RMOD = 10k sets 40 % spreading."
+  },
+  {
+   "topic": "Driving switching regulators",
+   "page": 13,
+   "text": "The part is aimed at clocking several interleaved switching regulators at one frequency, which reduces input capacitance and avoids beat notes. Because the phases come through inverters or flip-flops, rising (or falling) edges of different outputs never coincide, even with heavy spreading. Most regulators synchronize on the clock's rising edge. The 25 kHz smoothing keeps each frequency change within a regulator's loop bandwidth (typically 1/10, ranging 1/50 to 1/2 of its switching frequency); a regulator with bandwidth above 25 kHz stays in regulation. A PLL-synchronized regulator needs a loop filter with enough capture range and bandwidth. Output ripple becomes noise-like and broadband instead of a repeating tone, and the sequence repeats well below the audio band."
+  },
+  {
+   "topic": "Driving logic",
+   "page": 13,
+   "text": "The outputs can drive general digital logic, but the pseudorandom modulation, though smoothed by the 25 kHz filter, gives more cycle-to-cycle jitter than a slow triangular modulation, so logic with tight timing needs that jitter checked."
+  },
+  {
+   "topic": "EMC",
+   "page": 13,
+   "text": "For best EMC run SSFM with the master at its highest frequency. Modulating at or above the measuring bandwidth of regulatory tests gives the lowest readings; for interference inside a system the best rate has to be found in that system, within the regulator's synchronization range."
+  },
+  {
+   "topic": "Supply sensitivity",
+   "page": 15,
+   "text": "The guaranteed voltage coefficient is 0.1 %/V; typical sensitivity is half that."
+  },
+  {
+   "topic": "Layout",
+   "page": 15,
+   "text": "Keep the capacitance on SET and on MOD under 10 pF; more capacitance on SET raises jitter. Decouple V+ with 0.1 µF right at the pin to a ground plane, tie GND to the plane, and give an open DIV or PH pin 1 nF to GND or a ground guard."
+  }
+ ],
+ "packages": [
+  {
+   "name": "MS10 (10-lead plastic MSOP, LTC DWG # 05-08-1661)",
+   "page": 16,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "mm",
+    "inch",
+    "note"
+   ],
+   "rows": [
+    [
+     "Body length along the lead rows",
+     "3.00 ± 0.102",
+     "(.118 ± .004)",
+     "Note 3"
+    ],
+    [
+     "Body width",
+     "3.00 ± 0.102",
+     "(.118 ± .004)",
+     "Note 4"
+    ],
+    [
+     "Width across leads",
+     "4.90 ± 0.15",
+     "(1.93 ± .006)",
+     ""
+    ],
+    [
+     "Overall height",
+     "1.10 max",
+     "(.043) max",
+     ""
+    ],
+    [
+     "Body thickness",
+     "0.86 REF",
+     "(.034) REF",
+     ""
+    ],
+    [
+     "Standoff",
+     "0.13 ± 0.076",
+     "(.005 ± .003)",
+     ""
+    ],
+    [
+     "Lead width",
+     "0.17 – 0.27 TYP",
+     "(.007 – .011) TYP",
+     ""
+    ],
+    [
+     "Lead pitch",
+     "0.50 BSC",
+     "(.0197) BSC",
+     ""
+    ],
+    [
+     "Lead 6 to body end",
+     "0.497 ± 0.076 REF",
+     "(.0196 ± .003) REF",
+     ""
+    ],
+    [
+     "Foot length",
+     "0.53 ± 0.01",
+     "(.021 ± .006)",
+     ""
+    ],
+    [
+     "Gauge plane height",
+     "0.254",
+     "(.010)",
+     ""
+    ],
+    [
+     "Foot angle",
+     "0° – 6° TYP",
+     "",
+     ""
+    ],
+    [
+     "Lead thickness",
+     "0.18",
+     "(.007)",
+     ""
+    ],
+    [
+     "Lead coplanarity",
+     "0.102 max",
+     "(.004) max",
+     "Note 5"
+    ],
+    [
+     "Pad layout: pad width",
+     "0.305 ± 0.038 TYP",
+     "(.0120 ± .0015) TYP",
+     ""
+    ],
+    [
+     "Pad layout: pad pitch",
+     "0.50 BSC",
+     "(.0197) BSC",
+     ""
+    ],
+    [
+     "Pad layout: pad length",
+     "0.889 ± 0.127",
+     "(.035 ± .005)",
+     ""
+    ],
+    [
+     "Pad layout: outer span",
+     "5.23 MIN",
+     "(.206) MIN",
+     ""
+    ],
+    [
+     "Pad layout: gap between pad rows",
+     "3.2 – 3.45",
+     "(.126 – .136)",
+     ""
+    ]
+   ],
+   "notes": [
+    "Note 3: Excludes mold flash, protrusions and gate burrs, each at most 0.152mm (.006\") per side.",
+    "Note 4: Excludes interlead flash and protrusions, at most 0.152mm (.006\") per side.",
+    "Note 5: Coplanarity of the formed lead bottoms.",
+    "Width across leads: the inch value should read .193 ± .006.",
+    "Foot length: the millimetre and inch tolerances (± 0.01 and ± .006) do not agree."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,5011 @@
+{
+ "sheet": 1,
+ "name": "ESP32-C3FH4",
+ "kind": "mcu",
+ "manufacturer": "Espressif",
+ "title": "ESP32-C3 series: RISC-V Wi-Fi and Bluetooth LE SoC in QFN32 5×5 mm, with optional 4 or 8 MB flash in the package",
+ "source": {
+  "document": "ESP32-C3 Series Datasheet",
+  "revision": "Version 2.5, 2026-11-11",
+  "pages": 78
+ },
+ "summary": "A single-chip 2.4 GHz radio microcontroller: one 32-bit RISC-V core (RV32IMC) at up to 160 MHz with 384 KB ROM, 400 KB SRAM and 8 KB RTC SRAM, 802.11b/g/n Wi-Fi to 150 Mbps and Bluetooth 5 LE with coded PHY, sharing one RF port with its balun, switch, PA and LNA on chip. It runs from 3.0 to 3.6 V, needs an external main crystal, and sleeps at 5 µA in Deep-sleep. The variants differ in flash: ESP32-C3 has none and uses external SPI flash; ESP32-C3FN4, -FH4, -FH4AZ and -FH4X carry 4 MB and -FH8X 8 MB inside the package. The -FH4AZ and -FH4X leave the flash pins unbonded and offer 16 GPIOs, the rest 22. ESP32-C3FH4 is rated for -40 to 105 °C ambient.",
+ "key_figures": [
+  [
+   "CPU",
+   "32-bit RISC-V single core, up to 160 MHz; 483.27 CoreMark (3.02 CoreMark/MHz)"
+  ],
+  [
+   "Memory",
+   "384 KB ROM, 400 KB SRAM (16 KB for cache), 8 KB RTC SRAM, 4096-bit eFuse (1792 bits for users)"
+  ],
+  [
+   "Flash in package (ESP32-C3FH4)",
+   "4 MB, high-temperature grade"
+  ],
+  [
+   "GPIO (ESP32-C3FH4)",
+   "22, of which 3 strapping and 6 used by the flash"
+  ],
+  [
+   "Supply",
+   "3.0 ~ 3.6 V, supply able to give 0.5 A"
+  ],
+  [
+   "Wi-Fi",
+   "802.11b/g/n, 2412 ~ 2484 MHz; 21.0 dBm typ TX (802.11b); -98.4 dBm typ RX (802.11b, 1 Mbps)"
+  ],
+  [
+   "Bluetooth LE",
+   "Bluetooth 5, 2402 ~ 2480 MHz; up to 20 dBm TX; -105 dBm typ RX (125 Kbps)"
+  ],
+  [
+   "Peak current",
+   "335 mA (802.11b TX at 21 dBm)"
+  ],
+  [
+   "Deep-sleep current",
+   "5 µA typ (RTC timer and RTC memory on)"
+  ],
+  [
+   "ADC",
+   "two 12-bit SAR ADCs, 6 channels, 100 kSPS"
+  ],
+  [
+   "Ambient temperature (ESP32-C3FH4)",
+   "–40 ∼ 105 °C"
+  ],
+  [
+   "Package",
+   "QFN32 5×5 mm, 0.5 mm pitch, exposed pad"
+  ]
+ ],
+ "part_numbers": {
+  "page": 12,
+  "columns": [
+   "part number",
+   "status",
+   "in-package flash",
+   "ambient temp. (°C)",
+   "package (mm)",
+   "GPIO no.",
+   "chip revision"
+  ],
+  "rows": [
+   [
+    "ESP32-C3",
+    "",
+    "—",
+    "–40 ∼ 105",
+    "QFN32 (5*5)",
+    "22",
+    "v0.4"
+   ],
+   [
+    "ESP32-C3FN4",
+    "EOL",
+    "4 MB",
+    "–40 ∼ 85",
+    "QFN32 (5*5)",
+    "22",
+    "v0.4"
+   ],
+   [
+    "ESP32-C3FH4",
+    "",
+    "4 MB",
+    "–40 ∼ 105",
+    "QFN32 (5*5)",
+    "22",
+    "v0.4"
+   ],
+   [
+    "ESP32-C3FH4AZ",
+    "NRND",
+    "4 MB",
+    "–40 ∼ 105",
+    "QFN32 (5*5)",
+    "16",
+    "v0.4"
+   ],
+   [
+    "ESP32-C3FH4X",
+    "Recommended",
+    "4 MB",
+    "–40 ∼ 105",
+    "QFN32 (5*5)",
+    "16",
+    "v1.1"
+   ],
+   [
+    "ESP32-C3FH8X",
+    "",
+    "8 MB",
+    "–40 ∼ 105",
+    "QFN32 (5*5)",
+    "22",
+    "v1.1"
+   ]
+  ],
+  "notes": [
+   "Name fields, left to right: ESP32-C3 (series); F (flash inside the package); H or N (flash temperature grade, high or normal); flash size in MB; AZ (another identification code); X (chip revision v1.1).",
+   "Ambient temperature is the recommended range for the air immediately round the chip.",
+   "The in-package flash runs at up to 80 MHz and has no auto-suspend by default; a 120 MHz flash clock or auto-suspend is available on request.",
+   "Every revision has the same SRAM, but v1.1 leaves about 10 KB more free for the user than v0.4, and v1.1 needs particular ESP-IDF versions.",
+   "ESP32-C3 has no flash inside and needs an external SPI flash.",
+   "The 16-GPIO variants leave the SPI0/SPI1 flash pins unbonded."
+  ]
+ },
+ "pins": [
+  {
+   "package": "QFN32 5×5 mm (ESP32-C3, ESP32-C3FN4, ESP32-C3FH4, ESP32-C3FH8X)",
+   "page": 14,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "LNA_IN",
+     "type": "analog",
+     "function": "RF port: input of the receive low-noise amplifier and output of the transmitter; the antenna matching network connects to it."
+    },
+    {
+     "pin": "2",
+     "name": "VDD3P3",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "3",
+     "name": "VDD3P3",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "XTAL_32K_P",
+     "type": "I/O",
+     "function": "GPIO0. Positive side of an optional 32 kHz crystal or oscillator; also ADC1_CH0. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "5",
+     "name": "XTAL_32K_N",
+     "type": "I/O",
+     "function": "GPIO1. Negative side of an optional 32 kHz crystal or oscillator; also ADC1_CH1. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "6",
+     "name": "GPIO2",
+     "type": "I/O",
+     "function": "GPIO2, a strapping pin (pull it up at boot); also ADC1_CH2 and FSPIQ. Input enabled at reset. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "7",
+     "name": "CHIP_EN",
+     "type": "input",
+     "function": "Chip enable and hardware reset: high runs the chip, low powers it down. It must not float."
+    },
+    {
+     "pin": "8",
+     "name": "GPIO3",
+     "type": "I/O",
+     "function": "GPIO3; also ADC1_CH3. Input enabled at reset. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "9",
+     "name": "MTMS",
+     "type": "I/O",
+     "function": "JTAG TMS by default; GPIO4, ADC1_CH4 or FSPIHD. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "10",
+     "name": "MTDI",
+     "type": "I/O",
+     "function": "JTAG TDI by default; GPIO5, ADC2_CH0 or FSPIWP. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "11",
+     "name": "VDD3P3_RTC",
+     "type": "power",
+     "function": "Supply for the RTC domain, part of the digital domain and the RTC I/O pins (pins 4 to 10), 3.0 to 3.6 V."
+    },
+    {
+     "pin": "12",
+     "name": "MTCK",
+     "type": "I/O",
+     "function": "JTAG TCK by default; GPIO6 or FSPICLK. Weak pull-up after reset unless EFUSE_DIS_PAD_JTAG is burnt. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "13",
+     "name": "MTDO",
+     "type": "I/O",
+     "function": "JTAG TDO by default; GPIO7 or FSPID. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "14",
+     "name": "GPIO8",
+     "type": "I/O",
+     "function": "GPIO8, a strapping pin: with GPIO9 low it must be high for download boot, and it gates ROM messages on UART0. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "15",
+     "name": "GPIO9",
+     "type": "I/O",
+     "function": "GPIO9, a strapping pin with a weak pull-up at reset: high selects SPI boot, low selects download boot. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "16",
+     "name": "GPIO10",
+     "type": "I/O",
+     "function": "GPIO10; also FSPICS0. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "17",
+     "name": "VDD3P3_CPU",
+     "type": "power",
+     "function": "Supply for the digital I/O pins (12 to 16 and 25 to 28), and through RSPI the VDD_SPI rail, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "18",
+     "name": "VDD_SPI",
+     "type": "power",
+     "function": "Flash supply output, taken from VDD3P3_CPU through RSPI (7.5 Ω typ); on variants with flash inside it is also a backup supply input for that flash. Usable as GPIO11 only when the flash has its own supply."
+    },
+    {
+     "pin": "19",
+     "name": "SPIHD",
+     "type": "I/O",
+     "function": "Flash HOLD#; GPIO12. Weak pull-up. Taken by the in-package flash on variants that have it; not bonded on ESP32-C3FH4X and ESP32-C3FH4AZ."
+    },
+    {
+     "pin": "20",
+     "name": "SPIWP",
+     "type": "I/O",
+     "function": "Flash WP#; GPIO13. Weak pull-up. Taken by the in-package flash on variants that have it; not bonded on ESP32-C3FH4X and ESP32-C3FH4AZ."
+    },
+    {
+     "pin": "21",
+     "name": "SPICS0",
+     "type": "I/O",
+     "function": "Flash chip select CS#; GPIO14. Weak pull-up. Taken by the in-package flash on variants that have it; not bonded on ESP32-C3FH4X and ESP32-C3FH4AZ."
+    },
+    {
+     "pin": "22",
+     "name": "SPICLK",
+     "type": "I/O",
+     "function": "Flash clock; GPIO15. Weak pull-up. Taken by the in-package flash on variants that have it; not bonded on ESP32-C3FH4X and ESP32-C3FH4AZ."
+    },
+    {
+     "pin": "23",
+     "name": "SPID",
+     "type": "I/O",
+     "function": "Flash data DI (MOSI, IO0); GPIO16. Weak pull-up. Taken by the in-package flash on variants that have it; not bonded on ESP32-C3FH4X and ESP32-C3FH4AZ."
+    },
+    {
+     "pin": "24",
+     "name": "SPIQ",
+     "type": "I/O",
+     "function": "Flash data DO (MISO, IO1); GPIO17. Weak pull-up. Taken by the in-package flash on variants that have it; not bonded on ESP32-C3FH4X and ESP32-C3FH4AZ."
+    },
+    {
+     "pin": "25",
+     "name": "GPIO18",
+     "type": "I/O",
+     "function": "USB D- of the USB Serial/JTAG controller by default; GPIO18 once USB is turned off. 40 mA default drive. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "26",
+     "name": "GPIO19",
+     "type": "I/O",
+     "function": "USB D+ of the USB Serial/JTAG controller by default, with the USB pull-up on; GPIO19 once USB is turned off. 40 mA default drive. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "27",
+     "name": "U0RXD",
+     "type": "I/O",
+     "function": "UART0 receive by default, input with weak pull-up; GPIO20. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "28",
+     "name": "U0TXD",
+     "type": "I/O",
+     "function": "UART0 transmit by default, output with weak pull-up; GPIO21. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "29",
+     "name": "XTAL_N",
+     "type": "analog",
+     "function": "Main crystal or oscillator, negative side. The chip cannot run without the main crystal clock."
+    },
+    {
+     "pin": "30",
+     "name": "XTAL_P",
+     "type": "analog",
+     "function": "Main crystal or oscillator, positive side."
+    },
+    {
+     "pin": "31",
+     "name": "VDDA",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "32",
+     "name": "VDDA",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "33",
+     "name": "GND",
+     "type": "ground",
+     "function": "Exposed pad under the package: ground."
+    }
+   ],
+   "notes": [
+    "Pins count anticlockwise from pin 1 seen from the top; pin 33 is the exposed pad.",
+    "On the variants with flash inside, pins 19 to 24 run to that flash and are left for it."
+   ]
+  },
+  {
+   "package": "QFN32 5×5 mm (ESP32-C3FH4X, ESP32-C3FH4AZ)",
+   "page": 15,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "LNA_IN",
+     "type": "analog",
+     "function": "RF port: input of the receive low-noise amplifier and output of the transmitter; the antenna matching network connects to it."
+    },
+    {
+     "pin": "2",
+     "name": "VDD3P3",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "3",
+     "name": "VDD3P3",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "4",
+     "name": "XTAL_32K_P",
+     "type": "I/O",
+     "function": "GPIO0. Positive side of an optional 32 kHz crystal or oscillator; also ADC1_CH0. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "5",
+     "name": "XTAL_32K_N",
+     "type": "I/O",
+     "function": "GPIO1. Negative side of an optional 32 kHz crystal or oscillator; also ADC1_CH1. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "6",
+     "name": "GPIO2",
+     "type": "I/O",
+     "function": "GPIO2, a strapping pin (pull it up at boot); also ADC1_CH2 and FSPIQ. Input enabled at reset. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "7",
+     "name": "CHIP_EN",
+     "type": "input",
+     "function": "Chip enable and hardware reset: high runs the chip, low powers it down. It must not float."
+    },
+    {
+     "pin": "8",
+     "name": "GPIO3",
+     "type": "I/O",
+     "function": "GPIO3; also ADC1_CH3. Input enabled at reset. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "9",
+     "name": "MTMS",
+     "type": "I/O",
+     "function": "JTAG TMS by default; GPIO4, ADC1_CH4 or FSPIHD. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "10",
+     "name": "MTDI",
+     "type": "I/O",
+     "function": "JTAG TDI by default; GPIO5, ADC2_CH0 or FSPIWP. Powered from VDD3P3_RTC."
+    },
+    {
+     "pin": "11",
+     "name": "VDD3P3_RTC",
+     "type": "power",
+     "function": "Supply for the RTC domain, part of the digital domain and the RTC I/O pins (pins 4 to 10), 3.0 to 3.6 V."
+    },
+    {
+     "pin": "12",
+     "name": "MTCK",
+     "type": "I/O",
+     "function": "JTAG TCK by default; GPIO6 or FSPICLK. Weak pull-up after reset unless EFUSE_DIS_PAD_JTAG is burnt. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "13",
+     "name": "MTDO",
+     "type": "I/O",
+     "function": "JTAG TDO by default; GPIO7 or FSPID. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "14",
+     "name": "GPIO8",
+     "type": "I/O",
+     "function": "GPIO8, a strapping pin: with GPIO9 low it must be high for download boot, and it gates ROM messages on UART0. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "15",
+     "name": "GPIO9",
+     "type": "I/O",
+     "function": "GPIO9, a strapping pin with a weak pull-up at reset: high selects SPI boot, low selects download boot. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "16",
+     "name": "GPIO10",
+     "type": "I/O",
+     "function": "GPIO10; also FSPICS0. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "17",
+     "name": "VDD3P3_CPU",
+     "type": "power",
+     "function": "Supply for the digital I/O pins (12 to 16 and 25 to 28), and through RSPI the VDD_SPI rail, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "18",
+     "name": "VDD_SPI",
+     "type": "power",
+     "function": "Flash supply output, taken from VDD3P3_CPU through RSPI (7.5 Ω typ); on variants with flash inside it is also a backup supply input for that flash. Usable as GPIO11 only when the flash has its own supply."
+    },
+    {
+     "pin": "19",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not bonded inside the package; leave unconnected."
+    },
+    {
+     "pin": "20",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not bonded inside the package; leave unconnected."
+    },
+    {
+     "pin": "21",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not bonded inside the package; leave unconnected."
+    },
+    {
+     "pin": "22",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not bonded inside the package; leave unconnected."
+    },
+    {
+     "pin": "23",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not bonded inside the package; leave unconnected."
+    },
+    {
+     "pin": "24",
+     "name": "NC",
+     "type": "no connect",
+     "function": "Not bonded inside the package; leave unconnected."
+    },
+    {
+     "pin": "25",
+     "name": "GPIO18",
+     "type": "I/O",
+     "function": "USB D- of the USB Serial/JTAG controller by default; GPIO18 once USB is turned off. 40 mA default drive. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "26",
+     "name": "GPIO19",
+     "type": "I/O",
+     "function": "USB D+ of the USB Serial/JTAG controller by default, with the USB pull-up on; GPIO19 once USB is turned off. 40 mA default drive. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "27",
+     "name": "U0RXD",
+     "type": "I/O",
+     "function": "UART0 receive by default, input with weak pull-up; GPIO20. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "28",
+     "name": "U0TXD",
+     "type": "I/O",
+     "function": "UART0 transmit by default, output with weak pull-up; GPIO21. Powered from VDD3P3_CPU."
+    },
+    {
+     "pin": "29",
+     "name": "XTAL_N",
+     "type": "analog",
+     "function": "Main crystal or oscillator, negative side. The chip cannot run without the main crystal clock."
+    },
+    {
+     "pin": "30",
+     "name": "XTAL_P",
+     "type": "analog",
+     "function": "Main crystal or oscillator, positive side."
+    },
+    {
+     "pin": "31",
+     "name": "VDDA",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "32",
+     "name": "VDDA",
+     "type": "power",
+     "function": "Supply for the analog domain, 3.0 to 3.6 V."
+    },
+    {
+     "pin": "33",
+     "name": "GND",
+     "type": "ground",
+     "function": "Exposed pad under the package: ground."
+    }
+   ],
+   "notes": [
+    "The SPI0/SPI1 flash pins 19 to 24 are not bonded on these 16-GPIO variants; every other pin matches the 22-GPIO pinout."
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Pin overview",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "pin no.",
+    "pin name",
+    "pin type",
+    "pin providing power",
+    "at reset",
+    "after reset",
+    "IO MUX set",
+    "analog set"
+   ],
+   "rows": [
+    [
+     "1",
+     "LNA_IN",
+     "Analog",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "2",
+     "VDD3P3",
+     "Power",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "3",
+     "VDD3P3",
+     "Power",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "4",
+     "XTAL_32K_P",
+     "IO",
+     "VDD3P3_RTC",
+     "",
+     "",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "5",
+     "XTAL_32K_N",
+     "IO",
+     "VDD3P3_RTC",
+     "",
+     "",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "6",
+     "GPIO2",
+     "IO",
+     "VDD3P3_RTC",
+     "IE",
+     "IE",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "7",
+     "CHIP_EN",
+     "Analog",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "8",
+     "GPIO3",
+     "IO",
+     "VDD3P3_RTC",
+     "IE",
+     "IE",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "9",
+     "MTMS",
+     "IO",
+     "VDD3P3_RTC",
+     "",
+     "IE",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "10",
+     "MTDI",
+     "IO",
+     "VDD3P3_RTC",
+     "",
+     "IE",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "11",
+     "VDD3P3_RTC",
+     "Power",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "12",
+     "MTCK",
+     "IO",
+     "VDD3P3_CPU",
+     "",
+     "IE 6",
+     "IO MUX",
+     ""
+    ],
+    [
+     "13",
+     "MTDO",
+     "IO",
+     "VDD3P3_CPU",
+     "",
+     "IE",
+     "IO MUX",
+     ""
+    ],
+    [
+     "14",
+     "GPIO8",
+     "IO",
+     "VDD3P3_CPU",
+     "IE",
+     "IE",
+     "IO MUX",
+     ""
+    ],
+    [
+     "15",
+     "GPIO9",
+     "IO",
+     "VDD3P3_CPU",
+     "IE, WPU",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "16",
+     "GPIO10",
+     "IO",
+     "VDD3P3_CPU",
+     "",
+     "IE",
+     "IO MUX",
+     ""
+    ],
+    [
+     "17",
+     "VDD3P3_CPU",
+     "Power",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "18",
+     "VDD_SPI 8, 9",
+     "Power",
+     "VDD3P3_CPU",
+     "",
+     "",
+     "IO MUX",
+     ""
+    ],
+    [
+     "19",
+     "SPIHD 9",
+     "IO",
+     "VDD_SPI / VDD3P3_CPU",
+     "WPU",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "20",
+     "SPIWP 9",
+     "IO",
+     "VDD_SPI / VDD3P3_CPU",
+     "WPU",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "21",
+     "SPICS0 9",
+     "IO",
+     "VDD_SPI / VDD3P3_CPU",
+     "WPU",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "22",
+     "SPICLK 9",
+     "IO",
+     "VDD_SPI / VDD3P3_CPU",
+     "WPU",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "23",
+     "SPID 9",
+     "IO",
+     "VDD_SPI / VDD3P3_CPU",
+     "WPU",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "24",
+     "SPIQ 9",
+     "IO",
+     "VDD_SPI / VDD3P3_CPU",
+     "WPU",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "25",
+     "GPIO18",
+     "IO",
+     "VDD3P3_CPU",
+     "",
+     "",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "26",
+     "GPIO19",
+     "IO",
+     "VDD3P3_CPU",
+     "",
+     "USB_PU",
+     "IO MUX",
+     "Analog"
+    ],
+    [
+     "27",
+     "U0RXD",
+     "IO",
+     "VDD3P3_CPU",
+     "",
+     "IE, WPU",
+     "IO MUX",
+     ""
+    ],
+    [
+     "28",
+     "U0TXD",
+     "IO",
+     "VDD3P3_CPU",
+     "",
+     "WPU 7",
+     "IO MUX",
+     ""
+    ],
+    [
+     "29",
+     "XTAL_N",
+     "Analog",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "30",
+     "XTAL_P",
+     "Analog",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "31",
+     "VDDA",
+     "Power",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "32",
+     "VDDA",
+     "Power",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "33",
+     "GND",
+     "Power",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "Default function set in the default boot mode: IO MUX for pins 4 to 6, 8 to 10, 12 to 16 and 19 to 24, 27 and 28; Analog (USB) for GPIO18 and GPIO19. VDD_SPI defaults to its power role.",
+    "IE: input enabled. WPU: weak pull-up on. WPD: weak pull-down on. USB_PU: USB pull-up on.",
+    "A pin listed as powered by VDD_SPI really draws from the internal rail that feeds VDD_SPI. Whether pins 19 to 24 run from VDD3P3_CPU or VDD_SPI is set by a register.",
+    "Default drive strength: 10 mA on GPIO2, GPIO3, MTMS and MTDI; 40 mA on GPIO18 and GPIO19; 20 mA on every other pin.",
+    "GPIO18 and GPIO19 start in USB mode, where the pull-up comes from the USB pull-up resistor (USB_SERIAL_JTAG_DP/DM_PULLUP, value set by USB_SERIAL_JTAG_PULLUP_VALUE). With USB turned off they are plain GPIOs whose weak pulls start off (IO_MUX_FUN_WPU/WPD).",
+    "6: with EFUSE_DIS_PAD_JTAG = 0 (unburnt default) MTCK has IE and WPU after reset; with it burnt, IE only.",
+    "7: U0TXD has its output enabled after reset.",
+    "8: VDD_SPI feeds the in-package and any external flash by default. It can become a GPIO when an external flash has its own supply.",
+    "9: pins 19 to 24 are not bonded on ESP32-C3FH4AZ and ESP32-C3FH4X and are marked NC."
+   ]
+  },
+  {
+   "title": "Power-up glitches on pins",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "pin",
+    "glitch",
+    "typical time period (ns)"
+   ],
+   "rows": [
+    [
+     "MTCK",
+     "Low-level glitch",
+     "5"
+    ],
+    [
+     "MTDO",
+     "Low-level glitch",
+     "5"
+    ],
+    [
+     "GPIO10",
+     "Low-level glitch",
+     "5"
+    ],
+    [
+     "U0RXD",
+     "Low-level glitch",
+     "5"
+    ],
+    [
+     "GPIO18",
+     "High-level glitch",
+     "50000"
+    ]
+   ],
+   "notes": [
+    "A low-level glitch drives the pin low as an output for the period; a high-level glitch drives it high. A pull-down or pull-up glitch would hold the pin on its weak internal pull for the period. The weak pull resistors are 45 kΩ typ."
+   ]
+  },
+  {
+   "title": "Peripheral signals routed via IO MUX",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "pin function",
+    "signal",
+    "interface"
+   ],
+   "rows": [
+    [
+     "U0TXD",
+     "Transmit data",
+     "UART0"
+    ],
+    [
+     "U0RXD",
+     "Receive data",
+     "UART0"
+    ],
+    [
+     "MTCK",
+     "Test clock",
+     "JTAG (debug)"
+    ],
+    [
+     "MTDO",
+     "Test Data Out",
+     "JTAG (debug)"
+    ],
+    [
+     "MTDI",
+     "Test Data In",
+     "JTAG (debug)"
+    ],
+    [
+     "MTMS",
+     "Test Mode Select",
+     "JTAG (debug)"
+    ],
+    [
+     "SPIQ",
+     "Master in, slave out",
+     "SPI0/1, 3.3 V, to in-package or external flash; 1-, 2-, 4-line"
+    ],
+    [
+     "SPID",
+     "Master out, slave in",
+     "SPI0/1, 3.3 V, to in-package or external flash; 1-, 2-, 4-line"
+    ],
+    [
+     "SPIHD",
+     "Hold",
+     "SPI0/1, 3.3 V, to in-package or external flash; 1-, 2-, 4-line"
+    ],
+    [
+     "SPIWP",
+     "Write protect",
+     "SPI0/1, 3.3 V, to in-package or external flash; 1-, 2-, 4-line"
+    ],
+    [
+     "SPICLK",
+     "Clock",
+     "SPI0/1, 3.3 V, to in-package or external flash; 1-, 2-, 4-line"
+    ],
+    [
+     "SPICS…",
+     "Chip select",
+     "SPI0/1, 3.3 V, to in-package or external flash; 1-, 2-, 4-line"
+    ],
+    [
+     "FSPIQ",
+     "Master in, slave out",
+     "SPI2, fast general SPI; 1-, 2-, 4-line"
+    ],
+    [
+     "FSPID",
+     "Master out, slave in",
+     "SPI2, fast general SPI; 1-, 2-, 4-line"
+    ],
+    [
+     "FSPIHD",
+     "Hold",
+     "SPI2, fast general SPI; 1-, 2-, 4-line"
+    ],
+    [
+     "FSPIWP",
+     "Write protect",
+     "SPI2, fast general SPI; 1-, 2-, 4-line"
+    ],
+    [
+     "FSPICLK",
+     "Clock",
+     "SPI2, fast general SPI; 1-, 2-, 4-line"
+    ],
+    [
+     "FSPICS0",
+     "Chip select",
+     "SPI2, fast general SPI; 1-, 2-, 4-line"
+    ]
+   ]
+  },
+  {
+   "title": "IO MUX pin functions",
+   "page": 19,
+   "conditions": "",
+   "columns": [
+    "pin no.",
+    "IO MUX / GPIO name",
+    "F0",
+    "type",
+    "F1",
+    "type",
+    "F2",
+    "type",
+    "default in default boot mode"
+   ],
+   "rows": [
+    [
+     "4",
+     "GPIO0",
+     "GPIO0",
+     "I/O/T",
+     "GPIO0",
+     "I/O/T",
+     "",
+     "",
+     "F1"
+    ],
+    [
+     "5",
+     "GPIO1",
+     "GPIO1",
+     "I/O/T",
+     "GPIO1",
+     "I/O/T",
+     "",
+     "",
+     "F1"
+    ],
+    [
+     "6",
+     "GPIO2",
+     "GPIO2",
+     "I/O/T",
+     "GPIO2",
+     "I/O/T",
+     "FSPIQ",
+     "I1/O/T",
+     "F1"
+    ],
+    [
+     "8",
+     "GPIO3",
+     "GPIO3",
+     "I/O/T",
+     "GPIO3",
+     "I/O/T",
+     "",
+     "",
+     "F1"
+    ],
+    [
+     "9",
+     "GPIO4",
+     "MTMS",
+     "I1",
+     "GPIO4",
+     "I/O/T",
+     "FSPIHD",
+     "I1/O/T",
+     "F0"
+    ],
+    [
+     "10",
+     "GPIO5",
+     "MTDI",
+     "I1",
+     "GPIO5",
+     "I/O/T",
+     "FSPIWP",
+     "I1/O/T",
+     "F0"
+    ],
+    [
+     "12",
+     "GPIO6",
+     "MTCK",
+     "I1",
+     "GPIO6",
+     "I/O/T",
+     "FSPICLK",
+     "I1/O/T",
+     "F0"
+    ],
+    [
+     "13",
+     "GPIO7",
+     "MTDO",
+     "O/T",
+     "GPIO7",
+     "I/O/T",
+     "FSPID",
+     "I1/O/T",
+     "F0"
+    ],
+    [
+     "14",
+     "GPIO8",
+     "GPIO8",
+     "I/O/T",
+     "GPIO8",
+     "I/O/T",
+     "",
+     "",
+     "F1"
+    ],
+    [
+     "15",
+     "GPIO9",
+     "GPIO9",
+     "I/O/T",
+     "GPIO9",
+     "I/O/T",
+     "",
+     "",
+     "F1"
+    ],
+    [
+     "16",
+     "GPIO10",
+     "GPIO10",
+     "I/O/T",
+     "GPIO10",
+     "I/O/T",
+     "FSPICS0",
+     "I1/O/T",
+     "F1"
+    ],
+    [
+     "18",
+     "GPIO11",
+     "GPIO11",
+     "I/O/T",
+     "GPIO11",
+     "I/O/T",
+     "",
+     "",
+     ""
+    ],
+    [
+     "19",
+     "GPIO12",
+     "SPIHD",
+     "I1/O/T",
+     "GPIO12",
+     "I/O/T",
+     "",
+     "",
+     "F1"
+    ],
+    [
+     "20",
+     "GPIO13",
+     "SPIWP",
+     "I1/O/T",
+     "GPIO13",
+     "I/O/T",
+     "",
+     "",
+     "F1"
+    ],
+    [
+     "21",
+     "GPIO14",
+     "SPICS0",
+     "O/T",
+     "GPIO14",
+     "I/O/T",
+     "",
+     "",
+     "F0"
+    ],
+    [
+     "22",
+     "GPIO15",
+     "SPICLK",
+     "O/T",
+     "GPIO15",
+     "I/O/T",
+     "",
+     "",
+     "F0"
+    ],
+    [
+     "23",
+     "GPIO16",
+     "SPID",
+     "I1/O/T",
+     "GPIO16",
+     "I/O/T",
+     "",
+     "",
+     "F0"
+    ],
+    [
+     "24",
+     "GPIO17",
+     "SPIQ",
+     "I1/O/T",
+     "GPIO17",
+     "I/O/T",
+     "",
+     "",
+     "F0"
+    ],
+    [
+     "25",
+     "GPIO18",
+     "GPIO18",
+     "I/O/T",
+     "GPIO18",
+     "I/O/T",
+     "",
+     "",
+     ""
+    ],
+    [
+     "26",
+     "GPIO19",
+     "GPIO19",
+     "I/O/T",
+     "GPIO19",
+     "I/O/T",
+     "",
+     "",
+     ""
+    ],
+    [
+     "27",
+     "GPIO20",
+     "U0RXD",
+     "I1",
+     "GPIO20",
+     "I/O/T",
+     "",
+     "",
+     "F0"
+    ],
+    [
+     "28",
+     "GPIO21",
+     "U0TXD",
+     "O",
+     "GPIO21",
+     "I/O/T",
+     "",
+     "",
+     "F0"
+    ]
+   ],
+   "notes": [
+    "Type letters: I input, O output, T high impedance. I1: when the pin is given a function other than this one, the function's input reads 1. I0: the same, reading 0.",
+    "GPIO11 (VDD_SPI) defaults to its power role, and GPIO18 and GPIO19 to their analog USB function, so no IO MUX function is their default.",
+    "Pins needing care: GPIO2, GPIO8 and GPIO9 are strapping pins; MTMS, MTDI, MTCK, MTDO carry JTAG; U0RXD and U0TXD carry UART0; SPIHD, SPIWP, SPICS0, SPICLK, SPID and SPIQ serve the flash."
+   ]
+  },
+  {
+   "title": "Analog signals routed to analog functions",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "pin function",
+    "signal",
+    "use"
+   ],
+   "rows": [
+    [
+     "ADC…_CH…",
+     "ADC1/2 channel … signal",
+     "ADC1/2 input"
+    ],
+    [
+     "USB_D-",
+     "Data -",
+     "USB Serial/JTAG"
+    ],
+    [
+     "USB_D+",
+     "Data +",
+     "USB Serial/JTAG"
+    ],
+    [
+     "XTAL_32K_N",
+     "Negative clock signal",
+     "32 kHz clock to or from an external crystal or oscillator"
+    ],
+    [
+     "XTAL_32K_P",
+     "Positive clock signal",
+     "32 kHz clock to or from an external crystal or oscillator"
+    ]
+   ],
+   "notes": [
+    "Analog functions work in every power mode."
+   ]
+  },
+  {
+   "title": "Analog functions",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "pin no.",
+    "analog IO name",
+    "F0",
+    "F1"
+   ],
+   "rows": [
+    [
+     "4",
+     "GPIO0",
+     "XTAL_32K_P",
+     "ADC1_CH0"
+    ],
+    [
+     "5",
+     "GPIO1",
+     "XTAL_32K_N",
+     "ADC1_CH1"
+    ],
+    [
+     "6",
+     "GPIO2",
+     "",
+     "ADC1_CH2"
+    ],
+    [
+     "8",
+     "GPIO3",
+     "",
+     "ADC1_CH3"
+    ],
+    [
+     "9",
+     "GPIO4",
+     "",
+     "ADC1_CH4"
+    ],
+    [
+     "10",
+     "GPIO5",
+     "",
+     "ADC2_CH0"
+    ],
+    [
+     "25",
+     "GPIO18",
+     "USB_D-",
+     ""
+    ],
+    [
+     "26",
+     "GPIO19",
+     "USB_D+",
+     ""
+    ]
+   ],
+   "notes": [
+    "USB_D- and USB_D+ are the default functions of GPIO18 and GPIO19 in the default boot mode."
+   ]
+  },
+  {
+   "title": "Peripheral pin assignment",
+   "page": 24,
+   "conditions": "",
+   "columns": [
+    "pin no.",
+    "pin name",
+    "USB Serial/JTAG",
+    "JTAG",
+    "ADC1",
+    "ADC2",
+    "UART0",
+    "SPI0/1",
+    "SPI2",
+    "UART1",
+    "I2C",
+    "I2S",
+    "TWAI",
+    "LED PWM",
+    "RMT"
+   ],
+   "rows": [
+    [
+     "1",
+     "LNA_IN",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "2",
+     "VDD3P3",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "3",
+     "VDD3P3",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "4",
+     "XTAL_32K_P",
+     "",
+     "",
+     "ADC1_CH0 (P1)",
+     "",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)",
+     "GPIO0 (P2)"
+    ],
+    [
+     "5",
+     "XTAL_32K_N",
+     "",
+     "",
+     "ADC1_CH1 (P1)",
+     "",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)",
+     "GPIO1 (P2)"
+    ],
+    [
+     "6",
+     "GPIO2",
+     "",
+     "",
+     "ADC1_CH2 (P1)",
+     "",
+     "GPIO2 (P3)",
+     "GPIO2 (P3)",
+     "FSPIQ (P1)",
+     "GPIO2 (P3)",
+     "GPIO2 (P3)",
+     "GPIO2 (P3)",
+     "GPIO2 (P3)",
+     "GPIO2 (P3)",
+     "GPIO2 (P3)"
+    ],
+    [
+     "7",
+     "CHIP_EN",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "8",
+     "GPIO3",
+     "",
+     "",
+     "ADC1_CH3 (P1)",
+     "",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)",
+     "GPIO3 (P2)"
+    ],
+    [
+     "9",
+     "MTMS",
+     "",
+     "MTMS (P1)",
+     "ADC1_CH4 (P1)",
+     "",
+     "GPIO4 (P3)",
+     "GPIO4 (P3)",
+     "FSPIHD (P1)",
+     "GPIO4 (P3)",
+     "GPIO4 (P3)",
+     "GPIO4 (P3)",
+     "GPIO4 (P3)",
+     "GPIO4 (P3)",
+     "GPIO4 (P3)"
+    ],
+    [
+     "10",
+     "MTDI",
+     "",
+     "MTDI (P1)",
+     "",
+     "ADC2_CH0 (P1)",
+     "GPIO5 (P3)",
+     "GPIO5 (P3)",
+     "FSPIWP (P1)",
+     "GPIO5 (P3)",
+     "GPIO5 (P3)",
+     "GPIO5 (P3)",
+     "GPIO5 (P3)",
+     "GPIO5 (P3)",
+     "GPIO5 (P3)"
+    ],
+    [
+     "11",
+     "VDD3P3_RTC",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "12",
+     "MTCK",
+     "",
+     "MTCK (P1)",
+     "",
+     "",
+     "GPIO6 (P3)",
+     "GPIO6 (P3)",
+     "FSPICLK (P1)",
+     "GPIO6 (P3)",
+     "GPIO6 (P3)",
+     "GPIO6 (P3)",
+     "GPIO6 (P3)",
+     "GPIO6 (P3)",
+     "GPIO6 (P3)"
+    ],
+    [
+     "13",
+     "MTDO",
+     "",
+     "MTDO (P1)",
+     "",
+     "",
+     "GPIO7 (P3)",
+     "GPIO7 (P3)",
+     "FSPID (P1)",
+     "GPIO7 (P3)",
+     "GPIO7 (P3)",
+     "GPIO7 (P3)",
+     "GPIO7 (P3)",
+     "GPIO7 (P3)",
+     "GPIO7 (P3)"
+    ],
+    [
+     "14",
+     "GPIO8",
+     "",
+     "",
+     "",
+     "",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)",
+     "GPIO8 (P3)"
+    ],
+    [
+     "15",
+     "GPIO9",
+     "",
+     "",
+     "",
+     "",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)",
+     "GPIO9 (P3)"
+    ],
+    [
+     "16",
+     "GPIO10",
+     "",
+     "",
+     "",
+     "",
+     "GPIO10 (P2)",
+     "GPIO10 (P2)",
+     "FSPICS0 (P1)",
+     "GPIO10 (P2)",
+     "GPIO10 (P2)",
+     "GPIO10 (P2)",
+     "GPIO10 (P2)",
+     "GPIO10 (P2)",
+     "GPIO10 (P2)"
+    ],
+    [
+     "17",
+     "VDD3P3_CPU",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "18",
+     "VDD_SPI",
+     "",
+     "",
+     "",
+     "",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)",
+     "GPIO11 (P3)"
+    ],
+    [
+     "19",
+     "SPIHD",
+     "",
+     "",
+     "",
+     "",
+     "GPIO12 (P4)",
+     "SPIHD (P1)",
+     "GPIO12 (P4)",
+     "GPIO12 (P4)",
+     "GPIO12 (P4)",
+     "GPIO12 (P4)",
+     "GPIO12 (P4)",
+     "GPIO12 (P4)",
+     "GPIO12 (P4)"
+    ],
+    [
+     "20",
+     "SPIWP",
+     "",
+     "",
+     "",
+     "",
+     "GPIO13 (P4)",
+     "SPIWP (P1)",
+     "GPIO13 (P4)",
+     "GPIO13 (P4)",
+     "GPIO13 (P4)",
+     "GPIO13 (P4)",
+     "GPIO13 (P4)",
+     "GPIO13 (P4)",
+     "GPIO13 (P4)"
+    ],
+    [
+     "21",
+     "SPICS0",
+     "",
+     "",
+     "",
+     "",
+     "GPIO14 (P4)",
+     "SPICS0 (P1)",
+     "GPIO14 (P4)",
+     "GPIO14 (P4)",
+     "GPIO14 (P4)",
+     "GPIO14 (P4)",
+     "GPIO14 (P4)",
+     "GPIO14 (P4)",
+     "GPIO14 (P4)"
+    ],
+    [
+     "22",
+     "SPICLK",
+     "",
+     "",
+     "",
+     "",
+     "GPIO15 (P4)",
+     "SPICLK (P1)",
+     "GPIO15 (P4)",
+     "GPIO15 (P4)",
+     "GPIO15 (P4)",
+     "GPIO15 (P4)",
+     "GPIO15 (P4)",
+     "GPIO15 (P4)",
+     "GPIO15 (P4)"
+    ],
+    [
+     "23",
+     "SPID",
+     "",
+     "",
+     "",
+     "",
+     "GPIO16 (P4)",
+     "SPID (P1)",
+     "GPIO16 (P4)",
+     "GPIO16 (P4)",
+     "GPIO16 (P4)",
+     "GPIO16 (P4)",
+     "GPIO16 (P4)",
+     "GPIO16 (P4)",
+     "GPIO16 (P4)"
+    ],
+    [
+     "24",
+     "SPIQ",
+     "",
+     "",
+     "",
+     "",
+     "GPIO17 (P4)",
+     "SPIQ (P1)",
+     "GPIO17 (P4)",
+     "GPIO17 (P4)",
+     "GPIO17 (P4)",
+     "GPIO17 (P4)",
+     "GPIO17 (P4)",
+     "GPIO17 (P4)",
+     "GPIO17 (P4)"
+    ],
+    [
+     "25",
+     "GPIO18",
+     "USB_D- (P1)",
+     "",
+     "",
+     "",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)",
+     "GPIO18 (P3)"
+    ],
+    [
+     "26",
+     "GPIO19",
+     "USB_D+ (P1)",
+     "",
+     "",
+     "",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)",
+     "GPIO19 (P3)"
+    ],
+    [
+     "27",
+     "U0RXD",
+     "",
+     "",
+     "",
+     "",
+     "U0RXD (P1)",
+     "GPIO20 (P3)",
+     "GPIO20 (P3)",
+     "GPIO20 (P3)",
+     "GPIO20 (P3)",
+     "GPIO20 (P3)",
+     "GPIO20 (P3)",
+     "GPIO20 (P3)",
+     "GPIO20 (P3)"
+    ],
+    [
+     "28",
+     "U0TXD",
+     "",
+     "",
+     "",
+     "",
+     "U0TXD (P1)",
+     "GPIO21 (P3)",
+     "GPIO21 (P3)",
+     "GPIO21 (P3)",
+     "GPIO21 (P3)",
+     "GPIO21 (P3)",
+     "GPIO21 (P3)",
+     "GPIO21 (P3)",
+     "GPIO21 (P3)"
+    ],
+    [
+     "29",
+     "XTAL_N",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "30",
+     "XTAL_P",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "31",
+     "VDDA",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "32",
+     "VDDA",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "33",
+     "GND",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "notes": [
+    "P1: a fixed pin wired straight to the peripheral signal through the IO MUX. P2: a GPIO-matrix pin free of other duties. P3: a GPIO-matrix pin shared with a strapping (GPIO2, GPIO8, GPIO9), USB (GPIO18, GPIO19), JTAG (GPIO4 to GPIO7), UART0 (GPIO20, GPIO21) or flash-supply (GPIO11) role. P4: a pin already given to the in-package flash or advised for an external one (GPIO12 to GPIO17).",
+    "A peripheral with no P1 pin (UART1, for example) can use any P2 to P4 pin; a peripheral with only P1 entries (USB Serial/JTAG) can use only those pins.",
+    "Setting the USB_SERIAL_JTAG_EXCHG_PINS bit exchanges USB_D- and USB_D+.",
+    "UART0, SPI0/1 and SPI2 signals can also go through the GPIO matrix to any GPIO, beside their fixed IO MUX pins.",
+    "Pins 19 to 24 are not available on ESP32-C3FH4AZ and ESP32-C3FH4X."
+   ]
+  },
+  {
+   "title": "Analog pins",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "pin no.",
+    "pin name",
+    "pin type",
+    "pin function"
+   ],
+   "rows": [
+    [
+     "1",
+     "LNA_IN",
+     "I/O",
+     "RF low-noise amplifier input and output signals"
+    ],
+    [
+     "7",
+     "CHIP_EN",
+     "I",
+     "High: chip on (powered up). Low: chip off (powered down). Never left floating."
+    ],
+    [
+     "29",
+     "XTAL_N",
+     "—",
+     "Main crystal or oscillator, negative side of the differential clock"
+    ],
+    [
+     "30",
+     "XTAL_P",
+     "—",
+     "Main crystal or oscillator, positive side of the differential clock"
+    ]
+   ]
+  },
+  {
+   "title": "Power pins",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "pin no.",
+    "pin name",
+    "direction",
+    "power domain / other",
+    "IO pins"
+   ],
+   "rows": [
+    [
+     "2",
+     "VDD3P3",
+     "Input",
+     "Analog power domain",
+     ""
+    ],
+    [
+     "3",
+     "VDD3P3",
+     "Input",
+     "Analog power domain",
+     ""
+    ],
+    [
+     "11",
+     "VDD3P3_RTC",
+     "Input",
+     "RTC and part of Digital power domains",
+     "RTC IO"
+    ],
+    [
+     "17",
+     "VDD3P3_CPU",
+     "Input",
+     "Digital power domain",
+     "Digital IO"
+    ],
+    [
+     "18",
+     "VDD_SPI",
+     "Input",
+     "In-package flash (backup power line)",
+     ""
+    ],
+    [
+     "18",
+     "VDD_SPI",
+     "Output",
+     "In-package and off-package flash",
+     "SPI IO"
+    ],
+    [
+     "31",
+     "VDDA",
+     "Input",
+     "Analog power domain",
+     ""
+    ],
+    [
+     "32",
+     "VDDA",
+     "Input",
+     "Analog power domain",
+     ""
+    ],
+    [
+     "33",
+     "GND",
+     "—",
+     "External ground connection",
+     ""
+    ]
+   ],
+   "notes": [
+    "Digital IO pins take their supply from VDD3P3_CPU, RTC IO pins from VDD3P3_RTC, SPI IO pins from VDD_SPI."
+   ]
+  },
+  {
+   "title": "Voltage regulators",
+   "page": 26,
+   "conditions": "",
+   "columns": [
+    "voltage regulator",
+    "output",
+    "power supply"
+   ],
+   "rows": [
+    [
+     "Digital",
+     "1.1 V",
+     "Digital power domain"
+    ],
+    [
+     "Low-power",
+     "1.1 V",
+     "RTC power domain"
+    ]
+   ]
+  },
+  {
+   "title": "Timing parameters for power-up and reset",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min (µs)"
+   ],
+   "rows": [
+    [
+     "tSTBL",
+     "Settling time of the VDDA, VDD3P3, VDD3P3_RTC and VDD3P3_CPU rails before CHIP_EN is raised",
+     "50"
+    ],
+    [
+     "tRST",
+     "Time CHIP_EN is held below VIL_nRST to reset the chip",
+     "50"
+    ]
+   ],
+   "notes": [
+    "tSTBL starts when the supply rails pass 2.8 V. VIL_nRST is at most 0.25 × VDD."
+   ]
+  },
+  {
+   "title": "Pin mapping between chip and in-package flash",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "pin no.",
+    "pin name",
+    "single SPI flash",
+    "dual SPI flash",
+    "quad SPI / QPI flash"
+   ],
+   "rows": [
+    [
+     "22",
+     "SPICLK",
+     "CLK",
+     "CLK",
+     "CLK"
+    ],
+    [
+     "21",
+     "SPICS0",
+     "CS#",
+     "CS#",
+     "CS#"
+    ],
+    [
+     "23",
+     "SPID",
+     "DI",
+     "DI",
+     "DI"
+    ],
+    [
+     "24",
+     "SPIQ",
+     "DO",
+     "DO",
+     "DO"
+    ],
+    [
+     "20",
+     "SPIWP",
+     "WP#",
+     "WP#",
+     "WP#"
+    ],
+    [
+     "19",
+     "SPIHD",
+     "HOLD#",
+     "HOLD#",
+     "HOLD#"
+    ]
+   ],
+   "notes": [
+    "CS0 selects the in-package flash. The same mapping is the advised one for an external flash.",
+    "Pins wired to the in-package flash are for that flash only."
+   ]
+  },
+  {
+   "title": "Default configuration of strapping pins",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "strapping pin",
+    "default configuration",
+    "bit value"
+   ],
+   "rows": [
+    [
+     "GPIO2",
+     "Floating",
+     "–"
+    ],
+    [
+     "GPIO8",
+     "Floating",
+     "–"
+    ],
+    [
+     "GPIO9",
+     "Weak pull-up",
+     "1"
+    ]
+   ],
+   "notes": [
+    "These levels hold when the pin is left open or sees only a high-impedance load at reset; external resistors, or a host MCU, set other values."
+   ]
+  },
+  {
+   "title": "Timing parameters for the strapping pins",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min (ms)"
+   ],
+   "rows": [
+    [
+     "tSU",
+     "Setup time: power rails settle before CHIP_EN is raised",
+     "0"
+    ],
+    [
+     "tH",
+     "Hold time: strapping levels held after CHIP_EN is high, before the pins become ordinary IOs",
+     "3"
+    ]
+   ],
+   "notes": [
+    "tSU runs up to CHIP_EN crossing VIH_nRST; across tSU and tH the strapping pin stays on the side of VIH it is meant to read."
+   ]
+  },
+  {
+   "title": "Chip boot mode control",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "boot mode",
+    "GPIO2",
+    "GPIO8",
+    "GPIO9"
+   ],
+   "rows": [
+    [
+     "SPI boot mode",
+     "1",
+     "Any value",
+     "1"
+    ],
+    [
+     "Joint download boot mode",
+     "1",
+     "1",
+     "0"
+    ]
+   ],
+   "notes": [
+    "SPI boot is the default.",
+    "GPIO2 plays no part in choosing between the two modes, but a pull-up on it is advised because of glitches.",
+    "Joint download boot accepts USB-Serial-JTAG download and UART download."
+   ]
+  },
+  {
+   "title": "UART0 ROM message printing control",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "UART0 ROM code printing",
+    "EFUSE_UART_PRINT_CONTROL",
+    "GPIO8"
+   ],
+   "rows": [
+    [
+     "Enabled",
+     "0",
+     "Ignored"
+    ],
+    [
+     "Enabled",
+     "1",
+     "0"
+    ],
+    [
+     "Enabled",
+     "2",
+     "1"
+    ],
+    [
+     "Disabled",
+     "1",
+     "1"
+    ],
+    [
+     "Disabled",
+     "2",
+     "0"
+    ],
+    [
+     "Disabled",
+     "3",
+     "Ignored"
+    ]
+   ],
+   "notes": [
+    "Default: EFUSE_UART_PRINT_CONTROL = 0, printing enabled whatever GPIO8 reads."
+   ]
+  },
+  {
+   "title": "USB Serial/JTAG ROM message printing control",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "USB Serial/JTAG ROM code printing",
+    "EFUSE_DIS_USB_SERIAL_JTAG",
+    "EFUSE_USB_PRINT_CHANNEL"
+   ],
+   "rows": [
+    [
+     "Enabled",
+     "0",
+     "0"
+    ],
+    [
+     "Disabled",
+     "0",
+     "1"
+    ],
+    [
+     "Disabled",
+     "1",
+     "Ignored"
+    ]
+   ],
+   "notes": [
+    "Default: both eFuses 0, printing enabled. EFUSE_DIS_USB_SERIAL_JTAG turns the USB Serial/JTAG controller off altogether."
+   ]
+  },
+  {
+   "title": "Address mapping",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "start",
+    "end",
+    "target"
+   ],
+   "rows": [
+    [
+     "0x0000_0000",
+     "0x3BFF_FFFF",
+     "not available"
+    ],
+    [
+     "0x3C00_0000",
+     "0x3C7F_FFFF",
+     "cache, through the MMU to external memory"
+    ],
+    [
+     "0x3C80_0000",
+     "0x3FC7_FFFF",
+     "not available"
+    ],
+    [
+     "0x3FC8_0000",
+     "0x3FCD_FFFF",
+     "SRAM"
+    ],
+    [
+     "0x3FCE_0000",
+     "0x3FEF_FFFF",
+     "not available"
+    ],
+    [
+     "0x3FF0_0000",
+     "0x3FF1_FFFF",
+     "ROM"
+    ],
+    [
+     "0x3FF2_0000",
+     "0x3FFF_FFFF",
+     "not available"
+    ],
+    [
+     "0x4000_0000",
+     "0x4005_FFFF",
+     "ROM"
+    ],
+    [
+     "0x4006_0000",
+     "0x4037_BFFF",
+     "not available"
+    ],
+    [
+     "0x4037_C000",
+     "0x403D_FFFF",
+     "SRAM"
+    ],
+    [
+     "0x403E_0000",
+     "0x41FF_FFFF",
+     "not available"
+    ],
+    [
+     "0x4200_0000",
+     "0x427F_FFFF",
+     "cache, through the MMU to external memory"
+    ],
+    [
+     "0x4280_0000",
+     "0x4FFF_FFFF",
+     "not available"
+    ],
+    [
+     "0x5000_0000",
+     "0x5000_1FFF",
+     "RTC FAST memory"
+    ],
+    [
+     "0x5000_2000",
+     "0x5FFF_FFFF",
+     "not available"
+    ],
+    [
+     "0x6000_0000",
+     "0x600D_0FFF",
+     "peripherals"
+    ],
+    [
+     "0x600D_1000",
+     "0xFFFF_FFFF",
+     "not available"
+    ]
+   ],
+   "notes": [
+    "The GDMA reaches SRAM and the peripherals."
+   ]
+  },
+  {
+   "title": "Components and power domains",
+   "page": 39,
+   "conditions": "",
+   "columns": [
+    "power mode",
+    "RTC",
+    "Digital",
+    "CPU",
+    "optional digital periph",
+    "wireless digital circuits",
+    "analog",
+    "FOSC_CLK",
+    "XTAL_CLK",
+    "PLL",
+    "RF circuits"
+   ],
+   "rows": [
+    [
+     "Active",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "ON"
+    ],
+    [
+     "Modem-sleep",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "ON1",
+     "ON",
+     "ON",
+     "ON",
+     "ON",
+     "OFF2"
+    ],
+    [
+     "Light-sleep",
+     "ON",
+     "ON",
+     "OFF1",
+     "ON1",
+     "OFF1",
+     "ON",
+     "OFF",
+     "OFF",
+     "OFF",
+     "OFF2"
+    ],
+    [
+     "Deep-sleep",
+     "ON",
+     "OFF",
+     "OFF",
+     "OFF",
+     "OFF",
+     "ON",
+     "OFF",
+     "OFF",
+     "OFF",
+     "OFF"
+    ]
+   ],
+   "notes": [
+    "1: configurable (Technical Reference Manual).",
+    "2: with the wireless digital circuits on, the RF circuits switch on from time to time as internal operation needs, so wireless links stay up.",
+    "RTC domain: PMU, eFuse controller, brownout detector, RTC memory, super watchdog, RTC watchdog, RTC timer. Analog domain: RF circuits (receiver, transmitter, synthesizer, balun and switch), PLL, fast RC oscillator, main crystal clock. Optional digital peripherals: SHA, RSA, HMAC, RSA DS, AES, SPI2, secure boot, GDMA."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 55,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input power pins",
+     "Allowed input voltage",
+     "-0.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Ioutput",
+     "Cumulative IO output current",
+     "—",
+     "1000",
+     "mA"
+    ],
+    [
+     "TSTORE",
+     "Storage temperature",
+     "-40",
+     "150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Input power pins are VDDA, VDD3P3, VDD3P3_RTC, VDD3P3_CPU and VDD_SPI.",
+    "The part kept working after all its IO pins were driven high while shorted to ground for 24 hours in a row at 25 °C ambient."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 55,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VDDA, VDD3P3, VDD3P3_RTC",
+     "Recommended input voltage",
+     "3.0",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "VDD3P3_CPU",
+     "Recommended input voltage",
+     "3.0",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "VDD_SPI (as input)",
+     "—",
+     "3.0",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "IVDD",
+     "Cumulative input current",
+     "0.5",
+     "—",
+     "—",
+     "A"
+    ]
+   ],
+   "notes": [
+    "While eFuses are being written, VDD3P3_CPU stays at or below 3.3 V: the burning circuit is sensitive to higher voltage.",
+    "When VDD3P3_CPU feeds VDD_SPI, the drop across RSPI counts against the flash supply.",
+    "Ambient temperature: –40 to 105 °C for ESP32-C3FH4."
+   ]
+  },
+  {
+   "title": "VDD_SPI internal and output characteristics",
+   "page": 56,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "typ",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RSPI",
+     "VDD_SPI powered by VDD3P3_CPU via RSPI for 3.3 V flash_CPU",
+     "7.5",
+     "Ω"
+    ]
+   ],
+   "notes": [
+    "VDD3P3_CPU must exceed VDD_flash_min + I_flash_max × RSPI."
+   ]
+  },
+  {
+   "title": "DC characteristics",
+   "page": 56,
+   "conditions": "3.3 V, 25 °C",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "CIN",
+     "Pin capacitance",
+     "—",
+     "2",
+     "—",
+     "pF"
+    ],
+    [
+     "VIH",
+     "High-level input voltage",
+     "0.75 × VDD",
+     "—",
+     "VDD + 0.3",
+     "V"
+    ],
+    [
+     "VIL",
+     "Low-level input voltage",
+     "-0.3",
+     "—",
+     "0.25 × VDD",
+     "V"
+    ],
+    [
+     "IIH",
+     "High-level input current",
+     "—",
+     "—",
+     "50",
+     "nA"
+    ],
+    [
+     "IIL",
+     "Low-level input current",
+     "—",
+     "—",
+     "50",
+     "nA"
+    ],
+    [
+     "VOH",
+     "High-level output voltage",
+     "0.8 × VDD",
+     "—",
+     "—",
+     "V"
+    ],
+    [
+     "VOL",
+     "Low-level output voltage",
+     "—",
+     "—",
+     "0.1 × VDD",
+     "V"
+    ],
+    [
+     "IOH",
+     "High-level source current (VDD = 3.3 V, VOH >= 2.64 V, PAD_DRIVER = 3)",
+     "—",
+     "40",
+     "—",
+     "mA"
+    ],
+    [
+     "IOL",
+     "Low-level sink current (VDD = 3.3 V, VOL = 0.495 V, PAD_DRIVER = 3)",
+     "—",
+     "28",
+     "—",
+     "mA"
+    ],
+    [
+     "RPU",
+     "Internal weak pull-up resistor",
+     "—",
+     "45",
+     "—",
+     "kΩ"
+    ],
+    [
+     "RPD",
+     "Internal weak pull-down resistor",
+     "—",
+     "45",
+     "—",
+     "kΩ"
+    ],
+    [
+     "VIH_nRST",
+     "Chip reset release voltage (CHIP_EN voltage is within the specified range)",
+     "0.75 × VDD",
+     "—",
+     "VDD + 0.3",
+     "V"
+    ],
+    [
+     "VIL_nRST",
+     "Chip reset voltage (CHIP_EN voltage is within the specified range)",
+     "-0.3",
+     "—",
+     "0.25 × VDD",
+     "V"
+    ]
+   ],
+   "notes": [
+    "VDD is the voltage on the supply pin of the domain the pin belongs to.",
+    "VOH and VOL are taken into a high-impedance load."
+   ]
+  },
+  {
+   "title": "ADC characteristics",
+   "page": 57,
+   "conditions": "",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "DNL (Differential nonlinearity)",
+     "ADC connected to an external 100 nF capacitor; DC signal input; Ambient temperature at 25 °C; Wi-Fi off",
+     "-7",
+     "7",
+     "LSB"
+    ],
+    [
+     "INL (Integral nonlinearity)",
+     "ADC connected to an external 100 nF capacitor; DC signal input; Ambient temperature at 25 °C; Wi-Fi off",
+     "-12",
+     "12",
+     "LSB"
+    ],
+    [
+     "Sampling rate",
+     "—",
+     "—",
+     "100",
+     "kSPS"
+    ]
+   ],
+   "notes": [
+    "Averaging or filtering several samples improves DNL.",
+    "kSPS: thousands of samples per second."
+   ]
+  },
+  {
+   "title": "ADC calibration results",
+   "page": 57,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Total error",
+     "ATTEN0, effective measurement range of 0 ~ 750",
+     "-10",
+     "10",
+     "mV"
+    ],
+    [
+     "Total error",
+     "ATTEN1, effective measurement range of 0 ~ 1050",
+     "-10",
+     "10",
+     "mV"
+    ],
+    [
+     "Total error",
+     "ATTEN2, effective measurement range of 0 ~ 1300",
+     "-10",
+     "10",
+     "mV"
+    ],
+    [
+     "Total error",
+     "ATTEN3, effective measurement range of 0 ~ 2500",
+     "-35",
+     "35",
+     "mV"
+    ]
+   ],
+   "notes": [
+    "Error after hardware and software calibration; ranges are in mV. A user calibration can do better."
+   ]
+  },
+  {
+   "title": "Wi-Fi current consumption depending on RF modes",
+   "page": 57,
+   "conditions": "3.3 V supply, 25 °C ambient, measured at the RF port",
+   "columns": [
+    "work mode",
+    "description",
+    "peak (mA)"
+   ],
+   "rows": [
+    [
+     "Active (RF working), TX",
+     "802.11b, 1 Mbps, @21 dBm",
+     "335"
+    ],
+    [
+     "Active (RF working), TX",
+     "802.11g, 54 Mbps, @19 dBm",
+     "285"
+    ],
+    [
+     "Active (RF working), TX",
+     "802.11n, HT20, MCS7, @18.5 dBm",
+     "276"
+    ],
+    [
+     "Active (RF working), TX",
+     "802.11n, HT40, MCS7, @18.5 dBm",
+     "278"
+    ],
+    [
+     "Active (RF working), RX",
+     "802.11b/g/n, HT20",
+     "84"
+    ],
+    [
+     "Active (RF working), RX",
+     "802.11n, HT40",
+     "87"
+    ]
+   ],
+   "notes": [
+    "Transmit figures at 100 % duty cycle."
+   ]
+  },
+  {
+   "title": "Current consumption in Modem-sleep mode",
+   "page": 58,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "CPU frequency (MHz)",
+    "description",
+    "typ, all peripheral clocks disabled (mA)",
+    "typ, all peripheral clocks enabled (mA)"
+   ],
+   "rows": [
+    [
+     "Modem-sleep",
+     "160",
+     "CPU is running",
+     "23",
+     "28"
+    ],
+    [
+     "Modem-sleep",
+     "160",
+     "CPU is idle",
+     "16",
+     "21"
+    ],
+    [
+     "Modem-sleep",
+     "80",
+     "CPU is running",
+     "17",
+     "22"
+    ],
+    [
+     "Modem-sleep",
+     "80",
+     "CPU is idle",
+     "13",
+     "18"
+    ]
+   ],
+   "notes": [
+    "With peripheral clocks on, the real draw depends on which peripherals run.",
+    "In Modem-sleep the Wi-Fi clock is gated off.",
+    "Flash access adds current: 10 mA for an 80 Mbit/s flash in 2-line SPI mode."
+   ]
+  },
+  {
+   "title": "Current consumption in low-power modes",
+   "page": 58,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "description",
+    "typ (µA)"
+   ],
+   "rows": [
+    [
+     "Light-sleep",
+     "VDD_SPI and Wi-Fi are powered down, and all GPIOs are high-impedance",
+     "130"
+    ],
+    [
+     "Deep-sleep",
+     "RTC timer + RTC memory",
+     "5"
+    ],
+    [
+     "Power off",
+     "CHIP_EN is set to low level, the chip is powered off",
+     "1"
+    ]
+   ]
+  },
+  {
+   "title": "Flash specifications",
+   "page": 58,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "Power supply voltage (1.8 V)",
+     "1.65",
+     "1.80",
+     "2.00",
+     "V"
+    ],
+    [
+     "VCC",
+     "Power supply voltage (3.3 V)",
+     "2.7",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "FC",
+     "Maximum clock frequency",
+     "80",
+     "—",
+     "—",
+     "MHz"
+    ],
+    [
+     "—",
+     "Program/erase cycles",
+     "100,000",
+     "—",
+     "—",
+     "cycles"
+    ],
+    [
+     "TRET",
+     "Data retention time",
+     "20",
+     "—",
+     "—",
+     "years"
+    ],
+    [
+     "TPP",
+     "Page program time",
+     "—",
+     "0.8",
+     "5",
+     "ms"
+    ],
+    [
+     "TSE",
+     "Sector erase time (4 KB)",
+     "—",
+     "70",
+     "500",
+     "ms"
+    ],
+    [
+     "TBE1",
+     "Block erase time (32 KB)",
+     "—",
+     "0.2",
+     "2",
+     "s"
+    ],
+    [
+     "TBE2",
+     "Block erase time (64 KB)",
+     "—",
+     "0.3",
+     "3",
+     "s"
+    ],
+    [
+     "TCE",
+     "Chip erase time (16 Mb)",
+     "—",
+     "7",
+     "20",
+     "s"
+    ],
+    [
+     "TCE",
+     "Chip erase time (32 Mb)",
+     "—",
+     "20",
+     "60",
+     "s"
+    ],
+    [
+     "TCE",
+     "Chip erase time (64 Mb)",
+     "—",
+     "25",
+     "100",
+     "s"
+    ],
+    [
+     "TCE",
+     "Chip erase time (128 Mb)",
+     "—",
+     "60",
+     "200",
+     "s"
+    ],
+    [
+     "TCE",
+     "Chip erase time (256 Mb)",
+     "—",
+     "70",
+     "300",
+     "s"
+    ]
+   ],
+   "notes": [
+    "Figures come from the memory vendor, are assured by design or characterisation and are not all production-tested. Parts ship with the flash erased."
+   ]
+  },
+  {
+   "title": "Reliability qualifications",
+   "page": 59,
+   "conditions": "",
+   "columns": [
+    "test item",
+    "test conditions",
+    "test standard"
+   ],
+   "rows": [
+    [
+     "HTOL (High Temperature Operating Life)",
+     "125 °C, 1000 hours",
+     "JESD22-A108"
+    ],
+    [
+     "ESD (Electro-Static Discharge Sensitivity)",
+     "HBM (Human Body Mode) ± 2000 V",
+     "JS-001"
+    ],
+    [
+     "ESD (Electro-Static Discharge Sensitivity)",
+     "CDM (Charge Device Mode) ± 1000 V",
+     "JS-002"
+    ],
+    [
+     "Latch up",
+     "Current trigger ± 200 mA",
+     "JESD78"
+    ],
+    [
+     "Latch up",
+     "Voltage trigger 1.5 × VDDmax",
+     "JESD78"
+    ],
+    [
+     "Preconditioning",
+     "Bake 24 hours @125 °C; Moisture soak (level 3: 192 hours @30 °C, 60% RH); IR reflow solder: 260 + 0 °C, 20 seconds, three times",
+     "J-STD-020, JESD47, JESD22-A113"
+    ],
+    [
+     "TCT (Temperature Cycling Test)",
+     "–65 °C / 150 °C, 500 cycles",
+     "JESD22-A104"
+    ],
+    [
+     "uHAST (Highly Accelerated Stress Test, unbiased)",
+     "130 °C, 85% RH, 96 hours",
+     "JESD22-A118"
+    ],
+    [
+     "HTSL (High Temperature Storage Life)",
+     "150 °C, 1000 hours",
+     "JESD22-A103"
+    ],
+    [
+     "LTSL (Low Temperature Storage Life)",
+     "–40 °C, 1000 hours",
+     "JESD22-A119"
+    ]
+   ],
+   "notes": [
+    "Per JEDEC JEP155, 500 V HBM is enough for safe handling under a standard ESD control process; per JEP157, 250 V CDM is."
+   ]
+  },
+  {
+   "title": "Wi-Fi frequency",
+   "page": 60,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "min (MHz)",
+    "typ (MHz)",
+    "max (MHz)"
+   ],
+   "rows": [
+    [
+     "Center frequency of operating channel",
+     "2412",
+     "—",
+     "2484"
+    ]
+   ]
+  },
+  {
+   "title": "TX power with spectral mask and EVM meeting 802.11 standards",
+   "page": 60,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "rate",
+    "min (dBm)",
+    "typ (dBm)",
+    "max (dBm)"
+   ],
+   "rows": [
+    [
+     "802.11b, 1 Mbps",
+     "—",
+     "21.0",
+     "—"
+    ],
+    [
+     "802.11b, 11 Mbps",
+     "—",
+     "21.0",
+     "—"
+    ],
+    [
+     "802.11g, 6 Mbps",
+     "—",
+     "21.0",
+     "—"
+    ],
+    [
+     "802.11g, 54 Mbps",
+     "—",
+     "19.0",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS0",
+     "—",
+     "20.0",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS7",
+     "—",
+     "18.5",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS0",
+     "—",
+     "20.0",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS7",
+     "—",
+     "18.5",
+     "—"
+    ]
+   ]
+  },
+  {
+   "title": "TX EVM test",
+   "page": 60,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "rate",
+    "min (dB)",
+    "typ (dB)",
+    "SL (dB)"
+   ],
+   "rows": [
+    [
+     "802.11b, 1 Mbps, @21 dBm",
+     "—",
+     "-24.5",
+     "-10"
+    ],
+    [
+     "802.11b, 11 Mbps, @21 dBm",
+     "—",
+     "-25.0",
+     "-10"
+    ],
+    [
+     "802.11g, 6 Mbps, @21 dBm",
+     "—",
+     "-23.0",
+     "-5"
+    ],
+    [
+     "802.11g, 54 Mbps, @19 dBm",
+     "—",
+     "-27.5",
+     "-25"
+    ],
+    [
+     "802.11n, HT20, MCS0, @20 dBm",
+     "—",
+     "-22.5",
+     "-5"
+    ],
+    [
+     "802.11n, HT20, MCS7, @18.5 dBm",
+     "—",
+     "-29.0",
+     "-27"
+    ],
+    [
+     "802.11n, HT40, MCS0, @20 dBm",
+     "—",
+     "-22.5",
+     "-5"
+    ],
+    [
+     "802.11n, HT40, MCS7, @18.5 dBm",
+     "—",
+     "-28.0",
+     "-27"
+    ]
+   ],
+   "notes": [
+    "SL: the limit set by the standard."
+   ]
+  },
+  {
+   "title": "RX sensitivity",
+   "page": 61,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "rate",
+    "min (dBm)",
+    "typ (dBm)",
+    "max (dBm)"
+   ],
+   "rows": [
+    [
+     "802.11b, 1 Mbps",
+     "—",
+     "-98.4",
+     "—"
+    ],
+    [
+     "802.11b, 2 Mbps",
+     "—",
+     "-96.0",
+     "—"
+    ],
+    [
+     "802.11b, 5.5 Mbps",
+     "—",
+     "-93.0",
+     "—"
+    ],
+    [
+     "802.11b, 11 Mbps",
+     "—",
+     "-88.6",
+     "—"
+    ],
+    [
+     "802.11g, 6 Mbps",
+     "—",
+     "-93.8",
+     "—"
+    ],
+    [
+     "802.11g, 9 Mbps",
+     "—",
+     "-92.2",
+     "—"
+    ],
+    [
+     "802.11g, 12 Mbps",
+     "—",
+     "-91.0",
+     "—"
+    ],
+    [
+     "802.11g, 18 Mbps",
+     "—",
+     "-88.4",
+     "—"
+    ],
+    [
+     "802.11g, 24 Mbps",
+     "—",
+     "-85.8",
+     "—"
+    ],
+    [
+     "802.11g, 36 Mbps",
+     "—",
+     "-82.0",
+     "—"
+    ],
+    [
+     "802.11g, 48 Mbps",
+     "—",
+     "-78.0",
+     "—"
+    ],
+    [
+     "802.11g, 54 Mbps",
+     "—",
+     "-76.6",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS0",
+     "—",
+     "-93.6",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS1",
+     "—",
+     "-90.8",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS2",
+     "—",
+     "-88.4",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS3",
+     "—",
+     "-85.0",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS4",
+     "—",
+     "-81.8",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS5",
+     "—",
+     "-77.8",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS6",
+     "—",
+     "-76.0",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS7",
+     "—",
+     "-74.8",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS0",
+     "—",
+     "-90.0",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS1",
+     "—",
+     "-88.0",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS2",
+     "—",
+     "-85.2",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS3",
+     "—",
+     "-82.0",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS4",
+     "—",
+     "-78.8",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS5",
+     "—",
+     "-74.6",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS6",
+     "—",
+     "-73.0",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS7",
+     "—",
+     "-71.4",
+     "—"
+    ]
+   ]
+  },
+  {
+   "title": "Maximum RX level",
+   "page": 62,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "rate",
+    "min (dBm)",
+    "typ (dBm)",
+    "max (dBm)"
+   ],
+   "rows": [
+    [
+     "802.11b, 1 Mbps",
+     "—",
+     "5",
+     "—"
+    ],
+    [
+     "802.11b, 11 Mbps",
+     "—",
+     "5",
+     "—"
+    ],
+    [
+     "802.11g, 6 Mbps",
+     "—",
+     "5",
+     "—"
+    ],
+    [
+     "802.11g, 54 Mbps",
+     "—",
+     "0",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS0",
+     "—",
+     "5",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS7",
+     "—",
+     "0",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS0",
+     "—",
+     "5",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS7",
+     "—",
+     "0",
+     "—"
+    ]
+   ]
+  },
+  {
+   "title": "RX adjacent channel rejection",
+   "page": 62,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "rate",
+    "min (dB)",
+    "typ (dB)",
+    "max (dB)"
+   ],
+   "rows": [
+    [
+     "802.11b, 1 Mbps",
+     "—",
+     "35",
+     "—"
+    ],
+    [
+     "802.11b, 11 Mbps",
+     "—",
+     "35",
+     "—"
+    ],
+    [
+     "802.11g, 6 Mbps",
+     "—",
+     "31",
+     "—"
+    ],
+    [
+     "802.11g, 54 Mbps",
+     "—",
+     "20",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS0",
+     "—",
+     "31",
+     "—"
+    ],
+    [
+     "802.11n, HT20, MCS7",
+     "—",
+     "16",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS0",
+     "—",
+     "25",
+     "—"
+    ],
+    [
+     "802.11n, HT40, MCS7",
+     "—",
+     "11",
+     "—"
+    ]
+   ]
+  },
+  {
+   "title": "Bluetooth LE frequency",
+   "page": 62,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "min (MHz)",
+    "typ (MHz)",
+    "max (MHz)"
+   ],
+   "rows": [
+    [
+     "Center frequency of operating channel",
+     "2402",
+     "—",
+     "2480"
+    ]
+   ]
+  },
+  {
+   "title": "Transmitter characteristics, Bluetooth LE 1 Mbps",
+   "page": 62,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RF transmit power",
+     "RF power control range",
+     "-24.00",
+     "0",
+     "20.00",
+     "dBm"
+    ],
+    [
+     "RF transmit power",
+     "Gain control step",
+     "—",
+     "3.00",
+     "—",
+     "dB"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |fn|n=0, 1, 2, ..k",
+     "—",
+     "17.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |f0 − fn|",
+     "—",
+     "1.75",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |fn − fn−5|",
+     "—",
+     "1.46",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "|f1 − f0|",
+     "—",
+     "0.80",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "∆f1avg",
+     "—",
+     "250.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "Min ∆f2max (for at least 99.9% of all ∆f2max)",
+     "—",
+     "190.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "∆f2avg/∆f1avg",
+     "—",
+     "0.83",
+     "—",
+     "—"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 2 MHz offset",
+     "—",
+     "-37.62",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 3 MHz offset",
+     "—",
+     "-41.95",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "> ± 3 MHz offset",
+     "—",
+     "-44.48",
+     "—",
+     "dBm"
+    ]
+   ]
+  },
+  {
+   "title": "Transmitter characteristics, Bluetooth LE 2 Mbps",
+   "page": 63,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RF transmit power",
+     "RF power control range",
+     "-24.00",
+     "0",
+     "20.00",
+     "dBm"
+    ],
+    [
+     "RF transmit power",
+     "Gain control step",
+     "—",
+     "3.00",
+     "—",
+     "dB"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |fn|n=0, 1, 2, ..k",
+     "—",
+     "20.80",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |f0 − fn|",
+     "—",
+     "1.30",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |fn − fn−5|",
+     "—",
+     "1.33",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "|f1 − f0|",
+     "—",
+     "0.70",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "∆f1avg",
+     "—",
+     "498.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "Min ∆f2max (for at least 99.9% of all ∆f2max)",
+     "—",
+     "430.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "∆f2avg/∆f1avg",
+     "—",
+     "0.93",
+     "—",
+     "—"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 4 MHz offset",
+     "—",
+     "-43.55",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 5 MHz offset",
+     "—",
+     "-45.26",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "> ± 5 MHz offset",
+     "—",
+     "-45.26",
+     "—",
+     "dBm"
+    ]
+   ]
+  },
+  {
+   "title": "Transmitter characteristics, Bluetooth LE 125 Kbps",
+   "page": 63,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RF transmit power",
+     "RF power control range",
+     "-24.00",
+     "0",
+     "20.00",
+     "dBm"
+    ],
+    [
+     "RF transmit power",
+     "Gain control step",
+     "—",
+     "3.00",
+     "—",
+     "dB"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |fn|n=0, 1, 2, ..k",
+     "—",
+     "17.50",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |f0 − fn|",
+     "—",
+     "0.45",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "|fn − fn−3|",
+     "—",
+     "0.70",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "|f0 − f3|",
+     "—",
+     "0.30",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "∆f1avg",
+     "—",
+     "250.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "Min ∆f1max (for at least 99.9% of all ∆f2max)",
+     "—",
+     "235.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 2 MHz offset",
+     "—",
+     "-37.90",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 3 MHz offset",
+     "—",
+     "-41.00",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "> ± 3 MHz offset",
+     "—",
+     "-42.50",
+     "—",
+     "dBm"
+    ]
+   ]
+  },
+  {
+   "title": "Transmitter characteristics, Bluetooth LE 500 Kbps",
+   "page": 64,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "RF transmit power",
+     "RF power control range",
+     "-24.00",
+     "0",
+     "20.00",
+     "dBm"
+    ],
+    [
+     "RF transmit power",
+     "Gain control step",
+     "—",
+     "3.00",
+     "—",
+     "dB"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |fn|n=0, 1, 2, ..k",
+     "—",
+     "17.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "Max |f0 − fn|",
+     "—",
+     "0.88",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "|fn − fn−3|",
+     "—",
+     "1.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Carrier frequency offset and drift",
+     "|f0 − f3|",
+     "—",
+     "0.20",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "∆f2avg",
+     "—",
+     "208.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "Modulation characteristics",
+     "Min ∆f2max (for at least 99.9% of all ∆f2max)",
+     "—",
+     "190.00",
+     "—",
+     "kHz"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 2 MHz offset",
+     "—",
+     "-37.90",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "± 3 MHz offset",
+     "—",
+     "-41.30",
+     "—",
+     "dBm"
+    ],
+    [
+     "In-band spurious emissions",
+     "> ± 3 MHz offset",
+     "—",
+     "-42.80",
+     "—",
+     "dBm"
+    ]
+   ]
+  },
+  {
+   "title": "Receiver characteristics, Bluetooth LE 1 Mbps",
+   "page": 64,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Sensitivity @30.8% PER",
+     "—",
+     "—",
+     "-97",
+     "—",
+     "dBm"
+    ],
+    [
+     "Maximum received signal @30.8% PER",
+     "—",
+     "—",
+     "5",
+     "—",
+     "dBm"
+    ],
+    [
+     "Co-channel C/I",
+     "—",
+     "—",
+     "8",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 1 MHz",
+     "—",
+     "-3",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 1 MHz",
+     "—",
+     "-4",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 2 MHz",
+     "—",
+     "-29",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 2 MHz",
+     "—",
+     "-31",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 3 MHz",
+     "—",
+     "-33",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 3 MHz",
+     "—",
+     "-27",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≥ F0 + 4 MHz",
+     "—",
+     "-29",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≤ F0 – 4 MHz",
+     "—",
+     "-38",
+     "—",
+     "dB"
+    ],
+    [
+     "Image frequency",
+     "—",
+     "—",
+     "-29",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage + 1 MHz",
+     "—",
+     "-41",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage – 1 MHz",
+     "—",
+     "-33",
+     "—",
+     "dB"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "30 MHz ~ 2000 MHz",
+     "—",
+     "-5",
+     "—",
+     "dBm"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "2003 MHz ~ 2399 MHz",
+     "—",
+     "-18",
+     "—",
+     "dBm"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "2484 MHz ~ 2997 MHz",
+     "—",
+     "-15",
+     "—",
+     "dBm"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "3000 MHz ~ 12.75 GHz",
+     "—",
+     "-5",
+     "—",
+     "dBm"
+    ],
+    [
+     "Intermodulation",
+     "—",
+     "—",
+     "-30",
+     "—",
+     "dBm"
+    ]
+   ]
+  },
+  {
+   "title": "Receiver characteristics, Bluetooth LE 2 Mbps",
+   "page": 65,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Sensitivity @30.8% PER",
+     "—",
+     "—",
+     "-93",
+     "—",
+     "dBm"
+    ],
+    [
+     "Maximum received signal @30.8% PER",
+     "—",
+     "—",
+     "3",
+     "—",
+     "dBm"
+    ],
+    [
+     "Co-channel C/I",
+     "—",
+     "—",
+     "10",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 2 MHz",
+     "—",
+     "-7",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 2 MHz",
+     "—",
+     "-7",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 4 MHz",
+     "—",
+     "-28",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 4 MHz",
+     "—",
+     "-26",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 6 MHz",
+     "—",
+     "-26",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 6 MHz",
+     "—",
+     "-27",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≥ F0 + 8 MHz",
+     "—",
+     "-29",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≤ F0 – 8 MHz",
+     "—",
+     "-28",
+     "—",
+     "dB"
+    ],
+    [
+     "Image frequency",
+     "—",
+     "—",
+     "-28",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage + 2 MHz",
+     "—",
+     "-26",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage – 2 MHz",
+     "—",
+     "-7",
+     "—",
+     "dB"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "30 MHz ~ 2000 MHz",
+     "—",
+     "-5",
+     "—",
+     "dBm"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "2003 MHz ~ 2399 MHz",
+     "—",
+     "-19",
+     "—",
+     "dBm"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "2484 MHz ~ 2997 MHz",
+     "—",
+     "-16",
+     "—",
+     "dBm"
+    ],
+    [
+     "Out-of-band blocking performance",
+     "3000 MHz ~ 12.75 GHz",
+     "—",
+     "-5",
+     "—",
+     "dBm"
+    ],
+    [
+     "Intermodulation",
+     "—",
+     "—",
+     "-29",
+     "—",
+     "dBm"
+    ]
+   ]
+  },
+  {
+   "title": "Receiver characteristics, Bluetooth LE 125 Kbps",
+   "page": 65,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Sensitivity @30.8% PER",
+     "—",
+     "—",
+     "-105",
+     "—",
+     "dBm"
+    ],
+    [
+     "Maximum received signal @30.8% PER",
+     "—",
+     "—",
+     "5",
+     "—",
+     "dBm"
+    ],
+    [
+     "Co-channel C/I",
+     "—",
+     "—",
+     "3",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 1 MHz",
+     "—",
+     "-6",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 1 MHz",
+     "—",
+     "-6",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 2 MHz",
+     "—",
+     "-33",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 2 MHz",
+     "—",
+     "-43",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 3 MHz",
+     "—",
+     "-37",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 3 MHz",
+     "—",
+     "-47",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≥ F0 + 4 MHz",
+     "—",
+     "-40",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≤ F0 – 4 MHz",
+     "—",
+     "-50",
+     "—",
+     "dB"
+    ],
+    [
+     "Image frequency",
+     "—",
+     "—",
+     "-40",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage + 1 MHz",
+     "—",
+     "-50",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage – 1 MHz",
+     "—",
+     "-37",
+     "—",
+     "dB"
+    ]
+   ]
+  },
+  {
+   "title": "Receiver characteristics, Bluetooth LE 500 Kbps",
+   "page": 66,
+   "conditions": "3.3 V (±5%) supply, 25 °C ambient, at the antenna port with a 0 Ω front end",
+   "columns": [
+    "parameter",
+    "description",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Sensitivity @30.8% PER",
+     "—",
+     "—",
+     "-100",
+     "—",
+     "dBm"
+    ],
+    [
+     "Maximum received signal @30.8% PER",
+     "—",
+     "—",
+     "5",
+     "—",
+     "dBm"
+    ],
+    [
+     "Co-channel C/I",
+     "—",
+     "—",
+     "3",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 1 MHz",
+     "—",
+     "-2",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 1 MHz",
+     "—",
+     "-3",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 2 MHz",
+     "—",
+     "-32",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 2 MHz",
+     "—",
+     "-33",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 + 3 MHz",
+     "—",
+     "-23",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F = F0 – 3 MHz",
+     "—",
+     "-40",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≥ F0 + 4 MHz",
+     "—",
+     "-34",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel selectivity C/I",
+     "F ≤ F0 – 4 MHz",
+     "—",
+     "-44",
+     "—",
+     "dB"
+    ],
+    [
+     "Image frequency",
+     "—",
+     "—",
+     "-34",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage + 1 MHz",
+     "—",
+     "-46",
+     "—",
+     "dB"
+    ],
+    [
+     "Adjacent channel to image frequency",
+     "F = Fimage – 1 MHz",
+     "—",
+     "-23",
+     "—",
+     "dB"
+    ]
+   ]
+  },
+  {
+   "title": "ESP32-C3 chip series group",
+   "page": 69,
+   "conditions": "",
+   "columns": [
+    "item",
+    "ESP32-C3",
+    "ESP8685"
+   ],
+   "rows": [
+    [
+     "Chip revision",
+     "v0.4/v1.1",
+     "v0.4"
+    ],
+    [
+     "In-package flash",
+     "No/4 MB/8 MB",
+     "4 MB"
+    ],
+    [
+     "Flash extensibility",
+     "Y",
+     "—"
+    ],
+    [
+     "GPIO count",
+     "16 or 22",
+     "15"
+    ],
+    [
+     "Package",
+     "QFN32 (5×5 mm)",
+     "QFN28 (4×4 mm)"
+    ]
+   ],
+   "notes": [
+    "Both series share one set of software, Technical Reference Manual and hardware design guidelines; ESP8685 is a lower-cost version of ESP32-C3."
+   ]
+  }
+ ],
+ "curves": [],
+ "circuits": [],
+ "equations": [
+  {
+   "name": "Minimum VDD3P3_CPU when it feeds the flash through RSPI",
+   "expr": "VDD3P3_CPU > VDD_flash_min + I_flash_max × RSPI",
+   "where": {
+    "VDD_flash_min": "lowest operating voltage of the flash powered from VDD_SPI",
+    "I_flash_max": "highest operating current of that flash",
+    "RSPI": "internal resistance between VDD3P3_CPU and VDD_SPI, 7.5 Ω typ"
+   },
+   "note": "",
+   "page": 56
+  }
+ ],
+ "operation": [
+  {
+   "topic": "CPU",
+   "page": 33,
+   "text": "One 32-bit RISC-V core, RV32IMC, with a four-stage pipeline at up to 160 MHz, a 32-bit multiplier and divider, up to 32 vectored interrupts on seven priority levels, up to 8 hardware breakpoints or watchpoints, up to 16 PMP regions, and JTAG debug. The interrupt matrix maps 62 peripheral interrupt sources onto 31 CPU interrupts, each with settable priority, type, threshold and enable."
+  },
+  {
+   "topic": "DMA",
+   "page": 33,
+   "text": "The general DMA controller has three transmit and three receive channels, shared among SPI2, UHCI0, I2S, AES, SHA and the ADC. Channels work from linked lists, carry peripheral-to-memory and memory-to-memory traffic, all reach internal RAM, and are arbitrated by a fixed but configurable priority."
+  },
+  {
+   "topic": "Memory",
+   "page": 34,
+   "text": "384 KB of ROM holds boot and core routines. 400 KB of SRAM serves code and data at up to 160 MHz, 16 KB of it set aside as cache. 8 KB of RTC FAST SRAM is reachable by the CPU and keeps its contents in Deep-sleep. 4 Kbit of eFuse holds system settings, of which 1792 bits are for user data such as keys and a device ID; eFuse bits are one-time programmable, 0 unburnt and 1 burnt, with configurable read and write protection and error-coding."
+  },
+  {
+   "topic": "External flash and cache",
+   "page": 35,
+   "text": "SPI, dual SPI, quad SPI and QPI flash outside the package can be attached, up to 16 MB, and the CPU can map instructions and read-only data from it: up to 8 MB of instruction space and 8 MB of data space at a time, each in 64 KB blocks, with 8-, 16- and 32-bit reads. The read-only cache is 16 KB, eight-way set-associative, with 32-byte blocks, pre-load, lock, and critical-word-first with early restart. Software can change the flash mapping once the chip is running. Flash contents can be protected by XTS-AES encryption."
+  },
+  {
+   "topic": "In-package flash",
+   "page": 29,
+   "text": "On ESP32-C3FN4, -FH4 and -FH8X the flash inside the package hangs on SPICLK, SPICS0, SPID, SPIQ, SPIWP and SPIHD (pins 19 to 24) and those pins are not to be used for anything else. On -FH4X and -FH4AZ the same flash is wired inside and pins 19 to 24 are not bonded. ESP32-C3 has no internal flash; the same six pins are the advised connection for an external one. VDD_SPI powers the flash by default."
+  },
+  {
+   "topic": "GPIO and IO MUX",
+   "page": 36,
+   "text": "There are 22 GPIOs (16 on -FH4X and -FH4AZ). Each IO pin can take one of three IO MUX functions, F0 to F2: a fixed direct link to UART0, JTAG, SPI0/1 or SPI2, or a route through the GPIO matrix, which lets almost any peripheral input come from any pin and any output go to any pin at the cost of some added delay. Every GPIO has selectable pull-up, pull-down or high impedance, can raise edge- or level-triggered interrupts, is a non-inverting tri-state buffer, and can be held in its state for low-power operation. Some pins also carry ADC, USB or 32 kHz crystal functions."
+  },
+  {
+   "topic": "Pins that need care",
+   "page": 22,
+   "text": "GPIO2, GPIO8 and GPIO9 are strapping pins. GPIO18 and GPIO19 start as the USB Serial/JTAG D- and D+ and must be reconfigured to act as GPIOs. GPIO4 to GPIO7 carry JTAG, which can be freed by debugging over the USB pins instead. GPIO20 and GPIO21 carry UART0, often used for debug. GPIO11 is VDD_SPI and becomes a GPIO only when the flash has its own supply. GPIO12 to GPIO17 belong to the flash."
+  },
+  {
+   "topic": "Strapping pins",
+   "page": 30,
+   "text": "GPIO2, GPIO8 and GPIO9 are latched at chip reset (power-up or CHIP_EN) and the latched values stay until power-down; nothing else changes them, and the pins then work as ordinary IOs. GPIO9 has a weak pull-up at reset and GPIO2 and GPIO8 float, so set levels with external pull resistors or from a host MCU. The levels must be in place no later than CHIP_EN rising (tSU 0 ms) and held for 3 ms after (tH). Two eFuses also bear on boot, EFUSE_UART_PRINT_CONTROL for UART0 messages and EFUSE_USB_PRINT_CHANNEL for USB messages; both default to 0."
+  },
+  {
+   "topic": "Boot modes",
+   "page": 31,
+   "text": "GPIO9 high gives SPI boot, where the ROM loader runs the program in SPI flash. GPIO9 low with GPIO8 high gives joint download boot, where a binary can be written to flash over UART0 or USB, or loaded into SRAM and run from there. GPIO2 does not take part in the choice but should be pulled up because of glitches. A further SPI download boot mode exists (Technical Reference Manual)."
+  },
+  {
+   "topic": "ROM messages",
+   "page": 31,
+   "text": "During early SPI boot the ROM prints to UART0 and to the USB Serial/JTAG controller by default. UART0 output is governed by EFUSE_UART_PRINT_CONTROL together with GPIO8, USB output by EFUSE_USB_PRINT_CHANNEL and EFUSE_DIS_USB_SERIAL_JTAG; either can be silenced."
+  },
+  {
+   "topic": "Power scheme",
+   "page": 27,
+   "text": "VDD3P3_RTC feeds the RTC IO pins and the low-power 1.1 V regulator for the RTC domain. The digital system 1.1 V regulator draws on both VDD3P3_RTC and VDD3P3_CPU. VDD3P3_CPU feeds the digital IO pins and, through RSPI (7.5 Ω typ), the VDD_SPI pin that supplies the flash and the SPI IO pins. VDDA (two pins) and VDD3P3 (two pins) supply the analog and RF circuits. All supply pins are 3.0 to 3.6 V, from a source able to deliver 0.5 A in total; keep VDD3P3_CPU at or below 3.3 V while burning eFuses."
+  },
+  {
+   "topic": "Power-up and reset",
+   "page": 27,
+   "text": "CHIP_EN is raised only after the VDDA, VDD3P3, VDD3P3_RTC and VDD3P3_CPU rails have passed 2.8 V and settled for tSTBL, at least 50 µs. Pulling CHIP_EN below VIL_nRST (0.25 × VDD) for at least 50 µs (tRST) resets the chip; it is released above VIH_nRST (0.75 × VDD). CHIP_EN low powers the chip off (1 µA typ). CHIP_EN must not float. At power-up MTCK, MTDO, GPIO10 and U0RXD drive low for about 5 ns and GPIO18 drives high for about 50 µs."
+  },
+  {
+   "topic": "Reset levels",
+   "page": 36,
+   "text": "Four reset levels: CPU reset restarts the core only; core reset clears the whole digital system apart from RTC (CPU, peripherals, Wi-Fi, Bluetooth LE, digital GPIOs); system reset also clears RTC; chip reset clears everything. All but chip reset keep internal memory contents. Resets come from software, by register, or from hardware."
+  },
+  {
+   "topic": "Clocks",
+   "page": 37,
+   "text": "The CPU clock comes from the external main crystal, the fast RC oscillator (about 17.5 MHz, trimmable) or the PLL, directly or divided; after reset it runs on the crystal divided by 2. The chip will not run without the main crystal. The RTC slow clock (for the RTC counter and watchdog and the low-power controller) comes from an external 32 kHz crystal, the internal slow RC oscillator (about 136 kHz, trimmable) or the fast RC divided by 256. The RTC fast clock comes from the crystal divided by 2 or the fast RC divided by N (about 17.5 MHz)."
+  },
+  {
+   "topic": "Power modes",
+   "page": 38,
+   "text": "Active: CPU, radio and peripherals all on. Modem-sleep: the CPU runs, possibly at a lower clock, and the radio switches on only when the wireless link needs it; Wi-Fi is clock-gated (13 to 28 mA). Light-sleep: the CPU stops and may stay powered, some digital peripheral groups can be shut off, links can stay up, and wake-up comes from the MAC, the RTC timer or an external interrupt (130 µA typ). Deep-sleep: only the RTC domain stays powered and wireless link state is kept in RTC memory (5 µA typ)."
+  },
+  {
+   "topic": "Timers and watchdogs",
+   "page": 40,
+   "text": "A 52-bit system timer has two counters at a fixed 16 MHz and three comparators, with target or period alarms (52-bit target, 26-bit period), auto-reload, three interrupts, and stalling with the CPU or in OCD mode. Two 54-bit general-purpose timers have 16-bit prescalers (1 to 65536), count up or down, can be read live, halted and resumed, and raise level interrupts on alarm. Three digital watchdogs (one in each timer group, one in RTC) have four stages each with their own timeout, a 32-bit counter and write protection; the RTC watchdog and the timer-group-0 watchdog start by themselves during flash boot and restart the system if boot stalls. An analog super watchdog runs at ultra-low power with an early-warning interrupt. The XTAL32K watchdog switches the RTC slow clock to another source if the 32 kHz crystal stops."
+  },
+  {
+   "topic": "Security",
+   "page": 41,
+   "text": "Secure boot and XTS-AES flash encryption (IEEE 1619-2007, automatic decryption) protect code. Hardware accelerators: AES-128/256 with ECB, CBC, OFB, CTR, CFB8 and CFB128 in DMA mode; SHA-1, SHA-224 and SHA-256; RSA up to 3072-bit modular exponentiation and multiplication and 1536-bit multiplication; HMAC-SHA-256 that can feed keys to the RSA digital signature peripheral or re-enable soft-disabled JTAG; RSA digital signatures to 3072 bits with an encrypted private key. A true random number generator draws on ADC thermal noise and clock mismatch. A permission controller splits memory and peripherals between privileged and unprivileged environments, and the World Controller separates a secure and a non-secure world. Glitches on the crystal clock trigger a reset of the whole digital circuit including RTC. A debug assistant watches bus reads and writes, the stack pointer, the last PC before reset and selected bus writes."
+  },
+  {
+   "topic": "Connectivity peripherals",
+   "page": 47,
+   "text": "Two UARTs to 5 Mbps (RS232, RS485, IrDA) with hardware and software flow control, reachable by DMA through UHCI0. SPI0 and SPI1 serve the flash (single, dual, quad SPI and QPI, up to 120 MHz STR); SPI2 is a general master or slave with DMA: as master 80 MHz in full-duplex or 1-, 2-, 4-line half-duplex with six chip selects and settable CS timing, as slave 60 MHz. One I2C controller, master or slave, at 100 kbit/s, 400 kbit/s and up to 800 kbit/s depending on pull-up strength, 7- and 10-bit addressing. One I2S, master or slave, 8 to 32-bit words, BCK 10 kHz to 40 MHz, TDM and PDM. A USB 2.0 full-speed (12 Mbit/s) Serial/JTAG controller with its own PHY gives a CDC-ACM port and a JTAG adapter for flashing and debugging. A TWAI (CAN 2.0, ISO 11898-1) controller runs from 1 kbit/s to 1 Mbit/s with standard and extended frames, a 64-byte receive FIFO and acceptance filters. The LED PWM controller has six channels with duty resolution to 14 bits, hardware fades, and runs in Light-sleep. The remote control peripheral has two transmit and two receive channels sharing 192 × 32 bits of memory."
+  },
+  {
+   "topic": "ADC",
+   "page": 50,
+   "text": "Two 12-bit SAR ADCs: ADC1 measures 5 channels (GPIO0 to GPIO4) and is calibrated in the factory; ADC2 measures one channel (GPIO5) and is not. ADC2 does not work on some chip revisions (see the SoC errata). Four attenuation settings give ranges of 0 to 750, 1050, 1300 and 2500 mV."
+  },
+  {
+   "topic": "Temperature sensor",
+   "page": 51,
+   "text": "An internal sensor covers -40 °C to 125 °C through an ADC. It tracks the die, which usually runs warmer than the surrounding air, and its reading moves with clock speed and I/O load."
+  },
+  {
+   "topic": "Radio",
+   "page": 52,
+   "text": "On chip the radio has a 2.4 GHz receiver and transmitter, its own bias circuits and regulators, a balun with a TX/RX switch, and a clock generator whose inductors, varactors, filters and dividers are all internal. The receiver has RF filters, automatic gain control, DC offset cancellation and baseband filters, and converts to digital with two fast ADCs. The CMOS power amplifier is linearised by digital calibration, and further calibrations correct carrier leakage, I/Q mismatch, baseband and RF nonlinearity and antenna matching."
+  },
+  {
+   "topic": "Wi-Fi",
+   "page": 53,
+   "text": "802.11b/g/n, 1T1R, 20 and 40 MHz channels, MCS0 to 7 and MCS32, 0.4 µs guard interval, RX STBC, up to 150 Mbps, adjustable TX power, and antenna diversity through an external RF switch driven from GPIOs. The MAC runs station, SoftAP, station plus SoftAP and promiscuous modes over four virtual interfaces, with A-MPDU, A-MSDU, immediate block ACK, TXOP, WMM, RTS/CTS, hardware beacon monitoring, 802.11mc FTM and WEP, TKIP, CCMP, GCMP, WAPI, BIP, WPA2 and WPA3 security. While scanning as a station the SoftAP channel follows the station channel. Software libraries cover TCP/IP, ESP-WIFI-MESH and TLS 1.0 to 1.2."
+  },
+  {
+   "topic": "Bluetooth LE",
+   "page": 54,
+   "text": "Bluetooth 5 LE and Bluetooth mesh, with 1 Mbps, 2 Mbps and coded 125 and 500 Kbps PHYs, hardware listen-before-talk, and a high-power mode up to 20 dBm. The link layer supports advertising extensions, several advertising sets, advertising while scanning, several connections in central and peripheral roles together, adaptive frequency hopping, channel selection algorithm #2, LE privacy 1.2, data length extension, link-layer encryption and LE ping. Wi-Fi and Bluetooth share one antenna through an internal coexistence scheme."
+  },
+  {
+   "topic": "RF test conditions",
+   "page": 60,
+   "text": "RF figures are taken at the antenna port through a cable, front-end loss included, with a 0 Ω resistor as the front-end circuit, from 3.3 V (±5 %) at 25 °C. Centre frequency and target power are set in software; use only the channels the local regulator allows."
+  },
+  {
+   "topic": "Chip revisions",
+   "page": 13,
+   "text": "ESP32-C3, -FN4, -FH4 and -FH4AZ are revision v0.4; -FH4X and -FH8X are v1.1. The errata document lists what each revision fixes and which ESP-IDF releases support it."
+  },
+  {
+   "topic": "Package",
+   "page": 67,
+   "text": "QFN32, 5 × 5 mm body, 0.85 mm nominal height, 32 pads at 0.5 mm pitch with a 3.7 mm square exposed ground pad (pin 33) and a C0.300 chamfer marking pin 1 on the pad; a dot marks pin 1 on top. Dimensions and tolerances follow JEDEC MO-220. A land-pattern file is offered as DXF."
+  }
+ ],
+ "packages": [
+  {
+   "name": "QFN32 (5×5 mm)",
+   "page": 67,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.800",
+     "0.850",
+     "0.900"
+    ],
+    [
+     "A1",
+     "standoff",
+     "---",
+     "---",
+     "0.050"
+    ],
+    [
+     "A3",
+     "lead frame thickness",
+     "",
+     "0.203 Ref.",
+     ""
+    ],
+    [
+     "D",
+     "body length",
+     "4.950",
+     "5.000",
+     "5.050"
+    ],
+    [
+     "E",
+     "body width",
+     "4.950",
+     "5.000",
+     "5.050"
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "3.650",
+     "3.700",
+     "3.750"
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "3.650",
+     "3.700",
+     "3.750"
+    ],
+    [
+     "b",
+     "lead width",
+     "0.200",
+     "0.250",
+     "0.300"
+    ],
+    [
+     "e",
+     "lead pitch",
+     "",
+     "0.500 BSC",
+     ""
+    ],
+    [
+     "L",
+     "lead length",
+     "0.350",
+     "0.400",
+     "0.450"
+    ],
+    [
+     "aaa",
+     "profile tolerance of the top face",
+     "",
+     "0.10",
+     ""
+    ],
+    [
+     "bbb",
+     "lead position tolerance",
+     "",
+     "0.10",
+     ""
+    ],
+    [
+     "ccc",
+     "parallelism of the top face",
+     "",
+     "0.10",
+     ""
+    ],
+    [
+     "ddd",
+     "lead position tolerance",
+     "",
+     "0.05",
+     ""
+    ],
+    [
+     "eee",
+     "profile tolerance of the bottom face",
+     "",
+     "0.08",
+     ""
+    ],
+    [
+     "",
+     "pin 1 chamfer on the exposed pad",
+     "",
+     "C0.300",
+     ""
+    ]
+   ]
+  }
+ ]
+}

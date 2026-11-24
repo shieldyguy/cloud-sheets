@@ -1,0 +1,2896 @@
+{
+ "sheet": 1,
+ "name": "BQ25040DQCR",
+ "kind": "battery_charger",
+ "manufacturer": "Texas Instruments",
+ "title": "1.1 A single-cell Li-ion linear charger with 50 mA LDO and 2.3 A production test mode",
+ "source": {
+  "revision": "SLUS910B, March 2009, revised March 2009",
+  "pages": 29
+ },
+ "summary": "The bq25040 is a linear charger for one Li-ion cell, fed from a USB port or a wall adapter, with up to 1.1 A of charge current in a 2 mm × 3 mm 10-pin SON. A single pulse-coded pin, EN/SET, switches it on and off and picks USB100, USB500 or a resistor-set current, or a production test mode in which BAT holds 4.2 V and delivers up to 2.3 A with no cell fitted. It also carries a 4.9 V, 50 mA LDO, a 30 V-rated input with overvoltage cut-off at 6.9 V, input-voltage DPM, thermal regulation, and two open-drain flags, PG and CHG.",
+ "key_figures": [
+  [
+   "Charge voltage",
+   "4.20 V typ (4.16 to 4.24 V)"
+  ],
+  [
+   "Fast-charge current",
+   "100 to 1100 mA, set by RISET"
+  ],
+  [
+   "USB100 / USB500 input limit",
+   "95 mA / 395 mA typ"
+  ],
+  [
+   "Input rating",
+   "-0.3 to 30 V abs max; 4.35 to 6.7 V operating"
+  ],
+  [
+   "Overvoltage threshold",
+   "6.9 V typ"
+  ],
+  [
+   "LDO",
+   "4.90 V typ, 50 mA"
+  ],
+  [
+   "Production test mode",
+   "4.20 V at up to 2.3 A (20 % duty, 10 ms period)"
+  ],
+  [
+   "Package",
+   "10-pin WSON (DQC), 2 mm × 3 mm"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "VBAT(REG)",
+   "VOVP",
+   "VLDO",
+   "marking",
+   "packing"
+  ],
+  "rows": [
+   [
+    "bq25040DQCR",
+    "4.2V",
+    "6.9V",
+    "4.9V",
+    "OAB",
+    "tape and reel, 3,000 per reel"
+   ],
+   [
+    "bq25040DQCT",
+    "4.2V",
+    "6.9V",
+    "4.9V",
+    "OAB",
+    "tape and reel, 250 per reel"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "DQC (WSON-10, 2 mm × 3 mm)",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "IN",
+     "type": "power in",
+     "function": "Supply from the adapter or USB VBUS. Decouple to VSS with 1 µF ceramic or more."
+    },
+    {
+     "pin": "2",
+     "name": "ISET",
+     "type": "input",
+     "function": "A resistor to VSS (475 Ω to 5.36 kΩ) sets the fast-charge current from 100 mA to 1.1 A in the user-programmed mode. When the ISET current is below the USB500 limit, it also caps the current in USB500 mode."
+    },
+    {
+     "pin": "3",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground. Tie to the exposed pad and the board ground plane."
+    },
+    {
+     "pin": "4",
+     "name": "LDO",
+     "type": "power out",
+     "function": "4.9 V regulator output, up to 50 mA, on whenever VIN is above UVLO and below VOVP. Needs 1 µF ceramic or more to VSS. Its current is outside the input current limit."
+    },
+    {
+     "pin": "5",
+     "name": "IFULL",
+     "type": "input",
+     "function": "A resistor to VSS sets the charge-done level, 5 % to 50 % of the ISET current. CHG turns high-impedance once IBAT drops to that level."
+    },
+    {
+     "pin": "6",
+     "name": "EN/SET",
+     "type": "input",
+     "function": "One-wire control: pulse trains turn the IC on or off and choose the mode. An internal pull-down of about 260 kΩ holds it at VSS."
+    },
+    {
+     "pin": "7",
+     "name": "VSS",
+     "type": "ground",
+     "function": "Ground, the same node as pin 3."
+    },
+    {
+     "pin": "8",
+     "name": "CHG",
+     "type": "open-drain output",
+     "function": "Low while a charge is in progress; released to high impedance when the cell is full and stays so through later top-up charges. Also high impedance under a fault."
+    },
+    {
+     "pin": "9",
+     "name": "PG",
+     "type": "open-drain output",
+     "function": "Low while VIN is at least 80 mV above VBAT and below the OVP threshold; high impedance otherwise."
+    },
+    {
+     "pin": "10",
+     "name": "BAT",
+     "type": "power out",
+     "function": "Charger output to the cell and the system load. Needs 1 µF ceramic or more to VSS, and at least 40 µF with no cell fitted. In production test mode it holds 4.2 V and sources up to 2.3 A."
+    },
+    {
+     "pin": "PAD",
+     "name": "Thermal pad",
+     "type": "ground",
+     "function": "Exposed pad, joined to VSS inside the package. Solder it to the VSS potential on the board, but keep the VSS pins wired to ground as the main ground return at all times."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "over operating free-air temperature range unless otherwise stated",
+   "columns": [
+    "parameter",
+    "pins / conditions",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input voltage",
+     "IN (with respect to VSS)",
+     "–0.3 to 30",
+     "V"
+    ],
+    [
+     "Input voltage",
+     "EN/SET, ISET, IFULL (with respect to VSS)",
+     "–0.3 to 7",
+     "V"
+    ],
+    [
+     "Output voltage",
+     "BAT, CHG, PG (with respect to VSS)",
+     "–0.3 to 7",
+     "V"
+    ],
+    [
+     "Output voltage",
+     "LDO (with respect to VSS)",
+     "-0.3 to 7 (2)",
+     "V"
+    ],
+    [
+     "Input current (Continuous)",
+     "IN",
+     "1.5",
+     "A"
+    ],
+    [
+     "Input current (Pulsed)",
+     "IN, 20% duty cycle with 10 ms period",
+     "2.5",
+     "A"
+    ],
+    [
+     "Output current (Continuous)",
+     "BAT",
+     "1.5",
+     "A"
+    ],
+    [
+     "Output current (Pulsed)",
+     "BAT, 20% duty cycle with 10 ms period",
+     "2.5",
+     "A"
+    ],
+    [
+     "Output current (Continuous)",
+     "LDO",
+     "100",
+     "mA"
+    ],
+    [
+     "Output sink current",
+     "CHG, PG",
+     "15",
+     "mA"
+    ],
+    [
+     "Junction temperature, TJ",
+     "",
+     "–40 to 150",
+     "°C"
+    ],
+    [
+     "Storage temperature, Tstg",
+     "",
+     "–65 to 150",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "All voltages are measured from ground unless a row says otherwise. Operation at these limits is not implied, and long exposure to them can reduce reliability.",
+    "(2) With VLDO higher than VIN, the current has to be held below 100 mA to avoid damage."
+   ]
+  },
+  {
+   "title": "Dissipation ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "package",
+    "RθJA",
+    "RθJC"
+   ],
+   "rows": [
+    [
+     "10 Pin 2mm × 3mm SON",
+     "58.7 °C/W",
+     "3.9 °C/W"
+    ]
+   ],
+   "notes": [
+    "Figures for a JEDEC high-K board with the exposed pad soldered to a copper pad that reaches the ground plane through a 2 × 3 array of vias."
+   ]
+  },
+  {
+   "title": "Recommended operating conditions",
+   "page": 3,
+   "conditions": "over operating free-air temperature range unless otherwise stated",
+   "columns": [
+    "symbol",
+    "parameter",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VIN",
+     "IN voltage range",
+     "4.35",
+     "26",
+     "V"
+    ],
+    [
+     "VIN",
+     "IN operating voltage range",
+     "4.35 (1)",
+     "6.7",
+     "V"
+    ],
+    [
+     "IIN",
+     "Input current, IN pin (charging)",
+     "",
+     "1.1",
+     "A"
+    ],
+    [
+     "IIN(PTM)",
+     "Input current PTM, IN pin, 20% duty cycle with 10ms period",
+     "",
+     "2.3",
+     "A"
+    ],
+    [
+     "IO",
+     "Output current in charge mode, BAT pin (charging)",
+     "",
+     "1.1",
+     "A"
+    ],
+    [
+     "IO(PTM)",
+     "Output current in PTM, BAT pin, 20% duty cycle with 10 ms period",
+     "",
+     "2.3",
+     "A"
+    ],
+    [
+     "TJ",
+     "Junction Temperature",
+     "0",
+     "125",
+     "°C"
+    ],
+    [
+     "RISET",
+     "Fast-charge current programming resistor",
+     "475",
+     "5360",
+     "Ω"
+    ],
+    [
+     "RIFULL",
+     "Charge Done threshold",
+     "1",
+     "10",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "(1) Below VIN = 5 V the LDO, the charger or both can be in dropout, with poorer performance."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: input",
+   "page": 3,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Undervoltage lock-out",
+     "VUVLO",
+     "VIN: 0V → 4V",
+     "3.15",
+     "3.30",
+     "3.45",
+     "V"
+    ],
+    [
+     "Hysteresis on UVLO",
+     "VHYS(UVLO)",
+     "VIN: 4V → 0V",
+     "190",
+     "240",
+     "290",
+     "mV"
+    ],
+    [
+     "Input Power Good detection threshold VIN(PG) above VBAT",
+     "VIN(PG)",
+     "(Input power good if VIN > VBAT + VIN(PG)) VBAT = 3.6V, VIN: 3.5V → 4V",
+     "30",
+     "75",
+     "150",
+     "mV"
+    ],
+    [
+     "Hysteresis on VIN(PG)",
+     "VHYS(INPG)",
+     "VBAT = 3.6V, VIN: 4V → 3.5V",
+     "18",
+     "32",
+     "54",
+     "mV"
+    ],
+    [
+     "Delay time, input power loss to charger turn-off",
+     "tDGL(NO-IN)",
+     "Time measured from VIN: 5V → 2.5V, 1µs fall-time",
+     "",
+     "32",
+     "",
+     "ms"
+    ],
+    [
+     "Input overvoltage protection threshold",
+     "VOVP",
+     "VIN: 5V → 7V",
+     "6.7",
+     "6.9",
+     "7.1",
+     "V"
+    ],
+    [
+     "Hysteresis on OVP",
+     "VHYS(OVP)",
+     "VIN: 7V → 5V",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Input overvoltage blanking time",
+     "tBLK(OVP)",
+     "",
+     "",
+     "115",
+     "",
+     "µs"
+    ],
+    [
+     "Input overvoltage recovery time",
+     "tREC(OVP)",
+     "Time measured from VIN: 11V → 5V 1µs fall-time to CHG = LO, VBAT = 3.5V",
+     "",
+     "500",
+     "",
+     "µs"
+    ],
+    [
+     "Input DPM threshold",
+     "VIN(DPM)",
+     "VIN Falling, ICHRG reduced to 90%, USB100 or USB500 Mode",
+     "4.38",
+     "4.43",
+     "4.48",
+     "V"
+    ],
+    [
+     "USB100 mode input current limit",
+     "IIN",
+     "USB100 programmed by EN/SET, RISET > 1.1kΩ , VBAT = 3.5V",
+     "90",
+     "95",
+     "100",
+     "mA"
+    ],
+    [
+     "USB500 mode input current Limit",
+     "IIN",
+     "USB500 programmed by EN/SET, RISET > 1.1kΩ , VBAT = 3.5V",
+     "380",
+     "395",
+     "415",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: ISET short-circuit test",
+   "page": 3,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Continuous Monitor",
+     "RISET",
+     "RISET= 500Ω → 200Ω, IC latches off after tDGL(SHORT)",
+     "320",
+     "",
+     "460",
+     "Ω"
+    ],
+    [
+     "Deglitch time transition from ISET to IC latched off",
+     "tDGL(SHORT)",
+     "",
+     "",
+     "1.5",
+     "",
+     "ms"
+    ],
+    [
+     "Current limit with ISET shorted",
+     "ILIM",
+     "VISET = 0V, IC latches off after tDGL(SHORT)",
+     "1.7",
+     "2.0",
+     "2.2",
+     "A"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: quiescent current",
+   "page": 3,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Battery current into BAT",
+     "IBAT(PDWN)",
+     "VIN = 0 V",
+     "",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "Standby current into IN pin",
+     "IIN(STDBY)",
+     "VIN ≤ VOVP",
+     "",
+     "",
+     "150",
+     "µA"
+    ],
+    [
+     "Standby current into IN pin",
+     "IIN(STDBY)",
+     "VIN = 10V",
+     "",
+     "",
+     "350",
+     "µA"
+    ],
+    [
+     "Active supply current, IN pin",
+     "ICC",
+     "VIN = 6V, no load on BAT pin, VBAT > VBAT(REG), IC enabled",
+     "",
+     "",
+     "3",
+     "mA"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: battery charger fast-charge",
+   "page": 3,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Battery charge voltage",
+     "VBAT(REG)",
+     "",
+     "4.16",
+     "4.20",
+     "4.24",
+     "V"
+    ],
+    [
+     "Programmed Output “fast charge” current range",
+     "ICHRG",
+     "VBAT(REG) > VBAT > VLOWV, VIN = 5V, RISET = 475Ω to 5.36kΩ, User Programmable set by EN/SET",
+     "100",
+     "",
+     "1100",
+     "mA"
+    ],
+    [
+     "VIN – VBAT",
+     "VDO(IN-BAT)",
+     "VIN = 4.1V and IBAT = 1A",
+     "",
+     "280",
+     "512",
+     "mV"
+    ],
+    [
+     "Output “fast charge” formula",
+     "ICHRG",
+     "VBAT(REG) > VBAT > VLOWV, VIN = 5 V, User Programmable set by EN/SET",
+     "",
+     "KISET/RISET",
+     "",
+     "A"
+    ],
+    [
+     "Fast charge current factor",
+     "KISET",
+     "",
+     "480",
+     "530",
+     "580",
+     "AΩ"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: pre-charge and charge done",
+   "page": 4,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Pre-charge current",
+     "IPRECHG",
+     "VBAT < VLOWV, VIN = 5V, ICHRG = 250mA to 1100mA",
+     "17",
+     "20",
+     "22",
+     "%ICHG"
+    ],
+    [
+     "Pre-charge current",
+     "IPRECHG",
+     "VBAT < VLOWV, VIN = 5V, ICHRG = 100 mA to 249 mA",
+     "16",
+     "20",
+     "27",
+     "%ICHG"
+    ],
+    [
+     "Pre-charge to fast-charge transition threshold",
+     "VLOWV",
+     "",
+     "2.4",
+     "2.5",
+     "2.6",
+     "V"
+    ],
+    [
+     "Deglitch time on pre-charge to fast-charge transition",
+     "tDGL1(LOWV)",
+     "",
+     "",
+     "50",
+     "",
+     "µs"
+    ],
+    [
+     "Deglitch time on fast-charge to pre-charge transition",
+     "tDGL2(LOWV)",
+     "",
+     "",
+     "25",
+     "",
+     "ms"
+    ],
+    [
+     "Reference current to IFULL programming resistor",
+     "IIFULL",
+     "",
+     "70",
+     "75",
+     "80",
+     "µA"
+    ],
+    [
+     "Charge done current formula",
+     "IIFULL%",
+     "IIFULL% = 0% to 50% of ICHRG",
+     "",
+     "RIFULL/KIFULL",
+     "",
+     "%"
+    ],
+    [
+     "Charge done current factor",
+     "KIFULL",
+     "VIN = 5V, ICHGDONE = 25mA to 600mA",
+     "180",
+     "200",
+     "220",
+     "Ω/%"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: LDO",
+   "page": 4,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "LDO Output voltage",
+     "VLDO",
+     "VLDO + VDO(LDO) ≤ VIN ≤ VOVP, ILDO = 0mA to 50mA",
+     "4.75",
+     "4.90",
+     "5.05",
+     "V"
+    ],
+    [
+     "LDO output current limit",
+     "ILDO(MAX)",
+     "VLDO = 0V",
+     "65",
+     "125",
+     "185",
+     "mA"
+    ],
+    [
+     "LDO Dropout voltage",
+     "VDO(LDO)",
+     "VIN = 4.5V, ILDO = 50mA",
+     "",
+     "150",
+     "300",
+     "mV"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: production test mode",
+   "page": 4,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Production Test Mode BAT Output Voltage",
+     "VBAT(PTM)",
+     "VIN = 5.5V, IBAT = 2A for 4ms pulse",
+     "4.116",
+     "4.20",
+     "4.284",
+     "V"
+    ],
+    [
+     "Production Test Mode Maximum BAT output current",
+     "ILIM(PTM)",
+     "",
+     "2.3",
+     "",
+     "",
+     "A"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: thermal regulation",
+   "page": 4,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Temperature regulation limit",
+     "TJ(REG)",
+     "TJ Rising",
+     "",
+     "125",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown temperature",
+     "TJ(OFF)",
+     "TJ Rising",
+     "",
+     "155",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown hysteresis",
+     "TJ(OFF-HYS)",
+     "TJ Falling",
+     "",
+     "20",
+     "",
+     "°C"
+    ]
+   ]
+  },
+  {
+   "title": "Electrical characteristics: EN/SET interface and logic levels",
+   "page": 4,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "EN/SET latch timer",
+     "tEN/SET(Latch)",
+     "Timer to lock pulse count",
+     "1.5",
+     "",
+     "",
+     "ms"
+    ],
+    [
+     "EN/SET latch timer",
+     "tEN/SET(OFF)",
+     "Timer to turn off charge current",
+     "1.5",
+     "",
+     "",
+     "ms"
+    ],
+    [
+     "High duration on EN/SET",
+     "tHI(MIN)",
+     "",
+     "100",
+     "",
+     "700",
+     "µs"
+    ],
+    [
+     "Low time duration on EN/SET",
+     "tLO(MIN)",
+     "",
+     "100",
+     "",
+     "700",
+     "µs"
+    ],
+    [
+     "Logic LOW input voltage",
+     "VIL",
+     "",
+     "0",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "Logic HIGH input voltage",
+     "VIH",
+     "",
+     "1.4",
+     "",
+     "6.0",
+     "V"
+    ],
+    [
+     "EN/SET pulldown resistor",
+     "RPULLDOWN",
+     "See Note (1)",
+     "",
+     "260",
+     "",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "(1) Without an external pull-down, no low level is guaranteed."
+   ]
+  },
+  {
+   "title": "Electrical characteristics: logic levels on CHG and PG",
+   "page": 4,
+   "conditions": "0 °C ≤ TJ ≤ 125 °C and recommended supply voltage unless otherwise stated",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Output LOW voltage",
+     "VOL",
+     "ISINK = 5mA",
+     "",
+     "",
+     "0.425",
+     "V"
+    ],
+    [
+     "Leakage current",
+     "IIH",
+     "VCHG = VPG = 5V",
+     "",
+     "",
+     "1",
+     "µA"
+    ]
+   ]
+  },
+  {
+   "title": "EN/SET pulse map",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "no. of pulses",
+    "mode control",
+    "value"
+   ],
+   "rows": [
+    [
+     "0",
+     "Current Limit",
+     "USB500 Mode (default for startup)"
+    ],
+    [
+     "1",
+     "Current Limit",
+     "ISET Programmed"
+    ],
+    [
+     "2",
+     "Current Limit",
+     "USB100 Mode"
+    ],
+    [
+     "3",
+     "Production Test Mode",
+     "Enabled"
+    ],
+    [
+     "≥4",
+     "Current Limit",
+     "USB100 Mode"
+    ]
+   ]
+  },
+  {
+   "title": "PG deglitch, event to PG edge",
+   "page": 17,
+   "conditions": "nominal values",
+   "columns": [
+    "condition",
+    "enabled (EN/SET low)",
+    "disabled (EN/SET high)"
+   ],
+   "rows": [
+    [
+     "Entering OVP (VIN = 5.5V→10V)",
+     "100 µs",
+     "0"
+    ],
+    [
+     "Leaving OVP (VIN = 10V→5.5V)",
+     "450 µs",
+     "500 µs"
+    ],
+    [
+     "Entering SLEEP (VIN = 5.5V→3.6V)",
+     "32 ms",
+     "0"
+    ],
+    [
+     "Leaving SLEEP(VIN = 3.6V→5.5V)",
+     "500 µs",
+     "500 µs"
+    ],
+    [
+     "Entering UVLO (VIN = 5.5V→2.5V)",
+     "0",
+     "0"
+    ],
+    [
+     "Leaving UVLO (VIN = 2.5V→5.5V)",
+     "230 µs",
+     "230 µs"
+    ]
+   ]
+  },
+  {
+   "title": "Packaging information",
+   "page": 21,
+   "conditions": "",
+   "columns": [
+    "orderable part number",
+    "status",
+    "material type",
+    "package | pins",
+    "package qty | carrier",
+    "RoHS",
+    "lead finish",
+    "MSL rating / peak reflow",
+    "op temp (°C)",
+    "part marking"
+   ],
+   "rows": [
+    [
+     "BQ25040DQCR",
+     "Active",
+     "Production",
+     "WSON (DQC) | 10",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 125",
+     "OAB"
+    ],
+    [
+     "BQ25040DQCR.A",
+     "Active",
+     "Production",
+     "WSON (DQC) | 10",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 125",
+     "OAB"
+    ],
+    [
+     "BQ25040DQCR.B",
+     "Active",
+     "Production",
+     "WSON (DQC) | 10",
+     "3000 | LARGE T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 125",
+     "OAB"
+    ],
+    [
+     "BQ25040DQCT",
+     "Active",
+     "Production",
+     "WSON (DQC) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 125",
+     "OAB"
+    ],
+    [
+     "BQ25040DQCT.A",
+     "Active",
+     "Production",
+     "WSON (DQC) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 125",
+     "OAB"
+    ],
+    [
+     "BQ25040DQCT.B",
+     "Active",
+     "Production",
+     "WSON (DQC) | 10",
+     "250 | SMALL T&R",
+     "Yes",
+     "NIPDAU",
+     "Level-2-260C-1 YEAR",
+     "-40 to 125",
+     "OAB"
+    ]
+   ]
+  },
+  {
+   "title": "Tape and reel",
+   "page": 23,
+   "conditions": "all dimensions nominal",
+   "columns": [
+    "device",
+    "package",
+    "pins",
+    "SPQ",
+    "reel diameter (mm)",
+    "reel width W1 (mm)",
+    "A0 (mm)",
+    "B0 (mm)",
+    "K0 (mm)",
+    "P1 (mm)",
+    "W (mm)",
+    "pin 1 quadrant"
+   ],
+   "rows": [
+    [
+     "BQ25040DQCR",
+     "WSON DQC",
+     "10",
+     "3000",
+     "180.0",
+     "8.4",
+     "2.25",
+     "3.25",
+     "1.05",
+     "4.0",
+     "8.0",
+     "Q1"
+    ],
+    [
+     "BQ25040DQCT",
+     "WSON DQC",
+     "10",
+     "250",
+     "180.0",
+     "8.4",
+     "2.25",
+     "3.25",
+     "1.05",
+     "4.0",
+     "8.0",
+     "Q1"
+    ]
+   ]
+  },
+  {
+   "title": "Reel box dimensions",
+   "page": 24,
+   "conditions": "all dimensions nominal",
+   "columns": [
+    "device",
+    "package",
+    "pins",
+    "SPQ",
+    "length (mm)",
+    "width (mm)",
+    "height (mm)"
+   ],
+   "rows": [
+    [
+     "BQ25040DQCR",
+     "WSON DQC",
+     "10",
+     "3000",
+     "210.0",
+     "185.0",
+     "35.0"
+    ],
+    [
+     "BQ25040DQCT",
+     "WSON DQC",
+     "10",
+     "250",
+     "210.0",
+     "185.0",
+     "35.0"
+    ]
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Complete charge cycle",
+   "page": 9,
+   "conditions": "USB500 mode, no-battery application circuit, TA = 25 °C, RISET = 1.18 kΩ, RIFULL = 4.02 kΩ",
+   "x": {
+    "label": "Time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery and CHG voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Battery current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Battery voltage",
+     "points": [
+      [
+       0.1,
+       1.256
+      ],
+      [
+       2.4,
+       1.861
+      ],
+      [
+       6.8,
+       2.101
+      ],
+      [
+       9.1,
+       2.143
+      ],
+      [
+       20.3,
+       2.185
+      ],
+      [
+       29.2,
+       2.256
+      ],
+      [
+       58.3,
+       2.678
+      ],
+      [
+       69.5,
+       2.889
+      ],
+      [
+       76.2,
+       2.96
+      ],
+      [
+       80.7,
+       3.988
+      ],
+      [
+       91.9,
+       4.143
+      ],
+      [
+       98.6,
+       4.185
+      ],
+      [
+       472.3,
+       4.185
+      ]
+     ]
+    },
+    {
+     "label": "CHG voltage",
+     "points": [
+      [
+       0.1,
+       0.101
+      ],
+      [
+       373.8,
+       0.101
+      ],
+      [
+       378.3,
+       4.185
+      ],
+      [
+       472.3,
+       4.185
+      ]
+     ]
+    },
+    {
+     "label": "Battery current",
+     "points": [
+      [
+       2.4,
+       0.0911
+      ],
+      [
+       78.4,
+       0.0911
+      ],
+      [
+       80.7,
+       0.4455
+      ],
+      [
+       100.8,
+       0.4455
+      ],
+      [
+       100.8,
+       0.4404
+      ],
+      [
+       103.1,
+       0.4404
+      ],
+      [
+       103.1,
+       0.4202
+      ],
+      [
+       105.3,
+       0.4202
+      ],
+      [
+       105.3,
+       0.4101
+      ],
+      [
+       107.5,
+       0.4075
+      ],
+      [
+       109.8,
+       0.3898
+      ],
+      [
+       112.0,
+       0.3898
+      ],
+      [
+       112.0,
+       0.3746
+      ],
+      [
+       116.5,
+       0.3696
+      ],
+      [
+       116.5,
+       0.3594
+      ],
+      [
+       118.7,
+       0.3594
+      ],
+      [
+       121.0,
+       0.3442
+      ],
+      [
+       123.2,
+       0.3442
+      ],
+      [
+       125.4,
+       0.3341
+      ],
+      [
+       129.9,
+       0.3291
+      ],
+      [
+       129.9,
+       0.3189
+      ],
+      [
+       135.5,
+       0.3139
+      ],
+      [
+       138.9,
+       0.2987
+      ],
+      [
+       143.3,
+       0.2987
+      ],
+      [
+       145.6,
+       0.2886
+      ],
+      [
+       150.0,
+       0.2835
+      ],
+      [
+       150.0,
+       0.2784
+      ],
+      [
+       154.5,
+       0.2784
+      ],
+      [
+       154.5,
+       0.2734
+      ],
+      [
+       156.8,
+       0.2734
+      ],
+      [
+       156.8,
+       0.2632
+      ],
+      [
+       165.7,
+       0.2582
+      ],
+      [
+       170.2,
+       0.243
+      ],
+      [
+       174.7,
+       0.243
+      ],
+      [
+       176.9,
+       0.2329
+      ],
+      [
+       181.4,
+       0.2329
+      ],
+      [
+       185.8,
+       0.2177
+      ],
+      [
+       192.6,
+       0.2177
+      ],
+      [
+       194.8,
+       0.2076
+      ],
+      [
+       203.7,
+       0.2025
+      ],
+      [
+       203.7,
+       0.1974
+      ],
+      [
+       208.2,
+       0.1974
+      ],
+      [
+       210.5,
+       0.1873
+      ],
+      [
+       214.9,
+       0.1873
+      ],
+      [
+       214.9,
+       0.1822
+      ],
+      [
+       219.4,
+       0.1822
+      ],
+      [
+       219.4,
+       0.1772
+      ],
+      [
+       226.1,
+       0.1772
+      ],
+      [
+       226.1,
+       0.1721
+      ],
+      [
+       230.6,
+       0.1721
+      ],
+      [
+       232.8,
+       0.162
+      ],
+      [
+       239.5,
+       0.162
+      ],
+      [
+       239.5,
+       0.1569
+      ],
+      [
+       244.0,
+       0.1569
+      ],
+      [
+       244.0,
+       0.1519
+      ],
+      [
+       253.0,
+       0.1519
+      ],
+      [
+       255.2,
+       0.1417
+      ],
+      [
+       259.7,
+       0.1417
+      ],
+      [
+       259.7,
+       0.1367
+      ],
+      [
+       264.2,
+       0.1367
+      ],
+      [
+       264.2,
+       0.1316
+      ],
+      [
+       273.1,
+       0.1316
+      ],
+      [
+       273.1,
+       0.1265
+      ],
+      [
+       282.1,
+       0.1265
+      ],
+      [
+       282.1,
+       0.1215
+      ],
+      [
+       291.0,
+       0.1215
+      ],
+      [
+       291.0,
+       0.1164
+      ],
+      [
+       297.7,
+       0.1164
+      ],
+      [
+       297.7,
+       0.1114
+      ],
+      [
+       302.2,
+       0.1114
+      ],
+      [
+       302.2,
+       0.1063
+      ],
+      [
+       313.4,
+       0.1063
+      ],
+      [
+       313.4,
+       0.1012
+      ],
+      [
+       320.1,
+       0.1012
+      ],
+      [
+       320.1,
+       0.0962
+      ],
+      [
+       324.6,
+       0.1012
+      ],
+      [
+       324.6,
+       0.0962
+      ],
+      [
+       331.3,
+       0.0962
+      ],
+      [
+       331.3,
+       0.0911
+      ],
+      [
+       344.7,
+       0.0911
+      ],
+      [
+       344.7,
+       0.0861
+      ],
+      [
+       351.4,
+       0.0861
+      ],
+      [
+       351.4,
+       0.081
+      ],
+      [
+       362.6,
+       0.081
+      ],
+      [
+       362.6,
+       0.0759
+      ],
+      [
+       376.0,
+       0.0759
+      ],
+      [
+       376.0,
+       0.0709
+      ],
+      [
+       396.2,
+       0.0709
+      ],
+      [
+       396.2,
+       0.0658
+      ],
+      [
+       414.1,
+       0.0658
+      ],
+      [
+       414.1,
+       0.0607
+      ],
+      [
+       423.0,
+       0.0607
+      ],
+      [
+       423.0,
+       0.0557
+      ],
+      [
+       447.6,
+       0.0557
+      ],
+      [
+       447.6,
+       0.0506
+      ],
+      [
+       471.1,
+       0.0506
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Dropout voltage against temperature",
+   "page": 9,
+   "conditions": "USB500 mode, no-battery application circuit",
+   "x": {
+    "label": "Free-air temperature TA",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VDO(IN-BAT)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILOAD = 1.8 A",
+     "points": [
+      [
+       0,
+       0.4499
+      ],
+      [
+       31.1,
+       0.5188
+      ],
+      [
+       81.8,
+       0.6401
+      ],
+      [
+       125.0,
+       0.7614
+      ]
+     ]
+    },
+    {
+     "label": "ILOAD = 1 A",
+     "points": [
+      [
+       0,
+       0.2499
+      ],
+      [
+       20.7,
+       0.2729
+      ],
+      [
+       62.5,
+       0.3286
+      ],
+      [
+       125.0,
+       0.4237
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Thermal regulation: charge current against temperature",
+   "page": 9,
+   "conditions": "USB500 mode, no-battery application circuit",
+   "x": {
+    "label": "Free-air temperature TA",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBAT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "line 1",
+     "points": [
+      [
+       25.0,
+       98.0
+      ],
+      [
+       105.7,
+       98.0
+      ],
+      [
+       112.5,
+       97.1
+      ],
+      [
+       114.4,
+       96.3
+      ],
+      [
+       116.7,
+       91.4
+      ],
+      [
+       117.4,
+       86.9
+      ],
+      [
+       119.7,
+       52.1
+      ],
+      [
+       123.1,
+       24.2
+      ],
+      [
+       124.6,
+       5.7
+      ],
+      [
+       126.1,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "line 2",
+     "points": [
+      [
+       25.0,
+       94.3
+      ],
+      [
+       106.1,
+       94.3
+      ],
+      [
+       113.3,
+       93.4
+      ],
+      [
+       115.9,
+       92.2
+      ],
+      [
+       117.8,
+       89.8
+      ],
+      [
+       118.6,
+       86.5
+      ],
+      [
+       118.6,
+       81.6
+      ],
+      [
+       125.8,
+       19.7
+      ],
+      [
+       126.9,
+       2.5
+      ],
+      [
+       128.0,
+       0
+      ]
+     ]
+    },
+    {
+     "label": "line 3",
+     "points": [
+      [
+       25.0,
+       98.0
+      ],
+      [
+       112.9,
+       98.0
+      ],
+      [
+       119.3,
+       96.7
+      ],
+      [
+       121.2,
+       93.0
+      ],
+      [
+       122.7,
+       87.3
+      ],
+      [
+       126.1,
+       49.2
+      ],
+      [
+       131.8,
+       1.2
+      ]
+     ]
+    },
+    {
+     "label": "line 4",
+     "points": [
+      [
+       25.0,
+       98.0
+      ],
+      [
+       115.9,
+       98.0
+      ],
+      [
+       122.3,
+       96.7
+      ],
+      [
+       123.5,
+       95.1
+      ],
+      [
+       125.0,
+       90.6
+      ],
+      [
+       126.9,
+       78.3
+      ],
+      [
+       133.0,
+       9.4
+      ],
+      [
+       134.5,
+       3.7
+      ],
+      [
+       135.2,
+       2.5
+      ],
+      [
+       137.9,
+       1.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output regulation voltage against temperature",
+   "page": 10,
+   "conditions": "USB500 mode, no-battery application circuit, IC in PTM or CV regulation",
+   "x": {
+    "label": "Free-air temperature TA",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT(REG)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILOAD = 1 A",
+     "points": [
+      [
+       0,
+       4.2014
+      ],
+      [
+       28.0,
+       4.2004
+      ],
+      [
+       81.6,
+       4.1916
+      ],
+      [
+       125,
+       4.1827
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output regulation voltage against input voltage",
+   "page": 10,
+   "conditions": "USB500 mode, no-battery application circuit, TA = 25 °C, IC in PTM or CV regulation",
+   "x": {
+    "label": "Input voltage VI",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOUT(REG)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILOAD = 1 A",
+     "points": [
+      [
+       4.509,
+       4.19987
+      ],
+      [
+       5.01,
+       4.2
+      ],
+      [
+       6.801,
+       4.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Overvoltage protection threshold against temperature",
+   "page": 10,
+   "conditions": "USB500 mode, no-battery application circuit",
+   "x": {
+    "label": "Free-air temperature TA",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VOVP",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VI rising",
+     "points": [
+      [
+       0,
+       6.9188
+      ],
+      [
+       91.1,
+       6.8893
+      ],
+      [
+       125.0,
+       6.8827
+      ]
+     ]
+    },
+    {
+     "label": "VI falling",
+     "points": [
+      [
+       0,
+       6.8302
+      ],
+      [
+       37.9,
+       6.8106
+      ],
+      [
+       70.7,
+       6.7876
+      ],
+      [
+       125.0,
+       6.7647
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Fast-charge current against input voltage (USB100, USB500, ISET)",
+   "page": 10,
+   "conditions": "USB500 mode, no-battery application circuit, TA = 25 °C",
+   "x": {
+    "label": "Input voltage VIN",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBAT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ISET",
+     "points": [
+      [
+       4.199,
+       750.5
+      ],
+      [
+       6.697,
+       750.5
+      ]
+     ]
+    },
+    {
+     "label": "USB500",
+     "points": [
+      [
+       4.443,
+       13.5
+      ],
+      [
+       4.443,
+       238.3
+      ],
+      [
+       4.457,
+       345.4
+      ],
+      [
+       4.478,
+       389.8
+      ],
+      [
+       6.692,
+       389.8
+      ]
+     ]
+    },
+    {
+     "label": "USB100",
+     "points": [
+      [
+       4.443,
+       8.3
+      ],
+      [
+       4.443,
+       71.0
+      ],
+      [
+       4.478,
+       91.9
+      ],
+      [
+       6.692,
+       91.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Fast-charge current against battery voltage",
+   "page": 11,
+   "conditions": "USB500 mode, no-battery application circuit, TA = 25 °C",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBAT",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RISET = 680 Ω",
+     "points": [
+      [
+       2.5,
+       752.95
+      ],
+      [
+       2.717,
+       752.95
+      ],
+      [
+       2.826,
+       752.18
+      ],
+      [
+       3.348,
+       752.18
+      ],
+      [
+       3.38,
+       751.41
+      ],
+      [
+       3.848,
+       751.41
+      ],
+      [
+       3.859,
+       750.63
+      ],
+      [
+       3.87,
+       751.41
+      ],
+      [
+       3.88,
+       751.41
+      ],
+      [
+       3.902,
+       750.63
+      ],
+      [
+       4.185,
+       750.63
+      ],
+      [
+       4.196,
+       750.25
+      ]
+     ]
+    }
+   ],
+   "notes": [
+    "Misprint: the axis unit should read mA."
+   ]
+  },
+  {
+   "title": "Pre-charge current against battery voltage",
+   "page": 11,
+   "conditions": "USB500 mode, no-battery application circuit, TA = 25 °C, RISET = 680 Ω",
+   "x": {
+    "label": "VBAT",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IBAT",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IBAT",
+     "points": [
+      [
+       1.5056,
+       0.15497
+      ],
+      [
+       1.75,
+       0.1549
+      ],
+      [
+       2.0,
+       0.15485
+      ],
+      [
+       2.25,
+       0.15485
+      ],
+      [
+       2.4987,
+       0.15485
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "application",
+   "title": "Application schematic, adapter or USB input",
+   "page": 1,
+   "description": "The charger is fed either from an adapter or from a USB port's VBUS, both landing on IN with C1 (1 µF). R1 (680 Ω) on ISET gives about 780 mA of fast charge and R2 (2 kΩ) on IFULL sets charge-done at 10 % of that. BAT feeds the cell, C2 and the baseband processor (ABB); two LEDs with 1 kΩ resistors hang from BAT onto the open-drain PG and CHG pins. The ABB drives EN/SET, takes the 4.9 V LDO output (decoupled by C3) and the USB data lines.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq25040"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "ABB",
+     "external": true,
+     "note": "baseband processor of the host"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "Adaptor"
+    },
+    {
+     "ref": "J2",
+     "type": "connector",
+     "value": "USB Port"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "680 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "PG indicator"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "LED",
+     "note": "CHG indicator"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "single-cell Li-ion battery"
+    }
+   ],
+   "notes": [
+    "Only one of the two sources is connected at a time."
+   ]
+  },
+  {
+   "id": "battery-installed",
+   "title": "Typical application with the battery always fitted, ICHRG = 780 mA, ICHGDONE = 78 mA",
+   "page": 7,
+   "description": "A USB port or travel adapter feeds IN, bypassed by C1 (1 µF); its data lines are left open. R1 (680 Ω) sets about 780 mA of fast charge and R2 (2 kΩ) a 10 % charge-done level. BAT goes to the cell, to C2 (1 µF) and to the ABB's VCHG input, and supplies two LEDs through 1 kΩ resistors that sink into PG and CHG. A GPIO of the ABB drives EN/SET. The LDO output, with C3 (1 µF), feeds the ABB's VCHG DET, USB DET and VUSBIN pins.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq25040"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "ABB",
+     "external": true,
+     "note": "baseband processor of the host"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "USB or TA"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "680 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "PG indicator"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "LED",
+     "note": "CHG indicator"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "single-cell Li-ion battery"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "no-battery",
+   "title": "Typical application for PTM or with no battery fitted, ICHRG = 780 mA, ICHGDONE = 39 mA",
+   "page": 7,
+   "description": "The same wiring as the battery-fitted circuit, with two changes for running the system without a cell or in production test mode: C1 on IN grows to 22 µF, and the system side of BAT carries bulk capacitance of more than 40 µF (CB1, CB2) besides C2 (1 µF). The cell position BT1 is empty during PTM.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "bq25040"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "ABB",
+     "external": true,
+     "note": "baseband processor of the host"
+    },
+    {
+     "ref": "J1",
+     "type": "connector",
+     "value": "USB or TA"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "22 µF"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "1 µF"
+    },
+    {
+     "ref": "CB1",
+     "type": "capacitor",
+     "value": ">40 µF",
+     "note": "with CB2, more than 40 µF of bulk capacitance, needed for running without a cell"
+    },
+    {
+     "ref": "CB2",
+     "type": "capacitor",
+     "value": ">40 µF",
+     "note": "with CB1, more than 40 µF in all"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "680 Ω"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "2 kΩ"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "1 kΩ"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "LED",
+     "note": "PG indicator"
+    },
+    {
+     "ref": "D2",
+     "type": "led",
+     "value": "LED",
+     "note": "CHG indicator"
+    },
+    {
+     "ref": "BT1",
+     "type": "source",
+     "value": "single-cell Li-ion battery",
+     "note": "not fitted for PTM"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "ISET resistor",
+   "expr": "RISET = KISET / ICHG",
+   "where": {
+    "RISET": "resistor from ISET to VSS",
+    "KISET": "fast-charge current factor, 530 AΩ typ",
+    "ICHG": "wanted fast-charge current, 100 mA to 1.1 A"
+   },
+   "note": "Worked value: 530 AΩ / 0.78 A = 679 Ω, fitted as 680 Ω.",
+   "page": 15
+  },
+  {
+   "name": "Fast-charge current",
+   "expr": "ICHRG = KISET / RISET",
+   "where": {
+    "ICHRG": "fast-charge current in the ISET mode",
+    "RISET": "ISET resistor"
+   },
+   "note": "",
+   "page": 3
+  },
+  {
+   "name": "IFULL resistor",
+   "expr": "RIFULL = IFULL% × KIFULL",
+   "where": {
+    "RIFULL": "resistor from IFULL to VSS",
+    "IFULL%": "charge-done level as a percentage of the ISET current, 5 % to 50 %",
+    "KIFULL": "charge-done current factor, 200 Ω/% typ"
+   },
+   "note": "Worked value: 200 Ω/% × 10 % = 2 kΩ.",
+   "page": 15
+  },
+  {
+   "name": "Charge-done level",
+   "expr": "IIFULL% = RIFULL / KIFULL",
+   "where": {
+    "IIFULL%": "charge-done current as a percentage of ICHRG"
+   },
+   "note": "",
+   "page": 4
+  },
+  {
+   "name": "Junction-to-ambient thermal resistance",
+   "expr": "θJA = (TJ − TA) / PD",
+   "where": {
+    "TJ": "junction temperature",
+    "TA": "ambient temperature",
+    "PD": "power dissipated in the IC"
+   },
+   "note": "",
+   "page": 19
+  },
+  {
+   "name": "Charger dissipation",
+   "expr": "PD = (VIN − VOUT) × IOUT",
+   "where": {
+    "VIN": "input voltage",
+    "VOUT": "BAT voltage",
+    "IOUT": "charge current"
+   },
+   "note": "Largest early in the cycle, while the cell voltage is lowest.",
+   "page": 19
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Charge start",
+   "page": 12,
+   "text": "A charge begins once three things hold: a cell below the recharge level is on BAT, EN/SET is low, and the input is valid. Valid means VIN above UVLO, more than 80 mV over VBAT and under VOVP."
+  },
+  {
+   "topic": "Charge cycle",
+   "page": 12,
+   "text": "Below VLOWV (2.5 V) the cell gets a pre-charge current of 20 % of the ISET setting. Above VLOWV the fast-charge limit chosen through EN/SET (USB100, USB500 or ISET) applies. On reaching VBAT(REG) the charger holds the voltage while the current tapers. When IBAT falls to the IFULL level, CHG is released but charging carries on. There are no safety timers in the IC; the host has to time the charge."
+  },
+  {
+   "topic": "Thermal loop during charge",
+   "page": 2,
+   "text": "In every phase the junction temperature is watched, and the charge current is cut back when it passes the internal limit."
+  },
+  {
+   "topic": "EN/SET start-up",
+   "page": 13,
+   "text": "Pulling EN/SET low enables the IC. After a 50 µs deglitch it waits 32 ms (tWAIT), during which a mode can be pulsed in; with no pulses the IC comes up in USB500 mode."
+  },
+  {
+   "topic": "EN/SET pulse coding",
+   "page": 13,
+   "text": "Each high pulse and each gap between pulses must last 100 µs to 700 µs. The count is decoded once EN/SET has stayed low for 1.5 ms. A fourth pulse selects USB100 at once without waiting for the 1.5 ms timer. After one mode is set, further pulses are ignored until the input power is cycled or the IC is disabled and re-enabled."
+  },
+  {
+   "topic": "Disable",
+   "page": 13,
+   "text": "Holding EN/SET high for longer than 1.5 ms disables the IC: charging stops and input quiescent current drops. The LDO is not controlled by EN/SET."
+  },
+  {
+   "topic": "Current limit selection",
+   "page": 15,
+   "text": "EN/SET chooses USB100, USB500 or the ISET current. If the ISET current is set lower than the USB500 limit, it is the ISET value that applies in USB500 mode. Pre-charge is always 20 % of the ISET current, not of the selected mode, though in USB100 mode it can be held to the USB100 limit."
+  },
+  {
+   "topic": "Charge done",
+   "page": 15,
+   "text": "IFULL% is a share of the ISET fast-charge current and must lie from 5 % to 50 %. CHG goes high when IBAT drops below it, telling the host to end the cycle; the IC itself keeps charging until EN/SET disables it."
+  },
+  {
+   "topic": "Production test mode",
+   "page": 15,
+   "text": "Three pulses on EN/SET select PTM: BAT is regulated to 4.2 V and can supply up to 2.3 A with no cell fitted, for powering a product on a test line. It cannot carry 2.3 A continuously; above 1.5 A the user has to hold the full-current duty cycle to 20 %, with a period of 10 ms or less. Thermal regulation is off in PTM; thermal shutdown stays active."
+  },
+  {
+   "topic": "Undervoltage lockout",
+   "page": 15,
+   "text": "Below UVLO the IC sits in power-down: EN/SET is ignored, the pass FET from IN to BAT stays off, and PG and CHG float. Above UVLO it starts normally."
+  },
+  {
+   "topic": "Input overvoltage protection",
+   "page": 15,
+   "text": "Above VOVP both the LDO and the charger shut off. A 115 µs blanking time rides through input ringing. An adapter that is above VOVP at plug-in sees the IC finish its soft start, then shut down if the input is still high after 115 µs; it stays off until VIN drops below VOVP."
+  },
+  {
+   "topic": "Input DPM",
+   "page": 15,
+   "text": "In USB100 and USB500 modes the input voltage is watched; should it drop as far as VIN(DPM), the IC trims its input current so the source is not pulled down further. This keeps a weak or wrongly configured USB source from collapsing, for example a 250 mA-limited source with USB500 (395 mA) selected."
+  },
+  {
+   "topic": "LDO",
+   "page": 16,
+   "text": "The LDO gives up to 50 mA at VLDO whenever VIN is between UVLO and VOVP, regardless of EN/SET, for loads such as a USB transceiver that must run while the cell is flat. Its current has its own limit and adds to the input current limit; thermal regulation does not reduce it."
+  },
+  {
+   "topic": "CHG output",
+   "page": 16,
+   "text": "Open drain, pulled to VSS during pre-charge, fast charge and CV. It goes high impedance once the output is in regulation and the current is below the termination level, and stays high through later refresh charges. For a microcontroller input, pull it up through 1 kΩ to 100 kΩ; it can also drive an LED at under 15 mA. The pull-up rail may be anything under the pin rating. An LED pulled up to the cell dims at low battery; pulled up to LDO, its current is outside the input limit and can push the input past the USB100 maximum."
+  },
+  {
+   "topic": "PG output",
+   "page": 16,
+   "text": "Open drain, low when the input lies between VBAT + 80 mV and VOVP and is above UVLO. Pull-up choices behave as for CHG. Each input event has its own nominal PG deglitch time, enabled or disabled."
+  },
+  {
+   "topic": "Thermal regulation and shutdown",
+   "page": 17,
+   "text": "Above TJ(REG) the charge current is reduced to hold the die temperature. If the die still reaches TJ(OFF) the charge FET turns off, and turns on again after cooling by TJ(OFF-HYS); a lasting overtemperature makes the load current pulse. These loops act on die temperature, not ambient. Battery temperature (NTC) has to be watched by the host."
+  },
+  {
+   "topic": "Capacitors",
+   "page": 18,
+   "text": "IN: 1 µF ceramic close to IN and the ground pad for normal charging; 22 µF for PTM at up to 2.3 A; more where cable and source ringing at hot plug could exceed the OVP level for longer than the deglitch. BAT: 1 µF ceramic close to the pins for loop stability; 40 µF for PTM up to 2.3 A; more to limit droop on large load steps. LDO: at least 1 µF ceramic close to the pins, larger for better transient response."
+  },
+  {
+   "topic": "Status indicator supply",
+   "page": 18,
+   "text": "PG and CHG are 7 V open-drain FETs. Pull them up to the host supply when a host reads them. For LEDs the supply can be BAT, LDO or IN. From IN, a 6.2 V zener clamp is needed if the input can exceed 7 V. From BAT, brightness follows the cell and falls sharply below 3 V. LDO is a regulated rail and suits LEDs at high input voltage."
+  },
+  {
+   "topic": "Thermal design",
+   "page": 19,
+   "text": "The exposed pad carries heat into the board; θJA depends on mounting, trace size and copper, orientation, air volume and flow, and nearby surfaces. With weak board thermal design the thermal loop may cut the programmed charge current at high input voltage and low cell voltage."
+  },
+  {
+   "topic": "Layout",
+   "page": 20,
+   "text": "Put the IN and BAT capacitors as close to the IC as possible, with short traces to IN, BAT and the ground pad. Keep low-current grounds apart from the battery's high-current paths and join the two at a single point. Size the IN and BAT traces for the full charge current. Solder the exposed pad to board ground: it doubles as the IC's principal ground path."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DQC0010A (WSON-10)",
+   "page": 26,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "E",
+     "body width",
+     "1.9",
+     "",
+     "2.1"
+    ],
+    [
+     "D",
+     "body length",
+     "2.9",
+     "",
+     "3.1"
+    ],
+    [
+     "A",
+     "overall height",
+     "",
+     "",
+     "0.8"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "A3",
+     "terminal thickness",
+     "",
+     "(0.2)",
+     ""
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "",
+     "0.84 ± 0.1",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "",
+     "2.4 ± 0.1",
+     ""
+    ],
+    [
+     "e",
+     "terminal pitch (8×)",
+     "",
+     "0.5",
+     ""
+    ],
+    [
+     "",
+     "span of outer terminals in a row (2×)",
+     "",
+     "2",
+     ""
+    ],
+    [
+     "b",
+     "terminal width (10×)",
+     "0.2",
+     "",
+     "0.3"
+    ],
+    [
+     "L",
+     "terminal length (10×)",
+     "0.2",
+     "",
+     "0.4"
+    ],
+    [
+     "",
+     "optional terminal, end width (10×)",
+     "0.2",
+     "",
+     "0.3"
+    ],
+    [
+     "",
+     "optional terminal, end length (10×)",
+     "0.25",
+     "",
+     "0.35"
+    ],
+    [
+     "",
+     "pin 1 chamfer on exposed pad",
+     "",
+     "(45° × 0.2)",
+     ""
+    ],
+    [
+     "",
+     "seating-plane coplanarity",
+     "",
+     "",
+     "0.08"
+    ]
+   ],
+   "notes": [
+    "Pins 1 to 5 run down one long side and 6 to 10 back up the other; the exposed pad is terminal 11 and must be soldered to the board."
+   ]
+  },
+  {
+   "name": "DQC0010A land pattern",
+   "page": 27,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "terminal pad length (10×)",
+     "(0.5)"
+    ],
+    [
+     "terminal pad width (10×)",
+     "(0.25)"
+    ],
+    [
+     "terminal pitch (8×)",
+     "(0.5)"
+    ],
+    [
+     "exposed pad width",
+     "(0.84)"
+    ],
+    [
+     "exposed pad length",
+     "(2.4)"
+    ],
+    [
+     "terminal pad rows, centre to centre",
+     "(1.9)"
+    ],
+    [
+     "thermal via diameter",
+     "(0.2) TYP"
+    ],
+    [
+     "thermal via pitch",
+     "(0.95)"
+    ],
+    [
+     "pad corner radius",
+     "(R0.05) TYP"
+    ],
+    [
+     "solder mask clearance, non-solder-mask-defined (preferred)",
+     "0.07 MAX all around"
+    ],
+    [
+     "solder mask overlap, solder-mask-defined",
+     "0.07 MIN all around"
+    ]
+   ]
+  },
+  {
+   "name": "DQC0010A stencil",
+   "page": 28,
+   "unit": "mm",
+   "columns": [
+    "feature",
+    "value"
+   ],
+   "rows": [
+    [
+     "stencil thickness",
+     "0.125"
+    ],
+    [
+     "terminal aperture length (10×)",
+     "(0.5)"
+    ],
+    [
+     "terminal aperture width (10×)",
+     "(0.25)"
+    ],
+    [
+     "exposed pad apertures, width",
+     "(0.8)"
+    ],
+    [
+     "exposed pad apertures, length",
+     "(1.08)"
+    ],
+    [
+     "exposed pad aperture centre, offset from package centre",
+     "(0.64)"
+    ],
+    [
+     "paste coverage under exposed pad",
+     "86 %"
+    ],
+    [
+     "aperture corner radius",
+     "(R0.05) TYP"
+    ]
+   ]
+  }
+ ]
+}

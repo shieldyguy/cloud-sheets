@@ -1,0 +1,1621 @@
+{
+ "sheet": 1,
+ "name": "NCP349MNBKTBG",
+ "kind": "power_switch",
+ "manufacturer": "onsemi",
+ "title": "NCP349: positive overvoltage protection controller with internal 65 mΩ NMOS switch, DFN6 1.6 × 2 mm",
+ "source": {
+  "document": "NCP349/D",
+  "revision": "Rev. 3, September 2012",
+  "pages": 13
+ },
+ "summary": "A series switch for a charger or system input that passes the supply through an on-chip N-channel MOSFET (65 mΩ typ, gate driven by an internal charge pump) only while the input sits between an undervoltage and an overvoltage threshold. The input withstands 30 V and is protected against overvoltage up to 28 V; above OVLO the output is cut off within 5 µs max, and outside the window an open-drain FLAG output goes low. An active-low EN input turns the switch off without affecting fault detection. Five threshold versions are offered; NCP349MNBKTBG has UVLO 3.25 V typ and OVLO 6.4 V typ with 55 ms start-up delay.",
+ "key_figures": [
+  [
+   "Input voltage, protected",
+   "up to 28 V (30 V absolute maximum)"
+  ],
+  [
+   "Switch resistance RDS(on)",
+   "65 mΩ typ, 110 mΩ max at Vin = 5.0 V"
+  ],
+  [
+   "Continuous current",
+   "2.0 A (UVLO < VIN < OVLO); 4.0 A peak for t ≤ 1 ms"
+  ],
+  [
+   "OVLO, NCP349MNBK",
+   "6.0 / 6.4 / 6.8 V min / typ / max, hysteresis 100 mV typ"
+  ],
+  [
+   "UVLO, NCP349MNBK",
+   "3.0 / 3.25 / 3.5 V min / typ / max"
+  ],
+  [
+   "Output turn-off time on overvoltage",
+   "1.5 µs typ, 5.0 µs max"
+  ],
+  [
+   "Start-up delay ton, NCP349MNBK",
+   "30 / 55 / 70 ms"
+  ],
+  [
+   "Quiescent current",
+   "140 µA typ enabled, 70 µA typ with EN high"
+  ],
+  [
+   "Input ESD (IEC 61000-4-2) with 1 µF bypass",
+   "15 kV air, 8.0 kV contact"
+  ],
+  [
+   "Package",
+   "DFN6 1.6 × 2.0 mm, 0.5 mm pitch, exposed pad"
+  ]
+ ],
+ "part_numbers": {
+  "page": 11,
+  "columns": [
+   "part number",
+   "marking",
+   "UVLO typ",
+   "OVLO typ",
+   "ton / tstart typ",
+   "package",
+   "packing"
+  ],
+  "rows": [
+   [
+    "NCP349MNTBG",
+    "AC",
+    "2.95 V",
+    "6.85 V",
+    "1.8 ms / 1.2 ms",
+    "DFN6 (Pb-free)",
+    "3000 / tape and reel"
+   ],
+   [
+    "NCP349MNAETBG",
+    "AE",
+    "2.95 V",
+    "5.68 V",
+    "10 ms / 10 ms",
+    "DFN6 (Pb-free)",
+    "3000 / tape and reel"
+   ],
+   [
+    "NCP349MNBGTBG",
+    "AG",
+    "3.25 V",
+    "6.02 V",
+    "55 ms / 55 ms",
+    "DFN6 (Pb-free)",
+    "3000 / tape and reel"
+   ],
+   [
+    "NCP349MNBKTBG",
+    "AK",
+    "3.25 V",
+    "6.40 V",
+    "55 ms / 55 ms",
+    "DFN6 (Pb-free)",
+    "3000 / tape and reel"
+   ],
+   [
+    "NCP349MNAMTBG",
+    "AM",
+    "2.95 V",
+    "7.2 V",
+    "55 ms / 55 ms",
+    "DFN6 (Pb-free)",
+    "3000 / tape and reel"
+   ]
+  ],
+  "notes": [
+   "Order code pattern NCP349MNabTcG: letter a sets the UVLO typical threshold (none or A = 2.95 V, B = 3.25 V), letter b the OVLO typical threshold (E = 5.68 V, G = 6.02 V, K = 6.40 V, none = 6.85 V, M = 7.2 V), and letter c the reel (B = 3000 pieces).",
+   "Other UVLO and OVLO thresholds can be manufactured; availability through onsemi.",
+   "Package marking: two-letter device code XX, date code M, and a Pb-free indicator (G or microdot)."
+  ]
+ },
+ "pins": [
+  {
+   "package": "DFN6 1.6x2.0",
+   "page": 3,
+   "pins": [
+    {
+     "pin": "1, 7",
+     "name": "IN",
+     "type": "power in",
+     "function": "Supply input from the adapter or USB bus. Pin 7 is the exposed pad, tied inside to the switch drain; pins 1 and 7 are joined on the board. Bypass to GND with a low-ESR ceramic of 1 µF or more placed close to the chip."
+    },
+    {
+     "pin": "2",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "3",
+     "name": "FLAG",
+     "type": "open-drain output",
+     "function": "Active-low fault report: pulled low while the input is above OVLO or below UVLO. Needs an external pull-up of at least 10 kΩ to the logic supply."
+    },
+    {
+     "pin": "4, 5",
+     "name": "OUT",
+     "type": "power out",
+     "function": "Switched output; follows IN when no fault is present. Both OUT pins are joined on the board."
+    },
+    {
+     "pin": "6",
+     "name": "EN",
+     "type": "digital in",
+     "function": "Active-low enable. High puts the part in shutdown with OUT cut off from IN; low (grounded, pulled down or driven by an I/O) allows normal operation. Has no effect on fault detection."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Maximum ratings",
+   "page": 3,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Minimum Voltage (IN to GND)",
+     "Vminin",
+     "−0.3",
+     "V"
+    ],
+    [
+     "Minimum Voltage (All others to GND)",
+     "Vmin",
+     "−0.3",
+     "V"
+    ],
+    [
+     "Maximum Voltage (IN to GND)",
+     "Vmaxin",
+     "30",
+     "V"
+    ],
+    [
+     "Maximum Voltage (All others to GND)",
+     "Vmax",
+     "7.0",
+     "V"
+    ],
+    [
+     "Maximum Current (UVLO<VIN<OVLO)",
+     "Imax",
+     "2.0",
+     "A"
+    ],
+    [
+     "Maximum Peak Current (t ≤ 1 ms, TA = 85°C)",
+     "Imaxpeak",
+     "4.0",
+     "A"
+    ],
+    [
+     "Thermal Resistance, Junction-to-Air (Note 1)",
+     "RθJA",
+     "180",
+     "°C/W"
+    ],
+    [
+     "Operating Ambient Temperature Range",
+     "TA",
+     "−40 to +85",
+     "°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "Tstg",
+     "−65 to +150",
+     "°C"
+    ],
+    [
+     "Junction Operating Temperature",
+     "TJ",
+     "150",
+     "°C"
+    ],
+    [
+     "ESD Withstand Voltage (IEC 61000-4-2) (input only) when bypassed with 1.0 µF capacitor",
+     "Vesd",
+     "15 Air, 8.0 Contact",
+     "kV"
+    ],
+    [
+     "Human Body Model (HBM), Model = 2 (Note 2)",
+     "Vesd",
+     "2000",
+     "V"
+    ],
+    [
+     "Machine Model (MM) Model = B (Note 3)",
+     "Vesd",
+     "200",
+     "V"
+    ],
+    [
+     "Moisture Sensitivity",
+     "MSL",
+     "Level 1",
+     "−"
+    ]
+   ],
+   "notes": [
+    "Note 1: RθJA depends strongly on the copper heat-sink area tied to pin 7.",
+    "Note 2: HBM per JESD22/A114, a 100 pF capacitor discharged through 1.5 kΩ.",
+    "Note 3: MM per JESD22/A115, a 200 pF capacitor discharged through all pins.",
+    "Stress beyond these ratings can damage the part; they are not operating conditions."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 4,
+   "conditions": "Min and max over −40 °C < TA < +85 °C with Vin = +5.0 V; typical at TA = +25 °C, unless noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Input Voltage Range",
+     "Vin",
+     "−",
+     "1.2",
+     "−",
+     "28",
+     "V"
+    ],
+    [
+     "Undervoltage Lockout Threshold (Note 4), NCP349MN, NCP349MNAE, NCP349MNAM",
+     "UVLO",
+     "Vin falls below UVLO threshold from 5 V to 2.7 V",
+     "2.8",
+     "2.95",
+     "3.1",
+     "V"
+    ],
+    [
+     "Undervoltage Lockout Threshold (Note 4), NCP349MNBG, NCP349MNBK",
+     "UVLO",
+     "Vin falls below UVLO threshold from 5 V to 2.7 V",
+     "3.0",
+     "3.25",
+     "3.5",
+     "V"
+    ],
+    [
+     "Undervoltage Lockout Hysteresis",
+     "UVLOhyst",
+     "Vin rises above UVLO + UVLOhyst",
+     "30",
+     "60",
+     "90",
+     "mV"
+    ],
+    [
+     "Overvoltage Lockout Threshold (Note 4), NCP349MNAE",
+     "OVLO",
+     "Vin rises above OVLO threshold",
+     "5.53",
+     "5.68",
+     "5.83",
+     "V"
+    ],
+    [
+     "Overvoltage Lockout Threshold (Note 4), NCP349MNBG",
+     "OVLO",
+     "Vin rises above OVLO threshold",
+     "5.70",
+     "6.02",
+     "6.40",
+     "V"
+    ],
+    [
+     "Overvoltage Lockout Threshold (Note 4), NCP349MNBK",
+     "OVLO",
+     "Vin rises above OVLO threshold",
+     "6.0",
+     "6.4",
+     "6.8",
+     "V"
+    ],
+    [
+     "Overvoltage Lockout Threshold (Note 4), NCP349MN",
+     "OVLO",
+     "Vin rises above OVLO threshold",
+     "6.67",
+     "6.85",
+     "7.05",
+     "V"
+    ],
+    [
+     "Overvoltage Lockout Threshold (Note 4), NCP349MNAM",
+     "OVLO",
+     "Vin rises above OVLO threshold",
+     "6.8",
+     "7.2",
+     "7.6",
+     "V"
+    ],
+    [
+     "Overvoltage Lockout Hysteresis, NCP349MN, NCP349MNAE, NCP349MNBG",
+     "OVLOhyst",
+     "Vin falls below OVLO + OVLOhyst",
+     "30",
+     "60",
+     "90",
+     "mV"
+    ],
+    [
+     "Overvoltage Lockout Hysteresis, NCP349MNBK",
+     "OVLOhyst",
+     "Vin falls below OVLO + OVLOhyst",
+     "50",
+     "100",
+     "150",
+     "mV"
+    ],
+    [
+     "Overvoltage Lockout Hysteresis, NCP349MNAM",
+     "OVLOhyst",
+     "Vin falls below OVLO + OVLOhyst",
+     "50",
+     "70",
+     "100",
+     "mV"
+    ],
+    [
+     "Vin versus Vout Resistance",
+     "RDS(on)",
+     "Vin = 5.0 V, EN = GND, Load connected to Vout",
+     "−",
+     "65",
+     "110",
+     "mΩ"
+    ],
+    [
+     "Supply Quiescent Current",
+     "Idd",
+     "No load. EN = 5.0 V",
+     "−",
+     "70",
+     "150",
+     "µA"
+    ],
+    [
+     "Supply Quiescent Current",
+     "Idd",
+     "No load. EN = Gnd",
+     "−",
+     "140",
+     "250",
+     "µA"
+    ],
+    [
+     "UVLO Supply Current",
+     "Idduvlo",
+     "VIN = 2.7 V",
+     "−",
+     "60",
+     "−",
+     "µA"
+    ],
+    [
+     "FLAG Output Low Voltage",
+     "Volflag",
+     "1.2 V < VIN < UVLO, Sink 50 µA on FLAG pin",
+     "−",
+     "20",
+     "400",
+     "mV"
+    ],
+    [
+     "FLAG Output Low Voltage",
+     "Volflag",
+     "VIN > OVLO, Sink 1.0 mA on FLAG pin",
+     "−",
+     "−",
+     "400",
+     "mV"
+    ],
+    [
+     "FLAG Leakage Current",
+     "FLAGleak",
+     "FLAG level = 5.0 V",
+     "−",
+     "1.0",
+     "−",
+     "nA"
+    ],
+    [
+     "EN Voltage High",
+     "Vih",
+     "−",
+     "1.2",
+     "−",
+     "−",
+     "V"
+    ],
+    [
+     "EN Voltage Low",
+     "Vol",
+     "−",
+     "−",
+     "−",
+     "0.4",
+     "V"
+    ],
+    [
+     "EN Leakage Current",
+     "ENleak",
+     "EN = 5.0 V or GND",
+     "−",
+     "1.0",
+     "−",
+     "nA"
+    ]
+   ],
+   "notes": [
+    "Note 4: other UVLO and OVLO thresholds can be produced on request.",
+    "Limits over the full temperature range are guaranteed by correlation.",
+    "Misprint: the OVLO hysteresis condition should read Vin falls below OVLO − OVLOhyst."
+   ]
+  },
+  {
+   "title": "Timings",
+   "page": 4,
+   "conditions": "Min and max over −40 °C < TA < +85 °C with Vin = +5.0 V; typical at TA = +25 °C, unless noted.",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Startup Delay, NCP349MN",
+     "ton",
+     "From Vin > UVLO to Vout = 0.3 V (Figures 3 & 7)",
+     "1.0",
+     "1.8",
+     "2.7",
+     "ms"
+    ],
+    [
+     "Startup Delay, NCP349MNAE",
+     "ton",
+     "From Vin > UVLO to Vout = 0.3 V (Figures 3 & 7)",
+     "6.0",
+     "10",
+     "14",
+     "ms"
+    ],
+    [
+     "Startup Delay, NCP349MNBG, NCP349MNBK, NCP349MNAM",
+     "ton",
+     "From Vin > UVLO to Vout = 0.3 V (Figures 3 & 7)",
+     "30",
+     "55",
+     "70",
+     "ms"
+    ],
+    [
+     "FLAG Going Up Delay, NCP349MN",
+     "tstart",
+     "From Vout = 0.3 V to FLAG = 1.2 V (Figures 3 & 9)",
+     "0.4",
+     "1.2",
+     "2.1",
+     "ms"
+    ],
+    [
+     "FLAG Going Up Delay, NCP349MNAE",
+     "tstart",
+     "From Vout = 0.3 V to FLAG = 1.2 V (Figures 3 & 9)",
+     "6.0",
+     "10",
+     "14",
+     "ms"
+    ],
+    [
+     "FLAG Going Up Delay, NCP349MNBG, NCP349MNBK, NCP349MNAM",
+     "tstart",
+     "From Vout = 0.3 V to FLAG = 1.2 V (Figures 3 & 9)",
+     "30",
+     "55",
+     "70",
+     "ms"
+    ],
+    [
+     "Output Turn Off Time",
+     "toff",
+     "From Vin > OVLO to Vout ≤ 0.3 V (Figures 4 & 8); Vin increasing from 5.0 V to 8.0 V at 3.0 V/µs; Rload connected on Vout",
+     "−",
+     "1.5",
+     "5.0",
+     "µs"
+    ],
+    [
+     "Alert Delay",
+     "tstop",
+     "From Vin > OVLO to FLAG ≤ 0.4 V (Figures 4 & 10); Vin increasing from 5.0 V to 8.0 V at 3.0 V/µs; Rload connected on Vout",
+     "−",
+     "1.0",
+     "−",
+     "µs"
+    ],
+    [
+     "Disable Time",
+     "tdis",
+     "From EN ≥ 1.2 V to Vout < 0.3 V; Rload = 5.0 Ω (Figures 5 & 12)",
+     "−",
+     "1.0",
+     "5.0",
+     "µs"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Mounting footprint",
+   "page": 12,
+   "conditions": "",
+   "columns": [
+    "feature",
+    "value",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Pad pitch",
+     "0.50",
+     "mm"
+    ],
+    [
+     "Signal pad width (6 places)",
+     "0.36",
+     "mm"
+    ],
+    [
+     "Signal pad length (6 places)",
+     "0.43",
+     "mm"
+    ],
+    [
+     "Width across the pad columns and of the exposed-pad land",
+     "1.30",
+     "mm"
+    ],
+    [
+     "Exposed-pad land length",
+     "1.15",
+     "mm"
+    ],
+    [
+     "Overall length, outer edge to outer edge of the pad rows",
+     "2.30",
+     "mm"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Theta JA and maximum power against copper heat-spreader area",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Copper heat spreader area",
+    "unit": "mm²",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Theta JA",
+    "unit": "°C/W",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Max power",
+    "unit": "W",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Theta JA, 1.0 oz copper",
+     "points": [
+      [
+       50,
+       184.7
+      ],
+      [
+       100,
+       155.5
+      ],
+      [
+       150,
+       140.1
+      ],
+      [
+       200,
+       130.1
+      ],
+      [
+       300,
+       117.3
+      ],
+      [
+       400,
+       108.8
+      ],
+      [
+       500,
+       102.8
+      ],
+      [
+       600,
+       98.1
+      ]
+     ]
+    },
+    {
+     "label": "Theta JA, 2.0 oz copper",
+     "points": [
+      [
+       50,
+       159.6
+      ],
+      [
+       100,
+       130.1
+      ],
+      [
+       150,
+       117.3
+      ],
+      [
+       200,
+       108.8
+      ],
+      [
+       300,
+       98.1
+      ],
+      [
+       400,
+       91.2
+      ],
+      [
+       500,
+       86.0
+      ],
+      [
+       600,
+       82.2
+      ]
+     ]
+    },
+    {
+     "label": "Max power, 2.0 oz copper",
+     "axis": "y2",
+     "points": [
+      [
+       50,
+       0.786
+      ],
+      [
+       100,
+       0.962
+      ],
+      [
+       150,
+       1.066
+      ],
+      [
+       200,
+       1.148
+      ],
+      [
+       300,
+       1.275
+      ],
+      [
+       400,
+       1.371
+      ],
+      [
+       500,
+       1.453
+      ],
+      [
+       600,
+       1.522
+      ]
+     ]
+    },
+    {
+     "label": "Max power, 1.0 oz copper",
+     "axis": "y2",
+     "points": [
+      [
+       50,
+       0.679
+      ],
+      [
+       100,
+       0.805
+      ],
+      [
+       150,
+       0.893
+      ],
+      [
+       200,
+       0.962
+      ],
+      [
+       300,
+       1.066
+      ],
+      [
+       400,
+       1.148
+      ],
+      [
+       500,
+       1.217
+      ],
+      [
+       600,
+       1.275
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Startup",
+   "page": 6,
+   "conditions": "50 ms ton and tstart version; Vin = Ch1, Vout = Ch3; 1.00 V/div, 10 ms/div",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vin",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       2.4,
+       0
+      ],
+      [
+       3.0,
+       0.33
+      ],
+      [
+       8.2,
+       3.2
+      ],
+      [
+       11.0,
+       4.0
+      ],
+      [
+       14.4,
+       4.49
+      ],
+      [
+       17.2,
+       4.72
+      ],
+      [
+       23.0,
+       4.91
+      ],
+      [
+       30.4,
+       4.98
+      ],
+      [
+       100.0,
+       5.0
+      ]
+     ]
+    },
+    {
+     "label": "Vout",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       7.8,
+       0
+      ],
+      [
+       8.8,
+       0.1
+      ],
+      [
+       11.0,
+       0.16
+      ],
+      [
+       20.0,
+       0.03
+      ],
+      [
+       25.0,
+       0
+      ],
+      [
+       64.2,
+       0
+      ],
+      [
+       66.2,
+       4.98
+      ],
+      [
+       100.0,
+       4.98
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FLAG Going Up Delay",
+   "page": 6,
+   "conditions": "50 ms ton and tstart version; Vout = Ch3, FLAG = Ch2; 1.00 V/div, 10 ms/div",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Vout",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       8.8,
+       0
+      ],
+      [
+       9.2,
+       4.98
+      ],
+      [
+       100.0,
+       4.98
+      ]
+     ]
+    },
+    {
+     "label": "FLAG",
+     "points": [
+      [
+       0.2,
+       0.05
+      ],
+      [
+       63.0,
+       0.06
+      ],
+      [
+       63.8,
+       5.0
+      ],
+      [
+       100.0,
+       5.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Inrush Current with Cout = 100 µF, I charge = 1 A, Output Wall Adaptor Inductance 1 µH",
+   "page": 7,
+   "conditions": "Ch1 wall adaptor 2.0 V/div, Ch2 charge current 500 mA/div, Ch3 output voltage 1.0 V/div; 200 µs/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Charge current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Wall adaptor",
+     "points": [
+      [
+       0,
+       5.07
+      ],
+      [
+       425,
+       5.04
+      ],
+      [
+       481,
+       4.89
+      ],
+      [
+       608,
+       4.73
+      ],
+      [
+       748,
+       4.78
+      ],
+      [
+       783,
+       4.86
+      ],
+      [
+       1812,
+       4.91
+      ],
+      [
+       1961,
+       4.84
+      ],
+      [
+       2000,
+       4.94
+      ]
+     ]
+    },
+    {
+     "label": "Output voltage",
+     "points": [
+      [
+       0,
+       0.026
+      ],
+      [
+       385,
+       0.026
+      ],
+      [
+       425,
+       0.103
+      ],
+      [
+       442,
+       0.219
+      ],
+      [
+       486,
+       0.823
+      ],
+      [
+       573,
+       2.392
+      ],
+      [
+       661,
+       3.447
+      ],
+      [
+       709,
+       3.794
+      ],
+      [
+       775,
+       4.103
+      ],
+      [
+       880,
+       4.412
+      ],
+      [
+       1015,
+       4.643
+      ],
+      [
+       1204,
+       4.772
+      ],
+      [
+       1370,
+       4.81
+      ],
+      [
+       1619,
+       4.836
+      ],
+      [
+       2000,
+       4.836
+      ]
+     ]
+    },
+    {
+     "label": "Charge current",
+     "axis": "y2",
+     "points": [
+      [
+       0,
+       -13
+      ],
+      [
+       398,
+       -13
+      ],
+      [
+       407,
+       0
+      ],
+      [
+       433,
+       122
+      ],
+      [
+       451,
+       277
+      ],
+      [
+       525,
+       1209
+      ],
+      [
+       565,
+       1518
+      ],
+      [
+       595,
+       1653
+      ],
+      [
+       621,
+       1711
+      ],
+      [
+       665,
+       1685
+      ],
+      [
+       779,
+       1370
+      ],
+      [
+       823,
+       1273
+      ],
+      [
+       853,
+       1248
+      ],
+      [
+       875,
+       1183
+      ],
+      [
+       1002,
+       1061
+      ],
+      [
+       1046,
+       1023
+      ],
+      [
+       1291,
+       920
+      ],
+      [
+       1702,
+       881
+      ],
+      [
+       2000,
+       881
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Output Short Circuit (Zoom Fig. 14)",
+   "page": 7,
+   "conditions": "Ch1 wall adaptor 2.0 V/div, Ch2 charge current 2.0 A/div, Ch3 output voltage 1.0 V/div; 40.0 µs/div",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Wall adaptor",
+     "points": [
+      [
+       0,
+       5.13
+      ],
+      [
+       91.1,
+       5.13
+      ],
+      [
+       149.8,
+       4.96
+      ],
+      [
+       155.7,
+       4.87
+      ],
+      [
+       196.6,
+       4.7
+      ],
+      [
+       222.1,
+       4.48
+      ],
+      [
+       257.0,
+       4.31
+      ],
+      [
+       273.2,
+       4.19
+      ],
+      [
+       319.1,
+       3.33
+      ],
+      [
+       331.9,
+       3.33
+      ],
+      [
+       337.9,
+       5.52
+      ],
+      [
+       343.8,
+       5.08
+      ],
+      [
+       348.1,
+       4.92
+      ],
+      [
+       356.6,
+       5.3
+      ],
+      [
+       360.9,
+       5.04
+      ],
+      [
+       364.3,
+       5.18
+      ],
+      [
+       400.0,
+       5.16
+      ]
+     ]
+    },
+    {
+     "label": "Output voltage",
+     "points": [
+      [
+       0,
+       0
+      ],
+      [
+       15.3,
+       0.036
+      ],
+      [
+       92.8,
+       0
+      ],
+      [
+       112.3,
+       0.036
+      ],
+      [
+       131.9,
+       0.012
+      ],
+      [
+       322.6,
+       0.084
+      ],
+      [
+       327.7,
+       0.06
+      ]
+     ]
+    },
+    {
+     "label": "Charge current",
+     "axis": "y2",
+     "points": [
+      [
+       0,
+       0.05
+      ],
+      [
+       89.4,
+       0.05
+      ],
+      [
+       110.6,
+       0.12
+      ],
+      [
+       136.2,
+       0.43
+      ],
+      [
+       154.9,
+       0.84
+      ],
+      [
+       184.7,
+       1.73
+      ],
+      [
+       195.7,
+       2.12
+      ],
+      [
+       205.1,
+       2.43
+      ],
+      [
+       216.2,
+       2.89
+      ],
+      [
+       247.7,
+       4.12
+      ],
+      [
+       273.2,
+       4.96
+      ],
+      [
+       295.3,
+       5.35
+      ],
+      [
+       314.0,
+       5.49
+      ],
+      [
+       327.7,
+       5.49
+      ],
+      [
+       343.0,
+       0.07
+      ],
+      [
+       346.4,
+       -0.1
+      ],
+      [
+       354.9,
+       0.05
+      ],
+      [
+       360.9,
+       -0.07
+      ],
+      [
+       371.9,
+       0
+      ],
+      [
+       400.0,
+       0.05
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application circuit",
+   "page": 2,
+   "description": "The NCP349 sits between a wall adapter or USB input and a CC/CV charger or system. A 1 µF capacitor bypasses the input to ground. Both IN pins (1 and the exposed pad 7) take the input and both OUT pins (4, 5) feed the charger, which charges the battery. EN is held or driven low by a microprocessor to enable the switch. FLAG is pulled up through 10 kΩ to VBat and read by the microprocessor as the fault signal.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "NCP349"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "1 µF",
+     "note": "input bypass"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "FLAG pull-up to VBat"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "CC/CV charger or system",
+     "external": true
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "Battery"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "Wall adapter, AC/DC or USB"
+    },
+    {
+     "ref": "EN",
+     "type": "terminal",
+     "value": "Enable from microprocessor"
+    },
+    {
+     "ref": "FLAG",
+     "type": "terminal",
+     "value": "Fault flag to microprocessor"
+    },
+    {
+     "ref": "VBAT",
+     "type": "terminal",
+     "value": "VBat, pull-up supply"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Output voltage under load",
+   "expr": "Vout = Rload × Iout",
+   "where": {
+    "Rload": "load resistance",
+    "Iout": "load current"
+   },
+   "note": "With Rload = 8.0 Ω, Vin = 5.0 V and RDS(on) = 65 mΩ: Iout = 618 mA, Vout = 8 × 0.618 = 4.95 V.",
+   "page": 10
+  },
+  {
+   "name": "Switch conduction loss",
+   "expr": "P = RDS(on) × Iout²",
+   "where": {
+    "RDS(on)": "switch on-resistance, 65 mΩ typ",
+    "Iout": "load current"
+   },
+   "note": "0.065 × 0.618² = 25 mW at 618 mA.",
+   "page": 10
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Function",
+   "page": 8,
+   "text": "An internal low-resistance NMOS switch joins IN to OUT. With EN low and UVLO < Vin < OVLO the switch is on and OUT follows IN less the RDS(on) drop. If Vin goes above OVLO or below UVLO, or EN goes high, the switch opens. The part guards against positive overvoltage up to 28 V."
+  },
+  {
+   "topic": "Start-up",
+   "page": 8,
+   "text": "With EN low, once Vin rises past UVLO an internal timer runs for ton and the output then ramps up under soft-start. FLAG goes high a further tstart after the output reaches 0.3 V. ton and tstart depend on the version: 1.8 ms and 1.2 ms typ for NCP349MN, 10 ms for NCP349MNAE, 55 ms for NCP349MNBG, NCP349MNBK and NCP349MNAM."
+  },
+  {
+   "topic": "State machine",
+   "page": 9,
+   "text": "At power-up OUT is off, FLAG low and the timer reset. While Vin is outside the UVLO-OVLO window OUT stays off, FLAG low and the timer counts again from zero once Vin returns inside. Inside the window the timer runs to ton; Vin is checked again, then EN: EN = 1 leaves OUT open, EN = 0 closes the switch (Vout = Vin). After a second timer period FLAG goes high, with OUT open or closed according to EN. Vin is then watched continuously; leaving the window takes FLAG low and OUT open, and the sequence restarts."
+  },
+  {
+   "topic": "Undervoltage lockout",
+   "page": 10,
+   "text": "On a rising input the output stays off until Vin passes UVLO plus its hysteresis. FLAG is held low while Vin is below UVLO. The hysteresis gives noise immunity against transients."
+  },
+  {
+   "topic": "Overvoltage lockout",
+   "page": 10,
+   "text": "While Vin is above OVLO the switch stays open and FLAG is held low; the output is cut off within toff (1.5 µs typ) of the crossing. The threshold has hysteresis for noise immunity."
+  },
+  {
+   "topic": "FLAG output",
+   "page": 10,
+   "text": "Open-drain, active low: it pulls low as soon as Vin exceeds OVLO or falls below UVLO, and is released tstart after the output becomes available once Vin is back in range. It needs a pull-up to Vbat of typically 1 MΩ and at least 10 kΩ; Vbat must be at least 2.5 V. FLAG always reports the input state, even with the switch turned off by EN = 1."
+  },
+  {
+   "topic": "EN input",
+   "page": 10,
+   "text": "Drive EN low or ground it for normal operation. A high level opens the switch, disconnecting OUT from IN, within tdis (1.0 µs typ). A lockout fault wins over EN: the switch stays open while one is present."
+  },
+  {
+   "topic": "Internal NMOS",
+   "page": 10,
+   "text": "The on-chip N-channel switch, gate driven from an internal charge pump, protects the load on OUT from positive overvoltage; its RDS(on) of 65 mΩ typ sets the conduction loss in normal operation."
+  },
+  {
+   "topic": "ESD",
+   "page": 10,
+   "text": "The IN pin meets IEC 61000-4-2 level 4, ±15 kV air and ±8.0 kV contact discharge, provided at least 1.0 µF is connected from Vin to GND close to the part."
+  },
+  {
+   "topic": "PCB layout",
+   "page": 10,
+   "text": "The switch is a 2 A rated NMOSFET, and its heat leaves through the board. The exposed pad (pin 7) is the switch drain, internally on the input; it joins pin 1 and its copper spreads the heat. The pad connects to no other potential. RθJA falls from about 185 °C/W at 50 mm² of copper to about 98 °C/W at 600 mm² with 1 oz copper, and from about 160 °C/W to about 82 °C/W with 2 oz copper."
+  }
+ ],
+ "packages": [
+  {
+   "name": "DFN6 1.6x2.0, 0.5P (CASE 506BM-01)",
+   "page": 12,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min",
+    "typ",
+    "max"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     "0.80",
+     "",
+     "1.00"
+    ],
+    [
+     "A1",
+     "standoff",
+     "0.00",
+     "",
+     "0.05"
+    ],
+    [
+     "A3",
+     "terminal thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "b",
+     "terminal width",
+     "0.20",
+     "",
+     "0.40"
+    ],
+    [
+     "D",
+     "body length",
+     "",
+     "1.60 BSC",
+     ""
+    ],
+    [
+     "D2",
+     "exposed pad length",
+     "1.10",
+     "",
+     "1.30"
+    ],
+    [
+     "E",
+     "body width",
+     "",
+     "2.00 BSC",
+     ""
+    ],
+    [
+     "E2",
+     "exposed pad width",
+     "0.95",
+     "",
+     "1.15"
+    ],
+    [
+     "e",
+     "terminal pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "K",
+     "terminal to exposed pad",
+     "0.20",
+     "",
+     "−−−"
+    ],
+    [
+     "L",
+     "terminal length",
+     "0.15",
+     "",
+     "0.35"
+    ],
+    [
+     "L1",
+     "terminal pull-back",
+     "−−−",
+     "",
+     "0.10"
+    ]
+   ],
+   "notes": [
+    "Dimensions and tolerances per ASME Y14.5M-1994; millimetres control.",
+    "b is measured on the plated terminal between 0.15 mm and 0.20 mm from its tip.",
+    "Coplanarity covers the exposed pad and the terminals.",
+    "Six terminals, three per long side, with the exposed pad between the rows."
+   ]
+  }
+ ]
+}

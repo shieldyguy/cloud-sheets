@@ -1,0 +1,5488 @@
+{
+ "sheet": 1,
+ "name": "ADP5063ACPZ-1-R7",
+ "kind": "battery_charger",
+ "manufacturer": "Analog Devices",
+ "title": "Linear single-cell LiFePO4 charger with power path, I2C control and USB current limits, 4 mm × 4 mm LFCSP",
+ "source": {
+  "revision": "Rev. 0, 7/13",
+  "pages": 44
+ },
+ "summary": "The ADP5063 is a linear charger for one LiFePO4 or Li-Ion cell with an internal power path: an LDO feeds the system rail from USB or an adapter while a separate FET links the rail to the battery, so the system runs even with a dead or absent cell. It takes 4 V to 6.7 V and withstands 20 V, gives up to 2.1 A to the system and up to 1.3 A into the cell, and sets input limits for USB 2.0, USB 3.0 and dedicated chargers. Every threshold and current is set over I2C, three factory-assigned DIG_IO pins give direct control, and a pack thermistor input supports JEITA. The -1 version ends charge at 3.60 V by default.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "4 V to 6.7 V operating, −0.5 V to +20 V tolerated"
+  ],
+  [
+   "Default termination voltage",
+   "3.600 V (VTRM, programmable 3.60 V to 4.50 V)"
+  ],
+  [
+   "Termination accuracy",
+   "±1.7% over TJ −40°C to +125°C"
+  ],
+  [
+   "Fast charge current",
+   "50 mA to 1300 mA, 750 mA default"
+  ],
+  [
+   "System output (LDO mode)",
+   "2.1 A, 4.3 V to 5.0 V"
+  ],
+  [
+   "Isolation FET resistance",
+   "55 mΩ typ, 89 mΩ max"
+  ],
+  [
+   "Input current limit",
+   "100 mA to 2100 mA, 100 mA default"
+  ],
+  [
+   "Standby battery current",
+   "5 µA max"
+  ],
+  [
+   "Package",
+   "20-lead LFCSP_WQ, 4 mm × 4 mm, θJA 35.6 °C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 43,
+  "columns": [
+   "part number",
+   "temperature range (junction)",
+   "package",
+   "package option",
+   "description"
+  ],
+  "rows": [
+   [
+    "ADP5063ACPZ-1-R7",
+    "–40°C to +125°C",
+    "20-Lead Lead Frame Chip Scale Package [LFCSP_WQ]",
+    "CP-20-8",
+    "Charger; defaults VTRM 3.60 V, ICHG 750 mA, IEND 52.5 mA, VSYSTEM 4.3 V, 10 kΩ NTC beta 3150, DIG_IOx option 0101"
+   ],
+   [
+    "ADP5063CP-EVALZ",
+    "",
+    "",
+    "",
+    "Evaluation board"
+   ]
+  ],
+  "notes": [
+   "Z marks a RoHS-compliant part."
+  ]
+ },
+ "pins": [
+  {
+   "package": "20-lead LFCSP_WQ 4 mm × 4 mm (CP-20-8)",
+   "page": 9,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "SCL",
+     "type": "digital in",
+     "function": "I2C serial clock."
+    },
+    {
+     "pin": "2",
+     "name": "DIG_IO3",
+     "type": "GPIO",
+     "function": "On this part, charging enable: high turns charging on; low or left open turns it off (notes 2, 3)."
+    },
+    {
+     "pin": "3",
+     "name": "DIG_IO2",
+     "type": "GPIO",
+     "function": "On this part, high sets a 1500 mA input current limit; low or open leaves the limit to DIG_IO1 (notes 2, 3)."
+    },
+    {
+     "pin": "4",
+     "name": "BAT_SNS",
+     "type": "analog in",
+     "function": "Senses the battery voltage."
+    },
+    {
+     "pin": "5",
+     "name": "DIG_IO1",
+     "type": "GPIO",
+     "function": "On this part, sets the input current limit: 500 mA when high, 100 mA when low or open (notes 2, 3)."
+    },
+    {
+     "pin": "6",
+     "name": "VIN1",
+     "type": "power in",
+     "function": "Input from USB VBUS or an adapter; carries the full current while charging. Pins 6, 7 and 8 are tied together."
+    },
+    {
+     "pin": "7",
+     "name": "VIN2",
+     "type": "power in",
+     "function": "Input from USB VBUS or an adapter; same node as VIN1."
+    },
+    {
+     "pin": "8",
+     "name": "VIN3",
+     "type": "power in",
+     "function": "Input from USB VBUS or an adapter; same node as VIN1."
+    },
+    {
+     "pin": "9",
+     "name": "ISO_S1",
+     "type": "power in/out",
+     "function": "System side of the internal isolation and battery current FET; high current. Pins 9, 10 and 11 form the system output."
+    },
+    {
+     "pin": "10",
+     "name": "ISO_S2",
+     "type": "power in/out",
+     "function": "System side of the isolation FET; same node as ISO_S1."
+    },
+    {
+     "pin": "11",
+     "name": "ISO_S3",
+     "type": "power in/out",
+     "function": "System side of the isolation FET; same node as ISO_S1."
+    },
+    {
+     "pin": "12",
+     "name": "ISO_B1",
+     "type": "power in/out",
+     "function": "Battery side of the internal isolation and battery current FET. Pins 12, 13 and 14 go to the battery."
+    },
+    {
+     "pin": "13",
+     "name": "ISO_B2",
+     "type": "power in/out",
+     "function": "Battery side of the isolation FET; same node as ISO_B1."
+    },
+    {
+     "pin": "14",
+     "name": "ISO_B3",
+     "type": "power in/out",
+     "function": "Battery side of the isolation FET; same node as ISO_B1."
+    },
+    {
+     "pin": "15",
+     "name": "ILED",
+     "type": "open-drain out",
+     "function": "Drives an indicator LED."
+    },
+    {
+     "pin": "16",
+     "name": "SYS_EN",
+     "type": "open-drain out",
+     "function": "System enable: a pull-down FET that acts as a battery-good flag once the battery reaches VWEAK."
+    },
+    {
+     "pin": "17",
+     "name": "SDA",
+     "type": "digital in/out",
+     "function": "I2C serial data."
+    },
+    {
+     "pin": "18",
+     "name": "THR",
+     "type": "analog in",
+     "function": "Battery pack thermistor input. When unused, a 10 kΩ resistor from THR to AGND stands in for the thermistor."
+    },
+    {
+     "pin": "19",
+     "name": "CBP",
+     "type": "analog in/out",
+     "function": "Bypass capacitor for the internal supply."
+    },
+    {
+     "pin": "20",
+     "name": "AGND",
+     "type": "ground",
+     "function": "Analog ground."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "thermal pad",
+     "function": "Exposed pad. It need not be connected; tying it to analog ground carries heat into the board."
+    }
+   ],
+   "notes": [
+    "Types: I input, O output, I/O both, G ground, GPIO a general-purpose input/output whose function is set at the factory.",
+    "Note 2: the DIG_IOx functions are the factory options in the DIG_IOx functions table.",
+    "Note 3: the DIG_IOx pins set the starting state. Once the matching I2C bit is written, the register wins over the pin; connecting or removing VINx hands control back to the pin."
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Electrical characteristics",
+   "page": 3,
+   "conditions": "−40°C < TJ < +125°C, VVINx = 5.0 V, RHOT_RISE < RTHR < RCOLD_FALL, VBAT_SNS = 3.6 V, VISO_Bx = VBAT_SNS, CVINx = 10 µF, CISO_Sx = 22 µF, CISO_Bx = 22 µF, CCBP = 100 nF, all registers at default values, unless otherwise noted",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Undervoltage lockout",
+     "VUVLO",
+     "Falling threshold, higher of VVINx or VBAT_SNS (note 1)",
+     "2.25",
+     "2.35",
+     "2.5",
+     "V"
+    ],
+    [
+     "Undervoltage lockout hysteresis",
+     "",
+     "Higher of VVINx or VBAT_SNS rising (note 1)",
+     "50",
+     "100",
+     "150",
+     "mV"
+    ],
+    [
+     "Total input current",
+     "ILIM",
+     "Nominal USB initialized current level (note 2)",
+     "74",
+     "92",
+     "100",
+     "mA"
+    ],
+    [
+     "Total input current",
+     "ILIM",
+     "USB super speed",
+     "114",
+     "",
+     "150",
+     "mA"
+    ],
+    [
+     "Total input current",
+     "ILIM",
+     "USB enumerated current level (specification for China)",
+     "",
+     "",
+     "300",
+     "mA"
+    ],
+    [
+     "Total input current",
+     "ILIM",
+     "USB enumerated current level",
+     "425",
+     "470",
+     "500",
+     "mA"
+    ],
+    [
+     "Total input current",
+     "ILIM",
+     "Dedicated charger input",
+     "",
+     "",
+     "900",
+     "mA"
+    ],
+    [
+     "Total input current",
+     "ILIM",
+     "Dedicated wall charger",
+     "",
+     "",
+     "1500",
+     "mA"
+    ],
+    [
+     "VINx current consumption",
+     "IQVIN",
+     "Charging or LDO mode",
+     "",
+     "2",
+     "",
+     "mA"
+    ],
+    [
+     "VINx current consumption",
+     "IQVIN_SUSPEND",
+     "DIS_LDO = high, TJ = −40°C to +85°C",
+     "",
+     "1.0",
+     "1.8",
+     "mA"
+    ],
+    [
+     "Battery current consumption",
+     "IQBATT",
+     "LDO mode, VISO_Sx > VBAT_SNS",
+     "",
+     "20",
+     "",
+     "µA"
+    ],
+    [
+     "Battery current consumption",
+     "IQBATT",
+     "Standby, includes ISO_Sx pin leakage, VVINx = 0 V, TJ = −40°C to +85°C",
+     "",
+     "",
+     "5",
+     "µA"
+    ],
+    [
+     "Battery current consumption",
+     "IQBATT",
+     "Standby, battery monitor active",
+     "",
+     "0.5",
+     "0.9",
+     "mA"
+    ],
+    [
+     "Fast charge current constant current (CC) mode",
+     "ICHG",
+     "",
+     "",
+     "750",
+     "",
+     "mA"
+    ],
+    [
+     "Fast charge current accuracy",
+     "",
+     "ICHG = 400 mA to 1300 mA, VISO_Bx = 3.3 V, TJ = 0°C to 115°C",
+     "−9",
+     "",
+     "+9",
+     "%"
+    ],
+    [
+     "Trickle charge current (note 2)",
+     "ITRK_DEAD",
+     "",
+     "16",
+     "20",
+     "25",
+     "mA"
+    ],
+    [
+     "Weak charge current (notes 2, 3)",
+     "ICHG_WEAK",
+     "",
+     "",
+     "ITRK_DEAD + ICHG",
+     "",
+     "mA"
+    ],
+    [
+     "Trickle to weak charge threshold, dead battery",
+     "VTRK_DEAD",
+     "VTRK_DEAD < VBAT_SNS < VWEAK (notes 2, 4)",
+     "1.9",
+     "2.0",
+     "2.1",
+     "V"
+    ],
+    [
+     "Trickle to weak charge threshold, hysteresis",
+     "ΔVTRK_DEAD",
+     "On BAT_SNS (note 2)",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Weak to fast charge threshold",
+     "VWEAK",
+     "On BAT_SNS (notes 2, 4)",
+     "2.89",
+     "3.0",
+     "3.11",
+     "V"
+    ],
+    [
+     "Weak to fast charge threshold, hysteresis",
+     "ΔVWEAK",
+     "",
+     "",
+     "100",
+     "",
+     "mV"
+    ],
+    [
+     "Battery termination voltage",
+     "VTRM",
+     "",
+     "",
+     "3.600",
+     "",
+     "V"
+    ],
+    [
+     "Termination voltage accuracy",
+     "",
+     "On BAT_SNS, TJ = 25°C, IEND = 52.5 mA (note 2)",
+     "−0.6",
+     "",
+     "+0.6",
+     "%"
+    ],
+    [
+     "Termination voltage accuracy",
+     "",
+     "TJ = 0°C to 115°C (note 2)",
+     "−1.55",
+     "",
+     "+1.45",
+     "%"
+    ],
+    [
+     "Termination voltage accuracy",
+     "",
+     "TJ = −40°C to +125°C",
+     "−1.7",
+     "",
+     "+1.7",
+     "%"
+    ],
+    [
+     "Battery overvoltage threshold",
+     "VBATOV",
+     "Relative to VINx voltage, BAT_SNS rising",
+     "",
+     "VIN − 0.075",
+     "",
+     "V"
+    ],
+    [
+     "Charge complete current",
+     "IEND",
+     "VBAT_SNS = VTRM",
+     "15",
+     "52.5",
+     "98",
+     "mA"
+    ],
+    [
+     "Charging complete current threshold accuracy",
+     "",
+     "IEND = 52.5 mA, TJ = 0°C to 115°C (note 2)",
+     "17",
+     "",
+     "83",
+     "mA"
+    ],
+    [
+     "Charging complete current threshold accuracy",
+     "",
+     "IEND = 92.5 mA, TJ = 0°C to 115°C",
+     "59",
+     "",
+     "123",
+     "mA"
+    ],
+    [
+     "Recharge voltage differential",
+     "VRCH",
+     "Relative to VTRM, BAT_SNS falling (note 2)",
+     "160",
+     "260",
+     "390",
+     "mV"
+    ],
+    [
+     "Battery node short threshold voltage (note 2)",
+     "VBAT_SHR",
+     "",
+     "2.2",
+     "2.4",
+     "2.5",
+     "V"
+    ],
+    [
+     "Battery short detection current",
+     "ITRK_SHORT",
+     "ITRK_SHORT = ITRK_DEAD (note 2)",
+     "",
+     "20",
+     "",
+     "mA"
+    ],
+    [
+     "Charging start voltage limit",
+     "VCHG_VLIM",
+     "Voltage limit is not active by default",
+     "3.1",
+     "3.2",
+     "3.3",
+     "V"
+    ],
+    [
+     "Charging soft start current",
+     "ICHG_START",
+     "VBAT_SNS > VTRK_DEAD",
+     "185",
+     "260",
+     "365",
+     "mA"
+    ],
+    [
+     "Charging soft start time",
+     "tCHG_START",
+     "",
+     "",
+     "3",
+     "",
+     "ms"
+    ],
+    [
+     "Pin to pin resistance between ISO_Sx and ISO_Bx",
+     "RDSON_ISO",
+     "Battery supplement mode, VINx = 0 V, VISO_Bx = 3.6 V, IISO_Bx = 500 mA",
+     "",
+     "55",
+     "89",
+     "mΩ"
+    ],
+    [
+     "Regulated system voltage: VBAT low",
+     "VISO_SFC",
+     "VTRM[5:0] programming ≥ 4.00 V",
+     "3.6",
+     "3.8",
+     "4.0",
+     "V"
+    ],
+    [
+     "Regulated system voltage: VBAT low",
+     "VISO_SFC",
+     "VTRM[5:0] programming < 4.00 V",
+     "3.2",
+     "3.4",
+     "3.5",
+     "V"
+    ],
+    [
+     "Battery supplementary threshold",
+     "VTHISO",
+     "VISO_Sx < VISO_Bx, system voltage rising",
+     "0",
+     "5",
+     "12",
+     "mV"
+    ],
+    [
+     "Regulated system voltage",
+     "VISO_STRK",
+     "VSYSTEM[2:0] = 000 (binary) = 4.3 V, IISO_Sx = 100 mA, LDO mode (note 2)",
+     "4.214",
+     "4.3",
+     "4.386",
+     "V"
+    ],
+    [
+     "Load regulation",
+     "",
+     "IISO_Sx = 0 mA to 1500 mA",
+     "",
+     "−0.56",
+     "",
+     "%/A"
+    ],
+    [
+     "High voltage blocking FET (LDO FET) on resistance",
+     "RDS(ON)HV",
+     "IVINx = 500 mA",
+     "",
+     "330",
+     "485",
+     "mΩ"
+    ],
+    [
+     "Maximum output current",
+     "",
+     "VISO_Sx = 4.3 V, LDO mode",
+     "",
+     "2.1",
+     "",
+     "A"
+    ],
+    [
+     "VINx input voltage, good threshold rising",
+     "VVIN_OK_RISE",
+     "",
+     "3.75",
+     "3.9",
+     "4.0",
+     "V"
+    ],
+    [
+     "VINx falling",
+     "VVIN_OK_FALL",
+     "",
+     "",
+     "3.6",
+     "3.7",
+     "V"
+    ],
+    [
+     "VINx input overvoltage threshold",
+     "VVIN_OV",
+     "",
+     "6.7",
+     "6.9",
+     "7.2",
+     "V"
+    ],
+    [
+     "VINx input overvoltage hysteresis",
+     "ΔVVIN_OV",
+     "",
+     "",
+     "0.1",
+     "",
+     "V"
+    ],
+    [
+     "VINx transition timing",
+     "tVIN_RISE",
+     "Minimum rise time for VINx from 5 V to 20 V",
+     "10",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "VINx transition timing",
+     "tVIN_FALL",
+     "Minimum fall time for VINx from 4 V to 0 V",
+     "10",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Isothermal charging temperature",
+     "TLIM",
+     "",
+     "",
+     "115",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal early warning temperature",
+     "TSDL",
+     "",
+     "",
+     "130",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown temperature",
+     "TSD",
+     "TJ rising",
+     "",
+     "140",
+     "",
+     "°C"
+    ],
+    [
+     "Thermal shutdown temperature",
+     "TSD",
+     "TJ falling",
+     "",
+     "110",
+     "",
+     "°C"
+    ],
+    [
+     "Thermistor current, 10,000 NTC resistor",
+     "INTC_10k",
+     "",
+     "",
+     "",
+     "400",
+     "μA"
+    ],
+    [
+     "Thermistor current, 100,000 NTC resistor",
+     "INTC_100k",
+     "",
+     "",
+     "",
+     "40",
+     "μA"
+    ],
+    [
+     "Thermistor capacitance",
+     "CNTC",
+     "",
+     "",
+     "100",
+     "",
+     "pF"
+    ],
+    [
+     "Cold temperature threshold",
+     "TNTC_COLD",
+     "No battery charging occurs",
+     "",
+     "0",
+     "",
+     "°C"
+    ],
+    [
+     "Cool to cold resistance",
+     "RCOLD_FALL",
+     "",
+     "20,500",
+     "25,600",
+     "30,720",
+     "Ω"
+    ],
+    [
+     "Cold to cool resistance",
+     "RCOLD_RISE",
+     "",
+     "",
+     "24,400",
+     "",
+     "Ω"
+    ],
+    [
+     "Hot temperature threshold",
+     "TNTC_HOT",
+     "No battery charging occurs",
+     "",
+     "60",
+     "",
+     "°C"
+    ],
+    [
+     "Hot to typical resistance",
+     "RHOT_FALL",
+     "",
+     "",
+     "3700",
+     "",
+     "Ω"
+    ],
+    [
+     "Typical to hot resistance",
+     "RHOT_RISE",
+     "",
+     "2750",
+     "3350",
+     "3950",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): cold temperature",
+     "TJEITA_COLD",
+     "No battery charging occurs",
+     "",
+     "0",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA1 defaults (note 5): cool to cold resistance",
+     "RCOLD_FALL",
+     "",
+     "20,500",
+     "25,600",
+     "30,720",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): cold to cool resistance",
+     "RCOLD_RISE",
+     "",
+     "",
+     "24,400",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): cool temperature",
+     "TJEITA_COOL",
+     "Battery charging occurs at 50% of programmed level",
+     "",
+     "10",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA1 defaults (note 5): typical to cool resistance",
+     "RTYP_FALL",
+     "",
+     "13,200",
+     "16,500",
+     "19,800",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): cool to typical resistance",
+     "RTYP_RISE",
+     "",
+     "",
+     "15,900",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): warm temperature",
+     "TJEITA_WARM",
+     "Battery termination voltage (VTRM) is reduced by 100 mV",
+     "",
+     "45",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA1 defaults (note 5): warm to typical resistance",
+     "RWARM_FALL",
+     "",
+     "",
+     "5800",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): typical to warm resistance",
+     "RWARM_RISE",
+     "",
+     "4260",
+     "5200",
+     "6140",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): hot temperature",
+     "TJEITA_HOT",
+     "No battery charging occurs",
+     "",
+     "60",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA1 defaults (note 5): hot to warm resistance",
+     "RHOT_FALL",
+     "",
+     "",
+     "3700",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA1 defaults (note 5): warm to hot resistance",
+     "RHOT_RISE",
+     "",
+     "2750",
+     "3350",
+     "3950",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: cold temperature",
+     "TJEITA_COLD",
+     "No battery charging occurs",
+     "",
+     "0",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA2 defaults: cool to cold resistance",
+     "RCOLD_FALL",
+     "",
+     "20,500",
+     "25,600",
+     "30,720",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: cold to cool resistance",
+     "RCOLD_RISE",
+     "",
+     "",
+     "24,400",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: cool temperature",
+     "TJEITA_COOL",
+     "Battery termination voltage (VTRM) is reduced by 100 mV",
+     "",
+     "10",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA2 defaults: typical to cool resistance",
+     "RTYP_FALL",
+     "",
+     "13,200",
+     "16,500",
+     "19,800",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: cool to typical resistance",
+     "RTYP_RISE",
+     "",
+     "",
+     "15,900",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: warm temperature",
+     "TJEITA_WARM",
+     "Battery termination voltage (VTRM) is reduced by 100 mV",
+     "",
+     "45",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA2 defaults: warm to typical resistance",
+     "RWARM_FALL",
+     "",
+     "",
+     "5800",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: typical to warm resistance",
+     "RWARM_RISE",
+     "",
+     "4260",
+     "5200",
+     "6140",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: hot temperature",
+     "TJEITA_HOT",
+     "No battery charging occurs",
+     "",
+     "60",
+     "",
+     "°C"
+    ],
+    [
+     "JEITA2 defaults: hot to warm resistance",
+     "RHOT_FALL",
+     "",
+     "",
+     "3700",
+     "",
+     "Ω"
+    ],
+    [
+     "JEITA2 defaults: warm to hot resistance",
+     "RHOT_RISE",
+     "",
+     "2750",
+     "3350",
+     "3950",
+     "Ω"
+    ],
+    [
+     "Battery detection sink current",
+     "ISINK",
+     "",
+     "13",
+     "20",
+     "34",
+     "mA"
+    ],
+    [
+     "Battery detection source current",
+     "ISOURCE",
+     "",
+     "7",
+     "10",
+     "13",
+     "mA"
+    ],
+    [
+     "Battery threshold low",
+     "VBATL",
+     "",
+     "1.8",
+     "1.9",
+     "2.0",
+     "V"
+    ],
+    [
+     "Battery threshold high",
+     "VBATH",
+     "",
+     "",
+     "3.4",
+     "",
+     "V"
+    ],
+    [
+     "Battery detection timer",
+     "tBATOK",
+     "",
+     "",
+     "333",
+     "",
+     "ms"
+    ],
+    [
+     "Clock oscillator frequency",
+     "fCLK",
+     "",
+     "2.7",
+     "3",
+     "3.3",
+     "MHz"
+    ],
+    [
+     "Start charging delay",
+     "tSTART",
+     "",
+     "",
+     "1",
+     "",
+     "sec"
+    ],
+    [
+     "Trickle charge timer",
+     "tTRK",
+     "",
+     "",
+     "60",
+     "",
+     "min"
+    ],
+    [
+     "Fast charge timer",
+     "tCHG",
+     "",
+     "",
+     "600",
+     "",
+     "min"
+    ],
+    [
+     "Charge complete timer",
+     "tEND",
+     "VBAT_SNS = VTRM, ICHG < IEND",
+     "",
+     "7.5",
+     "",
+     "min"
+    ],
+    [
+     "Deglitch timer",
+     "tDG",
+     "Applies to VTRK_DEAD, VRCH, IEND, VWEAK, VVIN_OK_RISE, and VVIN_OK_FALL",
+     "",
+     "31",
+     "",
+     "ms"
+    ],
+    [
+     "Watchdog timer (note 2)",
+     "tWD",
+     "",
+     "",
+     "32",
+     "",
+     "sec"
+    ],
+    [
+     "Safety timer",
+     "tSAFE",
+     "",
+     "36",
+     "40",
+     "44",
+     "min"
+    ],
+    [
+     "Battery short timer (note 2)",
+     "tBAT_SHR",
+     "",
+     "",
+     "30",
+     "",
+     "sec"
+    ],
+    [
+     "Voltage drop over ILED",
+     "VILED",
+     "IILED = 20 mA",
+     "",
+     "200",
+     "",
+     "mV"
+    ],
+    [
+     "Maximum operating voltage over ILED",
+     "VMAXILED",
+     "",
+     "",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "SYS_EN FET on resistance",
+     "RON_SYS_EN",
+     "ISYS_EN = 20 mA",
+     "",
+     "10",
+     "",
+     "Ω"
+    ],
+    [
+     "Maximum voltage on digital inputs",
+     "VDIN_MAX",
+     "Applies to SCL, SDA, DIG_IO1, DIG_IO2, DIG_IO3",
+     "",
+     "",
+     "5.5",
+     "V"
+    ],
+    [
+     "Maximum logic low input voltage",
+     "VIL",
+     "Applies to SCL, SDA, DIG_IO1, DIG_IO2, DIG_IO3",
+     "",
+     "",
+     "0.5",
+     "V"
+    ],
+    [
+     "Minimum logic high input voltage",
+     "VIH",
+     "Applies to SCL, SDA, DIG_IO1, DIG_IO2, DIG_IO3",
+     "1.2",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Pull-down resistance",
+     "",
+     "Applies to DIG_IO1, DIG_IO2, DIG_IO3",
+     "215",
+     "350",
+     "610",
+     "kΩ"
+    ]
+   ],
+   "notes": [
+    "Note 1: the lockout normally comes from ISO_Sx or ISO_Bx; during some transitions VINx produces it.",
+    "Note 2: the value is set over I2C; the figure given is for the default register setting.",
+    "Note 3: while charging, the input current limit or isothermal charging can hold the output current lower.",
+    "Note 4: in weak charge mode at least 20 mA flows to the battery through the trickle branch, unless trickle charging is turned off; whatever current the system does not take also goes to the battery.",
+    "Note 5: I2C picks JEITA1 (the default) or JEITA2, and can turn the JEITA function on or off."
+   ]
+  },
+  {
+   "title": "Recommended input and output capacitances",
+   "page": 6,
+   "conditions": "Effective capacitance",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VINx",
+     "CVINx",
+     "",
+     "4",
+     "",
+     "10",
+     "μF"
+    ],
+    [
+     "CBP",
+     "CCBP",
+     "",
+     "60",
+     "100",
+     "140",
+     "nF"
+    ],
+    [
+     "ISO_Sx",
+     "CISO_Sx",
+     "",
+     "10",
+     "22",
+     "100",
+     "μF"
+    ],
+    [
+     "ISO_Bx",
+     "CISO_Bx",
+     "",
+     "10",
+     "22",
+     "",
+     "μF"
+    ]
+   ]
+  },
+  {
+   "title": "I2C-compatible interface timing",
+   "page": 6,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Capacitive load for each bus line",
+     "CS",
+     "",
+     "",
+     "400",
+     "pF"
+    ],
+    [
+     "SCL clock frequency",
+     "fSCL",
+     "",
+     "",
+     "400",
+     "kHz"
+    ],
+    [
+     "SCL high time",
+     "tHIGH",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "SCL low time",
+     "tLOW",
+     "1.3",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Data setup time",
+     "tSU, DAT",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "Data hold time",
+     "tHD, DAT",
+     "0",
+     "",
+     "0.9",
+     "µs"
+    ],
+    [
+     "Setup time for repeated start",
+     "tSU, STA",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Hold time for start/repeated start",
+     "tHD, STA",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Bus free time between a stop and a start condition",
+     "tBUF",
+     "1.3",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Setup time for stop condition",
+     "tSU, STO",
+     "0.6",
+     "",
+     "",
+     "µs"
+    ],
+    [
+     "Rise time of SCL/SDA",
+     "tR",
+     "20",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "Fall time of SCL/SDA",
+     "tF",
+     "20",
+     "",
+     "300",
+     "ns"
+    ],
+    [
+     "Pulse width of suppressed spike",
+     "tSP",
+     "0",
+     "",
+     "50",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "All figures are guaranteed by design.",
+    "The master holds SDA for at least 300 ns after SCL falls, so that SDA does not change inside the undefined part of the SCL falling edge."
+   ]
+  },
+  {
+   "title": "Absolute maximum ratings",
+   "page": 8,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "VIN1, VIN2, VIN3 to AGND",
+     "–0.5 V to +20 V"
+    ],
+    [
+     "All other pins to AGND",
+     "–0.3 V to +6 V"
+    ],
+    [
+     "Continuous drain current, battery supplementary mode, from ISO_Bx to ISO_Sx",
+     "2.1 A"
+    ],
+    [
+     "Storage temperature range",
+     "–65°C to +150°C"
+    ],
+    [
+     "Operating junction temperature range",
+     "–40°C to +125°C"
+    ],
+    [
+     "Soldering conditions",
+     "JEDEC J-STD-020"
+    ]
+   ],
+   "notes": [
+    "The plastic package changes its properties near a die temperature of 150°C (its glass transition), which can shift the part's parameters for good; a junction held above 175°C for long can damage the silicon."
+   ]
+  },
+  {
+   "title": "Thermal resistance",
+   "page": 8,
+   "conditions": "Device soldered on a circuit board (worst case for surface-mount packages)",
+   "columns": [
+    "package type",
+    "θJA",
+    "θJC",
+    "unit"
+   ],
+   "rows": [
+    [
+     "20-Lead LFCSP",
+     "35.6",
+     "3.65",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "θJA is for a 4-layer, 4 in × 3 in JEDEC board with 2.5 oz copper."
+   ]
+  },
+  {
+   "title": "Summary of operation modes",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "VVINx condition",
+    "battery condition",
+    "trickle charge",
+    "LDO FET state",
+    "battery isolation FET",
+    "system voltage ISO_Sx",
+    "additional conditions"
+   ],
+   "rows": [
+    [
+     "IC off, standby",
+     "0 V",
+     "Any battery condition",
+     "Off",
+     "Off",
+     "On",
+     "Battery voltage or 0 V",
+     ""
+    ],
+    [
+     "IC off, suspend",
+     "5 V",
+     "Any battery condition",
+     "Off",
+     "Off",
+     "On",
+     "Battery voltage",
+     "DIS_LDO = high"
+    ],
+    [
+     "LDO mode off, isolation FET on",
+     "5 V",
+     "Any battery condition",
+     "Off",
+     "Off",
+     "On",
+     "Battery voltage",
+     "Disable LDO and enable isolation FET"
+    ],
+    [
+     "LDO mode off, isolation FET off (system off)",
+     "5 V",
+     "Any battery condition",
+     "Off",
+     "Off",
+     "Off",
+     "0 V",
+     "Enable battery charging"
+    ],
+    [
+     "LDO mode, charger off",
+     "5 V",
+     "Any battery condition",
+     "Off",
+     "LDO",
+     "Off",
+     "4.3 V",
+     "Enable battery charging"
+    ],
+    [
+     "Trickle charge mode",
+     "5 V",
+     "Battery < VTRK_DEAD",
+     "On",
+     "LDO",
+     "Off",
+     "4.3 V",
+     "Enable battery charging"
+    ],
+    [
+     "Weak charge mode",
+     "5 V",
+     "VTRK_DEAD ≤ battery < VWEAK",
+     "On",
+     "CHG",
+     "CHG",
+     "3.4 V",
+     "Enable battery charging"
+    ],
+    [
+     "Fast charge mode",
+     "5 V",
+     "Battery ≥ VWEAK",
+     "Off",
+     "CHG",
+     "CHG",
+     "3.4 V (minimum)",
+     "Enable battery charging"
+    ],
+    [
+     "Charge mode, no battery",
+     "5 V",
+     "Open",
+     "Off",
+     "LDO",
+     "Off",
+     "4.3 V",
+     "Enable battery charging"
+    ],
+    [
+     "Charge mode, battery (ISO_Bx) shorted",
+     "5 V",
+     "Shorted",
+     "On",
+     "LDO",
+     "Off",
+     "4.3 V",
+     "Enable battery charging"
+    ]
+   ],
+   "notes": [
+    "The additional conditions are the controls in the operation mode controls table."
+   ]
+  },
+  {
+   "title": "Operation mode controls",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "control",
+    "DIG_IOx",
+    "I2C address, data bit(s)",
+    "effect"
+   ],
+   "rows": [
+    [
+     "Enable battery charging",
+     "DIG_IO3",
+     "0x07, D0",
+     "Low: fast, weak and trickle charging all off. High: all three on."
+    ],
+    [
+     "Disable LDO and enable isolation FET",
+     "Not applicable",
+     "0x07, D3, D0",
+     "Low: LDO on. High: LDO off; the isolation FET is then on with EN_CHG low and off with EN_CHG high."
+    ]
+   ]
+  },
+  {
+   "title": "DIG_IO1 operation",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "DIG_IO1",
+    "function"
+   ],
+   "rows": [
+    [
+     "0",
+     "100 mA input current limit, or the I2C programmed value"
+    ],
+    [
+     "1",
+     "500 mA input current limit, or the I2C programmed value (or an I2C value reprogrammed from the 100 mA default)"
+    ]
+   ]
+  },
+  {
+   "title": "Input current compatibility with standard USB limits",
+   "page": 18,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "standard USB limit",
+    "ADP5063 input current limit"
+   ],
+   "rows": [
+    [
+     "USB (China only)",
+     "100 mA, standard USB host or hub",
+     "100 mA or I2C programmed value"
+    ],
+    [
+     "USB (China only)",
+     "300 mA, Chinese USB specification",
+     "300 mA or I2C programmed value"
+    ],
+    [
+     "USB 2.0",
+     "100 mA, standard USB host or hub",
+     "100 mA or I2C programmed value"
+    ],
+    [
+     "USB 2.0",
+     "500 mA, standard USB host or hub",
+     "500 mA or I2C programmed value"
+    ],
+    [
+     "USB 3.0",
+     "150 mA, superspeed USB 3.0 host or hub",
+     "150 mA or I2C programmed value"
+    ],
+    [
+     "USB 3.0",
+     "900 mA, superspeed or high speed USB host or hub charger",
+     "900 mA or I2C programmed value"
+    ],
+    [
+     "Dedicated charger",
+     "1500 mA, dedicated charger or low/full speed USB host or hub charger",
+     "1500 mA or I2C programmed value"
+    ]
+   ]
+  },
+  {
+   "title": "SYS_EN modes",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "SYS_EN mode selection",
+    "SYS_EN behaviour"
+   ],
+   "rows": [
+    [
+     "00",
+     "Active when the LDO runs and the system voltage is present."
+    ],
+    [
+     "01",
+     "Active from the ISO_Bx voltage, in battery charging mode."
+    ],
+    [
+     "10",
+     "Active, with the isolation FET turned off, when the battery falls below VWEAK; works with VINx = 0 V and the battery monitor on (register 0x07 bit 5, EN_BMON)."
+    ],
+    [
+     "11",
+     "In LDO mode with the charger off: active. In charging mode: active when VISO_Bx ≥ VWEAK."
+    ]
+   ]
+  },
+  {
+   "title": "Indicator LED operation modes",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "ADP5063 mode",
+    "ILED mode",
+    "on/off time"
+   ],
+   "rows": [
+    [
+     "IC off",
+     "Off",
+     ""
+    ],
+    [
+     "LDO mode off",
+     "Off",
+     ""
+    ],
+    [
+     "LDO mode on",
+     "Off",
+     ""
+    ],
+    [
+     "Charge mode",
+     "Continuously on",
+     ""
+    ],
+    [
+     "Timer error (tTRK, tCHG, tSAFE)",
+     "Blinking",
+     "167 ms/833 ms"
+    ],
+    [
+     "Overtemperature (TSD)",
+     "Blinking",
+     "1 sec/1 sec"
+    ]
+   ]
+  },
+  {
+   "title": "THR input function",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "VINx",
+    "VISO_Bx",
+    "THR function"
+   ],
+   "rows": [
+    [
+     "Open or VIN = 0 V to 4.0 V",
+     "<2.5 V",
+     "Off"
+    ],
+    [
+     "Open or VIN = 0 V to 4.0 V",
+     ">2.5 V",
+     "Off, controlled by I2C"
+    ],
+    [
+     "4 V to 6.7 V",
+     "Don't care",
+     "Always on"
+    ]
+   ],
+   "notes": [
+    "The EN_THR default (register 0x07) is 0, sensing off."
+   ]
+  },
+  {
+   "title": "JEITA1 specifications",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "JEITA1 cold temperature limits",
+     "IJEITA_COLD",
+     "No charging",
+     "",
+     "0",
+     "°C"
+    ],
+    [
+     "JEITA1 cool temperature limits",
+     "IJEITA_COOL",
+     "Charging at about 50% of the programmed level (reduced charge current table)",
+     "0",
+     "10",
+     "°C"
+    ],
+    [
+     "JEITA1 typical temperature limits",
+     "IJEITA_TYP",
+     "Charging at the default or programmed levels",
+     "10",
+     "45",
+     "°C"
+    ],
+    [
+     "JEITA1 warm temperature limits",
+     "IJEITA_WARM",
+     "VTRM 100 mV below the programmed value",
+     "45",
+     "60",
+     "°C"
+    ],
+    [
+     "JEITA1 hot temperature limits",
+     "IJEITA_HOT",
+     "No charging",
+     "60",
+     "",
+     "°C"
+    ]
+   ]
+  },
+  {
+   "title": "JEITA1 reduced charge current levels, battery cool temperature",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "ICHG[4:0] (default)",
+    "ICHG JEITA1"
+   ],
+   "rows": [
+    [
+     "00000 = 50 mA",
+     "50 mA"
+    ],
+    [
+     "00001 = 100 mA",
+     "50 mA"
+    ],
+    [
+     "00010 = 150 mA",
+     "50 mA"
+    ],
+    [
+     "00011 = 200 mA",
+     "100 mA"
+    ],
+    [
+     "00100 = 250 mA",
+     "100 mA"
+    ],
+    [
+     "00101 = 300 mA",
+     "150 mA"
+    ],
+    [
+     "00110 = 350 mA",
+     "150 mA"
+    ],
+    [
+     "00111 = 400 mA",
+     "200 mA"
+    ],
+    [
+     "01000 = 450 mA",
+     "200 mA"
+    ],
+    [
+     "01001 = 500 mA",
+     "250 mA"
+    ],
+    [
+     "01010 = 550 mA",
+     "250 mA"
+    ],
+    [
+     "01011 = 600 mA",
+     "300 mA"
+    ],
+    [
+     "01100 = 650 mA",
+     "300 mA"
+    ],
+    [
+     "01101 = 700 mA",
+     "350 mA"
+    ],
+    [
+     "01110 = 750 mA",
+     "350 mA"
+    ],
+    [
+     "01111 = 800 mA",
+     "400 mA"
+    ],
+    [
+     "10000 = 850 mA",
+     "400 mA"
+    ],
+    [
+     "10001 = 900 mA",
+     "450 mA"
+    ],
+    [
+     "10010 = 950 mA",
+     "450 mA"
+    ],
+    [
+     "10011 = 1000 mA",
+     "500 mA"
+    ],
+    [
+     "10100 = 1050 mA",
+     "500 mA"
+    ],
+    [
+     "10101 = 1100 mA",
+     "550 mA"
+    ],
+    [
+     "10110 = 1200 mA",
+     "600 mA"
+    ],
+    [
+     "10111 to 11111 = 1300 mA",
+     "650 mA"
+    ]
+   ]
+  },
+  {
+   "title": "JEITA2 specifications",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "JEITA2 cold temperature limits",
+     "IJEITA_COLD",
+     "No charging",
+     "",
+     "0",
+     "°C"
+    ],
+    [
+     "JEITA2 cool temperature limits",
+     "IJEITA_COOL",
+     "VTRM 100 mV below the programmed value",
+     "0",
+     "10",
+     "°C"
+    ],
+    [
+     "JEITA2 typical temperature limits",
+     "IJEITA_TYP",
+     "Charging at the default or programmed levels",
+     "10",
+     "45",
+     "°C"
+    ],
+    [
+     "JEITA2 warm temperature limits",
+     "IJEITA_WARM",
+     "VTRM 100 mV below the programmed value",
+     "45",
+     "60",
+     "°C"
+    ],
+    [
+     "JEITA2 hot temperature limits",
+     "IJEITA_HOT",
+     "No charging",
+     "60",
+     "",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "The symbols IJEITA_x should read TJEITA_x."
+   ]
+  },
+  {
+   "title": "I2C register map",
+   "page": 27,
+   "conditions": "",
+   "columns": [
+    "address",
+    "register",
+    "bit fields, D7 to D0"
+   ],
+   "rows": [
+    [
+     "0x00",
+     "Manufacturer and model ID",
+     "D7:D4 MANUF[3:0]; D3:D0 Model[3:0]"
+    ],
+    [
+     "0x01",
+     "Silicon revision",
+     "D3:D0 REV[3:0]"
+    ],
+    [
+     "0x02",
+     "VINx pin settings",
+     "D3:D0 ILIM[3:0] (1)"
+    ],
+    [
+     "0x03",
+     "Termination settings",
+     "D7:D2 VTRM[5:0] (1, 2); D1:D0 CHG_VLIM[1:0] (1, 2)"
+    ],
+    [
+     "0x04",
+     "Charging current settings",
+     "D6:D2 ICHG[4:0] (1, 2); D1:D0 ITRK_DEAD[1:0] (1)"
+    ],
+    [
+     "0x05",
+     "Voltage thresholds",
+     "D7 DIS_RCH (1, 3); D6:D5 VRCH[1:0] (1); D4:D3 VTRK_DEAD[1:0] (1, 3); D2:D0 VWEAK[2:0] (1)"
+    ],
+    [
+     "0x06",
+     "Timer settings",
+     "D5 EN_TEND (1); D4 EN_CHG_TIMER (1); D3 CHG_TMR_PERIOD (1); D2 EN_WD (1, 3); D1 WD_PERIOD (1); D0 RESET_WD"
+    ],
+    [
+     "0x07",
+     "Functional settings 1",
+     "D6 DIS_IC1 (1); D5 EN_BMON (1); D4 EN_THR (1); D3 DIS_LDO (1); D2 EN_EOC (1); D0 EN_CHG (1)"
+    ],
+    [
+     "0x08",
+     "Functional settings 2",
+     "D7 EN_JEITA (1, 3); D6 JEITA_SELECT (1, 3); D5 EN_CHG_VLIM (1, 3); D4:D3 IDEAL_DIODE[1:0] (1, 3); D2:D0 VSYSTEM[2:0] (1, 3)"
+    ],
+    [
+     "0x09",
+     "Interrupt enable",
+     "D6 EN_THERM_LIM_INT; D5 EN_WD_INT; D4 EN_TSD_INT; D3 EN_THR_INT; D2 EN_BAT_INT; D1 EN_CHG_INT; D0 EN_VIN_INT"
+    ],
+    [
+     "0x0A",
+     "Interrupt active",
+     "D6 THERM_LIM_INT; D5 WD_INT; D4 TSD_INT; D3 THR_INT; D2 BAT_INT; D1 CHG_INT; D0 VIN_INT"
+    ],
+    [
+     "0x0B",
+     "Charger status 1",
+     "D7 VIN_OV; D6 VIN_OK; D5 VIN_ILIM; D4 THERM_LIM; D3 CHDONE; D2:D0 CHARGER_STATUS[2:0]"
+    ],
+    [
+     "0x0C",
+     "Charger status 2",
+     "D7:D5 THR_STATUS[2:0]; D3 RCH_LIM_INFO; D2:D0 BATTERY_STATUS[2:0]"
+    ],
+    [
+     "0x0D",
+     "Fault",
+     "D3 BAT_SHR (1); D1 TSD 130°C (1); D0 TSD 140°C (1)"
+    ],
+    [
+     "0x10",
+     "Battery short",
+     "D7:D5 TBAT_SHR[2:0] (1); D2:D0 VBAT_SHR[2:0] (1)"
+    ],
+    [
+     "0x11",
+     "IEND",
+     "D7:D5 IEND[2:0] (1, 3); D4 C/20 EOC (1); D3 C/10 EOC (1); D2 C/5 EOC (1); D1:D0 SYS_EN_SET[1:0] (1, 3)"
+    ]
+   ],
+   "notes": [
+    "Bits not listed are unused or reserved.",
+    "(1): the bit returns to its I2C default whenever VINx is connected or disconnected.",
+    "(2): part of the bit's I2C default is set at the factory.",
+    "(3): the bit's I2C default is set wholly at the factory."
+   ]
+  },
+  {
+   "title": "Register 0x00: manufacturer and model ID",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:4]",
+     "MANUF[3:0]",
+     "R",
+     "0001",
+     "Manufacturer identification"
+    ],
+    [
+     "[3:0]",
+     "MODEL[3:0]",
+     "R",
+     "1001",
+     "Model identification"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x01: silicon revision",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:4]",
+     "Not used",
+     "R",
+     "",
+     ""
+    ],
+    [
+     "[3:0]",
+     "REV[3:0]",
+     "R",
+     "0111",
+     "Silicon revision identification"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x02: VINx pin settings",
+   "page": 28,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:4]",
+     "Not used",
+     "R",
+     "",
+     ""
+    ],
+    [
+     "[3:0]",
+     "ILIM[3:0]",
+     "R/W",
+     "0000 = 100 mA",
+     "VINx input current limit: 0000 = 100 mA; 0001 = 150 mA; 0010 = 200 mA; 0011 = 250 mA; 0100 = 300 mA; 0101 = 400 mA; 0110 = 500 mA; 0111 = 600 mA; 1000 = 700 mA; 1001 = 800 mA; 1010 = 900 mA; 1011 = 1000 mA; 1100 = 1200 mA; 1101 = 1500 mA; 1110 = 1800 mA; 1111 = 2100 mA"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x03: termination settings",
+   "page": 29,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:2]",
+     "VTRM[5:0]",
+     "R/W",
+     "000101 = 3.60 V",
+     "Termination (float) voltage: 000101 = 3.60 V; 000110 = 3.62 V; 000111 = 3.64 V; 001000 = 3.66 V; 001001 = 3.68 V; 001010 = 3.70 V; 001011 = 3.72 V; 001100 = 3.74 V; 001101 = 3.76 V; 001110 = 3.78 V; 001111 = 3.80 V; 010000 = 3.82 V; 010001 = 3.84 V; 010010 = 3.86 V; 010011 = 3.88 V; 010100 = 3.90 V; 010101 = 3.92 V; 010110 = 3.94 V; 010111 = 3.96 V; 011000 = 3.98 V; 011001 = 4.00 V; 011010 = 4.02 V; 011011 = 4.04 V; 011100 = 4.06 V; 011101 = 4.08 V; 011110 = 4.10 V; 011111 = 4.12 V; 100000 = 4.14 V; 100001 = 4.16 V; 100010 = 4.18 V; 100011 = 4.20 V; 100100 = 4.22 V; 100101 = 4.24 V; 100110 = 4.26 V; 100111 = 4.28 V; 101000 = 4.30 V; 101001 = 4.32 V; 101010 = 4.34 V; 101011 = 4.36 V; 101100 = 4.38 V; 101101 = 4.40 V; 101110 = 4.42 V; 101111 = 4.44 V; 110000 = 4.44 V; 110001 = 4.46 V; 110010 = 4.48 V; 110011 to 111111 = 4.50 V"
+    ],
+    [
+     "[1:0]",
+     "CHG_VLIM[1:0]",
+     "R/W",
+     "00 = 3.2 V",
+     "Charging voltage limit: 00 = 3.2 V; 01 = 3.4 V; 10 = 3.7 V; 11 = 3.8 V"
+    ]
+   ],
+   "notes": [
+    "Codes 101111 and 110000 both give 4.44 V."
+   ]
+  },
+  {
+   "title": "Register 0x04: charging current settings",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "7",
+     "Not used",
+     "R",
+     "",
+     ""
+    ],
+    [
+     "[6:2]",
+     "ICHG[4:0]",
+     "R/W",
+     "01110 = 750 mA",
+     "Fast charge (constant current) level: 00000 = 50 mA; 00001 = 100 mA; 00010 = 150 mA; 00011 = 200 mA; 00100 = 250 mA; 00101 = 300 mA; 00110 = 350 mA; 00111 = 400 mA; 01000 = 450 mA; 01001 = 500 mA; 01010 = 550 mA; 01011 = 600 mA; 01100 = 650 mA; 01101 = 700 mA; 01110 = 750 mA; 01111 = 800 mA; 10000 = 850 mA; 10001 = 900 mA; 10010 = 950 mA; 10011 = 1000 mA; 10100 = 1050 mA; 10101 = 1100 mA; 10110 = 1200 mA; 10111 to 11111 = 1300 mA"
+    ],
+    [
+     "[1:0]",
+     "ITRK_DEAD[1:0]",
+     "R/W",
+     "10 = 20 mA",
+     "Trickle and weak charge current: 00 = 5 mA; 01 = 10 mA; 10 = 20 mA; 11 = 80 mA"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x05: voltage thresholds",
+   "page": 30,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "7",
+     "DIS_RCH",
+     "R/W",
+     "0 = recharge enabled",
+     "0 = recharge on; 1 = recharge off"
+    ],
+    [
+     "[6:5]",
+     "VRCH[1:0]",
+     "R/W",
+     "11 = 260 mV",
+     "Recharge threshold: 00 = 80 mV; 01 = 140 mV; 10 = 200 mV; 11 = 260 mV"
+    ],
+    [
+     "[4:3]",
+     "VTRK_DEAD[1:0]",
+     "R/W",
+     "00 = 2.0 V",
+     "Trickle to fast charge (dead battery) threshold: 00 = 2.0 V; 01 = 2.5 V; 10 = 2.6 V; 11 = 2.9 V"
+    ],
+    [
+     "[2:0]",
+     "VWEAK[2:0]",
+     "R/W",
+     "011 = 3.0 V",
+     "Weak battery rising threshold: 000 = 2.7 V; 001 = 2.8 V; 010 = 2.9 V; 011 = 3.0 V; 100 = 3.1 V; 101 = 3.2 V; 110 = 3.3 V; 111 = 3.4 V"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x06: timer settings",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:6]",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "5",
+     "EN_TEND",
+     "R/W",
+     "1",
+     "0 = tEND charge complete timer off (the 31 ms deglitch stays on); 1 = tEND on"
+    ],
+    [
+     "4",
+     "EN_CHG_TIMER",
+     "R/W",
+     "1",
+     "0 = trickle and fast charge timer off; 1 = on"
+    ],
+    [
+     "3",
+     "CHG_TMR_PERIOD",
+     "R/W",
+     "1",
+     "0 = 30 sec trickle timer, 300-minute fast charge timer; 1 = 60 sec trickle timer, 600-minute fast charge timer"
+    ],
+    [
+     "2",
+     "EN_WD",
+     "R/W",
+     "0",
+     "0 = watchdog off, even with BAT_SNS above VWEAK; 1 = watchdog and safety timer on"
+    ],
+    [
+     "1",
+     "WD_PERIOD",
+     "R/W",
+     "0",
+     "0 = 32 sec watchdog, 40-minute safety timer; 1 = 64 sec watchdog, 40-minute safety timer"
+    ],
+    [
+     "0",
+     "RESET_WD",
+     "W",
+     "0",
+     "Writing 1 resets the watchdog safety timer"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x07: functional settings 1",
+   "page": 31,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "7",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "6",
+     "DIS_IC1",
+     "R/W",
+     "0",
+     "0 = normal; 1 = part disabled, with VVINx held within VISO_Bx < VVINx < 5.5 V"
+    ],
+    [
+     "5",
+     "EN_BMON",
+     "R/W",
+     "0",
+     "0 = battery monitor off while VVINx is below VVIN_OK_RISE or VVIN_OK_FALL (it is always on with VVINx = 4 V to 6.7 V); 1 = monitor on even with VINx below VVIN_OK"
+    ],
+    [
+     "4",
+     "EN_THR",
+     "R/W",
+     "0",
+     "0 = THR current source off while VVINx is below VVIN_OK_RISE or VVIN_OK_FALL (always on with VVINx = 4 V to 6.7 V); 1 = source on even with VINx below those thresholds"
+    ],
+    [
+     "3",
+     "DIS_LDO",
+     "R/W",
+     "0",
+     "0 = LDO on; 1 = LDO off, and the isolation FET is on with EN_CHG low, off with EN_CHG high"
+    ],
+    [
+     "2",
+     "EN_EOC",
+     "R/W",
+     "1",
+     "0 = end of charge not allowed; 1 = allowed"
+    ],
+    [
+     "1",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "0",
+     "EN_CHG",
+     "R/W",
+     "0",
+     "0 = charging off; 1 = charging on"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x08: functional settings 2",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "7",
+     "EN_JEITA",
+     "R/W",
+     "0 = JEITA disabled",
+     "0 = JEITA temperature behaviour off; 1 = on"
+    ],
+    [
+     "6",
+     "JEITA_SELECT",
+     "R/W",
+     "0 = JEITA1",
+     "0 = JEITA1; 1 = JEITA2"
+    ],
+    [
+     "5",
+     "EN_CHG_VLIM",
+     "R/W",
+     "0",
+     "0 = charging voltage limit off; 1 = on: charging waits until the battery falls below VCHG_VLIM"
+    ],
+    [
+     "[4:3]",
+     "IDEAL_DIODE[1:0]",
+     "R/W",
+     "00",
+     "00 = ideal diode works whenever VISO_Sx < VISO_Bx; 01 = works when VISO_Sx < VISO_Bx and VBAT_SNS > VWEAK; 10 = off; 11 = off"
+    ],
+    [
+     "[2:0]",
+     "VSYSTEM[2:0]",
+     "R/W",
+     "000 = 4.3 V",
+     "System voltage: 000 = 4.3 V; 001 = 4.4 V; 010 = 4.5 V; 011 = 4.6 V; 100 = 4.7 V; 101 = 4.8 V; 110 = 4.9 V; 111 = 5.0 V"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x09: interrupt enable",
+   "page": 32,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "7",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "6",
+     "EN_THERM_LIM_INT",
+     "R/W",
+     "0",
+     "1 = interrupt on isothermal charging"
+    ],
+    [
+     "5",
+     "EN_WD_INT",
+     "R/W",
+     "0",
+     "1 = interrupt on the watchdog alarm"
+    ],
+    [
+     "4",
+     "EN_TSD_INT",
+     "R/W",
+     "0",
+     "1 = interrupt on overtemperature"
+    ],
+    [
+     "3",
+     "EN_THR_INT",
+     "R/W",
+     "0",
+     "1 = interrupt on THR temperature thresholds"
+    ],
+    [
+     "2",
+     "EN_BAT_INT",
+     "R/W",
+     "0",
+     "1 = interrupt on battery voltage thresholds"
+    ],
+    [
+     "1",
+     "EN_CHG_INT",
+     "R/W",
+     "0",
+     "1 = interrupt on a charger mode change"
+    ],
+    [
+     "0",
+     "EN_VIN_INT",
+     "R/W",
+     "0",
+     "1 = interrupt on VINx voltage thresholds"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x0A: interrupt active",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "7",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "6",
+     "THERM_LIM_INT",
+     "R",
+     "0",
+     "1 = isothermal charging raised the interrupt"
+    ],
+    [
+     "5",
+     "WD_INT",
+     "R",
+     "0",
+     "1 = the watchdog alarm raised the interrupt; the watchdog then runs out within 2 sec (32 sec period) or 4 sec (64 sec period)"
+    ],
+    [
+     "4",
+     "TSD_INT",
+     "R",
+     "0",
+     "1 = an overtemperature fault raised the interrupt"
+    ],
+    [
+     "3",
+     "THR_INT",
+     "R",
+     "0",
+     "1 = a THR temperature threshold raised the interrupt"
+    ],
+    [
+     "2",
+     "BAT_INT",
+     "R",
+     "0",
+     "1 = a battery voltage threshold raised the interrupt"
+    ],
+    [
+     "1",
+     "CHG_INT",
+     "R",
+     "0",
+     "1 = a charger mode change raised the interrupt"
+    ],
+    [
+     "0",
+     "VIN_INT",
+     "R",
+     "0",
+     "1 = a VINx voltage threshold raised the interrupt"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x0B: charger status 1",
+   "page": 33,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "7",
+     "VIN_OV",
+     "R",
+     "N/A",
+     "1 = VINx above VVIN_OV"
+    ],
+    [
+     "6",
+     "VIN_OK",
+     "R",
+     "N/A",
+     "1 = VINx above VVIN_OK_RISE and VVIN_OK_FALL"
+    ],
+    [
+     "5",
+     "VIN_ILIM",
+     "R",
+     "N/A",
+     "1 = the high voltage blocking FET is limiting VINx current and charging runs below the programmed ICHG"
+    ],
+    [
+     "4",
+     "THERM_LIM",
+     "R",
+     "N/A",
+     "1 = die temperature is holding charging below the programmed ICHG"
+    ],
+    [
+     "3",
+     "CHDONE",
+     "R",
+     "N/A",
+     "1 = a charge cycle has ended; latched, it stays set when VRCH is crossed"
+    ],
+    [
+     "[2:0]",
+     "CHARGER_STATUS[2:0]",
+     "R",
+     "N/A",
+     "000 = off; 001 = trickle charge; 010 = fast charge (CC mode); 011 = fast charge (CV mode); 100 = charge complete; 101 = LDO mode; 110 = trickle or fast charge timer expired; 111 = battery detection"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x0C: charger status 2",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:5]",
+     "THR_STATUS[2:0]",
+     "R",
+     "N/A",
+     "000 = off; 001 = battery cold; 010 = battery cool; 011 = battery warm; 100 = battery hot; 111 = thermistor OK"
+    ],
+    [
+     "4",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "3",
+     "RCH_LIM_INFO",
+     "R",
+     "N/A",
+     "Works when DIS_RCH = 1 and CHARGER_STATUS[2:0] = 100; flags that a recharge is due. 0 = VBAT_SNS > VRCH; 1 = VBAT_SNS < VRCH"
+    ],
+    [
+     "[2:0]",
+     "BATTERY_STATUS[2:0]",
+     "R",
+     "",
+     "000 = battery monitor off; 001 = no battery; 010 = VBAT_SNS < VTRK_DEAD; 011 = VTRK_DEAD ≤ VBAT_SNS < VWEAK; 100 = VBAT_SNS ≥ VWEAK"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x0D: fault",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:4]",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "3",
+     "BAT_SHR",
+     "R/W",
+     "0",
+     "1 = battery short detected"
+    ],
+    [
+     "2",
+     "Not used",
+     "R/W",
+     "",
+     ""
+    ],
+    [
+     "1",
+     "TSD 130°C",
+     "R/W",
+     "0",
+     "1 = lower overtemperature fault"
+    ],
+    [
+     "0",
+     "TSD 140°C",
+     "R/W",
+     "0",
+     "1 = overtemperature fault"
+    ]
+   ],
+   "notes": [
+    "A fault bit clears when its bit is written 1 or when VINx power is cycled."
+   ]
+  },
+  {
+   "title": "Register 0x10: battery short",
+   "page": 34,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:5]",
+     "TBAT_SHR[2:0]",
+     "R/W",
+     "100 = 30 sec",
+     "Battery short timeout: 000 = 1 sec; 001 = 2 sec; 010 = 4 sec; 011 = 10 sec; 100 = 30 sec; 101 = 60 sec; 110 = 120 sec; 111 = 180 sec"
+    ],
+    [
+     "[4:3]",
+     "Not used",
+     "",
+     "",
+     ""
+    ],
+    [
+     "[2:0]",
+     "VBAT_SHR[2:0]",
+     "R/W",
+     "100 = 2.4 V",
+     "Battery short threshold: 000 = 2.0 V; 001 = 2.1 V; 010 = 2.2 V; 011 = 2.3 V; 100 = 2.4 V; 101 = 2.5 V; 110 = 2.6 V; 111 = 2.7 V"
+    ]
+   ]
+  },
+  {
+   "title": "Register 0x11: IEND",
+   "page": 35,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "name",
+    "access",
+    "default",
+    "settings"
+   ],
+   "rows": [
+    [
+     "[7:5]",
+     "IEND[2:0]",
+     "R/W",
+     "010 = 52.5 mA",
+     "Termination current: 000 = 12.5 mA; 001 = 32.5 mA; 010 = 52.5 mA; 011 = 72.5 mA; 100 = 92.5 mA; 101 = 117.5 mA; 110 = 142.5 mA; 111 = 170.0 mA"
+    ],
+    [
+     "4",
+     "C/20 EOC",
+     "R/W",
+     "0",
+     "1 = termination current ICHG[4:0] ÷ 20, between 12.5 mA and 170 mA; overrides C/10 EOC, C/5 EOC and IEND[2:0]"
+    ],
+    [
+     "3",
+     "C/10 EOC",
+     "R/W",
+     "0",
+     "1 = termination current ICHG[4:0] ÷ 10, between 12.5 mA and 170 mA; overrides C/5 EOC and IEND[2:0], yields to C/20 EOC"
+    ],
+    [
+     "2",
+     "C/5 EOC",
+     "R/W",
+     "0",
+     "1 = termination current ICHG[4:0] ÷ 5, between 12.5 mA and 170 mA; overrides IEND[2:0], yields to C/20 EOC and C/10 EOC"
+    ],
+    [
+     "1:0",
+     "SYS_EN_SET[1:0]",
+     "R/W",
+     "00",
+     "SYS_EN behaviour, codes as in the SYS_EN modes table (code 10 needs VINx = 0 V and EN_BMON set)"
+    ]
+   ]
+  },
+  {
+   "title": "ISO_Bx and ISO_Sx capacitor suggestions",
+   "page": 37,
+   "conditions": "",
+   "columns": [
+    "vendor",
+    "part number",
+    "value",
+    "voltage",
+    "size"
+   ],
+   "rows": [
+    [
+     "Murata",
+     "GRM31CR61A226KE19",
+     "22 μF",
+     "10 V",
+     "1206"
+    ],
+    [
+     "Murata",
+     "GRM31CR60J226ME19",
+     "22 μF",
+     "6.3 V",
+     "1206"
+    ],
+    [
+     "TDK",
+     "C3216X5R0J226M",
+     "22 µF",
+     "6.3 V",
+     "1206"
+    ],
+    [
+     "Taiyo-Yuden",
+     "JMK316ABJ226KL-T",
+     "22 µF",
+     "6.3 V",
+     "1206"
+    ]
+   ]
+  },
+  {
+   "title": "CBP capacitor suggestions",
+   "page": 37,
+   "conditions": "",
+   "columns": [
+    "vendor",
+    "part number",
+    "value",
+    "voltage",
+    "size"
+   ],
+   "rows": [
+    [
+     "Murata",
+     "GRM155R70J104KA01",
+     "100 nF",
+     "6.3 V",
+     "0402"
+    ],
+    [
+     "TDK",
+     "C1005X7R1A104K050BB",
+     "100 nF",
+     "10 V",
+     "0402"
+    ]
+   ]
+  },
+  {
+   "title": "VINx capacitor suggestions",
+   "page": 37,
+   "conditions": "",
+   "columns": [
+    "vendor",
+    "part number",
+    "value",
+    "voltage",
+    "size"
+   ],
+   "rows": [
+    [
+     "Murata",
+     "GRM21BR61E106MA73",
+     "10 µF",
+     "25 V",
+     "0805"
+    ],
+    [
+     "TDK",
+     "C2012X5R1E106K",
+     "10 µF",
+     "25 V",
+     "0805"
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: default termination voltage",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "000 = 4.20 V",
+     ""
+    ],
+    [
+     "001 = 3.60 V",
+     "001 = 3.60 V"
+    ],
+    [
+     "010 = 3.70 V",
+     ""
+    ],
+    [
+     "011 = 3.80 V",
+     ""
+    ],
+    [
+     "100 = 3.90 V",
+     ""
+    ],
+    [
+     "101 = 4.00 V",
+     ""
+    ],
+    [
+     "110 = 4.10 V",
+     ""
+    ],
+    [
+     "111 = 4.40 V",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: default fast charge current",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "000 = 500 mA",
+     ""
+    ],
+    [
+     "001 = 300 mA",
+     ""
+    ],
+    [
+     "010 = 550 mA",
+     ""
+    ],
+    [
+     "011 = 600 mA",
+     ""
+    ],
+    [
+     "100 = 750 mA",
+     "100 = 750 mA"
+    ],
+    [
+     "101 = 900 mA",
+     ""
+    ],
+    [
+     "110 = 1300 mA",
+     ""
+    ],
+    [
+     "111 = 1300 mA",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: default end of charge current",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "000 = 52.5 mA",
+     "000 = 52.5 mA"
+    ],
+    [
+     "001 = 72.5 mA",
+     ""
+    ],
+    [
+     "010 = 12.5 mA",
+     ""
+    ],
+    [
+     "011 = 32.5 mA",
+     ""
+    ],
+    [
+     "100 = 142.5 mA",
+     ""
+    ],
+    [
+     "101 = 167.5 mA",
+     ""
+    ],
+    [
+     "110 = 92.5 mA",
+     ""
+    ],
+    [
+     "111 = 117.5 mA",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: default trickle to fast charge threshold",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "00 = 2.5 V",
+     ""
+    ],
+    [
+     "01 = 2.0 V",
+     "01 = 2.0 V"
+    ],
+    [
+     "10 = 2.9 V",
+     ""
+    ],
+    [
+     "11 = 2.6 V",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: default system voltage",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "000 = 4.3 V",
+     "000 = 4.3 V"
+    ],
+    [
+     "001 = 4.4 V",
+     ""
+    ],
+    [
+     "010 = 4.5 V",
+     ""
+    ],
+    [
+     "011 = 4.6 V",
+     ""
+    ],
+    [
+     "100 = 4.7 V",
+     ""
+    ],
+    [
+     "101 = 4.8 V",
+     ""
+    ],
+    [
+     "110 = 4.9 V",
+     ""
+    ],
+    [
+     "111 = 5.0 V",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: thermistor resistance",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "0 = 10 kΩ",
+     "0 = 10 kΩ"
+    ],
+    [
+     "1 = 100 kΩ",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: thermistor beta value",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "0100 = 3150",
+     "0100 = 3150"
+    ],
+    [
+     "0101 = 3350",
+     ""
+    ],
+    [
+     "0110 = 3500",
+     ""
+    ],
+    [
+     "0111 = 3650",
+     ""
+    ],
+    [
+     "1000 = 3850",
+     ""
+    ],
+    [
+     "1001 = 4000",
+     ""
+    ],
+    [
+     "1010 = 4200",
+     ""
+    ],
+    [
+     "1011 = 4400",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: DIS_IC1 mode select",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "0 = DIC_IC1 mode select, VINx current = 280 µA, ISO_Bx can float, no leak to ISO_Bx",
+     "0 = DIC_IC1 mode select, VINx current = 280 µA, ISO_Bx can float, no leak to ISO_Bx"
+    ],
+    [
+     "1 = DIC_IC1 mode select, VINx current = 110 µA, supply switch leaks from VINx to ISO_Bx",
+     ""
+    ]
+   ],
+   "notes": [
+    "DIC_IC1 should read DIS_IC1."
+   ]
+  },
+  {
+   "title": "Factory option: trickle or fast charge timer fault operation",
+   "page": 40,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "0 = after timeout LDO off, charging off",
+     ""
+    ],
+    [
+     "1 = after timeout LDO mode active, charging off",
+     "1 = after timeout LDO mode active, charging off"
+    ]
+   ]
+  },
+  {
+   "title": "I2C register default settings",
+   "page": 41,
+   "conditions": "",
+   "columns": [
+    "bit name",
+    "I2C register address, bit location",
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "CHG_VLIM[1:0]",
+     "Address 0x03, Bits[1:0]",
+     "0 = limit 3.2 V; 1 = limit 3.7 V",
+     "0 = limit 3.2 V"
+    ],
+    [
+     "DIS_RCH",
+     "Address 0x05, Bit 7",
+     "0 = recharge enabled; 1 = recharge disabled",
+     "0 = recharge enabled"
+    ],
+    [
+     "EN_WD",
+     "Address 0x06, Bit 2",
+     "0 = watchdog disabled; 1 = watchdog enabled",
+     "0 = disabled"
+    ],
+    [
+     "DIS_IC1",
+     "Address 0x07, Bit 6",
+     "0 = not activated; 1 = activated",
+     "0 = not activated"
+    ],
+    [
+     "EN_CHG",
+     "Address 0x07, Bit 0",
+     "0 = charging disabled; 1 = charging enabled",
+     "0 = charging disabled"
+    ],
+    [
+     "EN_JEITA",
+     "Address 0x08, Bit 7",
+     "0 = JEITA function disabled; 1 = JEITA function enabled",
+     "0 = JEITA function disabled"
+    ],
+    [
+     "JEITA_SELECT",
+     "Address 0x08, Bit 6",
+     "0 = JEITA1 charging; 1 = JEITA2 charging",
+     "0 = JEITA1 charging"
+    ],
+    [
+     "EN_CHG_VLIM",
+     "Address 0x08, Bit 5",
+     "0 = limit disabled; 1 = limit enabled",
+     "0 = limit disabled"
+    ],
+    [
+     "IDEAL_DIODE[1:0]",
+     "Address 0x08, Bits[4:3]",
+     "00 = ideal diode operates when VISO_Sx < VISO_Bx; 01 = ideal diode operates when VISO_Sx < VISO_Bx and VBAT_SNS > VWEAK; 10 = ideal diode is disabled; 11 = ideal diode is disabled",
+     "00 = ideal diode operates when VISO_Sx < VISO_Bx"
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: SYS_EN_SET default (I2C address 0x11, bits[1:0])",
+   "page": 41,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "00",
+     "00"
+    ],
+    [
+     "01",
+     ""
+    ],
+    [
+     "10",
+     ""
+    ],
+    [
+     "11",
+     ""
+    ]
+   ],
+   "notes": [
+    "Codes mean the same as in the SYS_EN modes table; code 10 needs VINx = 0 V and EN_BMON (register 0x07 bit D5) set."
+   ]
+  },
+  {
+   "title": "Factory option: DIG_IO1 polarity",
+   "page": 42,
+   "conditions": "",
+   "columns": [
+    "option",
+    "selection (ADP5063ACPZ-1-R7)"
+   ],
+   "rows": [
+    [
+     "0 = DIG_IO1 polarity, high active operation",
+     "0 = high active"
+    ],
+    [
+     "1 = DIG_IO1 polarity, low active operation",
+     ""
+    ]
+   ]
+  },
+  {
+   "title": "Factory option: DIG_IOx functions",
+   "page": 42,
+   "conditions": "",
+   "columns": [
+    "option",
+    "DIG_IO1 function",
+    "DIG_IO2 function",
+    "DIG_IO3 function",
+    "selection"
+   ],
+   "rows": [
+    [
+     "0000",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "Disable IC1: low = not activated, high = activated",
+     "Charging disable/enable: low = charging disable, high = charging enabled",
+     ""
+    ],
+    [
+     "0010",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "IVINx limit: low = not applicable, high = IVINx limit at 1500 mA",
+     "Disable IC1: low = not activated, high = activated",
+     ""
+    ],
+    [
+     "0011",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "IVINx limit: low = not applicable, high = IVINx limit at 1500 mA",
+     "Fast charge current: low = ICHG[4:0], high = ICHG[4:0] ÷ 2",
+     ""
+    ],
+    [
+     "0100",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "IVINx limit: low = not applicable, high = IVIN limit at 1500 mA",
+     "LDO: low = LDO active, high = LDO disabled",
+     ""
+    ],
+    [
+     "0101",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "IVINx limit: low = not applicable, high = IVINx limit at 1500 mA",
+     "Charging: low = charging disabled, high = charging enabled",
+     "0101"
+    ],
+    [
+     "0110",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "Recharge: low = not applicable, high = disable recharge",
+     "Charging: low = charging disabled, high = charging enabled",
+     ""
+    ],
+    [
+     "0111",
+     "Charging: low = charging disabled, high = charging enabled",
+     "Disable IC1: low = not activated, high = activated",
+     "Recharge: low = not applicable, high = disable recharge",
+     ""
+    ],
+    [
+     "1000",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "IVINx limit: low = not applicable, high = IVINx limit 1500 mA",
+     "Interrupt output",
+     ""
+    ],
+    [
+     "1001",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "Charging: low = charging disabled, high = charging enabled",
+     "Interrupt output",
+     ""
+    ],
+    [
+     "1010",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "Disable IC1: low = not activated, high = activated",
+     "Interrupt output",
+     ""
+    ],
+    [
+     "1011",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "Recharge: low = not applicable, high = disable recharge",
+     "Interrupt output",
+     ""
+    ],
+    [
+     "1100",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "Fast charge current: low = ICHG, high = ICHG[4:0] ÷ 2",
+     "Interrupt output",
+     ""
+    ],
+    [
+     "1101",
+     "IVINx limit: low = 100 mA, high = 500 mA",
+     "LDO: low = LDO active, high = LDO disabled",
+     "Interrupt output",
+     ""
+    ],
+    [
+     "1110",
+     "IVINx limit: low = not applicable, high = IVINx limit 1500 mA",
+     "Charging: low = charging disabled, high = charging enabled",
+     "Interrupt output",
+     ""
+    ],
+    [
+     "1111",
+     "Disable IC1: low = not activated, high = activated",
+     "Charging: low = charging disabled, high = charging enabled",
+     "Interrupt output",
+     ""
+    ]
+   ],
+   "notes": [
+    "The ADP5063ACPZ-1-R7 carries option 0101: DIG_IO1 sets the 100 mA or 500 mA input limit, DIG_IO2 high sets 1500 mA, DIG_IO3 turns charging on and off."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "System voltage vs. system output current, LDO mode",
+   "page": 10,
+   "conditions": "VVINx = 5.0 V, CVINx = 10 µF, CISO_Sx = 44 µF, CISO_Bx = 22 µF, CCBP = 100 nF, registers at default values; VSYSTEM[2:0] = 000 (binary) = 4.3 V",
+   "x": {
+    "label": "System output current",
+    "unit": "A",
+    "scale": "log"
+   },
+   "y": {
+    "label": "System voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VSYSTEM = 4.3 V",
+     "points": [
+      [
+       0.01022,
+       4.2987
+      ],
+      [
+       0.05223,
+       4.2938
+      ],
+      [
+       0.1259,
+       4.2931
+      ],
+      [
+       0.3946,
+       4.2886
+      ],
+      [
+       0.6357,
+       4.2841
+      ],
+      [
+       0.9452,
+       4.2786
+      ],
+      [
+       1.295,
+       4.2708
+      ],
+      [
+       1.546,
+       4.2624
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System voltage vs. input voltage (in dropout), LDO mode",
+   "page": 10,
+   "conditions": "VVINx = 5.0 V, CVINx = 10 µF, CISO_Sx = 44 µF, CISO_Bx = 22 µF, CCBP = 100 nF, registers at default values; VSYSTEM[2:0] = 000 (binary) = 4.3 V",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "System voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Load = 100 mA",
+     "points": [
+      [
+       4.003,
+       3.955
+      ],
+      [
+       4.292,
+       4.249
+      ],
+      [
+       4.336,
+       4.282
+      ],
+      [
+       4.369,
+       4.294
+      ],
+      [
+       6.707,
+       4.296
+      ]
+     ]
+    },
+    {
+     "label": "Load = 500 mA",
+     "points": [
+      [
+       4.003,
+       3.768
+      ],
+      [
+       4.475,
+       4.256
+      ],
+      [
+       4.521,
+       4.282
+      ],
+      [
+       4.819,
+       4.287
+      ],
+      [
+       6.707,
+       4.289
+      ]
+     ]
+    },
+    {
+     "label": "Load = 1000 mA",
+     "points": [
+      [
+       4.003,
+       3.513
+      ],
+      [
+       4.681,
+       4.232
+      ],
+      [
+       4.711,
+       4.257
+      ],
+      [
+       4.742,
+       4.269
+      ],
+      [
+       4.764,
+       4.274
+      ],
+      [
+       4.836,
+       4.277
+      ],
+      [
+       5.09,
+       4.279
+      ],
+      [
+       6.707,
+       4.278
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Battery charge current vs. battery voltage",
+   "page": 10,
+   "conditions": "VVINx = 5.0 V, CVINx = 10 µF, CISO_Sx = 44 µF, CISO_Bx = 22 µF, CCBP = 100 nF, registers at default values; ICHG[4:0] = 01001 (binary) = 500 mA, ILIM[3:0] = 1111 (binary) = 2100 mA",
+   "x": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Charge current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Charge current",
+     "points": [
+      [
+       1.8,
+       20.6
+      ],
+      [
+       2.0,
+       20.6
+      ],
+      [
+       2.05,
+       534.4
+      ],
+      [
+       2.1,
+       768.7
+      ],
+      [
+       3.0,
+       772.2
+      ],
+      [
+       3.05,
+       758.3
+      ],
+      [
+       3.103,
+       751.4
+      ],
+      [
+       3.453,
+       735.8
+      ],
+      [
+       3.5,
+       725.3
+      ],
+      [
+       3.553,
+       697.6
+      ],
+      [
+       3.603,
+       1.5
+      ],
+      [
+       3.65,
+       -0.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Ideal diode RON vs. battery voltage",
+   "page": 10,
+   "conditions": "VVINx = 5.0 V, CVINx = 10 µF, CISO_Sx = 44 µF, CISO_Bx = 22 µF, CCBP = 100 nF, registers at default values; IISO_Sx = 500 mA, VINx open",
+   "x": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Isolation FET resistance",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IISO_Sx = 500 mA",
+     "points": [
+      [
+       2.699,
+       61.0
+      ],
+      [
+       2.786,
+       60.3
+      ],
+      [
+       2.911,
+       58.91
+      ],
+      [
+       3.099,
+       57.57
+      ],
+      [
+       3.186,
+       56.77
+      ],
+      [
+       3.299,
+       56.21
+      ],
+      [
+       3.411,
+       55.41
+      ],
+      [
+       3.587,
+       54.77
+      ],
+      [
+       3.699,
+       53.87
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Input current vs. input voltage",
+   "page": 11,
+   "conditions": "VVINx = 5.0 V, CVINx = 10 µF, CISO_Sx = 44 µF, CISO_Bx = 22 µF, CCBP = 100 nF, registers at default values; VISO_Bx = 3.3 V",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Input current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Default startup",
+     "points": [
+      [
+       2.0,
+       0.039
+      ],
+      [
+       3.0,
+       0.057
+      ],
+      [
+       3.2,
+       0.069
+      ],
+      [
+       3.3,
+       0.112
+      ],
+      [
+       3.5,
+       0.13
+      ],
+      [
+       3.7,
+       0.118
+      ],
+      [
+       3.9,
+       0.136
+      ],
+      [
+       4.0,
+       3.078
+      ],
+      [
+       4.1,
+       3.206
+      ],
+      [
+       4.2,
+       3.194
+      ],
+      [
+       4.3,
+       1.935
+      ],
+      [
+       4.4,
+       1.99
+      ],
+      [
+       5.2,
+       2.166
+      ],
+      [
+       5.3,
+       2.118
+      ],
+      [
+       5.5,
+       1.954
+      ],
+      [
+       5.6,
+       1.984
+      ],
+      [
+       6.7,
+       2.124
+      ],
+      [
+       6.8,
+       2.063
+      ],
+      [
+       6.9,
+       1.249
+      ],
+      [
+       7.9,
+       1.303
+      ]
+     ]
+    },
+    {
+     "label": "DIS_LDO = high",
+     "points": [
+      [
+       4.1,
+       0.148
+      ],
+      [
+       5.5,
+       0.252
+      ],
+      [
+       5.6,
+       1.103
+      ],
+      [
+       6.9,
+       1.242
+      ],
+      [
+       7.9,
+       1.291
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Ideal diode RON vs. load current",
+   "page": 11,
+   "conditions": "VVINx = 5.0 V, CVINx = 10 µF, CISO_Sx = 44 µF, CISO_Bx = 22 µF, CCBP = 100 nF, registers at default values; VISO_Bx = 3.6 V",
+   "x": {
+    "label": "Load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Isolation FET resistance",
+    "unit": "mΩ",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VISO_Bx = 3.6 V",
+     "points": [
+      [
+       0.099,
+       51.91
+      ],
+      [
+       0.164,
+       52.6
+      ],
+      [
+       0.255,
+       53.03
+      ],
+      [
+       0.67,
+       54.11
+      ],
+      [
+       1.06,
+       54.76
+      ],
+      [
+       1.498,
+       55.14
+      ],
+      [
+       1.998,
+       55.92
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charge profile",
+   "page": 11,
+   "conditions": "VVINx = 5.0 V, CVINx = 10 µF, CISO_Sx = 44 µF, CISO_Bx = 22 µF, CCBP = 100 nF, registers at default values; ILIM[3:0] = 0110 (binary) = 500 mA, LiFePO4 battery capacity = 500 mAh",
+   "x": {
+    "label": "Charge time",
+    "unit": "min",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VBAT_SNS",
+     "points": [
+      [
+       0.44,
+       3.0
+      ],
+      [
+       1.56,
+       3.1917
+      ],
+      [
+       3.56,
+       3.3319
+      ],
+      [
+       4.33,
+       3.3444
+      ],
+      [
+       6.22,
+       3.3556
+      ],
+      [
+       12.22,
+       3.4083
+      ],
+      [
+       15.56,
+       3.425
+      ],
+      [
+       25.89,
+       3.4417
+      ],
+      [
+       41.56,
+       3.4931
+      ],
+      [
+       44.56,
+       3.5097
+      ],
+      [
+       47.56,
+       3.5347
+      ],
+      [
+       49.65,
+       3.5641
+      ],
+      [
+       51.22,
+       3.5958
+      ],
+      [
+       51.89,
+       3.5986
+      ],
+      [
+       76.32,
+       3.6006
+      ],
+      [
+       76.55,
+       3.5208
+      ],
+      [
+       77.11,
+       3.4833
+      ]
+     ]
+    },
+    {
+     "label": "IISO_B",
+     "points": [
+      [
+       0.22,
+       0.4648
+      ],
+      [
+       48.33,
+       0.4648
+      ],
+      [
+       50.89,
+       0.4617
+      ],
+      [
+       51.22,
+       0.4586
+      ],
+      [
+       53.22,
+       0.3426
+      ],
+      [
+       55.55,
+       0.2454
+      ],
+      [
+       57.55,
+       0.1868
+      ],
+      [
+       59.89,
+       0.1388
+      ],
+      [
+       60.22,
+       0.1388
+      ],
+      [
+       60.22,
+       0.1346
+      ],
+      [
+       62.55,
+       0.1053
+      ],
+      [
+       66.55,
+       0.074
+      ],
+      [
+       70.18,
+       0.0573
+      ],
+      [
+       70.37,
+       0.0593
+      ],
+      [
+       70.52,
+       0.0563
+      ],
+      [
+       70.55,
+       0.0583
+      ],
+      [
+       71.11,
+       0.0573
+      ],
+      [
+       72.89,
+       0.0489
+      ],
+      [
+       73.0,
+       0.051
+      ],
+      [
+       73.67,
+       0.0468
+      ],
+      [
+       76.33,
+       0.0426
+      ],
+      [
+       76.44,
+       0.0008
+      ],
+      [
+       77.11,
+       0.0008
+      ]
+     ],
+     "axis": "y2"
+    }
+   ]
+  },
+  {
+   "title": "Battery leakage (standby) current vs. ambient temperature, standby mode",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Standby current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VISO_Bx = 3.6 V",
+     "points": [
+      [
+       -40.0,
+       0.15
+      ],
+      [
+       -4.2,
+       0.141
+      ],
+      [
+       11.4,
+       0.152
+      ],
+      [
+       30.8,
+       0.192
+      ],
+      [
+       85.0,
+       0.328
+      ]
+     ]
+    },
+    {
+     "label": "VISO_Bx = 4.2 V",
+     "points": [
+      [
+       -40.0,
+       0.229
+      ],
+      [
+       -4.2,
+       0.213
+      ],
+      [
+       17.2,
+       0.216
+      ],
+      [
+       37.5,
+       0.266
+      ],
+      [
+       85.0,
+       0.42
+      ]
+     ]
+    },
+    {
+     "label": "VISO_Bx = 5.5 V",
+     "points": [
+      [
+       -40.0,
+       0.904
+      ],
+      [
+       0.1,
+       0.87
+      ],
+      [
+       14.2,
+       0.837
+      ],
+      [
+       20.8,
+       0.84
+      ],
+      [
+       37.5,
+       0.905
+      ],
+      [
+       85.0,
+       1.156
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VINx quiescent current vs. ambient temperature, DIS_LDO = high",
+   "page": 12,
+   "conditions": "DIS_LDO = high",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VINx quiescent current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "DIS_LDO = high",
+     "points": [
+      [
+       -39.9,
+       0.952
+      ],
+      [
+       25.1,
+       1.025
+      ],
+      [
+       125.1,
+       1.105
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System voltage accuracy vs. ambient temperature",
+   "page": 12,
+   "conditions": "Load = 100 mA, VVINx = 5.5 V",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "System voltage accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VISO_Sx = 4.3 V",
+     "points": [
+      [
+       -40.0,
+       -0.185
+      ],
+      [
+       -17.7,
+       -0.102
+      ],
+      [
+       -9.1,
+       -0.075
+      ],
+      [
+       2.2,
+       -0.055
+      ],
+      [
+       8.5,
+       -0.051
+      ],
+      [
+       31.1,
+       -0.074
+      ],
+      [
+       70.7,
+       -0.144
+      ],
+      [
+       85.0,
+       -0.164
+      ],
+      [
+       101.4,
+       -0.173
+      ],
+      [
+       124.9,
+       -0.17
+      ]
+     ]
+    },
+    {
+     "label": "VISO_Sx = 5.0 V",
+     "points": [
+      [
+       -40.0,
+       -0.138
+      ],
+      [
+       -9.1,
+       -0.053
+      ],
+      [
+       2.2,
+       -0.037
+      ],
+      [
+       11.9,
+       -0.034
+      ],
+      [
+       31.1,
+       -0.056
+      ],
+      [
+       85.0,
+       -0.161
+      ],
+      [
+       101.4,
+       -0.177
+      ],
+      [
+       124.9,
+       -0.187
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "System voltage accuracy vs. ambient temperature, trickle charge mode",
+   "page": 12,
+   "conditions": "VISO_Sx = 4.3 V with VVINx = 5.0 V, or VISO_Sx = 5.0 V with VVINx = 6.0 V",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "System voltage accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VISO_Sx = 4.3 V",
+     "points": [
+      [
+       -39.9,
+       -0.127
+      ],
+      [
+       -0.5,
+       -0.005
+      ],
+      [
+       25.0,
+       0.016
+      ],
+      [
+       54.5,
+       0.048
+      ],
+      [
+       60.0,
+       0.049
+      ],
+      [
+       71.1,
+       0.042
+      ],
+      [
+       124.9,
+       -0.019
+      ]
+     ]
+    },
+    {
+     "label": "VISO_Sx = 5.0 V",
+     "points": [
+      [
+       -39.9,
+       -0.089
+      ],
+      [
+       0.6,
+       0.014
+      ],
+      [
+       7.0,
+       0.016
+      ],
+      [
+       25.0,
+       0.004
+      ],
+      [
+       29.0,
+       0.009
+      ],
+      [
+       37.9,
+       0.031
+      ],
+      [
+       49.3,
+       0.04
+      ],
+      [
+       71.1,
+       0.036
+      ],
+      [
+       81.0,
+       0.028
+      ],
+      [
+       93.8,
+       0.007
+      ],
+      [
+       124.9,
+       -0.059
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VINx quiescent current vs. ambient temperature, LDO mode",
+   "page": 12,
+   "conditions": "LDO mode",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VINx quiescent current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VIN = 4.0 V",
+     "points": [
+      [
+       -40.1,
+       2.683
+      ],
+      [
+       25.0,
+       2.988
+      ],
+      [
+       62.6,
+       3.117
+      ],
+      [
+       78.2,
+       3.215
+      ],
+      [
+       84.9,
+       3.285
+      ],
+      [
+       96.4,
+       3.479
+      ],
+      [
+       125.0,
+       4.254
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 5.0 V",
+     "points": [
+      [
+       -40.1,
+       1.932
+      ],
+      [
+       31.2,
+       2.055
+      ],
+      [
+       62.6,
+       2.083
+      ],
+      [
+       78.2,
+       2.141
+      ],
+      [
+       84.9,
+       2.194
+      ],
+      [
+       96.4,
+       2.35
+      ],
+      [
+       106.2,
+       2.563
+      ],
+      [
+       125.0,
+       3.023
+      ]
+     ]
+    },
+    {
+     "label": "VIN = 6.7 V",
+     "points": [
+      [
+       -40.1,
+       2.019
+      ],
+      [
+       -5.1,
+       2.08
+      ],
+      [
+       84.9,
+       2.167
+      ],
+      [
+       125.0,
+       2.255
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Termination (VTRM) voltage accuracy vs. ambient temperature",
+   "page": 12,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VTRM voltage accuracy",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VTRM = 3.5 V",
+     "points": [
+      [
+       -40.1,
+       -0.0958
+      ],
+      [
+       -8.3,
+       -0.009
+      ],
+      [
+       0.5,
+       0.0065
+      ],
+      [
+       24.9,
+       0.0035
+      ],
+      [
+       38.0,
+       0.0164
+      ],
+      [
+       44.6,
+       0.0181
+      ],
+      [
+       78.3,
+       0.0142
+      ],
+      [
+       88.7,
+       0.0065
+      ],
+      [
+       125.1,
+       -0.0418
+      ]
+     ]
+    },
+    {
+     "label": "VTRM = 3.8 V",
+     "points": [
+      [
+       -40.1,
+       -0.1306
+      ],
+      [
+       -3.4,
+       -0.0479
+      ],
+      [
+       22.6,
+       -0.051
+      ],
+      [
+       40.1,
+       -0.0418
+      ],
+      [
+       81.6,
+       -0.0643
+      ],
+      [
+       115.2,
+       -0.1167
+      ],
+      [
+       125.1,
+       -0.1254
+      ]
+     ]
+    },
+    {
+     "label": "VTRM = 4.2 V",
+     "points": [
+      [
+       -40.1,
+       -0.0505
+      ],
+      [
+       -12.1,
+       0.0017
+      ],
+      [
+       -3.3,
+       0.0138
+      ],
+      [
+       4.8,
+       0.0017
+      ],
+      [
+       34.2,
+       -0.0037
+      ],
+      [
+       54.6,
+       -0.0155
+      ],
+      [
+       71.9,
+       -0.0353
+      ],
+      [
+       88.7,
+       -0.0641
+      ],
+      [
+       115.2,
+       -0.1184
+      ],
+      [
+       125.1,
+       -0.1324
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Fast charge current CC mode vs. ambient temperature",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Charge current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ICHG = 500 mA",
+     "points": [
+      [
+       -40.0,
+       0.4953
+      ],
+      [
+       115.0,
+       0.4988
+      ]
+     ]
+    },
+    {
+     "label": "ICHG = 750 mA",
+     "points": [
+      [
+       -40.0,
+       0.6872
+      ],
+      [
+       5.3,
+       0.6938
+      ],
+      [
+       115.0,
+       0.6977
+      ]
+     ]
+    },
+    {
+     "label": "ICHG = 1300 mA",
+     "points": [
+      [
+       -40.0,
+       1.2911
+      ],
+      [
+       25.1,
+       1.3033
+      ],
+      [
+       115.0,
+       1.3085
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "VINx overvoltage threshold vs. ambient temperature",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VINx overvoltage threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VINx overvoltage threshold",
+     "points": [
+      [
+       -40.0,
+       6.9399
+      ],
+      [
+       11.4,
+       6.9561
+      ],
+      [
+       20.8,
+       6.9568
+      ],
+      [
+       38.2,
+       6.9508
+      ],
+      [
+       84.8,
+       6.9281
+      ],
+      [
+       99.1,
+       6.9234
+      ],
+      [
+       114.8,
+       6.9201
+      ],
+      [
+       125.0,
+       6.9159
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Input current limit vs. ambient temperature",
+   "page": 13,
+   "conditions": "",
+   "x": {
+    "label": "Ambient temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Input current limit",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "ILIM = 100 mA",
+     "points": [
+      [
+       -40.0,
+       0.089
+      ],
+      [
+       125.0,
+       0.098
+      ]
+     ]
+    },
+    {
+     "label": "ILIM = 500 mA",
+     "points": [
+      [
+       -40.0,
+       0.458
+      ],
+      [
+       125.0,
+       0.483
+      ]
+     ]
+    },
+    {
+     "label": "ILIM = 900 mA",
+     "points": [
+      [
+       -40.0,
+       0.821
+      ],
+      [
+       15.4,
+       0.841
+      ],
+      [
+       125.0,
+       0.866
+      ]
+     ]
+    },
+    {
+     "label": "ILIM = 1500 mA",
+     "points": [
+      [
+       -40.0,
+       1.377
+      ],
+      [
+       125.0,
+       1.453
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Murata GRM31CR61A226KE19 capacitance vs. bias voltage",
+   "page": 36,
+   "conditions": "",
+   "x": {
+    "label": "DC bias voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Capacitance",
+    "unit": "µF",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "GRM31CR61A226KE19",
+     "points": [
+      [
+       -0.003,
+       50.36
+      ],
+      [
+       0.451,
+       50.43
+      ],
+      [
+       0.849,
+       49.87
+      ],
+      [
+       1.198,
+       48.96
+      ],
+      [
+       1.591,
+       47.58
+      ],
+      [
+       2.547,
+       43.15
+      ],
+      [
+       3.888,
+       35.95
+      ],
+      [
+       4.985,
+       30.57
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 1,
+   "description": "USB VBUS or an adapter feeds VINx through a 10 µF input capacitor. The system rail comes off ISO_Sx with 22 µF; the cell sits on ISO_Bx with BAT_SNS tied to the same node and 22 µF across it. A thermistor from THR to ground watches the pack temperature, ILED sinks current through an LED and resistor from VLED, and the I2C lines, the three DIG_IO controls and the SYS_EN flag go to the host.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADP5063"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "VINx input capacitor"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "CBP bypass"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "22 µF",
+     "note": "system output (ISO_Sx)"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 µF",
+     "note": "battery node (ISO_Bx)"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "Li-Ion cell",
+     "note": "single cell; pins + and -"
+    },
+    {
+     "ref": "RT1",
+     "type": "resistor",
+     "value": "",
+     "note": "battery pack NTC thermistor; no value given"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "",
+     "note": "indicator LED"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "LED series resistor; no value given"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "AC or USB (VBUS)"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "SYSTEM"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SCL"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "SDA"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "DIG_IO1"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "DIG_IO2"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "DIG_IO3"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "SYS_EN"
+    },
+    {
+     "ref": "J9",
+     "type": "terminal",
+     "value": "VLED"
+    }
+   ],
+   "notes": [
+    "The DIG_IO pins' functions are set at the factory."
+   ]
+  },
+  {
+   "id": "reference",
+   "title": "Reference circuit",
+   "page": 38,
+   "description": "The full hookup with part numbers: 4 V to 7 V on VIN1 to VIN3 with a 10 µF 25 V capacitor, 100 nF on CBP, 22 µF on the ISO_S pins for the system and 22 µF on the battery node. BAT_SNS joins ISO_B1 to ISO_B3 at the battery positive terminal. 1.5 kΩ pull-ups to VDDIO serve SCL and SDA, 10 kΩ pulls SYS_EN up to VDDIO for the MCU, an optional 10 kΩ NTC in the pack goes from THR to ground, and the LED on ILED runs from VLED through a resistor.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "ADP5063"
+    },
+    {
+     "ref": "C4",
+     "type": "capacitor",
+     "value": "10 µF",
+     "note": "GRM21BR6E106MA73; 25 V X5R 0805"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "100 nF",
+     "note": "GRM155R70J104KA01; 16 V X7R 0402"
+    },
+    {
+     "ref": "C3",
+     "type": "capacitor",
+     "value": "22 µF",
+     "note": "GRM31CR60J226ME19; 16 V X5R 1206"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "22 µF",
+     "note": "GRM31CR60J22ME19; 16 V X5R 1206"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "1.5 kΩ",
+     "note": "SDA pull-up"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "1.5 kΩ",
+     "note": "SCL pull-up"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "SYS_EN pull-up"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10 kΩ",
+     "note": "NTC thermistor in the battery pack, optional"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "",
+     "note": "LED series resistor; no value given"
+    },
+    {
+     "ref": "D1",
+     "type": "led",
+     "value": "",
+     "note": "indicator LED"
+    },
+    {
+     "ref": "BT1",
+     "type": "other",
+     "value": "battery",
+     "note": "pins + and -"
+    },
+    {
+     "ref": "J1",
+     "type": "terminal",
+     "value": "VIN = 4 V to 7 V"
+    },
+    {
+     "ref": "J2",
+     "type": "terminal",
+     "value": "VDDIO"
+    },
+    {
+     "ref": "J3",
+     "type": "terminal",
+     "value": "SCL to MCU"
+    },
+    {
+     "ref": "J4",
+     "type": "terminal",
+     "value": "SDA to MCU"
+    },
+    {
+     "ref": "J5",
+     "type": "terminal",
+     "value": "DIG_IO1 to MCU or NC"
+    },
+    {
+     "ref": "J6",
+     "type": "terminal",
+     "value": "DIG_IO2 to MCU or NC"
+    },
+    {
+     "ref": "J7",
+     "type": "terminal",
+     "value": "DIG_IO3 to MCU or NC"
+    },
+    {
+     "ref": "J8",
+     "type": "terminal",
+     "value": "SYS_EN to MCU"
+    },
+    {
+     "ref": "J9",
+     "type": "terminal",
+     "value": "VLED"
+    }
+   ],
+   "notes": [
+    "C2 and C3 sit at the battery and system pins; BAT_SNS meets the ISO_B pins near the battery positive terminal."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Effective output capacitance",
+   "expr": "CEFF = COUT × (1 − TEMPCO) × (1 − TOL)",
+   "where": {
+    "CEFF": "capacitance left at the working voltage",
+    "COUT": "capacitance at the DC bias in use",
+    "TEMPCO": "worst-case temperature coefficient of the capacitor",
+    "TOL": "worst-case tolerance of the capacitor"
+   },
+   "note": "Example: X5R with TEMPCO 15% over −40°C to +85°C, TOL 10%, COUT 16 µF at 4.2 V: CEFF = 16 μF × (1 − 0.15) × (1 − 0.1) ≈ 12.24 μF.",
+   "page": 36
+  },
+  {
+   "name": "Total power dissipation (1)",
+   "expr": "PD = PLDOFET + PISOFET",
+   "where": {
+    "PLDOFET": "loss in the input LDO FET",
+    "PISOFET": "loss in the battery isolation FET"
+   },
+   "note": "",
+   "page": 39
+  },
+  {
+   "name": "LDO FET dissipation (2)",
+   "expr": "PLDOFET = (VIN – VISO_Sx) × (ICHG + ILOAD)",
+   "where": {
+    "VIN": "voltage at the VINx pins",
+    "VISO_Sx": "system voltage at the ISO_Sx pins",
+    "ICHG": "charge current into the battery",
+    "ILOAD": "system load current out of ISO_Sx"
+   },
+   "note": "",
+   "page": 39
+  },
+  {
+   "name": "Isolation FET dissipation, battery below VISO_SFC (3)",
+   "expr": "PISOFET = (VISO_Sx – VISO_Bx) × ICHG",
+   "where": {
+    "VISO_Bx": "battery voltage at the ISO_Bx pins",
+    "ICHG": "charge current"
+   },
+   "note": "Applies while the battery is below VISO_SFC (3.4 V typical).",
+   "page": 39
+  },
+  {
+   "name": "Isolation FET dissipation, battery at VISO_SFC or above (4)",
+   "expr": "PISOFET = RDSON_ISO × ICHG",
+   "where": {
+    "RDSON_ISO": "isolation FET on resistance, typically 110 mΩ while charging",
+    "ICHG": "charge current"
+   },
+   "note": "For a power the current term should read ICHG².",
+   "page": 39
+  },
+  {
+   "name": "LDO mode dissipation",
+   "expr": "PD = (VIN – VISO_Sx) × ILOAD",
+   "where": {
+    "ILOAD": "system load current, all drawn from VINx with the battery not sharing ISO_Sx"
+   },
+   "note": "Charging off (EN_CHG = low); the system voltage is set from 4.3 V to 5.0 V.",
+   "page": 39
+  },
+  {
+   "name": "Junction temperature from ambient (5)",
+   "expr": "TJ = TA + (PD × θJA)",
+   "where": {
+    "TA": "board (ambient) temperature",
+    "θJA": "35.6°C/W for the 20-lead LFCSP"
+   },
+   "note": "TJ is to stay below 125°C.",
+   "page": 39
+  },
+  {
+   "name": "Junction temperature from case (6)",
+   "expr": "TJ = TC + (PD × θJC)",
+   "where": {
+    "TC": "case temperature",
+    "θJC": "junction-to-case thermal resistance, 3.65°C/W"
+   },
+   "note": "",
+   "page": 39
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Input range and protection",
+   "page": 16,
+   "text": "The charger runs from 4 V to 6.7 V on VINx and survives up to 20 V there, so spikes on USB VBUS when a cable goes in or out do no harm. Above VVIN_OV (6.9 V typical) the input is blocked. Until VINx reaches VIN_OK with no proper battery voltage present, the blocking stage draws under 1 mA."
+  },
+  {
+   "topic": "Power path",
+   "page": 16,
+   "text": "An internal FET joins the charger output (ISO_Sx, the system rail) to the battery (ISO_Bx). With it the system runs at once from USB even when the battery is dead or missing. The LDO puts out up to 2.1 A at an I2C-set 4.3 V to 5.0 V, and charge current into the cell goes up to 1.3 A from a dedicated charger."
+  },
+  {
+   "topic": "Input current limit",
+   "page": 18,
+   "text": "VINx current is limited by ILIM[3:0], 100 mA by default so that an unconfigured USB host or hub is respected. On this part DIG_IO1 high selects 500 mA and DIG_IO2 high selects 1500 mA. Writing ILIM over I2C overrides the pins. When the limit leaves less current than ICHG asks for, charging slows and VIN_ILIM is set. An external USB detection chip tells the system which source is attached so the right limit can be set."
+  },
+  {
+   "topic": "Trickle charge",
+   "page": 19,
+   "text": "A cell below VTRK_DEAD (2.0 V default) gets ITRK_DEAD (20 mA default), which can reset a pack protection circuit and bring the cell up safely. The LDO holds ISO_Sx at VISO_STRK and the isolation FET is off, so the battery is cut off from the system. If the cell has not reached VTRK_DEAD after 60 minutes, charging stops with a fault in CHARGER_STATUS."
+  },
+  {
+   "topic": "Weak charge",
+   "page": 19,
+   "text": "Between VTRK_DEAD and VWEAK the battery is too low to run the whole system, so the USB transceiver cannot ask the host for more current and the limit stays at 100 mA. At least 20 mA goes to the cell through the trickle branch, keeping a microcontroller on ISO_Sx alive; any current the system leaves over also charges the cell. The isolation FET holds ISO_Sx at VISO_SFC. Isothermal control or the input limit can keep the current below its setting."
+  },
+  {
+   "topic": "Fast charge, constant current",
+   "page": 19,
+   "text": "Above VWEAK the cell charges at ICHG and CHARGER_STATUS reads 010. Isothermal control or the input limit can hold the current lower. When the battery is below VISO_SFC the isolation FET keeps ISO_Sx at VISO_SFC."
+  },
+  {
+   "topic": "Fast charge, constant voltage",
+   "page": 19,
+   "text": "When BAT_SNS reaches VTRM the charger holds VTRM there and lets the current fall, so the series resistance of the pack and board does not cut the charge short. CHARGER_STATUS reads 011."
+  },
+  {
+   "topic": "Fast charge timer",
+   "page": 19,
+   "text": "If BAT_SNS has not reached VTRM within tCHG, charging stops with a fault. If VTRM was reached but the current is still above IEND when tCHG ends, charging stops without a fault and starts again normally at the recharge threshold."
+  },
+  {
+   "topic": "Watchdog and safety timer",
+   "page": 19,
+   "text": "The watchdog starts when the processor first sets RESET_WD or when the battery passes VWEAK, and from then must be reset within tWD. If it runs out during charging the safety timer tSAFE starts, ILIM returns to its default if parameters had been programmed, charging goes on for tSAFE, and then the charger turns off and sets CHARGER_STATUS."
+  },
+  {
+   "topic": "Charge complete and recharge",
+   "page": 20,
+   "text": "In constant voltage mode, current below IEND for tEND ends charging and sets CHDONE; a dip shorter than tEND restarts the timer. Afterwards the charger watches BAT_SNS and restarts at VRCH, normally straight into constant voltage. Recharge can be turned off over I2C; register 0x0C bit 3 then flags that a recharge is due."
+  },
+  {
+   "topic": "IC disable",
+   "page": 20,
+   "text": "DIS_IC1 (I2C, or DIG_IO2 where so programmed) turns off all internal control and can also set the LDO and isolation FET states. In that mode VINx reaches the internal supply directly, so VINx must stay within VISO_Bx < VINx < 5.5 V."
+  },
+  {
+   "topic": "Charging enable",
+   "page": 20,
+   "text": "EN_CHG low over I2C stops charging while the LDO keeps supplying the system at its set voltage. On this part DIG_IO3 also switches charging; a write to EN_CHG overrides the pin."
+  },
+  {
+   "topic": "Charging voltage limit",
+   "page": 20,
+   "text": "With EN_CHG_VLIM set (register 0x08 bit 5, off by default), charging enabled by EN_CHG or DIG_IO3 does not begin while the battery is above VCHG_VLIM (3.2 V typical). Once the battery drops below it, a full cycle runs to VTRM (3.6 V typical). Skipping top-ups of a half-full cell can lengthen cell life."
+  },
+  {
+   "topic": "SYS_EN output",
+   "page": 20,
+   "text": "SYS_EN is an open-drain flag that can hold the system off until the battery can support start-up. Its behaviour is chosen by SYS_EN_SET (four modes, default set at the factory)."
+  },
+  {
+   "topic": "Indicator LED",
+   "page": 20,
+   "text": "The open-drain ILED pin drives an LED or serves a microcontroller as a status line: on continuously while charging, blinking 167 ms on and 833 ms off after a timer fault, 1 sec on and 1 sec off in thermal shutdown, off otherwise."
+  },
+  {
+   "topic": "Isothermal charging",
+   "page": 21,
+   "text": "Above TLIM (115°C typical) die temperature, charge current is cut back to hold the die there and returns as it cools; THERM_LIM is set meanwhile. Charge current can therefore be set for typical rather than worst-case conditions. There is no such loop on the ISO_Sx load in LDO mode: above 130°C an interrupt is raised and above 140°C the part shuts down."
+  },
+  {
+   "topic": "Thermal shutdown and early warning",
+   "page": 21,
+   "text": "Above TSD the charger turns off and sets TSD 140°C. It can run again once the die is below the falling threshold and the bit is cleared by writing register 0x0D bit 0 or cycling power. Above TSDL an early warning bit is set first, so the system can shed load."
+  },
+  {
+   "topic": "Fault recovery",
+   "page": 21,
+   "text": "With CHARGER_STATUS = 110, remove the cause, then cycle VINx power or write 1 to the fault bits in register 0x0D."
+  },
+  {
+   "topic": "Battery isolation FET",
+   "page": 21,
+   "text": "Below VVIN_OK_RISE on VINx the FET is fully on. It is off in trickle charge. Above VTRK_DEAD it regulates ISO_Sx at VISO_SFC, and once the battery passes VISO_SFC it is fully on. When ISO_Sx falls below ISO_Bx under heavy load it turns fully on so the battery helps supply the system (ideal diode); when ISO_Sx rises above ISO_Bx again it regulates or conducts according to the cell voltage and charger mode."
+  },
+  {
+   "topic": "Battery detection",
+   "page": 21,
+   "text": "The charger first sinks ISINK from ISO_Bx for tBATOK: above VBATL at the end means a battery is present and charging begins; otherwise it sources ISOURCE for tBATOK. Reaching VBATH in that time means no battery; staying below means a battery is present."
+  },
+  {
+   "topic": "Battery short detection",
+   "page": 22,
+   "text": "A short comes from a damaged cell or a tripped pack protector. If ISO_Bx or BAT_SNS stays below VBATH after the source phase, trickle charge starts. If BAT_SNS is still below VBAT_SHR after tBAT_SHR, a short is declared: the isolation FET opens while the LDO keeps the system at VISO_STRK, and trickle current continues until the 60 minute trickle timer ends."
+  },
+  {
+   "topic": "Battery thermistor",
+   "page": 22,
+   "text": "THR drives a current pulse into the pack NTC every 167 ms and stops charging below 0°C or above 60°C. The thermistor is 10 kΩ or 100 kΩ at 25°C (10 kΩ on this part) with one of eight beta values from 3150 to 4400 (3150 on this part). Without a pack thermistor a 10 kΩ ±20% resistor from THR to AGND is needed; an open THR reads as below 0°C and blocks charging. EN_THR defaults to 0."
+  },
+  {
+   "topic": "JEITA temperature behaviour",
+   "page": 23,
+   "text": "JEITA1 or JEITA2 is turned on and chosen over I2C, or made the default at the factory. In the cool band JEITA1 halves the charge current while JEITA2 lowers VTRM by 100 mV; both lower VTRM by 100 mV when warm. In the cold or hot band charging stops and the isolation FET stays on so the part carries on in LDO mode."
+  },
+  {
+   "topic": "I2C interface",
+   "page": 26,
+   "text": "The chip address is 0x28 for writes and 0x29 for reads; fast mode to 400 kHz. A write sends the address, a subaddress and data; the subaddress steps up after each byte until a stop. A read sets the subaddress with a write, then a repeated start with the read address returns data from successive registers until the master stops. Registers return to defaults when VINx falls below VVIN_OK_FALL, and when the battery is removed with VIN at 0 V."
+  },
+  {
+   "topic": "ISO_Sx capacitor",
+   "page": 36,
+   "text": "The effective capacitance on ISO_Sx, counting the system's own capacitors, must stay between 10 µF and 100 µF at all times, after DC bias, temperature and tolerance. X5R or X7R rated 6.3 V or more suits; Y5V and Z5U do not. When the capacitance is split among loads, at least 5 µF sits at the ISO_Sx pins."
+  },
+  {
+   "topic": "ISO_Bx capacitor",
+   "page": 36,
+   "text": "ISO_Bx and ISO_Sx each need at least 10 µF effective at all times; 22 µF nominal usually achieves it."
+  },
+  {
+   "topic": "CBP capacitor",
+   "page": 36,
+   "text": "CBP decouples the internal supply. Keep it at or below 140 nF, and connect nothing else to the pin: no source and no load."
+  },
+  {
+   "topic": "VINx capacitor",
+   "page": 37,
+   "text": "USB 2.0 asks that VBUS capacitance on a peripheral be 1 µF to 10 µF. If VINx may see up to 20 V, the capacitor must be rated above 20 V, which usually means a larger case; with a lower guaranteed maximum a smaller part will do."
+  },
+  {
+   "topic": "Layout",
+   "page": 38,
+   "text": "The reference floor plan puts C1 (100 nF, 16 V X7R, 0402) beside the CBP pin with its ground on PGND, C4 (10 µF, 25 V X5R, 0805) between the VINx copper and PGND, C3 (22 µF, 16 V X5R, 1206) between the ISO_Sx copper and PGND, and C2 (22 µF, 16 V X5R, 1206) between the ISO_Bx copper and PGND, each next to its pins. BAT_SNS connects close to the battery positive terminal."
+  },
+  {
+   "topic": "Thermal design",
+   "page": 39,
+   "text": "θJA is for a JEDEC 4-layer board; real boards differ, so maximise copper, preferably on outer layers. Shutdown is at 140°C; normal running resumes below 110°C once the TSD 140°C bit is cleared over I2C. Measuring input and output power at worst case gives the dissipation directly."
+  },
+  {
+   "topic": "Factory options",
+   "page": 40,
+   "text": "Defaults for termination voltage, charge current, end of charge current, trickle threshold, system voltage, thermistor value and beta, DIS_IC1 behaviour, timer fault action, SYS_EN mode, DIG_IO1 polarity and the DIG_IOx functions are set at the factory. Other combinations are available on request."
+  }
+ ],
+ "packages": [
+  {
+   "name": "20-lead LFCSP_WQ (CP-20-8)",
+   "page": 43,
+   "unit": "mm",
+   "columns": [
+    "dimension",
+    "min",
+    "nom",
+    "max"
+   ],
+   "rows": [
+    [
+     "Body size, square",
+     "3.90",
+     "4.00",
+     "4.10"
+    ],
+    [
+     "Overall height",
+     "0.70",
+     "0.75",
+     "0.80"
+    ],
+    [
+     "Standoff",
+     "",
+     "0.02",
+     "0.05"
+    ],
+    [
+     "Lead frame thickness",
+     "",
+     "0.20 REF",
+     ""
+    ],
+    [
+     "Lead width",
+     "0.18",
+     "0.25",
+     "0.30"
+    ],
+    [
+     "Lead length",
+     "0.30",
+     "0.40",
+     "0.50"
+    ],
+    [
+     "Lead pitch",
+     "",
+     "0.50 BSC",
+     ""
+    ],
+    [
+     "Exposed pad, square",
+     "2.35",
+     "2.60",
+     "2.75"
+    ],
+    [
+     "Lead to exposed pad",
+     "0.25",
+     "",
+     ""
+    ],
+    [
+     "Coplanarity",
+     "",
+     "",
+     "0.08"
+    ]
+   ],
+   "notes": [
+    "JEDEC MO-220-WGGD."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2451 @@
+{
+ "sheet": 1,
+ "name": "MAX1873SEEE+T",
+ "kind": "battery_charger",
+ "manufacturer": "Analog Devices",
+ "title": "Current-limited switch-mode charger controller for 2-, 3- and 4-cell Li+ packs",
+ "source": {
+  "document": "19-2099",
+  "revision": "Rev 0, 7/01",
+  "pages": 14
+ },
+ "summary": "The MAX1873R, S and T control a buck converter with an external P-channel MOSFET to charge 2, 3 or 4 series Li+ cells with a regulated voltage (±0.75%) and current. A third loop limits current drawn from the adapter by reducing charge current, and IOUT reports charge current as a voltage. With the voltage loop disabled the part becomes a current source for NiCd or NiMH packs. Input up to 28 V, 300 kHz, 16-pin QSOP.",
+ "key_figures": [
+  [
+   "Input voltage",
+   "6 V to 28 V"
+  ],
+  [
+   "Battery regulation voltage",
+   "4.2 V per cell nominal; 8.4 V (R), 12.6 V (S), 16.8 V (T); adjustable ±5.25%"
+  ],
+  [
+   "Voltage accuracy",
+   "±0.75%"
+  ],
+  [
+   "Charge-current sense threshold",
+   "200 mV typ (CSB to BATT)"
+  ],
+  [
+   "Input-current sense threshold",
+   "100 mV typ (CSSP to CSSN)"
+  ],
+  [
+   "Switching frequency",
+   "300 kHz typ"
+  ],
+  [
+   "Dropout",
+   "200 mV, 100% duty cycle"
+  ],
+  [
+   "Battery current, input removed",
+   "1.5 µA typ, 5 µA max"
+  ],
+  [
+   "Operating temperature",
+   "-40°C to +85°C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 1,
+  "columns": [
+   "part number",
+   "series cells to charge",
+   "regulation voltage, VVADJ = VREF/2",
+   "temperature range",
+   "package"
+  ],
+  "rows": [
+   [
+    "MAX1873REEE",
+    "2-Cell Li+ or 5- or 6-cell Ni Battery",
+    "8.4 V",
+    "-40°C to +85°C",
+    "16 QSOP"
+   ],
+   [
+    "MAX1873SEEE",
+    "3-Cell Li+ or 7- or 9-cell Ni Battery",
+    "12.6 V",
+    "-40°C to +85°C",
+    "16 QSOP"
+   ],
+   [
+    "MAX1873TEEE",
+    "4-Cell Li+ 10-cell Ni Battery Packs",
+    "16.8 V",
+    "-40°C to +85°C",
+    "16 QSOP"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "16 QSOP",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "CSSN",
+     "type": "analog in",
+     "function": "Negative side of the input-current sense resistor. A resistor from CSSP to CSSN sets the limit on total current taken from the source; tying CSSN to CSSP turns input-current sensing off."
+    },
+    {
+     "pin": "2",
+     "name": "CSSP",
+     "type": "analog in",
+     "function": "Positive side of the input-current sense resistor; the pin is also the sense point for source undervoltage."
+    },
+    {
+     "pin": "3",
+     "name": "CCS",
+     "type": "analog",
+     "function": "Compensation node of the input-source current loop."
+    },
+    {
+     "pin": "4",
+     "name": "CCV",
+     "type": "analog",
+     "function": "Compensation node of the battery-voltage loop. A 1.5 kΩ pull-up to VL switches the voltage loop off, for NiCd or NiMH charging."
+    },
+    {
+     "pin": "5",
+     "name": "CCI",
+     "type": "analog",
+     "function": "Compensation node of the charge-current loop."
+    },
+    {
+     "pin": "6",
+     "name": "ICHG/EN",
+     "type": "analog in",
+     "function": "Charge-current adjust and shutdown. A divider from REF to GND scales the CSB-BATT current-sense threshold, which is 200 mV with the pin tied to REF. Below 500 mV charging stops and supply current falls to 5 µA."
+    },
+    {
+     "pin": "7",
+     "name": "IOUT",
+     "type": "analog out",
+     "function": "Charge-current monitor: a voltage of 20 × (VCSB - VBATT), so 4 V at 200 mV of sense voltage. Load capacitance 5 nF at most."
+    },
+    {
+     "pin": "8",
+     "name": "VADJ",
+     "type": "analog in",
+     "function": "Battery regulation voltage adjust, from 3.979 V to 4.421 V per cell. Equal divider resistors (nominally 100 kΩ each) give 4.2 V per cell; with 1% resistors accuracy stays within 0.75%, because the span is narrow."
+    },
+    {
+     "pin": "9",
+     "name": "REF",
+     "type": "analog out",
+     "function": "4.2 V reference output; needs a 1 µF ceramic capacitor to GND."
+    },
+    {
+     "pin": "10",
+     "name": "BATT",
+     "type": "analog in",
+     "function": "Battery voltage sense and negative side of the charge-current sense resistor. Capacitor to GND: 68 µF for the MAX1873R, 47 µF for the S, 33 µF for the T, with ESR under 1 Ω."
+    },
+    {
+     "pin": "11",
+     "name": "CSB",
+     "type": "analog in",
+     "function": "Positive side of the charge-current sense resistor."
+    },
+    {
+     "pin": "12",
+     "name": "GND",
+     "type": "ground",
+     "function": "Ground."
+    },
+    {
+     "pin": "13",
+     "name": "VH",
+     "type": "power out",
+     "function": "Internal regulator that feeds the EXT gate driver; a 0.22 µF ceramic capacitor goes from VH to DCIN."
+    },
+    {
+     "pin": "14",
+     "name": "EXT",
+     "type": "output",
+     "function": "Gate drive for the external P-channel MOSFET, swinging between VDCIN and VDCIN - 5 V."
+    },
+    {
+     "pin": "15",
+     "name": "DCIN",
+     "type": "power in",
+     "function": "Supply input of the controller; 0.22 µF ceramic capacitor to GND."
+    },
+    {
+     "pin": "16",
+     "name": "VL",
+     "type": "power out",
+     "function": "Internal 5.4 V regulator for the control logic; 2.2 µF or more of ceramic capacitance to GND."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "rating"
+   ],
+   "rows": [
+    [
+     "CSSP, CSSN, DCIN to GND",
+     "-0.3V to +30V"
+    ],
+    [
+     "VL, ICHG/EN to GND",
+     "-0.3V to +6V"
+    ],
+    [
+     "VH, EXT to DCIN",
+     "-6V to +0.3V"
+    ],
+    [
+     "VH, EXT to GND",
+     "(VDCIN + 0.3V) to -0.3V"
+    ],
+    [
+     "EXT to VH",
+     "+6V to -0.3V"
+    ],
+    [
+     "DCIN to VL",
+     "+30V to -0.3V"
+    ],
+    [
+     "VADJ, REF, CCI, CCV, CCS, IOUT to GND",
+     "-0.3V to (VL + 0.3V)"
+    ],
+    [
+     "BATT, CSB to GND",
+     "-0.3V to +20V"
+    ],
+    [
+     "CSSP to CSSN",
+     "-0.3V to +0.6V"
+    ],
+    [
+     "CSB to BATT",
+     "-0.3V to +0.6V"
+    ],
+    [
+     "VL Source Current",
+     "+50mA"
+    ],
+    [
+     "VH Sink Current",
+     "+40mA"
+    ],
+    [
+     "Continuous Power Dissipation (TA = +70°C), 16-Pin QSOP (derate 8.3mW/°C above +70°C)",
+     "+667mW"
+    ],
+    [
+     "Operating Temperature Range, MAX1873_EEE",
+     "-40°C to +85°C"
+    ],
+    [
+     "Junction Temperature",
+     "+150°C"
+    ],
+    [
+     "Storage Temperature Range",
+     "-65°C to +150°C"
+    ],
+    [
+     "Lead Temperature (soldering, 10s)",
+     "+300°C"
+    ]
+   ],
+   "notes": [
+    "Stress beyond these limits can damage the part permanently; operation at them is not implied, and long exposure can affect reliability."
+   ]
+  },
+  {
+   "title": "Electrical characteristics, TA = 0°C to +85°C",
+   "page": 2,
+   "conditions": "VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; circuit of Figure 1; TA = 0°C to +85°C; typical values at TA = +25°C unless otherwise noted",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "DCIN Input Voltage Range",
+     "",
+     "6",
+     "",
+     "28",
+     "V"
+    ],
+    [
+     "DCIN Quiescent Supply Current",
+     "6.0V < VDCIN < 28V",
+     "",
+     "4",
+     "7",
+     "mA"
+    ],
+    [
+     "DCIN Quiescent Supply Current",
+     "DCIN ≤ BATT",
+     "",
+     "0.1",
+     "10",
+     "µA"
+    ],
+    [
+     "DCIN to BATT Undervoltage Threshold",
+     "CSSP = DCIN, input falling",
+     "0.05",
+     "",
+     "0.175",
+     "V"
+    ],
+    [
+     "DCIN to BATT Undervoltage Threshold",
+     "CSSP = DCIN, input rising",
+     "0.22",
+     "",
+     "0.38",
+     "V"
+    ],
+    [
+     "VL Output Voltage",
+     "6.0V < VDCIN < 28V",
+     "5.15",
+     "5.40",
+     "5.65",
+     "V"
+    ],
+    [
+     "VL Output Load Regulation",
+     "IVL = 0 to 3mA",
+     "",
+     "15",
+     "50",
+     "mV"
+    ],
+    [
+     "REF Output Voltage",
+     "IREF = 21µA (200kΩ load)",
+     "4.179",
+     "4.20",
+     "4.221",
+     "V"
+    ],
+    [
+     "REF Line Regulation",
+     "6.0V < VDCIN < 28V",
+     "",
+     "2",
+     "6",
+     "mV"
+    ],
+    [
+     "REF Line Regulation",
+     "6.0V < VDCIN < 28V",
+     "",
+     "22",
+     "65",
+     "ppm/V"
+    ],
+    [
+     "REF Load Regulation",
+     "IREF = 0 to 1mA",
+     "",
+     "6",
+     "13",
+     "mV"
+    ],
+    [
+     "PWM Oscillator Frequency",
+     "",
+     "270",
+     "300",
+     "330",
+     "kHz"
+    ],
+    [
+     "EXT Driver Source On-Resistance",
+     "",
+     "",
+     "4",
+     "7",
+     "Ω"
+    ],
+    [
+     "EXT Driver Sink On-Resistance",
+     "",
+     "",
+     "2.5",
+     "4.5",
+     "Ω"
+    ],
+    [
+     "VH Output Voltage",
+     "DCIN - VH, 6V < VDCIN <28V, IVH = 0 to 20mA",
+     "4.75",
+     "",
+     "5.75",
+     "V"
+    ],
+    [
+     "CSSN/CSSP Input Current",
+     "VCSSN/VCSSP = 28V, VDCIN = 28V",
+     "",
+     "70",
+     "200",
+     "µA"
+    ],
+    [
+     "CSSN/CSSP Off-State Leakage",
+     "VDCIN = VSSN/VCSSP = 18V, VBATT = VCSB = 18V",
+     "",
+     "1.5",
+     "5",
+     "µA"
+    ],
+    [
+     "BATT, CSB Input Current",
+     "ICHG/EN = 0 (charger disabled)",
+     "",
+     "0.2",
+     "1",
+     "µA"
+    ],
+    [
+     "BATT, CSB Input Current",
+     "ICHG/EN = REF (charger enabled)",
+     "",
+     "250",
+     "500",
+     "µA"
+    ],
+    [
+     "BATT, CSB Input Current",
+     "DCIN ≤ BATT (input power removed)",
+     "",
+     "1.5",
+     "5",
+     "µA"
+    ],
+    [
+     "BATT Overvoltage Cutoff Threshold",
+     "2-cell version MAX1873R",
+     "10.45",
+     "11",
+     "11.55",
+     "V"
+    ],
+    [
+     "BATT Overvoltage Cutoff Threshold",
+     "3-cell version MAX1873S",
+     "15.675",
+     "16.5",
+     "17.325",
+     "V"
+    ],
+    [
+     "BATT Overvoltage Cutoff Threshold",
+     "4-cell version MAX1873T (Note 1)",
+     "17.575",
+     "18.5",
+     "19.425",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873R (2 Li+ cells), VVADJ = 0",
+     "7.898",
+     "7.958",
+     "8.018",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873R (2 Li+ cells), VVADJ = VREF/2",
+     "8.337",
+     "8.4",
+     "8.463",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873R (2 Li+ cells), VVADJ = VREF (Note 1)",
+     "8.775",
+     "8.842",
+     "8.909",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873S (3 Li+ cells), VVADJ = 0",
+     "11.847",
+     "11.937",
+     "12.027",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873S (3 Li+ cells), VVADJ = VREF/2",
+     "12.505",
+     "12.6",
+     "12.695",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873S (3 Li+ cells), VVADJ = VREF (Note 1)",
+     "13.163",
+     "13.263",
+     "13.363",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873T (4 Li+ cells), VVADJ = 0",
+     "15.796",
+     "15.916",
+     "16.036",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873T (4 Li+ cells), VVADJ = VREF/2",
+     "16.674",
+     "16.8",
+     "16.926",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873T (4 Li+ cells), VVADJ = VREF (Note 1)",
+     "17.551",
+     "17.684",
+     "17.817",
+     "V"
+    ],
+    [
+     "BATT Undervoltage Threshold",
+     "For ICHG/20 trickle charge, MAX1873R",
+     "4.8",
+     "5.0",
+     "5.2",
+     "V"
+    ],
+    [
+     "BATT Undervoltage Threshold",
+     "For ICHG/20 trickle charge, MAX1873S",
+     "7.2",
+     "7.5",
+     "7.8",
+     "V"
+    ],
+    [
+     "BATT Undervoltage Threshold",
+     "For ICHG/20 trickle charge, MAX1873T",
+     "9.6",
+     "10",
+     "10.4",
+     "V"
+    ],
+    [
+     "CSB to BATT Battery Current-Sense Voltage",
+     "VICHG/EN = VREF",
+     "190",
+     "200",
+     "210",
+     "mV"
+    ],
+    [
+     "CSB to BATT Battery Current-Sense Voltage",
+     "VICHG/EN = VREF/4",
+     "40",
+     "50",
+     "60",
+     "mV"
+    ],
+    [
+     "CSB to BATT Current-Sense Voltage when VBATT < 2.5V per Cell",
+     "",
+     "5",
+     "10",
+     "15",
+     "mV"
+    ],
+    [
+     "CSSP to CSSN Current-Sense Voltage",
+     "6V < VCSSP < 28V",
+     "90",
+     "100",
+     "110",
+     "mV"
+    ],
+    [
+     "ICHG/EN Input Threshold",
+     "Includes 50mV of hysteresis",
+     "500",
+     "600",
+     "700",
+     "mV"
+    ],
+    [
+     "ICHG/EN Input Voltage Range For Charge Current Adjustment",
+     "",
+     "700",
+     "",
+     "VREF",
+     "mV"
+    ],
+    [
+     "VADJ Input Current",
+     "VVADJ = VREF/2",
+     "-100",
+     "",
+     "100",
+     "nA"
+    ],
+    [
+     "ICHG/EN Input Current",
+     "VICHG/EN = VREF",
+     "-100",
+     "",
+     "100",
+     "nA"
+    ],
+    [
+     "VADJ Input Voltage Range",
+     "",
+     "0",
+     "",
+     "VREF",
+     "V"
+    ],
+    [
+     "IOUT Voltage",
+     "Full scale, VCSB - VBATT = 200mV, 0 < IOUT < 500µA",
+     "3.6",
+     "4.0",
+     "4.4",
+     "V"
+    ],
+    [
+     "IOUT Voltage",
+     "25% scale, VCSB - VBATT = 50mV, 0 < IOUT < 500µA",
+     "0.9",
+     "1.0",
+     "1.1",
+     "V"
+    ],
+    [
+     "IOUT Voltage",
+     "Trickle charge, VCSB - VBATT = 10mV",
+     "75",
+     "200",
+     "325",
+     "mV"
+    ],
+    [
+     "IOUT Voltage",
+     "No charge current, VCSB - VBATT = 0, IIOUT = sinking 20µA",
+     "40",
+     "70",
+     "90",
+     "mV"
+    ]
+   ],
+   "notes": [
+    "Note 1: the regulation voltage and the overvoltage cutoff share one reference and track; the regulation point stays below the cutoff.",
+    "In the off-state leakage conditions VSSN reads VCSSN."
+   ]
+  },
+  {
+   "title": "Electrical characteristics, TA = -40°C to +85°C",
+   "page": 4,
+   "conditions": "VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; circuit of Figure 1; TA = -40°C to +85°C; typical values at TA = +25°C unless otherwise noted",
+   "columns": [
+    "parameter",
+    "conditions",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "DCIN Input Voltage Range",
+     "",
+     "6",
+     "28",
+     "V"
+    ],
+    [
+     "DCIN Quiescent Supply Current",
+     "6.0V < VDCIN < 28V",
+     "",
+     "7",
+     "mA"
+    ],
+    [
+     "DCIN Quiescent Supply Current",
+     "DCIN ≤ BATT",
+     "",
+     "10",
+     "µA"
+    ],
+    [
+     "DCIN to BATT Undervoltage Threshold",
+     "CSSP = DCIN, input falling",
+     "0.05",
+     "0.2",
+     "V"
+    ],
+    [
+     "DCIN to BATT Undervoltage Threshold",
+     "CSSP = DCIN, input rising",
+     "0.22",
+     "0.38",
+     "V"
+    ],
+    [
+     "VL Output Voltage",
+     "6.0V < VDCIN < 28V",
+     "5.15",
+     "5.65",
+     "V"
+    ],
+    [
+     "VL Output Load Regulation",
+     "IVL = 0 to 3mA",
+     "",
+     "50",
+     "mV"
+    ],
+    [
+     "REF Output Voltage",
+     "IREF = 21µA (200kΩ load)",
+     "4.179",
+     "4.221",
+     "V"
+    ],
+    [
+     "REF Line Regulation",
+     "6.0V < VDCIN < 28V",
+     "",
+     "6",
+     "mV"
+    ],
+    [
+     "REF Line Regulation",
+     "6.0V < VDCIN < 28V",
+     "",
+     "65",
+     "ppm/V"
+    ],
+    [
+     "REF Load Regulation",
+     "IREF = 0 to 1mA",
+     "",
+     "13",
+     "mV"
+    ],
+    [
+     "PWM Oscillator Frequency",
+     "",
+     "270",
+     "330",
+     "kHz"
+    ],
+    [
+     "EXT Driver Source On-Resistance",
+     "",
+     "",
+     "7",
+     "Ω"
+    ],
+    [
+     "EXT Driver Sink On-Resistance",
+     "",
+     "",
+     "4.5",
+     "Ω"
+    ],
+    [
+     "VH Output Voltage",
+     "DCIN - VH, 6V < VDCIN <28V, IVH = 0 to 20mA",
+     "4.75",
+     "5.75",
+     "V"
+    ],
+    [
+     "CSSN/CSSP Input Current",
+     "VCSSN/VCSSP = 28V, VDCIN = 28V",
+     "",
+     "200",
+     "µA"
+    ],
+    [
+     "CSSN/CSSP Off-State Leakage",
+     "VDCIN = VSSN/VCSSP = 18V VBATT = VCSB = 18V",
+     "",
+     "5",
+     "µA"
+    ],
+    [
+     "BATT, CSB Input Current",
+     "ICHG/EN = 0 (charger disabled)",
+     "",
+     "1",
+     "µA"
+    ],
+    [
+     "BATT, CSB Input Current",
+     "ICHG/EN = REF (charger enabled)",
+     "",
+     "500",
+     "µA"
+    ],
+    [
+     "BATT, CSB Input Current",
+     "DCIN ≤ BATT (input power removed)",
+     "",
+     "5",
+     "µA"
+    ],
+    [
+     "BATT Overvoltage Cutoff Threshold",
+     "2-cell version MAX1873R",
+     "10.45",
+     "11.55",
+     "V"
+    ],
+    [
+     "BATT Overvoltage Cutoff Threshold",
+     "3-cell version MAX1873S",
+     "15.675",
+     "17.325",
+     "V"
+    ],
+    [
+     "BATT Overvoltage Cutoff Threshold",
+     "4-cell version MAX1873T (Note 1)",
+     "17.575",
+     "19.425",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873R (2 Li+ cells), VVADJ = 0",
+     "7.898",
+     "8.018",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873R (2 Li+ cells), VVADJ = VREF/2",
+     "8.337",
+     "8.463",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873R (2 Li+ cells), VVADJ = VREF (Note 1)",
+     "8.775",
+     "8.909",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873S (3 Li+ cells), VVADJ = 0",
+     "11.847",
+     "12.027",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873S (3 Li+ cells), VVADJ = VREF/2",
+     "12.505",
+     "12.695",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873S (3 Li+ cells), VVADJ = VREF (Note 1)",
+     "13.163",
+     "13.363",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873T (4 Li+ cells), VVADJ = 0",
+     "15.796",
+     "16.036",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873T (4 Li+ cells), VVADJ = VREF/2",
+     "16.674",
+     "16.926",
+     "V"
+    ],
+    [
+     "Battery Regulation Voltage",
+     "MAX1873T (4 Li+ cells), VVADJ = VREF (Note 1)",
+     "17.551",
+     "17.817",
+     "V"
+    ],
+    [
+     "BATT Undervoltage Threshold",
+     "For ICHG/20 trickle charge, MAX1873R",
+     "4.8",
+     "5.2",
+     "V"
+    ],
+    [
+     "BATT Undervoltage Threshold",
+     "For ICHG/20 trickle charge, MAX1873S",
+     "7.2",
+     "7.8",
+     "V"
+    ],
+    [
+     "BATT Undervoltage Threshold",
+     "For ICHG/20 trickle charge, MAX1873T",
+     "9.6",
+     "10.4",
+     "V"
+    ],
+    [
+     "CSB to BATT Battery Current-Sense Voltage",
+     "VICHG/EN = VREF",
+     "190",
+     "210",
+     "mV"
+    ],
+    [
+     "CSB to BATT Battery Current-Sense Voltage",
+     "VICHG/EN = VREF/4",
+     "40",
+     "60",
+     "mV"
+    ],
+    [
+     "CSB to BATT Current-Sense Voltage when VBATT < 2.5V per Cell",
+     "",
+     "5",
+     "15",
+     "mV"
+    ],
+    [
+     "CSSP to CSSN Current-Sense Voltage",
+     "6V < VCSSP < 28V",
+     "90",
+     "110",
+     "mV"
+    ],
+    [
+     "ICHG/EN Input Threshold",
+     "Includes 50mV of hysteresis",
+     "500",
+     "700",
+     "mV"
+    ],
+    [
+     "ICHG/EN Input Voltage Range for Charge Current Adjustment",
+     "",
+     "700",
+     "VREF",
+     "mV"
+    ],
+    [
+     "VADJ Input Current",
+     "VVADJ = VREF/2",
+     "-100",
+     "100",
+     "nA"
+    ],
+    [
+     "ICHG/EN Input Current",
+     "VICHG/EN = VREF",
+     "-100",
+     "100",
+     "nA"
+    ],
+    [
+     "VADJ Input Voltage Range",
+     "",
+     "0",
+     "VREF",
+     "V"
+    ],
+    [
+     "IOUT Voltage",
+     "Full scale, VCSB - VBATT = 200mV, 0 < IOUT < 500µA",
+     "3.6",
+     "4.4",
+     "V"
+    ],
+    [
+     "IOUT Voltage",
+     "25% scale, VCSB - VBATT = 50mV, 0 < IOUT < 500µA",
+     "0.9",
+     "1.1",
+     "V"
+    ],
+    [
+     "IOUT Voltage",
+     "Trickle charge, VCSB - VBATT = 10mV",
+     "75",
+     "325",
+     "mV"
+    ],
+    [
+     "IOUT Voltage",
+     "No charge current, VCSB - VBATT = 0, IIOUT = sinking 20µA",
+     "40",
+     "90",
+     "mV"
+    ]
+   ],
+   "notes": [
+    "Note 1: the regulation voltage and the overvoltage cutoff share one reference and track; the regulation point stays below the cutoff.",
+    "Note 2: limits down to -40°C rest on design, without production test.",
+    "In the off-state leakage conditions VSSN reads VCSSN."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "MAX1873T (4-cell) battery voltage against charging current",
+   "page": 6,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C; RCSB = 0.068 Ω",
+   "x": {
+    "label": "Charging current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1873T",
+     "points": [
+      [
+       0.157,
+       1.24
+      ],
+      [
+       0.165,
+       2.25
+      ],
+      [
+       0.201,
+       3.36
+      ],
+      [
+       0.19,
+       10.18
+      ],
+      [
+       0.286,
+       10.26
+      ],
+      [
+       2.992,
+       10.22
+      ],
+      [
+       2.989,
+       16.87
+      ],
+      [
+       0.305,
+       16.85
+      ],
+      [
+       0.083,
+       16.85
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "IOUT voltage against CSB-BATT voltage",
+   "page": 6,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C",
+   "x": {
+    "label": "CSB-BATT voltage",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IOUT voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IOUT",
+     "points": [
+      [
+       7.8,
+       0.13
+      ],
+      [
+       26.0,
+       0.467
+      ],
+      [
+       53.5,
+       1.021
+      ],
+      [
+       85.6,
+       1.642
+      ],
+      [
+       97.8,
+       1.89
+      ],
+      [
+       123.5,
+       2.385
+      ],
+      [
+       129.9,
+       2.51
+      ],
+      [
+       167.4,
+       3.265
+      ],
+      [
+       182.5,
+       3.559
+      ],
+      [
+       204.3,
+       3.98
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX1873T (4-cell) battery regulation voltage against VADJ voltage",
+   "page": 6,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C",
+   "x": {
+    "label": "VADJ voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery regulation voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1873T",
+     "points": [
+      [
+       0.0,
+       15.916
+      ],
+      [
+       4.172,
+       17.672
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reference voltage against temperature",
+   "page": 6,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C; MAX1873T",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Reference voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1873T",
+     "points": [
+      [
+       -39.5,
+       4.19715
+      ],
+      [
+       -24.6,
+       4.19817
+      ],
+      [
+       -9.8,
+       4.19886
+      ],
+      [
+       9.6,
+       4.1993
+      ],
+      [
+       22.5,
+       4.19936
+      ],
+      [
+       38.6,
+       4.199
+      ],
+      [
+       66.2,
+       4.19795
+      ],
+      [
+       85.9,
+       4.19673
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Reference voltage against reference current",
+   "page": 6,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C; MAX1873T",
+   "x": {
+    "label": "Reference current",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Reference voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1873T",
+     "points": [
+      [
+       0.004,
+       4.19925
+      ],
+      [
+       0.202,
+       4.19783
+      ],
+      [
+       0.402,
+       4.19663
+      ],
+      [
+       0.999,
+       4.19356
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX1873R (2-cell) efficiency against input voltage",
+   "page": 6,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C; VBATT = 7 V, ICHG = 3 A",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1873R",
+     "points": [
+      [
+       8.59,
+       94.12
+      ],
+      [
+       10.23,
+       92.54
+      ],
+      [
+       10.78,
+       92.05
+      ],
+      [
+       12.44,
+       90.87
+      ],
+      [
+       12.99,
+       90.56
+      ],
+      [
+       26.48,
+       84.53
+      ],
+      [
+       27.48,
+       84.14
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX1873S (3-cell) efficiency against input voltage",
+   "page": 7,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C; VBATT = 10.5 V, ICHG = 3 A",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1873S",
+     "points": [
+      [
+       11.96,
+       96.16
+      ],
+      [
+       12.19,
+       95.5
+      ],
+      [
+       12.26,
+       95.28
+      ],
+      [
+       12.45,
+       94.94
+      ],
+      [
+       12.56,
+       94.8
+      ],
+      [
+       14.49,
+       93.45
+      ],
+      [
+       14.78,
+       93.28
+      ],
+      [
+       23.22,
+       89.84
+      ],
+      [
+       23.73,
+       89.62
+      ],
+      [
+       27.18,
+       87.88
+      ],
+      [
+       27.84,
+       87.53
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "MAX1873T (4-cell) efficiency against input voltage",
+   "page": 7,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C; VBATT = 14 V, ICHG = 3 A",
+   "x": {
+    "label": "Input voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Efficiency",
+    "unit": "%",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "MAX1873T",
+     "points": [
+      [
+       15.96,
+       95.71
+      ],
+      [
+       17.63,
+       94.53
+      ],
+      [
+       18.18,
+       94.22
+      ],
+      [
+       23.45,
+       92.35
+      ],
+      [
+       24.5,
+       91.91
+      ],
+      [
+       27.35,
+       90.39
+      ],
+      [
+       27.46,
+       90.34
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "4-cell battery voltage and charging current against time",
+   "page": 7,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C",
+   "x": {
+    "label": "Time",
+    "unit": "minutes",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Battery voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Charging current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Battery voltage",
+     "points": [
+      [
+       1.0,
+       10.85
+      ],
+      [
+       1.0,
+       11.75
+      ],
+      [
+       1.2,
+       11.97
+      ],
+      [
+       1.2,
+       12.8
+      ],
+      [
+       1.3,
+       12.91
+      ],
+      [
+       1.3,
+       13.18
+      ],
+      [
+       1.6,
+       13.45
+      ],
+      [
+       1.6,
+       13.55
+      ],
+      [
+       2.1,
+       13.79
+      ],
+      [
+       5.9,
+       14.67
+      ],
+      [
+       10.8,
+       15.57
+      ],
+      [
+       11.7,
+       15.69
+      ],
+      [
+       15.0,
+       15.91
+      ],
+      [
+       16.6,
+       16.08
+      ],
+      [
+       20.2,
+       16.25
+      ],
+      [
+       23.8,
+       16.39
+      ],
+      [
+       26.7,
+       16.49
+      ],
+      [
+       31.3,
+       16.6
+      ],
+      [
+       34.4,
+       16.63
+      ],
+      [
+       40.9,
+       16.64
+      ],
+      [
+       47.2,
+       16.67
+      ],
+      [
+       54.9,
+       16.69
+      ],
+      [
+       63.1,
+       16.7
+      ],
+      [
+       77.9,
+       16.72
+      ],
+      [
+       90.3,
+       16.73
+      ],
+      [
+       125.0,
+       16.74
+      ],
+      [
+       147.6,
+       16.74
+      ]
+     ]
+    },
+    {
+     "label": "Charging current",
+     "axis": "y2",
+     "points": [
+      [
+       1.0,
+       3.001
+      ],
+      [
+       11.2,
+       3.0
+      ],
+      [
+       11.4,
+       2.994
+      ],
+      [
+       18.7,
+       2.397
+      ],
+      [
+       19.0,
+       2.376
+      ],
+      [
+       27.0,
+       1.95
+      ],
+      [
+       27.4,
+       1.936
+      ],
+      [
+       42.4,
+       1.346
+      ],
+      [
+       43.2,
+       1.318
+      ],
+      [
+       55.3,
+       0.956
+      ],
+      [
+       56.0,
+       0.938
+      ],
+      [
+       71.9,
+       0.608
+      ],
+      [
+       73.7,
+       0.579
+      ],
+      [
+       78.8,
+       0.501
+      ],
+      [
+       80.0,
+       0.487
+      ],
+      [
+       95.3,
+       0.338
+      ],
+      [
+       97.9,
+       0.317
+      ],
+      [
+       110.1,
+       0.242
+      ],
+      [
+       112.5,
+       0.228
+      ],
+      [
+       127.7,
+       0.164
+      ],
+      [
+       129.2,
+       0.16
+      ],
+      [
+       143.2,
+       0.135
+      ],
+      [
+       147.6,
+       0.128
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Charging current against system load current",
+   "page": 7,
+   "conditions": "Circuit of Figure 1, VDCIN = VCSSP = VCSSN = 18 V, VICHG/EN = VREF, VVADJ = VREF/2; MAX1873R: VBATT = VCSB = 8.4 V; MAX1873S: VBATT = VCSB = 12.6 V; MAX1873T: VBATT = VCSB = 16.8 V; TA = +25°C",
+   "x": {
+    "label": "System load current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Charging current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Charging current",
+     "points": [
+      [
+       0.0,
+       2.984
+      ],
+      [
+       0.61,
+       2.36
+      ],
+      [
+       1.488,
+       1.491
+      ],
+      [
+       2.112,
+       0.867
+      ],
+      [
+       2.972,
+       0.016
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical",
+   "title": "Typical application circuit (Figure 1)",
+   "page": 9,
+   "description": "A step-down charger for a 2- to 4-cell Li+ pack that also feeds a system load. D1 takes the adapter input onto DCIN. RCSS (0.033 Ω) measures the total drawn from the adapter, filtered into CSSP and CSSN by RP/CP and RN/CN. Q1, D2 and L1 form the buck stage driven from EXT at 300 kHz; RCSB (0.068 Ω) sets about 3 A of charge current and its voltage drives IOUT. R1 and R2 from REF set VADJ and so the per-cell voltage. R3 holds ICHG/EN at REF; the DISABLE switch Q2 grounds it to stop charging. CCC, CCCS and the CCCVS-RCCV-CCCVP network compensate the three loops.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1873"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "MBR5340",
+     "note": "input diode; blocks reverse input and battery discharge through the MOSFET body diode"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "MBR5340",
+     "note": "catch diode"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "",
+     "note": "P-channel switch"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": "10µH"
+    },
+    {
+     "ref": "RCSB",
+     "type": "resistor",
+     "value": "0.068Ω",
+     "note": "charge-current sense"
+    },
+    {
+     "ref": "RCSS",
+     "type": "resistor",
+     "value": "0.033Ω",
+     "note": "input-current sense"
+    },
+    {
+     "ref": "RP",
+     "type": "resistor",
+     "value": "4.7Ω"
+    },
+    {
+     "ref": "RN",
+     "type": "resistor",
+     "value": "4.7Ω"
+    },
+    {
+     "ref": "CP",
+     "type": "capacitor",
+     "value": "0.01µF"
+    },
+    {
+     "ref": "CN",
+     "type": "capacitor",
+     "value": "0.01µF"
+    },
+    {
+     "ref": "CVL",
+     "type": "capacitor",
+     "value": "2.2µF"
+    },
+    {
+     "ref": "CVH",
+     "type": "capacitor",
+     "value": "0.22µF"
+    },
+    {
+     "ref": "CDCIN",
+     "type": "capacitor",
+     "value": "0.22µF"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "47µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "CBATT",
+     "type": "capacitor",
+     "value": "68µF",
+     "note": "polarised"
+    },
+    {
+     "ref": "CREF",
+     "type": "capacitor",
+     "value": "1µF"
+    },
+    {
+     "ref": "CCC",
+     "type": "capacitor",
+     "value": "47nF"
+    },
+    {
+     "ref": "CCCS",
+     "type": "capacitor",
+     "value": "47nF"
+    },
+    {
+     "ref": "CCCVS",
+     "type": "capacitor",
+     "value": "0.1µF"
+    },
+    {
+     "ref": "RCCV",
+     "type": "resistor",
+     "value": "10kΩ"
+    },
+    {
+     "ref": "CCCVP",
+     "type": "capacitor",
+     "value": "1nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "upper VADJ divider resistor; equal R1 and R2 (100 kΩ each) give 4.2 V per cell"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "lower VADJ divider resistor"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "VIN 17V TO 28V (9V MIN FOR 2-CELLS)"
+    },
+    {
+     "ref": "LOAD",
+     "type": "terminal",
+     "value": "SYSTEM LOAD"
+    },
+    {
+     "ref": "IMON",
+     "type": "terminal",
+     "value": "4V OUT PER 200mV ON RCSB"
+    },
+    {
+     "ref": "BAT",
+     "type": "terminal",
+     "value": "Li+ battery, 2 to 4 cells, negative terminal to GND"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "100kΩ",
+     "note": "pulls ICHG/EN to REF for full-scale charge current"
+    },
+    {
+     "ref": "Q2",
+     "type": "nmos",
+     "value": "",
+     "note": "N-channel switch; on, it pulls ICHG/EN low and stops charging"
+    },
+    {
+     "ref": "DIS",
+     "type": "terminal",
+     "value": "DISABLE"
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "operating",
+   "title": "Typical operating circuit",
+   "page": 1,
+   "description": "A buck charger: input diode to DCIN, input-current sense resistor with RC filters into CSSP and CSSN, P-channel switch on EXT with catch diode and inductor, charge-current sense resistor from CSB to BATT, the VADJ divider from REF, and a series capacitor-resistor from CCV to GND beside a lone capacitor. ICHG/EN is tied straight to REF, so the charge current runs at full scale with no shutdown control.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX1873"
+    },
+    {
+     "ref": "D1",
+     "type": "schottky",
+     "value": "",
+     "note": "input diode; blocks reverse input and battery discharge through the MOSFET body diode"
+    },
+    {
+     "ref": "D2",
+     "type": "schottky",
+     "value": "",
+     "note": "catch diode"
+    },
+    {
+     "ref": "Q1",
+     "type": "pmos",
+     "value": "",
+     "note": "P-channel switch"
+    },
+    {
+     "ref": "L1",
+     "type": "inductor",
+     "value": ""
+    },
+    {
+     "ref": "RCSB",
+     "type": "resistor",
+     "value": "",
+     "note": "charge-current sense"
+    },
+    {
+     "ref": "RCSS",
+     "type": "resistor",
+     "value": "",
+     "note": "input-current sense"
+    },
+    {
+     "ref": "RP",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "RN",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "CP",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CN",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CVL",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CVH",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CDCIN",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "",
+     "note": "polarised"
+    },
+    {
+     "ref": "CBATT",
+     "type": "capacitor",
+     "value": "",
+     "note": "polarised"
+    },
+    {
+     "ref": "CREF",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CCC",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CCCS",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "CCCVS",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "RCCV",
+     "type": "resistor",
+     "value": ""
+    },
+    {
+     "ref": "CCCVP",
+     "type": "capacitor",
+     "value": ""
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "",
+     "note": "upper VADJ divider resistor; equal R1 and R2 (100 kΩ each) give 4.2 V per cell"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "",
+     "note": "lower VADJ divider resistor"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "VIN 9V TO 28V (9V MIN FOR 2-CELLS)"
+    },
+    {
+     "ref": "LOAD",
+     "type": "terminal",
+     "value": "SYSTEM LOAD"
+    },
+    {
+     "ref": "IMON",
+     "type": "terminal",
+     "value": "4V OUT PER 200mV ON RCS"
+    },
+    {
+     "ref": "BAT",
+     "type": "terminal",
+     "value": "Li+ battery, 2 to 4 cells, negative terminal to GND"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Charge-current monitor",
+   "expr": "VIOUT = 20 × (VCSB − VBATT) = 20 × RCSB × ICHG",
+   "where": {
+    "VCSB": "voltage at CSB",
+    "VBATT": "voltage at BATT",
+    "RCSB": "charge-current sense resistor",
+    "ICHG": "charging current"
+   },
+   "note": "IOUT drives up to 5 nF.",
+   "page": 11
+  },
+  {
+   "name": "Full-scale charging current",
+   "expr": "ICHG = 0.2 V / RCSB",
+   "where": {
+    "RCSB": "sense resistor from CSB to BATT"
+   },
+   "note": "With ICHG/EN tied to REF.",
+   "page": 11
+  },
+  {
+   "name": "Reduced charging current",
+   "expr": "ICHG = 0.2 V × (VICHG/EN / VREF) / RCSB",
+   "where": {
+    "VICHG/EN": "voltage on ICHG/EN",
+    "VREF": "reference voltage, 4.2 V"
+   },
+   "note": "A lower sense threshold suits an awkward RCSB value or cuts sense-resistor dissipation.",
+   "page": 11
+  },
+  {
+   "name": "Input current limit",
+   "expr": "IIN = 0.1 V / RCSS",
+   "where": {
+    "RCSS": "sense resistor from CSSP to CSSN"
+   },
+   "note": "Usually set at the rating of the adapter. Without the limit, CSSP and CSSN are shorted to DCIN.",
+   "page": 11
+  },
+  {
+   "name": "VADJ voltage for a regulation voltage",
+   "expr": "VVADJ = 9.5 × VBATTR / N − 9 × VREF",
+   "where": {
+    "VBATTR": "wanted regulation voltage of the whole series stack",
+    "N": "number of Li+ cells in series",
+    "VREF": "reference voltage, 4.2 V"
+   },
+   "note": "The full VADJ span, 0 to VREF, moves the regulation point ±5.263%, from 3.979 V to 4.421 V per cell.",
+   "page": 11
+  },
+  {
+   "name": "VADJ divider",
+   "expr": "R2 = VVADJ / (VREF − VVADJ) × R1",
+   "where": {
+    "R1": "upper resistor, REF to VADJ, picked so R1 + R2 is near 200 kΩ",
+    "R2": "lower resistor, VADJ to GND"
+   },
+   "note": "",
+   "page": 11
+  },
+  {
+   "name": "Inductor value",
+   "expr": "L = VBATT × (VDCIN(MAX) − VBATT) / (VDCIN(MAX) × fSW × ICHG × LIR)",
+   "where": {
+    "VBATT": "battery voltage",
+    "VDCIN(MAX)": "highest input voltage",
+    "fSW": "switching frequency, nominally 300 kHz",
+    "ICHG": "charging current",
+    "LIR": "ripple current over DC charging current, typically 0.3 to 0.5"
+   },
+   "note": "Worked case: 4 cells, 3 A, VDCIN(MAX) = 24 V and LIR = 0.5 give 11.2 µH and a 3.75 A peak; 10 µH serves.",
+   "page": 11
+  },
+  {
+   "name": "Peak inductor current",
+   "expr": "IPEAK = ICHG × (1 + LIR / 2)",
+   "where": {
+    "ICHG": "charging current",
+    "LIR": "ripple ratio"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Switch duty cycle",
+   "expr": "D ≈ VBATT / VDCIN",
+   "where": {
+    "VBATT": "battery regulation voltage, typically 4.2 V per cell",
+    "VDCIN": "source input voltage"
+   },
+   "note": "Continuous inductor current.",
+   "page": 12
+  },
+  {
+   "name": "Catch-diode duty cycle",
+   "expr": "D' ≈ (VDCIN − VBATT) / VDCIN",
+   "where": {
+    "D'": "1 − D"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "MOSFET conduction loss",
+   "expr": "PR = (VBATT(MAX) / VDCIN(MIN)) × RDS(ON) × ICHG²",
+   "where": {
+    "VBATT(MAX)": "highest battery voltage",
+    "VDCIN(MIN)": "lowest source voltage",
+    "RDS(ON)": "MOSFET on-resistance"
+   },
+   "note": "Worst at the highest duty cycle.",
+   "page": 12
+  },
+  {
+   "name": "MOSFET transition loss",
+   "expr": "PT = VDCIN × ICHG × fSW × tTR / 3",
+   "where": {
+    "tTR": "MOSFET transition time",
+    "fSW": "switching frequency"
+   },
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "MOSFET total dissipation",
+   "expr": "PTOT = PR + PT",
+   "where": {},
+   "note": "",
+   "page": 12
+  },
+  {
+   "name": "Input capacitor RMS current",
+   "expr": "ICIN ≈ ICHG × √(D − D²)",
+   "where": {
+    "ICIN": "input capacitor RMS current",
+    "D": "duty cycle, about VBATT / VDCIN",
+    "ICHG": "charging current"
+   },
+   "note": "Largest at D = 0.5, where it is 0.5 × ICHG; otherwise worst at the duty cycle closest to 50%.",
+   "page": 12
+  },
+  {
+   "name": "Minimum output capacitance",
+   "expr": "COUT > VREF × (1 + VBATT / VDCIN(MIN)) / (VBATT × fSW × RCSB)",
+   "where": {
+    "COUT": "total output capacitance",
+    "VREF": "4.2 V",
+    "VBATT": "highest regulation voltage, typically 4.2 V per cell",
+    "VDCIN(MIN)": "lowest source voltage",
+    "RCSB": "charge-current sense resistor (68 mΩ for 3 A)"
+   },
+   "note": "For loop stability.",
+   "page": 12
+  },
+  {
+   "name": "Maximum output capacitor ESR",
+   "expr": "RESR < RCSB × VBATT / VREF",
+   "where": {
+    "RESR": "output capacitor ESR"
+   },
+   "note": "For loop stability.",
+   "page": 13
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Overview",
+   "page": 9,
+   "text": "A buck converter built round an external P-channel MOSFET, inductor and diode charges 2, 3 or 4 Li+ cells in series. Three loops act on it: battery voltage (sensed at BATT), charge current (sensed across RCSB from CSB to BATT) and input current (sensed across RCSS). The default per-cell limit is 4.2 V, giving 8.4 V on the R, 12.6 V on the S and 16.8 V on the T."
+  },
+  {
+   "topic": "Voltage loop",
+   "page": 9,
+   "text": "The battery voltage is held within ±0.75%. VADJ, set between GND and REF, trims the per-cell voltage by ±5.25% about 4.2 V; because the span is small, 1% divider resistors still give the ±0.75% overall figure. Its compensation node is CCV, kept apart from the current loops; the network of the typical application circuit suits most designs."
+  },
+  {
+   "topic": "Charge-current loop",
+   "page": 10,
+   "text": "Charge current is the voltage across RCSB over the 200 mV threshold (ICHG = 0.2 V / RCSB with ICHG/EN at REF); a lower ICHG/EN voltage scales it down. The current amplifier is compensated at CCI; 47 nF to GND suits most uses."
+  },
+  {
+   "topic": "Input-current loop",
+   "page": 10,
+   "text": "When current drawn from the adapter reaches the RCSS limit, charging current is cut back so the system load keeps its supply. The adapter then needs to cover only the input limit, not maximum system load plus maximum charge current. Connecting CSSP to CSSN bypasses the function. The loop is compensated at CCS, typically 47 nF to GND."
+  },
+  {
+   "topic": "PWM controller",
+   "page": 10,
+   "text": "The MOSFET is switched at a fixed 300 kHz. Whichever of the CCI, CCV and CCS signals is lowest controls the duty cycle; the other two are clamped to within 200 mV of it so control passes between loops without delay. Dropout is 200 mV and duty cycle can reach 100%."
+  },
+  {
+   "topic": "Shutdown",
+   "page": 10,
+   "text": "Pulling ICHG/EN below 0.5 V stops charging. The part also shuts down when DCIN falls below BATT. While shut down, the BATT divider inside is switched out, and the battery supplies about 1.5 µA with the adapter absent or the part shut down."
+  },
+  {
+   "topic": "Source undervoltage (dropout)",
+   "page": 10,
+   "text": "DCIN is compared with BATT; the charger turns off once DCIN drops below BATT + 50 mV, so an absent or low source does not drain the battery."
+  },
+  {
+   "topic": "Input diode",
+   "page": 10,
+   "text": "A diode usually feeds the charger from the source. It stops the battery discharging through the MOSFET body diode if the input is shorted, and guards against reversed or negative adapter voltages."
+  },
+  {
+   "topic": "Trickle charge",
+   "page": 3,
+   "text": "Below the BATT undervoltage threshold (5.0 V R, 7.5 V S, 10 V T typical) charge current is cut to ICHG/20. Below 2.5 V per cell the CSB-BATT sense voltage is regulated to 10 mV typical."
+  },
+  {
+   "topic": "Charge-current monitor",
+   "page": 11,
+   "text": "IOUT gives 20 times the CSB-BATT voltage, so a microcontroller ADC can use it for gas gauging, state of charge or time remaining. It drives up to 5 nF."
+  },
+  {
+   "topic": "Setting the regulation voltage",
+   "page": 11,
+   "text": "Per-cell voltage depends on the cell chemistry and build and comes from the battery maker. For 4.2 V per cell use two equal 100 kΩ resistors from REF to GND with the tap on VADJ; for other voltages compute VVADJ, choose R1 so the divider totals about 200 kΩ, then compute R2."
+  },
+  {
+   "topic": "Inductor",
+   "page": 11,
+   "text": "More inductance lowers ripple, but at a fixed size brings more series resistance and less saturation current. Ripple of about 30% to 50% of the average charge current is a good compromise."
+  },
+  {
+   "topic": "MOSFET",
+   "page": 12,
+   "text": "Choose the P-channel MOSFET for efficiency, dissipation and temperature. On-resistance and gate charge set its loss and generally trade against each other. Conduction loss peaks at the lowest source voltage and highest battery voltage."
+  },
+  {
+   "topic": "Catch diode",
+   "page": 12,
+   "text": "A Schottky from the MOSFET drain to GND, rated for at least the charge-current limit and for a reverse voltage above the highest input voltage."
+  },
+  {
+   "topic": "Input capacitor",
+   "page": 12,
+   "text": "It carries the switching current so it does not flow back through the adapter, and must handle the input RMS current. Its impedance matters for keeping AC current out of the adapter and for EMI limits. Low-ESR aluminium electrolytics work; tantalum or large ceramics usually do better."
+  },
+  {
+   "topic": "Output capacitor",
+   "page": 12,
+   "text": "It takes the inductor ripple, so its impedance must be well below the battery's. Both capacitance and ESR set filtering and PWM loop stability."
+  },
+  {
+   "topic": "Compensation",
+   "page": 13,
+   "text": "The input-current, charge-current and voltage loops are compensated at CCS, CCI and CCV. 47 nF from CCI and from CCS to GND covers most chargers; larger values narrow those loops' bandwidth. At CCV, a series RC to GND sits beside a lone capacitor to GND; the typical application circuit gives values."
+  },
+  {
+   "topic": "VL, VH and REF bypassing",
+   "page": 13,
+   "text": "Two internal linear regulators run the part: VL for the control circuits and VH for the gate drive. VL can feed a little external circuitry up to 3 mA. Required low-ESR ceramics: 2.2 µF VL to GND, 0.22 µF VH to DCIN, 1 µF REF to GND, for stability."
+  },
+  {
+   "topic": "NiCd and NiMH charging",
+   "page": 13,
+   "text": "A 1.5 kΩ pull-up from CCV to VL disables the voltage loop, leaving the part a current source; the battery undervoltage features still reduce current at low VBATT. The R suits 5 or 6 Ni cells, the S 7 to 9, the T 10. There is no Ni termination: an external microcontroller or Ni charge controller must end the charge."
+  },
+  {
+   "topic": "Chip information",
+   "page": 13,
+   "text": "BiCMOS process, 1397 transistors."
+  }
+ ],
+ "packages": [
+  {
+   "name": "16 QSOP (0.150 in body, 0.025 in pitch, 21-0055)",
+   "page": 14,
+   "unit": "mm",
+   "columns": [
+    "symbol",
+    "what",
+    "min (in)",
+    "max (in)",
+    "min (mm)",
+    "max (mm)"
+   ],
+   "rows": [
+    [
+     "A",
+     "overall height",
+     ".061",
+     ".068",
+     "1.55",
+     "1.73"
+    ],
+    [
+     "A1",
+     "standoff",
+     ".004",
+     ".0098",
+     "0.102",
+     "0.249"
+    ],
+    [
+     "A2",
+     "body thickness",
+     ".055",
+     ".061",
+     "1.40",
+     "1.55"
+    ],
+    [
+     "B",
+     "lead width",
+     ".008",
+     ".012",
+     "0.20",
+     "0.31"
+    ],
+    [
+     "C",
+     "lead thickness",
+     ".0075",
+     ".0098",
+     "0.191",
+     "0.249"
+    ],
+    [
+     "D",
+     "body length (16 leads, variation AA)",
+     ".189",
+     ".196",
+     "4.80",
+     "4.98"
+    ],
+    [
+     "S",
+     "body end to outer lead (16 leads, variation AA)",
+     ".0020",
+     ".0070",
+     "0.05",
+     "0.18"
+    ],
+    [
+     "E",
+     "body width",
+     ".150",
+     ".157",
+     "3.81",
+     "3.99"
+    ],
+    [
+     "e",
+     "lead pitch",
+     ".025 BSC",
+     "",
+     "0.635 BSC",
+     ""
+    ],
+    [
+     "H",
+     "width over leads",
+     ".230",
+     ".244",
+     "5.84",
+     "6.20"
+    ],
+    [
+     "h",
+     "edge chamfer, × 45°",
+     ".010",
+     ".016",
+     "0.25",
+     "0.41"
+    ],
+    [
+     "L",
+     "foot length",
+     ".016",
+     ".035",
+     "0.41",
+     "0.89"
+    ],
+    [
+     "N",
+     "lead count",
+     "16",
+     "",
+     "16",
+     ""
+    ],
+    [
+     "α",
+     "foot angle",
+     "0°",
+     "8°",
+     "0°",
+     "8°"
+    ]
+   ],
+   "notes": [
+    "D and E exclude mold flash and protrusions, which are at most 0.006 in per side.",
+    "Inches are the controlling unit. The outline meets JEDEC MO137."
+   ]
+  }
+ ]
+}

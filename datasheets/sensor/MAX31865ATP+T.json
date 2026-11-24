@@ -1,0 +1,3572 @@
+{
+ "sheet": 1,
+ "name": "MAX31865ATP+T",
+ "kind": "sensor",
+ "manufacturer": "Analog Devices (Maxim Integrated)",
+ "title": "RTD-to-digital converter",
+ "source": {
+  "revision": "19-6478; Rev 3; 7/15",
+  "pages": 26
+ },
+ "summary": "The MAX31865 turns the resistance of a platinum RTD, PT100 to PT1000, into a 15-bit number read over SPI. A bias voltage drives the RTD in series with an external reference resistor, and a delta-sigma ADC with a 50/60 Hz sinc filter reports the ratio of the two resistances. It accepts 2-, 3- and 4-wire sensors, survives ±45 V on its sensor pins, and flags open, shorted and out-of-range sensor and cable faults. It runs from 3.0 V to 3.6 V and comes in a 20-pin TQFN or SSOP.",
+ "key_figures": [
+  [
+   "Sensor",
+   "100 Ω to 1 kΩ platinum RTD (PT100 to PT1000), 2-, 3- or 4-wire"
+  ],
+  [
+   "Resolution",
+   "15 bits; 0.03125 °C nominal"
+  ],
+  [
+   "Total accuracy",
+   "0.5 °C (0.05 % of full scale) max over all operating conditions"
+  ],
+  [
+   "Conversion time",
+   "21 ms max continuous; 55 ms (60 Hz) / 66 ms (50 Hz) max single"
+  ],
+  [
+   "Mains rejection",
+   "82 dB at 50/60 Hz and harmonics"
+  ],
+  [
+   "Input protection",
+   "±45 V on FORCE+, FORCE2, FORCE-, RTDIN+, RTDIN-"
+  ],
+  [
+   "Supply",
+   "VDD, DVDD 3.0 V to 3.6 V"
+  ],
+  [
+   "Supply current",
+   "2 mA typ, 3.5 mA max converting; 1.5 mA typ bias and ADC off"
+  ],
+  [
+   "Bias voltage",
+   "2.00 V typ, up to 5.75 mA"
+  ],
+  [
+   "Interface",
+   "SPI modes 1 and 3, 5 MHz max"
+  ],
+  [
+   "Operating temperature",
+   "-40 °C to +125 °C"
+  ]
+ ],
+ "part_numbers": {
+  "page": 25,
+  "columns": [
+   "part number",
+   "temperature range",
+   "pin-package",
+   "packing"
+  ],
+  "rows": [
+   [
+    "MAX31865AAP+",
+    "-40°C to +125°C",
+    "20 SSOP",
+    "lead(Pb)-free/RoHS"
+   ],
+   [
+    "MAX31865AAP+T",
+    "-40°C to +125°C",
+    "20 SSOP",
+    "lead(Pb)-free/RoHS, tape and reel"
+   ],
+   [
+    "MAX31865ATP+",
+    "-40°C to +125°C",
+    "20 TQFN-EP",
+    "lead(Pb)-free/RoHS"
+   ],
+   [
+    "MAX31865ATP+T",
+    "-40°C to +125°C",
+    "20 TQFN-EP",
+    "lead(Pb)-free/RoHS, tape and reel"
+   ]
+  ]
+ },
+ "pins": [
+  {
+   "package": "20 TQFN-EP (5mm x 5mm)",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "BIAS",
+     "type": "analog output",
+     "function": "Bias voltage output, VBIAS."
+    },
+    {
+     "pin": "2",
+     "name": "REFIN+",
+     "type": "analog input",
+     "function": "Reference input, positive side. Tie to BIAS; RREF goes between REFIN+ and REFIN-."
+    },
+    {
+     "pin": "3",
+     "name": "REFIN-",
+     "type": "analog input",
+     "function": "Reference input, negative side; the bottom end of RREF."
+    },
+    {
+     "pin": "4",
+     "name": "ISENSOR",
+     "type": "analog",
+     "function": "Low end of RREF; tie to REFIN-."
+    },
+    {
+     "pin": "5",
+     "name": "FORCE+",
+     "type": "analog",
+     "function": "Drive to the top of the RTD. Joined to FORCE2 for a 3-wire sensor. Withstands ±45V."
+    },
+    {
+     "pin": "6",
+     "name": "FORCE2",
+     "type": "analog input",
+     "function": "Extra sense input for 3-wire sensors only: tie to FORCE+ for 3-wire, to ground for 2-wire or 4-wire. Withstands ±45V."
+    },
+    {
+     "pin": "7",
+     "name": "RTDIN+",
+     "type": "analog input",
+     "function": "RTD sense input, positive. Withstands ±45V."
+    },
+    {
+     "pin": "8",
+     "name": "RTDIN-",
+     "type": "analog input",
+     "function": "RTD sense input, negative. Withstands ±45V."
+    },
+    {
+     "pin": "9",
+     "name": "FORCE-",
+     "type": "analog",
+     "function": "Return from the bottom of the RTD. Withstands ±45V."
+    },
+    {
+     "pin": "10",
+     "name": "GND2",
+     "type": "ground",
+     "function": "Analog ground; tie to GND1."
+    },
+    {
+     "pin": "11",
+     "name": "SDI",
+     "type": "digital input",
+     "function": "Serial data in."
+    },
+    {
+     "pin": "12",
+     "name": "SCLK",
+     "type": "digital input",
+     "function": "Serial clock in."
+    },
+    {
+     "pin": "13",
+     "name": "CS",
+     "type": "digital input",
+     "function": "Chip select, active low; the serial port works only while it is low."
+    },
+    {
+     "pin": "14",
+     "name": "SDO",
+     "type": "digital output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "15",
+     "name": "DGND",
+     "type": "ground",
+     "function": "Digital ground."
+    },
+    {
+     "pin": "16",
+     "name": "GND1",
+     "type": "ground",
+     "function": "Analog ground; tie to GND2."
+    },
+    {
+     "pin": "17",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Leave unconnected."
+    },
+    {
+     "pin": "18",
+     "name": "DRDY",
+     "type": "digital output",
+     "function": "Data ready, active low, push-pull. Falls when a fresh result lands in the RTD data registers and rises again once those registers are read."
+    },
+    {
+     "pin": "19",
+     "name": "DVDD",
+     "type": "power in",
+     "function": "Digital supply, 3.3V, with 0.1µF to DGND."
+    },
+    {
+     "pin": "20",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Analog supply, 3.3V, with 0.1µF to GND1."
+    },
+    {
+     "pin": "EP",
+     "name": "EP",
+     "type": "ground",
+     "function": "Exposed pad on the underside; tie to GND1."
+    }
+   ]
+  },
+  {
+   "package": "20 SSOP",
+   "page": 8,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "DRDY",
+     "type": "digital output",
+     "function": "Data ready, active low, push-pull. Falls when a fresh result lands in the RTD data registers and rises again once those registers are read."
+    },
+    {
+     "pin": "2",
+     "name": "DVDD",
+     "type": "power in",
+     "function": "Digital supply, 3.3V, with 0.1µF to DGND."
+    },
+    {
+     "pin": "3",
+     "name": "VDD",
+     "type": "power in",
+     "function": "Analog supply, 3.3V, with 0.1µF to GND1."
+    },
+    {
+     "pin": "4",
+     "name": "BIAS",
+     "type": "analog output",
+     "function": "Bias voltage output, VBIAS."
+    },
+    {
+     "pin": "5",
+     "name": "REFIN+",
+     "type": "analog input",
+     "function": "Reference input, positive side. Tie to BIAS; RREF goes between REFIN+ and REFIN-."
+    },
+    {
+     "pin": "6",
+     "name": "REFIN-",
+     "type": "analog input",
+     "function": "Reference input, negative side; the bottom end of RREF."
+    },
+    {
+     "pin": "7",
+     "name": "ISENSOR",
+     "type": "analog",
+     "function": "Low end of RREF; tie to REFIN-."
+    },
+    {
+     "pin": "8",
+     "name": "FORCE+",
+     "type": "analog",
+     "function": "Drive to the top of the RTD. Joined to FORCE2 for a 3-wire sensor. Withstands ±45V."
+    },
+    {
+     "pin": "9",
+     "name": "FORCE2",
+     "type": "analog input",
+     "function": "Extra sense input for 3-wire sensors only: tie to FORCE+ for 3-wire, to ground for 2-wire or 4-wire. Withstands ±45V."
+    },
+    {
+     "pin": "10",
+     "name": "RTDIN+",
+     "type": "analog input",
+     "function": "RTD sense input, positive. Withstands ±45V."
+    },
+    {
+     "pin": "11",
+     "name": "RTDIN-",
+     "type": "analog input",
+     "function": "RTD sense input, negative. Withstands ±45V."
+    },
+    {
+     "pin": "12",
+     "name": "FORCE-",
+     "type": "analog",
+     "function": "Return from the bottom of the RTD. Withstands ±45V."
+    },
+    {
+     "pin": "13",
+     "name": "GND2",
+     "type": "ground",
+     "function": "Analog ground; tie to GND1."
+    },
+    {
+     "pin": "14",
+     "name": "SDI",
+     "type": "digital input",
+     "function": "Serial data in."
+    },
+    {
+     "pin": "15",
+     "name": "SCLK",
+     "type": "digital input",
+     "function": "Serial clock in."
+    },
+    {
+     "pin": "16",
+     "name": "CS",
+     "type": "digital input",
+     "function": "Chip select, active low; the serial port works only while it is low."
+    },
+    {
+     "pin": "17",
+     "name": "SDO",
+     "type": "digital output",
+     "function": "Serial data out."
+    },
+    {
+     "pin": "18",
+     "name": "DGND",
+     "type": "ground",
+     "function": "Digital ground."
+    },
+    {
+     "pin": "19",
+     "name": "GND1",
+     "type": "ground",
+     "function": "Analog ground; tie to GND2."
+    },
+    {
+     "pin": "20",
+     "name": "N.C.",
+     "type": "no connect",
+     "function": "Leave unconnected."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Voltage on VDD relative to GND1",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+4.0",
+     "V"
+    ],
+    [
+     "Voltage on BIAS, REFIN+, REFIN-, ISENSOR",
+     "",
+     "",
+     "-0.3",
+     "",
+     "VDD + 0.3",
+     "V"
+    ],
+    [
+     "Voltage on FORCE+, FORCE2, FORCE-, RTDIN+, RTDIN- relative to GND1",
+     "",
+     "",
+     "-50",
+     "",
+     "+50",
+     "V"
+    ],
+    [
+     "Voltage on DVDD relative to DGND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "+4.0",
+     "V"
+    ],
+    [
+     "Voltage on all digital pins relative to DGND",
+     "",
+     "",
+     "-0.3",
+     "",
+     "VDVDD + 0.3",
+     "V"
+    ],
+    [
+     "Continuous power dissipation, TQFN",
+     "",
+     "TA = +70°C, derate 34.5mW/°C above +70°C",
+     "",
+     "",
+     "2758.6",
+     "mW"
+    ],
+    [
+     "Continuous power dissipation, SSOP",
+     "",
+     "TA = +70°C, derate 11.9mW/°C above +70°C",
+     "",
+     "",
+     "952.4",
+     "mW"
+    ],
+    [
+     "ESD protection",
+     "",
+     "All pins, Human Body Model",
+     "",
+     "",
+     "±2",
+     "kV"
+    ],
+    [
+     "Operating temperature range",
+     "",
+     "",
+     "-40",
+     "",
+     "+125",
+     "°C"
+    ],
+    [
+     "Junction temperature",
+     "",
+     "",
+     "",
+     "",
+     "+150",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "",
+     "",
+     "-65",
+     "",
+     "+150",
+     "°C"
+    ],
+    [
+     "Soldering temperature",
+     "",
+     "Reflow",
+     "",
+     "",
+     "+260",
+     "°C"
+    ],
+    [
+     "Lead temperature",
+     "",
+     "Soldering, 10s",
+     "",
+     "",
+     "+300",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "These are stress limits only; running the part at or past them is not implied, and long exposure at them can reduce reliability."
+   ]
+  },
+  {
+   "title": "Package thermal characteristics",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "TQFN",
+    "SSOP",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Junction-to-ambient thermal resistance",
+     "θJA",
+     "29",
+     "84",
+     "°C/W"
+    ],
+    [
+     "Junction-to-case thermal resistance",
+     "θJC",
+     "2",
+     "32",
+     "°C/W"
+    ]
+   ],
+   "notes": [
+    "Figures come from the JESD51-7 method on a four-layer board."
+   ]
+  },
+  {
+   "title": "Recommended DC operating conditions",
+   "page": 2,
+   "conditions": "TA = -40°C to +125°C, unless otherwise noted (Notes 2 and 3)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VDD",
+     "VDD",
+     "",
+     "3.0",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "DVDD",
+     "VDVDD",
+     "",
+     "3.0",
+     "3.3",
+     "3.6",
+     "V"
+    ],
+    [
+     "Input Logic 0",
+     "VIL",
+     "CS, SDI, SCLK",
+     "-0.3",
+     "",
+     "0.3 x VDVDD",
+     "V"
+    ],
+    [
+     "Input Logic 1",
+     "VIH",
+     "CS, SDI, SCLK",
+     "0.7 x VDVDD",
+     "",
+     "VDVDD + 0.3",
+     "V"
+    ],
+    [
+     "Analog Voltages (FORCE+, FORCE2, FORCE-, RTDIN+, RTDIN-)",
+     "",
+     "Normal conversion results",
+     "0",
+     "",
+     "VBIAS",
+     "V"
+    ],
+    [
+     "Reference Resistor",
+     "RREF",
+     "",
+     "350",
+     "",
+     "10k",
+     "Ω"
+    ],
+    [
+     "Cable Resistance",
+     "RCABLE",
+     "Per lead",
+     "0",
+     "",
+     "50",
+     "Ω"
+    ]
+   ],
+   "notes": [
+    "Note 2: Voltages are with respect to ground where the grounds are common; a current flowing into the IC is positive.",
+    "Note 3: Production test is 100 % at TA = +25°C and/or +85°C; limits across the full temperature and supply range rest on design and characterization. Typical values carry no guarantee."
+   ]
+  },
+  {
+   "title": "Electrical characteristics",
+   "page": 2,
+   "conditions": "3.0V ≤ VDD ≤ 3.6V, TA = -40°C to +125°C, unless otherwise noted. Typical values are TA = +25°C, VDD = VDVDD = 3.3V (Notes 2 and 3)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "ADC Resolution",
+     "",
+     "No missing codes",
+     "",
+     "15",
+     "",
+     "Bits"
+    ],
+    [
+     "ADC Full-Scale Input Voltage (RTDIN+ - RTDIN-)",
+     "",
+     "",
+     "",
+     "REFIN+ - REFIN-",
+     "",
+     "V"
+    ],
+    [
+     "ADC Common-Mode Input Range",
+     "",
+     "",
+     "0",
+     "",
+     "VBIAS",
+     "V"
+    ],
+    [
+     "Input Leakage Current",
+     "",
+     "RTDIN+, RTDIN-, 0°C to +70°C, on-state",
+     "",
+     "2",
+     "",
+     "nA"
+    ],
+    [
+     "Input Leakage Current",
+     "",
+     "RTDIN+, RTDIN-, -40°C to +85°C, on-state",
+     "",
+     "5",
+     "",
+     "nA"
+    ],
+    [
+     "Input Leakage Current",
+     "",
+     "RTDIN+, RTDIN-, -40°C to 100°C, on-state",
+     "",
+     "14",
+     "",
+     "nA"
+    ],
+    [
+     "Bias Voltage",
+     "VBIAS",
+     "",
+     "1.95",
+     "2.00",
+     "2.06",
+     "V"
+    ],
+    [
+     "Bias Voltage Output Current",
+     "IOUT",
+     "",
+     "0.2",
+     "",
+     "5.75",
+     "mA"
+    ],
+    [
+     "Bias Voltage Load Regulation",
+     "",
+     "IOUT ≤ 5.75mA",
+     "",
+     "30",
+     "",
+     "mV/mA"
+    ],
+    [
+     "Bias Voltage Startup Time",
+     "",
+     "(Note 4)",
+     "",
+     "",
+     "10",
+     "ms"
+    ],
+    [
+     "ADC Full-Scale Error",
+     "",
+     "",
+     "",
+     "±1",
+     "",
+     "LSB"
+    ],
+    [
+     "ADC Integral Nonlinearity",
+     "",
+     "Differential Input, endpoint fit, 0.3 x VBIAS ≤ VREF ≤ VBIAS",
+     "",
+     "±1",
+     "",
+     "LSB"
+    ],
+    [
+     "ADC Offset Error",
+     "",
+     "",
+     "-3",
+     "",
+     "+3",
+     "LSB"
+    ],
+    [
+     "Noise (over Nyquist Bandwidth)",
+     "",
+     "Input referred",
+     "",
+     "150",
+     "",
+     "µV RMS"
+    ],
+    [
+     "Common-Mode Rejection",
+     "",
+     "",
+     "",
+     "90",
+     "",
+     "dB"
+    ],
+    [
+     "50/60Hz Noise Rejection",
+     "",
+     "Fundamental and harmonics",
+     "",
+     "82",
+     "",
+     "dB"
+    ],
+    [
+     "Temperature Conversion Time (Note 5)",
+     "tCONV",
+     "Continuous conversion (60Hz notch)",
+     "",
+     "16.7",
+     "17.6",
+     "ms"
+    ],
+    [
+     "Temperature Conversion Time (Note 5)",
+     "tCONV",
+     "Single conversion (60Hz notch)",
+     "",
+     "52",
+     "55",
+     "ms"
+    ],
+    [
+     "Temperature Conversion Time (Note 5)",
+     "tCONV",
+     "Single conversion (50Hz notch)",
+     "",
+     "62.5",
+     "66",
+     "ms"
+    ],
+    [
+     "Temperature Conversion Time (Note 5)",
+     "tCONV",
+     "Continuous conversion (50Hz notch)",
+     "",
+     "20",
+     "21",
+     "ms"
+    ],
+    [
+     "Automatic Fault Detection Cycle Time",
+     "",
+     "From CS high to cycle complete",
+     "",
+     "550",
+     "600",
+     "µs"
+    ],
+    [
+     "Power-Supply Rejection",
+     "",
+     "",
+     "",
+     "1",
+     "",
+     "LSB/V"
+    ],
+    [
+     "Power-Supply Current (Note 6)",
+     "IDD Shutdown",
+     "Bias off, ADC off",
+     "",
+     "1.5",
+     "3",
+     "mA"
+    ],
+    [
+     "Power-Supply Current (Note 6)",
+     "IDD",
+     "Bias on, active conversion",
+     "",
+     "2",
+     "3.5",
+     "mA"
+    ],
+    [
+     "Power-On Reset Voltage Threshold",
+     "",
+     "",
+     "2",
+     "2.27",
+     "",
+     "V"
+    ],
+    [
+     "Power-On Reset Voltage Hysteresis",
+     "",
+     "",
+     "",
+     "120",
+     "",
+     "mV"
+    ],
+    [
+     "Input Capacitance",
+     "CIN",
+     "Logic inputs",
+     "",
+     "6",
+     "",
+     "pF"
+    ],
+    [
+     "Input Leakage Current",
+     "IL",
+     "Logic inputs",
+     "-1",
+     "",
+     "+1",
+     "µA"
+    ],
+    [
+     "Output High Voltage",
+     "VOH",
+     "IOUT = -1.6mA",
+     "VDVDD - 0.4",
+     "",
+     "",
+     "V"
+    ],
+    [
+     "Output Low Voltage",
+     "VOL",
+     "IOUT = 1.6mA",
+     "",
+     "",
+     "0.4",
+     "V"
+    ]
+   ],
+   "notes": [
+    "Note 4: Settling to 15 bits takes at least 10.5 time constants of the RC network at the inputs. The maximum startup time assumes RREF = 10kΩ and 0.1µF across the RTD inputs.",
+    "Note 5: Once continuous conversion is switched on, its first result takes as long as a single conversion at the chosen notch frequency.",
+    "Note 6: Analog plus digital current, BIAS unloaded, with the serial bus idle. When the RTD input voltage is above the reference input voltage, IDD rises by about 400µA."
+   ]
+  },
+  {
+   "title": "AC electrical characteristics: SPI interface",
+   "page": 4,
+   "conditions": "3.0V ≤ VDD ≤ 3.6V, TA = -40°C to +125°C, unless otherwise noted. Typical values are TA = +25°C, VDD = VDVDD = 3.3V (Notes 3 and 7)",
+   "columns": [
+    "parameter",
+    "symbol",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Data to SCLK Setup",
+     "tDC",
+     "(Notes 8, 9)",
+     "35",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCLK to Data Hold",
+     "tCDH",
+     "(Notes 8, 9)",
+     "35",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCLK to Data Valid",
+     "tCDD",
+     "(Notes 8, 9, 10)",
+     "",
+     "",
+     "80",
+     "ns"
+    ],
+    [
+     "SCLK Low Time",
+     "tCL",
+     "(Note 9)",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCLK High Time",
+     "tCH",
+     "(Note 9)",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCLK Frequency",
+     "tCLK",
+     "(Note 9)",
+     "DC",
+     "",
+     "5.0",
+     "MHz"
+    ],
+    [
+     "SCLK Rise and Fall",
+     "tR, tF",
+     "(Note 9)",
+     "",
+     "",
+     "200",
+     "ns"
+    ],
+    [
+     "CS to SCLK Setup",
+     "tCC",
+     "(Note 9)",
+     "400",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "SCLK to CS Hold",
+     "tCCH",
+     "(Note 9)",
+     "100",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CS Inactive Time",
+     "tCWH",
+     "(Note 9)",
+     "400",
+     "",
+     "",
+     "ns"
+    ],
+    [
+     "CS to Output High-Z",
+     "tCDZ",
+     "(Notes 8, 9)",
+     "",
+     "",
+     "40",
+     "ns"
+    ],
+    [
+     "Address 01h or 02h Decoded to DRDY High",
+     "tDRDYH",
+     "After RTD register read access (Note 9)",
+     "",
+     "50",
+     "",
+     "ns"
+    ]
+   ],
+   "notes": [
+    "Note 7: Every timing limit is guaranteed by design.",
+    "Note 8: Input thresholds for the measurement are 0.7 x VDVDD (high) and 0.3 x VDVDD (low); edges take 10ms at most.",
+    "Note 9: Load is 50pF.",
+    "Note 10: Output thresholds for the measurement are 0.7 x VDVDD (high) and 0.3 x VDVDD (low); the delay runs from SCLK crossing 50 % until SDO reaches its minimum VOH."
+   ]
+  },
+  {
+   "title": "Register addresses and POR state",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "register",
+    "read address (hex)",
+    "write address (hex)",
+    "POR state",
+    "read/write"
+   ],
+   "rows": [
+    [
+     "Configuration",
+     "00h",
+     "80h",
+     "00h",
+     "R/W"
+    ],
+    [
+     "RTD MSBs",
+     "01h",
+     "—",
+     "00h",
+     "R"
+    ],
+    [
+     "RTD LSBs",
+     "02h",
+     "—",
+     "00h",
+     "R"
+    ],
+    [
+     "High Fault Threshold MSB",
+     "03h",
+     "83h",
+     "FFh",
+     "R/W"
+    ],
+    [
+     "High Fault Threshold LSB",
+     "04h",
+     "84h",
+     "FFh",
+     "R/W"
+    ],
+    [
+     "Low Fault Threshold MSB",
+     "05h",
+     "85h",
+     "00h",
+     "R/W"
+    ],
+    [
+     "Low Fault Threshold LSB",
+     "06h",
+     "86h",
+     "00h",
+     "R/W"
+    ],
+    [
+     "Fault Status",
+     "07h",
+     "—",
+     "00h",
+     "R"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Configuration register (00h) bits",
+   "page": 13,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "function",
+    "values"
+   ],
+   "rows": [
+    [
+     "D7",
+     "VBIAS",
+     "1 = ON, 0 = OFF"
+    ],
+    [
+     "D6",
+     "Conversion mode",
+     "1 = Auto, 0 = Normally off"
+    ],
+    [
+     "D5",
+     "1-shot",
+     "1 = 1-shot (auto-clear)"
+    ],
+    [
+     "D4",
+     "3-wire",
+     "1 = 3-wire RTD, 0 = 2-wire or 4-wire"
+    ],
+    [
+     "D3, D2",
+     "Fault Detection Cycle Control",
+     "see fault-detection cycle control bits"
+    ],
+    [
+     "D1",
+     "Fault Status Clear",
+     "1 = Clear (auto-clear)"
+    ],
+    [
+     "D0",
+     "50/60Hz filter select",
+     "1 = 50Hz, 0 = 60Hz"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Fault-detection cycle control bits",
+   "page": 14,
+   "conditions": "",
+   "columns": [
+    "D3",
+    "D2",
+    "configuration register write (binary)",
+    "write action",
+    "read meaning"
+   ],
+   "rows": [
+    [
+     "0",
+     "0",
+     "XXXX00XXb",
+     "No action",
+     "Fault detection finished"
+    ],
+    [
+     "0",
+     "1",
+     "100X010Xb",
+     "Fault detection with automatic delay",
+     "Automatic fault detection still running"
+    ],
+    [
+     "1",
+     "0",
+     "100X100Xb",
+     "Run fault detection with manual delay (cycle 1)",
+     "Manual cycle 1 still running; waiting for user to write 11"
+    ],
+    [
+     "1",
+     "1",
+     "100X110Xb",
+     "Finish fault detection with manual delay (cycle 2)",
+     "Manual cycle 2 still running"
+    ]
+   ],
+   "notes": [
+    "X is a don't-care bit."
+   ]
+  },
+  {
+   "title": "RTD resistance registers (01h, 02h)",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bit",
+    "content",
+    "weighting",
+    "decimal value"
+   ],
+   "rows": [
+    [
+     "RTD MSBs (01h)",
+     "D7",
+     "MSB",
+     "2^14",
+     "16384"
+    ],
+    [
+     "RTD MSBs (01h)",
+     "D6",
+     "—",
+     "2^13",
+     "8192"
+    ],
+    [
+     "RTD MSBs (01h)",
+     "D5",
+     "—",
+     "2^12",
+     "4096"
+    ],
+    [
+     "RTD MSBs (01h)",
+     "D4",
+     "—",
+     "2^11",
+     "2048"
+    ],
+    [
+     "RTD MSBs (01h)",
+     "D3",
+     "—",
+     "2^10",
+     "1024"
+    ],
+    [
+     "RTD MSBs (01h)",
+     "D2",
+     "—",
+     "2^9",
+     "512"
+    ],
+    [
+     "RTD MSBs (01h)",
+     "D1",
+     "—",
+     "2^8",
+     "256"
+    ],
+    [
+     "RTD MSBs (01h)",
+     "D0",
+     "—",
+     "2^7",
+     "128"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D7",
+     "—",
+     "2^6",
+     "64"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D6",
+     "—",
+     "2^5",
+     "32"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D5",
+     "—",
+     "2^4",
+     "16"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D4",
+     "—",
+     "2^3",
+     "8"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D3",
+     "—",
+     "2^2",
+     "4"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D2",
+     "—",
+     "2^1",
+     "2"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D1",
+     "LSB",
+     "2^0",
+     "1"
+    ],
+    [
+     "RTD LSBs (02h)",
+     "D0",
+     "Fault",
+     "—",
+     "—"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "RTD resistance-data relationship",
+   "page": 15,
+   "conditions": "",
+   "columns": [
+    "RRTD/RREF",
+    "RTD MSBs (01h) binary",
+    "RTD LSBs (02h) binary",
+    "RTD MSBs (01h) hex",
+    "RTD LSBs (02h) hex",
+    "decimal"
+   ],
+   "rows": [
+    [
+     "0.025",
+     "0000 0110",
+     "0110 0110b",
+     "06h",
+     "66h",
+     "819"
+    ],
+    [
+     "0.125",
+     "0010 0000",
+     "0000 0000b",
+     "20h",
+     "00h",
+     "4096"
+    ],
+    [
+     "0.25",
+     "0100 0000",
+     "0000 0000b",
+     "40h",
+     "00h",
+     "8192"
+    ],
+    [
+     "0.50",
+     "1000 0000",
+     "0000 0000b",
+     "80h",
+     "00h",
+     "16,384"
+    ],
+    [
+     "0.75",
+     "1100 0000",
+     "0000 0000b",
+     "C0h",
+     "00h",
+     "24,576"
+    ],
+    [
+     "0.999",
+     "1111 1111",
+     "1111 1110b",
+     "FFh",
+     "FEh",
+     "32,767"
+    ]
+   ],
+   "notes": [
+    "The Fault bit, D0 of 02h, is taken as 0."
+   ]
+  },
+  {
+   "title": "Fault threshold registers (03h to 06h)",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "register",
+    "bit",
+    "content",
+    "weighting",
+    "decimal value"
+   ],
+   "rows": [
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D7",
+     "MSB",
+     "2^14",
+     "16384"
+    ],
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D6",
+     "—",
+     "2^13",
+     "8192"
+    ],
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D5",
+     "—",
+     "2^12",
+     "4096"
+    ],
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D4",
+     "—",
+     "2^11",
+     "2048"
+    ],
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D3",
+     "—",
+     "2^10",
+     "1024"
+    ],
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D2",
+     "—",
+     "2^9",
+     "512"
+    ],
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D1",
+     "—",
+     "2^8",
+     "256"
+    ],
+    [
+     "High (03h) / Low (05h) Fault Threshold MSB",
+     "D0",
+     "—",
+     "2^7",
+     "128"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D7",
+     "—",
+     "2^6",
+     "64"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D6",
+     "—",
+     "2^5",
+     "32"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D5",
+     "—",
+     "2^4",
+     "16"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D4",
+     "—",
+     "2^3",
+     "8"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D3",
+     "—",
+     "2^2",
+     "4"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D2",
+     "—",
+     "2^1",
+     "2"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D1",
+     "LSB",
+     "2^0",
+     "1"
+    ],
+    [
+     "High (04h) / Low (06h) Fault Threshold LSB",
+     "D0",
+     "X",
+     "—",
+     "—"
+    ]
+   ],
+   "notes": [
+    "X is a don't-care bit."
+   ]
+  },
+  {
+   "title": "Fault status register (07h) bits",
+   "page": 16,
+   "conditions": "",
+   "columns": [
+    "bit",
+    "fault"
+   ],
+   "rows": [
+    [
+     "D7",
+     "RTD High Threshold"
+    ],
+    [
+     "D6",
+     "RTD Low Threshold"
+    ],
+    [
+     "D5",
+     "REFIN- > 0.85 x VBIAS"
+    ],
+    [
+     "D4",
+     "REFIN- < 0.85 x VBIAS (FORCE- open)"
+    ],
+    [
+     "D3",
+     "RTDIN- < 0.85 x VBIAS (FORCE- open)"
+    ],
+    [
+     "D2",
+     "Overvoltage/undervoltage fault"
+    ],
+    [
+     "D1",
+     "X"
+    ],
+    [
+     "D0",
+     "X"
+    ]
+   ],
+   "notes": [
+    "X is a don't-care bit."
+   ]
+  },
+  {
+   "title": "SPI function table",
+   "page": 17,
+   "conditions": "",
+   "columns": [
+    "mode",
+    "CS",
+    "SCLK",
+    "SDI",
+    "SDO"
+   ],
+   "rows": [
+    [
+     "Disable Reset",
+     "High",
+     "Input disabled",
+     "Input disabled",
+     "High impedance"
+    ],
+    [
+     "Write",
+     "Low",
+     "CPOL = 1*, SCLK rising; CPOL = 0, SCLK falling",
+     "Data bit latch",
+     "High impedance"
+    ],
+    [
+     "Read",
+     "Low",
+     "CPOL = 1, SCLK falling; CPOL = 0, SCLK rising",
+     "X",
+     "Next data bit shift**"
+    ]
+   ],
+   "notes": [
+    "CPHA must be 1.",
+    "* CPOL: the idle-clock polarity setting held in the microcontroller's SPI control register.",
+    "** SDO stays high impedance until a full byte is ready to shift out in a read."
+   ]
+  },
+  {
+   "title": "Temperature example for PT100 with 400Ω RREF",
+   "page": 20,
+   "conditions": "",
+   "columns": [
+    "temperature (°C)",
+    "RTD resistance (Ω)",
+    "RTD data reg (01h-02h) (hex)",
+    "ADC code (dec)",
+    "ADC code/32 - 256 (°C)"
+   ],
+   "rows": [
+    [
+     "-200",
+     "18.52",
+     "0BDAh",
+     "1517",
+     "-208.59"
+    ],
+    [
+     "-175",
+     "29.22",
+     "12B4h",
+     "2394",
+     "-181.19"
+    ],
+    [
+     "-150",
+     "39.72",
+     "196Ch",
+     "3254",
+     "-154.31"
+    ],
+    [
+     "-125",
+     "50.06",
+     "200Ah",
+     "4101",
+     "-127.84"
+    ],
+    [
+     "-100",
+     "60.26",
+     "2690h",
+     "4936",
+     "-101.75"
+    ],
+    [
+     "-75",
+     "70.33",
+     "2D04h",
+     "5762",
+     "-75.94"
+    ],
+    [
+     "-50",
+     "80.31",
+     "3366h",
+     "6579",
+     "-50.41"
+    ],
+    [
+     "-40",
+     "84.27",
+     "35EEh",
+     "6903",
+     "-40.28"
+    ],
+    [
+     "-30",
+     "88.22",
+     "3876h",
+     "7227",
+     "-30.16"
+    ],
+    [
+     "-20",
+     "92.16",
+     "3AFCh",
+     "7550",
+     "-20.06"
+    ],
+    [
+     "-10",
+     "96.09",
+     "3D7Eh",
+     "7871",
+     "-10.03"
+    ],
+    [
+     "0",
+     "100.00",
+     "4000h",
+     "8192",
+     "0.00"
+    ],
+    [
+     "10",
+     "103.90",
+     "4280h",
+     "8512",
+     "10.00"
+    ],
+    [
+     "20",
+     "107.79",
+     "44FCh",
+     "8830",
+     "19.94"
+    ],
+    [
+     "30",
+     "111.67",
+     "4778h",
+     "9148",
+     "29.88"
+    ],
+    [
+     "40",
+     "115.54",
+     "49F2h",
+     "9465",
+     "39.78"
+    ],
+    [
+     "50",
+     "119.40",
+     "4C6Ah",
+     "9781",
+     "49.66"
+    ],
+    [
+     "60",
+     "123.24",
+     "4EE0h",
+     "10096",
+     "59.50"
+    ],
+    [
+     "70",
+     "127.08",
+     "5154h",
+     "10410",
+     "69.31"
+    ],
+    [
+     "80",
+     "130.90",
+     "53C6h",
+     "10723",
+     "79.09"
+    ],
+    [
+     "90",
+     "134.71",
+     "5636h",
+     "11035",
+     "88.84"
+    ],
+    [
+     "100",
+     "138.51",
+     "58A4h",
+     "11346",
+     "98.56"
+    ],
+    [
+     "110",
+     "142.29",
+     "5B12h",
+     "11657",
+     "108.28"
+    ],
+    [
+     "120",
+     "146.07",
+     "5D7Ch",
+     "11966",
+     "117.94"
+    ],
+    [
+     "130",
+     "149.83",
+     "5FE4h",
+     "12274",
+     "127.56"
+    ],
+    [
+     "140",
+     "153.58",
+     "624Ch",
+     "12582",
+     "137.19"
+    ],
+    [
+     "150",
+     "157.33",
+     "64B0h",
+     "12888",
+     "146.75"
+    ],
+    [
+     "160",
+     "161.05",
+     "6714h",
+     "13194",
+     "156.31"
+    ],
+    [
+     "170",
+     "164.77",
+     "6974h",
+     "13498",
+     "165.81"
+    ],
+    [
+     "180",
+     "168.48",
+     "6BD4h",
+     "13802",
+     "175.31"
+    ],
+    [
+     "190",
+     "172.17",
+     "6E30h",
+     "14104",
+     "184.75"
+    ],
+    [
+     "200",
+     "175.86",
+     "708Ch",
+     "14406",
+     "194.19"
+    ],
+    [
+     "225",
+     "185.01",
+     "7668h",
+     "15156",
+     "217.63"
+    ],
+    [
+     "250",
+     "194.10",
+     "7C3Ah",
+     "15901",
+     "240.91"
+    ],
+    [
+     "275",
+     "203.11",
+     "81FEh",
+     "16639",
+     "263.97"
+    ],
+    [
+     "300",
+     "212.05",
+     "87B6h",
+     "17371",
+     "286.84"
+    ],
+    [
+     "325",
+     "220.92",
+     "8D64h",
+     "18098",
+     "309.56"
+    ],
+    [
+     "350",
+     "229.72",
+     "9304h",
+     "18818",
+     "332.06"
+    ],
+    [
+     "375",
+     "238.44",
+     "989Ah",
+     "19533",
+     "354.41"
+    ],
+    [
+     "400",
+     "247.09",
+     "9E24h",
+     "20242",
+     "376.56"
+    ],
+    [
+     "425",
+     "255.67",
+     "A3A2h",
+     "20945",
+     "398.53"
+    ],
+    [
+     "450",
+     "264.18",
+     "A914h",
+     "21642",
+     "420.31"
+    ],
+    [
+     "475",
+     "272.61",
+     "AE7Ah",
+     "22333",
+     "441.91"
+    ],
+    [
+     "500",
+     "280.98",
+     "B3D4h",
+     "23018",
+     "463.31"
+    ],
+    [
+     "525",
+     "289.27",
+     "B922h",
+     "23697",
+     "484.53"
+    ],
+    [
+     "550",
+     "297.49",
+     "BE64h",
+     "24370",
+     "505.56"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Decoding RTD faults, 2-wire, when the Fault bit in the RTD LSB register is 1",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "fault status bit set",
+    "possible cause",
+    "condition detected",
+    "resulting data"
+   ],
+   "rows": [
+    [
+     "D7",
+     "Open RTD element",
+     "Measured resistance greater than High Fault Threshold value",
+     "Full scale"
+    ],
+    [
+     "D6",
+     "Shorted RTD element",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D6",
+     "RTDIN+ shorted low",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D5",
+     "Open RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Full scale"
+    ],
+    [
+     "D5",
+     "RTDIN+ shorted high",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "RTDIN- shorted high",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D4",
+     "RTDIN- shorted low",
+     "VREFIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D3",
+     "RTDIN- shorted low",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D3",
+     "RTDIN+ shorted low",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Near zero"
+    ],
+    [
+     "D2",
+     "Overvoltage or undervoltage fault",
+     "Any protected input voltage >VDD or <GND1",
+     "Indeterminate"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Decoding RTD faults, 3-wire, when the Fault bit in the RTD LSB register is 1",
+   "page": 22,
+   "conditions": "",
+   "columns": [
+    "fault status bit set",
+    "possible cause",
+    "condition detected",
+    "resulting data"
+   ],
+   "rows": [
+    [
+     "D7",
+     "Open RTD element",
+     "Measured resistance greater than High Fault Threshold value",
+     "Full scale"
+    ],
+    [
+     "D7",
+     "RTDIN+ shorted high and not connected to RTD",
+     "Measured resistance greater than High Fault Threshold value",
+     "Full scale"
+    ],
+    [
+     "D7",
+     "Force+ shorted high and connected to RTD",
+     "Measured resistance greater than High Fault Threshold value",
+     "Full scale"
+    ],
+    [
+     "D6",
+     "RTDIN+ shorted to RTDIN-",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D6",
+     "RTDIN+ shorted low and not connected to RTD",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D6",
+     "Force+ shorted low",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D5",
+     "Open RTD element",
+     "VREFIN- > 0.85 x VBIAS",
+     "Full scale"
+    ],
+    [
+     "D5",
+     "Force+ shorted high and connected to RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Full scale"
+    ],
+    [
+     "D5",
+     "Force+ unconnected",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "Force+ shorted high and not connected to RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "RTDIN- shorted high",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D4",
+     "RTDIN- shorted low",
+     "VREFIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D3",
+     "Force+ shorted low",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Near zero"
+    ],
+    [
+     "D3",
+     "RTDIN+ shorted low and connected to RTD",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Near zero"
+    ],
+    [
+     "D3",
+     "RTDIN- shorted low",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D2",
+     "Overvoltage or undervoltage fault",
+     "Any protected input voltage >VDD or < GND1",
+     "Indeterminate"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Decoding RTD faults, 4-wire, when the Fault bit in the RTD LSB register is 1",
+   "page": 23,
+   "conditions": "",
+   "columns": [
+    "fault status bit set",
+    "possible cause",
+    "condition detected",
+    "resulting data"
+   ],
+   "rows": [
+    [
+     "D7",
+     "Open RTD element",
+     "Measured resistance greater than High Fault Threshold value",
+     "Full scale"
+    ],
+    [
+     "D7",
+     "RTDIN+ shorted high and not connected to RTD",
+     "Measured resistance greater than High Fault Threshold value",
+     "Full scale"
+    ],
+    [
+     "D7",
+     "Force+ shorted high and connected to RTD",
+     "Measured resistance greater than High Fault Threshold value",
+     "Full scale"
+    ],
+    [
+     "D6",
+     "RTDIN+ shorted to RTDIN-",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D6",
+     "RTDIN+ shorted low and not connected to RTD",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D6",
+     "RTDIN- shorted high and not connected to RTD",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D6",
+     "Force+ shorted low",
+     "Measured resistance less than Low Fault Threshold value",
+     "Near zero"
+    ],
+    [
+     "D5",
+     "Open RTD element",
+     "VREFIN- > 0.85 x VBIAS",
+     "Full scale"
+    ],
+    [
+     "D5",
+     "Force+ shorted high and connected to RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Full scale"
+    ],
+    [
+     "D5",
+     "Force- unconnected",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "Force+ unconnected",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "Force+ shorted high and not connected to RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "Force- shorted high and not connected to RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "Force- shorted high and connected to RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D5",
+     "Force- shorted low and not connected to RTD",
+     "VREFIN- > 0.85 x VBIAS",
+     "Indeterminate"
+    ],
+    [
+     "D4",
+     "Force- shorted low and connected to RTD",
+     "VREFIN- < 0.85 x VBIAS (FORCE- open)",
+     "Indeterminate"
+    ],
+    [
+     "D4",
+     "RTDIN- shorted low and connected to RTD",
+     "VREFIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D3",
+     "Force+ shorted low",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Near zero"
+    ],
+    [
+     "D3",
+     "RTDIN+ shorted low and connected to RTD",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Near zero"
+    ],
+    [
+     "D3",
+     "RTDIN- shorted low and connected to RTD",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D3",
+     "RTDIN- shorted low and not connected to RTD",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D3",
+     "Force- shorted low",
+     "VRTDIN- < 0.85 x VBIAS (FORCE- open)",
+     "Appear to be valid"
+    ],
+    [
+     "D2",
+     "Overvoltage or undervoltage fault",
+     "Any protected input voltage >VDD or < GND1",
+     "Indeterminate"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "Package information",
+   "page": 25,
+   "conditions": "",
+   "columns": [
+    "package type",
+    "package code",
+    "outline no.",
+    "land pattern no."
+   ],
+   "rows": [
+    [
+     "20 TQFN-EP",
+     "T2055+5",
+     "21-0140",
+     "90-0010"
+    ],
+    [
+     "20 SSOP",
+     "A20+1",
+     "21-0056",
+     "90-0094"
+    ]
+   ],
+   "notes": [
+    "A +, # or - in the package code marks RoHS status only; the outline is the same whatever the suffix."
+   ]
+  }
+ ],
+ "curves": [
+  {
+   "title": "Supply current vs. temperature (ADC auto conversion mode)",
+   "page": 6,
+   "conditions": "VDD = VDVDD = 3.3V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Digital IDD",
+     "points": [
+      [
+       -40.1,
+       0.182
+      ],
+      [
+       -5.5,
+       0.206
+      ],
+      [
+       124.9,
+       0.255
+      ]
+     ]
+    },
+    {
+     "label": "Analog IDD (BIAS unloaded)",
+     "points": [
+      [
+       -40.1,
+       1.414
+      ],
+      [
+       65.4,
+       1.76
+      ],
+      [
+       124.9,
+       1.9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current vs. temperature (ADC normally off mode)",
+   "page": 6,
+   "conditions": "VDD = VDVDD = 3.3V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IDD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Digital IDD",
+     "points": [
+      [
+       -40.1,
+       0.174
+      ],
+      [
+       124.7,
+       0.245
+      ]
+     ]
+    },
+    {
+     "label": "Analog IDD (BIAS unloaded)",
+     "points": [
+      [
+       -40.1,
+       1.09
+      ],
+      [
+       37.8,
+       1.251
+      ],
+      [
+       124.7,
+       1.393
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Leakage current per pin vs. temperature",
+   "page": 6,
+   "conditions": "VDD = VDVDD = 3.3V; 1 V applied to FORCE+, FORCE2, RTDIN+, RTDIN-",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Current",
+    "unit": "nA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "Leakage per pin",
+     "points": [
+      [
+       69.8,
+       0.4
+      ],
+      [
+       86.4,
+       1.6
+      ],
+      [
+       89.9,
+       2.7
+      ],
+      [
+       102.4,
+       9.4
+      ],
+      [
+       107.6,
+       11.0
+      ],
+      [
+       109.8,
+       12.5
+      ],
+      [
+       113.6,
+       18.4
+      ],
+      [
+       116.0,
+       24.7
+      ],
+      [
+       124.7,
+       51.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sinc filter operation: input frequency vs. noise response",
+   "page": 6,
+   "conditions": "VDD = VDVDD = 3.3V, TA = +25°C",
+   "x": {
+    "label": "Input noise frequency",
+    "unit": "Hz",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Noise response",
+    "unit": "dB",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "60 Hz notch",
+     "points": [
+      [
+       20.0,
+       -5.2
+      ],
+      [
+       25.0,
+       -7.9
+      ],
+      [
+       28.8,
+       -10.9
+      ],
+      [
+       30.2,
+       -9.3
+      ],
+      [
+       31.2,
+       -13.1
+      ],
+      [
+       39.0,
+       -21.4
+      ],
+      [
+       45.0,
+       -31.5
+      ],
+      [
+       52.0,
+       -49.6
+      ],
+      [
+       54.9,
+       -62.8
+      ],
+      [
+       57.3,
+       -78.7
+      ],
+      [
+       59.1,
+       -82.0
+      ],
+      [
+       61.9,
+       -81.2
+      ],
+      [
+       65.3,
+       -64.8
+      ],
+      [
+       70.3,
+       -50.9
+      ],
+      [
+       76.9,
+       -42.7
+      ],
+      [
+       80.3,
+       -40.6
+      ],
+      [
+       82.9,
+       -39.9
+      ],
+      [
+       88.9,
+       -40.1
+      ],
+      [
+       89.9,
+       -46.8
+      ],
+      [
+       91.1,
+       -40.5
+      ],
+      [
+       96.9,
+       -44.0
+      ],
+      [
+       101.9,
+       -49.1
+      ],
+      [
+       103.9,
+       -51.6
+      ],
+      [
+       108.9,
+       -61.1
+      ],
+      [
+       115.3,
+       -80.3
+      ],
+      [
+       116.3,
+       -81.8
+      ],
+      [
+       118.9,
+       -83.0
+      ],
+      [
+       120.9,
+       -81.6
+      ],
+      [
+       122.9,
+       -82.2
+      ],
+      [
+       123.9,
+       -81.9
+      ],
+      [
+       132.3,
+       -63.2
+      ],
+      [
+       135.2,
+       -59.5
+      ],
+      [
+       139.8,
+       -55.6
+      ],
+      [
+       143.2,
+       -54.0
+      ],
+      [
+       148.6,
+       -53.4
+      ],
+      [
+       150.0,
+       -55.9
+      ],
+      [
+       151.0,
+       -53.7
+      ],
+      [
+       156.8,
+       -56.3
+      ],
+      [
+       158.8,
+       -58.0
+      ]
+     ]
+    },
+    {
+     "label": "50 Hz notch",
+     "points": [
+      [
+       20.0,
+       -7.3
+      ],
+      [
+       24.0,
+       -10.8
+      ],
+      [
+       24.8,
+       -9.2
+      ],
+      [
+       25.2,
+       -9.5
+      ],
+      [
+       26.2,
+       -13.2
+      ],
+      [
+       34.0,
+       -24.1
+      ],
+      [
+       39.0,
+       -35.0
+      ],
+      [
+       41.8,
+       -43.2
+      ],
+      [
+       42.8,
+       -49.8
+      ],
+      [
+       44.8,
+       -56.3
+      ],
+      [
+       47.8,
+       -79.5
+      ],
+      [
+       49.0,
+       -83.3
+      ],
+      [
+       50.0,
+       -82.3
+      ],
+      [
+       51.0,
+       -82.9
+      ],
+      [
+       51.8,
+       -81.2
+      ],
+      [
+       55.3,
+       -60.6
+      ],
+      [
+       58.3,
+       -51.4
+      ],
+      [
+       61.3,
+       -45.8
+      ],
+      [
+       66.9,
+       -40.9
+      ],
+      [
+       67.9,
+       -38.6
+      ],
+      [
+       68.9,
+       -40.1
+      ],
+      [
+       72.3,
+       -39.8
+      ],
+      [
+       76.9,
+       -41.2
+      ],
+      [
+       80.9,
+       -44.2
+      ],
+      [
+       84.7,
+       -48.7
+      ],
+      [
+       85.7,
+       -52.1
+      ],
+      [
+       87.1,
+       -52.6
+      ],
+      [
+       90.9,
+       -61.6
+      ],
+      [
+       95.3,
+       -77.9
+      ],
+      [
+       97.1,
+       -81.9
+      ],
+      [
+       99.9,
+       -81.9
+      ],
+      [
+       101.3,
+       -82.9
+      ],
+      [
+       102.9,
+       -81.9
+      ],
+      [
+       110.3,
+       -62.9
+      ],
+      [
+       116.3,
+       -55.6
+      ],
+      [
+       117.1,
+       -55.7
+      ],
+      [
+       117.9,
+       -59.5
+      ],
+      [
+       119.3,
+       -54.0
+      ],
+      [
+       123.3,
+       -53.4
+      ],
+      [
+       125.9,
+       -53.9
+      ],
+      [
+       128.9,
+       -55.3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ADC conversion error vs. RTD resistance (4kΩ RREF, 4-wire connection)",
+   "page": 6,
+   "conditions": "VDD = VDVDD = 3.3V",
+   "x": {
+    "label": "RRTD",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Error",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       679,
+       0.0043
+      ],
+      [
+       1002,
+       0.0269
+      ],
+      [
+       1059,
+       0.0269
+      ],
+      [
+       1197,
+       0.0212
+      ],
+      [
+       1422,
+       0.0297
+      ],
+      [
+       1502,
+       0.0297
+      ],
+      [
+       1577,
+       0.0269
+      ],
+      [
+       1721,
+       0.0142
+      ],
+      [
+       1802,
+       0.0113
+      ],
+      [
+       1877,
+       0.0128
+      ],
+      [
+       2130,
+       0.0255
+      ],
+      [
+       3201,
+       0.0693
+      ]
+     ]
+    },
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       679,
+       -0.0848
+      ],
+      [
+       846,
+       -0.0424
+      ],
+      [
+       967,
+       -0.0155
+      ],
+      [
+       1030,
+       -0.0056
+      ],
+      [
+       1076,
+       -0.0028
+      ],
+      [
+       1197,
+       -0.0028
+      ],
+      [
+       1646,
+       0.0297
+      ],
+      [
+       3201,
+       0.1188
+      ]
+     ]
+    },
+    {
+     "label": "+100 °C",
+     "points": [
+      [
+       679,
+       -0.0085
+      ],
+      [
+       1059,
+       -0.0085
+      ],
+      [
+       1318,
+       -0.0056
+      ],
+      [
+       3201,
+       0.0382
+      ]
+     ]
+    },
+    {
+     "label": "+0.1 °C error",
+     "points": [
+      [
+       0,
+       0.409
+      ],
+      [
+       3500,
+       0.409
+      ]
+     ]
+    },
+    {
+     "label": "-0.1 °C error",
+     "points": [
+      [
+       0,
+       -0.382
+      ],
+      [
+       3500,
+       -0.382
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ADC conversion error vs. RTD resistance (400Ω RREF, 4-wire connection)",
+   "page": 6,
+   "conditions": "VDD = VDVDD = 3.3V",
+   "x": {
+    "label": "RRTD",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Error",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "-40 °C",
+     "points": [
+      [
+       80.2,
+       -0.0219
+      ],
+      [
+       110.0,
+       -0.0262
+      ],
+      [
+       209.7,
+       -0.0333
+      ],
+      [
+       243.5,
+       -0.0432
+      ],
+      [
+       324.8,
+       -0.0743
+      ]
+     ]
+    },
+    {
+     "label": "+25 °C",
+     "points": [
+      [
+       80.2,
+       -0.0134
+      ],
+      [
+       91.1,
+       0.0007
+      ],
+      [
+       100.2,
+       0.0036
+      ],
+      [
+       104.8,
+       0.0021
+      ],
+      [
+       128.9,
+       -0.0177
+      ],
+      [
+       142.6,
+       -0.0262
+      ],
+      [
+       157.5,
+       -0.0276
+      ],
+      [
+       173.6,
+       -0.0233
+      ],
+      [
+       209.7,
+       -0.0078
+      ],
+      [
+       231.4,
+       -0.0021
+      ],
+      [
+       324.8,
+       0.0121
+      ]
+     ]
+    },
+    {
+     "label": "+100 °C",
+     "points": [
+      [
+       80.2,
+       -0.0248
+      ],
+      [
+       150.1,
+       -0.0333
+      ],
+      [
+       324.8,
+       -0.08
+      ]
+     ]
+    },
+    {
+     "label": "+0.1 °C error",
+     "points": [
+      [
+       0,
+       0.409
+      ],
+      [
+       350,
+       0.409
+      ]
+     ]
+    },
+    {
+     "label": "-0.1 °C error",
+     "points": [
+      [
+       0,
+       -0.382
+      ],
+      [
+       350,
+       -0.382
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PT100 RTD resistance vs. temperature",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Resistance",
+    "unit": "Ω",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "RTD resistance",
+     "points": [
+      [
+       -200.0,
+       18.7
+      ],
+      [
+       -109.6,
+       56.7
+      ],
+      [
+       24.9,
+       110.0
+      ],
+      [
+       266.9,
+       200.4
+      ],
+      [
+       484.4,
+       276.0
+      ],
+      [
+       749.9,
+       360.9
+      ]
+     ]
+    },
+    {
+     "label": "Straight-line approximation",
+     "points": [
+      [
+       -199.9,
+       22.1
+      ],
+      [
+       723.2,
+       382.6
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "four-wire",
+   "title": "4-wire RTD connection",
+   "page": 1,
+   "description": "The RTD is reached over four leads. BIAS drives REFIN+ and the top of RREF; the bottom of RREF ties to REFIN- and ISENSOR, and the same current leaves FORCE+, runs down one lead, through the RTD and back up another lead to FORCE-. Two further leads carry the RTD's own end voltages to RTDIN+ and RTDIN-, so the force-lead resistance stays out of the reading. CI across the two sense inputs filters noise. FORCE2 is grounded and the 3-wire bit stays 0. DVDD and VDD share the 3.3 V rail, each with its own 0.1 µF to ground, and the five logic lines run to the host.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX31865"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "DVDD bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "RREF",
+     "type": "resistor",
+     "value": "400 Ω (PT100) / 4 kΩ (PT1000)",
+     "note": "reference resistor, four times the RTD's resistance at 0 °C"
+    },
+    {
+     "ref": "CI",
+     "type": "capacitor",
+     "value": "100 nF (100 Ω RTD) / 10 nF (1 kΩ RTD)",
+     "note": "filter across the RTD inputs"
+    },
+    {
+     "ref": "RTD",
+     "type": "other",
+     "value": "platinum RTD, PT100 to PT1000"
+    },
+    {
+     "ref": "TP1",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "3.3 V supply"
+    },
+    {
+     "ref": "TP2",
+     "type": "terminal",
+     "value": "DRDY",
+     "note": "to the host"
+    },
+    {
+     "ref": "TP3",
+     "type": "terminal",
+     "value": "SDI",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP4",
+     "type": "terminal",
+     "value": "SCLK",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP5",
+     "type": "terminal",
+     "value": "CS",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP6",
+     "type": "terminal",
+     "value": "SDO",
+     "note": "to the host"
+    },
+    {
+     "ref": "RC1",
+     "type": "resistor",
+     "value": "RCABLE",
+     "note": "resistance of one sensor lead, 0 to 50 Ω"
+    },
+    {
+     "ref": "RC2",
+     "type": "resistor",
+     "value": "RCABLE",
+     "note": "resistance of one sensor lead, 0 to 50 Ω"
+    },
+    {
+     "ref": "RC3",
+     "type": "resistor",
+     "value": "RCABLE",
+     "note": "resistance of one sensor lead, 0 to 50 Ω"
+    },
+    {
+     "ref": "RC4",
+     "type": "resistor",
+     "value": "RCABLE",
+     "note": "resistance of one sensor lead, 0 to 50 Ω"
+    }
+   ],
+   "notes": [
+    "EP exists on the TQFN only and joins GND1."
+   ]
+  },
+  {
+   "id": "two-wire",
+   "title": "2-wire RTD connection",
+   "page": 24,
+   "description": "The RTD sits on two leads, which suits a sensor close to the converter. FORCE+ and RTDIN+ join at the RTD's top end and RTDIN- and FORCE- at its bottom end, so the lead resistance adds to the reading. The reference string, CI across the inputs, grounded FORCE2, supply bypassing and host lines are those of the 4-wire circuit; the 3-wire bit stays 0.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX31865"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "DVDD bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "RREF",
+     "type": "resistor",
+     "value": "400 Ω (PT100) / 4 kΩ (PT1000)",
+     "note": "reference resistor, four times the RTD's resistance at 0 °C"
+    },
+    {
+     "ref": "CI",
+     "type": "capacitor",
+     "value": "100 nF (100 Ω RTD) / 10 nF (1 kΩ RTD)",
+     "note": "filter across the RTD inputs"
+    },
+    {
+     "ref": "RTD",
+     "type": "other",
+     "value": "platinum RTD, PT100 to PT1000"
+    },
+    {
+     "ref": "TP1",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "3.3 V supply"
+    },
+    {
+     "ref": "TP2",
+     "type": "terminal",
+     "value": "DRDY",
+     "note": "to the host"
+    },
+    {
+     "ref": "TP3",
+     "type": "terminal",
+     "value": "SDI",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP4",
+     "type": "terminal",
+     "value": "SCLK",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP5",
+     "type": "terminal",
+     "value": "CS",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP6",
+     "type": "terminal",
+     "value": "SDO",
+     "note": "to the host"
+    }
+   ],
+   "notes": [
+    "EP exists on the TQFN only and joins GND1."
+   ]
+  },
+  {
+   "id": "three-wire",
+   "title": "3-wire RTD connection",
+   "page": 24,
+   "description": "Three leads reach the RTD. FORCE+ and FORCE2 join and drive the top end through the first lead; RTDIN+ senses the top end over a second lead; RTDIN- and FORCE- join at the board and share the third lead to the bottom end. With the 3-wire bit set, the part takes the drop between FORCE+ and RTDIN+ off the measured voltage, which cancels the lead resistance when the leads match. CI sits across RTDIN+ and RTDIN-; reference, bypassing and host lines match the 4-wire circuit.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "MAX31865"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "DVDD bypass"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.1 µF",
+     "note": "VDD bypass"
+    },
+    {
+     "ref": "RREF",
+     "type": "resistor",
+     "value": "400 Ω (PT100) / 4 kΩ (PT1000)",
+     "note": "reference resistor, four times the RTD's resistance at 0 °C"
+    },
+    {
+     "ref": "CI",
+     "type": "capacitor",
+     "value": "100 nF (100 Ω RTD) / 10 nF (1 kΩ RTD)",
+     "note": "filter across the RTD inputs"
+    },
+    {
+     "ref": "RTD",
+     "type": "other",
+     "value": "platinum RTD, PT100 to PT1000"
+    },
+    {
+     "ref": "TP1",
+     "type": "terminal",
+     "value": "VDD",
+     "note": "3.3 V supply"
+    },
+    {
+     "ref": "TP2",
+     "type": "terminal",
+     "value": "DRDY",
+     "note": "to the host"
+    },
+    {
+     "ref": "TP3",
+     "type": "terminal",
+     "value": "SDI",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP4",
+     "type": "terminal",
+     "value": "SCLK",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP5",
+     "type": "terminal",
+     "value": "CS",
+     "note": "from the host"
+    },
+    {
+     "ref": "TP6",
+     "type": "terminal",
+     "value": "SDO",
+     "note": "to the host"
+    },
+    {
+     "ref": "RC1",
+     "type": "resistor",
+     "value": "RCABLE",
+     "note": "resistance of one sensor lead, 0 to 50 Ω"
+    },
+    {
+     "ref": "RC2",
+     "type": "resistor",
+     "value": "RCABLE",
+     "note": "resistance of one sensor lead, 0 to 50 Ω"
+    },
+    {
+     "ref": "RC3",
+     "type": "resistor",
+     "value": "RCABLE",
+     "note": "resistance of one sensor lead, 0 to 50 Ω"
+    }
+   ],
+   "notes": [
+    "EP exists on the TQFN only and joins GND1."
+   ]
+  }
+ ],
+ "equations": [
+  {
+   "name": "Callendar-Van Dusen equation",
+   "expr": "R(T) = R0 × (1 + a×T + b×T² + c×(T − 100)×T³)",
+   "where": {
+    "T": "temperature, °C",
+    "R(T)": "RTD resistance at T",
+    "R0": "RTD resistance at 0 °C",
+    "a": "3.90830 × 10^-3 (IEC 751)",
+    "b": "-5.77500 × 10^-7 (IEC 751)",
+    "c": "-4.18301 × 10^-12 for -200 °C ≤ T ≤ 0 °C; 0 for 0 °C ≤ T ≤ +850 °C (IEC 751)"
+   },
+   "note": "IEC 751 gives α = 0.00385055.",
+   "page": 10
+  },
+  {
+   "name": "Linear temperature approximation",
+   "expr": "T ≈ (ADC code / 32) − 256",
+   "where": {
+    "T": "temperature, °C",
+    "ADC code": "15-bit result from the RTD data registers"
+   },
+   "note": "For -100 °C to +100 °C with an IEC 751 RTD and RREF = 4 × R0: 0 °C error at 0 °C, -1.75 °C at -100 °C, -1.4 °C at +100 °C.",
+   "page": 11
+  },
+  {
+   "name": "RTD resistance from the ADC code",
+   "expr": "RRTD = (ADC code × RREF) / 2^15",
+   "where": {
+    "RRTD": "RTD resistance",
+    "ADC code": "15-bit result from registers 01h-02h",
+    "RREF": "reference resistor"
+   },
+   "note": "",
+   "page": 19
+  },
+  {
+   "name": "Input filter settling before a conversion",
+   "expr": "t ≥ 10.5 × τ + 1 ms",
+   "where": {
+    "t": "wait after VBIAS is switched on before a 1-shot conversion",
+    "τ": "time constant of the RC network at the RTD inputs"
+   },
+   "note": "",
+   "page": 13
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Measurement principle",
+   "page": 10,
+   "text": "RREF and the RTD are in series, with VBIAS on the top of RREF, so one current flows through both. The drop across RREF is the ADC reference and the drop across the RTD is its differential input on RTDIN+ and RTDIN-; the output code is therefore RRTD/RREF as a 15-bit fraction. Thermistors and other resistive sensors work the same way."
+  },
+  {
+   "topic": "Choosing RREF",
+   "page": 10,
+   "text": "For a platinum RTD the best RREF is four times the sensor's 0 °C resistance: 400 Ω for a PT100, 4 kΩ for a PT1000. For an NTC or PTC thermistor, pick RREF at least as large as the sensor's highest resistance over the range of interest. The recommended RREF range is 350 Ω to 10 kΩ."
+  },
+  {
+   "topic": "Platinum RTDs",
+   "page": 10,
+   "text": "Common platinum RTDs read 100 Ω or 1 kΩ at 0 °C. Alpha, the mean slope from 0 °C to +100 °C, is 0.00385 for IEC 751 (PT100) and 0.00392 for SAMA. The curve bends slightly away from a straight line, which the Callendar-Van Dusen equation describes."
+  },
+  {
+   "topic": "2-, 3- and 4-wire connection",
+   "page": 10,
+   "text": "A 2-wire RTD reads its lead resistance as part of the sensor, so it works only near the converter: on a PT100, 0.4 Ω in series is about 1 °C of error. A 4-wire RTD separates force and sense leads, removing the lead error. A 3-wire RTD saves one lead: FORCE2 samples the drop between FORCE+ and RTDIN+ and the part subtracts it from RTDIN+ − RTDIN-, which cancels the lead error when the lead resistances match. Configuration bit D4 = 1 selects 3-wire."
+  },
+  {
+   "topic": "ADC and filter",
+   "page": 11,
+   "text": "The ADC has differential signal inputs (RTDIN+, RTDIN-) and differential reference inputs (REFIN+, REFIN-). A negative input gives code 0; an input above the reference gives full scale. A third-order sinc filter removes 50 Hz or 60 Hz mains and its harmonics by 82 dB; D0 picks the notch. The notch must not be changed while auto conversion runs."
+  },
+  {
+   "topic": "Input protection",
+   "page": 11,
+   "text": "FORCE+, FORCE2, FORCE-, RTDIN+ and RTDIN- withstand up to ±45 V. Analog switches in series with them open when a pin rises above about VDD + 100 mV or falls below about GND1 - 400 mV. During such a fault roughly 350 µA can flow through the protection; it does the part no harm. Fault bit D2 sets and the ADC stops updating until the fault clears, then resumes."
+  },
+  {
+   "topic": "Fault detection",
+   "page": 11,
+   "text": "Three kinds of check run. At all times: any protected pin above VDD or below GND1 (bit D2). After every conversion: a result at or above the high threshold (D7) or at or below the low threshold (D6). On request, in a fault-detection cycle: VREFIN- above 0.85 × VBIAS (D5), VREFIN- below 0.85 × VBIAS with the FORCE- switch open (D4), and VRTDIN- below 0.85 × VBIAS with the FORCE- switch open (D3). For the cycle an internal switch can disconnect FORCE- from its GND2 return. Any set fault also sets D0 of the RTD LSB register. Voltages are with respect to GND1."
+  },
+  {
+   "topic": "Configuration register",
+   "page": 13,
+   "text": "D7 turns VBIAS on; it may be turned off between conversions to save power and must be on before a 1-shot conversion, and it stays on in auto mode. D6 = 1 converts continuously at the 50/60 Hz rate; D6 = 0 is normally-off mode, from which 1-shot conversions start. D5 = 1 in normally-off mode starts one conversion when CS goes high (after the last byte of a multibyte write) and clears itself. If VBIAS was off, turn it on and wait 10.5 input-filter time constants plus 1 ms before the 1-shot. A single conversion takes about 52 ms with the 60 Hz filter and 62.5 ms with the 50 Hz filter."
+  },
+  {
+   "topic": "Fault-detection cycle",
+   "page": 14,
+   "text": "Writing 100X010Xb runs the automatic cycle: the ADC goes to normally-off mode and 100 µs delays are inserted before each check so an input filter can settle; D[3:2] return to 00b at the end. When the input filter's time constant exceeds 100 µs, use the manual cycle: with VBIAS on for at least 5 time constants, write 100X100Xb (checks with the FORCE- switch closed, after which it opens and D[3:2] read 10b); wait 5 time constants again and write 100X110Xb (checks with the switch open, then it closes and D[3:2] clear to 00b). Writing 100X110Xb without the first manual step runs the automatic cycle. Setting D5 together with D2 or D3 in one write makes both commands ignored."
+  },
+  {
+   "topic": "Fault status clear",
+   "page": 14,
+   "text": "Writing D1 = 1 with D5, D3 and D2 at 0 resets fault bits D[7:2]; D1 clears itself. A persisting over/undervoltage sets D2, and D0 of the RTD LSB register, again at once. Fault bits latch until cleared, so intermittent faults are kept."
+  },
+  {
+   "topic": "RTD data and fault thresholds",
+   "page": 15,
+   "text": "Registers 01h and 02h hold the 15-bit ratio RRTD/RREF, MSB first, with the Fault flag in D0 of 02h. The high threshold (03h-04h, POR FFFFh) and low threshold (05h-06h, POR 0000h) share that format. A result greater than or equal to the high threshold sets D7 of the fault status register; a result less than or equal to the low threshold sets D6."
+  },
+  {
+   "topic": "Serial interface",
+   "page": 16,
+   "text": "SPI modes 1 and 3. The part reads SCLK's level as CS falls to learn the idle clock polarity, so either polarity works. Bits move MSB first in bytes, one clock per bit. The first byte after CS falls is the address: A7 = 0 reads, A7 = 1 writes (reads at 0Xh, writes at 8Xh). Holding CS low continues the transfer and the address increments, wrapping from 7Fh/FFh to 00h/80h. An invalid address reads FFh; writes to read-only registers do nothing. SCLK runs only while CS is low."
+  },
+  {
+   "topic": "DRDY",
+   "page": 19,
+   "text": "A fresh result in registers 01h-02h pulls DRDY low; it goes back high once a read of those registers finishes."
+  },
+  {
+   "topic": "Input filter and settling",
+   "page": 19,
+   "text": "In noisy surroundings a capacitor may go across RTDIN+ and RTDIN-. After an over/undervoltage fault, after a fault-detection cycle, or after VBIAS is turned on, allow at least five filter time constants plus 1 ms before restarting the ADC for specified accuracy."
+  },
+  {
+   "topic": "Broken RTDIN+ lead",
+   "page": 21,
+   "text": "With 3- or 4-wire sensors, a broken or loose RTDIN+ lead leaves the ADC's positive input floating, so results wander with layout, noise and temperature and may slip past the thresholds. A 10 MΩ resistor from RTDIN+ to BIAS makes such a break read full scale."
+  },
+  {
+   "topic": "Open and shorted RTD",
+   "page": 21,
+   "text": "An open RTD reads full scale: set the high threshold to catch it, or test on demand for VREFIN- > 0.85 × VBIAS. A shorted RTD reads near zero: set the low threshold to catch it."
+  },
+  {
+   "topic": "Supply decoupling",
+   "page": 21,
+   "text": "Bypass VDD and DVDD each with a 0.1 µF capacitor, ideally a surface-mount ceramic part for low lead inductance and good high-frequency response."
+  }
+ ]
+}

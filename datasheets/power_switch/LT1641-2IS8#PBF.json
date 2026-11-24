@@ -1,0 +1,7183 @@
+{
+ "sheet": 1,
+ "name": "LT1641-2IS8#PBF",
+ "kind": "power_switch",
+ "manufacturer": "Analog Devices (Linear Technology)",
+ "title": "Positive high-voltage hot swap controllers, 9V to 80V",
+ "source": {
+  "revision": "Rev C (164112fc)",
+  "pages": 12
+ },
+ "summary": "The LT1641-1 and LT1641-2 control an external N-channel FET in the positive supply line so that a card can be plugged into, or pulled from, a powered backplane of 9 V to 80 V. The output ramps at a rate set by a gate capacitor, and current is limited by a sense resistor with a limit that folds back as the output falls. A timer capacitor sets how long the part may stay in current limit; then the LT1641-1 latches off and the LT1641-2 retries on its own. ON gives undervoltage lockout, FB and the open-collector PWRGD give a power-good signal; both come in an 8-lead SO.",
+ "key_figures": [
+  [
+   "Supply range",
+   "9 V to 80 V operating; 100 V absolute maximum"
+  ],
+  [
+   "Supply current",
+   "2 mA typ, 5.5 mA max (ON = 3 V)"
+  ],
+  [
+   "Current-limit sense voltage",
+   "47 mV typ (VFB = 1 V), folding back to 12 mV typ (VFB = 0 V)"
+  ],
+  [
+   "Gate drive above VCC",
+   "10 V min for VCC = 20 V to 80 V; 4.5 V min for VCC = 10.8 V to 20 V; 18 V max"
+  ],
+  [
+   "ON and FB thresholds",
+   "1.313 V rising, 1.233 V falling, 80 mV hysteresis"
+  ],
+  [
+   "GATE pull-up / fault pull-down",
+   "−10 µA typ / 70 mA typ"
+  ],
+  [
+   "Fault response",
+   "LT1641-1 latches off; LT1641-2 retries automatically"
+  ],
+  [
+   "Package",
+   "S8, 8-lead plastic SO; θJA = 110°C/W"
+  ]
+ ],
+ "part_numbers": {
+  "page": 2,
+  "columns": [
+   "part number",
+   "fault response",
+   "temperature range",
+   "package",
+   "marking"
+  ],
+  "rows": [
+   [
+    "LT1641-1CS8",
+    "latched off",
+    "0°C to 70°C",
+    "S8, 8-lead plastic SO",
+    "16411"
+   ],
+   [
+    "LT1641-1IS8",
+    "latched off",
+    "−40°C to 85°C",
+    "S8, 8-lead plastic SO",
+    "16411I"
+   ],
+   [
+    "LT1641-2CS8",
+    "automatic retry",
+    "0°C to 70°C",
+    "S8, 8-lead plastic SO",
+    "16412"
+   ],
+   [
+    "LT1641-2IS8",
+    "automatic retry",
+    "−40°C to 85°C",
+    "S8, 8-lead plastic SO",
+    "16412I"
+   ]
+  ],
+  "notes": [
+   "Suffixes: #TR tape and reel; #PBF lead free; #TRPBF lead free, tape and reel.",
+   "Wider operating temperature ranges are available on request from the factory."
+  ]
+ },
+ "pins": [
+  {
+   "package": "S8 (8-lead SO)",
+   "page": 5,
+   "pins": [
+    {
+     "pin": "1",
+     "name": "ON",
+     "type": "input",
+     "function": "Undervoltage lockout input. Falling below 1.233 V pulls GATE low and turns the FET off; rising above 1.313 V turns it on again. Once a current-limit fault has latched, pulsing ON low clears it."
+    },
+    {
+     "pin": "2",
+     "name": "FB",
+     "type": "input",
+     "function": "Power-good comparator input, fed from a resistive divider on the output. Below 1.233 V PWRGD goes low; above 1.313 V PWRGD is released. FB also sets the foldback of the current limit."
+    },
+    {
+     "pin": "3",
+     "name": "PWRGD",
+     "type": "open-collector output",
+     "function": "Power-good output, open collector to GND. Pulled low while FB is under its falling threshold, high impedance once FB passes its rising threshold. Its pull-up may go to a voltage above or below VCC."
+    },
+    {
+     "pin": "4",
+     "name": "GND",
+     "type": "ground",
+     "function": "Device ground."
+    },
+    {
+     "pin": "5",
+     "name": "TIMER",
+     "type": "analog",
+     "function": "Current-limit timer. A capacitor on this pin sets the longest time the part may spend in current limit: it charges from a pull-up source while the limit is active, and at 1.233 V GATE is pulled low and the capacitor discharges at 3 µA. Below 0.5 V the LT1641-2 turns GATE back on by itself; the LT1641-1 stays off until ON is pulsed low. The capacitor is 1.5 nF or more."
+    },
+    {
+     "pin": "6",
+     "name": "GATE",
+     "type": "output",
+     "function": "Drives the gate of the external N-channel FET from an internal charge pump: at least 10 V above VCC for supplies over 20 V, at least 4.5 V for 10.8 V to 20 V. A 10 µA pull-up into a capacitor from GATE to GND sets the rising slope. In current limit GATE is regulated to hold the sense voltage constant. GATE is pulled to GND when ON is low, VCC is below the 8.3 V lockout, or TIMER is above 1.233 V."
+    },
+    {
+     "pin": "7",
+     "name": "SENSE",
+     "type": "input",
+     "function": "Current-limit sense input; the sense resistor sits between VCC and SENSE in the supply path. The limit regulates VCC − VSENSE to 47 mV for VFB at 0.5 V or more, falling linearly to 12 mV at VFB = 0 V. Tying SENSE to VCC disables current limiting."
+    },
+    {
+     "pin": "8",
+     "name": "VCC",
+     "type": "power in",
+     "function": "Supply input, 9 V to 80 V in normal operation, 2 mA typical. An internal lockout keeps the part off below 8.3 V."
+    }
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "title": "Absolute maximum ratings",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "parameter",
+    "symbol",
+    "min",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "Supply voltage",
+     "VCC",
+     "−0.3",
+     "100",
+     "V"
+    ],
+    [
+     "Input voltage (SENSE)",
+     "",
+     "−0.3",
+     "100",
+     "V"
+    ],
+    [
+     "Input voltage (TIMER)",
+     "",
+     "−0.3",
+     "44",
+     "V"
+    ],
+    [
+     "Input voltage (FB, ON)",
+     "",
+     "−0.3",
+     "60",
+     "V"
+    ],
+    [
+     "Output voltage (PWRGD)",
+     "",
+     "−0.3",
+     "100",
+     "V"
+    ],
+    [
+     "Output voltage (GATE)",
+     "",
+     "−0.3",
+     "100",
+     "V"
+    ],
+    [
+     "Operating temperature range, LT1641-1C, LT1641-2C",
+     "",
+     "0",
+     "70",
+     "°C"
+    ],
+    [
+     "Operating temperature range, LT1641-1I, LT1641-2I",
+     "",
+     "−40",
+     "85",
+     "°C"
+    ],
+    [
+     "Storage temperature range",
+     "",
+     "−65",
+     "150",
+     "°C"
+    ],
+    [
+     "Lead temperature (soldering, 10 sec)",
+     "",
+     "",
+     "300",
+     "°C"
+    ]
+   ],
+   "notes": [
+    "Note 1: Stress past these ratings can damage the part for good, and long periods at any of them can shorten its life and reliability."
+   ]
+  },
+  {
+   "title": "Thermal",
+   "page": 2,
+   "conditions": "",
+   "columns": [
+    "package",
+    "TJMAX",
+    "θJA"
+   ],
+   "rows": [
+    [
+     "S8, 8-lead plastic SO",
+     "125°C",
+     "110°C/W"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "title": "DC electrical characteristics",
+   "page": 2,
+   "conditions": "VCC = 24V; TA = 25°C, except rows marked ●, which hold over the full operating temperature range.",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "full range",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "VCC",
+     "VCC Operating Range",
+     "",
+     "●",
+     "9",
+     "",
+     "80",
+     "V"
+    ],
+    [
+     "ICC",
+     "VCC Supply Current",
+     "ON = 3V",
+     "●",
+     "",
+     "2",
+     "5.5",
+     "mA"
+    ],
+    [
+     "VLKO",
+     "VCC Undervoltage Lockout",
+     "",
+     "●",
+     "7.5",
+     "8.3",
+     "8.8",
+     "V"
+    ],
+    [
+     "VFBH",
+     "FB Pin High Voltage Threshold",
+     "FB Low to High Transition",
+     "●",
+     "1.280",
+     "1.313",
+     "1.345",
+     "V"
+    ],
+    [
+     "VFBL",
+     "FB Pin Low Voltage Threshold",
+     "FB High to Low Transition",
+     "●",
+     "1.221",
+     "1.233",
+     "1.245",
+     "V"
+    ],
+    [
+     "VFBHST",
+     "FB Pin Hysteresis Voltage",
+     "",
+     "",
+     "",
+     "80",
+     "",
+     "mV"
+    ],
+    [
+     "IINFB",
+     "FB Pin Input Current",
+     "VFB = GND",
+     "",
+     "",
+     "",
+     "−1",
+     "µA"
+    ],
+    [
+     "ΔVFB",
+     "FB Pin Threshold Line Regulation",
+     "9V ≤ VCC ≤ 80V",
+     "●",
+     "",
+     "",
+     "0.05",
+     "mV/V"
+    ],
+    [
+     "VSENSETRIP",
+     "SENSE Pin Trip Voltage (VCC – VSENSE)",
+     "VFB = 0V",
+     "●",
+     "8",
+     "12",
+     "17",
+     "mV"
+    ],
+    [
+     "VSENSETRIP",
+     "SENSE Pin Trip Voltage (VCC – VSENSE)",
+     "VFB = 1V",
+     "●",
+     "39",
+     "47",
+     "55",
+     "mV"
+    ],
+    [
+     "IGATEUP",
+     "GATE Pin Pull-Up Current",
+     "Charge Pump On, VGATE = 7V",
+     "●",
+     "−5",
+     "−10",
+     "−20",
+     "µA"
+    ],
+    [
+     "IGATEDN",
+     "GATE Pin Pull-Down Current",
+     "Any Fault Condition, VGATE = 2V",
+     "●",
+     "35",
+     "70",
+     "100",
+     "mA"
+    ],
+    [
+     "ΔVGATE",
+     "External N-Channel Gate Drive",
+     "VGATE – VCC, VCC = 10.8V to 20V",
+     "●",
+     "4.5",
+     "",
+     "18",
+     "V"
+    ],
+    [
+     "ΔVGATE",
+     "External N-Channel Gate Drive",
+     "VGATE – VCC, VCC = 20V to 80V",
+     "●",
+     "10",
+     "",
+     "18",
+     "V"
+    ],
+    [
+     "ITIMERUP",
+     "TIMER Pin Pull-Up Current",
+     "VTIMER = 0V",
+     "●",
+     "−24",
+     "−80",
+     "−132",
+     "µA"
+    ],
+    [
+     "ITIMERON",
+     "TIMER Pin Pull-Down Current",
+     "VTIMER = 1V",
+     "●",
+     "1.5",
+     "3",
+     "5",
+     "µA"
+    ],
+    [
+     "VONH",
+     "ON Pin High Threshold",
+     "ON Low to High Transition",
+     "●",
+     "1.280",
+     "1.313",
+     "1.345",
+     "V"
+    ],
+    [
+     "VONL",
+     "ON Pin Low Threshold",
+     "ON High to Low Transition",
+     "●",
+     "1.221",
+     "1.233",
+     "1.245",
+     "V"
+    ],
+    [
+     "VONHYST",
+     "ON Pin Hysteresis",
+     "",
+     "",
+     "",
+     "80",
+     "",
+     "mV"
+    ],
+    [
+     "IINON",
+     "ON Pin Input Current",
+     "VON = GND",
+     "",
+     "",
+     "",
+     "−1",
+     "µA"
+    ],
+    [
+     "VOL",
+     "PWRGD Output Low Voltage",
+     "IO = 2mA",
+     "●",
+     "",
+     "",
+     "0.4",
+     "V"
+    ],
+    [
+     "VOL",
+     "PWRGD Output Low Voltage",
+     "IO = 4mA",
+     "●",
+     "",
+     "",
+     "2.5",
+     "V"
+    ],
+    [
+     "IOH",
+     "PWRGD Pin Leakage Current",
+     "VPWRGD = 80V",
+     "●",
+     "",
+     "",
+     "10",
+     "µA"
+    ]
+   ],
+   "notes": [
+    "Note 2: Current flowing into a pin is positive and current flowing out is negative; voltages are measured from ground unless a row says otherwise."
+   ]
+  },
+  {
+   "title": "AC electrical characteristics",
+   "page": 3,
+   "conditions": "TA = 25°C, VCC = 24V",
+   "columns": [
+    "symbol",
+    "parameter",
+    "conditions",
+    "min",
+    "typ",
+    "max",
+    "unit"
+   ],
+   "rows": [
+    [
+     "tPHLON",
+     "ON Low to GATE Low",
+     "test circuit; ON falling through 1.233V to GATE falling through 1V",
+     "",
+     "6",
+     "",
+     "µs"
+    ],
+    [
+     "tPLHON",
+     "ON High to GATE High",
+     "test circuit; ON rising through 1.313V to GATE rising through 5V",
+     "",
+     "1.7",
+     "",
+     "µs"
+    ],
+    [
+     "tPHLFB",
+     "FB Low to PWRGD Low",
+     "test circuit; FB falling through 1.233V to PWRGD falling through 1V",
+     "",
+     "3.2",
+     "",
+     "µs"
+    ],
+    [
+     "tPLHFB",
+     "FB High to PWRGD High",
+     "test circuit; FB rising through 1.313V to PWRGD rising through 1V",
+     "",
+     "1.5",
+     "",
+     "µs"
+    ],
+    [
+     "tPHLSENSE",
+     "(VCC – SENSE) High to GATE Low",
+     "test circuit; VCC − SENSE stepping through 47mV to GATE falling through VCC",
+     "0.5",
+     "1",
+     "2",
+     "µs"
+    ]
+   ],
+   "notes": []
+  }
+ ],
+ "curves": [
+  {
+   "title": "Supply current against supply voltage",
+   "page": 3,
+   "conditions": "",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "85°C",
+     "points": [
+      [
+       9.03,
+       2.198
+      ],
+      [
+       26.63,
+       2.443
+      ],
+      [
+       65.3,
+       2.808
+      ],
+      [
+       73.59,
+       2.908
+      ],
+      [
+       79.93,
+       3.009
+      ]
+     ]
+    },
+    {
+     "label": "25°C",
+     "points": [
+      [
+       9.22,
+       1.952
+      ],
+      [
+       16.45,
+       2.068
+      ],
+      [
+       26.62,
+       2.184
+      ],
+      [
+       62.58,
+       2.501
+      ],
+      [
+       79.84,
+       2.67
+      ]
+     ]
+    },
+    {
+     "label": "–45°C",
+     "points": [
+      [
+       9.22,
+       1.63
+      ],
+      [
+       11.18,
+       1.691
+      ],
+      [
+       19.18,
+       1.79
+      ],
+      [
+       64.1,
+       2.183
+      ],
+      [
+       80.03,
+       2.349
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Supply current against temperature",
+   "page": 3,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ICC",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -43.8,
+       2.067
+      ],
+      [
+       84.9,
+       2.629
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 24V",
+     "points": [
+      [
+       -43.8,
+       1.845
+      ],
+      [
+       84.9,
+       2.408
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FB pin low voltage threshold against temperature",
+   "page": 3,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "FB pin low voltage threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -44.8,
+       1.23209
+      ],
+      [
+       -34.6,
+       1.23407
+      ],
+      [
+       -23.7,
+       1.23561
+      ],
+      [
+       -11.9,
+       1.23674
+      ],
+      [
+       0.9,
+       1.23745
+      ],
+      [
+       14.9,
+       1.23777
+      ],
+      [
+       30.3,
+       1.2377
+      ],
+      [
+       47.2,
+       1.23725
+      ],
+      [
+       72.2,
+       1.23618
+      ],
+      [
+       84.5,
+       1.23599
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FB pin high voltage threshold against temperature",
+   "page": 3,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "FB pin high voltage threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -45.3,
+       1.29074
+      ],
+      [
+       66.5,
+       1.32605
+      ],
+      [
+       73.9,
+       1.32762
+      ],
+      [
+       85.0,
+       1.32885
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "FB pin hysteresis against temperature",
+   "page": 3,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "FB pin hysteresis",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -44.2,
+       0.05896
+      ],
+      [
+       -26.9,
+       0.06086
+      ],
+      [
+       -14.2,
+       0.06313
+      ],
+      [
+       3.1,
+       0.06765
+      ],
+      [
+       18.6,
+       0.07247
+      ],
+      [
+       56.0,
+       0.08604
+      ],
+      [
+       66.3,
+       0.08936
+      ],
+      [
+       75.8,
+       0.09163
+      ],
+      [
+       84.9,
+       0.09257
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "GATE pull-up current against temperature",
+   "page": 3,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "IGATE pull-up",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -43.5,
+       -7.62
+      ],
+      [
+       83.3,
+       -12.002
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gate drive against temperature",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate drive (VGATE – VCC)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -45.0,
+       15.12
+      ],
+      [
+       -19.9,
+       15.37
+      ],
+      [
+       7.0,
+       15.45
+      ],
+      [
+       31.8,
+       15.42
+      ],
+      [
+       59.1,
+       15.23
+      ],
+      [
+       67.3,
+       15.22
+      ],
+      [
+       75.7,
+       15.31
+      ],
+      [
+       85.0,
+       15.52
+      ]
+     ]
+    },
+    {
+     "label": "VCC = 10.8V",
+     "points": [
+      [
+       -45.3,
+       7.01
+      ],
+      [
+       -24.2,
+       7.08
+      ],
+      [
+       19.4,
+       6.95
+      ],
+      [
+       44.2,
+       6.74
+      ],
+      [
+       58.9,
+       6.49
+      ],
+      [
+       68.4,
+       6.39
+      ],
+      [
+       77.9,
+       6.34
+      ],
+      [
+       84.7,
+       6.36
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gate drive against VCC",
+   "page": 4,
+   "conditions": "TA = 25°C",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Gate drive (VGATE – VCC)",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       10.53,
+       7.05
+      ],
+      [
+       17.67,
+       13.93
+      ],
+      [
+       19.18,
+       14.78
+      ],
+      [
+       20.62,
+       15.22
+      ],
+      [
+       21.59,
+       15.37
+      ],
+      [
+       22.8,
+       15.48
+      ],
+      [
+       24.31,
+       15.54
+      ],
+      [
+       35.38,
+       15.54
+      ],
+      [
+       45.94,
+       15.47
+      ],
+      [
+       66.9,
+       15.15
+      ],
+      [
+       79.89,
+       14.87
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "TIMER pin pull-up current against temperature",
+   "page": 4,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "TIMER pin pull-up current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -46.2,
+       -52.94
+      ],
+      [
+       -14.8,
+       -63.6
+      ],
+      [
+       84.4,
+       -98.67
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "TIMER pin pull-up current against VCC",
+   "page": 4,
+   "conditions": "",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "TIMER pin pull-up current",
+    "unit": "µA",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = –45°C",
+     "points": [
+      [
+       11.04,
+       11.8
+      ],
+      [
+       56.33,
+       11.55
+      ],
+      [
+       79.82,
+       11.35
+      ]
+     ]
+    },
+    {
+     "label": "TA = 0°C",
+     "points": [
+      [
+       11.04,
+       10.6
+      ],
+      [
+       46.29,
+       10.39
+      ],
+      [
+       79.82,
+       10.09
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       11.04,
+       9.88
+      ],
+      [
+       46.29,
+       9.66
+      ],
+      [
+       79.82,
+       9.37
+      ]
+     ]
+    },
+    {
+     "label": "TA = 85°C",
+     "points": [
+      [
+       11.04,
+       8.65
+      ],
+      [
+       46.29,
+       8.43
+      ],
+      [
+       79.82,
+       8.14
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ON pin high voltage threshold against temperature",
+   "page": 4,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ON pin high voltage threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -44.6,
+       1.29011
+      ],
+      [
+       -39.8,
+       1.29284
+      ],
+      [
+       -33.1,
+       1.29571
+      ],
+      [
+       -16.2,
+       1.30145
+      ],
+      [
+       22.7,
+       1.31265
+      ],
+      [
+       33.6,
+       1.31554
+      ],
+      [
+       43.7,
+       1.31885
+      ],
+      [
+       49.7,
+       1.32122
+      ],
+      [
+       59.3,
+       1.3242
+      ],
+      [
+       84.8,
+       1.33098
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ON pin low voltage threshold against temperature",
+   "page": 4,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ON pin low voltage threshold",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -45.0,
+       1.23429
+      ],
+      [
+       -29.4,
+       1.23527
+      ],
+      [
+       -20.9,
+       1.23602
+      ],
+      [
+       -17.4,
+       1.23616
+      ],
+      [
+       85.5,
+       1.23617
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "ON pin voltage hysteresis against temperature",
+   "page": 4,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "Temperature",
+    "unit": "°C",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "ON pin hysteresis",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V",
+     "points": [
+      [
+       -44.4,
+       0.05533
+      ],
+      [
+       -36.6,
+       0.05844
+      ],
+      [
+       -27.2,
+       0.06159
+      ],
+      [
+       -15.8,
+       0.06428
+      ],
+      [
+       12.9,
+       0.07316
+      ],
+      [
+       34.2,
+       0.0789
+      ],
+      [
+       53.9,
+       0.08555
+      ],
+      [
+       68.6,
+       0.08971
+      ],
+      [
+       84.7,
+       0.09488
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "PWRGD output low voltage against load current",
+   "page": 4,
+   "conditions": "VCC = 48V",
+   "x": {
+    "label": "ILOAD",
+    "unit": "mA",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "PWRGD VOUT low",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "TA = –45°C",
+     "points": [
+      [
+       10.15,
+       0.08
+      ],
+      [
+       50.84,
+       0.54
+      ],
+      [
+       58.65,
+       0.98
+      ],
+      [
+       64.88,
+       1.55
+      ],
+      [
+       68.81,
+       2.36
+      ],
+      [
+       70.89,
+       3.28
+      ],
+      [
+       76.54,
+       7.84
+      ]
+     ]
+    },
+    {
+     "label": "TA = 25°C",
+     "points": [
+      [
+       10.15,
+       0.08
+      ],
+      [
+       62.94,
+       0.59
+      ],
+      [
+       69.19,
+       0.86
+      ],
+      [
+       76.39,
+       1.38
+      ]
+     ]
+    },
+    {
+     "label": "TA = 85°C",
+     "points": [
+      [
+       10.15,
+       0.08
+      ],
+      [
+       62.92,
+       0.58
+      ],
+      [
+       76.39,
+       0.94
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "SENSE pin regulation voltage against feedback voltage",
+   "page": 4,
+   "conditions": "VCC = 48V, TA = 25°C",
+   "x": {
+    "label": "VFEEDBACK",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "SENSE pin regulation voltage",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC = 48V, TA = 25°C",
+     "points": [
+      [
+       0.002,
+       9.53
+      ],
+      [
+       0.482,
+       41.37
+      ],
+      [
+       0.51,
+       42.75
+      ],
+      [
+       0.534,
+       43.06
+      ],
+      [
+       1.0,
+       42.87
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Current limit sense voltage against FB pin voltage",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "VFB",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VCC – VSENSE",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VCC – VSENSE",
+     "points": [
+      [
+       0.0,
+       12.0
+      ],
+      [
+       0.5,
+       47.0
+      ],
+      [
+       1.005,
+       47.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Response time to overcurrent",
+   "page": 9,
+   "conditions": "",
+   "x": {
+    "label": "VCC – VSENSE",
+    "unit": "mV",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Propagation delay",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "SENSE to GATE delay",
+     "points": [
+      [
+       67.0,
+       12.455
+      ],
+      [
+       67.5,
+       12.233
+      ],
+      [
+       68.1,
+       11.983
+      ],
+      [
+       68.8,
+       11.706
+      ],
+      [
+       69.7,
+       11.404
+      ],
+      [
+       70.6,
+       11.078
+      ],
+      [
+       71.8,
+       10.729
+      ],
+      [
+       73.2,
+       10.357
+      ],
+      [
+       74.8,
+       9.963
+      ],
+      [
+       77.7,
+       9.332
+      ],
+      [
+       81.0,
+       8.723
+      ],
+      [
+       84.4,
+       8.146
+      ],
+      [
+       87.8,
+       7.61
+      ],
+      [
+       91.2,
+       7.122
+      ],
+      [
+       94.5,
+       6.691
+      ],
+      [
+       97.5,
+       6.327
+      ],
+      [
+       100.1,
+       6.038
+      ],
+      [
+       108.0,
+       5.245
+      ],
+      [
+       117.6,
+       4.404
+      ],
+      [
+       128.7,
+       3.561
+      ],
+      [
+       141.2,
+       2.764
+      ],
+      [
+       155.0,
+       2.061
+      ],
+      [
+       170.1,
+       1.5
+      ],
+      [
+       186.4,
+       1.128
+      ],
+      [
+       203.7,
+       0.994
+      ],
+      [
+       245.6,
+       0.994
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Gate drive against supply voltage",
+   "page": 11,
+   "conditions": "",
+   "x": {
+    "label": "VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "VGATE – VCC",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "VGATE – VCC",
+     "points": [
+      [
+       8.7,
+       4.84
+      ],
+      [
+       19.81,
+       15.12
+      ],
+      [
+       20.42,
+       15.46
+      ],
+      [
+       21.36,
+       15.73
+      ],
+      [
+       25.49,
+       15.75
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Power-up waveforms",
+   "page": 8,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Sense current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "GATE",
+     "points": [
+      [
+       -100.2,
+       0.61
+      ],
+      [
+       -12.7,
+       0.4
+      ],
+      [
+       -11.5,
+       4.04
+      ],
+      [
+       -11.1,
+       4.04
+      ],
+      [
+       -9.9,
+       5.86
+      ],
+      [
+       -9.1,
+       5.86
+      ],
+      [
+       -8.7,
+       6.46
+      ],
+      [
+       -6.3,
+       6.46
+      ],
+      [
+       -5.5,
+       7.27
+      ],
+      [
+       -3.9,
+       7.27
+      ],
+      [
+       4.2,
+       9.69
+      ],
+      [
+       6.2,
+       11.11
+      ],
+      [
+       7.4,
+       11.31
+      ],
+      [
+       9.8,
+       13.13
+      ],
+      [
+       11.4,
+       13.13
+      ],
+      [
+       12.6,
+       13.73
+      ],
+      [
+       14.2,
+       15.55
+      ],
+      [
+       15.8,
+       16.15
+      ],
+      [
+       17.8,
+       17.77
+      ],
+      [
+       19.4,
+       17.77
+      ],
+      [
+       21.0,
+       19.18
+      ],
+      [
+       24.2,
+       20.19
+      ],
+      [
+       25.8,
+       21.2
+      ],
+      [
+       26.2,
+       22.0
+      ],
+      [
+       27.4,
+       21.8
+      ],
+      [
+       28.2,
+       22.61
+      ],
+      [
+       29.0,
+       22.61
+      ],
+      [
+       29.4,
+       23.41
+      ],
+      [
+       30.6,
+       23.41
+      ],
+      [
+       31.0,
+       24.22
+      ],
+      [
+       33.0,
+       24.62
+      ],
+      [
+       35.0,
+       25.62
+      ],
+      [
+       38.5,
+       28.24
+      ],
+      [
+       39.7,
+       28.24
+      ],
+      [
+       40.5,
+       29.25
+      ],
+      [
+       42.1,
+       30.05
+      ],
+      [
+       43.7,
+       30.25
+      ],
+      [
+       44.5,
+       31.66
+      ],
+      [
+       46.2,
+       32.47
+      ],
+      [
+       46.6,
+       33.07
+      ],
+      [
+       47.8,
+       33.27
+      ],
+      [
+       48.6,
+       34.08
+      ],
+      [
+       51.0,
+       34.08
+      ],
+      [
+       51.8,
+       34.88
+      ],
+      [
+       54.2,
+       35.69
+      ],
+      [
+       54.6,
+       36.29
+      ],
+      [
+       61.0,
+       36.29
+      ],
+      [
+       63.8,
+       37.7
+      ],
+      [
+       64.2,
+       37.3
+      ],
+      [
+       65.0,
+       37.7
+      ],
+      [
+       65.4,
+       37.09
+      ],
+      [
+       67.4,
+       37.3
+      ],
+      [
+       68.2,
+       37.9
+      ],
+      [
+       70.2,
+       37.7
+      ],
+      [
+       70.6,
+       37.3
+      ],
+      [
+       71.0,
+       37.9
+      ],
+      [
+       72.2,
+       37.7
+      ],
+      [
+       73.8,
+       38.5
+      ],
+      [
+       75.0,
+       37.9
+      ],
+      [
+       77.0,
+       37.9
+      ],
+      [
+       78.2,
+       38.5
+      ],
+      [
+       79.4,
+       37.9
+      ],
+      [
+       84.7,
+       37.9
+      ],
+      [
+       85.9,
+       38.5
+      ],
+      [
+       87.5,
+       38.7
+      ],
+      [
+       88.7,
+       38.7
+      ],
+      [
+       89.6,
+       38.1
+      ],
+      [
+       92.4,
+       38.1
+      ],
+      [
+       92.8,
+       38.5
+      ],
+      [
+       94.0,
+       38.5
+      ],
+      [
+       94.4,
+       38.1
+      ],
+      [
+       97.3,
+       38.5
+      ],
+      [
+       97.7,
+       38.1
+      ],
+      [
+       98.9,
+       38.7
+      ],
+      [
+       100.1,
+       38.7
+      ]
+     ]
+    },
+    {
+     "label": "Isense",
+     "points": [
+      [
+       -100.2,
+       -0.03
+      ],
+      [
+       -97.4,
+       0.05
+      ],
+      [
+       -97.0,
+       0.03
+      ],
+      [
+       -96.2,
+       0.03
+      ],
+      [
+       -95.4,
+       -0.02
+      ],
+      [
+       -94.2,
+       -0.02
+      ],
+      [
+       -93.0,
+       0.03
+      ],
+      [
+       -92.2,
+       0.02
+      ],
+      [
+       -91.8,
+       -0.01
+      ],
+      [
+       -91.0,
+       0.02
+      ],
+      [
+       -90.6,
+       -0.02
+      ],
+      [
+       -89.8,
+       0.03
+      ],
+      [
+       -89.0,
+       -0.02
+      ],
+      [
+       -87.8,
+       0.08
+      ],
+      [
+       -87.0,
+       0.08
+      ],
+      [
+       -85.4,
+       0.03
+      ],
+      [
+       -83.8,
+       0.02
+      ],
+      [
+       -83.4,
+       -0.03
+      ],
+      [
+       -82.6,
+       -0.05
+      ],
+      [
+       -81.8,
+       -0.02
+      ],
+      [
+       -78.9,
+       -0.03
+      ],
+      [
+       -78.5,
+       -0.01
+      ],
+      [
+       -77.3,
+       -0.01
+      ],
+      [
+       -76.9,
+       -0.04
+      ],
+      [
+       -76.1,
+       -0.05
+      ],
+      [
+       -74.1,
+       0.02
+      ],
+      [
+       -72.1,
+       0.03
+      ],
+      [
+       -71.7,
+       -0.02
+      ],
+      [
+       -70.1,
+       -0.02
+      ],
+      [
+       -69.7,
+       -0.07
+      ],
+      [
+       -68.9,
+       -0.07
+      ],
+      [
+       -67.7,
+       0.05
+      ],
+      [
+       -66.5,
+       0.06
+      ],
+      [
+       -65.7,
+       -0.01
+      ],
+      [
+       -64.1,
+       -0.01
+      ],
+      [
+       -62.9,
+       -0.091
+      ],
+      [
+       -61.3,
+       -0.101
+      ],
+      [
+       -60.9,
+       0.02
+      ],
+      [
+       -60.5,
+       0.03
+      ],
+      [
+       -59.3,
+       0.01
+      ],
+      [
+       -58.5,
+       -0.04
+      ],
+      [
+       -55.7,
+       -0.05
+      ],
+      [
+       -54.9,
+       0.02
+      ],
+      [
+       -52.4,
+       0.02
+      ],
+      [
+       -51.6,
+       0.04
+      ],
+      [
+       -50.0,
+       -0.03
+      ],
+      [
+       -48.4,
+       -0.03
+      ],
+      [
+       -48.0,
+       0.01
+      ],
+      [
+       -47.2,
+       0.02
+      ],
+      [
+       -46.0,
+       0
+      ],
+      [
+       -45.6,
+       0.06
+      ],
+      [
+       -45.2,
+       -0.02
+      ],
+      [
+       -44.8,
+       0.02
+      ],
+      [
+       -43.6,
+       -0.02
+      ],
+      [
+       -41.6,
+       -0.02
+      ],
+      [
+       -40.8,
+       0.03
+      ],
+      [
+       -38.8,
+       0.03
+      ],
+      [
+       -38.4,
+       0.02
+      ],
+      [
+       -38.0,
+       -0.08
+      ],
+      [
+       -37.2,
+       -0.08
+      ],
+      [
+       -36.0,
+       0.05
+      ],
+      [
+       -34.8,
+       0.05
+      ],
+      [
+       -34.4,
+       -0.06
+      ],
+      [
+       -33.2,
+       -0.06
+      ],
+      [
+       -32.4,
+       -0.01
+      ],
+      [
+       -30.4,
+       0.05
+      ],
+      [
+       -28.8,
+       0.05
+      ],
+      [
+       -27.9,
+       0.08
+      ],
+      [
+       -27.1,
+       0.07
+      ],
+      [
+       -26.3,
+       -0.01
+      ],
+      [
+       -25.1,
+       -0.01
+      ],
+      [
+       -23.9,
+       0.04
+      ],
+      [
+       -21.5,
+       -0.03
+      ],
+      [
+       -20.3,
+       -0.03
+      ],
+      [
+       -18.7,
+       0.02
+      ],
+      [
+       -14.7,
+       0.02
+      ],
+      [
+       -13.1,
+       -0.04
+      ],
+      [
+       -12.3,
+       0.01
+      ],
+      [
+       -9.5,
+       0.674
+      ],
+      [
+       -7.1,
+       0.835
+      ],
+      [
+       -5.5,
+       0.885
+      ],
+      [
+       -4.3,
+       0.965
+      ],
+      [
+       4.2,
+       1.282
+      ],
+      [
+       4.6,
+       1.371
+      ],
+      [
+       5.0,
+       1.371
+      ],
+      [
+       5.8,
+       1.441
+      ],
+      [
+       8.2,
+       1.54
+      ],
+      [
+       10.6,
+       1.708
+      ],
+      [
+       13.0,
+       1.758
+      ],
+      [
+       13.8,
+       1.827
+      ],
+      [
+       14.6,
+       1.827
+      ],
+      [
+       15.4,
+       1.748
+      ],
+      [
+       17.4,
+       1.748
+      ],
+      [
+       17.8,
+       1.807
+      ],
+      [
+       19.8,
+       1.827
+      ],
+      [
+       21.0,
+       1.758
+      ],
+      [
+       22.2,
+       1.748
+      ],
+      [
+       25.0,
+       1.758
+      ],
+      [
+       25.8,
+       1.797
+      ],
+      [
+       26.6,
+       1.797
+      ],
+      [
+       27.4,
+       1.768
+      ],
+      [
+       28.6,
+       1.768
+      ],
+      [
+       29.0,
+       1.827
+      ],
+      [
+       29.8,
+       1.827
+      ],
+      [
+       30.2,
+       1.877
+      ],
+      [
+       30.6,
+       1.877
+      ],
+      [
+       31.4,
+       1.768
+      ],
+      [
+       33.8,
+       1.758
+      ],
+      [
+       35.0,
+       1.827
+      ],
+      [
+       35.8,
+       1.827
+      ],
+      [
+       36.9,
+       1.758
+      ],
+      [
+       38.1,
+       1.768
+      ],
+      [
+       38.9,
+       1.718
+      ],
+      [
+       41.3,
+       0.603
+      ],
+      [
+       42.5,
+       0.272
+      ],
+      [
+       43.7,
+       0.231
+      ],
+      [
+       44.5,
+       0.121
+      ],
+      [
+       46.2,
+       0.121
+      ],
+      [
+       47.0,
+       0.091
+      ],
+      [
+       48.2,
+       0.08
+      ],
+      [
+       49.0,
+       -0.01
+      ],
+      [
+       49.8,
+       -0.01
+      ],
+      [
+       50.2,
+       0.01
+      ],
+      [
+       50.6,
+       0.07
+      ],
+      [
+       51.8,
+       0.07
+      ],
+      [
+       53.8,
+       0.02
+      ],
+      [
+       54.2,
+       -0.01
+      ],
+      [
+       55.4,
+       -0.02
+      ],
+      [
+       56.2,
+       0.06
+      ],
+      [
+       56.6,
+       0.04
+      ],
+      [
+       57.4,
+       0.04
+      ],
+      [
+       57.8,
+       -0.04
+      ],
+      [
+       58.6,
+       -0.04
+      ],
+      [
+       59.0,
+       -0.01
+      ],
+      [
+       61.8,
+       -0.02
+      ],
+      [
+       64.6,
+       0.08
+      ],
+      [
+       65.4,
+       0.08
+      ],
+      [
+       66.2,
+       -0.03
+      ],
+      [
+       67.0,
+       -0.03
+      ],
+      [
+       67.4,
+       0.01
+      ],
+      [
+       68.6,
+       0.02
+      ],
+      [
+       72.2,
+       0
+      ],
+      [
+       72.6,
+       0.06
+      ],
+      [
+       75.8,
+       0.05
+      ],
+      [
+       76.2,
+       0.07
+      ],
+      [
+       77.0,
+       0.03
+      ],
+      [
+       82.6,
+       0.01
+      ],
+      [
+       83.0,
+       0.06
+      ],
+      [
+       83.4,
+       0.06
+      ],
+      [
+       83.8,
+       0
+      ],
+      [
+       85.1,
+       -0.02
+      ],
+      [
+       86.3,
+       -0.02
+      ],
+      [
+       86.7,
+       0.02
+      ],
+      [
+       88.3,
+       0.02
+      ],
+      [
+       88.7,
+       0.04
+      ],
+      [
+       89.6,
+       0.04
+      ],
+      [
+       90.4,
+       -0.02
+      ],
+      [
+       91.6,
+       0
+      ],
+      [
+       92.0,
+       0.03
+      ],
+      [
+       94.4,
+       0.02
+      ],
+      [
+       96.9,
+       0.04
+      ],
+      [
+       99.3,
+       -0.01
+      ],
+      [
+       100.1,
+       0.01
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "OUTPUT",
+     "points": [
+      [
+       -100.2,
+       0.8
+      ],
+      [
+       -99.8,
+       0.4
+      ],
+      [
+       -99.4,
+       0.8
+      ],
+      [
+       -98.2,
+       0.4
+      ],
+      [
+       -97.8,
+       0.8
+      ],
+      [
+       -95.4,
+       0.6
+      ],
+      [
+       -94.2,
+       1.21
+      ],
+      [
+       -81.0,
+       1.01
+      ],
+      [
+       -80.6,
+       1.41
+      ],
+      [
+       -79.8,
+       1.01
+      ],
+      [
+       -74.5,
+       1.01
+      ],
+      [
+       -74.1,
+       0.6
+      ],
+      [
+       -70.5,
+       0.6
+      ],
+      [
+       -70.1,
+       1.01
+      ],
+      [
+       -68.5,
+       1.01
+      ],
+      [
+       -67.7,
+       0.6
+      ],
+      [
+       -66.9,
+       1.21
+      ],
+      [
+       -52.8,
+       1.21
+      ],
+      [
+       -52.4,
+       0.8
+      ],
+      [
+       -50.4,
+       1.41
+      ],
+      [
+       -46.0,
+       1.41
+      ],
+      [
+       -44.8,
+       0.6
+      ],
+      [
+       -44.0,
+       0.6
+      ],
+      [
+       -43.6,
+       1.21
+      ],
+      [
+       -42.0,
+       1.41
+      ],
+      [
+       -41.6,
+       0.8
+      ],
+      [
+       -38.4,
+       0.6
+      ],
+      [
+       -38.0,
+       1.41
+      ],
+      [
+       -35.6,
+       1.21
+      ],
+      [
+       -34.0,
+       1.61
+      ],
+      [
+       -28.4,
+       0.8
+      ],
+      [
+       -24.3,
+       1.21
+      ],
+      [
+       -23.5,
+       1.61
+      ],
+      [
+       -22.7,
+       1.21
+      ],
+      [
+       -20.3,
+       1.61
+      ],
+      [
+       -17.5,
+       0.8
+      ],
+      [
+       -15.1,
+       0.8
+      ],
+      [
+       -12.7,
+       1.41
+      ],
+      [
+       -10.3,
+       1.01
+      ],
+      [
+       -8.3,
+       1.21
+      ],
+      [
+       -7.5,
+       1.81
+      ],
+      [
+       -4.7,
+       2.21
+      ],
+      [
+       -3.9,
+       2.82
+      ],
+      [
+       4.2,
+       5.83
+      ],
+      [
+       6.2,
+       6.24
+      ],
+      [
+       10.6,
+       8.65
+      ],
+      [
+       11.4,
+       9.45
+      ],
+      [
+       13.4,
+       9.65
+      ],
+      [
+       15.0,
+       10.66
+      ],
+      [
+       16.2,
+       10.86
+      ],
+      [
+       17.4,
+       11.46
+      ],
+      [
+       18.2,
+       12.67
+      ],
+      [
+       22.6,
+       14.68
+      ],
+      [
+       25.0,
+       15.29
+      ],
+      [
+       25.4,
+       15.89
+      ],
+      [
+       26.6,
+       16.29
+      ],
+      [
+       27.0,
+       17.1
+      ],
+      [
+       27.8,
+       17.1
+      ],
+      [
+       28.2,
+       18.1
+      ],
+      [
+       30.6,
+       18.71
+      ],
+      [
+       32.6,
+       20.11
+      ],
+      [
+       35.4,
+       20.92
+      ],
+      [
+       38.9,
+       23.73
+      ],
+      [
+       42.1,
+       23.53
+      ],
+      [
+       44.1,
+       24.14
+      ],
+      [
+       46.2,
+       23.53
+      ],
+      [
+       47.4,
+       24.34
+      ],
+      [
+       49.0,
+       24.34
+      ],
+      [
+       49.4,
+       23.73
+      ],
+      [
+       50.2,
+       23.73
+      ],
+      [
+       51.8,
+       24.54
+      ],
+      [
+       52.6,
+       24.54
+      ],
+      [
+       53.0,
+       23.73
+      ],
+      [
+       58.2,
+       23.73
+      ],
+      [
+       58.6,
+       24.14
+      ],
+      [
+       62.2,
+       24.34
+      ],
+      [
+       64.2,
+       23.53
+      ],
+      [
+       65.8,
+       24.34
+      ],
+      [
+       67.0,
+       23.73
+      ],
+      [
+       73.4,
+       23.73
+      ],
+      [
+       73.8,
+       24.14
+      ],
+      [
+       76.2,
+       24.34
+      ],
+      [
+       76.6,
+       23.73
+      ],
+      [
+       81.4,
+       23.53
+      ],
+      [
+       83.4,
+       23.73
+      ],
+      [
+       84.3,
+       24.34
+      ],
+      [
+       85.5,
+       24.34
+      ],
+      [
+       85.9,
+       23.73
+      ],
+      [
+       89.6,
+       23.73
+      ],
+      [
+       90.0,
+       24.14
+      ],
+      [
+       90.8,
+       24.14
+      ],
+      [
+       91.2,
+       23.73
+      ],
+      [
+       94.4,
+       23.73
+      ],
+      [
+       94.8,
+       24.14
+      ],
+      [
+       97.3,
+       24.14
+      ],
+      [
+       97.7,
+       24.54
+      ],
+      [
+       98.1,
+       23.93
+      ],
+      [
+       100.1,
+       23.73
+      ]
+     ]
+    },
+    {
+     "label": "PWRGD",
+     "points": [
+      [
+       -100.2,
+       1.41
+      ],
+      [
+       -99.4,
+       0.8
+      ],
+      [
+       -93.0,
+       0.8
+      ],
+      [
+       -92.6,
+       0.4
+      ],
+      [
+       -91.8,
+       0.4
+      ],
+      [
+       -91.4,
+       0.8
+      ],
+      [
+       -82.2,
+       1.01
+      ],
+      [
+       -76.1,
+       0.6
+      ],
+      [
+       -75.3,
+       1.01
+      ],
+      [
+       -74.5,
+       0.4
+      ],
+      [
+       -71.7,
+       0.4
+      ],
+      [
+       -70.5,
+       1.41
+      ],
+      [
+       -70.1,
+       1.01
+      ],
+      [
+       -66.9,
+       1.01
+      ],
+      [
+       -66.5,
+       0.6
+      ],
+      [
+       -65.7,
+       1.01
+      ],
+      [
+       -61.3,
+       0.8
+      ],
+      [
+       -59.7,
+       1.01
+      ],
+      [
+       -59.3,
+       1.41
+      ],
+      [
+       -58.9,
+       1.01
+      ],
+      [
+       -58.1,
+       1.41
+      ],
+      [
+       -56.5,
+       0.8
+      ],
+      [
+       -53.7,
+       0.8
+      ],
+      [
+       -53.2,
+       1.41
+      ],
+      [
+       -52.4,
+       1.41
+      ],
+      [
+       -51.6,
+       0.6
+      ],
+      [
+       -50.4,
+       0.6
+      ],
+      [
+       -48.0,
+       1.41
+      ],
+      [
+       -47.2,
+       0.8
+      ],
+      [
+       -44.8,
+       0.8
+      ],
+      [
+       -43.6,
+       0.4
+      ],
+      [
+       -40.8,
+       0.8
+      ],
+      [
+       -39.2,
+       0.2
+      ],
+      [
+       -37.6,
+       1.41
+      ],
+      [
+       -36.4,
+       0.8
+      ],
+      [
+       -34.8,
+       0.8
+      ],
+      [
+       -30.4,
+       1.61
+      ],
+      [
+       -30.0,
+       0.8
+      ],
+      [
+       -26.3,
+       0.8
+      ],
+      [
+       -25.9,
+       1.21
+      ],
+      [
+       -23.1,
+       1.41
+      ],
+      [
+       -21.9,
+       1.41
+      ],
+      [
+       -20.3,
+       0.8
+      ],
+      [
+       -13.5,
+       1.01
+      ],
+      [
+       -11.9,
+       0
+      ],
+      [
+       5.8,
+       0
+      ],
+      [
+       6.2,
+       -0.4
+      ],
+      [
+       7.0,
+       -0.4
+      ],
+      [
+       7.8,
+       0
+      ],
+      [
+       22.2,
+       -0.2
+      ],
+      [
+       27.0,
+       0
+      ],
+      [
+       27.4,
+       0.4
+      ],
+      [
+       27.8,
+       -0.2
+      ],
+      [
+       29.0,
+       0.4
+      ],
+      [
+       29.4,
+       0
+      ],
+      [
+       36.9,
+       0
+      ],
+      [
+       37.3,
+       0.4
+      ],
+      [
+       38.1,
+       -0.2
+      ],
+      [
+       39.7,
+       -0.2
+      ],
+      [
+       40.9,
+       24.14
+      ],
+      [
+       48.2,
+       24.14
+      ],
+      [
+       49.4,
+       23.73
+      ],
+      [
+       51.0,
+       24.74
+      ],
+      [
+       52.6,
+       23.93
+      ],
+      [
+       53.8,
+       23.93
+      ],
+      [
+       54.6,
+       24.54
+      ],
+      [
+       55.4,
+       24.34
+      ],
+      [
+       57.4,
+       24.74
+      ],
+      [
+       59.0,
+       24.14
+      ],
+      [
+       60.2,
+       24.14
+      ],
+      [
+       60.6,
+       24.54
+      ],
+      [
+       61.4,
+       24.54
+      ],
+      [
+       61.8,
+       24.14
+      ],
+      [
+       66.2,
+       24.14
+      ],
+      [
+       67.0,
+       24.74
+      ],
+      [
+       67.8,
+       24.74
+      ],
+      [
+       68.2,
+       24.14
+      ],
+      [
+       71.0,
+       24.14
+      ],
+      [
+       71.4,
+       24.54
+      ],
+      [
+       73.4,
+       24.14
+      ],
+      [
+       73.8,
+       24.54
+      ],
+      [
+       74.6,
+       24.54
+      ],
+      [
+       75.0,
+       24.14
+      ],
+      [
+       79.4,
+       23.93
+      ],
+      [
+       80.2,
+       24.94
+      ],
+      [
+       81.0,
+       24.94
+      ],
+      [
+       81.8,
+       23.93
+      ],
+      [
+       82.6,
+       23.73
+      ],
+      [
+       83.8,
+       24.54
+      ],
+      [
+       86.7,
+       24.14
+      ],
+      [
+       87.5,
+       24.34
+      ],
+      [
+       87.9,
+       24.94
+      ],
+      [
+       89.1,
+       24.94
+      ],
+      [
+       90.8,
+       24.14
+      ],
+      [
+       93.6,
+       24.54
+      ],
+      [
+       100.1,
+       24.14
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Short-circuit waveforms",
+   "page": 10,
+   "conditions": "CT = 100nF",
+   "x": {
+    "label": "Time",
+    "unit": "ms",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Sense current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "OUTPUT",
+     "points": [
+      [
+       -0.498,
+       23.8
+      ],
+      [
+       -0.478,
+       26.3
+      ],
+      [
+       -0.458,
+       26.3
+      ],
+      [
+       -0.448,
+       25.3
+      ],
+      [
+       -0.418,
+       25.3
+      ],
+      [
+       -0.408,
+       26.3
+      ],
+      [
+       -0.388,
+       26.3
+      ],
+      [
+       -0.378,
+       25.3
+      ],
+      [
+       -0.368,
+       26.3
+      ],
+      [
+       -0.329,
+       26.3
+      ],
+      [
+       -0.319,
+       25.3
+      ],
+      [
+       -0.299,
+       26.3
+      ],
+      [
+       -0.289,
+       25.3
+      ],
+      [
+       -0.279,
+       26.3
+      ],
+      [
+       -0.259,
+       26.3
+      ],
+      [
+       -0.249,
+       25.3
+      ],
+      [
+       -0.219,
+       26.8
+      ],
+      [
+       -0.09,
+       26.3
+      ],
+      [
+       0.1,
+       1.0
+      ],
+      [
+       0.129,
+       1.0
+      ],
+      [
+       0.139,
+       2.0
+      ],
+      [
+       0.189,
+       1.0
+      ],
+      [
+       0.199,
+       2.0
+      ],
+      [
+       0.269,
+       2.5
+      ],
+      [
+       0.299,
+       1.0
+      ],
+      [
+       0.309,
+       2.0
+      ],
+      [
+       0.319,
+       1.0
+      ],
+      [
+       0.368,
+       2.0
+      ],
+      [
+       0.388,
+       0.5
+      ],
+      [
+       0.428,
+       1.0
+      ],
+      [
+       0.438,
+       2.0
+      ],
+      [
+       0.488,
+       1.0
+      ],
+      [
+       0.508,
+       2.5
+      ],
+      [
+       0.578,
+       2.0
+      ],
+      [
+       0.588,
+       1.0
+      ],
+      [
+       0.597,
+       2.0
+      ],
+      [
+       0.657,
+       2.0
+      ],
+      [
+       0.667,
+       0.5
+      ],
+      [
+       0.846,
+       1.0
+      ],
+      [
+       0.856,
+       2.0
+      ],
+      [
+       0.876,
+       1.0
+      ],
+      [
+       0.916,
+       2.0
+      ],
+      [
+       0.996,
+       2.0
+      ],
+      [
+       1.026,
+       1.0
+      ],
+      [
+       1.056,
+       2.5
+      ],
+      [
+       1.115,
+       2.5
+      ],
+      [
+       1.135,
+       1.5
+      ],
+      [
+       1.185,
+       2.5
+      ],
+      [
+       1.255,
+       1.0
+      ],
+      [
+       1.285,
+       2.5
+      ],
+      [
+       1.314,
+       2.5
+      ],
+      [
+       1.334,
+       0.5
+      ],
+      [
+       1.364,
+       0.5
+      ],
+      [
+       1.394,
+       2.5
+      ],
+      [
+       1.454,
+       2.0
+      ],
+      [
+       1.464,
+       1.0
+      ],
+      [
+       1.474,
+       2.0
+      ],
+      [
+       1.514,
+       2.5
+      ],
+      [
+       1.653,
+       2.0
+      ],
+      [
+       1.663,
+       1.0
+      ],
+      [
+       1.693,
+       2.5
+      ],
+      [
+       1.822,
+       2.5
+      ],
+      [
+       1.852,
+       1.0
+      ],
+      [
+       1.992,
+       2.0
+      ],
+      [
+       2.031,
+       0.5
+      ],
+      [
+       2.131,
+       0.5
+      ],
+      [
+       2.161,
+       2.5
+      ],
+      [
+       2.27,
+       2.5
+      ],
+      [
+       2.29,
+       0.5
+      ],
+      [
+       2.32,
+       0.5
+      ],
+      [
+       2.38,
+       1.5
+      ],
+      [
+       2.39,
+       2.5
+      ],
+      [
+       2.509,
+       2.5
+      ],
+      [
+       2.549,
+       1.0
+      ],
+      [
+       2.679,
+       0.5
+      ],
+      [
+       2.699,
+       1.0
+      ],
+      [
+       2.709,
+       2.5
+      ],
+      [
+       2.729,
+       2.5
+      ],
+      [
+       2.769,
+       0.5
+      ],
+      [
+       2.819,
+       0.5
+      ],
+      [
+       2.839,
+       1.5
+      ],
+      [
+       2.849,
+       0.5
+      ],
+      [
+       2.869,
+       2.5
+      ],
+      [
+       2.879,
+       1.5
+      ],
+      [
+       2.919,
+       1.0
+      ],
+      [
+       2.959,
+       1.0
+      ],
+      [
+       2.98,
+       2.5
+      ],
+      [
+       2.999,
+       2.5
+      ],
+      [
+       3.019,
+       1.0
+      ],
+      [
+       3.059,
+       1.5
+      ],
+      [
+       3.069,
+       2.5
+      ],
+      [
+       3.129,
+       2.5
+      ],
+      [
+       3.169,
+       0.5
+      ],
+      [
+       3.199,
+       0.5
+      ],
+      [
+       3.239,
+       2.5
+      ],
+      [
+       3.279,
+       2.5
+      ],
+      [
+       3.289,
+       1.5
+      ],
+      [
+       3.359,
+       2.5
+      ],
+      [
+       3.369,
+       1.5
+      ],
+      [
+       3.449,
+       2.0
+      ],
+      [
+       3.459,
+       1.0
+      ],
+      [
+       3.509,
+       1.5
+      ],
+      [
+       3.539,
+       0.5
+      ],
+      [
+       3.579,
+       1.0
+      ],
+      [
+       3.589,
+       2.0
+      ],
+      [
+       3.609,
+       1.0
+      ],
+      [
+       3.619,
+       2.0
+      ],
+      [
+       3.629,
+       1.0
+      ],
+      [
+       3.699,
+       2.0
+      ],
+      [
+       3.709,
+       0.5
+      ],
+      [
+       3.729,
+       0.5
+      ],
+      [
+       3.809,
+       2.0
+      ],
+      [
+       3.869,
+       1.5
+      ],
+      [
+       3.919,
+       2.5
+      ],
+      [
+       3.959,
+       2.0
+      ],
+      [
+       3.969,
+       1.0
+      ],
+      [
+       3.989,
+       2.0
+      ],
+      [
+       4.01,
+       1.0
+      ],
+      [
+       4.02,
+       2.0
+      ],
+      [
+       4.04,
+       0.5
+      ],
+      [
+       4.122,
+       0.5
+      ],
+      [
+       4.183,
+       2.5
+      ],
+      [
+       4.213,
+       1.0
+      ],
+      [
+       4.254,
+       1.0
+      ],
+      [
+       4.274,
+       2.5
+      ],
+      [
+       4.397,
+       1.0
+      ],
+      [
+       4.407,
+       2.5
+      ],
+      [
+       4.458,
+       2.5
+      ],
+      [
+       4.488,
+       0.5
+      ]
+     ]
+    },
+    {
+     "label": "Isense",
+     "points": [
+      [
+       -0.498,
+       1.042
+      ],
+      [
+       -0.458,
+       1.062
+      ],
+      [
+       -0.448,
+       1.102
+      ],
+      [
+       -0.428,
+       1.082
+      ],
+      [
+       -0.418,
+       1.182
+      ],
+      [
+       -0.398,
+       1.182
+      ],
+      [
+       -0.388,
+       1.142
+      ],
+      [
+       -0.339,
+       1.142
+      ],
+      [
+       -0.319,
+       1.162
+      ],
+      [
+       -0.309,
+       1.222
+      ],
+      [
+       -0.229,
+       1.182
+      ],
+      [
+       -0.199,
+       1.262
+      ],
+      [
+       -0.169,
+       1.222
+      ],
+      [
+       -0.159,
+       1.142
+      ],
+      [
+       -0.139,
+       1.162
+      ],
+      [
+       -0.119,
+       1.302
+      ],
+      [
+       -0.05,
+       3.35
+      ],
+      [
+       -0.02,
+       3.35
+      ],
+      [
+       0.01,
+       2.727
+      ],
+      [
+       0.04,
+       1.102
+      ],
+      [
+       0.06,
+       1.022
+      ],
+      [
+       0.08,
+       0.741
+      ],
+      [
+       0.129,
+       0.741
+      ],
+      [
+       0.159,
+       0.601
+      ],
+      [
+       0.229,
+       0.741
+      ],
+      [
+       0.259,
+       0.701
+      ],
+      [
+       0.299,
+       0.781
+      ],
+      [
+       0.319,
+       0.761
+      ],
+      [
+       0.349,
+       0.821
+      ],
+      [
+       0.368,
+       0.801
+      ],
+      [
+       0.408,
+       0.581
+      ],
+      [
+       0.418,
+       0.661
+      ],
+      [
+       0.448,
+       0.661
+      ],
+      [
+       0.498,
+       0.761
+      ],
+      [
+       0.558,
+       0.761
+      ],
+      [
+       0.588,
+       0.601
+      ],
+      [
+       0.607,
+       0.601
+      ],
+      [
+       0.637,
+       0.761
+      ],
+      [
+       0.657,
+       0.761
+      ],
+      [
+       0.667,
+       0.681
+      ],
+      [
+       0.697,
+       0.681
+      ],
+      [
+       0.707,
+       0.641
+      ],
+      [
+       0.717,
+       0.681
+      ],
+      [
+       0.767,
+       0.641
+      ],
+      [
+       0.787,
+       0.761
+      ],
+      [
+       0.836,
+       0.761
+      ],
+      [
+       0.846,
+       0.701
+      ],
+      [
+       0.876,
+       0.661
+      ],
+      [
+       0.896,
+       0.661
+      ],
+      [
+       0.906,
+       0.761
+      ],
+      [
+       0.976,
+       0.761
+      ],
+      [
+       1.016,
+       0.681
+      ],
+      [
+       1.046,
+       0.681
+      ],
+      [
+       1.056,
+       0.761
+      ],
+      [
+       1.105,
+       0.761
+      ],
+      [
+       1.115,
+       0.681
+      ],
+      [
+       1.175,
+       0.621
+      ],
+      [
+       1.195,
+       0.701
+      ],
+      [
+       1.265,
+       0.681
+      ],
+      [
+       1.275,
+       0.781
+      ],
+      [
+       1.285,
+       0.781
+      ],
+      [
+       1.294,
+       0.681
+      ],
+      [
+       1.364,
+       0.701
+      ],
+      [
+       1.394,
+       0.601
+      ],
+      [
+       1.424,
+       0.701
+      ],
+      [
+       1.504,
+       0.701
+      ],
+      [
+       1.524,
+       0.761
+      ],
+      [
+       1.553,
+       0.741
+      ],
+      [
+       1.573,
+       0.581
+      ],
+      [
+       1.593,
+       0.581
+      ],
+      [
+       1.623,
+       0.721
+      ],
+      [
+       1.683,
+       0.06
+      ],
+      [
+       1.723,
+       0.12
+      ],
+      [
+       1.763,
+       0.12
+      ],
+      [
+       1.782,
+       0.26
+      ],
+      [
+       1.902,
+       0.26
+      ],
+      [
+       1.932,
+       0.18
+      ],
+      [
+       1.982,
+       0.18
+      ],
+      [
+       2.141,
+       0.281
+      ],
+      [
+       2.24,
+       0.281
+      ],
+      [
+       2.26,
+       0.26
+      ],
+      [
+       2.28,
+       0.14
+      ],
+      [
+       2.37,
+       0.12
+      ],
+      [
+       2.479,
+       0.16
+      ],
+      [
+       2.489,
+       0.24
+      ],
+      [
+       2.499,
+       0.2
+      ],
+      [
+       2.549,
+       0.2
+      ],
+      [
+       2.569,
+       0.281
+      ],
+      [
+       2.649,
+       0.281
+      ],
+      [
+       2.679,
+       0.22
+      ],
+      [
+       2.689,
+       0.1
+      ],
+      [
+       2.709,
+       0.1
+      ],
+      [
+       2.739,
+       0.26
+      ],
+      [
+       2.779,
+       0.26
+      ],
+      [
+       2.789,
+       0.14
+      ],
+      [
+       2.809,
+       0.14
+      ],
+      [
+       2.819,
+       0.2
+      ],
+      [
+       2.859,
+       0.22
+      ],
+      [
+       2.869,
+       0.14
+      ],
+      [
+       2.879,
+       0.14
+      ],
+      [
+       2.889,
+       0.22
+      ],
+      [
+       2.939,
+       0.26
+      ],
+      [
+       2.959,
+       0.341
+      ],
+      [
+       2.97,
+       0.26
+      ],
+      [
+       2.99,
+       0.301
+      ],
+      [
+       3.049,
+       0.2
+      ],
+      [
+       3.159,
+       0.2
+      ],
+      [
+       3.169,
+       0.12
+      ],
+      [
+       3.179,
+       0.12
+      ],
+      [
+       3.189,
+       0.22
+      ],
+      [
+       3.209,
+       0.22
+      ],
+      [
+       3.219,
+       0.14
+      ],
+      [
+       3.249,
+       0.14
+      ],
+      [
+       3.259,
+       0.24
+      ],
+      [
+       3.279,
+       0.24
+      ],
+      [
+       3.289,
+       0.281
+      ],
+      [
+       3.299,
+       0.281
+      ],
+      [
+       3.309,
+       0.2
+      ],
+      [
+       3.369,
+       0.18
+      ],
+      [
+       3.389,
+       0.24
+      ],
+      [
+       3.409,
+       0.1
+      ],
+      [
+       3.419,
+       0.2
+      ],
+      [
+       3.439,
+       0.2
+      ],
+      [
+       3.449,
+       0.26
+      ],
+      [
+       3.529,
+       0.22
+      ],
+      [
+       3.549,
+       0.16
+      ],
+      [
+       3.569,
+       0.26
+      ],
+      [
+       3.599,
+       0.281
+      ],
+      [
+       3.629,
+       0.24
+      ],
+      [
+       3.689,
+       0.301
+      ],
+      [
+       3.719,
+       0.301
+      ],
+      [
+       3.749,
+       0.12
+      ],
+      [
+       3.789,
+       0.2
+      ],
+      [
+       3.799,
+       0.281
+      ],
+      [
+       3.889,
+       0.301
+      ],
+      [
+       3.919,
+       0.26
+      ],
+      [
+       3.949,
+       0.14
+      ],
+      [
+       3.969,
+       0.2
+      ],
+      [
+       3.989,
+       0.18
+      ],
+      [
+       4.061,
+       0.22
+      ],
+      [
+       4.091,
+       0.14
+      ],
+      [
+       4.101,
+       0.06
+      ],
+      [
+       4.122,
+       0.06
+      ],
+      [
+       4.132,
+       0.16
+      ],
+      [
+       4.152,
+       0.2
+      ],
+      [
+       4.183,
+       0.2
+      ],
+      [
+       4.203,
+       0.26
+      ],
+      [
+       4.244,
+       0.2
+      ],
+      [
+       4.305,
+       0.2
+      ],
+      [
+       4.325,
+       0.26
+      ],
+      [
+       4.356,
+       0.26
+      ],
+      [
+       4.376,
+       0.18
+      ],
+      [
+       4.397,
+       0.18
+      ],
+      [
+       4.417,
+       0.24
+      ],
+      [
+       4.468,
+       0.17
+      ],
+      [
+       4.478,
+       0.2
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "GATE",
+     "points": [
+      [
+       -0.478,
+       40.47
+      ],
+      [
+       -0.329,
+       40.07
+      ],
+      [
+       -0.259,
+       40.07
+      ],
+      [
+       -0.249,
+       40.47
+      ],
+      [
+       -0.139,
+       40.07
+      ],
+      [
+       -0.02,
+       40.47
+      ],
+      [
+       0,
+       11.82
+      ],
+      [
+       0.04,
+       7.41
+      ],
+      [
+       0.07,
+       7.21
+      ],
+      [
+       0.129,
+       4.61
+      ],
+      [
+       0.139,
+       4.61
+      ],
+      [
+       0.159,
+       6.01
+      ],
+      [
+       0.209,
+       5.41
+      ],
+      [
+       0.219,
+       6.21
+      ],
+      [
+       0.259,
+       6.21
+      ],
+      [
+       0.269,
+       5.01
+      ],
+      [
+       0.309,
+       5.01
+      ],
+      [
+       0.319,
+       5.81
+      ],
+      [
+       0.378,
+       5.81
+      ],
+      [
+       0.398,
+       6.81
+      ],
+      [
+       0.458,
+       6.81
+      ],
+      [
+       0.488,
+       6.21
+      ],
+      [
+       0.538,
+       6.61
+      ],
+      [
+       0.548,
+       6.01
+      ],
+      [
+       0.578,
+       6.21
+      ],
+      [
+       0.588,
+       6.81
+      ],
+      [
+       0.637,
+       6.81
+      ],
+      [
+       0.667,
+       6.21
+      ],
+      [
+       0.707,
+       6.61
+      ],
+      [
+       0.876,
+       6.81
+      ],
+      [
+       0.886,
+       6.21
+      ],
+      [
+       0.906,
+       6.01
+      ],
+      [
+       0.936,
+       6.01
+      ],
+      [
+       0.956,
+       6.81
+      ],
+      [
+       1.016,
+       6.41
+      ],
+      [
+       1.344,
+       6.61
+      ],
+      [
+       1.354,
+       6.21
+      ],
+      [
+       1.414,
+       6.61
+      ],
+      [
+       1.454,
+       6.41
+      ],
+      [
+       1.474,
+       6.81
+      ],
+      [
+       1.633,
+       6.81
+      ],
+      [
+       1.653,
+       3.21
+      ],
+      [
+       1.683,
+       2.6
+      ],
+      [
+       1.992,
+       2.81
+      ],
+      [
+       2.071,
+       2.2
+      ],
+      [
+       2.091,
+       2.81
+      ],
+      [
+       2.121,
+       2.81
+      ],
+      [
+       2.231,
+       2.2
+      ],
+      [
+       2.24,
+       2.81
+      ],
+      [
+       2.32,
+       2.81
+      ],
+      [
+       2.37,
+       2.6
+      ],
+      [
+       2.4,
+       2.0
+      ],
+      [
+       2.44,
+       2.0
+      ],
+      [
+       2.489,
+       2.81
+      ],
+      [
+       2.529,
+       2.6
+      ],
+      [
+       2.549,
+       2.0
+      ],
+      [
+       2.619,
+       2.6
+      ],
+      [
+       2.709,
+       2.81
+      ],
+      [
+       2.729,
+       2.4
+      ],
+      [
+       2.779,
+       2.4
+      ],
+      [
+       2.789,
+       2.0
+      ],
+      [
+       2.809,
+       2.6
+      ],
+      [
+       2.819,
+       2.4
+      ],
+      [
+       2.839,
+       2.81
+      ],
+      [
+       2.889,
+       2.4
+      ],
+      [
+       2.97,
+       2.81
+      ],
+      [
+       2.99,
+       2.4
+      ],
+      [
+       3.119,
+       2.4
+      ],
+      [
+       3.129,
+       2.0
+      ],
+      [
+       3.149,
+       2.4
+      ],
+      [
+       3.209,
+       2.4
+      ],
+      [
+       3.219,
+       2.0
+      ],
+      [
+       3.249,
+       2.6
+      ],
+      [
+       3.389,
+       2.0
+      ],
+      [
+       3.429,
+       2.81
+      ],
+      [
+       3.509,
+       2.4
+      ],
+      [
+       3.519,
+       2.0
+      ],
+      [
+       3.539,
+       2.4
+      ],
+      [
+       3.549,
+       2.0
+      ],
+      [
+       3.559,
+       2.4
+      ],
+      [
+       3.599,
+       2.6
+      ],
+      [
+       3.669,
+       2.4
+      ],
+      [
+       3.719,
+       2.81
+      ],
+      [
+       3.809,
+       2.4
+      ],
+      [
+       3.879,
+       2.6
+      ],
+      [
+       3.909,
+       2.0
+      ],
+      [
+       3.949,
+       2.2
+      ],
+      [
+       3.959,
+       2.6
+      ],
+      [
+       3.989,
+       2.6
+      ],
+      [
+       3.999,
+       2.0
+      ],
+      [
+       4.162,
+       2.0
+      ],
+      [
+       4.234,
+       2.2
+      ],
+      [
+       4.244,
+       2.6
+      ],
+      [
+       4.285,
+       2.6
+      ],
+      [
+       4.295,
+       2.2
+      ],
+      [
+       4.437,
+       2.6
+      ],
+      [
+       4.447,
+       2.2
+      ],
+      [
+       4.468,
+       2.81
+      ],
+      [
+       4.488,
+       2.81
+      ]
+     ]
+    },
+    {
+     "label": "TIMER",
+     "points": [
+      [
+       -0.498,
+       0.07
+      ],
+      [
+       -0.448,
+       0.09
+      ],
+      [
+       -0.358,
+       0.09
+      ],
+      [
+       -0.349,
+       0.11
+      ],
+      [
+       -0.289,
+       0.09
+      ],
+      [
+       -0.269,
+       0.09
+      ],
+      [
+       -0.259,
+       0.11
+      ],
+      [
+       -0.249,
+       0.09
+      ],
+      [
+       -0.239,
+       0.11
+      ],
+      [
+       -0.189,
+       0.1
+      ],
+      [
+       -0.169,
+       0.12
+      ],
+      [
+       -0.08,
+       0.09
+      ],
+      [
+       0.08,
+       0.16
+      ],
+      [
+       0.11,
+       0.2
+      ],
+      [
+       0.139,
+       0.2
+      ],
+      [
+       0.189,
+       0.25
+      ],
+      [
+       0.239,
+       0.26
+      ],
+      [
+       0.269,
+       0.311
+      ],
+      [
+       0.339,
+       0.351
+      ],
+      [
+       0.368,
+       0.411
+      ],
+      [
+       0.388,
+       0.401
+      ],
+      [
+       0.458,
+       0.431
+      ],
+      [
+       0.498,
+       0.481
+      ],
+      [
+       0.528,
+       0.491
+      ],
+      [
+       0.558,
+       0.551
+      ],
+      [
+       0.607,
+       0.531
+      ],
+      [
+       0.637,
+       0.601
+      ],
+      [
+       0.697,
+       0.611
+      ],
+      [
+       0.717,
+       0.641
+      ],
+      [
+       0.777,
+       0.641
+      ],
+      [
+       0.817,
+       0.681
+      ],
+      [
+       0.886,
+       0.801
+      ],
+      [
+       0.936,
+       0.801
+      ],
+      [
+       0.946,
+       0.842
+      ],
+      [
+       0.986,
+       0.842
+      ],
+      [
+       1.006,
+       0.882
+      ],
+      [
+       1.046,
+       0.882
+      ],
+      [
+       1.105,
+       0.962
+      ],
+      [
+       1.135,
+       0.962
+      ],
+      [
+       1.165,
+       1.002
+      ],
+      [
+       1.205,
+       1.002
+      ],
+      [
+       1.265,
+       1.072
+      ],
+      [
+       1.334,
+       1.082
+      ],
+      [
+       1.404,
+       1.152
+      ],
+      [
+       1.444,
+       1.162
+      ],
+      [
+       1.484,
+       1.212
+      ],
+      [
+       1.543,
+       1.232
+      ],
+      [
+       1.563,
+       1.272
+      ],
+      [
+       1.653,
+       1.342
+      ],
+      [
+       1.822,
+       1.332
+      ],
+      [
+       1.872,
+       1.362
+      ],
+      [
+       1.912,
+       1.332
+      ],
+      [
+       1.962,
+       1.332
+      ],
+      [
+       1.972,
+       1.352
+      ],
+      [
+       1.992,
+       1.352
+      ],
+      [
+       2.001,
+       1.322
+      ],
+      [
+       2.061,
+       1.312
+      ],
+      [
+       2.081,
+       1.332
+      ],
+      [
+       2.191,
+       1.322
+      ],
+      [
+       2.211,
+       1.352
+      ],
+      [
+       2.231,
+       1.352
+      ],
+      [
+       2.25,
+       1.322
+      ],
+      [
+       2.3,
+       1.322
+      ],
+      [
+       2.35,
+       1.352
+      ],
+      [
+       2.42,
+       1.292
+      ],
+      [
+       2.479,
+       1.312
+      ],
+      [
+       2.489,
+       1.332
+      ],
+      [
+       2.539,
+       1.292
+      ],
+      [
+       2.719,
+       1.322
+      ],
+      [
+       2.729,
+       1.282
+      ],
+      [
+       2.789,
+       1.312
+      ],
+      [
+       2.869,
+       1.302
+      ],
+      [
+       2.879,
+       1.322
+      ],
+      [
+       2.919,
+       1.322
+      ],
+      [
+       2.939,
+       1.312
+      ],
+      [
+       2.949,
+       1.282
+      ],
+      [
+       2.97,
+       1.312
+      ],
+      [
+       2.99,
+       1.282
+      ],
+      [
+       3.049,
+       1.302
+      ],
+      [
+       3.069,
+       1.292
+      ],
+      [
+       3.079,
+       1.252
+      ],
+      [
+       3.099,
+       1.252
+      ],
+      [
+       3.129,
+       1.302
+      ],
+      [
+       3.189,
+       1.292
+      ],
+      [
+       3.239,
+       1.312
+      ],
+      [
+       3.279,
+       1.262
+      ],
+      [
+       3.329,
+       1.282
+      ],
+      [
+       3.409,
+       1.262
+      ],
+      [
+       3.429,
+       1.302
+      ],
+      [
+       3.459,
+       1.312
+      ],
+      [
+       3.479,
+       1.272
+      ],
+      [
+       3.619,
+       1.282
+      ],
+      [
+       3.649,
+       1.232
+      ],
+      [
+       3.679,
+       1.232
+      ],
+      [
+       3.699,
+       1.292
+      ],
+      [
+       3.739,
+       1.292
+      ],
+      [
+       3.759,
+       1.252
+      ],
+      [
+       3.819,
+       1.252
+      ],
+      [
+       3.829,
+       1.272
+      ],
+      [
+       3.889,
+       1.292
+      ],
+      [
+       3.899,
+       1.252
+      ],
+      [
+       3.919,
+       1.272
+      ],
+      [
+       3.929,
+       1.252
+      ],
+      [
+       3.959,
+       1.272
+      ],
+      [
+       3.979,
+       1.262
+      ],
+      [
+       3.999,
+       1.212
+      ],
+      [
+       4.101,
+       1.272
+      ],
+      [
+       4.111,
+       1.252
+      ],
+      [
+       4.122,
+       1.272
+      ],
+      [
+       4.142,
+       1.272
+      ],
+      [
+       4.152,
+       1.252
+      ],
+      [
+       4.244,
+       1.272
+      ],
+      [
+       4.264,
+       1.242
+      ],
+      [
+       4.366,
+       1.232
+      ],
+      [
+       4.407,
+       1.252
+      ],
+      [
+       4.488,
+       1.242
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Overvoltage waveforms",
+   "page": 10,
+   "conditions": "",
+   "x": {
+    "label": "Time",
+    "unit": "µs",
+    "scale": "linear"
+   },
+   "y": {
+    "label": "Voltage",
+    "unit": "V",
+    "scale": "linear"
+   },
+   "y2": {
+    "label": "Sense current",
+    "unit": "A",
+    "scale": "linear"
+   },
+   "series": [
+    {
+     "label": "IN",
+     "points": [
+      [
+       -49.88,
+       22.9
+      ],
+      [
+       -2.8,
+       23.4
+      ],
+      [
+       -1.2,
+       28.5
+      ],
+      [
+       -0.8,
+       44.8
+      ],
+      [
+       -0.4,
+       44.8
+      ],
+      [
+       -0.2,
+       34.1
+      ],
+      [
+       0,
+       33.6
+      ],
+      [
+       0.6,
+       33.6
+      ],
+      [
+       1.0,
+       37.6
+      ],
+      [
+       2.0,
+       39.7
+      ],
+      [
+       18.21,
+       39.7
+      ],
+      [
+       18.81,
+       38.2
+      ],
+      [
+       19.41,
+       39.7
+      ],
+      [
+       28.01,
+       39.7
+      ],
+      [
+       28.62,
+       38.2
+      ],
+      [
+       29.42,
+       39.7
+      ],
+      [
+       43.88,
+       39.7
+      ],
+      [
+       44.69,
+       37.6
+      ],
+      [
+       46.12,
+       39.7
+      ],
+      [
+       47.75,
+       38.2
+      ],
+      [
+       50.19,
+       39.2
+      ]
+     ]
+    },
+    {
+     "label": "Isense",
+     "points": [
+      [
+       -49.88,
+       1.01
+      ],
+      [
+       -47.67,
+       0.86
+      ],
+      [
+       -46.47,
+       1.11
+      ],
+      [
+       -45.87,
+       0.66
+      ],
+      [
+       -45.07,
+       0.56
+      ],
+      [
+       -44.67,
+       1.06
+      ],
+      [
+       -42.66,
+       0.91
+      ],
+      [
+       -42.06,
+       1.16
+      ],
+      [
+       -41.06,
+       0.91
+      ],
+      [
+       -39.66,
+       0.91
+      ],
+      [
+       -39.46,
+       1.16
+      ],
+      [
+       -38.06,
+       1.11
+      ],
+      [
+       -37.86,
+       0.91
+      ],
+      [
+       -36.86,
+       1.11
+      ],
+      [
+       -36.46,
+       0.96
+      ],
+      [
+       -34.85,
+       1.06
+      ],
+      [
+       -33.25,
+       0.76
+      ],
+      [
+       -30.05,
+       1.11
+      ],
+      [
+       -29.44,
+       0.91
+      ],
+      [
+       -28.24,
+       0.96
+      ],
+      [
+       -28.04,
+       0.71
+      ],
+      [
+       -27.44,
+       0.71
+      ],
+      [
+       -27.24,
+       1.16
+      ],
+      [
+       -26.64,
+       1.01
+      ],
+      [
+       -25.64,
+       1.11
+      ],
+      [
+       -25.24,
+       0.91
+      ],
+      [
+       -23.44,
+       1.01
+      ],
+      [
+       -23.24,
+       0.86
+      ],
+      [
+       -22.83,
+       1.01
+      ],
+      [
+       -21.43,
+       0.96
+      ],
+      [
+       -21.03,
+       1.16
+      ],
+      [
+       -20.83,
+       0.96
+      ],
+      [
+       -20.43,
+       1.16
+      ],
+      [
+       -19.23,
+       1.16
+      ],
+      [
+       -18.83,
+       0.96
+      ],
+      [
+       -17.83,
+       0.96
+      ],
+      [
+       -17.63,
+       0.76
+      ],
+      [
+       -17.43,
+       0.96
+      ],
+      [
+       -16.42,
+       0.96
+      ],
+      [
+       -15.22,
+       0.71
+      ],
+      [
+       -15.02,
+       0.86
+      ],
+      [
+       -13.02,
+       0.86
+      ],
+      [
+       -12.62,
+       1.16
+      ],
+      [
+       -12.22,
+       1.16
+      ],
+      [
+       -8.21,
+       0.56
+      ],
+      [
+       -7.41,
+       0.96
+      ],
+      [
+       -5.61,
+       1.01
+      ],
+      [
+       -5.01,
+       0.86
+      ],
+      [
+       -4.01,
+       1.01
+      ],
+      [
+       -3.2,
+       2.25
+      ],
+      [
+       -3.0,
+       2.85
+      ],
+      [
+       -2.8,
+       3.35
+      ],
+      [
+       -2.6,
+       3.4
+      ],
+      [
+       -2.4,
+       3.95
+      ],
+      [
+       -2.2,
+       4.45
+      ],
+      [
+       -2.0,
+       4.9
+      ],
+      [
+       -1.8,
+       5.25
+      ],
+      [
+       -1.6,
+       5.35
+      ],
+      [
+       -1.4,
+       5.65
+      ],
+      [
+       -1.2,
+       6.05
+      ],
+      [
+       -1.0,
+       6.1
+      ],
+      [
+       -0.8,
+       6.65
+      ],
+      [
+       -0.6,
+       7.15
+      ],
+      [
+       -0.4,
+       7.45
+      ],
+      [
+       -0.2,
+       7.75
+      ],
+      [
+       0.4,
+       7.0
+      ],
+      [
+       0.8,
+       6.6
+      ],
+      [
+       1.0,
+       6.0
+      ],
+      [
+       1.2,
+       5.3
+      ],
+      [
+       1.4,
+       4.6
+      ],
+      [
+       1.6,
+       3.8
+      ],
+      [
+       1.8,
+       3.25
+      ],
+      [
+       2.0,
+       2.65
+      ],
+      [
+       2.2,
+       1.95
+      ],
+      [
+       2.4,
+       1.4
+      ],
+      [
+       2.6,
+       0.95
+      ],
+      [
+       2.8,
+       0.65
+      ],
+      [
+       3.2,
+       0.55
+      ],
+      [
+       3.4,
+       0.75
+      ],
+      [
+       3.6,
+       1.0
+      ],
+      [
+       6.61,
+       0.66
+      ],
+      [
+       6.81,
+       0.4
+      ],
+      [
+       7.21,
+       0.56
+      ],
+      [
+       7.61,
+       0.4
+      ],
+      [
+       10.81,
+       0.3
+      ],
+      [
+       20.81,
+       0.25
+      ],
+      [
+       22.01,
+       0.4
+      ],
+      [
+       24.21,
+       0.25
+      ],
+      [
+       25.81,
+       0.5
+      ],
+      [
+       27.61,
+       0.25
+      ],
+      [
+       32.02,
+       0.3
+      ],
+      [
+       32.42,
+       0.66
+      ],
+      [
+       32.82,
+       0.66
+      ],
+      [
+       33.22,
+       0.25
+      ],
+      [
+       35.61,
+       0.25
+      ],
+      [
+       35.81,
+       0.45
+      ],
+      [
+       40.01,
+       0.25
+      ],
+      [
+       43.88,
+       0.45
+      ],
+      [
+       48.36,
+       0.3
+      ]
+     ],
+     "axis": "y2"
+    },
+    {
+     "label": "GATE",
+     "points": [
+      [
+       -48.07,
+       40.4
+      ],
+      [
+       -46.27,
+       42.4
+      ],
+      [
+       -27.04,
+       40.4
+      ],
+      [
+       -25.44,
+       41.9
+      ],
+      [
+       -17.63,
+       40.4
+      ],
+      [
+       -3.2,
+       41.9
+      ],
+      [
+       -1.8,
+       43.5
+      ],
+      [
+       0.2,
+       49.6
+      ],
+      [
+       0.4,
+       48.6
+      ],
+      [
+       1.2,
+       5.0
+      ],
+      [
+       1.4,
+       4.0
+      ],
+      [
+       4.21,
+       3.4
+      ],
+      [
+       5.01,
+       1.5
+      ],
+      [
+       7.01,
+       3.4
+      ],
+      [
+       14.41,
+       3.4
+      ],
+      [
+       15.61,
+       2.0
+      ],
+      [
+       16.21,
+       3.4
+      ],
+      [
+       50.19,
+       3.4
+      ]
+     ]
+    },
+    {
+     "label": "TIMER",
+     "points": [
+      [
+       -49.88,
+       -0.15
+      ],
+      [
+       -0.6,
+       -0.05
+      ],
+      [
+       -0.4,
+       0.45
+      ],
+      [
+       -0.2,
+       1.0
+      ],
+      [
+       1.0,
+       3.7
+      ],
+      [
+       1.2,
+       4.35
+      ],
+      [
+       1.4,
+       5.1
+      ],
+      [
+       1.6,
+       6.05
+      ],
+      [
+       1.8,
+       6.9
+      ],
+      [
+       2.0,
+       7.55
+      ],
+      [
+       2.2,
+       8.05
+      ],
+      [
+       2.4,
+       8.35
+      ],
+      [
+       2.6,
+       8.6
+      ],
+      [
+       2.8,
+       8.8
+      ],
+      [
+       3.0,
+       8.95
+      ],
+      [
+       3.61,
+       8.57
+      ],
+      [
+       3.61,
+       8.57
+      ],
+      [
+       15.01,
+       8.57
+      ],
+      [
+       15.81,
+       8.71
+      ],
+      [
+       19.6,
+       8.57
+      ],
+      [
+       20.4,
+       8.71
+      ],
+      [
+       20.81,
+       8.57
+      ],
+      [
+       38.41,
+       8.67
+      ],
+      [
+       39.01,
+       8.52
+      ],
+      [
+       41.84,
+       8.52
+      ],
+      [
+       44.29,
+       8.67
+      ],
+      [
+       49.58,
+       8.57
+      ],
+      [
+       50.19,
+       8.71
+      ]
+     ]
+    },
+    {
+     "label": "OUTPUT",
+     "points": [
+      [
+       -49.88,
+       29.6
+      ],
+      [
+       -49.27,
+       28.0
+      ],
+      [
+       -45.87,
+       29.6
+      ],
+      [
+       -44.07,
+       27.5
+      ],
+      [
+       -42.86,
+       29.6
+      ],
+      [
+       -41.66,
+       27.5
+      ],
+      [
+       -38.66,
+       29.6
+      ],
+      [
+       -35.25,
+       29.6
+      ],
+      [
+       -34.45,
+       28.0
+      ],
+      [
+       -32.45,
+       29.6
+      ],
+      [
+       -23.44,
+       28.0
+      ],
+      [
+       -23.03,
+       29.6
+      ],
+      [
+       -21.43,
+       29.6
+      ],
+      [
+       -20.23,
+       27.5
+      ],
+      [
+       -18.83,
+       29.6
+      ],
+      [
+       -18.03,
+       27.5
+      ],
+      [
+       -17.03,
+       29.6
+      ],
+      [
+       -6.81,
+       29.6
+      ],
+      [
+       -5.81,
+       31.7
+      ],
+      [
+       -0.8,
+       33.8
+      ],
+      [
+       0,
+       2.6
+      ],
+      [
+       2.8,
+       2.1
+      ],
+      [
+       4.21,
+       4.2
+      ],
+      [
+       4.81,
+       2.1
+      ],
+      [
+       7.81,
+       2.1
+      ],
+      [
+       8.21,
+       4.2
+      ],
+      [
+       11.41,
+       4.2
+      ],
+      [
+       11.61,
+       2.1
+      ],
+      [
+       12.21,
+       4.2
+      ],
+      [
+       12.61,
+       2.1
+      ],
+      [
+       13.41,
+       4.2
+      ],
+      [
+       16.01,
+       2.1
+      ],
+      [
+       16.41,
+       3.7
+      ],
+      [
+       22.61,
+       4.2
+      ],
+      [
+       23.41,
+       2.1
+      ],
+      [
+       25.41,
+       2.1
+      ],
+      [
+       26.61,
+       4.2
+      ],
+      [
+       27.01,
+       2.1
+      ],
+      [
+       28.42,
+       3.7
+      ],
+      [
+       33.82,
+       2.1
+      ],
+      [
+       34.61,
+       4.2
+      ],
+      [
+       35.81,
+       2.6
+      ],
+      [
+       36.41,
+       4.2
+      ],
+      [
+       37.61,
+       2.6
+      ],
+      [
+       38.61,
+       4.2
+      ],
+      [
+       41.23,
+       2.6
+      ],
+      [
+       42.45,
+       4.2
+      ],
+      [
+       44.49,
+       2.6
+      ],
+      [
+       45.1,
+       4.2
+      ],
+      [
+       50.19,
+       4.2
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "circuits": [
+  {
+   "id": "typical-24v",
+   "title": "24V input voltage application",
+   "page": 1,
+   "description": "A 24 V card-side hot swap stage. The backplane feeds VCC and the sense resistor RS; Q1, an N-channel FET, passes current from RS to VOUT under GATE control. R5 in series with Q1's gate stops it oscillating, D1 clamps gate to source, and R6 with C1 from GATE to ground compensates the current loop while C1 sets the GATE ramp. R1 and R2 divide the short connector pin down to ON for undervoltage lockout. R3 and R4 divide VOUT down to FB for power good and foldback; R7 pulls the open-collector PWRGD up to VOUT. C2 on TIMER sets how long the part may stay in current limit. D3, an SMAT70A, clamps transients on the input.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT1641-1/LT1641-2"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "0.01Ω",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "IRF530",
+     "note": "pass transistor"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10Ω",
+     "note": "5%"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "CMPZ5248B",
+     "note": "gate-to-source clamp"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "1k",
+     "note": "5%"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "49.9k",
+     "note": "1%"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "3.4k",
+     "note": "1%"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "59k",
+     "note": "1%"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "3.57k",
+     "note": "1%"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "24k",
+     "note": "5%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.68µF",
+     "note": "timer capacitor"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "",
+     "note": "load capacitance"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "SHORT_PIN",
+     "type": "terminal",
+     "value": "",
+     "note": "short connector pin, mates last"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "D3",
+     "type": "zener",
+     "value": "SMAT70A",
+     "note": "input transient suppressor, Diodes Inc."
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "PWRGD",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": [
+    "Either LT1641-1 (latch off after a fault) or LT1641-2 (automatic retry) fits this circuit.",
+    "The SMAT70A is a Diodes Inc. part."
+   ]
+  },
+  {
+   "id": "typical",
+   "title": "Typical application",
+   "page": 8,
+   "description": "The 24 V hot swap stage with a 0.025 Ω sense resistor, giving a 1.88 A current limit that folds back to 480 mA into a short. Q1 is the pass FET; RS senses current; C1 sets the GATE slew rate and with it the inrush current into CL; R6 compensates the current loop and R5 damps Q1's gate. R1 and R2 from the short pin set the undervoltage turn-on point at ON; R3 and R4 tell FB when VOUT is up, and PWRGD, pulled up by R7, then goes high. C2 sets the current-limit time.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT1641-1"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "0.025Ω",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "IRF530",
+     "note": "pass transistor"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10Ω",
+     "note": "5%"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "CMPZ5248B",
+     "note": "gate-to-source clamp"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "1k",
+     "note": "5%"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "49.9k",
+     "note": "1%"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "3.4k",
+     "note": "1%"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "59k",
+     "note": "1%"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "3.57k",
+     "note": "1%"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "24k",
+     "note": "5%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.68µF",
+     "note": "timer capacitor"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "",
+     "note": "load capacitance"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "SHORT_PIN",
+     "type": "terminal",
+     "value": "",
+     "note": "short connector pin, mates last"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "PWRGD",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": [
+    "CL is a polarised capacitor."
+   ]
+  },
+  {
+   "id": "overvoltage",
+   "title": "Overvoltage detection",
+   "page": 10,
+   "description": "The typical 24 V stage with a 30 V Zener, D2, from VIN to TIMER. When the input rises past D2's breakdown, D2 conducts and drives TIMER above 1.233 V; the fault latch sets and GATE is pulled to ground at once, switching Q1 off. The part runs again after power is removed and restored, or after ON is pulsed low.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT1641-1"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "0.025Ω",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "IRF530",
+     "note": "pass transistor"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10Ω",
+     "note": "5%"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "CMPZ5248B",
+     "note": "gate-to-source clamp"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "1k",
+     "note": "5%"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "49.9k",
+     "note": "1%"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "3.4k",
+     "note": "1%"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "59k",
+     "note": "1%"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "3.57k",
+     "note": "1%"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "24k",
+     "note": "5%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.68µF",
+     "note": "timer capacitor"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "",
+     "note": "load capacitance"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "SHORT_PIN",
+     "type": "terminal",
+     "value": "",
+     "note": "short connector pin, mates last"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "D2",
+     "type": "zener",
+     "value": "1N5256B",
+     "note": "30V"
+    },
+    {
+     "ref": "VOUT",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "PWRGD",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": [
+    "CL is a polarised capacitor."
+   ]
+  },
+  {
+   "id": "active-low-enable",
+   "title": "Active low enable module",
+   "page": 11,
+   "description": "A 48 V hot swap stage feeding a power module whose enable input is active low. RS is 0.01 Ω. R1 and R2 set the undervoltage point at ON to 37 V; R3 and R4 set the power-good level at FB. PWRGD, pulled up to the switched output by R7, drives the base of Q2; Q2's collector holds the module's ON/OFF pin, so the module is held off until PWRGD goes high. CL, 220 µF, sits across the module input.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT1641-1"
+    },
+    {
+     "ref": "RS",
+     "type": "resistor",
+     "value": "0.01Ω",
+     "note": "current sense resistor"
+    },
+    {
+     "ref": "Q1",
+     "type": "nmos",
+     "value": "IRF530",
+     "note": "pass transistor"
+    },
+    {
+     "ref": "R5",
+     "type": "resistor",
+     "value": "10Ω",
+     "note": "5%"
+    },
+    {
+     "ref": "D1",
+     "type": "zener",
+     "value": "CMPZ5248B",
+     "note": "gate-to-source clamp"
+    },
+    {
+     "ref": "R6",
+     "type": "resistor",
+     "value": "1k",
+     "note": "5%"
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "294k",
+     "note": "1%"
+    },
+    {
+     "ref": "R2",
+     "type": "resistor",
+     "value": "10.2k",
+     "note": "1%"
+    },
+    {
+     "ref": "R3",
+     "type": "resistor",
+     "value": "143k",
+     "note": "1%"
+    },
+    {
+     "ref": "R4",
+     "type": "resistor",
+     "value": "4.22k",
+     "note": "1%"
+    },
+    {
+     "ref": "R7",
+     "type": "resistor",
+     "value": "47k",
+     "note": "5%"
+    },
+    {
+     "ref": "C2",
+     "type": "capacitor",
+     "value": "0.68µF",
+     "note": "timer capacitor"
+    },
+    {
+     "ref": "CL",
+     "type": "capacitor",
+     "value": "220µF",
+     "note": "load capacitance"
+    },
+    {
+     "ref": "VIN",
+     "type": "terminal",
+     "value": "48V"
+    },
+    {
+     "ref": "SHORT_PIN",
+     "type": "terminal",
+     "value": "",
+     "note": "short connector pin, mates last"
+    },
+    {
+     "ref": "GND",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "Q2",
+     "type": "npn",
+     "value": "MMBT5551LT1",
+     "note": "inverts PWRGD for the module enable"
+    },
+    {
+     "ref": "U2",
+     "type": "other",
+     "value": "power module, active-low enable",
+     "external": true
+    },
+    {
+     "ref": "VOUT+",
+     "type": "terminal",
+     "value": ""
+    },
+    {
+     "ref": "VOUT-",
+     "type": "terminal",
+     "value": ""
+    }
+   ],
+   "notes": [
+    "UV = 37V at the ON divider."
+   ]
+  },
+  {
+   "id": "test-circuit",
+   "title": "Test circuit",
+   "page": 6,
+   "fixture": true,
+   "description": "The setup the AC characteristics are measured in. A 24 V supply feeds VCC; pulse generators drive ON, FB, SENSE and TIMER against ground; PWRGD is pulled up to 5 V through 5 kΩ; GATE is loaded with 10 nF through a switch.",
+   "parts": [
+    {
+     "ref": "U1",
+     "type": "ic",
+     "value": "LT1641-1/LT1641-2"
+    },
+    {
+     "ref": "V1",
+     "type": "source",
+     "value": "24V"
+    },
+    {
+     "ref": "G1",
+     "type": "source",
+     "value": "pulse",
+     "note": "drives ON"
+    },
+    {
+     "ref": "G2",
+     "type": "source",
+     "value": "pulse",
+     "note": "drives FB"
+    },
+    {
+     "ref": "G3",
+     "type": "source",
+     "value": "pulse",
+     "note": "drives SENSE"
+    },
+    {
+     "ref": "G4",
+     "type": "source",
+     "value": "pulse",
+     "note": "drives TIMER"
+    },
+    {
+     "ref": "R1",
+     "type": "resistor",
+     "value": "5k"
+    },
+    {
+     "ref": "S1",
+     "type": "switch",
+     "value": ""
+    },
+    {
+     "ref": "C1",
+     "type": "capacitor",
+     "value": "10nF"
+    },
+    {
+     "ref": "V+",
+     "type": "terminal",
+     "value": "5V"
+    }
+   ],
+   "notes": []
+  }
+ ],
+ "equations": [
+  {
+   "name": "Current limit",
+   "expr": "ILIMIT = 47mV / RSENSE",
+   "where": {
+    "ILIMIT": "maximum load current, with FB at 0.5 V or above",
+    "RSENSE": "sense resistor between VCC and SENSE"
+   },
+   "note": "With RSENSE = 0.025 Ω the limit is 1.88 A, folding back to 480 mA with the output shorted to ground.",
+   "page": 8
+  },
+  {
+   "name": "GATE slew rate",
+   "expr": "dVGATE/dt = 10µA / C1",
+   "where": {
+    "C1": "capacitor from GATE to ground",
+    "10µA": "GATE pull-up current"
+   },
+   "note": "",
+   "page": 7
+  },
+  {
+   "name": "Inrush current",
+   "expr": "IINRUSH = CL × 10µA / C1",
+   "where": {
+    "IINRUSH": "supply current charging the load at start-up",
+    "CL": "load capacitance",
+    "C1": "capacitor from GATE to ground"
+   },
+   "note": "When the sense voltage reaches the current limit first, the internal limit takes over from this value.",
+   "page": 7
+  },
+  {
+   "name": "TIMER ramp in current limit",
+   "expr": "dVTIMER/dt = 77µA / CTIMER",
+   "where": {
+    "CTIMER": "capacitor from TIMER to ground"
+   },
+   "note": "",
+   "page": 8
+  },
+  {
+   "name": "Timer capacitor",
+   "expr": "C(nF) = 62 × t(ms)",
+   "where": {
+    "C": "TIMER capacitor in nF",
+    "t": "longest time allowed in current limit, in ms"
+   },
+   "note": "C is 1.5 nF or more.",
+   "page": 8
+  }
+ ],
+ "operation": [
+  {
+   "topic": "Hot insertion",
+   "page": 7,
+   "text": "A card plugged into a live backplane draws a large surge as its bypass capacitors charge. That surge can damage connector contacts and disturb the shared supply enough to reset other cards. The LT1641 brings the card's supply up in a controlled way through an external N-channel FET, protects against undervoltage and overcurrent, and flags with PWRGD when the output is ready."
+  },
+  {
+   "topic": "Power-up sequence",
+   "page": 7,
+   "text": "When the connector first makes contact Q1 is off. It turns on once three things hold: ON is above its turn-on threshold, VCC is above the undervoltage lockout, and TIMER is below 1.233 V. GATE then rises at 10 µA/C1 and the inrush current is CL × 10 µA/C1. If the voltage across RS climbs too high the current limit takes over, adjusting GATE to hold the sense voltage constant. When R3 and R4 show the output at its final value, PWRGD goes high."
+  },
+  {
+   "topic": "Parts round the FET",
+   "page": 7,
+   "text": "RS senses current. C1 sets the GATE slew rate. R6 compensates the current control loop. R5 keeps Q1 from oscillating at high frequency. R1 and R2 sense undervoltage at ON; R3 and R4 sense the output at FB."
+  },
+  {
+   "topic": "Foldback current limit",
+   "page": 8,
+   "text": "The current limit is set by a sense resistor between VCC (pin 8) and SENSE (pin 7). To limit the FET's dissipation and the spikes on the input supply into a short, the limit folds back with the output voltage seen at FB: at FB = 0 V GATE is driven to hold 12 mV across the resistor, the sense voltage rises with FB, and from FB = 0.5 V upward it is held at 47 mV."
+  },
+  {
+   "topic": "Overcurrent response time",
+   "page": 8,
+   "text": "How fast the drain current of Q1 is brought under control depends on Q1's input capacitance, on C1 and R6, and on the internal SENSE-to-GATE delay. The delay from a step on SENSE to GATE starting to fall shortens as the overdrive grows."
+  },
+  {
+   "topic": "Current-limit timer",
+   "page": 8,
+   "text": "With the current limit inactive, a 3 µA source holds TIMER at ground. Once the limit is active an 80 µA pull-up is switched to TIMER and the capacitor ramps at 77 µA/CTIMER for as long as the limit stays active; if the limit drops out, the 3 µA source discharges TIMER again. At 1.233 V the LT1641-1 sets its fault latch and the LT1641-2 sets its auto-restart latch; GATE is pulled to ground at once and TIMER is discharged by the 3 µA source. When TIMER falls under 0.5 V the LT1641-2 turns GATE on again by itself; the LT1641-1 waits for ON to be pulsed low to clear the fault latch, and otherwise stays off."
+  },
+  {
+   "topic": "Short circuit",
+   "page": 9,
+   "text": "Into a short the sense voltage sits at 12 mV while the timer ramps; since FB never gets above 0.5 V, the LT1641-1 latches off when TIMER reaches 1.233 V. The short-circuit waveforms are taken with CT = 100 nF."
+  },
+  {
+   "topic": "Undervoltage and overvoltage",
+   "page": 9,
+   "text": "ON feeds an internal comparator with 80 mV of hysteresis. Below 1.233 V GATE is pulled low and stays low until ON is high again. For overvoltage, a Zener from the input to TIMER conducts above its breakdown and pulls TIMER over 1.233 V; the fault latch sets and GATE goes to ground at once, turning Q1 off. Removing and restoring power, or pulsing ON low, restores operation."
+  },
+  {
+   "topic": "Power good",
+   "page": 9,
+   "text": "An internal comparator checks FB, its noninverting input, against a 1.233 V precision reference with 80 mV of hysteresis. Its open-collector output, PWRGD, can work from a pull-up of up to 100 V. PWRGD can drive the active-high enable of a power module directly; for an active-low enable, transistor Q2 and R7 invert it."
+  },
+  {
+   "topic": "Supply transients",
+   "page": 9,
+   "text": "Every part is tested to withstand supply voltages up to 100 V; spikes over 100 V can damage it. In a short circuit, fast current changes in the supply traces can induce spikes above 100 V. Wider or thicker traces cut the trace inductance, and 0.1 µF from VCC to GND helps; a surge suppressor at the input also guards against surges."
+  },
+  {
+   "topic": "Gate drive and FET choice",
+   "page": 10,
+   "text": "GATE is clamped at most 18 V above the input. At the 9 V minimum input the gate drive is at least 4.5 V; above 20 V supply it is at least 10 V, enough for a standard N-channel FET. For a 9 V to 24 V range a logic-level N-channel FET is needed, with a Zener from its gate to its source for protection (D1 in the typical application)."
+  },
+  {
+   "topic": "Layout",
+   "page": 11,
+   "text": "A Kelvin connection to the sense resistor gives accurate current sensing. For 1 oz copper, traces need at least 0.02\" of width per amp to stay reasonably cool, and 0.03\" per amp or more is better; 1 oz copper has a sheet resistance of about 530 µΩ per square, so small resistances add up fast at high current. For noise immunity, place the ON divider close to the chip with short traces to VCC and GND; a 0.1 µF capacitor between ON and GND further suppresses picked-up noise. In the suggested layout the VCC and SENSE traces run separately to the two ends of RS, and R1 and R2 sit next to the ON pin with their ground taken at the chip."
+  }
+ ],
+ "packages": [
+  {
+   "name": "S8, 8-lead plastic small outline, narrow .150 inch (LTC DWG # 05-08-1610)",
+   "page": 12,
+   "unit": "inches (mm)",
+   "columns": [
+    "dimension",
+    "inches",
+    "mm",
+    "note"
+   ],
+   "rows": [
+    [
+     "body length, along the pin rows",
+     ".189 – .197",
+     "4.801 – 5.004",
+     "*"
+    ],
+    [
+     "body width",
+     ".150 – .157",
+     "3.810 – 3.988",
+     "*"
+    ],
+    [
+     "overall width across the leads",
+     ".228 – .244",
+     "5.791 – 6.197",
+     ""
+    ],
+    [
+     "overall height",
+     ".053 – .069",
+     "1.346 – 1.752",
+     ""
+    ],
+    [
+     "standoff",
+     ".004 – .010",
+     "0.101 – 0.254",
+     ""
+    ],
+    [
+     "lead pitch",
+     ".050 BSC",
+     "1.270 BSC",
+     ""
+    ],
+    [
+     "lead width",
+     ".014 – .019 TYP",
+     "0.355 – 0.483 TYP",
+     ""
+    ],
+    [
+     "lead thickness",
+     ".008 – .010",
+     "0.203 – 0.254",
+     ""
+    ],
+    [
+     "foot length",
+     ".016 – .050",
+     "0.406 – 1.270",
+     ""
+    ],
+    [
+     "body edge chamfer",
+     ".010 – .020 × 45°",
+     "0.254 – 0.508 × 45°",
+     ""
+    ],
+    [
+     "foot angle",
+     "0° – 8° TYP",
+     "0° – 8° TYP",
+     ""
+    ]
+   ],
+   "notes": [
+    "* Mold flash and protrusions are excluded; they are no more than .006\" (0.15 mm)."
+   ]
+  },
+  {
+   "name": "S8 recommended solder pad layout",
+   "page": 12,
+   "unit": "inches",
+   "columns": [
+    "dimension",
+    "inches"
+   ],
+   "rows": [
+    [
+     "pad pitch",
+     ".050 BSC"
+    ],
+    [
+     "pad width",
+     ".030 ±.005 TYP"
+    ],
+    [
+     "pad length",
+     ".045 ±.005"
+    ],
+    [
+     "gap between the two pad rows",
+     ".160 ±.005"
+    ],
+    [
+     "outer extent across both pad rows",
+     ".245 MIN"
+    ]
+   ],
+   "notes": []
+  }
+ ]
+}
